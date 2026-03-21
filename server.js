@@ -95,6 +95,7 @@ const PRODUCTS_QUERY = `*[_type == "product" && available == true] | order(name 
   designer, year, category, subcategory,
   material, dimensions, price, leadTime, description,
   "image": coalesce(image.asset->url, imageUrl),
+  "gallery": gallery[].asset->url,
   badge, available, featured
 }`;
 
@@ -159,6 +160,71 @@ app.post('/api/revalidate', (req, res) => {
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });
 });
+
+// ─── ODOO SYNC ────────────────────────────────────────────
+// POST /api/sync-odoo  — pulls products from Odoo and upserts them into Sanity.
+// Set ODOO_URL and ODOO_API_KEY in .env before calling.
+app.post('/api/sync-odoo', async (req, res) => {
+  const { ODOO_URL, ODOO_API_KEY } = process.env;
+
+  if (!ODOO_URL || !ODOO_API_KEY) {
+    return res.status(400).json({ error: 'ODOO_URL and ODOO_API_KEY must be set in .env' });
+  }
+  if (!sanity) {
+    return res.status(400).json({ error: 'Sanity must be configured (SANITY_PROJECT_ID) to sync Odoo products' });
+  }
+
+  try {
+    // Odoo REST API (v16+) — adjust fields to match your Odoo setup
+    const odooRes = await fetch(
+      `${ODOO_URL}/api/product.template?fields=id,name,list_price,description_sale,categ_id,active,default_code`,
+      { headers: { 'Authorization': `Bearer ${ODOO_API_KEY}`, 'Content-Type': 'application/json' } }
+    );
+    if (!odooRes.ok) throw new Error(`Odoo API ${odooRes.status}: ${odooRes.statusText}`);
+
+    const { records } = await odooRes.json();
+    let synced = 0;
+
+    for (const item of records) {
+      if (!item.active) continue; // skip archived products
+
+      const doc = {
+        _id:         `odoo-${item.id}`,
+        _type:       'product',
+        name:        item.name,
+        price:       item.list_price || 0,
+        description: item.description_sale || '',
+        available:   true,
+        featured:    false,
+        category:    _mapOdooCategory(item.categ_id?.[1] || ''),
+        subcategory: item.categ_id?.[1] || '',
+      };
+
+      // Write token is needed for mutations; use a Sanity client with the API token
+      const writeClient = sanity.withConfig({ token: process.env.SANITY_API_TOKEN, useCdn: false });
+      await writeClient.createOrReplace(doc);
+      synced++;
+    }
+
+    delete _cache['products']; // bust cache
+    console.log(`Odoo sync: ${synced} products upserted`);
+    res.json({ synced });
+
+  } catch (err) {
+    console.error('Odoo sync error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+function _mapOdooCategory(odooCategory) {
+  const c = odooCategory.toLowerCase();
+  if (c.includes('chaise') || c.includes('fauteuil') || c.includes('canapé') || c.includes('sofa') || c.includes('seat')) return 'assises';
+  if (c.includes('table') || c.includes('bureau') || c.includes('desk'))  return 'tables';
+  if (c.includes('lampe') || c.includes('luminaire') || c.includes('light') || c.includes('lamp')) return 'luminaires';
+  if (c.includes('rangement') || c.includes('étagère') || c.includes('shelf') || c.includes('storage')) return 'rangements';
+  if (c.includes('extérieur') || c.includes('outdoor') || c.includes('jardin')) return 'exterieur';
+  return 'objets';
+}
 
 // ─── CREATE CHECKOUT SESSION ───────────────────────────────
 app.post('/create-checkout-session', async (req, res) => {
