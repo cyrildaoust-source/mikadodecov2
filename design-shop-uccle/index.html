@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atelier Forme — Bruxelles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Neue+Haas+Grotesk+Display+Pro:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1916;
+      --stone: #f2ede6;
+      --warm-white: #faf8f4;
+      --muted: #9a9590;
+      --accent: #c8a97e;
+      --border: #e0d9cf;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--warm-white);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /*  CURSOR  */
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--ink);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease;
+    }
+    .cursor.hovered {
+      width: 40px; height: 40px;
+      background: transparent;
+      border: 1px solid var(--ink);
+    }
+
+    /*  NAVIGATION  */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      mix-blend-mode: normal;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { font-style: italic; font-weight: 300; }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 400;
+      opacity: 0.7;
+      transition: opacity 0.25s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-cta {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 400;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+      transition: opacity 0.25s;
+    }
+    .nav-cta:hover { opacity: 0.5; }
+
+    /*  HERO  */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 64px 80px 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(56px, 6vw, 88px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 32px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 340px;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 48px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 400;
+      transition: gap 0.3s ease;
+    }
+    .btn-primary::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--ink);
+      transition: width 0.3s ease;
+    }
+    .btn-primary:hover { gap: 24px; }
+    .btn-primary:hover::after { width: 64px; }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      background: var(--stone);
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    .hero-image.loaded { transform: scale(1); }
+
+    .hero-image-caption {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      font-weight: 400;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 3;
+    }
+    .hero-scroll span {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-lr;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--muted);
+      animation: scrollDown 2s ease infinite;
+    }
+    @keyframes scrollDown {
+      0% { top: -100%; }
+      100% { top: 100%; }
+    }
+
+    /*  INTRO BAND  */
+    .intro-band {
+      padding: 80px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .intro-band-left {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 300;
+      line-height: 1.3;
+      max-width: 600px;
+    }
+    .intro-band-left em { font-style: italic; color: var(--muted); }
+
+    .intro-band-right {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      min-width: 280px;
+    }
+    .intro-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .intro-stat-number {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .intro-stat-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /*  COLLECTIONS  */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 80px 48px 48px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 54px);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+    .section-title em { font-style: italic; }
+
+    .section-link {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.25s;
+      white-space: nowrap;
+    }
+    .section-link:hover { color: var(--ink); }
+
+    .collections-grid {
+      padding: 0 48px 80px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .collection-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--stone);
+    }
+    .collection-item:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .collection-img {
+      width: 100%;
+      height: 100%;
+      min-height: 340px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .collection-item:first-child .collection-img { min-height: 680px; }
+
+    .collection-item:hover .collection-img { transform: scale(1.04); }
+
+    .collection-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 28px;
+      background: linear-gradient(to top, rgba(26,25,22,0.6) 0%, transparent 100%);
+      color: white;
+    }
+    .collection-category {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 6px;
+      font-weight: 400;
+    }
+    .collection-name {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.2;
+    }
+    .collection-item:first-child .collection-name { font-size: 32px; }
+
+    /*  MARQUEE  */
+    .marquee-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+      overflow: hidden;
+      background: var(--stone);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 24s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding: 0 40px;
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /*  FEATURED PRODUCT  */
+    .featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+
+    .featured-image {
+      background: var(--stone);
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .featured:hover .featured-image img { transform: scale(1.03); }
+
+    .featured-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 72px;
+      background: var(--warm-white);
+    }
+
+    .featured-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .featured-tag-line {
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .featured-tag span {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .featured-title {
+      font-family: var(--serif);
+      font-size: clamp(42px, 4.5vw, 64px);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .featured-subtitle {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .featured-desc {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 380px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .featured-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 40px;
+      margin-bottom: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .spec-label {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 400;
+    }
+    .spec-value {
+      font-size: 13px;
+      color: var(--ink);
+      font-weight: 300;
+    }
+
+    .featured-price {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 40px;
+      background: var(--ink);
+      color: var(--warm-white);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      text-decoration: none;
+      border: 1px solid var(--ink);
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+    .btn-dark:hover {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    /*  PHILOSOPHY  */
+    .philosophy {
+      background: var(--ink);
+      color: var(--warm-white);
+      padding: 120px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .philosophy-left .section-label { color: var(--accent); }
+
+    .philosophy-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 4vw, 60px);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-top: 16px;
+    }
+    .philosophy-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .philosophy-right {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .philosophy-item {
+      display: flex;
+      gap: 28px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .philosophy-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .philosophy-num {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.15);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .philosophy-item-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+    .philosophy-item-text {
+      font-size: 13px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+    }
+
+    /*  PRODUCTS GRID  */
+    .products-section {
+      padding: 0 48px 80px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      cursor: pointer;
+    }
+
+    .product-card-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--stone);
+      aspect-ratio: 3/4;
+      margin-bottom: 20px;
+    }
+    .product-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover .product-card-image img { transform: scale(1.05); }
+
+    .product-card-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--ink);
+      color: var(--warm-white);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      font-weight: 400;
+    }
+
+    .product-card-action {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: var(--warm-white);
+      color: var(--ink);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      font-weight: 400;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+    .product-card:hover .product-card-action {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-brand {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 400;
+    }
+    .product-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 300;
+      margin-bottom: 6px;
+    }
+    .product-material {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+    .product-price {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+    }
+
+    /*  SPACE / SHOWROOM  */
+    .showroom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 70vh;
+      min-height: 500px;
+    }
+
+    .showroom-content {
+      background: var(--stone);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 72px 80px 48px;
+    }
+
+    .showroom-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .showroom-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .showroom:hover .showroom-image img { transform: scale(1.03); }
+
+    .showroom-address {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .address-group label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 400;
+    }
+    .address-group p {
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /*  JOURNAL  */
+    .journal-section {
+      padding: 80px 48px;
+      background: var(--warm-white);
+    }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .journal-card {}
+
+    .journal-card-image {
+      overflow: hidden;
+      background: var(--stone);
+      margin-bottom: 24px;
+    }
+    .journal-card-image img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .journal-card:first-child .journal-card-image img { aspect-ratio: 16/10; }
+    .journal-card:hover .journal-card-image img { transform: scale(1.04); }
+
+    .journal-tag {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+    .journal-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .journal-card:first-child .journal-title { font-size: 28px; }
+    .journal-excerpt {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+    .journal-meta {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /*  NEWSLETTER  */
+    .newsletter {
+      background: var(--stone);
+      padding: 80px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      border-top: 1px solid var(--border);
+    }
+    .newsletter-left {
+      max-width: 480px;
+    }
+    .newsletter-title {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .newsletter-title em { font-style: italic; color: var(--muted); }
+    .newsletter-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      flex: 1;
+      max-width: 480px;
+    }
+    .newsletter-input {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-right: none;
+      padding: 14px 20px;
+      font-size: 13px;
+      font-family: var(--sans);
+      font-weight: 300;
+      background: var(--warm-white);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.25s;
+    }
+    .newsletter-input::placeholder { color: var(--muted); }
+    .newsletter-input:focus { border-color: var(--ink); }
+    .newsletter-submit {
+      padding: 14px 28px;
+      background: var(--ink);
+      color: var(--warm-white);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: var(--sans);
+      font-weight: 400;
+      border: 1px solid var(--ink);
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .newsletter-submit:hover {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    /*  FOOTER  */
+    footer {
+      background: var(--ink);
+      color: var(--warm-white);
+      padding: 72px 48px 40px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 64px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .footer-brand-name span { font-style: italic; }
+    .footer-tagline {
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      max-width: 280px;
+      margin-bottom: 32px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-social {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      text-decoration: none;
+      letter-spacing: 0;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .footer-social:hover {
+      border-color: rgba(255,255,255,0.4);
+      color: var(--warm-white);
+    }
+
+    .footer-col-title {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 12px; }
+    .footer-col ul li a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color 0.25s;
+    }
+    .footer-col ul li a:hover { color: var(--warm-white); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      font-weight: 300;
+      transition: color 0.25s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /*  ANIMATIONS  */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /*  RESPONSIVE  */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 0 32px 80px; padding-top: 120px; justify-content: center; }
+      .collections-grid { grid-template-columns: 1fr 1fr; }
+      .collection-item:first-child { grid-column: 1 / 3; grid-row: auto; }
+      .featured { grid-template-columns: 1fr; }
+      .featured-content { padding: 48px 32px; }
+      .philosophy { grid-template-columns: 1fr; gap: 48px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .showroom { grid-template-columns: 1fr; height: auto; }
+      .showroom-image { height: 400px; }
+      .journal-grid { grid-template-columns: 1fr 1fr; }
+      .journal-card:first-child { grid-column: 1 / 3; }
+      .newsletter { flex-direction: column; align-items: stretch; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .intro-band { flex-direction: column; gap: 40px; padding: 48px 24px; }
+      .intro-band-right { flex-direction: row; gap: 40px; }
+      .section-header { padding: 48px 24px 32px; }
+      .collections-grid { padding: 0 24px 48px; }
+      .products-section { padding: 0 24px 48px; }
+      .philosophy { padding: 72px 24px; }
+      .showroom-content { padding: 48px 24px; }
+      .journal-section { padding: 48px 24px; }
+      .newsletter { padding: 48px 24px; }
+      footer { padding: 48px 24px 32px; }
+    }
+
+    @media (max-width: 640px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .journal-grid { grid-template-columns: 1fr; }
+      .journal-card:first-child { grid-column: auto; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .intro-band-right { flex-direction: column; gap: 24px; }
+      .showroom-address { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-right: 1px solid var(--border); border-bottom: none; }
+      .featured-specs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Atelier <span>Forme</span></a>
+    <ul class="nav-links">
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#products">Boutique</a></li>
+      <li><a href="#showroom">Showroom</a></li>
+      <li><a href="#journal">Journal</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#showroom" class="nav-cta">Prendre rendez-vous</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow reveal">Bruxelles — Uccle · Depuis 2007</p>
+      <h1 class="hero-title reveal reveal-delay-1">
+        Des objets<br>faits pour<br><em>durer</em>
+      </h1>
+      <p class="hero-subtitle reveal reveal-delay-2">
+        Une sélection rigoureuse de mobilier, luminaires et objets extraordinaires pour l'intérieur exigeant. Choisis directement auprès des meilleurs ateliers européens.
+      </p>
+      <a href="#collections" class="btn-primary reveal reveal-delay-3">Explorer les collections</a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-image" id="heroImage"></div>
+      <span class="hero-image-caption">Showroom Uccle, 2024</span>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Défiler</span>
+    </div>
+  </section>
+
+  <!-- Intro Band -->
+  <div class="intro-band">
+    <p class="intro-band-left reveal">
+      Nous croyons que le grand design <em>transcende le temps</em> — chaque pièce de notre collection est choisie pour son savoir-faire, son honnêteté matérielle et sa capacité à embellir avec les années.
+    </p>
+    <div class="intro-band-right">
+      <div class="intro-stat reveal reveal-delay-1">
+        <span class="intro-stat-number">340+</span>
+        <span class="intro-stat-label">Pièces sélectionnées</span>
+      </div>
+      <div class="intro-stat reveal reveal-delay-2">
+        <span class="intro-stat-number">68</span>
+        <span class="intro-stat-label">Maisons de design</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collections -->
+  <section id="collections">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Nos collections</p>
+        <h2 class="section-title">La <em>sélection</em></h2>
+      </div>
+      <a href="#products" class="section-link">Tout voir →</a>
+    </div>
+    <div class="collections-grid">
+      <div class="collection-item reveal">
+        <img class="collection-img" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80" alt="Living" loading="lazy" />
+        <div class="collection-overlay">
+          <p class="collection-category">À la une</p>
+          <p class="collection-name">Salon<br>& Séjour</p>
+        </div>
+      </div>
+      <div class="collection-item reveal reveal-delay-1">
+        <img class="collection-img" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80" alt="Seating" loading="lazy" />
+        <div class="collection-overlay">
+          <p class="collection-category">Assises</p>
+          <p class="collection-name">Chaises & Canapés</p>
+        </div>
+      </div>
+      <div class="collection-item reveal reveal-delay-2">
+        <img class="collection-img" src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=700&q=80" alt="Lighting" loading="lazy" />
+        <div class="collection-overlay">
+          <p class="collection-category">Luminaires</p>
+          <p class="collection-name">Lumière &<br>Ambiance</p>
+        </div>
+      </div>
+      <div class="collection-item reveal reveal-delay-1">
+        <img class="collection-img" src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=700&q=80" alt="Objects" loading="lazy" />
+        <div class="collection-overlay">
+          <p class="collection-category">Objets</p>
+          <p class="collection-name">Décor &<br>Accessoires</p>
+        </div>
+      </div>
+      <div class="collection-item reveal reveal-delay-2">
+        <img class="collection-img" src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=700&q=80" alt="Bedroom" loading="lazy" />
+        <div class="collection-overlay">
+          <p class="collection-category">Chambre</p>
+          <p class="collection-name">Repos & Sommeil</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-section">
+    <div class="marquee-track" id="marqueeTrack">
+      <span class="marquee-item">Vitra <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Cassina <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Knoll <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Hay <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Muuto <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Flos <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Artek <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Carl Hansen <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Fritz Hansen <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Minotti <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Poliform <span class="marquee-dot"></span></span>
+      <span class="marquee-item">B&B Italia <span class="marquee-dot"></span></span>
+      <!-- Duplicate for seamless loop -->
+      <span class="marquee-item">Vitra <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Cassina <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Knoll <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Hay <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Muuto <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Flos <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Artek <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Carl Hansen <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Fritz Hansen <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Minotti <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Poliform <span class="marquee-dot"></span></span>
+      <span class="marquee-item">B&B Italia <span class="marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- Featured Product -->
+  <section>
+    <div class="featured">
+      <div class="featured-image">
+        <img src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=900&q=80" alt="Featured chair" loading="lazy" />
+      </div>
+      <div class="featured-content">
+        <div class="featured-tag">
+          <span class="featured-tag-line"></span>
+          <span>Objet de la saison</span>
+        </div>
+        <h2 class="featured-title reveal">Ariel</h2>
+        <p class="featured-subtitle reveal reveal-delay-1">Fauteuil de salon, 1963</p>
+        <p class="featured-desc reveal reveal-delay-2">
+          Conçu à l'origine pour les lounges de l'aéroport d'Orly, ce monument du modernisme français allie une assurance sculpturale à un confort authentique. Chaque pièce est finie à la main dans notre atelier bruxellois.
+        </p>
+        <div class="featured-specs reveal reveal-delay-2">
+          <div>
+            <p class="spec-label">Créateur</p>
+            <p class="spec-value">Pierre Paulin</p>
+          </div>
+          <div>
+            <p class="spec-label">Matière</p>
+            <p class="spec-value">Tissu, acier</p>
+          </div>
+          <div>
+            <p class="spec-label">Dimensions</p>
+
+            <p class="spec-value">W 82 × D 74 × H 70 cm</p>
+          </div>
+          <div>
+            <p class="spec-label">Délai</p>
+            <p class="spec-value">10–12 semaines</p>
+          </div>
+        </div>
+        <p class="featured-price reveal reveal-delay-3">€ 4 200</p>
+        <a href="#" class="btn-dark reveal reveal-delay-3">Demander des informations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="philosophy">
+    <div class="philosophy-left">
+      <p class="section-label reveal">Notre approche</p>
+      <h2 class="philosophy-title reveal reveal-delay-1">
+        Un design qui<br><em>perdure</em>
+      </h2>
+    </div>
+    <div class="philosophy-right">
+      <div class="philosophy-item reveal">
+        <span class="philosophy-num">01</span>
+        <div>
+          <p class="philosophy-item-title">Sourcé avec intention</p>
+          <p class="philosophy-item-text">Chaque pièce de notre collection est sélectionnée à travers des relations directes avec les créateurs et artisans qui les fabriquent. Nous visitons des ateliers, pas des salons professionnels.</p>
+        </div>
+      </div>
+      <div class="philosophy-item reveal reveal-delay-1">
+        <span class="philosophy-num">02</span>
+        <div>
+          <p class="philosophy-item-title">Fait pour durer</p>
+          <p class="philosophy-item-text">Nous ne proposons que des pièces conçues pour traverser les générations — avec des assemblages traditionnels, des matières naturelles et des finitions qui s'embellissent avec le temps.</p>
+        </div>
+      </div>
+      <div class="philosophy-item reveal reveal-delay-2">
+        <span class="philosophy-num">03</span>
+        <div>
+          <p class="philosophy-item-title">Conseillé par des spécialistes</p>
+          <p class="philosophy-item-text">Notre équipe d'architectes et de décorateurs est à votre disposition pour tout projet résidentiel ou commercial, d'une pièce unique à un intérieur complet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section id="products">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Nouveautés</p>
+        <h2 class="section-title">Tout juste <em>arrivé</em></h2>
+      </div>
+      <a href="#" class="section-link">Tous les produits →</a>
+    </div>
+    <div class="products-section">
+      <div class="products-grid">
+
+        <div class="product-card reveal">
+          <div class="product-card-image">
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="Lounge chair" loading="lazy" />
+            <span class="product-card-badge">Nouveau</span>
+            <button class="product-card-action">Ajouter à la liste</button>
+          </div>
+          <p class="product-brand">Cassina</p>
+          <p class="product-name">LC2 Grand Confort</p>
+          <p class="product-material">Cuir pleine fleur, chrome</p>
+          <p class="product-price">€ 6 840</p>
+        </div>
+
+        <div class="product-card reveal reveal-delay-1">
+          <div class="product-card-image">
+            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80" alt="Sofa" loading="lazy" />
+            <button class="product-card-action">Ajouter à la liste</button>
+          </div>
+          <p class="product-brand">Minotti</p>
+          <p class="product-name">Freeman Tailor</p>
+          <p class="product-material">Bouclé, pieds en noyer</p>
+          <p class="product-price">€ 12 400</p>
+        </div>
+
+        <div class="product-card reveal reveal-delay-2">
+          <div class="product-card-image">
+            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&q=80" alt="Lamp" loading="lazy" />
+            <span class="product-card-badge">Limité</span>
+            <button class="product-card-action">Ajouter à la liste</button>
+          </div>
+          <p class="product-brand">Flos</p>
+          <p class="product-name">Arco Floor Lamp</p>
+          <p class="product-material">Marbre de Carrare, acier</p>
+          <p class="product-price">€ 2 190</p>
+        </div>
+
+        <div class="product-card reveal reveal-delay-3">
+          <div class="product-card-image">
+            <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=600&q=80" alt="Side table" loading="lazy" />
+            <button class="product-card-action">Ajouter à la liste</button>
+          </div>
+          <p class="product-brand">Carl Hansen</p>
+          <p class="product-name">CH88 Chair</p>
+          <p class="product-material">Chêne huilé, cuir naturel</p>
+          <p class="product-price">€ 1 680</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Showroom -->
+  <section id="showroom">
+    <div class="showroom">
+      <div class="showroom-content reveal">
+        <p class="section-label">Notre espace</p>
+        <h2 class="section-title" style="margin-top:12px;">Visiter le<br><em>showroom</em></h2>
+        <p style="font-size:14px;color:var(--muted);line-height:1.9;margin-top:24px;font-weight:300;max-width:380px;">
+          Notre showroom de 600 m² à Uccle est organisé en une série de scènes domestiques — et non comme un plateau de vente. Venez découvrir les pièces dans leur vrai contexte, sans hâte et sans pression.
+        </p>
+        <div class="showroom-address reveal reveal-delay-1">
+          <div class="address-group">
+            <label>Adresse</label>
+            <p>Chaussée de Waterloo 1180<br>1180 Uccle, Bruxelles</p>
+          </div>
+          <div class="address-group">
+            <label>Horaires</label>
+            <p>Mar–Sam, 10h–18h<br>Ou sur rendez-vous</p>
+          </div>
+          <div class="address-group">
+            <label>Contact</label>
+            <p>+32 2 345 67 89<br>bonjour@atelierforme.be</p>
+          </div>
+          <div class="address-group">
+            <label>Transports</label>
+            <p>Bus 38, 60 · Tram 92<br>Parking disponible</p>
+          </div>
+        </div>
+      </div>
+      <div class="showroom-image">
+        <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=900&q=80" alt="Showroom interior" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Journal -->
+  <section id="journal" class="journal-section">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+      <div>
+        <p class="section-label">Journal</p>
+        <h2 class="section-title">Idées & <em>perspective</em></h2>
+      </div>
+      <a href="#" class="section-link">Tous les articles →</a>
+    </div>
+    <div class="journal-grid">
+      <div class="journal-card reveal">
+        <div class="journal-card-image">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80" alt="Article" loading="lazy" />
+        </div>
+        <p class="journal-tag">Culture du design</p>
+        <h3 class="journal-title">La pertinence durable du design italien d'après-guerre</h3>
+        <p class="journal-excerpt">De Gio Ponti à Ettore Sottsass, une génération de créateurs a posé les bases à partir desquelles nous comprenons encore le mobilier aujourd'hui.</p>
+        <p class="journal-meta">Mars 2025 · 8 min de lecture</p>
+      </div>
+      <div class="journal-card reveal reveal-delay-1">
+        <div class="journal-card-image">
+          <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=600&q=80" alt="Article" loading="lazy" />
+        </div>
+        <p class="journal-tag">Matières</p>
+        <h3 class="journal-title">Pourquoi nous travaillons exclusivement avec le chêne européen</h3>
+        <p class="journal-excerpt">Durabilité, savoir-faire et la beauté lente du bois qui vieillit naturellement.</p>
+        <p class="journal-meta">Février 2025 · 5 min de lecture</p>
+      </div>
+      <div class="journal-card reveal reveal-delay-2">
+        <div class="journal-card-image">
+          <img src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=600&q=80" alt="Article" loading="lazy" />
+        </div>
+        <p class="journal-tag">Projet</p>
+        <h3 class="journal-title">Dans les coulisses d'une rénovation à Ixelles</h3>
+        <p class="journal-excerpt">Comment notre équipe a transformé une maison de maître bruxelloise des années 1920 pour une vie contemporaine.</p>
+        <p class="journal-meta">Janvier 2025 · 6 min de lecture</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <div class="newsletter-left">
+      <h3 class="newsletter-title">La <em>newsletter</em></h3>
+      <p class="newsletter-subtitle">Nouveautés, articles du journal et invitations à des événements privés — rien de plus, rien de moins.</p>
+    </div>
+    <form class="newsletter-form" onsubmit="return false;">
+      <input type="email" class="newsletter-input" placeholder="Votre adresse e-mail" />
+      <button type="submit" class="newsletter-submit">S'abonner</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand-name">Atelier <span>Forme</span></p>
+        <p class="footer-tagline">Une boutique de design soigneusement sélectionné au cœur d'Uccle, Bruxelles. Des objets pour une vie pensée.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">In</a>
+          <a href="#" class="footer-social">Ig</a>
+          <a href="#" class="footer-social">Pi</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Collections</p>
+        <ul>
+          <li><a href="#">Salon & Séjour</a></li>
+          <li><a href="#">Assises</a></li>
+          <li><a href="#">Tables & Rangements</a></li>
+          <li><a href="#">Luminaires</a></li>
+          <li><a href="#">Objets & Décor</a></li>
+          <li><a href="#">Extérieur</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Services</p>
+        <ul>
+          <li><a href="#">Architecture intérieure</a></li>
+          <li><a href="#">Conseil en projet</a></li>
+          <li><a href="#">Mobilier sur mesure</a></li>
+          <li><a href="#">Conseil en art</a></li>
+          <li><a href="#">Liste de mariage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Atelier</p>
+        <ul>
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Showroom</a></li>
+          <li><a href="#">Presse</a></li>
+          <li><a href="#">Recrutement</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Atelier Forme, Uccle Bruxelles. Tous droits réservés.</p>
+      <div class="footer-legal">
+        <a href="#">Confidentialité</a>
+        <a href="#">Mentions légales</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .collection-item, .product-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+    });
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Hero image parallax load
+    const heroImage = document.getElementById('heroImage');
+    setTimeout(() => heroImage.classList.add('loaded'), 100);
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth hover on collection items
+    document.querySelectorAll('.collection-item').forEach(item => {
+      item.style.cursor = 'pointer';
+    });
+
+    // Newsletter form feedback
+    document.querySelector('.newsletter-submit').addEventListener('click', function() {
+      const input = document.querySelector('.newsletter-input');
+      if (input.value && input.value.includes('@')) {
+        this.textContent = 'Abonné ';
+        this.style.background = '#6b7c5c';
+        this.style.borderColor = '#6b7c5c';
+        input.value = '';
+        setTimeout(() => {
+          this.textContent = "S'abonner";
+          this.style.background = '';
+          this.style.borderColor = '';
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
