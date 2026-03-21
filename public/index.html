@@ -1714,10 +1714,11 @@
   });
 
   // ─── INIT ─────────────────────────────────────────────
-  // Load brands first so brand buttons are ready when products render
+  // Load both in parallel, then re-render products so brand buttons are correct
   (async () => {
-    await loadBrands();
-    await loadProducts();
+    await Promise.all([loadBrands(), loadProducts()]);
+    renderProducts(products); // re-render with brands now loaded
+    renderBrands();           // re-render brand counts now products are loaded
     updateSelectionBtn();
   })();
   </script>

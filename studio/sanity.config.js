@@ -4,7 +4,7 @@ import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
 
 // ─── REPLACE WITH YOUR PROJECT DETAILS ───────────────────
-const PROJECT_ID = 'YOUR_PROJECT_ID'   // from sanity.io/manage
+const PROJECT_ID = '93cr99yi'
 const DATASET    = 'production'
 // ─────────────────────────────────────────────────────────
 
