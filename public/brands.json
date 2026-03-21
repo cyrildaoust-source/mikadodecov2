@@ -1,0 +1,122 @@
+[
+  {
+    "id": "cassina",
+    "brandKey": "Cassina",
+    "name": "Cassina",
+    "country": "Italie",
+    "founded": 1927,
+    "city": "Meda",
+    "tagline": "L'éditeur qui a mis le modernisme à la portée du monde.",
+    "description": "Fondée à Meda en 1927 par les frères Cassina, la maison est devenue l'éditeur de référence du design moderne européen en signant des accords historiques avec Le Corbusier, Charlotte Perriand, Gio Ponti et Franco Albini. Chaque pièce est fabriquée dans l'usine historique de Meda, à quelques kilomètres de Milan.",
+    "website": "cassina.com",
+    "color": "#d4c5b0"
+  },
+  {
+    "id": "vitra",
+    "brandKey": "Vitra",
+    "name": "Vitra",
+    "country": "Suisse",
+    "founded": 1950,
+    "city": "Weil am Rhein",
+    "tagline": "Façonner la vie au travail et à la maison depuis 1950.",
+    "description": "Fondée par Willi Fehlbaum à Weil am Rhein, Vitra s'est construite autour d'une relation unique avec les Eames, Nelson, Prouvé et Gehry. Son campus — conçu par Hadid, Piano, Ando, Herzog & de Meuron — est aujourd'hui l'un des lieux d'architecture industrielle les plus importants au monde.",
+    "website": "vitra.com",
+    "color": "#e8e0d5"
+  },
+  {
+    "id": "knoll",
+    "brandKey": "Knoll",
+    "name": "Knoll",
+    "country": "États-Unis",
+    "founded": 1938,
+    "city": "New York",
+    "tagline": "Design au service de l'humain depuis 1938.",
+    "description": "Hans Knoll fonde sa maison en 1938 à New York avec une conviction : le design peut transformer les espaces de travail. Florence Knoll lui donnera sa vision architecturale, tandis que Mies van der Rohe, Eero Saarinen et Harry Bertoia lui apporteront ses pièces les plus emblématiques.",
+    "website": "knoll.com",
+    "color": "#ddd8d0"
+  },
+  {
+    "id": "flos",
+    "brandKey": "Flos",
+    "name": "Flos",
+    "country": "Italie",
+    "founded": 1962,
+    "city": "Brescia",
+    "tagline": "Lumière comme expression artistique.",
+    "description": "Né à Brescia en 1962 d'un partenariat entre Dino Gavina et les frères Castiglioni, Flos a redéfini ce que pouvait être un luminaire. L'Arco, le Toio, la Parentesi — autant d'objets qui abolissent la frontière entre sculpture et éclairage fonctionnel.",
+    "website": "flos.com",
+    "color": "#e2dcd4"
+  },
+  {
+    "id": "carl-hansen",
+    "brandKey": "Carl Hansen & Søn",
+    "name": "Carl Hansen",
+    "country": "Danemark",
+    "founded": 1908,
+    "city": "Odense",
+    "tagline": "L'artisanat danois dans sa forme la plus pure.",
+    "description": "Depuis 1908 à Odense, Carl Hansen & Søn perpétue les traditions ébénistes danoises avec une rigueur absolue. L'accord exclusif passé avec Hans J. Wegner en 1949 — pour la Wishbone Chair notamment — a fondé l'une des collaborations les plus durables de l'histoire du design.",
+    "website": "carlhansen.com",
+    "color": "#e5ddd4"
+  },
+  {
+    "id": "louis-poulsen",
+    "brandKey": "Louis Poulsen",
+    "name": "Louis Poulsen",
+    "country": "Danemark",
+    "founded": 1874,
+    "city": "Copenhague",
+    "tagline": "La lumière pensée pour l'être humain.",
+    "description": "Fondée à Copenhague en 1874, Louis Poulsen est la maison qui a élevé l'éclairage scandinave au rang d'art. La philosophie de Poul Henningsen — aucun éblouissement, lumière toujours diffuse et enveloppante — reste le fil directeur de chacune de leurs créations.",
+    "website": "louispoulsen.com",
+    "color": "#dbd5ce"
+  },
+  {
+    "id": "minotti",
+    "brandKey": "Minotti",
+    "name": "Minotti",
+    "country": "Italie",
+    "founded": 1948,
+    "city": "Meda",
+    "tagline": "Le luxe discret de l'intérieur contemporain.",
+    "description": "Fondée à Meda en 1948 par Alberto Minotti, la maison est aujourd'hui synonyme d'un luxe sobre et raffiné. Sous la direction artistique de Rodolfo Dordoni depuis 1994, chaque collection explore la frontière entre architecture d'intérieur et mobilier à haute couture.",
+    "website": "minotti.com",
+    "color": "#e0d9d0"
+  },
+  {
+    "id": "string",
+    "brandKey": "String Furniture",
+    "name": "String",
+    "country": "Suède",
+    "founded": 1949,
+    "city": "Stockholm",
+    "tagline": "Le système d'étagères qui n'a jamais vieilli.",
+    "description": "Née d'un concours de design en 1949 remporté par Nils Strinning, la String Shelf System a été produite sans interruption depuis sa création. Ce système d'accrochage breveté, reconnaissable entre tous, est devenu un classique incontournable du modernisme scandinave.",
+    "website": "string-furniture.com",
+    "color": "#e4dfd7"
+  },
+  {
+    "id": "franco-albini",
+    "brandKey": "Franco Albini",
+    "name": "Franco Albini",
+    "country": "Italie",
+    "founded": 1930,
+    "city": "Milan",
+    "tagline": "Le rationalisme milanais dans toute sa tension.",
+    "description": "Architecte et designer milanais formé au rationalisme, Franco Albini a créé une œuvre fondée sur la tension entre légèreté et solidité. Ses meubles — souvent réédités par Cassina et Knoll — illustrent une vision où la structure devient ornement.",
+    "website": "francoalbini.com",
+    "color": "#ddd6cd"
+  },
+  {
+    "id": "tolix",
+    "brandKey": "Tolix",
+    "name": "Tolix",
+    "country": "France",
+    "founded": 1927,
+    "city": "Autun",
+    "tagline": "L'acier brut élevé au rang d'icône.",
+    "description": "Xavier Pauchard fonde Tolix en 1927 dans les ateliers de Bourgogne. Sa chaise A — née pour les terrasses et les ateliers — est devenue l'un des objets industriels les plus copiés au monde. La fabrication n'a pas changé depuis 90 ans, dans la même usine d'Autun.",
+    "website": "tolix.com",
+    "color": "#e6e0d8"
+  }
+]
