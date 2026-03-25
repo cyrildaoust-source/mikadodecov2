@@ -51,12 +51,15 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 28px 48px;
       transition: background .4s, padding .4s;
+      overflow: visible;
+      --nh: 80px;
     }
     nav.scrolled {
-      background: rgba(250,248,244,.94);
+      background: rgba(250,248,244,.96);
       backdrop-filter: blur(12px);
       padding: 18px 48px;
       border-bottom: 1px solid var(--border);
+      --nh: 62px;
     }
     .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
     .nav-logo span { font-style: italic; font-weight: 300; }
@@ -66,6 +69,34 @@
     .nav-right { display: flex; align-items: center; gap: 24px; }
     .nav-cta { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--ink); text-decoration: none; font-weight: 400; border-bottom: 1px solid var(--ink); padding-bottom: 1px; transition: opacity .25s; }
     .nav-cta:hover { opacity: .5; }
+
+    /* ─── MEGA DROPDOWN ────────────────────────────── */
+    .nav-item-dd { position: relative; }
+    .nav-item-dd > a { display: flex; align-items: center; gap: 6px; }
+    .nav-arrow { font-size: 8px; display: inline-block; transition: transform .3s; opacity: .4; }
+    .nav-item-dd:hover .nav-arrow { transform: rotate(180deg); opacity: 1; }
+    .nav-item-dd:hover > a { opacity: 1 !important; }
+    .nav-mega { position: fixed; left: 0; right: 0; top: var(--nh); background: var(--warm-white); border-top: 2px solid var(--ink); border-bottom: 1px solid var(--border); box-shadow: 0 16px 48px rgba(26,25,22,.07); padding: 48px; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity .2s, transform .2s, top .4s; z-index: 199; }
+    .nav-item-dd:hover .nav-mega { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mega-inner { display: flex; gap: 0; max-width: 900px; }
+    .mega-col-cats { min-width: 260px; padding-right: 60px; }
+    .mega-col-brands { padding-left: 60px; border-left: 1px solid var(--border); flex: 1; }
+    .mega-col-title { font-size: 9px; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); font-weight: 400; margin-bottom: 24px; }
+    .mega-cat-list { list-style: none; }
+    .mega-cat-link { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; text-decoration: none; color: var(--ink); padding: 8px 0; transition: color .15s; }
+    .mega-cat-link:hover { color: var(--accent); }
+    .mega-cat-link.mega-active .mega-cat-link-name { font-style: italic; }
+    .mega-cat-link-name { font-family: var(--serif); font-size: 19px; font-weight: 300; line-height: 1; }
+    .mega-cat-link-count { font-size: 10px; color: var(--muted); font-weight: 400; min-width: 20px; text-align: right; }
+    .mega-cat-link:hover .mega-cat-link-count { color: var(--accent); }
+    .mega-brand-cols { columns: 2; column-gap: 0; }
+    .mega-brand-link { display: block; text-decoration: none; color: var(--ink); padding: 6px 0; font-size: 13px; font-weight: 300; transition: color .15s; white-space: nowrap; break-inside: avoid; }
+    .mega-brand-link:hover { color: var(--accent); }
+    .mega-col-footer { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); }
+    .mega-see-all { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .15s; display: inline-flex; align-items: center; gap: 8px; }
+    .mega-see-all::after { content: '→'; display: inline-block; transition: transform .15s; }
+    .mega-see-all:hover { color: var(--ink); }
+    .mega-see-all:hover::after { transform: translateX(3px); }
 
     /* ─── HERO ───────────────────────────────────── */
     .hero {
@@ -811,8 +842,31 @@
   <nav id="nav">
     <a href="#" class="nav-logo">Atelier <span>Forme</span></a>
     <ul class="nav-links">
-      <li><a href="#marques">Marques</a></li>
-      <li><a href="#catalogue">Collections</a></li>
+      <li class="nav-item-dd">
+        <a href="/catalogue.html">Nos produits <span class="nav-arrow">↓</span></a>
+        <div class="nav-mega">
+          <div class="mega-inner">
+            <div class="mega-col mega-col-cats">
+              <p class="mega-col-title">Collections</p>
+              <ul class="mega-cat-list">
+                <li><a href="/catalogue.html" class="mega-cat-link"><span class="mega-cat-link-name">Tout</span><span class="mega-cat-link-count" id="megaCountAll">—</span></a></li>
+                <li><a href="/catalogue.html?cat=assises" class="mega-cat-link"><span class="mega-cat-link-name">Assises</span><span class="mega-cat-link-count" id="megaCountAssises">—</span></a></li>
+                <li><a href="/catalogue.html?cat=tables" class="mega-cat-link"><span class="mega-cat-link-name">Tables</span><span class="mega-cat-link-count" id="megaCountTables">—</span></a></li>
+                <li><a href="/catalogue.html?cat=luminaires" class="mega-cat-link"><span class="mega-cat-link-name">Luminaires</span><span class="mega-cat-link-count" id="megaCountLuminaires">—</span></a></li>
+                <li><a href="/catalogue.html?cat=rangements" class="mega-cat-link"><span class="mega-cat-link-name">Rangements</span><span class="mega-cat-link-count" id="megaCountRangements">—</span></a></li>
+                <li><a href="/catalogue.html?cat=objets" class="mega-cat-link"><span class="mega-cat-link-name">Objets</span><span class="mega-cat-link-count" id="megaCountObjets">—</span></a></li>
+                <li><a href="/catalogue.html?cat=exterieur" class="mega-cat-link"><span class="mega-cat-link-name">Extérieur</span><span class="mega-cat-link-count" id="megaCountExterieur">—</span></a></li>
+              </ul>
+              <div class="mega-col-footer"><a href="/catalogue.html" class="mega-see-all">Tout le catalogue</a></div>
+            </div>
+            <div class="mega-col mega-col-brands">
+              <p class="mega-col-title">Maisons partenaires</p>
+              <div class="mega-brand-cols" id="megaBrandsList"></div>
+              <div class="mega-col-footer"><a href="/marques.html" class="mega-see-all">Toutes les marques</a></div>
+            </div>
+          </div>
+        </div>
+      </li>
       <li><a href="#showroom">Showroom</a></li>
     </ul>
     <div class="nav-right">
@@ -1713,12 +1767,28 @@
     renderProducts(filtered);
   });
 
+  // ─── MEGA MENU ────────────────────────────────────────
+  function populateMegaMenu() {
+    const cats = ['All','Assises','Tables','Luminaires','Rangements','Objets','Exterieur'];
+    const map  = { All:null, Assises:'assises', Tables:'tables', Luminaires:'luminaires', Rangements:'rangements', Objets:'objets', Exterieur:'exterieur' };
+    cats.forEach(c => {
+      const el = document.getElementById(`megaCount${c}`);
+      if (!el) return;
+      const count = map[c] ? products.filter(p => p.category === map[c]).length : products.length;
+      el.textContent = count;
+    });
+    const list = document.getElementById('megaBrandsList');
+    if (list) list.innerHTML = brands.map(b =>
+      `<a href="/marques.html" class="mega-brand-link" onclick="sessionStorage.setItem('openBrand','${b.brandKey}')">${b.name}</a>`).join('');
+  }
+
   // ─── INIT ─────────────────────────────────────────────
   // Load both in parallel, then re-render products so brand buttons are correct
   (async () => {
     await Promise.all([loadBrands(), loadProducts()]);
-    renderProducts(products); // re-render with brands now loaded
-    renderBrands();           // re-render brand counts now products are loaded
+    renderProducts(products);
+    renderBrands();
+    populateMegaMenu();
     updateSelectionBtn();
   })();
   </script>
