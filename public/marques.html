@@ -26,8 +26,8 @@
     /* ─── NAV ─── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 28px 48px; transition: background .4s, padding .4s; overflow: visible; --nh: 80px; }
     nav.scrolled { background: rgba(250,248,244,.96); backdrop-filter: blur(12px); padding: 18px 48px; border-bottom: 1px solid var(--border); --nh: 62px; }
-    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
-    .nav-logo span { font-style: italic; font-weight: 300; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 40px; width: auto; display: block; }
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); text-decoration: none; font-weight: 400; opacity: .7; transition: opacity .25s; }
     .nav-links a:hover, .nav-links a.active { opacity: 1; }
@@ -240,12 +240,13 @@
     @media (max-width: 1024px) { .brands-grid { grid-template-columns: repeat(3, 1fr); } .page-hero { padding: 120px 24px 48px; flex-direction: column; gap: 24px; align-items: flex-start; } .filter-bar { padding: 0 24px; } .marques-body { padding: 32px 24px 100px; } nav { padding: 20px 24px; } .nav-links { display: none; } .mega-cat-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 640px) { .brands-grid { grid-template-columns: repeat(2, 1fr); } .region-tab { padding: 14px 12px; font-size: 9px; } }
   </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <div class="cursor" id="cursor"></div>
 
   <nav id="nav">
-    <a href="/" class="nav-logo">Atelier <span>Forme</span></a>
+    <a href="/" class="nav-logo"><img src="/logo.png" alt="Mikadodeco"></a>
     <ul class="nav-links">
       <li class="nav-item-dd">
         <a href="/catalogue.html" class="active">Nos produits <span class="nav-arrow">↓</span></a>
@@ -393,6 +394,8 @@
           <select name="projet"><option value="">Sélectionner</option><option value="residentiel">Résidentiel</option><option value="renovation">Rénovation</option><option value="commercial">Commercial</option><option value="cadeau">Cadeau</option></select>
         </div>
         <div class="form-field"><label>Message</label><textarea name="message"></textarea></div>
+        <input type="text" name="website" id="hp_website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
+        <div class="cf-turnstile" data-sitekey="__TURNSTILE_SITE_KEY__" data-callback="onTurnstileToken" data-expired-callback="onTurnstileExpired" data-theme="light"></div>
         <p class="form-note">Vous serez redirigé vers la page de paiement sécurisée Stripe.</p>
         <button type="submit" class="btn-dark">Procéder au paiement →</button>
       </form>
@@ -411,6 +414,10 @@
   <div class="toast" id="toast"><span class="toast-dot"></span><span id="toastMsg"></span></div>
 
   <script>
+  var _turnstileToken = null;
+  function onTurnstileToken(token) { _turnstileToken = token; }
+  function onTurnstileExpired() { _turnstileToken = null; }
+
   const PRODUCTS_URL = '/api/products';
   const BRANDS_URL   = '/api/brands';
   let products = [], brands = [], cart = JSON.parse(localStorage.getItem('af_cart') || '[]');
@@ -617,10 +624,12 @@
   }
   async function submitOrder(e) {
     e.preventDefault();
+    if (document.getElementById('hp_website').value !== '') return; // bot
+    if (!_turnstileToken) { showToast('Veuillez compléter la vérification de sécurité.'); return; }
     const form = e.target, btn = form.querySelector('button[type="submit"]'), data = Object.fromEntries(new FormData(form));
     btn.disabled = true; btn.textContent = 'Redirection…';
     try {
-      const res = await fetch('/create-checkout-session', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ items: cart.map(i => ({id:i.id,qty:i.qty})), customer: {prenom:data.prenom,nom:data.nom,email:data.email,telephone:data.telephone||'',projet:data.projet||'',message:data.message||''} }) });
+      const res = await fetch('/create-checkout-session', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ items: cart.map(i => ({id:i.id,qty:i.qty})), customer: {prenom:data.prenom,nom:data.nom,email:data.email,telephone:data.telephone||'',projet:data.projet||'',message:data.message||''}, turnstileToken: _turnstileToken }) });
       const json = await res.json();
       if (!res.ok || json.error) throw new Error(json.error);
       window.location.href = json.url;

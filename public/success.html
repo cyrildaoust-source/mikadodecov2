@@ -21,8 +21,8 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 28px 48px; border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
-    .nav-logo span { font-style: italic; font-weight: 300; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 40px; width: auto; display: block; }
 
     .page {
       display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 89px);
@@ -117,7 +117,7 @@
 <body>
 
   <nav>
-    <a href="/" class="nav-logo">Atelier <span>Forme</span></a>
+    <a href="/" class="nav-logo"><img src="/logo.png" alt="Mikadodeco"></a>
     <span style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)">Uccle, Bruxelles</span>
   </nav>
 
@@ -130,13 +130,6 @@
       <p class="success-text" id="successText">
         Nous avons bien reçu votre paiement. Un conseiller de l'Atelier vous contactera dans les 48 heures pour confirmer les délais de livraison et les détails de finition.
       </p>
-
-      <div class="order-details" id="orderDetails" style="display:none">
-        <p class="order-details-title">Récapitulatif</p>
-        <div id="detailRows"></div>
-      </div>
-
-      <div class="items-list" id="itemsList" style="display:none"></div>
 
       <div class="actions">
         <a href="/" class="btn-dark">Retour à la boutique</a>
@@ -155,52 +148,7 @@
   </footer>
 
   <script>
-    const params    = new URLSearchParams(window.location.search);
-    const sessionId = params.get('session_id');
-
-    if (sessionId) {
-      fetch(`/session/${sessionId}`)
-        .then(r => r.json())
-        .then(data => {
-          if (data.error) return;
-
-          // Personalise greeting
-          if (data.customerName) {
-            document.getElementById('successText').textContent =
-              `Bonjour ${data.customerName}, nous avons bien reçu votre paiement. Un conseiller de l'Atelier vous contactera dans les 48 heures pour confirmer les délais de livraison et les détails de finition.`;
-          }
-
-          // Show order details
-          const fmt = n => new Intl.NumberFormat('fr-BE', { style: 'currency', currency: (data.currency || 'eur').toUpperCase() }).format(n / 100);
-          const detailRows = document.getElementById('detailRows');
-          const rows = [];
-          if (data.customerEmail) rows.push({ label: 'Email', value: data.customerEmail });
-          rows.push({ label: 'Référence', value: sessionId.substring(0, 24) + '…' });
-          rows.push({ label: 'Total payé', value: fmt(data.amount), total: true });
-
-          detailRows.innerHTML = rows.map(r => `
-            <div class="detail-row${r.total ? ' total' : ''}">
-              <span class="detail-label">${r.label}</span>
-              <span class="detail-value">${r.value}</span>
-            </div>`).join('');
-          document.getElementById('orderDetails').style.display = 'block';
-
-          // Show items
-          if (data.items?.length) {
-            const list = document.getElementById('itemsList');
-            list.innerHTML = data.items.map(i => `
-              <div class="item-row">
-                <span class="item-name">${i.name}</span>
-                <span class="item-qty">× ${i.qty}</span>
-                <span class="item-price">${fmt(i.amount)}</span>
-              </div>`).join('');
-            list.style.display = 'block';
-          }
-        })
-        .catch(() => {}); // fail silently — page still shows success message
-    }
-
-    // Clear cart from localStorage
+    // Clear cart on arrival — Shopify handles the order confirmation on their side
     localStorage.removeItem('af_cart');
   </script>
   <!-- Intercom -->

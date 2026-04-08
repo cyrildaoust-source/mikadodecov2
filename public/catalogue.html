@@ -26,8 +26,8 @@
     /* ─── NAV ─── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 28px 48px; transition: background .4s, padding .4s; overflow: visible; --nh: 80px; }
     nav.scrolled { background: rgba(250,248,244,.96); backdrop-filter: blur(12px); padding: 18px 48px; border-bottom: 1px solid var(--border); --nh: 62px; }
-    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
-    .nav-logo span { font-style: italic; font-weight: 300; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 40px; width: auto; display: block; }
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); text-decoration: none; font-weight: 400; opacity: .7; transition: opacity .25s; }
     .nav-links a:hover, .nav-links a.active { opacity: 1; }
@@ -250,7 +250,7 @@
   <div class="cursor" id="cursor"></div>
 
   <nav id="nav">
-    <a href="/" class="nav-logo">Atelier <span>Forme</span></a>
+    <a href="/" class="nav-logo"><img src="/logo.png" alt="Mikadodeco"></a>
     <ul class="nav-links">
       <li class="nav-item-dd">
         <a href="/catalogue.html" class="active">Nos produits <span class="nav-arrow">↓</span></a>
@@ -405,7 +405,8 @@
           <select name="projet"><option value="">Sélectionner</option><option value="residentiel">Résidentiel</option><option value="renovation">Rénovation</option><option value="commercial">Commercial</option><option value="cadeau">Cadeau</option></select>
         </div>
         <div class="form-field"><label>Message</label><textarea name="message"></textarea></div>
-        <p class="form-note">Vous serez redirigé vers la page de paiement sécurisée Stripe.</p>
+        <input type="text" name="website" id="hp_website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
+        <p class="form-note">Vous serez redirigé vers la page de paiement sécurisée Shopify.</p>
         <button type="submit" class="btn-dark">Procéder au paiement →</button>
       </form>
     </div>
@@ -655,13 +656,14 @@
   }
   async function submitOrder(e) {
     e.preventDefault();
+    if (document.getElementById('hp_website').value !== '') return; // honeypot
     const form = e.target, btn = form.querySelector('button[type="submit"]'), data = Object.fromEntries(new FormData(form));
     btn.disabled = true; btn.textContent = 'Redirection…';
     try {
-      const res = await fetch('/create-checkout-session', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ items: cart.map(i => ({id:i.id,qty:i.qty})), customer: {prenom:data.prenom,nom:data.nom,email:data.email,telephone:data.telephone||'',projet:data.projet||'',message:data.message||''} }) });
+      const res = await fetch('/api/cart/create', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ items: cart.map(i => ({variantId:i.variantId,qty:i.qty})), customer: {prenom:data.prenom,nom:data.nom,email:data.email,telephone:data.telephone||'',projet:data.projet||'',message:data.message||''} }) });
       const json = await res.json();
       if (!res.ok || json.error) throw new Error(json.error);
-      window.location.href = json.url;
+      window.location.href = json.checkoutUrl;
     } catch(err) { showToast(err.message || 'Erreur'); btn.disabled = false; btn.textContent = 'Procéder au paiement →'; }
   }
 

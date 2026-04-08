@@ -21,8 +21,8 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 28px 48px; border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
-    .nav-logo span { font-style: italic; font-weight: 300; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 40px; width: auto; display: block; }
 
     .page {
       flex: 1; display: flex; align-items: center; justify-content: center;
@@ -82,7 +82,7 @@
 <body>
 
   <nav>
-    <a href="/" class="nav-logo">Atelier <span>Forme</span></a>
+    <a href="/" class="nav-logo"><img src="/logo.png" alt="Mikadodeco"></a>
     <span style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)">Uccle, Bruxelles</span>
   </nav>
 

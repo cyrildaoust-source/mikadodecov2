@@ -61,8 +61,8 @@
       border-bottom: 1px solid var(--border);
       --nh: 62px;
     }
-    .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
-    .nav-logo span { font-style: italic; font-weight: 300; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 40px; width: auto; display: block; }
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); text-decoration: none; font-weight: 400; opacity: .7; transition: opacity .25s; }
     .nav-links a:hover { opacity: 1; }
@@ -246,8 +246,8 @@
     /* ─── FOOTER ──────────────────────────────────── */
     footer { background: var(--ink); color: var(--warm-white); padding: 72px 48px 40px; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 64px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.1); }
-    .footer-brand-name { font-family: var(--serif); font-size: 28px; font-weight: 300; letter-spacing: .1em; margin-bottom: 16px; }
-    .footer-brand-name span { font-style: italic; }
+    .footer-brand-name { margin-bottom: 16px; }
+    .footer-brand-name img { height: 48px; width: auto; display: block; }
     .footer-tagline { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,.45); font-weight: 300; max-width: 280px; margin-bottom: 32px; }
     .footer-socials { display: flex; gap: 20px; }
     .footer-social { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.5); font-size: 11px; text-decoration: none; transition: border-color .25s, color .25s; }
@@ -840,7 +840,7 @@
 
   <!-- ─── NAV ─────────────────────────────────────── -->
   <nav id="nav">
-    <a href="#" class="nav-logo">Atelier <span>Forme</span></a>
+    <a href="#" class="nav-logo"><img src="/logo.png" alt="Mikadodeco"></a>
     <ul class="nav-links">
       <li class="nav-item-dd">
         <a href="/catalogue.html">Nos produits <span class="nav-arrow">↓</span></a>
@@ -1048,7 +1048,7 @@
   <footer>
     <div class="footer-top">
       <div>
-        <p class="footer-brand-name">Atelier <span>Forme</span></p>
+        <p class="footer-brand-name"><img src="/logo.png" alt="Mikadodeco"></p>
         <p class="footer-tagline">Une boutique de design soigneusement sélectionné au cœur d'Uccle, Bruxelles.</p>
         <div class="footer-socials">
           <a href="#" class="footer-social">In</a>
@@ -1185,7 +1185,7 @@
           <textarea name="message" placeholder="Précisez vos contraintes, délais, finitions souhaitées…"></textarea>
         </div>
 
-        <p class="form-note">Vous serez redirigé vers la page de paiement sécurisée Stripe. Un conseiller confirmera votre commande et les délais de livraison dans les 48h.</p>
+        <p class="form-note">Vous serez redirigé vers la page de paiement sécurisée Shopify. Un conseiller confirmera votre commande et les délais de livraison dans les 48h.</p>
 
         <div class="order-panel-footer" style="margin: 0 -32px -32px; padding: 24px 32px 32px; border-top: 1px solid var(--border); background: var(--warm-white);">
           <button type="submit" class="btn-dark">Procéder au paiement →</button>
@@ -1478,23 +1478,22 @@
     currentDetailProductId = null;
   }
 
-  // ─── SUBMIT ORDER → STRIPE CHECKOUT ──────────────────────
+  // ─── SUBMIT ORDER → SHOPIFY CHECKOUT ─────────────────────
   async function submitOrder(e) {
     e.preventDefault();
     const form   = e.target;
     const btn    = form.querySelector('button[type="submit"]');
     const data   = Object.fromEntries(new FormData(form));
 
-    // Loading state
     btn.disabled    = true;
     btn.textContent = 'Redirection vers le paiement…';
 
     try {
-      const res = await fetch('/create-checkout-session', {
+      const res = await fetch('/api/cart/create', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          items: cart.map(i => ({ id: i.id, qty: i.qty })),
+          items: cart.map(i => ({ variantId: i.variantId, qty: i.qty })),
           customer: {
             prenom:    data.prenom,
             nom:       data.nom,
@@ -1509,8 +1508,7 @@
       const json = await res.json();
       if (!res.ok || json.error) throw new Error(json.error || 'Erreur serveur');
 
-      // Redirect to Stripe Checkout
-      window.location.href = json.url;
+      window.location.href = json.checkoutUrl;
 
     } catch (err) {
       console.error('Checkout error:', err);
