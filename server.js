@@ -398,13 +398,12 @@ app.post('/api/cart/create', async (req, res) => {
   }
 });
 
-// ─── CATCH-ALL (SPA fallback) ──────────────────────────
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// ─── START (only when run directly, not when imported by Vercel) ──
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`\n  Mikadodeco — serveur demarre`);
+    console.log(`  http://localhost:${PORT}\n`);
+  });
+}
 
-// ─── START ─────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`\n  Mikadodeco — serveur demarre`);
-  console.log(`  http://localhost:${PORT}\n`);
-});
+module.exports = app;
