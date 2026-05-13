@@ -1022,7 +1022,7 @@
         <div class="showroom-address reveal reveal-delay-1">
           <div class="address-group"><label>Adresse</label><p>Chaussée de Waterloo 1180<br>1180 Uccle, Bruxelles</p></div>
           <div class="address-group"><label>Horaires</label><p>Mar–Sam, 10h–18h<br>Ou sur rendez-vous</p></div>
-          <div class="address-group"><label>Contact</label><p>+32 2 345 67 89<br>bonjour@atelierforme.be</p></div>
+          <div class="address-group"><label>Contact</label><p>+32 2 345 67 89<br>contact@mikadodeco.com</p></div>
           <div class="address-group"><label>Transports</label><p>Bus 38, 60 · Tram 92<br>Parking disponible</p></div>
         </div>
       </div>
@@ -1267,7 +1267,27 @@
   const PRODUCTS_URL = '/api/products';
   const BRANDS_URL   = '/api/brands';
 
-  let products = [];
+  const HARDCODED_PRODUCTS = [{
+    id: 'hardcoded-eames-lounge',
+    variantId: null,
+    name: 'Lounge Chair & Ottoman',
+    brand: 'Vitra',
+    designer: 'Charles & Ray Eames',
+    year: 1956,
+    category: 'assises',
+    subcategory: 'fauteuil',
+    material: 'Coques en contreplaqué moulé, cuir pleine fleur, base aluminium poli',
+    dimensions: 'Fauteuil L 84 × P 84 × H 84 cm · Ottoman L 64 × P 56 × H 42 cm',
+    price: 9450,
+    leadTime: 'Délai 6–8 semaines',
+    description: 'Pièce iconique dessinée par Charles et Ray Eames en 1956. Trois coques en contreplaqué moulé articulées sur une base étoile en aluminium poli, garniture en cuir pleine fleur. Fabrication Vitra, sous licence officielle.',
+    image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80',
+    badge: 'bestseller',
+    available: true,
+    featured: true,
+  }];
+
+  let products = [...HARDCODED_PRODUCTS];
   let brands   = [];
   let cart = JSON.parse(localStorage.getItem('af_cart') || '[]');
   let activeFilter = 'all';
@@ -1278,11 +1298,13 @@
   async function loadProducts() {
     try {
       const res = await fetch(PRODUCTS_URL);
-      products = await res.json();
-      // If using Sanity, unwrap: products = data.result
+      const fetched = await res.json();
+      const list = Array.isArray(fetched) ? fetched : [];
+      products = [...HARDCODED_PRODUCTS, ...list.filter(p => !HARDCODED_PRODUCTS.some(h => h.id === p.id))];
       renderProducts(products);
     } catch(e) {
       console.error('Could not load products:', e);
+      renderProducts(products);
     }
   }
 

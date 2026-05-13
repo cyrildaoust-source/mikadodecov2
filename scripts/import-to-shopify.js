@@ -114,8 +114,10 @@ async function shopifyPost(endpoint, body) {
 
 async function getExistingTitles() {
   const res = await fetch(`${API}/products.json?limit=250&fields=id,title`, { headers: HEADERS });
-  const { products } = await res.json();
-  return new Set(products.map(p => p.title));
+  const json = await res.json();
+  if (!res.ok) throw new Error(`Shopify ${res.status}: ${JSON.stringify(json.errors ?? json)}`);
+  if (!Array.isArray(json.products)) throw new Error(`Unexpected response: ${JSON.stringify(json)}`);
+  return new Set(json.products.map(p => p.title));
 }
 
 // ── Main ────────────────────────────────────────────────────────────────────
