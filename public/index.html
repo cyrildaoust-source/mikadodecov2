@@ -1262,32 +1262,12 @@
   </div>
 
   <script>
-  // Data is served by the Express backend (/api/products, /api/brands)
-  // which reads from Sanity CMS when configured, or local JSON as fallback.
+  // Data is served by the Express backend (/api/products, /api/brands, /api/collections)
+  // which proxies the Shopify Storefront API.
   const PRODUCTS_URL = '/api/products';
   const BRANDS_URL   = '/api/brands';
 
-  const HARDCODED_PRODUCTS = [{
-    id: 'hardcoded-eames-lounge',
-    variantId: null,
-    name: 'Lounge Chair & Ottoman',
-    brand: 'Vitra',
-    designer: 'Charles & Ray Eames',
-    year: 1956,
-    category: 'assises',
-    subcategory: 'fauteuil',
-    material: 'Coques en contreplaqué moulé, cuir pleine fleur, base aluminium poli',
-    dimensions: 'Fauteuil L 84 × P 84 × H 84 cm · Ottoman L 64 × P 56 × H 42 cm',
-    price: 9450,
-    leadTime: 'Délai 6–8 semaines',
-    description: 'Pièce iconique dessinée par Charles et Ray Eames en 1956. Trois coques en contreplaqué moulé articulées sur une base étoile en aluminium poli, garniture en cuir pleine fleur. Fabrication Vitra, sous licence officielle.',
-    image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80',
-    badge: 'bestseller',
-    available: true,
-    featured: true,
-  }];
-
-  let products = [...HARDCODED_PRODUCTS];
+  let products = [];
   let brands   = [];
   let cart = JSON.parse(localStorage.getItem('af_cart') || '[]');
   let activeFilter = 'all';
@@ -1299,8 +1279,7 @@
     try {
       const res = await fetch(PRODUCTS_URL);
       const fetched = await res.json();
-      const list = Array.isArray(fetched) ? fetched : [];
-      products = [...HARDCODED_PRODUCTS, ...list.filter(p => !HARDCODED_PRODUCTS.some(h => h.id === p.id))];
+      products = Array.isArray(fetched) ? fetched : [];
       renderProducts(products);
     } catch(e) {
       console.error('Could not load products:', e);
@@ -1333,7 +1312,7 @@
             : `<p class="product-brand-btn" style="cursor:default;pointer-events:none">${p.brand}</p>`
           }
           <p class="product-name">${p.name}</p>
-          <p class="product-designer">${p.designer}, ${p.year}</p>
+          ${[p.designer, p.year].filter(Boolean).length ? `<p class="product-designer">${[p.designer, p.year].filter(Boolean).join(', ')}</p>` : ''}
           <p class="product-price">€ ${p.price.toLocaleString('fr-BE')}</p>
         </div>`;
     }).join('');

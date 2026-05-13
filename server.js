@@ -94,6 +94,20 @@ const PRODUCTS_QUERY = `
   }
 `;
 
+// Map fine-grained Shopify product types (Fermob/HAY use FR labels) to the
+// 6 top-level frontend categories. Anything unmatched falls through to "objets".
+const CATEGORY_MAP = {
+  assises:    ['chaise', 'chaise haute', 'fauteuil', 'fauteuil à bascule', 'banc', 'tabouret', 'pouf', 'repose-pieds'],
+  tables:     ['table', 'table basse', 'table à rallonge'],
+  luminaires: ['applique', 'lampadaire', 'lampe baladeuse', 'lampe de bureau', 'lampe de chevet', 'lampe de table', 'lampe à pince', 'pied de lampe'],
+  rangements: ['caisse de rangement', 'patère'],
+  exterieur:  ['accessoires de grill extérieur', 'housse de protection', 'jardinière'],
+};
+const TYPE_TO_CATEGORY = Object.entries(CATEGORY_MAP).reduce((acc, [cat, types]) => {
+  types.forEach(t => { acc[t] = cat; });
+  return acc;
+}, {});
+
 function mapProduct(node) {
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
@@ -101,6 +115,7 @@ function mapProduct(node) {
   const price   = parseFloat(variant?.price?.amount || node.priceRange.minVariantPrice.amount);
   // Tags: use "badge:nouveau", "badge:limite", "badge:bestseller", "featured" conventions
   const badgeTag = node.tags.find(t => t.startsWith('badge:'))?.replace('badge:', '') || null;
+  const rawType  = (node.productType || '').toLowerCase().trim();
   return {
     id:          node.id,
     variantId:   variant?.id || null,
@@ -108,7 +123,8 @@ function mapProduct(node) {
     brand:       node.vendor || '',
     designer:    meta.designer    || '',
     year:        meta.year        ? parseInt(meta.year) : null,
-    category:    (node.productType || 'objets').toLowerCase(),
+    category:    TYPE_TO_CATEGORY[rawType] || 'objets',
+    productType: rawType,
     subcategory: meta.subcategory || node.tags.find(t => t.startsWith('sub:'))?.replace('sub:', '') || '',
     material:    meta.material    || '',
     dimensions:  meta.dimensions  || '',
@@ -129,10 +145,46 @@ async function getProducts() {
   });
 }
 
-// ─── SHOPIFY: COLLECTIONS (BRANDS) QUERY ───────────────
-// Collections are used as brand profiles. Add metafields to each collection
-// in Shopify admin → Settings → Custom data → Collections
-// Keys used: brand_key, country, city, founded, website, tagline, color, featured
+// ─── BRANDS: DERIVED FROM product.vendor ───────────────
+// Brands are inferred from the vendor field on each product (HAY, Vitra, &Tradition…).
+// To enrich a brand with metadata (country, founded, tagline, logo, website, color),
+// create a Shopify Page named "brand:<vendor>" — not implemented yet, see TODO below.
+async function getBrands() {
+  return cached('brands', async () => {
+    const products = await getProducts();
+    const byVendor = new Map();
+    for (const p of products) {
+      const key = p.brand?.trim();
+      if (!key) continue;
+      const slug = key.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      const entry = byVendor.get(key) || {
+        id:          `brand:${slug}`,
+        brandKey:    key,
+        name:        key,
+        country:     '',
+        city:        '',
+        founded:     null,
+        tagline:     '',
+        description: '',
+        website:     '',
+        logo:        null,
+        color:       '#d4c5b0',
+        featured:    false,
+        productCount: 0,
+      };
+      entry.productCount += 1;
+      byVendor.set(key, entry);
+    }
+    return [...byVendor.values()]
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((b, i) => ({ ...b, order: i }));
+  });
+}
+
+// ─── SHOPIFY: COLLECTIONS QUERY ────────────────────────
+// Real Shopify collections (product lines like Palissade, Bistro, Luxembourg…).
+// Optional metafields: custom.country, custom.city, custom.founded, custom.website,
+// custom.tagline, custom.color, custom.featured
 const COLLECTIONS_QUERY = `
   query GetCollections($first: Int!) {
     collections(first: $first) {
@@ -143,7 +195,6 @@ const COLLECTIONS_QUERY = `
           description
           image { url altText }
           metafields(identifiers: [
-            { namespace: "custom", key: "brand_key" }
             { namespace: "custom", key: "country" }
             { namespace: "custom", key: "city" }
             { namespace: "custom", key: "founded" }
@@ -164,9 +215,11 @@ const COLLECTIONS_QUERY = `
 function mapCollection(node, index) {
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
+  const slug = node.id.split('/').pop().toLowerCase();
   return {
     id:          node.id,
-    brandKey:    meta.brand_key || node.title,
+    slug,
+    key:         node.title,
     name:        node.title,
     country:     meta.country   || '',
     city:        meta.city      || '',
@@ -174,20 +227,20 @@ function mapCollection(node, index) {
     tagline:     meta.tagline   || '',
     description: node.description || '',
     website:     meta.website   || '',
-    logo:        node.image?.url || null,
+    image:       node.image?.url || null,
     color:       meta.color     || '#d4c5b0',
     featured:    meta.featured  === 'true',
     order:       index,
   };
 }
 
-async function getBrands() {
-  return cached('brands', async () => {
+async function getCollections() {
+  return cached('collections', async () => {
     const data = await shopifyFetch(COLLECTIONS_QUERY, { first: 100 });
     return data.collections.edges
       .map(({ node }, i) => mapCollection(node, i))
       // Exclude Shopify's built-in "All" / "Home page" collections
-      .filter(b => !['all', 'frontpage'].includes(b.id.split('/').pop().toLowerCase()));
+      .filter(c => !['all', 'frontpage'].includes(c.slug));
   });
 }
 
@@ -203,6 +256,7 @@ app.get('/api/products', async (req, res) => {
 });
 
 // ─── API: GET BRANDS ───────────────────────────────────
+// Derived from product.vendor — returns one entry per unique vendor.
 app.get('/api/brands', async (req, res) => {
   try {
     const brands = await getBrands();
@@ -210,6 +264,18 @@ app.get('/api/brands', async (req, res) => {
   } catch (err) {
     console.error('Brands error:', err.message);
     res.status(500).json({ error: 'Impossible de charger les marques.' });
+  }
+});
+
+// ─── API: GET COLLECTIONS ──────────────────────────────
+// Real Shopify collections (product lines: Palissade, Bistro, Luxembourg…).
+app.get('/api/collections', async (req, res) => {
+  try {
+    const collections = await getCollections();
+    res.json(collections);
+  } catch (err) {
+    console.error('Collections error:', err.message);
+    res.status(500).json({ error: 'Impossible de charger les collections.' });
   }
 });
 
@@ -251,6 +317,7 @@ app.get('/api/vitra', (req, res) => {
 app.post('/api/revalidate', (req, res) => {
   delete _cache['products'];
   delete _cache['brands'];
+  delete _cache['collections'];
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });
 });

@@ -502,7 +502,7 @@
         </div>
         ${hasBrand ? `<button class="product-brand-btn" onclick="event.stopPropagation();openBrandPanelByKey('${p.brand.replace(/'/g,"\\'")}',event)">${p.brand}</button>` : `<p class="product-brand-btn" style="cursor:default;pointer-events:none">${p.brand}</p>`}
         <p class="product-name">${p.name}</p>
-        <p class="product-designer">${p.designer}, ${p.year}</p>
+        ${[p.designer, p.year].filter(Boolean).length ? `<p class="product-designer">${[p.designer, p.year].filter(Boolean).join(', ')}</p>` : ''}
         <p class="product-price">€ ${p.price.toLocaleString('fr-BE')}</p>
       </div>`;
     }).join('');
