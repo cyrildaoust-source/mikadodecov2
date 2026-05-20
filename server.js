@@ -417,7 +417,21 @@ app.post('/api/cart/create', async (req, res) => {
       return res.status(400).json({ error: result.userErrors[0].message });
     }
 
-    res.json({ checkoutUrl: result.cart.checkoutUrl });
+    // Shopify returns checkoutUrl on the store's *primary* domain. The headless
+    // storefront owns www.mikadodeco.be (served by Vercel), so checkout must run
+    // on a Shopify-pointed subdomain. If SHOPIFY_CHECKOUT_DOMAIN is set (e.g.
+    // shop.mikadodeco.be → CNAME shops.myshopify.com, set as Shopify primary),
+    // force the checkout host to it so the redirect lands on Shopify, not Vercel.
+    let checkoutUrl = result.cart.checkoutUrl;
+    if (process.env.SHOPIFY_CHECKOUT_DOMAIN) {
+      try {
+        const u = new URL(checkoutUrl);
+        u.host = process.env.SHOPIFY_CHECKOUT_DOMAIN;
+        checkoutUrl = u.toString();
+      } catch (_) { /* keep Shopify's original URL on parse failure */ }
+    }
+
+    res.json({ checkoutUrl });
 
   } catch (err) {
     console.error('Cart create error:', err.message);
