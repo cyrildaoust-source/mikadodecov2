@@ -531,4 +531,6 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
   .sel-summary { position: static; }
   .jgrid { grid-template-columns: 1fr; }
   .formgrid2 { grid-template-columns: 1fr; }
+  .filterbar__right { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 10px; }
+  .fselect { flex: 1 1 140px; min-width: 0; }
 }
