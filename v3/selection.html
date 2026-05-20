@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Votre sélection · Mikadodeco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="page wrap">
+    <div class="pagehead"><span class="eyebrow">Panier</span><h1 class="serif">Votre sélection</h1></div>
+
+    <div data-populated style="display:none">
+      <div class="sel">
+        <div data-items></div>
+        <aside class="sel-summary">
+          <h2 class="serif">Récapitulatif</h2>
+          <div class="sel-row"><span>Sous-total</span><span data-subtotal>â¦</span></div>
+          <div class="sel-row"><span>Livraison</span><span data-delivery-fee>Offerte</span></div>
+          <div class="sel-row sel-row--total"><span data-total-label>Total</span><span data-total>â¦</span></div>
+
+          <div class="sel-opt">
+            <h3>Livraison</h3>
+            <label><input type="radio" name="delivery" value="showroom" checked /> <span>Retrait au showroom, Uccle <em>(offerte)</em></span></label>
+            <label><input type="radio" name="delivery" value="standard" /> <span>Livraison Belgique <em>(40 €)</em></span></label>
+            <label><input type="radio" name="delivery" value="express" /> <span>Livraison express <em>(80 €)</em></span></label>
+          </div>
+          <div class="sel-opt">
+            <h3>Paiement</h3>
+            <label><input type="radio" name="payment" value="full" checked /> <span>Paiement intégral</span></label>
+            <label><input type="radio" name="payment" value="deposit" /> <span>Acompte 30 %, solde au showroom</span></label>
+          </div>
+
+          <button class="btn btn--solid btn--block" data-checkout style="margin-top:14px">Finaliser la sélection</button>
+          <p class="form-error" data-checkout-error style="display:none;margin-top:10px"></p>
+        </aside>
+      </div>
+    </div>
+
+    <div class="sel-empty" data-empty style="display:none">
+      <h2 class="serif">Votre sélection est vide</h2>
+      <p style="color:var(--muted);margin-bottom:24px">Parcourez le catalogue et ajoutez les pièces qui vous parlent.</p>
+      <a href="/produits.html" class="btn btn--outline">Voir le catalogue</a>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell, readCart, removeFromCartAt, euro, escapeHtml } from "/shared.js";
+    initShell({ active: "", transparentNav: false });
+
+    const DELIVERY = { showroom: { fee: 0, label: "Retrait showroom Uccle (0€)" }, standard: { fee: 40, label: "Livraison Belgique (40€)" }, express: { fee: 80, label: "Livraison express (80€)" } };
+    const populated = document.querySelector("[data-populated]");
+    const empty = document.querySelector("[data-empty]");
+    const itemsEl = document.querySelector("[data-items]");
+
+    function delivery() { return document.querySelector('input[name="delivery"]:checked')?.value || "showroom"; }
+    function payment() { return document.querySelector('input[name="payment"]:checked')?.value || "full"; }
+
+    function render() {
+      const cart = readCart();
+      if (!cart.length) { populated.style.display = "none"; empty.style.display = "block"; return; }
+      populated.style.display = "block"; empty.style.display = "none";
+      itemsEl.innerHTML = cart.map((i, idx) => `
+        <div class="sel-item">
+          <img class="sel-item__img" src="${escapeHtml(i.image)}" alt="${escapeHtml(i.name)}" />
+          <div>
+            <div class="sel-item__brand">${escapeHtml(i.brand || "")}</div>
+            <div class="sel-item__name">${escapeHtml(i.name || "Article")}</div>
+            <button class="sel-item__remove" data-remove="${idx}">Retirer</button>
+          </div>
+          <div class="sel-item__price">${euro(i.price)}</div>
+        </div>`).join("");
+      const subtotal = cart.reduce((s, i) => s + (i.price || 0), 0);
+      const fee = DELIVERY[delivery()].fee;
+      const grand = subtotal + fee;
+      document.querySelector("[data-subtotal]").textContent = euro(subtotal);
+      document.querySelector("[data-delivery-fee]").textContent = fee ? euro(fee) : "Offerte";
+      if (payment() === "deposit") {
+        document.querySelector("[data-total-label]").textContent = "À payer aujourd'hui (30 %)";
+        document.querySelector("[data-total]").textContent = euro(Math.round(grand * 0.3));
+      } else {
+        document.querySelector("[data-total-label]").textContent = "Total";
+        document.querySelector("[data-total]").textContent = euro(grand);
+      }
+    }
+
+    document.addEventListener("click", (e) => {
+      const rm = e.target.closest("[data-remove]");
+      if (rm) { removeFromCartAt(Number(rm.dataset.remove)); render(); }
+    });
+    document.addEventListener("change", (e) => { if (e.target.name === "delivery" || e.target.name === "payment") render(); });
+
+    document.querySelector("[data-checkout]").addEventListener("click", async () => {
+      const cart = readCart();
+      if (!cart.length) return;
+      const btn = document.querySelector("[data-checkout]");
+      const err = document.querySelector("[data-checkout-error]");
+      btn.disabled = true; btn.textContent = "Redirection…"; err.style.display = "none";
+      try {
+        const projet = `Livraison: ${DELIVERY[delivery()].label} · Paiement: ${payment() === "deposit" ? "Acompte 30%" : "Paiement intégral"}`;
+        const res = await fetch("/api/cart/create", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: 1 })), customer: { projet } }),
+        });
+        const data = await res.json();
+        if (data.checkoutUrl) location.href = data.checkoutUrl;
+        else throw new Error(data.error || "checkout");
+      } catch (e2) {
+        err.textContent = "Le paiement n'a pas pu démarrer. Réessayez ou contactez-nous."; err.style.display = "block";
+        btn.disabled = false; btn.textContent = "Finaliser la sélection";
+        console.warn(e2);
+      }
+    });
+
+    document.addEventListener("cart:change", render);
+    render();
+  </script>
+</body>
+</html>

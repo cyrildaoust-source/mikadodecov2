@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le journal · Mikadodeco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="page wrap">
+    <article class="article" data-article>
+      <a class="article__back" href="/journal.html">← Le journal</a>
+      <div data-body></div>
+    </article>
+
+    <div class="section wrap" style="text-align:center;border-top:1px solid var(--line);margin-top:48px">
+      <h2 class="serif" style="font-size:clamp(26px,2.6vw,38px);margin-bottom:16px">Une pièce vous a tapé dans l'œil ?</h2>
+      <a href="/produits.html" class="btn btn--blue">Voir le catalogue</a>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell } from "/shared.js";
+    initShell({ active: "Le journal", transparentNav: false });
+
+    const ARTICLES = {
+      "tissu-qui-se-patine": {
+        meta: "Conseil · 4 min", img: "/images/ref-feat-1.webp",
+        title: "Choisir un tissu qui se patine",
+        lead: "Le beau vieillissement n'est pas un défaut, c'est une promesse. Petit guide des matières qui gagnent en caractère avec les années.",
+        body: [
+          ["p", "On choisit souvent un canapé pour son allure le jour de la livraison. Le vrai test arrive trois ans plus tard, quand la matière a vécu. Certaines se fatiguent. D'autres deviennent meilleures."],
+          ["h2", "Le lin, l'allié des familles"],
+          ["p", "Froissé d'origine, le lin ne craint pas une vie de tous les jours. Il respire, se détend, et un faux pli y est une qualité, pas un accident. Lavable, robuste, il s'adoucit à chaque passage."],
+          ["h2", "La laine, la chaleur qui dure"],
+          ["p", "Une bonne laine résiste à l'usure et reprend sa forme. Elle pardonne les accrocs et garde sa couleur loin de la lumière directe. C'est un investissement qui se mesure en décennies."],
+          ["blockquote", "Une matière honnête vous dit où elle en est. C'est ça qu'on appelle se patiner."],
+          ["p", "Notre conseil : touchez avant d'acheter. Au showroom, on vous laisse vivre la matière, la froisser, l'asseoir. C'est le meilleur moyen de savoir si elle vieillira avec vous."],
+        ],
+      },
+      "fermob": {
+        meta: "Maison · 6 min", img: "/images/ref-feat-2.webp",
+        title: "Pourquoi Fermob plutôt qu'ailleurs",
+        lead: "Le mobilier d'extérieur est un terrain miné de fausses bonnes affaires. Voici pourquoi nous tenons à une maison comme Fermob.",
+        body: [
+          ["p", "Une chaise de jardin passe ses étés au soleil et ses hivers dehors ou presque. Peu de meubles encaissent un tel régime. La différence ne se voit pas en magasin : elle apparaît à la troisième saison."],
+          ["h2", "Un acier qui ne s'écaille pas"],
+          ["p", "Le traitement compte plus que la couleur. Un acier bien préparé et thermolaqué résiste à la rouille et aux rayures. C'est invisible à l'achat, décisif à l'usage."],
+          ["h2", "Des pièces qui se réparent"],
+          ["p", "Une maison sérieuse vend encore les pièces détachées dix ans après. Cela change tout : un meuble réparable n'est pas un meuble jetable."],
+          ["p", "C'est cette logique de durée, plus que la mode, qui guide ce qu'on fait entrer dans la sélection."],
+        ],
+      },
+      "and-tradition": {
+        meta: "Visite · 5 min", img: "/images/ref-feat-3.webp",
+        title: "Une journée chez &Tradition",
+        lead: "Carnet de visite : ce qu'on retient d'une maison danoise qui réédite les classiques sans les figer.",
+        body: [
+          ["p", "On imagine souvent le design danois comme un musée. La réalité est plus vivante : des archives qu'on rouvre, des teintes qu'on retravaille, des designers d'aujourd'hui invités à dialoguer avec ceux d'hier."],
+          ["h2", "Le respect de l'original"],
+          ["p", "Rééditer, ce n'est pas copier. C'est retrouver les bonnes proportions, les bons matériaux, et résister à la tentation de tout moderniser. Le meilleur compliment, c'est qu'on ne voie pas le travail."],
+          ["blockquote", "Un classique, c'est une pièce qui a déjà survécu à plusieurs modes."],
+          ["p", "On en est revenus avec une conviction simple : mieux vaut une pièce qu'on gardera vingt ans qu'une tendance qu'on regrettera dans deux."],
+        ],
+      },
+      "chene-et-le-temps": {
+        meta: "Matières · 3 min", img: "/images/ref-split-1.webp",
+        title: "Le chêne, et le temps qui passe",
+        lead: "Pourquoi on préfère un chêne huilé qui fonce à un placage parfait qui s'use mal.",
+        body: [
+          ["p", "Le chêne massif a un défaut qu'on adore : il change. Il fonce, prend la lumière, garde la trace d'un verre oublié. Un placage, lui, reste figé jusqu'au jour où il s'écaille."],
+          ["h2", "Huilé plutôt que verni"],
+          ["p", "Une finition huilée laisse le bois respirer et se répare localement. Un coup de papier de verre fin, un peu d'huile, et la marque disparaît. Le verni, à l'inverse, oblige à tout refaire."],
+          ["p", "Nourrissez votre chêne une à deux fois par an. C'est cinq minutes, et c'est ce qui fait la différence entre un meuble qui dure et un meuble qui se remplace."],
+        ],
+      },
+      "recevoir-dehors": {
+        meta: "Inspiration · 4 min", img: "/images/ref-split-2.webp",
+        title: "Recevoir dehors, sans en faire trop",
+        lead: "Une belle table d'extérieur tient à trois choses, et aucune n'est compliquée.",
+        body: [
+          ["p", "On surcharge souvent les tables d'été. Le secret est ailleurs : quelques pièces justes, posées avec soin, valent mieux qu'un décor de magazine difficile à tenir."],
+          ["h2", "La lumière d'abord"],
+          ["p", "Une lampe baladeuse rechargeable change tout à la tombée du jour. Pas de fil, pas de bougie qui s'éteint au vent : juste une lumière chaude qu'on déplace au gré de la soirée."],
+          ["h2", "Des matières qui ne craignent rien"],
+          ["p", "Lin lavé pour la nappe, grès pour les assiettes, acier pour les assises. Tout ce qui peut prendre une averse sans drame vous libère l'esprit."],
+          ["p", "Le reste, c'est l'instant. Et ça, aucune sélection ne peut le livrer."],
+        ],
+      },
+      "choisir-une-piece": {
+        meta: "Atelier · 5 min", img: "/images/ref-tile-3.webp",
+        title: "Comment nous choisissons une pièce",
+        lead: "Derrière chaque produit de la sélection, une petite enquête. Voici nos critères.",
+        body: [
+          ["p", "On nous demande souvent pourquoi telle marque et pas une autre. La réponse tient en quelques questions qu'on se pose avant de faire entrer quoi que ce soit."],
+          ["h2", "Le dessin tient-il debout ?"],
+          ["p", "Une pièce doit avoir une raison d'être au-delà de la mode. Si on ne sait pas dire pourquoi elle est bien dessinée, elle ne reste pas."],
+          ["h2", "Vieillira-t-elle bien ?"],
+          ["p", "Matériaux honnêtes, finitions réparables, maison qui assure le suivi. On préfère défendre peu de marques, mais bien."],
+          ["blockquote", "Choisi, pas seulement vendu. C'est la seule règle."],
+          ["p", "Le reste, prix, disponibilité, livraison, vient après. D'abord, est-ce une bonne pièce ?"],
+        ],
+      },
+    };
+
+    const slug = new URLSearchParams(location.search).get("slug");
+    const a = ARTICLES[slug];
+    const host = document.querySelector("[data-body]");
+    if (!a) {
+      host.innerHTML = `<div class="article__meta">Le journal</div><h1 class="article__title">Article introuvable</h1><p class="prose">Cet article n'existe pas ou plus. <a href="/journal.html" style="color:var(--accent-ink)">Retour au journal</a>.</p>`;
+    } else {
+      document.title = `${a.title} · Mikadodeco`;
+      const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+      const bodyHtml = a.body.map(([t, txt]) => `<${t}>${esc(txt)}</${t}>`).join("");
+      host.innerHTML = `
+        <div class="article__meta">${esc(a.meta)}</div>
+        <h1 class="article__title">${esc(a.title)}</h1>
+        <p class="article__lead">${esc(a.lead)}</p>
+        <img class="article__hero" src="${a.img}" alt="" />
+        <div class="prose">${bodyHtml}</div>`;
+    }
+  </script>
+</body>
+</html>

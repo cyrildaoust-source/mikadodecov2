@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rendez-vous · Mikadodeco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="rdv-hero">
+    <img class="rdv-hero__img" src="/images/rdv-hero.jpg" alt="Le showroom Mikadodeco" />
+    <div class="rdv-hero__scrim"></div>
+    <div class="rdv-hero__in">
+      <div class="rdv-hero__text">
+        <span class="eyebrow">Le showroom · Uccle</span>
+        <h1>Sur rendez-vous.</h1>
+        <p>Trente minutes, rien que pour votre projet. On vous montre les matières, on vous fait asseoir. Sans engagement.</p>
+      </div>
+
+      <div class="rdv-form-card" data-form-wrap>
+        <h3 class="serif">Réserver une visite</h3>
+        <p class="muted">On confirme votre créneau dans la journée.</p>
+        <form class="form" data-rdv-form novalidate>
+          <div class="field"><label for="r-name">Nom *</label><input id="r-name" name="name" type="text" required /></div>
+          <div class="field"><label for="r-email">E-mail *</label><input id="r-email" name="email" type="email" required /></div>
+          <div class="field"><label for="r-tel">Téléphone</label><input id="r-tel" name="telephone" type="tel" /></div>
+          <div class="formgrid2">
+            <div class="field"><label for="r-date">Date souhaitée</label><input id="r-date" name="date" type="date" /></div>
+            <div class="field"><label for="r-slot">Créneau</label><select id="r-slot" name="slot"><option>Matin (10h–13h)</option><option>Après-midi (13h–18h)</option></select></div>
+          </div>
+          <div class="field"><label for="r-msg">Votre projet (optionnel)</label><textarea id="r-msg" name="projet_msg" style="min-height:84px"></textarea></div>
+          <p class="form-error" data-error style="display:none"></p>
+          <button class="btn btn--blue btn--block" type="submit" data-submit>Demander ce rendez-vous</button>
+        </form>
+      </div>
+
+      <div class="rdv-form-card" data-success style="display:none">
+        <h3 class="serif">C'est noté.</h3>
+        <p class="muted">Merci. Nous vous confirmons votre créneau par e-mail dans la journée. À très vite au showroom.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOUS TROUVER · bespoke brand-styled location -->
+  <section class="locate reveal" id="nous-trouver" aria-labelledby="locate-title">
+    <div class="locate__head">
+      <span class="eyebrow">La boutique · Uccle</span>
+      <h2 class="serif" id="locate-title">Nous trouver</h2>
+    </div>
+
+    <div class="locate__grid">
+      <aside class="locate__rail">
+        <p class="locate__addr">75 Rue du Doyenné<br />1180 Uccle</p>
+        <p class="locate__sub">Bruxelles, Belgique</p>
+
+        <div class="locate__rule" aria-hidden="true"></div>
+
+        <table class="hours">
+          <tr><td>Mardi – Samedi</td><td>10h30 – 18h30</td></tr>
+          <tr><td>Dimanche &amp; Lundi</td><td>Fermé</td></tr>
+        </table>
+
+        <p class="locate__studio">Un projet d'aménagement ? <a href="/studio.html">Mikado Studio</a> vous reçoit sur rendez-vous.</p>
+
+        <div class="locate__actions">
+          <a class="btn btn--blue btn--block" href="https://www.google.com/maps/dir/?api=1&amp;destination=75%20Rue%20du%20Doyenn%C3%A9%2C%201180%20Uccle" target="_blank" rel="noopener">Itinéraire</a>
+          <a class="btn btn--outline btn--block" href="https://www.google.com/maps/search/?api=1&amp;query=75%20Rue%20du%20Doyenn%C3%A9%2C%201180%20Uccle" target="_blank" rel="noopener">Ouvrir dans Maps</a>
+        </div>
+      </aside>
+
+      <div class="locate__map-wrap">
+        <div class="locate__map" id="mikado-map" role="img" aria-label="Carte de la boutique Mikadodeco, 75 Rue du Doyenné, 1180 Uccle"></div>
+        <div class="locate__frame" aria-hidden="true"></div>
+        <figure class="locate__photo">
+          <img src="/images/boutique-uccle.jpg" alt="Devanture de la boutique Mikadodeco à Uccle" loading="lazy" />
+          <figcaption>La boutique · Uccle</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <!-- Bespoke brand-styled map · Leaflet + CARTO tiles, warm-tinted in styles.css -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    (function () {
+      var el = document.getElementById("mikado-map");
+      if (!el || !window.L) return;
+      var LAT = 50.8030627, LNG = 4.3403107;
+
+      var map = L.map(el, {
+        center: [LAT, LNG],
+        zoom: 16,
+        zoomControl: false,
+        scrollWheelZoom: false,   // never hijack the page scroll
+        attributionControl: true,
+      });
+      L.control.zoom({ position: "topright" }).addTo(map);
+
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+        subdomains: "abcd",
+        maxZoom: 20,
+        attribution: '&copy; OpenStreetMap &middot; &copy; CARTO',
+      }).addTo(map);
+
+      var pin = L.divIcon({
+        className: "mikado-pin",
+        html:
+          '<svg class="mikado-pin__svg" viewBox="0 0 24 32" aria-hidden="true">' +
+          '<path d="M12 0C5.37 0 0 5.37 0 12c0 8.4 12 20 12 20s12-11.6 12-20C24 5.37 18.63 0 12 0z"/>' +
+          '<circle cx="12" cy="12" r="4.4"/></svg>' +
+          '<span class="mikado-pin__ring" aria-hidden="true"></span>',
+        iconSize: [34, 42],
+        iconAnchor: [17, 40],
+      });
+      L.marker([LAT, LNG], { icon: pin, title: "Mikadodeco, 75 Rue du Doyenné", keyboard: false }).addTo(map);
+
+      // Premium, non-grabby: scroll-zoom only while the map is focused/clicked.
+      map.on("focus", function () { map.scrollWheelZoom.enable(); });
+      map.on("blur", function () { map.scrollWheelZoom.disable(); });
+
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+
+  <script type="module">
+    import { initShell } from "/shared.js";
+    initShell({ active: "", transparentNav: true });
+
+    const form = document.querySelector("[data-rdv-form]");
+    const errEl = form.querySelector("[data-error]");
+    const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    const fail = (m) => { errEl.textContent = m; errEl.style.display = "block"; };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errEl.style.display = "none";
+      const f = Object.fromEntries(new FormData(form).entries());
+      if (!f.name?.trim()) return fail("Indiquez votre nom.");
+      if (!isEmail(f.email || "")) return fail("Indiquez un e-mail valide.");
+      const btn = form.querySelector("[data-submit]");
+      btn.disabled = true; btn.textContent = "Envoi…";
+      const message = `Demande de rendez-vous showroom.\nDate souhaitée: ${f.date || "à convenir"} · ${f.slot}\n${f.projet_msg || ""}`.trim();
+      try {
+        const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: f.name, email: f.email, telephone: f.telephone, projet: "Prise de rendez-vous showroom", message, source: "v3-rendez-vous" }) });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || "server");
+        document.querySelector("[data-form-wrap]").style.display = "none";
+        document.querySelector("[data-success]").style.display = "block";
+      } catch (e2) { fail("L'envoi a échoué. Réessayez ou écrivez à shop@mikadodeco.be."); btn.disabled = false; btn.textContent = "Demander ce rendez-vous"; console.warn(e2); }
+    });
+  </script>
+</body>
+</html>

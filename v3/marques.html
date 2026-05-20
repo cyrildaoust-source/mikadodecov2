@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Les maisons · Mikadodeco</title>
+  <meta name="description" content="Les maisons de design que nous défendons : un nombre volontairement réduit de marques européennes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="subhero">
+    <img class="subhero__img" src="/images/marques-hero.jpg" alt="Les maisons Mikadodeco" />
+    <div class="subhero__scrim"></div>
+    <div class="subhero__in">
+      <h1>Les maisons que<br>nous défendons.</h1>
+      <p>Un nombre volontairement réduit de marques européennes, pour mieux les connaître.</p>
+    </div>
+  </section>
+
+  <section class="section wrap reveal">
+    <div class="shead"><h2 class="serif">Toutes les maisons</h2><span class="plp-count" data-brand-count></span></div>
+    <div class="brandgrid" data-brandgrid>
+      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>
+      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>
+      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>
+      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>
+    </div>
+  </section>
+
+  <section class="feature feature--accent reveal">
+    <div class="feature__media"><img src="/images/marques-choisi.jpg" alt="Notre sélection" /></div>
+    <div class="feature__body">
+      <span class="eyebrow">Notre conviction</span>
+      <h2 class="serif">Choisi, pas seulement vendu.</h2>
+      <p>Chaque maison entre dans la sélection parce qu'elle tient debout : un dessin juste, des matériaux honnêtes, un savoir-faire qui dure. Nous préférons défendre peu de marques, mais bien.</p>
+      <a href="/produits.html" class="btn btn--blue">Voir le catalogue</a>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell, fetchBrands, slugify } from "/shared.js";
+    initShell({ active: "Marques", transparentNav: true });
+
+    const ORIGIN = { fermob:"France", hay:"Danemark", vitra:"Suisse", muuto:"Danemark", "tradition":"Danemark", "ferm-living":"Danemark", fatboy:"Pays-Bas", hkliving:"Pays-Bas", "pols-potten":"Pays-Bas", alessi:"Italie", artek:"Finlande", relaxound:"Allemagne", gubi:"Danemark" };
+    const grid = document.querySelector("[data-brandgrid]");
+    const countEl = document.querySelector("[data-brand-count]");
+
+    fetchBrands().then((brands) => {
+      brands = brands.filter((b) => b.productCount > 0).sort((a, b) => b.productCount - a.productCount);
+      countEl.textContent = `${brands.length} maisons`;
+      grid.innerHTML = brands.map((b) => {
+        const slug = slugify(b.name);
+        const origin = ORIGIN[slug] || "Europe";
+        const safeName = b.name.replace(/"/g, "&quot;");
+        return `<a class="brandcard" href="/produits.html?brand=${slug}">
+          <span class="brandcard__origin">${origin}</span>
+          <div>
+            <img class="brandcard__logo" src="/images/brands/${slug}.svg" alt="${safeName}" loading="lazy"
+              onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'brandcard__name',textContent:this.alt}))" />
+            <div class="brandcard__count">${b.productCount} pièce${b.productCount > 1 ? "s" : ""}</div>
+          </div>
+        </a>`;
+      }).join("");
+    }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Les maisons se chargent bientôt.</p>`; console.warn(e); });
+  </script>
+</body>
+</html>

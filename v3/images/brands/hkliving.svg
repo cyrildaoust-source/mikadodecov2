@@ -1,0 +1,947 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Lovers of a distinctive interior can indulge in HKLIVING, our goal is to provide everyone with an interior that truly suits you as a person. ">
+        <meta name="keywords" content="">
+        <meta name="author" content="VWA Digital Agency">
+        <meta name="theme-color" content="#bebebe">
+
+        <title>HKLIVING: Creating ambience</title>
+
+            <link rel="icon" type="image/png" sizes="16x16" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=16&amp;amp;rnd=133567872804470000">
+            <link rel="icon" type="image/png" sizes="32x32" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=32&amp;amp;rnd=133567872804470000">
+            <link rel="icon" type="image/png" sizes="48x48" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=48&amp;amp;rnd=133567872804470000">
+            <link rel="icon" type="image/png" sizes="96x96" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=96&amp;amp;rnd=133567872804470000">
+            <link rel="icon" type="image/png" sizes="144x144" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=144&amp;amp;rnd=133567872804470000">
+            <link rel="icon" type="image/png" sizes="192x192" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=192&amp;amp;rnd=133567872804470000">
+            <link rel="icon" type="image/png" sizes="256x256" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=256&amp;amp;rnd=133567872804470000">
+            <link rel="icon" type="image/png" sizes="384x384" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=384&amp;amp;rnd=133567872804470000">
+            <link rel="icon" type="image/png" sizes="512x512" href="/media/pgdko2jr/hk-beeldmerk-bruin-svg.png?width=512&amp;amp;rnd=133567872804470000">
+
+        <script data-gtm-id="GTM-K96NT25" src="/scripts/vwa.gtm.datalayer.js"></script>
+
+        <script>
+            // Push cookie config to gtm based on user consent
+            gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'functional_storage': 'denied', // optional
+                'personalization_storage': 'denied', // optional
+                'security_storage': 'denied', // optional
+                'wait_for_update': '2000' // milliseconds
+            });
+
+            // Further redact your ads data (optional)
+            gtag('set', 'ads_data_redaction', 'False');
+        </script>
+
+        
+
+        <link href="/sb/bootstrap-css-bundle.css.v202604101415" rel="stylesheet">
+        <link href="/sb/main-bundle.css.v202604101415" rel="stylesheet">
+
+        
+
+        <script src="/sb/bootstrap-js-bundle.js.v202604101415"></script>
+
+        <script src="/App_Plugins/UmbracoForms/Assets/promise-polyfill/dist/polyfill.min.js" type="application/javascript"></script><script src="/App_Plugins/UmbracoForms/Assets/aspnet-client-validation/dist/aspnet-validation.min.js" type="application/javascript"></script>
+    </head>
+
+    <body data-disable-header-scroll="">
+
+            <!-- GOOGLE TAG MANAGER (NOSCRIPT) -->
+            <noscript>
+                <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K96NT25"
+                        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            </noscript>
+
+
+        
+
+
+
+
+<div class="retro-header-wrp" style="--menuBackgroundColor: #b2a07c; --menuTextColor: #3c281e;">
+
+
+    <header class="retro ">
+
+        <div class="menu-toggle">
+            <span class="icon icon-bars"></span>
+        </div>
+
+        <div class="site-logo">
+            <a href="/">
+                <img src="/media/10ipad2m/hk-logo-bruin.svg?rmode=pad&amp;rnd=133567872599270000" />
+                <img src="/media/rmgfqcao/hk-logo-creme.svg?rmode=pad&amp;rnd=133567872603970000" class="hover" />
+            </a>
+        </div>
+
+        <div class="content">
+            <div>
+                <span class="search">
+                    <input type="text" placeholder="Search" id="searchField" class="hover" />
+                    <label class="icon icon-retro-search" for="searchField"></label>
+                    <a class="search-close"><span class="icon icon-retro-close"></span></a>
+                </span>
+
+                <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Gu27ewHPNpKoUDc7QYYZL4E32oFyIFmD8VWfOVm_q9geQZ70UfHnJWaEcG3OzxeZ383bilW8OkhxymsIh5VauxRLyiSf5-a-R_D20kgOgPpCzJiuBCKUOI8zNejWzu04bqL-ZFRFCjr5cSdTK-jSxc" />
+
+
+
+                    <a href="/pressroom/" class="btn-header-icon" title="Pressroom">
+                        <span class="icon icon-hr"></span>
+                    </a>
+
+                    <a href="/stores/" class="btn-header-icon" title="Store locator">
+                        <span class="icon icon-retro-shop"></span>
+                    </a>
+
+                <a href="/account/" class="btn-account-menu">
+                    <span class="icon icon-retro-user"></span>
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-panel">
+        <div class="menu-panel-close">
+            <span class="icon icon-retro-close"></span>
+        </div>
+        <div class="menu-panel-tabs">
+                <span class="tab active" data-tab="products-262575">Products</span>
+                <span class="tab " data-tab="collections-262581">Collections</span>
+                <span class="tab " data-tab="inspiration-262571">Inspiration</span>
+                <span class="tab " data-tab="about-262578">About</span>
+            <span class="tab-indicator"></span>
+        </div>
+
+        <div class="menu-panel-content">
+                <div class="menu-panel-view active" data-view="products-262575">
+
+                    <div class="menu-panel-level active" data-level="root">
+
+                                <a href="/products/" class="header-link">
+                                    <h2>Categories</h2>
+                                </a>
+                                        <a href="/products/sofas/" data-has-children="sofas-3636">
+                                            <span>Sofas</span>
+                                            <span class="arrow icon icon-retro-arrow-square-right"></span>
+                                        </a>
+                                        <a href="/products/furniture/" data-has-children="furniture-3642">
+                                            <span>Furniture</span>
+                                            <span class="arrow icon icon-retro-arrow-square-right"></span>
+                                        </a>
+                                        <a href="/products/kitchen/" data-has-children="kitchen-16189">
+                                            <span>Kitchen</span>
+                                            <span class="arrow icon icon-retro-arrow-square-right"></span>
+                                        </a>
+                                        <a href="/products/textile/" data-has-children="textile-16186">
+                                            <span>Textile</span>
+                                            <span class="arrow icon icon-retro-arrow-square-right"></span>
+                                        </a>
+                                        <a href="/products/lighting/" data-has-children="lighting-16187">
+                                            <span>Lighting</span>
+                                            <span class="arrow icon icon-retro-arrow-square-right"></span>
+                                        </a>
+                                        <a href="/products/accessories/" data-has-children="accessories-16188">
+                                            <span>Accessories</span>
+                                            <span class="arrow icon icon-retro-arrow-square-right"></span>
+                                        </a>
+                                        <a href="/products/outdoor/" data-has-children="outdoor-186774">
+                                            <span>Outdoor</span>
+                                            <span class="arrow icon icon-retro-arrow-square-right"></span>
+                                        </a>
+                                        <a href="/products/art/">Art</a>
+                                        <a href="/products/brand-kit/">Brand kit</a>
+                                        <a href="/products/add-ons/">Add ons</a>
+                    </div>
+
+                                    <div class="menu-panel-level" data-level="sofas-3636">
+                                        <a class="menu-panel-back" href="javascript:void(0)">
+                                            <span class="icon icon-retro-arrow-square-left"></span>
+                                        </a>
+                                        <h2><a href="/products/sofas/">Sofas</a></h2>
+                                            <a href="/products/sofas/nomad-couch/">Nomad couch</a>
+                                            <a href="/products/sofas/wave-couch/">Wave couch</a>
+                                            <a href="/products/sofas/vint-couch/">Vint couch</a>
+                                            <a href="/products/sofas/jax-couch/">Jax couch</a>
+                                            <a href="/products/sofas/club-couch/">Club couch</a>
+                                            <a href="/products/sofas/retro-sofa/">Retro sofa</a>
+                                    </div>
+                                    <div class="menu-panel-level" data-level="furniture-3642">
+                                        <a class="menu-panel-back" href="javascript:void(0)">
+                                            <span class="icon icon-retro-arrow-square-left"></span>
+                                        </a>
+                                        <h2><a href="/products/furniture/">Furniture</a></h2>
+                                            <a href="/products/furniture/benches/">Benches</a>
+                                            <a href="/products/furniture/cabinets-shelves/">Cabinets &amp; shelves</a>
+                                            <a href="/products/furniture/dining-chairs/">Dining chairs</a>
+                                            <a href="/products/furniture/dining-tables/">Dining tables</a>
+                                            <a href="/products/furniture/fauteuils/">Fauteuils</a>
+                                            <a href="/products/furniture/side-tables/">Side tables</a>
+                                            <a href="/products/furniture/stools/">Stools</a>
+                                    </div>
+                                    <div class="menu-panel-level" data-level="kitchen-16189">
+                                        <a class="menu-panel-back" href="javascript:void(0)">
+                                            <span class="icon icon-retro-arrow-square-left"></span>
+                                        </a>
+                                        <h2><a href="/products/kitchen/">Kitchen</a></h2>
+                                            <a href="/products/kitchen/70s-ceramics/">70s ceramics</a>
+                                            <a href="/products/kitchen/chef-ceramics/">Chef ceramics</a>
+                                            <a href="/products/kitchen/artist-ceramics/">Artist ceramics</a>
+                                            <a href="/products/kitchen/shell-ceramics/">Shell ceramics</a>
+                                            <a href="/products/kitchen/tableware/">Tableware</a>
+                                            <a href="/products/kitchen/glassware/">Glassware</a>
+                                            <a href="/products/kitchen/mugs-cups/">Mugs &amp; cups</a>
+                                            <a href="/products/kitchen/plates/">Plates</a>
+                                            <a href="/products/kitchen/bowls/">Bowls</a>
+                                            <a href="/products/kitchen/cutlery/">Cutlery</a>
+                                            <a href="/products/kitchen/table-linen/">Table linen</a>
+                                            <a href="/products/kitchen/kitchen-accessories/">Kitchen accessories</a>
+                                            <a href="/products/kitchen/serving-trays/">Serving trays</a>
+                                            <a href="/products/kitchen/bread-boards/">Bread boards</a>
+                                    </div>
+                                    <div class="menu-panel-level" data-level="textile-16186">
+                                        <a class="menu-panel-back" href="javascript:void(0)">
+                                            <span class="icon icon-retro-arrow-square-left"></span>
+                                        </a>
+                                        <h2><a href="/products/textile/">Textile</a></h2>
+                                            <a href="/products/textile/bath-mats/">Bath mats</a>
+                                            <a href="/products/textile/bed-linen/">Bed linen</a>
+                                            <a href="/products/textile/cushions/">Cushions</a>
+                                            <a href="/products/textile/rugs/">Rugs</a>
+                                            <a href="/products/textile/wall-rugs/">Wall rugs</a>
+                                            <a href="/products/textile/towels-robes/">Towels &amp; robes</a>
+                                    </div>
+                                    <div class="menu-panel-level" data-level="lighting-16187">
+                                        <a class="menu-panel-back" href="javascript:void(0)">
+                                            <span class="icon icon-retro-arrow-square-left"></span>
+                                        </a>
+                                        <h2><a href="/products/lighting/">Lighting</a></h2>
+                                            <a href="/products/lighting/lamp-bases/">Lamp bases</a>
+                                            <a href="/products/lighting/lamp-shades/">Lamp shades</a>
+                                            <a href="/products/lighting/floor-lamps/">Floor lamps</a>
+                                            <a href="/products/lighting/pendant-lamps/">Pendant lamps</a>
+                                            <a href="/products/lighting/table-lamps/">Table lamps</a>
+                                            <a href="/products/lighting/wall-lamps/">Wall lamps</a>
+                                    </div>
+                                    <div class="menu-panel-level" data-level="accessories-16188">
+                                        <a class="menu-panel-back" href="javascript:void(0)">
+                                            <span class="icon icon-retro-arrow-square-left"></span>
+                                        </a>
+                                        <h2><a href="/products/accessories/">Accessories</a></h2>
+                                            <a href="/products/accessories/clocks/">Clocks</a>
+                                            <a href="/products/accessories/candle-holders/">Candle holders</a>
+                                            <a href="/products/accessories/home-fragrances/">Home fragrances</a>
+                                            <a href="/products/accessories/clothing-racks/">Clothing racks</a>
+                                            <a href="/products/accessories/flowerpots/">Flowerpots</a>
+                                            <a href="/products/accessories/lookbooks/">Lookbooks</a>
+                                            <a href="/products/accessories/mirrors/">Mirrors</a>
+                                            <a href="/products/accessories/objects-sculptures/">Objects &amp; sculptures</a>
+                                            <a href="/products/accessories/vases/">Vases</a>
+                                            <a href="/products/accessories/wall-decoration/">Wall decoration</a>
+                                    </div>
+                                    <div class="menu-panel-level" data-level="outdoor-186774">
+                                        <a class="menu-panel-back" href="javascript:void(0)">
+                                            <span class="icon icon-retro-arrow-square-left"></span>
+                                        </a>
+                                        <h2><a href="/products/outdoor/">Outdoor</a></h2>
+                                            <a href="/products/outdoor/outdoor-furniture/">Outdoor furniture</a>
+                                            <a href="/products/outdoor/outdoor-textile/">Outdoor textile</a>
+                                            <a href="/products/outdoor/outdoor-accessories/">Outdoor accessories</a>
+                                    </div>
+
+                </div>
+                <div class="menu-panel-view " data-view="collections-262581">
+
+                    <div class="menu-panel-level active" data-level="root">
+
+                                <a href="/collections/" class="header-link">
+                                    <h2>Collections</h2>
+                                </a>
+                                        <a href="/collection">
+                                            All collections
+
+                                        </a>
+                                        <a href="/collections/additions-2026/">
+                                            Additions 2026
+
+                                                    <span class="tag">New</span>
+                                        </a>
+                                        <a href="/collections/70s-ceramics-van-gogh/">
+                                            70s ceramics Van Gogh
+
+                                                    <span class="tag">New</span>
+                                        </a>
+                                        <a href="/collections/teun-zwets-for-hkliving/">
+                                            Teun Zwets
+
+                                                    <span class="tag">New</span>
+                                        </a>
+                                        <a href="/collections/nienke-sikkema-for-hkliving/">
+                                            Nienke Sikkema
+
+                                                    <span class="tag">New</span>
+                                        </a>
+                                        <a href="/collections/collection-25-26/">
+                                            Collection 25-26
+
+                                        </a>
+                                        <a href="/collections/must-haves/?type=products">
+                                            Must-haves
+
+                                        </a>
+                                        <a href="/collections/fresh-stock/?type=products">
+                                            Fresh stock
+
+                                        </a>
+                    </div>
+
+
+                </div>
+                <div class="menu-panel-view " data-view="inspiration-262571">
+
+                    <div class="menu-panel-level active" data-level="root">
+
+                                <a href="/catalogues/" class="header-link">
+                                    <h2>Catalogues</h2>
+                                </a>
+                                        <a href="/catalogues/">
+                                            All catalogues
+
+                                        </a>
+                                        <a href="/catalogues/additions-2026/">
+                                            Additions 2026
+
+                                        </a>
+                                        <a href="/catalogues/collection-25-26/">
+                                            Collection 25-26
+
+                                        </a>
+                                        <a href="/catalogues/collection-outdoor-2026/">
+                                            Collection outdoor 2026
+
+                                        </a>
+                                <a href="/collaborations/" class="header-link">
+                                    <h2>Collaborations</h2>
+                                </a>
+                                        <a href="/collections/teun-zwets-for-hkliving/">
+                                            Teun Zwets
+
+                                                    <span class="tag">New</span>
+                                        </a>
+                                        <a href="/collections/nienke-sikkema-for-hkliving/">
+                                            Nienke Sikkema
+
+                                                    <span class="tag">New</span>
+                                        </a>
+                                        <a href="/collections/hkliving-x-gabriella-ferrero/">
+                                            HKLIVING x Gabriella Ferrero
+
+                                        </a>
+                                        <a href="/collections/doris-for-hkliving/">
+                                            Doris for HKLIVING
+
+                                        </a>
+                    </div>
+
+
+                </div>
+                <div class="menu-panel-view " data-view="about-262578">
+
+                    <div class="menu-panel-level active" data-level="root">
+
+                                <a href="/our-story/" class="header-link">
+                                    <h2>About</h2>
+                                </a>
+                                        <a href="/our-story/">
+                                            Our story
+
+                                        </a>
+                                        <a href="/brand-philosophy/">
+                                            Brand Philosophy
+
+                                        </a>
+                                        <a href="/our-story/press/">
+                                            Press
+
+                                        </a>
+                                        <a href="/our-story/careers/">
+                                            Careers
+
+                                        </a>
+                                <a href="/our-story/contact-us/" class="header-link">
+                                    <h2>Contact</h2>
+                                </a>
+                                        <a href="/our-story/contact-us/">
+                                            Contact us
+
+                                        </a>
+                                        <a href="/our-story/agents-distributors/">
+                                            Agents &amp; Distributors
+
+                                        </a>
+                                        <a href="/stores/">
+                                            Stores
+
+                                        </a>
+                                        <a href="/our-story/become-a-dealer/">
+                                            Become a dealer
+
+                                        </a>
+                    </div>
+
+
+                </div>
+        </div>
+
+        <div class="menu-panel-footer">
+            <hr />
+                <a href="/stores/">Stores</a>
+                <a href="/pressroom/">Pressroom</a>
+                <a href="/our-story/contact-us/">Contact us</a>
+        </div>
+    </div>
+
+    <div class="menu-panel-blur"></div>
+</div>
+
+
+        
+
+
+
+
+
+
+
+
+<div class="container-fluid section-retro-video" data-enable-transparent-header="true">
+    <div class="row">
+        <div class="video-wrapper">
+
+            <div class="video-content" style="--textColor: #f0ebde;">
+                <h1>Heavy, sculptural objects that look museum-ready yet belong right in the middle of everyday life. </h1>
+
+                <div class="content">
+                    
+                </div>
+
+                <div class="button col-12">
+                    <a href="/collections/additions-2026/" class="btn disable-btn-hover btn-retro-0 light">Additions 2026 <span class="icon icon-retro-arrow-square-right"></span></a>
+                </div>
+            </div>
+
+            <video id="video-309" autoplay loop playsinline="playsinline" preload="auto" muted="false" poster="/media/4y2ftzf3/2026_additions_hkliving_lr_210.jpg?rxy=0.519776391932131,0.6024091311123279&amp;width=1920&amp;format=jpg&amp;quality=75&amp;rnd=134208944189330000">
+
+            </video>
+
+        </div>
+
+        <div class="scroll-indicator" onclick="window.scrollBy(0, 250);" style="color: #f0ebde;">
+            <span class="icon icon-retro-mouse-scroll-down"></span>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid section-retro-3-images">
+    <div class="row">
+        <div class="top-wrp">
+                <div>
+                    <h2>
+                        Creative collaboration sits at the heart of  Additions 2026 &#x2014; a driving force in shaping the collection&#x2019;s direction.
+                    </h2>
+                </div>
+
+                <div>
+                    <a href="/collections/additions-2026/?type=products" class="btn btn-retro-1">
+                        Additions 2026 <span class="icon icon-retro-arrow-square-right"></span>
+                    </a>
+                </div>
+        </div>
+
+        <div class="image-wrp">
+                <div style=" background-position: 50% 50%; --background-image-xl: url(/media/tlzlqos1/2026_additions_hkliving_lr_109.jpg?width=866&amp;rnd=134183853327200000); --background-image-lg: url(/media/tlzlqos1/2026_additions_hkliving_lr_109.jpg?width=700&amp;rnd=134183853327200000); --background-image-xs: url(/media/tlzlqos1/2026_additions_hkliving_lr_109.jpg?width=700&amp;rnd=134183853327200000)">
+                        <a href="/collections/70s-ceramics-collection/?type=products" class="btn">
+                            70s ceramics <span class="icon icon-retro-arrow-square-right"></span>
+                        </a>
+                </div>
+
+                <div style=" background-position: 50% 50%; --background-image-xl: url(/media/waqfrubi/2026_eastern_hkliving_lr_009.jpg?width=866&amp;rnd=134183853972100000); --background-image-lg: url(/media/waqfrubi/2026_eastern_hkliving_lr_009.jpg?width=700&amp;rnd=134183853972100000); --background-image-xs: url(/media/waqfrubi/2026_eastern_hkliving_lr_009.jpg?width=700&amp;rnd=134183853972100000)">
+                        <a href="/products/kitchen/" class="btn">
+                            Kitchen <span class="icon icon-retro-arrow-square-right"></span>
+                        </a>
+                </div>
+
+                <div style=" background-position: 50% 50%; --background-image-xl: url(/media/bxhnduas/2026_eastern_hkliving_lr_031.jpg?width=866&amp;rnd=134183854229500000); --background-image-lg: url(/media/bxhnduas/2026_eastern_hkliving_lr_031.jpg?width=700&amp;rnd=134183854229500000); --background-image-xs: url(/media/bxhnduas/2026_eastern_hkliving_lr_031.jpg?width=700&amp;rnd=134183854229500000)">
+                        <a href="/products/accessories/" class="btn">
+                            Accessories <span class="icon icon-retro-arrow-square-right"></span>
+                        </a>
+                </div>
+        </div>
+
+            <div class="scroll imagecount-3">
+                <div class="prev"><span class="icon icon-retro-arrow-square-left"></span></div>
+                <div class="next"><span class="icon icon-retro-arrow-square-right"></span></div>
+            </div>
+    </div>
+</div>
+
+<div class="section-retro-hotspots">
+    
+
+    <div class="umb-grid">
+                <div class="grid-section">
+        <div >
+            <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <div >
+
+
+
+
+
+<div id="image-map-pro-1" class="hotspot wrapper id-image-map-pro-1"></div>
+
+        <script type="text/javascript">
+			(function () {
+				var hotspots = {"0":"{\"id\":5684,\"editor\":{\"selected_shape\":\"spot-3377\"},\"general\":{\"name\":\"Untitled\",\"width\":2500,\"height\":1667,\"naturalWidth\":2500,\"naturalHeight\":1667},\"image\":{\"url\":\"/media/epnovvcq/2026_eastern_hkliving_lr_056.jpg\"},\"spots\":[{\"id\":\"spot-6524\",\"title\":\"small vases avc0009\",\"x\":10.692,\"y\":21.191,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"show-tooltip\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-185581\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/nutm3mql/avc0009_eg.jpg?rnd=134129457637000000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/70s-ceramics-small-vases-palette-set-of-5/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"70s ceramics: small vases, palette, set of 5\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AVC0009\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-9766\",\"title\":\"glass sculpture awx0011\",\"x\":22.973,\"y\":35.17,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"show-tooltip\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-102971\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/hbcnel1v/awx0011_eg.jpg?rnd=133985145501770000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/glass-sculpture-chrome-no-2/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Glass sculpture chrome, no.2\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AWX0011\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-8447\",\"title\":\"gemstone vase jade ssn0006\",\"x\":6.698,\"y\":49.815,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"show-tooltip\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-969251\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/2llpxbwc/ssn0006_eg.jpg?rnd=134164062196600000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/nsgsvase/nienke-sikkema-for-hkliving-gemstone-vase-jade/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Nienke Sikkema for HKLIVING: gemstone vase, jade\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"SSN0006\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-428\",\"title\":\"pop cube small pink aax0006\",\"x\":20.458,\"y\":55.584,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"show-tooltip\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-392351\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/2amm20wv/aax0006_eg.jpg?rnd=134123527794100000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-pink/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Pop cube small, pink\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AAX0006\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-25\",\"title\":\"chrome plateau knc0004\",\"x\":12.764,\"y\":79.659,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"show-tooltip\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-980241\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/uypdfcxd/knc0004_eg.jpg?rnd=133985166258300000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/new-classics-chrome-plateau-rough/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"New classics: chrome plateau, rough\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"KNC0004\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-8975\",\"title\":\"pop cube small cream aax0008\",\"x\":28.152,\"y\":88.091,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"show-tooltip\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-34361\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/glfjbl5o/aax0008_eg.jpg?rnd=134123527837630000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-cream/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Pop cube small, cream\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AAX0008\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-7488\",\"title\":\"trinket box stz0011\",\"x\":53.527,\"y\":47.484,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"show-tooltip\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-432551\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/sfiltqlj/stz0011_eg.jpg?rnd=134145234397700000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/trinketboxtz/teun-zwets-for-hkliving-trinket-box-moss/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Teun Zwets for HKLIVING: trinket box, moss\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"STZ0011\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-3377\",\"title\":\"glassfiber lamp pink ltl0008\",\"x\":68.175,\"y\":77.772,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"show-tooltip\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"left\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-182721\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/rqaaesn5/ltl0008_eg.jpg?rnd=134129475766400000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/glassfiber-table-lamp-pink/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Glassfiber table lamp, pink\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"LTL0008\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}}]}","1":"{\"id\":5684,\"editor\":{\"selected_shape\":\"spot-6524\"},\"general\":{\"name\":\"Untitled\",\"width\":2500,\"height\":1667,\"naturalWidth\":2500,\"naturalHeight\":1667},\"image\":{\"url\":\"/media/epnovvcq/2026_eastern_hkliving_lr_056.jpg\"},\"spots\":[{\"id\":\"spot-6524\",\"title\":\"small vases avc0009\",\"x\":10.692,\"y\":21.191,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/70s-ceramics-small-vases-palette-set-of-5/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-53221\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/nutm3mql/avc0009_eg.jpg?rnd=134129457637000000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/70s-ceramics-small-vases-palette-set-of-5/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"70s ceramics: small vases, palette, set of 5\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AVC0009\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-9766\",\"title\":\"glass sculpture awx0011\",\"x\":22.973,\"y\":35.17,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/glass-sculpture-chrome-no-2/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-363581\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/hbcnel1v/awx0011_eg.jpg?rnd=133985145501770000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/glass-sculpture-chrome-no-2/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Glass sculpture chrome, no.2\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AWX0011\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-8447\",\"title\":\"gemstone vase jade ssn0006\",\"x\":6.698,\"y\":49.815,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/nsgsvase/nienke-sikkema-for-hkliving-gemstone-vase-jade/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-378181\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/2llpxbwc/ssn0006_eg.jpg?rnd=134164062196600000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/nsgsvase/nienke-sikkema-for-hkliving-gemstone-vase-jade/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Nienke Sikkema for HKLIVING: gemstone vase, jade\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"SSN0006\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-428\",\"title\":\"pop cube small pink aax0006\",\"x\":20.458,\"y\":55.584,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-pink/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-40561\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/2amm20wv/aax0006_eg.jpg?rnd=134123527794100000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-pink/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Pop cube small, pink\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\",\"text_shadow\":\"h2\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AAX0006\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-25\",\"title\":\"chrome plateau knc0004\",\"x\":12.764,\"y\":79.659,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/new-classics-chrome-plateau-rough/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-75351\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/uypdfcxd/knc0004_eg.jpg?rnd=133985166258300000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/new-classics-chrome-plateau-rough/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"New classics: chrome plateau, rough\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"KNC0004\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-8975\",\"title\":\"pop cube small cream aax0008\",\"x\":28.152,\"y\":88.091,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-cream/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-529411\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/glfjbl5o/aax0008_eg.jpg?rnd=134123527837630000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-cream/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Pop cube small, cream\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AAX0008\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-7488\",\"title\":\"trinket box stz0011\",\"x\":53.527,\"y\":47.484,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/trinketboxtz/teun-zwets-for-hkliving-trinket-box-moss/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-88741\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/sfiltqlj/stz0011_eg.jpg?rnd=134145234397700000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/trinketboxtz/teun-zwets-for-hkliving-trinket-box-moss/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Teun Zwets for HKLIVING: trinket box, moss\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"STZ0011\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-3377\",\"title\":\"glassfiber lamp pink ltl0008\",\"x\":68.175,\"y\":77.772,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/glassfiber-table-lamp-pink/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"left\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-843661\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/rqaaesn5/ltl0008_eg.jpg?rnd=134129475766400000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/glassfiber-table-lamp-pink/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Glassfiber table lamp, pink\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"LTL0008\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}}]}","2":"{\"id\":5684,\"editor\":{\"selected_shape\":\"spot-6524\"},\"general\":{\"name\":\"Untitled\",\"width\":2500,\"height\":1667,\"naturalWidth\":2500,\"naturalHeight\":1667},\"image\":{\"url\":\"/media/epnovvcq/2026_eastern_hkliving_lr_056.jpg\"},\"spots\":[{\"id\":\"spot-6524\",\"title\":\"small vases avc0009\",\"x\":10.692,\"y\":21.191,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/70s-ceramics-small-vases-palette-set-of-5/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-127741\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/nutm3mql/avc0009_eg.jpg?rnd=134129457637000000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/70s-ceramics-small-vases-palette-set-of-5/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"70s ceramics: small vases, palette, set of 5\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AVC0009\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-9766\",\"title\":\"glass sculpture awx0011\",\"x\":22.973,\"y\":35.17,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/glass-sculpture-chrome-no-2/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-909751\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/hbcnel1v/awx0011_eg.jpg?rnd=133985145501770000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/glass-sculpture-chrome-no-2/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Glass sculpture chrome, no.2\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AWX0011\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-8447\",\"title\":\"gemstone vase jade ssn0006\",\"x\":6.698,\"y\":49.815,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/nsgsvase/nienke-sikkema-for-hkliving-gemstone-vase-jade/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-169171\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/2llpxbwc/ssn0006_eg.jpg?rnd=134164062196600000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/nsgsvase/nienke-sikkema-for-hkliving-gemstone-vase-jade/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Nienke Sikkema for HKLIVING: gemstone vase, jade\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"SSN0006\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-428\",\"title\":\"pop cube small pink aax0006\",\"x\":20.458,\"y\":55.584,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-pink/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-379161\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/2amm20wv/aax0006_eg.jpg?rnd=134123527794100000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-pink/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Pop cube small, pink\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AAX0006\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-25\",\"title\":\"chrome plateau knc0004\",\"x\":12.764,\"y\":79.659,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/new-classics-chrome-plateau-rough/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-125071\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/uypdfcxd/knc0004_eg.jpg?rnd=133985166258300000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/new-classics-chrome-plateau-rough/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"New classics: chrome plateau, rough\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"KNC0004\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-8975\",\"title\":\"pop cube small cream aax0008\",\"x\":28.152,\"y\":88.091,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/popcubesmall/pop-cube-small-cream/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-397701\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/glfjbl5o/aax0008_eg.jpg?rnd=134123527837630000\",\"image_is_a_link\":1,\"link_to\":\"\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Pop cube small, cream\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"AAX0008\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-7488\",\"title\":\"trinket box stz0011\",\"x\":53.527,\"y\":47.484,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/trinketboxtz/teun-zwets-for-hkliving-trinket-box-moss/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"right\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-768431\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/sfiltqlj/stz0011_eg.jpg?rnd=134145234397700000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/trinketboxtz/teun-zwets-for-hkliving-trinket-box-moss/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Teun Zwets for HKLIVING: trinket box, moss\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"STZ0011\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}},{\"id\":\"spot-3377\",\"title\":\"glassfiber lamp pink ltl0008\",\"x\":68.175,\"y\":77.772,\"actions\":{\"mouseover\":\"no-action\",\"click\":\"follow-link\",\"link\":\"https://www.hkliving.com/product/glassfiber-table-lamp-pink/\"},\"default_style\":{\"icon_type\":\"custom\",\"icon_url\":\"/media/d3nbfhjs/hotspot-hq.png\",\"icon_is_pin\":0},\"tooltip_style\":{\"border_radius\":0,\"padding\":0,\"background_color\":\"#ffffff\",\"background_opacity\":1,\"position\":\"left\",\"width\":450},\"tooltip_content\":{\"content_type\":\"content-builder\",\"squares_settings\":{\"containers\":[{\"id\":\"sq-container-763611\",\"settings\":{\"elements\":[{\"settings\":{\"name\":\"Button\",\"iconClass\":\"fa fa-link\"},\"options\":{\"button\":{\"text\":\"8\"},\"general\":{\"classes\":\"tooltip-close\"}}},{\"settings\":{\"name\":\"Image\",\"iconClass\":\"fa fa-camera\"},\"options\":{\"image\":{\"url\":\"https://www.hkliving.com/media/rqaaesn5/ltl0008_eg.jpg?rnd=134129475766400000\",\"image_is_a_link\":1,\"link_to\":\"https://www.hkliving.com/product/glassfiber-table-lamp-pink/\"}}},{\"settings\":{\"name\":\"Heading\",\"iconClass\":\"fa fa-header\"},\"options\":{\"heading\":{\"text\":\"Glassfiber table lamp, pink\",\"heading\":\"h2\"},\"layout\":{\"box_model\":{\"margin\":{\"top\":15},\"padding\":{\"top\":0,\"bottom\":0,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"recoleta\\\"\",\"font_size\":\"25\",\"font_weight\":\"semibold\",\"line_height\":\"50\",\"text_color\":\"#1c1c1c\"}}},{\"settings\":{\"name\":\"Paragraph\",\"iconClass\":\"fa fa-paragraph\"},\"options\":{\"text\":{\"text\":\"LTL0008\"},\"layout\":{\"box_model\":{\"padding\":{\"bottom\":20,\"left\":25,\"right\":25}}},\"font\":{\"font_family\":\"\\\"helveticaneue\\\"\",\"font_size\":\"18\",\"line_height\":\"31\",\"text_color\":\"#1c1c1c\"}}}]}}]}}}]}"};
+
+				function loadHotspot() {
+					var w = $(document).innerWidth();
+                    var viewportId = (w < 768) ? 2 : ((w < 992) ? 1 : ((w < 1200) ? 0 : 0));
+
+					if (!hotspots[viewportId]) {
+						/* If viewport is not available. Use default */
+						viewportId = 0;
+					}
+
+					if (hotspots[viewportId]) {
+						var hotspot = JSON.parse(hotspots[viewportId]);
+
+						if (hotspot) {
+							$('#image-map-pro-1').imageMapPro(hotspot);
+						}
+					}
+
+					document.removeEventListener("DOMContentLoaded", loadHotspot)
+				}
+
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", loadHotspot);
+				} else { loadHotspot(); }
+			})();
+        </script>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+                </div>
+    </div>
+
+
+
+</div>
+
+
+
+<div class="container-fluid section-retro-3-images">
+    <div class="row">
+        <div class="top-wrp">
+                <div>
+                    <h2>
+                        Let us guide you in the art of living &#x2014; for homes that refuse to look like everyone else&#x2019;s.
+                    </h2>
+                </div>
+
+                <div>
+                    <a href="/collections/additions-2026/?type=products" class="btn btn-retro-1">
+                        Additions 2026 <span class="icon icon-retro-arrow-square-right"></span>
+                    </a>
+                </div>
+        </div>
+
+        <div class="image-wrp">
+                <div style=" background-position: 50% 50%; --background-image-xl: url(/media/emaf3t54/2026_additions_hkliving_lr_211.jpg?width=866&amp;rnd=134183855199130000); --background-image-lg: url(/media/emaf3t54/2026_additions_hkliving_lr_211.jpg?width=700&amp;rnd=134183855199130000); --background-image-xs: url(/media/emaf3t54/2026_additions_hkliving_lr_211.jpg?width=700&amp;rnd=134183855199130000)">
+                        <a href="/collections/nienke-sikkema-for-hkliving/" class="btn">
+                            Nienke Sikkema <span class="icon icon-retro-arrow-square-right"></span>
+                        </a>
+                </div>
+
+                <div style=" background-position: 50% 50%; --background-image-xl: url(/media/imgfnj14/2026_additions_vangogh_hliving_lr_01.jpg?width=866&amp;rnd=134183855444470000); --background-image-lg: url(/media/imgfnj14/2026_additions_vangogh_hliving_lr_01.jpg?width=700&amp;rnd=134183855444470000); --background-image-xs: url(/media/imgfnj14/2026_additions_vangogh_hliving_lr_01.jpg?width=700&amp;rnd=134183855444470000)">
+                        <a href="/collections/70s-ceramics-van-gogh/" class="btn">
+                            Van Gogh <span class="icon icon-retro-arrow-square-right"></span>
+                        </a>
+                </div>
+
+                <div style=" background-position: 50% 50%; --background-image-xl: url(/media/imqnntbm/2026_additions_hkliving_lr_131.jpg?width=866&amp;rnd=134183855793930000); --background-image-lg: url(/media/imqnntbm/2026_additions_hkliving_lr_131.jpg?width=700&amp;rnd=134183855793930000); --background-image-xs: url(/media/imqnntbm/2026_additions_hkliving_lr_131.jpg?width=700&amp;rnd=134183855793930000)">
+                        <a href="/collections/teun-zwets-for-hkliving/" class="btn">
+                            Teun Zwets <span class="icon icon-retro-arrow-square-right"></span>
+                        </a>
+                </div>
+        </div>
+
+            <div class="scroll imagecount-3">
+                <div class="prev"><span class="icon icon-retro-arrow-square-left"></span></div>
+                <div class="next"><span class="icon icon-retro-arrow-square-right"></span></div>
+            </div>
+    </div>
+</div>
+
+
+
+
+        
+
+
+
+<footer class="retro">
+    <div style="background-color: #f0ebde; color: #3c281e;">
+        <div class="container footer-top-section">
+            <div>
+                <h4>Do you need some help?</h4>
+
+                <div style="display: flex;">
+                    <div>
+                        <span class="icon icon-retro-dialog"></span>
+                    </div>
+
+                    <div>
+                        <p>Our customer service team will be happy to assist you, please click <a href="/our-story/contact-us/" title="Contact"><u>here</u></a> to get in touch with us.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4>Arrange it yourself</h4>
+
+                <div style="display: flex; margin-bottom: 5px;">
+                    <div>
+                        <span class="icon icon-download"></span>
+                    </div>
+
+                    <div>
+                        <a href="/pressroom/">Download pressroom packages</a>
+                    </div>
+                </div>
+                <div style="display: flex; margin-bottom: 5px;">
+                    <div>
+                        <span class="icon icon-retro-box"></span>
+                    </div>
+
+                    <div>
+                        <a href="/our-story/become-a-dealer/">Become a dealer</a>
+                    </div>
+                </div>
+                <div style="display: flex; margin-bottom: 5px;">
+                    <div>
+                        <span class="icon icon-"></span>
+                    </div>
+
+                    <div>
+                        <a></a>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4>Got some questions?</h4>
+
+                <div style="display: flex; margin-bottom: 5px;">
+                    <div>
+                        <span class="icon icon-retro-couch"></span>
+                    </div>
+
+                    <div>
+                        <a href="/stores/">Where can I buy HKLIVING?</a>
+                    </div>
+                </div>
+                <div style="display: flex; margin-bottom: 5px;">
+                    <div>
+                        <span class="icon icon-"></span>
+                    </div>
+
+                    <div>
+                        <a></a>
+                    </div>
+                </div>
+                <div style="display: flex; margin-bottom: 5px;">
+                    <div>
+                        <span class="icon icon-"></span>
+                    </div>
+
+                    <div>
+                        <a></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #3c281e; color: #f0ebde; --color: #f0ebde;">
+        <div class="container footer-bottom-section">
+
+            <div class="logo">
+                <img src="/media/vr5oayj2/hk-beeldmerk-creme.svg?rmode=pad&amp;rnd=133567872608930000" />
+            </div>
+
+            <div class="content">
+                <div>
+                        <div>
+                            <h5>Customer service</h5>
+
+                                    <a href="/our-story/contact-us/">Contact</a>
+                                    <a href="/our-story/agents-distributors/">Agents &amp; Distributors</a>
+                        </div>
+                        <div>
+                            <h5>About HKLIVING</h5>
+
+                                    <a href="/our-story/">Our story</a>
+                                    <a href="/brand-philosophy/">Brand Philosophy</a>
+                                    <a href="/account/documentation/">Brand Book</a>
+                        </div>
+                        <div>
+                            <h5>Discover HKLIVING</h5>
+
+                                    <a href="/stores/">Stores</a>
+                                    <a href="/our-story/press/">Press</a>
+                                    <a href="/catalogues/">Catalogues</a>
+                                    <a href="/collection/">Collection</a>
+                        </div>
+                        <div>
+                            <h5>HKLIVING and you</h5>
+
+                                    <a href="/our-story/become-a-dealer/">Become a dealer</a>
+                                    <a href="/our-story/careers/">Careers</a>
+                                    <a href="/login/">Login</a>
+                        </div>
+
+                    <div class="socials">
+                                <a href="https://www.instagram.com/hkliving/" target="_blank">
+                                    <span class="icon-retro-instagram"></span>
+                                </a>
+                                <a href="https://nl.pinterest.com/hkliving/" target="_blank">
+                                    <span class="icon-retro-pinterest"></span>
+                                </a>
+                                <a href="https://www.facebook.com/hklivingcom" target="_blank">
+                                    <span class="icon-retro-facebook"></span>
+                                </a>
+                    </div>
+                </div>
+                
+                <div class="bottom-bar">
+                    <div class="copyright">© 2026 HKLIVING</div>
+
+                    <div class="links">
+                            <a href="/cookie-statement-oud/">Cookie statement</a>
+                            <a href="/privacy-statement/">Privacy statement</a>
+                            <a href="/terms-and-conditions/">Terms and conditions</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+
+        
+
+
+
+    <div class="container cookie-consent-container">
+
+        <div class="row row-main">
+
+            <div class="col-12 col-md-9">
+                <div class="row">
+                    <div class="col-12 cookies-title">
+                        <span>We use cookies</span>
+                    </div>
+                    <div class="col-12">
+                        <span class="cookies-explain">
+                            We use cookies to enhance your browsing experience, analyze our traffic and serve personalized content or ads. 
+By clicking “Accept All” you consent to our use of cookies. 
+For more information, please see our <a href="/cookie-statement">cookie statement</a> and our <a href="/privacy-statement">privacy statement</a>.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3 cookies-buttons">
+                <div class="row">
+                    <div class="col-6 col-md-12 cookies-accept">
+                        <a href="#" id="cookieAcceptAll" class="btn btn-retro-0 cookie-action">Accept all</a>
+                    </div>
+                    <div class="col-6 col-md-12 cookies-reject">
+                        <a href="#" id="cookieRejectAll" class="btn btn-retro-0 inverted cookie-action">Reject all</a>
+                    </div>
+                    <div class="col-12 cookies-customize">
+                        <a id="btn-customize-expand" class="btn btn-small" href="#">
+                            <span>Customise</span>
+                            <span class="icon icon-arrow-up icon-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-options">
+
+            <div class="col-12 d-lg-none text-end cookies-options-close">
+                <span class="icon icon-remove-1"></span>
+            </div>
+
+            <div class="col-12 cookies-options-container">
+
+                <div class="col-12 cookies-options-header">
+                    <span>Customize Consent Preferences</span>
+                    
+                </div>
+                <div class="col-12 cookies-options-explain">
+                    We use cookies to help you navigate efficiently and perform certain functions. You will find detailed information about all cookies under each consent category below. The cookies that are categorized as &quot;Necessary&quot; are stored on your browser as they are essential for enabling the basic functionalities of the site. We also use third-party cookies that help us analyze how you use this website, store your preferences, and provide the content and advertisements that are relevant to you. These cookies will only be stored in your browser with your prior consent. You can choose to enable or disable some or all of these cookies but disabling some of them may affect your browsing experience.
+                </div>
+
+                <div class="col-12 cookies-options-title">
+                    <div class="row">
+                        <div class="col-9">
+                            <span class="h5">Necessary</span>
+                        </div>
+                        <div class="col-3 cookies-options-switch">
+                            <div class="form-check form-switch">
+                                <input disabled class="form-check-input" name="cookie_pref[]" value="necessary" checked="checked" type="checkbox" role="switch" id="switchNecessary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 cookies-options-explain">
+                    Necessary cookies are required to enable the basic features of this site, such as providing secure log-in or adjusting your consent preferences. These cookies do not store any personally identifiable data.
+                </div>
+
+                    <div class="col-12 cookies-options-title">
+                        <div class="row">
+                            <div class="col-9">
+                                <span class="h5">Analytics &amp; Tracking</span>
+                            </div>
+                            <div class="col-3 cookies-options-switch">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="cookie_pref[]" value="analytics" type="checkbox" role="switch" id="switchAnalytics">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 cookies-options-explain">
+                        Analytics &amp; Tracking cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics such as the number of visitors, bounce rate, traffic source, etc.
+                    </div>
+                    <div class="col-12 cookies-options-title">
+                        <div class="row">
+                            <div class="col-9">
+                                <span class="h5">Marketing &amp; Advertisement</span>
+                            </div>
+                            <div class="col-3 cookies-options-switch">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="cookie_pref[]" value="advertisement" type="checkbox" role="switch" id="switchAdvertisement">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 cookies-options-explain">
+                        Marketing &amp; Advertisement cookies are used to provide visitors with customized advertisements based on the pages you visited previously and to analyze the effectiveness of the ad campaigns.
+                    </div>
+
+            </div>
+
+            <div class="col-12 text-end cookies-save-prefs">
+                <a href="#" id="cookieSavePrefs" class="btn btn-retro-0 cookie-action">Save my preferences</a>
+            </div>
+            <div class="col-6 d-lg-none text-center mt-1 cookies-accept">
+                <a href="#" id="cookieAcceptAll" class="btn btn-retro-0 cookie-action">Accept all</a>
+            </div>
+            <div class="col-6 d-lg-none text-center mt-1 cookies-reject">
+                <a href="#" id="cookieRejectAll" class="btn btn-retro-0 inverted cookie-action">Reject all</a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+        
+
+
+<div class="container download-notification-container">
+
+    <div class="row row-main">
+        <div class="col-12 col-md-9">
+            <div class="row">
+                <div class="col-12 download-title">
+                    <span class="download-title-busy">Waiting for requested pressroom package...</span>
+                    <span class="download-title-ready">Your download is ready!</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-3 download-buttons">
+
+            <div class="row download-cancel-busy">
+                <div class="col-12 download-cancel">
+                    <a href="#" id="btn-download-cancel" class="btn btn-small disable-btn-hover">
+                        <span>Abort package request</span>
+                        <span class="icon icon-remove-1 icon-right"></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row download-cancel-ready">
+                <div class="col-12 download-start">
+                    <a href="/account/downloads" id="btn-download-start" class="btn btn-retro-0 disable-btn-hover download-action download-anonymous">
+                        <span>
+Download your package                        </span>
+                        <span class="icon icon-download icon-right"></span>
+                    </a>
+                </div>
+                <div class="col-12 download-cancel">
+                    <a href="#" id="btn-download-cancel" class="btn btn-small disable-btn-hover">
+                        <span>
+Delete package                        </span>
+                        <span class="icon icon-remove-1 icon-right"></span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+        <script src="/sb/main-js-bundle.js.v202604101415"></script>
+        <script src="/sb/fsLightbox.js.v202604101415"></script>
+
+        
+
+        <div id="flip-overlay">
+            <p>Activating Assistant mode</p> 
+            <div class="loader">
+                <div class="fill"></div>
+            </div>
+        </div>
+
+    </body>
+</html>

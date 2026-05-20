@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produit · Mikadodeco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="page wrap">
+    <a class="pdp__back" href="/produits.html">← Le catalogue</a>
+    <div data-pdp>
+      <div class="pdp"><div class="pcard__skel" style="aspect-ratio:1/1"></div><div></div></div>
+    </div>
+
+    <section class="section" data-related-wrap style="display:none">
+      <h2 class="catalogue-head serif">Dans le même esprit</h2>
+      <div class="pgrid" data-related></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell, fetchProducts, productCard, addToCart, removeFromCart, inCart, euro, escapeHtml, slugify } from "/shared.js";
+    initShell({ active: "Mobilier", transparentNav: false });
+
+    const id = new URLSearchParams(location.search).get("id");
+    const host = document.querySelector("[data-pdp]");
+
+    fetchProducts().then((all) => {
+      const p = all.find((x) => x.id === id || encodeURIComponent(x.id) === id);
+      if (!p) { host.innerHTML = `<p class="plp-empty">Cette pièce est introuvable. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue</a>.</p>`; return; }
+      document.title = `${p.name} · Mikadodeco`;
+
+      const imgs = (p.images && p.images.length ? p.images : [p.image, p.image2]).filter(Boolean);
+      const metaRows = [
+        ["Designer", p.designer], ["Année", p.year], ["Matière", p.material],
+        ["Dimensions", p.dimensions], ["Délai", p.leadTime],
+      ].filter(([, v]) => v);
+
+      const variants = Array.isArray(p.variants) ? p.variants : [];
+      let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true };
+      const optName = (variants[0] && variants[0].options && variants[0].options[0] && variants[0].options[0].name) || "Variante";
+      const ctaLabel = () => inCart(current.id) ? "Dans la sélection · retirer" : "+ Ajouter à la sélection";
+
+      host.innerHTML = `
+        <div class="pdp">
+          <div class="pdp__gallery">
+            <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" alt="${escapeHtml(p.name)}" />
+            ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(src)}" alt="" />`).join("")}</div>` : ""}
+          </div>
+          <div class="pdp__info">
+            <a class="pdp__brand" href="/produits.html?brand=${slugify(p.brand || "")}">${escapeHtml(p.brand || "")}</a>
+            <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
+            ${p.designer ? `<div class="pdp__designer">Dessiné par ${escapeHtml(p.designer)}</div>` : ""}
+            <div class="pdp__price" data-price-el>${euro(current.price)}</div>
+            ${variants.length > 1 ? `<div class="pdp__variants"><span class="label">${escapeHtml(optName)}</span><div>${variants.map((v) => `<button class="variant-chip${v.id === current.id ? " is-active" : ""}" data-vid="${escapeHtml(v.id)}"${v.available === false ? " disabled" : ""}>${escapeHtml((v.options && v.options[0] && v.options[0].value) || v.title || "Variante")}</button>`).join("")}</div></div>` : ""}
+            <button class="btn btn--blue btn--block pdp__cta" data-add>${ctaLabel()}</button>
+            <p class="pdp__note">Disponible en boutique à Uccle, ou en livraison sous 2 à 5 jours. <a href="/rendez-vous.html">Voir en boutique</a>.</p>
+            ${p.description ? `<p class="pdp__desc">${escapeHtml(p.description)}</p>` : ""}
+            ${metaRows.length ? `<dl class="pdp__meta">${metaRows.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHtml(v)}</dd></div>`).join("")}</dl>` : ""}
+          </div>
+        </div>`;
+
+      const main = host.querySelector("[data-main]");
+      const priceEl = host.querySelector("[data-price-el]");
+      const cta = host.querySelector("[data-add]");
+
+      // keep the active thumbnail in sync with whatever the main image shows,
+      // whether the change came from a thumbnail click or a variant selection.
+      const thumbs = Array.from(host.querySelectorAll("[data-thumb]"));
+      const stripQuery = (u) => (u || "").split("?")[0];
+      const syncActiveThumb = (src) => {
+        const target = stripQuery(src);
+        thumbs.forEach((t) => t.classList.toggle("is-active", stripQuery(t.getAttribute("src")) === target));
+      };
+
+      // match the initial highlight to the image the main is actually showing
+      syncActiveThumb(current.image || imgs[0] || "");
+
+      // gallery thumbnails
+      thumbs.forEach((t) => t.addEventListener("click", () => {
+        main.src = t.src;
+        syncActiveThumb(t.getAttribute("src"));
+      }));
+
+      // variant selection: updates price, image, and what gets added
+      host.querySelectorAll("[data-vid]").forEach((chip) => chip.addEventListener("click", () => {
+        const v = variants.find((x) => x.id === chip.dataset.vid);
+        if (!v) return;
+        current = v;
+        host.querySelectorAll("[data-vid]").forEach((c) => c.classList.toggle("is-active", c === chip));
+        if (v.image) { main.src = v.image; syncActiveThumb(v.image); }
+        priceEl.textContent = euro(v.price);
+        cta.textContent = ctaLabel();
+      }));
+
+      // add the selected variant to the selection
+      cta.addEventListener("click", () => {
+        if (inCart(current.id)) { removeFromCart(current.id); }
+        else { addToCart({ handle: p.id, variantId: current.id, name: p.name + (current.title && variants.length > 1 ? ` · ${current.title}` : ""), brand: p.brand, price: current.price || 0, image: current.image || p.image }); }
+        cta.textContent = ctaLabel();
+      });
+
+      // related (same category)
+      const related = all.filter((x) => x.category === p.category && x.id !== p.id && x.image).slice(0, 4);
+      if (related.length) {
+        document.querySelector("[data-related-wrap]").style.display = "";
+        document.querySelector("[data-related]").innerHTML = related.map(productCard).join("");
+      }
+    }).catch((e) => { host.innerHTML = `<p class="plp-empty">La pièce se charge bientôt.</p>`; console.warn(e); });
+  </script>
+</body>
+</html>

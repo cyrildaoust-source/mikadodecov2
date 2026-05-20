@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Mikadodeco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="page wrap">
+    <div class="pagehead"><span class="eyebrow">Contact</span><h1 class="serif">Une question. Une réponse.</h1><p>Conseil produit, devis, livraison ou rendez-vous : écrivez-nous, un conseiller revient vers vous sous 48 h.</p></div>
+
+    <div class="formwrap" data-form-wrap>
+      <form class="form" data-contact-form novalidate>
+        <div class="formgrid2">
+          <div class="field"><label for="c-name">Nom *</label><input id="c-name" name="name" type="text" required /></div>
+          <div class="field"><label for="c-email">E-mail *</label><input id="c-email" name="email" type="email" required /></div>
+        </div>
+        <div class="formgrid2">
+          <div class="field"><label for="c-tel">Téléphone</label><input id="c-tel" name="telephone" type="tel" /></div>
+          <div class="field"><label for="c-projet">Sujet</label>
+            <select id="c-projet" name="projet">
+              <option value="">Sélectionner…</option>
+              <option>Conseil produit</option>
+              <option>Demande de devis</option>
+              <option>Prise de rendez-vous showroom</option>
+              <option>Question livraison / installation</option>
+              <option>Après-vente</option>
+              <option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="c-msg">Message *</label><textarea id="c-msg" name="message" required></textarea></div>
+        <p class="form-error" data-error style="display:none"></p>
+        <button class="btn btn--solid" type="submit" data-submit>Envoyer</button>
+        <p style="font-size:var(--fs-meta);color:var(--subtle)">En envoyant ce message, vous acceptez d'être recontacté au sujet de votre demande.</p>
+      </form>
+
+      <aside class="form-aside">
+        <h3 class="serif">Le showroom</h3>
+        <p>
+          <a href="mailto:shop@mikadodeco.be">shop@mikadodeco.be</a><br />
+          75 Rue du Doyenné<br />
+          1180 Uccle, Bruxelles
+        </p>
+        <table class="hours">
+          <tr><td>Mardi – Samedi</td><td>10h30 – 18h30</td></tr>
+          <tr><td>Dimanche &amp; Lundi</td><td>Fermé</td></tr>
+        </table>
+        <p style="margin-top:16px">Visites sur rendez-vous. <a href="/rendez-vous.html">Réserver une visite</a>.</p>
+      </aside>
+    </div>
+
+    <div class="form-success" data-success style="display:none">
+      <h2 class="serif">Message envoyé</h2>
+      <p style="color:var(--muted)">Merci. Un conseiller de l'atelier vous répondra sous 48 h.</p>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell } from "/shared.js";
+    initShell({ active: "", transparentNav: false });
+
+    const form = document.querySelector("[data-contact-form]");
+    const errEl = document.querySelector("[data-error]");
+    const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errEl.style.display = "none";
+      const f = Object.fromEntries(new FormData(form).entries());
+      if (!f.name?.trim()) return fail("Indiquez votre nom.");
+      if (!isEmail(f.email || "")) return fail("Indiquez un e-mail valide.");
+      if ((f.message || "").trim().length < 4) return fail("Votre message est un peu court.");
+      const btn = document.querySelector("[data-submit]");
+      btn.disabled = true; btn.textContent = "Envoi…";
+      try {
+        const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...f, source: "v3-contact" }) });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || "server");
+        document.querySelector("[data-form-wrap]").style.display = "none";
+        document.querySelector("[data-success]").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e2) { fail("L'envoi a échoué. Réessayez ou écrivez à shop@mikadodeco.be."); btn.disabled = false; btn.textContent = "Envoyer"; console.warn(e2); }
+    });
+    function fail(msg) { errEl.textContent = msg; errEl.style.display = "block"; }
+  </script>
+</body>
+</html>

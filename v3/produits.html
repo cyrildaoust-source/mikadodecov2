@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue · Mikadodeco</title>
+  <meta name="description" content="Le catalogue Mikadodeco : mobilier, luminaires et objets de design, choisis pièce par pièce." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="subhero">
+    <img class="subhero__img" src="/images/produits-hero.jpg" alt="Catalogue Mikadodeco" style="object-position: center 70%" />
+    <div class="subhero__scrim"></div>
+    <div class="subhero__in">
+      <h1 data-plp-title>Le catalogue</h1>
+      <p data-plp-sub>Mobilier, luminaires et objets, choisis pièce par pièce.</p>
+    </div>
+  </section>
+
+  <div class="filterbar" data-chips>
+    <div class="chips">
+      <button class="chip" data-cat="tous">Tous</button>
+      <button class="chip" data-cat="assises">Assises</button>
+      <button class="chip" data-cat="tables">Tables</button>
+      <button class="chip" data-cat="luminaires">Luminaires</button>
+      <button class="chip" data-cat="rangements">Rangements</button>
+      <button class="chip" data-cat="objets">Objets</button>
+      <button class="chip" data-cat="exterieur">Extérieur</button>
+    </div>
+    <div class="filterbar__right">
+      <span class="plp-count" data-plp-count></span>
+      <select class="fselect" data-filter-brand aria-label="Marque"><option value="">Toutes les marques</option></select>
+      <select class="fselect" data-sort aria-label="Trier">
+        <option value="pop">Les plus populaires</option>
+        <option value="asc">Prix croissant</option>
+        <option value="desc">Prix décroissant</option>
+        <option value="az">A → Z</option>
+      </select>
+    </div>
+  </div>
+
+  <section class="section wrap" data-pop-section style="padding-bottom:0">
+    <h2 class="serif catalogue-head">Les plus populaires</h2>
+    <div class="pgrid" data-pop-grid>
+      <div class="pcard"><div class="pcard__skel"></div></div>
+      <div class="pcard"><div class="pcard__skel"></div></div>
+      <div class="pcard"><div class="pcard__skel"></div></div>
+      <div class="pcard"><div class="pcard__skel"></div></div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <h2 class="serif catalogue-head" data-grid-title>Tout le catalogue</h2>
+    <div class="pgrid" data-grid></div>
+    <div class="loadmore-wrap" data-loadmore-wrap style="display:none">
+      <button class="btn btn--outline" data-loadmore>Voir plus</button>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell, fetchProducts, fetchBrands, productCard, slugify } from "/shared.js";
+    initShell({ active: "Mobilier", transparentNav: true });
+
+    const CAT_LABEL = { tous:"Le catalogue", assises:"Assises", tables:"Tables", luminaires:"Luminaires", rangements:"Rangements", objets:"Objets", exterieur:"Extérieur" };
+    const grid = document.querySelector("[data-grid]");
+    const popGrid = document.querySelector("[data-pop-grid]");
+    const popSection = document.querySelector("[data-pop-section]");
+    const countEl = document.querySelector("[data-plp-count]");
+    const brandSel = document.querySelector("[data-filter-brand]");
+    const sortSel = document.querySelector("[data-sort]");
+    const chipsBar = document.querySelector("[data-chips]");
+    const moreWrap = document.querySelector("[data-loadmore-wrap]");
+    const titleEl = document.querySelector("[data-plp-title]");
+    const subEl = document.querySelector("[data-plp-sub]");
+    const gridTitle = document.querySelector("[data-grid-title]");
+
+    const params = new URLSearchParams(location.search);
+    let ALL = [];
+    const state = { cat: params.get("cat") || "tous", brand: params.get("brand") || "", sort: "pop", shown: 12 };
+
+    const popScore = (p) => (p.featured ? 2 : 0) + (p.badge === "bestseller" ? 1 : 0);
+    function base() {
+      let list = ALL.slice();
+      if (state.cat !== "tous") list = list.filter((p) => p.category === state.cat);
+      if (state.brand) list = list.filter((p) => slugify(p.brand) === state.brand);
+      return list;
+    }
+    function applySort(list) {
+      const l = list.slice();
+      if (state.sort === "asc") l.sort((a, b) => (a.price || 0) - (b.price || 0));
+      else if (state.sort === "desc") l.sort((a, b) => (b.price || 0) - (a.price || 0));
+      else if (state.sort === "az") l.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+      else l.sort((a, b) => popScore(b) - popScore(a)); // "pop"
+      return l;
+    }
+    function syncURL() {
+      const q = new URLSearchParams();
+      if (state.cat !== "tous") q.set("cat", state.cat);
+      if (state.brand) q.set("brand", state.brand);
+      history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q : ""));
+    }
+    function render() {
+      const all = base();
+      countEl.textContent = `${all.length} pièce${all.length > 1 ? "s" : ""}`;
+
+      // Always-on "most popular" strip (top 4), independent of the chosen sort.
+      const showPop = all.length > 4;
+      popSection.style.display = showPop ? "" : "none";
+      const pop = showPop ? all.slice().sort((a, b) => popScore(b) - popScore(a)).slice(0, 4) : [];
+      if (showPop) popGrid.innerHTML = pop.map(productCard).join("");
+
+      const popIds = new Set(pop.map((p) => p.id));
+      const mainList = applySort(all.filter((p) => !popIds.has(p.id)));
+      const slice = mainList.slice(0, state.shown);
+      grid.innerHTML = slice.length ? slice.map(productCard).join("") : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
+      moreWrap.style.display = mainList.length > state.shown ? "flex" : "none";
+      gridTitle.textContent = showPop ? "Tout le catalogue" : "Le catalogue";
+
+      chipsBar.querySelectorAll(".chip").forEach((c) => c.classList.toggle("is-active", c.dataset.cat === state.cat));
+      const brandName = state.brand ? (ALL.find((p) => slugify(p.brand) === state.brand)?.brand || "") : "";
+      titleEl.textContent = brandName || CAT_LABEL[state.cat] || "Le catalogue";
+      subEl.textContent = brandName ? "Toutes les pièces de la maison." : "Mobilier de design, choisi pièce par pièce.";
+    }
+
+    Promise.all([fetchProducts(), fetchBrands()]).then(([prods, brands]) => {
+      ALL = prods.filter((p) => p.image);
+      brands.sort((a, b) => String(a.name).localeCompare(String(b.name))).forEach((b) => {
+        const o = document.createElement("option");
+        o.value = slugify(b.name); o.textContent = `${b.name} (${b.productCount})`;
+        if (o.value === state.brand) o.selected = true;
+        brandSel.appendChild(o);
+      });
+      sortSel.value = state.sort;
+      render();
+    }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`; console.warn(e); });
+
+    chipsBar.addEventListener("click", (e) => {
+      const c = e.target.closest(".chip"); if (!c) return;
+      state.cat = c.dataset.cat; state.shown = 12; syncURL(); render();
+    });
+    brandSel.addEventListener("change", () => { state.brand = brandSel.value; state.shown = 12; syncURL(); render(); });
+    sortSel.addEventListener("change", () => { state.sort = sortSel.value; render(); });
+    document.querySelector("[data-loadmore]").addEventListener("click", () => { state.shown += 12; render(); });
+  </script>
+</body>
+</html>

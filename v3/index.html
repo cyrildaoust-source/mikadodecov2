@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mikadodeco · Mobilier &amp; objets de design, Bruxelles</title>
+  <meta name="description" content="Une sélection de mobilier et d'objets de design. Boutique à Uccle, du mardi au samedi. Livraison en Belgique." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <!-- shared chrome (announce + nav + drawer) injected by shared.js -->
+  <div id="site-header"></div>
+
+  <!-- 1. HERO -->
+  <section class="hero">
+    <img class="hero__img" src="/images/hero-home.jpg" alt="Chambre d'enfant baignée de lumière, mobilier et objets de design" fetchpriority="high" />
+    <div class="hero__scrim"></div>
+    <div class="hero__content">
+      <h1>Le design,<br>pour toute la maison.</h1>
+      <div class="hero__cta"><a href="#selection" class="btn btn--light">Découvrir la sélection</a></div>
+    </div>
+  </section>
+
+  <!-- 2. CATEGORY CAROUSEL (6 tiles) -->
+  <section class="section reveal">
+    <div class="catscroll">
+      <a class="cat" href="/produits.html?cat=assises"><img src="/images/assises.jpg" alt="Assises" /><span class="cat__label">Assises</span></a>
+      <a class="cat" href="/produits.html?cat=tables"><img src="/images/tables.jpg" alt="Tables" /><span class="cat__label">Tables</span></a>
+      <a class="cat" href="/produits.html?cat=luminaires"><img src="/images/luminaires.jpg" alt="Luminaires" /><span class="cat__label">Luminaires</span></a>
+      <a class="cat" href="/produits.html?cat=rangements"><img src="/images/rangements.jpg" alt="Rangements" /><span class="cat__label">Rangements</span></a>
+      <a class="cat" href="/produits.html?cat=objets"><img src="/images/objets.jpg" alt="Objets" /><span class="cat__label">Objets</span></a>
+      <a class="cat" href="/produits.html?cat=exterieur"><img src="/images/exterieur.jpg" alt="Extérieur" /><span class="cat__label">Extérieur</span></a>
+    </div>
+  </section>
+
+  <!-- 3. OUR STORE -->
+  <section class="feature reveal">
+    <div class="feature__media"><img src="/images/feat-store.jpg" alt="Salon de design : canapé vert, table d'appoint en laiton, lampe et niche éclairée" /></div>
+    <div class="feature__body">
+      <span class="eyebrow">La boutique · Uccle</span>
+      <h2 class="serif">Le design, choisi pièce par pièce.</h2>
+      <p>Mikadodeco est une boutique de design à Uccle. On y réunit les plus belles maisons européennes, sélectionnées une à une, pour composer chez vous des intérieurs qui durent. Passez nous voir, ou commandez en ligne.</p>
+      <a href="/produits.html" class="btn btn--outline">Voir la sélection</a>
+    </div>
+  </section>
+
+  <!-- 3b. BRAND LOGO MARQUEE -->
+  <section class="brandmarquee reveal">
+    <p class="brandmarquee__head">Quelques-unes de nos maisons</p>
+    <div class="brandmarquee__viewport">
+      <div class="brandmarquee__track" data-brandmarquee></div>
+    </div>
+  </section>
+
+  <!-- 4. PRODUCT ROW 1 -->
+  <section class="section wrap reveal" id="selection">
+    <div class="shead">
+      <h2 class="serif">Sélection du moment</h2>
+      <a href="/produits.html">Toute la sélection</a>
+    </div>
+    <div class="prow" data-products data-count="3">
+      <div class="pcard"><div class="pcard__skel"></div></div>
+      <div class="pcard"><div class="pcard__skel"></div></div>
+      <div class="pcard"><div class="pcard__skel"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. EDITORIAL FEATURE B (image right) -->
+  <section class="feature feature--rev reveal">
+    <div class="feature__media"><img src="/images/journal-patine.jpg" alt="Chambre baignée de lumière, intérieur qui se patine" /></div>
+    <div class="feature__body">
+      <span class="eyebrow">Le journal</span>
+      <h2 class="serif">Imparfait, et parfait ainsi</h2>
+      <p>Le beau vieillissement n'est pas un défaut, c'est une promesse. Petit guide des matières qui gagnent en caractère avec les années.</p>
+      <a href="/article.html?slug=tissu-qui-se-patine" class="btn btn--outline">Lire l'article</a>
+    </div>
+  </section>
+
+  <!-- 6. PRODUCT ROW 2 -->
+  <section class="section wrap reveal">
+    <div class="shead">
+      <h2 class="serif">Les essentiels</h2>
+      <a href="/produits.html">Voir tout</a>
+    </div>
+    <div class="prow" data-products data-count="3">
+      <div class="pcard"><div class="pcard__skel"></div></div>
+      <div class="pcard"><div class="pcard__skel"></div></div>
+      <div class="pcard"><div class="pcard__skel"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. VISIT THE BOUTIQUE · baby-blue moment -->
+  <section class="feature feature--accent reveal">
+    <div class="feature__media"><img src="/images/feat-visit.jpg" alt="Intérieur baigné de soleil : poufs aux imprimés Marimekko, table basse en laiton, tapis tressé" /></div>
+    <div class="feature__body">
+      <span class="eyebrow">Nous rendre visite</span>
+      <h2 class="serif">Poussez la porte, du mardi au samedi.</h2>
+      <p>La boutique vous accueille rue du Doyenné, à Uccle, du mardi au samedi. Envie d'être guidé ? Réservez un moment avec Mikado Studio.</p>
+      <a href="/rendez-vous.html" class="btn btn--blue">Horaires &amp; rendez-vous</a>
+    </div>
+  </section>
+
+  <!-- 9. LOOKBOOK -->
+  <section class="section wrap reveal">
+    <div class="shead"><h2 class="serif">Le lookbook</h2><a href="/produits.html">Voir la sélection</a></div>
+    <div class="lookbook">
+      <a class="lookbook__cell lookbook__cell--tall" href="/produits.html"><img src="/images/lookbook-recevoir.jpg" alt="Inspiration intérieure" /><span class="lookbook__label">L'art de recevoir</span></a>
+      <a class="lookbook__cell" href="/produits.html?cat=assises"><img src="/images/salon-quilton.jpg" alt="Le salon" /><span class="lookbook__label">Le salon</span></a>
+      <a class="lookbook__cell" href="/produits.html?cat=exterieur"><img src="/images/dehors-thorvald.jpg" alt="Extérieur" /><span class="lookbook__label">Dehors</span></a>
+    </div>
+  </section>
+
+  <!-- 9b. SOCIAL PROOF · STATS -->
+  <section class="stats reveal">
+    <div class="wrap">
+      <div class="stat">
+        <div class="stat__num">15<span class="stat__suf">ans</span></div>
+        <div class="stat__label">D'expertise en mobilier de design, depuis 2011</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">4,9<span class="stat__suf">/5</span></div>
+        <div class="stat__label">Note moyenne sur Google</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">110<span class="stat__suf">+</span></div>
+        <div class="stat__label">Avis clients sur Google Maps</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">25+</div>
+        <div class="stat__label">Marques de design sélectionnées</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. USP BAND -->
+  <section class="usp reveal">
+    <div class="wrap">
+      <div class="usp__col"><h3 class="serif">Boutique à Uccle</h3><p>Ouvert du mardi au samedi, 10h30 – 18h30.</p></div>
+      <div class="usp__col"><h3 class="serif">Maisons choisies</h3><p>Les plus belles signatures européennes, sélectionnées une à une.</p></div>
+      <div class="usp__col"><h3 class="serif">Mikado Studio</h3><p>Le conseil en aménagement, sur rendez-vous.</p></div>
+      <div class="usp__col"><h3 class="serif">Livraison en Belgique</h3><p>Commandez en ligne, livré sous 2 à 5 jours.</p></div>
+    </div>
+  </section>
+
+  <!-- shared footer injected by shared.js -->
+  <div id="site-footer"></div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

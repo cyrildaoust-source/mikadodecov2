@@ -45,7 +45,10 @@ async function cached(key, fetcher, ttl = 300_000) {
 const app  = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(express.static(path.join(__dirname, 'public')));
+// The Mikadodeco storefront (v3/) is served at the site root.
+// Old /v3/* links 301-redirect to the clean root path for backward-compat.
+app.use('/v3', (req, res) => res.redirect(301, req.url && req.url !== '/' ? req.url : '/'));
+app.use(express.static(path.join(__dirname, 'v3')));
 app.use(cors({ origin: process.env.BASE_URL || `http://localhost:${PORT}` }));
 app.use(express.json());
 
@@ -65,15 +68,21 @@ const PRODUCTS_QUERY = `
           tags
           availableForSale
           featuredImage { url altText }
+          images(first: 8) {
+            edges { node { url altText } }
+          }
           priceRange {
             minVariantPrice { amount currencyCode }
           }
-          variants(first: 1) {
+          variants(first: 12) {
             edges {
               node {
                 id
+                title
                 price { amount currencyCode }
                 availableForSale
+                selectedOptions { name value }
+                image { url altText }
               }
             }
           }
@@ -131,7 +140,25 @@ function mapProduct(node) {
     price,
     leadTime:    meta.lead_time   || '',
     description: node.description || '',
-    image:       node.featuredImage?.url || '',
+    image:       node.featuredImage?.url || node.images?.edges?.[0]?.node?.url || '',
+    // image2 = first image that isn't the featured one — used for on-hover swap.
+    image2:      (() => {
+      const featured = node.featuredImage?.url;
+      const imgs = (node.images?.edges || []).map(e => e?.node?.url).filter(Boolean);
+      const second = imgs.find(u => u !== featured) || imgs[1] || null;
+      return second || null;
+    })(),
+    // images = full ordered list, used by the PDP gallery
+    images:      (node.images?.edges || []).map(e => e?.node?.url).filter(Boolean),
+    // variants = all variants with their selected options, used by the PDP variant picker
+    variants:    (node.variants?.edges || []).map(e => e?.node).filter(Boolean).map(v => ({
+      id: v.id,
+      title: v.title,
+      price: parseFloat(v.price?.amount),
+      available: v.availableForSale,
+      options: (v.selectedOptions || []).map(o => ({ name: o.name, value: o.value })),
+      image: v.image?.url || null,
+    })),
     badge:       badgeTag,
     available:   node.availableForSale && (variant?.availableForSale ?? true),
     featured:    node.tags.some(t => t.toLowerCase() === 'featured'),
@@ -395,6 +422,116 @@ app.post('/api/cart/create', async (req, res) => {
   } catch (err) {
     console.error('Cart create error:', err.message);
     res.status(500).json({ error: err.message || 'Erreur lors de la creation du panier.' });
+  }
+});
+
+// ─── CONTACT FORM ──────────────────────────────────────
+// Body: { name, email, telephone?, projet?, message }
+// Validates server-side, logs structured payload, returns 200.
+// Wire up nodemailer / a webhook later — the endpoint contract stays the same.
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name = '', email = '', telephone = '', projet = '', message = '', source = 'website' } = req.body || {};
+
+    const cleanName    = String(name).trim().slice(0, 120);
+    const cleanEmail   = String(email).trim().toLowerCase().slice(0, 200);
+    const cleanPhone   = String(telephone).trim().slice(0, 40);
+    const cleanProjet  = String(projet).trim().slice(0, 80);
+    const cleanMessage = String(message).trim().slice(0, 4000);
+
+    if (!cleanName)    return res.status(400).json({ error: 'name_required' });
+    if (!cleanEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      return res.status(400).json({ error: 'email_invalid' });
+    }
+    if (!cleanMessage || cleanMessage.length < 4) {
+      return res.status(400).json({ error: 'message_too_short' });
+    }
+
+    const submission = {
+      ts:       new Date().toISOString(),
+      name:     cleanName,
+      email:    cleanEmail,
+      telephone:cleanPhone || null,
+      projet:   cleanProjet || null,
+      message:  cleanMessage,
+      source,
+      ua:       String(req.headers['user-agent'] || '').slice(0, 200),
+    };
+
+    // Structured log — surfaces in Vercel logs, Heroku, journalctl, etc.
+    console.log('[contact]', JSON.stringify(submission));
+
+    // If a CONTACT_WEBHOOK_URL is set, forward (Slack, Discord, Zapier, etc.)
+    if (process.env.CONTACT_WEBHOOK_URL) {
+      try {
+        await fetch(process.env.CONTACT_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(submission),
+        });
+      } catch (e) {
+        console.warn('[contact] webhook failed:', e.message);
+      }
+    }
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('[contact] error:', err.message);
+    res.status(500).json({ error: 'server_error' });
+  }
+});
+
+// ─── API: NEWSLETTER → SHOPIFY ─────────────────────────
+// Subscribes an email to the Shopify customer list (tagged "newsletter")
+// via the storefront's classic customer form handler. No Admin API needed.
+// Body: { email }
+app.post('/api/newsletter', async (req, res) => {
+  try {
+    const email = String(req.body?.email || '').trim().toLowerCase().slice(0, 200);
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: 'email_invalid' });
+    }
+    if (!SHOPIFY_STORE) {
+      console.log('[newsletter] (no Shopify configured)', email);
+      return res.json({ ok: true });
+    }
+    // Best-effort: post to Shopify's classic storefront customer form handler.
+    // (Reliable customer-list signup needs the Admin API; the storefront form
+    // handler is theme/online-store dependent. We never lose the lead: on any
+    // failure we still log + optionally forward to a webhook.)
+    let shopifyOk = false;
+    try {
+      const form = new URLSearchParams();
+      form.set('form_type', 'customer');
+      form.set('utf8', '✓');
+      form.set('contact[email]', email);
+      form.set('contact[tags]', 'newsletter,v3-footer');
+      const r = await fetch(`https://${SHOPIFY_STORE}/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'mikadodeco-newsletter' },
+        body: form.toString(),
+        redirect: 'manual',
+      });
+      shopifyOk = r.status >= 200 && r.status < 400; // 302 = success
+      console.log('[newsletter]', JSON.stringify({ ts: new Date().toISOString(), email, shopifyStatus: r.status, shopifyOk }));
+    } catch (e) {
+      console.warn('[newsletter] shopify post failed:', e.message);
+    }
+
+    // Always capture the lead, even if Shopify declined.
+    if (process.env.NEWSLETTER_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL) {
+      try {
+        await fetch(process.env.NEWSLETTER_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'newsletter', email, shopifyOk, ts: new Date().toISOString() }),
+        });
+      } catch (e) { console.warn('[newsletter] webhook failed:', e.message); }
+    }
+
+    res.json({ ok: true, shopify: shopifyOk });
+  } catch (err) {
+    console.error('[newsletter] error:', err.message);
+    res.status(500).json({ error: 'server_error' });
   }
 });
 
