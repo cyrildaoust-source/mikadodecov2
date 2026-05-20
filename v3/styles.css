@@ -478,7 +478,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .locate__actions { margin-top: auto; padding-top: clamp(24px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 12px; }
 
 /* map showpiece */
-.locate__map-wrap { position: relative; min-height: 480px; overflow: hidden; background: var(--tile); border: 1px solid var(--line-ink); box-shadow: 0 24px 60px rgba(26,25,22,.18); }
+.locate__map-wrap { position: relative; isolation: isolate; z-index: 0; min-height: 480px; overflow: hidden; background: var(--tile); border: 1px solid var(--line-ink); box-shadow: 0 24px 60px rgba(26,25,22,.18); }
 .locate__map { position: absolute; inset: 0; background: var(--tile); }
 /* warm-tint the map tiles toward cream so it reads Mikado, not stock Google */
 .locate__map .leaflet-tile-pane { filter: grayscale(1) contrast(1.05) brightness(1.02); }
