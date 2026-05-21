@@ -53,7 +53,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, readCart, removeFromCartAt, euro, escapeHtml } from "/shared.js";
+    import { initShell, readCart, removeFromCartAt, setCartQty, euro, escapeHtml } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
     const DELIVERY = { showroom: { fee: 0, label: "Retrait showroom Uccle (0€)" }, standard: { fee: 40, label: "Livraison Belgique (40€)" }, express: { fee: 80, label: "Livraison express (80€)" } };
@@ -68,17 +68,28 @@
       const cart = readCart();
       if (!cart.length) { populated.style.display = "none"; empty.style.display = "block"; return; }
       populated.style.display = "block"; empty.style.display = "none";
-      itemsEl.innerHTML = cart.map((i, idx) => `
-        <div class="sel-item">
+      itemsEl.innerHTML = cart.map((i, idx) => {
+        const qty = i.qty || 1;
+        const line = (i.price || 0) * qty;
+        return `
+        <div class="sel-item" data-row="${idx}">
           <img class="sel-item__img" src="${escapeHtml(i.image)}" alt="${escapeHtml(i.name)}" />
           <div>
             <div class="sel-item__brand">${escapeHtml(i.brand || "")}</div>
-            <div class="sel-item__name">${escapeHtml(i.name || "Article")}</div>
-            <button class="sel-item__remove" data-remove="${idx}">Retirer</button>
+            <div class="sel-item__name">${escapeHtml(i.name || "")}</div>
+            <div class="sel-item__controls">
+              <div class="qty qty--sm">
+                <button class="qty__btn" data-qty-dec="${escapeHtml(i.variantId)}" aria-label="Diminuer" type="button">−</button>
+                <input class="qty__val" data-qty-input="${escapeHtml(i.variantId)}" type="text" inputmode="numeric" value="${qty}" aria-label="Quantité" />
+                <button class="qty__btn" data-qty-inc="${escapeHtml(i.variantId)}" aria-label="Augmenter" type="button">+</button>
+              </div>
+              <button class="sel-item__remove" data-remove="${idx}">Retirer</button>
+            </div>
           </div>
-          <div class="sel-item__price">${euro(i.price)}</div>
-        </div>`).join("");
-      const subtotal = cart.reduce((s, i) => s + (i.price || 0), 0);
+          <div class="sel-item__price">${euro(line)}</div>
+        </div>`;
+      }).join("");
+      const subtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
       const fee = DELIVERY[delivery()].fee;
       const grand = subtotal + fee;
       document.querySelector("[data-subtotal]").textContent = euro(subtotal);
@@ -92,11 +103,38 @@
       }
     }
 
+    function findQty(variantId) {
+      const item = readCart().find((i) => i.variantId === variantId);
+      return item ? (item.qty || 1) : 0;
+    }
+
     document.addEventListener("click", (e) => {
       const rm = e.target.closest("[data-remove]");
-      if (rm) { removeFromCartAt(Number(rm.dataset.remove)); render(); }
+      if (rm) { removeFromCartAt(Number(rm.dataset.remove)); return; }
+      const dec = e.target.closest("[data-qty-dec]");
+      if (dec) {
+        const v = dec.dataset.qtyDec;
+        const n = findQty(v);
+        if (n > 1) setCartQty(v, n - 1);
+        return;
+      }
+      const inc = e.target.closest("[data-qty-inc]");
+      if (inc) {
+        const v = inc.dataset.qtyInc;
+        const n = findQty(v);
+        setCartQty(v, Math.min(99, n + 1));
+        return;
+      }
     });
-    document.addEventListener("change", (e) => { if (e.target.name === "delivery" || e.target.name === "payment") render(); });
+    document.addEventListener("change", (e) => {
+      if (e.target.name === "delivery" || e.target.name === "payment") render();
+      const qtyEl = e.target.closest("[data-qty-input]");
+      if (qtyEl) {
+        const v = qtyEl.dataset.qtyInput;
+        const n = Math.max(1, Math.min(99, parseInt(qtyEl.value) || 1));
+        setCartQty(v, n);
+      }
+    });
 
     document.querySelector("[data-checkout]").addEventListener("click", async () => {
       const cart = readCart();
@@ -108,7 +146,7 @@
         const projet = `Livraison: ${DELIVERY[delivery()].label} · Paiement: ${payment() === "deposit" ? "Acompte 30%" : "Paiement intégral"}`;
         const res = await fetch("/api/cart/create", {
           method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: 1 })), customer: { projet } }),
+          body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })), customer: { projet } }),
         });
         const data = await res.json();
         if (data.checkoutUrl) location.href = data.checkoutUrl;

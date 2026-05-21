@@ -28,7 +28,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, productCard, addToCart, removeFromCart, inCart, euro, escapeHtml, slugify } from "/shared.js";
+    import { initShell, fetchProducts, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: false });
 
     const id = new URLSearchParams(location.search).get("id");
@@ -48,7 +48,6 @@
       const variants = Array.isArray(p.variants) ? p.variants : [];
       let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true };
       const optName = (variants[0] && variants[0].options && variants[0].options[0] && variants[0].options[0].name) || "Variante";
-      const ctaLabel = () => inCart(current.id) ? "Dans la sélection · retirer" : "+ Ajouter à la sélection";
 
       host.innerHTML = `
         <div class="pdp">
@@ -60,9 +59,18 @@
             <a class="pdp__brand" href="/produits.html?brand=${slugify(p.brand || "")}">${escapeHtml(p.brand || "")}</a>
             <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
             ${p.designer ? `<div class="pdp__designer">Dessiné par ${escapeHtml(p.designer)}</div>` : ""}
-            <div class="pdp__price" data-price-el>${euro(current.price)}</div>
+            <div class="pdp__price" data-price-el>${priceLabel(p)}</div>
             ${variants.length > 1 ? `<div class="pdp__variants"><span class="label">${escapeHtml(optName)}</span><div>${variants.map((v) => `<button class="variant-chip${v.id === current.id ? " is-active" : ""}" data-vid="${escapeHtml(v.id)}"${v.available === false ? " disabled" : ""}>${escapeHtml((v.options && v.options[0] && v.options[0].value) || v.title || "Variante")}</button>`).join("")}</div></div>` : ""}
-            <button class="btn btn--blue btn--block pdp__cta" data-add>${ctaLabel()}</button>
+            <div class="pdp__qty">
+              <span class="label">Quantité</span>
+              <div class="qty">
+                <button class="qty__btn" data-qty-dec aria-label="Diminuer la quantité" type="button">−</button>
+                <input class="qty__val" data-qty-input type="text" inputmode="numeric" value="1" aria-label="Quantité" />
+                <button class="qty__btn" data-qty-inc aria-label="Augmenter la quantité" type="button">+</button>
+              </div>
+            </div>
+            <button class="btn btn--blue btn--block pdp__cta" data-add>+ Ajouter à la sélection</button>
+            <p class="pdp__cart-status" data-cart-status></p>
             <p class="pdp__note">Disponible en boutique à Uccle, ou en livraison sous 2 à 5 jours. <a href="/rendez-vous.html">Voir en boutique</a>.</p>
             ${p.description ? `<p class="pdp__desc">${escapeHtml(p.description)}</p>` : ""}
             ${metaRows.length ? `<dl class="pdp__meta">${metaRows.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHtml(v)}</dd></div>`).join("")}</dl>` : ""}
@@ -72,6 +80,27 @@
       const main = host.querySelector("[data-main]");
       const priceEl = host.querySelector("[data-price-el]");
       const cta = host.querySelector("[data-add]");
+      const status = host.querySelector("[data-cart-status]");
+      const qtyInput = host.querySelector("[data-qty-input]");
+
+      // local "how many to add" — separate from the cart's stored quantity
+      let pickQty = 1;
+      const setPick = (n) => {
+        pickQty = Math.max(1, Math.min(99, parseInt(n) || 1));
+        qtyInput.value = pickQty;
+      };
+      host.querySelector("[data-qty-dec]").addEventListener("click", () => setPick(pickQty - 1));
+      host.querySelector("[data-qty-inc]").addEventListener("click", () => setPick(pickQty + 1));
+      qtyInput.addEventListener("change", (e) => setPick(e.target.value));
+
+      const updateStatus = () => {
+        const n = cartQty(current.id);
+        status.innerHTML = n > 0
+          ? `Dans la sélection : <strong>${n}</strong> · <a href="/selection.html">voir le panier</a>`
+          : "";
+      };
+      updateStatus();
+      document.addEventListener("cart:change", updateStatus);
 
       // keep the active thumbnail in sync with whatever the main image shows,
       // whether the change came from a thumbnail click or a variant selection.
@@ -91,7 +120,7 @@
         syncActiveThumb(t.getAttribute("src"));
       }));
 
-      // variant selection: updates price, image, and what gets added
+      // variant selection: updates price, image, status, and what gets added
       host.querySelectorAll("[data-vid]").forEach((chip) => chip.addEventListener("click", () => {
         const v = variants.find((x) => x.id === chip.dataset.vid);
         if (!v) return;
@@ -99,14 +128,19 @@
         host.querySelectorAll("[data-vid]").forEach((c) => c.classList.toggle("is-active", c === chip));
         if (v.image) { main.src = v.image; syncActiveThumb(v.image); }
         priceEl.textContent = euro(v.price);
-        cta.textContent = ctaLabel();
+        updateStatus();
       }));
 
-      // add the selected variant to the selection
+      // add the chosen quantity of the current variant to the selection
       cta.addEventListener("click", () => {
-        if (inCart(current.id)) { removeFromCart(current.id); }
-        else { addToCart({ handle: p.id, variantId: current.id, name: p.name + (current.title && variants.length > 1 ? ` · ${current.title}` : ""), brand: p.brand, price: current.price || 0, image: current.image || p.image }); }
-        cta.textContent = ctaLabel();
+        addToCart({
+          handle: p.id,
+          variantId: current.id,
+          name: p.name + (current.title && variants.length > 1 ? ` · ${current.title}` : ""),
+          brand: p.brand,
+          price: current.price || 0,
+          image: current.image || p.image,
+        }, pickQty);
       });
 
       // related (same category)

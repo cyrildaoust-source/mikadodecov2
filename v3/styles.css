@@ -166,11 +166,12 @@ ul { list-style: none; }
 .pcard:hover .pcard__media img.alt { opacity: 1; }
 .pcard__tags { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; z-index: 2; }
 .tag { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); padding: 3px 8px; border: 1px solid var(--accent-ink); color: var(--accent-ink); background: var(--paper); letter-spacing: .04em; text-transform: uppercase; }
-.pcard__heart { position: absolute; top: 10px; right: 12px; z-index: 2; width: 24px; height: 24px; color: var(--ink-deep); }
 /* product-name tier · Neue Haas Grotesk Display, SemiBold (600) */
 .pcard__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
-.pcard__name { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--ink-deep); margin-top: 4px; line-height: 1.35; }
+.pcard__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 4px; }
+.pcard__name { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--ink-deep); line-height: 1.35; min-width: 0; }
 .pcard__price { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--accent-ink); margin-top: 4px; }
+.pcard__variants { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); white-space: nowrap; flex-shrink: 0; }
 .pcard__cta { margin-top: 14px; }
 .pcard__skel { aspect-ratio: 1/1; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
 @keyframes pulse { 0%,100%{opacity:.55} 50%{opacity:1} }
@@ -362,7 +363,8 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sel-item__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .08em; color: var(--subtle); }
 .sel-item__name { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-body); color: var(--ink-deep); margin-top: 2px; }
 .sel-item__price { font-family: var(--sans-product); font-weight: 600; color: var(--accent-ink); }
-.sel-item__remove { background: none; border: none; color: var(--muted); font-size: var(--fs-small); text-decoration: underline; cursor: pointer; margin-top: 6px; }
+.sel-item__remove { background: none; border: none; color: var(--muted); font-size: var(--fs-small); text-decoration: underline; cursor: pointer; }
+.sel-item__controls { display: flex; align-items: center; gap: 18px; margin-top: 12px; flex-wrap: wrap; }
 .sel-summary { position: sticky; top: 130px; background: var(--paper-2); padding: clamp(24px, 3vw, 36px); }
 .sel-summary h2 { font-family: var(--serif); font-weight: 600; font-size: 28px; margin-bottom: 18px; }
 .sel-row { display: flex; justify-content: space-between; font-size: var(--fs-small); padding: 8px 0; }
@@ -415,9 +417,24 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .variant-chip.is-active { background: var(--ink-deep); border-color: var(--ink-deep); color: var(--paper); }
 .variant-chip:disabled { opacity: .4; cursor: not-allowed; text-decoration: line-through; }
 .pdp__desc { color: var(--ink); line-height: 1.7; margin: 18px 0 4px; white-space: pre-line; }
-.pdp__cta { margin: 18px 0 8px; }
+.pdp__qty { display: flex; align-items: center; gap: 18px; margin: 22px 0 4px; }
+.pdp__qty .label { font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.pdp__cta { margin: 14px 0 6px; }
+.pdp__cart-status { font-size: var(--fs-small); color: var(--muted); margin-bottom: 14px; min-height: 1.4em; }
+.pdp__cart-status strong { color: var(--ink-deep); font-weight: 600; }
+.pdp__cart-status a { color: var(--accent-ink); border-bottom: 1px solid currentColor; }
 .pdp__note { font-size: var(--fs-small); color: var(--muted); }
 .pdp__note a { color: var(--accent-ink); }
+
+/* ---------- qty stepper · used on PDP + selection page ---------- */
+.qty { display: inline-flex; align-items: stretch; border: 1px solid var(--line-ink); background: var(--paper); }
+.qty__btn { width: 36px; background: transparent; border: 0; font-family: var(--sans-product); font-size: 16px; font-weight: 600; color: var(--ink-deep); cursor: pointer; transition: background .2s var(--ease), color .2s var(--ease); }
+.qty__btn:hover { background: var(--ink-deep); color: var(--paper); }
+.qty__val { width: 44px; border: 0; border-left: 1px solid var(--line-ink); border-right: 1px solid var(--line-ink); text-align: center; background: transparent; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--ink-deep); padding: 9px 0; -moz-appearance: textfield; }
+.qty__val:focus { outline: none; background: var(--paper-2); }
+.qty__val::-webkit-outer-spin-button, .qty__val::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.qty--sm .qty__btn { width: 30px; font-size: 14px; }
+.qty--sm .qty__val { width: 36px; padding: 6px 0; font-size: 13px; }
 .pdp__meta { margin-top: 26px; border-top: 1px solid var(--line); }
 .pdp__meta div { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-small); }
 .pdp__meta dt { color: var(--muted); }

@@ -13,6 +13,16 @@ export const euro = (n) =>
     ? new Intl.NumberFormat("fr-BE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
     : "";
 
+// Card / PDP price label. Returns "À partir de X €" when the product has a
+// variant price range; otherwise the plain price. Falls back to p.price when
+// priceMin/priceMax aren't on the object (older feeds / safety).
+export const priceLabel = (p) => {
+  const min = p?.priceMin ?? p?.price;
+  const max = p?.priceMax ?? p?.price;
+  if (min != null && max != null && max - min > 0.5) return `À partir de ${euro(min)}`;
+  return euro(min);
+};
+
 export const escapeHtml = (s) =>
   String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -20,17 +30,46 @@ export const slugify = (s) =>
   String(s ?? "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 /* ---------- cart (selection) ---------- */
+// Cart items: { variantId, qty, handle, name, brand, price, image }
+// Migration on read: legacy items missing qty → qty=1. Items with no variantId
+// are filtered out (defensive — a bug in older builds could create them and
+// they all collide under the empty-string key).
 export function readCart() {
-  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { return []; }
+  try {
+    const raw = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    if (!Array.isArray(raw)) return [];
+    return raw
+      .filter((i) => i && i.variantId)
+      .map((i) => ({ ...i, qty: Math.max(1, parseInt(i.qty) || 1) }));
+  } catch { return []; }
 }
 function writeCart(items) {
   localStorage.setItem(CART_KEY, JSON.stringify(items));
   document.dispatchEvent(new CustomEvent("cart:change"));
 }
-export function inCart(variantId) { return readCart().some((i) => i.variantId === variantId); }
-export function addToCart(item) {
+export function inCart(variantId) { return !!variantId && readCart().some((i) => i.variantId === variantId); }
+export function cartQty(variantId) {
+  if (!variantId) return 0;
+  const item = readCart().find((i) => i.variantId === variantId);
+  return item ? item.qty : 0;
+}
+export function addToCart(item, qty = 1) {
+  if (!item || !item.variantId) return readCart();
+  const n = Math.max(1, parseInt(qty) || 1);
   const cart = readCart();
-  if (!cart.some((i) => i.variantId === item.variantId)) { cart.push(item); writeCart(cart); }
+  const idx = cart.findIndex((i) => i.variantId === item.variantId);
+  if (idx >= 0) cart[idx].qty = (cart[idx].qty || 1) + n;
+  else cart.push({ ...item, qty: n });
+  writeCart(cart);
+  return cart;
+}
+export function setCartQty(variantId, qty) {
+  const cart = readCart();
+  const idx = cart.findIndex((i) => i.variantId === variantId);
+  if (idx < 0) return cart;
+  const n = Math.max(1, parseInt(qty) || 1);
+  cart[idx].qty = n;
+  writeCart(cart);
   return cart;
 }
 export function removeFromCart(variantId) {
@@ -45,7 +84,9 @@ export function removeFromCartAt(index) {
   writeCart(cart);
   return cart;
 }
-export function cartCount() { return readCart().length; }
+export function cartCount() {
+  return readCart().reduce((s, i) => s + (i.qty || 1), 0);
+}
 export function syncBadge() {
   const n = cartCount();
   document.querySelectorAll("[data-cart-count]").forEach((el) => {
@@ -67,7 +108,50 @@ export async function fetchBrands() {
 }
 
 /* ---------- product card (used by every grid) ---------- */
-const HEART = `<svg class="pcard__heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 20s-7-4.6-9.3-8.4C1 8.7 2.3 5.5 5.4 5.5c2 0 3.2 1.3 3.9 2.4.7-1.1 1.9-2.4 3.9-2.4 3.1 0 4.4 3.2 2.7 6.1C19 15.4 12 20 12 20z"/></svg>`;
+function cardLabel(variantId) {
+  const n = cartQty(variantId);
+  if (n === 0) return "+ Ajouter à la sélection";
+  if (n === 1) return "Dans la sélection";
+  return `Dans la sélection (${n})`;
+}
+
+// FR plurals — overrides for option names where the naive "+ s" rule misleads.
+const VARIANT_PLURALS = {
+  "Couleur": "finitions",
+  "Coloris": "finitions",
+  "Taille": "tailles",
+  "Dimensions": "dimensions",
+  "Structure": "structures",
+  "Coussin": "coussins",
+  "Patin": "patins",
+  "Assise": "assises",
+  "Essence bois": "essences de bois",
+  "Couleur cadre": "finitions de cadre",
+  "Modèle": "modèles",
+  "Finition": "finitions",
+  "Forme": "formes",
+  "Geste": "gestes",
+};
+const pluralize = (name) => VARIANT_PLURALS[name] || (name.toLowerCase().endsWith("s") ? name.toLowerCase() : name.toLowerCase() + "s");
+
+// "25 couleurs" · "3 tailles" · "120 variantes" — empty string when the product
+// has a single variant or only one distinct value on its primary option.
+function variantBadge(p) {
+  const vs = Array.isArray(p?.variants) ? p.variants : [];
+  if (vs.length < 2) return "";
+  // primary option: the one with the most distinct values; ties → first option
+  const tally = {};
+  for (const v of vs) for (const o of (v.options || [])) {
+    if (!o?.name) continue;
+    tally[o.name] = tally[o.name] || new Set();
+    tally[o.name].add(o.value);
+  }
+  const ranked = Object.entries(tally).sort((a, b) => b[1].size - a[1].size);
+  if (!ranked.length) return `${vs.length} variantes`;
+  const [name, values] = ranked[0];
+  if (values.size < 2) return vs.length > 1 ? `${vs.length} variantes` : "";
+  return `${values.size} ${pluralize(name)}`;
+}
 
 export function productCard(p) {
   const href = `/produit.html?id=${encodeURIComponent(p.id)}`;
@@ -75,39 +159,48 @@ export function productCard(p) {
   const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`
     : p.badge === "limite" ? `<span class="tag">Édition limitée</span>` : "";
-  const added = inCart(p.variantId);
   return `
     <div class="pcard">
       <a class="pcard__media" href="${href}" aria-label="${escapeHtml(p.name)}">
         <div class="pcard__tags">${tag}</div>
-        ${HEART}
         <img class="main" src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy" />
         ${alt}
       </a>
       <div class="pcard__brand">${escapeHtml(p.brand || "")}</div>
-      <a class="pcard__name" href="${href}">${escapeHtml(p.name)}</a>
-      <div class="pcard__price">${euro(p.price)}</div>
+      <div class="pcard__row">
+        <a class="pcard__name" href="${href}">${escapeHtml(p.name)}</a>
+        ${variantBadge(p) ? `<span class="pcard__variants">${variantBadge(p)}</span>` : ""}
+      </div>
+      <div class="pcard__price">${priceLabel(p)}</div>
       <button class="btn btn--outline btn--block pcard__cta" data-add
         data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.id)}"
         data-name="${escapeHtml(p.name)}" data-brand="${escapeHtml(p.brand || "")}"
         data-price="${p.price || 0}" data-image="${escapeHtml(p.image || "")}">
-        ${added ? "Dans la sélection" : "+ Ajouter à la sélection"}
+        ${cardLabel(p.variantId)}
       </button>
     </div>`;
 }
 
-/* delegated add-to-cart for any [data-add] button */
+/* delegated add-to-cart for any [data-add] button.
+   Cards behave as a toggle: click adds 1; clicking when already in cart removes
+   the whole line (quantity is adjusted on the selection page or PDP). */
 function bindAddToCart() {
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-add]");
     if (!btn) return;
     e.preventDefault();
     const v = btn.dataset.variant;
-    if (inCart(v)) { removeFromCart(v); btn.textContent = "+ Ajouter à la sélection"; }
-    else {
-      addToCart({ handle: btn.dataset.handle, variantId: v, name: btn.dataset.name, brand: btn.dataset.brand, price: parseFloat(btn.dataset.price) || 0, image: btn.dataset.image });
-      btn.textContent = "Dans la sélection";
-    }
+    if (!v) return;
+    if (inCart(v)) removeFromCart(v);
+    else addToCart({ handle: btn.dataset.handle, variantId: v, name: btn.dataset.name, brand: btn.dataset.brand, price: parseFloat(btn.dataset.price) || 0, image: btn.dataset.image });
+    btn.textContent = cardLabel(v);
+  });
+  // Keep every [data-add] label in sync when the cart changes elsewhere.
+  document.addEventListener("cart:change", () => {
+    document.querySelectorAll("[data-add]").forEach((b) => {
+      const v = b.dataset.variant;
+      if (v) b.textContent = cardLabel(v);
+    });
   });
 }
 

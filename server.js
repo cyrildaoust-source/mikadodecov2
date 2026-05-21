@@ -73,8 +73,9 @@ const PRODUCTS_QUERY = `
           }
           priceRange {
             minVariantPrice { amount currencyCode }
+            maxVariantPrice { amount currencyCode }
           }
-          variants(first: 12) {
+          variants(first: 250) {
             edges {
               node {
                 id
@@ -121,7 +122,13 @@ function mapProduct(node) {
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
   const variant = node.variants.edges[0]?.node;
-  const price   = parseFloat(variant?.price?.amount || node.priceRange.minVariantPrice.amount);
+  // `price` is the first variant's price (what gets stored in the cart when
+  // adding from a product card). `priceMin` / `priceMax` come from Shopify's
+  // priceRange and cover every variant. The front-end shows "À partir de"
+  // when priceMin < priceMax.
+  const price    = parseFloat(variant?.price?.amount || node.priceRange.minVariantPrice.amount);
+  const priceMin = parseFloat(node.priceRange.minVariantPrice.amount);
+  const priceMax = parseFloat(node.priceRange.maxVariantPrice?.amount || node.priceRange.minVariantPrice.amount);
   // Tags: use "badge:nouveau", "badge:limite", "badge:bestseller", "featured" conventions
   const badgeTag = node.tags.find(t => t.startsWith('badge:'))?.replace('badge:', '') || null;
   const rawType  = (node.productType || '').toLowerCase().trim();
@@ -138,6 +145,8 @@ function mapProduct(node) {
     material:    meta.material    || '',
     dimensions:  meta.dimensions  || '',
     price,
+    priceMin,
+    priceMax,
     leadTime:    meta.lead_time   || '',
     description: node.description || '',
     image:       node.featuredImage?.url || node.images?.edges?.[0]?.node?.url || '',
