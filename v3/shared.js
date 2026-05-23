@@ -106,6 +106,30 @@ export async function fetchBrands() {
   if (!r.ok) throw new Error("brands " + r.status);
   return r.json();
 }
+export async function fetchPromos() {
+  const r = await fetch("/api/promos");
+  if (!r.ok) throw new Error("promos " + r.status);
+  return r.json();
+}
+// Fills the empty .pcard__promo slot on every card whose variantId is in
+// the promos map. Call after rendering a product grid, and after the
+// fetchPromos() response resolves.
+export function applyPromos(promosMap) {
+  if (!promosMap || typeof promosMap !== "object") return;
+  document.querySelectorAll(".pcard").forEach((card) => {
+    const slot = card.querySelector("[data-promo-slot]");
+    const variantId = card.querySelector("[data-variant]")?.dataset.variant;
+    if (!slot || !variantId) return;
+    const title = promosMap[variantId];
+    if (title) {
+      slot.textContent = title;
+      slot.hidden = false;
+    } else {
+      slot.hidden = true;
+      slot.textContent = "";
+    }
+  });
+}
 
 /* ---------- product card (used by every grid) ---------- */
 function cardLabel(variantId) {
@@ -163,6 +187,7 @@ export function productCard(p) {
     <div class="pcard">
       <a class="pcard__media" href="${href}" aria-label="${escapeHtml(p.name)}">
         <div class="pcard__tags">${tag}</div>
+        <span class="pcard__promo" data-promo-slot hidden></span>
         <img class="main" src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy" />
         ${alt}
       </a>
@@ -171,6 +196,9 @@ export function productCard(p) {
         <a class="pcard__name" href="${href}">${escapeHtml(p.name)}</a>
         ${variantBadge(p) ? `<span class="pcard__variants">${variantBadge(p)}</span>` : ""}
       </div>
+      ${p.inStock
+        ? `<div class="pcard__avail pcard__avail--stock"><span class="pcard__dot" aria-hidden="true"></span>Disponible</div>`
+        : (p.leadTimeLabel ? `<div class="pcard__avail">Disponibilité : ${escapeHtml(p.leadTimeLabel)}</div>` : "")}
       <div class="pcard__price">${priceLabel(p)}</div>
       <button class="btn btn--outline btn--block pcard__cta" data-add
         data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.id)}"

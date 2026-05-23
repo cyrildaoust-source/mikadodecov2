@@ -21,15 +21,17 @@
         <div data-items></div>
         <aside class="sel-summary">
           <h2 class="serif">Récapitulatif</h2>
-          <div class="sel-row"><span>Sous-total</span><span data-subtotal>â¦</span></div>
+          <div class="sel-row"><span>Sous-total</span><span data-subtotal>…</span></div>
+          <div class="sel-discounts" data-discounts hidden></div>
           <div class="sel-row"><span>Livraison</span><span data-delivery-fee>Offerte</span></div>
-          <div class="sel-row sel-row--total"><span data-total-label>Total</span><span data-total>â¦</span></div>
+          <div class="sel-row sel-row--total"><span data-total-label>Total</span><span data-total>…</span></div>
+          <p class="sel-eta" data-cart-eta hidden></p>
 
           <div class="sel-opt">
             <h3>Livraison</h3>
             <label><input type="radio" name="delivery" value="showroom" checked /> <span>Retrait au showroom, Uccle <em>(offerte)</em></span></label>
-            <label><input type="radio" name="delivery" value="standard" /> <span>Livraison Belgique <em>(40 €)</em></span></label>
-            <label><input type="radio" name="delivery" value="express" /> <span>Livraison express <em>(80 €)</em></span></label>
+            <label><input type="radio" name="delivery" value="standard" /> <span>Livraison Belgique <em data-delivery-belgium-label>(50 €)</em></span></label>
+            <p class="sel-opt__hint" data-delivery-hint>Livraison offerte dès 1 000 € d'achats.</p>
           </div>
           <div class="sel-opt">
             <h3>Paiement</h3>
@@ -53,10 +55,21 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, readCart, removeFromCartAt, setCartQty, euro, escapeHtml } from "/shared.js";
+    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
-    const DELIVERY = { showroom: { fee: 0, label: "Retrait showroom Uccle (0€)" }, standard: { fee: 40, label: "Livraison Belgique (40€)" }, express: { fee: 80, label: "Livraison express (80€)" } };
+    const SHIPPING_FREE_FROM = 1000;       // free shipping threshold (€, post-discount)
+    const SHIPPING_BELGIUM   = 50;          // standard Belgium fee
+    function deliveryFee(method, payable) {
+      if (method === "showroom") return 0;
+      if (method === "standard") return payable >= SHIPPING_FREE_FROM ? 0 : SHIPPING_BELGIUM;
+      return 0;
+    }
+    function deliveryLabel(method, payable) {
+      if (method === "showroom") return "Retrait showroom Uccle (offerte)";
+      if (method === "standard") return payable >= SHIPPING_FREE_FROM ? "Livraison Belgique (offerte)" : `Livraison Belgique (${SHIPPING_BELGIUM}€)`;
+      return "";
+    }
     const populated = document.querySelector("[data-populated]");
     const empty = document.querySelector("[data-empty]");
     const itemsEl = document.querySelector("[data-items]");
@@ -64,13 +77,35 @@
     function delivery() { return document.querySelector('input[name="delivery"]:checked')?.value || "showroom"; }
     function payment() { return document.querySelector('input[name="payment"]:checked')?.value || "full"; }
 
+    // Last preview returned by /api/cart/preview. When present, its values
+    // (post-discount subtotal + discount breakdown) replace the local sums.
+    let lastPreview = null;
+    const discountsEl = document.querySelector("[data-discounts]");
+
+    // Map of variantId → { inStock, leadTimeLabel, leadTimeDays }, filled
+    // once /api/products resolves. Used to render the cart-wide ETA.
+    let variantInfo = new Map();
+    fetchProducts().then((all) => {
+      for (const p of all) {
+        for (const v of (p.variants || [])) {
+          variantInfo.set(v.id, {
+            inStock: !!p.inStock,
+            leadTimeLabel: p.leadTimeLabel || "",
+            leadTimeDays: p.leadTimeDays || 0,
+          });
+        }
+      }
+      render();
+    }).catch((e) => console.warn("[selection] product info unavailable:", e.message));
+
     function render() {
       const cart = readCart();
       if (!cart.length) { populated.style.display = "none"; empty.style.display = "block"; return; }
       populated.style.display = "block"; empty.style.display = "none";
       itemsEl.innerHTML = cart.map((i, idx) => {
         const qty = i.qty || 1;
-        const line = (i.price || 0) * qty;
+        const lineSubtotal = (i.price || 0) * qty;
+        const lineDiscount = lastPreview?.lineDiscounts?.[i.variantId] || 0;
         return `
         <div class="sel-item" data-row="${idx}">
           <img class="sel-item__img" src="${escapeHtml(i.image)}" alt="${escapeHtml(i.name)}" />
@@ -86,14 +121,47 @@
               <button class="sel-item__remove" data-remove="${idx}">Retirer</button>
             </div>
           </div>
-          <div class="sel-item__price">${euro(line)}</div>
+          <div class="sel-item__price">${euro(lineSubtotal)}${lineDiscount > 0 ? `<span class="sel-item__discount">−${euro(lineDiscount)}</span>` : ""}</div>
         </div>`;
       }).join("");
-      const subtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
-      const fee = DELIVERY[delivery()].fee;
-      const grand = subtotal + fee;
+
+      const localSubtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
+      const subtotal = localSubtotal;                  // displayed as "Sous-total" (pre-discount)
+      const discount = lastPreview?.discount || 0;     // sum of all Shopify discounts
+      const payable  = Math.max(0, subtotal - discount);
+      const fee      = deliveryFee(delivery(), payable);
+      const grand    = payable + fee;
+
+      // Standard-delivery sub-label updates between "(50 €)" and "(offerte)"
+      // based on the threshold, and the small hint below explains how close
+      // the customer is to free shipping.
+      const belgLabel = document.querySelector("[data-delivery-belgium-label]");
+      if (belgLabel) belgLabel.textContent = payable >= SHIPPING_FREE_FROM ? "(offerte)" : `(${SHIPPING_BELGIUM} €)`;
+      const hint = document.querySelector("[data-delivery-hint]");
+      if (hint) {
+        if (payable >= SHIPPING_FREE_FROM) {
+          hint.textContent = "Livraison Belgique offerte sur votre panier.";
+          hint.classList.add("is-met");
+        } else {
+          const missing = SHIPPING_FREE_FROM - payable;
+          hint.textContent = `Plus que ${euro(missing)} pour la livraison offerte.`;
+          hint.classList.remove("is-met");
+        }
+      }
+
       document.querySelector("[data-subtotal]").textContent = euro(subtotal);
       document.querySelector("[data-delivery-fee]").textContent = fee ? euro(fee) : "Offerte";
+
+      // Discount lines (visible only when Shopify returned at least one)
+      const list = lastPreview?.discounts || [];
+      if (list.length > 0) {
+        discountsEl.innerHTML = list.map((d) => `<div class="sel-row sel-row--discount"><span>Remise · ${escapeHtml(d.title)}</span><span>−${euro(d.amount)}</span></div>`).join("");
+        discountsEl.hidden = false;
+      } else {
+        discountsEl.innerHTML = "";
+        discountsEl.hidden = true;
+      }
+
       if (payment() === "deposit") {
         document.querySelector("[data-total-label]").textContent = "À payer aujourd'hui (30 %)";
         document.querySelector("[data-total]").textContent = euro(Math.round(grand * 0.3));
@@ -101,6 +169,56 @@
         document.querySelector("[data-total-label]").textContent = "Total";
         document.querySelector("[data-total]").textContent = euro(grand);
       }
+
+      // Cart-wide ETA = slowest item in the cart. Skips entries that aren't
+      // in the variantInfo map yet (still loading) — render() runs again
+      // once the fetch resolves.
+      const etaEl = document.querySelector("[data-cart-eta]");
+      if (etaEl) {
+        let slowest = null;
+        for (const i of cart) {
+          const info = variantInfo.get(i.variantId);
+          if (!info) continue;
+          const days = info.inStock ? 3 : (info.leadTimeDays || 0);
+          if (!slowest || days > slowest.days) {
+            slowest = { days, label: info.inStock ? "2-3 jours ouvrés" : (info.leadTimeLabel || ""), inStock: info.inStock };
+          }
+        }
+        if (slowest && slowest.label) {
+          etaEl.innerHTML = `Livraison estimée : <strong>${escapeHtml(slowest.label)}</strong>${cart.length > 1 ? ' <span class="sel-eta__note">(article le plus long)</span>' : ""}`;
+          etaEl.hidden = false;
+        } else {
+          etaEl.hidden = true;
+        }
+      }
+    }
+
+    // Debounced preview fetch: asks Shopify for the *real* totals + automatic
+    // discount allocations (e.g. "Buy 5 get 1 free") for the current cart.
+    let previewTimer = null;
+    let previewSeq = 0;
+    function schedulePreview() {
+      clearTimeout(previewTimer);
+      previewTimer = setTimeout(async () => {
+        const cart = readCart();
+        if (!cart.length) { lastPreview = null; render(); return; }
+        const mySeq = ++previewSeq;
+        try {
+          const res = await fetch("/api/cart/preview", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })) }),
+          });
+          if (!res.ok) throw new Error("preview " + res.status);
+          const data = await res.json();
+          if (mySeq !== previewSeq) return; // a newer request already started
+          lastPreview = data;
+          render();
+        } catch (e) {
+          // silent failure: keep the local (pre-discount) totals
+          if (mySeq === previewSeq) { lastPreview = null; render(); }
+          console.warn("[selection] preview unavailable:", e.message);
+        }
+      }, 500);
     }
 
     function findQty(variantId) {
@@ -143,7 +261,9 @@
       const err = document.querySelector("[data-checkout-error]");
       btn.disabled = true; btn.textContent = "Redirection…"; err.style.display = "none";
       try {
-        const projet = `Livraison: ${DELIVERY[delivery()].label} · Paiement: ${payment() === "deposit" ? "Acompte 30%" : "Paiement intégral"}`;
+        const localSubtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
+        const payable = Math.max(0, localSubtotal - (lastPreview?.discount || 0));
+        const projet = `Livraison: ${deliveryLabel(delivery(), payable)} · Paiement: ${payment() === "deposit" ? "Acompte 30%" : "Paiement intégral"}`;
         const res = await fetch("/api/cart/create", {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })), customer: { projet } }),
@@ -158,8 +278,20 @@
       }
     });
 
-    document.addEventListener("cart:change", render);
+    document.addEventListener("cart:change", () => { render(); schedulePreview(); });
+
+    // Back-button safety: if the user hits "back" from Shopify checkout the
+    // page restores from the bfcache with the button still disabled / showing
+    // "Redirection…". Reset to its idle state on every pageshow.
+    window.addEventListener("pageshow", () => {
+      const btn = document.querySelector("[data-checkout]");
+      if (btn) { btn.disabled = false; btn.textContent = "Finaliser la sélection"; }
+      const err = document.querySelector("[data-checkout-error]");
+      if (err) { err.style.display = "none"; err.textContent = ""; }
+    });
+
     render();
+    schedulePreview();
   </script>
 </body>
 </html>

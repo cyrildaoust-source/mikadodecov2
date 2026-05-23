@@ -166,12 +166,18 @@ ul { list-style: none; }
 .pcard:hover .pcard__media img.alt { opacity: 1; }
 .pcard__tags { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; z-index: 2; }
 .tag { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); padding: 3px 8px; border: 1px solid var(--accent-ink); color: var(--accent-ink); background: var(--paper); letter-spacing: .04em; text-transform: uppercase; }
+/* card-level PROMO badge · same warm red as PDP, sits below the .pcard__tags
+   stack (which holds "Nouveau"/"Coup de cœur" outlined chips). */
+.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: #c43d3d; color: var(--paper); font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 12px rgba(196,61,61,.28); transform: rotate(-1.5deg); transform-origin: top right; }
 /* product-name tier · Neue Haas Grotesk Display, SemiBold (600) */
 .pcard__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
 .pcard__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 4px; }
 .pcard__name { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--ink-deep); line-height: 1.35; min-width: 0; }
 .pcard__price { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--accent-ink); margin-top: 4px; }
 .pcard__variants { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.pcard__avail { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+.pcard__avail--stock { color: var(--ink-deep); font-weight: 600; }
+.pcard__dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #5a8c4a; box-shadow: 0 0 0 3px rgba(90,140,74,.15); flex-shrink: 0; }
 .pcard__cta { margin-top: 14px; }
 .pcard__skel { aspect-ratio: 1/1; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
 @keyframes pulse { 0%,100%{opacity:.55} 50%{opacity:1} }
@@ -369,7 +375,16 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sel-summary h2 { font-family: var(--serif); font-weight: 600; font-size: 28px; margin-bottom: 18px; }
 .sel-row { display: flex; justify-content: space-between; font-size: var(--fs-small); padding: 8px 0; }
 .sel-row--total { border-top: 1px solid var(--line); margin-top: 8px; padding-top: 14px; font-size: var(--fs-body); font-weight: 500; color: var(--ink-deep); }
+.sel-row--discount { color: var(--accent-ink); }
+.sel-row--discount > span:first-child { padding-right: 14px; }
+.sel-discounts:not([hidden]) { border-top: 1px dashed var(--line); padding-top: 4px; margin-top: 4px; }
+.sel-item__discount { display: block; font-size: var(--fs-meta); font-weight: 600; color: var(--accent-ink); margin-top: 4px; }
 .sel-opt { margin: 18px 0; }
+.sel-opt__hint { font-size: var(--fs-meta); color: var(--muted); margin: 6px 0 0 22px; font-style: italic; }
+.sel-opt__hint.is-met { color: var(--accent-ink); font-style: normal; }
+.sel-eta { font-size: var(--fs-small); color: var(--ink-deep); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.sel-eta strong { font-weight: 600; }
+.sel-eta__note { color: var(--muted); font-size: var(--fs-meta); }
 .sel-opt h3 { font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
 .sel-opt label { display: flex; gap: 10px; align-items: baseline; font-size: var(--fs-small); padding: 7px 0; cursor: pointer; }
 .sel-opt input { accent-color: var(--accent-ink); margin-top: 2px; }
@@ -408,6 +423,10 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .pdp__info { position: sticky; top: 130px; }
 .pdp__brand { font-family: var(--sans-product); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: var(--fs-meta); color: var(--accent-ink); }
 .pdp__name { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 3.4vw, 50px); line-height: 1.03; margin: 8px 0 6px; }
+.pdp__main-wrap { position: relative; }
+/* PROMO BADGE · warm red, paper text, slight tilt + shadow — meant to grab
+   attention against the cream/blue palette without breaking the warmth. */
+.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: #c43d3d; color: var(--paper); font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 6px 18px rgba(196,61,61,.32); transform: rotate(-2deg); transform-origin: top left; }
 .pdp__designer { color: var(--muted); font-size: var(--fs-small); }
 .pdp__price { font-family: var(--sans-product); font-weight: 600; font-size: 22px; color: var(--ink-deep); margin: 18px 0; }
 .pdp__variants { margin: 18px 0; }
@@ -423,6 +442,8 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .pdp__cart-status { font-size: var(--fs-small); color: var(--muted); margin-bottom: 14px; min-height: 1.4em; }
 .pdp__cart-status strong { color: var(--ink-deep); font-weight: 600; }
 .pdp__cart-status a { color: var(--accent-ink); border-bottom: 1px solid currentColor; }
+.pdp__avail { font-size: var(--fs-small); color: var(--ink-deep); margin: 8px 0 4px; display: flex; align-items: center; gap: 8px; }
+.pdp__avail strong { font-weight: 600; }
 .pdp__note { font-size: var(--fs-small); color: var(--muted); }
 .pdp__note a { color: var(--accent-ink); }
 

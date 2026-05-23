@@ -66,7 +66,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchBrands, productCard, slugify } from "/shared.js";
+    import { initShell, fetchProducts, fetchBrands, fetchPromos, applyPromos, productCard, slugify } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: true });
 
     const CAT_LABEL = { tous:"Le catalogue", assises:"Assises", tables:"Tables", luminaires:"Luminaires", rangements:"Rangements", objets:"Objets", exterieur:"Extérieur" };
@@ -128,7 +128,10 @@
       const brandName = state.brand ? (ALL.find((p) => slugify(p.brand) === state.brand)?.brand || "") : "";
       titleEl.textContent = brandName || CAT_LABEL[state.cat] || "Le catalogue";
       subEl.textContent = brandName ? "Toutes les pièces de la maison." : "Mobilier de design, choisi pièce par pièce.";
+      applyPromos(PROMOS);
     }
+
+    let PROMOS = {};
 
     Promise.all([fetchProducts(), fetchBrands()]).then(([prods, brands]) => {
       ALL = prods.filter((p) => p.image);
@@ -141,6 +144,11 @@
       sortSel.value = state.sort;
       render();
     }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`; console.warn(e); });
+
+    // Background promo fetch — re-applies to the current grid (and to every
+    // subsequent render via the applyPromos call inside render()).
+    fetchPromos().then((map) => { PROMOS = map; applyPromos(PROMOS); })
+      .catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
     chipsBar.addEventListener("click", (e) => {
       const c = e.target.closest(".chip"); if (!c) return;

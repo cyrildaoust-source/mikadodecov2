@@ -1,5 +1,5 @@
 /* Home page · mounts the shared shell, then fills the product rows. */
-import { initShell, fetchProducts, productCard, fetchBrands, slugify, escapeHtml } from "/shared.js";
+import { initShell, fetchProducts, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml } from "/shared.js";
 
 initShell({ active: "", transparentNav: true });
 
@@ -22,6 +22,11 @@ async function loadRows() {
   }
 }
 loadRows();
+
+// Fetch Shopify promo titles in the background (cached server-side) and
+// inject them onto every rendered card once they resolve. Failures are
+// silent — the badge is optional decoration.
+fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
 /* Brand logo marquee + live "maisons" count, from the real vendor feed.
    Each brand renders as a monochrome logo from /images/brands/<slug>.svg.

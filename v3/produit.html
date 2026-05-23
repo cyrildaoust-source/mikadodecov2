@@ -28,7 +28,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify } from "/shared.js";
+    import { initShell, fetchProducts, fetchPromos, applyPromos, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: false });
 
     const id = new URLSearchParams(location.search).get("id");
@@ -52,7 +52,10 @@
       host.innerHTML = `
         <div class="pdp">
           <div class="pdp__gallery">
-            <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" alt="${escapeHtml(p.name)}" />
+            <div class="pdp__main-wrap">
+              <span class="pdp__promo" data-promo hidden></span>
+              <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" alt="${escapeHtml(p.name)}" />
+            </div>
             ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(src)}" alt="" />`).join("")}</div>` : ""}
           </div>
           <div class="pdp__info">
@@ -71,7 +74,10 @@
             </div>
             <button class="btn btn--blue btn--block pdp__cta" data-add>+ Ajouter à la sélection</button>
             <p class="pdp__cart-status" data-cart-status></p>
-            <p class="pdp__note">Disponible en boutique à Uccle, ou en livraison sous 2 à 5 jours. <a href="/rendez-vous.html">Voir en boutique</a>.</p>
+            <p class="pdp__avail">${p.inStock
+              ? `<span class="pcard__dot" aria-hidden="true"></span><strong>Disponible</strong> à la boutique · expédition 2-3 jours ouvrés`
+              : `<strong>Disponibilité :</strong> ${escapeHtml(p.leadTimeLabel || "Délai sur demande")}`}</p>
+            <p class="pdp__note">Visible aussi en boutique à Uccle. <a href="/rendez-vous.html">Voir en boutique</a>.</p>
             ${p.description ? `<p class="pdp__desc">${escapeHtml(p.description)}</p>` : ""}
             ${metaRows.length ? `<dl class="pdp__meta">${metaRows.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHtml(v)}</dd></div>`).join("")}</dl>` : ""}
           </div>
@@ -102,6 +108,37 @@
       updateStatus();
       document.addEventListener("cart:change", updateStatus);
 
+      // Auto-discover any Shopify automatic discount that applies to this
+      // variant. We probe with qty=100 — large enough to trigger most tier
+      // rules (e.g. "buy 5 get 1 free"). If Shopify returns a discount, we
+      // surface its title as a baby-blue badge top-left of the main image.
+      const promoEl = host.querySelector("[data-promo]");
+      let promoSeq = 0;
+      async function probePromo(variantId) {
+        if (!variantId || !promoEl) return;
+        const mySeq = ++promoSeq;
+        try {
+          const r = await fetch("/api/cart/preview", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: [{ variantId, qty: 100 }] }),
+          });
+          if (!r.ok) throw new Error("preview " + r.status);
+          const data = await r.json();
+          if (mySeq !== promoSeq) return; // a newer probe started (variant change)
+          if (data.discounts && data.discounts.length > 0) {
+            promoEl.textContent = data.discounts[0].title;
+            promoEl.hidden = false;
+          } else {
+            promoEl.hidden = true;
+            promoEl.textContent = "";
+          }
+        } catch (e) {
+          // silent — promo badge is optional decoration
+          if (mySeq === promoSeq && promoEl) { promoEl.hidden = true; promoEl.textContent = ""; }
+        }
+      }
+      probePromo(current.id);
+
       // keep the active thumbnail in sync with whatever the main image shows,
       // whether the change came from a thumbnail click or a variant selection.
       const thumbs = Array.from(host.querySelectorAll("[data-thumb]"));
@@ -129,6 +166,7 @@
         if (v.image) { main.src = v.image; syncActiveThumb(v.image); }
         priceEl.textContent = euro(v.price);
         updateStatus();
+        probePromo(v.id);
       }));
 
       // add the chosen quantity of the current variant to the selection
@@ -149,6 +187,10 @@
         document.querySelector("[data-related-wrap]").style.display = "";
         document.querySelector("[data-related]").innerHTML = related.map(productCard).join("");
       }
+
+      // Inject promo badges (both on the main PDP for non-default variants via
+      // probePromo above, and on the related cards via the shared map).
+      fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
     }).catch((e) => { host.innerHTML = `<p class="plp-empty">La pièce se charge bientôt.</p>`; console.warn(e); });
   </script>
 </body>

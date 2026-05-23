@@ -67,6 +67,7 @@ const PRODUCTS_QUERY = `
           description
           tags
           availableForSale
+          totalInventory
           featuredImage { url altText }
           images(first: 8) {
             edges { node { url altText } }
@@ -103,6 +104,72 @@ const PRODUCTS_QUERY = `
     }
   }
 `;
+
+// Brand lead-times — supplier delay + small handling buffer, already in the
+// shape we want to show on the storefront. Keys are normalised (lower-case,
+// alphanum-only) so vendor spelling differences (Ferm Living / FermLiving)
+// resolve to the same entry. To update: edit a value, restart the server.
+const BRAND_LEAD_TIMES_RAW = {
+  '&Tradition':           '1-2 semaines',
+  'Alessi':               '10-14 jours',
+  'Anglepoise':           '2-3 semaines',
+  'Blomus':               '5-7 jours',
+  'Cody Foster':          '8-12 semaines',
+  'Compagnie de Provence':'5-7 jours',
+  'Esteban':              '7-10 jours',
+  'Ester & Erik':         '4-5 semaines',
+  'Fabula Living':        '2-3 semaines',
+  'Fatboy':               '5-7 jours',
+  'Ferm Living':          '10-14 jours',
+  'Fermob':               '4-6 semaines',
+  'HAY':                  '10-14 jours',
+  'HKLiving':             '10-14 jours',
+  'HomeSpirit':           '7-9 semaines',
+  'Ichendorf':            '2-3 semaines',
+  'Ichendorf Milano':     '2-3 semaines',
+  'Artek':                '2-3 semaines',
+  'Iittala':              '10-14 jours',
+  'Kriptonite':           '13-16 semaines',
+  'LindDNA':              '5-7 jours',
+  'Linie Design':         '4-5 semaines',
+  'Marimekko':            '1-2 semaines',
+  'Missoni':              '3-4 semaines',
+  'Muuto':                '1-2 semaines',
+  'Normann Copenhagen':   '10-14 jours',
+  'Pols Potten':          '2-3 semaines',
+  'Relaxound':            '1-2 semaines',
+  'Remember':             '2-3 semaines',
+  'Serax':                '10-14 jours',
+  'Softline':             '10-14 jours',
+  'Stoff Nagel':          '7-10 jours',
+  'String Furniture':     '3-4 semaines',
+  'Treku':                '8-12 semaines',
+  'Vitra':                '3-4 semaines',
+  'Volta':                '1-2 semaines',
+  'DCW':                  '3-4 semaines',
+  'Charolles':            '5-7 semaines',
+};
+const LEAD_TIME_DEFAULT = '2-3 semaines';
+const normBrand = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+const BRAND_LEAD_TIMES = Object.fromEntries(
+  Object.entries(BRAND_LEAD_TIMES_RAW).map(([k, v]) => [normBrand(k), v])
+);
+const leadTimeForBrand = (brand) => BRAND_LEAD_TIMES[normBrand(brand)] || LEAD_TIME_DEFAULT;
+
+// Parse a "5-7 jours" / "3-4 semaines" / "2-3 mois" string into a numeric
+// max-days estimate so we can compare lead times across brands (used by the
+// cart to surface the slowest item's delay as the cart-wide ETA).
+function leadTimeMaxDays(label) {
+  if (!label) return 0;
+  const m = String(label).match(/(\d+)\s*[-–]\s*(\d+)\s*(jour|semaine|mois)/i);
+  if (!m) return 0;
+  const max = parseInt(m[2], 10);
+  const unit = m[3].toLowerCase();
+  if (unit.startsWith('jour'))    return max;
+  if (unit.startsWith('semaine')) return max * 7;
+  if (unit.startsWith('mois'))    return max * 30;
+  return max;
+}
 
 // Map fine-grained Shopify product types (Fermob/HAY use FR labels) to the
 // 6 top-level frontend categories. Anything unmatched falls through to "objets".
@@ -147,6 +214,15 @@ function mapProduct(node) {
     price,
     priceMin,
     priceMax,
+    // Availability surfaced on cards and PDP. Uses Shopify's inventory count:
+    //   > 0  → "● Disponible"
+    //   = 0  → "Disponibilité : <brand lead-time>" (tracked but out of stock)
+    //   null → same (Shopify isn't tracking this item — defaults to on-order)
+    // Requires the unauthenticated_read_product_inventory Storefront scope.
+    inStock:     (typeof node.totalInventory === 'number') && node.totalInventory > 0,
+    leadTimeLabel: leadTimeForBrand(node.vendor),
+    leadTimeDays:  leadTimeMaxDays(leadTimeForBrand(node.vendor)),
+    // (kept for backward compat with the PDP metafield — separate from brand lead-time)
     leadTime:    meta.lead_time   || '',
     description: node.description || '',
     image:       node.featuredImage?.url || node.images?.edges?.[0]?.node?.url || '',
@@ -354,6 +430,7 @@ app.post('/api/revalidate', (req, res) => {
   delete _cache['products'];
   delete _cache['brands'];
   delete _cache['collections'];
+  delete _cache['promos'];
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });
 });
@@ -381,6 +458,164 @@ const CART_CREATE_MUTATION = `
     }
   }
 `;
+
+// ─── SHOPIFY: CART PREVIEW (totals + discount allocations) ─────────
+// Same shape as CartCreate, but we ask for cost + discountAllocations so
+// the front-end can show Shopify's actual price after automatic discounts
+// (e.g. "Buy 5 get 1 free") before the customer hits checkout.
+const CART_PREVIEW_MUTATION = `
+  mutation CartPreview($lines: [CartLineInput!]!) {
+    cartCreate(input: { lines: $lines }) {
+      cart {
+        id
+        cost {
+          subtotalAmount { amount currencyCode }
+          totalAmount    { amount currencyCode }
+        }
+        discountAllocations {
+          discountedAmount { amount currencyCode }
+          ... on CartAutomaticDiscountAllocation { title }
+          ... on CartCodeDiscountAllocation      { code  }
+          ... on CartCustomDiscountAllocation    { title }
+        }
+        lines(first: 50) {
+          edges {
+            node {
+              id
+              quantity
+              cost {
+                subtotalAmount { amount currencyCode }
+                totalAmount    { amount currencyCode }
+              }
+              discountAllocations {
+                discountedAmount { amount currencyCode }
+                ... on CartAutomaticDiscountAllocation { title }
+                ... on CartCodeDiscountAllocation      { code  }
+                ... on CartCustomDiscountAllocation    { title }
+              }
+              merchandise { ... on ProductVariant { id } }
+            }
+          }
+        }
+      }
+      userErrors { field message }
+    }
+  }
+`;
+
+// ─── PROMO DISCOVERY ────────────────────────────────────
+// Probes each variant with a "test cart" of qty=100 to surface any Shopify
+// automatic discount that applies. Used by /api/promos to drive the red
+// promo badge on product cards and on the PDP.
+async function fetchPromoForVariant(variantId) {
+  try {
+    const data = await shopifyFetch(CART_PREVIEW_MUTATION, {
+      lines: [{ merchandiseId: variantId, quantity: 100 }],
+    });
+    const cart = data.cartCreate?.cart;
+    if (!cart) return null;
+    const titleOf = (d) => d.title || d.code;
+    const cartLevel = (cart.discountAllocations || []).map(titleOf);
+    const lineLevel = (cart.lines?.edges || []).flatMap((e) =>
+      (e.node.discountAllocations || []).map(titleOf)
+    );
+    return [...cartLevel, ...lineLevel].find(Boolean) || null;
+  } catch (e) {
+    console.warn('[promo] probe failed for', variantId, e.message);
+    return null;
+  }
+}
+
+// Parallel probe with bounded concurrency. ~12 in-flight requests is well
+// under Shopify's Storefront rate limit and finishes a 200-product probe in
+// roughly 2-4 seconds on cold cache. Result cached as 'promos' (5 min TTL).
+async function getPromos() {
+  return cached('promos', async () => {
+    const products = await getProducts();
+    const variantIds = [...new Set(products.map((p) => p.variantId).filter(Boolean))];
+    const map = {};
+    let i = 0;
+    const concurrency = 12;
+    async function worker() {
+      while (i < variantIds.length) {
+        const vid = variantIds[i++];
+        const title = await fetchPromoForVariant(vid);
+        if (title) map[vid] = title;
+      }
+    }
+    await Promise.all(Array(Math.min(concurrency, variantIds.length)).fill(0).map(worker));
+    return map;
+  });
+}
+
+// ─── API: PROMOS (variantId → discount title) ──────────
+app.get('/api/promos', async (req, res) => {
+  try {
+    res.json(await getPromos());
+  } catch (err) {
+    console.error('Promos error:', err.message);
+    res.status(500).json({ error: 'Impossible de charger les promotions.' });
+  }
+});
+
+// ─── API: CART PREVIEW (totals + discounts) ────────────
+// Body: { items: [{ variantId, qty }] }
+// Returns: { subtotal, total, discount, discounts: [{title, amount}], lines: [{variantId, qty, subtotal, total, discount}] }
+// NOTE: every call creates an orphan Shopify cart that auto-expires after
+// ~10 days. Debounce on the client to keep volume sane.
+app.post('/api/cart/preview', async (req, res) => {
+  try {
+    const items = req.body?.items;
+    if (!Array.isArray(items) || items.length === 0) return res.json({ subtotal: 0, total: 0, discount: 0, discounts: [], lines: [] });
+    const lines = items.map(item => ({
+      merchandiseId: item.variantId,
+      quantity:      Math.max(1, Math.min(99, parseInt(item.qty) || 1)),
+    }));
+    const data = await shopifyFetch(CART_PREVIEW_MUTATION, { lines });
+    const result = data.cartCreate;
+    if (result.userErrors?.length) return res.status(400).json({ error: result.userErrors[0].message });
+    const cart = result.cart;
+    const titleOf = (d) => d.title || d.code || 'Remise';
+    // Cart-level discounts (e.g. code "WELCOME10")
+    const cartDiscounts = (cart.discountAllocations || []).map(d => ({
+      title:  titleOf(d),
+      amount: parseFloat(d.discountedAmount.amount),
+    }));
+    // Shopify can split one client-side line into several internal lines
+    // (e.g. a "buy 5 get 1 free" rule yields one qty=5 line + one qty=1 free
+    // line for the same variantId). We collect line-level allocations and
+    // aggregate per variant so the cart UI can show a clean per-row discount.
+    const internalLines = (cart.lines?.edges || []).map(e => e.node);
+    const lineDiscounts = {}; // variantId → total discount
+    const allLineDiscountObjs = [];
+    for (const n of internalLines) {
+      const vid = n.merchandise?.id || null;
+      const lineSub = parseFloat(n.cost.subtotalAmount.amount);
+      const lineTot = parseFloat(n.cost.totalAmount.amount);
+      const lineDiscount = Math.max(0, lineSub - lineTot);
+      if (vid && lineDiscount > 0) lineDiscounts[vid] = (lineDiscounts[vid] || 0) + lineDiscount;
+      for (const d of (n.discountAllocations || [])) {
+        const amt = parseFloat(d.discountedAmount.amount);
+        if (amt > 0) allLineDiscountObjs.push({ title: titleOf(d), amount: amt });
+      }
+    }
+    // Summary list, aggregated by title, used to render "Remise · X: -Y €" rows
+    const byTitle = {};
+    [...cartDiscounts, ...allLineDiscountObjs].forEach(d => {
+      if (d.amount <= 0) return;
+      byTitle[d.title] = (byTitle[d.title] || 0) + d.amount;
+    });
+    const discounts = Object.entries(byTitle).map(([title, amount]) => ({ title, amount }));
+    const discount  = discounts.reduce((s, d) => s + d.amount, 0);
+    // Cart cost totals (post-discount, pre-shipping/tax)
+    const subtotalDisplayed = parseFloat(cart.cost.subtotalAmount.amount) + discount; // pre-discount, for "Sous-total"
+    const total             = parseFloat(cart.cost.totalAmount.amount);
+    res.json({ subtotal: subtotalDisplayed, total, discount, discounts, lineDiscounts });
+  } catch (err) {
+    console.error('Cart preview error:', err.message);
+    res.status(500).json({ error: 'Erreur lors du calcul du panier.' });
+  }
+});
 
 // ─── API: CREATE CART → SHOPIFY CHECKOUT ───────────────
 // Body: { items: [{ variantId, qty }], customer: { prenom, nom, email, telephone, projet, message } }
