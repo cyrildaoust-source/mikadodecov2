@@ -105,71 +105,15 @@ const PRODUCTS_QUERY = `
   }
 `;
 
-// Brand lead-times — supplier delay + small handling buffer, already in the
-// shape we want to show on the storefront. Keys are normalised (lower-case,
-// alphanum-only) so vendor spelling differences (Ferm Living / FermLiving)
-// resolve to the same entry. To update: edit a value, restart the server.
-const BRAND_LEAD_TIMES_RAW = {
-  '&Tradition':           '1-2 semaines',
-  'Alessi':               '10-14 jours',
-  'Anglepoise':           '2-3 semaines',
-  'Blomus':               '5-7 jours',
-  'Cody Foster':          '8-12 semaines',
-  'Compagnie de Provence':'5-7 jours',
-  'Esteban':              '7-10 jours',
-  'Ester & Erik':         '4-5 semaines',
-  'Fabula Living':        '2-3 semaines',
-  'Fatboy':               '5-7 jours',
-  'Ferm Living':          '10-14 jours',
-  'Fermob':               '4-6 semaines',
-  'HAY':                  '10-14 jours',
-  'HKLiving':             '10-14 jours',
-  'HomeSpirit':           '7-9 semaines',
-  'Ichendorf':            '2-3 semaines',
-  'Ichendorf Milano':     '2-3 semaines',
-  'Artek':                '2-3 semaines',
-  'Iittala':              '10-14 jours',
-  'Kriptonite':           '13-16 semaines',
-  'LindDNA':              '5-7 jours',
-  'Linie Design':         '4-5 semaines',
-  'Marimekko':            '1-2 semaines',
-  'Missoni':              '3-4 semaines',
-  'Muuto':                '1-2 semaines',
-  'Normann Copenhagen':   '10-14 jours',
-  'Pols Potten':          '2-3 semaines',
-  'Relaxound':            '1-2 semaines',
-  'Remember':             '2-3 semaines',
-  'Serax':                '10-14 jours',
-  'Softline':             '10-14 jours',
-  'Stoff Nagel':          '7-10 jours',
-  'String Furniture':     '3-4 semaines',
-  'Treku':                '8-12 semaines',
-  'Vitra':                '3-4 semaines',
-  'Volta':                '1-2 semaines',
-  'DCW':                  '3-4 semaines',
-  'Charolles':            '5-7 semaines',
-};
-const LEAD_TIME_DEFAULT = '2-3 semaines';
-const normBrand = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
-const BRAND_LEAD_TIMES = Object.fromEntries(
-  Object.entries(BRAND_LEAD_TIMES_RAW).map(([k, v]) => [normBrand(k), v])
-);
-const leadTimeForBrand = (brand) => BRAND_LEAD_TIMES[normBrand(brand)] || LEAD_TIME_DEFAULT;
-
-// Parse a "5-7 jours" / "3-4 semaines" / "2-3 mois" string into a numeric
-// max-days estimate so we can compare lead times across brands (used by the
-// cart to surface the slowest item's delay as the cart-wide ETA).
-function leadTimeMaxDays(label) {
-  if (!label) return 0;
-  const m = String(label).match(/(\d+)\s*[-–]\s*(\d+)\s*(jour|semaine|mois)/i);
-  if (!m) return 0;
-  const max = parseInt(m[2], 10);
-  const unit = m[3].toLowerCase();
-  if (unit.startsWith('jour'))    return max;
-  if (unit.startsWith('semaine')) return max * 7;
-  if (unit.startsWith('mois'))    return max * 30;
-  return max;
-}
+// Boutique-de-quartier delivery promise: a single, honest baseline applies
+// to anything that has to be ordered from a supplier (which is most of the
+// catalog). Items physically in stock at the boutique are flagged via the
+// Shopify inventory and shipped fast. Anything genuinely outside this
+// promise (Fermob peak season, Kriptonite, Charolles, Treku, etc.) gets a
+// `delai-long` product tag in Shopify → we fall back to a generic
+// "délai sur demande" line and confirm by mail/phone after the order.
+const DELIVERY_DEFAULT = '3-4 semaines';
+const DELIVERY_LONG    = 'délai sur demande';
 
 // Map fine-grained Shopify product types (Fermob/HAY use FR labels) to the
 // 6 top-level frontend categories. Anything unmatched falls through to "objets".
@@ -214,14 +158,13 @@ function mapProduct(node) {
     price,
     priceMin,
     priceMax,
-    // Availability surfaced on cards and PDP. Uses Shopify's inventory count:
-    //   > 0  → "● Disponible"
-    //   = 0  → "Disponibilité : <brand lead-time>" (tracked but out of stock)
-    //   null → same (Shopify isn't tracking this item — defaults to on-order)
-    // Requires the unauthenticated_read_product_inventory Storefront scope.
+    // Availability badge — "À voir en boutique" when the article is
+    // physically present (regardless of finish/colour — it's an invitation
+    // to come see the model, not a real-time stock count). Anything else
+    // ships from the supplier under the standard promise.
     inStock:     (typeof node.totalInventory === 'number') && node.totalInventory > 0,
-    leadTimeLabel: leadTimeForBrand(node.vendor),
-    leadTimeDays:  leadTimeMaxDays(leadTimeForBrand(node.vendor)),
+    longDelay:   node.tags.some(t => /^delai[-_ ]?long$/i.test(t)),
+    leadTimeLabel: node.tags.some(t => /^delai[-_ ]?long$/i.test(t)) ? DELIVERY_LONG : DELIVERY_DEFAULT,
     // (kept for backward compat with the PDP metafield — separate from brand lead-time)
     leadTime:    meta.lead_time   || '',
     description: node.description || '',

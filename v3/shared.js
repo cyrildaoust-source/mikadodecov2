@@ -112,8 +112,9 @@ export async function fetchPromos() {
   return r.json();
 }
 // Fills the empty .pcard__promo slot on every card whose variantId is in
-// the promos map. Call after rendering a product grid, and after the
-// fetchPromos() response resolves.
+// the promos map. Cards show a short generic label ("Offre exclusive")
+// and keep the full Shopify discount title in a tooltip; the PDP shows
+// the full title in place.
 export function applyPromos(promosMap) {
   if (!promosMap || typeof promosMap !== "object") return;
   document.querySelectorAll(".pcard").forEach((card) => {
@@ -122,11 +123,13 @@ export function applyPromos(promosMap) {
     if (!slot || !variantId) return;
     const title = promosMap[variantId];
     if (title) {
-      slot.textContent = title;
+      slot.textContent = "Offre exclusive";
+      slot.title = title;
       slot.hidden = false;
     } else {
       slot.hidden = true;
       slot.textContent = "";
+      slot.removeAttribute("title");
     }
   });
 }
@@ -197,8 +200,8 @@ export function productCard(p) {
         ${variantBadge(p) ? `<span class="pcard__variants">${variantBadge(p)}</span>` : ""}
       </div>
       ${p.inStock
-        ? `<div class="pcard__avail pcard__avail--stock"><span class="pcard__dot" aria-hidden="true"></span>Disponible</div>`
-        : (p.leadTimeLabel ? `<div class="pcard__avail">Disponibilité : ${escapeHtml(p.leadTimeLabel)}</div>` : "")}
+        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>`
+        : `<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>${p.longDelay ? "Sur commande · délai sur demande" : "Livraison " + escapeHtml(p.leadTimeLabel || "3-4 semaines")}</div>`}
       <div class="pcard__price">${priceLabel(p)}</div>
       <button class="btn btn--outline btn--block pcard__cta" data-add
         data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.id)}"

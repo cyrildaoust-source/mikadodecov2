@@ -33,12 +33,6 @@
             <label><input type="radio" name="delivery" value="standard" /> <span>Livraison Belgique <em data-delivery-belgium-label>(50 €)</em></span></label>
             <p class="sel-opt__hint" data-delivery-hint>Livraison offerte dès 1 000 € d'achats.</p>
           </div>
-          <div class="sel-opt">
-            <h3>Paiement</h3>
-            <label><input type="radio" name="payment" value="full" checked /> <span>Paiement intégral</span></label>
-            <label><input type="radio" name="payment" value="deposit" /> <span>Acompte 30 %, solde au showroom</span></label>
-          </div>
-
           <button class="btn btn--solid btn--block" data-checkout style="margin-top:14px">Finaliser la sélection</button>
           <p class="form-error" data-checkout-error style="display:none;margin-top:10px"></p>
         </aside>
@@ -75,24 +69,20 @@
     const itemsEl = document.querySelector("[data-items]");
 
     function delivery() { return document.querySelector('input[name="delivery"]:checked')?.value || "showroom"; }
-    function payment() { return document.querySelector('input[name="payment"]:checked')?.value || "full"; }
 
     // Last preview returned by /api/cart/preview. When present, its values
     // (post-discount subtotal + discount breakdown) replace the local sums.
     let lastPreview = null;
     const discountsEl = document.querySelector("[data-discounts]");
 
-    // Map of variantId → { inStock, leadTimeLabel, leadTimeDays }, filled
-    // once /api/products resolves. Used to render the cart-wide ETA.
+    // Map of variantId → { longDelay }. Populated once /api/products
+    // resolves. Used to decide whether the cart contains any item that
+    // breaks the standard "3-4 semaines" promise (Fermob peak, Kriptonite…).
     let variantInfo = new Map();
     fetchProducts().then((all) => {
       for (const p of all) {
         for (const v of (p.variants || [])) {
-          variantInfo.set(v.id, {
-            inStock: !!p.inStock,
-            leadTimeLabel: p.leadTimeLabel || "",
-            leadTimeDays: p.leadTimeDays || 0,
-          });
+          variantInfo.set(v.id, { longDelay: !!p.longDelay });
         }
       }
       render();
@@ -162,34 +152,23 @@
         discountsEl.hidden = true;
       }
 
-      if (payment() === "deposit") {
-        document.querySelector("[data-total-label]").textContent = "À payer aujourd'hui (30 %)";
-        document.querySelector("[data-total]").textContent = euro(Math.round(grand * 0.3));
-      } else {
-        document.querySelector("[data-total-label]").textContent = "Total";
-        document.querySelector("[data-total]").textContent = euro(grand);
-      }
+      document.querySelector("[data-total-label]").textContent = "Total";
+      document.querySelector("[data-total]").textContent = euro(grand);
 
-      // Cart-wide ETA = slowest item in the cart. Skips entries that aren't
-      // in the variantInfo map yet (still loading) — render() runs again
-      // once the fetch resolves.
+      // Cart-wide ETA. Uniform 3-4 semaines unless any item is tagged as a
+      // long-delay exception (Fermob peak / Kriptonite / sur-mesure…), in
+      // which case we tell the customer we'll confirm by mail/phone.
       const etaEl = document.querySelector("[data-cart-eta]");
       if (etaEl) {
-        let slowest = null;
-        for (const i of cart) {
-          const info = variantInfo.get(i.variantId);
-          if (!info) continue;
-          const days = info.inStock ? 3 : (info.leadTimeDays || 0);
-          if (!slowest || days > slowest.days) {
-            slowest = { days, label: info.inStock ? "2-3 jours ouvrés" : (info.leadTimeLabel || ""), inStock: info.inStock };
-          }
-        }
-        if (slowest && slowest.label) {
-          etaEl.innerHTML = `Livraison estimée : <strong>${escapeHtml(slowest.label)}</strong>${cart.length > 1 ? ' <span class="sel-eta__note">(article le plus long)</span>' : ""}`;
-          etaEl.hidden = false;
+        const anyLong = cart.some((i) => variantInfo.get(i.variantId)?.longDelay);
+        if (anyLong) {
+          etaEl.innerHTML = `<strong>Délai sur demande</strong> · certains articles de votre sélection peuvent demander un délai plus long. Nous vous contacterons après votre commande pour confirmer.`;
+          etaEl.classList.add("sel-eta--warn");
         } else {
-          etaEl.hidden = true;
+          etaEl.innerHTML = `Livraison estimée : <strong>3-4 semaines</strong>`;
+          etaEl.classList.remove("sel-eta--warn");
         }
+        etaEl.hidden = false;
       }
     }
 
@@ -245,7 +224,7 @@
       }
     });
     document.addEventListener("change", (e) => {
-      if (e.target.name === "delivery" || e.target.name === "payment") render();
+      if (e.target.name === "delivery") render();
       const qtyEl = e.target.closest("[data-qty-input]");
       if (qtyEl) {
         const v = qtyEl.dataset.qtyInput;
@@ -263,7 +242,7 @@
       try {
         const localSubtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
         const payable = Math.max(0, localSubtotal - (lastPreview?.discount || 0));
-        const projet = `Livraison: ${deliveryLabel(delivery(), payable)} · Paiement: ${payment() === "deposit" ? "Acompte 30%" : "Paiement intégral"}`;
+        const projet = `Livraison: ${deliveryLabel(delivery(), payable)}`;
         const res = await fetch("/api/cart/create", {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })), customer: { projet } }),

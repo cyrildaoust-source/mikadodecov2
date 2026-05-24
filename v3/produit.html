@@ -63,7 +63,23 @@
             <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
             ${p.designer ? `<div class="pdp__designer">Dessiné par ${escapeHtml(p.designer)}</div>` : ""}
             <div class="pdp__price" data-price-el>${priceLabel(p)}</div>
-            ${variants.length > 1 ? `<div class="pdp__variants"><span class="label">${escapeHtml(optName)}</span><div>${variants.map((v) => `<button class="variant-chip${v.id === current.id ? " is-active" : ""}" data-vid="${escapeHtml(v.id)}"${v.available === false ? " disabled" : ""}>${escapeHtml((v.options && v.options[0] && v.options[0].value) || v.title || "Variante")}</button>`).join("")}</div></div>` : ""}
+            ${variants.length > 1 ? `
+            <div class="pdp__variants">
+              <span class="label">${escapeHtml(optName)}</span>
+              <div class="vselect" data-vselect>
+                <button class="vselect__toggle" type="button" data-vselect-toggle aria-expanded="false" aria-haspopup="listbox">
+                  <img class="vselect__thumb" data-vselect-current-img src="${escapeHtml(current.image || p.image || '')}" alt="" />
+                  <span class="vselect__value" data-vselect-current-label>${escapeHtml((current.options && current.options[0] && current.options[0].value) || current.title || 'Choisir')}</span>
+                  <svg class="vselect__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+                </button>
+                <ul class="vselect__list" data-vselect-list role="listbox" hidden>
+                  ${variants.map((v) => `<li class="vselect__option${v.id === current.id ? ' is-active' : ''}" data-vid="${escapeHtml(v.id)}" role="option" aria-selected="${v.id === current.id}"${v.available === false ? ' aria-disabled="true"' : ''}>
+                    <img class="vselect__thumb" src="${escapeHtml(v.image || p.image || '')}" alt="" loading="lazy" />
+                    <span>${escapeHtml((v.options && v.options[0] && v.options[0].value) || v.title || 'Variante')}</span>
+                  </li>`).join('')}
+                </ul>
+              </div>
+            </div>` : ""}
             <div class="pdp__qty">
               <span class="label">Quantité</span>
               <div class="qty">
@@ -75,8 +91,10 @@
             <button class="btn btn--blue btn--block pdp__cta" data-add>+ Ajouter à la sélection</button>
             <p class="pdp__cart-status" data-cart-status></p>
             <p class="pdp__avail">${p.inStock
-              ? `<span class="pcard__dot" aria-hidden="true"></span><strong>Disponible</strong> à la boutique · expédition 2-3 jours ouvrés`
-              : `<strong>Disponibilité :</strong> ${escapeHtml(p.leadTimeLabel || "Délai sur demande")}`}</p>
+              ? `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>À voir en boutique</strong> · 75 Rue du Doyenné, Uccle`
+              : p.longDelay
+                ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande`
+                : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}`}</p>
             <p class="pdp__note">Visible aussi en boutique à Uccle. <a href="/rendez-vous.html">Voir en boutique</a>.</p>
             ${p.description ? `<p class="pdp__desc">${escapeHtml(p.description)}</p>` : ""}
             ${metaRows.length ? `<dl class="pdp__meta">${metaRows.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHtml(v)}</dd></div>`).join("")}</dl>` : ""}
@@ -157,17 +175,51 @@
         syncActiveThumb(t.getAttribute("src"));
       }));
 
-      // variant selection: updates price, image, status, and what gets added
-      host.querySelectorAll("[data-vid]").forEach((chip) => chip.addEventListener("click", () => {
-        const v = variants.find((x) => x.id === chip.dataset.vid);
+      // variant selection: updates price, image, status, the dropdown
+      // toggle's thumb/label, and what gets added to the cart.
+      const vselectToggleBtn = host.querySelector("[data-vselect-toggle]");
+      const vselectList      = host.querySelector("[data-vselect-list]");
+      const vselectThumbEl   = host.querySelector("[data-vselect-current-img]");
+      const vselectLabelEl   = host.querySelector("[data-vselect-current-label]");
+      host.querySelectorAll("[data-vid]").forEach((opt) => opt.addEventListener("click", () => {
+        if (opt.getAttribute("aria-disabled") === "true") return;
+        const v = variants.find((x) => x.id === opt.dataset.vid);
         if (!v) return;
         current = v;
-        host.querySelectorAll("[data-vid]").forEach((c) => c.classList.toggle("is-active", c === chip));
+        host.querySelectorAll("[data-vid]").forEach((c) => {
+          c.classList.toggle("is-active", c === opt);
+          c.setAttribute("aria-selected", c === opt ? "true" : "false");
+        });
         if (v.image) { main.src = v.image; syncActiveThumb(v.image); }
         priceEl.textContent = euro(v.price);
+        if (vselectThumbEl) vselectThumbEl.src = v.image || p.image || "";
+        if (vselectLabelEl) vselectLabelEl.textContent = (v.options && v.options[0] && v.options[0].value) || v.title || "Variante";
+        if (vselectToggleBtn && vselectList) { vselectToggleBtn.setAttribute("aria-expanded", "false"); vselectList.hidden = true; }
         updateStatus();
         probePromo(v.id);
       }));
+
+      // Dropdown open/close + close on outside click + Escape
+      if (vselectToggleBtn && vselectList) {
+        vselectToggleBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const open = vselectToggleBtn.getAttribute("aria-expanded") === "true";
+          vselectToggleBtn.setAttribute("aria-expanded", open ? "false" : "true");
+          vselectList.hidden = open;
+        });
+        document.addEventListener("click", (e) => {
+          if (!host.querySelector("[data-vselect]")?.contains(e.target)) {
+            vselectToggleBtn.setAttribute("aria-expanded", "false");
+            vselectList.hidden = true;
+          }
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            vselectToggleBtn.setAttribute("aria-expanded", "false");
+            vselectList.hidden = true;
+          }
+        });
+      }
 
       // add the chosen quantity of the current variant to the selection
       cta.addEventListener("click", () => {
