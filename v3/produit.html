@@ -15,6 +15,7 @@
 
   <main class="page wrap">
     <a class="pdp__back" href="/produits.html">← Le catalogue</a>
+    <div data-promo-slot></div>
     <div data-pdp>
       <div class="pdp"><div class="pcard__skel" style="aspect-ratio:1/1"></div><div></div></div>
     </div>
@@ -28,7 +29,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchPromos, applyPromos, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify } from "/shared.js";
+    import { initShell, fetchProducts, fetchPromos, applyPromos, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, isPromoEteActive, promoBandeauHTML, PROMO_ETE_2026 } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: false });
 
     const id = new URLSearchParams(location.search).get("id");
@@ -39,6 +40,13 @@
       if (!p) { host.innerHTML = `<p class="plp-empty">Cette pièce est introuvable. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue</a>.</p>`; return; }
       document.title = `${p.name} · Mikadodeco`;
 
+      // Promo bandeau on PDPs for products tagged as eligible to the BXGY
+      // discount (89 sieges). Auto-hides outside the active window.
+      const promoSlot = document.querySelector("[data-promo-slot]");
+      if (promoSlot && isPromoEteActive() && Array.isArray(p.tags) && p.tags.includes(PROMO_ETE_2026.tagSiege)) {
+        promoSlot.innerHTML = promoBandeauHTML("pdp");
+      }
+
       const imgs = (p.images && p.images.length ? p.images : [p.image, p.image2]).filter(Boolean);
       const metaRows = [
         ["Designer", p.designer], ["Année", p.year], ["Matière", p.material],
@@ -47,7 +55,33 @@
 
       const variants = Array.isArray(p.variants) ? p.variants : [];
       let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true };
-      const optName = (variants[0] && variants[0].options && variants[0].options[0] && variants[0].options[0].name) || "Variante";
+
+      // Walk every variant to collect the option axes (Couleur, Structure,
+      // Coussin, etc.) and the distinct values per axis. Products like the
+      // Fauteuil cabriolet 1900 have 2 axes (Structure × Coussin) and need
+      // one dropdown each — single-axis products keep one dropdown.
+      const optionNames = [];
+      const optionValues = {};
+      const _seenAxes = new Set();
+      for (const v of variants) for (const o of (v.options || [])) {
+        if (!o?.name) continue;
+        if (!_seenAxes.has(o.name)) { _seenAxes.add(o.name); optionNames.push(o.name); optionValues[o.name] = []; }
+        if (!optionValues[o.name].includes(o.value)) optionValues[o.name].push(o.value);
+      }
+      // Currently selected value per axis (mirrors the `current` variant).
+      const currentSelection = {};
+      for (const o of (current.options || [])) currentSelection[o.name] = o.value;
+
+      // Variant lookup helpers used by the dropdowns.
+      const findVariantBy = (sel) =>
+        variants.find((v) => (v.options || []).every((o) => sel[o.name] === o.value));
+      const imageForOption = (axisName, axisValue) => {
+        const sel = { ...currentSelection, [axisName]: axisValue };
+        const exact = findVariantBy(sel);
+        if (exact?.image) return exact.image;
+        const any = variants.find((v) => (v.options || []).some((o) => o.name === axisName && o.value === axisValue));
+        return any?.image || p.image || "";
+      };
 
       host.innerHTML = `
         <div class="pdp">
@@ -63,23 +97,26 @@
             <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
             ${p.designer ? `<div class="pdp__designer">Dessiné par ${escapeHtml(p.designer)}</div>` : ""}
             <div class="pdp__price" data-price-el>${priceLabel(p)}</div>
-            ${variants.length > 1 ? `
+            ${variants.length > 1 && optionNames.length > 0 ? optionNames.map((axisName) => {
+              const selVal = currentSelection[axisName] || "";
+              return `
             <div class="pdp__variants">
-              <span class="label">${escapeHtml(optName)}</span>
-              <div class="vselect" data-vselect>
+              <span class="label">${escapeHtml(axisName)}</span>
+              <div class="vselect" data-vselect data-option-name="${escapeHtml(axisName)}">
                 <button class="vselect__toggle" type="button" data-vselect-toggle aria-expanded="false" aria-haspopup="listbox">
-                  <img class="vselect__thumb" data-vselect-current-img src="${escapeHtml(current.image || p.image || '')}" alt="" />
-                  <span class="vselect__value" data-vselect-current-label>${escapeHtml((current.options && current.options[0] && current.options[0].value) || current.title || 'Choisir')}</span>
+                  <img class="vselect__thumb" data-vselect-current-img src="${escapeHtml(imageForOption(axisName, selVal))}" alt="" />
+                  <span class="vselect__value" data-vselect-current-label>${escapeHtml(selVal || 'Choisir')}</span>
                   <svg class="vselect__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
                 </button>
                 <ul class="vselect__list" data-vselect-list role="listbox" hidden>
-                  ${variants.map((v) => `<li class="vselect__option${v.id === current.id ? ' is-active' : ''}" data-vid="${escapeHtml(v.id)}" role="option" aria-selected="${v.id === current.id}"${v.available === false ? ' aria-disabled="true"' : ''}>
-                    <img class="vselect__thumb" src="${escapeHtml(v.image || p.image || '')}" alt="" loading="lazy" />
-                    <span>${escapeHtml((v.options && v.options[0] && v.options[0].value) || v.title || 'Variante')}</span>
+                  ${optionValues[axisName].map((val) => `<li class="vselect__option${val === selVal ? ' is-active' : ''}" data-option-value="${escapeHtml(val)}" role="option" aria-selected="${val === selVal}">
+                    <img class="vselect__thumb" src="${escapeHtml(imageForOption(axisName, val))}" alt="" loading="lazy" />
+                    <span>${escapeHtml(val)}</span>
                   </li>`).join('')}
                 </ul>
               </div>
-            </div>` : ""}
+            </div>`;
+            }).join('') : ""}
             <div class="pdp__qty">
               <span class="label">Quantité</span>
               <div class="qty">
@@ -175,51 +212,76 @@
         syncActiveThumb(t.getAttribute("src"));
       }));
 
-      // variant selection: updates price, image, status, the dropdown
-      // toggle's thumb/label, and what gets added to the cart.
-      const vselectToggleBtn = host.querySelector("[data-vselect-toggle]");
-      const vselectList      = host.querySelector("[data-vselect-list]");
-      const vselectThumbEl   = host.querySelector("[data-vselect-current-img]");
-      const vselectLabelEl   = host.querySelector("[data-vselect-current-label]");
-      host.querySelectorAll("[data-vid]").forEach((opt) => opt.addEventListener("click", () => {
-        if (opt.getAttribute("aria-disabled") === "true") return;
-        const v = variants.find((x) => x.id === opt.dataset.vid);
+      // Refresh every dropdown's toggle + active option + main image / price
+      // / status / promo to reflect `currentSelection` and `current`. Called
+      // after any axis change.
+      const closeAllVselects = () => host.querySelectorAll("[data-vselect]").forEach((vs) => {
+        vs.querySelector("[data-vselect-toggle]")?.setAttribute("aria-expanded", "false");
+        const lst = vs.querySelector("[data-vselect-list]");
+        if (lst) lst.hidden = true;
+      });
+
+      const refreshAllVselects = () => {
+        host.querySelectorAll("[data-vselect]").forEach((vs) => {
+          const axis = vs.dataset.optionName;
+          const sel = currentSelection[axis];
+          const tImg = vs.querySelector("[data-vselect-current-img]");
+          const tLab = vs.querySelector("[data-vselect-current-label]");
+          if (tImg) tImg.src = imageForOption(axis, sel);
+          if (tLab) tLab.textContent = sel || "Choisir";
+          vs.querySelectorAll(".vselect__option").forEach((opt) => {
+            const v = opt.dataset.optionValue;
+            opt.classList.toggle("is-active", v === sel);
+            opt.setAttribute("aria-selected", v === sel ? "true" : "false");
+            const thumb = opt.querySelector(".vselect__thumb");
+            if (thumb) thumb.src = imageForOption(axis, v);
+          });
+        });
+        closeAllVselects();
+        if (current.image) { main.src = current.image; syncActiveThumb(current.image); }
+        priceEl.textContent = euro(current.price);
+        updateStatus();
+        probePromo(current.id);
+      };
+
+      // Option click: update currentSelection on that axis, resolve the new
+      // variant (exact match preferred, else adopt the closest combination).
+      host.querySelectorAll(".vselect__option").forEach((opt) => opt.addEventListener("click", () => {
+        const vs = opt.closest("[data-vselect]");
+        const axis = vs?.dataset.optionName;
+        const value = opt.dataset.optionValue;
+        if (!axis || !value) return;
+        currentSelection[axis] = value;
+        let v = findVariantBy(currentSelection);
+        if (!v) {
+          // Combination doesn't exist — fall back to any variant matching
+          // the just-picked option, then sync currentSelection to its axes.
+          v = variants.find((x) => (x.options || []).some((o) => o.name === axis && o.value === value));
+          if (v) for (const o of (v.options || [])) currentSelection[o.name] = o.value;
+        }
         if (!v) return;
         current = v;
-        host.querySelectorAll("[data-vid]").forEach((c) => {
-          c.classList.toggle("is-active", c === opt);
-          c.setAttribute("aria-selected", c === opt ? "true" : "false");
-        });
-        if (v.image) { main.src = v.image; syncActiveThumb(v.image); }
-        priceEl.textContent = euro(v.price);
-        if (vselectThumbEl) vselectThumbEl.src = v.image || p.image || "";
-        if (vselectLabelEl) vselectLabelEl.textContent = (v.options && v.options[0] && v.options[0].value) || v.title || "Variante";
-        if (vselectToggleBtn && vselectList) { vselectToggleBtn.setAttribute("aria-expanded", "false"); vselectList.hidden = true; }
-        updateStatus();
-        probePromo(v.id);
+        refreshAllVselects();
       }));
 
-      // Dropdown open/close + close on outside click + Escape
-      if (vselectToggleBtn && vselectList) {
-        vselectToggleBtn.addEventListener("click", (e) => {
+      // Per-toggle open/close — only one dropdown open at a time.
+      host.querySelectorAll("[data-vselect-toggle]").forEach((toggle) => {
+        toggle.addEventListener("click", (e) => {
           e.stopPropagation();
-          const open = vselectToggleBtn.getAttribute("aria-expanded") === "true";
-          vselectToggleBtn.setAttribute("aria-expanded", open ? "false" : "true");
-          vselectList.hidden = open;
-        });
-        document.addEventListener("click", (e) => {
-          if (!host.querySelector("[data-vselect]")?.contains(e.target)) {
-            vselectToggleBtn.setAttribute("aria-expanded", "false");
-            vselectList.hidden = true;
+          const vs = toggle.closest("[data-vselect]");
+          const list = vs.querySelector("[data-vselect-list]");
+          const open = toggle.getAttribute("aria-expanded") === "true";
+          closeAllVselects();
+          if (!open) {
+            toggle.setAttribute("aria-expanded", "true");
+            list.hidden = false;
           }
         });
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") {
-            vselectToggleBtn.setAttribute("aria-expanded", "false");
-            vselectList.hidden = true;
-          }
-        });
-      }
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest("[data-vselect]")) closeAllVselects();
+      });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeAllVselects(); });
 
       // add the chosen quantity of the current variant to the selection
       cta.addEventListener("click", () => {

@@ -31,7 +31,6 @@
       <button class="chip" data-cat="luminaires">Luminaires</button>
       <button class="chip" data-cat="rangements">Rangements</button>
       <button class="chip" data-cat="objets">Objets</button>
-      <button class="chip" data-cat="exterieur">Extérieur</button>
     </div>
     <div class="filterbar__right">
       <span class="plp-count" data-plp-count></span>
@@ -44,6 +43,8 @@
       </select>
     </div>
   </div>
+
+  <div class="wrap" data-promo-slot></div>
 
   <section class="section wrap" data-pop-section style="padding-bottom:0">
     <h2 class="serif catalogue-head">Les plus populaires</h2>
@@ -66,7 +67,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchBrands, fetchPromos, applyPromos, productCard, slugify } from "/shared.js";
+    import { initShell, fetchProducts, fetchBrands, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, isPromoEteActive, promoBandeauHTML, PROMO_ETE_2026 } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: true });
 
     const CAT_LABEL = { tous:"Le catalogue", assises:"Assises", tables:"Tables", luminaires:"Luminaires", rangements:"Rangements", objets:"Objets", exterieur:"Extérieur" };
@@ -84,13 +85,16 @@
 
     const params = new URLSearchParams(location.search);
     let ALL = [];
-    const state = { cat: params.get("cat") || "tous", brand: params.get("brand") || "", sort: "pop", shown: 12 };
+    let COLLECTIONS_BY_HANDLE = {};
+    const state = { coll: params.get("coll") || "", cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", shown: 12 };
 
     const popScore = (p) => (p.featured ? 2 : 0) + (p.badge === "bestseller" ? 1 : 0);
     function base() {
       let list = ALL.slice();
+      if (state.coll) list = list.filter((p) => Array.isArray(p.collections) && p.collections.includes(state.coll));
       if (state.cat !== "tous") list = list.filter((p) => p.category === state.cat);
       if (state.brand) list = list.filter((p) => slugify(p.brand) === state.brand);
+      if (state.tag) list = list.filter((p) => Array.isArray(p.tags) && p.tags.includes(state.tag));
       return list;
     }
     function applySort(list) {
@@ -103,13 +107,30 @@
     }
     function syncURL() {
       const q = new URLSearchParams();
+      if (state.coll) q.set("coll", state.coll);
       if (state.cat !== "tous") q.set("cat", state.cat);
       if (state.brand) q.set("brand", state.brand);
+      if (state.tag) q.set("tag", state.tag);
       history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q : ""));
     }
     function render() {
       const all = base();
       countEl.textContent = `${all.length} pièce${all.length > 1 ? "s" : ""}`;
+
+      // Promo bandeau on outdoor entry pages — but NOT on the promo
+      // collection itself (the page header already says everything when
+      // the visitor lands there directly). Auto-removes after the window.
+      const promoSlot = document.querySelector("[data-promo-slot]");
+      if (promoSlot) {
+        const onPromoPage = state.coll === PROMO_ETE_2026.collPromo
+                         || state.tag === PROMO_ETE_2026.tagSiege;
+        const showBandeau = isPromoEteActive() && !onPromoPage && (
+          state.coll === PROMO_ETE_2026.collOutdoor ||
+          state.cat === "exterieur" ||
+          state.tag === PROMO_ETE_2026.tagOutdoor
+        );
+        promoSlot.innerHTML = showBandeau ? promoBandeauHTML("plp") : "";
+      }
 
       // Always-on "most popular" strip (top 4), independent of the chosen sort.
       const showPop = all.length > 4;
@@ -125,16 +146,39 @@
       gridTitle.textContent = showPop ? "Tout le catalogue" : "Le catalogue";
 
       chipsBar.querySelectorAll(".chip").forEach((c) => c.classList.toggle("is-active", c.dataset.cat === state.cat));
+
+      // Header + filterbar adapt to the active filter:
+      //   ?coll  → collection title/description from Shopify (chips hidden)
+      //   ?brand → brand name + standard subtitle
+      //   ?tag   → readable label derived from the tag
+      //   else   → default "Le catalogue"
+      const coll = state.coll ? COLLECTIONS_BY_HANDLE[state.coll] : null;
       const brandName = state.brand ? (ALL.find((p) => slugify(p.brand) === state.brand)?.brand || "") : "";
-      titleEl.textContent = brandName || CAT_LABEL[state.cat] || "Le catalogue";
-      subEl.textContent = brandName ? "Toutes les pièces de la maison." : "Mobilier de design, choisi pièce par pièce.";
+      if (coll) {
+        titleEl.textContent = coll.name;
+        subEl.textContent = coll.description || "";
+      } else if (brandName) {
+        titleEl.textContent = brandName;
+        subEl.textContent = "Toutes les pièces de la maison.";
+      } else if (state.tag === PROMO_ETE_2026.tagSiege) {
+        titleEl.textContent = "Promo · 4ème chaise offerte";
+        subEl.textContent = "Les sièges d'extérieur éligibles à l'offre du 26 mai au 6 juin.";
+      } else {
+        titleEl.textContent = CAT_LABEL[state.cat] || "Le catalogue";
+        subEl.textContent = "Mobilier de design, choisi pièce par pièce.";
+      }
+      // Hide categorical chips when we're inside a curated view (collection
+      // or tag) — they don't make sense and dilute the page identity.
+      chipsBar.style.display = (state.coll || state.tag) ? "none" : "";
+
       applyPromos(PROMOS);
     }
 
     let PROMOS = {};
 
-    Promise.all([fetchProducts(), fetchBrands()]).then(([prods, brands]) => {
+    Promise.all([fetchProducts(), fetchBrands(), fetchCollections()]).then(([prods, brands, colls]) => {
       ALL = prods.filter((p) => p.image);
+      (colls || []).forEach((c) => { if (c.handle) COLLECTIONS_BY_HANDLE[c.handle] = c; });
       brands.sort((a, b) => String(a.name).localeCompare(String(b.name))).forEach((b) => {
         const o = document.createElement("option");
         o.value = slugify(b.name); o.textContent = `${b.name} (${b.productCount})`;

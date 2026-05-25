@@ -106,6 +106,45 @@ export async function fetchBrands() {
   if (!r.ok) throw new Error("brands " + r.status);
   return r.json();
 }
+export async function fetchCollections() {
+  const r = await fetch("/api/collections");
+  if (!r.ok) throw new Error("collections " + r.status);
+  return r.json();
+}
+/* ---------- promo été 2026 (4ème chaise offerte) ---------- */
+// Centralized so every consumer (PLP bandeau, PDP bandeau, cart message)
+// uses the same dates and tag names. Update here when the next promo lands.
+export const PROMO_ETE_2026 = {
+  start: new Date("2026-05-26T00:00:00+02:00"),
+  end:   new Date("2026-06-06T23:59:59+02:00"),
+  tagOutdoor: "promo-ete-2026",          // 590 outdoor products (vitrine)
+  tagSiege:   "promo-siege-ete-2026",    // 89 sieges éligibles à la BXGY
+  collOutdoor:"mobilier-exterieur",
+  collPromo:  "promo-4eme-chaise-offerte",
+};
+export const isPromoEteActive = () => {
+  const now = new Date();
+  return now >= PROMO_ETE_2026.start && now <= PROMO_ETE_2026.end;
+};
+// Hero bandeau used on the outdoor PLP and on eligible PDPs. Variants:
+//   "plp"  → full bandeau with CTA (top of /produits.html?coll=mobilier-exterieur)
+//   "pdp"  → compact bandeau (just under the PDP gallery)
+export function promoBandeauHTML(variant = "plp") {
+  const cta = `<a class="promo-bandeau__cta" href="/produits.html?coll=${PROMO_ETE_2026.collPromo}">Voir la sélection chaises en promo →</a>`;
+  const intro = variant === "pdp"
+    ? `<p class="promo-bandeau__body">Du <strong>26 mai au 6 juin</strong>, achetez 3 chaises d'extérieur, la 4<sup>ème</sup> est offerte. Automatiquement, sans code.</p>`
+    : `<p class="promo-bandeau__body">Du <strong>26 mai au 6 juin</strong>, achetez 3 chaises d'extérieur, la 4<sup>ème</sup> est offerte. Automatiquement, sans code.<br><span class="promo-bandeau__brands">Fermob · HAY · Vitra · &amp;Tradition · Fatboy</span></p>`;
+  return `
+    <aside class="promo-bandeau promo-bandeau--${escapeHtml(variant)}">
+      <div class="promo-bandeau__inner">
+        <span class="promo-bandeau__eyebrow">Offre été 2026</span>
+        <h2 class="promo-bandeau__title">L'été commence à votre table.</h2>
+        ${intro}
+        ${variant === "plp" ? cta : ""}
+      </div>
+    </aside>`;
+}
+
 export async function fetchPromos() {
   const r = await fetch("/api/promos");
   if (!r.ok) throw new Error("promos " + r.status);
@@ -239,6 +278,7 @@ function bindAddToCart() {
 const NAV = [
   { label: "Mobilier", href: "/produits.html" },
   { label: "Marques", href: "/marques.html" },
+  { label: "Extérieur", href: "/produits.html?coll=mobilier-exterieur" },
   { label: "Mikado Studio", href: "/studio.html" },
   { label: "Le journal", href: "/journal.html" },
 ];
@@ -309,7 +349,7 @@ function footerHTML() {
           <li><a href="/produits.html">Mobilier</a></li>
           <li><a href="/produits.html?cat=luminaires">Luminaires</a></li>
           <li><a href="/produits.html?cat=objets">Objets</a></li>
-          <li><a href="/produits.html?cat=exterieur">Extérieur</a></li>
+          <li><a href="/produits.html?coll=mobilier-exterieur">Extérieur</a></li>
         </ul></div>
         <div><h5>Maison</h5><ul>
           <li><a href="/marques.html">Les marques</a></li>

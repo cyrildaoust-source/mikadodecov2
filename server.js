@@ -68,6 +68,9 @@ const PRODUCTS_QUERY = `
           tags
           availableForSale
           totalInventory
+          collections(first: 20) {
+            edges { node { handle } }
+          }
           featuredImage { url altText }
           images(first: 8) {
             edges { node { url altText } }
@@ -165,6 +168,13 @@ function mapProduct(node) {
     inStock:     (typeof node.totalInventory === 'number') && node.totalInventory > 0,
     longDelay:   node.tags.some(t => /^delai[-_ ]?long$/i.test(t)),
     leadTimeLabel: node.tags.some(t => /^delai[-_ ]?long$/i.test(t)) ? DELIVERY_LONG : DELIVERY_DEFAULT,
+    // Raw Shopify tags exposed so the front can react to seasonal flags
+    // (e.g. `promo-ete-2026`, `promo-siege-ete-2026`) without an extra API.
+    tags:        node.tags || [],
+    // Shopify collection handles this product belongs to. Lets the front
+    // render true collection pages (Mobilier d'extérieur, Promo 4ème
+    // chaise offerte…) instead of tag-filtered catalog views.
+    collections: (node.collections?.edges || []).map(e => e?.node?.handle).filter(Boolean),
     // (kept for backward compat with the PDP metafield — separate from brand lead-time)
     leadTime:    meta.lead_time   || '',
     description: node.description || '',
@@ -246,6 +256,7 @@ const COLLECTIONS_QUERY = `
       edges {
         node {
           id
+          handle
           title
           description
           image { url altText }
@@ -273,6 +284,7 @@ function mapCollection(node, index) {
   const slug = node.id.split('/').pop().toLowerCase();
   return {
     id:          node.id,
+    handle:      node.handle || '',
     slug,
     key:         node.title,
     name:        node.title,
@@ -295,7 +307,7 @@ async function getCollections() {
     return data.collections.edges
       .map(({ node }, i) => mapCollection(node, i))
       // Exclude Shopify's built-in "All" / "Home page" collections
-      .filter(c => !['all', 'frontpage'].includes(c.slug));
+      .filter(c => !['all', 'frontpage'].includes(c.handle));
   });
 }
 
