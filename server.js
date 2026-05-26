@@ -48,6 +48,10 @@ const PORT = process.env.PORT || 4000;
 // The Mikadodeco storefront (v3/) is served at the site root.
 // Old /v3/* links 301-redirect to the clean root path for backward-compat.
 app.use('/v3', (req, res) => res.redirect(301, req.url && req.url !== '/' ? req.url : '/'));
+// Pretty collection URLs: /collections/<handle> serves the catalog page
+// (the client-side script picks up the handle from the pathname). Matches
+// Shopify's URL convention so links from newsletters and the press work.
+app.get('/collections/:handle', (req, res) => res.sendFile(path.join(__dirname, 'v3', 'produits.html')));
 app.use(express.static(path.join(__dirname, 'v3')));
 app.use(cors({ origin: process.env.BASE_URL || `http://localhost:${PORT}` }));
 app.use(express.json());

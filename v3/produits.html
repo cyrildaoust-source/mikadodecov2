@@ -84,9 +84,14 @@
     const gridTitle = document.querySelector("[data-grid-title]");
 
     const params = new URLSearchParams(location.search);
+    // Pretty Shopify-style URL: /collections/<handle> sets the coll filter
+    // from the path. Falls back to ?coll= for backward-compat with anywhere
+    // we still build URLs that way.
+    const prettyCollMatch = location.pathname.match(/^\/collections\/(.+?)\/?$/);
+    const collFromPath = prettyCollMatch ? decodeURIComponent(prettyCollMatch[1]) : "";
     let ALL = [];
     let COLLECTIONS_BY_HANDLE = {};
-    const state = { coll: params.get("coll") || "", cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", shown: 12 };
+    const state = { coll: collFromPath || params.get("coll") || "", cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", shown: 12 };
 
     const popScore = (p) => (p.featured ? 2 : 0) + (p.badge === "bestseller" ? 1 : 0);
     function base() {
@@ -107,7 +112,10 @@
     }
     function syncURL() {
       const q = new URLSearchParams();
-      if (state.coll) q.set("coll", state.coll);
+      // When the URL is already /collections/<handle>, don't echo coll in
+      // the query string (it's in the path already).
+      const collInPath = /^\/collections\//.test(location.pathname);
+      if (state.coll && !collInPath) q.set("coll", state.coll);
       if (state.cat !== "tous") q.set("cat", state.cat);
       if (state.brand) q.set("brand", state.brand);
       if (state.tag) q.set("tag", state.tag);

@@ -391,12 +391,6 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sel-eta--warn { color: #b9742c; font-style: italic; }
 .sel-eta--warn strong { font-style: normal; }
 
-/* "4ème chaise offerte" nudge under the cart total. Terracotta to echo the
-   PLP/PDP bandeau; the "OK" variant uses a calmer ink colour. */
-.sel-promo-nudge { font-size: var(--fs-small); color: #C97D4F; line-height: 1.5; margin-top: 14px; padding: 12px 14px; background: #F5EFE0; border-left: 3px solid #C97D4F; }
-.sel-promo-nudge a { color: #C97D4F; border-bottom: 1px solid currentColor; }
-.sel-promo-nudge--ok { color: var(--ink-deep); border-left-color: #5a8c4a; }
-
 /* PROMO BANDEAU · summer-2026 hero used on outdoor PLP + eligible PDPs.
    Warm beige bg, terracotta accents — sits gently in the cream palette. */
 .promo-bandeau { background: #F5EFE0; border: 1px solid #ead9b8; margin: clamp(20px, 3vw, 36px) 0; }
@@ -509,7 +503,15 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .article__hero { width: 100%; aspect-ratio: 3/2; object-fit: cover; background: var(--tile); margin-bottom: 36px; }
 .prose p { font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 20px; }
 .prose h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.1; margin: 36px 0 14px; }
+.prose h3 { font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.2; margin: 28px 0 10px; color: var(--ink-deep); }
+.prose ul, .prose ol { font-size: 17px; line-height: 1.6; color: var(--ink); margin: 0 0 20px 0; padding-left: 22px; }
+.prose li { margin-bottom: 8px; }
+.prose strong { font-weight: 600; color: var(--ink-deep); }
+.prose em { font-style: italic; }
+.prose a { color: var(--accent-ink); border-bottom: 1px solid currentColor; transition: color .2s var(--ease); }
+.prose a:hover { color: var(--ink-deep); }
 .prose blockquote { font-family: var(--serif); font-weight: 500; font-size: 26px; line-height: 1.25; color: var(--ink-deep); border-left: 3px solid var(--accent); padding-left: 22px; margin: 28px 0; }
+.prose blockquote a { font-family: var(--sans); font-size: 16px; font-weight: 600; color: var(--accent-ink); display: inline-block; margin-top: 6px; }
 
 /* ---------- rendez-vous hero (form top-right) ---------- */
 .rdv-hero { position: relative; min-height: 740px; overflow: hidden; background: var(--tile); }

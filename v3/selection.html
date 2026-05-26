@@ -26,7 +26,6 @@
           <div class="sel-row"><span>Livraison</span><span data-delivery-fee>Offerte</span></div>
           <div class="sel-row sel-row--total"><span data-total-label>Total</span><span data-total>…</span></div>
           <p class="sel-eta" data-cart-eta hidden></p>
-          <p class="sel-promo-nudge" data-promo-nudge hidden></p>
 
           <div class="sel-opt">
             <h3>Livraison</h3>
@@ -50,7 +49,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml, isPromoEteActive, PROMO_ETE_2026 } from "/shared.js";
+    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
     const SHIPPING_FREE_FROM = 1000;       // free shipping threshold (€, post-discount)
@@ -76,14 +75,13 @@
     let lastPreview = null;
     const discountsEl = document.querySelector("[data-discounts]");
 
-    // Map of variantId → { longDelay, isPromoSiege }. Populated once /api/products
-    // resolves. Used by the cart-wide ETA + the "4ème chaise offerte" nudge.
+    // Map of variantId → { longDelay }. Populated once /api/products
+    // resolves. Used by the cart-wide ETA.
     let variantInfo = new Map();
     fetchProducts().then((all) => {
       for (const p of all) {
-        const isPromoSiege = Array.isArray(p.tags) && p.tags.includes(PROMO_ETE_2026.tagSiege);
         for (const v of (p.variants || [])) {
-          variantInfo.set(v.id, { longDelay: !!p.longDelay, isPromoSiege });
+          variantInfo.set(v.id, { longDelay: !!p.longDelay });
         }
       }
       render();
@@ -172,30 +170,11 @@
         etaEl.hidden = false;
       }
 
-      // "4ème chaise offerte" nudge — counts eligible sieges (sum of qty) in
-      // the cart. <4 → tells the visitor how many to add; ≥4 → confirms the
-      // discount is applied. Auto-hides outside the promo window.
-      const nudgeEl = document.querySelector("[data-promo-nudge]");
-      if (nudgeEl) {
-        if (isPromoEteActive()) {
-          const eligibleQty = cart.reduce((s, i) =>
-            s + (variantInfo.get(i.variantId)?.isPromoSiege ? (i.qty || 1) : 0), 0);
-          if (eligibleQty >= 4) {
-            nudgeEl.innerHTML = `<strong>La 4<sup>ème</sup> chaise est offerte</strong> — réduction appliquée.`;
-            nudgeEl.classList.add("sel-promo-nudge--ok");
-            nudgeEl.hidden = false;
-          } else if (eligibleQty >= 1) {
-            const left = 4 - eligibleQty;
-            nudgeEl.innerHTML = `Plus que <strong>${left} siège${left > 1 ? "s" : ""} outdoor</strong> à ajouter — la 4<sup>ème</sup> est offerte automatiquement. <a href="/produits.html?coll=${PROMO_ETE_2026.collPromo}">Voir la sélection →</a>`;
-            nudgeEl.classList.remove("sel-promo-nudge--ok");
-            nudgeEl.hidden = false;
-          } else {
-            nudgeEl.hidden = true;
-          }
-        } else {
-          nudgeEl.hidden = true;
-        }
-      }
+      // NOTE: per the promo brief (docs/promo-ete-2026/brief_frontend.md
+      // §4) we don't nudge the cart toward a 4th chair. A 3-chair order is
+      // higher margin and we don't want to actively push for the free 4th.
+      // Shopify renders its own "réduction appliquée" line at checkout when
+      // the BXGY threshold is crossed — that's enough.
     }
 
     // Debounced preview fetch: asks Shopify for the *real* totals + automatic
