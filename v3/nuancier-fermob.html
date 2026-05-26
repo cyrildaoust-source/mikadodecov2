@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuancier Fermob · Mikadodeco</title>
+  <meta name="description" content="Le nuancier complet Fermob 2026 — 25 nuances signature, leurs ambiances, leurs harmonies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://www.fermob.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/nuancier-fermob.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="page wrap">
+    <div id="nf-root"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell } from "/shared.js";
+    import { mountNuancier } from "/nuancier-fermob.js";
+
+    initShell({ active: "Le journal", transparentNav: false });
+
+    (async () => {
+      try {
+        const r = await fetch("/nuancier-fermob.data.json", { cache: "force-cache" });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        const colors = await r.json();
+        // Standalone page: skip scroll-on-load (host is already near top).
+        mountNuancier(document.getElementById("nf-root"), colors, { scrollOnLoad: false });
+      } catch (err) {
+        console.warn("[nuancier] load failed:", err.message);
+        document.getElementById("nf-root").innerHTML =
+          `<p class="nf-error">Le nuancier ne s'est pas chargé. <a href="/journal.html">Retour au journal →</a></p>`;
+      }
+    })();
+  </script>
+</body>
+</html>

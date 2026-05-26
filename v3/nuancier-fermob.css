@@ -1,0 +1,238 @@
+/* ============================================================
+   Mikadodeco · Nuancier Fermob widget
+   Self-contained palette + detail panel + ambiances. All classes
+   are .nf-* to stay safe under any host (page autonome ou article).
+   Reuses Mikado design tokens — no new colors/fonts introduced.
+   ============================================================ */
+
+.nf-root { display: block; }
+
+/* ============================================================
+   Sticky nav · active label (Cormorant italic + index) + swatches
+   ============================================================ */
+.nf-nav {
+  position: sticky;
+  top: calc(var(--nav-h) + 4px);
+  z-index: 40;
+  background: var(--paper);
+  padding: 18px 0 14px;
+  margin-bottom: clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Active-color label · sits above the swatches, fades on change */
+.nf-active {
+  text-align: center;
+  margin-bottom: 14px;
+  opacity: 1;
+  transition: opacity 150ms var(--ease);
+}
+.nf-active.is-fading { opacity: 0; }
+.nf-active__name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink-deep);
+  margin-bottom: 4px;
+}
+.nf-active__index {
+  font-family: var(--sans-product);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+/* ============================================================
+   Swatch bar · circles · active marked by a thin 2px tick below
+   ============================================================ */
+.nf-swatches { padding: 0; }
+.nf-swatches__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 10px;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.nf-swatch {
+  all: unset;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.nf-swatch__dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--swatch-color, var(--ink));
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s var(--ease);
+}
+.nf-swatch:hover .nf-swatch__dot { transform: scale(1.12); }
+.nf-swatch:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; border-radius: 4px; }
+
+/* Active state · thin 2px tick under the swatch */
+.nf-swatch[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 20px;
+  height: 2px;
+  background: var(--ink);
+  transform: translateX(-50%);
+}
+
+/* ============================================================
+   Magazine stage · moodboard + narrative
+   ============================================================ */
+.nf-stage {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(24px, 3vw, 48px);
+  align-items: start;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.nf-stage__media { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.nf-stage__hero { width: 100%; aspect-ratio: 4/5; object-fit: cover; background: var(--tile); }
+.nf-stage__moodgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.nf-stage__moodgrid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--tile); }
+
+.nf-stage__body { padding-top: 4px; }
+.nf-stage__title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(18px, 1.6vw, 22px);
+  color: var(--accent-ink);
+  margin-bottom: 18px;
+}
+.nf-stage__desc {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 48ch;
+  margin-bottom: 26px;
+}
+
+/* Harmonies · visual only (no navigation) */
+.nf-stage__harmonies { padding-top: 22px; border-top: 1px solid var(--line); }
+.nf-stage__harmonies-label {
+  font-family: var(--sans-product);
+  font-size: var(--fs-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-ink);
+  margin-bottom: 14px;
+}
+.nf-stage__harmonies-list { display: flex; flex-direction: column; gap: 8px; }
+.nf-harmony { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.nf-harmony__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-family: var(--sans-product);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-deep);
+}
+.nf-harmony__chip::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--chip-color, var(--ink));
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+.nf-harmony__plus { color: var(--subtle); font-size: 13px; }
+
+/* ============================================================
+   Ambiances grid
+   ============================================================ */
+.nf-ambiances { margin-top: 8px; }
+.nf-ambiances__title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(22px, 2.2vw, 30px);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--accent);
+}
+.nf-ambiances__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.nf-ambiances__grid img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  background: var(--tile);
+  transition: opacity 0.25s var(--ease);
+}
+.nf-ambiances__grid img:hover { opacity: 0.92; }
+
+/* ============================================================
+   Error fallback
+   ============================================================ */
+.nf-error {
+  padding: 32px 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 920px) {
+  .nf-stage { grid-template-columns: 1fr; gap: 24px; }
+  .nf-stage__hero { aspect-ratio: 3/4; }
+  .nf-ambiances__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}
+
+@media (max-width: 760px) {
+  .nf-nav {
+    top: calc(var(--nav-h) - 8px);
+    padding: 12px 0 10px;
+    margin-left: calc(var(--gutter) * -1);
+    margin-right: calc(var(--gutter) * -1);
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+  .nf-active { margin-bottom: 10px; }
+  .nf-swatches__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .nf-swatches__list::-webkit-scrollbar { display: none; }
+  .nf-swatch { width: 34px; height: 34px; flex-shrink: 0; }
+  .nf-swatch__dot { width: 26px; height: 26px; }
+}
+
+@media (max-width: 480px) {
+  .nf-ambiances__grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-active,
+  .nf-swatch__dot,
+  .nf-ambiances__grid img { transition: none; }
+}

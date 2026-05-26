@@ -1,0 +1,1723 @@
+[
+  {
+    "order": 1,
+    "name": "Blanc coton",
+    "hex": "#ffffff",
+    "admin_value": "135",
+    "title": "La pureté incarnée",
+    "description": "Doté d'une finition poudrée, Blanc coton apporte de la luminosité et de la pureté aux harmonies colorées. Et pour une touche élégante à vos espaces, elle se joue aussi en total look monochrome. Le rêve non ?",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Blanc-coton-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Blanc-coton-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Blanc-coton-2.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_BLANC_COTON_SAINT-TROPEZ_VISUEL2019_TOM_WATSON_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Sixties/3-ambiance/SIXTIES_BLANC_COTON_SAINT-TROPEZ_EXCLUWEB2019_TOM_WATSON-3.1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Sixties/3-ambiance/SIXTIES_FLOWER_BLANC_COTON_SAINT-TROPEZ_VISUEL2019_TOM_WATSON.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Lorette/3-ambiance/Grand Hotel Dieu_LYON_Crédit Stéphane Rambaud (3).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Basics/3-ambiance/Table-Ø96-et-chaises-BISTRO,-lampe-H.25-BALAD-et-Galette-Bistro-LES-BASICS.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Latitude/3-ambiance/CARGO_CARBONE_MAILLANE_BOOKGSS2020_SEBASTIEN_EROME.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Réglisse",
+          "hex": "#071512",
+          "title": "Un délice pour les yeux"
+        },
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        },
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        },
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        }
+      ]
+    }
+  },
+  {
+    "order": 4,
+    "name": "Gris argile",
+    "hex": "#d1ccbe",
+    "admin_value": "34138",
+    "title": "Résolument naturel",
+    "description": "Se rapprochant au plus près de l’argile blanche naturelle, ce gris chaud, incontournable et intemporel, fait le lien entre tous les camaïeux du nuancier Fermob. Presque poudreux, subtil, sa singularité permet de créer des univers empreints de douceur. Comme quoi, la beauté surgit parfois des choses les plus terre à terre.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Gris-argile-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Gris-argile-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Gris-argile-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/Hotel Intercontinental_BORDEAUX_Crédit Stéphane Rambaud (10).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/Place Bellecour_LYON_Crédit Stéphane Rambaud (2).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/Shooting-Contract-Fermob_CAP-FERRET_Crédit-Romain-Ricard-(2.1).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/Shooting-Contract-Fermob_CAP-FERRET_Crédit-Romain-Ricard-(6.1).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/Shooting-Contract-Fermob_CAP-FERRET_Crédit-Romain-Ricard-(7.1).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Opera Plus/3-ambiance/Grand Hotel Dieu_LYON_Crédit Stéphane Rambaud (11).jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        },
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        },
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        },
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Blanc coton",
+          "hex": "#ffffff",
+          "title": "La pureté incarnée"
+        },
+        {
+          "name": "Muscade",
+          "hex": "#b4a28f",
+          "title": "Il fait des merveilles"
+        }
+      ]
+    }
+  },
+  {
+    "order": 6,
+    "name": "Gris orage",
+    "hex": "#455e5d",
+    "admin_value": "149",
+    "title": "Un éclair de génie",
+    "description": "Gris orage, c'est un tempétueux mélange de gris et de subtiles touches de bleus, révélant toute sa splendeur et sa délicatesse sous la lumière grâce à sa finition texturée et légèrement pailletée. Il peut être utilisé en monochrome pour un rendu chic, associé à des tons neutres pour une ambiance plus chaleureuse, et se marie parfaitement aux autres bleus de par ses légères nuances bleutées.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Gris-orage-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Gris-orage-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Gris-orage-2.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Alto/3-ambiance/ALTO_GRIS_ORAGE_NOEL2019_SEBASTIEN_EROME_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/L'ermitage_LYON_Crédit Stéphane Rambaud (5).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bistro/3-ambiance/chaise-longue-BISTRO.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/Fermob@Yeah-0094.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_GRIS_ORAGE_VIGNES_JEROME_GALLAND.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Croisette/3-ambiance/CROISETTE_GRIS_ORAGE_CHATEAU-CLEMENT_VISUEL2018_STEPHANE_RAMBAUD_2.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Réglisse",
+          "hex": "#071512",
+          "title": "Un délice pour les yeux"
+        },
+        {
+          "name": "Carbone",
+          "hex": "#2d2e33",
+          "title": "Le plein d'énergie"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ]
+    }
+  },
+  {
+    "order": 7,
+    "name": "Carbone",
+    "hex": "#2d2e33",
+    "admin_value": "144",
+    "title": "Le plein d'énergie",
+    "description": "Profond et intense à la fois, ce gris très foncé est un clin d'œil à la couleur du charbon. Pour autant, sa finition texturée et légèrement pailletée, confère au Carbone un effet de matière minérale qui, au contact du soleil, dévoile toute sa lumière. Sa particularité ? Il s'associe parfaitement avec l'ensemble du nuancier !",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Carbone-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Carbone-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Carbone-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Harry/3-ambiance/HARRY_COCOTTE_CARBONE_NORD_ALBUM2019_STEPHANE_RAMBAUD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Latitude/3-ambiance/CARGO_CARBONE_MAILLANE_BOOKGSS2020_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Guinguette/3-ambiance/LORETTE_COLOR_MIX_REGLISSE_LOIRE_DECO2019_SEBASTIEN_EROME-1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/Hotel Intercontinental_BORDEAUX_Crédit Stéphane Rambaud (10).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Louvre/3-ambiance/Les planches_ALBIGNY_SUR_SAONE_Crédit Stéphane Rambaud (4).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Cadiz/3-ambiance/CADIZ_CARBONE_OCEAN_LOVERS_VISUEL2020_SEBASTIEN_EROME_3.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        },
+        {
+          "name": "Muscade",
+          "hex": "#b4a28f",
+          "title": "Il fait des merveilles"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Blanc coton",
+          "hex": "#ffffff",
+          "title": "La pureté incarnée"
+        },
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ]
+    }
+  },
+  {
+    "order": 8,
+    "name": "Réglisse",
+    "hex": "#071512",
+    "admin_value": "156",
+    "title": "Un délice pour les yeux",
+    "description": "Le réglisse ce bonbon qui nous rappelle notre enfance et aussi un incontournable dans la décoration. Son aspect mat et texturé fait de Réglisse, un intemporel du nuancier. Il se joue aussi bien en monochrome qu'en collaboration avec les teintes neutres pour un effet élégant et à la fois naturel. À consommer sans modération.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Réglisse-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Réglisse-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Réglisse-1.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/L'ermitage_LYON_Crédit Stéphane Rambaud (5).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/Banc-et-table-BELLEVIE.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Cadiz/3-ambiance/CADIZ-WEB.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_REGLISSE_NOEL2018_VISUEL2018_STEPHANE_RAMBAUD-1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Mooon/3-ambiance/MOOON_OPERA+_BLEU_ACAPULCO_PUGET_BOOKGSS2021_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Cadiz/3-ambiance/CADIZ_REGLISSE_COCOTTE_PESTO_VISUELS26_MONTRIANT_NICOLAS_MATHEUS_1_BD.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Muscade",
+          "hex": "#b4a28f",
+          "title": "Il fait des merveilles"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        },
+        {
+          "name": "Blanc coton",
+          "hex": "#ffffff",
+          "title": "La pureté incarnée"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Carbone",
+          "hex": "#2d2e33",
+          "title": "Le plein d'énergie"
+        },
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ]
+    }
+  },
+  {
+    "order": 9,
+    "name": "Romarin",
+    "hex": "#686e64",
+    "admin_value": "157",
+    "title": "Sortez des sentiers battus",
+    "description": "Sous sa douceur apparente, Romarin est une couleur affirmée, moderne et pointue. Idéals pour le jardin et les intérieurs par sa tonalité neutre, ses effets argentés lui apportent tonicité et luminosité. Chaleureux, il rehausse, par contraste, les couleurs vives du nuancier. Généreux, il compose avec les autres verts des camaïeux harmonieux. Un trésor à l'état pur !",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Romarin-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Romarin-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Romarin-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Coolside/3-ambiance/COOLSIDE_ROMARIN_DOMAINESAINTECOLOMBE_BOOKGSS2019_STEPHANE_RAMBAUD_4.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Lorette/3-ambiance/Grand Hotel Dieu_LYON_Crédit Stéphane Rambaud (3).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Cargo/3-ambiance/CARGO_LATITUDE_CACTUS_BOOKGSS2019.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/BISTRO_LUXEMBOURG_ROMARIN_NOEL2018_STEPHANE_RAMBAUD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Oleron/3-ambiance/OLERON_CACTUS_MAILLANE_BOOKGSS2020_SEBASTIEN_EROME_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Cuub/3-ambiance/CUUB.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        },
+        {
+          "name": "Carbone",
+          "hex": "#2d2e33",
+          "title": "Le plein d'énergie"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        },
+        {
+          "name": "Réglisse",
+          "hex": "#071512",
+          "title": "Un délice pour les yeux"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        },
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Blanc coton",
+          "hex": "#ffffff",
+          "title": "La pureté incarnée"
+        }
+      ]
+    }
+  },
+  {
+    "order": 10,
+    "name": "Cactus",
+    "hex": "#7a856e",
+    "admin_value": "142",
+    "title": "Il pique notre curiosité",
+    "description": "<p>Place au naturel et à la détente avec ce vert grisé et texturé très nature. Entre la feuille d'olivier, du chêne et du cactus, Cactus sent bon la garrigue. Une couleur idéale pour créer des univers empreints de douceur.</p>##NewLine##<p>Cactus se marie à merveille avec d'autres verts pour une ambiance végétale et naturelle, avec des touches de rouge et de bleu pour une atmosphère florale, exotique ou vintage. Pour un look chic et moderne, il s'associe avec des tons plus neutres tels que le gris et le blanc.</p>",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Cactus-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Cactus-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Cactus-2.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Sixties/3-ambiance/SIXTIES_CACTUS_NIMES_VISUEL2018_STEPHANE_RAMBAUD_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Sixties/3-ambiance/SIXTIES_EVASION_CACTUS_IBIZA_VISUEL2019_TOM_WATSON-1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Louisiane/3-ambiance/Mas de la Fouque_Saintes Maries de la Mer_FR_Stephane Rambaud pour Fermob (2).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Kintbury/3-ambiance/KINTBURY_LOUVRE_CACTUS_INDOOR2018_VISUEL2018_CLAIRE_CURT.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Cargo/3-ambiance/CARGO_LATITUDE_CACTUS_BOOKGSS2019.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Craft/3-ambiance/CRAFT_KINTBURY_CACTUS_INDOOR2018_VISUEL2018_CLAIRE_CURT-2.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        },
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Piment",
+          "hex": "#940c24",
+          "title": "Muy Caliente"
+        },
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        }
+      ]
+    }
+  },
+  {
+    "order": 11,
+    "name": "Vert tilleul",
+    "hex": "#b7b373",
+    "admin_value": "163",
+    "title": "Pétillant et doux à la fois",
+    "description": "Couleur incontournable et intemporel, Vert tilleul se pare de paillettes nacrées pour gagner en éclat. Saupoudrées subtilement, cette teinte flirte avec les rayons de soleil et cultive lumière et raffinement. Mixé avec des coloris neutres et douces, Vert tilleul forme un ensemble très paisible. Lié aux tonalités rouges, il crée une ambiance plus florale. Enfin, en camaïeu de verts, il transforme un espace en une atmosphère naturelle et végétale.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Vert-tilleul-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Vert-tilleul-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Vert-tilleul-2.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/ColorMix/3-ambiance/Color Mix_Stephane Rambaud pour Fermob_3.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Envie d ailleurs/3-ambiance/ENVIE_D_AILLEURS_VERT_TILLEUL_MAILLANE_BOOKGSS2020_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Cuub/3-ambiance/CUUB.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Balad/3-ambiance/BALAD_CUUB_CACTUS_INTO_THE_WILD_VISUEL2020_SEBASTIEN_EROME_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Lorette/3-ambiance/LORETTE_TILLEUL_INTO_THE_WILD_VISUEL2020_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Envie d ailleurs/3-ambiance/ENVIE_D_AILLEURS_OCRE_ROUGE_TILLEUL_CAP_FERRET_VISUEL2020_SEBASTIEN_EROME_2 copie.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        },
+        {
+          "name": "Tonka",
+          "hex": "#4b443d",
+          "title": "Plaisir sensoriel"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        },
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        },
+        {
+          "name": "Piment",
+          "hex": "#940c24",
+          "title": "Muy Caliente"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Miel",
+          "hex": "#fab400",
+          "title": "C'est bon pour la santé"
+        },
+        {
+          "name": "Muscade",
+          "hex": "#b4a28f",
+          "title": "Il fait des merveilles"
+        }
+      ]
+    }
+  },
+  {
+    "order": 12,
+    "name": "Pesto",
+    "hex": "#5e5e31",
+    "admin_value": "64706",
+    "title": "Ma che bello",
+    "description": "Direction l’Italie dans l’évocation de la traditionnelle recette du Pesto avec un mélange osé de vert agrémenté d’une légère pointe de jaune. Et si la cuisine se partage en grandes tablées, la couleur Pesto appelle à la convivialité d’un moment en plein air. Facile à intégrer aux intérieurs comme aux extérieurs, cette note végétale singulière diffuse ses ondes apaisantes et trouve un parfait équilibre dans une harmonie en camaïeu avec les verts, en touche subtile ou en contraste pour apporter profondeur et style... Bellissima!",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Pesto-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Pesto-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Pesto-2.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_CHENE_PESTO_PAIN_D_EPICES_YOGA_VISUEL2024_LOUISE_CARRASCO_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_CHENE_PESTO_YOGA_VISUEL2024_LOUISE_CARRASCO_3.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Funambule/3-ambiance/FUNAMBULE_PESTO_CIOTAT_VISUELS25_NICOLAS_MATHEUS_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_ORANGE_CONFITE_PESTO_MENTHE_GLACIALE_TILLEUL_MARSEILLE_VISUELS25_NICOLAS_MATHEUS_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_PESTO_MARSEILLE_VISUELS25_NICOLAS_MATHEUS_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/BELLEVIE_BALAD_BOUQUET_SAUVAGE_PESTO_GRIS_ARGILE_TARASCON_ALBUM2024_LOUISE_CARRASCO_BD.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        },
+        {
+          "name": "Guimauve",
+          "hex": "#cecae6",
+          "title": "Un nuage de tendresse"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        },
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Vert cèdre",
+          "hex": "#004939",
+          "title": "Détente en pleine nature"
+        },
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Pain d'épices",
+          "hex": "#986f31",
+          "title": "Un grand classique de la pâtisserie"
+        }
+      ]
+    }
+  },
+  {
+    "order": 13,
+    "name": "Vert cèdre",
+    "hex": "#004939",
+    "admin_value": "161",
+    "title": "Détente en pleine nature",
+    "description": "Couleur la plus ancienne du nuancier, Vert Cèdre est l'incontournable au jardin. Retravaillée il y a quelques années pour lui apporter plus de luminosité, elle n'a pas pour autant perdu de son charme et de son authenticité, tout en étant dans l'air du temps. Généreuse par nature, Vert cèdre compose avec les autres verts et les teintes plus neutres, et s'invite même dans nos intérieurs. Magique n'est-ce pas ?",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Vert-cèdre-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Vert-cèdre-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Vert-cèdre-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Ribambelle/3-ambiance/RIBAMBELLE_SURPRISING_BLEU_ACAPULCO_IBIZA_VISUEL2019_TOM_WATSON.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Evasion/3-ambiance/BASKET_EVASION_VERT_CEDRE_AVIGNON_DECO2019_SEBASTIEN_EROME_8.1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Lorette/3-ambiance/LORETTE_SIXTIES_VERT_CEDRE_IBIZA_ALBUM2019_TOM_WATSON-1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Envie d ailleurs/3-ambiance/ENVIE_D_AILLEURS_MONSTERA_SEBASTIEN_EROME_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/1900/3-ambiance/1900_VERT_CEDRE_RAMATUELLE_RESIDENTIAL_DESIGNER2021_NICOLAS_MATHEUS_4.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_CACTUS_KATE_PIMENT_CERISE_NOIRE_LUXEMBOURG_MOOON!_HOOP_LAHO_ALBUM2022_ROMAIN_RICARD.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        },
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        },
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Bleu abysse",
+          "hex": "#0c1b31",
+          "title": "Profondément mystérieux"
+        },
+        {
+          "name": "Vert opaline",
+          "hex": "#b7edc7",
+          "title": "La couleur caméléon du nuancier"
+        }
+      ]
+    }
+  },
+  {
+    "order": 14,
+    "name": "Bleu abysse",
+    "hex": "#0c1b31",
+    "admin_value": "137",
+    "title": "Profondément mystérieux",
+    "description": "Ultra-foncé, plutôt noir coloré que bleu profond, Bleu abysse évoque les fonds marins, royaume de mystère et de calme éternel. Il s'associe avec les verts et les bleus du nuancier pour apporter élégance et sérénité sur les terres outdoor comme dans les intérieurs raffinés. D'une subtilité majestueuse, Bleu abysse crée des ambiances chics et dans l’air du temps.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-abysse-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-abysse-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-abysse-2.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Louisiane/3-ambiance/LOUISIANE_BLEU_ABYSSE_VIGNES_VISUEL2019_STEPHANE_GALLAND.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Ribambelle/3-ambiance/RIBAMBELLE_SURPRISING_BLEU_ACAPULCO_IBIZA_VISUEL2019_TOM_WATSON.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/BELLEVIE_LUXEMBOURG_BLEU_ABYSSE_IBIZA_VISUEL2019_TOM_WATSON.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bistro/3-ambiance/chaise-longue-BISTRO.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_TECK_BLEU_ABYSSE_NIMES_VISUEL2018_STEPHANE_RAMBAUD_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Guinguette/3-ambiance/GINGUETTE_BLEU_ABYSSE_MAILLANE_BOOKGSS2020_SEBASTIEN_EROME.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Vert cèdre",
+          "hex": "#004939",
+          "title": "Détente en pleine nature"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Bleu maya",
+          "hex": "#88b6d1",
+          "title": "Libre comme l'eau"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Réglisse",
+          "hex": "#071512",
+          "title": "Un délice pour les yeux"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Vert cèdre",
+          "hex": "#004939",
+          "title": "Détente en pleine nature"
+        },
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        }
+      ]
+    }
+  },
+  {
+    "order": 15,
+    "name": "Bleu acapulco",
+    "hex": "#003d4b",
+    "admin_value": "858",
+    "title": "Paradisiaque",
+    "description": "Rien que de prononcer ce nom, on sent déjà l’océan, la jungle, le sable chaud, l’exotisme... Lumineux en situation extérieure, intense et profond en intérieur, Bleu acapulco apporte de nouvelles perspectives au nuancier. Associé aux camaïeux de verts et de bleus, il offre de douces harmonies, tandis que mixé à des tons plus neutres, il apporte une ambiance chaleureuse et rassurante. Un véritable joyau.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-acapulco-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-acapulco-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-acapulco-2.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Ribambelle/3-ambiance/RIBAMBELLE_SURPRISING_BLEU_ACAPULCO_IBIZA_VISUEL2019_TOM_WATSON.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/BELLEVIE_LUXEMBOURG_BLEU_ABYSSE_IBIZA_VISUEL2019_TOM_WATSON.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/L'ermitage_LYON_Crédit Stéphane Rambaud (5).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Trefle/3-ambiance/TREFLE_NOEL2019_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Nevado/3- ambiance/NEVADO_BLEU_ABYSSE_OCEAN_LOVERS_VISUEL2020_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/BELLEVIE_HOOP_BLEU_ACAPULCO_OCEAN_LOVERS_VISUEL2020_SEBASTIEN_EROME.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Bleu abysse",
+          "hex": "#0c1b31",
+          "title": "Profondément mystérieux"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Gris orage",
+          "hex": "#455e5d",
+          "title": "Un éclair de génie"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        },
+        {
+          "name": "Blanc coton",
+          "hex": "#ffffff",
+          "title": "La pureté incarnée"
+        }
+      ]
+    }
+  },
+  {
+    "order": 16,
+    "name": "Bleu maya",
+    "hex": "#88b6d1",
+    "admin_value": "71395",
+    "title": "Libre comme l'eau",
+    "description": "Évoquant les bassins cristallins des cénotes du Yucatán, Bleu maya signe une entrée rafraîchissante dans le nuancier. Sa connotation directe à la mer procure une sensation de liberté absolue, de sérénité et d’apaisement dont raffolent les intérieurs et les extérieurs. Très pure quand elle rencontre des teintes pastel et minérales, cette couleur ose également des harmonies plus audacieuses : l’associer à Cerise noire ou Pain d’épices sera gage de singularité.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-Maya-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-Maya-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Bleu-Maya-1.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Stripe/3-ambiance/STRIPE_web-uniquement.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_ORANGE_CONFITE_BLEU_MAYA_MARSEILLE_VISUELS25_NICOLAS_MATHEUS_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Balad2/3-ambiance/BALAD_SIXTIES_ORANGE_CONFITE_BLEU_MAYA_CANNES_VISUEL26_NICOLAS_MATHEUS_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_SURPRISING_LUXEMBOURG_TONKA_BLEU_MAYA_ORANGE_CONFITE_CIOTAT_VISUELS25_NICOLAS_MATHEUS_2_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_ALU_COCOTTE_MENTHE_GLACIALE_GUIMAUVE_BLEU_CELESTE_BARTHAS_VISUELS26_NICOLAS_MATHEUS_1_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_ORANGE_CONFITE_BLEU_MAYA_MARSEILLE_VISUELS25_NICOLAS_MATHEUS_4.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Pain d'épices",
+          "hex": "#986f31",
+          "title": "Un grand classique de la pâtisserie"
+        },
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Guimauve",
+          "hex": "#cecae6",
+          "title": "Un nuage de tendresse"
+        },
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        },
+        {
+          "name": "Pesto",
+          "hex": "#5e5e31",
+          "title": "Ma che bello"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        },
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        }
+      ]
+    }
+  },
+  {
+    "order": 17,
+    "name": "Guimauve",
+    "hex": "#cecae6",
+    "admin_value": "64704",
+    "title": "Un nuage de tendresse",
+    "description": "Naturellement douce, rassurante et lumineuse, Guimauve affirme pour autant son caractère. Cette couleur punchy et vitaminée se marie aussi bien avec des couleurs douces, qu’avec des couleurs plus affirmées. Associée à nos pastels, elle nous rappelle nos pauses gourmandes d’enfance avec un ensemble de teintes douces. Avec nos bleus et nos verts, elle apporte du contraste pour des associations subtiles et nuancées 100% rétro.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Guimauve-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Guimauve-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Guimauve-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Piapolo/3-ambiance/PIAPOLO_GUIMAUVE_COULEUR_VISUEL2024_LOUISE_CARRASCO_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg Kid/3-ambiance/LUXEMBOURG_KID_GUIMAUVE_CACTUS_MENTHE_CITRON_CIOTAT_VISUELS25_NICOLAS_MATHEUS_1_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Adada/3-ambiance/ADADA_GUIMAUVE_VISUELS25_JURA_SEBASTIEN_EROME_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_MOOON_BLEU_MAYA_GUIMAUVE_BEIGE_LATTE_CERISE_NOIRE_CANNES_VISUEL26_NICOLAS_MATHEUS.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_GUIMAUVE_MOVE_ALBUM2024_LOUISE_CARRASCO_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg Kid/3-ambiance/LUXEMBOURG_KID_GUIMAUVE_BLEU_ACAPLUCO_VISUELS25_NICOLAS_MATHEUS_BD.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        },
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Pain d'épices",
+          "hex": "#986f31",
+          "title": "Un grand classique de la pâtisserie"
+        },
+        {
+          "name": "Orange confite",
+          "hex": "#9c4b1c",
+          "title": "Audace vitaminée"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        }
+      ]
+    }
+  },
+  {
+    "order": 18,
+    "name": "Menthe glaciale",
+    "hex": "#e3f1e8",
+    "admin_value": "34141",
+    "title": "Une bouffée de fraîcheur",
+    "description": "Blanc coloré, bleu, vert, voici un subtil cocktail pour créer Menthe glaciale. Une couleur vitaminée qui se marie aussi bien avec des tons naturels pour créer des ambiances tropicales qu'avec des coloris plus tranchés pour des atmosphères plus vintages. Menthe glaciale a décidément très bon goût !",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Menthe-glaciale-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Menthe-glaciale-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Menthe-glaciale-1.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Lorette/3-ambiance/Grand Hotel Dieu_LYON_Crédit Stéphane Rambaud (3).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/Hotel Intercontinental_BORDEAUX_Crédit Stéphane Rambaud (10).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Rythmic/3-ambiance/Place-Bellecour_LYON_Crédit-Stéphane-Rambaud-(1.1).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Cocotte/3-ambiance/COCOTTE_EVASION_MENTHE_GLACIALE_OCEAN_LOVERS_ALBUM2020_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_MENTHE_GLACIALE_OCEAN_LOVERS_ALBUM2020_SEBASTIEN_EROME_3.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Lorette/3-ambiance/Grand Hotel Dieu_LYON_Crédit Stéphane Rambaud (8).jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Gris orage",
+          "hex": "#455e5d",
+          "title": "Un éclair de génie"
+        },
+        {
+          "name": "Bleu maya",
+          "hex": "#88b6d1",
+          "title": "Libre comme l'eau"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Miel",
+          "hex": "#fab400",
+          "title": "C'est bon pour la santé"
+        },
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        }
+      ]
+    }
+  },
+  {
+    "order": 19,
+    "name": "Citron givré",
+    "hex": "#fff9c7",
+    "admin_value": "34140",
+    "title": "Un zeste de fraicheur",
+    "description": "Ce jaune, presque blanc, évoque les vacances de notre enfance : lumineux, frais et tellement estival… C'est le sorbet d'été par excellence ! Acidulé et lumineux, Citron givré se révèle sous un nouveau jour à chaque association : floral avec les verts et les rouges, peps quand il rencontre les pastels. Une chose est sûre, Citron givré n'a pas fini de faire parler lui.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Citron-givré-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Citron-givré-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Citron-givré-1.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_CITRON_GIVRE_OCEAN_LOVERS_ALBUM2020_SEBASTIEN_EROME_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_CITRON_GIVRE_OCEAN_LOVERS_ALBUM2020_SEBASTIEN_EROME_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_ULTRASOFA_CITRON_GIVRE_OCEAN_LOVERS_VISUEL2020_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_GRIS_ARGILE_OCEAN_LOVERS_VISUEL2020_SEBASTIEN_EROME_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRIING_CITRON_GIVRE_OCEAN_LOVERS_VISUEL2020_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_CITRON_GIVRE_OCEAN_LOVERS_VISUEL2020_SEBASTIEN_EROME_3.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Blanc coton",
+          "hex": "#ffffff",
+          "title": "La pureté incarnée"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Blanc coton",
+          "hex": "#ffffff",
+          "title": "La pureté incarnée"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Muscade",
+          "hex": "#b4a28f",
+          "title": "Il fait des merveilles"
+        },
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Capucine",
+          "hex": "#e84536",
+          "title": "Une fine fleur de la couleur qui symbolise les amoureux."
+        },
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ]
+    }
+  },
+  {
+    "order": 20,
+    "name": "Miel",
+    "hex": "#fab400",
+    "admin_value": "56186",
+    "title": "C'est bon pour la santé",
+    "description": "Véritable soleil d’hiver ou pépite estivale, Miel fait le spectacle. Couleur éclatante, il vient enrichir le nuancier Fermob grâce à son nouvel aspect texturé qui lui donne de la profondeur et de la puissance. Pétillante, Miel est la teinte ensoleillée qui s’associe aussi bien aux nuances chaudes qu’aux teintes plus froides pour créer des associations couleurs de caractère. Irrésistible !",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Miel-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Miel-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Miel-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_MIEL_IBIZA_VISUEL2019_TOM_WATSON.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Alto/3-ambiance/ALTO_MIEL_STUDIO_VISUEL2019_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Louisiane/3-ambiance/Nelson Mandela Children's Hospital_JOHANNESBURG (3).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Oleron/3-ambiance/OLERON_MIEL_DOMAINESAINTECOLOMBE_BOOKGSS2019_STEPHANE_RAMBAUD_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Kintbury/3-ambiance/KINTBURY_LOUVRE_CACTUS_INDOOR2018_VISUEL2018_CLAIRE_CURT.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/Fermob@Yeah-0094.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        },
+        {
+          "name": "Muscade",
+          "hex": "#b4a28f",
+          "title": "Il fait des merveilles"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Gris orage",
+          "hex": "#455e5d",
+          "title": "Un éclair de génie"
+        },
+        {
+          "name": "Carbone",
+          "hex": "#2d2e33",
+          "title": "Le plein d'énergie"
+        }
+      ]
+    }
+  },
+  {
+    "order": 21,
+    "name": "Pain d'épices",
+    "hex": "#986f31",
+    "admin_value": "64705",
+    "title": "Un grand classique de la pâtisserie",
+    "description": "Comme son nom l’indique, Pain d'épices est une couleur qui se compose d’un mélange de teintes dorées, mielleuses, sucrées pour s’associer avec de nombreuses tonalités, et plus particulièrement avec les couleurs chaudes. Mixée avec nos teintes minérales, elle apportera une pointe de douceur. Et pourquoi ne pas l’intégrer en petite touche dans nos intérieurs pour réchauffer l’ambiance ? Pain d'épices, c'est la gourmandise à l'état pure.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Pain-d'épices-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Pain-d'épices-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Pain-d'épices-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_PAIN_EPICES_INDOOR_NOEL2023_LYON_SEBASTIEN_EROME_01.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_CHENE_PESTO_PAIN_D_EPICES_YOGA_VISUEL2024_LOUISE_CARRASCO_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Swiing/3-ambiance/SWIING_PAIN_D_EPICES_TABLE_FETE_NOEL25_VISUEL26_NICOLAS_MATHEUS_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Piapolo/3-ambiance/BEBOP_CROISETTE_PIAPOLO_GRIS_ARGILE_PAIN_EPICES_INDOOR_NOEL2023_LYON_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Louisiane/3-ambiance/LOUISIANE_PAIN_D_EPICES_PESTO_E_TARASCON_VISUEL2024_LOUISE_CARRASCO_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Alto/3-ambiance/ALTO_PAIN_EPICES_INDOOR_NOEL2023_LYON_SEBASTIEN_EROME.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Guimauve",
+          "hex": "#cecae6",
+          "title": "Un nuage de tendresse"
+        },
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        },
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        },
+        {
+          "name": "Pesto",
+          "hex": "#5e5e31",
+          "title": "Ma che bello"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Muscade",
+          "hex": "#b4a28f",
+          "title": "Il fait des merveilles"
+        },
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        }
+      ]
+    }
+  },
+  {
+    "order": 22,
+    "name": "Muscade",
+    "hex": "#b4a28f",
+    "admin_value": "153",
+    "title": "Il fait des merveilles",
+    "description": "Muscade séduit par sa tonalité simple, douce et chaleureuse. Finement texturée et pailletée, cette couleur a l'incroyable capacité de transformer un espace banal en une véritable atmosphère reposante. Idéale pour créer du lien entre les différentes teintes, elle s'associe aussi bien aux couleurs neutres pour un style minimaliste, qu'aux teintes les plus chaudes pour un retour aux sources.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Muscade-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Muscade-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Muscade-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Coolside/3-ambiance/COOLSIDE_MUSCADE_DOMAINESAINTECOLOMBE_BOOKGSS2019_STEPHANE_RAMBAUD_4.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Coolside/3-ambiance/COOLSIDE_MUSCADE_DOMAINESAINTECOLOMBE_BOOKGSS2019_STEPHANE_RAMBAUD_6.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Pasaia/3-ambiance/PASAIA_MUSCADE_SAINT-TROPEZ_VISUEL2019_TOM_WATSON.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Caractere/3-ambiance/CARACTERE_MUSCADE_ENGLISH_MAN_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Evasion/3-ambiance/EVASION.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Louvre/3-ambiance/Les planches_ALBIGNY_SUR_SAONE_Crédit Stéphane Rambaud (4).jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        },
+        {
+          "name": "Blanc coton",
+          "hex": "#ffffff",
+          "title": "La pureté incarnée"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        },
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        },
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        }
+      ]
+    }
+  },
+  {
+    "order": 23,
+    "name": "Beige latte",
+    "hex": "#eae2ce",
+    "admin_value": "77255",
+    "title": "Une touche de douceur",
+    "description": "Beige Latte s’inspire des nuances enveloppantes du café au lait. Sa touche rosée et sa finition mate rappellent la chaleur d’une mousse onctueuse, le velouté d’une céramique artisanale ou la lumière tamisée d’un salon empreint de sérénité... Idéale pour créer des ambiances calmes et sophistiquées, elle adoucit l’espace sans jamais s’effacer. Caméléon par nature, Beige latte valorise les matières, révèle les volumes avec délicatesse, et se marie à merveille avec les tons terreux ou les verts profonds pour une harmonie très naturelle.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Beige latte-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Beige latte-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Beige latte 1.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Bistro/3-ambiance/BISTRO_BEIGE_LATTE_VISUELS26_MONTRIANT_NICOLAS_MATHEUS_1_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bistro/3-ambiance/BISTRO_BEIGE_LATTE_VISUELS26_MONTRIANT_NICOLAS_MATHEUS_2_BD.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Pesto",
+          "hex": "#5e5e31",
+          "title": "Ma che bello"
+        },
+        {
+          "name": "Tonka",
+          "hex": "#4b443d",
+          "title": "Plaisir sensoriel"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Guimauve",
+          "hex": "#cecae6",
+          "title": "Un nuage de tendresse"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Bleu maya",
+          "hex": "#88b6d1",
+          "title": "Libre comme l'eau"
+        },
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        },
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        }
+      ]
+    }
+  },
+  {
+    "order": 24,
+    "name": "Tonka",
+    "hex": "#4b443d",
+    "admin_value": "71397",
+    "title": "Plaisir sensoriel",
+    "description": "D’une échappée boisée en forêt amazonienne à la gourmandise d’une pâtisserie, Tonka joue avec les sens et les plaisirs. Si cette teinte brune apporte une touche de sophistication et de mystère au nuancier, elle dépose un voile réconfortant à l’intérieur comme à l’extérieur, se mêlant merveilleusement aux verts pour des alliances végétales et aux jaunes pour des accords plus solaires. Tout aussi enveloppants, le bois et le cuir lui collent à la peau et proposent un jeu de camaïeux de marrons qui nuance le décor. Une façon d’apporter du caractère aux espaces, sous couvert d’élégance.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/TONKA-02.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/TONKA-01.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/02-IMG-INSPI-2000X2000.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Bebop/3-ambiance/BEBOP_STUDIE_CHENE_SWIING_MENTHE_GLACIALE_TONKA_OCRE_ROUGE_CIOTAT_VISUELS25_NICOLAS_MATHEUS_1_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Calvi/3-ambiance/CALVI-FENIX_STUDIE-CHENE-TONKA_VISUELS25_MARSEILLE_NICOLAS_MATHEUS_4_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/STUDIE_SURPRISING_LUXEMBOURG_TONKA_BLEU_MAYA_ORANGE_CONFITE_CIOTAT_VISUELS25_NICOLAS_MATHEUS_1_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bebop/3-ambiance/BEBOP_STUDIE_CHENE_SWIING_MENTHE_GLACIALE_TONKA_OCRE_ROUGE_CIOTAT_VISUELS25_NICOLAS_MATHEUS_2_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Calvi/3-ambiance/CALVI-FENIX_STUDIE-CHENE-TONKA_VISUELS25_MARSEILLE_NICOLAS_MATHEUS_1_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_CHENE_TONKA_MENTHE_GLACIALE_CIOTAT_VISUELS25_NICOLAS_MATHEUS_BD.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Pesto",
+          "hex": "#5e5e31",
+          "title": "Ma che bello"
+        },
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        },
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        },
+        {
+          "name": "Pain d'épices",
+          "hex": "#986f31",
+          "title": "Un grand classique de la pâtisserie"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        },
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        }
+      ]
+    }
+  },
+  {
+    "order": 25,
+    "name": "Cerise noire",
+    "hex": "#541827",
+    "admin_value": "50554",
+    "title": "Cerise sur le gâteau",
+    "description": "Du jardin à la gourmandise, il n'y a qu'un pas.<br />Une couleur enveloppante, à la fois profonde, sombre et chaude et au caractère affirmé. Cerise noire se joue seule pour révéler toute son intensité ou s’associe indifféremment aux teintes chaudes ou froides pour une atmosphère singulière adaptée aux envies de chacun. Un pur trésor à savourer.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Cerise-noire-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Cerise-noire-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Cerise-noire-1.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Louisiane/3-ambiance/LOUISIANE_CERISE_NOIRE_LYON_ALBUM2022_STEPHANE_RAMBAUD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Origami/3-ambiance/ORIGAMI_CERISE_NOIRE_EVASION_ETNA_BASTION_ALBUM2022_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_CACTUS_KATE_PIMENT_CERISE_NOIRE_LUXEMBOURG_MOOON!_HOOP_LAHO_ALBUM2022_ROMAIN_RICARD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/BELLEVIE_CERISE_NOIRE_MOOON!_CARBONE_OCCITANIE_VISUEL2022_NICOLAS_MATHEUS (2).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Alize/3-ambiance/ALIZE_MOOON_OCCITANIE_NICOLAS_MATHEUS-2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Airloop/3-ambiance/AIRLOOP_HOOP_BALAD_OCCITANIE_NICOLAS_MATHEUS.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Muscade",
+          "hex": "#b4a28f",
+          "title": "Il fait des merveilles"
+        },
+        {
+          "name": "Miel",
+          "hex": "#fab400",
+          "title": "C'est bon pour la santé"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        },
+        {
+          "name": "Bleu abysse",
+          "hex": "#0c1b31",
+          "title": "Profondément mystérieux"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Gris orage",
+          "hex": "#455e5d",
+          "title": "Un éclair de génie"
+        },
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Vert cèdre",
+          "hex": "#004939",
+          "title": "Détente en pleine nature"
+        },
+        {
+          "name": "Bleu abysse",
+          "hex": "#0c1b31",
+          "title": "Profondément mystérieux"
+        }
+      ]
+    }
+  },
+  {
+    "order": 26,
+    "name": "Piment",
+    "hex": "#940c24",
+    "admin_value": "154",
+    "title": "Muy Caliente",
+    "description": "Un rouge texturé et profond, une couleur chaude, sensuelle et authentique... Piment réveille les papilles et révèle les espaces intérieurs et extérieurs avec cette touche d'élégance et pleine de chaleur. Il s'adopte en monochrome pour booster une ambiance ou s'associe avec des couleurs chaudes et vertes comme une invitation au voyage. Piment, c'est l'allié qui réchauffe les cœurs et les jardins... À faire rougir d'envie !",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Piment-3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Piment-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Piment-1.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Evasion/3-ambiance/BASKET_EVASION_PIMENT_AVIGNON_VISUEL2019_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Evasion/3-ambiance/BASKET_EVASION_VERT_CEDRE_AVIGNON_DECO2019_SEBASTIEN_EROME_8.1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Montmartre/3-ambiance/MONTMARTRE_GUINGUETTE-PIMENT_MAILLANE_BOOK2020_SEBASTIEN_EROME_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Oleron/3-ambiance/OLERON_OCRE_EROUGE_PUGET_BOOKGSS2021_SEBASTIEN_EROME_1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Nevado/3- ambiance/NEVADO_LUXEMBOURG_OCRE_RAMATUELLE_RESIDENTIAL_DESIGNER2021_NICOLAS_MATHEUS_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Envie d ailleurs/3-ambiance/BALAD_LEONA_ROSE_MAGIC_MARTIN_SEBASTIEN_EROME_3.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Vert tilleul",
+          "hex": "#b7b373",
+          "title": "Pétillant et doux à la fois"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Gris orage",
+          "hex": "#455e5d",
+          "title": "Un éclair de génie"
+        },
+        {
+          "name": "Carbone",
+          "hex": "#2d2e33",
+          "title": "Le plein d'énergie"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        },
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Ocre rouge",
+          "hex": "#7f3d31",
+          "title": "Une force de la nature"
+        },
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        }
+      ]
+    }
+  },
+  {
+    "order": 27,
+    "name": "Ocre rouge",
+    "hex": "#7f3d31",
+    "admin_value": "857",
+    "title": "Une force de la nature",
+    "description": "Teinte ancestrale et naturelle, Ocre rouge s’inscrit avec beaucoup d’élégance dans la tendance du retour aux sources et à la terre. Ce coloris poudreux, authentique et chaleureux, trouvera sa place dans les teintes chaudes du nuancier Fermob, grâce à ses notes rouges orangées.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Ocre-rouge-1.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Ocre-rouge-2.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Ocre-rouge-3.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Lorette/3-ambiance/LORETTE_OCRE_ROUGE_SAINT-TROPEZ_ALBUM2019_TOM_WATSON_2.1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Bistro/3-ambiance/BISTRO_OCRE_ROUGE_MAILLANE_BOOKGSS2020_SEBASTIEN_EROME.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Evasion/3-ambiance/EVASION.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Lorette/3-ambiance/LORETTE_OCRE_ROUGE_SAINT-TROPEZ_ALBUM2019_TOM_WATSON_1.1.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Mooon/3-ambiance/Shooting Contract Fermob_CAP FERRET_Crédit Romain Ricard (1).jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_OCRE_ROUGE_NOEL2018_STEPHANE_RAMBAUD_1.1.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Gris argile",
+          "hex": "#d1ccbe",
+          "title": "Résolument naturel"
+        },
+        {
+          "name": "Citron givré",
+          "hex": "#fff9c7",
+          "title": "Un zeste de fraicheur"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        },
+        {
+          "name": "Cactus",
+          "hex": "#7a856e",
+          "title": "Il pique notre curiosité"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Piment",
+          "hex": "#940c24",
+          "title": "Muy Caliente"
+        },
+        {
+          "name": "Romarin",
+          "hex": "#686e64",
+          "title": "Sortez des sentiers battus"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Bleu acapulco",
+          "hex": "#003d4b",
+          "title": "Paradisiaque"
+        },
+        {
+          "name": "Vert cèdre",
+          "hex": "#004939",
+          "title": "Détente en pleine nature"
+        }
+      ]
+    }
+  },
+  {
+    "order": 28,
+    "name": "Orange confite",
+    "hex": "#9c4b1c",
+    "admin_value": "71396",
+    "title": "Audace vitaminée",
+    "description": "Plus douce et flamboyante que l’orange fraîche, Orange confite est le résultat complexe d’un savant mélange sucré, qui sous la chaleur révèle l’intensité presque sanguine des fruits et leur incroyable brillance. Acidulée, sucrée et gage d’exotisme, cette teinte chaleureuse favorise la convivialité de l’aurore au crépuscule. Les espaces de vie s’illuminent, se réchauffent et se dynamisent au contact de cet orangé dont la pigmentation intense fait vibrer les formes et les matières. Orange confite se veut aussi versatile : si elle évoque l’été indien quand elle se rapproche d’autres couleurs chaudes, elle regarde dans le rétro au côté de teintes bleues et brunes, vibe seventies oblige.",
+    "moodboard_images": [
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Orange brulée_3.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Orange brulée_4.jpg",
+      "https://www.fermob.com/mediatheque/VISUELS_MOODBOARD_NUANCIER/Orange brulée_2.jpg"
+    ],
+    "ambiance_thumbs": [
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_ORANGE_CONFITE_BLEU_MAYA_MARSEILLE_VISUELS25_NICOLAS_MATHEUS_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_ORANGE_CONFITE_PESTO_MENTHE_GLACIALE_TILLEUL_MARSEILLE_VISUELS25_NICOLAS_MATHEUS_2.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Alize/3-ambiance/ALIZE_GRISARGILE_ORANGECONFITE_COLORMIX_GALET_OLIVE_FICELLE_EUCALYPTUS_VISUELS26_MONTRIANT_NICOLAS_MATHEUS_2_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Studie/3-ambiance/STUDIE_SURPRISING_LUXEMBOURG_TONKA_BLEU_MAYA_ORANGE_CONFITE_CIOTAT_VISUELS25_NICOLAS_MATHEUS_2_BD.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_ORANGE_CONFITE_BLEU_MAYA_MARSEILLE_VISUELS25_NICOLAS_MATHEUS_4.jpg",
+      "https://www.fermob.com/mediatheque/2_produits/Luxembourg/3-ambiance/LUXEMBOURG_ORANGE_CONFITE_MARSEILLE_VISUELS2025_NICOLAS_MATHEUS_BD.jpg"
+    ],
+    "associations": {
+      "association1": [
+        {
+          "name": "Pain d'épices",
+          "hex": "#986f31",
+          "title": "Un grand classique de la pâtisserie"
+        },
+        {
+          "name": "Miel",
+          "hex": "#fab400",
+          "title": "C'est bon pour la santé"
+        }
+      ],
+      "association2": [
+        {
+          "name": "Menthe glaciale",
+          "hex": "#e3f1e8",
+          "title": "Une bouffée de fraîcheur"
+        },
+        {
+          "name": "Pesto",
+          "hex": "#5e5e31",
+          "title": "Ma che bello"
+        }
+      ],
+      "association3": [
+        {
+          "name": "Tonka",
+          "hex": "#4b443d",
+          "title": "Plaisir sensoriel"
+        },
+        {
+          "name": "Bleu maya",
+          "hex": "#88b6d1",
+          "title": "Libre comme l'eau"
+        }
+      ],
+      "association4": [
+        {
+          "name": "Cerise noire",
+          "hex": "#541827",
+          "title": "Cerise sur le gâteau"
+        },
+        {
+          "name": "Guimauve",
+          "hex": "#cecae6",
+          "title": "Un nuage de tendresse"
+        }
+      ]
+    }
+  }
+]
