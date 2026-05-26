@@ -31,7 +31,7 @@
             <h3>Livraison</h3>
             <label><input type="radio" name="delivery" value="showroom" checked /> <span>Retrait au showroom, Uccle <em>(offerte)</em></span></label>
             <label><input type="radio" name="delivery" value="standard" /> <span>Livraison Belgique <em data-delivery-belgium-label>(50 €)</em></span></label>
-            <p class="sel-opt__hint" data-delivery-hint>Livraison offerte dès 1 000 € d'achats.</p>
+            <p class="sel-opt__hint" data-delivery-hint>Livraison offerte dès 1 500 € d'achats.</p>
           </div>
           <button class="btn btn--solid btn--block" data-checkout style="margin-top:14px">Finaliser la sélection</button>
           <p class="form-error" data-checkout-error style="display:none;margin-top:10px"></p>
@@ -52,8 +52,13 @@
     import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
-    const SHIPPING_FREE_FROM = 1000;       // free shipping threshold (€, post-discount)
-    const SHIPPING_BELGIUM   = 50;          // standard Belgium fee
+    // Mirrors the real Shopify shipping rule (Belgium zone): 50 € flat
+    // under the threshold, free at or above it. Shopify is the source of
+    // truth — it applies the rule at checkout via the Storefront API. We
+    // display the same values here so the cart total matches what the
+    // customer will pay; keep these in sync if Shopify changes.
+    const SHIPPING_FREE_FROM = 1500;
+    const SHIPPING_BELGIUM   = 50;
     function deliveryFee(method, payable) {
       if (method === "showroom") return 0;
       if (method === "standard") return payable >= SHIPPING_FREE_FROM ? 0 : SHIPPING_BELGIUM;
