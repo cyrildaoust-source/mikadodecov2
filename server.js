@@ -338,6 +338,73 @@ app.get('/api/brands', async (req, res) => {
   }
 });
 
+// ─── SHOPIFY: MAIN MENU QUERY ──────────────────────────
+// Drives the site nav top-level + the Mobilier mega menu sub-items
+// + the Marques dropdown. Handle "main-menu" is the default Shopify
+// "Menu principal" (Online Store → Navigation). Cyril edits libellés
+// / ordre / sub-items from the Shopify admin; the site picks it up
+// at the next /api/menu cache refresh (5 min TTL).
+const MENU_QUERY = `
+  query GetMainMenu {
+    menu(handle: "main-menu") {
+      items {
+        title
+        url
+        items {
+          title
+          url
+          items {
+            title
+            url
+          }
+        }
+      }
+    }
+  }
+`;
+
+// Shopify returns absolute URLs on the *primary* domain
+// (shop.mikadodeco.be/...). Rewrite to bare paths so the front
+// uses them directly and the JSON works on any environment.
+function rewriteMenuUrl(url) {
+  if (!url) return url;
+  try {
+    const u = new URL(url);
+    return u.pathname + u.search + u.hash;
+  } catch { return url; }
+}
+
+function mapMenuItems(items) {
+  if (!Array.isArray(items)) return [];
+  return items.map((it) => ({
+    title: it.title || '',
+    url:   rewriteMenuUrl(it.url),
+    items: mapMenuItems(it.items),
+  }));
+}
+
+async function getMenu() {
+  return cached('menu', async () => {
+    const data = await shopifyFetch(MENU_QUERY);
+    const items = mapMenuItems(data?.menu?.items || []);
+    return { ok: true, items };
+  });
+}
+
+// ─── API: MAIN MENU ────────────────────────────────────
+// Used by the nav widget (mega menu + dropdown). On upstream failure
+// returns { ok: false, items: [] } — the client falls back to its
+// hardcoded top-level. We never 500 on this endpoint: the nav is
+// global and must not surface as a broken request.
+app.get('/api/menu', async (req, res) => {
+  try {
+    res.json(await getMenu());
+  } catch (err) {
+    console.warn('Menu fetch failed:', err.message);
+    res.json({ ok: false, items: [] });
+  }
+});
+
 // ─── API: GET COLLECTIONS ──────────────────────────────
 // Real Shopify collections (product lines: Palissade, Bistro, Luxembourg…).
 app.get('/api/collections', async (req, res) => {
@@ -390,6 +457,7 @@ app.post('/api/revalidate', (req, res) => {
   delete _cache['brands'];
   delete _cache['collections'];
   delete _cache['promos'];
+  delete _cache['menu'];
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });
 });

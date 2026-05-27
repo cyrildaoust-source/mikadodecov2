@@ -1,0 +1,11 @@
+{
+  "_note": "Visual ambiance + CTAs for each mega-menu section. Cyril edits this file directly to swap the image or change the featured brand. V1: only 'mobilier' is wired up.",
+  "mobilier": {
+    "image": "/images/lifestyle-1.jpg",
+    "imageAlt": "Ambiance salon Mikado — fauteuil et table",
+    "ctaLabel": "Découvrir Vitra",
+    "ctaHref": "/collections/vitra",
+    "secondaryLabel": "Nouveautés",
+    "secondaryHref": "/collections/nouveautes"
+  }
+}

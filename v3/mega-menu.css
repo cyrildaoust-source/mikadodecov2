@@ -1,0 +1,280 @@
+/* ============================================================
+   Mikadodeco · Mega menu + dropdown
+   Drives the .nlink[data-mm-trigger] panels in the global chrome.
+   Reuses Mikado tokens (--paper, --ink, --accent-ink). All new
+   classes are .mm-* / .nlink--* to avoid touching the base nav.
+   ============================================================ */
+
+/* ---------- Promotions top-level (italic + accent dot) ---------- */
+.chrome a.nlink--promo { font-style: italic; }
+.chrome a.nlink--promo::before {
+  content: "•";
+  color: var(--accent-ink);
+  margin-right: 5px;
+  font-style: normal;
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: middle;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   PANEL STAGE · single off-flow container that hosts the open panel
+   ============================================================ */
+.mm-stage {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  background: var(--paper);
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(26, 25, 22, 0.06);
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity .18s var(--ease), transform .18s var(--ease);
+}
+.mm-stage.is-open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.mm-stage__inner { max-width: var(--container); margin-inline: auto; padding: 32px var(--gutter) 36px; }
+
+.mm-panel { display: none; }
+.mm-panel.is-active { display: block; }
+
+/* ============================================================
+   MOBILIER MEGA · grid of category columns + side visual panel
+   ============================================================ */
+.mm-mega {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+.mm-mega__cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 22px 28px;
+}
+.mm-col__head {
+  display: block;
+  font-family: var(--sans-product);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+.mm-col__list { display: flex; flex-direction: column; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.mm-col__list a {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--muted);
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
+}
+.mm-col__list a:hover,
+.mm-col__list a:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+  outline: none;
+}
+
+/* side panel · ambiance image + CTA + secondary shortcut */
+.mm-mega__side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: clamp(20px, 2vw, 32px);
+  border-left: 1px solid rgba(26, 25, 22, 0.1);
+}
+.mm-mega__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); }
+.mm-mega__cta {
+  display: inline-block;
+  font-family: var(--sans-product);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--ink);
+  align-self: flex-start;
+}
+.mm-mega__cta:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
+.mm-mega__sep { height: 1px; background: var(--line); margin: 2px 0 4px; }
+.mm-mega__second {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--muted);
+  align-self: flex-start;
+  transition: color .18s var(--ease);
+}
+.mm-mega__second:hover { color: var(--ink); }
+
+/* ============================================================
+   MARQUES DROPDOWN · single column, narrow, paper bg
+   ============================================================ */
+/* JS anchors the stage under the Marques trigger (sets `left` in px,
+   `right: auto`). We shrink the stage itself so the paper bg hugs
+   the dropdown column instead of stretching full-width. */
+.mm-stage.mm-stage--narrow {
+  width: 240px;
+  min-width: 240px;
+  right: auto;
+}
+.mm-stage--narrow .mm-stage__inner {
+  max-width: none;
+  margin: 0;
+  padding: 18px 22px 20px;
+}
+.mm-drop {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mm-drop a {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--ink);
+  padding: 6px 0;
+  transition: color .18s var(--ease);
+}
+.mm-drop a:hover { color: var(--accent-ink); }
+.mm-drop__sep { height: 1px; background: var(--line); margin: 8px 0 6px; }
+.mm-drop__all {
+  font-family: var(--sans);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: inline-block;
+  padding-top: 2px;
+}
+.mm-drop__all:hover { color: var(--ink); }
+
+/* ============================================================
+   DRAWER (mobile) · accordion top-level + bottom visual zone
+   Overrides the base .drawer styles (kept in styles.css) with
+   the richer V2 markup. The base .drawer rules (slide-in,
+   background, padding) still apply; we add structure on top.
+   ============================================================ */
+.drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0 18px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+.drawer__head .drawer__title {
+  font-family: var(--sans-product);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+/* tighten the existing .drawer__close (already in styles.css) */
+.drawer .drawer__head .drawer__close { font-size: 28px; line-height: 1; margin: 0; }
+
+.drawer__body { flex: 1 1 auto; overflow-y: auto; }
+
+.drawer__group { border-bottom: 1px solid var(--line); }
+.drawer__group-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: 0;
+  padding: 14px 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--ink-deep);
+  text-align: left;
+  cursor: pointer;
+}
+.drawer__group-head .drawer__chev { font-size: 16px; color: var(--subtle); transition: transform .2s var(--ease); }
+.drawer__group[data-open="true"] .drawer__chev { transform: rotate(180deg); }
+.drawer__sub { list-style: none; padding: 0 0 14px 4px; margin: 0; display: none; }
+.drawer__group[data-open="true"] .drawer__sub { display: block; }
+.drawer__sub li { margin: 0; }
+.drawer__sub a {
+  display: block;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+  padding: 8px 0;
+  border-bottom: 0;
+}
+.drawer__sub a:hover { color: var(--accent-ink); }
+
+.drawer__link {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--ink-deep);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.drawer__link--promo { font-style: italic; }
+.drawer__link--promo::before {
+  content: "•";
+  color: var(--accent-ink);
+  margin-right: 7px;
+  font-style: normal;
+  font-size: 1em;
+  vertical-align: middle;
+}
+.drawer__link--util {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--muted);
+  padding: 10px 0;
+}
+
+.drawer__foot { padding: 18px 0 24px; }
+.drawer__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); margin-bottom: 12px; }
+.drawer__foot-cta {
+  display: block;
+  font-family: var(--sans-product);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.drawer__foot-cta:last-child { border-bottom: 0; }
+
+/* ============================================================
+   Responsive · hide desktop panels on small screens
+   ============================================================ */
+@media (max-width: 920px) {
+  .mm-stage { display: none !important; }
+}
+
+@media (min-width: 921px) {
+  /* Hide drawer-only blocks just in case the drawer renders above 920px */
+  .drawer__foot { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-stage,
+  .drawer__chev { transition: none; }
+}

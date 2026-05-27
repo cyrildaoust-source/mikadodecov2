@@ -274,17 +274,67 @@ function bindAddToCart() {
   });
 }
 
-/* ---------- chrome + footer markup ---------- */
-const NAV = [
-  { label: "Mobilier", href: "/produits.html" },
-  { label: "Marques", href: "/marques.html" },
-  { label: "Extérieur", href: "/collections/mobilier-exterieur" },
-  { label: "Mikado Studio", href: "/studio.html" },
-  { label: "Le journal", href: "/journal.html" },
+/* ---------- chrome + footer markup ----------
+   NAV_TOP is the top-level fallback that renders immediately. Mega
+   menu sub-items + Marques dropdown contents are hydrated async by
+   /mega-menu.js from /api/menu (Shopify-driven). If the fetch fails,
+   the top-level still navigates (clicks land on the corresponding
+   collection page). */
+const NAV_TOP = [
+  { label: "Mobilier",      href: "/collections/all",         kind: "mega",     key: "mobilier" },
+  { label: "Marques",       href: "/collections",             kind: "dropdown", key: "marques"  },
+  { label: "Promotions",    href: "/collections/promotions",  kind: "promo" },
+  { label: "Mikado Studio", href: "/studio.html",             kind: "link"  },
+  { label: "Le journal",    href: "/journal.html",            kind: "link"  },
 ];
 
 function chromeHTML(active) {
-  const links = NAV.map((n) => `<a href="${n.href}" class="nlink${active === n.label ? " is-active" : ""}">${n.label}</a>`).join("");
+  const links = NAV_TOP.map((n) => {
+    const isActive = active === n.label;
+    const cls = ["nlink", isActive ? "is-active" : "", n.kind === "promo" ? "nlink--promo" : ""].filter(Boolean).join(" ");
+    const extra = (n.kind === "mega" || n.kind === "dropdown")
+      ? ` data-mm-trigger="${n.key}" aria-haspopup="true" aria-expanded="false"`
+      : "";
+    return `<a href="${n.href}" class="${cls}"${extra}>${n.label}</a>`;
+  }).join("");
+
+  // Mega panel stage — single off-flow container, hidden by default.
+  // Hydrated by /mega-menu.js after the chrome is in the DOM.
+  const stage = `
+    <div class="mm-stage" data-mm-stage>
+      <div class="mm-stage__inner">
+        <div class="mm-panel" data-mm-panel="mobilier"></div>
+        <div class="mm-panel" data-mm-panel="marques"></div>
+      </div>
+    </div>`;
+
+  // Mobile drawer — accordion sections for Mobilier/Marques, then
+  // flat links for Promotions / Studio / Le journal, plus a footer
+  // visual block hydrated from mega-menu-config.json.
+  const drawerHTML = `
+    <div class="drawer" data-drawer>
+      <div class="drawer__head">
+        <span class="drawer__title">Menu</span>
+        <button class="drawer__close" data-drawer-close aria-label="Fermer">&times;</button>
+      </div>
+      <div class="drawer__body">
+        <div class="drawer__group" data-open="false" data-drawer-group="mobilier">
+          <button type="button" class="drawer__group-head" aria-expanded="false">Mobilier <span class="drawer__chev" aria-hidden="true">▾</span></button>
+          <ul class="drawer__sub" data-drawer-sub="mobilier"></ul>
+        </div>
+        <div class="drawer__group" data-open="false" data-drawer-group="marques">
+          <button type="button" class="drawer__group-head" aria-expanded="false">Marques <span class="drawer__chev" aria-hidden="true">▾</span></button>
+          <ul class="drawer__sub" data-drawer-sub="marques"></ul>
+        </div>
+        <a class="drawer__link drawer__link--promo" href="/collections/promotions">Promotions</a>
+        <a class="drawer__link" href="/studio.html">Mikado Studio</a>
+        <a class="drawer__link" href="/journal.html">Le journal</a>
+        <a class="drawer__link drawer__link--util" href="/rendez-vous.html">Rendez-vous</a>
+        <a class="drawer__link drawer__link--util" href="/selection.html">Sélection</a>
+      </div>
+      <footer class="drawer__foot" data-drawer-foot></footer>
+    </div>`;
+
   return `
   <div class="chrome" data-chrome>
     <div class="announce" data-announce>
@@ -312,13 +362,9 @@ function chromeHTML(active) {
         </div>
       </div>
     </div>
+    ${stage}
   </div>
-  <div class="drawer" data-drawer>
-    <button class="drawer__close" data-drawer-close aria-label="Fermer">&times;</button>
-    ${NAV.map((n) => `<a href="${n.href}">${n.label}</a>`).join("")}
-    <a href="/selection.html">Sélection</a>
-    <a href="/rendez-vous.html">Rendez-vous</a>
-  </div>`;
+  ${drawerHTML}`;
 }
 
 function footerHTML() {
@@ -434,9 +480,18 @@ function bindAnnounce() {
 }
 
 /* ---------- entry ---------- */
+function ensureMegaMenuCss() {
+  if (document.querySelector('link[href="/mega-menu.css"]')) return;
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "/mega-menu.css";
+  document.head.appendChild(link);
+}
+
 export function initShell({ active = "", transparentNav = false } = {}) {
   const h = document.getElementById("site-header");
   const f = document.getElementById("site-footer");
+  ensureMegaMenuCss();
   if (h) h.innerHTML = chromeHTML(active);
   if (f) f.innerHTML = footerHTML();
   if (!transparentNav) document.body.classList.add("has-topnav");
@@ -448,4 +503,7 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   syncBadge();
   document.addEventListener("cart:change", syncBadge);
   bindReveal();
+  // Hydrate mega menu + dropdown async (fetches /api/menu).
+  // Top-level is already in the DOM; only sub-items wait on this.
+  import("/mega-menu.js").then(({ initMegaMenu }) => initMegaMenu()).catch((e) => console.warn("[shell] mega-menu init failed:", e.message));
 }
