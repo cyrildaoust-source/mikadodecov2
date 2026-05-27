@@ -181,13 +181,18 @@
     // tag/sort) still operate on the partial set — known V1 tradeoff.
     const state = { coll: collFromPath, cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false };
 
-    // Instant title paint before the /api/collection/<handle>/products
-    // fetch resolves. Avoids the "Le catalogue" flash on the well-known
-    // handles. render() may overwrite later with Shopify-confirmed data.
-    if (state.coll && COLL_TITLES[state.coll]) {
-      titleEl.textContent = COLL_TITLES[state.coll];
+    // Instant paint before the /api/collection/<handle>/products fetch
+    // resolves. On ANY collection page: blank the description (V2.1 —
+    // avoids the default "Mobilier de design…" flash) and hide chips.
+    // Title is set from the hardcoded map when known (V1.1 — avoids
+    // the "Le catalogue" flash). Both get silently overwritten by the
+    // Shopify payload when it arrives.
+    if (state.coll) {
       subEl.textContent = "";
       chipsBar.style.display = "none";
+      if (COLL_TITLES[state.coll]) {
+        titleEl.textContent = COLL_TITLES[state.coll];
+      }
     }
 
     const popScore = (p) => (p.featured ? 2 : 0) + (p.badge === "bestseller" ? 1 : 0);
@@ -272,10 +277,11 @@
       } else if (brandName) {
         titleEl.textContent = brandName;
         subEl.textContent = "Toutes les pièces de la maison.";
-      } else if (state.coll && COLL_TITLES[state.coll]) {
-        // Known collection but live payload not (yet) available —
-        // keep the hardcoded title rather than blink to "Le catalogue".
-        titleEl.textContent = COLL_TITLES[state.coll];
+      } else if (state.coll) {
+        // Collection page — payload not (yet) available. Title from
+        // the hardcoded map if known, else generic fallback.
+        // Description stays empty until Shopify responds (V2.1).
+        titleEl.textContent = COLL_TITLES[state.coll] || "Le catalogue";
         subEl.textContent = "";
       } else if (state.tag === PROMO_ETE_2026.tagSiege) {
         titleEl.textContent = "Promo · 4ème chaise offerte";
@@ -297,10 +303,16 @@
     // collection filter (from /collections/<handle> path or ?coll=
     // legacy query) hits the dedicated server-side endpoint;
     // /produits.html without filter hits /api/products?paginated=1.
+    // V2.1: `state.tag` is forwarded to the server when on a
+    // collection — Shopify ProductFilter narrows the result set
+    // upstream instead of the client filtering a partial batch.
     function endpointFor(cursor) {
       const q = new URLSearchParams({ limit: String(PAGE_SIZE) });
       if (cursor) q.set("cursor", cursor);
-      if (state.coll) return `/api/collection/${encodeURIComponent(state.coll)}/products?${q}`;
+      if (state.coll) {
+        if (state.tag) q.set("tag", state.tag);
+        return `/api/collection/${encodeURIComponent(state.coll)}/products?${q}`;
+      }
       q.set("paginated", "1");
       return `/api/products?${q}`;
     }

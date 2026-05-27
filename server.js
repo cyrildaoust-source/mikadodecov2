@@ -455,12 +455,12 @@ app.get('/api/collections', async (req, res) => {
 // (PLP grid empty on most collections) came from client-side filtering
 // a too-small 250-product window.
 const COLLECTION_PRODUCTS_QUERY = `
-  query GetCollectionProducts($handle: String!, $first: Int!, $after: String) {
+  query GetCollectionProducts($handle: String!, $first: Int!, $after: String, $filters: [ProductFilter!]) {
     collection(handle: $handle) {
       title
       description
       image { url altText }
-      products(first: $first, after: $after) {
+      products(first: $first, after: $after, filters: $filters) {
         pageInfo { hasNextPage endCursor }
         edges {
           cursor
@@ -507,12 +507,17 @@ const COLLECTION_PRODUCTS_QUERY = `
   }
 `;
 
-async function getCollectionProducts(handle, first, after) {
+async function getCollectionProducts(handle, first, after, tag) {
   const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
   const a   = after || null;
-  const key = `collection:${handle}:${f}:${a || 'first'}`;
+  const t   = (tag || '').trim() || null;
+  const key = `collection:${handle}:${t ? `tag-${t}:` : ''}${f}:${a || 'first'}`;
   return cached(key, async () => {
-    const data = await shopifyFetch(COLLECTION_PRODUCTS_QUERY, { handle, first: f, after: a });
+    // Shopify's ProductFilter list — empty = no filter, [{ tag }] =
+    // server-side tag filtering. Caching by tag prevents the V2 issue
+    // where "Voir plus" on a tag had to scroll past unrelated products.
+    const filters = t ? [{ tag: t }] : [];
+    const data = await shopifyFetch(COLLECTION_PRODUCTS_QUERY, { handle, first: f, after: a, filters });
     const c = data.collection;
     if (!c) return null;
     const items = c.products.edges.map(({ node }) => mapProduct(node));
@@ -530,14 +535,16 @@ async function getCollectionProducts(handle, first, after) {
 }
 
 // ─── API: GET COLLECTION PRODUCTS ──────────────────────
-// GET /api/collection/:handle/products?cursor=...&limit=50
+// GET /api/collection/:handle/products?cursor=...&limit=50&tag=<tag>
 // Returns { collection: { title, description, image }, items, pageInfo }
+// `tag` is an optional Shopify ProductFilter — when present, only
+// products carrying that tag are returned (paginated server-side).
 // 404 when the handle does not exist in Shopify.
 app.get('/api/collection/:handle/products', async (req, res) => {
   try {
     const { handle } = req.params;
-    const { cursor, limit } = req.query;
-    const payload = await getCollectionProducts(handle, limit, cursor);
+    const { cursor, limit, tag } = req.query;
+    const payload = await getCollectionProducts(handle, limit, cursor, tag);
     if (!payload) return res.status(404).json({ error: 'collection_not_found' });
     res.json(payload);
   } catch (err) {

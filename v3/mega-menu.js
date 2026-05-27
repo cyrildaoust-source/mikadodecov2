@@ -1,12 +1,11 @@
 /* ============================================================
-   Mikadodeco · Mega menu controller (V2)
-   Fetches /api/menu (Shopify-driven, cached server-side 5 min) +
-   /mega-menu-config.json (editorial "coup de cœur") + /mega-menu-
-   designers.json (Marques→Designers map). Both mega menus run the
-   same full-width stage; Marques now has its own column layout
-   (Brands · Designers · side panel) instead of the V1 dropdown.
-   Top-level NAV labels/hrefs live in shared.js as the fallback
-   so the chrome renders instantly with no flash.
+   Mikadodeco · Mega menu controller (V2.1)
+   - Mobilier  : Shopify-driven (menu(handle:"main-menu"))
+   - Marques   : fully hardcoded from /mega-menu-brands.json
+                 (15 brands + featured collections + flat designer list)
+   - Side panel "Coup de cœur" from /mega-menu-config.json (restored)
+   Top-level NAV labels/hrefs live in shared.js as the fallback so
+   the chrome renders instantly with no flash.
    ============================================================ */
 
 import { escapeHtml } from "/shared.js";
@@ -14,12 +13,12 @@ import { escapeHtml } from "/shared.js";
 const OPEN_DELAY  = 100;
 const CLOSE_DELAY = 200;
 
-let config    = null;   // mega-menu-config.json
-let designers = null;   // mega-menu-designers.json
-let menu      = null;   // /api/menu payload
-let stageEl   = null;   // shared panel container injected after .chrome
+let config     = null;   // mega-menu-config.json (side panel)
+let brandsData = null;   // mega-menu-brands.json (Marques hardcode)
+let menu       = null;   // /api/menu (Mobilier only)
+let stageEl    = null;
 
-const TOP = { mobilier: null, marques: null };
+const TOP = { mobilier: null };
 
 // --- public ---------------------------------------------------
 
@@ -27,14 +26,14 @@ export async function initMegaMenu() {
   stageEl = document.querySelector("[data-mm-stage]");
   if (!stageEl) return;
   try {
-    const [menuRes, cfgRes, desRes] = await Promise.all([
+    const [menuRes, cfgRes, brandsRes] = await Promise.all([
       fetch("/api/menu",                  { cache: "no-store"    }).then((r) => r.json()).catch(() => ({ ok: false, items: [] })),
       fetch("/mega-menu-config.json",     { cache: "force-cache" }).then((r) => r.json()).catch(() => ({})),
-      fetch("/mega-menu-designers.json",  { cache: "force-cache" }).then((r) => r.json()).catch(() => ({})),
+      fetch("/mega-menu-brands.json",     { cache: "force-cache" }).then((r) => r.json()).catch(() => ({ brands: [], designers: [] })),
     ]);
-    menu      = menuRes;
-    config    = cfgRes      || {};
-    designers = desRes      || {};
+    menu       = menuRes;
+    config     = cfgRes      || {};
+    brandsData = brandsRes   || { brands: [], designers: [] };
     indexTopItems(menu.items || []);
     hydrateMobilier();
     hydrateMarques();
@@ -48,20 +47,15 @@ export async function initMegaMenu() {
   }
 }
 
-// --- data layer ----------------------------------------------
-
 function indexTopItems(items) {
   for (const it of items) {
     const key = (it.title || "").trim().toLowerCase();
-    if (key === "mobilier")     TOP.mobilier = it;
-    else if (key === "marques") TOP.marques  = it;
+    if (key === "mobilier") TOP.mobilier = it;
   }
 }
 
 // --- shared side panel render ---------------------------------
 
-// "Coup de cœur du moment" block, used by both mega menus.
-// Returns "" when no block is configured for that mega.
 function coupDeCoeurHTML(megaKey) {
   const cdc = config?.[megaKey]?.coupDeCoeur;
   if (!cdc || !cdc.image) return "";
@@ -76,17 +70,13 @@ function coupDeCoeurHTML(megaKey) {
     </aside>`;
 }
 
-// --- desktop hydration ---------------------------------------
+// --- Mobilier mega (Shopify-driven, unchanged) ----------------
 
 function hydrateMobilier() {
   const panel = stageEl.querySelector('[data-mm-panel="mobilier"]');
   if (!panel) return;
   const top = TOP.mobilier;
   if (!top || !top.items?.length) { panel.innerHTML = ""; return; }
-
-  // 4+3 grid: stable layout regardless of viewport. CSS handles the
-  // grid-template-columns: repeat(4, 1fr) so we just render the 7
-  // categories in source order; Shopify drives the order.
   const colsHtml = top.items.map((cat) => {
     const subs = (cat.items || []).map((sub) =>
       `<li><a href="${escapeHtml(sub.url)}">${escapeHtml(sub.title)}</a></li>`
@@ -97,7 +87,6 @@ function hydrateMobilier() {
         <ul class="mm-col__list">${subs}</ul>
       </div>`;
   }).join("");
-
   panel.innerHTML = `
     <div class="mm-mega mm-mega--mobilier">
       <div class="mm-mega__cols">${colsHtml}</div>
@@ -105,45 +94,46 @@ function hydrateMobilier() {
     </div>`;
 }
 
+// --- Marques mega (V2.1: fully hardcoded) ---------------------
+
 function hydrateMarques() {
   const panel = stageEl.querySelector('[data-mm-panel="marques"]');
   if (!panel) return;
-  const top = TOP.marques;
-  if (!top || !top.items?.length) { panel.innerHTML = ""; return; }
+  const brands    = brandsData?.brands || [];
+  const designers = brandsData?.designers || [];
+  if (!brands.length) { panel.innerHTML = ""; return; }
 
-  // Column 1 — Brands (Shopify ordered)
-  const brandLinks = top.items.map((b) =>
-    `<a href="${escapeHtml(b.url)}">${escapeHtml(b.title)}</a>`
+  // Each brand card = name + (optional) flat list of featured collections.
+  // CSS lays them out in an auto-fit grid (3-4 cols on desktop).
+  const brandCards = brands.map((b) => {
+    const collsHtml = (b.collections || []).map((c) =>
+      `<li><a href="${escapeHtml(b.href)}?tag=${encodeURIComponent(c.tag)}">${escapeHtml(c.name)}</a></li>`
+    ).join("");
+    return `
+      <div class="mm-brand">
+        <a class="mm-brand__name" href="${escapeHtml(b.href)}">${escapeHtml(b.name)}</a>
+        ${collsHtml ? `<ul class="mm-brand__colls">${collsHtml}</ul>` : ""}
+      </div>`;
+  }).join("");
+
+  // Designers — flat alphabetic list, name only, link to /marques.html
+  // (placeholder until the dedicated designers page exists).
+  const desHtml = designers.map((d) =>
+    `<a href="/marques.html">${escapeHtml(d)}</a>`
   ).join("");
-
-  // Column 2 — Designers grouped by brand (config-driven). Only the
-  // brands that appear in mega-menu-designers.json render here; the
-  // others stay listed in column 1 without a designer block.
-  const designerGroups = (top.items || [])
-    .filter((b) => Array.isArray(designers?.[b.title]) && designers[b.title].length)
-    .map((b) => {
-      const names = designers[b.title].map((d) =>
-        `<a href="${escapeHtml(d.href)}">${escapeHtml(d.name)}</a>`
-      ).join("");
-      return `
-        <div class="mm-des__group">
-          <div class="mm-des__brand">· ${escapeHtml(b.title)}</div>
-          <div class="mm-des__list">${names}</div>
-        </div>`;
-    }).join("");
 
   panel.innerHTML = `
     <div class="mm-mega mm-mega--marques">
       <div class="mm-marques">
         <div class="mm-marques__col">
           <div class="mm-col__head">Nos marques</div>
-          <div class="mm-brands">${brandLinks}</div>
+          <div class="mm-brands-grid">${brandCards}</div>
           <a class="mm-marques__all" href="/marques.html">Toutes les marques →</a>
         </div>
         <div class="mm-marques__col mm-marques__col--des">
           <div class="mm-col__head">Designers</div>
-          <div class="mm-des">${designerGroups}</div>
-          <a class="mm-marques__all" href="/designers.html">Tous les designers →</a>
+          <div class="mm-des-flat">${desHtml}</div>
+          <a class="mm-marques__all" href="/marques.html">Tous les designers →</a>
         </div>
       </div>
       ${coupDeCoeurHTML("marques")}
@@ -159,16 +149,17 @@ function hydrateDrawer() {
       `<li><a href="${escapeHtml(c.url)}">${escapeHtml(c.title)}</a></li>`
     ).join("");
   }
+  // Marques drawer: 15 brands, name only — featured collections skipped
+  // on mobile (V2.1 decision: drawer is already long).
   const brSub = document.querySelector('[data-drawer-sub="marques"]');
-  if (brSub && TOP.marques?.items?.length) {
-    const links = TOP.marques.items.map((b) =>
-      `<li><a href="${escapeHtml(b.url)}">${escapeHtml(b.title)}</a></li>`
+  if (brSub && brandsData?.brands?.length) {
+    const links = brandsData.brands.map((b) =>
+      `<li><a href="${escapeHtml(b.href)}">${escapeHtml(b.name)}</a></li>`
     ).join("");
     brSub.innerHTML = links + `<li><a href="/marques.html" style="font-style:italic">Toutes les marques →</a></li>`;
   }
-  // Drawer footer: render the Mobilier coup de cœur as the bottom
-  // editorial block (single source of truth, the same JSON as the
-  // desktop side panel).
+  // Drawer footer reuses the Mobilier coup de cœur as the bottom
+  // editorial block (single source of truth, same JSON as desktop).
   const foot = document.querySelector("[data-drawer-foot]");
   const cdc  = config?.mobilier?.coupDeCoeur;
   if (foot && cdc?.image) {
@@ -219,7 +210,6 @@ function open(key) {
   stageEl.querySelectorAll(".mm-panel").forEach((p) => p.classList.remove("is-active"));
   panel.classList.add("is-active");
   stageEl.dataset.mmKey = key;
-  // Both mega menus are now full-width; no per-key positioning.
   stageEl.classList.add("is-open");
   setExpanded(key, true);
   openKey = key;

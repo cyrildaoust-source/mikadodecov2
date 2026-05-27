@@ -1,0 +1,168 @@
+{
+  "_note": "V2.1: Marques mega menu fully hardcoded (no Shopify fetch). Cyril edits this file to add/remove brands or feature collections. Each collection.tag points at a Shopify product tag — the catalog filters server-side via /api/collection/<brand>/products?tag=<tag>.",
+  "brands": [
+    {
+      "name": "Vitra",
+      "href": "/collections/vitra",
+      "collections": [
+        { "name": "Soft pad chair", "tag": "soft-pad-chair" },
+        { "name": "Hal", "tag": "hal" },
+        { "name": "Soft modular sofa", "tag": "soft-modular-sofa" },
+        { "name": "Wooden doll", "tag": "wooden-doll" },
+        { "name": "Akari", "tag": "akari-suspensions" }
+      ]
+    },
+    {
+      "name": "Fermob",
+      "href": "/collections/fermob",
+      "collections": [
+        { "name": "Bistro", "tag": "bistro" },
+        { "name": "Luxembourg", "tag": "luxembourg" },
+        { "name": "Bellevie", "tag": "bellevie" },
+        { "name": "1900", "tag": "1900" }
+      ]
+    },
+    {
+      "name": "&Tradition",
+      "href": "/collections/tradition",
+      "collections": [
+        { "name": "Flowerpot", "tag": "flowerpot" },
+        { "name": "Thorvald", "tag": "thorvald" },
+        { "name": "Hi Lo", "tag": "hi-lo" },
+        { "name": "Rely", "tag": "rely" }
+      ]
+    },
+    {
+      "name": "HAY",
+      "href": "/collections/hay",
+      "collections": [
+        { "name": "Palissade", "tag": "palissade" },
+        { "name": "About a chair", "tag": "about-a-chair" },
+        { "name": "Rey", "tag": "rey" },
+        { "name": "Mags", "tag": "mags" },
+        { "name": "Color crate", "tag": "color-crate" }
+      ]
+    },
+    {
+      "name": "Muuto",
+      "href": "/collections/muuto",
+      "collections": [
+        { "name": "Stacked system", "tag": "stacked-system" },
+        { "name": "Dots wood", "tag": "dots-wood" },
+        { "name": "Connect modular sofa", "tag": "connect-modular-sofa" },
+        { "name": "Restore", "tag": "restore" },
+        { "name": "Linear", "tag": "linear" }
+      ]
+    },
+    {
+      "name": "Ferm Living",
+      "href": "/collections/ferm-living",
+      "collections": [
+        { "name": "Ripple", "tag": "ripple" },
+        { "name": "Pond", "tag": "pond" },
+        { "name": "Arum", "tag": "arum" },
+        { "name": "Mist", "tag": "mist" }
+      ]
+    },
+    {
+      "name": "Alessi",
+      "href": "/collections/alessi",
+      "collections": [
+        { "name": "9090", "tag": "9090" },
+        { "name": "Itsumo", "tag": "itsumo" },
+        { "name": "Mediterraneo", "tag": "mediterraneo" },
+        { "name": "Plissé", "tag": "plisse" },
+        { "name": "Moka", "tag": "moka" }
+      ]
+    },
+    {
+      "name": "Iittala",
+      "href": "/collections/iittala",
+      "collections": [
+        { "name": "Essence", "tag": "essence" },
+        { "name": "Teema", "tag": "teema" },
+        { "name": "Kastehelmi", "tag": "kastehelmi" },
+        { "name": "Vulpes", "tag": "vulpes" }
+      ]
+    },
+    {
+      "name": "Serax",
+      "href": "/collections/serax",
+      "collections": [
+        { "name": "Carte blanche", "tag": "carte-blanche" },
+        { "name": "Dé", "tag": "de" },
+        { "name": "Sculptural Confluence", "tag": "sculptural-confluence" },
+        { "name": "Verde Lanza", "tag": "verde-lanza" },
+        { "name": "Base", "tag": "base" }
+      ]
+    },
+    {
+      "name": "Marimekko",
+      "href": "/collections/marimekko",
+      "collections": []
+    },
+    {
+      "name": "Anglepoise",
+      "href": "/collections/anglepoise",
+      "collections": []
+    },
+    {
+      "name": "Artek",
+      "href": "/collections/artek",
+      "collections": [
+        { "name": "Stool 60", "tag": "stool-60" },
+        { "name": "Screen", "tag": "screen" },
+        { "name": "Arm chair 41", "tag": "arm-chair-41" }
+      ]
+    },
+    {
+      "name": "Fatboy",
+      "href": "/collections/fatboy",
+      "collections": [
+        { "name": "Boelleke", "tag": "boelleke" },
+        { "name": "Original", "tag": "original" },
+        { "name": "Edison", "tag": "edison" },
+        { "name": "Sumo", "tag": "sumo" },
+        { "name": "Lamzac", "tag": "lamzac" }
+      ]
+    },
+    {
+      "name": "HKliving",
+      "href": "/collections/hkliving",
+      "collections": [
+        { "name": "70s ceramics", "tag": "70s-ceramics" },
+        { "name": "Teun Zwets", "tag": "teun-zwets" },
+        { "name": "New classics", "tag": "new-classics" }
+      ]
+    },
+    {
+      "name": "Pols Potten",
+      "href": "/collections/pols-potten",
+      "collections": [
+        { "name": "Zigzag", "tag": "zigzag" },
+        { "name": "Rijksmuseum", "tag": "rijksmuseum" },
+        { "name": "Polygon", "tag": "polygon" }
+      ]
+    }
+  ],
+  "designers": [
+    "Achille Castiglioni",
+    "Alvar Aalto",
+    "Anderssen & Voll",
+    "Anita Le Grelle",
+    "Arne Jacobsen",
+    "Cecilie Manz",
+    "Charles & Ray Eames",
+    "Frédéric Sofia",
+    "Isamu Noguchi",
+    "Jasper Morrison",
+    "Jean Prouvé",
+    "Marie Michielssen",
+    "Mette & Rolf Hay",
+    "Norm Architects",
+    "Patricia Urquiola",
+    "Philippe Starck",
+    "Verner Panton",
+    "Vincent Van Duysen"
+  ]
+}

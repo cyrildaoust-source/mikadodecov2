@@ -118,65 +118,77 @@
 }
 
 /* ============================================================
-   MARQUES MEGA · 2 inner columns (Brands · Designers) + side
+   MARQUES MEGA (V2.1) · brand grid (3-4 cols) + flat designer list
+   The mega itself is the same 2-col shell as Mobilier (.mm-mega
+   = `1fr 280px`). Inner = mm-marques (brands + designers).
    ============================================================ */
 .mm-marques {
   display: grid;
-  grid-template-columns: minmax(220px, 0.9fr) 1.4fr;
-  gap: clamp(28px, 4vw, 56px);
+  grid-template-columns: 2.2fr 1fr;
+  gap: clamp(28px, 4vw, 48px);
 }
-.mm-marques__col { display: flex; flex-direction: column; }
+.mm-marques__col { display: flex; flex-direction: column; min-width: 0; }
 
-/* Brands — 2 internal columns of names (6 + 5) */
-.mm-brands {
+/* Brand cards — name on top, featured collections under */
+.mm-brands-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px 18px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px 24px;
   margin-bottom: 18px;
 }
-.mm-brands a {
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  color: var(--ink);
-  padding: 2px 0;
-  border-bottom: 1px solid transparent;
-  transition: color .18s var(--ease), border-color .18s var(--ease);
-}
-.mm-brands a:hover,
-.mm-brands a:focus-visible {
-  color: var(--accent-ink);
-  border-bottom-color: var(--accent-ink);
-  outline: none;
-}
-
-/* Designers — groups by brand */
-.mm-des {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 24px;
-  margin-bottom: 18px;
-}
-.mm-des__group { display: flex; flex-direction: column; }
-.mm-des__brand {
+.mm-brand { display: flex; flex-direction: column; }
+.mm-brand__name {
   font-family: var(--sans-product);
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-  margin-bottom: 6px;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: 0;
 }
-.mm-des__list { display: flex; flex-direction: column; gap: 3px; }
-.mm-des__list a {
+.mm-brand__name:hover {
+  color: var(--accent-ink);
+}
+.mm-brand__colls {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mm-brand__colls a {
   font-family: var(--sans);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--muted);
   padding: 1px 0;
   border-bottom: 1px solid transparent;
   transition: color .18s var(--ease), border-color .18s var(--ease);
 }
-.mm-des__list a:hover,
-.mm-des__list a:focus-visible {
+.mm-brand__colls a:hover,
+.mm-brand__colls a:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+  outline: none;
+}
+
+/* Designers — flat alphabetic list, multi-column flow */
+.mm-des-flat {
+  column-count: 2;
+  column-gap: 18px;
+  margin-bottom: 18px;
+}
+.mm-des-flat a {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 2px 0;
+  break-inside: avoid;
+  border-bottom: 1px solid transparent;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
+}
+.mm-des-flat a:hover,
+.mm-des-flat a:focus-visible {
   color: var(--ink);
   border-bottom-color: var(--ink);
   outline: none;
