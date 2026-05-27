@@ -22,6 +22,7 @@
       "dest": "/v3/$1"
     },
     { "src": "/(.*\\.[a-zA-Z0-9]+)", "dest": "/v3/$1" },
+    { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
     { "src": "/collections/(.+)", "dest": "/v3/produits.html" },
     { "src": "/", "dest": "/v3/index.html" },
     { "src": "/(.+)", "dest": "/v3/$1.html" }
