@@ -60,9 +60,11 @@ app.use(express.json());
 // Metafields must be enabled in Shopify admin → Settings → Custom data → Products
 // Namespaces used: "custom" — keys: designer, year, material, dimensions, lead_time, subcategory
 const PRODUCTS_QUERY = `
-  query GetProducts($first: Int!) {
-    products(first: $first) {
+  query GetProducts($first: Int!, $after: String) {
+    products(first: $first, after: $after) {
+      pageInfo { hasNextPage endCursor }
       edges {
+        cursor
         node {
           id
           title
@@ -207,10 +209,27 @@ function mapProduct(node) {
   };
 }
 
+// Legacy: returns up to 250 products as a flat array. Kept untouched
+// because home/selection/produit pages + getBrands/getPromos all read
+// this shape directly. The new paginated mode lives in getProductsPage.
 async function getProducts() {
   return cached('products', async () => {
     const data = await shopifyFetch(PRODUCTS_QUERY, { first: 250 });
     return data.products.edges.map(({ node }) => mapProduct(node));
+  });
+}
+
+// Paginated catalog used by the PLP. Cached per (first, after) so each
+// "Voir plus" click is sub-5ms after the first warm-up. Returns the
+// Shopify-native shape `{ items, pageInfo }`.
+async function getProductsPage(first, after) {
+  const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
+  const a   = after || null;
+  const key = `products:page:${f}:${a || 'first'}`;
+  return cached(key, async () => {
+    const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a });
+    const items = data.products.edges.map(({ node }) => mapProduct(node));
+    return { items, pageInfo: data.products.pageInfo };
   });
 }
 
@@ -307,7 +326,9 @@ function mapCollection(node, index) {
 
 async function getCollections() {
   return cached('collections', async () => {
-    const data = await shopifyFetch(COLLECTIONS_QUERY, { first: 100 });
+    // Shopify shop currently has 147 collections; 250 leaves headroom
+    // without needing pagination.
+    const data = await shopifyFetch(COLLECTIONS_QUERY, { first: 250 });
     return data.collections.edges
       .map(({ node }, i) => mapCollection(node, i))
       // Exclude Shopify's built-in "All" / "Home page" collections
@@ -316,8 +337,19 @@ async function getCollections() {
 }
 
 // ─── API: GET PRODUCTS ─────────────────────────────────
+// Two modes:
+//   GET /api/products                              → legacy array (≤ 250 products)
+//     consumed by home (main.js), selection, produit, internal getPromos
+//   GET /api/products?paginated=1&limit=50&cursor= → { items, pageInfo }
+//     consumed by the new PLP at /produits.html
+// The legacy shape is contractual — 4 callers depend on it.
 app.get('/api/products', async (req, res) => {
   try {
+    const { paginated, cursor, limit } = req.query;
+    if (paginated || cursor || limit) {
+      const page = await getProductsPage(limit, cursor);
+      return res.json(page);
+    }
     const products = await getProducts();
     res.json(products);
   } catch (err) {
@@ -414,6 +446,103 @@ app.get('/api/collections', async (req, res) => {
   } catch (err) {
     console.error('Collections error:', err.message);
     res.status(500).json({ error: 'Impossible de charger les collections.' });
+  }
+});
+
+// ─── SHOPIFY: COLLECTION PRODUCTS QUERY ────────────────
+// Drives /collections/<handle> pages. We query Shopify directly by
+// handle so the products are pre-filtered server-side — the V1 bug
+// (PLP grid empty on most collections) came from client-side filtering
+// a too-small 250-product window.
+const COLLECTION_PRODUCTS_QUERY = `
+  query GetCollectionProducts($handle: String!, $first: Int!, $after: String) {
+    collection(handle: $handle) {
+      title
+      description
+      image { url altText }
+      products(first: $first, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        edges {
+          cursor
+          node {
+            id
+            title
+            vendor
+            productType
+            description
+            tags
+            availableForSale
+            totalInventory
+            collections(first: 20) { edges { node { handle } } }
+            featuredImage { url altText }
+            images(first: 8) { edges { node { url altText } } }
+            priceRange {
+              minVariantPrice { amount currencyCode }
+              maxVariantPrice { amount currencyCode }
+            }
+            variants(first: 250) {
+              edges {
+                node {
+                  id
+                  title
+                  price { amount currencyCode }
+                  availableForSale
+                  selectedOptions { name value }
+                  image { url altText }
+                }
+              }
+            }
+            metafields(identifiers: [
+              { namespace: "custom", key: "designer" }
+              { namespace: "custom", key: "year" }
+              { namespace: "custom", key: "material" }
+              { namespace: "custom", key: "dimensions" }
+              { namespace: "custom", key: "lead_time" }
+              { namespace: "custom", key: "subcategory" }
+            ]) { key value }
+          }
+        }
+      }
+    }
+  }
+`;
+
+async function getCollectionProducts(handle, first, after) {
+  const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
+  const a   = after || null;
+  const key = `collection:${handle}:${f}:${a || 'first'}`;
+  return cached(key, async () => {
+    const data = await shopifyFetch(COLLECTION_PRODUCTS_QUERY, { handle, first: f, after: a });
+    const c = data.collection;
+    if (!c) return null;
+    const items = c.products.edges.map(({ node }) => mapProduct(node));
+    return {
+      collection: {
+        handle,
+        title:       c.title || '',
+        description: c.description || '',
+        image:       c.image?.url || null,
+      },
+      items,
+      pageInfo: c.products.pageInfo,
+    };
+  });
+}
+
+// ─── API: GET COLLECTION PRODUCTS ──────────────────────
+// GET /api/collection/:handle/products?cursor=...&limit=50
+// Returns { collection: { title, description, image }, items, pageInfo }
+// 404 when the handle does not exist in Shopify.
+app.get('/api/collection/:handle/products', async (req, res) => {
+  try {
+    const { handle } = req.params;
+    const { cursor, limit } = req.query;
+    const payload = await getCollectionProducts(handle, limit, cursor);
+    if (!payload) return res.status(404).json({ error: 'collection_not_found' });
+    res.json(payload);
+  } catch (err) {
+    console.error('Collection products error:', err.message);
+    res.status(500).json({ error: 'Impossible de charger la collection.' });
   }
 });
 

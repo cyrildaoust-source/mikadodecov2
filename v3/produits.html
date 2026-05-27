@@ -91,7 +91,13 @@
     const collFromPath = prettyCollMatch ? decodeURIComponent(prettyCollMatch[1]) : "";
     let ALL = [];
     let COLLECTIONS_BY_HANDLE = {};
-    const state = { coll: collFromPath || params.get("coll") || "", cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", shown: 12 };
+    let COLLECTION_META = null; // set by /api/collection/:handle/products payload
+    const PAGE_SIZE = 50;
+    // V2: server-side pagination via cursor. state.cursor / state.hasMore
+    // drive the "Voir plus" button; state.shown disappeared (we render
+    // every product already loaded into ALL). Client filters (cat/brand/
+    // tag/sort) still operate on the partial set — known V1 tradeoff.
+    const state = { coll: collFromPath || params.get("coll") || "", cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false };
 
     const popScore = (p) => (p.featured ? 2 : 0) + (p.badge === "bestseller" ? 1 : 0);
     function base() {
@@ -148,9 +154,11 @@
 
       const popIds = new Set(pop.map((p) => p.id));
       const mainList = applySort(all.filter((p) => !popIds.has(p.id)));
-      const slice = mainList.slice(0, state.shown);
-      grid.innerHTML = slice.length ? slice.map(productCard).join("") : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
-      moreWrap.style.display = mainList.length > state.shown ? "flex" : "none";
+      grid.innerHTML = mainList.length ? mainList.map(productCard).join("") : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
+      // "Voir plus" reflects the server-side cursor — visible only when
+      // there is another batch upstream. Client-side filters do NOT hide
+      // it (a filter can match items in unfetched pages).
+      moreWrap.style.display = state.hasMore ? "flex" : "none";
       gridTitle.textContent = showPop ? "Tout le catalogue" : "Le catalogue";
 
       chipsBar.querySelectorAll(".chip").forEach((c) => c.classList.toggle("is-active", c.dataset.cat === state.cat));
@@ -160,7 +168,12 @@
       //   ?brand → brand name + standard subtitle
       //   ?tag   → readable label derived from the tag
       //   else   → default "Le catalogue"
-      const coll = state.coll ? COLLECTIONS_BY_HANDLE[state.coll] : null;
+      // Collection metadata: prefer the per-handle payload (always
+       // current) over the global /api/collections cache (subset).
+      const collFromMeta = COLLECTION_META && COLLECTION_META.handle === state.coll
+        ? { name: COLLECTION_META.title, description: COLLECTION_META.description }
+        : null;
+      const coll = collFromMeta || (state.coll ? COLLECTIONS_BY_HANDLE[state.coll] : null);
       const brandName = state.brand ? (ALL.find((p) => slugify(p.brand) === state.brand)?.brand || "") : "";
       if (coll) {
         titleEl.textContent = coll.name;
@@ -184,18 +197,85 @@
 
     let PROMOS = {};
 
-    Promise.all([fetchProducts(), fetchBrands(), fetchCollections()]).then(([prods, brands, colls]) => {
-      ALL = prods.filter((p) => p.image);
-      (colls || []).forEach((c) => { if (c.handle) COLLECTIONS_BY_HANDLE[c.handle] = c; });
-      brands.sort((a, b) => String(a.name).localeCompare(String(b.name))).forEach((b) => {
-        const o = document.createElement("option");
-        o.value = slugify(b.name); o.textContent = `${b.name} (${b.productCount})`;
-        if (o.value === state.brand) o.selected = true;
-        brandSel.appendChild(o);
-      });
-      sortSel.value = state.sort;
-      render();
-    }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`; console.warn(e); });
+    // Build the endpoint URL for the active route + cursor. Any
+    // collection filter (from /collections/<handle> path or ?coll=
+    // legacy query) hits the dedicated server-side endpoint;
+    // /produits.html without filter hits /api/products?paginated=1.
+    function endpointFor(cursor) {
+      const q = new URLSearchParams({ limit: String(PAGE_SIZE) });
+      if (cursor) q.set("cursor", cursor);
+      if (state.coll) return `/api/collection/${encodeURIComponent(state.coll)}/products?${q}`;
+      q.set("paginated", "1");
+      return `/api/products?${q}`;
+    }
+
+    async function fetchPage(cursor) {
+      const r = await fetch(endpointFor(cursor));
+      if (r.status === 404) return { _notFound: true };
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }
+
+    async function loadInitial() {
+      try {
+        const [pageData, brands, colls] = await Promise.all([
+          fetchPage(null),
+          fetchBrands(),
+          fetchCollections(),
+        ]);
+        (colls || []).forEach((c) => { if (c.handle) COLLECTIONS_BY_HANDLE[c.handle] = c; });
+        brands.sort((a, b) => String(a.name).localeCompare(String(b.name))).forEach((b) => {
+          const o = document.createElement("option");
+          o.value = slugify(b.name); o.textContent = `${b.name} (${b.productCount})`;
+          if (o.value === state.brand) o.selected = true;
+          brandSel.appendChild(o);
+        });
+        sortSel.value = state.sort;
+
+        if (pageData._notFound) {
+          titleEl.textContent = "Collection introuvable";
+          subEl.textContent = "";
+          grid.innerHTML = `<p class="plp-empty">Cette collection n'existe pas ou plus. <a href="/marques.html" style="color:var(--accent-ink)">Voir toutes les marques →</a></p>`;
+          moreWrap.style.display = "none";
+          popSection.style.display = "none";
+          chipsBar.style.display = "none";
+          countEl.textContent = "";
+          return;
+        }
+        if (pageData.collection) COLLECTION_META = pageData.collection;
+        ALL = (pageData.items || []).filter((p) => p.image);
+        state.cursor  = pageData.pageInfo?.endCursor || null;
+        state.hasMore = !!pageData.pageInfo?.hasNextPage;
+        render();
+      } catch (e) {
+        grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`;
+        console.warn(e);
+      }
+    }
+
+    async function loadMore() {
+      if (!state.hasMore || state.loading) return;
+      state.loading = true;
+      const btn = document.querySelector("[data-loadmore]");
+      const label = btn?.textContent;
+      if (btn) { btn.textContent = "…"; btn.disabled = true; }
+      try {
+        const data = await fetchPage(state.cursor);
+        if (data?.items?.length) {
+          ALL = ALL.concat(data.items.filter((p) => p.image));
+        }
+        state.cursor  = data?.pageInfo?.endCursor || null;
+        state.hasMore = !!data?.pageInfo?.hasNextPage;
+        render();
+      } catch (e) {
+        console.warn("loadMore:", e.message);
+      } finally {
+        state.loading = false;
+        if (btn) { btn.textContent = label || "Voir plus"; btn.disabled = false; }
+      }
+    }
+
+    loadInitial();
 
     // Background promo fetch — re-applies to the current grid (and to every
     // subsequent render via the applyPromos call inside render()).
@@ -204,11 +284,11 @@
 
     chipsBar.addEventListener("click", (e) => {
       const c = e.target.closest(".chip"); if (!c) return;
-      state.cat = c.dataset.cat; state.shown = 12; syncURL(); render();
+      state.cat = c.dataset.cat; syncURL(); render();
     });
-    brandSel.addEventListener("change", () => { state.brand = brandSel.value; state.shown = 12; syncURL(); render(); });
+    brandSel.addEventListener("change", () => { state.brand = brandSel.value; syncURL(); render(); });
     sortSel.addEventListener("change", () => { state.sort = sortSel.value; render(); });
-    document.querySelector("[data-loadmore]").addEventListener("click", () => { state.shown += 12; render(); });
+    document.querySelector("[data-loadmore]").addEventListener("click", loadMore);
   </script>
 </body>
 </html>
