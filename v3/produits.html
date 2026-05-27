@@ -71,6 +71,83 @@
     initShell({ active: "Mobilier", transparentNav: true });
 
     const CAT_LABEL = { tous:"Le catalogue", assises:"Assises", tables:"Tables", luminaires:"Luminaires", rangements:"Rangements", objets:"Objets", exterieur:"Extérieur" };
+
+    // Hardcoded handle → title map for the collections exposed in the
+    // mega menu. Used for instant title paint before the
+    // /api/collection/<handle>/products fetch resolves — avoids the
+    // "Le catalogue" flash. The Shopify payload still overrides this
+    // silently once it arrives (lets Cyril rename in admin).
+    const COLL_TITLES = {
+      // Mobilier > Sièges
+      "sieges": "Sièges",
+      "chaises": "Chaises",
+      "fauteuils": "Fauteuils",
+      "canapes": "Canapés",
+      "sieges-de-bureau": "Sièges de bureau",
+      "chaises-longues": "Chaises longues",
+      "tabourets-et-bancs": "Tabourets et bancs",
+      // Mobilier > Tables
+      "tables": "Tables",
+      "tables-de-salle-a-manger": "Tables de salle à manger",
+      "tables-de-cafe": "Tables de café",
+      "tables-basses-et-tables-dappoint": "Tables basses et tables d'appoint",
+      "bureaux": "Bureaux",
+      // Mobilier > Luminaires
+      "luminaires": "Luminaires",
+      "suspensions": "Suspensions",
+      "lampes-de-table": "Lampes de table",
+      "lampes-de-bureau": "Lampes de bureau",
+      "lampadaires": "Lampadaires",
+      "appliques": "Appliques",
+      "lampes-nomades": "Lampes nomades",
+      // Mobilier > Décoration
+      "decoration": "Décoration",
+      "vases": "Vases",
+      "bougeoirs-bougies-photophores": "Bougeoirs, bougies & photophores",
+      "miroirs": "Miroirs",
+      "coussins-plaids-tapis": "Coussins, plaids & tapis",
+      "cache-pots-jardinieres": "Cache-pots & jardinières",
+      "objets-decoratifs-cadres": "Objets décoratifs & cadres",
+      // Mobilier > Outdoor
+      "outdoor": "Mobilier outdoor",
+      "chaises-outdoor": "Chaises outdoor",
+      "tables-outdoor": "Tables outdoor",
+      "bancs-outdoor": "Bancs outdoor",
+      "bains-de-soleil-transats": "Bains de soleil & transats",
+      "parasols-ombrages": "Parasols & ombrages",
+      "brasero-barbecue": "Brasero & barbecue",
+      "accessoires-jardin": "Accessoires jardin",
+      // Mobilier > Rangement
+      "rangement": "Rangement",
+      "etageres-et-bibliotheques": "Étagères et bibliothèques",
+      "commodes-et-buffets": "Commodes et buffets",
+      "paniers-et-corbeilles": "Paniers et corbeilles",
+      "pateres-et-porte-manteaux": "Patères et porte-manteaux",
+      "dessertes-et-chariots": "Dessertes et chariots",
+      // Mobilier > Arts de la table
+      "accessoires": "Arts de la table",
+      "vaisselle-assiettes": "Vaisselle & assiettes",
+      "verres-carafes": "Verres & carafes",
+      "couverts": "Couverts",
+      "mugs-tasses-cafe": "Mugs, tasses & café",
+      "ustensiles-cuisine": "Ustensiles & cuisine",
+      // Marques
+      "vitra": "Vitra",
+      "fermob": "Fermob",
+      "tradition": "&Tradition",
+      "hay": "HAY",
+      "muuto": "Muuto",
+      "ferm-living": "Ferm Living",
+      "alessi": "Alessi",
+      "iittala": "Iittala",
+      "serax": "Serax",
+      "marimekko": "Marimekko",
+      "anglepoise": "Anglepoise",
+      "artek": "Artek",
+      "fatboy": "Fatboy",
+      "hkliving": "HKliving",
+      "pols-potten": "Pols Potten",
+    };
     const grid = document.querySelector("[data-grid]");
     const popGrid = document.querySelector("[data-pop-grid]");
     const popSection = document.querySelector("[data-pop-section]");
@@ -88,7 +165,12 @@
     // from the path. Falls back to ?coll= for backward-compat with anywhere
     // we still build URLs that way.
     const prettyCollMatch = location.pathname.match(/^\/collections\/(.+?)\/?$/);
-    const collFromPath = prettyCollMatch ? decodeURIComponent(prettyCollMatch[1]) : "";
+    const rawColl = prettyCollMatch ? decodeURIComponent(prettyCollMatch[1]) : (params.get("coll") || "");
+    // "all" is the Shopify CATALOG-type item ("Mobilier" in the mega
+    // menu) — there is no actual /collections/all on Storefront. Treat
+    // it as no collection filter so we fall back to the paginated
+    // catalog endpoint and keep the chips visible.
+    const collFromPath = rawColl === "all" ? "" : rawColl;
     let ALL = [];
     let COLLECTIONS_BY_HANDLE = {};
     let COLLECTION_META = null; // set by /api/collection/:handle/products payload
@@ -97,7 +179,16 @@
     // drive the "Voir plus" button; state.shown disappeared (we render
     // every product already loaded into ALL). Client filters (cat/brand/
     // tag/sort) still operate on the partial set — known V1 tradeoff.
-    const state = { coll: collFromPath || params.get("coll") || "", cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false };
+    const state = { coll: collFromPath, cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false };
+
+    // Instant title paint before the /api/collection/<handle>/products
+    // fetch resolves. Avoids the "Le catalogue" flash on the well-known
+    // handles. render() may overwrite later with Shopify-confirmed data.
+    if (state.coll && COLL_TITLES[state.coll]) {
+      titleEl.textContent = COLL_TITLES[state.coll];
+      subEl.textContent = "";
+      chipsBar.style.display = "none";
+    }
 
     const popScore = (p) => (p.featured ? 2 : 0) + (p.badge === "bestseller" ? 1 : 0);
     function base() {
@@ -181,6 +272,11 @@
       } else if (brandName) {
         titleEl.textContent = brandName;
         subEl.textContent = "Toutes les pièces de la maison.";
+      } else if (state.coll && COLL_TITLES[state.coll]) {
+        // Known collection but live payload not (yet) available —
+        // keep the hardcoded title rather than blink to "Le catalogue".
+        titleEl.textContent = COLL_TITLES[state.coll];
+        subEl.textContent = "";
       } else if (state.tag === PROMO_ETE_2026.tagSiege) {
         titleEl.textContent = "Promo · 4ème chaise offerte";
         subEl.textContent = "Les sièges d'extérieur éligibles à l'offre du 26 mai au 6 juin.";
