@@ -1,37 +1,40 @@
 /* ============================================================
-   Mikadodeco · Mega menu controller
-   Fetches /api/menu (Shopify-driven, cached server-side 5 min),
-   hydrates the Mobilier mega panel + Marques dropdown + the mobile
-   drawer accordions. Wires hover-open/close with delays, keyboard
-   support (Tab/Esc), and focus-out close.
-   Top-level NAV labels/hrefs live in shared.js as a hardcoded
-   fallback so the chrome renders instantly with no flash.
+   Mikadodeco · Mega menu controller (V2)
+   Fetches /api/menu (Shopify-driven, cached server-side 5 min) +
+   /mega-menu-config.json (editorial "coup de cœur") + /mega-menu-
+   designers.json (Marques→Designers map). Both mega menus run the
+   same full-width stage; Marques now has its own column layout
+   (Brands · Designers · side panel) instead of the V1 dropdown.
+   Top-level NAV labels/hrefs live in shared.js as the fallback
+   so the chrome renders instantly with no flash.
    ============================================================ */
 
-import { escapeHtml, slugify } from "/shared.js";
+import { escapeHtml } from "/shared.js";
 
 const OPEN_DELAY  = 100;
 const CLOSE_DELAY = 200;
 
-let config = null;     // mega-menu-config.json (lazy fetched alongside menu)
-let menu   = null;     // /api/menu payload
-let stageEl = null;    // shared panel container injected after .chrome
+let config    = null;   // mega-menu-config.json
+let designers = null;   // mega-menu-designers.json
+let menu      = null;   // /api/menu payload
+let stageEl   = null;   // shared panel container injected after .chrome
 
-// Lookup tables built once after fetch
 const TOP = { mobilier: null, marques: null };
 
 // --- public ---------------------------------------------------
 
 export async function initMegaMenu() {
   stageEl = document.querySelector("[data-mm-stage]");
-  if (!stageEl) return; // nav not rendered yet — caller should re-init
+  if (!stageEl) return;
   try {
-    const [menuRes, cfgRes] = await Promise.all([
-      fetch("/api/menu", { cache: "no-store" }).then((r) => r.json()).catch(() => ({ ok: false, items: [] })),
-      fetch("/mega-menu-config.json", { cache: "force-cache" }).then((r) => r.json()).catch(() => ({})),
+    const [menuRes, cfgRes, desRes] = await Promise.all([
+      fetch("/api/menu",                  { cache: "no-store"    }).then((r) => r.json()).catch(() => ({ ok: false, items: [] })),
+      fetch("/mega-menu-config.json",     { cache: "force-cache" }).then((r) => r.json()).catch(() => ({})),
+      fetch("/mega-menu-designers.json",  { cache: "force-cache" }).then((r) => r.json()).catch(() => ({})),
     ]);
-    menu = menuRes;
-    config = cfgRes || {};
+    menu      = menuRes;
+    config    = cfgRes      || {};
+    designers = desRes      || {};
     indexTopItems(menu.items || []);
     hydrateMobilier();
     hydrateMarques();
@@ -47,9 +50,6 @@ export async function initMegaMenu() {
 
 // --- data layer ----------------------------------------------
 
-// Match by lowercased title — Shopify item is "Mobilier" (renamed
-// from "Produits") and "Marques" exactly. If Cyril renames one,
-// hydration silently no-ops and the hardcoded top-level still works.
 function indexTopItems(items) {
   for (const it of items) {
     const key = (it.title || "").trim().toLowerCase();
@@ -58,17 +58,35 @@ function indexTopItems(items) {
   }
 }
 
+// --- shared side panel render ---------------------------------
+
+// "Coup de cœur du moment" block, used by both mega menus.
+// Returns "" when no block is configured for that mega.
+function coupDeCoeurHTML(megaKey) {
+  const cdc = config?.[megaKey]?.coupDeCoeur;
+  if (!cdc || !cdc.image) return "";
+  return `
+    <aside class="mm-side">
+      <div class="mm-side__label">${escapeHtml(cdc.label || "Coup de cœur du moment")}</div>
+      <div class="mm-side__rule" aria-hidden="true"></div>
+      <img class="mm-side__visual" src="${escapeHtml(cdc.image)}" alt="${escapeHtml(cdc.imageAlt || "")}" loading="lazy" />
+      ${cdc.title ? `<div class="mm-side__title">${escapeHtml(cdc.title)}</div>` : ""}
+      ${cdc.lead  ? `<p class="mm-side__lead">${escapeHtml(cdc.lead)}</p>` : ""}
+      ${cdc.ctaHref ? `<a class="mm-side__cta" href="${escapeHtml(cdc.ctaHref)}">${escapeHtml(cdc.ctaLabel || "Lire l'article")} →</a>` : ""}
+    </aside>`;
+}
+
 // --- desktop hydration ---------------------------------------
 
 function hydrateMobilier() {
   const panel = stageEl.querySelector('[data-mm-panel="mobilier"]');
   if (!panel) return;
   const top = TOP.mobilier;
-  if (!top || !top.items?.length) {
-    panel.innerHTML = "";
-    return;
-  }
-  const cfg = config.mobilier || {};
+  if (!top || !top.items?.length) { panel.innerHTML = ""; return; }
+
+  // 4+3 grid: stable layout regardless of viewport. CSS handles the
+  // grid-template-columns: repeat(4, 1fr) so we just render the 7
+  // categories in source order; Shopify drives the order.
   const colsHtml = top.items.map((cat) => {
     const subs = (cat.items || []).map((sub) =>
       `<li><a href="${escapeHtml(sub.url)}">${escapeHtml(sub.title)}</a></li>`
@@ -80,18 +98,10 @@ function hydrateMobilier() {
       </div>`;
   }).join("");
 
-  const sideHtml = cfg.image ? `
-    <aside class="mm-mega__side">
-      <img class="mm-mega__visual" src="${escapeHtml(cfg.image)}" alt="${escapeHtml(cfg.imageAlt || "")}" loading="lazy" />
-      ${cfg.ctaHref ? `<a class="mm-mega__cta" href="${escapeHtml(cfg.ctaHref)}">${escapeHtml(cfg.ctaLabel || "Découvrir")} →</a>` : ""}
-      <div class="mm-mega__sep"></div>
-      ${cfg.secondaryHref ? `<a class="mm-mega__second" href="${escapeHtml(cfg.secondaryHref)}">${escapeHtml(cfg.secondaryLabel || "Nouveautés")} →</a>` : ""}
-    </aside>` : "";
-
   panel.innerHTML = `
-    <div class="mm-mega">
+    <div class="mm-mega mm-mega--mobilier">
       <div class="mm-mega__cols">${colsHtml}</div>
-      ${sideHtml}
+      ${coupDeCoeurHTML("mobilier")}
     </div>`;
 }
 
@@ -100,29 +110,55 @@ function hydrateMarques() {
   if (!panel) return;
   const top = TOP.marques;
   if (!top || !top.items?.length) { panel.innerHTML = ""; return; }
-  const list = top.items.map((b) =>
+
+  // Column 1 — Brands (Shopify ordered)
+  const brandLinks = top.items.map((b) =>
     `<a href="${escapeHtml(b.url)}">${escapeHtml(b.title)}</a>`
   ).join("");
+
+  // Column 2 — Designers grouped by brand (config-driven). Only the
+  // brands that appear in mega-menu-designers.json render here; the
+  // others stay listed in column 1 without a designer block.
+  const designerGroups = (top.items || [])
+    .filter((b) => Array.isArray(designers?.[b.title]) && designers[b.title].length)
+    .map((b) => {
+      const names = designers[b.title].map((d) =>
+        `<a href="${escapeHtml(d.href)}">${escapeHtml(d.name)}</a>`
+      ).join("");
+      return `
+        <div class="mm-des__group">
+          <div class="mm-des__brand">· ${escapeHtml(b.title)}</div>
+          <div class="mm-des__list">${names}</div>
+        </div>`;
+    }).join("");
+
   panel.innerHTML = `
-    <div class="mm-drop">
-      ${list}
-      <div class="mm-drop__sep"></div>
-      <a class="mm-drop__all" href="/marques.html">Toutes les marques →</a>
+    <div class="mm-mega mm-mega--marques">
+      <div class="mm-marques">
+        <div class="mm-marques__col">
+          <div class="mm-col__head">Nos marques</div>
+          <div class="mm-brands">${brandLinks}</div>
+          <a class="mm-marques__all" href="/marques.html">Toutes les marques →</a>
+        </div>
+        <div class="mm-marques__col mm-marques__col--des">
+          <div class="mm-col__head">Designers</div>
+          <div class="mm-des">${designerGroups}</div>
+          <a class="mm-marques__all" href="/designers.html">Tous les designers →</a>
+        </div>
+      </div>
+      ${coupDeCoeurHTML("marques")}
     </div>`;
 }
 
 // --- mobile drawer hydration ---------------------------------
 
 function hydrateDrawer() {
-  // Mobilier section: list of 7 categories (link only, no sub-sub
-  // in V1 — direct navigation per brief §4 mobile note).
   const mobSub = document.querySelector('[data-drawer-sub="mobilier"]');
   if (mobSub && TOP.mobilier?.items?.length) {
     mobSub.innerHTML = TOP.mobilier.items.map((c) =>
       `<li><a href="${escapeHtml(c.url)}">${escapeHtml(c.title)}</a></li>`
     ).join("");
   }
-  // Marques section: list of 11 brands + "Toutes les marques".
   const brSub = document.querySelector('[data-drawer-sub="marques"]');
   if (brSub && TOP.marques?.items?.length) {
     const links = TOP.marques.items.map((b) =>
@@ -130,14 +166,18 @@ function hydrateDrawer() {
     ).join("");
     brSub.innerHTML = links + `<li><a href="/marques.html" style="font-style:italic">Toutes les marques →</a></li>`;
   }
-  // Bottom visual + shortcuts (mobilier config)
+  // Drawer footer: render the Mobilier coup de cœur as the bottom
+  // editorial block (single source of truth, the same JSON as the
+  // desktop side panel).
   const foot = document.querySelector("[data-drawer-foot]");
-  if (foot && config.mobilier?.image) {
-    const cfg = config.mobilier;
+  const cdc  = config?.mobilier?.coupDeCoeur;
+  if (foot && cdc?.image) {
     foot.innerHTML = `
-      <img class="drawer__visual" src="${escapeHtml(cfg.image)}" alt="${escapeHtml(cfg.imageAlt || "")}" loading="lazy" />
-      ${cfg.ctaHref ? `<a class="drawer__foot-cta" href="${escapeHtml(cfg.ctaHref)}">${escapeHtml(cfg.ctaLabel || "Découvrir")} →</a>` : ""}
-      ${cfg.secondaryHref ? `<a class="drawer__foot-cta" href="${escapeHtml(cfg.secondaryHref)}">${escapeHtml(cfg.secondaryLabel || "Nouveautés")} →</a>` : ""}
+      <div class="drawer__foot-label">${escapeHtml(cdc.label || "Coup de cœur du moment")}</div>
+      <img class="drawer__visual" src="${escapeHtml(cdc.image)}" alt="${escapeHtml(cdc.imageAlt || "")}" loading="lazy" />
+      ${cdc.title ? `<div class="drawer__foot-title">${escapeHtml(cdc.title)}</div>` : ""}
+      ${cdc.lead  ? `<p class="drawer__foot-lead">${escapeHtml(cdc.lead)}</p>` : ""}
+      ${cdc.ctaHref ? `<a class="drawer__foot-cta" href="${escapeHtml(cdc.ctaHref)}">${escapeHtml(cdc.ctaLabel || "Lire l'article")} →</a>` : ""}
     `;
   }
 }
@@ -153,7 +193,6 @@ function bindHover() {
     const key = t.dataset.mmTrigger;
     t.addEventListener("mouseenter", () => scheduleOpen(key));
     t.addEventListener("mouseleave", () => scheduleClose());
-    // Focus opens immediately so keyboard users see the panel.
     t.addEventListener("focus", () => open(key));
   });
   stageEl.addEventListener("mouseenter", () => cancelTimers());
@@ -176,38 +215,14 @@ function cancelTimers() {
 function open(key) {
   if (!stageEl || openKey === key) return;
   const panel = stageEl.querySelector(`[data-mm-panel="${key}"]`);
-  if (!panel || !panel.innerHTML.trim()) return; // not hydrated yet
-  // Hide other panels
+  if (!panel || !panel.innerHTML.trim()) return;
   stageEl.querySelectorAll(".mm-panel").forEach((p) => p.classList.remove("is-active"));
   panel.classList.add("is-active");
   stageEl.dataset.mmKey = key;
-  stageEl.classList.toggle("mm-stage--narrow", key === "marques");
-  positionStage(key);
+  // Both mega menus are now full-width; no per-key positioning.
   stageEl.classList.add("is-open");
   setExpanded(key, true);
   openKey = key;
-}
-
-// Anchor the stage relative to its trigger.
-// - Mobilier mega = full-width banner (default `left:0; right:0`)
-// - Marques dropdown = narrow box anchored under the Marques trigger,
-//   computed from getBoundingClientRect so it follows window resizes.
-function positionStage(key) {
-  if (!stageEl) return;
-  if (key === "marques") {
-    const trigger = document.querySelector(`[data-mm-trigger="${key}"]`);
-    const chrome  = stageEl.closest(".chrome") || document.body;
-    if (trigger) {
-      const tRect = trigger.getBoundingClientRect();
-      const cRect = chrome.getBoundingClientRect();
-      // Align left edge of dropdown with left edge of trigger.
-      stageEl.style.left  = (tRect.left - cRect.left) + "px";
-      stageEl.style.right = "auto";
-    }
-  } else {
-    stageEl.style.left  = "";
-    stageEl.style.right = "";
-  }
 }
 
 function close() {
@@ -233,13 +248,10 @@ function bindKeyboard() {
 }
 
 function bindFocus() {
-  // Close when focus moves outside the trigger AND the panel.
   document.addEventListener("focusin", (e) => {
     if (!openKey) return;
     const trigger = document.querySelector(`[data-mm-trigger="${openKey}"]`);
-    if (!stageEl.contains(e.target) && e.target !== trigger) {
-      close();
-    }
+    if (!stageEl.contains(e.target) && e.target !== trigger) close();
   });
 }
 

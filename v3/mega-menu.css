@@ -1,23 +1,46 @@
 /* ============================================================
-   Mikadodeco · Mega menu + dropdown
-   Drives the .nlink[data-mm-trigger] panels in the global chrome.
-   Reuses Mikado tokens (--paper, --ink, --accent-ink). All new
-   classes are .mm-* / .nlink--* to avoid touching the base nav.
+   Mikadodeco · Mega menu + drawer (V2)
+   Both Mobilier and Marques are full-width mega menus sharing the
+   same .mm-stage. Side panel renders a "Coup de cœur du moment"
+   block driven by mega-menu-config.json. All classes are .mm-* /
+   .nlink--* to stay safe under any host.
    ============================================================ */
 
-/* ---------- Promotions top-level (italic + accent dot) ---------- */
-.chrome a.nlink--promo { font-style: italic; }
-.chrome a.nlink--promo::before {
-  content: "•";
-  color: var(--accent-ink);
-  margin-right: 5px;
-  font-style: normal;
-  font-size: 1.3em;
-  line-height: 0;
-  vertical-align: middle;
-  display: inline-block;
-  transform: translateY(-1px);
+/* ============================================================
+   Header layout V2 · nav primary lives next to the logo (left).
+   Right side keeps just Rendez-vous + Sélection + burger.
+   The base .nav__inner grid (auto 1fr) from styles.css still
+   applies; we just lay out the new .nav__primary and align the
+   right cluster.
+   ============================================================ */
+.chrome .nav__left {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
 }
+.chrome .nav__primary {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.2vw, 32px);
+}
+.chrome .nav__right {
+  justify-content: flex-end;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+/* Hide the primary nav below desktop · drawer takes over.
+   Mirrors the .mm-stage breakpoint (1024px = brief V2 cut-off)
+   and pulls the burger / utility hides up from the styles.css
+   920px breakpoint so we don't leave 921-1023px with neither
+   mega menu nor burger visible. */
+@media (max-width: 1023px) {
+  .chrome .nav__primary { display: none; }
+  .chrome .nav__burger  { display: inline-flex; }
+  .chrome .nav__util-extra { display: none; }
+}
+
+/* ---------- Promotions top-level · italic only (V2: no pastille) -- */
+.chrome a.nlink--promo { font-style: italic; }
 
 /* ============================================================
    PANEL STAGE · single off-flow container that hosts the open panel
@@ -48,7 +71,7 @@
 .mm-panel.is-active { display: block; }
 
 /* ============================================================
-   MOBILIER MEGA · grid of category columns + side visual panel
+   SHARED MEGA SHELL · 2-zone grid (content + side panel)
    ============================================================ */
 .mm-mega {
   display: grid;
@@ -56,11 +79,14 @@
   gap: clamp(28px, 4vw, 56px);
   align-items: start;
 }
-.mm-mega__cols {
+
+/* ---------- MOBILIER · 4+3 forced grid (V2) ---------------- */
+.mm-mega--mobilier .mm-mega__cols {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 22px 28px;
 }
+
 .mm-col__head {
   display: block;
   font-family: var(--sans-product);
@@ -91,84 +117,134 @@
   outline: none;
 }
 
-/* side panel · ambiance image + CTA + secondary shortcut */
-.mm-mega__side {
+/* ============================================================
+   MARQUES MEGA · 2 inner columns (Brands · Designers) + side
+   ============================================================ */
+.mm-marques {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.9fr) 1.4fr;
+  gap: clamp(28px, 4vw, 56px);
+}
+.mm-marques__col { display: flex; flex-direction: column; }
+
+/* Brands — 2 internal columns of names (6 + 5) */
+.mm-brands {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 18px;
+  margin-bottom: 18px;
+}
+.mm-brands a {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--ink);
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
+}
+.mm-brands a:hover,
+.mm-brands a:focus-visible {
+  color: var(--accent-ink);
+  border-bottom-color: var(--accent-ink);
+  outline: none;
+}
+
+/* Designers — groups by brand */
+.mm-des {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+  margin-bottom: 18px;
+}
+.mm-des__group { display: flex; flex-direction: column; }
+.mm-des__brand {
+  font-family: var(--sans-product);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 6px;
+}
+.mm-des__list { display: flex; flex-direction: column; gap: 3px; }
+.mm-des__list a {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--muted);
+  padding: 1px 0;
+  border-bottom: 1px solid transparent;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
+}
+.mm-des__list a:hover,
+.mm-des__list a:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+  outline: none;
+}
+
+/* "Toutes les marques →" / "Tous les designers →" footer link */
+.mm-marques__all {
+  margin-top: auto;
+  font-family: var(--sans);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--muted);
+  align-self: flex-start;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  width: 100%;
+}
+.mm-marques__all:hover { color: var(--ink); }
+
+/* ============================================================
+   SIDE PANEL · "Coup de cœur du moment" (shared by both megas)
+   ============================================================ */
+.mm-side {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
   padding-left: clamp(20px, 2vw, 32px);
   border-left: 1px solid rgba(26, 25, 22, 0.1);
 }
-.mm-mega__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); }
-.mm-mega__cta {
-  display: inline-block;
+.mm-side__label {
+  font-family: var(--sans-product);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.mm-side__rule { height: 1px; background: var(--line); margin: 2px 0 6px; }
+.mm-side__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); margin-bottom: 4px; }
+.mm-side__title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  color: var(--ink-deep);
+}
+.mm-side__lead {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 2px 0 6px;
+}
+.mm-side__cta {
   font-family: var(--sans-product);
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--ink);
-  padding: 4px 0;
+  align-self: flex-start;
+  padding: 2px 0;
   border-bottom: 1px solid var(--ink);
-  align-self: flex-start;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
 }
-.mm-mega__cta:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
-.mm-mega__sep { height: 1px; background: var(--line); margin: 2px 0 4px; }
-.mm-mega__second {
-  display: inline-block;
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  color: var(--muted);
-  align-self: flex-start;
-  transition: color .18s var(--ease);
-}
-.mm-mega__second:hover { color: var(--ink); }
+.mm-side__cta:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
 
 /* ============================================================
-   MARQUES DROPDOWN · single column, narrow, paper bg
-   ============================================================ */
-/* JS anchors the stage under the Marques trigger (sets `left` in px,
-   `right: auto`). We shrink the stage itself so the paper bg hugs
-   the dropdown column instead of stretching full-width. */
-.mm-stage.mm-stage--narrow {
-  width: 240px;
-  min-width: 240px;
-  right: auto;
-}
-.mm-stage--narrow .mm-stage__inner {
-  max-width: none;
-  margin: 0;
-  padding: 18px 22px 20px;
-}
-.mm-drop {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.mm-drop a {
-  display: block;
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  color: var(--ink);
-  padding: 6px 0;
-  transition: color .18s var(--ease);
-}
-.mm-drop a:hover { color: var(--accent-ink); }
-.mm-drop__sep { height: 1px; background: var(--line); margin: 8px 0 6px; }
-.mm-drop__all {
-  font-family: var(--sans);
-  font-style: italic;
-  font-size: 0.85rem;
-  color: var(--muted);
-  display: inline-block;
-  padding-top: 2px;
-}
-.mm-drop__all:hover { color: var(--ink); }
-
-/* ============================================================
-   DRAWER (mobile) · accordion top-level + bottom visual zone
-   Overrides the base .drawer styles (kept in styles.css) with
-   the richer V2 markup. The base .drawer rules (slide-in,
-   background, padding) still apply; we add structure on top.
+   DRAWER (mobile) · accordion top-level + bottom editorial block
    ============================================================ */
 .drawer__head {
   display: flex;
@@ -185,7 +261,6 @@
   text-transform: uppercase;
   color: var(--subtle);
 }
-/* tighten the existing .drawer__close (already in styles.css) */
 .drawer .drawer__head .drawer__close { font-size: 28px; line-height: 1; margin: 0; }
 
 .drawer__body { flex: 1 1 auto; overflow-y: auto; }
@@ -232,14 +307,6 @@
   border-bottom: 1px solid var(--line);
 }
 .drawer__link--promo { font-style: italic; }
-.drawer__link--promo::before {
-  content: "•";
-  color: var(--accent-ink);
-  margin-right: 7px;
-  font-style: normal;
-  font-size: 1em;
-  vertical-align: middle;
-}
 .drawer__link--util {
   font-family: var(--sans);
   font-size: 0.95rem;
@@ -249,28 +316,55 @@
 }
 
 .drawer__foot { padding: 18px 0 24px; }
-.drawer__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); margin-bottom: 12px; }
-.drawer__foot-cta {
-  display: block;
+.drawer__foot-label {
   font-family: var(--sans-product);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 8px;
+}
+.drawer__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); margin-bottom: 10px; }
+.drawer__foot-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink-deep);
+  margin-bottom: 4px;
+}
+.drawer__foot-lead {
+  font-family: var(--sans);
   font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.drawer__foot-cta {
+  display: inline-block;
+  font-family: var(--sans-product);
+  font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--ink);
-  padding: 8px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 2px 0;
+  border-bottom: 1px solid var(--ink);
 }
-.drawer__foot-cta:last-child { border-bottom: 0; }
 
 /* ============================================================
-   Responsive · hide desktop panels on small screens
+   Responsive
    ============================================================ */
-@media (max-width: 920px) {
+@media (max-width: 1180px) {
+  .mm-mega { grid-template-columns: 1fr 240px; }
+  .mm-marques { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 1023px) {
+  /* Below 1024px we fall back to the mobile accordion drawer; the
+     mega menu must stay hidden so it doesn't peek behind the nav. */
   .mm-stage { display: none !important; }
 }
 
-@media (min-width: 921px) {
-  /* Hide drawer-only blocks just in case the drawer renders above 920px */
+@media (min-width: 1024px) {
   .drawer__foot { display: none; }
 }
 

@@ -1,0 +1,38 @@
+{
+  "_note": "Designers featured in the Marques mega menu, grouped by brand. V2: links point to the brand collection (real /designers.html arrives in a later chantier). Brands omitted from this file (Ferm Living, Iittala, Marimekko, Anglepoise) intentionally skip the designer section but stay listed in the Marques column.",
+  "Vitra": [
+    { "name": "Charles & Ray Eames", "href": "/collections/vitra" },
+    { "name": "Jean Prouvé", "href": "/collections/vitra" },
+    { "name": "Verner Panton", "href": "/collections/vitra" }
+  ],
+  "Fermob": [
+    { "name": "Frédéric Sofia", "href": "/collections/fermob" },
+    { "name": "Tristan Lohner", "href": "/collections/fermob" },
+    { "name": "Pascal Mourgue", "href": "/collections/fermob" }
+  ],
+  "&Tradition": [
+    { "name": "Verner Panton", "href": "/collections/tradition" },
+    { "name": "Arne Jacobsen", "href": "/collections/tradition" },
+    { "name": "Norm Architects", "href": "/collections/tradition" }
+  ],
+  "HAY": [
+    { "name": "Mette & Rolf Hay", "href": "/collections/hay" },
+    { "name": "Stefan Diez", "href": "/collections/hay" },
+    { "name": "Sebastian Wrong", "href": "/collections/hay" }
+  ],
+  "Muuto": [
+    { "name": "Cecilie Manz", "href": "/collections/muuto" },
+    { "name": "Anderssen & Voll", "href": "/collections/muuto" },
+    { "name": "Jens Fager", "href": "/collections/muuto" }
+  ],
+  "Serax": [
+    { "name": "Marie Michielssen", "href": "/collections/serax" },
+    { "name": "Vincent Van Duysen", "href": "/collections/serax" },
+    { "name": "Anita Le Grelle", "href": "/collections/serax" }
+  ],
+  "Alessi": [
+    { "name": "Achille Castiglioni", "href": "/collections/alessi" },
+    { "name": "Philippe Starck", "href": "/collections/alessi" },
+    { "name": "Patricia Urquiola", "href": "/collections/alessi" }
+  ]
+}

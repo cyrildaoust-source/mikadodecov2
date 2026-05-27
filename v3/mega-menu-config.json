@@ -1,11 +1,25 @@
 {
-  "_note": "Visual ambiance + CTAs for each mega-menu section. Cyril edits this file directly to swap the image or change the featured brand. V1: only 'mobilier' is wired up.",
+  "_note": "Editorial 'coup de cœur du moment' shown in the side panel of each mega menu. Cyril edits this file by hand to rotate the feature (no code change needed). One block per mega: 'mobilier' + 'marques'.",
   "mobilier": {
-    "image": "/images/lifestyle-1.jpg",
-    "imageAlt": "Ambiance salon Mikado — fauteuil et table",
-    "ctaLabel": "Découvrir Vitra",
-    "ctaHref": "/collections/vitra",
-    "secondaryLabel": "Nouveautés",
-    "secondaryHref": "/collections/nouveautes"
+    "coupDeCoeur": {
+      "label": "Coup de cœur du moment",
+      "image": "/images/lifestyle-1.jpg",
+      "imageAlt": "Salon Mikado · ambiance contemporaine",
+      "title": "Verner Panton chez &Tradition",
+      "lead": "Une réédition iconique des années 60, retravaillée avec les ateliers d'origine.",
+      "ctaLabel": "Lire l'article",
+      "ctaHref": "/article.html?slug=and-tradition"
+    }
+  },
+  "marques": {
+    "coupDeCoeur": {
+      "label": "Coup de cœur du moment",
+      "image": "/images/ref-feat-2.webp",
+      "imageAlt": "Pourquoi Fermob plutôt qu'ailleurs",
+      "title": "Pourquoi Fermob plutôt qu'ailleurs",
+      "lead": "Une maison qui répare encore les pièces dix ans après — la différence se voit à la troisième saison.",
+      "ctaLabel": "Lire l'article",
+      "ctaHref": "/article.html?slug=fermob"
+    }
   }
 }

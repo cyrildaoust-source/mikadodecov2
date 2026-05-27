@@ -346,20 +346,18 @@ function chromeHTML(active) {
     <div class="nav__inner">
       <div class="nav__left">
         <a href="/" class="wordmark" aria-label="mikadodeco"><img src="/logomikado.svg" alt="mikadodeco" /></a>
+        <nav class="nav__primary">${links}</nav>
       </div>
-      <div class="nav__rightwrap">
-        <nav class="nav__center">${links}</nav>
-        <div class="nav__right">
-          <a href="/rendez-vous.html" class="nav__util nav__util-extra">Rendez-vous</a>
-          <a href="/selection.html" class="nav__cart" aria-label="Ma sélection">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" width="22" height="22" aria-hidden="true">
-              <path d="M6.46 8.2 4.55 19.2a.25.25 0 0 0 .25.3h14.4a.25.25 0 0 0 .25-.3L17.54 8.2a.25.25 0 0 0-.25-.2H6.71a.25.25 0 0 0-.25.2Z" stroke-linejoin="round"/>
-              <path d="M9.5 11V4.75a.25.25 0 0 1 .25-.25h4.5a.25.25 0 0 1 .25.25V11"/>
-            </svg>
-            <span class="cartcount" data-cart-count>0</span>
-          </a>
-          <button class="nav__burger" data-burger aria-label="Menu">Menu</button>
-        </div>
+      <div class="nav__right">
+        <a href="/rendez-vous.html" class="nav__util nav__util-extra">Rendez-vous</a>
+        <a href="/selection.html" class="nav__cart" aria-label="Ma sélection">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" width="22" height="22" aria-hidden="true">
+            <path d="M6.46 8.2 4.55 19.2a.25.25 0 0 0 .25.3h14.4a.25.25 0 0 0 .25-.3L17.54 8.2a.25.25 0 0 0-.25-.2H6.71a.25.25 0 0 0-.25.2Z" stroke-linejoin="round"/>
+            <path d="M9.5 11V4.75a.25.25 0 0 1 .25-.25h4.5a.25.25 0 0 1 .25.25V11"/>
+          </svg>
+          <span class="cartcount" data-cart-count>0</span>
+        </a>
+        <button class="nav__burger" data-burger aria-label="Menu">Menu</button>
       </div>
     </div>
     ${stage}
