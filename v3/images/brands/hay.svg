@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 44" role="img" aria-label="HAY"><text x="48" y="32" text-anchor="middle" font-family="'neue-haas-grotesk-display','Helvetica Neue',Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="1" fill="#1a1916">HAY</text></svg>
+<svg width="288" height="110" viewBox="0 0 288 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0H21.0294V44.3235H67.9412V0H88.9706V110H67.9412V63.25H21.0294V110H0V0Z" fill="black"/>
+<path d="M141.059 0H163.059L203.338 110H181.177L173.574 88H129.897L122.294 110H100.78L141.059 0ZM136.044 70.0441H167.265L154.485 32.8382C153.353 29.7647 151.735 22.9706 151.574 22C151.412 22.8088 149.794 29.6029 148.824 32.8382L136.044 70.0441Z" fill="black"/>
+<path d="M229.059 67.7794L192.177 0H215.632L239.735 47.5588L264.324 0H287.132L250.25 67.7794V110H229.059V67.7794Z" fill="black"/>
+</svg>
