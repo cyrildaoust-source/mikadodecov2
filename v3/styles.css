@@ -227,6 +227,10 @@ ul { list-style: none; }
 .brandmarquee__item:hover .brandmarquee__logo { opacity: 1; }
 .brandmarquee__wordmark { font-family: var(--sans-product); font-size: clamp(16px, 1.7vw, 22px); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); white-space: nowrap; transition: color .25s var(--ease); }
 .brandmarquee__item:hover .brandmarquee__wordmark { color: var(--ink-deep); }
+/* Interim text fallback for the marquee until the new SVG set ships.
+   Italic Cormorant Garamond at the same visual weight as the logo. */
+.brandmarquee__name { display: inline-block; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(20px, 2.3vw, 28px); line-height: 1; color: var(--ink); opacity: .5; white-space: nowrap; transition: opacity .3s var(--ease); }
+.brandmarquee__item:hover .brandmarquee__name { opacity: 1; }
 @keyframes brand-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
   .brandmarquee__track { animation: none; width: 100%; flex-wrap: wrap; justify-content: center; gap: clamp(28px, 4vw, 56px); }
@@ -361,7 +365,11 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .brandcard:hover { background: var(--ink-deep); color: var(--paper); border-color: var(--ink-deep); }
 .brandcard:hover .brandcard__count, .brandcard:hover .brandcard__origin { color: rgba(248,245,239,.7); }
 .brandcard__origin { font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--subtle); }
-.brandcard__name { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.05; margin-top: auto; }
+/* Card brand name (Cormorant italic) — primary identity until the
+   new SVG set ships. Equivalent of object-position left bottom: the
+   block sits at the bottom of the flex parent (margin-top:auto). */
+.brandcard__name { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.5rem; line-height: 1.1; color: var(--ink); margin-top: auto; text-align: left; transition: color .25s var(--ease); }
+.brandcard:hover .brandcard__name { color: var(--paper); }
 .brandcard__logo { display: block; height: 32px; width: auto; max-width: 75%; object-fit: contain; object-position: left bottom; margin-top: auto; transition: filter .25s var(--ease); }
 .brandcard:hover .brandcard__logo { filter: brightness(0) invert(1); }
 .brandcard__count { font-size: var(--fs-small); color: var(--muted); margin-top: 6px; }

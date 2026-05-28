@@ -29,16 +29,16 @@ loadRows();
 fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
 /* Brand logo marquee + live "maisons" count, from the real vendor feed.
-   Each brand renders as a monochrome logo from /images/brands/<slug>.svg.
-   Drop an official SVG at that path to replace any mark; missing files fall
-   back to a clean text wordmark so the marquee never breaks. */
+   Interim: text fallback (Cormorant italic) until Cyril ships new SVGs.
+   When the SVGs are ready, swap the <span> back to an <img class="brandmarquee__logo"
+   src="/images/brands/<slug>.svg"> (the original styles + onerror wordmark
+   fallback are kept in styles.css for the revival). */
 function brandLogo(b) {
   const slug = slugify(b.name);
   const href = `/produits.html?brand=${slug}`;
   const name = escapeHtml(b.name);
   return `<a class="brandmarquee__item" href="${href}" aria-label="${name}">`
-    + `<img class="brandmarquee__logo" src="/images/brands/${slug}.svg" alt="${name}" loading="lazy" `
-    + `onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brandmarquee__wordmark',textContent:this.alt}))" />`
+    + `<span class="brandmarquee__name">${name}</span>`
     + `</a>`;
 }
 
