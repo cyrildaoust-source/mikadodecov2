@@ -103,18 +103,13 @@ function hydrateMarques() {
   const designers = brandsData?.designers || [];
   if (!brands.length) { panel.innerHTML = ""; return; }
 
-  // Each brand card = name + (optional) flat list of featured collections.
-  // CSS lays them out in an auto-fit grid (3-4 cols on desktop).
-  const brandCards = brands.map((b) => {
-    const collsHtml = (b.collections || []).map((c) =>
-      `<li><a href="${escapeHtml(b.href)}?tag=${encodeURIComponent(c.tag)}">${escapeHtml(c.name)}</a></li>`
-    ).join("");
-    return `
+  // V2.2: featured sub-collections retired from the rendered mega
+  // (kept in the JSON for future revival). Brand cards now hold just
+  // the brand name → collection page.
+  const brandCards = brands.map((b) => `
       <div class="mm-brand">
         <a class="mm-brand__name" href="${escapeHtml(b.href)}">${escapeHtml(b.name)}</a>
-        ${collsHtml ? `<ul class="mm-brand__colls">${collsHtml}</ul>` : ""}
-      </div>`;
-  }).join("");
+      </div>`).join("");
 
   // Designers — flat alphabetic list, name only, link to /marques.html
   // (placeholder until the dedicated designers page exists).

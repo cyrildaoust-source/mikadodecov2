@@ -227,7 +227,11 @@
   color: var(--accent-ink);
 }
 .mm-side__rule { height: 1px; background: var(--line); margin: 2px 0 6px; }
-.mm-side__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); margin-bottom: 4px; }
+/* Coup de cœur photo · keeps the 16/10 frame but anchors the visible
+   slice to the top of the source. The editorial blog images are often
+   portrait (e.g. ref-feat-2.webp 1200×1600) — without object-position
+   the center crop ends up on a meaningless detail (texture, hand…). */
+.mm-side__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center top; background: var(--tile); margin-bottom: 4px; }
 .mm-side__title {
   font-family: var(--serif);
   font-weight: 600;
