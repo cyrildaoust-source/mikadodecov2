@@ -419,7 +419,10 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    a 4:5 portrait aspect-ratio and falls back to the silhouette SVG
    while Cyril rolls in real images one by one. */
 .designer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(24px, 3vw, 36px); }
-.designer-card { display: flex; flex-direction: column; background: var(--paper-2); padding: 18px; transition: background .35s var(--ease); }
+/* Card is now an <a> → /produits.html?designer=<slug>. Reset link
+   defaults so the layout matches the legacy <article> rendering. */
+.designer-card { display: flex; flex-direction: column; background: var(--paper-2); padding: 18px; color: var(--ink); text-decoration: none; transition: background .35s var(--ease); }
+.designer-card:hover { background: var(--paper); }
 /* V2.1: back to portrait 4:5 (industry convention for designer cards).
    Sources are landscape 1500×1200 — object-position:center 25% keeps
    the face (usually in the top quarter) safely in the visible crop. */

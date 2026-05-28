@@ -187,7 +187,12 @@
     // drive the "Voir plus" button; state.shown disappeared (we render
     // every product already loaded into ALL). Client filters (cat/brand/
     // tag/sort) still operate on the partial set — known V1 tradeoff.
-    const state = { coll: collFromPath, cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false };
+    // V3 (chantier pages-designers-produits): ?designer=<slug> resolves
+    // to a tag-OR list against /api/products?tags=... — the designer
+    // metadata (name + tags) is fetched from /designers-data.json
+    // before the first product fetch.
+    const designerSlug = params.get("designer") || "";
+    const state = { coll: collFromPath, cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false, designer: null };
 
     // Instant paint before the /api/collection/<handle>/products fetch
     // resolves. On ANY collection page: blank the description (V2.1 —
@@ -201,6 +206,12 @@
       if (COLL_TITLES[state.coll]) {
         titleEl.textContent = COLL_TITLES[state.coll];
       }
+    }
+    // Designer page: hide chips and blank the subtitle until the
+    // designer record is resolved (loadInitial sets the real title).
+    if (designerSlug) {
+      subEl.textContent = "";
+      chipsBar.style.display = "none";
     }
 
     const popScore = (p) => (p.featured ? 2 : 0) + (p.badge === "bestseller" ? 1 : 0);
@@ -258,7 +269,12 @@
 
       const popIds = new Set(pop.map((p) => p.id));
       const mainList = applySort(all.filter((p) => !popIds.has(p.id)));
-      grid.innerHTML = mainList.length ? mainList.map(productCard).join("") : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
+      // Designer pages get a dedicated empty message — "élargir les
+      // filtres" doesn't apply when the URL itself selects the slice.
+      const emptyMsg = state.designer
+        ? `<p class="plp-empty">Aucun produit pour ce designer pour le moment. <a href="/designers.html" style="color:var(--accent-ink)">Retour aux designers →</a></p>`
+        : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
+      grid.innerHTML = mainList.length ? mainList.map(productCard).join("") : emptyMsg;
       // "Voir plus" reflects the server-side cursor — visible only when
       // there is another batch upstream. Client-side filters do NOT hide
       // it (a filter can match items in unfetched pages).
@@ -287,6 +303,12 @@
       if (coll) {
         titleEl.textContent = coll.name;
         subEl.textContent = coll.description || "";
+      } else if (state.designer?.name) {
+        titleEl.textContent = `Produits de ${state.designer.name}`;
+        subEl.textContent = `Sélection de pièces designées par ${state.designer.name}.`;
+      } else if (state.designer && !state.designer.name) {
+        titleEl.textContent = "Designer introuvable";
+        subEl.textContent = "";
       } else if (brandName) {
         titleEl.textContent = brandName;
         subEl.textContent = "Toutes les pièces de la maison.";
@@ -305,7 +327,7 @@
       }
       // Hide categorical chips when we're inside a curated view (collection
       // or tag) — they don't make sense and dilute the page identity.
-      chipsBar.style.display = (state.coll || state.tag) ? "none" : "";
+      chipsBar.style.display = (state.coll || state.tag || state.designer) ? "none" : "";
 
       applyPromos(PROMOS);
     }
@@ -326,6 +348,19 @@
         if (state.tag) q.set("tag", state.tag);
         return `/api/collection/${encodeURIComponent(state.coll)}/products?${q}`;
       }
+      // V3 designer route: OR-tag query against /api/products. Tags are
+      // resolved from /designers-data.json so a single ?designer=<slug>
+      // can capture multiple historical tag variants (e.g. bouroullec,
+      // ronan-bouroullec, erwan-bouroullec for the duo). Unknown slugs
+      // get a sentinel tag that matches nothing, so the grid stays
+      // empty and the "introuvable" header is the only message.
+      if (state.designer) {
+        q.set("paginated", "1");
+        q.set("tags", state.designer.tags?.length
+          ? state.designer.tags.join(",")
+          : "__no_designer_match__");
+        return `/api/products?${q}`;
+      }
       q.set("paginated", "1");
       return `/api/products?${q}`;
     }
@@ -337,8 +372,31 @@
       return r.json();
     }
 
+    // Resolve ?designer=<slug> to { slug, name, tags } before the first
+     // product fetch. If the slug isn't in designers-data.json we keep
+     // state.designer = null + show a friendly empty state.
+    async function resolveDesigner() {
+      if (!designerSlug) return;
+      try {
+        const r = await fetch("/designers-data.json", { cache: "force-cache" });
+        if (!r.ok) return;
+        const data = await r.json();
+        const d = (data.designers || []).find((x) => x.slug === designerSlug);
+        if (d) {
+          state.designer = { slug: d.slug, name: d.name, tags: (d.tags && d.tags.length) ? d.tags : [d.slug] };
+        } else {
+          // Slug not found → flag with a name=null sentinel so render()
+          // can switch to "Aucun produit pour ce designer".
+          state.designer = { slug: designerSlug, name: null, tags: [] };
+        }
+      } catch (e) {
+        console.warn("[plp] designers-data unavailable:", e.message);
+      }
+    }
+
     async function loadInitial() {
       try {
+        await resolveDesigner();
         const [pageData, brands, colls] = await Promise.all([
           fetchPage(null),
           fetchBrands(),

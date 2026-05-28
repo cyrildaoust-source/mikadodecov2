@@ -43,19 +43,23 @@
         const list = data?.designers || [];
         countEl.textContent = `${list.length} designers`;
         grid.innerHTML = list.map((d) => {
+          // Brand sub-links keep their own navigation. The outer <a> is
+          // the whole card → /produits.html?designer=<slug>. Nested <a>
+          // is tolerated by modern browsers; stopPropagation on the
+          // inner click prevents the card's navigation from firing too.
           const brands = (d.brands || []).map((b, i) => {
             const href = d.brandHrefs?.[i];
             return href
-              ? `<a href="${escapeHtml(href)}">${escapeHtml(b)}</a>`
+              ? `<a href="${escapeHtml(href)}" onclick="event.stopPropagation()">${escapeHtml(b)}</a>`
               : `<span>${escapeHtml(b)}</span>`;
           }).join("<span class=\"designer-card__brand-sep\" aria-hidden=\"true\"> · </span>");
           return `
-            <article class="designer-card" id="${escapeHtml(d.slug)}">
+            <a class="designer-card" id="${escapeHtml(d.slug)}" href="/produits.html?designer=${encodeURIComponent(d.slug)}">
               <img class="designer-card__photo" src="${escapeHtml(d.photo)}" alt="${escapeHtml(d.name)}" loading="lazy" />
               <h3 class="designer-card__name">${escapeHtml(d.name)}</h3>
               <div class="designer-card__brands">${brands}</div>
               <p class="designer-card__bio">${escapeHtml(d.bio)}</p>
-            </article>`;
+            </a>`;
         }).join("");
 
         // Deep-link: scroll to the targeted card and pulse it briefly.

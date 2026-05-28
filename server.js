@@ -60,8 +60,8 @@ app.use(express.json());
 // Metafields must be enabled in Shopify admin → Settings → Custom data → Products
 // Namespaces used: "custom" — keys: designer, year, material, dimensions, lead_time, subcategory
 const PRODUCTS_QUERY = `
-  query GetProducts($first: Int!, $after: String) {
-    products(first: $first, after: $after) {
+  query GetProducts($first: Int!, $after: String, $query: String) {
+    products(first: $first, after: $after, query: $query) {
       pageInfo { hasNextPage endCursor }
       edges {
         cursor
@@ -216,20 +216,27 @@ function mapProduct(node) {
 // this shape directly. The new paginated mode lives in getProductsPage.
 async function getProducts() {
   return cached('products', async () => {
-    const data = await shopifyFetch(PRODUCTS_QUERY, { first: 250 });
+    const data = await shopifyFetch(PRODUCTS_QUERY, { first: 250, after: null, query: null });
     return data.products.edges.map(({ node }) => mapProduct(node));
   });
 }
 
-// Paginated catalog used by the PLP. Cached per (first, after) so each
-// "Voir plus" click is sub-5ms after the first warm-up. Returns the
-// Shopify-native shape `{ items, pageInfo }`.
-async function getProductsPage(first, after) {
+// Paginated catalog used by the PLP. Cached per (first, after, tags)
+// so each "Voir plus" click is sub-5ms after the first warm-up.
+// `tags` (comma-separated) becomes a Shopify GraphQL query string
+// `tag:foo OR tag:bar OR ...` — used by /produits.html?designer=<slug>
+// to filter on a list of historical tag variants.
+async function getProductsPage(first, after, tags) {
   const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
   const a   = after || null;
-  const key = `products:page:${f}:${a || 'first'}`;
+  const tagList = Array.isArray(tags)
+    ? tags
+    : (tags ? String(tags).split(',').map((s) => s.trim()).filter(Boolean) : []);
+  const sortedTags = [...tagList].sort();
+  const query = tagList.length ? tagList.map((t) => `tag:${t}`).join(' OR ') : null;
+  const key = `products:page:${f}:${a || 'first'}${sortedTags.length ? ':tags-' + sortedTags.join(',') : ''}`;
   return cached(key, async () => {
-    const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a });
+    const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query });
     const items = data.products.edges.map(({ node }) => mapProduct(node));
     return { items, pageInfo: data.products.pageInfo };
   });
@@ -347,9 +354,9 @@ async function getCollections() {
 // The legacy shape is contractual — 4 callers depend on it.
 app.get('/api/products', async (req, res) => {
   try {
-    const { paginated, cursor, limit } = req.query;
-    if (paginated || cursor || limit) {
-      const page = await getProductsPage(limit, cursor);
+    const { paginated, cursor, limit, tags } = req.query;
+    if (paginated || cursor || limit || tags) {
+      const page = await getProductsPage(limit, cursor, tags);
       return res.json(page);
     }
     const products = await getProducts();

@@ -1,9 +1,10 @@
 {
-  "_note": "31 designers referenced from the Marques mega menu. Bios are short, factual, Mikado tone. V2 (2026-05-28): +9 Vitra designers, real portraits for 6 (Charles & Ray Eames, Isamu Noguchi, Jasper Morrison, Jean Prouvé, Ronan & Erwan Bouroullec, Verner Panton) + all 9 newcomers; remaining 16 keep the silhouette placeholder until Cyril ships their portrait. Order: alphabetical by first name (matches mega menu).",
+  "_note": "29 designers — V3 (2026-05-29): Erwan & Ronan solo entries merged into 'Ronan & Erwan Bouroullec' (Cyril: 'on ne fait pas de distinction'). Each entry now carries a `tags` array used by /produits.html?designer=<slug> to query Shopify via OR-tag filter. Default tags=[slug]; multi-tag entries (e.g. Bouroullec) cover historical tag variants in Shopify.",
   "designers": [
     {
       "name": "Achille Castiglioni",
       "slug": "achille-castiglioni",
+      "tags": ["achille-castiglioni"],
       "brands": ["Alessi"],
       "brandHrefs": ["/collections/alessi"],
       "bio": "Designer italien (1918-2002), maître de la fonctionnalité poétique. Plus de 150 produits chez Alessi.",
@@ -12,6 +13,7 @@
     {
       "name": "Alexander Girard",
       "slug": "alexander-girard",
+      "tags": ["alexander-girard"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Designer textile et graphiste américain (1907-1993). Couleur, motifs et poésie chez Vitra — Wooden Dolls, Environmental Enrichment Panels.",
@@ -20,6 +22,7 @@
     {
       "name": "Alvar Aalto",
       "slug": "alvar-aalto",
+      "tags": ["alvar-aalto"],
       "brands": ["Artek", "Iittala"],
       "brandHrefs": ["/collections/artek", "/collections/iittala"],
       "bio": "Architecte finlandais (1898-1976), fondateur d'Artek en 1935. Pionnier du modernisme nordique.",
@@ -28,6 +31,7 @@
     {
       "name": "Anderssen & Voll",
       "slug": "anderssen-voll",
+      "tags": ["anderssen-voll"],
       "brands": ["Muuto"],
       "brandHrefs": ["/collections/muuto"],
       "bio": "Studio norvégien fondé en 2009 par Torbjørn Anderssen et Espen Voll. Design scandinave minimaliste.",
@@ -36,6 +40,7 @@
     {
       "name": "Anita Le Grelle",
       "slug": "anita-le-grelle",
+      "tags": ["anita-le-grelle"],
       "brands": ["Serax"],
       "brandHrefs": ["/collections/serax"],
       "bio": "Designer belge, signature monochrome et organique pour la vaisselle et les arts de la table.",
@@ -44,6 +49,7 @@
     {
       "name": "Antonio Citterio",
       "slug": "antonio-citterio",
+      "tags": ["antonio-citterio"],
       "brands": ["Vitra", "&Tradition"],
       "brandHrefs": ["/collections/vitra", "/collections/tradition"],
       "bio": "Architecte et designer italien né en 1950. Grand Repos chez Vitra, collaborations chez &Tradition.",
@@ -52,6 +58,7 @@
     {
       "name": "Arik Levy",
       "slug": "arik-levy",
+      "tags": ["arik-levy"],
       "brands": ["Serax"],
       "brandHrefs": ["/collections/serax"],
       "bio": "Designer et artiste israélien né en 1963, basé à Paris. Vases et objets sculpturaux pour Serax.",
@@ -60,6 +67,7 @@
     {
       "name": "Arne Jacobsen",
       "slug": "arne-jacobsen",
+      "tags": ["arne-jacobsen"],
       "brands": ["&Tradition"],
       "brandHrefs": ["/collections/tradition"],
       "bio": "Architecte et designer danois (1902-1971), icône du design scandinave. Chaise Œuf, Chaise Fourmi.",
@@ -68,6 +76,7 @@
     {
       "name": "Cecilie Manz",
       "slug": "cecilie-manz",
+      "tags": ["cecilie-manz"],
       "brands": ["Muuto"],
       "brandHrefs": ["/collections/muuto"],
       "bio": "Designer danoise née en 1972, lignes épurées et matières chaleureuses.",
@@ -76,6 +85,7 @@
     {
       "name": "Charles & Ray Eames",
       "slug": "charles-ray-eames",
+      "tags": ["charles-ray-eames"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Couple américain (1907-1978 / 1912-1988), pionniers du mid-century moderne. Lounge Chair, Plastic Chair.",
@@ -84,6 +94,7 @@
     {
       "name": "Dorothee Becker",
       "slug": "dorothee-becker",
+      "tags": ["dorothee-becker"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Designer allemande (1938-2025). Créatrice du légendaire Uten.Silo (1969) pour Vitra.",
@@ -92,22 +103,16 @@
     {
       "name": "Edward Barber & Jay Osgerby",
       "slug": "edward-barber-jay-osgerby",
+      "tags": ["edward-barber-jay-osgerby"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Duo britannique basé à Londres, fondé en 1996. Tip Ton et Pacific Chair chez Vitra.",
       "photo": "/images/designers/edward-barber-jay-osgerby.jpg"
     },
     {
-      "name": "Erwan Bouroullec",
-      "slug": "erwan-bouroullec",
-      "brands": ["Vitra", "HAY"],
-      "brandHrefs": ["/collections/vitra", "/collections/hay"],
-      "bio": "Designer français né en 1976, frère de Ronan. Créations solo récentes en parallèle du duo.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
-    },
-    {
       "name": "Frank Gehry",
       "slug": "frank-gehry",
+      "tags": ["frank-gehry"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Architecte canado-américain né en 1929, lauréat Pritzker. Wiggle Side Chair et Hat Trick chez Vitra.",
@@ -116,6 +121,7 @@
     {
       "name": "Frédéric Sofia",
       "slug": "frederic-sofia",
+      "tags": ["frederic-sofia"],
       "brands": ["Fermob"],
       "brandHrefs": ["/collections/fermob"],
       "bio": "Designer maison de Fermob, signature de la plupart des collections outdoor récentes.",
@@ -124,6 +130,7 @@
     {
       "name": "George Nelson",
       "slug": "george-nelson",
+      "tags": ["george-nelson"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Designer américain visionnaire (1908-1986). Marshmallow Sofa, Coconut Chair et horloges iconiques chez Vitra.",
@@ -132,6 +139,7 @@
     {
       "name": "Isamu Noguchi",
       "slug": "isamu-noguchi",
+      "tags": ["isamu-noguchi"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Sculpteur américano-japonais (1904-1988), créateur des lampes Akari en papier washi.",
@@ -140,6 +148,7 @@
     {
       "name": "Jasper Morrison",
       "slug": "jasper-morrison",
+      "tags": ["jasper-morrison"],
       "brands": ["Vitra", "HAY", "Alessi"],
       "brandHrefs": ["/collections/vitra", "/collections/hay", "/collections/alessi"],
       "bio": "Designer britannique né en 1959, philosophie « Super Normal » — formes essentielles.",
@@ -148,6 +157,7 @@
     {
       "name": "Jean Prouvé",
       "slug": "jean-prouve",
+      "tags": ["jean-prouve"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Architecte et ingénieur français (1901-1984), pionnier du mobilier industriel. Chaise Standard.",
@@ -156,6 +166,7 @@
     {
       "name": "Julien De Smedt",
       "slug": "julien-de-smedt",
+      "tags": ["julien-de-smedt"],
       "brands": ["HAY", "Muuto"],
       "brandHrefs": ["/collections/hay", "/collections/muuto"],
       "bio": "Architecte belge né en 1975, fondateur de JDS Architects. Approche radicale et durable.",
@@ -164,6 +175,7 @@
     {
       "name": "Marie Michielssen",
       "slug": "marie-michielssen",
+      "tags": ["marie-michielssen"],
       "brands": ["Serax"],
       "brandHrefs": ["/collections/serax"],
       "bio": "Designer belge, collections céramique organique pour Serax.",
@@ -172,6 +184,7 @@
     {
       "name": "Mette & Rolf Hay",
       "slug": "mette-rolf-hay",
+      "tags": ["mette-rolf-hay"],
       "brands": ["HAY"],
       "brandHrefs": ["/collections/hay"],
       "bio": "Couple danois fondateur de HAY en 2002. Design accessible et coloré.",
@@ -180,6 +193,7 @@
     {
       "name": "Michel Charlot",
       "slug": "michel-charlot",
+      "tags": ["michel-charlot"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Designer suisse né en 1984, ancien collaborateur des Bouroullec. Belleville Chair chez Vitra.",
@@ -188,6 +202,7 @@
     {
       "name": "Norm Architects",
       "slug": "norm-architects",
+      "tags": ["norm-architects"],
       "brands": ["&Tradition", "Muuto"],
       "brandHrefs": ["/collections/tradition", "/collections/muuto"],
       "bio": "Studio danois fondé en 2008. Architecture intérieure et design produit minimaliste.",
@@ -196,6 +211,7 @@
     {
       "name": "Patricia Urquiola",
       "slug": "patricia-urquiola",
+      "tags": ["patricia-urquiola"],
       "brands": ["Alessi"],
       "brandHrefs": ["/collections/alessi"],
       "bio": "Architecte et designer espagnole née en 1961, basée à Milan. Style hybride italo-espagnol.",
@@ -204,6 +220,7 @@
     {
       "name": "Philippe Starck",
       "slug": "philippe-starck",
+      "tags": ["philippe-starck"],
       "brands": ["Alessi"],
       "brandHrefs": ["/collections/alessi"],
       "bio": "Designer français né en 1949, prolifique et reconnaissable. Juicy Salif iconique chez Alessi.",
@@ -212,22 +229,16 @@
     {
       "name": "Ronan & Erwan Bouroullec",
       "slug": "ronan-erwan-bouroullec",
+      "tags": ["ronan-erwan-bouroullec", "ronan-and-erwan-bouroullec", "bouroullec", "ronan-bouroullec", "erwan-bouroullec"],
       "brands": ["Vitra", "HAY"],
       "brandHrefs": ["/collections/vitra", "/collections/hay"],
       "bio": "Duo français, frères, l'une des signatures contemporaines majeures. Palissade chez HAY.",
       "photo": "/images/designers/ronan-erwan-bouroullec.jpg"
     },
     {
-      "name": "Ronan Bouroullec",
-      "slug": "ronan-bouroullec",
-      "brands": ["Vitra", "HAY"],
-      "brandHrefs": ["/collections/vitra", "/collections/hay"],
-      "bio": "Designer français né en 1971, créations solo en parallèle du duo formé avec son frère Erwan.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
-    },
-    {
       "name": "Sori Yanagi",
       "slug": "sori-yanagi",
+      "tags": ["sori-yanagi"],
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Designer japonais pionnier du modernisme oriental (1915-2011). Butterfly Stool (1954), iconique chez Vitra.",
@@ -236,6 +247,7 @@
     {
       "name": "Verner Panton",
       "slug": "verner-panton",
+      "tags": ["verner-panton"],
       "brands": ["Vitra", "&Tradition"],
       "brandHrefs": ["/collections/vitra", "/collections/tradition"],
       "bio": "Designer danois (1926-1998), icône pop des années 60-70. Panton Chair, Flowerpot.",
@@ -244,6 +256,7 @@
     {
       "name": "Vincent Van Duysen",
       "slug": "vincent-van-duysen",
+      "tags": ["vincent-van-duysen"],
       "brands": ["Serax"],
       "brandHrefs": ["/collections/serax"],
       "bio": "Architecte belge né en 1962, signature minimaliste épurée. Collections céramique pour Serax.",
