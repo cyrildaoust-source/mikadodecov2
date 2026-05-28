@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Designers · Mikadodeco</title>
+  <meta name="description" content="Les créateurs qui façonnent les collections que nous revendons : 22 designers iconiques chez Mikadodeco." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="subhero">
+    <img class="subhero__img" src="/images/marques-hero.jpg" alt="Designers Mikadodeco" />
+    <div class="subhero__scrim"></div>
+    <div class="subhero__in">
+      <h1>Designers.</h1>
+      <p>Les créateurs qui façonnent les collections que nous revendons.</p>
+    </div>
+  </section>
+
+  <section class="section wrap reveal">
+    <div class="shead"><h2 class="serif">Tous les designers</h2><span class="plp-count" data-designer-count></span></div>
+    <div class="designer-grid" data-designer-grid></div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell, escapeHtml } from "/shared.js";
+    initShell({ active: "Marques", transparentNav: true });
+
+    const grid    = document.querySelector("[data-designer-grid]");
+    const countEl = document.querySelector("[data-designer-count]");
+
+    fetch("/designers-data.json", { cache: "force-cache" })
+      .then((r) => r.ok ? r.json() : Promise.reject("designers-data " + r.status))
+      .then((data) => {
+        const list = data?.designers || [];
+        countEl.textContent = `${list.length} designers`;
+        grid.innerHTML = list.map((d) => {
+          const brands = (d.brands || []).map((b, i) => {
+            const href = d.brandHrefs?.[i];
+            return href
+              ? `<a href="${escapeHtml(href)}">${escapeHtml(b)}</a>`
+              : `<span>${escapeHtml(b)}</span>`;
+          }).join("<span class=\"designer-card__brand-sep\" aria-hidden=\"true\"> · </span>");
+          return `
+            <article class="designer-card" id="${escapeHtml(d.slug)}">
+              <img class="designer-card__photo" src="${escapeHtml(d.photo)}" alt="${escapeHtml(d.name)}" loading="lazy" />
+              <h3 class="designer-card__name">${escapeHtml(d.name)}</h3>
+              <div class="designer-card__brands">${brands}</div>
+              <p class="designer-card__bio">${escapeHtml(d.bio)}</p>
+            </article>`;
+        }).join("");
+
+        // Deep-link: scroll to the targeted card and pulse it briefly.
+        // Slight delay lets the layout settle before we measure offsets.
+        const hash = location.hash.replace(/^#/, "");
+        if (hash) {
+          requestAnimationFrame(() => {
+            const card = document.getElementById(hash);
+            if (!card) return;
+            card.scrollIntoView({ behavior: "smooth", block: "start" });
+            card.classList.add("is-highlight");
+            setTimeout(() => card.classList.remove("is-highlight"), 1600);
+          });
+        }
+      })
+      .catch((e) => {
+        grid.innerHTML = `<p class="plp-empty">La page designers se charge bientôt.</p>`;
+        console.warn("[designers]", e);
+      });
+
+    // Hash changes (e.g. back-button from elsewhere on the same page)
+    window.addEventListener("hashchange", () => {
+      const h = location.hash.replace(/^#/, "");
+      const card = h && document.getElementById(h);
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "start" });
+        card.classList.add("is-highlight");
+        setTimeout(() => card.classList.remove("is-highlight"), 1600);
+      }
+    });
+  </script>
+</body>
+</html>

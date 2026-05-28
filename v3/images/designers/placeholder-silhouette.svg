@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 250" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Photo à venir">
+  <rect width="200" height="250" fill="#efe9df"/>
+  <g fill="#a39c91" opacity="0.55">
+    <circle cx="100" cy="92" r="34"/>
+    <path d="M40 250 C40 180 65 158 100 156 C135 158 160 180 160 250 Z"/>
+  </g>
+</svg>

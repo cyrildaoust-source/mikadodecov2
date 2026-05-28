@@ -413,6 +413,30 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .brandcard:hover .brandcard__logo { filter: brightness(0) invert(1); }
 .brandcard__count { font-size: var(--fs-small); color: var(--muted); margin-top: 6px; }
 
+/* ---------- designers ---------- */
+/* Card grid mirroring .brandgrid layout but with editorial portrait
+   cells (photo on top, name + brands + bio underneath). Photo uses
+   a 4:5 portrait aspect-ratio and falls back to the silhouette SVG
+   while Cyril rolls in real images one by one. */
+.designer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.designer-card { display: flex; flex-direction: column; background: var(--paper-2); padding: 18px; transition: background .35s var(--ease); }
+.designer-card__photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; background: var(--tile); margin-bottom: 16px; }
+.designer-card__name { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.5rem; line-height: 1.1; color: var(--ink-deep); margin-bottom: 6px; }
+.designer-card__brands { font-family: var(--sans-product); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.designer-card__brands a { color: inherit; transition: color .2s var(--ease); }
+.designer-card__brands a:hover { color: var(--accent-ink); }
+.designer-card__brand-sep { color: var(--subtle); margin: 0 2px; }
+.designer-card__bio { font-family: var(--sans); font-size: 0.95rem; line-height: 1.5; color: var(--ink); margin-top: auto; }
+/* Deep-link pulse · gentle 1.6s flash on the targeted card */
+.designer-card.is-highlight { background: var(--accent-soft); transition: background 0s; animation: designerPulse 1.6s var(--ease); }
+@keyframes designerPulse {
+  0%   { background: var(--accent-soft); }
+  100% { background: var(--paper-2); }
+}
+@media (max-width: 1080px) { .designer-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px)  { .designer-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } .designer-card { padding: 14px; } .designer-card__name { font-size: 1.25rem; } .designer-card__bio { font-size: 0.9rem; } }
+@media (prefers-reduced-motion: reduce) { .designer-card.is-highlight { animation: none; } }
+
 /* ---------- selection (cart) ---------- */
 .sel { display: grid; grid-template-columns: 1.7fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
 .sel-item { display: grid; grid-template-columns: 96px 1fr auto; gap: 20px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line); }

@@ -8,7 +8,7 @@
    the chrome renders instantly with no flash.
    ============================================================ */
 
-import { escapeHtml } from "/shared.js";
+import { escapeHtml, slugify } from "/shared.js";
 
 const OPEN_DELAY  = 100;
 const CLOSE_DELAY = 200;
@@ -111,10 +111,11 @@ function hydrateMarques() {
         <a class="mm-brand__name" href="${escapeHtml(b.href)}">${escapeHtml(b.name)}</a>
       </div>`).join("");
 
-  // Designers — flat alphabetic list, name only, link to /marques.html
-  // (placeholder until the dedicated designers page exists).
+  // Designers — flat alphabetic list, deep-link to the matching card
+  // on /designers.html via the kebab slug ("Charles & Ray Eames" →
+  // #charles-ray-eames). designers.html scrolls + highlights on load.
   const desHtml = designers.map((d) =>
-    `<a href="/marques.html">${escapeHtml(d)}</a>`
+    `<a href="/designers.html#${slugify(d)}">${escapeHtml(d)}</a>`
   ).join("");
 
   panel.innerHTML = `
@@ -128,7 +129,7 @@ function hydrateMarques() {
         <div class="mm-marques__col mm-marques__col--des">
           <div class="mm-col__head">Designers</div>
           <div class="mm-des-flat">${desHtml}</div>
-          <a class="mm-marques__all" href="/marques.html">Tous les designers →</a>
+          <a class="mm-marques__all" href="/designers.html">Tous les designers →</a>
         </div>
       </div>
       ${coupDeCoeurHTML("marques")}
