@@ -1,27 +1,6 @@
 {
-  "_note": "V2.1: Marques mega menu fully hardcoded (no Shopify fetch). Cyril edits this file to add/remove brands or feature collections. Each collection.tag points at a Shopify product tag — the catalog filters server-side via /api/collection/<brand>/products?tag=<tag>.",
+  "_note": "V2.3: Marques mega menu fully hardcoded (no Shopify fetch). 22 brands total, sorted alphabetically (& sorts before letters). Featured `collections` arrays preserved on existing brands for potential revival (V2.2 retired their rendering). Cyril edits this file to add/remove brands.",
   "brands": [
-    {
-      "name": "Vitra",
-      "href": "/collections/vitra",
-      "collections": [
-        { "name": "Soft pad chair", "tag": "soft-pad-chair" },
-        { "name": "Hal", "tag": "hal" },
-        { "name": "Soft modular sofa", "tag": "soft-modular-sofa" },
-        { "name": "Wooden doll", "tag": "wooden-doll" },
-        { "name": "Akari", "tag": "akari-suspensions" }
-      ]
-    },
-    {
-      "name": "Fermob",
-      "href": "/collections/fermob",
-      "collections": [
-        { "name": "Bistro", "tag": "bistro" },
-        { "name": "Luxembourg", "tag": "luxembourg" },
-        { "name": "Bellevie", "tag": "bellevie" },
-        { "name": "1900", "tag": "1900" }
-      ]
-    },
     {
       "name": "&Tradition",
       "href": "/collections/tradition",
@@ -30,38 +9,6 @@
         { "name": "Thorvald", "tag": "thorvald" },
         { "name": "Hi Lo", "tag": "hi-lo" },
         { "name": "Rely", "tag": "rely" }
-      ]
-    },
-    {
-      "name": "HAY",
-      "href": "/collections/hay",
-      "collections": [
-        { "name": "Palissade", "tag": "palissade" },
-        { "name": "About a chair", "tag": "about-a-chair" },
-        { "name": "Rey", "tag": "rey" },
-        { "name": "Mags", "tag": "mags" },
-        { "name": "Color crate", "tag": "color-crate" }
-      ]
-    },
-    {
-      "name": "Muuto",
-      "href": "/collections/muuto",
-      "collections": [
-        { "name": "Stacked system", "tag": "stacked-system" },
-        { "name": "Dots wood", "tag": "dots-wood" },
-        { "name": "Connect modular sofa", "tag": "connect-modular-sofa" },
-        { "name": "Restore", "tag": "restore" },
-        { "name": "Linear", "tag": "linear" }
-      ]
-    },
-    {
-      "name": "Ferm Living",
-      "href": "/collections/ferm-living",
-      "collections": [
-        { "name": "Ripple", "tag": "ripple" },
-        { "name": "Pond", "tag": "pond" },
-        { "name": "Arum", "tag": "arum" },
-        { "name": "Mist", "tag": "mist" }
       ]
     },
     {
@@ -74,32 +21,6 @@
         { "name": "Plissé", "tag": "plisse" },
         { "name": "Moka", "tag": "moka" }
       ]
-    },
-    {
-      "name": "Iittala",
-      "href": "/collections/iittala",
-      "collections": [
-        { "name": "Essence", "tag": "essence" },
-        { "name": "Teema", "tag": "teema" },
-        { "name": "Kastehelmi", "tag": "kastehelmi" },
-        { "name": "Vulpes", "tag": "vulpes" }
-      ]
-    },
-    {
-      "name": "Serax",
-      "href": "/collections/serax",
-      "collections": [
-        { "name": "Carte blanche", "tag": "carte-blanche" },
-        { "name": "Dé", "tag": "de" },
-        { "name": "Sculptural Confluence", "tag": "sculptural-confluence" },
-        { "name": "Verde Lanza", "tag": "verde-lanza" },
-        { "name": "Base", "tag": "base" }
-      ]
-    },
-    {
-      "name": "Marimekko",
-      "href": "/collections/marimekko",
-      "collections": []
     },
     {
       "name": "Anglepoise",
@@ -116,6 +37,11 @@
       ]
     },
     {
+      "name": "Blomus",
+      "href": "/collections/blomus",
+      "collections": []
+    },
+    {
       "name": "Fatboy",
       "href": "/collections/fatboy",
       "collections": [
@@ -124,6 +50,37 @@
         { "name": "Edison", "tag": "edison" },
         { "name": "Sumo", "tag": "sumo" },
         { "name": "Lamzac", "tag": "lamzac" }
+      ]
+    },
+    {
+      "name": "Ferm Living",
+      "href": "/collections/ferm-living",
+      "collections": [
+        { "name": "Ripple", "tag": "ripple" },
+        { "name": "Pond", "tag": "pond" },
+        { "name": "Arum", "tag": "arum" },
+        { "name": "Mist", "tag": "mist" }
+      ]
+    },
+    {
+      "name": "Fermob",
+      "href": "/collections/fermob",
+      "collections": [
+        { "name": "Bistro", "tag": "bistro" },
+        { "name": "Luxembourg", "tag": "luxembourg" },
+        { "name": "Bellevie", "tag": "bellevie" },
+        { "name": "1900", "tag": "1900" }
+      ]
+    },
+    {
+      "name": "HAY",
+      "href": "/collections/hay",
+      "collections": [
+        { "name": "Palissade", "tag": "palissade" },
+        { "name": "About a chair", "tag": "about-a-chair" },
+        { "name": "Rey", "tag": "rey" },
+        { "name": "Mags", "tag": "mags" },
+        { "name": "Color crate", "tag": "color-crate" }
       ]
     },
     {
@@ -136,6 +93,42 @@
       ]
     },
     {
+      "name": "Ichendorf Milano",
+      "href": "/collections/ichendorf-milano",
+      "collections": []
+    },
+    {
+      "name": "Iittala",
+      "href": "/collections/iittala",
+      "collections": [
+        { "name": "Essence", "tag": "essence" },
+        { "name": "Teema", "tag": "teema" },
+        { "name": "Kastehelmi", "tag": "kastehelmi" },
+        { "name": "Vulpes", "tag": "vulpes" }
+      ]
+    },
+    {
+      "name": "LIND DNA",
+      "href": "/collections/lind-dna",
+      "collections": []
+    },
+    {
+      "name": "Marimekko",
+      "href": "/collections/marimekko",
+      "collections": []
+    },
+    {
+      "name": "Muuto",
+      "href": "/collections/muuto",
+      "collections": [
+        { "name": "Stacked system", "tag": "stacked-system" },
+        { "name": "Dots wood", "tag": "dots-wood" },
+        { "name": "Connect modular sofa", "tag": "connect-modular-sofa" },
+        { "name": "Restore", "tag": "restore" },
+        { "name": "Linear", "tag": "linear" }
+      ]
+    },
+    {
       "name": "Pols Potten",
       "href": "/collections/pols-potten",
       "collections": [
@@ -143,6 +136,48 @@
         { "name": "Rijksmuseum", "tag": "rijksmuseum" },
         { "name": "Polygon", "tag": "polygon" }
       ]
+    },
+    {
+      "name": "Relaxound",
+      "href": "/collections/relaxound",
+      "collections": []
+    },
+    {
+      "name": "Serax",
+      "href": "/collections/serax",
+      "collections": [
+        { "name": "Carte blanche", "tag": "carte-blanche" },
+        { "name": "Dé", "tag": "de" },
+        { "name": "Sculptural Confluence", "tag": "sculptural-confluence" },
+        { "name": "Verde Lanza", "tag": "verde-lanza" },
+        { "name": "Base", "tag": "base" }
+      ]
+    },
+    {
+      "name": "Stoff Nagel",
+      "href": "/collections/stoff-nagel",
+      "collections": []
+    },
+    {
+      "name": "String Furniture",
+      "href": "/collections/string-furniture",
+      "collections": []
+    },
+    {
+      "name": "Vitra",
+      "href": "/collections/vitra",
+      "collections": [
+        { "name": "Soft pad chair", "tag": "soft-pad-chair" },
+        { "name": "Hal", "tag": "hal" },
+        { "name": "Soft modular sofa", "tag": "soft-modular-sofa" },
+        { "name": "Wooden doll", "tag": "wooden-doll" },
+        { "name": "Akari", "tag": "akari-suspensions" }
+      ]
+    },
+    {
+      "name": "Volta Mobiles",
+      "href": "/collections/volta",
+      "collections": []
     }
   ],
   "designers": [
@@ -153,15 +188,19 @@
     "Arne Jacobsen",
     "Cecilie Manz",
     "Charles & Ray Eames",
+    "Erwan Bouroullec",
     "Frédéric Sofia",
     "Isamu Noguchi",
     "Jasper Morrison",
     "Jean Prouvé",
+    "Julien De Smedt",
     "Marie Michielssen",
     "Mette & Rolf Hay",
     "Norm Architects",
     "Patricia Urquiola",
     "Philippe Starck",
+    "Ronan & Erwan Bouroullec",
+    "Ronan Bouroullec",
     "Verner Panton",
     "Vincent Van Duysen"
   ]

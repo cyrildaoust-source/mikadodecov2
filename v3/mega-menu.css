@@ -129,10 +129,14 @@
 }
 .mm-marques__col { display: flex; flex-direction: column; min-width: 0; }
 
-/* Brand cards — name on top, featured collections under */
+/* Brand cards — name on top, featured collections under.
+   V2.3: lowered the min from 160 to 140 to favour 4 cols on the
+   stage (~670px wide), keeping the 22-brand block at 5-6 rows
+   instead of 8. Long names ("Ichendorf Milano", "String Furniture")
+   may wrap onto 2 lines — accepted. */
 .mm-brands-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 18px 24px;
   margin-bottom: 18px;
 }
