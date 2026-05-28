@@ -63,7 +63,8 @@
         return `<a class="brandcard" href="/produits.html?brand=${slug}">
           <span class="brandcard__origin">${origin}</span>
           <div>
-            <div class="brandcard__name">${safeName}</div>
+            <img class="brandcard__logo" src="/images/brands/${slug}.svg" alt="${safeName}" loading="lazy"
+              onerror="this.outerHTML='<span class=&quot;brandcard__name&quot;>${safeName}</span>'" />
             <div class="brandcard__count">${b.productCount} pièce${b.productCount > 1 ? "s" : ""}</div>
           </div>
         </a>`;

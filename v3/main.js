@@ -29,16 +29,16 @@ loadRows();
 fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
 /* Brand logo marquee + live "maisons" count, from the real vendor feed.
-   Interim: text fallback (Cormorant italic) until Cyril ships new SVGs.
-   When the SVGs are ready, swap the <span> back to an <img class="brandmarquee__logo"
-   src="/images/brands/<slug>.svg"> (the original styles + onerror wordmark
-   fallback are kept in styles.css for the revival). */
+   Tries /images/brands/<slug>.svg first; if missing, the <img> onerror
+   swaps itself for a Cormorant-italic wordmark (.brandmarquee__name).
+   No console 404 noise — the swap is silent for the viewer. */
 function brandLogo(b) {
   const slug = slugify(b.name);
   const href = `/produits.html?brand=${slug}`;
   const name = escapeHtml(b.name);
   return `<a class="brandmarquee__item" href="${href}" aria-label="${name}">`
-    + `<span class="brandmarquee__name">${name}</span>`
+    + `<img class="brandmarquee__logo" src="/images/brands/${slug}.svg" alt="${name}" loading="lazy" `
+    + `onerror="this.outerHTML='<span class=&quot;brandmarquee__name&quot;>${name}</span>'" />`
     + `</a>`;
 }
 
