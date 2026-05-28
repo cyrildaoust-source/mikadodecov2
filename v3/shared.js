@@ -29,6 +29,23 @@ export const escapeHtml = (s) =>
 export const slugify = (s) =>
   String(s ?? "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
+/* ---------- build SHA / cache busting ----------
+   Vercel serves /images/* with `Cache-Control: immutable`, so a logo
+   update is invisible to returning visitors until they clear their
+   cache. We append the current build SHA to long-cached asset URLs:
+   every deploy → new SHA → ?v= changes → browser refetches.
+   buildShaReady() resolves once /api/build has answered (sub-5ms). */
+let _buildSha = "";
+const _buildShaPromise = fetch("/api/build", { cache: "no-store" })
+  .then((r) => (r.ok ? r.json() : null))
+  .then((d) => { _buildSha = (d && d.sha) || ""; })
+  .catch(() => { _buildSha = ""; });
+export const buildShaReady = () => _buildShaPromise;
+export const versionedImg = (path) => {
+  if (!_buildSha) return path;
+  return path + (path.includes("?") ? "&" : "?") + "v=" + _buildSha;
+};
+
 /* ---------- cart (selection) ---------- */
 // Cart items: { variantId, qty, handle, name, brand, price, image }
 // Migration on read: legacy items missing qty → qty=1. Items with no variantId

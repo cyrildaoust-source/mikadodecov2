@@ -663,6 +663,18 @@ app.get('/api/vitra', (req, res) => {
   }
 });
 
+// ─── API: BUILD INFO (cache busting) ───────────────────
+// Exposes the current build SHA so the client can append it as a
+// query-string to long-cached asset URLs (e.g. /images/brands/*.svg
+// served with `Cache-Control: immutable`). Each Vercel deploy gets
+// a new SHA → ?v=... changes → browser re-fetches without manual
+// cache clears. Falls back to "dev" outside Vercel.
+app.get('/api/build', (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  const raw = process.env.VERCEL_GIT_COMMIT_SHA || '';
+  res.json({ sha: raw ? raw.slice(0, 7) : 'dev' });
+});
+
 // ─── API: REVALIDATE CACHE ─────────────────────────────
 // Call this from a Shopify webhook (Products/update, Collections/update)
 // Setup in Shopify admin → Settings → Notifications → Webhooks

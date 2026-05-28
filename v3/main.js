@@ -1,5 +1,5 @@
 /* Home page · mounts the shared shell, then fills the product rows. */
-import { initShell, fetchProducts, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml } from "/shared.js";
+import { initShell, fetchProducts, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml, buildShaReady, versionedImg } from "/shared.js";
 
 initShell({ active: "", transparentNav: true });
 
@@ -36,8 +36,9 @@ function brandLogo(b) {
   const slug = slugify(b.name);
   const href = `/produits.html?brand=${slug}`;
   const name = escapeHtml(b.name);
+  const src  = versionedImg(`/images/brands/${slug}.svg`);
   return `<a class="brandmarquee__item" href="${href}" aria-label="${name}">`
-    + `<img class="brandmarquee__logo" src="/images/brands/${slug}.svg" alt="${name}" loading="lazy" `
+    + `<img class="brandmarquee__logo" src="${src}" alt="${name}" loading="lazy" `
     + `onerror="this.outerHTML='<span class=&quot;brandmarquee__name&quot;>${name}</span>'" />`
     + `</a>`;
 }
@@ -46,9 +47,15 @@ async function loadBrandMarquee() {
   const track = document.querySelector("[data-brandmarquee]");
   if (!track) return;
   try {
-    const brands = (await fetchBrands()).filter((b) => b.productCount > 0);
-    if (!brands.length) throw new Error("empty brand feed");
-    const ordered = [...brands].sort((a, b) => b.productCount - a.productCount);
+    // Wait for the build SHA so the logo URLs carry ?v=<sha> on the
+    // first paint. The fetch is cached server-side, sub-ms warm.
+    const [, brands] = await Promise.all([
+      buildShaReady(),
+      fetchBrands(),
+    ]);
+    const filtered = brands.filter((b) => b.productCount > 0);
+    if (!filtered.length) throw new Error("empty brand feed");
+    const ordered = [...filtered].sort((a, b) => b.productCount - a.productCount);
     const items = ordered.map(brandLogo).join("");
     // Duplicate the set so the -50% keyframe loops seamlessly.
     track.innerHTML = items + items;

@@ -46,24 +46,28 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchBrands, slugify } from "/shared.js";
+    import { initShell, fetchBrands, slugify, buildShaReady, versionedImg } from "/shared.js";
     initShell({ active: "Marques", transparentNav: true });
 
     const ORIGIN = { fermob:"France", hay:"Danemark", vitra:"Suisse", muuto:"Danemark", "tradition":"Danemark", "ferm-living":"Danemark", fatboy:"Pays-Bas", hkliving:"Pays-Bas", "pols-potten":"Pays-Bas", alessi:"Italie", artek:"Finlande", relaxound:"Allemagne", gubi:"Danemark" };
     const grid = document.querySelector("[data-brandgrid]");
     const countEl = document.querySelector("[data-brand-count]");
 
-    fetchBrands().then((brands) => {
-      brands = brands.filter((b) => b.productCount > 0).sort((a, b) => b.productCount - a.productCount);
+    // Wait for buildShaReady so the brand logo URLs carry ?v=<sha>
+    // on the first paint — same cache-busting trick as the home
+    // marquee in main.js.
+    Promise.all([buildShaReady(), fetchBrands()]).then(([, brandsRaw]) => {
+      const brands = brandsRaw.filter((b) => b.productCount > 0).sort((a, b) => b.productCount - a.productCount);
       countEl.textContent = `${brands.length} maisons`;
       grid.innerHTML = brands.map((b) => {
         const slug = slugify(b.name);
         const origin = ORIGIN[slug] || "Europe";
         const safeName = b.name.replace(/"/g, "&quot;");
+        const logoSrc  = versionedImg(`/images/brands/${slug}.svg`);
         return `<a class="brandcard" href="/produits.html?brand=${slug}">
           <span class="brandcard__origin">${origin}</span>
           <div>
-            <img class="brandcard__logo" src="/images/brands/${slug}.svg" alt="${safeName}" loading="lazy"
+            <img class="brandcard__logo" src="${logoSrc}" alt="${safeName}" loading="lazy"
               onerror="this.outerHTML='<span class=&quot;brandcard__name&quot;>${safeName}</span>'" />
             <div class="brandcard__count">${b.productCount} pièce${b.productCount > 1 ? "s" : ""}</div>
           </div>
