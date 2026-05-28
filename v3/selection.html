@@ -23,6 +23,7 @@
           <h2 class="serif">Récapitulatif</h2>
           <div class="sel-row"><span>Sous-total</span><span data-subtotal>…</span></div>
           <div class="sel-discounts" data-discounts hidden></div>
+          <div class="sel-row sel-row--savings" data-savings hidden></div>
           <div class="sel-row"><span>Livraison</span><span data-delivery-fee>Offerte</span></div>
           <div class="sel-row sel-row--total"><span data-total-label>Total</span><span data-total>…</span></div>
           <p class="sel-eta" data-cart-eta hidden></p>
@@ -31,6 +32,7 @@
             <h3>Livraison</h3>
             <label><input type="radio" name="delivery" value="showroom" checked /> <span>Retrait au showroom, Uccle <em>(offerte)</em></span></label>
             <label><input type="radio" name="delivery" value="standard" /> <span>Livraison Belgique <em data-delivery-belgium-label>(50 €)</em></span></label>
+            <p class="sel-opt__confirm-note">Votre choix sera confirmé au paiement.</p>
             <p class="sel-opt__hint" data-delivery-hint>Livraison offerte dès 1 500 € d'achats.</p>
           </div>
           <button class="btn btn--solid btn--block" data-checkout style="margin-top:14px">Finaliser la sélection</button>
@@ -99,13 +101,53 @@
       itemsEl.innerHTML = cart.map((i, idx) => {
         const qty = i.qty || 1;
         const lineSubtotal = (i.price || 0) * qty;
-        const lineDiscount = lastPreview?.lineDiscounts?.[i.variantId] || 0;
+        // V1 panier: look up the per-variant payload from /api/cart/preview.
+        // Falls back gracefully when the preview hasn't responded yet.
+        const previewLine    = lastPreview?.lines?.find((l) => l.variantId === i.variantId);
+        const lineDiscount   = previewLine?.discount   || 0;
+        const discountTitles = previewLine?.discountTitles || [];
+        const discountPct    = previewLine?.discountPct || 0;
+
+        const promoCodeHTML = discountTitles.length
+          ? `<div class="sel-item__promo-code">${discountTitles.map(escapeHtml).join(" · ")}</div>`
+          : "";
+
+        // 3 visual states (brief §3 cases 1/2/3):
+        //   • free (≥99% off)  → original price struck + "GRATUIT" italic
+        //   • partial discount → original struck + final price + −amount
+        //                        (+ "dont X OFFERTE(S)" for BXGY qty ≥ 4)
+        //   • no discount      → plain price
+        let priceHTML;
+        if (discountPct >= 99) {
+          priceHTML = `
+            <span class="sel-item__price--original">${euro(lineSubtotal)}</span>
+            <span class="sel-item__price--free">GRATUIT</span>`;
+        } else if (lineDiscount > 0) {
+          // Detect BXGY-style "free units": discount expressed as a whole
+          // number of unit prices. Only shown when qty ≥ 4 (where the
+          // valorisation makes sense, i.e. the rule "achetez 3, le 4ème
+          // offert"). Floors to 0 if the discount isn't a clean multiple.
+          const unit  = qty > 0 ? lineSubtotal / qty : 0;
+          const freeN = (qty >= 4 && unit > 0) ? Math.floor(lineDiscount / unit) : 0;
+          const freeMention = freeN >= 1
+            ? `<span class="sel-item__free-mention">dont ${freeN} OFFERTE${freeN > 1 ? "S" : ""}</span>`
+            : "";
+          priceHTML = `
+            <span class="sel-item__price--original">${euro(lineSubtotal)}</span>
+            <span class="sel-item__price--final">${euro(lineSubtotal - lineDiscount)}</span>
+            <span class="sel-item__discount-amount">−${euro(lineDiscount)}</span>
+            ${freeMention}`;
+        } else {
+          priceHTML = `<span class="sel-item__price--final">${euro(lineSubtotal)}</span>`;
+        }
+
         return `
         <div class="sel-item" data-row="${idx}">
           <img class="sel-item__img" src="${escapeHtml(i.image)}" alt="${escapeHtml(i.name)}" />
           <div>
             <div class="sel-item__brand">${escapeHtml(i.brand || "")}</div>
             <div class="sel-item__name">${escapeHtml(i.name || "")}</div>
+            ${promoCodeHTML}
             <div class="sel-item__controls">
               <div class="qty qty--sm">
                 <button class="qty__btn" data-qty-dec="${escapeHtml(i.variantId)}" aria-label="Diminuer" type="button">−</button>
@@ -115,7 +157,7 @@
               <button class="sel-item__remove" data-remove="${idx}">Retirer</button>
             </div>
           </div>
-          <div class="sel-item__price">${euro(lineSubtotal)}${lineDiscount > 0 ? `<span class="sel-item__discount">−${euro(lineDiscount)}</span>` : ""}</div>
+          <div class="sel-item__price">${priceHTML}</div>
         </div>`;
       }).join("");
 
@@ -154,6 +196,21 @@
       } else {
         discountsEl.innerHTML = "";
         discountsEl.hidden = true;
+      }
+
+      // "ÉCONOMIES TOTALES" highlight row — visible only when discount > 0.
+      // Mirrors Shopify checkout's at-a-glance savings summary.
+      const savingsEl = document.querySelector("[data-savings]");
+      if (savingsEl) {
+        if (discount > 0) {
+          savingsEl.innerHTML = `
+            <span class="sel-row__savings-label">ÉCONOMIES TOTALES</span>
+            <span class="sel-row__savings-amount">−${euro(discount)}</span>`;
+          savingsEl.hidden = false;
+        } else {
+          savingsEl.innerHTML = "";
+          savingsEl.hidden = true;
+        }
       }
 
       document.querySelector("[data-total-label]").textContent = "Total";

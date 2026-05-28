@@ -746,17 +746,36 @@ app.post('/api/cart/preview', async (req, res) => {
     }));
     // Shopify can split one client-side line into several internal lines
     // (e.g. a "buy 5 get 1 free" rule yields one qty=5 line + one qty=1 free
-    // line for the same variantId). We collect line-level allocations and
-    // aggregate per variant so the cart UI can show a clean per-row discount.
+    // line for the same variantId). We aggregate the internal lines per
+    // variantId so the cart UI can show one clean row per variant with the
+    // exact promo title(s) and the post-discount price.
     const internalLines = (cart.lines?.edges || []).map(e => e.node);
-    const lineDiscounts = {}; // variantId → total discount
+    const lineDiscounts = {}; // variantId → total discount (legacy field)
     const allLineDiscountObjs = [];
+    // Per-variant aggregation: subtotal, total, discount, discount titles, qty
+    const byVariant = new Map();
     for (const n of internalLines) {
       const vid = n.merchandise?.id || null;
       const lineSub = parseFloat(n.cost.subtotalAmount.amount);
       const lineTot = parseFloat(n.cost.totalAmount.amount);
       const lineDiscount = Math.max(0, lineSub - lineTot);
+      const qty = parseInt(n.quantity) || 0;
       if (vid && lineDiscount > 0) lineDiscounts[vid] = (lineDiscounts[vid] || 0) + lineDiscount;
+      if (vid) {
+        const agg = byVariant.get(vid) || { subtotal: 0, total: 0, discount: 0, qty: 0, titles: new Set() };
+        agg.subtotal += lineSub;
+        agg.total    += lineTot;
+        agg.discount += lineDiscount;
+        agg.qty      += qty;
+        for (const d of (n.discountAllocations || [])) {
+          const amt = parseFloat(d.discountedAmount.amount);
+          if (amt > 0) {
+            const t = titleOf(d);
+            if (t) agg.titles.add(t);
+          }
+        }
+        byVariant.set(vid, agg);
+      }
       for (const d of (n.discountAllocations || [])) {
         const amt = parseFloat(d.discountedAmount.amount);
         if (amt > 0) allLineDiscountObjs.push({ title: titleOf(d), amount: amt });
@@ -770,10 +789,31 @@ app.post('/api/cart/preview', async (req, res) => {
     });
     const discounts = Object.entries(byTitle).map(([title, amount]) => ({ title, amount }));
     const discount  = discounts.reduce((s, d) => s + d.amount, 0);
+    // Per-variant payload — client renders one row per variant with the
+    // original/final price split and the promo title(s) underneath.
+    // discountPct is rounded to 1 decimal; the client checks ≥ 99 to flip
+    // the row into the "GRATUIT" visual treatment.
+    const linesOut = items.map(item => {
+      const agg = byVariant.get(item.variantId);
+      if (!agg) {
+        const qty = Math.max(1, Math.min(99, parseInt(item.qty) || 1));
+        return { variantId: item.variantId, qty, subtotal: 0, total: 0, discount: 0, discountPct: 0, discountTitles: [] };
+      }
+      const pct = agg.subtotal > 0 ? (agg.discount / agg.subtotal) * 100 : 0;
+      return {
+        variantId:      item.variantId,
+        qty:            agg.qty,
+        subtotal:       agg.subtotal,
+        total:          agg.total,
+        discount:       agg.discount,
+        discountPct:    Math.round(pct * 10) / 10,
+        discountTitles: [...agg.titles],
+      };
+    });
     // Cart cost totals (post-discount, pre-shipping/tax)
     const subtotalDisplayed = parseFloat(cart.cost.subtotalAmount.amount) + discount; // pre-discount, for "Sous-total"
     const total             = parseFloat(cart.cost.totalAmount.amount);
-    res.json({ subtotal: subtotalDisplayed, total, discount, discounts, lineDiscounts });
+    res.json({ subtotal: subtotalDisplayed, total, discount, discounts, lineDiscounts, lines: linesOut });
   } catch (err) {
     console.error('Cart preview error:', err.message);
     res.status(500).json({ error: 'Erreur lors du calcul du panier.' });
