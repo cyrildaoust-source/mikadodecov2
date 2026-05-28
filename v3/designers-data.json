@@ -1,5 +1,5 @@
 {
-  "_note": "22 designers (alphabetical) referenced in the Marques mega menu (V2.3). Bios are short, factual, Mikado tone. Photos use a shared silhouette placeholder until Cyril ships real portraits — drop a /images/designers/<slug>.jpg per row and update the `photo` field.",
+  "_note": "31 designers referenced from the Marques mega menu. Bios are short, factual, Mikado tone. V2 (2026-05-28): +9 Vitra designers, real portraits for 6 (Charles & Ray Eames, Isamu Noguchi, Jasper Morrison, Jean Prouvé, Ronan & Erwan Bouroullec, Verner Panton) + all 9 newcomers; remaining 16 keep the silhouette placeholder until Cyril ships their portrait. Order: alphabetical by first name (matches mega menu).",
   "designers": [
     {
       "name": "Achille Castiglioni",
@@ -8,6 +8,14 @@
       "brandHrefs": ["/collections/alessi"],
       "bio": "Designer italien (1918-2002), maître de la fonctionnalité poétique. Plus de 150 produits chez Alessi.",
       "photo": "/images/designers/placeholder-silhouette.svg"
+    },
+    {
+      "name": "Alexander Girard",
+      "slug": "alexander-girard",
+      "brands": ["Vitra"],
+      "brandHrefs": ["/collections/vitra"],
+      "bio": "Designer textile et graphiste américain (1907-1993). Couleur, motifs et poésie chez Vitra — Wooden Dolls, Environmental Enrichment Panels.",
+      "photo": "/images/designers/alexander-girard.jpg"
     },
     {
       "name": "Alvar Aalto",
@@ -34,6 +42,22 @@
       "photo": "/images/designers/placeholder-silhouette.svg"
     },
     {
+      "name": "Antonio Citterio",
+      "slug": "antonio-citterio",
+      "brands": ["Vitra", "&Tradition"],
+      "brandHrefs": ["/collections/vitra", "/collections/tradition"],
+      "bio": "Architecte et designer italien né en 1950. Grand Repos chez Vitra, collaborations chez &Tradition.",
+      "photo": "/images/designers/antonio-citterio.jpg"
+    },
+    {
+      "name": "Arik Levy",
+      "slug": "arik-levy",
+      "brands": ["Serax"],
+      "brandHrefs": ["/collections/serax"],
+      "bio": "Designer et artiste israélien né en 1963, basé à Paris. Vases et objets sculpturaux pour Serax.",
+      "photo": "/images/designers/arik-levy.jpg"
+    },
+    {
       "name": "Arne Jacobsen",
       "slug": "arne-jacobsen",
       "brands": ["&Tradition"],
@@ -55,7 +79,23 @@
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Couple américain (1907-1978 / 1912-1988), pionniers du mid-century moderne. Lounge Chair, Plastic Chair.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/charles-ray-eames.jpg"
+    },
+    {
+      "name": "Dorothee Becker",
+      "slug": "dorothee-becker",
+      "brands": ["Vitra"],
+      "brandHrefs": ["/collections/vitra"],
+      "bio": "Designer allemande (1938-2025). Créatrice du légendaire Uten.Silo (1969) pour Vitra.",
+      "photo": "/images/designers/dorothee-becker.jpg"
+    },
+    {
+      "name": "Edward Barber & Jay Osgerby",
+      "slug": "edward-barber-jay-osgerby",
+      "brands": ["Vitra"],
+      "brandHrefs": ["/collections/vitra"],
+      "bio": "Duo britannique basé à Londres, fondé en 1996. Tip Ton et Pacific Chair chez Vitra.",
+      "photo": "/images/designers/edward-barber-jay-osgerby.jpg"
     },
     {
       "name": "Erwan Bouroullec",
@@ -66,6 +106,14 @@
       "photo": "/images/designers/placeholder-silhouette.svg"
     },
     {
+      "name": "Frank Gehry",
+      "slug": "frank-gehry",
+      "brands": ["Vitra"],
+      "brandHrefs": ["/collections/vitra"],
+      "bio": "Architecte canado-américain né en 1929, lauréat Pritzker. Wiggle Side Chair et Hat Trick chez Vitra.",
+      "photo": "/images/designers/frank-gehry.jpg"
+    },
+    {
       "name": "Frédéric Sofia",
       "slug": "frederic-sofia",
       "brands": ["Fermob"],
@@ -74,12 +122,20 @@
       "photo": "/images/designers/placeholder-silhouette.svg"
     },
     {
+      "name": "George Nelson",
+      "slug": "george-nelson",
+      "brands": ["Vitra"],
+      "brandHrefs": ["/collections/vitra"],
+      "bio": "Designer américain visionnaire (1908-1986). Marshmallow Sofa, Coconut Chair et horloges iconiques chez Vitra.",
+      "photo": "/images/designers/george-nelson.jpg"
+    },
+    {
       "name": "Isamu Noguchi",
       "slug": "isamu-noguchi",
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Sculpteur américano-japonais (1904-1988), créateur des lampes Akari en papier washi.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/isamu-noguchi.jpg"
     },
     {
       "name": "Jasper Morrison",
@@ -87,7 +143,7 @@
       "brands": ["Vitra", "HAY", "Alessi"],
       "brandHrefs": ["/collections/vitra", "/collections/hay", "/collections/alessi"],
       "bio": "Designer britannique né en 1959, philosophie « Super Normal » — formes essentielles.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/jasper-morrison.jpg"
     },
     {
       "name": "Jean Prouvé",
@@ -95,7 +151,7 @@
       "brands": ["Vitra"],
       "brandHrefs": ["/collections/vitra"],
       "bio": "Architecte et ingénieur français (1901-1984), pionnier du mobilier industriel. Chaise Standard.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/jean-prouve.jpg"
     },
     {
       "name": "Julien De Smedt",
@@ -120,6 +176,14 @@
       "brandHrefs": ["/collections/hay"],
       "bio": "Couple danois fondateur de HAY en 2002. Design accessible et coloré.",
       "photo": "/images/designers/placeholder-silhouette.svg"
+    },
+    {
+      "name": "Michel Charlot",
+      "slug": "michel-charlot",
+      "brands": ["Vitra"],
+      "brandHrefs": ["/collections/vitra"],
+      "bio": "Designer suisse né en 1984, ancien collaborateur des Bouroullec. Belleville Chair chez Vitra.",
+      "photo": "/images/designers/michel-charlot.jpg"
     },
     {
       "name": "Norm Architects",
@@ -151,7 +215,7 @@
       "brands": ["Vitra", "HAY"],
       "brandHrefs": ["/collections/vitra", "/collections/hay"],
       "bio": "Duo français, frères, l'une des signatures contemporaines majeures. Palissade chez HAY.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/ronan-erwan-bouroullec.jpg"
     },
     {
       "name": "Ronan Bouroullec",
@@ -162,12 +226,20 @@
       "photo": "/images/designers/placeholder-silhouette.svg"
     },
     {
+      "name": "Sori Yanagi",
+      "slug": "sori-yanagi",
+      "brands": ["Vitra"],
+      "brandHrefs": ["/collections/vitra"],
+      "bio": "Designer japonais pionnier du modernisme oriental (1915-2011). Butterfly Stool (1954), iconique chez Vitra.",
+      "photo": "/images/designers/sori-yanagi.jpg"
+    },
+    {
       "name": "Verner Panton",
       "slug": "verner-panton",
       "brands": ["Vitra", "&Tradition"],
       "brandHrefs": ["/collections/vitra", "/collections/tradition"],
       "bio": "Designer danois (1926-1998), icône pop des années 60-70. Panton Chair, Flowerpot.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/verner-panton.jpg"
     },
     {
       "name": "Vincent Van Duysen",
