@@ -220,7 +220,12 @@ function variantBadge(p) {
 }
 
 export function productCard(p) {
-  const href = `/produit.html?id=${encodeURIComponent(p.id)}`;
+  // Prefer ?handle= so the PDP can hit /api/product/:handle directly
+  // (no /api/products cap). Fall back to ?id= for products served from
+  // a stale cache that doesn't carry .handle yet.
+  const href = p.handle
+    ? `/produit.html?handle=${encodeURIComponent(p.handle)}`
+    : `/produit.html?id=${encodeURIComponent(p.id)}`;
   const alt = p.image2 && p.image2 !== p.image ? `<img class="alt" src="${p.image2}" alt="" loading="lazy" />` : "";
   const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`

@@ -67,6 +67,7 @@ const PRODUCTS_QUERY = `
         cursor
         node {
           id
+          handle
           title
           vendor
           productType
@@ -154,6 +155,7 @@ function mapProduct(node) {
   const rawType  = (node.productType || '').toLowerCase().trim();
   return {
     id:          node.id,
+    handle:      node.handle || '',
     variantId:   variant?.id || null,
     name:        node.title,
     brand:       node.vendor || '',
@@ -466,6 +468,7 @@ const COLLECTION_PRODUCTS_QUERY = `
           cursor
           node {
             id
+            handle
             title
             vendor
             productType
@@ -533,6 +536,81 @@ async function getCollectionProducts(handle, first, after, tag) {
     };
   });
 }
+
+// ─── SHOPIFY: SINGLE PRODUCT BY HANDLE ─────────────────
+// Used by the PDP at /produit?handle=<h>. Before this endpoint the
+// PDP could only render products from /api/products (capped at 250)
+// — anything beyond the cap rendered "introuvable". This query goes
+// straight to Shopify by handle, so the catalog cap no longer gates
+// individual product pages.
+const PRODUCT_QUERY = `
+  query GetProduct($handle: String!) {
+    product(handle: $handle) {
+      id
+      handle
+      title
+      vendor
+      productType
+      description
+      tags
+      availableForSale
+      totalInventory
+      collections(first: 20) { edges { node { handle } } }
+      featuredImage { url altText }
+      images(first: 10) { edges { node { url altText } } }
+      priceRange {
+        minVariantPrice { amount currencyCode }
+        maxVariantPrice { amount currencyCode }
+      }
+      variants(first: 250) {
+        edges {
+          node {
+            id
+            title
+            price { amount currencyCode }
+            availableForSale
+            selectedOptions { name value }
+            image { url altText }
+          }
+        }
+      }
+      metafields(identifiers: [
+        { namespace: "custom", key: "designer" }
+        { namespace: "custom", key: "year" }
+        { namespace: "custom", key: "material" }
+        { namespace: "custom", key: "dimensions" }
+        { namespace: "custom", key: "lead_time" }
+        { namespace: "custom", key: "subcategory" }
+      ]) { key value }
+    }
+  }
+`;
+
+async function getProductByHandle(handle) {
+  const h = String(handle || '').trim();
+  if (!h) return null;
+  return cached(`product:${h}`, async () => {
+    const data = await shopifyFetch(PRODUCT_QUERY, { handle: h });
+    const node = data.product;
+    if (!node) return null;
+    return mapProduct(node);
+  });
+}
+
+// ─── API: GET PRODUCT BY HANDLE ────────────────────────
+// GET /api/product/:handle
+// 404 when the handle does not exist in Shopify (or is unpublished
+// on the Storefront API channel).
+app.get('/api/product/:handle', async (req, res) => {
+  try {
+    const product = await getProductByHandle(req.params.handle);
+    if (!product) return res.status(404).json({ error: 'product_not_found' });
+    res.json(product);
+  } catch (err) {
+    console.error('Product fetch error:', err.message);
+    res.status(500).json({ error: 'Impossible de charger ce produit.' });
+  }
+});
 
 // ─── API: GET COLLECTION PRODUCTS ──────────────────────
 // GET /api/collection/:handle/products?cursor=...&limit=50&tag=<tag>
