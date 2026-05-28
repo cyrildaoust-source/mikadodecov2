@@ -418,11 +418,12 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    cells (photo on top, name + brands + bio underneath). Photo uses
    a 4:5 portrait aspect-ratio and falls back to the silhouette SVG
    while Cyril rolls in real images one by one. */
-.designer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 36px); }
+.designer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(24px, 3vw, 36px); }
 .designer-card { display: flex; flex-direction: column; background: var(--paper-2); padding: 18px; transition: background .35s var(--ease); }
-/* V2 photos are landscape 5:4 (1500×1200). object-position:center 30%
-   keeps faces (usually in the top third) safely in frame. */
-.designer-card__photo { width: 100%; aspect-ratio: 5/4; object-fit: cover; object-position: center 30%; background: var(--tile); margin-bottom: 16px; }
+/* V2.1: back to portrait 4:5 (industry convention for designer cards).
+   Sources are landscape 1500×1200 — object-position:center 25% keeps
+   the face (usually in the top quarter) safely in the visible crop. */
+.designer-card__photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 25%; background: var(--tile); margin-bottom: 16px; }
 .designer-card__name { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.5rem; line-height: 1.1; color: var(--ink-deep); margin-bottom: 6px; }
 .designer-card__brands { font-family: var(--sans-product); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 .designer-card__brands a { color: inherit; transition: color .2s var(--ease); }
