@@ -347,10 +347,49 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 
 /* ---------- catalogue ---------- */
 .filterbar { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; padding: 14px var(--gutter); }
-.chips { display: flex; gap: 8px; flex-wrap: wrap; }
-.chip { font-size: var(--fs-small); padding: 8px 15px; border: 1px solid var(--line-ink); background: transparent; color: var(--ink); transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease); }
-.chip:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
-.chip.is-active { background: var(--ink-deep); border-color: var(--ink-deep); color: var(--paper); }
+/* PLP category filter — underline-style chips desktop, native dropdown
+   on mobile. Underline avoids the boxy look of the previous pill chips
+   while keeping the active state explicit. */
+.chips { display: flex; gap: clamp(20px, 3vw, 36px); flex-wrap: wrap; align-items: baseline; }
+.chip {
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+  border-bottom: 1px solid transparent;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.chip:hover { color: var(--ink); }
+.chip.is-active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
+/* Mobile dropdown — hidden on desktop, takes over at ≤ 768px below. */
+.chips-select { display: none; }
+@media (max-width: 768px) {
+  .chips { display: none; }
+  .chips-select {
+    display: block;
+    width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    padding: 10px 36px 10px 14px;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--ink);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+                      linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+  }
+  .chips-select:focus { outline: none; border-color: var(--accent-ink); }
+}
 .filterbar__right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
 .fselect { font-family: inherit; font-size: var(--fs-small); border: 1px solid var(--line); background: var(--paper); padding: 9px 12px; color: var(--ink); }
 .plp-count { font-size: var(--fs-small); color: var(--muted); }

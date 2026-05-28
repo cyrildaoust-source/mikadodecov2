@@ -32,6 +32,14 @@
       <button class="chip" data-cat="rangements">Rangements</button>
       <button class="chip" data-cat="objets">Objets</button>
     </div>
+    <select class="chips-select" data-chips-select aria-label="Filtrer par catégorie">
+      <option value="tous">Tous</option>
+      <option value="assises">Assises</option>
+      <option value="tables">Tables</option>
+      <option value="luminaires">Luminaires</option>
+      <option value="rangements">Rangements</option>
+      <option value="objets">Objets</option>
+    </select>
     <div class="filterbar__right">
       <span class="plp-count" data-plp-count></span>
       <select class="fselect" data-filter-brand aria-label="Marque"><option value="">Toutes les marques</option></select>
@@ -258,6 +266,11 @@
       gridTitle.textContent = showPop ? "Tout le catalogue" : "Le catalogue";
 
       chipsBar.querySelectorAll(".chip").forEach((c) => c.classList.toggle("is-active", c.dataset.cat === state.cat));
+      // Keep the mobile <select> in sync with the active category so a
+      // chip click from desktop or a URL reload both reflect on the
+      // dropdown when the viewport drops below 769px.
+      const selectEl = document.querySelector("[data-chips-select]");
+      if (selectEl && selectEl.value !== state.cat) selectEl.value = state.cat;
 
       // Header + filterbar adapt to the active filter:
       //   ?coll  → collection title/description from Shopify (chips hidden)
@@ -394,6 +407,13 @@
       const c = e.target.closest(".chip"); if (!c) return;
       state.cat = c.dataset.cat; syncURL(); render();
     });
+    // Mobile dropdown (visible ≤ 768px) shares the same state.cat.
+    const chipsSelectEl = document.querySelector("[data-chips-select]");
+    if (chipsSelectEl) {
+      chipsSelectEl.addEventListener("change", (e) => {
+        state.cat = e.target.value; syncURL(); render();
+      });
+    }
     brandSel.addEventListener("change", () => { state.brand = brandSel.value; syncURL(); render(); });
     sortSel.addEventListener("change", () => { state.sort = sortSel.value; render(); });
     document.querySelector("[data-loadmore]").addEventListener("click", loadMore);
