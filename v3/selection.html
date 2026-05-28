@@ -23,18 +23,12 @@
           <h2 class="serif">Récapitulatif</h2>
           <div class="sel-row"><span>Sous-total</span><span data-subtotal>…</span></div>
           <div class="sel-discounts" data-discounts hidden></div>
-          <div class="sel-row sel-row--savings" data-savings hidden></div>
-          <div class="sel-row"><span>Livraison</span><span data-delivery-fee>Offerte</span></div>
+          <p class="sel-summary__hint" data-delivery-hint>Livraison offerte dès 1 500 € d'achats.</p>
+          <div class="sel-row sel-row--delivery-calc"><span>Livraison</span><span>Calculée au paiement</span></div>
           <div class="sel-row sel-row--total"><span data-total-label>Total</span><span data-total>…</span></div>
+          <div class="sel-row sel-row--savings" data-savings hidden></div>
           <p class="sel-eta" data-cart-eta hidden></p>
 
-          <div class="sel-opt">
-            <h3>Livraison</h3>
-            <label><input type="radio" name="delivery" value="showroom" checked /> <span>Retrait au showroom, Uccle <em>(offerte)</em></span></label>
-            <label><input type="radio" name="delivery" value="standard" /> <span>Livraison Belgique <em data-delivery-belgium-label>(50 €)</em></span></label>
-            <p class="sel-opt__confirm-note">Votre choix sera confirmé au paiement.</p>
-            <p class="sel-opt__hint" data-delivery-hint>Livraison offerte dès 1 500 € d'achats.</p>
-          </div>
           <button class="btn btn--solid btn--block" data-checkout style="margin-top:14px">Finaliser la sélection</button>
           <p class="form-error" data-checkout-error style="display:none;margin-top:10px"></p>
         </aside>
@@ -54,28 +48,16 @@
     import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
-    // Mirrors the real Shopify shipping rule (Belgium zone): 50 € flat
-    // under the threshold, free at or above it. Shopify is the source of
-    // truth — it applies the rule at checkout via the Storefront API. We
-    // display the same values here so the cart total matches what the
-    // customer will pay; keep these in sync if Shopify changes.
+    // Free-shipping threshold (Belgium zone). The radio toggle that
+    // selected showroom/standard was removed in V1.1 — Shopify checkout
+    // owns the delivery choice. We still surface the "Plus que X € pour
+    // la livraison offerte" hint to drive average cart size, computed
+    // against the post-discount payable amount.
     const SHIPPING_FREE_FROM = 1500;
-    const SHIPPING_BELGIUM   = 50;
-    function deliveryFee(method, payable) {
-      if (method === "showroom") return 0;
-      if (method === "standard") return payable >= SHIPPING_FREE_FROM ? 0 : SHIPPING_BELGIUM;
-      return 0;
-    }
-    function deliveryLabel(method, payable) {
-      if (method === "showroom") return "Retrait showroom Uccle (offerte)";
-      if (method === "standard") return payable >= SHIPPING_FREE_FROM ? "Livraison Belgique (offerte)" : `Livraison Belgique (${SHIPPING_BELGIUM}€)`;
-      return "";
-    }
+    function deliveryLabel() { return "À confirmer au paiement"; }
     const populated = document.querySelector("[data-populated]");
     const empty = document.querySelector("[data-empty]");
     const itemsEl = document.querySelector("[data-items]");
-
-    function delivery() { return document.querySelector('input[name="delivery"]:checked')?.value || "showroom"; }
 
     // Last preview returned by /api/cart/preview. When present, its values
     // (post-discount subtotal + discount breakdown) replace the local sums.
@@ -165,14 +147,11 @@
       const subtotal = localSubtotal;                  // displayed as "Sous-total" (pre-discount)
       const discount = lastPreview?.discount || 0;     // sum of all Shopify discounts
       const payable  = Math.max(0, subtotal - discount);
-      const fee      = deliveryFee(delivery(), payable);
-      const grand    = payable + fee;
+      // V1.1: delivery fee is no longer added to the cart total — Shopify
+      // checkout computes and shows it. The hint below still motivates
+      // crossing the 1500€ threshold for free shipping.
+      const grand    = payable;
 
-      // Standard-delivery sub-label updates between "(50 €)" and "(offerte)"
-      // based on the threshold, and the small hint below explains how close
-      // the customer is to free shipping.
-      const belgLabel = document.querySelector("[data-delivery-belgium-label]");
-      if (belgLabel) belgLabel.textContent = payable >= SHIPPING_FREE_FROM ? "(offerte)" : `(${SHIPPING_BELGIUM} €)`;
       const hint = document.querySelector("[data-delivery-hint]");
       if (hint) {
         if (payable >= SHIPPING_FREE_FROM) {
@@ -186,7 +165,6 @@
       }
 
       document.querySelector("[data-subtotal]").textContent = euro(subtotal);
-      document.querySelector("[data-delivery-fee]").textContent = fee ? euro(fee) : "Offerte";
 
       // Discount lines (visible only when Shopify returned at least one)
       const list = lastPreview?.discounts || [];
@@ -291,7 +269,6 @@
       }
     });
     document.addEventListener("change", (e) => {
-      if (e.target.name === "delivery") render();
       const qtyEl = e.target.closest("[data-qty-input]");
       if (qtyEl) {
         const v = qtyEl.dataset.qtyInput;
@@ -307,9 +284,7 @@
       const err = document.querySelector("[data-checkout-error]");
       btn.disabled = true; btn.textContent = "Redirection…"; err.style.display = "none";
       try {
-        const localSubtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
-        const payable = Math.max(0, localSubtotal - (lastPreview?.discount || 0));
-        const projet = `Livraison: ${deliveryLabel(delivery(), payable)}`;
+        const projet = `Livraison: ${deliveryLabel()}`;
         const res = await fetch("/api/cart/create", {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })), customer: { projet } }),

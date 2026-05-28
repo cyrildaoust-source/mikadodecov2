@@ -400,15 +400,26 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sel-item__discount-amount { display: block; font-family: var(--sans-product); font-size: 0.85rem; font-weight: 500; color: var(--accent-ink); }
 /* "dont X OFFERTE(S)" — Cormorant italic mention valorised on BXGY rows
    (qty ≥ 4 + discount being a whole number of unit prices). */
-.sel-item__free-mention { display: block; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 0.95rem; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-ink); margin-top: 2px; }
-/* "Économies totales" récap row · highlight band before the delivery line */
-.sel-row--savings { padding: 10px 0; margin: 4px 0; border-top: 1px solid rgba(26, 25, 22, 0.1); border-bottom: 1px solid rgba(26, 25, 22, 0.1); }
+/* V1.1: dark Cormorant italic for max contrast on cream — the previous
+   accent-ink was too faint to register as a value-prop. */
+.sel-item__free-mention { display: block; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.05rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink); margin-top: 4px; }
+/* "Économies totales" · positioned after the Total line in V1.1 as a
+   post-total satisfaction summary. Top margin separates it from Total. */
+.sel-row--savings { padding: 10px 0 4px; margin-top: 16px; border-top: 1px solid rgba(26, 25, 22, 0.1); }
 .sel-row__savings-label { font-family: var(--sans-product); font-size: 0.85rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); }
 .sel-row__savings-amount { font-family: var(--sans-product); font-size: 1rem; font-weight: 500; color: var(--accent-ink); }
+/* "Livraison · Calculée au paiement" — Shopify owns shipping at checkout;
+   we no longer commit to a price in the cart récap. */
+.sel-row--delivery-calc > span:last-child { color: var(--muted); font-style: italic; }
+/* Standalone hint that used to live inside the .sel-opt block. Anchored
+   to the récap now; turns accent-ink when the threshold is reached. */
+.sel-summary__hint { font-size: var(--fs-meta); color: var(--muted); margin: 4px 0 8px; font-style: italic; }
+.sel-summary__hint.is-met { color: var(--accent-ink); font-style: normal; }
+/* Legacy .sel-opt classes kept for backward-compat — toggle markup
+   removed in V1.1, but other pages or tests might still reference them. */
 .sel-opt { margin: 18px 0; }
 .sel-opt__hint { font-size: var(--fs-meta); color: var(--muted); margin: 6px 0 0 22px; font-style: italic; }
 .sel-opt__hint.is-met { color: var(--accent-ink); font-style: normal; }
-.sel-opt__confirm-note { font-style: italic; font-size: 0.75rem; color: var(--muted); margin: 6px 0 0 22px; }
 .sel-eta { font-size: var(--fs-small); color: var(--ink-deep); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); line-height: 1.5; }
 .sel-eta strong { font-weight: 600; }
 .sel-eta--warn { color: #b9742c; font-style: italic; }
