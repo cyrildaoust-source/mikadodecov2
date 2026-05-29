@@ -15,7 +15,12 @@
   <div id="site-header"></div>
 
   <section class="subhero">
-    <img class="subhero__img" src="/images/marques-hero.jpg" alt="Designers Mikadodeco" fetchpriority="high" />
+    <picture>
+      <source type="image/webp"
+        srcset="/images/marques-hero-640.webp 640w, /images/marques-hero-960.webp 960w, /images/marques-hero-1280.webp 1280w, /images/marques-hero-1500.webp 1500w"
+        sizes="100vw" />
+      <img class="subhero__img" src="/images/marques-hero.jpg" width="1500" height="1875" alt="Designers Mikadodeco" fetchpriority="high" />
+    </picture>
     <div class="subhero__scrim"></div>
     <div class="subhero__in">
       <h1>Designers.</h1>
@@ -74,7 +79,7 @@
           }).join("<span class=\"designer-card__brand-sep\" aria-hidden=\"true\"> · </span>");
           return `
             <article class="designer-card" id="${escapeHtml(d.slug)}">
-              <img class="designer-card__photo" src="${escapeHtml(d.photo)}" alt="${escapeHtml(d.name)}" loading="lazy" />
+              <picture><source type="image/webp" srcset="${escapeHtml(d.photo.replace(/\.jpg$/, "-640.webp"))}" /><img class="designer-card__photo" src="${escapeHtml(d.photo)}" width="640" height="800" alt="${escapeHtml(d.name)}" loading="lazy" /></picture>
               <h3 class="designer-card__name">${escapeHtml(d.name)}</h3>
               <div class="designer-card__brands">${brands}</div>
               <p class="designer-card__bio">${escapeHtml(d.bio)}</p>

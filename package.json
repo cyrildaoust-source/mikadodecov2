@@ -7,7 +7,8 @@
     "dev": "nodemon server.js",
     "scrape": "node scripts/scrape-vitra.js",
     "import:shopify": "node scripts/import-to-shopify.js",
-    "import:shopify:dry": "node scripts/import-to-shopify.js --dry-run"
+    "import:shopify:dry": "node scripts/import-to-shopify.js --dry-run",
+    "images": "node scripts/optimize-images.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.2",
-    "playwright": "^1.59.1"
+    "playwright": "^1.59.1",
+    "sharp": "^0.34.5"
   }
 }

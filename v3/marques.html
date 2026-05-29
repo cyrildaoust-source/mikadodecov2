@@ -15,7 +15,12 @@
   <div id="site-header"></div>
 
   <section class="subhero">
-    <img class="subhero__img" src="/images/marques-hero.jpg" alt="Les maisons Mikadodeco" />
+    <picture>
+      <source type="image/webp"
+        srcset="/images/marques-hero-640.webp 640w, /images/marques-hero-960.webp 960w, /images/marques-hero-1280.webp 1280w, /images/marques-hero-1500.webp 1500w"
+        sizes="100vw" />
+      <img class="subhero__img" src="/images/marques-hero.jpg" width="1500" height="1875" alt="Les maisons Mikadodeco" fetchpriority="high" />
+    </picture>
     <div class="subhero__scrim"></div>
     <div class="subhero__in">
       <h1>Les maisons que<br>nous défendons.</h1>
