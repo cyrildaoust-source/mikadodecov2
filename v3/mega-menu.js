@@ -111,11 +111,11 @@ function hydrateMarques() {
         <a class="mm-brand__name" href="${escapeHtml(b.href)}">${escapeHtml(b.name)}</a>
       </div>`).join("");
 
-  // Designers — flat alphabetic list, deep-link to the matching card
-  // on /designers.html via the kebab slug ("Charles & Ray Eames" →
-  // #charles-ray-eames). designers.html scrolls + highlights on load.
+  // Designers — flat alphabetic list, one-click to the filtered PLP
+  // (?designer=<slug>). The "Tous les designers →" footer link below
+  // still points to /designers.html for the full 29-card grid.
   const desHtml = designers.map((d) =>
-    `<a href="/designers.html#${slugify(d)}">${escapeHtml(d)}</a>`
+    `<a href="/produits.html?designer=${slugify(d)}">${escapeHtml(d)}</a>`
   ).join("");
 
   panel.innerHTML = `
