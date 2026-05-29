@@ -8,7 +8,7 @@
       "brands": ["Alessi"],
       "brandHrefs": ["/collections/alessi"],
       "bio": "Designer italien (1918-2002), maître de la fonctionnalité poétique. Plus de 150 produits chez Alessi.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/achille-castiglioni.jpg"
     },
     {
       "name": "Alexander Girard",
@@ -26,7 +26,7 @@
       "brands": ["Artek", "Iittala"],
       "brandHrefs": ["/collections/artek", "/collections/iittala"],
       "bio": "Architecte finlandais (1898-1976), fondateur d'Artek en 1935. Pionnier du modernisme nordique.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/alvar-aalto.jpg"
     },
     {
       "name": "Anderssen & Voll",
@@ -35,7 +35,7 @@
       "brands": ["Muuto"],
       "brandHrefs": ["/collections/muuto"],
       "bio": "Studio norvégien fondé en 2009 par Torbjørn Anderssen et Espen Voll. Design scandinave minimaliste.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/anderssen-voll.jpg"
     },
     {
       "name": "Anita Le Grelle",
@@ -44,7 +44,7 @@
       "brands": ["Serax"],
       "brandHrefs": ["/collections/serax"],
       "bio": "Designer belge, signature monochrome et organique pour la vaisselle et les arts de la table.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/anita-le-grelle.jpg"
     },
     {
       "name": "Antonio Citterio",
@@ -71,7 +71,7 @@
       "brands": ["&Tradition"],
       "brandHrefs": ["/collections/tradition"],
       "bio": "Architecte et designer danois (1902-1971), icône du design scandinave. Chaise Œuf, Chaise Fourmi.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/arne-jacobsen.jpg"
     },
     {
       "name": "Cecilie Manz",
@@ -80,7 +80,7 @@
       "brands": ["Muuto"],
       "brandHrefs": ["/collections/muuto"],
       "bio": "Designer danoise née en 1972, lignes épurées et matières chaleureuses.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/cecilie-manz.jpg"
     },
     {
       "name": "Charles & Ray Eames",
@@ -125,7 +125,7 @@
       "brands": ["Fermob"],
       "brandHrefs": ["/collections/fermob"],
       "bio": "Designer maison de Fermob, signature de la plupart des collections outdoor récentes.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/frederic-sofia.jpg"
     },
     {
       "name": "George Nelson",
@@ -170,7 +170,7 @@
       "brands": ["HAY", "Muuto"],
       "brandHrefs": ["/collections/hay", "/collections/muuto"],
       "bio": "Architecte belge né en 1975, fondateur de JDS Architects. Approche radicale et durable.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/julien-de-smedt.jpg"
     },
     {
       "name": "Marie Michielssen",
@@ -179,7 +179,7 @@
       "brands": ["Serax"],
       "brandHrefs": ["/collections/serax"],
       "bio": "Designer belge, collections céramique organique pour Serax.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/marie-michielssen.jpg"
     },
     {
       "name": "Mette & Rolf Hay",
@@ -188,7 +188,7 @@
       "brands": ["HAY"],
       "brandHrefs": ["/collections/hay"],
       "bio": "Couple danois fondateur de HAY en 2002. Design accessible et coloré.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/mette-rolf-hay.jpg"
     },
     {
       "name": "Michel Charlot",
@@ -206,7 +206,7 @@
       "brands": ["&Tradition", "Muuto"],
       "brandHrefs": ["/collections/tradition", "/collections/muuto"],
       "bio": "Studio danois fondé en 2008. Architecture intérieure et design produit minimaliste.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/norm-architects.jpg"
     },
     {
       "name": "Patricia Urquiola",
@@ -215,7 +215,7 @@
       "brands": ["Alessi"],
       "brandHrefs": ["/collections/alessi"],
       "bio": "Architecte et designer espagnole née en 1961, basée à Milan. Style hybride italo-espagnol.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/patricia-urquiola.jpg"
     },
     {
       "name": "Philippe Starck",
@@ -224,7 +224,7 @@
       "brands": ["Alessi"],
       "brandHrefs": ["/collections/alessi"],
       "bio": "Designer français né en 1949, prolifique et reconnaissable. Juicy Salif iconique chez Alessi.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/philippe-starck.jpg"
     },
     {
       "name": "Ronan & Erwan Bouroullec",
@@ -260,7 +260,7 @@
       "brands": ["Serax"],
       "brandHrefs": ["/collections/serax"],
       "bio": "Architecte belge né en 1962, signature minimaliste épurée. Collections céramique pour Serax.",
-      "photo": "/images/designers/placeholder-silhouette.svg"
+      "photo": "/images/designers/vincent-van-duysen.jpg"
     }
   ]
 }
