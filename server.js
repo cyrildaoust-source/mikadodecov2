@@ -139,6 +139,28 @@ const TYPE_TO_CATEGORY = Object.entries(CATEGORY_MAP).reduce((acc, [cat, types])
   return acc;
 }, {});
 
+// Shopify's CDN resizes + reformats images on the fly via URL params, but
+// does NOTHING by default: it hands us the full-res original. For product
+// CARDS (1:1, rendered ≈300px CSS / 600px retina) that's megabytes wasted.
+// shopifyResize() appends `width=<w>&format=webp` so the CDN returns a
+// card-sized WebP instead. Two gotchas baked in here:
+//   1. `format=webp` is REQUIRED — `width=` alone still serves JPEG.
+//   2. These URLs already carry a `?v=…` cache-buster, so we must join with
+//      `&` when a query already exists (`?` otherwise), never blindly with `?`.
+// Only cdn.shopify.com URLs are touched; local /images/… assets pass through
+// untouched. The PDP gallery (images[]) and variant images are intentionally
+// left full-res by mapProduct — only `image`/`image2` (the card fields) resize.
+function shopifyResize(url, width) {
+  if (!url || typeof url !== 'string' || !url.includes('cdn.shopify.com')) return url;
+  const sep = url.includes('?') ? '&' : '?';
+  return `${url}${sep}width=${width}&format=webp`;
+}
+
+// Target width (px) for the 1:1 product-card thumbnail. ~300px CSS box on the
+// PLP/home grids, doubled for retina. Bumping this is the single knob for card
+// image sharpness vs. weight.
+const CARD_IMAGE_WIDTH = 600;
+
 function mapProduct(node) {
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
@@ -186,15 +208,18 @@ function mapProduct(node) {
     // (kept for backward compat with the PDP metafield — separate from brand lead-time)
     leadTime:    meta.lead_time   || '',
     description: node.description || '',
-    image:       node.featuredImage?.url || node.images?.edges?.[0]?.node?.url || '',
+    // Card thumbnail → card-width WebP. The full-res original still feeds the
+    // PDP through images[]/variant images below (left untouched on purpose).
+    image:       shopifyResize(node.featuredImage?.url || node.images?.edges?.[0]?.node?.url || '', CARD_IMAGE_WIDTH),
     // image2 = first image that isn't the featured one — used for on-hover swap.
+    // Dedup runs on the RAW urls; only the chosen url is resized afterwards.
     image2:      (() => {
       const featured = node.featuredImage?.url;
       const imgs = (node.images?.edges || []).map(e => e?.node?.url).filter(Boolean);
       const second = imgs.find(u => u !== featured) || imgs[1] || null;
-      return second || null;
+      return second ? shopifyResize(second, CARD_IMAGE_WIDTH) : null;
     })(),
-    // images = full ordered list, used by the PDP gallery
+    // images = full ordered list, used by the PDP gallery — kept FULL-RES.
     images:      (node.images?.edges || []).map(e => e?.node?.url).filter(Boolean),
     // variants = all variants with their selected options, used by the PDP variant picker
     variants:    (node.variants?.edges || []).map(e => e?.node).filter(Boolean).map(v => ({
