@@ -401,16 +401,17 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 /* ---------- brands ---------- */
 .brandgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
 .brandcard { display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; border: 1px solid var(--line); padding: 24px; transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease); }
-.brandcard:hover { background: var(--ink-deep); color: var(--paper); border-color: var(--ink-deep); }
-.brandcard:hover .brandcard__count, .brandcard:hover .brandcard__origin { color: rgba(248,245,239,.7); }
+/* Gentle hover · aligned with .designer-card (option C). The previous
+   dramatic ink-deep inversion + paper text + logo brightness:0 filter
+   has been retired for a softer cross-card language. */
+.brandcard:hover { background: var(--paper); }
 .brandcard__origin { font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--subtle); }
 /* Card brand name (Cormorant italic) — primary identity until the
    new SVG set ships. Equivalent of object-position left bottom: the
    block sits at the bottom of the flex parent (margin-top:auto). */
 .brandcard__name { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.5rem; line-height: 1.1; color: var(--ink); margin-top: auto; text-align: left; transition: color .25s var(--ease); }
-.brandcard:hover .brandcard__name { color: var(--paper); }
+.brandcard:hover .brandcard__name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .brandcard__logo { display: block; height: 32px; width: auto; max-width: 75%; object-fit: contain; object-position: left bottom; margin-top: auto; transition: filter .25s var(--ease); }
-.brandcard:hover .brandcard__logo { filter: brightness(0) invert(1); }
 .brandcard__count { font-size: var(--fs-small); color: var(--muted); margin-top: 6px; }
 
 /* ---------- designers ---------- */
@@ -429,6 +430,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    the photo / name / bio on Safari (private windows especially). */
 .designer-card { position: relative; display: flex; flex-direction: column; background: var(--paper-2); padding: 18px; color: var(--ink); transition: background .35s var(--ease); }
 .designer-card:hover { background: var(--paper); }
+.designer-card:hover .designer-card__name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .designer-card__link { position: absolute; inset: 0; z-index: 1; text-decoration: none; text-indent: -9999px; overflow: hidden; }
 /* Brand links sit above the overlay so they stay independently clickable. */
 .designer-card__brands { position: relative; z-index: 2; }
