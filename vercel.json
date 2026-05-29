@@ -18,7 +18,8 @@
     { "src": "/v3", "status": 301, "headers": { "Location": "/" } },
     {
       "src": "/(.*\\.html(?:\\?.*)?)?$",
-      "headers": { "cache-control": "public, max-age=0, must-revalidate" }
+      "headers": { "cache-control": "public, max-age=0, must-revalidate" },
+      "continue": true
     },
     {
       "src": "/(.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|woff2?|ttf|eot|ico))",
