@@ -43,23 +43,25 @@
         const list = data?.designers || [];
         countEl.textContent = `${list.length} designers`;
         grid.innerHTML = list.map((d) => {
-          // Brand sub-links keep their own navigation. The outer <a> is
-          // the whole card → /produits.html?designer=<slug>. Nested <a>
-          // is tolerated by modern browsers; stopPropagation on the
-          // inner click prevents the card's navigation from firing too.
+          // Card layout: <article> wrapper + transparent overlay <a> for
+          // navigation (covers the whole card). Brand links sit above the
+          // overlay via z-index so they stay clickable on their own. This
+          // pattern avoids Safari's "<a> as a flex container" bug that
+          // visually dissociated photo / name / bio across cards.
           const brands = (d.brands || []).map((b, i) => {
             const href = d.brandHrefs?.[i];
             return href
-              ? `<a href="${escapeHtml(href)}" onclick="event.stopPropagation()">${escapeHtml(b)}</a>`
+              ? `<a href="${escapeHtml(href)}">${escapeHtml(b)}</a>`
               : `<span>${escapeHtml(b)}</span>`;
           }).join("<span class=\"designer-card__brand-sep\" aria-hidden=\"true\"> · </span>");
           return `
-            <a class="designer-card" id="${escapeHtml(d.slug)}" href="/produits.html?designer=${encodeURIComponent(d.slug)}">
+            <article class="designer-card" id="${escapeHtml(d.slug)}">
               <img class="designer-card__photo" src="${escapeHtml(d.photo)}" alt="${escapeHtml(d.name)}" loading="lazy" />
               <h3 class="designer-card__name">${escapeHtml(d.name)}</h3>
               <div class="designer-card__brands">${brands}</div>
               <p class="designer-card__bio">${escapeHtml(d.bio)}</p>
-            </a>`;
+              <a class="designer-card__link" href="/produits.html?designer=${encodeURIComponent(d.slug)}" aria-label="Voir les produits de ${escapeHtml(d.name)}"></a>
+            </article>`;
         }).join("");
 
         // Deep-link: scroll to the targeted card and pulse it briefly.

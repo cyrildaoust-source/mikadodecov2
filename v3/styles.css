@@ -418,11 +418,20 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    cells (photo on top, name + brands + bio underneath). Photo uses
    a 4:5 portrait aspect-ratio and falls back to the silhouette SVG
    while Cyril rolls in real images one by one. */
-.designer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(24px, 3vw, 36px); }
-/* Card is now an <a> → /produits.html?designer=<slug>. Reset link
-   defaults so the layout matches the legacy <article> rendering. */
-.designer-card { display: flex; flex-direction: column; background: var(--paper-2); padding: 18px; color: var(--ink); text-decoration: none; transition: background .35s var(--ease); }
+/* grid-auto-rows + align-items:stretch forces every row to take the
+   tallest card's height and stretch each card to fill it — keeps the
+   bottom alignment of the bio block consistent across rows whatever
+   the bio length. */
+.designer-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 1fr; align-items: stretch; gap: clamp(24px, 3vw, 36px); }
+/* V3.1 (Safari fix): the card is a plain <article> + a transparent
+   overlay <a class="designer-card__link"> that covers the whole tile.
+   The previous "<a> as flex column" pattern was visually fragmenting
+   the photo / name / bio on Safari (private windows especially). */
+.designer-card { position: relative; display: flex; flex-direction: column; background: var(--paper-2); padding: 18px; color: var(--ink); transition: background .35s var(--ease); }
 .designer-card:hover { background: var(--paper); }
+.designer-card__link { position: absolute; inset: 0; z-index: 1; text-decoration: none; text-indent: -9999px; overflow: hidden; }
+/* Brand links sit above the overlay so they stay independently clickable. */
+.designer-card__brands { position: relative; z-index: 2; }
 /* V2.1: back to portrait 4:5 (industry convention for designer cards).
    Sources are landscape 1500×1200 — object-position:center 25% keeps
    the face (usually in the top quarter) safely in the visible crop. */
