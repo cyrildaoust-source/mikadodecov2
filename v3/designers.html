@@ -15,7 +15,7 @@
   <div id="site-header"></div>
 
   <section class="subhero">
-    <img class="subhero__img" src="/images/marques-hero.jpg" alt="Designers Mikadodeco" />
+    <img class="subhero__img" src="/images/marques-hero.jpg" alt="Designers Mikadodeco" fetchpriority="high" />
     <div class="subhero__scrim"></div>
     <div class="subhero__in">
       <h1>Designers.</h1>
@@ -26,6 +26,24 @@
   <section class="section wrap reveal">
     <div class="shead"><h2 class="serif">Tous les designers</h2><span class="plp-count" data-designer-count></span></div>
     <div class="designer-grid" data-designer-grid></div>
+    <script>
+      /* Reserve grid height before /designers-data.json comes back —
+         29 skeletons matching the real card shape (photo 4:5 + name +
+         brands + bio). Replaced by the rendered cards in the module
+         below. Without this, the grid is 0px tall at first paint and
+         the footer jumps ~3600px when cards inject (CLS ≈ 0.35). */
+      (function () {
+        var g = document.querySelector("[data-designer-grid]");
+        if (!g) return;
+        var skel = '<div class="designer-card designer-card--skel">'
+                 + '<div class="designer-card__skel-photo"></div>'
+                 + '<div class="designer-card__skel-name"></div>'
+                 + '<div class="designer-card__skel-brand"></div>'
+                 + '<div class="designer-card__skel-bio"></div>'
+                 + "</div>";
+        g.innerHTML = skel.repeat(29);
+      })();
+    </script>
   </section>
 
   <div id="site-footer"></div>
