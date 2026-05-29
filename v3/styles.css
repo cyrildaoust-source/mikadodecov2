@@ -431,6 +431,15 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .designer-card { position: relative; display: flex; flex-direction: column; background: var(--paper-2); padding: 18px; color: var(--ink); transition: background .35s var(--ease); }
 .designer-card:hover { background: var(--paper); }
 .designer-card:hover .designer-card__name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+/* Skeleton placeholder used in v3/designers.html before the cards
+   render — reserves the grid height to kill the CLS jump (~0.35 →
+   ~0). Photo block matches the real 4:5 ratio; text blocks mimic the
+   name / brand / bio rhythm. Replaced by the real cards' innerHTML. */
+.designer-card--skel { pointer-events: none; }
+.designer-card__skel-photo { width: 100%; aspect-ratio: 4/5; background: var(--tile); margin-bottom: 16px; animation: pulse 1.4s var(--ease) infinite; }
+.designer-card__skel-name  { width: 70%; height: 1.5rem; background: var(--tile); margin-bottom: 8px; animation: pulse 1.4s var(--ease) infinite; }
+.designer-card__skel-brand { width: 40%; height: 0.7rem; background: var(--tile); margin-bottom: 12px; animation: pulse 1.4s var(--ease) infinite; }
+.designer-card__skel-bio   { width: 100%; height: 3rem; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
 .designer-card__link { position: absolute; inset: 0; z-index: 1; text-decoration: none; text-indent: -9999px; overflow: hidden; }
 /* Brand links sit above the overlay so they stay independently clickable. */
 .designer-card__brands { position: relative; z-index: 2; }
