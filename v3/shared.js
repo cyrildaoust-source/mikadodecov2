@@ -78,6 +78,9 @@ export function addToCart(item, qty = 1) {
   if (idx >= 0) cart[idx].qty = (cart[idx].qty || 1) + n;
   else cart.push({ ...item, qty: n });
   writeCart(cart);
+  // `cart:add` fires ONLY on an actual add (not on qty edits / removals, which
+  // go through writeCart → cart:change only). The cart drawer opens on this.
+  document.dispatchEvent(new CustomEvent("cart:add"));
   return cart;
 }
 export function setCartQty(variantId, qty) {
@@ -357,6 +360,22 @@ function chromeHTML(active) {
       <footer class="drawer__foot" data-drawer-foot></footer>
     </div>`;
 
+  // Cart drawer (mini-cart) — slides from the right, above everything. Body +
+  // foot are (re)rendered by bindCartDrawer() from readCart(); the skeleton just
+  // holds the slots. Present on every page (injected with the shell).
+  const cartDrawerHTML = `
+    <div class="cartd" data-cart-drawer>
+      <div class="cartd__backdrop" data-cartd-backdrop></div>
+      <aside class="cartd__panel" role="dialog" aria-modal="true" aria-label="Mon panier" data-cartd-panel>
+        <header class="cartd__head">
+          <h2 class="cartd__title" data-cartd-title>Mon panier</h2>
+          <button class="cartd__close" data-cartd-close type="button" aria-label="Fermer le panier">&times;</button>
+        </header>
+        <div class="cartd__body" data-cartd-body></div>
+        <footer class="cartd__foot" data-cartd-foot hidden></footer>
+      </aside>
+    </div>`;
+
   return `
   <div class="chrome" data-chrome>
     <div class="announce" data-announce>
@@ -384,7 +403,8 @@ function chromeHTML(active) {
     </div>
     ${stage}
   </div>
-  ${drawerHTML}`;
+  ${drawerHTML}
+  ${cartDrawerHTML}`;
 }
 
 function footerHTML() {
@@ -450,6 +470,134 @@ function bindDrawer() {
   document.querySelector("[data-drawer-close]")?.addEventListener("click", () => drawer.classList.remove("open"));
   drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => drawer.classList.remove("open")));
 }
+
+/* ---------- cart drawer (mini-cart) ----------
+   Slides from the right on (1) cart-icon click and (2) cart:add. Lists the cart
+   with live qty/remove, a client-side subtotal, and a link to /selection.html.
+   Re-renders on cart:change but NEVER auto-opens on it (only cart:add + icon). */
+function bindCartDrawer() {
+  const root = document.querySelector("[data-cart-drawer]");
+  if (!root) return;
+  const panel    = root.querySelector("[data-cartd-panel]");
+  const body     = root.querySelector("[data-cartd-body]");
+  const foot     = root.querySelector("[data-cartd-foot]");
+  const title    = root.querySelector("[data-cartd-title]");
+  const cartLink = document.querySelector(".nav__cart");
+  let lastFocus  = null;
+  const isOpen   = () => root.classList.contains("open");
+
+  const lineHTML = (i, idx) => {
+    const qty = Math.max(1, parseInt(i.qty) || 1);
+    return `
+      <div class="cartd__item">
+        <img class="cartd__img" src="${escapeHtml(i.image || "")}" alt="" loading="lazy" />
+        <div class="cartd__info">
+          <div class="cartd__brand">${escapeHtml(i.brand || "")}</div>
+          <div class="cartd__name">${escapeHtml(i.name || "")}</div>
+          <div class="cartd__line">
+            <div class="cartd__qty">
+              <button class="cartd__qbtn" type="button" data-cartd-dec="${escapeHtml(i.variantId)}" aria-label="Diminuer la quantité">−</button>
+              <span class="cartd__qval">${qty}</span>
+              <button class="cartd__qbtn" type="button" data-cartd-inc="${escapeHtml(i.variantId)}" aria-label="Augmenter la quantité">+</button>
+            </div>
+            <span class="cartd__price">${euro((i.price || 0) * qty)}</span>
+          </div>
+        </div>
+        <button class="cartd__remove" type="button" data-cartd-remove="${idx}" aria-label="Retirer ${escapeHtml(i.name || "cet article")}">&times;</button>
+      </div>`;
+  };
+
+  function render() {
+    const cart = readCart();
+    const n = cartCount();
+    title.textContent = `Mon panier${n ? ` (${n})` : ""}`;
+    if (!cart.length) {
+      body.innerHTML = `
+        <div class="cartd__empty">
+          <p class="cartd__empty-text">Votre panier est vide</p>
+          <a class="btn btn--outline btn--block" href="/produits.html">Voir le catalogue</a>
+        </div>`;
+      foot.hidden = true; foot.innerHTML = "";
+      return;
+    }
+    body.innerHTML = cart.map(lineHTML).join("");
+    const subtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
+    foot.hidden = false;
+    foot.innerHTML = `
+      <div class="cartd__subtotal"><span>Sous-total</span><span>${euro(subtotal)}</span></div>
+      <p class="cartd__note">Remises et livraison calculées au panier</p>
+      <a class="btn btn--solid btn--block cartd__cta" href="/selection.html">Aller au panier →</a>`;
+  }
+
+  function lockScroll(on) {
+    if (on) {
+      const sw = window.innerWidth - document.documentElement.clientWidth;
+      if (sw > 0) document.body.style.paddingRight = sw + "px";
+      document.body.classList.add("cartd-locked");
+    } else {
+      document.body.classList.remove("cartd-locked");
+      document.body.style.paddingRight = "";
+    }
+  }
+
+  function onKeydown(e) {
+    if (!isOpen()) return;
+    if (e.key === "Escape") { e.preventDefault(); close(); return; }
+    if (e.key !== "Tab") return;
+    const list = [...panel.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])')]
+      .filter((el) => el.offsetParent !== null && !el.disabled);
+    if (!list.length) { e.preventDefault(); return; }
+    const first = list[0], last = list[list.length - 1], a = document.activeElement;
+    if (!panel.contains(a)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && a === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && a === last) { e.preventDefault(); first.focus(); }
+  }
+
+  function open() {
+    if (isOpen()) { render(); return; }          // already open → just refresh, no re-animate
+    lastFocus = document.activeElement;
+    document.querySelector("[data-drawer]")?.classList.remove("open"); // close mobile menu
+    render();
+    root.classList.add("open");
+    lockScroll(true);
+    document.addEventListener("keydown", onKeydown, true);
+    requestAnimationFrame(() => root.querySelector("[data-cartd-close]")?.focus());
+  }
+
+  function close() {
+    if (!isOpen()) return;
+    root.classList.remove("open");
+    lockScroll(false);
+    document.removeEventListener("keydown", onKeydown, true);
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+    else cartLink?.focus();
+  }
+
+  // ── open triggers ──
+  cartLink?.addEventListener("click", (e) => { e.preventDefault(); open(); }); // href kept as no-JS fallback
+  document.addEventListener("cart:add", open);
+  document.querySelector("[data-burger]")?.addEventListener("click", close);   // opening mobile menu closes the cart
+
+  // ── close triggers ──
+  root.querySelector("[data-cartd-close]")?.addEventListener("click", close);
+  root.querySelector("[data-cartd-backdrop]")?.addEventListener("click", close);
+
+  // ── live refresh (never auto-open) ──
+  document.addEventListener("cart:change", () => { if (isOpen()) render(); });
+
+  // ── qty +/- via setCartQty (NOT addToCart), remove via index ──
+  body.addEventListener("click", (e) => {
+    const dec = e.target.closest("[data-cartd-dec]");
+    const inc = e.target.closest("[data-cartd-inc]");
+    const rem = e.target.closest("[data-cartd-remove]");
+    if (dec) setCartQty(dec.dataset.cartdDec, cartQty(dec.dataset.cartdDec) - 1);
+    else if (inc) setCartQty(inc.dataset.cartdInc, cartQty(inc.dataset.cartdInc) + 1);
+    else if (rem) removeFromCartAt(parseInt(rem.dataset.cartdRemove, 10));
+  });
+
+  render(); // seed content so an icon-click before any add shows the current cart
+}
+
 export function bindReveal() {
   const els = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("in")); return; }
@@ -516,6 +664,7 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   if (f) f.innerHTML = footerHTML();
   if (!transparentNav) document.body.classList.add("has-topnav");
   bindDrawer();
+  bindCartDrawer();
   bindChrome(transparentNav);
   bindAnnounce();
   bindNewsletter();
