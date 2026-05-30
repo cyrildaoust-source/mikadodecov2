@@ -115,6 +115,41 @@ export function syncBadge() {
   });
 }
 
+/* Real cart totals + automatic discount allocations from Shopify
+   (POST /api/cart/preview). This is the SAME logic selection.html runs inline
+   — extracted here so the cart drawer reuses it verbatim (debounced ~500ms,
+   stale responses dropped via a sequence counter, silent network fallback).
+   `onUpdate(preview|null)` fires with the payload, or null on empty cart /
+   failure (→ caller keeps the client-side pre-discount subtotal). Returns
+   `{ schedule }`. selection.html keeps its own copy for now (not modified
+   here) and could be migrated to this helper in a follow-up. */
+export function createCartPreview(onUpdate, delay = 500) {
+  let timer = null, seq = 0;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(async () => {
+      const cart = readCart();
+      if (!cart.length) { onUpdate(null); return; }
+      const mySeq = ++seq;
+      try {
+        const res = await fetch("/api/cart/preview", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })) }),
+        });
+        if (!res.ok) throw new Error("preview " + res.status);
+        const data = await res.json();
+        if (mySeq !== seq) return;                 // a newer request superseded this one
+        onUpdate(data);
+      } catch (e) {
+        if (mySeq === seq) onUpdate(null);          // silent: keep local pre-discount totals
+        console.warn("[cart] preview unavailable:", e.message);
+      }
+    }, delay);
+  }
+  return { schedule };
+}
+
 /* ---------- data ---------- */
 export async function fetchProducts() {
   const r = await fetch("/api/products");
@@ -483,8 +518,21 @@ function bindCartDrawer() {
   const foot     = root.querySelector("[data-cartd-foot]");
   const title    = root.querySelector("[data-cartd-title]");
   const cartLink = document.querySelector(".nav__cart");
-  let lastFocus  = null;
-  const isOpen   = () => root.classList.contains("open");
+  let lastFocus   = null;
+  let lastPreview = null;                          // last /api/cart/preview payload (real discounts + total)
+  const isOpen    = () => root.classList.contains("open");
+
+  // Per-line price, mirroring selection.html's 3 states: fully free (≥99% off)
+  // → struck original + GRATUIT; partial discount → struck original + final;
+  // else plain price. Uses the per-variant payload from the preview.
+  const priceHTML = (i, qty) => {
+    const lineSub = (i.price || 0) * qty;
+    const pl = lastPreview?.lines?.find((l) => l.variantId === i.variantId);
+    const d = pl?.discount || 0;
+    if ((pl?.discountPct || 0) >= 99) return `<s class="cartd__was">${euro(lineSub)}</s><em class="cartd__free">GRATUIT</em>`;
+    if (d > 0) return `<s class="cartd__was">${euro(lineSub)}</s><span class="cartd__price">${euro(lineSub - d)}</span>`;
+    return `<span class="cartd__price">${euro(lineSub)}</span>`;
+  };
 
   const lineHTML = (i, idx) => {
     const qty = Math.max(1, parseInt(i.qty) || 1);
@@ -500,7 +548,7 @@ function bindCartDrawer() {
               <span class="cartd__qval">${qty}</span>
               <button class="cartd__qbtn" type="button" data-cartd-inc="${escapeHtml(i.variantId)}" aria-label="Augmenter la quantité">+</button>
             </div>
-            <span class="cartd__price">${euro((i.price || 0) * qty)}</span>
+            <div class="cartd__priceblock">${priceHTML(i, qty)}</div>
           </div>
         </div>
         <button class="cartd__remove" type="button" data-cartd-remove="${idx}" aria-label="Retirer ${escapeHtml(i.name || "cet article")}">&times;</button>
@@ -521,12 +569,22 @@ function bindCartDrawer() {
       return;
     }
     body.innerHTML = cart.map(lineHTML).join("");
-    const subtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
+    // Subtotal = client pre-discount sum (same basis as selection.html). Discount
+    // + total come from the real preview; until it lands, total === subtotal so
+    // the summary is never empty (anti-flash).
+    const subtotal  = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
+    const discount  = lastPreview?.discount || 0;
+    const total     = Math.max(0, subtotal - discount);
+    const discounts = lastPreview?.discounts || [];
     foot.hidden = false;
     foot.innerHTML = `
-      <div class="cartd__subtotal"><span>Sous-total</span><span>${euro(subtotal)}</span></div>
+      <div class="cartd__row"><span>Sous-total</span><span>${euro(subtotal)}</span></div>
+      ${discounts.map((d) => `<div class="cartd__row cartd__row--discount"><span>Remise · ${escapeHtml(d.title)}</span><span>−${euro(d.amount)}</span></div>`).join("")}
+      <div class="cartd__row cartd__row--total"><span>Total</span><span>${euro(total)}</span></div>
+      ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
       <p class="cartd__note">Remises et livraison calculées au panier</p>
-      <a class="btn btn--solid btn--block cartd__cta" href="/selection.html">Aller au panier →</a>`;
+      <a class="btn btn--solid btn--block cartd__cta" href="/selection.html">Aller au panier →</a>
+      <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
   }
 
   function lockScroll(on) {
@@ -554,10 +612,12 @@ function bindCartDrawer() {
   }
 
   function open() {
-    if (isOpen()) { render(); return; }          // already open → just refresh, no re-animate
+    if (isOpen()) { render(); preview.schedule(); return; } // already open → refresh, no re-animate
     lastFocus = document.activeElement;
     document.querySelector("[data-drawer]")?.classList.remove("open"); // close mobile menu
+    lastPreview = null;                          // anti-flash: start from the client subtotal, no stale discounts
     render();
+    preview.schedule();                          // real discounts/total — fetched ONLY while open
     root.classList.add("open");
     lockScroll(true);
     document.addEventListener("keydown", onKeydown, true);
@@ -573,6 +633,10 @@ function bindCartDrawer() {
     else cartLink?.focus();
   }
 
+  // Real discounts/total from Shopify (same endpoint+logic as selection.html),
+  // fetched ONLY while the drawer is open; null payload → keep client subtotal.
+  const preview = createCartPreview((data) => { lastPreview = data; if (isOpen()) render(); });
+
   // ── open triggers ──
   cartLink?.addEventListener("click", (e) => { e.preventDefault(); open(); }); // href kept as no-JS fallback
   document.addEventListener("cart:add", open);
@@ -582,8 +646,11 @@ function bindCartDrawer() {
   root.querySelector("[data-cartd-close]")?.addEventListener("click", close);
   root.querySelector("[data-cartd-backdrop]")?.addEventListener("click", close);
 
-  // ── live refresh (never auto-open) ──
-  document.addEventListener("cart:change", () => { if (isOpen()) render(); });
+  // ── live refresh (never auto-open) — re-render + re-fetch discounts while open ──
+  document.addEventListener("cart:change", () => { if (isOpen()) { render(); preview.schedule(); } });
+
+  // ── "← Continuer mes achats" closes (foot is re-rendered, so delegate) ──
+  foot.addEventListener("click", (e) => { if (e.target.closest("[data-cartd-continue]")) close(); });
 
   // ── qty +/- via setCartQty (NOT addToCart), remove via index ──
   body.addEventListener("click", (e) => {
