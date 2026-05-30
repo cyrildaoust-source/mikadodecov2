@@ -480,6 +480,7 @@ function footerHTML() {
         </ul></div>
         <div><h5>Contact</h5><ul>
           <li><a href="mailto:shop@mikadodeco.be">shop@mikadodeco.be</a></li>
+          <li><a href="tel:+32493837983">+32 (0)493 83 79 83</a></li>
           <li><a href="/contact.html">Nous écrire</a></li>
           <li><a href="https://maps.google.com/?q=75+Rue+du+Doyenné+1180+Uccle" target="_blank" rel="noopener">75 Rue du Doyenné, Uccle</a></li>
         </ul></div>
