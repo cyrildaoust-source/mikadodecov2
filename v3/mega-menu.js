@@ -37,6 +37,7 @@ export async function initMegaMenu() {
     indexTopItems(menu.items || []);
     hydrateMobilier();
     hydrateMarques();
+    hydrateDesigners();
     hydrateDrawer();
     bindHover();
     bindKeyboard();
@@ -136,14 +137,59 @@ function hydrateMarques() {
     </div>`;
 }
 
+// --- Designers mega (editorial: designer du mois + à la une) --
+
+function hydrateDesigners() {
+  const panel = stageEl.querySelector('[data-mm-panel="designers"]');
+  if (!panel) return;
+  const des    = config?.designers || {};
+  const duMois = des.duMois;
+  const aLaUne = des.aLaUne || [];
+  // No editorial config → leave empty so open() skips it; the top-level
+  // "Designers" trigger still navigates to /designers.html (graceful).
+  if (!duMois && !aLaUne.length) { panel.innerHTML = ""; return; }
+
+  // Designer du mois — portrait + blurb; the whole card links to the
+  // filtered PLP (?designer=<slug>). onerror keeps the frame clean if the
+  // portrait is missing (the photos ship on the designers branch).
+  const feature = duMois ? `
+      <a class="mm-des-card" href="/produits.html?designer=${escapeHtml(duMois.slug)}">
+        <span class="mm-des-card__photo">
+          ${duMois.photo ? `<img src="${escapeHtml(duMois.photo)}" alt="${escapeHtml(duMois.name || "")}" loading="lazy" onerror="this.remove()" />` : ""}
+        </span>
+        <span class="mm-des-card__body">
+          <span class="mm-des-card__sur">Designer du mois</span>
+          <span class="mm-des-card__name">${escapeHtml(duMois.name || "")}</span>
+          ${duMois.lead ? `<span class="mm-des-card__lead">${escapeHtml(duMois.lead)}</span>` : ""}
+          <span class="mm-des-card__cta">${escapeHtml(duMois.ctaLabel || "Voir ses pièces")} →</span>
+        </span>
+      </a>` : "";
+
+  // À la une — flat name list, one click to each designer's PLP.
+  const aune = aLaUne.map((d) =>
+    `<li><a href="/produits.html?designer=${escapeHtml(d.slug)}">${escapeHtml(d.name)}</a></li>`
+  ).join("");
+
+  panel.innerHTML = `
+    <div class="mm-mega mm-mega--designers">
+      ${feature}
+      <div class="mm-des-aune">
+        <div class="mm-col__head">À la une</div>
+        <ul class="mm-col__list mm-des-aune__list">${aune}</ul>
+        <a class="mm-marques__all" href="/designers.html">Tous les designers →</a>
+      </div>
+    </div>`;
+}
+
 // --- mobile drawer hydration ---------------------------------
 
 function hydrateDrawer() {
   const mobSub = document.querySelector('[data-drawer-sub="mobilier"]');
   if (mobSub && TOP.mobilier?.items?.length) {
-    mobSub.innerHTML = TOP.mobilier.items.map((c) =>
+    const links = TOP.mobilier.items.map((c) =>
       `<li><a href="${escapeHtml(c.url)}">${escapeHtml(c.title)}</a></li>`
     ).join("");
+    mobSub.innerHTML = links + `<li><a href="/collections/all" style="font-style:italic">Voir tout le mobilier →</a></li>`;
   }
   // Marques drawer: 15 brands, name only — featured collections skipped
   // on mobile (V2.1 decision: drawer is already long).
