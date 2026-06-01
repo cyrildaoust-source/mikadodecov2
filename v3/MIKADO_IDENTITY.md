@@ -13,12 +13,14 @@ The source of truth for the Mikadodeco storefront: palette, type, detailing, voi
 | `--muted` | `#7c756c` | secondary text |
 | `--subtle` | `#a39c91` | meta / captions |
 | `--line` | `#e0d9cf` | warm beige hairline |
-| **`--accent`** | **`#9ad4f0`** | **signature baby blue** · fills, rules, underlines, panel |
-| **`--accent-ink`** | **`#4ea7d6`** | deeper companion · legible blue for text/tags/links on cream |
-| **`--accent-soft`** | **`#e6f4fb`** | tint · the single "blue moment" panel |
+| **`--accent`** | **`#28408F`** | **signature royal blue** · links/text, rules, underlines, btn--blue + announce bg |
+| **`--accent-ink`** | **`#1C2F6B`** | deep royal · legible blue for text/tags/links on cream + btn hover bg |
+| **`--accent-soft`** | **`#ECEFF7`** | pale-blue tint · the single "blue moment" panel |
+| **`--promo`** | **`#C9A24A`** | luminous gold · promo (badges use a brushed-brass gradient, ink text) |
+| **`--promo-deep`** | **`#A07F2E`** | deep gold · hover / gold text on cream |
 | `--on-dark` | `#f8f5ef` | text over imagery (hero, category labels) |
 
-Warm cream + brown-black, with a baby-blue signature used sparingly.
+Warm cream + brown-black, with a measured royal-blue signature + gold promo accent.
 
 ## Type
 
@@ -53,7 +55,7 @@ French-first, warm, store-as-curator in Uccle (Bruxelles). Short, calm, concrete
 - **Email**: shop@mikadodeco.be (single contact address; the earlier info@/contact@ variants were placeholders).
 - **Founding year**: **2011** (used in the footer seal aria-label).
 - **Format**: walk-in boutique Tue–Sat; **Mikado Studio** handles design projects by appointment.
-- **Location block** (`rendez-vous.html` → `.locate`): bespoke brand-styled map (Leaflet + CARTO `light_all` tiles, warm-tinted via CSS) with a baby-blue pin + overlapping storefront print. This carries the page's single "blue moment".
+- **Location block** (`rendez-vous.html` → `.locate`): bespoke brand-styled map (Leaflet + CARTO `light_all` tiles, warm-tinted via CSS) with a royal-blue pin + overlapping storefront print. This carries the page's single "blue moment".
 
 ## To confirm before launch
 - Fonts: Cormorant is free (Google). `gopher` + `neue-haas-grotesk-*` come from the Adobe Fonts kit `gqc3ska` · confirm the plan covers production web use on the live domain.
