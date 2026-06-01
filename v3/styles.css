@@ -1,9 +1,9 @@
 /* ============================================================
    Mikadodeco · design system
    Identity decisions in MIKADO_IDENTITY.md.
-   - Warm base #f8f5ef + brown-black ink + BABY-BLUE signature (#9ad4f0)
+   - Warm base #f8f5ef + brown-black ink + ROYAL-BLUE signature (#28408F) + gold promo
    - Cormorant Garamond display (matches logo) + Neue Haas Grotesk body
-   - Signature: baby-blue detailing thread + atelier lockups/seal
+   - Signature: royal-blue accent (measured) + gold promo + warm-greige product tiles
    ============================================================ */
 
 /* Fonts:
@@ -59,7 +59,7 @@
   /* --- Mikado palette --- */
   --paper:      #f8f5ef;   /* warm base */
   --paper-2:    #efe9df;   /* warm band · USP, alt sections */
-  --tile:       #efeae1;   /* product / image backdrop */
+  --tile:       #ECE7DD;   /* product / image backdrop · warm greige */
   --ink:        #1a1916;   /* warm brown-black */
   --ink-deep:   #1a1916;
   --muted:      #7c756c;   /* secondary text */
@@ -67,10 +67,15 @@
   --line:       #e0d9cf;   /* warm beige hairline */
   --line-ink:   #1a1916;   /* button/strong borders */
 
-  /* signature baby blue */
-  --accent:     #9ad4f0;   /* light baby blue · fills, rules, underlines */
-  --accent-ink: #4ea7d6;   /* deeper companion · legible text/tags on cream */
-  --accent-soft:#e6f4fb;   /* tint · the one "blue moment" panel */
+  /* signature royal blue · premium accent (measured, not an omnipresent fill).
+     DARK now → when used as a BACKGROUND, text must be --paper (cream). */
+  --accent:     #28408F;   /* royal blue · links text, rules, underlines, btn--blue bg */
+  --accent-ink: #1C2F6B;   /* deep royal · link/hover text on cream + btn hover bg */
+  --accent-soft:#ECEFF7;   /* pale blue tint · soft panels (light bg, dark text) */
+
+  /* promotions · matte gold (premium "étiquette dorée", not "sale red") */
+  --promo:      #B5893C;   /* gold · promo badges (with --ink-deep text) */
+  --promo-deep: #8A6826;   /* deep gold · hover */
 
   --on-dark:    #f8f5ef;   /* text over imagery */
 
@@ -116,7 +121,9 @@ ul { list-style: none; }
    NAV + ANNOUNCEMENT
    ============================================================ */
 .chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 80; transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease); color: var(--on-dark); border-bottom: 1px solid transparent; }
-.announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--ink-deep); }
+/* Discreet announcement strip — no saturated full-width fill anymore: paper bg,
+   ink text, a hairline rule. Premium restraint over the old baby-blue aplat. */
+.announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--line); }
 .announce span { position: absolute; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
 .announce span.on { opacity: 1; }
 .nav__inner { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; max-width: var(--container); margin-inline: auto; padding: 18px var(--gutter) 16px; }
@@ -153,7 +160,7 @@ ul { list-style: none; }
 .btn--light:hover { background: var(--on-dark); color: var(--ink-deep); }
 .btn--solid { background: var(--ink-deep); color: var(--paper); }
 .btn--solid:hover { background: #000; }
-.btn--blue { background: var(--accent); color: var(--ink-deep); border: 1px solid var(--accent); }
+.btn--blue { background: var(--accent); color: var(--paper); border: 1px solid var(--accent); }
 .btn--blue:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: var(--paper); }
 .btn--block { width: 100%; }
 
@@ -211,9 +218,9 @@ ul { list-style: none; }
 .pcard:hover .pcard__media img.alt { opacity: 1; }
 .pcard__tags { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; z-index: 2; }
 .tag { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); padding: 3px 8px; border: 1px solid var(--accent-ink); color: var(--accent-ink); background: var(--paper); letter-spacing: .04em; text-transform: uppercase; }
-/* card-level PROMO badge · same crimson red as PDP, sits opposite the
+/* card-level PROMO badge · same gold "étiquette" as PDP, sits opposite the
    .pcard__tags stack (which holds "Nouveau"/"Coup de cœur" outlined chips). */
-.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: #dc2626; color: var(--paper); font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 12px rgba(220,38,38,.32); }
+.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: var(--promo); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 14px rgba(26,25,22,.12); }
 /* product-name tier · Neue Haas Grotesk Display, SemiBold (600) */
 .pcard__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
 .pcard__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 4px; }
@@ -288,7 +295,9 @@ ul { list-style: none; }
 .stats { background: var(--ink-deep); color: var(--on-dark); }
 .stats .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(28px, 3vw, 56px); padding-block: clamp(52px, 5.5vw, 92px); text-align: center; }
 .stat__num { font-family: var(--serif); font-weight: 600; font-size: clamp(42px, 4.6vw, 72px); line-height: 1; color: var(--on-dark); display: inline-flex; align-items: baseline; justify-content: center; gap: 6px; }
-.stat__suf { font-size: .42em; color: var(--accent); letter-spacing: .02em; }
+/* Suffix sits on the DARK .stats panel — royal blue would be dark-on-dark, so it
+   takes the gold accent (the "or" of bleu roi + or): readable + premium on ink. */
+.stat__suf { font-size: .42em; color: var(--promo); letter-spacing: .02em; }
 .stat__label { margin-top: 14px; font-size: var(--fs-small); color: rgba(248,245,239,.72); max-width: 22ch; margin-inline: auto; }
 @media (max-width: 920px) {
   .stats .wrap { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
@@ -608,10 +617,10 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .pdp__brand { font-family: var(--sans-product); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: var(--fs-meta); color: var(--accent-ink); }
 .pdp__name { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 3.4vw, 50px); line-height: 1.03; margin: 8px 0 6px; }
 .pdp__main-wrap { position: relative; }
-/* PROMO BADGE · pure attention-grabbing red, paper text + shadow. The
-   crimson reads as "sale" universally and cuts cleanly through the cream
-   palette. Kept perfectly horizontal — no tilt. */
-.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: #dc2626; color: var(--paper); font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 6px 18px rgba(220,38,38,.35); }
+/* PROMO BADGE · matte-gold "étiquette dorée", ink text + soft shadow. Premium
+   and still vendeur — reads as a curated label, not a "sale red" sticker.
+   Kept perfectly horizontal — no tilt. */
+.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: var(--promo); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 4px 14px rgba(26,25,22,.12); }
 .pdp__designer { color: var(--muted); font-size: var(--fs-small); }
 .pdp__price { font-family: var(--sans-product); font-weight: 600; font-size: 22px; color: var(--ink-deep); margin: 18px 0; }
 .pdp__variants { margin: 18px 0; }
@@ -760,7 +769,7 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
 .locate__map .leaflet-control-zoom { border: none; box-shadow: 0 6px 18px rgba(26,25,22,.16); }
 .locate__map .leaflet-control-zoom a { background: var(--paper); color: var(--ink-deep); border: 1px solid var(--line); border-bottom: none; width: 32px; height: 32px; line-height: 32px; font-weight: 400; transition: background .2s var(--ease), color .2s var(--ease); }
 .locate__map .leaflet-control-zoom a:last-child { border-bottom: 1px solid var(--line); }
-.locate__map .leaflet-control-zoom a:hover { background: var(--accent); color: var(--ink-deep); }
+.locate__map .leaflet-control-zoom a:hover { background: var(--accent); color: var(--paper); }
 .locate__map .leaflet-control-attribution { background: rgba(248,245,239,.82); color: var(--subtle); font-family: var(--sans); font-size: 10px; }
 .locate__map .leaflet-control-attribution a { color: var(--accent-ink); }
 

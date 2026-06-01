@@ -39,8 +39,8 @@
   .chrome .nav__util-extra { display: none; }
 }
 
-/* ---------- Promotions top-level · italic only (V2: no pastille) -- */
-.chrome a.nlink--promo { font-style: italic; }
+/* ---------- Promotions top-level · neutral, identical to other nav entries -- */
+.chrome a.nlink--promo { font-style: normal; }
 
 /* ============================================================
    PANEL STAGE · single off-flow container that hosts the open panel
@@ -326,7 +326,7 @@
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
 }
-.drawer__link--promo { font-style: italic; }
+.drawer__link--promo { font-style: normal; }
 .drawer__link--util {
   font-family: var(--sans);
   font-size: 0.95rem;
