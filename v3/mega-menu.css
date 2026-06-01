@@ -79,6 +79,10 @@
   gap: clamp(28px, 4vw, 56px);
   align-items: start;
 }
+/* Pin the editorial panel to the right rail for all three megas, so it can
+   never reflow into the 1fr track if the left content is absent (e.g. a
+   brands-JSON fetch failure leaving the Designers mega with only the side). */
+.mm-mega > .mm-side { grid-column: 2; }
 
 /* ---------- MOBILIER · 4+3 forced grid (V2) ---------------- */
 .mm-mega--mobilier .mm-mega__cols {
@@ -118,15 +122,10 @@
 }
 
 /* ============================================================
-   MARQUES MEGA (V2.1) · brand grid (3-4 cols) + flat designer list
-   The mega itself is the same 2-col shell as Mobilier (.mm-mega
-   = `1fr 280px`). Inner = mm-marques (brands + designers).
+   MARQUES MEGA · brand grid (auto-fit) — same 2-col shell as
+   Mobilier & Designers: .mm-mega (1fr 280px) = content + .mm-side.
+   (Designers moved to their own mega; no inner 2-col grid anymore.)
    ============================================================ */
-.mm-marques {
-  display: grid;
-  grid-template-columns: 2.2fr 1fr;
-  gap: clamp(28px, 4vw, 48px);
-}
 .mm-marques__col { display: flex; flex-direction: column; min-width: 0; }
 
 /* Brand cards — name on top, featured collections under.
@@ -263,90 +262,10 @@
 }
 .mm-side__cta:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
 
-/* ============================================================
-   DESIGNERS mega · "designer du mois" + "à la une" (editorial)
-   Reuses .mm-col__head / .mm-col__list / .mm-marques__all; only the
-   feature card + right rail are new (.mm-des-card* / .mm-des-aune*).
-   ============================================================ */
-/* .mm-mega.mm-mega--designers (specificity 0,2,0) so these proportions beat
-   the generic .mm-mega rules — incl. the 1fr/240px shrink at ≤1180px below. */
-.mm-mega.mm-mega--designers {
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: clamp(28px, 4vw, 56px);
-  align-items: stretch;            /* let the right rail push "Tous les…" to the bottom */
-}
-
-/* Designer du mois — portrait photo + editorial blurb, whole card links. */
-.mm-des-card {
-  display: grid;
-  grid-template-columns: clamp(140px, 15vw, 188px) 1fr;
-  gap: clamp(18px, 2vw, 28px);
-  align-items: start;
-}
-.mm-des-card__photo {
-  display: block;
-  aspect-ratio: 3 / 4;            /* portrait */
-  background: var(--tile);        /* neutral frame if the photo is missing */
-  overflow: hidden;
-}
-.mm-des-card__photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-}
-.mm-des-card__body { display: flex; flex-direction: column; gap: 8px; }
-.mm-des-card__sur {
-  font-family: var(--sans-product);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-}
-.mm-des-card__name {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1.15;
-  color: var(--ink-deep);
-  transition: color .18s var(--ease);
-}
-.mm-des-card__lead {
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  line-height: 1.45;
-  color: var(--muted);
-  margin: 2px 0 4px;
-}
-.mm-des-card__cta {
-  font-family: var(--sans-product);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  align-self: flex-start;
-  padding-bottom: 2px;
-  border-bottom: 1px solid var(--ink);
-  transition: color .18s var(--ease), border-color .18s var(--ease);
-}
-.mm-des-card:hover .mm-des-card__name { color: var(--accent-ink); }
-.mm-des-card:hover .mm-des-card__cta { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
-
-/* À la une — name list, then a filet + "Tous les designers →"
-   (right rail mirrors the .mm-side left border). */
-.mm-des-aune {
-  display: flex;
-  flex-direction: column;
-  padding-left: clamp(20px, 2vw, 32px);
-  border-left: 1px solid rgba(26, 25, 22, 0.1);
-}
-.mm-des-aune__list { margin-bottom: 18px; }
-
-@media (max-width: 1180px) {
-  .mm-mega.mm-mega--designers { grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 3vw, 40px); }
-}
+/* Designers mega needs NO bespoke CSS: it reuses the shared shell —
+   .mm-mega (1fr 280px) with .mm-marques__col + .mm-des-flat ("à la une")
+   on the left and the .mm-side "Designer du mois" panel on the right —
+   exactly like Mobilier & Marques. */
 
 /* ============================================================
    DRAWER (mobile) · accordion top-level + bottom editorial block
@@ -460,7 +379,6 @@
    ============================================================ */
 @media (max-width: 1180px) {
   .mm-mega { grid-template-columns: 1fr 240px; }
-  .mm-marques { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
 
 @media (max-width: 1023px) {
