@@ -73,9 +73,10 @@
   --accent-ink: #1C2F6B;   /* deep royal · link/hover text on cream + btn hover bg */
   --accent-soft:#ECEFF7;   /* pale blue tint · soft panels (light bg, dark text) */
 
-  /* promotions · matte gold (premium "étiquette dorée", not "sale red") */
-  --promo:      #B5893C;   /* gold · promo badges (with --ink-deep text) */
-  --promo-deep: #8A6826;   /* deep gold · hover */
+  /* promotions · luminous brushed-gold (feuille d'or / laiton, not a flat matte) */
+  --promo:      #C9A24A;   /* luminous gold · solid fallback (with --ink-deep text) */
+  --promo-deep: #A07F2E;   /* deep gold · hover + gold text on cream */
+  --promo-sheen: linear-gradient(135deg, #DCC079 0%, #C9A24A 55%, #B0852F 100%); /* brass sheen · badges + CTA */
 
   --on-dark:    #f8f5ef;   /* text over imagery */
 
@@ -121,9 +122,9 @@ ul { list-style: none; }
    NAV + ANNOUNCEMENT
    ============================================================ */
 .chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 80; transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease); color: var(--on-dark); border-bottom: 1px solid transparent; }
-/* Discreet announcement strip — no saturated full-width fill anymore: paper bg,
-   ink text, a hairline rule. Premium restraint over the old baby-blue aplat. */
-.announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--line); }
+/* Reassurance strip (delivery Belgium / boutique Uccle) — a visible, premium
+   royal-blue band with cream text. Slim + full-width; sober, not baby-blue. */
+.announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--paper); }
 .announce span { position: absolute; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
 .announce span.on { opacity: 1; }
 .nav__inner { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; max-width: var(--container); margin-inline: auto; padding: 18px var(--gutter) 16px; }
@@ -186,7 +187,7 @@ ul { list-style: none; }
 .cat::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.34), transparent 50%); }
 
 /* ============================================================
-   SECTION HEADER · serif + baby-blue rule (signature detail)
+   SECTION HEADER · serif + royal-blue rule (signature detail)
    ============================================================ */
 .shead { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid var(--accent); }
 .shead h2 { font-family: var(--serif); font-weight: 600; font-size: var(--fs-h2); line-height: 1.05; max-width: 24ch; }
@@ -204,9 +205,10 @@ ul { list-style: none; }
 .feature__body h2 { font-family: var(--serif); font-weight: 600; font-size: var(--fs-display); line-height: 1.0; letter-spacing: -0.035em; margin-bottom: 22px; max-width: 14ch; }
 .feature__body p { color: var(--muted); max-width: 42ch; margin-bottom: 28px; font-size: 17px; }
 .feature--accent .feature__body { background: var(--accent-soft); }   /* the single blue moment */
+.feature--accent .feature__body p { color: var(--ink); }   /* ink body on pale-blue panel — full legibility */
 
 /* ============================================================
-   PRODUCT ROW · baby-blue tag + price (signature detail)
+   PRODUCT ROW · royal-blue tag + price (signature detail)
    ============================================================ */
 .prow { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
 .prow--4 { grid-template-columns: repeat(4, 1fr); }
@@ -220,7 +222,7 @@ ul { list-style: none; }
 .tag { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); padding: 3px 8px; border: 1px solid var(--accent-ink); color: var(--accent-ink); background: var(--paper); letter-spacing: .04em; text-transform: uppercase; }
 /* card-level PROMO badge · same gold "étiquette" as PDP, sits opposite the
    .pcard__tags stack (which holds "Nouveau"/"Coup de cœur" outlined chips). */
-.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: var(--promo); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 14px rgba(26,25,22,.12); }
+.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: var(--promo-sheen); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
 /* product-name tier · Neue Haas Grotesk Display, SemiBold (600) */
 .pcard__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
 .pcard__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 4px; }
@@ -567,14 +569,14 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 
 /* PROMO BANDEAU · summer-2026 hero used on outdoor PLP + eligible PDPs.
    Warm beige bg, terracotta accents — sits gently in the cream palette. */
-.promo-bandeau { background: #F5EFE0; border: 1px solid #ead9b8; margin: clamp(20px, 3vw, 36px) 0; }
+.promo-bandeau { background: var(--paper-2); border: 1px solid var(--line); margin: clamp(20px, 3vw, 36px) 0; }
 .promo-bandeau__inner { padding: clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px); max-width: 760px; }
-.promo-bandeau__eyebrow { display: inline-block; font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); color: #C97D4F; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+.promo-bandeau__eyebrow { display: inline-block; font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); color: var(--promo-deep); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
 .promo-bandeau__title { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--ink-deep); margin: 0 0 14px; }
-.promo-bandeau__body { font-size: var(--fs-body); color: #3B5040; line-height: 1.55; margin: 0 0 18px; max-width: 56ch; }
+.promo-bandeau__body { font-size: var(--fs-body); color: var(--ink); line-height: 1.55; margin: 0 0 18px; max-width: 56ch; }
 .promo-bandeau__brands { display: inline-block; margin-top: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
-.promo-bandeau__cta { display: inline-flex; align-items: center; padding: 12px 22px; background: #C97D4F; color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .04em; text-decoration: none; transition: background .25s var(--ease); }
-.promo-bandeau__cta:hover { background: #b16a3e; }
+.promo-bandeau__cta { display: inline-flex; align-items: center; padding: 12px 22px; background: var(--promo-sheen); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .04em; text-decoration: none; transition: background .25s var(--ease); }
+.promo-bandeau__cta:hover { background: var(--promo-deep); }
 .promo-bandeau--pdp .promo-bandeau__inner { padding: clamp(20px, 2.4vw, 32px) clamp(20px, 2.4vw, 32px); max-width: 100%; }
 .promo-bandeau--pdp .promo-bandeau__title { font-size: clamp(22px, 2.4vw, 30px); }
 .promo-bandeau--pdp .promo-bandeau__body { font-size: var(--fs-small); margin-bottom: 0; }
@@ -620,7 +622,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 /* PROMO BADGE · matte-gold "étiquette dorée", ink text + soft shadow. Premium
    and still vendeur — reads as a curated label, not a "sale red" sticker.
    Kept perfectly horizontal — no tilt. */
-.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: var(--promo); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 4px 14px rgba(26,25,22,.12); }
+.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: var(--promo-sheen); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
 .pdp__designer { color: var(--muted); font-size: var(--fs-small); }
 .pdp__price { font-family: var(--sans-product); font-weight: 600; font-size: 22px; color: var(--ink-deep); margin: 18px 0; }
 .pdp__variants { margin: 18px 0; }
@@ -723,7 +725,7 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
 /* ============================================================
    NOUS TROUVER · bespoke brand-styled location block
    Warm-tinted CARTO map + overlapping storefront print +
-   baby-blue pin. This carries the page's single "blue moment".
+   royal-blue pin. This carries the page's single "blue moment".
    ============================================================ */
 .locate { background: var(--paper); padding-block: var(--section-y); }
 .locate__head { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); margin-bottom: clamp(24px, 3vw, 44px); }
@@ -757,7 +759,7 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
 .locate__photo img { aspect-ratio: 4/5; object-fit: cover; width: 100%; background: var(--tile); }
 .locate__photo figcaption { font-size: var(--fs-meta); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-align: center; padding: 8px 4px 7px; }
 
-/* baby-blue teardrop pin + slow pulse */
+/* royal-blue teardrop pin + slow pulse */
 .mikado-pin { position: relative; }
 .mikado-pin__svg { position: relative; z-index: 2; display: block; width: 34px; height: 42px; fill: var(--accent); stroke: var(--accent-ink); stroke-width: 1.4; filter: drop-shadow(0 6px 9px rgba(26,25,22,.35)); }
 .mikado-pin__svg circle { fill: var(--paper); stroke: none; }
