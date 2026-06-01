@@ -9,6 +9,35 @@
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" />
   <link rel="stylesheet" href="/styles.css" />
+  <style>
+    /* Promotions · discreet premium destination at the top of the catalog —
+       a route into /collections/promotions, NOT a category filter chip
+       (lives outside [data-chips] so it survives the curated-view hide). */
+    .plp-promo { margin: 18px 0 4px; }
+    .plp-promo__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--sans-product);
+      font-size: var(--fs-meta);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-ink);
+      padding-bottom: 3px;
+      border-bottom: 1px solid transparent;
+      transition: color .18s var(--ease), border-color .18s var(--ease);
+    }
+    .plp-promo__link:hover,
+    .plp-promo__link:focus-visible { border-bottom-color: var(--accent-ink); outline: none; }
+    .plp-promo__dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: none;
+    }
+  </style>
 </head>
 <body>
   <div id="site-header"></div>
@@ -26,6 +55,12 @@
       <p data-plp-sub>Mobilier, luminaires et objets, choisis pièce par pièce.</p>
     </div>
   </section>
+
+  <div class="wrap plp-promo">
+    <a class="plp-promo__link" href="/collections/promotions">
+      <span class="plp-promo__dot" aria-hidden="true"></span>Promotions
+    </a>
+  </div>
 
   <div class="filterbar" data-chips>
     <div class="chips">

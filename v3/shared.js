@@ -341,11 +341,11 @@ function bindAddToCart() {
    the top-level still navigates (clicks land on the corresponding
    collection page). */
 const NAV_TOP = [
-  { label: "Mobilier",      href: "/collections/all",         kind: "mega",     key: "mobilier" },
-  { label: "Marques",       href: "/collections",             kind: "dropdown", key: "marques"  },
-  { label: "Promotions",    href: "/collections/promotions",  kind: "promo" },
-  { label: "Mikado Studio", href: "/studio.html",             kind: "link"  },
-  { label: "Le journal",    href: "/journal.html",            kind: "link"  },
+  { label: "Mobilier",      href: "/collections/all", kind: "mega",     key: "mobilier"  },
+  { label: "Marques",       href: "/marques.html",    kind: "dropdown", key: "marques"   },
+  { label: "Designers",     href: "/designers.html",  kind: "dropdown", key: "designers" },
+  { label: "Mikado Studio", href: "/studio.html",     kind: "link"  },
+  { label: "Le journal",    href: "/journal.html",    kind: "link"  },
 ];
 
 function chromeHTML(active) {
@@ -365,11 +365,12 @@ function chromeHTML(active) {
       <div class="mm-stage__inner">
         <div class="mm-panel" data-mm-panel="mobilier"></div>
         <div class="mm-panel" data-mm-panel="marques"></div>
+        <div class="mm-panel" data-mm-panel="designers"></div>
       </div>
     </div>`;
 
   // Mobile drawer — accordion sections for Mobilier/Marques, then
-  // flat links for Promotions / Studio / Le journal, plus a footer
+  // flat links for Designers / Studio / Le journal, plus a footer
   // visual block hydrated from mega-menu-config.json.
   const drawerHTML = `
     <div class="drawer" data-drawer>
@@ -386,7 +387,7 @@ function chromeHTML(active) {
           <button type="button" class="drawer__group-head" aria-expanded="false">Marques <span class="drawer__chev" aria-hidden="true">▾</span></button>
           <ul class="drawer__sub" data-drawer-sub="marques"></ul>
         </div>
-        <a class="drawer__link drawer__link--promo" href="/collections/promotions">Promotions</a>
+        <a class="drawer__link" href="/designers.html">Designers</a>
         <a class="drawer__link" href="/studio.html">Mikado Studio</a>
         <a class="drawer__link" href="/journal.html">Le journal</a>
         <a class="drawer__link drawer__link--util" href="/rendez-vous.html">Rendez-vous</a>
@@ -498,13 +499,51 @@ function footerHTML() {
 }
 
 /* ---------- bindings ---------- */
+/* Body scroll-lock shared by the cart drawer and the mobile menu drawer.
+   Single source of truth: same scrollbar-width compensation + the same
+   `cartd-locked` body class for both. The two drawers are mutually
+   exclusive (opening one closes the other), so they never fight the lock. */
+function lockBodyScroll(on) {
+  if (on) {
+    const sw = window.innerWidth - document.documentElement.clientWidth;
+    if (sw > 0) document.body.style.paddingRight = sw + "px";
+    document.body.classList.add("cartd-locked");
+  } else {
+    document.body.classList.remove("cartd-locked");
+    document.body.style.paddingRight = "";
+  }
+}
+
 function bindDrawer() {
   const drawer = document.querySelector("[data-drawer]");
-  const open = document.querySelector("[data-burger]");
-  if (!drawer || !open) return;
-  open.addEventListener("click", () => drawer.classList.add("open"));
-  document.querySelector("[data-drawer-close]")?.addEventListener("click", () => drawer.classList.remove("open"));
-  drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => drawer.classList.remove("open")));
+  const burger = document.querySelector("[data-burger]");
+  if (!drawer || !burger) return;
+  const isOpen = () => drawer.classList.contains("open");
+
+  function openDrawer() {
+    if (isOpen()) return;
+    drawer.classList.add("open");
+    lockBodyScroll(true);
+    // Back button closes the drawer instead of leaving the page: push a
+    // marker entry now, pop it on a clean close so history stays tidy.
+    history.pushState({ drawer: true }, "");
+  }
+  // closeDrawer(keepHistory): keepHistory=true skips the history.back() —
+  // used when the Back button already popped the marker (popstate) and when
+  // a link is navigating away (calling back() would race the navigation).
+  function closeDrawer(keepHistory) {
+    if (!isOpen()) return;
+    drawer.classList.remove("open");
+    lockBodyScroll(false);
+    if (!keepHistory && history.state && history.state.drawer) history.back();
+  }
+
+  burger.addEventListener("click", openDrawer);
+  document.querySelector("[data-drawer-close]")?.addEventListener("click", () => closeDrawer(false));
+  // A link navigates away → just close + unlock, let the nav proceed.
+  drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => closeDrawer(true)));
+  // Browser Back while open → close the drawer (the marker is already gone).
+  window.addEventListener("popstate", () => { if (isOpen()) closeDrawer(true); });
 }
 
 /* ---------- cart drawer (mini-cart) ----------
@@ -588,17 +627,6 @@ function bindCartDrawer() {
       <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
   }
 
-  function lockScroll(on) {
-    if (on) {
-      const sw = window.innerWidth - document.documentElement.clientWidth;
-      if (sw > 0) document.body.style.paddingRight = sw + "px";
-      document.body.classList.add("cartd-locked");
-    } else {
-      document.body.classList.remove("cartd-locked");
-      document.body.style.paddingRight = "";
-    }
-  }
-
   function onKeydown(e) {
     if (!isOpen()) return;
     if (e.key === "Escape") { e.preventDefault(); close(); return; }
@@ -620,7 +648,7 @@ function bindCartDrawer() {
     render();
     preview.schedule();                          // real discounts/total — fetched ONLY while open
     root.classList.add("open");
-    lockScroll(true);
+    lockBodyScroll(true);
     document.addEventListener("keydown", onKeydown, true);
     requestAnimationFrame(() => root.querySelector("[data-cartd-close]")?.focus());
   }
@@ -628,7 +656,7 @@ function bindCartDrawer() {
   function close() {
     if (!isOpen()) return;
     root.classList.remove("open");
-    lockScroll(false);
+    lockBodyScroll(false);
     document.removeEventListener("keydown", onKeydown, true);
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
     else cartLink?.focus();

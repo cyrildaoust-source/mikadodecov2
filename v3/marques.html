@@ -61,7 +61,7 @@
     // on the first paint — same cache-busting trick as the home
     // marquee in main.js.
     Promise.all([buildShaReady(), fetchBrands()]).then(([, brandsRaw]) => {
-      const brands = brandsRaw.filter((b) => b.productCount > 0).sort((a, b) => b.productCount - a.productCount);
+      const brands = brandsRaw.filter((b) => b.productCount > 0).sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
       countEl.textContent = `${brands.length} maisons`;
       grid.innerHTML = brands.map((b) => {
         const slug = slugify(b.name);

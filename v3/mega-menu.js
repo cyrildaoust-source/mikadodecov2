@@ -37,6 +37,7 @@ export async function initMegaMenu() {
     indexTopItems(menu.items || []);
     hydrateMobilier();
     hydrateMarques();
+    hydrateDesigners();
     hydrateDrawer();
     bindHover();
     bindKeyboard();
@@ -56,18 +57,35 @@ function indexTopItems(items) {
 
 // --- shared side panel render ---------------------------------
 
+// Editorial side panel (.mm-side) shared as-is by all three megas: the
+// "Coup de cœur" (Mobilier/Marques) and the "Designer du mois" (Designers)
+// are the SAME visual component — only the data differs.
+function sideHTML({ label, image, imageAlt, title, lead, ctaHref, ctaLabel, imgOnError }) {
+  if (!image) return "";
+  const onerr = imgOnError ? ` onerror="this.remove()"` : "";
+  return `
+    <aside class="mm-side">
+      <div class="mm-side__label">${escapeHtml(label || "")}</div>
+      <div class="mm-side__rule" aria-hidden="true"></div>
+      <img class="mm-side__visual" src="${escapeHtml(image)}" alt="${escapeHtml(imageAlt || "")}" loading="lazy"${onerr} />
+      ${title ? `<div class="mm-side__title">${escapeHtml(title)}</div>` : ""}
+      ${lead  ? `<p class="mm-side__lead">${escapeHtml(lead)}</p>` : ""}
+      ${ctaHref ? `<a class="mm-side__cta" href="${escapeHtml(ctaHref)}">${escapeHtml(ctaLabel || "")} →</a>` : ""}
+    </aside>`;
+}
+
 function coupDeCoeurHTML(megaKey) {
   const cdc = config?.[megaKey]?.coupDeCoeur;
   if (!cdc || !cdc.image) return "";
-  return `
-    <aside class="mm-side">
-      <div class="mm-side__label">${escapeHtml(cdc.label || "Coup de cœur du moment")}</div>
-      <div class="mm-side__rule" aria-hidden="true"></div>
-      <img class="mm-side__visual" src="${escapeHtml(cdc.image)}" alt="${escapeHtml(cdc.imageAlt || "")}" loading="lazy" />
-      ${cdc.title ? `<div class="mm-side__title">${escapeHtml(cdc.title)}</div>` : ""}
-      ${cdc.lead  ? `<p class="mm-side__lead">${escapeHtml(cdc.lead)}</p>` : ""}
-      ${cdc.ctaHref ? `<a class="mm-side__cta" href="${escapeHtml(cdc.ctaHref)}">${escapeHtml(cdc.ctaLabel || "Lire l'article")} →</a>` : ""}
-    </aside>`;
+  return sideHTML({
+    label: cdc.label || "Coup de cœur du moment",
+    image: cdc.image,
+    imageAlt: cdc.imageAlt || "",
+    title: cdc.title,
+    lead: cdc.lead,
+    ctaHref: cdc.ctaHref,
+    ctaLabel: cdc.ctaLabel || "Lire l'article",
+  });
 }
 
 // --- Mobilier mega (Shopify-driven, unchanged) ----------------
@@ -99,8 +117,7 @@ function hydrateMobilier() {
 function hydrateMarques() {
   const panel = stageEl.querySelector('[data-mm-panel="marques"]');
   if (!panel) return;
-  const brands    = brandsData?.brands || [];
-  const designers = brandsData?.designers || [];
+  const brands = brandsData?.brands || [];
   if (!brands.length) { panel.innerHTML = ""; return; }
 
   // V2.2: featured sub-collections retired from the rendered mega
@@ -111,28 +128,59 @@ function hydrateMarques() {
         <a class="mm-brand__name" href="${escapeHtml(b.href)}">${escapeHtml(b.name)}</a>
       </div>`).join("");
 
-  // Designers — flat alphabetic list, one-click to the filtered PLP
-  // (?designer=<slug>). The "Tous les designers →" footer link below
-  // still points to /designers.html for the full 29-card grid.
+  // Same shell as Mobilier/Designers: navigable content left, editorial
+  // .mm-side right. Designers now live only in their own mega (removed here).
+  panel.innerHTML = `
+    <div class="mm-mega mm-mega--marques">
+      <div class="mm-marques__col">
+        <div class="mm-col__head">Nos marques</div>
+        <div class="mm-brands-grid">${brandCards}</div>
+        <a class="mm-marques__all" href="/marques.html">Toutes les marques →</a>
+      </div>
+      ${coupDeCoeurHTML("marques")}
+    </div>`;
+}
+
+// --- Designers mega · À la une (left) + "Designer du mois" .mm-side
+//     (right). Same shell/structure as Mobilier & Marques. -------------
+
+function hydrateDesigners() {
+  const panel = stageEl.querySelector('[data-mm-panel="designers"]');
+  if (!panel) return;
+  const designers = brandsData?.designers || [];
+  const duMois    = config?.designers?.duMois;
+  // Nothing to show → leave empty so open() skips it; the top-level
+  // "Designers" trigger still navigates to /designers.html (graceful).
+  if (!designers.length && !duMois) { panel.innerHTML = ""; return; }
+
+  // À la une — the curated flat list (the same one the Marques mega used
+  // to hold), 2 columns, one click to each designer's filtered PLP.
   const desHtml = designers.map((d) =>
     `<a href="/produits.html?designer=${slugify(d)}">${escapeHtml(d)}</a>`
   ).join("");
+  const left = designers.length ? `
+      <div class="mm-marques__col">
+        <div class="mm-col__head">À la une</div>
+        <div class="mm-des-flat">${desHtml}</div>
+        <a class="mm-marques__all" href="/designers.html">Tous les designers →</a>
+      </div>` : "";
+
+  // Designer du mois — the SAME editorial component as the coup de cœur.
+  const side = duMois ? sideHTML({
+    label: "Designer du mois",
+    image: duMois.photo,
+    imageAlt: duMois.name || "",
+    title: duMois.name,
+    lead: duMois.lead,
+    ctaHref: duMois.slug ? `/produits.html?designer=${duMois.slug}` : "",
+    ctaLabel: duMois.ctaLabel || "Voir ses pièces",
+    imgOnError: true,
+  }) : "";
 
   panel.innerHTML = `
-    <div class="mm-mega mm-mega--marques">
-      <div class="mm-marques">
-        <div class="mm-marques__col">
-          <div class="mm-col__head">Nos marques</div>
-          <div class="mm-brands-grid">${brandCards}</div>
-          <a class="mm-marques__all" href="/marques.html">Toutes les marques →</a>
-        </div>
-        <div class="mm-marques__col mm-marques__col--des">
-          <div class="mm-col__head">Designers</div>
-          <div class="mm-des-flat">${desHtml}</div>
-          <a class="mm-marques__all" href="/designers.html">Tous les designers →</a>
-        </div>
-      </div>
-      ${coupDeCoeurHTML("marques")}
+    <div class="mm-mega mm-mega--designers">
+      ${left}
+      ${side}
     </div>`;
 }
 
@@ -141,9 +189,10 @@ function hydrateMarques() {
 function hydrateDrawer() {
   const mobSub = document.querySelector('[data-drawer-sub="mobilier"]');
   if (mobSub && TOP.mobilier?.items?.length) {
-    mobSub.innerHTML = TOP.mobilier.items.map((c) =>
+    const links = TOP.mobilier.items.map((c) =>
       `<li><a href="${escapeHtml(c.url)}">${escapeHtml(c.title)}</a></li>`
     ).join("");
+    mobSub.innerHTML = links + `<li><a href="/collections/all" style="font-style:italic">Voir tout le mobilier →</a></li>`;
   }
   // Marques drawer: 15 brands, name only — featured collections skipped
   // on mobile (V2.1 decision: drawer is already long).

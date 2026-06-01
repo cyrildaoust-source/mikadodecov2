@@ -21,5 +21,22 @@
       "ctaLabel": "Lire l'article",
       "ctaHref": "/article.html?slug=fermob"
     }
+  },
+  "designers": {
+    "duMois": {
+      "slug": "verner-panton",
+      "name": "Verner Panton",
+      "photo": "/images/designers/verner-panton.jpg",
+      "lead": "Couleur, courbes et audace — l'icône du design pop danois.",
+      "ctaLabel": "Voir ses pièces"
+    },
+    "aLaUne": [
+      { "slug": "ettore-sottsass",        "name": "Ettore Sottsass" },
+      { "slug": "patricia-urquiola",      "name": "Patricia Urquiola" },
+      { "slug": "jasper-morrison",        "name": "Jasper Morrison" },
+      { "slug": "naoto-fukasawa",         "name": "Naoto Fukasawa" },
+      { "slug": "achille-castiglioni",    "name": "Achille Castiglioni" },
+      { "slug": "ronan-erwan-bouroullec", "name": "Ronan & Erwan Bouroullec" }
+    ]
   }
 }
