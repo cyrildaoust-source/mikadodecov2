@@ -1,9 +1,9 @@
 /* ============================================================
    Mikadodeco · design system
    Identity decisions in MIKADO_IDENTITY.md.
-   - Warm base #f8f5ef + brown-black ink + ROYAL-BLUE signature (#28408F) + gold promo
+   - Warm base #f8f5ef + brown-black ink + ROYAL-BLUE signature (#28408F); promo = ink label
    - Cormorant Garamond display (matches logo) + Neue Haas Grotesk body
-   - Signature: royal-blue accent (measured) + gold promo + warm-greige product tiles
+   - Signature: royal-blue accent (measured · carries primary CTAs) + warm-greige product tiles
    ============================================================ */
 
 /* Fonts:
@@ -73,10 +73,9 @@
   --accent-ink: #1C2F6B;   /* deep royal · link/hover text on cream + btn hover bg */
   --accent-soft:#ECEFF7;   /* pale blue tint · soft panels (light bg, dark text) */
 
-  /* promotions · luminous brushed-gold (feuille d'or / laiton, not a flat matte) */
-  --promo:      #C9A24A;   /* luminous gold · solid fallback (with --ink-deep text) */
-  --promo-deep: #A07F2E;   /* deep gold · hover + gold text on cream */
-  --promo-sheen: linear-gradient(135deg, #DCC079 0%, #C9A24A 55%, #B0852F 100%); /* brass sheen · badges + CTA */
+  /* promotions · ink/charcoal label — monochrome with the royal blue, no gold */
+  --promo:      var(--ink-deep);   /* near-black promo badge (with --paper text) */
+  --promo-deep: #000;              /* darkest · hover */
 
   --on-dark:    #f8f5ef;   /* text over imagery */
 
@@ -220,9 +219,9 @@ ul { list-style: none; }
 .pcard:hover .pcard__media img.alt { opacity: 1; }
 .pcard__tags { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; z-index: 2; }
 .tag { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); padding: 3px 8px; border: 1px solid var(--accent-ink); color: var(--accent-ink); background: var(--paper); letter-spacing: .04em; text-transform: uppercase; }
-/* card-level PROMO badge · same gold "étiquette" as PDP, sits opposite the
-   .pcard__tags stack (which holds "Nouveau"/"Coup de cœur" outlined chips). */
-.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: var(--promo-sheen); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
+/* card-level PROMO badge · flat ink/charcoal label (cream text), same as PDP;
+   sits opposite the .pcard__tags stack ("Nouveau"/"Coup de cœur" outlined chips). */
+.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
 /* product-name tier · Neue Haas Grotesk Display, SemiBold (600) */
 .pcard__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
 .pcard__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 4px; }
@@ -297,9 +296,9 @@ ul { list-style: none; }
 .stats { background: var(--ink-deep); color: var(--on-dark); }
 .stats .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(28px, 3vw, 56px); padding-block: clamp(52px, 5.5vw, 92px); text-align: center; }
 .stat__num { font-family: var(--serif); font-weight: 600; font-size: clamp(42px, 4.6vw, 72px); line-height: 1; color: var(--on-dark); display: inline-flex; align-items: baseline; justify-content: center; gap: 6px; }
-/* Suffix sits on the DARK .stats panel — royal blue would be dark-on-dark, so it
-   takes the gold accent (the "or" of bleu roi + or): readable + premium on ink. */
-.stat__suf { font-size: .42em; color: var(--promo); letter-spacing: .02em; }
+/* Suffix sits on the DARK .stats panel — needs a LIGHT colour. Pale-blue tint
+   (--accent-soft) keeps a whisper of the royal-blue signature, readable on ink. */
+.stat__suf { font-size: .42em; color: var(--accent-soft); letter-spacing: .02em; }
 .stat__label { margin-top: 14px; font-size: var(--fs-small); color: rgba(248,245,239,.72); max-width: 22ch; margin-inline: auto; }
 @media (max-width: 920px) {
   .stats .wrap { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
@@ -571,12 +570,12 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    Warm beige bg, terracotta accents — sits gently in the cream palette. */
 .promo-bandeau { background: var(--paper-2); border: 1px solid var(--line); margin: clamp(20px, 3vw, 36px) 0; }
 .promo-bandeau__inner { padding: clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px); max-width: 760px; }
-.promo-bandeau__eyebrow { display: inline-block; font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); color: var(--promo-deep); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+.promo-bandeau__eyebrow { display: inline-block; font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); color: var(--accent-ink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
 .promo-bandeau__title { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--ink-deep); margin: 0 0 14px; }
 .promo-bandeau__body { font-size: var(--fs-body); color: var(--ink); line-height: 1.55; margin: 0 0 18px; max-width: 56ch; }
 .promo-bandeau__brands { display: inline-block; margin-top: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
-.promo-bandeau__cta { display: inline-flex; align-items: center; padding: 12px 22px; background: var(--promo-sheen); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .04em; text-decoration: none; transition: background .25s var(--ease); }
-.promo-bandeau__cta:hover { background: var(--promo-deep); }
+.promo-bandeau__cta { display: inline-flex; align-items: center; padding: 12px 22px; background: var(--accent); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .04em; text-decoration: none; transition: background .25s var(--ease); }
+.promo-bandeau__cta:hover { background: var(--accent-ink); }
 .promo-bandeau--pdp .promo-bandeau__inner { padding: clamp(20px, 2.4vw, 32px) clamp(20px, 2.4vw, 32px); max-width: 100%; }
 .promo-bandeau--pdp .promo-bandeau__title { font-size: clamp(22px, 2.4vw, 30px); }
 .promo-bandeau--pdp .promo-bandeau__body { font-size: var(--fs-small); margin-bottom: 0; }
@@ -619,10 +618,10 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .pdp__brand { font-family: var(--sans-product); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: var(--fs-meta); color: var(--accent-ink); }
 .pdp__name { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 3.4vw, 50px); line-height: 1.03; margin: 8px 0 6px; }
 .pdp__main-wrap { position: relative; }
-/* PROMO BADGE · matte-gold "étiquette dorée", ink text + soft shadow. Premium
-   and still vendeur — reads as a curated label, not a "sale red" sticker.
+/* PROMO BADGE · flat ink/charcoal label, cream text + soft shadow. Minimalist
+   and modern — monochrome with the royal blue, not a "sale red" sticker.
    Kept perfectly horizontal — no tilt. */
-.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: var(--promo-sheen); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
+.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
 .pdp__designer { color: var(--muted); font-size: var(--fs-small); }
 .pdp__price { font-family: var(--sans-product); font-weight: 600; font-size: 22px; color: var(--ink-deep); margin: 18px 0; }
 .pdp__variants { margin: 18px 0; }

@@ -584,7 +584,7 @@ function bindCartDrawer() {
       <div class="cartd__row cartd__row--total"><span>Total</span><span>${euro(total)}</span></div>
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
       <p class="cartd__note">Remises et livraison calculées au panier</p>
-      <a class="btn btn--solid btn--block cartd__cta" href="/selection.html">Aller au panier →</a>
+      <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Aller au panier →</a>
       <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
   }
 
