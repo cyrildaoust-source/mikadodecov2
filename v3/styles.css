@@ -72,6 +72,10 @@
   --accent-ink: #4ea7d6;   /* deeper companion · legible text/tags on cream */
   --accent-soft:#e6f4fb;   /* tint · the one "blue moment" panel */
 
+  /* promotions accent · warm terracotta (= été banner hue) — premium, visible, not "sale red" */
+  --promo:      #C97D4F;   /* terracotta · promo badges + nav */
+  --promo-deep: #b16a3e;   /* hover / darker variant */
+
   --on-dark:    #f8f5ef;   /* text over imagery */
 
   /* --- type --- */
@@ -213,7 +217,7 @@ ul { list-style: none; }
 .tag { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); padding: 3px 8px; border: 1px solid var(--accent-ink); color: var(--accent-ink); background: var(--paper); letter-spacing: .04em; text-transform: uppercase; }
 /* card-level PROMO badge · same crimson red as PDP, sits opposite the
    .pcard__tags stack (which holds "Nouveau"/"Coup de cœur" outlined chips). */
-.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: #dc2626; color: var(--paper); font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 12px rgba(220,38,38,.32); }
+.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 14px rgba(26,25,22,.12); }
 /* product-name tier · Neue Haas Grotesk Display, SemiBold (600) */
 .pcard__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
 .pcard__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 4px; }
@@ -560,12 +564,12 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    Warm beige bg, terracotta accents — sits gently in the cream palette. */
 .promo-bandeau { background: #F5EFE0; border: 1px solid #ead9b8; margin: clamp(20px, 3vw, 36px) 0; }
 .promo-bandeau__inner { padding: clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px); max-width: 760px; }
-.promo-bandeau__eyebrow { display: inline-block; font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); color: #C97D4F; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+.promo-bandeau__eyebrow { display: inline-block; font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); color: var(--promo); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
 .promo-bandeau__title { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--ink-deep); margin: 0 0 14px; }
 .promo-bandeau__body { font-size: var(--fs-body); color: #3B5040; line-height: 1.55; margin: 0 0 18px; max-width: 56ch; }
 .promo-bandeau__brands { display: inline-block; margin-top: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
-.promo-bandeau__cta { display: inline-flex; align-items: center; padding: 12px 22px; background: #C97D4F; color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .04em; text-decoration: none; transition: background .25s var(--ease); }
-.promo-bandeau__cta:hover { background: #b16a3e; }
+.promo-bandeau__cta { display: inline-flex; align-items: center; padding: 12px 22px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .04em; text-decoration: none; transition: background .25s var(--ease); }
+.promo-bandeau__cta:hover { background: var(--promo-deep); }
 .promo-bandeau--pdp .promo-bandeau__inner { padding: clamp(20px, 2.4vw, 32px) clamp(20px, 2.4vw, 32px); max-width: 100%; }
 .promo-bandeau--pdp .promo-bandeau__title { font-size: clamp(22px, 2.4vw, 30px); }
 .promo-bandeau--pdp .promo-bandeau__body { font-size: var(--fs-small); margin-bottom: 0; }
@@ -611,7 +615,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 /* PROMO BADGE · pure attention-grabbing red, paper text + shadow. The
    crimson reads as "sale" universally and cuts cleanly through the cream
    palette. Kept perfectly horizontal — no tilt. */
-.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: #dc2626; color: var(--paper); font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 6px 18px rgba(220,38,38,.35); }
+.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 4px 14px rgba(26,25,22,.12); }
 .pdp__designer { color: var(--muted); font-size: var(--fs-small); }
 .pdp__price { font-family: var(--sans-product); font-weight: 600; font-size: 22px; color: var(--ink-deep); margin: 18px 0; }
 .pdp__variants { margin: 18px 0; }

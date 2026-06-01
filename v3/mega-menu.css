@@ -39,8 +39,9 @@
   .chrome .nav__util-extra { display: none; }
 }
 
-/* ---------- Promotions top-level · italic only (V2: no pastille) -- */
-.chrome a.nlink--promo { font-style: italic; }
+/* ---------- Promotions top-level · terracotta accent (premium, not italic) -- */
+.chrome a.nlink--promo { color: var(--promo); }
+.chrome a.nlink--promo:hover { color: var(--promo-deep); }
 
 /* ============================================================
    PANEL STAGE · single off-flow container that hosts the open panel
@@ -326,7 +327,8 @@
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
 }
-.drawer__link--promo { font-style: italic; }
+/* .drawer a.drawer__link--promo: bump specificity past `.drawer a` (color: ink-deep) */
+.drawer a.drawer__link--promo { color: var(--promo); font-style: normal; }
 .drawer__link--util {
   font-family: var(--sans);
   font-size: 0.95rem;
