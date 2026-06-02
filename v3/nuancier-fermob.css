@@ -8,7 +8,7 @@
 .nf-root { display: block; }
 
 /* ============================================================
-   Sticky nav · active label (Cormorant italic + index) + swatches
+   Sticky nav · the square swatch rail (samples + Dock hover)
    ============================================================ */
 .nf-nav {
   position: sticky;
@@ -20,34 +20,51 @@
   border-bottom: 1px solid var(--line);
 }
 
-/* Active-color label · sits above the swatches, fades on change */
+/* Active-colour feature · sits beside the hero in the stage, fades on change */
 .nf-active {
-  text-align: center;
-  margin-bottom: 14px;
   opacity: 1;
   transition: opacity 150ms var(--ease);
+  margin-bottom: 20px;
 }
 .nf-active.is-fading { opacity: 0; }
 .nf-active__name {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
   color: var(--ink-deep);
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
+.nf-active__meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .nf-active__index {
   font-family: var(--sans-product);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--subtle);
 }
+.nf-active__hex {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--sans-product);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.nf-active__chip {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--swatch-color, var(--ink));
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
 
 /* ============================================================
-   Swatch bar · circles · active marked by a thin 2px tick below
+   Swatch bar · square samples · active marked by a ring
    ============================================================ */
 .nf-swatches { padding: 0; }
 .nf-swatches__list {
@@ -74,24 +91,18 @@
 .nf-swatch__dot {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  border-radius: 2px;                 /* square paint-chip sample (no rounds bar the crest) */
   background: var(--swatch-color, var(--ink));
   border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s var(--ease);
+  transform-origin: bottom center;    /* Dock fish-eye grows upward */
+  transition: transform 0.15s var(--ease);
 }
 .nf-swatch:hover .nf-swatch__dot { transform: scale(1.12); }
 .nf-swatch:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; border-radius: 4px; }
 
-/* Active state · thin 2px tick under the swatch */
-.nf-swatch[aria-pressed="true"]::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -6px;
-  width: 20px;
-  height: 2px;
-  background: var(--ink);
-  transform: translateX(-50%);
+/* Active state · a marked ring around the square sample */
+.nf-swatch[aria-pressed="true"] .nf-swatch__dot {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3.5px var(--ink-deep);
 }
 
 /* ============================================================
@@ -106,7 +117,9 @@
 }
 
 .nf-stage__media { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.nf-stage__hero { width: 100%; aspect-ratio: 4/5; object-fit: cover; background: var(--tile); }
+.nf-stage__hero-wrap { position: relative; width: 100%; aspect-ratio: 4/5; background: var(--tile); overflow: hidden; }
+.nf-stage__hero { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 280ms var(--ease); }
+.nf-stage__hero.is-front { opacity: 1; }
 .nf-stage__moodgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .nf-stage__moodgrid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--tile); }
 
@@ -176,14 +189,20 @@
   border-bottom: 2px solid var(--accent);
 }
 .nf-ambiances__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.nf-ambiances__grid img {
-  width: 100%;
+.nf-amb {
   aspect-ratio: 4/3;
-  object-fit: cover;
+  overflow: hidden;
   background: var(--tile);
-  transition: opacity 0.25s var(--ease);
+  border-radius: 2px;
 }
-.nf-ambiances__grid img:hover { opacity: 0.92; }
+.nf-amb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+.nf-amb:hover img { transform: scale(1.05); }
 
 /* ============================================================
    Error fallback
@@ -199,7 +218,8 @@
    ============================================================ */
 @media (max-width: 920px) {
   .nf-stage { grid-template-columns: 1fr; gap: 24px; }
-  .nf-stage__hero { aspect-ratio: 3/4; }
+  .nf-stage__hero-wrap { aspect-ratio: 3/4; }
+  .nf-active__name { font-size: clamp(2rem, 8vw, 3rem); }
   .nf-ambiances__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
 
@@ -234,5 +254,7 @@
 @media (prefers-reduced-motion: reduce) {
   .nf-active,
   .nf-swatch__dot,
-  .nf-ambiances__grid img { transition: none; }
+  .nf-stage__hero,
+  .nf-amb img { transition: none; }
+  .nf-amb:hover img { transform: none; }
 }
