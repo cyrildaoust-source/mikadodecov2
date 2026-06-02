@@ -242,13 +242,17 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     const rows = Object.values(assocs).filter((row) => Array.isArray(row) && row.length);
     if (!rows.length) { els.harmonies.hidden = true; return; }
     els.harmonies.hidden = false;
-    // Chips are purely visual (no navigation). Rendered as <span>.
+    // Each harmony = a mini palette band (active colour first, then its 1-2
+    // partners) in a fixed grid column, then the partner names. A legend, not a
+    // control — no boxes, no links.
     els.harmoniesL.innerHTML = rows.map((row) => {
-      const chips = row.map((c, i) => {
-        const sep = i > 0 ? `<span class="nf-harmony__plus" aria-hidden="true">+</span>` : "";
-        return `${sep}<span class="nf-harmony__chip" style="--chip-color:${escapeHtml(c.hex)}" title="${escapeHtml(c.title || c.name)}">${escapeHtml(c.name)}</span>`;
-      }).join("");
-      return `<div class="nf-harmony">${chips}</div>`;
+      const band = [color, ...row].map((c) =>
+        `<span class="nf-harmony__sw" style="--chip-color:${escapeHtml(c.hex)}"></span>`
+      ).join("");
+      const names = row.map((c) =>
+        `<span class="nf-harmony__name" title="${escapeHtml(c.title || c.name)}">${escapeHtml(c.name)}</span>`
+      ).join(`<span class="nf-harmony__sep" aria-hidden="true"> · </span>`);
+      return `<div class="nf-harmony__band" aria-hidden="true">${band}</div><div class="nf-harmony__names">${names}</div>`;
     }).join("");
   }
 

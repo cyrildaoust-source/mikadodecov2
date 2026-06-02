@@ -110,14 +110,14 @@
    ============================================================ */
 .nf-stage {
   display: grid;
-  grid-template-columns: clamp(300px, 33vw, 380px) 1fr;   /* hero ~ product-photo size, not full-bleed */
+  grid-template-columns: clamp(360px, 42vw, 580px) 1fr;   /* hero = medium landscape, present but not envahissant */
   gap: clamp(24px, 3vw, 48px);
   align-items: start;
   margin-bottom: clamp(40px, 5vw, 64px);
 }
 
-.nf-stage__media { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 420px; }
-.nf-stage__hero-wrap { position: relative; width: 100%; aspect-ratio: 4/5; background: var(--tile); overflow: hidden; }
+.nf-stage__media { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 580px; }
+.nf-stage__hero-wrap { position: relative; width: 100%; aspect-ratio: 3/2; background: var(--tile); overflow: hidden; }
 .nf-stage__hero { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 280ms var(--ease); }
 .nf-stage__hero.is-front { opacity: 1; }
 .nf-stage__moodgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -150,29 +150,32 @@
   color: var(--accent-ink);
   margin-bottom: 14px;
 }
-/* A harmony is a legend line, NOT a button: filled square + readable name,
-   no box/border so it never reads as clickable. */
-.nf-stage__harmonies-list { display: flex; flex-direction: column; gap: 14px; }
-.nf-harmony { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-.nf-harmony__chip {
-  display: inline-flex;
+/* Harmonies = an aligned legend, not controls. A 2-column grid so every band
+   and every name list start on the same x — no row-to-row drift. */
+.nf-stage__harmonies-list {
+  display: grid;
+  grid-template-columns: 60px 1fr;
   align-items: center;
-  gap: 9px;
+  row-gap: 13px;
+  column-gap: 16px;
+}
+/* Mini palette band · active colour first, then partners — contiguous squares. */
+.nf-harmony__band { display: flex; }
+.nf-harmony__sw {
+  width: 20px;
+  height: 20px;
+  background: var(--chip-color, var(--ink));
+  flex: none;
+}
+.nf-harmony__sw + .nf-harmony__sw { box-shadow: inset 1px 0 0 rgba(26, 25, 22, 0.18); }
+.nf-harmony__names {
   font-family: var(--sans-product);
   font-size: 15px;
   font-weight: 500;
+  line-height: 1.4;
   color: var(--ink-deep);
 }
-.nf-harmony__chip::before {
-  content: "";
-  width: 17px;
-  height: 17px;
-  border-radius: 0;
-  background: var(--chip-color, var(--ink));
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  flex-shrink: 0;
-}
-.nf-harmony__plus { color: var(--subtle); font-size: 14px; }
+.nf-harmony__sep { color: var(--subtle); }
 
 /* ============================================================
    Ambiances grid
@@ -216,7 +219,7 @@
    ============================================================ */
 @media (max-width: 920px) {
   .nf-stage { grid-template-columns: 1fr; gap: 24px; }
-  .nf-stage__hero-wrap { aspect-ratio: 4/5; }
+  .nf-stage__hero-wrap { aspect-ratio: 3/2; }
   .nf-active__name { font-size: clamp(2rem, 8vw, 3rem); }
   .nf-ambiances__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
