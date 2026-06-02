@@ -62,20 +62,9 @@ const TEMPLATE = `
 
 const FADE_MS = 150;
 
-// One CONSTANT shrinking cascade for every composition: each square is 2/3 of
-// the previous and nests into its bottom-right corner (60 → 40 → 27). Smallest
-// square sits on top. Keyed by total square count. Values in %.
-const HARM_LAYOUT = {
-  2: [
-    { w: 60, l: 0,  t: 0,  z: 1 },   // active · biggest
-    { w: 40, l: 40, t: 40, z: 2 },   // partner · 2/3, nested in the bottom-right corner
-  ],
-  3: [
-    { w: 60, l: 0,  t: 0,  z: 1 },   // active · biggest
-    { w: 40, l: 40, t: 40, z: 2 },   // partner 1 · 2/3, nested bottom-right
-    { w: 27, l: 66, t: 66, z: 3 },   // partner 2 · 2/3 again, nested in partner 1's corner
-  ],
-};
+// Harmony squares are placed by CSS grid span (the exact Fermob composition),
+// so the JS only needs the role per square index.
+const HARM_ROLES = ["active", "p1", "p2"];
 
 export function mountNuancier(rootEl, colors, opts = {}) {
   if (!rootEl) return null;
@@ -261,13 +250,11 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     // (big, top-left) + its 1-2 partners (smaller, staggered bottom-right).
     // Each square reveals its name on hover, with auto-contrasting text.
     els.harmoniesL.innerHTML = rows.map((row) => {
-      const squares = [color, ...row.slice(0, 2)];
-      const layout = HARM_LAYOUT[squares.length] || HARM_LAYOUT[3];
+      const squares = [color, ...row.slice(0, 2)];   // active + up to 2 partners
       const cells = squares.map((c, i) => {
-        const p = layout[i];
         const txt = luminance(c.hex) > 0.6 ? "var(--ink)" : "var(--paper)";
         const hidden = i === 0 ? ` aria-hidden="true"` : "";   // active name = the big label already
-        return `<div class="nf-harm-sq" style="--sq:${escapeHtml(c.hex)};--z:${p.z};left:${p.l}%;top:${p.t}%;width:${p.w}%;height:${p.w}%">
+        return `<div class="nf-harm-sq nf-harm-sq--${HARM_ROLES[i]}" style="--sq:${escapeHtml(c.hex)}">
           <span class="nf-harm-sq__name" style="color:${txt}"${hidden}>${escapeHtml(c.name)}</span>
         </div>`;
       }).join("");
