@@ -27,6 +27,11 @@
       "continue": true
     },
     {
+      "src": "/(.*\\.json)(?:\\?.*)?$",
+      "headers": { "cache-control": "public, max-age=0, must-revalidate" },
+      "continue": true
+    },
+    {
       "src": "/(.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|woff2?|ttf|eot|ico))",
       "headers": { "cache-control": "public, max-age=31536000, immutable" },
       "dest": "/v3/$1"

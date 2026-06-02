@@ -36,6 +36,12 @@
     const id     = params.get("id");
     const host = document.querySelector("[data-pdp]");
 
+    // The full catalogue is needed by at most two places on this page: the
+    // ?id= fallback below and the "related" block. Share ONE /api/products
+    // promise so we never fetch the (up to 250-product) list twice.
+    let _allProducts;
+    const allProducts = () => (_allProducts ??= fetchProducts());
+
     // Prefer ?handle= (unbounded by the /api/products 250-product cap).
     // Falls back to the legacy id lookup so bookmarked ?id= URLs still
     // resolve for products within the cap.
@@ -46,7 +52,7 @@
         if (!r.ok) throw new Error("HTTP " + r.status);
         return r.json();
       }
-      const all = await fetchProducts();
+      const all = await allProducts();
       return all.find((x) => x.id === id || encodeURIComponent(x.id) === id) || null;
     }
 
@@ -375,7 +381,7 @@
 
       // related (same category) — best-effort, fetched separately so the
       // PDP renders even if the product list is unavailable or capped.
-      fetchProducts().then((all) => {
+      allProducts().then((all) => {
         const related = all.filter((x) => x.category === p.category && x.id !== p.id && x.image).slice(0, 4);
         if (related.length) {
           document.querySelector("[data-related-wrap]").style.display = "";

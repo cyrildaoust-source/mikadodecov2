@@ -608,7 +608,6 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 
 /* ---------- product detail ---------- */
 .pdp { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
-.pdp__back { display: inline-block; font-size: var(--fs-small); color: var(--accent-ink); margin-bottom: 22px; }
 
 /* Fil d'Ariane — discreet breadcrumb on cream (schema.org BreadcrumbList) */
 [data-breadcrumb] { min-height: 1.3em; }

@@ -7,6 +7,15 @@
 
 .nf-root { display: block; }
 
+/* CLS guard · reserve the widget's height while the host is still empty (before
+   the JS fetch + mount), so the content below — the CTA band + footer — starts
+   below the fold and doesn't jump down when the palette fills in. ":empty"
+   only matches the un-mounted host: the reserve self-removes the instant
+   mountNuancier() injects markup (or the error fallback), so no colour ever
+   leaves a trailing gap. Value sits just under the shortest mounted layout
+   (~1331px, narrow two-column) — content always fills past it. */
+#nf-root:empty { min-height: 1280px; }
+
 /* ============================================================
    Sticky nav · the square swatch rail (samples + Dock hover)
    ============================================================ */

@@ -345,6 +345,7 @@ export function productCard(p) {
   // Carry the current view so the PDP breadcrumb reflects the real path.
   const from = currentViewFrom();
   const href = from ? `${base}&from=${encodeURIComponent(from)}` : base;
+  const vb = variantBadge(p);   // compute once (it runs a variants×options double loop)
   const alt = p.image2 && p.image2 !== p.image ? `<img class="alt" src="${p.image2}" alt="" loading="lazy" />` : "";
   const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`
@@ -360,7 +361,7 @@ export function productCard(p) {
       <div class="pcard__brand">${escapeHtml(p.brand || "")}</div>
       <div class="pcard__row">
         <a class="pcard__name" href="${href}">${escapeHtml(p.name)}</a>
-        ${variantBadge(p) ? `<span class="pcard__variants">${variantBadge(p)}</span>` : ""}
+        ${vb ? `<span class="pcard__variants">${vb}</span>` : ""}
       </div>
       ${p.inStock
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>`
