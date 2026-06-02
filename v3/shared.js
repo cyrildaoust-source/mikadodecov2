@@ -316,13 +316,35 @@ function variantBadge(p) {
   return `${values.size} ${pluralize(name)}`;
 }
 
+// Encodes the current listing view as a token (coll:<h> | cat:<x> |
+// designer:<x> | brand:<x>) so a product link carries the path the user
+// actually took — read by the PDP to build a CONTEXTUAL breadcrumb. Derived
+// from location at card-render time; "" = no context (homepage / bare
+// catalogue / PDP related) → the PDP shows the neutral catalogue trail.
+export function currentViewFrom() {
+  const params = new URLSearchParams(location.search);
+  const collMatch = location.pathname.match(/^\/collections\/(.+?)\/?$/);
+  if (collMatch) {
+    const h = decodeURIComponent(collMatch[1]);
+    if (h && h !== "all") return "coll:" + h;
+  }
+  if (params.get("designer")) return "designer:" + params.get("designer");
+  if (params.get("brand")) return "brand:" + params.get("brand");
+  const cat = params.get("cat");
+  if (cat && cat !== "tous") return "cat:" + cat;
+  return "";
+}
+
 export function productCard(p) {
   // Prefer ?handle= so the PDP can hit /api/product/:handle directly
   // (no /api/products cap). Fall back to ?id= for products served from
   // a stale cache that doesn't carry .handle yet.
-  const href = p.handle
+  const base = p.handle
     ? `/produit.html?handle=${encodeURIComponent(p.handle)}`
     : `/produit.html?id=${encodeURIComponent(p.id)}`;
+  // Carry the current view so the PDP breadcrumb reflects the real path.
+  const from = currentViewFrom();
+  const href = from ? `${base}&from=${encodeURIComponent(from)}` : base;
   const alt = p.image2 && p.image2 !== p.image ? `<img class="alt" src="${p.image2}" alt="" loading="lazy" />` : "";
   const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`
