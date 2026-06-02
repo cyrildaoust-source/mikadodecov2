@@ -52,7 +52,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchBrands, slugify, buildShaReady, versionedImg, loadBrandHandles, breadcrumbHTML } from "/shared.js";
+    import { initShell, slugify, buildShaReady, versionedImg, breadcrumbHTML } from "/shared.js";
     initShell({ active: "Marques", transparentNav: true });
     document.querySelector("[data-breadcrumb]").innerHTML =
       breadcrumbHTML([{ label: "Accueil", href: "/" }, { label: "Marques" }]);
@@ -64,24 +64,28 @@
     // Wait for buildShaReady so the brand logo URLs carry ?v=<sha>
     // on the first paint — same cache-busting trick as the home
     // marquee in main.js.
-    Promise.all([buildShaReady(), fetchBrands(), loadBrandHandles()]).then(([, brandsRaw, HANDLES]) => {
-      const brands = brandsRaw.filter((b) => b.productCount > 0).sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
+    // Liste pilotée par la liste curée (mega-menu-brands.json — les 22 mêmes
+    // marques que le mega menu). Plus d'appel à /api/brands : cet endpoint ne
+    // lisait que les 250 premiers produits (~6000 au total), si bien que des
+    // marques disparaissaient et qu'IHR (vendu en boutique uniquement)
+    // polluait l'échantillon. buildShaReady reste pour le cache-busting logos.
+    Promise.all([
+      buildShaReady(),
+      fetch("/mega-menu-brands.json", { cache: "force-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status)),
+    ]).then(([, data]) => {
+      const brands = (data.brands || []).slice().sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
       countEl.textContent = `${brands.length} maisons`;
       grid.innerHTML = brands.map((b) => {
         const slug = slugify(b.name);
         const origin = ORIGIN[slug] || "Europe";
         const safeName = b.name.replace(/"/g, "&quot;");
         const logoSrc  = versionedImg(`/images/brands/${slug}.svg`);
-        // Server-side filtered collection when a curated handle exists
-        // (mega-menu-brands.json), else fall back to the brands index.
-        const handle = HANDLES[slug];
-        const href = handle ? `/collections/${handle}` : "/marques.html";
+        const href = b.href || `/produits.html?brand=${slug}`;
         return `<a class="brandcard" href="${href}">
           <span class="brandcard__origin">${origin}</span>
           <div>
             <img class="brandcard__logo" src="${logoSrc}" alt="${safeName}" loading="lazy"
               onerror="this.outerHTML='<span class=&quot;brandcard__name&quot;>${safeName}</span>'" />
-            <div class="brandcard__count">${b.productCount} pièce${b.productCount > 1 ? "s" : ""}</div>
           </div>
         </a>`;
       }).join("");
