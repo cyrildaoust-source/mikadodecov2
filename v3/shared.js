@@ -166,6 +166,29 @@ export async function fetchCollections() {
   if (!r.ok) throw new Error("collections " + r.status);
   return r.json();
 }
+// Curated brand → Shopify collection-handle map, sourced from
+// mega-menu-brands.json (the single source of truth for curated handles).
+// Resolves to { slugify(name): handle }. Memoized so repeated callers (brand
+// cards, PDP brand link/breadcrumb) share one fetch. Brands absent from the
+// map have no curated collection — callers decide the fallback.
+let _brandHandles = null;
+export function loadBrandHandles() {
+  if (!_brandHandles) {
+    _brandHandles = fetch("/mega-menu-brands.json", { cache: "force-cache" })
+      .then((r) => (r.ok ? r.json() : { brands: [] }))
+      .then((d) => {
+        const map = {};
+        for (const b of (d.brands || [])) {
+          if (b && b.name && typeof b.href === "string") {
+            map[slugify(b.name)] = b.href.replace(/^\/collections\//, "");
+          }
+        }
+        return map;
+      })
+      .catch(() => ({}));
+  }
+  return _brandHandles;
+}
 /* ---------- promo été 2026 (4ème chaise offerte) ---------- */
 // Centralized so every consumer (PLP bandeau, PDP bandeau, cart message)
 // uses the same dates and tag names. Update here when the next promo lands.
@@ -181,6 +204,25 @@ export const isPromoEteActive = () => {
   const now = new Date();
   return now >= PROMO_ETE_2026.start && now <= PROMO_ETE_2026.end;
 };
+// Fil d'Ariane (breadcrumb). `trail` = [{ label, href? }, …]; the LAST item is
+// the current page (rendered without a link, aria-current). Emits schema.org
+// BreadcrumbList microdata for SEO. Pure string helper (like promoBandeauHTML):
+// inject the result into a per-page placeholder — it is NOT rendered by
+// initShell, because the crumb belongs between the header and the page H1,
+// a region that lives in per-page markup.
+export function breadcrumbHTML(trail) {
+  if (!Array.isArray(trail) || trail.length === 0) return "";
+  const items = trail.map((c, i) => {
+    const isLast = i === trail.length - 1;
+    const label = escapeHtml(c.label);
+    const inner = (!isLast && c.href)
+      ? `<a itemprop="item" href="${escapeHtml(c.href)}"><span itemprop="name">${label}</span></a>`
+      : `<span itemprop="name"${isLast ? ' aria-current="page"' : ""}>${label}</span>`;
+    return `<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">${inner}<meta itemprop="position" content="${i + 1}" /></li>`;
+  }).join("");
+  return `<nav class="breadcrumb" aria-label="Fil d'Ariane"><ol itemscope itemtype="https://schema.org/BreadcrumbList">${items}</ol></nav>`;
+}
+
 // Hero bandeau used on the outdoor PLP and on eligible PDPs. Variants:
 //   "plp"  → full bandeau with CTA (top of /collections/mobilier-exterieur)
 //   "pdp"  → compact bandeau (just under the PDP gallery)
@@ -274,13 +316,35 @@ function variantBadge(p) {
   return `${values.size} ${pluralize(name)}`;
 }
 
+// Encodes the current listing view as a token (coll:<h> | cat:<x> |
+// designer:<x> | brand:<x>) so a product link carries the path the user
+// actually took — read by the PDP to build a CONTEXTUAL breadcrumb. Derived
+// from location at card-render time; "" = no context (homepage / bare
+// catalogue / PDP related) → the PDP shows the neutral catalogue trail.
+export function currentViewFrom() {
+  const params = new URLSearchParams(location.search);
+  const collMatch = location.pathname.match(/^\/collections\/(.+?)\/?$/);
+  if (collMatch) {
+    const h = decodeURIComponent(collMatch[1]);
+    if (h && h !== "all") return "coll:" + h;
+  }
+  if (params.get("designer")) return "designer:" + params.get("designer");
+  if (params.get("brand")) return "brand:" + params.get("brand");
+  const cat = params.get("cat");
+  if (cat && cat !== "tous") return "cat:" + cat;
+  return "";
+}
+
 export function productCard(p) {
   // Prefer ?handle= so the PDP can hit /api/product/:handle directly
   // (no /api/products cap). Fall back to ?id= for products served from
   // a stale cache that doesn't carry .handle yet.
-  const href = p.handle
+  const base = p.handle
     ? `/produit.html?handle=${encodeURIComponent(p.handle)}`
     : `/produit.html?id=${encodeURIComponent(p.id)}`;
+  // Carry the current view so the PDP breadcrumb reflects the real path.
+  const from = currentViewFrom();
+  const href = from ? `${base}&from=${encodeURIComponent(from)}` : base;
   const alt = p.image2 && p.image2 !== p.image ? `<img class="alt" src="${p.image2}" alt="" loading="lazy" />` : "";
   const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`
@@ -341,7 +405,7 @@ function bindAddToCart() {
    the top-level still navigates (clicks land on the corresponding
    collection page). */
 const NAV_TOP = [
-  { label: "Mobilier",      href: "/collections/all", kind: "mega",     key: "mobilier"  },
+  { label: "Mobilier",      href: "/produits.html",   kind: "mega",     key: "mobilier"  },
   { label: "Marques",       href: "/marques.html",    kind: "dropdown", key: "marques"   },
   { label: "Designers",     href: "/designers.html",  kind: "dropdown", key: "designers" },
   { label: "Mikado Studio", href: "/studio.html",     kind: "link"  },
@@ -391,7 +455,7 @@ function chromeHTML(active) {
         <a class="drawer__link" href="/studio.html">Mikado Studio</a>
         <a class="drawer__link" href="/journal.html">Le journal</a>
         <a class="drawer__link drawer__link--util" href="/rendez-vous.html">Rendez-vous</a>
-        <a class="drawer__link drawer__link--util" href="/selection.html">Sélection</a>
+        <a class="drawer__link drawer__link--util" href="/selection.html">Ma sélection</a>
       </div>
       <footer class="drawer__foot" data-drawer-foot></footer>
     </div>`;
@@ -471,7 +535,7 @@ function footerHTML() {
           <li><a href="/produits.html">Mobilier</a></li>
           <li><a href="/produits.html?cat=luminaires">Luminaires</a></li>
           <li><a href="/produits.html?cat=objets">Objets</a></li>
-          <li><a href="/collections/mobilier-exterieur">Extérieur</a></li>
+          <li><a href="/collections/outdoor">Extérieur</a></li>
         </ul></div>
         <div><h5>Maison</h5><ul>
           <li><a href="/marques.html">Les marques</a></li>
@@ -623,7 +687,7 @@ function bindCartDrawer() {
       <div class="cartd__row cartd__row--total"><span>Total</span><span>${euro(total)}</span></div>
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
       <p class="cartd__note">Remises et livraison calculées au panier</p>
-      <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Aller au panier →</a>
+      <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Ma sélection →</a>
       <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
   }
 

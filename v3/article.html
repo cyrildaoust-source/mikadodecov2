@@ -14,7 +14,7 @@
 
   <main class="page wrap">
     <article class="article" data-article>
-      <a class="article__back" href="/journal.html">← Le journal</a>
+      <div data-breadcrumb></div>
       <div data-body></div>
     </article>
 
@@ -27,7 +27,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell } from "/shared.js";
+    import { initShell, breadcrumbHTML } from "/shared.js";
     initShell({ active: "Le journal", transparentNav: false });
 
     const ARTICLES = {
@@ -297,6 +297,15 @@
     const slug = new URLSearchParams(location.search).get("slug");
     const a = ARTICLES[slug];
     const host = document.querySelector("[data-body]");
+    // Fil d'Ariane (Accueil › Le journal › titre) — replaces the back-link.
+    const crumbEl = document.querySelector("[data-breadcrumb]");
+    if (crumbEl) {
+      crumbEl.innerHTML = breadcrumbHTML([
+        { label: "Accueil", href: "/" },
+        { label: "Le journal", href: "/journal.html" },
+        { label: a ? a.title : "Article introuvable" },
+      ]);
+    }
     if (!a) {
       host.innerHTML = `<div class="article__meta">Le journal</div><h1 class="article__title">Article introuvable</h1><p class="prose">Cet article n'existe pas ou plus. <a href="/journal.html" style="color:var(--accent-ink)">Retour au journal</a>.</p>`;
     } else {

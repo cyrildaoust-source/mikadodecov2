@@ -609,6 +609,16 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 /* ---------- product detail ---------- */
 .pdp { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
 .pdp__back { display: inline-block; font-size: var(--fs-small); color: var(--accent-ink); margin-bottom: 22px; }
+
+/* Fil d'Ariane — discreet breadcrumb on cream (schema.org BreadcrumbList) */
+[data-breadcrumb] { min-height: 1.3em; }
+.breadcrumb { font-size: var(--fs-small); color: var(--muted); margin: 16px 0; }
+.breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0; padding: 0; }
+.breadcrumb li { display: inline-flex; align-items: center; gap: 7px; }
+.breadcrumb li + li::before { content: "›"; color: var(--muted); opacity: .6; }
+.breadcrumb a { color: var(--muted); text-decoration: none; transition: color .25s var(--ease); }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb [aria-current="page"] { color: var(--ink); }
 .pdp__main { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--tile); }
 .pdp__thumbs { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
 .pdp__thumbs img { width: 74px; height: 74px; object-fit: cover; background: var(--tile); cursor: pointer; opacity: .55; transition: opacity .2s var(--ease); }
