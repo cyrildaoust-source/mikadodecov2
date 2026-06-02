@@ -276,7 +276,7 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     const rail = els.swatches;
     const fine = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
     if (!rail || !fine || prefersReducedMotion()) return;
-    const MAX = 1.55, RADIUS = 140, ROW = 26;
+    const MAX = 1.45, RADIUS = 65, ROW = 26;
     let dots = [], cx = [], cy = [], raf = 0, px = 0, py = 0;
     const measure = () => {
       dots = [...rail.querySelectorAll(".nf-swatch__dot")];
@@ -293,7 +293,7 @@ export function mountNuancier(rootEl, colors, opts = {}) {
         let s = 1;
         if (Math.abs(py - cy[i]) <= ROW) {                  // only the hovered row
           const t = Math.min(1, Math.abs(px - cx[i]) / RADIUS);
-          s = 1 + (MAX - 1) * (1 + Math.cos(t * Math.PI)) / 2;
+          s = 1 + (MAX - 1) * (1 - t) * (1 - t);             // steep falloff: neighbours barely grow
         }
         dots[i].style.transform = s > 1.001 ? `scale(${s.toFixed(3)})` : "";
       }

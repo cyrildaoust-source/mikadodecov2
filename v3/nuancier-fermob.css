@@ -58,7 +58,7 @@
 .nf-active__chip {
   width: 14px;
   height: 14px;
-  border-radius: 2px;
+  border-radius: 0;
   background: var(--swatch-color, var(--ink));
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
@@ -91,14 +91,14 @@
 .nf-swatch__dot {
   width: 28px;
   height: 28px;
-  border-radius: 2px;                 /* square paint-chip sample (no rounds bar the crest) */
+  border-radius: 0;                   /* sharp square sample — matches the angular .btn convention */
   background: var(--swatch-color, var(--ink));
   border: 1px solid rgba(0, 0, 0, 0.1);
   transform-origin: bottom center;    /* Dock fish-eye grows upward */
   transition: transform 0.15s var(--ease);
 }
 .nf-swatch:hover .nf-swatch__dot { transform: scale(1.12); }
-.nf-swatch:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; border-radius: 4px; }
+.nf-swatch:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; border-radius: 0; }
 
 /* Active state · a marked ring around the square sample */
 .nf-swatch[aria-pressed="true"] .nf-swatch__dot {
@@ -157,7 +157,7 @@
   align-items: center;
   gap: 8px;
   padding: 5px 12px;
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--line);
   background: var(--paper);
   font-family: var(--sans-product);
@@ -169,7 +169,7 @@
   content: "";
   width: 12px;
   height: 12px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--chip-color, var(--ink));
   border: 1px solid rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
@@ -193,7 +193,7 @@
   aspect-ratio: 4/3;
   overflow: hidden;
   background: var(--tile);
-  border-radius: 2px;
+  border-radius: 0;
 }
 .nf-amb img {
   width: 100%;
