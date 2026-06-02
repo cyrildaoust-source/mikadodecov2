@@ -62,18 +62,18 @@ const TEMPLATE = `
 
 const FADE_MS = 150;
 
-// One CONSTANT overlap arrangement for every composition (no per-index
-// variants): the active colour as a big square, with its 1-2 partners clustered
-// over its bottom-right corner. Keyed by total square count. Values in %.
+// One CONSTANT shrinking cascade for every composition: each square is 2/3 of
+// the previous and nests into its bottom-right corner (60 → 40 → 27). Smallest
+// square sits on top. Keyed by total square count. Values in %.
 const HARM_LAYOUT = {
   2: [
-    { w: 66, l: 0,  t: 0,  z: 1 },   // active
-    { w: 46, l: 46, t: 46, z: 2 },   // partner · bottom-right corner
+    { w: 60, l: 0,  t: 0,  z: 1 },   // active · biggest
+    { w: 40, l: 40, t: 40, z: 2 },   // partner · 2/3, nested in the bottom-right corner
   ],
   3: [
-    { w: 62, l: 0,  t: 0,  z: 1 },   // active
-    { w: 44, l: 46, t: 30, z: 2 },   // partner 1 · right of the cluster
-    { w: 44, l: 44, t: 52, z: 3 },   // partner 2 · below, overlapping p1 + the active
+    { w: 60, l: 0,  t: 0,  z: 1 },   // active · biggest
+    { w: 40, l: 40, t: 40, z: 2 },   // partner 1 · 2/3, nested bottom-right
+    { w: 27, l: 66, t: 66, z: 3 },   // partner 2 · 2/3 again, nested in partner 1's corner
   ],
 };
 
