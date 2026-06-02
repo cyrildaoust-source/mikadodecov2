@@ -21,7 +21,7 @@
 
     <div class="section wrap" style="text-align:center;border-top:1px solid var(--line);margin-top:48px">
       <h2 class="serif" style="font-size:clamp(26px,2.6vw,38px);margin-bottom:16px">Une pièce vous a tapé dans l'œil ?</h2>
-      <a href="/produits.html" class="btn btn--blue">Voir le catalogue</a>
+      <a href="/produits.html" class="btn btn--blue" data-end-cta>Voir le catalogue</a>
     </div>
   </main>
 
@@ -35,6 +35,7 @@
       "comment-choisir-couleur-fermob": {
         meta: "Conseil · 6 min", img: "/images/journal-couleur-fermob.jpg",
         title: "Comment bien choisir sa couleur Fermob",
+        cta: { label: "Voir le mobilier Fermob", href: "/collections/fermob" },
         lead: "Fermob propose 25 nuances dans sa palette 2026. Ce guide vous aide à cerner les 3 ou 4 couleurs qui correspondent vraiment à votre projet — terrasse, balcon, jardin ou patio.",
         body: [["html", `
           <p>Vous venez d'arrêter votre choix sur une chaise Bistro, une table Bellevie ou un fauteuil Luxembourg. Reste la décision qui va, en réalité, définir l'ambiance de votre extérieur pour les dix prochaines années : la couleur.</p>
@@ -243,6 +244,12 @@
       host.innerHTML = `<div class="article__meta">Le journal</div><h1 class="article__title">Article introuvable</h1><p class="prose">Cet article n'existe pas ou plus. <a href="/journal.html" style="color:var(--accent-ink)">Retour au journal</a>.</p>`;
     } else {
       document.title = `${a.title} · Mikadodeco`;
+      // CTA de fin contextuel : si l'article définit un cta (lié à son sujet),
+      // l'utiliser ; sinon garder le repli générique catalogue (HTML statique).
+      if (a.cta) {
+        const endCta = document.querySelector("[data-end-cta]");
+        if (endCta) { endCta.textContent = a.cta.label; endCta.href = a.cta.href; }
+      }
       // Inject (or update) the meta description for SEO + social previews.
       let metaDesc = document.querySelector('meta[name="description"]');
       if (!metaDesc) { metaDesc = document.createElement("meta"); metaDesc.setAttribute("name", "description"); document.head.appendChild(metaDesc); }
