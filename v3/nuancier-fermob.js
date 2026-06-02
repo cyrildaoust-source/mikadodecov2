@@ -62,6 +62,20 @@ const TEMPLATE = `
 
 const FADE_MS = 150;
 
+// Overlapping-square layouts for the harmony compositions, keyed by the total
+// number of squares (active + partners). Values are % within the square comp.
+const HARM_LAYOUT = {
+  2: [
+    { w: 64, l: 0,  t: 0,  z: 1 },
+    { w: 52, l: 40, t: 42, z: 2 },
+  ],
+  3: [
+    { w: 60, l: 0,  t: 0,  z: 1 },
+    { w: 46, l: 32, t: 28, z: 2 },
+    { w: 44, l: 54, t: 54, z: 3 },
+  ],
+};
+
 export function mountNuancier(rootEl, colors, opts = {}) {
   if (!rootEl) return null;
   if (!Array.isArray(colors) || !colors.length) {
@@ -242,17 +256,21 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     const rows = Object.values(assocs).filter((row) => Array.isArray(row) && row.length);
     if (!rows.length) { els.harmonies.hidden = true; return; }
     els.harmonies.hidden = false;
-    // Each harmony = a mini palette band (active colour first, then its 1-2
-    // partners) in a fixed grid column, then the partner names. A legend, not a
-    // control — no boxes, no links.
+    // 4 compositions of overlapping flat-colour squares: the active colour
+    // (big, top-left) + its 1-2 partners (smaller, staggered bottom-right).
+    // Each square reveals its name on hover, with auto-contrasting text.
     els.harmoniesL.innerHTML = rows.map((row) => {
-      const band = [color, ...row].map((c) =>
-        `<span class="nf-harmony__sw" style="--chip-color:${escapeHtml(c.hex)}"></span>`
-      ).join("");
-      const names = row.map((c) =>
-        `<span class="nf-harmony__name" title="${escapeHtml(c.title || c.name)}">${escapeHtml(c.name)}</span>`
-      ).join(`<span class="nf-harmony__sep" aria-hidden="true"> · </span>`);
-      return `<div class="nf-harmony__band" aria-hidden="true">${band}</div><div class="nf-harmony__names">${names}</div>`;
+      const squares = [color, ...row.slice(0, 2)];
+      const layout = HARM_LAYOUT[squares.length] || HARM_LAYOUT[3];
+      const cells = squares.map((c, i) => {
+        const p = layout[i];
+        const txt = luminance(c.hex) > 0.6 ? "var(--ink)" : "var(--paper)";
+        const hidden = i === 0 ? ` aria-hidden="true"` : "";   // active name = the big label already
+        return `<div class="nf-harm-sq" style="--sq:${escapeHtml(c.hex)};--z:${p.z};left:${p.l}%;top:${p.t}%;width:${p.w}%;height:${p.w}%">
+          <span class="nf-harm-sq__name" style="color:${txt}"${hidden}>${escapeHtml(c.name)}</span>
+        </div>`;
+      }).join("");
+      return `<div class="nf-harm">${cells}</div>`;
     }).join("");
   }
 
@@ -327,4 +345,16 @@ export function mountNuancier(rootEl, colors, opts = {}) {
 
 function prefersReducedMotion() {
   return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+// Perceived brightness of a #rrggbb (or #rgb) colour, 0..1 — used to pick a
+// readable label colour over each harmony square.
+function luminance(hex) {
+  let h = String(hex || "").replace("#", "").trim();
+  if (h.length === 3) h = h.split("").map((x) => x + x).join("");
+  if (h.length !== 6) return 1;
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 }

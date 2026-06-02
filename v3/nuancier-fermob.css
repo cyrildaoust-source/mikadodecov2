@@ -150,32 +150,47 @@
   color: var(--accent-ink);
   margin-bottom: 14px;
 }
-/* Harmonies = an aligned legend, not controls. A 2-column grid so every band
-   and every name list start on the same x — no row-to-row drift. */
+/* Harmonies = 4 compositions of overlapping flat-colour squares (active colour
+   big top-left + its 1-2 partners staggered). The name reveals inside a square
+   on hover, with auto-contrast text. Sharp corners, no image — our angular
+   take on Fermob's component. */
 .nf-stage__harmonies-list {
   display: grid;
-  grid-template-columns: 60px 1fr;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 820px;          /* keep comps ~180-190px — don't let them balloon on wide screens */
+}
+.nf-harm { position: relative; aspect-ratio: 1 / 1; }
+.nf-harm-sq {
+  position: absolute;
+  background: var(--sq, var(--ink));
+  z-index: var(--z, 1);            /* base stacking; :hover lifts it to 10 below */
+  display: flex;
   align-items: center;
-  row-gap: 13px;
-  column-gap: 16px;
+  justify-content: center;
+  cursor: default;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
-/* Mini palette band · active colour first, then partners — contiguous squares. */
-.nf-harmony__band { display: flex; }
-.nf-harmony__sw {
-  width: 20px;
-  height: 20px;
-  background: var(--chip-color, var(--ink));
-  flex: none;
-}
-.nf-harmony__sw + .nf-harmony__sw { box-shadow: inset 1px 0 0 rgba(26, 25, 22, 0.18); }
-.nf-harmony__names {
+.nf-harm-sq__name {
   font-family: var(--sans-product);
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--ink-deep);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
+  padding: 0 6px;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease);
 }
-.nf-harmony__sep { color: var(--subtle); }
+.nf-harm-sq:hover {
+  transform: translateY(-8px) scale(1.05);
+  z-index: 10;
+  box-shadow: 0 12px 26px rgba(26, 25, 22, 0.22);
+}
+.nf-harm-sq:hover .nf-harm-sq__name { opacity: 1; }
+@media (max-width: 760px) {
+  .nf-stage__harmonies-list { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* ============================================================
    Ambiances grid
@@ -256,6 +271,8 @@
   .nf-active,
   .nf-swatch__dot,
   .nf-stage__hero,
-  .nf-amb img { transition: none; }
-  .nf-amb:hover img { transform: none; }
+  .nf-amb img,
+  .nf-harm-sq { transition: none; }
+  .nf-amb:hover img,
+  .nf-harm-sq:hover { transform: none; }   /* name still reveals (z-index + opacity), no motion */
 }
