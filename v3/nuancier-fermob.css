@@ -178,7 +178,8 @@
 .nf-harm-sq {
   background: var(--sq, var(--ink));
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;        /* a TRUE square — size driven by its grid-area width */
+  align-self: start;          /* anchor at the top of its (taller) area, like Fermob */
   display: flex;
   align-items: center;
   justify-content: center;
