@@ -13,7 +13,7 @@
   <div id="site-header"></div>
 
   <main class="page wrap">
-    <a class="pdp__back" href="/produits.html">← Le catalogue</a>
+    <div data-breadcrumb></div>
     <div data-promo-slot></div>
     <div data-pdp>
       <div class="pdp"><div class="pcard__skel" style="aspect-ratio:1/1"></div><div></div></div>
@@ -28,7 +28,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchPromos, applyPromos, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, isPromoEteActive, promoBandeauHTML, PROMO_ETE_2026 } from "/shared.js";
+    import { initShell, fetchProducts, fetchPromos, applyPromos, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, isPromoEteActive, promoBandeauHTML, breadcrumbHTML, loadBrandHandles, PROMO_ETE_2026 } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: false });
 
     const params = new URLSearchParams(location.search);
@@ -50,9 +50,23 @@
       return all.find((x) => x.id === id || encodeURIComponent(x.id) === id) || null;
     }
 
-    loadProduct().then((p) => {
+    Promise.all([loadProduct(), loadBrandHandles()]).then(([p, brandMap]) => {
       if (!p) { host.innerHTML = `<p class="plp-empty">Cette pièce est introuvable. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue</a>.</p>`; return; }
       document.title = `${p.name} · Mikadodeco`;
+
+      // Brand collection URL — curated /collections/<handle> when known (joined
+      // via mega-menu-brands.json), else the ?brand= filter fallback.
+      const bslug = slugify(p.brand || "");
+      const brandHref = brandMap[bslug] ? `/collections/${brandMap[bslug]}` : (bslug ? `/produits.html?brand=${bslug}` : "/produits.html");
+
+      // Fil d'Ariane (Accueil › marque › produit) — replaces the old back-link.
+      const crumbEl = document.querySelector("[data-breadcrumb]");
+      if (crumbEl) {
+        const trail = [{ label: "Accueil", href: "/" }];
+        if (p.brand) trail.push({ label: p.brand, href: brandHref });
+        trail.push({ label: p.name });
+        crumbEl.innerHTML = breadcrumbHTML(trail);
+      }
 
       // Promo bandeau on PDPs for products tagged as eligible to the BXGY
       // discount (89 sieges). Auto-hides outside the active window.
@@ -107,7 +121,7 @@
             ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(src)}" alt="" />`).join("")}</div>` : ""}
           </div>
           <div class="pdp__info">
-            <a class="pdp__brand" href="/produits.html?brand=${slugify(p.brand || "")}">${escapeHtml(p.brand || "")}</a>
+            <a class="pdp__brand" href="${brandHref}">${escapeHtml(p.brand || "")}</a>
             <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
             ${p.designer ? `<div class="pdp__designer">Dessiné par ${escapeHtml(p.designer)}</div>` : ""}
             <div class="pdp__price" data-price-el>${priceLabel(p)}</div>
@@ -171,7 +185,7 @@
       const updateStatus = () => {
         const n = cartQty(current.id);
         status.innerHTML = n > 0
-          ? `Dans la sélection : <strong>${n}</strong> · <a href="/selection.html">voir le panier</a>`
+          ? `Dans la sélection : <strong>${n}</strong> · <a href="/selection.html">Ma sélection</a>`
           : "";
       };
       updateStatus();

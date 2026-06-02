@@ -56,6 +56,8 @@
     </div>
   </section>
 
+  <div class="wrap" data-breadcrumb></div>
+
   <div class="wrap plp-promo">
     <a class="plp-promo__link" href="/collections/promotions">
       <span class="plp-promo__dot" aria-hidden="true"></span>Promotions
@@ -114,7 +116,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchBrands, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, isPromoEteActive, promoBandeauHTML, PROMO_ETE_2026 } from "/shared.js";
+    import { initShell, fetchProducts, fetchBrands, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, isPromoEteActive, promoBandeauHTML, breadcrumbHTML, PROMO_ETE_2026 } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: true });
 
     const CAT_LABEL = { tous:"Le catalogue", assises:"Assises", tables:"Tables", luminaires:"Luminaires", rangements:"Rangements", objets:"Objets", exterieur:"Extérieur" };
@@ -194,7 +196,18 @@
       "fatboy": "Fatboy",
       "hkliving": "HKliving",
       "pols-potten": "Pols Potten",
+      // Promotions (also valid /collections/<handle> routes)
+      "promotions": "Promotions",
+      "promo-4eme-chaise-offerte": "Promo · 4ème chaise offerte",
     };
+
+    // Brand handles — the "Marques" subset of COLL_TITLES. Drives the
+    // breadcrumb level (Marques vs Mobilier) for a /collections/<handle> view.
+    const BRAND_HANDLES = new Set([
+      "vitra", "fermob", "tradition", "hay", "muuto", "ferm-living",
+      "alessi", "iittala", "serax", "marimekko", "anglepoise", "artek",
+      "fatboy", "hkliving", "pols-potten",
+    ]);
     const grid = document.querySelector("[data-grid]");
     const popGrid = document.querySelector("[data-pop-grid]");
     const popSection = document.querySelector("[data-pop-section]");
@@ -206,6 +219,7 @@
     const titleEl = document.querySelector("[data-plp-title]");
     const subEl = document.querySelector("[data-plp-sub]");
     const gridTitle = document.querySelector("[data-grid-title]");
+    const breadcrumbEl = document.querySelector("[data-breadcrumb]");
 
     const params = new URLSearchParams(location.search);
     // Pretty Shopify-style URL: /collections/<handle> sets the coll filter
@@ -363,6 +377,30 @@
       } else {
         titleEl.textContent = CAT_LABEL[state.cat] || "Le catalogue";
         subEl.textContent = "Mobilier de design, choisi pièce par pièce.";
+      }
+      // Fil d'Ariane (Accueil › niveau › page courante), construit depuis le
+      // mode résolu + le titre final ci-dessus. render() est rappelé à chaque
+      // changement de filtre, donc le fil reste synchronisé.
+      if (breadcrumbEl) {
+        const home = { label: "Accueil", href: "/" };
+        const cur = { label: titleEl.textContent };
+        let trail;
+        if (state.coll) {
+          const lvl = BRAND_HANDLES.has(state.coll)
+            ? { label: "Marques", href: "/marques.html" }
+            : { label: "Mobilier", href: "/produits.html" };
+          trail = [home, lvl, cur];
+        } else if (state.designer) {
+          trail = [home, { label: "Designers", href: "/designers.html" },
+                   { label: state.designer.name || "Designer introuvable" }];
+        } else if (brandName) {
+          trail = [home, { label: "Marques", href: "/marques.html" }, cur];
+        } else if ((state.cat && state.cat !== "tous") || state.tag) {
+          trail = [home, { label: "Mobilier", href: "/produits.html" }, cur];
+        } else {
+          trail = [home, cur];
+        }
+        breadcrumbEl.innerHTML = breadcrumbHTML(trail);
       }
       // Hide categorical chips when we're inside a curated view (collection
       // or tag) — they don't make sense and dilute the page identity.
