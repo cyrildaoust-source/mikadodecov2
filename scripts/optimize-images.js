@@ -53,6 +53,9 @@ const add = (file, widths, label) => jobs.push({ src: path.join(IMG_DIR, file), 
  'lookbook-recevoir.jpg', 'salon-quilton.jpg', 'dehors-thorvald.jpg']
   .forEach(f => add(f, CONTENT_WIDTHS, 'content'));
 
+// Journal · "à la une" featured photo (Lot B — real editorial photo, 3:2)
+add('journal-couleur-fermob.jpg', [800, 1280, 1600], 'content');
+
 // 3.4 — the six homepage category tiles
 ['assises.jpg', 'tables.jpg', 'luminaires.jpg', 'rangements.jpg', 'objets.jpg', 'exterieur.jpg']
   .forEach(f => add(f, TILE_WIDTHS, 'tile'));
