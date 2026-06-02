@@ -62,21 +62,18 @@ const TEMPLATE = `
 
 const FADE_MS = 150;
 
-// Overlapping-square layouts for the harmony compositions. Keyed by total
-// square count (active + partners); each is an ARRAY of variants cycled by the
-// composition index so the 4 comps don't all share one diagonal. Values in %.
-const HARM_LAYOUTS = {
+// One CONSTANT overlap arrangement for every composition (no per-index
+// variants): the active colour as a big square, with its 1-2 partners clustered
+// over its bottom-right corner. Keyed by total square count. Values in %.
+const HARM_LAYOUT = {
   2: [
-    [{ w: 64, l: 0,  t: 0,  z: 1 }, { w: 52, l: 40, t: 42, z: 2 }],
-    [{ w: 64, l: 36, t: 0,  z: 1 }, { w: 52, l: 0,  t: 44, z: 2 }],
-    [{ w: 62, l: 0,  t: 38, z: 1 }, { w: 50, l: 42, t: 0,  z: 2 }],
-    [{ w: 58, l: 40, t: 40, z: 1 }, { w: 48, l: 0,  t: 6,  z: 2 }],
+    { w: 66, l: 0,  t: 0,  z: 1 },   // active
+    { w: 46, l: 46, t: 46, z: 2 },   // partner · bottom-right corner
   ],
   3: [
-    [{ w: 60, l: 0,  t: 0,  z: 1 }, { w: 46, l: 32, t: 28, z: 2 }, { w: 44, l: 54, t: 54, z: 3 }],
-    [{ w: 60, l: 40, t: 0,  z: 1 }, { w: 46, l: 16, t: 26, z: 2 }, { w: 44, l: 0,  t: 52, z: 3 }],
-    [{ w: 58, l: 0,  t: 42, z: 1 }, { w: 46, l: 30, t: 16, z: 2 }, { w: 42, l: 54, t: 0,  z: 3 }],
-    [{ w: 54, l: 23, t: 23, z: 1 }, { w: 40, l: 0,  t: 0,  z: 2 }, { w: 40, l: 60, t: 60, z: 3 }],
+    { w: 62, l: 0,  t: 0,  z: 1 },   // active
+    { w: 44, l: 46, t: 30, z: 2 },   // partner 1 · right of the cluster
+    { w: 44, l: 44, t: 52, z: 3 },   // partner 2 · below, overlapping p1 + the active
   ],
 };
 
@@ -263,10 +260,9 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     // 4 compositions of overlapping flat-colour squares: the active colour
     // (big, top-left) + its 1-2 partners (smaller, staggered bottom-right).
     // Each square reveals its name on hover, with auto-contrasting text.
-    els.harmoniesL.innerHTML = rows.map((row, idx) => {
+    els.harmoniesL.innerHTML = rows.map((row) => {
       const squares = [color, ...row.slice(0, 2)];
-      const variants = HARM_LAYOUTS[squares.length] || HARM_LAYOUTS[3];
-      const layout = variants[idx % variants.length];   // vary the arrangement per comp
+      const layout = HARM_LAYOUT[squares.length] || HARM_LAYOUT[3];
       const cells = squares.map((c, i) => {
         const p = layout[i];
         const txt = luminance(c.hex) > 0.6 ? "var(--ink)" : "var(--paper)";

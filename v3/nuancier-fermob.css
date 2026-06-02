@@ -112,8 +112,8 @@
   display: grid;
   grid-template-columns: clamp(360px, 42vw, 580px) 1fr;   /* hero = medium landscape, present but not envahissant */
   gap: clamp(24px, 3vw, 48px);
-  align-items: start;
-  margin-bottom: clamp(40px, 5vw, 64px);
+  align-items: center;          /* centre the short text column against the tall image — no bottom void */
+  margin-bottom: clamp(28px, 3.5vw, 44px);
 }
 
 .nf-stage__media { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 580px; }
