@@ -852,3 +852,147 @@ body.cartd-locked { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .cartd__backdrop, .cartd__panel { transition: opacity .01s, visibility 0s; }
 }
+
+/* =====================================================================
+   === JOURNAL / ARTICLE PREMIUM ===  (Lot A)
+   Self-contained section appended at EOF to avoid merge collisions with
+   the parallel nav work. Reading-progress bar (article.html) + premium
+   journal layout (journal.html). Tokens only — DA unchanged.
+   ===================================================================== */
+
+/* ---- Reading progress bar (article.html) ---- */
+.readbar {
+  position: fixed;
+  top: 116px;                 /* fallback; JS pins it to the live header bottom */
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 70;                /* tucks under the fixed .chrome (z-index 80) */
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+  pointer-events: none;
+}
+.readbar.is-on { opacity: 1; }
+.readbar__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: var(--accent);
+  transition: transform .1s linear;
+  will-change: transform;
+}
+
+/* ---- Journal · "à la une" featured ---- */
+.jfeat {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  background: var(--paper-2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: clamp(32px, 4vw, 56px);
+  transition: background .3s var(--ease);
+}
+.jfeat:hover { background: var(--paper); }
+.jfeat__media { aspect-ratio: 16 / 10; overflow: hidden; background: var(--tile); }
+.jfeat__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--ease); }
+.jfeat:hover .jfeat__img { transform: scale(1.03); }
+.jfeat__body { display: flex; flex-direction: column; justify-content: center; padding: clamp(26px, 3.4vw, 56px); }
+.jfeat__title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink-deep);
+  margin: 6px 0 0;
+}
+.jfeat__excerpt {
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 14px 0 0;
+  max-width: 48ch;
+}
+.jfeat__more {
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  font-family: var(--sans-product);
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--accent-ink);
+  margin-top: 20px;
+  transition: color .2s var(--ease);
+}
+.jfeat:hover .jfeat__more { color: var(--ink-deep); }
+/* Specificity 0,2,0 so this beats the .jread base (margin-top:auto) regardless
+   of source order — keeps the featured read-time grouped under the link. */
+.jfeat .jfeat__read { margin-top: 16px; padding-top: 0; }
+
+/* ---- Journal · refined grid cards ---- */
+.jcard {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-2);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: background .3s var(--ease);
+}
+.jcard:hover { background: var(--paper); }
+.jcard__media { aspect-ratio: 3 / 2; overflow: hidden; background: var(--tile); }
+.jcard__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--ease); }
+.jcard:hover .jcard__img { transform: scale(1.04); }
+.jcard__body { display: flex; flex-direction: column; flex: 1 1 auto; padding: clamp(16px, 1.6vw, 22px) clamp(16px, 1.6vw, 22px) clamp(18px, 2vw, 24px); }
+.jcard__title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(21px, 2vw, 26px);
+  line-height: 1.12;
+  color: var(--ink-deep);
+  transition: color .2s var(--ease);
+}
+.jcard:hover .jcard__title { color: var(--accent-ink); }
+.jcard__excerpt {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+
+/* ---- Journal · shared bits (category label + read time) ---- */
+.jcat {
+  font-family: var(--sans-product);
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 10px;
+}
+.jread {
+  font-family: var(--sans);
+  font-size: var(--fs-meta);
+  color: var(--subtle);
+  margin-top: auto;           /* pins read-time to the card bottom, aligned across a row */
+  padding-top: 14px;
+}
+
+/* ---- Journal premium · responsive (featured stacks; grid uses .jgrid 3→2→1) ---- */
+@media (max-width: 860px) {
+  .jfeat { grid-template-columns: 1fr; }
+  .jfeat__media { aspect-ratio: 3 / 2; }
+  .jfeat__body { padding: clamp(20px, 5vw, 32px); }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .readbar, .readbar__fill,
+  .jfeat, .jfeat__img, .jfeat__more,
+  .jcard, .jcard__img, .jcard__title { transition: none; }
+  .jfeat:hover .jfeat__img, .jcard:hover .jcard__img { transform: none; }
+}

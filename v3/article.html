@@ -11,6 +11,7 @@
 </head>
 <body>
   <div id="site-header"></div>
+  <div class="readbar" data-readbar aria-hidden="true"><span class="readbar__fill" data-readbar-fill></span></div>
 
   <main class="page wrap">
     <article class="article" data-article>
@@ -32,9 +33,9 @@
 
     const ARTICLES = {
       "comment-choisir-couleur-fermob": {
-        meta: "Conseil · 10 min", img: "/images/exterieur.jpg",
+        meta: "Conseil · 6 min", img: "/images/exterieur.jpg",
         title: "Comment bien choisir sa couleur Fermob",
-        lead: "Fermob propose 25 nuances dans sa palette 2026. En 10 minutes de lecture, ce guide vous aide à cerner les 3 ou 4 couleurs qui correspondent vraiment à votre projet — terrasse, balcon, jardin ou patio.",
+        lead: "Fermob propose 25 nuances dans sa palette 2026. Ce guide vous aide à cerner les 3 ou 4 couleurs qui correspondent vraiment à votre projet — terrasse, balcon, jardin ou patio.",
         body: [["html", `
           <p>Vous venez d'arrêter votre choix sur une chaise Bistro, une table Bellevie ou un fauteuil Luxembourg. Reste la décision qui va, en réalité, définir l'ambiance de votre extérieur pour les dix prochaines années : la couleur.</p>
 
@@ -76,75 +77,16 @@
           <p><strong>Créer un point focal</strong> = la couleur du mobilier devient l'élément structurant qui attire l'œil. Choisissez une teinte qui contraste fortement. Effet : énergie, caractère.</p>
           <p>Les deux sont bonnes — ce n'est pas une question de goût, c'est une question d'intention.</p>
 
-          <h2>Les 25 couleurs Fermob 2026, classées en 6 familles</h2>
-          <p>Voici la palette complète, organisée par familles cohérentes. Pour chaque famille, vous trouverez à qui elle convient et dans quel contexte elle brille.</p>
-
-          <h3>Famille 1 — Les neutres intemporels</h3>
-          <p>5 couleurs : <strong>Carbone · Réglisse · Gris orage · Gris argile · Blanc coton</strong></p>
-          <p>Ce sont les valeurs sûres. Ils s'intègrent partout, ne se démodent jamais, et constituent souvent l'achat "premier mobilier Fermob" pour qui veut sécuriser son choix.</p>
+          <h2>Les 6 familles, en un coup d'œil</h2>
+          <p>La palette 2026 compte 25 nuances. Pour s'y retrouver, on les classe en 6 familles cohérentes — voici à qui chacune s'adresse. Le détail teinte par teinte se parcourt dans le nuancier, juste en dessous.</p>
           <ul>
-            <li><strong>Carbone</strong> : un gris très foncé, presque noir mais plus doux. Le plus vendu. Va avec tout.</li>
-            <li><strong>Réglisse</strong> : noir profond, mat. Plus radical que Carbone, plus statement.</li>
-            <li><strong>Gris orage</strong> : gris medium chaud. Pour ceux qui veulent du neutre sans tomber dans le noir.</li>
-            <li><strong>Gris argile</strong> : gris clair tirant légèrement vers le beige. Lumineux, parfait pour balcons sombres.</li>
-            <li><strong>Blanc coton</strong> : blanc cassé, légèrement crème. Idéal pour patios méditerranéens.</li>
+            <li><strong>Les neutres intemporels</strong> — les valeurs sûres : elles s'intègrent partout et ne se démodent jamais (Carbone, Réglisse, Gris orage, Blanc coton…).</li>
+            <li><strong>Les beiges et terres claires</strong> — chaudes et organiques, elles réchauffent immédiatement un espace (Beige latte, Tonka, Pain d'épices, Miel…).</li>
+            <li><strong>Les chaleureux affirmés</strong> — des terres profondes qui montent en intensité et affirment un parti pris (Ocre rouge, Piment, Cerise noire…).</li>
+            <li><strong>Les verts</strong> — ils dialoguent avec la végétation tout en s'en distinguant (Cactus, Romarin, Pesto, Vert tilleul…).</li>
+            <li><strong>Les bleus</strong> — du bleu nuit au glacier, ils couvrent tous les usages (Bleu abysse, Acapulco, Bleu maya, Menthe glaciale).</li>
+            <li><strong>Les acidulés</strong> — les deux outsiders, magnifiques posés en couleur d'accent (Citron givré, Guimauve).</li>
           </ul>
-          <p><em>À choisir si :</em> vous voulez du sûr, vous changerez souvent les coussins/accessoires autour, ou vous équipez un espace pro (restaurant, hôtel).</p>
-
-          <h3>Famille 2 — Les beiges et terres claires</h3>
-          <p>5 couleurs : <strong>Beige latte · Tonka · Pain d'épices · Muscade · Miel</strong></p>
-          <p>Une famille chaude, organique, qui réchauffe immédiatement n'importe quel espace. Tendance forte des dernières saisons.</p>
-          <ul>
-            <li><strong>Beige latte</strong> : beige doux, lumineux, presque crème.</li>
-            <li><strong>Tonka</strong> : brun-beige chaud, comme la fève qui lui donne son nom.</li>
-            <li><strong>Pain d'épices</strong> : marron caramel, sucré, hospitalier.</li>
-            <li><strong>Muscade</strong> : brun moyen chaud, plus terreux.</li>
-            <li><strong>Miel</strong> : jaune-brun doré, lumineux et profond à la fois.</li>
-          </ul>
-          <p><em>À choisir si :</em> vous avez un jardin classique, une terrasse en bois, un sol en pierre ou en terre cuite, ou vous voulez une ambiance "village méditerranéen" / "campagne".</p>
-
-          <h3>Famille 3 — Les chaleureux affirmés (terres profondes)</h3>
-          <p>4 couleurs : <strong>Ocre rouge · Orange confite · Piment · Cerise noire</strong></p>
-          <p>Ici on monte en intensité. Ces couleurs ne se mettent pas par hasard — elles affirment un parti pris.</p>
-          <ul>
-            <li><strong>Ocre rouge</strong> : rouge brique, terre cuite. Très méditerranéen.</li>
-            <li><strong>Orange confite</strong> : orange foncé, profond, complexe.</li>
-            <li><strong>Piment</strong> : rouge orangé vif, presque corail.</li>
-            <li><strong>Cerise noire</strong> : rouge profond, presque bourgogne. Le rouge le plus sophistiqué de la palette.</li>
-          </ul>
-          <p><em>À choisir si :</em> vous voulez un point focal fort, vous équipez un patio ou une cour, vous avez une déco intérieure colorée que vous prolongez dehors.</p>
-
-          <h3>Famille 4 — Les verts</h3>
-          <p>5 couleurs : <strong>Cactus · Romarin · Pesto · Vert cèdre · Vert tilleul</strong></p>
-          <p>Les verts Fermob sont une catégorie à part — ils dialoguent naturellement avec la végétation tout en se distinguant d'elle.</p>
-          <ul>
-            <li><strong>Cactus</strong> : vert vif, énergique, presque sapin.</li>
-            <li><strong>Romarin</strong> : vert kaki, sage, mat. Le préféré des projets contemporains.</li>
-            <li><strong>Pesto</strong> : vert moutarde, terreux, originale.</li>
-            <li><strong>Vert cèdre</strong> : vert grisé profond, sobre.</li>
-            <li><strong>Vert tilleul</strong> : vert tendre acidulé, lumineux.</li>
-          </ul>
-          <p><em>À choisir si :</em> vous avez un jardin avec beaucoup de végétation, vous cherchez la cohérence avec la nature, ou au contraire vous voulez un vert qui se détache du gazon (alors plutôt Pesto ou Vert tilleul que Romarin).</p>
-
-          <h3>Famille 5 — Les bleus</h3>
-          <p>4 couleurs : <strong>Bleu abysse · Bleu acapulco · Bleu maya · Menthe glaciale</strong></p>
-          <p>Les bleus Fermob sont diversifiés — du plus profond au plus pâle, ils couvrent tous les usages.</p>
-          <ul>
-            <li><strong>Bleu abysse</strong> : bleu nuit, profond, presque noir bleuté.</li>
-            <li><strong>Bleu acapulco</strong> : bleu cobalt vif. Une icône Fermob. Très méditerranéen.</li>
-            <li><strong>Bleu maya</strong> : bleu turquoise, joyeux, plus saturé qu'acapulco.</li>
-            <li><strong>Menthe glaciale</strong> : bleu pâle légèrement teinté vert, presque bleu glacier.</li>
-          </ul>
-          <p><em>À choisir si :</em> vous habitez près de la mer, votre déco intérieure est dans les bleus, ou vous voulez un effet "vacances" sur votre terrasse.</p>
-
-          <h3>Famille 6 — Les acidulés</h3>
-          <p>2 couleurs : <strong>Citron givré · Guimauve</strong></p>
-          <p>Ce sont les deux outsiders de la palette. Pas pour tout le monde, mais magnifiques bien posés.</p>
-          <ul>
-            <li><strong>Citron givré</strong> : jaune pâle légèrement givré. Lumineux, frais.</li>
-            <li><strong>Guimauve</strong> : rose poudré doux. Inattendu en extérieur, sublime en mix.</li>
-          </ul>
-          <p><em>À choisir si :</em> vous voulez vraiment vous démarquer, ou en couleur d'accent (1 chaise sur 4) au milieu d'un set neutre.</p>
 
           <div class="article-cta">
             <p class="article-cta__lead">Explorez chaque teinte en détail.</p>
@@ -319,6 +261,31 @@
         <img class="article__hero" src="${a.img}" alt="" />
         <div class="prose">${bodyHtml}</div>`;
     }
+
+    /* Reading progress bar — fills as the article body scrolls past;
+       hidden when the article fits within one screen. Passive + rAF. */
+    (function readingProgress() {
+      const bar  = document.querySelector("[data-readbar]");
+      const fill = document.querySelector("[data-readbar-fill]");
+      const el   = document.querySelector("[data-article]");
+      if (!bar || !fill || !el) return;
+      const chrome = document.querySelector(".chrome");
+      const place = () => { if (chrome) bar.style.top = Math.round(chrome.getBoundingClientRect().bottom) + "px"; };
+      let ticking = false;
+      const measure = () => {
+        const total = el.offsetHeight - window.innerHeight;
+        if (total <= 80) { bar.classList.remove("is-on"); fill.style.transform = "scaleX(0)"; return; }
+        bar.classList.add("is-on");
+        const p = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / total));
+        fill.style.transform = "scaleX(" + p.toFixed(4) + ")";
+      };
+      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { measure(); ticking = false; }); } };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", () => { place(); measure(); }, { passive: true });
+      window.addEventListener("load", () => { place(); measure(); });
+      place();
+      measure();
+    })();
   </script>
 </body>
 </html>
