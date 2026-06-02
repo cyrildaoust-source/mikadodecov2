@@ -15,10 +15,6 @@ import { slugify, escapeHtml } from "/shared.js";
 
 const TEMPLATE = `
   <header class="nf-nav">
-    <div class="nf-active" data-active>
-      <h2 class="nf-active__name serif" data-name>—</h2>
-      <div class="nf-active__index"><span data-index>—</span> / 25</div>
-    </div>
     <nav class="nf-swatches" aria-label="Toutes les couleurs Fermob">
       <ol class="nf-swatches__list" data-swatches></ol>
     </nav>
@@ -26,7 +22,10 @@ const TEMPLATE = `
 
   <section class="nf-stage" aria-live="polite">
     <div class="nf-stage__media">
-      <img class="nf-stage__hero" data-mood-hero alt="" />
+      <div class="nf-stage__hero-wrap">
+        <img class="nf-stage__hero is-front" data-mood-hero alt="" />
+        <img class="nf-stage__hero" data-mood-hero-top alt="" aria-hidden="true" />
+      </div>
       <div class="nf-stage__moodgrid">
         <img data-mood-1 loading="lazy" alt="" />
         <img data-mood-2 loading="lazy" alt="" />
@@ -34,14 +33,25 @@ const TEMPLATE = `
     </div>
 
     <div class="nf-stage__body">
+      <div class="nf-active" data-active>
+        <h2 class="nf-active__name serif" data-name>—</h2>
+        <div class="nf-active__meta">
+          <span class="nf-active__index"><span data-index>—</span> / <span data-total>—</span></span>
+          <span class="nf-active__hex">
+            <span class="nf-active__chip" data-hex-chip aria-hidden="true"></span>
+            <span class="nf-active__code" data-hex-code>—</span>
+          </span>
+        </div>
+      </div>
+
       <p class="nf-stage__title" data-title>—</p>
       <p class="nf-stage__desc" data-desc>—</p>
-
-      <div class="nf-stage__harmonies" data-harmonies hidden>
-        <div class="nf-stage__harmonies-label">Harmonies recommandées</div>
-        <div class="nf-stage__harmonies-list" data-harmonies-list></div>
-      </div>
     </div>
+  </section>
+
+  <section class="nf-stage__harmonies" data-harmonies hidden>
+    <div class="nf-stage__harmonies-label">Harmonies recommandées</div>
+    <div class="nf-stage__harmonies-list" data-harmonies-list></div>
   </section>
 
   <section class="nf-ambiances" data-ambiances hidden>
@@ -51,6 +61,10 @@ const TEMPLATE = `
 `;
 
 const FADE_MS = 150;
+
+// Harmony squares are placed by CSS grid span (the exact Fermob composition),
+// so the JS only needs the role per square index.
+const HARM_ROLES = ["active", "p1", "p2"];
 
 export function mountNuancier(rootEl, colors, opts = {}) {
   if (!rootEl) return null;
@@ -68,8 +82,12 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     active:     $("[data-active]"),
     name:       $("[data-name]"),
     index:      $("[data-index]"),
+    total:      $("[data-total]"),
+    hexChip:    $("[data-hex-chip]"),
+    hexCode:    $("[data-hex-code]"),
     swatches:   $("[data-swatches]"),
-    moodHero:   $("[data-mood-hero]"),
+    heroA:      $("[data-mood-hero]"),
+    heroB:      $("[data-mood-hero-top]"),
     mood1:      $("[data-mood-1]"),
     mood2:      $("[data-mood-2]"),
     title:      $("[data-title]"),
@@ -81,12 +99,17 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     thumbs:     $("[data-thumbs]"),
   };
 
+  let heroFront = 0;   // index of the visible hero layer in [heroA, heroB]
+  let heroSeq   = 0;   // guards against out-of-order crossfade swaps
+
   const bySlug = new Map();
   colors.forEach((c) => bySlug.set(slugify(c.name), c));
 
   let activeSlug = null;
 
+  if (els.total) els.total.textContent = String(colors.length);
   renderSwatches();
+  setupDock();
 
   const hashSlug = location.hash.replace(/^#/, "");
   const initial  = (hashSlug && bySlug.has(hashSlug)) ? hashSlug : slugify(colors[0].name);
@@ -138,9 +161,9 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     if (!color) return;
     activeSlug = slug;
 
-    // Moodboard + body + ambiances refresh immediately. Only the
-    // top "active label" gets the fade — it's the change indicator.
-    refreshMedia(color);
+    // Body + ambiances refresh immediately; the hero crossfades and the
+    // active feature label fades — together they signal the change.
+    refreshMedia(color, fade && !prefersReducedMotion());
     refreshBody(color);
     refreshHarmonies(color);
     refreshAmbiances(color);
@@ -164,14 +187,53 @@ export function mountNuancier(rootEl, colors, opts = {}) {
 
   function writeActiveLabel(color) {
     els.name.textContent  = color.name || "—";
-    els.index.textContent = String(color.order ?? "").padStart(2, "0");
+    const pos = colors.indexOf(color) + 1;          // 1-based position (order values aren't a clean 1..N)
+    els.index.textContent = String(pos).padStart(2, "0");
+    if (els.hexChip) els.hexChip.style.setProperty("--swatch-color", color.hex || "transparent");
+    if (els.hexCode) els.hexCode.textContent = (color.hex || "").toUpperCase();
   }
 
-  function refreshMedia(color) {
+  function refreshMedia(color, animate) {
     const moods = Array.isArray(color.moodboard_images) ? color.moodboard_images : [];
-    setImg(els.moodHero, moods[0], `${color.name} · ambiance principale`);
-    setImg(els.mood1,    moods[1], `${color.name} · ambiance 2`);
-    setImg(els.mood2,    moods[2], `${color.name} · ambiance 3`);
+    crossfadeHero(moods[0], `${color.name} · ambiance principale`, animate);
+    setImg(els.mood1, moods[1], `${color.name} · ambiance 2`);
+    setImg(els.mood2, moods[2], `${color.name} · ambiance 3`);
+  }
+
+  // Hero crossfade — two stacked <img> layers. The incoming image loads on
+  // the back layer, then we fade it to front (old one out). A seq token drops
+  // stale swaps if the user clicks several colours in quick succession.
+  function crossfadeHero(url, alt, animate) {
+    const layers = [els.heroA, els.heroB];
+    if (!layers[0] || !layers[1]) return;
+    const front = layers[heroFront];
+    const back  = layers[heroFront ^ 1];
+    if (!url) {
+      front.removeAttribute("src"); front.alt = "";
+      back.removeAttribute("src");  back.alt  = "";
+      return;
+    }
+    if (!animate) {
+      setImg(front, url, alt);
+      front.classList.add("is-front");
+      back.classList.remove("is-front");
+      front.setAttribute("aria-hidden", "false");
+      back.setAttribute("aria-hidden", "true");
+      back.removeAttribute("src");
+      return;
+    }
+    const seq = ++heroSeq;
+    setImg(back, url, alt);
+    const swap = () => {
+      if (seq !== heroSeq) return;        // superseded by a newer change
+      back.classList.add("is-front");
+      front.classList.remove("is-front");
+      back.setAttribute("aria-hidden", "false");
+      front.setAttribute("aria-hidden", "true");
+      heroFront ^= 1;
+    };
+    if (back.decode) back.decode().then(swap).catch(swap);
+    else { back.onload = swap; back.onerror = swap; }
   }
 
   function refreshBody(color) {
@@ -184,13 +246,19 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     const rows = Object.values(assocs).filter((row) => Array.isArray(row) && row.length);
     if (!rows.length) { els.harmonies.hidden = true; return; }
     els.harmonies.hidden = false;
-    // Chips are purely visual (no navigation). Rendered as <span>.
+    // 4 compositions of overlapping flat-colour squares: the active colour
+    // (big, top-left) + its 1-2 partners (smaller, staggered bottom-right).
+    // Each square reveals its name on hover, with auto-contrasting text.
     els.harmoniesL.innerHTML = rows.map((row) => {
-      const chips = row.map((c, i) => {
-        const sep = i > 0 ? `<span class="nf-harmony__plus" aria-hidden="true">+</span>` : "";
-        return `${sep}<span class="nf-harmony__chip" style="--chip-color:${escapeHtml(c.hex)}" title="${escapeHtml(c.title || c.name)}">${escapeHtml(c.name)}</span>`;
+      const squares = [color, ...row.slice(0, 2)];   // active + up to 2 partners
+      const cells = squares.map((c, i) => {
+        const txt = luminance(c.hex) > 0.6 ? "var(--ink)" : "var(--paper)";
+        const hidden = i === 0 ? ` aria-hidden="true"` : "";   // active name = the big label already
+        return `<div class="nf-harm-sq nf-harm-sq--${HARM_ROLES[i]}" style="--sq:${escapeHtml(c.hex)}">
+          <span class="nf-harm-sq__name" style="color:${txt}"${hidden}>${escapeHtml(c.name)}</span>
+        </div>`;
       }).join("");
-      return `<div class="nf-harmony">${chips}</div>`;
+      return `<div class="nf-harm">${cells}</div>`;
     }).join("");
   }
 
@@ -200,7 +268,7 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     els.ambiances.hidden = false;
     els.ambColor.textContent = color.name;
     els.thumbs.innerHTML = thumbs.map((url, i) =>
-      `<img loading="lazy" referrerpolicy="no-referrer" src="${escapeHtml(url)}" alt="${escapeHtml(color.name)} — ambiance ${i + 1}" />`
+      `<div class="nf-amb"><img loading="lazy" referrerpolicy="no-referrer" src="${escapeHtml(url)}" alt="${escapeHtml(color.name)} — ambiance ${i + 1}" /></div>`
     ).join("");
   }
 
@@ -208,6 +276,49 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     els.swatches.querySelectorAll(".nf-swatch").forEach((b) => {
       b.setAttribute("aria-pressed", b.dataset.slug === slug ? "true" : "false");
     });
+  }
+
+  // macOS-Dock fish-eye on the swatch rail: the sample under the cursor grows
+  // most, neighbours less with horizontal distance (cosine falloff, ~3 wide).
+  // Fine-pointer only (touch owns the horizontal scroll) and off under
+  // reduced motion. Pure transforms — no layout shift, no focus/click impact.
+  function setupDock() {
+    const rail = els.swatches;
+    const fine = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+    if (!rail || !fine || prefersReducedMotion()) return;
+    const MAX = 1.45, RADIUS = 65, ROW = 26;
+    let dots = [], cx = [], cy = [], raf = 0, px = 0, py = 0;
+    const measure = () => {
+      dots = [...rail.querySelectorAll(".nf-swatch__dot")];
+      cx = []; cy = [];
+      for (const d of dots) {
+        const r = d.getBoundingClientRect();
+        cx.push(r.left + r.width / 2);
+        cy.push(r.top + r.height / 2);
+      }
+    };
+    const apply = () => {
+      raf = 0;
+      for (let i = 0; i < dots.length; i++) {
+        let s = 1;
+        if (Math.abs(py - cy[i]) <= ROW) {                  // only the hovered row
+          const t = Math.min(1, Math.abs(px - cx[i]) / RADIUS);
+          s = 1 + (MAX - 1) * (1 - t) * (1 - t);             // steep falloff: neighbours barely grow
+        }
+        dots[i].style.transform = s > 1.001 ? `scale(${s.toFixed(3)})` : "";
+      }
+    };
+    const reset = () => {
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      for (const d of dots) d.style.transform = "";
+    };
+    rail.addEventListener("pointerenter", measure, { passive: true });
+    rail.addEventListener("pointermove", (e) => {
+      px = e.clientX; py = e.clientY;
+      if (!raf) raf = requestAnimationFrame(apply);
+    }, { passive: true });
+    rail.addEventListener("pointerleave", reset, { passive: true });
+    window.addEventListener("resize", () => { reset(); measure(); }, { passive: true });
   }
 
   function setImg(imgEl, url, alt) {
@@ -222,4 +333,16 @@ export function mountNuancier(rootEl, colors, opts = {}) {
 
 function prefersReducedMotion() {
   return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+// Perceived brightness of a #rrggbb (or #rgb) colour, 0..1 — used to pick a
+// readable label colour over each harmony square.
+function luminance(hex) {
+  let h = String(hex || "").replace("#", "").trim();
+  if (h.length === 3) h = h.split("").map((x) => x + x).join("");
+  if (h.length !== 6) return 1;
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 }
