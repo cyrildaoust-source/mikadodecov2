@@ -140,15 +140,22 @@
   margin-bottom: 26px;
 }
 
-/* Harmonies · visual only (no navigation) */
-.nf-stage__harmonies { padding-top: 22px; border-top: 1px solid var(--line); }
+/* Harmonies · full-width band — big editorial title on the left, the four
+   colour compositions on the right (visual only, no navigation). */
+.nf-stage__harmonies {
+  display: grid;
+  grid-template-columns: clamp(220px, 24vw, 320px) minmax(0, 840px);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
 .nf-stage__harmonies-label {
-  font-family: var(--sans-product);
-  font-size: var(--fs-meta);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent-ink);
-  margin-bottom: 14px;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(28px, 3.4vw, 48px);
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+  color: var(--ink-deep);
 }
 /* Harmonies = 4 compositions of overlapping flat-colour squares (active colour
    big top-left + its 1-2 partners staggered). The name reveals inside a square
@@ -157,8 +164,7 @@
 .nf-stage__harmonies-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  max-width: 820px;          /* keep comps ~180-190px — don't let them balloon on wide screens */
+  gap: 16px;                 /* capped by the band's 840px right column */
 }
 .nf-harm { position: relative; aspect-ratio: 1 / 1; }
 .nf-harm-sq {
@@ -236,6 +242,7 @@
   .nf-stage { grid-template-columns: 1fr; gap: 24px; }
   .nf-stage__hero-wrap { aspect-ratio: 3/2; }
   .nf-active__name { font-size: clamp(2rem, 8vw, 3rem); }
+  .nf-stage__harmonies { grid-template-columns: 1fr; gap: clamp(20px, 4vw, 28px); }
   .nf-ambiances__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
 
