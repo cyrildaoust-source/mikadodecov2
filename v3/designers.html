@@ -134,7 +134,7 @@
       if (el) highlight(el);
     }
 
-    fetch("/designers-data.json", { cache: "force-cache" })
+    fetch("/designers-data.json", { cache: "no-cache" })
       .then((r) => r.ok ? r.json() : Promise.reject("designers-data " + r.status))
       .then((data) => {
         // Visible directory = every designer that isn't hidden. Hidden ones

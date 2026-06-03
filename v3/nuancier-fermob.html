@@ -36,7 +36,7 @@
 
     (async () => {
       try {
-        const r = await fetch("/nuancier-fermob.data.json", { cache: "force-cache" });
+        const r = await fetch("/nuancier-fermob.data.json", { cache: "no-cache" });
         if (!r.ok) throw new Error("HTTP " + r.status);
         const colors = await r.json();
         // Standalone page: skip scroll-on-load (host is already near top).

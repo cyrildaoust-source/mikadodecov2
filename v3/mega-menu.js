@@ -28,8 +28,8 @@ export async function initMegaMenu() {
   try {
     const [menuRes, cfgRes, brandsRes] = await Promise.all([
       fetch("/api/menu",                  { cache: "no-store"    }).then((r) => r.json()).catch(() => ({ ok: false, items: [] })),
-      fetch("/mega-menu-config.json",     { cache: "force-cache" }).then((r) => r.json()).catch(() => ({})),
-      fetch("/mega-menu-brands.json",     { cache: "force-cache" }).then((r) => r.json()).catch(() => ({ brands: [], designers: [] })),
+      fetch("/mega-menu-config.json",     { cache: "no-cache" }).then((r) => r.json()).catch(() => ({})),
+      fetch("/mega-menu-brands.json",     { cache: "no-cache" }).then((r) => r.json()).catch(() => ({ brands: [], designers: [] })),
     ]);
     menu       = menuRes;
     config     = cfgRes      || {};

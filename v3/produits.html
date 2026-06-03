@@ -508,7 +508,7 @@
       // filterbar / popular strip from the URL alone.
       const notFound = () => { state.designer = { slug: designerSlug, name: null, tags: [] }; };
       try {
-        const r = await fetch("/designers-data.json", { cache: "force-cache" });
+        const r = await fetch("/designers-data.json", { cache: "no-cache" });
         if (!r.ok) { notFound(); return; }
         const data = await r.json();
         const d = (data.designers || []).find((x) => x.slug === designerSlug);

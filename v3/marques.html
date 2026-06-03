@@ -71,7 +71,7 @@
     // polluait l'échantillon. buildShaReady reste pour le cache-busting logos.
     Promise.all([
       buildShaReady(),
-      fetch("/mega-menu-brands.json", { cache: "force-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status)),
+      fetch("/mega-menu-brands.json", { cache: "no-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status)),
     ]).then(([, data]) => {
       const brands = (data.brands || []).slice().sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
       countEl.textContent = `${brands.length} maisons`;

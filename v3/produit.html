@@ -84,7 +84,7 @@
       } else if (type === "designer" && val) {
         let name = val;
         try {
-          const r = await fetch("/designers-data.json", { cache: "force-cache" });
+          const r = await fetch("/designers-data.json", { cache: "no-cache" });
           if (r.ok) { const list = (await r.json()).designers || []; name = (list.find((x) => x.slug === val) || {}).name || val; }
         } catch (e) { /* keep the slug */ }
         trail = [home,
