@@ -1,5 +1,5 @@
 {
-  "_note": "53 designers — enrichi 2026-06-01 (29 + 30 ajouts Alessi/Serax). Affichage 'Prénom Nom', tri par 'sortKey' (nom de famille). Cartes épurées : 'bio' conservé en data pour future page créateur, non affiché sur la grille.",
+  "_note": "158 designers — enrichi 2026-06-03 (audit tags designer : +104 créateurs sourcés, noms = pages designers officielles des marques, bio à compléter). Tri par sortKey.",
   "designers": [
     {
       "name": "Alvar Aalto",
@@ -33,8 +33,56 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Né en 1932 à Helsinki, Eero Aarnio est un designer finlandais formé à l'Institut des arts industriels de la ville, diplômé en 1960. Il ouvre son propre studio en 1962. Au cours des années 1960, il s'écarte des conventions du mobilier scandinave en explorant le plastique et la fibre de verre, les formes organiques et les couleurs vives, avec des assises sculpturales et modernes. On lui doit le fauteuil Ball, sphère ouverte montée sur pied conçue en 1963 et éditée par Asko, ainsi que le fauteuil Pastil (1967, American Industrial Design Award 1968) et le fauteuil suspendu Bubble, coque transparente en acrylique conçue en 1968, tous deux édités à l'origine par Asko. Ses œuvres figurent au MoMA et au Victoria & Albert Museum. Pour Alessi, il a dessiné l'arrosoir Diva et le presse-agrumes Citrus.",
       "photo": "/images/designers/eero-aarnio.jpg"
+    },
+    {
+      "name": "Virgil Abloh",
+      "slug": "virgil-abloh",
+      "sortKey": "Abloh",
+      "tags": [
+        "virgil-abloh"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/virgil-abloh.jpg"
+    },
+    {
+      "name": "Carlo Alessi",
+      "slug": "carlo-alessi",
+      "sortKey": "Alessi",
+      "tags": [
+        "carlo-alessi"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/carlo-alessi.jpg"
+    },
+    {
+      "name": "LUCY.D - Karin Santorso and Barbara Ambrosz",
+      "slug": "lucy-d-karin-santorso-barbara-ambrosz",
+      "sortKey": "Ambrosz",
+      "tags": [
+        "lucy-d-karin-santorso-barbara-ambrosz"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/lucy-d-karin-santorso-barbara-ambrosz.jpg"
     },
     {
       "name": "Michael Anastassiades",
@@ -49,7 +97,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Né à Chypre en 1967, Michael Anastassiades s'installe à Londres en 1988. Il y suit une formation d'ingénieur civil à l'Imperial College, puis un master de design industriel au Royal College of Art, avant de fonder son studio londonien en 1994. Designer, il développe un vocabulaire fondé sur des formes géométriques élémentaires, la sphère et la ligne épurée, particulièrement dans la collection d'éclairages IC Lights éditée par Flos (2014). Nommé Royal Designer for Industry par la Royal Society of Arts (RSA) en 2015, il figure dans les collections du MoMA de New York, du Victoria & Albert Museum et de l'Art Institute of Chicago. Pour Alessi, il a notamment conçu la cafetière espresso Menhir, le vase à fleurs Trumpet et la collection de parfums d'intérieur Rocc.",
       "photo": "/images/designers/michael-anastassiades.jpg"
     },
     {
@@ -64,9 +112,26 @@
       "brandHrefs": [
         "/collections/muuto"
       ],
-      "bio": "Studio norvégien fondé en 2009 par Torbjørn Anderssen et Espen Voll. Design scandinave minimaliste.",
+      "bio": "Anderssen & Voll est un studio de design norvégien fondé à Oslo en 2009 par Torbjørn Anderssen (né en 1976 à Elverum) et Espen Voll (né en 1965 à Trondheim). Tous deux formés dans les écoles d'art norvégiennes, à Bergen et à Oslo, ils s'étaient d'abord fait connaître au sein du collectif Norway Says, cofondé en 2000, qui reçut le prix Torsten et Wanja Söderberg en 2007. Leur pratique couvre le mobilier, le luminaire, le textile et les arts de la table. Ils comptent parmi les principaux collaborateurs de Muuto, pour qui ils ont dessiné plusieurs familles de canapés, dont Oslo, Outline et Rest, et travaillent aussi pour Magis, Foscarini et &Tradition.",
       "photo": "/images/designers/anderssen-voll.jpg",
-      "sortKey": "Anderssen"
+      "sortKey": "Anderssen",
+      "featured": true
+    },
+    {
+      "name": "Federico Angi",
+      "slug": "federico-angi",
+      "sortKey": "Angi",
+      "tags": [
+        "federico-angi"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/federico-angi.jpg"
     },
     {
       "name": "Ron Arad",
@@ -81,8 +146,72 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Né à Tel-Aviv en 1951, Ron Arad est un designer et architecte britannico-israélien, figure majeure du design contemporain. Formé à la Bezalel Academy of Arts and Design de Jérusalem (1971-1973) puis à l'Architectural Association School of Architecture de Londres (1974-1979), il fonde en 1981 le studio One Off avec Caroline Thorman, avant de créer en 1989 la pratique Ron Arad Associates. Sa démarche se distingue par l'expérimentation de matériaux non conventionnels et de procédés de fabrication inattendus, avec des formes souvent sculpturales. Parmi ses pièces marquantes figurent le Rover Chair (1981), la bibliothèque ondulante Bookworm pour Kartell (1994) et la chaise Tom Vac pour Vitra (1997). Pour Alessi, il signe notamment le set de coupelles Babyboop et le rafraîchissoir Chiringuito. Il a été nommé Royal Designer for Industry en 2002 et a reçu la London Design Medal en 2011.",
       "photo": "/images/designers/ron-arad.jpg"
+    },
+    {
+      "name": "Wiel Arets",
+      "slug": "wiel-arets",
+      "sortKey": "Arets",
+      "tags": [
+        "wiel-arets"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/wiel-arets.jpg"
+    },
+    {
+      "name": "Filip Arickx",
+      "slug": "filip-arickx",
+      "sortKey": "Arickx",
+      "tags": [
+        "filip-arickx"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/filip-arickx.jpg"
+    },
+    {
+      "name": "Kris Van Assche",
+      "slug": "kris-van-assche",
+      "sortKey": "Assche",
+      "tags": [
+        "kris-van-assche"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/kris-van-assche.jpg"
+    },
+    {
+      "name": "Carole Baijings",
+      "slug": "carole-baijings",
+      "sortKey": "Baijings",
+      "tags": [
+        "carole-baijings"
+      ],
+      "brands": [
+        "Fatboy"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy"
+      ],
+      "bio": "",
+      "photo": "/images/designers/carole-baijings.jpg"
     },
     {
       "name": "Edward Barber & Jay Osgerby",
@@ -96,7 +225,7 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Duo britannique basé à Londres, fondé en 1996. Tip Ton et Pacific Chair chez Vitra.",
+      "bio": "Edward Barber (né à Shrewsbury en 1969) et Jay Osgerby (né à Oxford en 1969) forment un duo de designers britanniques. Ils se rencontrent au Royal College of Art de Londres, où ils étudient tous deux l'architecture, et fondent leur studio en 1996. Leur travail, ancré dans une culture architecturale, couvre le mobilier, le luminaire, le produit et l'installation. Pour Vitra, ils signent la chaise Tip Ton (2011), dont le piètement luge incliné autorise une assise basculée vers l'avant, puis le fauteuil de bureau Pacific (2016). Parmi leurs premières pièces figure la table Loop (1996, éditée par Isokon, puis Cappellini). On leur doit aussi la torche des Jeux olympiques de Londres 2012. Nommés Royal Designers for Industry en 2007, ils sont faits Officiers de l'Ordre de l'Empire britannique (OBE) en 2013.",
       "photo": "/images/designers/edward-barber-jay-osgerby.jpg",
       "sortKey": "Barber"
     },
@@ -112,9 +241,43 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Designer allemande (1938-2025). Créatrice du légendaire Uten.Silo (1969) pour Vitra.",
+      "bio": "Designer allemande, Dorothee Becker (Aschaffenburg, 1938 – 2023) est l'une des figures discrètes du design utilitaire de l'après-guerre. Sans formation de designer, elle étudie les langues à Francfort et à Munich avant de se tourner vers la création. Au début des années 1960, elle vit et travaille en Californie aux côtés de son mari, le créateur de luminaires Ingo Maurer. Sa démarche tient en une formule : « gute brauchbare Sachen » — de bonnes choses utiles, débarrassées du superflu. En 1969, elle conçoit l'Uten.Silo, rangement mural en plastique moulé associant contenants, crochets et pinces métalliques, suivi d'une version réduite en 1970. D'abord édité par Design M, la société d'Ingo Maurer, l'objet est réédité par Vitra à partir de 2002 et figure dans la collection du MoMA de New York. Elle tient par ailleurs une boutique à Munich jusqu'en 1989.",
       "photo": "/images/designers/dorothee-becker.jpg",
       "sortKey": "Becker"
+    },
+    {
+      "name": "BIG-GAME",
+      "slug": "big-game",
+      "sortKey": "BIG-GAME",
+      "tags": [
+        "big-game"
+      ],
+      "brands": [
+        "Alessi",
+        "Muuto"
+      ],
+      "brandHrefs": [
+        "/collections/alessi",
+        "/collections/muuto"
+      ],
+      "bio": "",
+      "photo": "/images/designers/big-game.jpg"
+    },
+    {
+      "name": "Piet Boon",
+      "slug": "piet-boon",
+      "sortKey": "Boon",
+      "tags": [
+        "piet-boon"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/piet-boon.jpg"
     },
     {
       "name": "Mario Botta",
@@ -129,7 +292,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Né en 1943 à Mendrisio, dans le Tessin, Mario Botta est un architecte suisse de premier plan. Apprenti dès l'âge de quinze ans dans une agence de Lugano, il poursuit sa formation à Milan puis à l'Université IUAV de Venise, où il obtient son diplôme en 1969, côtoyant Carlo Scarpa, Louis Kahn et Le Corbusier. Il ouvre son atelier à Lugano en 1970. Son langage repose sur une géométrie franche, des volumes élémentaires et la vérité des matériaux. On lui doit notamment le San Francisco Museum of Modern Art, la cathédrale d'Évry et l'église de Mogno. Pour Alessi, l'architecte signe d'abord la montre Eye, éditée par Officina Alessi (1989), puis le pichet Tua (2000), en acier inoxydable poli miroir.",
       "photo": "/images/designers/mario-botta.jpg"
     },
     {
@@ -168,8 +331,56 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Architecte et designer italien, Andrea Branzi (Florence, 1938 - Milan, 2023) est diplômé de l'École d'architecture de Florence en 1966. La même année, il cofonde Archizoom Associati, collectif du design radical italien dont est issu le projet d'utopie urbaine No-Stop City. Il fonde Studio Alchimia en 1976 puis s'associe au mouvement Memphis dans les années 1980. Théoricien et pédagogue, il a été directeur culturel de la Domus Academy et professeur au Politecnico di Milano, où il a dirigé l'école de design d'intérieur. Son travail a été distingué par le Compasso d'Oro. Pour Alessi, il signe notamment le casse-noix Scoiattolo, le décapsuleur Ercolino et le vase Tronchetto.",
       "photo": "/images/designers/andrea-branzi.jpg"
+    },
+    {
+      "name": "Plan C",
+      "slug": "plan-c",
+      "sortKey": "C",
+      "tags": [
+        "plan-c"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/plan-c.jpg"
+    },
+    {
+      "name": "Fratelli Campana",
+      "slug": "fratelli-campana",
+      "sortKey": "Campana",
+      "tags": [
+        "fratelli-campana"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/fratelli-campana.jpg"
+    },
+    {
+      "name": "Sophie Casier",
+      "slug": "sophie-casier",
+      "sortKey": "Casier",
+      "tags": [
+        "sophie-casier"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/sophie-casier.jpg"
     },
     {
       "name": "Achille Castiglioni",
@@ -189,6 +400,38 @@
       "featured": true
     },
     {
+      "name": "Pier Giacomo Castiglioni",
+      "slug": "pier-giacomo-castiglioni",
+      "sortKey": "Castiglioni",
+      "tags": [
+        "pier-giacomo-castiglioni"
+      ],
+      "brands": [
+        "Flos"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Flos"
+      ],
+      "bio": "",
+      "photo": "/images/designers/pier-giacomo-castiglioni.jpg"
+    },
+    {
+      "name": "Gary Chang",
+      "slug": "gary-chang",
+      "sortKey": "Chang",
+      "tags": [
+        "gary-chang"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/gary-chang.jpg"
+    },
+    {
       "name": "Michel Charlot",
       "slug": "michel-charlot",
       "tags": [
@@ -200,7 +443,7 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Designer suisse né en 1984, ancien collaborateur des Bouroullec. Belleville Chair chez Vitra.",
+      "bio": "Designer industriel suisse né à Lausanne en 1984, Michel Charlot est diplômé de l'ECAL/University of Art and Design Lausanne en 2009. Il travaille environ dix-huit mois auprès de Jasper Morrison avant d'ouvrir sa propre agence en 2011, d'abord à Bâle puis à Porto. Sa démarche vise l'efficacité entre conception, dessin et production. Pour Vitra, il signe en 2014 la Davy Table, table d'extérieur pensée comme compagne de la chaise Landi dessinée par Hans Coray en 1939. Il collabore également avec Belux, Kettal et Camper. Sa lampe U-Turn (Belux, présentée en 2012) a reçu en 2013 le Design Preis Schweiz et le Swiss Design Award. En 2016, Jasper Morrison le distingue par le A&W Mentor Prize. Il enseigne le design à l'ECAL et à la Tama Art University de Tokyo.",
       "photo": "/images/designers/michel-charlot.jpg",
       "sortKey": "Charlot"
     },
@@ -218,8 +461,23 @@
         "/collections/alessi"
       ],
       "bio": "Né à Londres en 1953, l'architecte britannique David Chipperfield se forme à la Kingston School of Art puis à l'Architectural Association de Londres, avant de fonder son agence en 1985. Sa démarche se reconnaît à un minimalisme rigoureux et à un dialogue patient avec le contexte et l'histoire, dont témoigne la reconstruction du Neues Museum de Berlin. Cette sobriété guide aussi son travail d'objet : pour Alessi, il signe en 2009 la collection de table Tonale, en grès aux tonalités sourdes inspirées des natures mortes de Giorgio Morandi, conçue pour l'usage quotidien. Son œuvre architecturale a été distinguée par le RIBA Stirling Prize (2007, pour le Musée de la littérature moderne de Marbach), la Royal Gold Medal du RIBA (2011), le Praemium Imperiale (2013) et le prix Pritzker (2023). Il a été anobli en 2010.",
-      "photo": "/images/designers/david-chipperfield.jpg",
-      "featured": true
+      "photo": "/images/designers/david-chipperfield.jpg"
+    },
+    {
+      "name": "Biagio Cisotti",
+      "slug": "biagio-cisotti",
+      "sortKey": "Cisotti",
+      "tags": [
+        "biagio-cisotti"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/biagio-cisotti.jpg"
     },
     {
       "name": "Antonio Citterio",
@@ -241,6 +499,70 @@
       "featured": true
     },
     {
+      "name": "Lluís Clotet",
+      "slug": "lluis-clotet",
+      "sortKey": "Clotet",
+      "tags": [
+        "lluis-clotet"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/lluis-clotet.jpg"
+    },
+    {
+      "name": "Adam Cornish",
+      "slug": "adam-cornish",
+      "sortKey": "Cornish",
+      "tags": [
+        "adam-cornish"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/adam-cornish.jpg"
+    },
+    {
+      "name": "Coseincorso",
+      "slug": "coseincorso",
+      "sortKey": "Coseincorso",
+      "tags": [
+        "coseincorso"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/coseincorso.jpg"
+    },
+    {
+      "name": "D'Urbino-Lomazzi",
+      "slug": "durbino-lomazzi",
+      "sortKey": "D'Urbino-Lomazzi",
+      "tags": [
+        "durbino-lomazzi"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/durbino-lomazzi.jpg"
+    },
+    {
       "name": "Michele De Lucchi",
       "slug": "michele-de-lucchi",
       "sortKey": "De Lucchi",
@@ -254,8 +576,7 @@
         "/collections/alessi"
       ],
       "bio": "Né en 1951 à Ferrare, Michele De Lucchi est un architecte et designer italien diplômé en architecture à Florence (1975). Figure de la scène radicale et expérimentale des années 1970-1980, il participe aux mouvements Studio Alchimia puis Memphis, où il explore une approche libre de la couleur, de la forme et du décor. En 1987, il dessine avec Giancarlo Fassina la lampe Tolomeo pour Artemide, devenue une référence et couronnée du Compasso d'Oro en 1989. Directeur du design d'Olivetti de 1988 à 2002, il fonde en 1990 Produzione Privata pour réunir techniques artisanales et expérimentation. Pour Alessi, il conçoit la cafetière Pulcina (2015) et la collection d'appareils ménagers Plissé, dont la bouilloire électrique (2018). Il a reçu le Compasso d'Oro à la carrière en 2022.",
-      "photo": "/images/designers/michele-de-lucchi.jpg",
-      "featured": true
+      "photo": "/images/designers/michele-de-lucchi.jpg"
     },
     {
       "name": "Julien De Smedt",
@@ -271,9 +592,106 @@
         "/collections/hay",
         "/collections/muuto"
       ],
-      "bio": "Architecte belge né en 1975, fondateur de JDS Architects. Approche radicale et durable.",
+      "bio": "Né à Bruxelles en 1975, Julien De Smedt est un architecte belge diplômé de la Bartlett School of Architecture de Londres en 2000. Après un passage chez OMA, l'agence de Rem Koolhaas à Rotterdam, il cofonde en 2001 le bureau PLOT à Copenhague avec Bjarke Ingels, avant de créer en 2006 sa propre structure, JDS Architects, implantée à Bruxelles, Copenhague, Belo Horizonte et Shanghai. Parmi ses projets figurent les VM Houses et le Maritime Youth House à Copenhague (réalisés au sein de PLOT) ainsi que le tremplin de saut à ski d'Holmenkollen à Oslo. Il reçoit un Lion d'or à la Biennale de Venise en 2004 et le prix Maaskant en 2009. Son travail d'architecte irrigue aussi son mobilier : pour Muuto, il signe en 2009 le Stacked Storage System, rangement modulaire fondé sur un cube décliné en plusieurs tailles, que l'on assemble et réassemble en bibliothèque, buffet ou cloison.",
       "photo": "/images/designers/julien-de-smedt.jpg",
-      "sortKey": "De Smedt"
+      "sortKey": "De Smedt",
+      "featured": true
+    },
+    {
+      "name": "Pauline Deltour",
+      "slug": "pauline-deltour",
+      "sortKey": "Deltour",
+      "tags": [
+        "pauline-deltour"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/pauline-deltour.jpg"
+    },
+    {
+      "name": "Ruben Deriemaeker",
+      "slug": "ruben-deriemaeker",
+      "sortKey": "Deriemaeker",
+      "tags": [
+        "ruben-deriemaeker"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/ruben-deriemaeker.jpg"
+    },
+    {
+      "name": "Nadine Dewart",
+      "slug": "nadine-dewart",
+      "sortKey": "Dewart",
+      "tags": [
+        "nadine-dewart"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/nadine-dewart.jpg"
+    },
+    {
+      "name": "Anita Dineen",
+      "slug": "anita-dineen",
+      "sortKey": "Dineen",
+      "tags": [
+        "anita-dineen"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/anita-dineen.jpg"
+    },
+    {
+      "name": "Luigi Caccia Dominioni",
+      "slug": "luigi-caccia-dominioni",
+      "sortKey": "Dominioni",
+      "tags": [
+        "luigi-caccia-dominioni"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/luigi-caccia-dominioni.jpg"
+    },
+    {
+      "name": "Lauren Van Driessche",
+      "slug": "lauren-van-driessche",
+      "sortKey": "Driessche",
+      "tags": [
+        "lauren-van-driessche"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/lauren-van-driessche.jpg"
     },
     {
       "name": "Charles & Ray Eames",
@@ -293,6 +711,22 @@
       "featured": true
     },
     {
+      "name": "Marc Ferrand",
+      "slug": "marc-ferrand",
+      "sortKey": "Ferrand",
+      "tags": [
+        "marc-ferrand"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/marc-ferrand.jpg"
+    },
+    {
       "name": "Naoto Fukasawa",
       "slug": "naoto-fukasawa",
       "sortKey": "Fukasawa",
@@ -305,15 +739,112 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "Né en 1956 à Kōfu, dans la préfecture de Yamanashi, Naoto Fukasawa est un designer industriel japonais. Diplômé en design produit de l'université d'art Tama en 1980, il travaille pour ID Two (devenu IDEO), dont il dirige le bureau de Tokyo à partir de 1996, avant de fonder son propre studio en 2003. Sa démarche se résume dans le concept de « Without Thought » : observer les gestes inconscients du quotidien pour concevoir des objets dont l'usage va de soi, sans mode d'emploi. Son lecteur CD mural dessiné pour Muji en 1999, dont la cordelette rappelle un ventilateur, est entré dans la collection du MoMA. Pour Alessi, il signe la collection de couverts et de vaisselle Itsumo. Il a reçu le prix Isamu Noguchi en 2018.",
+      "bio": "Né en 1956 à Kōfu, dans la préfecture de Yamanashi, Naoto Fukasawa est un designer industriel japonais. Diplômé en design produit de l'université d'art Tama en 1980, il travaille pour ID Two (devenu IDEO), dont il dirige le bureau de Tokyo à partir de 1996, avant de fonder son propre studio en 2003.\n\nSa démarche se résume dans le concept de « Without Thought » : observer les gestes inconscients du quotidien pour concevoir des objets dont l'usage va de soi, sans mode d'emploi.\n\nSon lecteur CD mural dessiné pour Muji en 1999, dont la cordelette rappelle un ventilateur, est entré dans la collection du MoMA. Pour Alessi, il signe la collection de couverts et de vaisselle Itsumo. Il a reçu le prix Isamu Noguchi en 2018.",
       "photo": "/images/designers/naoto-fukasawa.jpg",
       "featured": true
+    },
+    {
+      "name": "Doriana e Massimiliano Fuksas",
+      "slug": "doriana-e-massimiliano-fuksas",
+      "sortKey": "Fuksas",
+      "tags": [
+        "doriana-e-massimiliano-fuksas"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/doriana-e-massimiliano-fuksas.jpg"
+    },
+    {
+      "name": "Alex Gabriels",
+      "slug": "alex-gabriels",
+      "sortKey": "Gabriels",
+      "tags": [
+        "alex-gabriels"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/alex-gabriels.jpg"
+    },
+    {
+      "name": "Nadia Gallardo",
+      "slug": "nadia-gallardo",
+      "sortKey": "Gallardo",
+      "tags": [
+        "nadia-gallardo"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/nadia-gallardo.jpg"
+    },
+    {
+      "name": "Elisa Gargan",
+      "slug": "elisa-gargan",
+      "sortKey": "Gargan",
+      "tags": [
+        "elisa-gargan"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/elisa-gargan.jpg"
+    },
+    {
+      "name": "Anna e Gian Franco Gasparini",
+      "slug": "anna-e-gian-franco-gasparini",
+      "sortKey": "Gasparini",
+      "tags": [
+        "anna-e-gian-franco-gasparini"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/anna-e-gian-franco-gasparini.jpg"
+    },
+    {
+      "name": "Frédérick Gautier",
+      "slug": "frederick-gautier",
+      "sortKey": "Gautier",
+      "tags": [
+        "frederick-gautier"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/frederick-gautier.jpg"
     },
     {
       "name": "Frank Gehry",
       "slug": "frank-gehry",
       "tags": [
-        "frank-gehry"
+        "frank-gehry",
+        "frank-o-gehry"
       ],
       "brands": [
         "Vitra"
@@ -321,9 +852,41 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Architecte canado-américain né en 1929, lauréat Pritzker. Wiggle Side Chair et Hat Trick chez Vitra.",
+      "bio": "Né en 1929 à Toronto, Frank Gehry (de son vrai nom Ephraim Goldberg) est un architecte canado-américain, naturalisé en 1951. Diplômé de l'University of Southern California en 1954, il poursuit ensuite des études à la Harvard Graduate School of Design. Souvent rattaché au déconstructivisme — étiquette qu'il refusait —, il développe un langage de volumes fragmentés et de surfaces sculpturales, illustré par le musée Guggenheim de Bilbao (1997) et le Walt Disney Concert Hall de Los Angeles (2003). En 1972, il explore le mobilier avec la série « Easy Edges » en carton ondulé stratifié, dont la Wiggle Side Chair et le Wiggle Stool, aujourd'hui réédités par Vitra. Lauréat du prix Pritzker en 1989 et de la médaille d'or de l'American Institute of Architects en 1999, il s'éteint le 5 décembre 2025.",
       "photo": "/images/designers/frank-gehry.jpg",
       "sortKey": "Gehry"
+    },
+    {
+      "name": "Massimo Giacon",
+      "slug": "massimo-giacon",
+      "sortKey": "Giacon",
+      "tags": [
+        "massimo-giacon"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/massimo-giacon.jpg"
+    },
+    {
+      "name": "Stefano Giovannoni",
+      "slug": "stefano-giovannoni",
+      "sortKey": "Giovannoni",
+      "tags": [
+        "stefano-giovannoni"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/stefano-giovannoni.jpg"
     },
     {
       "name": "Alexander Girard",
@@ -337,9 +900,26 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Designer textile et graphiste américain (1907-1993). Couleur, motifs et poésie chez Vitra — Wooden Dolls, Environmental Enrichment Panels.",
+      "bio": "Architecte et designer américain, Alexander Girard (1907-1993) est l'une des figures du modernisme d'après-guerre, aux côtés de Charles et Ray Eames et de George Nelson. Né à New York et élevé à Florence, il étudie l'architecture en Europe (Architectural Association de Londres, École royale d'architecture de Rome) puis obtient un diplôme d'architecture à la New York University en 1935. Au début des années 1950, il prend la direction de la division textile de Herman Miller, pour laquelle il créera plus de trois cents motifs aux couleurs vives et aux formes géométriques, en rupture avec les tons neutres de l'époque. Collectionneur d'art populaire rassemblé au fil de ses voyages, il en tire une signature colorée. On lui doit aussi l'aménagement du restaurant new-yorkais La Fonda del Sol (1960) et l'identité visuelle de la compagnie Braniff (1965). Ses Wooden Dolls, figures sculptées conçues en 1952 pour sa maison de Santa Fe, ainsi que plusieurs de ses tissus sont aujourd'hui réédités par Vitra.",
       "photo": "/images/designers/alexander-girard.jpg",
-      "sortKey": "Girard"
+      "sortKey": "Girard",
+      "featured": true
+    },
+    {
+      "name": "Frédéric Gooris",
+      "slug": "frederic-gooris",
+      "sortKey": "Gooris",
+      "tags": [
+        "frederic-gooris"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/frederic-gooris.jpg"
     },
     {
       "name": "Michael Graves",
@@ -354,8 +934,40 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Architecte et designer américain, Michael Graves (Indianapolis, 1934 – Princeton, 2015) est l'une des figures majeures du postmodernisme. Formé à l'université de Cincinnati puis à Harvard, lauréat du Prix de Rome en 1960, il enseigne pendant près de quarante ans à Princeton. D'abord membre des « New York Five », il rompt avec le modernisme à la fin des années 1970 pour une architecture colorée et citationnelle, dont le Portland Building (1982) et le Humana Building de Louisville restent emblématiques. Sa collaboration avec Alessi élargit son œuvre aux arts de la table : après un service à thé et à café en argent au début des années 1980, il signe en 1985 la bouilloire 9093, à sifflet en forme d'oiseau, devenue l'un des objets les plus vendus de la marque. Il reçoit la National Medal of Arts (1999), la médaille d'or de l'American Institute of Architects (2001) et le Prix Driehaus (2012).",
       "photo": "/images/designers/michael-graves.jpg"
+    },
+    {
+      "name": "Grint",
+      "slug": "grint",
+      "sortKey": "Grint",
+      "tags": [
+        "grint"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/grint.jpg"
+    },
+    {
+      "name": "Koen Van Guijze",
+      "slug": "koen-van-guijze",
+      "sortKey": "Guijze",
+      "tags": [
+        "koen-van-guijze"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/koen-van-guijze.jpg"
     },
     {
       "name": "Zaha Hadid",
@@ -370,8 +982,24 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Architecte d'origine irakienne et de nationalité britannique, Zaha Hadid (Bagdad, 1950 - Miami, 2016) étudie d'abord les mathématiques à l'Université américaine de Beyrouth avant de rejoindre l'Architectural Association de Londres, où elle se forme à partir de 1972. Elle fonde son agence, Zaha Hadid Architects, à Londres au tournant des années 1980. Son écriture, faite de courbes fluides et de géométries dynamiques, lui vaut le surnom de « reine des courbes ». Elle signe notamment le Centre Heydar Aliyev à Bakou, le musée MAXXI à Rome et le Centre aquatique de Londres. En 2004, elle est la première femme à recevoir le prix Pritzker ; elle obtient le prix Stirling en 2010 et 2011, et est faite Dame de l'Empire britannique en 2012. Cette même sensibilité sculpturale irrigue ses objets, comme le vase Crevasse édité par Alessi.",
       "photo": "/images/designers/zaha-hadid.jpg"
+    },
+    {
+      "name": "Jim Hannon-Tan",
+      "slug": "jim-hannon-tan",
+      "sortKey": "Hannon-Tan",
+      "tags": [
+        "jim-hannon-tan"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/jim-hannon-tan.jpg"
     },
     {
       "name": "Mette & Rolf Hay",
@@ -391,6 +1019,37 @@
       "hidden": true
     },
     {
+      "name": "Wouters & Hendrix",
+      "slug": "wouters-hendrix",
+      "sortKey": "Hendrix",
+      "tags": [
+        "wouters-hendrix"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/wouters-hendrix.jpg"
+    },
+    {
+      "name": "Sebastian Herkner",
+      "slug": "sebastian-herkner",
+      "sortKey": "Herkner",
+      "tags": [
+        "sebastian-herkner"
+      ],
+      "brands": [
+        "&Tradition"
+      ],
+      "brandHrefs": [
+        "/collections/tradition"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Sergio Herman",
       "slug": "sergio-herman",
       "sortKey": "Herman",
@@ -403,8 +1062,104 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Sergio Herman (né en 1970 à Oostburg, en Zélande) est un chef néerlandais. Il transforme le restaurant familial Oud Sluis, dans le sud des Pays-Bas, en une table triplement étoilée au Michelin (trois étoiles à partir de 2006), classée plusieurs années consécutives parmi les World's 50 Best Restaurants, avant de le fermer fin 2013. Il fonde ensuite plusieurs concepts gastronomiques, dont The Jane à Anvers, ouvert en 2014 avec Nick Bril et bientôt récompensé de deux étoiles Michelin. Sa collaboration avec l'éditeur belge Serax prolonge cette sensibilité culinaire dans l'art de la table, en trois collections : Surface, inspirée des paysages bruts de sa Zélande natale ; Inku, d'esprit japonais et wabi-sabi, aux glaçures volontairement imparfaites ; et Silhouette, en porcelaine blanche aux formes organiques.",
       "photo": "/images/designers/sergio-herman.jpg"
+    },
+    {
+      "name": "Seppe Van Heusden",
+      "slug": "seppe-van-heusden",
+      "sortKey": "Heusden",
+      "tags": [
+        "seppe-van-heusden"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/seppe-van-heusden.jpg"
+    },
+    {
+      "name": "Ann Van Hoey",
+      "slug": "ann-van-hoey",
+      "sortKey": "Hoey",
+      "tags": [
+        "ann-van-hoey"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/ann-van-hoey.jpg"
+    },
+    {
+      "name": "Josef Hoffmann",
+      "slug": "josef-hoffmann",
+      "sortKey": "Hoffmann",
+      "tags": [
+        "josef-hoffmann"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/josef-hoffmann.jpg"
+    },
+    {
+      "name": "Florentijn Hofman",
+      "slug": "florentijn-hofman",
+      "sortKey": "Hofman",
+      "tags": [
+        "florentijn-hofman"
+      ],
+      "brands": [
+        "Fatboy"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy"
+      ],
+      "bio": "",
+      "photo": "/images/designers/florentijn-hofman.jpg"
+    },
+    {
+      "name": "Giulio Iacchetti",
+      "slug": "giulio-iacchetti",
+      "sortKey": "Iacchetti",
+      "tags": [
+        "giulio-iacchetti"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/giulio-iacchetti.jpg"
+    },
+    {
+      "name": "Harry Paul van Iersel",
+      "slug": "harry-paul-van-iersel",
+      "sortKey": "Iersel",
+      "tags": [
+        "harry-paul-van-iersel"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/harry-paul-van-iersel.jpg"
     },
     {
       "name": "Toyo Ito",
@@ -441,6 +1196,104 @@
       "featured": true
     },
     {
+      "name": "Marcello Jori",
+      "slug": "marcello-jori",
+      "sortKey": "Jori",
+      "tags": [
+        "marcello-jori"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/marcello-jori.jpg"
+    },
+    {
+      "name": "Patrick Jouin",
+      "slug": "patrick-jouin",
+      "sortKey": "Jouin",
+      "tags": [
+        "patrick-jouin"
+      ],
+      "brands": [
+        "Alessi",
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/collections/alessi",
+        "/collections/fermob"
+      ],
+      "bio": "",
+      "photo": "/images/designers/patrick-jouin.jpg"
+    },
+    {
+      "name": "Kranen/Gille",
+      "slug": "kranen-gille",
+      "sortKey": "Kranen/Gille",
+      "tags": [
+        "kranen-gille"
+      ],
+      "brands": [
+        "Fatboy"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy"
+      ],
+      "bio": "",
+      "photo": "/images/designers/kranen-gille.jpg"
+    },
+    {
+      "name": "Kseniya Kravtsova",
+      "slug": "kseniya-kravtsova",
+      "sortKey": "Kravtsova",
+      "tags": [
+        "kseniya-kravtsova"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/kseniya-kravtsova.jpg"
+    },
+    {
+      "name": "Jin Kuramoto",
+      "slug": "jin-kuramoto",
+      "sortKey": "Kuramoto",
+      "tags": [
+        "jin-kuramoto"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/jin-kuramoto.jpg"
+    },
+    {
+      "name": "Kristiina Lassus",
+      "slug": "kristiina-lassus",
+      "sortKey": "Lassus",
+      "tags": [
+        "kristiina-lassus"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/kristiina-lassus.jpg"
+    },
+    {
       "name": "Anita Le Grelle",
       "slug": "anita-le-grelle",
       "tags": [
@@ -452,9 +1305,25 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "Designer belge, signature monochrome et organique pour la vaisselle et les arts de la table.",
+      "bio": "Céramiste belge née et élevée à Anvers, Anita Le Grelle y obtient d'abord un diplôme en graphisme et travaille dans la publicité. Installée à Londres avec sa famille, elle suit des cours de sculpture au Royal College of Art, où elle décroche un diplôme en 2000. C'est presque par hasard qu'elle vient à la poterie en 2013 : la demande croissante pour ses pièces la pousse à en faire son métier. Elle crée Terres de Rêves, à la fois le nom de son atelier — installé à Bruxelles, où elle travaille le grès et la porcelaine — et de sa collection. Son univers, inspiré par la nature, superpose des couches d'émaux qui évoquent les paysages, les mers et la terre, chaque pièce étant façonnée à la main, unique par sa couleur et sa forme. Elle collabore régulièrement avec Serax, qui rééditise et diffuse ses créations dans le monde entier.",
       "photo": "/images/designers/anita-le-grelle.jpg",
       "sortKey": "Le Grelle"
+    },
+    {
+      "name": "Bertrand Lejoly",
+      "slug": "bertrand-lejoly",
+      "sortKey": "Lejoly",
+      "tags": [
+        "bertrand-lejoly"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/bertrand-lejoly.jpg"
     },
     {
       "name": "Arik Levy",
@@ -468,9 +1337,91 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "Designer et artiste israélien né en 1963, basé à Paris. Vases et objets sculpturaux pour Serax.",
+      "bio": "Né en 1963 à Tel-Aviv, Arik Levy est un artiste et designer israélien établi à Paris. Diplômé avec distinction de l'Art Center Europe, en Suisse, en 1991, il développe une démarche pluridisciplinaire à la frontière de l'art, du design industriel, de la sculpture et de la scénographie. Sa série la plus connue reste les « Rock » : des volumes géométriques facettés en acier inoxydable poli, amorcés en 1999, qui réfléchissent et fragmentent leur environnement, tantôt sculptures, tantôt objets fonctionnels. Pour l'édition, il signe la collection de céramiques empilables Tribe chez Bitossi Ceramiche (2007), les luminaires Wireflow pour Vibia (2013), ainsi que des pièces en cristal taillé pour Baccarat (collection Intangible, 2007).",
       "photo": "/images/designers/arik-levy.jpg",
       "sortKey": "Levy"
+    },
+    {
+      "name": "Louis de Limburg",
+      "slug": "louis-de-limburg",
+      "sortKey": "Limburg",
+      "tags": [
+        "louis-de-limburg"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/louis-de-limburg.jpg"
+    },
+    {
+      "name": "José Lévy",
+      "slug": "jose-levy",
+      "sortKey": "Lévy",
+      "tags": [
+        "jose-levy"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/jose-levy.jpg"
+    },
+    {
+      "name": "Boucquillon & Maaoui",
+      "slug": "boucquillon-maaoui",
+      "sortKey": "Maaoui",
+      "tags": [
+        "boucquillon-maaoui"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/boucquillon-maaoui.jpg"
+    },
+    {
+      "name": "Nel Maertens",
+      "slug": "nel-maertens",
+      "sortKey": "Maertens",
+      "tags": [
+        "nel-maertens"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/nel-maertens.jpg"
+    },
+    {
+      "name": "Philippe Malouin",
+      "slug": "philippe-malouin",
+      "sortKey": "Malouin",
+      "tags": [
+        "philippe-malouin"
+      ],
+      "brands": [
+        "Alessi",
+        "Flos"
+      ],
+      "brandHrefs": [
+        "/collections/alessi",
+        "/produits.html?marque=Flos"
+      ],
+      "bio": "",
+      "photo": "/images/designers/philippe-malouin.jpg"
     },
     {
       "name": "Cecilie Manz",
@@ -502,8 +1453,54 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Enzo Mari (Novare, 1932 – Milan, 2020) est un artiste et designer italien, également théoricien du design. Formé à l'Académie de Brera à Milan, il aborde l'objet avec une approche méthodique, attentive à la forme, à l'usage et à la dimension sociale de la production. Sa longue collaboration avec l'éditeur Danese donne naissance à plusieurs pièces de référence, du puzzle 16 animali (1957) au calendrier perpétuel Timor (1967). Il dessine aussi du mobilier pour Driade (chaise Sof Sof, 1972) et Zanotta (chaise Tonietta, 1985), et conçoit pour Alessi les vases Ecolo (1995), réalisés à partir de bouteilles plastique recyclées. En 1974, son ouvrage Autoprogettazione propose des plans de meubles à construire soi-même. Il reçoit quatre fois le Compasso d'Oro (1967, 1979, 1987, 2001), puis le prix pour l'ensemble de sa carrière en 2011.",
       "photo": "/images/designers/enzo-mari.jpg"
+    },
+    {
+      "name": "Massimo Mariani",
+      "slug": "massimo-mariani",
+      "sortKey": "Mariani",
+      "tags": [
+        "massimo-mariani"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Marni",
+      "slug": "marni",
+      "sortKey": "Marni",
+      "tags": [
+        "marni"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Carlo Mazzeri",
+      "slug": "carlo-mazzeri",
+      "sortKey": "Mazzeri",
+      "tags": [
+        "carlo-mazzeri"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/carlo-mazzeri.jpg"
     },
     {
       "name": "Alessandro Mendini",
@@ -519,8 +1516,7 @@
         "/collections/alessi"
       ],
       "bio": "Né à Milan en 1931 et mort dans cette même ville en 2019, Alessandro Mendini est une figure majeure du design italien de la seconde moitié du XXe siècle. Diplômé en architecture du Politecnico di Milano en 1959, il fut autant théoricien que créateur : il dirigea les revues Casabella puis Domus, et cofonda la Domus Academy en 1982. Au sein du Studio Alchimia, il prit part aux courants radical et postmoderne, défendant un design narratif et ouvertement décoratif. Sa Poltrona di Proust (1978), fauteuil néo-baroque dont le tissu reprend une touche pointilliste, en demeure l'emblème. Chez Alessi, il signa en 1994 le tire-bouchon Anna G., devenu une icône domestique. Il reçut trois fois le Compasso d'Oro (1979, 1981, 2014).",
-      "photo": "/images/designers/alessandro-mendini.jpg",
-      "featured": true
+      "photo": "/images/designers/alessandro-mendini.jpg"
     },
     {
       "name": "Marie Michielssen",
@@ -534,9 +1530,57 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "Designer belge, collections céramique organique pour Serax.",
+      "bio": "Marie Michielssen est une créatrice belge formée aux arts graphiques. En 1995, elle fonde sa propre activité en repeignant et patinant à la main de simples pots de fleurs en terre cuite, leur donnant un caractère unique. Lorsque la production dépasse les moyens de son petit atelier, elle confie sa collection à l'éditeur belge Serax, dont elle est depuis plus de vingt ans la créatrice maison, signant deux collections par an. Son travail est entièrement manuel : elle dessine quotidiennement au crayon et travaille avec ses mains, sans ordinateur, guidée par l'intuition et l'attachement aux matières « qui ont une âme » : papier mâché, béton, terre, porcelaine. On lui doit notamment la collection Earth en papier mâché et la vaisselle céramique La Mère, hommage à la figure maternelle. En 2025, elle est nommée Designer of the Year par Tableware International.",
       "photo": "/images/designers/marie-michielssen.jpg",
       "sortKey": "Michielssen"
+    },
+    {
+      "name": "Miriam Mirri",
+      "slug": "miriam-mirri",
+      "sortKey": "Mirri",
+      "tags": [
+        "miriam-mirri"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/miriam-mirri.jpg"
+    },
+    {
+      "name": "Bea Mombaers",
+      "slug": "bea-mombaers",
+      "sortKey": "Mombaers",
+      "tags": [
+        "bea-mombaers"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/bea-mombaers.jpg"
+    },
+    {
+      "name": "Moretti-Savoy",
+      "slug": "moretti-savoy",
+      "sortKey": "Moretti-Savoy",
+      "tags": [
+        "moretti-savoy"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/moretti-savoy.jpg"
     },
     {
       "name": "Jasper Morrison",
@@ -572,7 +1616,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Pascale Naessens (née le 4 juin 1969 à Eeklo) est une autrice culinaire et céramiste belge, connue en Flandre pour son approche de l'alimentation « pure » et saine. Après des études de sciences économiques, elle mène une carrière de mannequin à l'international, puis travaille comme présentatrice à la télévision flamande (VTM) de 1992 à 2006. Son premier livre de cuisine paraît en 2010 ; elle en a depuis signé une quinzaine, dont plusieurs traduits en français, anglais, allemand et chinois. Sa rencontre avec la Tunisienne Sabiha éveille sa passion pour la céramique, qu'elle approfondit par des cours d'émaillage et de cuisson. Elle conçoit dans son atelier une vaisselle qu'elle présente à Serax : de cette collaboration naît la collection « Pure » (2012), prolongée par la ligne « Verde Lanza », inspirée de Lanzarote où elle séjourne régulièrement.",
       "photo": "/images/designers/pascale-naessens.jpg"
     },
     {
@@ -605,7 +1649,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Nendo est le studio de design fondé en 2002 à Tokyo par Oki Sato, architecte et designer japonais né à Toronto en 1977. Diplômé d'un master d'architecture de l'université Waseda, il ouvre un second bureau à Milan en 2005. Le nom « nendo » signifie « pâte à modeler » (argile) en japonais, image de souplesse et de malléabilité. Le travail du studio se distingue par un minimalisme épuré, nourri d'influences japonaises et scandinaves, et par le goût du petit détail qui crée un effet de surprise. Pour Alessi, Nendo a conçu en 2024 la collection Toru d'appareils électroménagers en acier inoxydable, dont un élément tubulaire noir fait tour à tour office de bec ou de poignée. Oki Sato a reçu le Good Design Award et a été désigné « Designer of the Year » par le magazine Wallpaper* en 2012.",
       "photo": "/images/designers/nendo.jpg"
     },
     {
@@ -639,9 +1683,41 @@
         "/collections/tradition",
         "/collections/muuto"
       ],
-      "bio": "Studio danois fondé en 2008. Architecture intérieure et design produit minimaliste.",
+      "bio": "Fondé en 2008 à Copenhague par les architectes Jonas Bjerre-Poulsen et Kasper Rønn, Norm Architects est un studio danois actif en architecture, design d'intérieur, mobilier, objets et photographie. Sa démarche, qu'il qualifie de « soft minimalism », privilégie les matériaux naturels, la lumière et de justes proportions, dans un dialogue entre simplicité nordique et sensibilité japonaise. Le studio signe des pièces pour plusieurs éditeurs scandinaves, dont &Tradition : sa lampe Milk, dont le globe en verre opalin soufflé bouche repose sur trois pieds en bois massif, en illustre l'esthétique épurée. Norm Architects collabore aussi de longue date avec la marque danoise Menu, aujourd'hui intégrée à Audo Copenhagen, pour qui le studio a notamment conçu mobilier, intérieurs (dont la maison-hôtel The Audo) et accessoires.",
       "photo": "/images/designers/norm-architects.jpg",
       "sortKey": "Norm"
+    },
+    {
+      "name": "Marijn Oomen",
+      "slug": "marijn-oomen",
+      "sortKey": "Oomen",
+      "tags": [
+        "marijn-oomen"
+      ],
+      "brands": [
+        "Fatboy"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy"
+      ],
+      "bio": "",
+      "photo": "/images/designers/marijn-oomen.jpg"
+    },
+    {
+      "name": "Studio Ottawa",
+      "slug": "studio-ottawa",
+      "sortKey": "Ottawa",
+      "tags": [
+        "studio-ottawa"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/studio-ottawa.jpg"
     },
     {
       "name": "Ottolenghi",
@@ -656,7 +1732,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Né en 1968 à Jérusalem, Yotam Ottolenghi est un chef, restaurateur et auteur culinaire israélo-britannique installé à Londres. Après des études de littérature comparée à l'université de Tel-Aviv, il se forme à la cuisine à l'école Le Cordon Bleu et ouvre en 2002, avec Sami Tamimi, la première épicerie-traiteur Ottolenghi à Notting Hill. Sa cuisine, ancrée dans les saveurs méditerranéennes et moyen-orientales, met en avant les légumes et les couleurs vives, un registre qu'il déploie aussi dans ses livres, de Plenty (2010) à Jerusalem (2012). Pour Serax, il a conçu avec l'artiste italien Ivo Bisignano la collection d'arts de la table Feast, puis la série de vases en grès Sicily. La collection Feast a reçu un EDIDA (Elle Deco International Design Awards) 2022 dans la catégorie Tableware.",
       "photo": "/images/designers/ottolenghi.jpg"
     },
     {
@@ -679,6 +1755,85 @@
       "featured": true
     },
     {
+      "name": "Patrick Paris",
+      "slug": "patrick-paris",
+      "sortKey": "Paris",
+      "tags": [
+        "patrick-paris"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/patrick-paris.jpg"
+    },
+    {
+      "name": "Annebet Philips",
+      "slug": "annebet-philips",
+      "sortKey": "Philips",
+      "tags": [
+        "annebet-philips"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/annebet-philips.jpg"
+    },
+    {
+      "name": "PlayLab",
+      "slug": "playlab",
+      "sortKey": "PlayLab",
+      "tags": [
+        "playlab"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Kuno Prey",
+      "slug": "kuno-prey",
+      "sortKey": "Prey",
+      "tags": [
+        "kuno-prey"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/kuno-prey.jpg"
+    },
+    {
+      "name": "Thijs Prinsen",
+      "slug": "thijs-prinsen",
+      "sortKey": "Prinsen",
+      "tags": [
+        "thijs-prinsen"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/thijs-prinsen.jpg"
+    },
+    {
       "name": "Jean Prouvé",
       "slug": "jean-prouve",
       "tags": [
@@ -696,6 +1851,38 @@
       "featured": true
     },
     {
+      "name": "Jonas Van Put",
+      "slug": "jonas-van-put",
+      "sortKey": "Put",
+      "tags": [
+        "jonas-van-put"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/jonas-van-put.jpg"
+    },
+    {
+      "name": "Claudia Raimondo",
+      "slug": "claudia-raimondo",
+      "sortKey": "Raimondo",
+      "tags": [
+        "claudia-raimondo"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/claudia-raimondo.jpg"
+    },
+    {
       "name": "Aldo Rossi",
       "slug": "aldo-rossi",
       "sortKey": "Rossi",
@@ -708,8 +1895,40 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Architecte et designer italien (Milan, 1931 — 1997), Aldo Rossi est l'une des figures majeures du courant postmoderne. Formé à l'École polytechnique de Milan, il s'impose d'abord par sa réflexion théorique sur la ville et l'architecture, puis par des œuvres bâties comme le cimetière San Cataldo de Modène. En 1990, il devient le premier Italien lauréat du prix Pritzker. Son langage repose sur des formes primaires, la géométrie et une économie de moyens, qu'il transpose à l'objet à partir des années 1980 dans sa collaboration avec Alessi : ses cafetières et bouilloires se lisent comme de petites architectures de table. Parmi elles, la cafetière espresso La Cupola, coiffée d'une coupole, est devenue une icône du design italien.",
       "photo": "/images/designers/aldo-rossi.jpg"
+    },
+    {
+      "name": "Elena Salmistraro",
+      "slug": "elena-salmistraro",
+      "sortKey": "Salmistraro",
+      "tags": [
+        "elena-salmistraro"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/elena-salmistraro.jpg"
+    },
+    {
+      "name": "Marta Sansoni",
+      "slug": "marta-sansoni",
+      "sortKey": "Sansoni",
+      "tags": [
+        "marta-sansoni"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": "",
+      "photo": "/images/designers/marta-sansoni.jpg"
     },
     {
       "name": "Richard Sapper",
@@ -724,8 +1943,56 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Designer industriel allemand né à Munich en 1932 et mort en 2015, Richard Sapper est l'une des figures majeures du design d'après-guerre. Après des études à Munich et un passage par le bureau de style de Mercedes-Benz, il s'installe à Milan en 1958, où il travaille auprès de Gio Ponti puis noue une longue collaboration avec Marco Zanuso. Sa démarche associe la rigueur technique allemande à la culture formelle italienne, dans des objets à la fois sculpturaux et fonctionnels. On lui doit la lampe Tizio (1972) pour Artemide et, plus tard, le design des ordinateurs portables ThinkPad d'IBM. Pour Alessi, il signe la cafetière espresso 9090, première à recevoir le Compasso d'Oro pour la marque (1979), et la bouilloire au sifflet mélodique 9091 (1983). Au cours de sa carrière, il a reçu onze Compasso d'Oro.",
       "photo": "/images/designers/richard-sapper.jpg"
+    },
+    {
+      "name": "Nathalie Schellekens",
+      "slug": "nathalie-schellekens",
+      "sortKey": "Schellekens",
+      "tags": [
+        "nathalie-schellekens"
+      ],
+      "brands": [
+        "Fatboy"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy"
+      ],
+      "bio": "",
+      "photo": "/images/designers/nathalie-schellekens.jpg"
+    },
+    {
+      "name": "Claudia Schoemig",
+      "slug": "claudia-schoemig",
+      "sortKey": "Schoemig",
+      "tags": [
+        "claudia-schoemig"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/claudia-schoemig.jpg"
+    },
+    {
+      "name": "Antonino Sciortino",
+      "slug": "antonino-sciortino",
+      "sortKey": "Sciortino",
+      "tags": [
+        "antonino-sciortino"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/antonino-sciortino.jpg"
     },
     {
       "name": "Inga Sempé",
@@ -740,8 +2007,56 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Née à Paris en 1968, fille du dessinateur Jean-Jacques Sempé et de la peintre danoise Mette Ivers, Inga Sempé est designer. Diplômée de l'ENSCI – Les Ateliers en 1993, elle séjourne à la Villa Médicis à Rome (2000-2001) avant d'ouvrir son studio parisien. Son travail porte sur l'objet domestique et sa production industrielle : un dessin sobre, attentif aux matières et aux usages. Elle conçoit mobilier, luminaires, objets et textiles pour des maisons françaises, italiennes et scandinaves, parmi lesquelles Alessi, Ligne Roset, Luceplan, HAY, Magis et Wästberg. Pour Alessi, elle signe la ménagère Collo-alto (2015), prolongement de sa cuillère à risotto IS01 (2012), au long col effilé caractéristique. On lui doit aussi la suspension Plissé (Luceplan, 2007) et le canapé Ruché (Ligne Roset, 2010). Elle a reçu le Grand Prix de la création de la Ville de Paris (2003) et un Red Dot Design Award (2007).",
       "photo": "/images/designers/inga-sempe.jpg"
+    },
+    {
+      "name": "Bela Silva",
+      "slug": "bela-silva",
+      "sortKey": "Silva",
+      "tags": [
+        "bela-silva"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/bela-silva.jpg"
+    },
+    {
+      "name": "Emma Silvestris",
+      "slug": "emma-silvestris",
+      "sortKey": "Silvestris",
+      "tags": [
+        "emma-silvestris"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/emma-silvestris.jpg"
+    },
+    {
+      "name": "Studio Simple",
+      "slug": "studio-simple",
+      "sortKey": "Simple",
+      "tags": [
+        "studio-simple"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/studio-simple.jpg"
     },
     {
       "name": "Frédéric Sofia",
@@ -755,9 +2070,28 @@
       "brandHrefs": [
         "/collections/fermob"
       ],
-      "bio": "Designer maison de Fermob, signature de la plupart des collections outdoor récentes.",
+      "bio": "Né en 1967 à Lyon, Frédéric Sofia est un designer français. Issu d'une formation technique et commerciale, il vient au design en autodidacte après un voyage en Australie en 1992. Il fonde d'abord Wombat, société d'édition de luminaires, avant de créer son propre studio à Paris en 2000. Il mène en parallèle une pratique artistique avec Catherine Sofia (duo FC Sofia). Pour Fermob, il signe la collection Luxembourg, éditée à partir de 2004 : relecture contemporaine des fauteuils et chaises du jardin du Luxembourg, présents au Sénat depuis 1923. Ce siège est entré dans les collections du Centre national des arts plastiques (2006), puis du Mobilier national. On lui doit aussi, pour Fermob, la collection Sixties, associant structure tubulaire en aluminium et assise en résine tressée. Depuis 2022, il assure, avec Catherine Sofia, la direction artistique de la revue Intramuros.",
       "photo": "/images/designers/frederic-sofia.jpg",
-      "sortKey": "Sofia"
+      "sortKey": "Sofia",
+      "featured": true
+    },
+    {
+      "name": "Valerio Sommella",
+      "slug": "valerio-sommella",
+      "sortKey": "Sommella",
+      "tags": [
+        "valerio-sommella"
+      ],
+      "brands": [
+        "Alessi",
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/collections/alessi",
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": "",
+      "photo": "/images/designers/valerio-sommella.jpg"
     },
     {
       "name": "Ettore Sottsass",
@@ -794,6 +2128,108 @@
       "featured": true
     },
     {
+      "name": "Erik Stehmann",
+      "slug": "erik-stehmann",
+      "sortKey": "Stehmann",
+      "tags": [
+        "erik-stehmann"
+      ],
+      "brands": [
+        "Fatboy",
+        "Pols Potten"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy",
+        "/produits.html?marque=Pols Potten"
+      ],
+      "bio": "",
+      "photo": "/images/designers/erik-stehmann.jpg"
+    },
+    {
+      "name": "WAWW La Table",
+      "slug": "waww-la-table",
+      "sortKey": "Table",
+      "tags": [
+        "waww-la-table"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/waww-la-table.jpg"
+    },
+    {
+      "name": "Keiji Takeuchi",
+      "slug": "keiji-takeuchi",
+      "sortKey": "Takeuchi",
+      "tags": [
+        "keiji-takeuchi"
+      ],
+      "brands": [
+        "Alessi",
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/collections/alessi",
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": "",
+      "photo": "/images/designers/keiji-takeuchi.jpg"
+    },
+    {
+      "name": "Norman Trapman",
+      "slug": "norman-trapman",
+      "sortKey": "Trapman",
+      "tags": [
+        "norman-trapman"
+      ],
+      "brands": [
+        "Pols Potten"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Pols Potten"
+      ],
+      "bio": "",
+      "photo": "/images/designers/norman-trapman.jpg"
+    },
+    {
+      "name": "Mario Trimarchi",
+      "slug": "mario-trimarchi",
+      "sortKey": "Trimarchi",
+      "tags": [
+        "mario-trimarchi"
+      ],
+      "brands": [
+        "Alessi",
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/collections/alessi",
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": "",
+      "photo": "/images/designers/mario-trimarchi.jpg"
+    },
+    {
+      "name": "John Truex",
+      "slug": "john-truex",
+      "sortKey": "Truex",
+      "tags": [
+        "john-truex"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/john-truex.jpg"
+    },
+    {
       "name": "Luc Tuymans",
       "slug": "luc-tuymans",
       "sortKey": "Tuymans",
@@ -806,8 +2242,40 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Né en 1958 à Mortsel, près d'Anvers, Luc Tuymans est un peintre belge figuratif majeur de sa génération. Formé à Bruxelles (Sint-Lukas, La Cambre) puis à l'Académie royale des beaux-arts d'Anvers, il a contribué à réaffirmer la pertinence de la peinture à une époque où on la croyait dépassée. Sa signature : des toiles aux teintes pâles, exécutées en une seule journée à partir d'images photographiques ou cinématographiques, qui interrogent le rapport de l'individu à l'histoire et à la mémoire — la Seconde Guerre mondiale en étant un motif récurrent. Son œuvre figure dans les collections du MoMA, de la Tate et du Centre Pompidou. Pour Serax, il a conçu Plates by Luc Tuymans, un coffret de cinq assiettes en porcelaine à décor doré, issu d'une œuvre de 2012 créée au profit de la recherche sur la drépanocytose (asbl Simon & Odil).",
       "photo": "/images/designers/luc-tuymans.jpg"
+    },
+    {
+      "name": "Nynke Tynagel",
+      "slug": "nynke-tynagel",
+      "sortKey": "Tynagel",
+      "tags": [
+        "nynke-tynagel"
+      ],
+      "brands": [
+        "Fatboy"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy"
+      ],
+      "bio": "",
+      "photo": "/images/designers/nynke-tynagel.jpg"
+    },
+    {
+      "name": "Ben van Berkel / UNStudio",
+      "slug": "ben-van-berkel-unstudio",
+      "sortKey": "UNStudio",
+      "tags": [
+        "ben-van-berkel-unstudio"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/ben-van-berkel-unstudio.jpg"
     },
     {
       "name": "Patricia Urquiola",
@@ -823,8 +2291,55 @@
       ],
       "bio": "Née en 1961 à Oviedo, l'architecte et designer espagnole Patricia Urquiola étudie l'architecture à Madrid puis au Politecnico di Milano, où elle obtient son diplôme en 1989 sous la direction d'Achille Castiglioni. Après avoir travaillé avec Vico Magistretti puis chez Lissoni Associati (Piero Lissoni), elle fonde son studio à Milan en 2001. Son travail mêle savoir-faire artisanal et technologie, avec un goût marqué pour la matière, la couleur et la couture. Pour Moroso, elle signe le fauteuil Fjord (2002), la chaise longue Antibodi (2006) et l'assise tressée Tropicalia (2008) ; pour B&B Italia, le canapé modulaire Tufty-Time (2005). Chez Alessi, elle dessine la batterie de cuisine Edo (2017) et les couverts Clivo. Elle a reçu la Médaille d'or du Mérite des Beaux-Arts décernée par l'État espagnol (2011).",
       "photo": "/images/designers/patricia-urquiola.jpg",
-      "sortKey": "Urquiola",
-      "featured": true
+      "sortKey": "Urquiola"
+    },
+    {
+      "name": "Utilise.Objects",
+      "slug": "utilise-objects",
+      "sortKey": "Utilise.Objects",
+      "tags": [
+        "utilise-objects"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/utilise-objects.jpg"
+    },
+    {
+      "name": "Hortense and Valériane",
+      "slug": "hortense-and-valeriane",
+      "sortKey": "Valériane",
+      "tags": [
+        "hortense-and-valeriane"
+      ],
+      "brands": [
+        "Fatboy"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy"
+      ],
+      "bio": "",
+      "photo": "/images/designers/hortense-and-valeriane.jpg"
+    },
+    {
+      "name": "De Makers Van",
+      "slug": "de-makers-van",
+      "sortKey": "Van",
+      "tags": [
+        "de-makers-van"
+      ],
+      "brands": [
+        "Fatboy"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fatboy"
+      ],
+      "bio": "",
+      "photo": "/images/designers/de-makers-van.jpg"
     },
     {
       "name": "Roos Van de Velde",
@@ -839,7 +2354,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Née en 1961 dans le Pajottenland, au sud-ouest de Bruxelles, Roos Van de Velde est une artiste visuelle belge formée à l'Académie royale des beaux-arts d'Anvers, où elle étudie la céramique. Multidisciplinaire, elle est surtout connue pour son travail de la porcelaine et de la céramique : ses pièces devenant de plus en plus fines et translucides, elle est passée du grès au bone china. La nature traverse l'ensemble de son œuvre, qu'elle conçoit comme un univers personnel. Sa signature tient dans une philosophie de l'imperfection assumée : elle fut l'une des premières à célébrer l'imperfection, le hasard et les traces du geste de fabrication comme éléments de beauté. Pour Serax, elle signe en 2009 la collection de table en porcelaine Perfect Imperfection, où défauts et aléas de cuisson sont laissés libres d'agir, ainsi que les couverts Flora Vulgaris, aux formes organiques inspirées du végétal.",
       "photo": "/images/designers/roos-van-de-velde.jpg"
     },
     {
@@ -860,6 +2375,70 @@
       "featured": true
     },
     {
+      "name": "Antoine Vandewoude",
+      "slug": "antoine-vandewoude",
+      "sortKey": "Vandewoude",
+      "tags": [
+        "antoine-vandewoude"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/antoine-vandewoude.jpg"
+    },
+    {
+      "name": "Guido Venturini",
+      "slug": "guido-venturini",
+      "sortKey": "Venturini",
+      "tags": [
+        "guido-venturini"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/guido-venturini.jpg"
+    },
+    {
+      "name": "Bob Verhelst",
+      "slug": "bob-verhelst",
+      "sortKey": "Verhelst",
+      "tags": [
+        "bob-verhelst"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/bob-verhelst.jpg"
+    },
+    {
+      "name": "Roderick Vos",
+      "slug": "roderick-vos",
+      "sortKey": "Vos",
+      "tags": [
+        "roderick-vos"
+      ],
+      "brands": [
+        "Pols Potten"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Pols Potten"
+      ],
+      "bio": "",
+      "photo": "/images/designers/roderick-vos.jpg"
+    },
+    {
       "name": "Marcel Wanders",
       "slug": "marcel-wanders",
       "sortKey": "Wanders",
@@ -873,8 +2452,57 @@
         "/collections/alessi"
       ],
       "bio": "Né en 1963 à Boxtel, Marcel Wanders est un designer industriel et d'intérieur néerlandais, diplômé cum laude de l'Institut des arts d'Arnhem en 1988. Sa signature mêle savoir-faire artisanal et procédés contemporains, ornementation narrative et imaginaire poétique, à rebours du minimalisme dominant. Il se fait connaître en 1996 avec la Knotted Chair, fauteuil en fibres tressées imprégnées de résine époxy développé au sein de Droog Design, dont l'édition commerciale est ensuite assurée par Cappellini. En 2001, il cofonde avec Casper Vissers la maison d'édition Moooi à Amsterdam, dont il est directeur artistique. Pour Alessi, il conçoit la collection d'arts de la table Dressed (2011), dont les décors délicats se nichent dans les parties les moins visibles des objets, puis la collection Circus (2016), peuplée de personnages forains.",
-      "photo": "/images/designers/marcel-wanders.jpg",
-      "featured": true
+      "photo": "/images/designers/marcel-wanders.jpg"
+    },
+    {
+      "name": "Kelly Wearstler",
+      "slug": "kelly-wearstler",
+      "sortKey": "Wearstler",
+      "tags": [
+        "kelly-wearstler"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/kelly-wearstler.jpg"
+    },
+    {
+      "name": "Sylvain Willenz",
+      "slug": "sylvain-willenz",
+      "sortKey": "Willenz",
+      "tags": [
+        "sylvain-willenz"
+      ],
+      "brands": [
+        "HAY",
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/hay",
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/sylvain-willenz.jpg"
+    },
+    {
+      "name": "TUDelft - Titus Wybenga",
+      "slug": "tudelft-titus-wybenga",
+      "sortKey": "Wybenga",
+      "tags": [
+        "tudelft-titus-wybenga"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/tudelft-titus-wybenga.jpg"
     },
     {
       "name": "Sori Yanagi",
@@ -892,6 +2520,73 @@
       "photo": "/images/designers/sori-yanagi.jpg",
       "sortKey": "Yanagi",
       "hidden": true
+    },
+    {
+      "name": "Marco Zanuso",
+      "slug": "marco-zanuso",
+      "sortKey": "Zanuso",
+      "tags": [
+        "marco-zanuso"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/marco-zanuso.jpg"
+    },
+    {
+      "name": "Nika Zupanc",
+      "slug": "nika-zupanc",
+      "sortKey": "Zupanc",
+      "tags": [
+        "nika-zupanc"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/nika-zupanc.jpg"
+    },
+    {
+      "name": "Teun Zwets",
+      "slug": "teun-zwets",
+      "sortKey": "Zwets",
+      "tags": [
+        "teun-zwets"
+      ],
+      "brands": [
+        "HKliving",
+        "Pols Potten"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=HKliving",
+        "/produits.html?marque=Pols Potten"
+      ],
+      "bio": "",
+      "photo": "/images/designers/teun-zwets.jpg"
+    },
+    {
+      "name": "Tristan Lohner",
+      "slug": "tristan-lohner",
+      "tags": [
+        "tristan-lohner"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/collections/fermob"
+      ],
+      "bio": "Tristan Lohner est un designer produit français. Formé d'abord à l'ébénisterie (Brevet des Métiers d'Art auprès de Bernard Daude, qui travailla pour Pierre Paulin au Mobilier national), il rejoint ensuite l'École des Arts décoratifs de Paris, où il étudie le design produit sous la direction de Jean-Marie Massaud. Il dirige par ailleurs le RBC Design Center à Montpellier, concept store imaginé par Jean Nouvel. Son travail privilégie la justesse, la sobriété et le lien sensible entre l'objet et son usager. Collaborateur régulier de Fermob, il y signe la lampe nomade Balad (Étoile de l'Observeur du Design 2017), la table Bebop, le luminaire MOOON! et la chaise Studie, distinguée du Red Dot « Best of the Best » en 2022. Pour Hartô, il a dessiné la lampe de table Nina.",
+      "photo": "/images/designers/tristan-lohner.jpg",
+      "sortKey": "Lohner Tristan",
+      "featured": true
     }
   ]
 }
