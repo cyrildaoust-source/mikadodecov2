@@ -37,6 +37,9 @@
       background: var(--accent);
       flex: none;
     }
+    /* Page créateur : réserve la hauteur du titre de grille pour que le
+       passage "vide → Les pièces de {name}" (anti-flash) ne décale rien (CLS). */
+    .plp-designer [data-grid-title] { min-height: 1.05em; }
   </style>
   <script>
     /* Page créateur (?designer=<slug>) — flag the document BEFORE first
@@ -141,6 +144,15 @@
       <h2 class="serif catalogue-head" data-grid-title>Tout le catalogue</h2>
       <span class="plp-count grid-head__count" data-piece-count></span>
     </div>
+    <script>
+      /* Page créateur : efface "Tout le catalogue" DÈS le parsing (avant le
+         premier paint) — aucun flash. Le module pose "Les pièces de {name}"
+         dès que le designer est résolu (~15 ms). Le min-height (inline <style>)
+         réserve la ligne → pas de décalage (CLS). */
+      if (document.documentElement.classList.contains("plp-designer")) {
+        var _gt = document.querySelector("[data-grid-title]"); if (_gt) _gt.textContent = "";
+      }
+    </script>
     <div class="pgrid" data-grid></div>
     <div class="loadmore-wrap" data-loadmore-wrap style="display:none">
       <button class="btn btn--outline" data-loadmore>Voir plus</button>
@@ -150,7 +162,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchBrands, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, isPromoEteActive, promoBandeauHTML, breadcrumbHTML, PROMO_ETE_2026 } from "/shared.js";
+    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, isPromoEteActive, promoBandeauHTML, breadcrumbHTML, PROMO_ETE_2026 } from "/shared.js";
     // initShell is called below — the active nav entry depends on the route
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
@@ -312,6 +324,9 @@
     if (designerSlug) {
       subEl.textContent = "";
       chipsBar.style.display = "none";
+      // (The default grid title "Tout le catalogue" is already cleared at parse
+      // time by the inline script next to the grid-head — see above — so no
+      // flash; loadInitial() sets "Les pièces de {name}" once resolved.)
     }
 
     const popScore = (p) => (p.featured ? 2 : 0) + (p.badge === "bestseller" ? 1 : 0);
@@ -585,22 +600,48 @@
       + `</div>`;
     }
 
+    // Brand <select> — populated from the curated mega-menu-brands.json (the
+    // single source of truth, 22 brands), NOT /api/brands (~1.8s, capped,
+    // wrong counts). value = slugify(name) so the existing product filter
+    // (slugify(p.brand) === state.brand) keeps matching; label = plain name,
+    // no count. no-cache → a curated edit shows up on the next visit.
+    async function populateBrandSelect() {
+      try {
+        const r = await fetch("/mega-menu-brands.json", { cache: "no-cache" });
+        if (!r.ok) return;
+        const data = await r.json();
+        const brands = (data.brands || [])
+          .map((b) => ({ name: b.name, value: slugify(b.name) }))
+          .filter((b) => b.name && b.value)
+          .sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
+        const frag = document.createDocumentFragment();
+        for (const b of brands) {
+          const o = document.createElement("option");
+          o.value = b.value; o.textContent = b.name;
+          if (b.value === state.brand) o.selected = true;
+          frag.appendChild(o);
+        }
+        brandSel.appendChild(frag);
+      } catch (e) {
+        console.warn("[plp] marques (mega-menu-brands.json) indisponibles:", e.message);
+      }
+    }
+
     async function loadInitial() {
       try {
         await resolveDesigner();
         renderDesignerHero();
-        const [pageData, brands, colls] = await Promise.all([
-          fetchPage(null),
-          fetchBrands(),
-          fetchCollections(),
-        ]);
-        (colls || []).forEach((c) => { if (c.handle) COLLECTIONS_BY_HANDLE[c.handle] = c; });
-        brands.sort((a, b) => String(a.name).localeCompare(String(b.name))).forEach((b) => {
-          const o = document.createElement("option");
-          o.value = slugify(b.name); o.textContent = `${b.name} (${b.productCount})`;
-          if (o.value === state.brand) o.selected = true;
-          brandSel.appendChild(o);
-        });
+        // Anti-flash: name the créateur as soon as the (~15ms) designer record
+        // is in, well before the products land.
+        if (state.designer) {
+          gridTitle.textContent = state.designer.name ? `Les pièces de ${state.designer.name}` : "";
+        }
+
+        // NON-BLOCKING render: the grid + title only need the products. Await
+        // ONLY fetchPage, render immediately (~0.8s), then enrich the brand
+        // selector + collection metadata in the background — they must never
+        // hold the grid hostage (/api/brands ~1.8s, /api/collections ~1.5s).
+        const pageData = await fetchPage(null);
         sortSel.value = state.sort;
 
         if (pageData._notFound) {
@@ -618,6 +659,15 @@
         state.cursor  = pageData.pageInfo?.endCursor || null;
         state.hasMore = !!pageData.pageInfo?.hasNextPage;
         render();
+
+        // Background, after the grid is already up — neither blocks first paint:
+        populateBrandSelect();
+        fetchCollections()
+          .then((colls) => {
+            (colls || []).forEach((c) => { if (c.handle) COLLECTIONS_BY_HANDLE[c.handle] = c; });
+            render(); // backfill collection title/description if one matched
+          })
+          .catch((e) => console.warn("[plp] collections indisponibles:", e.message));
       } catch (e) {
         grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`;
         console.warn(e);
