@@ -29,26 +29,36 @@
 
   <div class="wrap" data-breadcrumb></div>
 
-  <section class="section wrap reveal">
-    <div class="shead"><h2 class="serif">Tous les designers</h2><span class="plp-count" data-designer-count></span></div>
-    <div class="designer-grid" data-designer-grid></div>
+  <!-- Bloc featured · les grands noms (20 grandes cartes) -->
+  <section class="section wrap reveal" style="padding-bottom: clamp(28px, 3vw, 44px)">
+    <div class="shead"><h2 class="serif">Les grands noms du design</h2></div>
+    <div class="designer-grid" data-featured-grid></div>
     <script>
-      /* Reserve grid height before /designers-data.json comes back —
-         53 skeletons matching the real (épuré) card shape (photo 4:5 +
-         name + brands, no bio). Replaced by the rendered cards in the
-         module below. Without this, the grid is 0px tall at first paint
-         and the footer jumps thousands of px when cards inject (CLS). */
+      /* Reserve the featured-block height before /designers-data.json comes
+         back — 20 skeletons matching the real (épuré) card shape (photo 4:5 +
+         name + brands, no bio). Replaced by the rendered cards in the module
+         below. Without this, the block is 0px tall at first paint and the
+         page below jumps when the cards inject (CLS). The A-Z index sits
+         further down (below the fold) so its fill-in doesn't shift the
+         viewport. */
       (function () {
-        var g = document.querySelector("[data-designer-grid]");
+        var g = document.querySelector("[data-featured-grid]");
         if (!g) return;
-        var skel = '<div class="designer-card designer-card--skel">'
+        var skel = '<div class="designer-card designer-card--lg designer-card--skel">'
                  + '<div class="designer-card__skel-photo"></div>'
                  + '<div class="designer-card__skel-name"></div>'
                  + '<div class="designer-card__skel-brand"></div>'
                  + "</div>";
-        g.innerHTML = skel.repeat(53);
+        g.innerHTML = skel.repeat(20);
       })();
     </script>
+  </section>
+
+  <!-- Annuaire complet A-Z (tous les designers visibles) -->
+  <section class="section wrap reveal" style="padding-top: clamp(28px, 3vw, 44px)">
+    <div class="shead"><h2 class="serif">Tous les designers</h2><span class="plp-count" data-designer-count></span></div>
+    <nav class="az-bar" data-az-bar aria-label="Index alphabétique des designers"></nav>
+    <div class="az-index" data-az-index></div>
   </section>
 
   <div id="site-footer"></div>
@@ -59,65 +69,130 @@
     document.querySelector("[data-breadcrumb]").innerHTML =
       breadcrumbHTML([{ label: "Accueil", href: "/" }, { label: "Designers" }]);
 
-    const grid    = document.querySelector("[data-designer-grid]");
-    const countEl = document.querySelector("[data-designer-count]");
+    const featuredGrid = document.querySelector("[data-featured-grid]");
+    const azBar        = document.querySelector("[data-az-bar]");
+    const azIndex      = document.querySelector("[data-az-index]");
+    const countEl      = document.querySelector("[data-designer-count]");
+
+    const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    // Precomposed Latin letters NFD can't decompose (no combining-mark form):
+    // fold them to a base letter so a Nordic/Polish/Icelandic family name files
+    // under its letter instead of dropping into the "#" bucket.
+    const FOLD = { "Ø": "O", "Œ": "O", "Æ": "A", "Å": "A", "Ł": "L", "Đ": "D", "Þ": "T", "ẞ": "S" };
+
+    // Bucket letter = first char of the sort key (family name), uppercased
+    // and stripped of diacritics so "Prouvé" → P, "Émile…" → E. Anything
+    // non-alphabetic falls into the "#" bucket.
+    function bucketOf(d) {
+      const key = (d.sortKey || d.name || "").trim();
+      let ch = key.charAt(0).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      ch = FOLD[ch] || ch;
+      return /[A-Z]/.test(ch) ? ch : "#";
+    }
+
+    function brandsHTML(d) {
+      return (d.brands || []).map((b, i) => {
+        const href = d.brandHrefs?.[i];
+        return href
+          ? `<a href="${escapeHtml(href)}">${escapeHtml(b)}</a>`
+          : `<span>${escapeHtml(b)}</span>`;
+      }).join('<span class="designer-card__brand-sep" aria-hidden="true"> · </span>');
+    }
+
+    // Guarded portrait — a missing photo must not throw (one bad record would
+    // otherwise reject the whole .then and blank the entire directory). Falls
+    // back to a neutral tile that keeps the 4:5 footprint (no CLS).
+    function photoHTML(d) {
+      if (!d.photo) return `<div class="designer-card__photo" aria-hidden="true"></div>`;
+      return `<picture><source type="image/webp" srcset="${escapeHtml(d.photo.replace(/\.jpg$/, "-640.webp"))}" /><img class="designer-card__photo" src="${escapeHtml(d.photo)}" width="640" height="800" alt="${escapeHtml(d.name)}" loading="lazy" /></picture>`;
+    }
+
+    // Large featured card — same shape as the historical (épuré) card:
+    // <article> + transparent overlay <a> for whole-tile navigation, brand
+    // links kept clickable above the overlay. The featured card OWNS the
+    // deep-link id="<slug>" (its A-Z entry below carries none — one id/slug).
+    function featuredCardHTML(d) {
+      return `
+        <article class="designer-card designer-card--lg" id="${escapeHtml(d.slug)}">
+          ${photoHTML(d)}
+          <h3 class="designer-card__name">${escapeHtml(d.name)}</h3>
+          <div class="designer-card__brands">${brandsHTML(d)}</div>
+          <a class="designer-card__link" href="/produits.html?designer=${encodeURIComponent(d.slug)}" aria-label="Voir les produits de ${escapeHtml(d.name)}"></a>
+        </article>`;
+    }
+
+    function highlight(el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.classList.add("is-highlight");
+      setTimeout(() => el.classList.remove("is-highlight"), 1600);
+    }
+    function gotoHash() {
+      const raw = location.hash.replace(/^#/, "");
+      if (!raw) return;
+      let hash; try { hash = decodeURIComponent(raw); } catch (e) { hash = raw; }
+      const el = document.getElementById(hash) || document.getElementById(raw);
+      if (el) highlight(el);
+    }
 
     fetch("/designers-data.json", { cache: "force-cache" })
       .then((r) => r.ok ? r.json() : Promise.reject("designers-data " + r.status))
       .then((data) => {
-        const list = data?.designers || [];
-        // Robust last-name sort (the JSON ships pre-sorted; this secures it).
-        list.sort((a, b) => (a.sortKey || a.name).localeCompare(b.sortKey || b.name, "fr", { sensitivity: "base" }));
-        countEl.textContent = `${list.length} designers`;
-        grid.innerHTML = list.map((d) => {
-          // Card layout: <article> wrapper + transparent overlay <a> for
-          // navigation (covers the whole card). Brand links sit above the
-          // overlay via z-index so they stay clickable on their own. This
-          // pattern avoids Safari's "<a> as a flex container" bug that
-          // visually dissociated photo / name / bio across cards.
-          const brands = (d.brands || []).map((b, i) => {
-            const href = d.brandHrefs?.[i];
-            return href
-              ? `<a href="${escapeHtml(href)}">${escapeHtml(b)}</a>`
-              : `<span>${escapeHtml(b)}</span>`;
-          }).join("<span class=\"designer-card__brand-sep\" aria-hidden=\"true\"> · </span>");
-          return `
-            <article class="designer-card" id="${escapeHtml(d.slug)}">
-              <picture><source type="image/webp" srcset="${escapeHtml(d.photo.replace(/\.jpg$/, "-640.webp"))}" /><img class="designer-card__photo" src="${escapeHtml(d.photo)}" width="640" height="800" alt="${escapeHtml(d.name)}" loading="lazy" /></picture>
-              <h3 class="designer-card__name">${escapeHtml(d.name)}</h3>
-              <div class="designer-card__brands">${brands}</div>
-              <a class="designer-card__link" href="/produits.html?designer=${encodeURIComponent(d.slug)}" aria-label="Voir les produits de ${escapeHtml(d.name)}"></a>
-            </article>`;
+        // Visible directory = every designer that isn't hidden. Hidden ones
+        // (no product yet) stay in the JSON but render nowhere.
+        const all = (data?.designers || []).filter((d) => !d.hidden);
+        all.sort((a, b) => (a.sortKey || a.name).localeCompare(b.sortKey || b.name, "fr", { sensitivity: "base" }));
+        countEl.textContent = `${all.length} designers`;
+
+        // 1) Featured block — the big cards (ordered by family name).
+        const featured = all.filter((d) => d.featured);
+        const featuredSlugs = new Set(featured.map((d) => d.slug));
+        featuredGrid.innerHTML = featured.map(featuredCardHTML).join("");
+
+        // 2) A-Z index — ALL visible designers (featured included so the
+        //    directory is complete). Group by bucket letter.
+        const groups = {};
+        for (const d of all) (groups[bucketOf(d)] ||= []).push(d);
+        const letters = Object.keys(groups).sort((a, b) => {
+          if (a === "#") return 1;
+          if (b === "#") return -1;
+          return a.localeCompare(b, "fr");
+        });
+
+        // Alpha bar: full alphabet; letters without designers are inert.
+        const bar = ALPHA.map((L) => groups[L]
+          ? `<a class="az-bar__letter" href="#letter-${L}">${L}</a>`
+          : `<span class="az-bar__letter is-empty" aria-hidden="true">${L}</span>`);
+        if (groups["#"]) bar.push(`<a class="az-bar__letter" href="#letter-num">#</a>`);
+        azBar.innerHTML = bar.join("");
+
+        // Groups: family-name links. A featured designer's A-Z entry carries
+        // NO id (its big card holds the only id="<slug>" on the page).
+        azIndex.innerHTML = letters.map((L) => {
+          const anchor = L === "#" ? "letter-num" : `letter-${L}`;
+          const names = groups[L].map((d) => {
+            const id = featuredSlugs.has(d.slug) ? "" : ` id="${escapeHtml(d.slug)}"`;
+            const label = escapeHtml(d.sortKey || d.name);
+            return `<li class="az-name"${id}><a href="/produits.html?designer=${encodeURIComponent(d.slug)}">${label}</a></li>`;
+          }).join("");
+          return `<div class="az-group">`
+               +   `<h3 class="az-letter" id="${anchor}">${L}</h3>`
+               +   `<ul class="az-names">${names}</ul>`
+               + `</div>`;
         }).join("");
 
-        // Deep-link: scroll to the targeted card and pulse it briefly.
-        // Slight delay lets the layout settle before we measure offsets.
-        const hash = location.hash.replace(/^#/, "");
-        if (hash) {
-          requestAnimationFrame(() => {
-            const card = document.getElementById(hash);
-            if (!card) return;
-            card.scrollIntoView({ behavior: "smooth", block: "start" });
-            card.classList.add("is-highlight");
-            setTimeout(() => card.classList.remove("is-highlight"), 1600);
-          });
-        }
+        // Deep-link (#<slug> in the URL — a shared/bookmarked link or any
+        // future caller): scroll to the targeted card or A-Z entry and pulse
+        // it. rAF lets the layout settle before we measure offsets.
+        requestAnimationFrame(gotoHash);
       })
       .catch((e) => {
-        grid.innerHTML = `<p class="plp-empty">La page designers se charge bientôt. <a href="/produits.html">Retour au catalogue</a></p>`;
+        featuredGrid.innerHTML = `<p class="plp-empty">La page designers se charge bientôt. <a href="/produits.html">Retour au catalogue</a></p>`;
         console.warn("[designers]", e);
       });
 
-    // Hash changes (e.g. back-button from elsewhere on the same page)
-    window.addEventListener("hashchange", () => {
-      const h = location.hash.replace(/^#/, "");
-      const card = h && document.getElementById(h);
-      if (card) {
-        card.scrollIntoView({ behavior: "smooth", block: "start" });
-        card.classList.add("is-highlight");
-        setTimeout(() => card.classList.remove("is-highlight"), 1600);
-      }
-    });
+    // Hash changes (navigating to another #<slug> on this page) re-trigger
+    // the scroll + pulse.
+    window.addEventListener("hashchange", gotoHash);
   </script>
 </body>
 </html>

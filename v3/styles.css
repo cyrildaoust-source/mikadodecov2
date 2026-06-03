@@ -1008,3 +1008,149 @@ body.cartd-locked { overflow: hidden; }
   .jcard, .jcard__img, .jcard__title { transition: none; }
   .jfeat:hover .jfeat__img, .jcard:hover .jcard__img { transform: none; }
 }
+
+/* ============================================================
+   DESIGNERS — refonte A-Z (designers.html) + page créateur
+   (produits.html?designer=<slug>). DA stricte : coins nets,
+   crème / encre / bleu roi, aucun élément rond.
+   ============================================================ */
+
+/* ---------- Bloc featured · grandes cartes ----------
+   Réutilise .designer-card / .designer-grid ; --lg = emphase discrète
+   du nom pour le bloc « grands noms ». Le skeleton garde la même hauteur
+   (CLS ~0). */
+.designer-card--lg .designer-card__name { font-size: 1.7rem; }
+.designer-card--lg .designer-card__skel-name { height: 1.7rem; }
+
+/* Deep-link (#<slug> depuis le mega menu) : les cibles vivent sous la nav
+   fixe — on décale le scroll pour qu'elles ne soient pas masquées. */
+.designer-card,
+.az-name,
+.az-letter { scroll-margin-top: calc(var(--nav-h) + 28px); }
+
+/* ---------- Annuaire A-Z ---------- */
+.az-bar { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 clamp(28px, 3.5vw, 44px); }
+.az-bar__letter {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small);
+  color: var(--ink); border: 1px solid var(--line); border-radius: 0;
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.az-bar__letter:hover,
+.az-bar__letter:focus-visible { background: var(--accent); color: var(--paper); border-color: var(--accent); outline: none; }
+.az-bar__letter.is-empty { color: var(--subtle); border-color: transparent; pointer-events: none; }
+
+.az-index { display: grid; }
+.az-group {
+  display: grid; grid-template-columns: 3rem 1fr; align-items: baseline;
+  gap: 0 20px; padding: clamp(18px, 2.4vw, 28px) 0; border-bottom: 1px solid var(--line);
+}
+.az-group:first-child { padding-top: 0; }
+.az-group:last-child { border-bottom: 0; padding-bottom: 0; }
+.az-letter {
+  font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 3vw, 38px);
+  line-height: 1; color: var(--accent);
+}
+.az-names { display: flex; flex-wrap: wrap; align-items: baseline; margin: 0; padding: 0; list-style: none; row-gap: 6px; }
+.az-name { display: inline-flex; align-items: baseline; }
+.az-name:not(:last-child)::after { content: "·"; color: var(--subtle); margin: 0 10px; }
+.az-name a {
+  font-family: var(--sans-product); font-size: 0.95rem; font-weight: 500;
+  color: var(--ink); padding: 1px 2px; border-bottom: 1px solid transparent;
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.az-name a:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
+/* Keyboard focus keeps the strong global ring (:focus-visible, line ~109) —
+   the dense `·`-separated list needs more than the 1px hover underline. */
+.az-name a:focus-visible { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
+/* Deep-link pulse sur une entrée texte A-Z (pendant du pulse des cartes). */
+.az-name.is-highlight a { animation: azPulse 1.6s var(--ease); color: var(--accent-ink); }
+@keyframes azPulse { 0% { background: var(--accent-soft); } 100% { background: transparent; } }
+
+/* ---------- Page créateur · designer-hero ----------
+   Le flag .plp-designer (posé dans <head> avant le 1er paint) masque le
+   hero/filterbar du catalogue et décale le contenu sous la nav fixe —
+   pas de flash, pas de saut (CLS). */
+.plp-designer body { padding-top: 116px; }
+/* Suppress the whole catalog chrome BEFORE first paint (no flash / no CLS).
+   [data-pop-section] ships visible with 4 skeleton pcards by default — on a
+   designer page render() hides it, but hiding it here too kills the paint-
+   then-collapse jump. */
+.plp-designer .subhero,
+.plp-designer .plp-promo,
+.plp-designer .filterbar,
+.plp-designer [data-pop-section] { display: none; }
+/* Reserve the breadcrumb's filled height (it renders after the product
+   fetch) so the hero below it doesn't get nudged down (CLS). */
+.plp-designer [data-breadcrumb] { min-height: 52px; }
+/* Reserve roughly one product row so the grid filling (empty → cards) on a
+   sparse designer page doesn't yank the near-fold footer upward (CLS). For
+   richer designers the grid simply grows past this floor, below the fold. */
+.plp-designer [data-grid] { min-height: 380px; }
+
+.grid-head__count { display: none; }
+.plp-designer .grid-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+  margin-bottom: 22px; padding-bottom: 14px; border-bottom: 2px solid var(--accent);
+}
+.plp-designer .grid-head .catalogue-head { flex: 1; margin: 0; padding: 0; border-bottom: 0; }
+.plp-designer .grid-head__count { display: inline; white-space: nowrap; }
+
+.designer-hero {
+  display: grid; grid-template-columns: minmax(230px, 290px) 1fr;
+  gap: clamp(28px, 4vw, 56px); align-items: start;
+  margin: clamp(6px, 1.5vw, 16px) 0 clamp(32px, 4vw, 52px);
+  /* Desktop: every bio (even the longest, ~920 chars) fits within ~420px
+     beside the portrait. Pin a floor so the skeleton (same class) and the
+     real content share the exact height — the hero never grows when data
+     lands (CLS=0), with a little headroom for the web-font swap. On mobile
+     the stacked layout is far taller, so this floor is inert. */
+  min-height: 430px;
+}
+/* Introuvable state — single column (no portrait), no fixed floor. */
+.designer-hero--empty { grid-template-columns: 1fr; min-height: 0; }
+.designer-hero__photo {
+  width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 25%;
+  background: var(--tile);
+}
+.designer-hero__name {
+  font-family: var(--serif); font-weight: 600; font-size: clamp(34px, 4.4vw, 60px);
+  line-height: 1.02; letter-spacing: -0.02em; color: var(--ink-deep);
+  margin-bottom: clamp(16px, 2vw, 24px);
+}
+.designer-hero__bio { color: var(--ink); font-size: 17px; line-height: 1.6; max-width: 66ch; }
+.designer-hero__bio a { color: var(--accent-ink); border-bottom: 1px solid transparent; transition: border-color .2s var(--ease); }
+.designer-hero__bio a:hover { border-bottom-color: var(--accent-ink); }
+.designer-hero__editor {
+  margin-top: clamp(18px, 2.2vw, 26px); padding-top: 16px; border-top: 1px solid var(--line);
+  font-family: var(--sans-product); font-size: var(--fs-small); letter-spacing: .02em; color: var(--muted);
+}
+.designer-hero__editor-label { text-transform: uppercase; letter-spacing: .1em; font-weight: 600; color: var(--ink); margin-right: 4px; }
+.designer-hero__editor a { color: var(--accent-ink); border-bottom: 1px solid transparent; transition: border-color .2s var(--ease); }
+.designer-hero__editor a:hover { border-bottom-color: var(--accent-ink); }
+.designer-hero__brand-sep { color: var(--subtle); margin: 0 4px; }
+
+/* skeleton (réserve la hauteur du hero avant que la donnée arrive) */
+.designer-hero--skel .designer-hero__photo { animation: pulse 1.4s var(--ease) infinite; }
+.dh-skel { background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
+.dh-skel--title { width: 58%; height: clamp(34px, 4.4vw, 56px); margin-bottom: 24px; }
+.dh-skel--line { width: 100%; height: 0.85rem; margin-bottom: 13px; }
+.dh-skel--line:nth-child(even) { width: 90%; }
+.dh-skel--brands { width: 32%; height: 0.85rem; margin-top: 30px; }
+
+@media (max-width: 768px) {
+  .designer-card--lg .designer-card__name { font-size: 1.35rem; }
+  .az-group { grid-template-columns: 2rem 1fr; gap: 0 14px; }
+  .az-letter { font-size: 24px; }
+  .designer-hero { grid-template-columns: 1fr; gap: 22px; min-height: 0; }
+  .designer-hero__photo { max-width: 280px; }
+  .designer-hero__name { font-size: clamp(32px, 9vw, 46px); }
+  .designer-hero__bio { font-size: 16px; }
+  /* Stacked layout — the bio runs ~16-22 lines, so reserve the body height
+     close to a typical bio to keep skeleton ≈ real (CLS). */
+  .designer-hero--skel .designer-hero__body { min-height: 600px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .az-name.is-highlight a { animation: none; }
+}

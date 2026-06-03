@@ -38,6 +38,13 @@
       flex: none;
     }
   </style>
+  <script>
+    /* Page créateur (?designer=<slug>) — flag the document BEFORE first
+       paint so styles.css can suppress the generic catalog hero / filterbar
+       and offset the content under the fixed nav, with no flash or layout
+       jump (CLS). The designer-hero is injected by the module below. */
+    try { if (new URLSearchParams(location.search).get("designer")) document.documentElement.classList.add("plp-designer"); } catch (e) {}
+  </script>
 </head>
 <body>
   <div id="site-header"></div>
@@ -57,6 +64,30 @@
   </section>
 
   <div class="wrap" data-breadcrumb></div>
+
+  <!-- Page créateur · en-tête portrait + bio (rempli par le module ;
+       masqué/inerte en mode catalogue normal). -->
+  <div class="wrap" data-designer-hero></div>
+  <script>
+    /* Reserve the designer-hero height before /designers-data.json resolves
+       so the swap skeleton → real content doesn't shift the page (CLS). On
+       desktop the portrait (4:5) dominates the row height, so the variable
+       bio length barely moves the layout. */
+    (function () {
+      if (!document.documentElement.classList.contains("plp-designer")) return;
+      var el = document.querySelector("[data-designer-hero]");
+      if (!el) return;
+      el.innerHTML =
+        '<div class="designer-hero designer-hero--skel">'
+      +   '<div class="designer-hero__photo"></div>'
+      +   '<div class="designer-hero__body">'
+      +     '<div class="dh-skel dh-skel--title"></div>'
+      +     '<div class="dh-skel dh-skel--line"></div>'.repeat(7)
+      +     '<div class="dh-skel dh-skel--brands"></div>'
+      +   '</div>'
+      + '</div>';
+    })();
+  </script>
 
   <div class="wrap plp-promo">
     <a class="plp-promo__link" href="/collections/promotions">
@@ -106,7 +137,10 @@
   </section>
 
   <section class="section wrap">
-    <h2 class="serif catalogue-head" data-grid-title>Tout le catalogue</h2>
+    <div class="grid-head">
+      <h2 class="serif catalogue-head" data-grid-title>Tout le catalogue</h2>
+      <span class="plp-count grid-head__count" data-piece-count></span>
+    </div>
     <div class="pgrid" data-grid></div>
     <div class="loadmore-wrap" data-loadmore-wrap style="display:none">
       <button class="btn btn--outline" data-loadmore>Voir plus</button>
@@ -220,6 +254,8 @@
     const subEl = document.querySelector("[data-plp-sub]");
     const gridTitle = document.querySelector("[data-grid-title]");
     const breadcrumbEl = document.querySelector("[data-breadcrumb]");
+    const pieceCountEl = document.querySelector("[data-piece-count]");
+    const designerHeroEl = document.querySelector("[data-designer-hero]");
 
     const params = new URLSearchParams(location.search);
     // Pretty Shopify-style URL: /collections/<handle> sets the coll filter
@@ -298,6 +334,9 @@
     function render() {
       const all = base();
       countEl.textContent = `${all.length} pièce${all.length > 1 ? "s" : ""}`;
+      // Designer page hides the filterbar (and its count) — mirror the count
+      // next to the "Les pièces de …" grid title instead.
+      if (pieceCountEl) pieceCountEl.textContent = (state.designer && state.designer.name) ? countEl.textContent : "";
 
       // Promo bandeau on outdoor entry pages — but NOT on the promo
       // collection itself (the page header already says everything when
@@ -314,8 +353,10 @@
         promoSlot.innerHTML = showBandeau ? promoBandeauHTML("plp") : "";
       }
 
-      // Always-on "most popular" strip (top 4), independent of the chosen sort.
-      const showPop = all.length > 4;
+      // Always-on "most popular" strip (top 4), independent of the chosen
+      // sort. Suppressed on a designer page — there, the whole grid IS that
+      // designer's pieces, so a "most popular" split would only fragment it.
+      const showPop = all.length > 4 && !state.designer;
       popSection.style.display = showPop ? "" : "none";
       const pop = showPop ? all.slice().sort((a, b) => popScore(b) - popScore(a)).slice(0, 4) : [];
       if (showPop) popGrid.innerHTML = pop.map(productCard).join("");
@@ -332,7 +373,12 @@
       // there is another batch upstream. Client-side filters do NOT hide
       // it (a filter can match items in unfetched pages).
       moreWrap.style.display = state.hasMore ? "flex" : "none";
-      gridTitle.textContent = showPop ? "Tout le catalogue" : "Le catalogue";
+      // Designer page: the grid title names the créateur ("Les pièces de …").
+      // An introuvable slug (name === null) leaves it blank — the hero already
+      // says "Designer introuvable".
+      gridTitle.textContent = state.designer
+        ? (state.designer.name ? `Les pièces de ${state.designer.name}` : "")
+        : (showPop ? "Tout le catalogue" : "Le catalogue");
 
       chipsBar.querySelectorAll(".chip").forEach((c) => c.classList.toggle("is-active", c.dataset.cat === state.cat));
       // Keep the mobile <select> in sync with the active category so a
@@ -454,26 +500,84 @@
      // state.designer = null + show a friendly empty state.
     async function resolveDesigner() {
       if (!designerSlug) return;
+      // Sentinel used whenever the slug can't be resolved (unknown slug OR
+      // designers-data.json unreachable). Keeps endpointFor() on the
+      // "__no_designer_match__" branch — never leaks the full catalogue — and
+      // drives the coherent "Designer introuvable" state, which matters because
+      // the .plp-designer flag has already (irreversibly) hidden the subhero /
+      // filterbar / popular strip from the URL alone.
+      const notFound = () => { state.designer = { slug: designerSlug, name: null, tags: [] }; };
       try {
         const r = await fetch("/designers-data.json", { cache: "force-cache" });
-        if (!r.ok) return;
+        if (!r.ok) { notFound(); return; }
         const data = await r.json();
         const d = (data.designers || []).find((x) => x.slug === designerSlug);
         if (d) {
-          state.designer = { slug: d.slug, name: d.name, tags: (d.tags && d.tags.length) ? d.tags : [d.slug] };
+          // V3.1: also carry the editorial fields so the designer-hero
+          // (portrait + bio + "Édité par") can render without a second fetch.
+          state.designer = {
+            slug: d.slug, name: d.name,
+            tags: (d.tags && d.tags.length) ? d.tags : [d.slug],
+            photo: d.photo || "", bio: d.bio || "",
+            brands: d.brands || [], brandHrefs: d.brandHrefs || [],
+          };
         } else {
           // Slug not found → flag with a name=null sentinel so render()
           // can switch to "Aucun produit pour ce designer".
-          state.designer = { slug: designerSlug, name: null, tags: [] };
+          notFound();
         }
       } catch (e) {
+        notFound();
         console.warn("[plp] designers-data unavailable:", e.message);
       }
+    }
+
+    // Designer-hero header — portrait + name + bio + "Édité par : <marques>".
+    // Replaces the reserved skeleton injected at parse. Only runs on
+    // ?designer=<slug> pages; clears the slot if the record is unavailable.
+    function renderDesignerHero() {
+      if (!designerHeroEl) return;
+      const d = state.designer;
+      if (!d) { designerHeroEl.innerHTML = ""; return; }   // data unavailable → drop skeleton
+      if (!d.name) {
+        designerHeroEl.innerHTML =
+          `<div class="designer-hero designer-hero--empty">`
+        +   `<div class="designer-hero__body">`
+        +     `<h1 class="designer-hero__name serif">Designer introuvable</h1>`
+        +     `<p class="designer-hero__bio">Ce créateur n'existe pas ou n'est plus référencé. `
+        +       `<a href="/designers.html">Voir tous les designers →</a></p>`
+        +   `</div>`
+        + `</div>`;
+        return;
+      }
+      const brands = (d.brands || []).map((b, i) => {
+        const href = d.brandHrefs?.[i];
+        return href
+          ? `<a href="${escapeHtml(href)}">${escapeHtml(b)}</a>`
+          : `<span>${escapeHtml(b)}</span>`;
+      }).join('<span class="designer-hero__brand-sep" aria-hidden="true"> · </span>');
+      const editor = brands
+        ? `<p class="designer-hero__editor"><span class="designer-hero__editor-label">Édité par&nbsp;:</span> ${brands}</p>`
+        : "";
+      const bio = d.bio ? `<p class="designer-hero__bio">${escapeHtml(d.bio)}</p>` : "";
+      const photo = d.photo
+        ? `<picture><source type="image/webp" srcset="${escapeHtml(d.photo.replace(/\.jpg$/, "-640.webp"))}" /><img class="designer-hero__photo" src="${escapeHtml(d.photo)}" width="640" height="800" alt="${escapeHtml(d.name)}" fetchpriority="high" /></picture>`
+        : "";
+      designerHeroEl.innerHTML =
+        `<div class="designer-hero">`
+      +   photo
+      +   `<div class="designer-hero__body">`
+      +     `<h1 class="designer-hero__name serif">${escapeHtml(d.name)}</h1>`
+      +     bio
+      +     editor
+      +   `</div>`
+      + `</div>`;
     }
 
     async function loadInitial() {
       try {
         await resolveDesigner();
+        renderDesignerHero();
         const [pageData, brands, colls] = await Promise.all([
           fetchPage(null),
           fetchBrands(),

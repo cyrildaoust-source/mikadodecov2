@@ -15,9 +15,10 @@
         "/collections/artek",
         "/collections/iittala"
       ],
-      "bio": "Architecte finlandais (1898-1976), fondateur d'Artek en 1935. Pionnier du modernisme nordique.",
+      "bio": "Architecte et designer finlandais, Alvar Aalto (Kuortane, 1898 – Helsinki, 1976) est diplômé en architecture de l'École polytechnique d'Helsinki (Helsinki University of Technology) en 1921. Figure majeure du mouvement moderne, il en infléchit la rigueur fonctionnaliste par des formes organiques, une attention à l'ergonomie et un usage privilégié des matériaux naturels, le bois de bouleau en particulier. Ses recherches sur le cintrage du contreplaqué donnent naissance à des pièces produites en série, conçues comme le prolongement de son architecture. En 1935, il cofonde l'éditeur Artek, qui diffuse encore son mobilier aujourd'hui. Parmi ses créations devenues des classiques figurent le fauteuil 41 « Paimio » (conçu en 1932 pour un sanatorium), le tabouret empilable Stool 60 et son pied en L cintré (1933) — tous deux édités par Artek —, ainsi que le vase « Savoy » aux contours libres édité par Iittala (1936).",
       "photo": "/images/designers/alvar-aalto.jpg",
-      "sortKey": "Aalto"
+      "sortKey": "Aalto",
+      "featured": true
     },
     {
       "name": "Eero Aarnio",
@@ -149,9 +150,10 @@
         "/collections/vitra",
         "/collections/hay"
       ],
-      "bio": "Duo français, frères, l'une des signatures contemporaines majeures. Palissade chez HAY.",
+      "bio": "Ronan (né en 1971) et Erwan (né en 1976) Bouroullec sont deux designers français, originaires de Quimper, en Bretagne. Formés respectivement à l'École nationale supérieure des arts décoratifs de Paris et à l'école d'art de Cergy, les deux frères travaillent ensemble depuis 1999. Leur démarche explore des formes organiques et des systèmes modulaires, du meuble au textile jusqu'à l'espace urbain. Leur collaboration avec Vitra a donné naissance au paravent Algues (2004), au canapé Alcove (2006) et à la chaise Vegetal (2009), inspirée de structures végétales. Pour HAY, ils signent la collection d'extérieur Palissade (2015). En 2014, leur travail a été distingué par la London Design Medal.",
       "photo": "/images/designers/ronan-erwan-bouroullec.jpg",
-      "sortKey": "Bouroullec"
+      "sortKey": "Bouroullec",
+      "featured": true
     },
     {
       "name": "Andrea Branzi",
@@ -181,9 +183,10 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "Designer italien (1918-2002), maître de la fonctionnalité poétique. Plus de 150 produits chez Alessi.",
+      "bio": "Achille Castiglioni (Milan, 1918 - Milan, 2002) est un designer et architecte italien, diplômé en architecture du Politecnico di Milano en 1944. Il développe l'essentiel de son œuvre aux côtés de son frère Pier Giacomo (1913-1968), dans une démarche fondée sur la fonction, l'usage et la curiosité. Héritier de l'objet trouvé cher à Duchamp, il détourne des éléments existants, comme le tabouret Mezzadro et son siège de tracteur (Zanotta, 1957). Avec Pier Giacomo, il signe en 1962 le lampadaire Arco pour Flos, dont l'arc d'acier et le socle de marbre éclairent une table sans plafonnier. Seul, il dessine plus tard les couverts Dry pour Alessi (1982), en production depuis cette date. Plusieurs fois lauréat du Compasso d'Oro, il enseigne au Politecnico di Torino puis, à partir de 1980, à celui de Milan.",
       "photo": "/images/designers/achille-castiglioni.jpg",
-      "sortKey": "Castiglioni"
+      "sortKey": "Castiglioni",
+      "featured": true
     },
     {
       "name": "Michel Charlot",
@@ -214,8 +217,9 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
-      "photo": "/images/designers/david-chipperfield.jpg"
+      "bio": "Né à Londres en 1953, l'architecte britannique David Chipperfield se forme à la Kingston School of Art puis à l'Architectural Association de Londres, avant de fonder son agence en 1985. Sa démarche se reconnaît à un minimalisme rigoureux et à un dialogue patient avec le contexte et l'histoire, dont témoigne la reconstruction du Neues Museum de Berlin. Cette sobriété guide aussi son travail d'objet : pour Alessi, il signe en 2009 la collection de table Tonale, en grès aux tonalités sourdes inspirées des natures mortes de Giorgio Morandi, conçue pour l'usage quotidien. Son œuvre architecturale a été distinguée par le RIBA Stirling Prize (2007, pour le Musée de la littérature moderne de Marbach), la Royal Gold Medal du RIBA (2011), le Praemium Imperiale (2013) et le prix Pritzker (2023). Il a été anobli en 2010.",
+      "photo": "/images/designers/david-chipperfield.jpg",
+      "featured": true
     },
     {
       "name": "Antonio Citterio",
@@ -231,9 +235,10 @@
         "/collections/vitra",
         "/collections/tradition"
       ],
-      "bio": "Architecte et designer italien né en 1950. Grand Repos chez Vitra, collaborations chez &Tradition.",
+      "bio": "Né en 1950 à Meda, en Lombardie, Antonio Citterio est un architecte et designer industriel italien. Il étudie l'architecture au Politecnico di Milano, où il ouvre son propre studio dès 1972, avant la fin de ses études (diplôme en 1975). Son travail se distingue par une rigueur géométrique discrète et une recherche de pérennité plutôt que d'effet. Il reçoit le Compasso d'Oro à deux reprises : en 1987 pour le canapé Sity édité par B&B Italia, puis en 1994 pour le système de rangement Mobil édité par Kartell (conçu avec Glen Oliver Löw), aujourd'hui conservé dans les collections du MoMA de New York. Il collabore avec Vitra depuis 1988, où il signe notamment le Grand Sofà. En 2000, il fonde avec Patricia Viel l'agence aujourd'hui connue sous le nom d'ACPV Architects, active à l'international.",
       "photo": "/images/designers/antonio-citterio.jpg",
-      "sortKey": "Citterio"
+      "sortKey": "Citterio",
+      "featured": true
     },
     {
       "name": "Michele De Lucchi",
@@ -248,8 +253,9 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
-      "photo": "/images/designers/michele-de-lucchi.jpg"
+      "bio": "Né en 1951 à Ferrare, Michele De Lucchi est un architecte et designer italien diplômé en architecture à Florence (1975). Figure de la scène radicale et expérimentale des années 1970-1980, il participe aux mouvements Studio Alchimia puis Memphis, où il explore une approche libre de la couleur, de la forme et du décor. En 1987, il dessine avec Giancarlo Fassina la lampe Tolomeo pour Artemide, devenue une référence et couronnée du Compasso d'Oro en 1989. Directeur du design d'Olivetti de 1988 à 2002, il fonde en 1990 Produzione Privata pour réunir techniques artisanales et expérimentation. Pour Alessi, il conçoit la cafetière Pulcina (2015) et la collection d'appareils ménagers Plissé, dont la bouilloire électrique (2018). Il a reçu le Compasso d'Oro à la carrière en 2022.",
+      "photo": "/images/designers/michele-de-lucchi.jpg",
+      "featured": true
     },
     {
       "name": "Julien De Smedt",
@@ -281,9 +287,10 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Couple américain (1907-1978 / 1912-1988), pionniers du mid-century moderne. Lounge Chair, Plastic Chair.",
+      "bio": "Charles Eames (1907-1978) et Ray Eames, née Kaiser (1912-1988), forment l'un des duos majeurs du design américain du XXe siècle. Charles étudie l'architecture à la Washington University de Saint-Louis ; Ray se forme à la peinture abstraite auprès de Hans Hofmann. Ils se rencontrent à la Cranbrook Academy of Art en 1940 et se marient en 1941, devenant partenaires de création. Leur recherche porte sur la forme moulée au service du corps : pionniers du contreplaqué cintré, puis du premier siège à coque en plastique produit en série. Leur démarche se résume par une formule restée célèbre : « le meilleur pour le plus grand nombre, au moindre coût ». De la chaise en contreplaqué moulé LCW (1945) aux coques en plastique moulé (1950) jusqu'au Lounge Chair (1956), leurs créations sont aujourd'hui éditées en Europe par Vitra et ailleurs par Herman Miller.",
       "photo": "/images/designers/charles-ray-eames.jpg",
-      "sortKey": "Eames"
+      "sortKey": "Eames",
+      "featured": true
     },
     {
       "name": "Naoto Fukasawa",
@@ -298,8 +305,9 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
-      "photo": "/images/designers/naoto-fukasawa.jpg"
+      "bio": "Né en 1956 à Kōfu, dans la préfecture de Yamanashi, Naoto Fukasawa est un designer industriel japonais. Diplômé en design produit de l'université d'art Tama en 1980, il travaille pour ID Two (devenu IDEO), dont il dirige le bureau de Tokyo à partir de 1996, avant de fonder son propre studio en 2003. Sa démarche se résume dans le concept de « Without Thought » : observer les gestes inconscients du quotidien pour concevoir des objets dont l'usage va de soi, sans mode d'emploi. Son lecteur CD mural dessiné pour Muji en 1999, dont la cordelette rappelle un ventilateur, est entré dans la collection du MoMA. Pour Alessi, il signe la collection de couverts et de vaisselle Itsumo. Il a reçu le prix Isamu Noguchi en 2018.",
+      "photo": "/images/designers/naoto-fukasawa.jpg",
+      "featured": true
     },
     {
       "name": "Frank Gehry",
@@ -379,7 +387,8 @@
       ],
       "bio": "Couple danois fondateur de HAY en 2002. Design accessible et coloré.",
       "photo": "/images/designers/mette-rolf-hay.jpg",
-      "sortKey": "Hay"
+      "sortKey": "Hay",
+      "hidden": true
     },
     {
       "name": "Sergio Herman",
@@ -411,7 +420,8 @@
         "/collections/alessi"
       ],
       "bio": "",
-      "photo": "/images/designers/toyo-ito.jpg"
+      "photo": "/images/designers/toyo-ito.jpg",
+      "hidden": true
     },
     {
       "name": "Arne Jacobsen",
@@ -425,9 +435,10 @@
       "brandHrefs": [
         "/collections/tradition"
       ],
-      "bio": "Architecte et designer danois (1902-1971), icône du design scandinave. Chaise Œuf, Chaise Fourmi.",
+      "bio": "Figure majeure du modernisme danois, Arne Jacobsen (1902-1971) est né et mort à Copenhague. Architecte de formation, il étudie à l'Académie royale des beaux-arts du Danemark (1924-1927) avant de devenir l'un des représentants du fonctionnalisme nordique. Sa démarche repose sur l'idée d'œuvre totale : du bâtiment au mobilier, du luminaire aux poignées de porte, chaque élément participe d'un même langage. Avec l'éditeur Fritz Hansen, il signe des assises devenues des références : la chaise Fourmi (Ant, 1952), la Série 7 (modèle 3107, 1955), puis les fauteuils Egg et Swan (1958), conçus pour l'hôtel SAS Royal de Copenhague. Dès 1929, il dessine la lampe Bellevue, aujourd'hui rééditée par &Tradition, qui produit également le canapé Mayor (1942), créé avec Flemming Lassen.",
       "photo": "/images/designers/arne-jacobsen.jpg",
-      "sortKey": "Jacobsen"
+      "sortKey": "Jacobsen",
+      "featured": true
     },
     {
       "name": "Anita Le Grelle",
@@ -475,7 +486,8 @@
       ],
       "bio": "Designer danoise née en 1972, lignes épurées et matières chaleureuses.",
       "photo": "/images/designers/cecilie-manz.jpg",
-      "sortKey": "Manz"
+      "sortKey": "Manz",
+      "hidden": true
     },
     {
       "name": "Enzo Mari",
@@ -506,8 +518,9 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
-      "photo": "/images/designers/alessandro-mendini.jpg"
+      "bio": "Né à Milan en 1931 et mort dans cette même ville en 2019, Alessandro Mendini est une figure majeure du design italien de la seconde moitié du XXe siècle. Diplômé en architecture du Politecnico di Milano en 1959, il fut autant théoricien que créateur : il dirigea les revues Casabella puis Domus, et cofonda la Domus Academy en 1982. Au sein du Studio Alchimia, il prit part aux courants radical et postmoderne, défendant un design narratif et ouvertement décoratif. Sa Poltrona di Proust (1978), fauteuil néo-baroque dont le tissu reprend une touche pointilliste, en demeure l'emblème. Chez Alessi, il signa en 1994 le tire-bouchon Anna G., devenu une icône domestique. Il reçut trois fois le Compasso d'Oro (1979, 1981, 2014).",
+      "photo": "/images/designers/alessandro-mendini.jpg",
+      "featured": true
     },
     {
       "name": "Marie Michielssen",
@@ -541,9 +554,10 @@
         "/collections/hay",
         "/collections/alessi"
       ],
-      "bio": "Designer britannique né en 1959, philosophie « Super Normal » — formes essentielles.",
+      "bio": "Né à Londres en 1959, Jasper Morrison est un designer britannique formé au Kingston Polytechnic (Bachelor of Design, 1982), au Royal College of Art (diplômé en 1985) puis à la Hochschule der Künste de Berlin. Il fonde son Office for Design à Londres en 1986. Sa démarche cherche des objets qui se fondent dans le quotidien : simplicité dépouillée, justesse des proportions et familiarité de forme, sensibilité qu'il développe en 2006 avec Naoto Fukasawa sous le nom de « Super Normal ». On lui doit la Air-Chair pour Magis (1999), chaise monobloc en polypropylène moulé par injection de gaz, la lampe Glo-Ball pour Flos (1998), la Cork Family en granulé de liège pressé pour Vitra (2004) et le tire-bouchon Socrates pour Alessi (1998). Royal Designer for Industry, lauréat du Compasso d'Oro, il a été fait Commandeur de l'Empire britannique (CBE).",
       "photo": "/images/designers/jasper-morrison.jpg",
-      "sortKey": "Morrison"
+      "sortKey": "Morrison",
+      "featured": true
     },
     {
       "name": "Pascale Naessens",
@@ -573,9 +587,10 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Designer américain visionnaire (1908-1986). Marshmallow Sofa, Coconut Chair et horloges iconiques chez Vitra.",
+      "bio": "Né en 1908 à Hartford (Connecticut) et mort en 1986 à New York, George Nelson est l'une des figures majeures du design américain du XXe siècle. Architecte de formation, diplômé de Yale puis lauréat du Prix de Rome (séjour à l'Académie américaine de Rome), il fut aussi auteur et critique, théoricien autant que praticien. Directeur du design de Herman Miller de 1947 à 1972, il y porta une vision moderniste et fit travailler de grands noms, des Eames à Isamu Noguchi. Son studio, George Nelson Associates, signa des pièces devenues des classiques : la Coconut Chair (1955), dont la coque évoque un huitième de noix de coco, le Marshmallow Sofa (1956) et ses dix-huit coussins ronds, ou encore les horloges Ball Clock, éditées par la Howard Miller Clock Company. Plusieurs de ces icônes du mobilier sont aujourd'hui éditées en Europe par Vitra.",
       "photo": "/images/designers/george-nelson.jpg",
-      "sortKey": "Nelson"
+      "sortKey": "Nelson",
+      "featured": true
     },
     {
       "name": "Nendo",
@@ -605,9 +620,10 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Sculpteur américano-japonais (1904-1988), créateur des lampes Akari en papier washi.",
+      "bio": "Sculpteur et designer américain, Isamu Noguchi (1904-1988) naît à Los Angeles, fils du poète japonais Yone Noguchi et de l'écrivaine américaine Léonie Gilmour. Formé d'abord auprès de Gutzon Borglum, il devient en 1927 l'assistant de Constantin Brâncuși à Paris, grâce à une bourse Guggenheim. De cette double culture naît une œuvre reliant Orient et Occident, où sculpture, mobilier et luminaire procèdent d'une même recherche de formes organiques. Sa Coffee Table de 1944, dont la dalle de verre repose sur deux pieds en bois, est éditée à l'origine par Herman Miller aux États-Unis. À partir de 1951, il conçoit à Gifu les Akari, luminaires de papier washi et bambou fabriqués par Ozeki. Vitra réédite ces pièces en Europe. Il reçoit la National Medal of Arts en 1987.",
       "photo": "/images/designers/isamu-noguchi.jpg",
-      "sortKey": "Noguchi"
+      "sortKey": "Noguchi",
+      "featured": true
     },
     {
       "name": "Norm Architects",
@@ -657,9 +673,10 @@
         "/collections/vitra",
         "/collections/tradition"
       ],
-      "bio": "Designer danois (1926-1998), icône pop des années 60-70. Panton Chair, Flowerpot.",
+      "bio": "Né en 1926 à Gamtofte, sur l'île de Fionie, et mort en 1998 à Copenhague, Verner Panton compte parmi les figures majeures du design danois du XXe siècle. Formé à l'architecture à l'Académie royale des beaux-arts de Copenhague, dont il sort diplômé en 1951, il débute dans l'atelier d'Arne Jacobsen avant de mener une carrière indépendante. Rompant avec le bois et la sobriété scandinaves, il explore les matières plastiques, les formes organiques et la couleur vive, jusqu'à concevoir des environnements immersifs mêlant mobilier, lumière et textile. Sa Panton Chair, imaginée en 1960 et développée avec Vitra pour la production en série en 1967, est la première chaise cantilever moulée d'une seule pièce et d'un seul matériau. On lui doit aussi la Living Tower (1969, Vitra) et la suspension Flowerpot (1968), éditée à l'origine par Louis Poulsen et aujourd'hui rééditée par &Tradition.",
       "photo": "/images/designers/verner-panton.jpg",
-      "sortKey": "Panton"
+      "sortKey": "Panton",
+      "featured": true
     },
     {
       "name": "Jean Prouvé",
@@ -673,9 +690,10 @@
       "brandHrefs": [
         "/collections/vitra"
       ],
-      "bio": "Architecte et ingénieur français (1901-1984), pionnier du mobilier industriel. Chaise Standard.",
+      "bio": "Né à Nancy en 1901 et mort dans la même ville en 1984, Jean Prouvé grandit dans le cercle de l'École de Nancy, autour de son père le peintre Victor Prouvé. Formé à l'École des beaux-arts de Nancy puis apprenti du ferronnier Émile Robert et de l'atelier Szabo, il reste autodidacte en architecture. Le Corbusier le qualifie de « constructeur » : Prouvé efface la frontière entre ingénierie, fabrication et design. Sa signature tient dans la tôle d'acier pliée, où la logique de production devient ligne. Plusieurs de ses pièces naissent de commandes utilitaires : le fauteuil Cité (1930), conçu pour la cité universitaire de Nancy, et la chaise Standard (1934), dont les piétements arrière en tôle pliée reportent l'essentiel des charges. Vitra réédite ces créations depuis 2002, en collaboration avec les héritiers du constructeur.",
       "photo": "/images/designers/jean-prouve.jpg",
-      "sortKey": "Prouvé"
+      "sortKey": "Prouvé",
+      "featured": true
     },
     {
       "name": "Aldo Rossi",
@@ -754,8 +772,9 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
-      "photo": "/images/designers/ettore-sottsass.jpg"
+      "bio": "Né à Innsbruck en 1917 et mort à Milan en 2007, Ettore Sottsass est une figure majeure du design italien du XXe siècle. Diplômé en architecture du Politecnico di Torino en 1939, il développe une approche qui rompt avec le fonctionnalisme strict de l'après-guerre, mêlant couleur, forme et charge symbolique aux objets du quotidien. Consultant pour Olivetti, il signe le calculateur Elea 9003 (Compasso d'Oro 1959) puis la machine à écrire portable Valentine (1969, avec Perry A. King). En décembre 1980, il fonde à Milan le groupe Memphis, dont la bibliothèque Carlton (1981) devient emblématique. Pour Alessi, il dessine le service à condiments 5070 (1978), aujourd'hui un classique, et la ménagère Nuovo Milano (1987, avec Alberto Gozzi), lauréate du XVIe Compasso d'Oro.",
+      "photo": "/images/designers/ettore-sottsass.jpg",
+      "featured": true
     },
     {
       "name": "Philippe Starck",
@@ -769,9 +788,10 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "Designer français né en 1949, prolifique et reconnaissable. Juicy Salif iconique chez Alessi.",
+      "bio": "Né en 1949 à Paris, Philippe Starck est l'une des figures majeures du design français. Formé à l'École Nissim de Camondo, il accède à la notoriété au début des années 1980, notamment après l'aménagement, en 1983, des appartements privés de l'Élysée pour le président François Mitterrand. Son travail embrasse le mobilier, les objets du quotidien, l'architecture et les intérieurs, et repose sur une idée de « design démocratique » : améliorer la qualité tout en abaissant le prix pour la rendre accessible au plus grand nombre. Pour lui, un objet doit d'abord être utile avant d'être beau. Parmi ses pièces les plus connues figurent le presse-agrumes Juicy Salif (1990), en aluminium poli, édité par Alessi, et la chaise Louis Ghost (2002) en polycarbonate, réinterprétation d'un fauteuil Louis XVI éditée par Kartell. Le Juicy Salif figure dans les collections permanentes du MoMA et du Metropolitan Museum of Art à New York.",
       "photo": "/images/designers/philippe-starck.jpg",
-      "sortKey": "Starck"
+      "sortKey": "Starck",
+      "featured": true
     },
     {
       "name": "Luc Tuymans",
@@ -801,9 +821,10 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "Architecte et designer espagnole née en 1961, basée à Milan. Style hybride italo-espagnol.",
+      "bio": "Née en 1961 à Oviedo, l'architecte et designer espagnole Patricia Urquiola étudie l'architecture à Madrid puis au Politecnico di Milano, où elle obtient son diplôme en 1989 sous la direction d'Achille Castiglioni. Après avoir travaillé avec Vico Magistretti puis chez Lissoni Associati (Piero Lissoni), elle fonde son studio à Milan en 2001. Son travail mêle savoir-faire artisanal et technologie, avec un goût marqué pour la matière, la couleur et la couture. Pour Moroso, elle signe le fauteuil Fjord (2002), la chaise longue Antibodi (2006) et l'assise tressée Tropicalia (2008) ; pour B&B Italia, le canapé modulaire Tufty-Time (2005). Chez Alessi, elle dessine la batterie de cuisine Edo (2017) et les couverts Clivo. Elle a reçu la Médaille d'or du Mérite des Beaux-Arts décernée par l'État espagnol (2011).",
       "photo": "/images/designers/patricia-urquiola.jpg",
-      "sortKey": "Urquiola"
+      "sortKey": "Urquiola",
+      "featured": true
     },
     {
       "name": "Roos Van de Velde",
@@ -833,9 +854,10 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "Architecte belge né en 1962, signature minimaliste épurée. Collections céramique pour Serax.",
+      "bio": "Né en 1962 à Lokeren, l'architecte et designer belge Vincent Van Duysen se forme à l'école d'architecture Sint-Lucas de Gand, puis travaille à Milan auprès d'Aldo Cibic avant de fonder son studio à Anvers en 1989. Son langage privilégie la fonction, la durabilité et le confort : des volumes épurés, des matériaux naturels et des palettes sobres composent des intérieurs tactiles et sereins. Depuis 2016, il est directeur créatif de Molteni&C, pour qui il dessine notamment le système de rangement Gliss Master et le lit Ribbon. Pour l'éditeur belge Serax, il signe les services de table Cena et Passe-Partout. Il a reçu le Henry van de Velde Lifetime Achievement Award en 2019.",
       "photo": "/images/designers/vincent-van-duysen.jpg",
-      "sortKey": "Van Duysen"
+      "sortKey": "Van Duysen",
+      "featured": true
     },
     {
       "name": "Marcel Wanders",
@@ -850,8 +872,9 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
-      "photo": "/images/designers/marcel-wanders.jpg"
+      "bio": "Né en 1963 à Boxtel, Marcel Wanders est un designer industriel et d'intérieur néerlandais, diplômé cum laude de l'Institut des arts d'Arnhem en 1988. Sa signature mêle savoir-faire artisanal et procédés contemporains, ornementation narrative et imaginaire poétique, à rebours du minimalisme dominant. Il se fait connaître en 1996 avec la Knotted Chair, fauteuil en fibres tressées imprégnées de résine époxy développé au sein de Droog Design, dont l'édition commerciale est ensuite assurée par Cappellini. En 2001, il cofonde avec Casper Vissers la maison d'édition Moooi à Amsterdam, dont il est directeur artistique. Pour Alessi, il conçoit la collection d'arts de la table Dressed (2011), dont les décors délicats se nichent dans les parties les moins visibles des objets, puis la collection Circus (2016), peuplée de personnages forains.",
+      "photo": "/images/designers/marcel-wanders.jpg",
+      "featured": true
     },
     {
       "name": "Sori Yanagi",
@@ -867,7 +890,8 @@
       ],
       "bio": "Designer japonais pionnier du modernisme oriental (1915-2011). Butterfly Stool (1954), iconique chez Vitra.",
       "photo": "/images/designers/sori-yanagi.jpg",
-      "sortKey": "Yanagi"
+      "sortKey": "Yanagi",
+      "hidden": true
     }
   ]
 }
