@@ -174,7 +174,7 @@ export async function fetchCollections() {
 let _brandHandles = null;
 export function loadBrandHandles() {
   if (!_brandHandles) {
-    _brandHandles = fetch("/mega-menu-brands.json", { cache: "force-cache" })
+    _brandHandles = fetch("/mega-menu-brands.json", { cache: "no-cache" })
       .then((r) => (r.ok ? r.json() : { brands: [] }))
       .then((d) => {
         const map = {};
