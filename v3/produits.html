@@ -151,7 +151,8 @@
 
   <script type="module">
     import { initShell, fetchProducts, fetchBrands, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, isPromoEteActive, promoBandeauHTML, breadcrumbHTML, PROMO_ETE_2026 } from "/shared.js";
-    initShell({ active: "Mobilier", transparentNav: true });
+    // initShell is called below — the active nav entry depends on the route
+    // (designer / brand / mobilier), so it waits until the URL is parsed.
 
     const CAT_LABEL = { tous:"Le catalogue", assises:"Assises", tables:"Tables", luminaires:"Luminaires", rangements:"Rangements", objets:"Objets", exterieur:"Extérieur" };
 
@@ -281,6 +282,16 @@
     // metadata (name + tags) is fetched from /designers-data.json
     // before the first product fetch.
     const designerSlug = params.get("designer") || "";
+
+    // Active nav entry — mirrors the breadcrumb level (same BRAND_HANDLES test):
+    // a designer slug -> "Designers"; a brand (?brand= or /collections/<brand
+    // handle>) -> "Marques"; everything else (catalogue, ?cat, ?tag, a Mobilier
+    // collection like /collections/chaises) -> "Mobilier".
+    const activeNav = designerSlug
+      ? "Designers"
+      : (params.get("brand") || BRAND_HANDLES.has(collFromPath)) ? "Marques" : "Mobilier";
+    initShell({ active: activeNav, transparentNav: true });
+
     const state = { coll: collFromPath, cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false, designer: null };
 
     // Instant paint before the /api/collection/<handle>/products fetch
