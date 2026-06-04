@@ -1,7 +1,7 @@
 /* ============================================================
    Mikadodeco · design system
    Identity decisions in MIKADO_IDENTITY.md.
-   - Warm base #f8f5ef + brown-black ink + ROYAL-BLUE signature (#28408F); promo = ink label
+   - Warm base #f8f5ef + brown-black ink + ROYAL-BLUE signature (#38529F); promo = ink label
    - Cormorant Garamond display (matches logo) + Neue Haas Grotesk body
    - Signature: royal-blue accent (measured · carries primary CTAs) + warm-greige product tiles
    ============================================================ */
@@ -69,7 +69,7 @@
 
   /* signature royal blue · premium accent (measured, not an omnipresent fill).
      DARK now → when used as a BACKGROUND, text must be --paper (cream). */
-  --accent:     #28408F;   /* royal blue · links text, rules, underlines, btn--blue bg */
+  --accent:     #38529F;   /* royal blue · links text, rules, underlines, btn--blue bg */
   --accent-ink: #1C2F6B;   /* deep royal · link/hover text on cream + btn hover bg */
   --accent-soft:#ECEFF7;   /* pale blue tint · soft panels (light bg, dark text) */
 
