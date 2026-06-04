@@ -2,9 +2,10 @@
 /**
  * Génère le jeu complet de favicons à partir de logomikado.svg.
  *
- * Le logo est un logotype « Mikado » (serif) trop large pour être lisible à
- * 16-32 px. On en extrait donc la seule lettre « M » (deux sous-tracés du
- * path original), posée en bleu roi (--accent #38529F) sur un carré crème
+ * Le logo est un logotype « Mikado. » (serif) trop large pour être lisible à
+ * 16-32 px. On en extrait donc le monogramme « M. » — la lettre « M » (deux
+ * sous-tracés) suivie du point final du logo (dernier sous-tracé, ramené
+ * juste après le M) — posé en bleu roi (--accent #38529F) sur un carré crème
  * arrondi (--paper #f8f5ef) — la signature de la DA.
  *
  * Sorties (à la racine de v3/, servies en /<fichier> par vercel.json) :
@@ -26,18 +27,29 @@ const dMatch = logo.match(/<path d="([^"]+)"/);
 if (!dMatch) throw new Error('path introuvable dans logomikado.svg');
 const fullD = dMatch[1];
 
-// Les lettres suivantes commencent au « M20.1182 » (le « i »). Tout ce qui
-// précède = la lettre « M » (ses deux sous-tracés). Boîte ≈ 0..18.3 x 0..17.7.
-const cut = fullD.indexOf('M20.1182');
-if (cut === -1) throw new Error('séparation M/i introuvable — le logo a changé ?');
-const mPath = fullD.slice(0, cut).trim();
+// Le path est une suite de sous-tracés, chacun ouvert par un « moveto »
+// absolu (M<nombre>). On les sépare pour isoler les glyphes.
+const subs = fullD.split(/(?=M-?\d)/).filter(Boolean);
+// Les deux premiers = la lettre « M » ; le dernier = le point final « . ».
+const mPath = (subs[0] + subs[1]).trim();
+const dotPath = subs[subs.length - 1].trim();
+if (!/^M65\./.test(dotPath)) throw new Error('point final introuvable — le logo a changé ?');
+
+// Boîte du « M » ≈ 0..18.3 (x) ; le point natif est à x≈64.6 → on le ramène
+// juste après le M (bord gauche à 19.4) en le translatant de -45.2.
+const DOT_DX = 19.4 - 64.6;      // ≈ -45.2
+// Boîte combinée « M. » ≈ 0..22.1 (x) x 0..17.7 (y). Pour la caler dans un
+// carré de 64 avec ~8 px de marge : échelle 48/22.1 ≈ 2.17, centrée.
+const SCALE = 2.17;
+const TX = (64 - 22.1 * SCALE) / 2;   // ≈ 8.0
+const TY = (64 - 17.7 * SCALE) / 2;   // ≈ 12.8
 
 // 2. Construire favicon.svg ---------------------------------------------------
-// M natif ~18.3 x 17.7 → scale 2.4 ⇒ ~44 x 42.5, centré dans 64 (marges ~10).
 const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="12" fill="${CREAM}"/>
-  <g transform="translate(10 10.9) scale(2.4)" fill="${BLUE}">
+  <g transform="translate(${TX.toFixed(2)} ${TY.toFixed(2)}) scale(${SCALE})" fill="${BLUE}">
     <path d="${mPath}"/>
+    <path transform="translate(${DOT_DX.toFixed(2)} 0)" d="${dotPath}"/>
   </g>
 </svg>
 `;
