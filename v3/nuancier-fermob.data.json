@@ -680,11 +680,6 @@
           "name": "Bleu abysse",
           "hex": "#0c1b31",
           "title": "Profondément mystérieux"
-        },
-        {
-          "name": "Vert opaline",
-          "hex": "#b7edc7",
-          "title": "La couleur caméléon du nuancier"
         }
       ]
     }
@@ -1077,11 +1072,6 @@
         }
       ],
       "association4": [
-        {
-          "name": "Capucine",
-          "hex": "#e84536",
-          "title": "Une fine fleur de la couleur qui symbolise les amoureux."
-        },
         {
           "name": "Gris argile",
           "hex": "#d1ccbe",
