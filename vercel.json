@@ -1,40 +1,41 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/index.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": "data/**" }
-    },
-    { "src": "v3/**", "use": "@vercel/static" }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "headers": { "cache-control": "no-store" },
-      "dest": "/api/index.js"
-    },
-    { "src": "/v3/(.*)", "status": 301, "headers": { "Location": "/$1" } },
-    { "src": "/v3", "status": 301, "headers": { "Location": "/" } },
-    {
-      "src": "/(.*\\.(?:css|js|mjs))(?:\\?.*)?$",
-      "headers": { "cache-control": "public, max-age=0, must-revalidate" },
-      "continue": true
-    },
-    {
-      "src": "/(.*\\.html(?:\\?.*)?)?$",
-      "headers": { "cache-control": "public, max-age=0, must-revalidate" },
-      "continue": true
-    },
-    {
-      "src": "/(.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|woff2?|ttf|eot|ico))",
-      "headers": { "cache-control": "public, max-age=31536000, immutable" },
-      "dest": "/v3/$1"
-    },
-    { "src": "/(.*\\.[a-zA-Z0-9]+)", "dest": "/v3/$1" },
-    { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
-    { "src": "/collections/(.+)", "dest": "/v3/produits.html" },
-    { "src": "/", "dest": "/v3/index.html" },
-    { "src": "/(.+)", "dest": "/v3/$1.html" }
-  ]
+    "version": 2,
+    "builds": [
+          {
+                  "src": "api/index.js",
+                  "use": "@vercel/node",
+                  "config": { "includeFiles": "data/**" }
+          },
+          { "src": "v3/**", "use": "@vercel/static" }
+    ],
+    "routes": [
+          {
+                  "src": "/api/(.*)",
+                  "headers": { "cache-control": "no-store" },
+                  "dest": "/api/index.js"
+          },
+          { "src": "/nos-produits(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
+          { "src": "/v3/(.*)", "status": 301, "headers": { "Location": "/$1" } },
+          { "src": "/v3", "status": 301, "headers": { "Location": "/" } },
+          {
+                  "src": "/(.*\\.(?:css|js|mjs))(?:\\?.*)?$",
+                  "headers": { "cache-control": "public, max-age=0, must-revalidate" },
+                  "continue": true
+          },
+          {
+                  "src": "/(.*\\.html(?:\\?.*)?)?$",
+                  "headers": { "cache-control": "public, max-age=0, must-revalidate" },
+                  "continue": true
+          },
+          {
+                  "src": "/(.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|woff2?|ttf|eot|ico))",
+                  "headers": { "cache-control": "public, max-age=31536000, immutable" },
+                  "dest": "/v3/$1"
+          },
+          { "src": "/(.*\\.[a-zA-Z0-9]+)", "dest": "/v3/$1" },
+          { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
+          { "src": "/collections/(.+)", "dest": "/v3/produits.html" },
+          { "src": "/", "dest": "/v3/index.html" },
+          { "src": "/(.+)", "dest": "/v3/$1.html" }
+    ]
 }
