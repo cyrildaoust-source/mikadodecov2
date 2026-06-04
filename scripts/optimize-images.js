@@ -38,6 +38,11 @@ const CONTENT_WIDTHS = [800, 1280];
 const TILE_WIDTHS = [480, 800];
 // Designer portraits: single ~640px card thumbnail (capped to native).
 const DESIGNER_WIDTH = 640;
+// Brand collection-page heros: panoramic 3:1 banners (sources ~1.9MB, never
+// served). Full-bleed LCP → wide WebP ladder, plus ONE resized JPEG fallback
+// so the ~3% of browsers without WebP don't download the multi-MB original.
+const HEADER_WIDTHS = [1280, 1920, 2400];
+const HEADER_JPG_FALLBACK = 1920;
 
 // ── Build the job list ────────────────────────────────────────────────────
 // Each job: { src: absolute path, widths: [target px], label } — `widths`
@@ -74,6 +79,24 @@ try {
   console.warn('⚠  designers-data.json unreadable — skipping designer portraits:', e.message);
 }
 
+// 3.6 — brand collection-page heros. Every JPG dropped into
+// v3/images/brands/headers/ is processed generically (drop a <handle>.jpg,
+// add the handle to BRAND_HEADERS in produits.html, run this — done). The
+// `-<width>.jpg` regex guard skips OUR OWN resized JPEG output so a second
+// run doesn't treat `fatboy-1920.jpg` as a fresh source and recurse.
+const headersDir = path.join(IMG_DIR, 'brands', 'headers');
+if (fs.existsSync(headersDir)) {
+  fs.readdirSync(headersDir)
+    .filter(f => /\.jpe?g$/i.test(f) && !/-\d+\.jpe?g$/i.test(f))
+    .sort()
+    .forEach(f => jobs.push({
+      src: path.join(headersDir, f),
+      widths: HEADER_WIDTHS,
+      label: 'header',
+      jpgFallback: HEADER_JPG_FALLBACK,
+    }));
+}
+
 // ── Width capping: never upscale, always keep one variant at/under native ───
 function capWidths(targets, native) {
   const out = targets.filter(w => w < native);
@@ -99,6 +122,16 @@ async function generate() {
     const base = path.basename(job.src, path.extname(job.src));
     const widths = capWidths(job.widths, meta.width);
 
+    // produits.html hardcodes the brand-header srcset (-1280/-1920/-2400.webp
+    // + -1920.jpg). A source narrower than the widest target silently drops
+    // variants the front still requests → the banner 404s and falls back to
+    // the generic hero. Flag it at build time rather than letting it slip by.
+    if (job.label === 'header' && meta.width < Math.max(...job.widths)) {
+      console.warn(`⚠  header ${base}.jpg is ${meta.width}px wide (< ${Math.max(...job.widths)}px). ` +
+        `produits.html requests fixed -1280/-1920/-2400 variants, so some will be missing and this ` +
+        `brand will fall back to the generic hero. Use a ≥${Math.max(...job.widths)}px, 3:1 source.`);
+    }
+
     for (const w of widths) {
       const out = path.join(dir, `${base}-${w}.webp`);
       const fresh = fs.existsSync(out) && fs.statSync(out).mtimeMs >= srcStat.mtimeMs;
@@ -115,6 +148,24 @@ async function generate() {
       made++;
       if (job.label === 'hero') heroReport.push([path.basename(out), size]);
       console.log(`✓ ${job.label.padEnd(8)} ${path.basename(out).padEnd(28)} ${String(w).padStart(4)}w  ${fmtKB(size)}`);
+    }
+
+    // Resized JPEG fallback (headers only): the <img> fallback the browser
+    // uses when it can't do WebP. Capped to native, never the heavy original.
+    if (job.jpgFallback) {
+      const jw = Math.min(job.jpgFallback, meta.width);
+      const outJpg = path.join(dir, `${base}-${jw}.jpg`);
+      const freshJpg = fs.existsSync(outJpg) && fs.statSync(outJpg).mtimeMs >= srcStat.mtimeMs;
+      if (freshJpg && !FORCE) {
+        skipped++;
+      } else {
+        await sharp(job.src)
+          .resize({ width: jw, withoutEnlargement: true })
+          .jpeg({ quality: 80 })
+          .toFile(outJpg);
+        made++;
+        console.log(`✓ ${'hdr-jpg'.padEnd(8)} ${path.basename(outJpg).padEnd(28)} ${String(jw).padStart(4)}w  ${fmtKB(fs.statSync(outJpg).size)}`);
+      }
     }
   }
 
