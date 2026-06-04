@@ -48,17 +48,103 @@
        jump (CLS). The designer-hero is injected by the module below. */
     try { if (new URLSearchParams(location.search).get("designer")) document.documentElement.classList.add("plp-designer"); } catch (e) {}
   </script>
+  <!-- Hero resolution + preload. On a curated brand collection page it resolves
+       the brand banner, else the generic catalog hero; stashes the choice on
+       window.__hero and preloads the chosen WebP so the LCP fetch starts
+       immediately. The body <picture> reuses the SAME srcset → the LCP image is
+       fetched exactly once. -->
+  <script>
+    (function () {
+      // handle → display name for brands shipping a header banner. Sources
+      // MUST be ≥2400px wide, 3:1 (the markup hardcodes -1280/-1920/-2400.webp
+      // + -1920.jpg — see scripts/optimize-images.js, which warns otherwise).
+      // Drop the file, run `npm run images`, then add the handle here.
+      // Kriptonite ships a file but isn't curated → intentionally absent.
+      var HEADERS = {
+        "fatboy": "Fatboy",
+        "ferm-living": "Ferm Living",
+        "tradition": "&Tradition",
+        "vitra": "Vitra",
+        "string-furniture": "String Furniture",
+        "muuto": "Muuto",
+        "blomus": "Blomus"
+      };
+      var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
+      var h = m ? decodeURIComponent(m[1]).toLowerCase() : "";
+      var hero;
+      if (Object.prototype.hasOwnProperty.call(HEADERS, h)) {
+        var d = "/images/brands/headers/";
+        hero = {
+          brand: true,
+          srcset: d + h + "-1280.webp 1280w, " + d + h + "-1920.webp 1920w, " + d + h + "-2400.webp 2400w",
+          img: d + h + "-1920.jpg",
+          width: 2400, height: 800,
+          alt: HEADERS[h],
+          obj: "center 50%"
+        };
+      } else {
+        hero = {
+          brand: false,
+          srcset: "/images/produits-hero-640.webp 640w, /images/produits-hero-960.webp 960w, /images/produits-hero-1280.webp 1280w, /images/produits-hero-1600.webp 1600w",
+          img: "/images/produits-hero.jpg",
+          width: 1600, height: 2000,
+          alt: "Catalogue Mikadodeco",
+          obj: "center 70%"
+        };
+      }
+      window.__hero = hero;
+      var link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.type = "image/webp";
+      link.setAttribute("imagesrcset", hero.srcset);
+      link.setAttribute("imagesizes", "100vw");
+      link.setAttribute("fetchpriority", "high");
+      document.head.appendChild(link);
+    })();
+  </script>
 </head>
 <body>
   <div id="site-header"></div>
 
   <section class="subhero">
-    <picture>
-      <source type="image/webp"
-        srcset="/images/produits-hero-640.webp 640w, /images/produits-hero-960.webp 960w, /images/produits-hero-1280.webp 1280w, /images/produits-hero-1600.webp 1600w"
-        sizes="100vw" />
-      <img class="subhero__img" src="/images/produits-hero.jpg" width="1600" height="2000" alt="Catalogue Mikadodeco" fetchpriority="high" style="object-position: center 70%" />
-    </picture>
+    <!-- Hero <picture>, rendered from the choice resolved in <head>
+         (window.__hero). Its <source> srcset matches the head preload, so the
+         LCP image — already fetching in parallel with the CSS — is fetched
+         exactly once. The .subhero box is a fixed height in CSS, so the image
+         is never the layout driver (zero CLS). On a brand banner, onerror
+         drops the WebP <source> and swaps to the generic hero — a brand page
+         never shows a broken image. JS-less clients use the <noscript> hero. -->
+    <script>
+      (function () {
+        var hero = window.__hero || {
+          brand: false,
+          srcset: "/images/produits-hero-640.webp 640w, /images/produits-hero-960.webp 960w, /images/produits-hero-1280.webp 1280w, /images/produits-hero-1600.webp 1600w",
+          img: "/images/produits-hero.jpg", width: 1600, height: 2000,
+          alt: "Catalogue Mikadodeco", obj: "center 70%"
+        };
+        var enc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;"); };
+        var onerr = hero.brand
+          ? ' onerror="this.onerror=null;var s=this.parentNode.querySelector(\'source\');if(s)s.remove();' +
+            'this.src=\'/images/produits-hero.jpg\';this.style.objectPosition=\'center 70%\'"'
+          : '';
+        document.write(
+          '<picture>' +
+            '<source type="image/webp" srcset="' + hero.srcset + '" sizes="100vw">' +
+            '<img class="subhero__img" src="' + hero.img + '" width="' + hero.width + '" height="' + hero.height + '" ' +
+              'alt="' + enc(hero.alt) + '" fetchpriority="high" style="object-position:' + hero.obj + '"' + onerr + '>' +
+          '</picture>'
+        );
+      })();
+    </script>
+    <noscript>
+      <picture>
+        <source type="image/webp"
+          srcset="/images/produits-hero-640.webp 640w, /images/produits-hero-960.webp 960w, /images/produits-hero-1280.webp 1280w, /images/produits-hero-1600.webp 1600w"
+          sizes="100vw" />
+        <img class="subhero__img" src="/images/produits-hero.jpg" width="1600" height="2000" alt="Catalogue Mikadodeco" fetchpriority="high" style="object-position: center 70%" />
+      </picture>
+    </noscript>
     <div class="subhero__scrim"></div>
     <div class="subhero__in">
       <h1 data-plp-title>Le catalogue</h1>
