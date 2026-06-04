@@ -285,7 +285,6 @@
       "https://www.fermob.com/mediatheque/2_produits/Bellevie/3-ambiance/Banc-et-table-BELLEVIE.jpg",
       "https://www.fermob.com/mediatheque/2_produits/Cadiz/3-ambiance/CADIZ-WEB.jpg",
       "https://www.fermob.com/mediatheque/2_produits/Surprising/3-ambiance/SURPRISING_REGLISSE_NOEL2018_VISUEL2018_STEPHANE_RAMBAUD-1.jpg",
-      "https://www.fermob.com/mediatheque/2_produits/Mooon/3-ambiance/MOOON_OPERA+_BLEU_ACAPULCO_PUGET_BOOKGSS2021_SEBASTIEN_EROME.jpg",
       "https://www.fermob.com/mediatheque/2_produits/Cadiz/3-ambiance/CADIZ_REGLISSE_COCOTTE_PESTO_VISUELS26_MONTRIANT_NICOLAS_MATHEUS_1_BD.jpg"
     ],
     "associations": {
@@ -680,11 +679,6 @@
           "name": "Bleu abysse",
           "hex": "#0c1b31",
           "title": "Profondément mystérieux"
-        },
-        {
-          "name": "Vert opaline",
-          "hex": "#b7edc7",
-          "title": "La couleur caméléon du nuancier"
         }
       ]
     }
@@ -1077,11 +1071,6 @@
         }
       ],
       "association4": [
-        {
-          "name": "Capucine",
-          "hex": "#e84536",
-          "title": "Une fine fleur de la couleur qui symbolise les amoureux."
-        },
         {
           "name": "Gris argile",
           "hex": "#d1ccbe",
