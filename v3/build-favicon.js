@@ -5,8 +5,8 @@
  * Le logo est un logotype « Mikado. » (serif) trop large pour être lisible à
  * 16-32 px. On en extrait donc le monogramme « M. » — la lettre « M » (deux
  * sous-tracés) suivie du point final du logo (dernier sous-tracé, ramené
- * juste après le M) — posé en bleu roi (--accent #38529F) sur un carré crème
- * arrondi (--paper #f8f5ef) — la signature de la DA.
+ * juste après le M) — posé dans le noir du site (--ink #1a1916, la couleur
+ * du logo dans le header) sur un carré crème arrondi (--paper #f8f5ef).
  *
  * Sorties (à la racine de v3/, servies en /<fichier> par vercel.json) :
  *   - favicon.svg            onglets modernes (vectoriel)
@@ -19,7 +19,7 @@ const sharp = require('sharp');
 
 const DIR = __dirname;
 const CREAM = '#f8f5ef';   // --paper
-const BLUE = '#38529F';    // --accent (bleu roi)
+const INK = '#1a1916';     // --ink (brun-noir chaud, couleur du logo dans le header)
 
 // 1. Extraire la lettre « M » du logotype ------------------------------------
 const logo = fs.readFileSync(path.join(DIR, 'logomikado.svg'), 'utf8');
@@ -47,7 +47,7 @@ const TY = (64 - 17.7 * SCALE) / 2;   // ≈ 12.8
 // 2. Construire favicon.svg ---------------------------------------------------
 const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="12" fill="${CREAM}"/>
-  <g transform="translate(${TX.toFixed(2)} ${TY.toFixed(2)}) scale(${SCALE})" fill="${BLUE}">
+  <g transform="translate(${TX.toFixed(2)} ${TY.toFixed(2)}) scale(${SCALE})" fill="${INK}">
     <path d="${mPath}"/>
     <path transform="translate(${DOT_DX.toFixed(2)} 0)" d="${dotPath}"/>
   </g>
