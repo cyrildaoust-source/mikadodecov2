@@ -1,5 +1,5 @@
 {
-  "_note": "158 designers — enrichi 2026-06-03 (audit tags designer : +104 créateurs sourcés, noms = pages designers officielles des marques, bio à compléter). Tri par sortKey.",
+  "_note": "186 designers — enrichi 2026-06-04 (audit designer multi-sources). Tri par sortKey.",
   "designers": [
     {
       "name": "Alvar Aalto",
@@ -19,6 +19,21 @@
       "photo": "/images/designers/alvar-aalto.jpg",
       "sortKey": "Aalto",
       "featured": true
+    },
+    {
+      "name": "Aino Aalto",
+      "slug": "aino-aalto",
+      "sortKey": "Aalto",
+      "tags": [
+        "aino-aalto"
+      ],
+      "brands": [
+        "Iittala"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Iittala"
+      ],
+      "bio": ""
     },
     {
       "name": "Eero Aarnio",
@@ -65,7 +80,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Carlo Alessi (Granerolo, Verbania, 1916 — 2009) est un designer et industriel italien, fils de Giovanni Alessi, fondateur de l'atelier métallurgique familial à Omegna en 1921. Formé au dessin technique à l'institut OMAR de Novare, il entre jeune dans l'entreprise et en devient le dessinateur en chef. Entre 1935 et 1945, il conçoit la majeure partie de la production de la maison, signant notamment les séries Ottagonale, Scalini, Cilindrica et Bombé. Son service à thé et à café Bombé, dessiné en 1945 et d'abord réalisé en laiton chromé et argenté avant l'acier inoxydable, demeure l'une des pièces emblématiques de la marque (éditée par Alessi). Devenu directeur général, il donne à l'entreprise une dimension internationale et amorce les collaborations avec des designers extérieurs. Il en assure la présidence jusqu'à sa disparition.",
       "photo": "/images/designers/carlo-alessi.jpg"
     },
     {
@@ -150,6 +165,21 @@
       "photo": "/images/designers/ron-arad.jpg"
     },
     {
+      "name": "Archirivolto",
+      "slug": "archirivolto",
+      "sortKey": "Archirivolto",
+      "tags": [
+        "archirivolto"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": "Archirivolto est un studio italien de design fondé en 1983 par Claudio Dondoli et Marco Pocci, qui s'étaient rencontrés à la Faculté d'architecture de Florence. Installé à Colle di Val d'Elsa, dans la campagne toscane proche de Sienne, le studio débute dans l'architecture, l'aménagement intérieur et la vente de mobilier, avant de se consacrer au design industriel à partir de la fin des années 1980. Sa spécialité est l'assise : chaises, fauteuils, tabourets et sièges de bureau ou d'extérieur, avec une bonne maîtrise des matériaux, en particulier le plastique. Le duo collabore avec de nombreux éditeurs européens. Pour Fermob, il signe le fauteuil d'extérieur Rythmic, en acier, dont les lattes épousent la courbe de l'assise et du dossier."
+    },
+    {
       "name": "Wiel Arets",
       "slug": "wiel-arets",
       "sortKey": "Arets",
@@ -162,7 +192,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Wiel Arets (né en 1955 à Heerlen, aux Pays-Bas) est un architecte néerlandais, également théoricien et designer industriel. Diplômé de l'Université technique d'Eindhoven en 1983, il fonde son agence dans la même décennie et s'impose sur la scène internationale avec l'Académie d'art et d'architecture de Maastricht (1989-1993). Son langage minimaliste et géométrique, attentif aux matériaux et à la lumière, marque des bâtiments comme la bibliothèque de l'université d'Utrecht (achevée en 2004). Doyen du Berlage Institute de Rotterdam (1995-2002) puis du College of Architecture de l'Illinois Institute of Technology à Chicago (2012-2017), il prolonge cette rigueur dans le design. Sa collaboration avec Alessi, entamée au début des années 2000, donne notamment la bouilloire électrique Hot.it (WA09) et le service de couverts eat.it, fondé sur une symétrie « équivalente et opposée » des formes.",
       "photo": "/images/designers/wiel-arets.jpg"
     },
     {
@@ -182,6 +212,22 @@
       "photo": "/images/designers/filip-arickx.jpg"
     },
     {
+      "name": "Antonio Aricò",
+      "slug": "antonio-arico",
+      "sortKey": "Aricò",
+      "tags": [
+        "antonio-arico"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/antonio-arico.jpg"
+    },
+    {
       "name": "Kris Van Assche",
       "slug": "kris-van-assche",
       "sortKey": "Assche",
@@ -194,7 +240,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Né en 1976 à Londerzeel, en Flandre, Kris Van Assche est un créateur de mode belge formé à l'Académie royale des beaux-arts d'Anvers, où il étudie la mode féminine de 1994 à 1998. Installé à Paris, il devient l'assistant d'Hedi Slimane chez Yves Saint Laurent puis pour le lancement de Dior Homme. Il fonde sa propre maison, KRISVANASSCHE, en 2005, assure la direction artistique de Dior Homme de 2007 à 2018, puis celle de Berluti de 2018 à 2021. En 2025, il étend son travail aux objets pour la maison avec la collection Josephine éditée par Serax : des vases et bonbonnières en verre soufflé bouche, béton, marbre et porcelaine argentée, en hommage à sa grand-mère.",
       "photo": "/images/designers/kris-van-assche.jpg"
     },
     {
@@ -230,6 +276,21 @@
       "sortKey": "Barber"
     },
     {
+      "name": "Thomas Bastide",
+      "slug": "thomas-bastide",
+      "sortKey": "Bastide",
+      "tags": [
+        "thomas-bastide"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Dorothee Becker",
       "slug": "dorothee-becker",
       "tags": [
@@ -260,7 +321,7 @@
         "/collections/alessi",
         "/collections/muuto"
       ],
-      "bio": "",
+      "bio": "BIG-GAME est un studio de design fondé en 2004 à Lausanne par Grégoire Jeanmonod (Suisse), Elric Petit (Belge) et Augustin Scott de Martinville (Français). Jeanmonod et Scott de Martinville ont étudié à l'ECAL (École cantonale d'art de Lausanne), tandis que Petit s'est formé à La Cambre, à Bruxelles. Le studio revendique une approche « simple, fonctionnelle et optimiste », appliquée au mobilier, aux objets, aux luminaires ainsi qu'à la scénographie et à la direction artistique. BIG-GAME collabore notamment avec Alessi, Muuto, Hay, Magis et Karimoku. Ses créations ont été distinguées par plusieurs récompenses, dont le Swiss Design Award et le iF Design Award, et figurent dans les collections du Centre Pompidou et du MoMA. Les trois fondateurs enseignent à l'ECAL.",
       "photo": "/images/designers/big-game.jpg"
     },
     {
@@ -276,7 +337,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Piet Boon est un designer néerlandais né en 1958. Il débute sa carrière dans le bâtiment, expérience qui nourrit son rapport à la structure et à la fonction. En 1983, il fonde à Oostzaan, dans la région de la Zaanstreek près d'Amsterdam, le Studio Piet Boon, qu'il développe avec Karin Meyn, partenaire et directrice créative intérieur et stylisme. Le studio est multidisciplinaire et couvre l'architecture, l'aménagement intérieur et le design de produits, avec une signature axée sur l'équilibre des proportions, la sobriété des formes et les matériaux naturels. Pour Serax, le studio conçoit la collection Base, un service de table en porcelaine fine de couleur blanc cassé pensé comme une toile de fond, décliné en couverts et verres, ainsi que la collection Volumes, des vases et cache-pots en céramique à la palette terreuse.",
       "photo": "/images/designers/piet-boon.jpg"
     },
     {
@@ -335,9 +396,9 @@
       "photo": "/images/designers/andrea-branzi.jpg"
     },
     {
-      "name": "Plan C",
+      "name": "Carolina Castiglioni",
       "slug": "plan-c",
-      "sortKey": "C",
+      "sortKey": "Castiglioni Carolina",
       "tags": [
         "plan-c"
       ],
@@ -347,7 +408,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Carolina Castiglioni est une créatrice de mode et directrice artistique italienne, fondatrice du label milanais Plan C. Fille de Consuelo Castiglioni, créatrice de Marni, elle grandit au sein de la maison familiale où elle occupe le poste de directrice des projets spéciaux. En 2018, après le départ de la famille de Marni, elle lance Plan C, une griffe de prêt-à-porter au vestiaire éclectique, marqué par des associations de couleurs audacieuses et un goût pour les formes et les matières. C'est ce même regard qui la conduit vers les arts de la table : en 2025, elle signe avec l'éditeur belge Serax sa première collection d'objets, Silos — vases, bougeoirs et bougies parfumées en porcelaine aux teintes brun, bleu et orange, dont les volumes géométriques évoquent l'esprit du design Memphis des années 1980.",
       "photo": "/images/designers/plan-c.jpg"
     },
     {
@@ -383,6 +444,21 @@
       "photo": "/images/designers/sophie-casier.jpg"
     },
     {
+      "name": "Jean-Charles de Castelbajac",
+      "slug": "jean-charles-de-castelbajac",
+      "sortKey": "Castelbajac",
+      "tags": [
+        "jean-charles-de-castelbajac"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Achille Castiglioni",
       "slug": "achille-castiglioni",
       "tags": [
@@ -412,7 +488,7 @@
       "brandHrefs": [
         "/produits.html?marque=Flos"
       ],
-      "bio": "",
+      "bio": "Architecte et designer italien, Pier Giacomo Castiglioni (Milan, 1913 - Milan, 1968) est l'une des figures du design industriel italien d'après-guerre. Fils du sculpteur Giannino Castiglioni, il étudie l'architecture au Politecnico di Milano, dont il sort diplômé en 1937. Après la guerre, il forme avec ses frères Livio puis Achille un atelier dédié au produit, à l'aménagement et à l'exposition ; il travaille ensuite en tandem avec Achille jusqu'à sa mort. Pour l'éditeur Flos, le duo signe plusieurs luminaires devenus des références, parmi lesquels les lampes Arco, Toio et Taccia (1962). Cofondateur de l'ADI (Associazione per il Disegno Industriale) en 1956, il a enseigné le dessin au Politecnico de 1964 à 1968. Son œuvre, distinguée par plusieurs Compasso d'Oro, figure dans les collections du MoMA de New York, du Centre Pompidou et du V&A de Londres.",
       "photo": "/images/designers/pier-giacomo-castiglioni.jpg"
     },
     {
@@ -511,8 +587,23 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Architecte et designer né à Barcelone en 1941, Lluís Clotet obtient son diplôme à l'École technique supérieure d'architecture de Barcelone (ETSAB) en 1965, où il enseigne ensuite de 1977 à 1984. En 1964, il fonde le Studio PER aux côtés de Pep Bonet, Cristian Cirici et Oscar Tusquets, et compte parmi les associés fondateurs de l'éditeur BD Ediciones de Diseño (BD Barcelona). Il collabore avec Tusquets jusqu'en 1983, puis poursuit l'essentiel de son œuvre bâtie avec Ignacio Paricio. Souvent présenté, avec Tusquets, comme un précurseur du postmodernisme en Espagne, il reçoit le Prix national d'architecture en 2010. Pour Alessi, il signe une série d'objets en acier inoxydable évoquant une feuille de papier froissée, obtenus par emboutissage à froid en une seule opération, dont la corbeille Port et le plateau Foix.",
       "photo": "/images/designers/lluis-clotet.jpg"
+    },
+    {
+      "name": "Terence Conran",
+      "slug": "terence-conran",
+      "sortKey": "Conran",
+      "tags": [
+        "terence-conran"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
     },
     {
       "name": "Adam Cornish",
@@ -527,7 +618,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Né en 1981 en Australie, Adam Cornish est un designer industriel établi à Melbourne. Formé au design industriel à l'University of Technology de Sydney puis au design de mobilier au RMIT, où il enseigne, il dirige son propre studio et travaille à la croisée du mobilier, du produit et de l'aménagement intérieur. Sa démarche s'inspire de l'observation du vivant et privilégie la simplification des formes et l'expression des matériaux. Pour Alessi, il signe la collection Trinity (2013), dont la structure concentrique évoque la spirale de la coquille du nautile : une feuille d'acier inoxydable ajourée au laser. Son travail, distingué par le New York Design Award et le concours Herman Miller Asie-Pacifique « Yves Béhar », a été présenté au Salone del Mobile de Milan et à l'ICFF de New York.",
       "photo": "/images/designers/adam-cornish.jpg"
     },
     {
@@ -547,6 +638,21 @@
       "photo": "/images/designers/coseincorso.jpg"
     },
     {
+      "name": "Matali Crasset",
+      "slug": "matali-crasset",
+      "sortKey": "Crasset",
+      "tags": [
+        "matali-crasset"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
       "name": "D'Urbino-Lomazzi",
       "slug": "durbino-lomazzi",
       "sortKey": "D'Urbino-Lomazzi",
@@ -559,7 +665,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Donato D'Urbino (né en 1935) et Paolo Lomazzi (né en 1936), tous deux nés à Milan, forment un duo majeur du design italien. Architectes et designers, ils débutent leur collaboration en 1966 aux côtés de l'architecte Jonathan De Pas (1932-1991), avec qui ils signent plusieurs icônes : le fauteuil gonflable Blow (1967, Zanotta), le siège Joe en forme de gant de baseball (1968, Poltronova) et le portemanteau pliant Sciangai (1973, Zanotta), couronné du Compasso d'Oro en 1979. Leur démarche explore matériaux et technologies au service de la production de masse. Après la mort de De Pas en 1991, D'Urbino et Lomazzi poursuivent ensemble, collaborant notamment avec Alessi, Cassina, Driade, Artemide et Bonacina. Leurs pièces figurent dans les collections du MoMA, du Victoria and Albert Museum et du Centre Pompidou.",
       "photo": "/images/designers/durbino-lomazzi.jpg"
     },
     {
@@ -727,6 +833,21 @@
       "photo": "/images/designers/marc-ferrand.jpg"
     },
     {
+      "name": "Goula & Figuera",
+      "slug": "goula-figuera",
+      "sortKey": "Figuera",
+      "tags": [
+        "goula-figuera"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Naoto Fukasawa",
       "slug": "naoto-fukasawa",
       "sortKey": "Fukasawa",
@@ -756,7 +877,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Doriana et Massimiliano Fuksas forment un duo d'architectes italiens. Massimiliano Fuksas, né à Rome en 1944, est diplômé en architecture de l'université La Sapienza en 1969. Doriana Mandrelli, née à Rome en 1955, est diplômée en histoire de l'architecture moderne et contemporaine de La Sapienza (1979), puis en architecture de l'École spéciale d'architecture (ESA) de Paris. Ils travaillent ensemble depuis 1985 au sein du Studio Fuksas, avec des bureaux à Rome, Paris et Shenzhen, et signent aéroports, musées et centres culturels. Massimiliano a dirigé la 7e Biennale d'architecture de Venise en 2000, sur le thème « Less Aesthetics, More Ethics ». Pour Alessi, ils ont conçu la collection d'arts de la table Colombina (porcelaine, verre et couverts) ainsi que le service Tea & Coffee Towers (2003).",
       "photo": "/images/designers/doriana-e-massimiliano-fuksas.jpg"
     },
     {
@@ -772,7 +893,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Alex Gabriels est une céramiste belge installée à Kampenhout. Après une carrière de directrice artistique dans la publicité, elle se forme à la céramique — d'abord artistique, puis fonctionnelle — avant d'en faire son activité à plein temps depuis 2020. Son travail associe un dessin épuré et la matérialité de l'argile chamottée, façonnée à la main. Pour Serax, elle conçoit une collection de luminaires en céramique partie du cylindre et du disque, dont les modèles Maia, Rana, Nova, Romé et Fou évoquent des références de l'architecture moderniste. Elle signe aussi Mira, une série d'accessoires d'intérieur inspirés de l'éclairage d'avant l'électricité.",
       "photo": "/images/designers/alex-gabriels.jpg"
     },
     {
@@ -836,7 +957,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Designer et céramiste français né à Toulouse, Frédérick Gautier est venu tardivement à la création. Après une vingtaine d'années passées dans le cinéma comme directeur artistique, il se forme à l'École nationale supérieure du paysage de Versailles, dont il sort diplômé en 2014, et y découvre le modelage et la céramique. Fasciné par le brutalisme, il met au point une terre qui, une fois cuite, évoque le béton. Sa signature FCK condense ses initiales et désigne, en langage de construction, la résistance caractéristique du béton à la compression à 28 jours. Depuis 2015, il développe pour la marque belge Serax la collection FCK — arts de la table, ustensiles de cuisine, vases et luminaires —, transposant l'esthétique minérale de l'architecture dans des objets du quotidien. Il a publié en 2022, avec Marie Godfrain, l'ouvrage FCK Paysages concrets (Actes Sud).",
       "photo": "/images/designers/frederick-gautier.jpg"
     },
     {
@@ -857,6 +978,21 @@
       "sortKey": "Gehry"
     },
     {
+      "name": "Olivier Gence",
+      "slug": "olivier-gence",
+      "sortKey": "Gence",
+      "tags": [
+        "olivier-gence"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Massimo Giacon",
       "slug": "massimo-giacon",
       "sortKey": "Giacon",
@@ -869,7 +1005,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Né à Padoue en 1961, Massimo Giacon est un illustrateur, auteur de bande dessinée, designer et musicien italien. Actif à Milan depuis 1980, il participe au renouveau de la BD italienne des années 1980, autour de revues comme Frigidaire, Linus, Alter ou Nova Express. À partir de 1985, il aborde le design en collaborant avec le studio Sottsass Associati, puis avec le mouvement Memphis et des maisons comme Olivetti, Artemide, Swatch ou Alessi. Son univers graphique, marqué par l'humour et un trait pop, trouve dans l'objet décoratif un terrain d'expression. Pour Alessi, il revisite les figures de la crèche et de Noël en porcelaine et signe, avec Marcello Jori, la série de décorations de Noël en verre soufflé Le Palle Quadrate. Il poursuit en parallèle une activité d'artiste et de musicien.",
       "photo": "/images/designers/massimo-giacon.jpg"
     },
     {
@@ -885,7 +1021,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Né en 1954 à La Spezia, Stefano Giovannoni est un architecte et designer industriel italien, diplômé de la faculté d'architecture de Florence en 1978. Au début des années 1980, il collabore avec le Studio Alchimia d'Ettore Sottsass et Alessandro Mendini, avant de fonder vers 1985 le groupe King-Kong avec Guido Venturini et de participer au mouvement bolidiste. Sa collaboration avec Alessi, débutée à la fin des années 1980, donne naissance à un langage figuratif et coloré. On lui doit la série Girotondo (1989, dessinée avec Venturini), l'un des plus grands succès commerciaux de la marque, le porte-balai Merdolino (1993), la boîte à biscuits Mary Biscuit (1995) et la ligne de cuisson Mami pour Alessi. Il vit et travaille à Milan, où il a fondé la marque qeeboo en 2016.",
       "photo": "/images/designers/stefano-giovannoni.jpg"
     },
     {
@@ -954,6 +1090,21 @@
       "photo": "/images/designers/grint.jpg"
     },
     {
+      "name": "Harald Guggenbichler",
+      "slug": "harald-guggenbichler",
+      "sortKey": "Guggenbichler",
+      "tags": [
+        "harald-guggenbichler"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": "Designer autrichien né à Klagenfurt, Harald Guggenbichler s'est d'abord formé comme menuisier avant de se consacrer au design. Avec Heike Guggenbichler, il anime depuis 2004 le studio Guggenbichler Design, basé à Vienne, qui collabore avec des éditeurs internationaux tels que Tonon, Cassina, Ligne Roset, Rossin et Fermob. Sa démarche met en avant la fonctionnalité, le sens du matériau et une économie de moyens, avec des lignes claires et une sensibilité poétique. Pour Fermob, il signe la collection Surprising, des sièges d'extérieur en acier dont la structure filaire d'une seule pièce dessine une silhouette aérienne. Son fauteuil SINO, dessiné en 2004 et édité par Die Collection, a reçu un red dot en 2006."
+    },
+    {
       "name": "Koen Van Guijze",
       "slug": "koen-van-guijze",
       "sortKey": "Guijze",
@@ -966,7 +1117,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Koen Van Guijze est un designer belge spécialisé dans l'éclairage architectural. En 1996, il fonde à Anvers le studio Accessori (lichtarchitectuur), conçu autour de l'idée que la lumière est un élément constitutif de l'architecture. Depuis plus de vingt-cinq ans, il développe des luminaires sur mesure pour des intérieurs résidentiels, l'hôtellerie et des showrooms, assemblés à la main par des ateliers belges. Son vocabulaire privilégie les matériaux bruts et authentiques — acier, laiton, béton, liège, céramique, sable, papier — dans un registre qui associe une approche brutaliste à des détails soignés. Il prolonge cette recherche avec la collection Sofisticato, éditée par Serax : une ligne minimaliste où l'acier bleui, façonné à la main, devient la signature du luminaire.",
       "photo": "/images/designers/koen-van-guijze.jpg"
     },
     {
@@ -1031,7 +1182,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Wouters & Hendrix est une maison de joaillerie anversoise fondée en 1984 par Katrin Wouters et Karen Hendrix. Toutes deux formées en orfèvrerie à l'Académie royale des beaux-arts d'Anvers, elles y côtoient la génération des Six d'Anvers — dont Dries Van Noten et Ann Demeulemeester — et réalisent des bijoux et accessoires pour leurs défilés. Le duo développe une joaillerie d'auteur, faite main dans son atelier anversois et teintée de surréalisme, jouant d'associations de matériaux et de techniques inattendues. En 2024, pour ses quarante ans, la maison étend son langage à l'art de la table avec « Les Objets Mouleversants », une ligne de « bijoux pour la maison » éditée par Serax : vaisselle, verres et objets décoratifs qui prolongent l'esprit de ses créations.",
       "photo": "/images/designers/wouters-hendrix.jpg"
     },
     {
@@ -1047,7 +1198,7 @@
       "brandHrefs": [
         "/collections/tradition"
       ],
-      "bio": ""
+      "bio": "Né en 1981 à Bad Mergentheim, Sebastian Herkner est un designer industriel allemand formé au design produit à la HfG Offenbach am Main (Université d'art et de design d'Offenbach). Durant ses études, il effectue un stage chez Stella McCartney à Londres, qui aiguise son rapport aux matières, aux couleurs et aux textures. Il fonde son propre studio à Offenbach en 2006. Son travail conjugue savoir-faire artisanaux, matériaux authentiques et technologies contemporaines, au service du mobilier, du luminaire et des objets. Il collabore avec de nombreux éditeurs européens, parmi lesquels ClassiCon, Moroso, Thonet, Pedrali, Dedon, Wittmann et &Tradition. Il reçoit le German Design Award dans la catégorie Newcomer en 2011 et est élu Créateur de l'année à Maison&Objet en 2019."
     },
     {
       "name": "Sergio Herman",
@@ -1078,7 +1229,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Seppe Van Heusden est un designer industriel néerlandais établi à Utrecht. Diplômé de la Lund University School of Industrial Design (Suède) en 2020, où il enseigne à temps partiel, il a auparavant travaillé au sein de l'agence Snøhetta. Sa pratique s'étend du design produit au design spatial, avec une attention portée à l'éclairage, au mobilier et aux objets. Il cherche à établir un lien architectural avec l'espace pour concevoir des objets durables, en jouant de contrastes et de matériaux honnêtes. Il collabore avec Serax, pour qui il signe en 2022 la collection de luminaires Seam, dont l'abat-jour en porcelaine assume la couture visible du moule de coulage, contrastant avec un bras et un socle en acier noir. Il a également travaillé pour MDF Italia, Lodes, +Halle et Modular Lighting Instruments.",
       "photo": "/images/designers/seppe-van-heusden.jpg"
     },
     {
@@ -1110,7 +1261,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Josef Hoffmann (Brtnice, Moravie, 1870 – Vienne, 1956) est un architecte et designer autrichien, figure majeure de la modernité viennoise. Formé à l'Académie des beaux-arts de Vienne, notamment auprès d'Otto Wagner, il participe à la fondation de la Sécession viennoise en 1897, puis cofonde en 1903 la Wiener Werkstätte avec Koloman Moser, atelier voué à l'idéal de l'œuvre d'art totale. Professeur à la Kunstgewerbeschule de Vienne dès 1899, il y enseigne durant des décennies. Parmi ses réalisations figurent le sanatorium de Purkersdorf (1904-1905) et le palais Stoclet à Bruxelles (1905-1911). Son vocabulaire géométrique, fait de lignes pures et de motifs ajourés, irrigue son mobilier comme ses arts de la table. La ménagère Rundes Modell, dessinée en 1906, est aujourd'hui rééditée par Alessi en acier inoxydable.",
       "photo": "/images/designers/josef-hoffmann.jpg"
     },
     {
@@ -1142,7 +1293,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Giulio Iacchetti, né à Castelleone (Lombardie) en 1966, est un designer industriel italien actif depuis 1992. Son travail porte sur la recherche et la définition de nouvelles typologies d'objets. Il dessine pour de nombreux éditeurs, parmi lesquels Alessi, Magis, Foscarini, Fontana Arte, Artemide, Danese et Abet Laminati, et assure la direction artistique de Danese. En 2001, il reçoit le Compasso d'Oro pour le Moscardino, couvert biodégradable conçu avec Matteo Ragni pour Pandora Design et entré dans la collection permanente du MoMA (réédité en acier par Alessi en 2022). Un second Compasso d'Oro lui est décerné en 2014 pour les plaques d'égout Sfera (Montini), également avec Matteo Ragni. En 2012, il fonde Internoitaliano, réseau d'ateliers artisanaux produisant mobilier et accessoires. En 2009, la Triennale de Milan lui consacre l'exposition « Oggetti disobbedienti ».",
       "photo": "/images/designers/giulio-iacchetti.jpg"
     },
     {
@@ -1196,6 +1347,21 @@
       "featured": true
     },
     {
+      "name": "Hella Jongerius",
+      "slug": "hella-jongerius",
+      "sortKey": "Jongerius",
+      "tags": [
+        "hella-jongerius"
+      ],
+      "brands": [
+        "Vitra"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Vitra"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Marcello Jori",
       "slug": "marcello-jori",
       "sortKey": "Jori",
@@ -1226,7 +1392,7 @@
         "/collections/alessi",
         "/collections/fermob"
       ],
-      "bio": "",
+      "bio": "Designer industriel français né en 1967 à Nantes, Patrick Jouin est diplômé de l'ENSCI – Les Ateliers en 1992. Après plusieurs années dans le studio de Philippe Starck (direction artistique de Thomson multimédia), il fonde en 1998 son agence Patrick Jouin iD, dédiée au design d'objet, puis cofonde en 2006 avec l'architecte Sanjit Manku le studio Jouin Manku, voué à l'architecture intérieure. Sa collaboration avec le chef Alain Ducasse, dont il signe des intérieurs de restaurants à partir de 2000 (bar et restaurant du Plaza Athénée), le révèle sur la scène internationale. Il conçoit en 2004 la collection Solid, parmi les premiers meubles produits par frittage laser, dont la chaise C2 figure aux collections du MoMA et du Stedelijk Museum. Il reçoit le Compasso d'Oro en 2011 pour le Pasta Pot d'Alessi.",
       "photo": "/images/designers/patrick-jouin.jpg"
     },
     {
@@ -1242,7 +1408,7 @@
       "brandHrefs": [
         "/produits.html?marque=Fatboy"
       ],
-      "bio": "",
+      "bio": "Kranen/Gille est un duo de designers néerlando-allemand fondé en 2007 par Jos Kranen (né en 1977 à Tegelen, Pays-Bas) et Johannes Gille (né en 1979 à Marbourg, Allemagne), rencontrés à la Design Academy d'Eindhoven. Installé à Bois-le-Duc ('s-Hertogenbosch), le studio travaille le mobilier, le luminaire, la céramique et l'aménagement intérieur. Sa démarche juxtapose des registres opposés, l'industriel et l'organique, avec des formes inspirées d'outils, de machines et d'ustensiles anciens. Parmi ses projets figurent les séries auto-éditées Islands (2011) et Plant (2013), ainsi que la suspension The Party éditée par Moooi (2018). Pour Fatboy, le duo a conçu le lampadaire en arc Big Lebow et la table d'appoint Bakkes.",
       "photo": "/images/designers/kranen-gille.jpg"
     },
     {
@@ -1258,7 +1424,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Kseniya Kravtsova est une artiste et designer ukrainienne, surtout reconnue pour sa céramique. Elle a grandi dans la campagne près de Lviv, dans l'ouest de l'Ukraine, et travaille depuis plus de vingt ans dans le sud de la France. Installée depuis 2020 à Barbentane, au cœur du parc naturel de la Montagnette, elle façonne ses pièces dans son atelier de Provence. Pluridisciplinaire, elle se définit comme « une poète devenue artiste » et fait de la poésie du quotidien le fil conducteur de son travail. Pour Serax, elle signe les vases Gala, en faïence, dont la forme s'inspire d'un sac plastique soulevé par le vent, métaphore de fragilité et de durabilité. Elle conçoit aussi la collection de luminaires Harna, en grès beige inspiré de l'argile brute et des fleurs, déclinée en applique et en lampadaire.",
       "photo": "/images/designers/kseniya-kravtsova.jpg"
     },
     {
@@ -1290,7 +1456,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Née à Helsinki en 1966, Kristiina Lassus est une designer de produits et architecte d'intérieur finlandaise. Formée à l'Université des arts industriels d'Helsinki (UIAH), elle y obtient un master en design leadership (1992) puis un second master en architecture d'intérieur et design de mobilier (1995), et se spécialise en développement produit. Coordinatrice du design chez Artek de 1994 à 1997, elle est ensuite design manager chez l'italien Alessi de 1998 à 2004, pour qui elle conçoit plusieurs objets de table et de cuisine. En 2003, elle fonde à Milan le Kristiina Lassus Studio (direction artistique, design produit, architecture d'intérieur) ; à partir de 2007, elle développe une collection de tapis noués main. Son travail lui a valu deux Red Dot Awards (2008 et 2010).",
       "photo": "/images/designers/kristiina-lassus.jpg"
     },
     {
@@ -1322,8 +1488,23 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Bertrand Lejoly est un designer belge né en 1980 dans la région germanophone de Belgique, au sein d'une famille de cultures germanique et française. Diplômé de l'École supérieure des arts Saint-Luc à Liège en 2002, il débute comme designer industriel en Allemagne, puis collabore de 2006 à 2013 avec l'agence Matteo Thun & Partners à Milan. De 2013 à 2021, il est responsable du design produit auprès de l'architecte belge Vincent Van Duysen. En 2021, il fonde son propre studio à Anvers. Il revendique une esthétique de « refined simplicity », à la frontière de l'expressif et de la sobriété, puisant dans des formes ancrées dans la mémoire collective pour concevoir des objets du quotidien intemporels. Son travail a été distingué par plusieurs prix (German Design Award et IF Design Award 2022, Red Dot, Archiproducts Design Award 2024) et il collabore avec des éditeurs tels que Zanotta, Paola Lenti, Fantini, Duravit et Serax. Pour cette dernière, il signe Cose, une collection d'accessoires (coupes, boîtes, distributeurs) aux formes arrondies et aux finitions mates.",
       "photo": "/images/designers/bertrand-lejoly.jpg"
+    },
+    {
+      "name": "Antoine Lesur",
+      "slug": "antoine-lesur",
+      "sortKey": "Lesur",
+      "tags": [
+        "antoine-lesur"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": "Antoine Lesur est un designer français, diplômé de l'École Boulle en 2002. Après une dizaine d'années passées en agences, dont cinq ans au sein du studio de Patrick Jouin, il fonde sa propre structure de design en 2012. Sa pratique couvre le design produit, le mobilier et l'aménagement d'espace, avec une attention portée aux matériaux et à l'éco-conception. Pour Fermob, il signe en 2018 la collection Cadiz, une famille d'assises d'extérieur — chaises, fauteuils et tabourets de bar — associant structure en aluminium et toile technique Batyline. En 2016, il conçoit avec Marc Venot la scénographie de l'exposition du Prix Émile Hermès."
     },
     {
       "name": "Arik Levy",
@@ -1342,6 +1523,21 @@
       "sortKey": "Levy"
     },
     {
+      "name": "Juliette Liberman",
+      "slug": "juliette-liberman",
+      "sortKey": "Liberman",
+      "tags": [
+        "juliette-liberman"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Louis de Limburg",
       "slug": "louis-de-limburg",
       "sortKey": "Limburg",
@@ -1358,6 +1554,23 @@
       "photo": "/images/designers/louis-de-limburg.jpg"
     },
     {
+      "name": "Tristan Lohner",
+      "slug": "tristan-lohner",
+      "tags": [
+        "tristan-lohner"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/collections/fermob"
+      ],
+      "bio": "Tristan Lohner est un designer produit français. Formé d'abord à l'ébénisterie (Brevet des Métiers d'Art auprès de Bernard Daude, qui travailla pour Pierre Paulin au Mobilier national), il rejoint ensuite l'École des Arts décoratifs de Paris, où il étudie le design produit sous la direction de Jean-Marie Massaud. Il dirige par ailleurs le RBC Design Center à Montpellier, concept store imaginé par Jean Nouvel. Son travail privilégie la justesse, la sobriété et le lien sensible entre l'objet et son usager. Collaborateur régulier de Fermob, il y signe la lampe nomade Balad (Étoile de l'Observeur du Design 2017), la table Bebop, le luminaire MOOON! et la chaise Studie, distinguée du Red Dot « Best of the Best » en 2022. Pour Hartô, il a dessiné la lampe de table Nina.",
+      "photo": "/images/designers/tristan-lohner.jpg",
+      "sortKey": "Lohner Tristan",
+      "featured": true
+    },
+    {
       "name": "José Lévy",
       "slug": "jose-levy",
       "sortKey": "Lévy",
@@ -1370,7 +1583,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Né en 1963 à Paris, José Lévy est un créateur français actif à la croisée de la mode, du design et de l'art. Il lance sa maison de mode, José Lévy à Paris, en 1990 et remporte le prix de l'ANDAM dans la catégorie homme en 1991. De 1998 à 2006, il est directeur artistique pour plusieurs maisons, parmi lesquelles Cacharel, Nina Ricci, Ungaro et Holland & Holland. Il abandonne la mode en 2007 pour se consacrer au design et aux arts décoratifs, et est pensionnaire de la Villa Kujoyama en 2011. Pour Serax, il a conçu Fontainebleau, mobilier d'extérieur en acier d'un vert profond imaginé pour sa maison de campagne, ainsi que les Glass Towers, vases en verre inspirés des gratte-ciel de Tokyo et des fleurs.",
       "photo": "/images/designers/jose-levy.jpg"
     },
     {
@@ -1386,7 +1599,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Boucquillon & Maaoui est un duo formé par Michel Boucquillon, né en Belgique en 1962, architecte (diplômé de Saint-Luc à Bruxelles en 1986) et designer industriel, et Donia Maaoui, son épouse, également architecte, qui pratique la sculpture et la peinture. Michel Boucquillon se fait remarquer dès 1988 en remportant le concours pour l'hémicycle du Parlement européen à Bruxelles. En 2000, il installe son atelier, la Casa Boucquillon, à Lucques, en Toscane, lieu de vie et de travail dédié au design industriel et à l'architecture. Le couple y conçoit objets et architectures, et collabore notamment avec Alessi. Leur série Bark, en acier perforé, s'inspire de l'écorce des arbres qui entourent leur maison et décline centres de table, vases et accessoires. Pour Alessi, ils signent aussi la corbeille Barket, issue de cette même famille, et la corbeille Vimini, inspirée de la vannerie en osier. Leur travail est présent dans plusieurs musées.",
       "photo": "/images/designers/boucquillon-maaoui.jpg"
     },
     {
@@ -1484,7 +1697,37 @@
       "brandHrefs": [
         "/collections/serax"
       ],
+      "bio": "Marni est une maison de mode italienne fondée à Milan en 1994 par la créatrice suisse Consuelo Castiglioni, d'abord comme prolongement de l'entreprise de fourrures familiale. La marque s'est distinguée par un vocabulaire singulier : silhouettes graphiques, imprimés d'inspiration botanique et associations de couleurs inattendues. En 2012, le groupe OTB de Renzo Rosso prend une participation majoritaire, puis le contrôle total en 2015. Francesco Risso en assure la direction créative de 2016 à 2025, avant l'arrivée de la créatrice belge Meryll Rogge. Dans les arts de la table, Marni collabore avec l'éditeur belge Serax pour une collection de vaisselle en porcelaine, Midnight Flowers, puis une série de vases sculpturaux, After Midnight."
+    },
+    {
+      "name": "Philippe Mathieu",
+      "slug": "philippe-mathieu",
+      "sortKey": "Mathieu",
+      "tags": [
+        "philippe-mathieu"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
       "bio": ""
+    },
+    {
+      "name": "J. Mazoyer-Do",
+      "slug": "j-mazoyer-do",
+      "sortKey": "Mazoyer-Do",
+      "tags": [
+        "j-mazoyer-do"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": "Derrière la signature « J. Mazoyer-Do » se trouve Joseph Mazoyer, designer français né en 1961, et son agence DO – Design Office. Diplômé de l'ENSCI – Les Ateliers, il fonde ce studio à Lyon au début des années 1990, qu'il développe ensuite à Paris puis en Asie (Hong Kong, Canton, Shanghai). Issu d'une famille de pionniers de l'aéronautique et d'inventeurs, il oriente son travail vers l'innovation. Sa pratique couvre le design industriel, le luminaire, les objets connectés, l'équipement domestique et les produits de bien-être. Son parcours a été distingué par des Red Dot, des iF Design Award et des Étoiles de l'Observeur du design. Pour Fermob, il a conçu la collection de luminaires Hoopik, dont une lampe sans fil au halo lumineux circulaire."
     },
     {
       "name": "Carlo Mazzeri",
@@ -1501,6 +1744,21 @@
       ],
       "bio": "",
       "photo": "/images/designers/carlo-mazzeri.jpg"
+    },
+    {
+      "name": "Fabio Meliota",
+      "slug": "fabio-meliota",
+      "sortKey": "Meliota",
+      "tags": [
+        "fabio-meliota"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
     },
     {
       "name": "Alessandro Mendini",
@@ -1547,7 +1805,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Née à Bologne en 1964, Miriam Mirri est une designer industrielle italienne établie à Milan. Formée à la Scuola Superiore di Disegno Anatomico, elle poursuit des études de design et de communication à l'Università del Progetto de Reggio Emilia. Elle travaille d'abord avec Nigel Coates au cabinet Branson-Coates à Londres, puis comme assistante de Stefano Giovannoni à Milan, avant d'ouvrir son activité indépendante en 2000. Son travail couvre les arts de la table, les accessoires pour animaux, le textile, l'horlogerie et les objets du quotidien, pour des maisons telles qu'Alessi, Mandarina Duck, Seiko ou United Pets. Pour Alessi, elle signe la coupe à glace Big Love (2002), issue du métaprojet Family Follows Fiction, et l'infuseur à thé You (2012). En 2006, elle reçoit le Fritz Henkel Award for Innovation. Elle est membre de l'ADI (Associazione per il Disegno Industriale).",
       "photo": "/images/designers/miriam-mirri.jpg"
     },
     {
@@ -1563,7 +1821,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Bea Mombaers est une styliste et décoratrice d'intérieur belge, active depuis une vingtaine d'années sur la scène du design et de l'art en Belgique. Collectionneuse de pièces rares et d'objets singuliers, elle tient à Knokke la boutique lifestyle Items et a ouvert un bed & breakfast conceptuel à Knokke-Zoute. En 2018, elle lance avec l'éditeur Serax une première collection de mobilier d'intérieur et d'extérieur. Suivront notamment des miroirs, des accessoires en acier, des tables bistrot et d'appoint, ainsi que les luminaires Cylinder. Son travail privilégie les volumes sobres et les matériaux bruts.",
       "photo": "/images/designers/bea-mombaers.jpg"
     },
     {
@@ -1602,6 +1860,36 @@
       "photo": "/images/designers/jasper-morrison.jpg",
       "sortKey": "Morrison",
       "featured": true
+    },
+    {
+      "name": "Pascal Mourgue",
+      "slug": "pascal-mourgue",
+      "sortKey": "Mourgue",
+      "tags": [
+        "pascal-mourgue"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": "Designer français né en 1943 à Neuilly-sur-Seine et mort en 2014 à Montreuil, Pascal Mourgue se forme à l'École Boulle puis à l'École nationale supérieure des arts décoratifs de Paris. Frère cadet du designer Olivier Mourgue, il se revendique autant artiste que designer. En 1985, sa chaise Lune d'argent, éditée par Fermob, structure en fil et tôle d'acier, lui vaut le premier prix du concours de la Fondation Cartier ; elle entre dans les collections du Centre Pompidou en 1997. Il poursuit avec Fermob une série de sièges d'extérieur en acier laqué, dont les lignes Dune et Plein Air. Pour Cinna, il dessine en 1994 le fauteuil Câlin. Lauréat du Grand Prix national de la création industrielle en 1996, il reçoit en 1998 le Prix du Nombre d'or du mobilier contemporain."
+    },
+    {
+      "name": "Hvidt & Mølgaard",
+      "slug": "hvidt-molgaard",
+      "sortKey": "Mølgaard",
+      "tags": [
+        "hvidt-molgaard"
+      ],
+      "brands": [
+        "&Tradition"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=&Tradition"
+      ],
+      "bio": ""
     },
     {
       "name": "Pascale Naessens",
@@ -1651,6 +1939,21 @@
       ],
       "bio": "Nendo est le studio de design fondé en 2002 à Tokyo par Oki Sato, architecte et designer japonais né à Toronto en 1977. Diplômé d'un master d'architecture de l'université Waseda, il ouvre un second bureau à Milan en 2005. Le nom « nendo » signifie « pâte à modeler » (argile) en japonais, image de souplesse et de malléabilité. Le travail du studio se distingue par un minimalisme épuré, nourri d'influences japonaises et scandinaves, et par le goût du petit détail qui crée un effet de surprise. Pour Alessi, Nendo a conçu en 2024 la collection Toru d'appareils électroménagers en acier inoxydable, dont un élément tubulaire noir fait tour à tour office de bec ou de poignée. Oki Sato a reçu le Good Design Award et a été désigné « Designer of the Year » par le magazine Wallpaper* en 2012.",
       "photo": "/images/designers/nendo.jpg"
+    },
+    {
+      "name": "Luca Nichetto",
+      "slug": "luca-nichetto",
+      "sortKey": "Nichetto",
+      "tags": [
+        "luca-nichetto"
+      ],
+      "brands": [
+        "&Tradition"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=&Tradition"
+      ],
+      "bio": ""
     },
     {
       "name": "Isamu Noguchi",
@@ -1767,8 +2070,23 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Patrick Paris est un designer français autodidacte, basé à Versailles, qui fonde son propre studio en 2005. Il revendique cette formation libre comme la source de la singularité de son travail. Sa démarche s'organise autour d'un matériau de prédilection : le béton, qu'il décrit comme lourd mais fragile, froid mais délicat. En explorant ses teintes et ses effets, il en tire des objets énigmatiques qui ne dévoilent pas toujours leur fonction au premier regard, jouant d'ergonomies décalées et de formes inattendues. Édité par Serax, il signe des luminaires, vases et accessoires d'intérieur en béton — parmi lesquels les lampes Eaunophe, Flastaire et l'applique Chadophe — avec la volonté assumée d'introduire un peu d'austérité dans un monde obsédé par le confort.",
       "photo": "/images/designers/patrick-paris.jpg"
+    },
+    {
+      "name": "Pagnon et Pelhaître",
+      "slug": "pagnon-et-pelhaitre",
+      "sortKey": "Pelhaître",
+      "tags": [
+        "pagnon-et-pelhaitre"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": "Pagnon & Pelhaître est un duo de designers français formé par Patrick Pagnon et Claude Pelhaître, diplômés de l'École nationale supérieure des Arts décoratifs (ENSAD) de Paris en 1977. Ils participent à la création de la section mobilier de l'ENSAD en 1978, puis fondent leur agence parisienne, Pagnon & Pelhaître Design, en 1979, en orientant leur travail vers le mobilier et l'architecture intérieure. Depuis 2005, ils enseignent à l'ENSAD. Leur écriture privilégie la rigueur, les lignes claires et des formes simples pensées pour dialoguer dans l'espace. Le duo a notamment travaillé pour Cinna, signant First (1983), Straty (1985), Ipso Facto (1999) ou Cineline (2004), ainsi que pour Fermob, pour qui il conçoit la collection d'extérieur Bellevie (banquettes, fauteuils, tables)."
     },
     {
       "name": "Annebet Philips",
@@ -1783,7 +2101,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Annebet Philips est une designeuse industrielle néerlandaise installée à Amsterdam. Diplômée cum laude d'un master en Industrial Design Engineering à l'université de technologie de Delft en 2008, elle fonde son studio à Amsterdam en 2013. Sa démarche associe une rigueur d'ingénieure à une signature volontairement enjouée, presque cartoonesque : formes franches, lignes claires et touches d'humour. Pour Serax, elle signe la collection d'arts de la table Carte Blanche, lancée en 2025. Le principe : façonner des maquettes intuitives en carton, puis les traduire en porcelaine en conservant plis, arêtes et bords irréguliers, rehaussés de traits peints à la main. La gamme réunit tasses à espresso et à cappuccino, mug à thé et soucoupes, pot à lait et théière.",
       "photo": "/images/designers/annebet-philips.jpg"
     },
     {
@@ -1830,7 +2148,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Thijs Prinsen (né en 1984) est un architecte diplômé en 2007 de la Provinciale Hogeschool Limburg, avec une spécialisation en arts visuels. Il travaille depuis lors au sein du bureau Lens°ass architecten, fondé par Bart Lens à Hasselt (Limbourg, Belgique), dont il devient associé en 2012 avant d'en codiriger l'activité. Pour Serax, il signe en 2024 la collection d'appliques Primary Shape, née d'un chantier de rénovation où l'abondance de briques de récupération lui inspire des volumes rectangulaires. Déclinées en béton coloré et en terre cuite, ces appliques cultivent un minimalisme volontairement brut.",
       "photo": "/images/designers/thijs-prinsen.jpg"
     },
     {
@@ -1853,7 +2171,7 @@
     {
       "name": "Jonas Van Put",
       "slug": "jonas-van-put",
-      "sortKey": "Put",
+      "sortKey": "Van Put Jonas",
       "tags": [
         "jonas-van-put"
       ],
@@ -1879,8 +2197,38 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Architecte de formation et docteure en design industriel, Claudia Raimondo vit et travaille à Milan. Sa pratique est centrée sur la sphère CMF — couleur, matériaux et finitions (colour, materials and finishes) —, appliquée aux produits comme aux contextes : identité de marque, image d'entreprise et points de vente, notamment pour des maisons telles que Rolex et Tudor. Pour Alessi, elle a signé la collection Joy, des objets de table en acier inoxydable 18/10 à la surface facettée : coupes centrales, paniers ronds et plateaux. Son approche associe rigueur d'architecte et exploration des matières, des teintes et des traitements de surface au service d'objets domestiques.",
       "photo": "/images/designers/claudia-raimondo.jpg"
+    },
+    {
+      "name": "Gerrit Rietveld",
+      "slug": "gerrit-rietveld",
+      "sortKey": "Rietveld",
+      "tags": [
+        "gerrit-rietveld"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=HAY"
+      ],
+      "bio": "Designer de mobilier et architecte néerlandais, Gerrit Rietveld (1888-1964) naît et meurt à Utrecht. Fils d'ébéniste, il se forme comme menuisier dans l'atelier paternel avant d'ouvrir son propre atelier de meubles en 1917. Membre du mouvement De Stijl à partir de 1919, il traduit dans le meuble la rigueur géométrique et les couleurs primaires du groupe. Sa Chaise Rouge et Bleue, conçue vers 1917-1918 puis repeinte sous l'influence de De Stijl, en devient l'emblème : une composition de plans et de lignes réduite à l'essentiel. Il prolonge cette recherche avec la Zig-Zag (1934), structure en porte-à-faux formée d'un ruban de bois sans pieds traditionnels. Architecte, il signe la Maison Rietveld Schröder à Utrecht (1924), inscrite au patrimoine mondial de l'UNESCO depuis 2000. Ses meubles, dont ces deux chaises, sont réédités par Cassina."
+    },
+    {
+      "name": "Mattia Di Rosa",
+      "slug": "mattia-di-rosa",
+      "sortKey": "Rosa",
+      "tags": [
+        "mattia-di-rosa"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "Aldo Rossi",
@@ -1897,6 +2245,22 @@
       ],
       "bio": "Architecte et designer italien (Milan, 1931 — 1997), Aldo Rossi est l'une des figures majeures du courant postmoderne. Formé à l'École polytechnique de Milan, il s'impose d'abord par sa réflexion théorique sur la ville et l'architecture, puis par des œuvres bâties comme le cimetière San Cataldo de Modène. En 1990, il devient le premier Italien lauréat du prix Pritzker. Son langage repose sur des formes primaires, la géométrie et une économie de moyens, qu'il transpose à l'objet à partir des années 1980 dans sa collaboration avec Alessi : ses cafetières et bouilloires se lisent comme de petites architectures de table. Parmi elles, la cafetière espresso La Cupola, coiffée d'une coupole, est devenue une icône du design italien.",
       "photo": "/images/designers/aldo-rossi.jpg"
+    },
+    {
+      "name": "Alejandro Ruiz",
+      "slug": "alejandro-ruiz",
+      "sortKey": "Ruiz",
+      "tags": [
+        "alejandro-ruiz"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Alessi"
+      ],
+      "bio": "",
+      "photo": "/images/designers/alejandro-ruiz.jpg"
     },
     {
       "name": "Elena Salmistraro",
@@ -1927,7 +2291,7 @@
       "brandHrefs": [
         "/produits.html?marque=Ichendorf Milano"
       ],
-      "bio": "",
+      "bio": "Architecte et designer italienne née à Florence en 1963, Marta Sansoni obtient son diplôme d'architecture à l'Université de Florence en 1990, avec un mémoire (« Un edificio per il culto ») retenu en 1991 pour le Salon International de l'Architecture de Paris. De 1990 à 1996, elle anime des séminaires à la Faculté d'architecture de Florence. Sa pratique couvre l'architecture, l'architecture d'intérieur et le design produit. Après avoir participé au concours « Memory Containers » d'Alessi en 1990, elle développe pour la maison plusieurs familles d'objets, dont la corbeille à fruits Cactus! et la ligne Ba-Rock, ainsi que le mixeur Folpo. Elle a aussi travaillé pour IVV et Martinelli Luce. Pour Ichendorf Milano, elle signe la collection Tea, théières et tasses en verre borosilicate soufflé à la lampe. Elle est membre du Conseil italien du design (CID) depuis 2007.",
       "photo": "/images/designers/marta-sansoni.jpg"
     },
     {
@@ -1959,7 +2323,7 @@
       "brandHrefs": [
         "/produits.html?marque=Fatboy"
       ],
-      "bio": "",
+      "bio": "Nathalie Schellekens est une designer néerlandaise diplômée de la Design Academy Eindhoven. Elle dirige Studio ONS (Ontwerpstudio Nathalie Schellekens), basé à Heesch aux Pays-Bas, un atelier actif à la croisée du design de produit, de l'aménagement intérieur et de l'identité de marque. Elle est l'auteure de la lampe Bolleke éditée par Fatboy (2016), lanterne portable et rechargeable dont l'anse en boucle s'inspire des élastiques de fixation employés dans la voile. Son travail s'étend au mobilier et aux objets d'extérieur, avec des pièces signées pour des éditeurs tels que Jess Design (chaise Tape), Satelliet (chaise Ami), DYYK ou Borek (parasol Monroe).",
       "photo": "/images/designers/nathalie-schellekens.jpg"
     },
     {
@@ -1991,7 +2355,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Né en 1962 à Bagheria, près de Palerme, Antonino Sciortino est un artiste et designer sicilien qui travaille le fer. Initié au métier de forgeron dès l'enfance dans l'atelier familial, il apprend à façonner le fil de fer recuit, un métal souple qu'il plie en lignes graciles. Avant de revenir à la matière, il mène une carrière de danseur et de chorégraphe, une expérience qui irrigue son œuvre. En 2003, il s'installe à Milan où il ouvre son atelier, soutenu par la Compagnia del Giardino. Ses sculptures et son mobilier mêlent la rigidité du fer à un mouvement libre, dans un style qu'il qualifie de baroque minimaliste. Pour Serax, il signe la ligne Metal Sculptures, une collection de meubles et d'accessoires d'intérieur peints à la main et polis, où chaque pièce conserve une présence sculpturale.",
       "photo": "/images/designers/antonino-sciortino.jpg"
     },
     {
@@ -2023,7 +2387,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Née à Lisbonne en 1966, Bela Silva est une artiste portugaise dont la pratique s'organise autour de la céramique, à laquelle s'ajoutent l'azulejo, la sculpture et le dessin. Formée aux écoles de Beaux-Arts de Porto et de Lisbonne et à l'Ar.Co, puis à la Norwich School of Art au Royaume-Uni, elle obtient un master à la School of the Art Institute of Chicago en 1994. Elle partage aujourd'hui son travail entre Bruxelles et Lisbonne. Nourri de ses voyages et de mythologies locales, son langage coloré se déploie aussi bien dans des panneaux d'azulejos pour le métro de Lisbonne (station Alvalade) que dans des collaborations avec Hermès, Vista Alegre, Bordalo Pinheiro et Serax. Pour cette dernière, elle a notamment signé les collections Look At Me (céramique), Eternal Snow (verrerie) et Japanese Kimonos (art de la table).",
       "photo": "/images/designers/bela-silva.jpg"
     },
     {
@@ -2039,7 +2403,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Née à Salerne en 1962, Emma Silvestris vit et travaille à Bari, dans le sud de l'Italie. Titulaire d'un diplôme en littératures étrangères et histoire de l'art, elle exerce d'abord comme enseignante et chercheuse avant de se consacrer au design à partir de 1990, au sein du Special Studio de Bari. Son vocabulaire formel associe des lignes douces et organiques à la rigueur de la géométrie et au recours à des symboles anciens. Sa pièce la plus connue est la collection Mediterraneo, née en 2004 lors de l'atelier « Lightness of Steel » mené pour Alessi par le LPWK de Laura Polinoro et éditée à partir de 2005 : une corbeille et des accessoires en acier découpé qui transposent dans le métal la délicatesse du corail et des organismes marins. Son travail privilégie les objets usuels de la table et de la cuisine.",
       "photo": "/images/designers/emma-silvestris.jpg"
     },
     {
@@ -2055,7 +2419,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Studio Simple est un studio de design belge fondé en 2007 par Ann Vereecken et Jeroen Worst, établi à Gand. À l'origine concepteurs d'aménagements intérieurs pour de nombreux clients, ils façonnaient à la main des objets complémentaires pour chacun de leurs projets. Certaines de ces pièces rejoignent Serax en 2013, donnant naissance à une collection d'accessoires et de luminaires développée sous le nom Studio Simple. Ann se concentre sur l'esthétique, tandis que Jeroen prend en charge les aspects pratiques et techniques, en privilégiant les ressources et la production locales. Leur démarche revendique la simplicité, la pérennité et une conscience de l'empreinte du design. Pour Serax, ils signent notamment les séries Dunes (assiettes en bois tourné), Daysign (accessoires de cuisine et de table) et Ceremony (plateaux).",
       "photo": "/images/designers/studio-simple.jpg"
     },
     {
@@ -2076,6 +2440,21 @@
       "featured": true
     },
     {
+      "name": "Catherine Sofia",
+      "slug": "catherine-sofia",
+      "sortKey": "Sofia",
+      "tags": [
+        "catherine-sofia"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Valerio Sommella",
       "slug": "valerio-sommella",
       "sortKey": "Sommella",
@@ -2090,7 +2469,7 @@
         "/collections/alessi",
         "/produits.html?marque=Ichendorf Milano"
       ],
-      "bio": "",
+      "bio": "Designer industriel italien né à Cortona, en Toscane, et formé à Milan, Valerio Sommella est diplômé avec mention du département de design du Politecnico di Milano. Il passe les premières années de sa carrière entre Milan et Amsterdam avant d'ouvrir son propre studio à Milan en 2009. Sa pratique couvre des champs variés, du mobilier à l'éclairage en passant par les arts de la table et l'électronique grand public. Il a collaboré avec des maisons telles qu'Alessi, Moooi, Nemo, Ethimo et Alcantara, ainsi qu'avec Ichendorf Milano, pour qui il a dessiné la collection de verres Octave. Son travail a été distingué par plusieurs récompenses, dont des German Design Awards et des Good Design Awards de Chicago.",
       "photo": "/images/designers/valerio-sommella.jpg"
     },
     {
@@ -2142,8 +2521,23 @@
         "/produits.html?marque=Fatboy",
         "/produits.html?marque=Pols Potten"
       ],
-      "bio": "",
+      "bio": "Erik Stehmann (né en 1984) est un designer produit néerlandais. Diplômé de l'école d'art ArtEZ d'Arnhem, il fonde en 2009 son propre studio dans cette ville. Sa démarche revendique le jeu et l'inventivité : il conçoit des objets ludiques, à mi-chemin entre la fonction et le clin d'œil, qu'il décrit comme des « jouets pour adultes ». Son travail couvre le mobilier, le luminaire et de petits objets du quotidien. Pour Fatboy, il signe la collection d'extérieur Toní, relecture en aluminium léger du salon de bistrot, déclinée en chaises empilables et en tables dont la Bistreau à porte-parasol intégré. Pour Weltevree, il dessine le Beach Rocker, fauteuil de plage en hêtre verni croisé avec un rocking-chair, dont les coloris sont développés avec le studio Raw Color.",
       "photo": "/images/designers/erik-stehmann.jpg"
+    },
+    {
+      "name": "OEO Studio",
+      "slug": "oeo-studio",
+      "sortKey": "Studio",
+      "tags": [
+        "oeo-studio"
+      ],
+      "brands": [
+        "&Tradition"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=&Tradition"
+      ],
+      "bio": ""
     },
     {
       "name": "WAWW La Table",
@@ -2158,7 +2552,7 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "WAWW La Table est une plateforme française dédiée à l'art de la table, fondée en juin 2020, à la sortie du premier confinement, par Péri Cochin, productrice de télévision de formation d'architecte, et Arabelle Reille, historienne de l'art et conseillère en art (qui a animé des programmes culturels sur Paris Première). Amies de longue date, elles lancent sur Instagram un concours hebdomadaire récompensant la plus belle table, qui fédère une communauté de passionnés de mise en scène de la table. Le projet revendique une approche du recyclage et de la « seconde vie » des objets, mêlant chine, brocante et art de vivre à la française. Pour l'éditeur belge Serax, WAWW La Table signe la vaisselle Bazaar, inspirée des bazars d'Istanbul, et une gamme de verres aux formes et teintes variées (Nabucho, Astarté, Yam, Bubble).",
       "photo": "/images/designers/waww-la-table.jpg"
     },
     {
@@ -2176,7 +2570,7 @@
         "/collections/alessi",
         "/produits.html?marque=Ichendorf Milano"
       ],
-      "bio": "",
+      "bio": "Keiji Takeuchi est un designer japonais né à Fukuoka en 1977. Il passe une grande partie de sa jeunesse en Nouvelle-Zélande, où il obtient un diplôme de design produit à Auckland, complété par une bourse d'études à l'ENSCI-Les Ateliers, à Paris. En 2005, il rejoint le studio tokyoïte de Naoto Fukasawa, auprès duquel il travaille sept ans. Installé à Milan à partir de 2012, il y fonde son propre bureau de design en 2015. En 2016, il reçoit le prix du jeune talent japonais décerné par Elle Deco Japon (EDIDA). Il collabore avec des maisons internationales telles que Fredericia, Boffi De Padova, Living Divani, Karimoku et le groupe MillerKnoll.",
       "photo": "/images/designers/keiji-takeuchi.jpg"
     },
     {
@@ -2192,7 +2586,7 @@
       "brandHrefs": [
         "/produits.html?marque=Pols Potten"
       ],
-      "bio": "",
+      "bio": "Norman Trapman (né en 1951 à Amsterdam) est un céramiste et designer néerlandais. Diplômé en 1974 de l'Académie royale d'art et de design (Koninklijke Academie voor Kunst en Vormgeving) à Bois-le-Duc, il enseigne à l'académie St. Joost (Bois-le-Duc et Breda). En 1994, il effectue une résidence au Centre européen de la céramique (EKWC) et en devient ensuite membre du conseil. Surnommé aux Pays-Bas le « gourou du vase », il privilégie une démarche où la matière et l'outil guident la forme : ses pièces sont notamment façonnées à l'aide d'une presse à boudin des années 1960 conçue à l'origine pour la brique. Son vase Coral, en porcelaine émaillée évoquant les récifs coralliens et la tradition des vases à tulipes de Delft, est l'une des pièces phares de la collection Pols Potten. Ses œuvres ont été exposées au Frans Hals Museum de Haarlem et au Stedelijk Museum d'Amsterdam.",
       "photo": "/images/designers/norman-trapman.jpg"
     },
     {
@@ -2210,7 +2604,7 @@
         "/collections/alessi",
         "/produits.html?marque=Ichendorf Milano"
       ],
-      "bio": "",
+      "bio": "Architecte et designer italien né à Messine, en Sicile, Mario Trimarchi vit et travaille à Milan, où il s'est installé dans les années 1980. Il obtient son master en design industriel à la Domus Academy lors de l'année de fondation de l'institution, en 1984, avant d'y diriger plus tard des programmes de master. Pendant une dizaine d'années, de la fin des années 1980 à 2000, il fait partie de l'Olivetti Design Studio, où il collabore avec Michele De Lucchi sur des ordinateurs et des distributeurs automatiques. En 1999, il fonde FRAGILE, studio d'identité visuelle mené avec Frida Doveil, signant marques et systèmes de communication pour Alessi, Poltrona Frau, Poste Italiane ou Coop Italia. Pour Alessi, il dessine la cafetière Ossidiana (2014), lauréate du Compasso d'Oro en 2016. Pour Ichendorf Milano, il conçoit des collections de verre : Amaranta, Andalusia et Rivoli. Il enseigne le design dans des écoles italiennes (NABA, IULM).",
       "photo": "/images/designers/mario-trimarchi.jpg"
     },
     {
@@ -2258,7 +2652,7 @@
       "brandHrefs": [
         "/produits.html?marque=Fatboy"
       ],
-      "bio": "",
+      "bio": "Nynke Tynagel (née en 1977) est une graphiste, designer textile et de produits néerlandaise. Elle étudie les arts graphiques à la Design Academy Eindhoven, dont elle sort diplômée en 2000. La même année, elle cofonde avec Job Smeets le collectif Studio Job, dont elle devient copropriétaire et l'autrice du langage graphique pendant plus de vingt ans. En 2020, elle quitte le studio pour fonder sa propre structure éponyme. Son vocabulaire, narratif, mêle imagerie héraldique et registre populaire, décliné en textile, céramique, illustration ou impression. Ses œuvres figurent dans les collections du MoMA, du Stedelijk Museum d'Amsterdam, du Louisiana Museum, du Centraal Museum et du TextielMuseum. Sous son nom, elle collabore notamment avec Qeeboo, Fatboy et byBorre.",
       "photo": "/images/designers/nynke-tynagel.jpg"
     },
     {
@@ -2274,7 +2668,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Ben van Berkel (né le 25 janvier 1957 à Utrecht) est un architecte néerlandais. Il étudie à la Rietveld Academie d'Amsterdam puis à l'Architectural Association de Londres, où il obtient son diplôme avec mention en 1987. En 1988, il fonde avec Caroline Bos l'agence Van Berkel & Bos, relancée en 1998 sous le nom d'UNStudio, réseau de spécialistes en architecture, urbanisme et infrastructures. On lui doit notamment le pont Érasme à Rotterdam (1996), la Möbius House et le musée Mercedes-Benz de Stuttgart (2006). Depuis 2016, van Berkel et UNStudio collaborent avec l'éditeur italien Alessi, signant couverts et objets de table, dont les couverts Giro (2016) et la trancheuse à truffe Alba (2017), inspirée de l'entrelacs des racines et de la rugosité des tubercules.",
       "photo": "/images/designers/ben-van-berkel-unstudio.jpg"
     },
     {
@@ -2338,7 +2732,7 @@
       "brandHrefs": [
         "/produits.html?marque=Fatboy"
       ],
-      "bio": "",
+      "bio": "DeMakersVan (« Les Faiseurs de ») est un collectif de design néerlandais fondé vers 2005 par les frères jumeaux Jeroen et Joep Verhoeven et par Judith de Graauw, diplômés de la Design Academy Eindhoven. Le studio explore le territoire entre savoir-faire artisanal et procédés industriels de pointe. Il s'est fait connaître par la Cinderella Table de Jeroen Verhoeven (2004), forme générée par ordinateur et assemblée à la main à partir de strates de contreplaqué, conservée notamment au MoMA de New York, au Victoria and Albert Museum de Londres et au Centre Pompidou. La Lace Fence de Joep Verhoeven, qui noue le grillage à la manière de la dentelle, compte parmi ses pièces emblématiques. Pour Fatboy, le collectif a conçu des luminaires d'extérieur, dont la famille Edison (le Petit, le Grand) et le lustre RockCoco.",
       "photo": "/images/designers/de-makers-van.jpg"
     },
     {
@@ -2403,7 +2797,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Né à Alfonsine en 1957, Guido Venturini est un architecte et designer italien, diplômé en architecture à Florence. En 1985, il fonde avec Stefano Giovannoni le groupe Bolidista, courant au langage aérodynamique inspiré par la vitesse, et crée la même année King-Kong, signature active jusqu'en 1989. Sous ce nom, le duo développe un langage graphique enfantin et caricatural qui marquera le design du début des années 1990. C'est ainsi qu'ils conçoivent pour Alessi la série Girotondo (1989), reconnaissable à sa frise de petits personnages découpés. En solo, Venturini signe ensuite pour Alessi l'allume-gaz Firebird (1993). Il a enseigné à la Domus Academy et à la faculté d'architecture de Florence.",
       "photo": "/images/designers/guido-venturini.jpg"
     },
     {
@@ -2419,8 +2813,23 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Bob Verhelst est un designer, scénographe et créateur de costumes belge, formé à Anvers. Il étudie d'abord la mode à l'Académie royale des beaux-arts d'Anvers, aux côtés d'Ann Demeulemeester, Dries Van Noten et Martin Margiela, avant de se spécialiser dans le costume de théâtre à l'Académie des beaux-arts de Varsovie, sous la direction de Józef Szajna, puis à Rome. Sa carrière croise théâtre, mode et design : il signe des décors pour des théâtres européens et des vitrines pour Hermès, Cartier, Viktor & Rolf et L'Oréal. Il conçoit la scénographie de l'exposition « Margiela, les années Hermès » (2017) et fut directeur artistique du concept store anversois Graanmarkt 13 de 2010 à 2023. En 2024, il dévoile sa première ligne de mobilier et d'objets, « Sculptural Confluence », éditée par la maison belge Serax — des pièces sculpturales aux formes géométriques inspirées du Bauhaus et d'Eileen Gray, où il dit penser « davantage en sculpteur qu'en designer ».",
       "photo": "/images/designers/bob-verhelst.jpg"
+    },
+    {
+      "name": "Vlaemynck",
+      "slug": "vlaemynck",
+      "sortKey": "Vlaemynck",
+      "tags": [
+        "vlaemynck"
+      ],
+      "brands": [
+        "Fermob"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Fermob"
+      ],
+      "bio": "Fondée en 1965 par Roland Vlaemynck, Vlaemynck est une maison française de mobilier et de textile d'extérieur haut de gamme. À l'origine tisserand, dans le Nord de la France, l'entreprise s'est forgée une réputation autour des parasols et des coussins confectionnés dans ses ateliers de Bourgogne (région de Mâcon), où plus de 250 000 m² de toile sont travaillés chaque année. Parmi les premières en France à proposer du mobilier en teck, elle complète son offre textile par des assises, tables et bains de soleil destinés en priorité à l'hôtellerie et la restauration. Son histoire est liée à la Côte d'Azur, ayant équipé les terrasses de nombreux hôtels de prestige (Carlton, Martinez...). Reprise par le groupe Fermob en 2013, la marque est aujourd'hui commercialisée via la plateforme Fermob Contract."
     },
     {
       "name": "Roderick Vos",
@@ -2435,7 +2844,7 @@
       "brandHrefs": [
         "/produits.html?marque=Pols Potten"
       ],
-      "bio": "",
+      "bio": "Né à Groningue (Pays-Bas) en 1965, Roderick Vos étudie le design industriel à la Design Academy d'Eindhoven, qu'il intègre en 1984. Sa formation est marquée par un stage de six mois au Japon en 1987 et un passage dans l'atelier d'Ingo Maurer à Munich. Diplômé en 1990, il s'installe en Indonésie (Surabaya) avec sa compagne Claire Vos pour approfondir le travail du rotin et du textile. Le couple fonde officiellement le Studio Roderick Vos en 1999, aujourd'hui établi à Nimègue. Le studio conçoit luminaires, textiles, accessoires et mobilier pour des éditeurs internationaux tels que Driade, Moooi, Linteloo, Alessi et Pols Potten. Certaines de leurs pièces figurent dans les collections du Stedelijk Museum d'Amsterdam et du Museum of Arts and Design de New York.",
       "photo": "/images/designers/roderick-vos.jpg"
     },
     {
@@ -2467,8 +2876,23 @@
       "brandHrefs": [
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Designer américaine née le 21 novembre 1967 à Myrtle Beach (Caroline du Sud), Kelly Wearstler s'est formée au Massachusetts College of Art de Boston, où elle obtient un diplôme en design d'intérieur et graphique. Installée à Los Angeles, elle fonde son agence éponyme en 1995 et se fait connaître au début des années 2000 pour ses intérieurs d'hôtels, notamment la chaîne Viceroy. Son travail couvre l'architecture intérieure résidentielle, hôtelière et commerciale, ainsi que le mobilier, le luminaire, les textiles et les arts de la table. Pour l'éditeur belge Serax, elle a conçu en 2023 deux collections de vaisselle contrastées : Dune, hommage à la poterie antique jouant des finitions mate et brillante, et Zuma, aux motifs graphiques tamponnés à la main d'inspiration Bauhaus.",
       "photo": "/images/designers/kelly-wearstler.jpg"
+    },
+    {
+      "name": "Hee Welling",
+      "slug": "hee-welling",
+      "sortKey": "Welling",
+      "tags": [
+        "hee-welling"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=HAY"
+      ],
+      "bio": "Né en 1974, Hee Welling est un designer danois actif dans le mobilier, l'aménagement intérieur, le luminaire et le design industriel. Fils d'ébéniste, il s'intéresse tôt aux techniques de production et aux matériaux. Il étudie à l'Université d'art et de design d'Helsinki, puis obtient un master en design de mobilier à l'Académie royale danoise des beaux-arts. En 2003, il fonde son studio à Copenhague. Pour l'éditeur danois HAY, il conçoit la collection Hee (2004), en acier laqué empilable, puis la série About A Chair (AAC) en 2010. Il a reçu le Bo Bedre Award (Danemark) et un Good Design Award (États-Unis), et a été nominé au titre de designer danois de l'année en 2013 et 2014."
     },
     {
       "name": "Sylvain Willenz",
@@ -2485,7 +2909,7 @@
         "/collections/hay",
         "/collections/serax"
       ],
-      "bio": "",
+      "bio": "Né à Bruxelles en 1978, Sylvain Willenz suit un master en Design Products au Royal College of Art de Londres, dont il sort diplômé en 2003. Il fonde son studio à Bruxelles en 2004 et y développe un travail de mobilier, de luminaires et d'objets pour une clientèle internationale, avec une approche graphique attentive aux procédés de fabrication. Sa lampe Torch Light, éditée par Established & Sons en 2008, contribue à le faire connaître et lui vaut, l'année suivante, le titre de Designer belge de l'année 2009. Il signe par la suite la série de tables Rebar pour HAY et la collection de sièges Curve pour Serax (2020). Son travail figure dans plusieurs collections muséales, dont le Design Museum Brussels. Il intervient par ailleurs en enseignement à l'ECAL et à l'ENSAV La Cambre (jurys et workshops).",
       "photo": "/images/designers/sylvain-willenz.jpg"
     },
     {
@@ -2534,7 +2958,7 @@
       "brandHrefs": [
         "/collections/alessi"
       ],
-      "bio": "",
+      "bio": "Architecte et designer italien né à Milan en 1916, Marco Zanuso (1916-2001) compte parmi les figures fondatrices du design industriel italien d'après-guerre. Diplômé en architecture du Politecnico di Milano en 1939, il ouvre son agence à Milan en 1945 et enseigne dans ce même établissement durant plusieurs décennies. Son travail explore les matériaux et procédés nouveaux, des mousses synthétiques aux matières plastiques. Le fauteuil Lady, édité par Arflex en 1951, remporte une médaille à la Triennale de Milan la même année. À partir de 1957, il engage une longue collaboration avec l'Allemand Richard Sapper, dont naissent les téléviseurs et radios de Brionvega ainsi que le téléphone Grillo, produit par Siemens. Plusieurs fois lauréat du Compasso d'Oro, il signe le service de couverts Duna, conçu en 1960 et édité par Alessi.",
       "photo": "/images/designers/marco-zanuso.jpg"
     },
     {
@@ -2568,25 +2992,8 @@
         "/produits.html?marque=HKliving",
         "/produits.html?marque=Pols Potten"
       ],
-      "bio": "",
+      "bio": "Teun Zwets (né en 1992) est un designer néerlandais diplômé en 2020 de la Design Academy Eindhoven, où son projet de fin d'études, Teunland, lui vaut le Kazerne Design Award. Depuis son studio installé à Eindhoven, il développe une pratique fondée sur le réemploi de matériaux mis au rebut, qu'il assemble sans plan préétabli, au gré des matières et des impulsions de l'atelier. Son travail se reconnaît à ses couleurs franches, ses surfaces brutes recouvertes de laques épaisses et brillantes, et ses formes qui détournent des objets familiers. À la frontière du design et de l'art, il a été montré notamment à la Dutch Design Week, chez Rossana Orlandi et au Salone del Mobile de Milan. Il a collaboré avec HKliving, Pols Potten et Lensvelt, ainsi qu'avec Piet Hein Eek et G-Star.",
       "photo": "/images/designers/teun-zwets.jpg"
-    },
-    {
-      "name": "Tristan Lohner",
-      "slug": "tristan-lohner",
-      "tags": [
-        "tristan-lohner"
-      ],
-      "brands": [
-        "Fermob"
-      ],
-      "brandHrefs": [
-        "/collections/fermob"
-      ],
-      "bio": "Tristan Lohner est un designer produit français. Formé d'abord à l'ébénisterie (Brevet des Métiers d'Art auprès de Bernard Daude, qui travailla pour Pierre Paulin au Mobilier national), il rejoint ensuite l'École des Arts décoratifs de Paris, où il étudie le design produit sous la direction de Jean-Marie Massaud. Il dirige par ailleurs le RBC Design Center à Montpellier, concept store imaginé par Jean Nouvel. Son travail privilégie la justesse, la sobriété et le lien sensible entre l'objet et son usager. Collaborateur régulier de Fermob, il y signe la lampe nomade Balad (Étoile de l'Observeur du Design 2017), la table Bebop, le luminaire MOOON! et la chaise Studie, distinguée du Red Dot « Best of the Best » en 2022. Pour Hartô, il a dessiné la lampe de table Nina.",
-      "photo": "/images/designers/tristan-lohner.jpg",
-      "sortKey": "Lohner Tristan",
-      "featured": true
     }
   ]
 }
