@@ -8,6 +8,16 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <title>Produit · Mikadodeco</title>
   <meta name="description" content="Découvrez cette pièce de notre sélection design. Retrait à Uccle, livraison en Belgique." />
+  <script>
+    /* SEO canonical — URL self propre (?handle). Toujours UN seul rel="canonical". */
+    (function () {
+      var handle = new URLSearchParams(location.search).get("handle");
+      var canon = "https://www.mikadodeco.be/produit.html" + (handle ? "?handle=" + encodeURIComponent(handle) : "");
+      var link = document.querySelector('link[rel="canonical"]') || document.head.appendChild(document.createElement("link"));
+      link.rel = "canonical";
+      link.href = canon;
+    })();
+  </script>
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />

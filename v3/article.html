@@ -7,6 +7,16 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <title>Le journal · Mikadodeco</title>
+  <script>
+    /* SEO canonical — URL self propre (?slug). Toujours UN seul rel="canonical". */
+    (function () {
+      var slug = new URLSearchParams(location.search).get("slug");
+      var canon = "https://www.mikadodeco.be/article.html" + (slug ? "?slug=" + encodeURIComponent(slug) : "");
+      var link = document.querySelector('link[rel="canonical"]') || document.head.appendChild(document.createElement("link"));
+      link.rel = "canonical";
+      link.href = canon;
+    })();
+  </script>
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />

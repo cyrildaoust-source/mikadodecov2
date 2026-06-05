@@ -8,6 +8,27 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <title>Catalogue · Mikadodeco</title>
   <meta name="description" content="Le catalogue Mikadodeco : mobilier, luminaires et objets de design, choisis pièce par pièce." />
+  <script>
+    /* SEO canonical — résolu selon la route : /collections/<handle> (sans query),
+       ?designer / ?brand (self avec le param), sinon catalogue /produits.html
+       (params de filtre cat/sort/tag retirés). Toujours UN seul rel="canonical". */
+    (function () {
+      var ORIGIN = "https://www.mikadodeco.be";
+      var canon;
+      var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
+      if (m) {
+        canon = ORIGIN + "/collections/" + m[1];
+      } else {
+        var p = new URLSearchParams(location.search);
+        if (p.get("designer"))   canon = ORIGIN + "/produits.html?designer=" + encodeURIComponent(p.get("designer"));
+        else if (p.get("brand")) canon = ORIGIN + "/produits.html?brand=" + encodeURIComponent(p.get("brand"));
+        else                     canon = ORIGIN + "/produits.html";
+      }
+      var link = document.querySelector('link[rel="canonical"]') || document.head.appendChild(document.createElement("link"));
+      link.rel = "canonical";
+      link.href = canon;
+    })();
+  </script>
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
