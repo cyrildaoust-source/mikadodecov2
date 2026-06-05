@@ -251,15 +251,71 @@ async function getProducts() {
 // `tags` (comma-separated) becomes a Shopify GraphQL query string
 // `tag:foo OR tag:bar OR ...` — used by /produits.html?designer=<slug>
 // to filter on a list of historical tag variants.
-async function getProductsPage(first, after, tags) {
+// Category panel (/produits.html) — handle → Shopify query clause, hardcoded
+// from chantiers/filtrage-catalogue/data/category-filters.json (36 categories,
+// alphabetical). `cats` (comma-separated handles) becomes the OR of the
+// clauses below — same mechanism as `tags`. Unknown handles are ignored.
+const CATEGORY_FILTERS = {
+  'accessoires-jardin': '(product_type:"Arrosoir" OR product_type:"Mangeoire à oiseaux")',
+  'appliques': '(product_type:"Applique")',
+  'bains-de-soleil-transats': '(product_type:"Bain de soleil" OR product_type:"Transat" OR product_type:"Hamac")',
+  'bougeoirs-bougies-photophores': '(product_type:"Bougeoir" OR product_type:"Bougie" OR product_type:"Bougie parfumée" OR product_type:"Photophore" OR product_type:"Chandelier" OR product_type:"Petite bougie parfumée")',
+  'brasero-barbecue': '(product_type:"Brasero" OR product_type:"Barbecue" OR product_type:"Gril" OR product_type:"Accessoires de grill extérieur")',
+  'bureaux': '(product_type:"Bureau")',
+  'cache-pots-jardinieres': '(product_type:"Cache-pot" OR product_type:"Cache-pot grand" OR product_type:"Cache-pot moyen" OR product_type:"Cache-pot petit" OR product_type:"Cache-pot stoneware" OR product_type:"Jardinière")',
+  'canapes': '(product_type:"Canapé" OR product_type:"Banquette")',
+  'chaises': '(product_type:"Chaise" OR product_type:"Chaise de bar" OR product_type:"Chaise enfant" OR product_type:"Chaise haute")',
+  'chaises-longues': '(product_type:"Chaise longue" OR product_type:"Bain de soleil" OR product_type:"Transat")',
+  'commodes-et-buffets': '(product_type:"Commode" OR product_type:"Buffet")',
+  'coussins-plaids-tapis': '(product_type:"Coussin" OR product_type:"Tapis" OR product_type:"Couvre-lit" OR product_type:"Plaid")',
+  'couverts': '(product_type:"Couverts" OR product_type:"Couteau" OR product_type:"Couteau de table" OR product_type:"Fourchette" OR product_type:"Fourchette de table" OR product_type:"Cuiller" OR product_type:"Cuiller de table" OR product_type:"Cuillère" OR product_type:"Cuillère de service" OR product_type:"Cuillère de table")',
+  'dessertes-et-chariots': '(product_type:"Desserte" OR product_type:"Chariot")',
+  'etageres-et-bibliotheques': '(vendor:"String Furniture" OR product_type:"Étagère" OR product_type:"Etagère" OR product_type:"Bibliothèque")',
+  'fauteuils': '(product_type:"Fauteuil")',
+  'lampadaires': '(product_type:"Lampadaire")',
+  'lampes-de-bureau': '(product_type:"Lampe de bureau" OR product_type:"Lampe à pince")',
+  'lampes-de-table': '(product_type:"Lampe" OR product_type:"Lampe de table" OR product_type:"Lampe de chevet")',
+  'lampes-nomades': '(product_type:"Lampe baladeuse")',
+  'miroirs': '(product_type:"Miroir" OR product_type:"Miroir cosmétique" OR product_type:"Miroir cosmétique LED" OR product_type:"Miroir cosmétique LED mural")',
+  'mugs-tasses-cafe': '(product_type:"Mug" OR product_type:"Mug à café" OR product_type:"Mug à cappuccino" OR product_type:"Mug à latte" OR product_type:"Mug à thé" OR product_type:"Tasse" OR product_type:"Cafétière" OR product_type:"Cafétière espresso")',
+  'objets-decoratifs-cadres': '(product_type:"Cadre" OR product_type:"Figurine" OR product_type:"Mobile" OR product_type:"Centre de table" OR product_type:"Cube décoratif" OR product_type:"Horloge")',
+  'paniers-et-corbeilles': '(product_type:"Panier" OR product_type:"Panier de rangement" OR product_type:"Corbeille" OR product_type:"Caisse de rangement")',
+  'parasols-ombrages': '(product_type:"Parasol" OR product_type:"Paravent")',
+  'pateres-et-porte-manteaux': '(product_type:"Patère" OR product_type:"Patère murale" OR product_type:"Cintre" OR product_type:"Porte-manteau")',
+  'sieges-de-bureau': '(product_type:"Chaise de bureau" OR product_type:"Fauteuil de bureau" OR product_type:"Siège de bureau")',
+  'suspensions': '(product_type:"Suspension")',
+  'tables-basses-et-tables-dappoint': '(product_type:"Table basse" OR product_type:"Table d\'appoint" OR product_type:"Table de chevet" OR product_type:"Sellette")',
+  'tables-de-cafe': '(product_type:"Table de café" OR product_type:"Table de bistro" OR title:Bistro)',
+  'tables-de-salle-a-manger': '(product_type:"Table à manger" OR product_type:"Table de salle à manger" OR product_type:"Mange-debout")',
+  'tabourets-et-bancs': '(product_type:"Tabouret" OR product_type:"Tabouret de bar" OR product_type:"Banc" OR product_type:"Repose-pieds")',
+  'ustensiles-cuisine': '(product_type:"Casserole" OR product_type:"Cocotte" OR product_type:"Faitout" OR product_type:"Bloc couteaux" OR product_type:"Coupe-fromage" OR product_type:"Plateau")',
+  'vaisselle-assiettes': '(product_type:"Assiette" OR product_type:"Assiette creuse" OR product_type:"Assiette plate" OR product_type:"Assiette à dessert" OR product_type:"Bol" OR product_type:"Bol de service" OR product_type:"Plat" OR product_type:"Saladier" OR product_type:"Coupelle")',
+  'vases': '(product_type:"Vase")',
+  'verres-carafes': '(product_type:"Verre" OR product_type:"Carafe" OR product_type:"Carafe isotherme" OR product_type:"Pichet" OR product_type:"Pichet à eau" OR product_type:"Pichet à lait" OR product_type:"Flûte" OR product_type:"Flûte à champagne" OR product_type:"Decanter" OR product_type:"Huilier")',
+};
+
+async function getProductsPage(first, after, tags, cats) {
   const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
   const a   = after || null;
   const tagList = Array.isArray(tags)
     ? tags
     : (tags ? String(tags).split(',').map((s) => s.trim()).filter(Boolean) : []);
+  const catList = Array.isArray(cats)
+    ? cats
+    : (cats ? String(cats).split(',').map((s) => s.trim()).filter(Boolean) : []);
+  // Map category handles → their hardcoded clause; drop unknown handles.
+  const catClauses = catList.map((h) => CATEGORY_FILTERS[h]).filter(Boolean);
   const sortedTags = [...tagList].sort();
-  const query = tagList.length ? tagList.map((t) => `tag:${t}`).join(' OR ') : null;
-  const key = `products:page:${f}:${a || 'first'}${sortedTags.length ? ':tags-' + sortedTags.join(',') : ''}`;
+  const sortedCats = catList.filter((h) => CATEGORY_FILTERS[h]).sort();
+  const tagQuery = tagList.length ? tagList.map((t) => `tag:${t}`).join(' OR ') : '';
+  const catQuery = catClauses.length ? catClauses.join(' OR ') : '';
+  // tags (designer) and cats (catalog panel) are independent in practice;
+  // if both are ever sent, intersect them (AND). Otherwise use whichever.
+  const query = (tagQuery && catQuery) ? `(${tagQuery}) AND (${catQuery})`
+              : (tagQuery || catQuery || null);
+  const key = `products:page:${f}:${a || 'first'}`
+            + (sortedTags.length ? ':tags-' + sortedTags.join(',') : '')
+            + (sortedCats.length ? ':cats-' + sortedCats.join(',') : '');
   return cached(key, async () => {
     const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query });
     const items = data.products.edges.map(({ node }) => mapProduct(node));
@@ -379,9 +435,9 @@ async function getCollections() {
 // The legacy shape is contractual — 4 callers depend on it.
 app.get('/api/products', async (req, res) => {
   try {
-    const { paginated, cursor, limit, tags } = req.query;
-    if (paginated || cursor || limit || tags) {
-      const page = await getProductsPage(limit, cursor, tags);
+    const { paginated, cursor, limit, tags, cats } = req.query;
+    if (paginated || cursor || limit || tags || cats) {
+      const page = await getProductsPage(limit, cursor, tags, cats);
       return res.json(page);
     }
     const products = await getProducts();
