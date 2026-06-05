@@ -52,6 +52,76 @@ app.use('/v3', (req, res) => res.redirect(301, req.url && req.url !== '/' ? req.
 // (the client-side script picks up the handle from the pathname). Matches
 // Shopify's URL convention so links from newsletters and the press work.
 app.get('/collections/:handle', (req, res) => res.sendFile(path.join(__dirname, 'v3', 'produits.html')));
+
+// ─── SSR OPEN GRAPH POUR LES FICHES PRODUIT ────────────
+// Les robots d'aperçu social (WhatsApp/iMessage/Messenger/FB…) n'exécutent
+// PAS le JS — un lien produit partagé doit donc déjà porter, dans le <head>,
+// le nom + l'image du produit. On enrichit ici le <head> côté serveur (title,
+// description, Open Graph, Twitter) à partir des données Shopify ; le reste de
+// la page continue de s'hydrater en JS à l'identique (galerie, variantes,
+// panier, JSON-LD client). Cache edge (s-maxage) → quasi-CDN après le 1er hit.
+// vercel.json route /produit.html?handle=… vers cette fonction ; sans handle,
+// la fiche tombe sur le fichier statique (template générique inchangé).
+const PRODUIT_TEMPLATE = path.join(__dirname, 'v3', 'produit.html');
+const ogEscape = (s) => String(s == null ? '' : s)
+  .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function sendProduitTemplate(res) {
+  // Template générique inchangé (pas de handle / introuvable / erreur). Jamais 500.
+  try {
+    res.set('Content-Type', 'text/html; charset=utf-8');
+    return res.send(fs.readFileSync(PRODUIT_TEMPLATE, 'utf8'));
+  } catch (e) {
+    return res.sendFile(PRODUIT_TEMPLATE);
+  }
+}
+app.get('/produit.html', async (req, res) => {
+  const handle = req.query.handle;
+  if (!handle) return sendProduitTemplate(res);
+  try {
+    const product = await getProductByHandle(handle);
+    if (!product) return sendProduitTemplate(res);
+
+    const name     = product.name || 'Produit';
+    const brand    = product.brand || '';
+    const designer = product.designer || '';
+    const title = `${name} · Mikadodeco`;
+    let desc = `${name}${brand ? ' — ' + brand : ''}. `
+             + (designer ? `Dessiné par ${designer}. ` : '')
+             + 'Pièce design à voir en boutique à Uccle, livraison en Belgique.';
+    if (desc.length > 200) desc = desc.slice(0, 199).trimEnd() + '…';
+    // Première image produit (images[] = full-res CDN Shopify), en absolu, en
+    // ajoutant &width=1200 (les URLs Shopify ont déjà ?v=…). Repli og-default.
+    const raw = (product.images && product.images[0]) || '';
+    const image = raw
+      ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200'
+      : 'https://www.mikadodeco.be/images/og-default.jpg';
+    const url = 'https://www.mikadodeco.be/produit.html?handle=' + encodeURIComponent(handle);
+
+    const T = ogEscape(title), D = ogEscape(desc), U = ogEscape(url), I = ogEscape(image);
+    let html = fs.readFileSync(PRODUIT_TEMPLATE, 'utf8');
+    html = html
+      .replace(/<title>[\s\S]*?<\/title>/, `<title>${T}</title>`)
+      .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${D}" />`)
+      .replace(/<meta property="og:title" content="[^"]*"\s*\/>/, `<meta property="og:title" content="${T}" />`)
+      .replace(/<meta property="og:description" content="[^"]*"\s*\/>/, `<meta property="og:description" content="${D}" />`)
+      .replace(/<meta property="og:url" content="[^"]*"\s*\/>/, `<meta property="og:url" content="${U}" />`)
+      .replace(/<meta property="og:image" content="[^"]*"\s*\/>/, `<meta property="og:image" content="${I}" />`)
+      // Les photos produit ne sont pas en 1.91:1 → on retire le ratio en dur.
+      .replace(/\s*<meta property="og:image:width" content="[^"]*"\s*\/>/, '')
+      .replace(/\s*<meta property="og:image:height" content="[^"]*"\s*\/>/, '')
+      .replace(/<meta name="twitter:title" content="[^"]*"\s*\/>/, `<meta name="twitter:title" content="${T}" />`)
+      .replace(/<meta name="twitter:description" content="[^"]*"\s*\/>/, `<meta name="twitter:description" content="${D}" />`)
+      .replace(/<meta name="twitter:image" content="[^"]*"\s*\/>/, `<meta name="twitter:image" content="${I}" />`);
+
+    res.set('Content-Type', 'text/html; charset=utf-8');
+    res.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=86400');
+    return res.send(html);
+  } catch (err) {
+    console.warn('[og-produit]', err.message);
+    return sendProduitTemplate(res);
+  }
+});
+
 app.use(express.static(path.join(__dirname, 'v3')));
 app.use(cors({ origin: process.env.BASE_URL || `http://localhost:${PORT}` }));
 app.use(express.json());
