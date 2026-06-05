@@ -163,6 +163,22 @@
       const variants = Array.isArray(p.variants) ? p.variants : [];
       let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true };
 
+      // SEO · Product JSON-LD (Google rend le JS) — champs omis si absents,
+      // images en absolu, availability selon la variante affichée.
+      (function () {
+        var abs = function (u) { return u && !/^https?:\/\//.test(u) ? "https://www.mikadodeco.be" + (u.charAt(0) === "/" ? u : "/" + u) : u; };
+        var ld = { "@context": "https://schema.org", "@type": "Product", "name": p.name };
+        if (p.brand) ld.brand = { "@type": "Brand", "name": p.brand };
+        var img = abs(current.image || imgs[0] || p.image || "");
+        if (img) ld.image = img;
+        var offers = { "@type": "Offer", "priceCurrency": "EUR", "availability": current.available === false ? "https://schema.org/OutOfStock" : "https://schema.org/InStock" };
+        var price = current.price != null ? current.price : p.price;
+        if (price != null && price !== "") offers.price = String(price);
+        ld.offers = offers;
+        var s = document.createElement("script"); s.type = "application/ld+json"; s.textContent = JSON.stringify(ld);
+        document.head.appendChild(s);
+      })();
+
       // Walk every variant to collect the option axes (Couleur, Structure,
       // Coussin, etc.) and the distinct values per axis. Products like the
       // Fauteuil cabriolet 1900 have 2 axes (Structure × Coussin) and need

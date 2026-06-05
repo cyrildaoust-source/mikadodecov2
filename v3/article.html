@@ -291,6 +291,18 @@
       let metaDesc = document.querySelector('meta[name="description"]');
       if (!metaDesc) { metaDesc = document.createElement("meta"); metaDesc.setAttribute("name", "description"); document.head.appendChild(metaDesc); }
       metaDesc.setAttribute("content", a.lead.slice(0, 200));
+
+      // SEO · Article JSON-LD (Google rend le JS) — datePublished omis (absent
+      // d'ARTICLES) ; image en absolu.
+      (function () {
+        var img = a.img && !/^https?:\/\//.test(a.img) ? "https://www.mikadodeco.be" + (a.img.charAt(0) === "/" ? a.img : "/" + a.img) : a.img;
+        var ld = { "@context": "https://schema.org", "@type": "Article", "headline": a.title };
+        if (img) ld.image = img;
+        ld.author = { "@type": "Organization", "name": "Mikadodeco" };
+        ld.publisher = { "@type": "Organization", "name": "Mikadodeco", "logo": { "@type": "ImageObject", "url": "https://www.mikadodeco.be/apple-touch-icon.png" } };
+        var s = document.createElement("script"); s.type = "application/ld+json"; s.textContent = JSON.stringify(ld);
+        document.head.appendChild(s);
+      })();
       const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
       // Body tuples: [tag, text] → escaped & wrapped. ["html", raw] → raw HTML
       // pass-through (used by richer articles that need lists, inline bold,
