@@ -79,6 +79,32 @@
     /* Page créateur : réserve la hauteur du titre de grille pour que le
        passage "vide → Les pièces de {name}" (anti-flash) ne décale rien (CLS). */
     .plp-designer [data-grid-title] { min-height: 1.05em; }
+
+    /* Panneau Catégorie — multi-sélection serveur, façon Vitra · DA Mikado
+       (coins nets, crème/encre, case qui se REMPLIT en encre sans coche). */
+    .filterbar__left { display: flex; align-items: center; }
+    .cat-trigger { font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 500; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); padding: 9px 14px; cursor: pointer; letter-spacing: .02em; transition: border-color .15s var(--ease), color .15s var(--ease); }
+    .cat-trigger:hover, .cat-trigger[aria-expanded="true"] { border-color: var(--ink); }
+    .cat-trigger.is-active { border-color: var(--accent); }
+    .cat-trigger__count { font-weight: 600; color: var(--accent-ink); }
+    .cat-trigger__caret { font-size: .8em; transition: transform .2s var(--ease); }
+    .cat-trigger[aria-expanded="true"] .cat-trigger__caret { transform: rotate(180deg); }
+
+    .cat-panel { border: 1px solid var(--line); border-top: none; background: var(--paper); padding: clamp(18px, 2.2vw, 28px) var(--gutter); }
+    .cat-panel[hidden] { display: none; }
+    .cat-panel__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px clamp(20px, 3vw, 40px); }
+    .cat-opt { display: flex; align-items: center; gap: 11px; cursor: pointer; padding: 5px 0; font-family: var(--sans-product); font-size: var(--fs-small); color: var(--ink); line-height: 1.25; }
+    .cat-opt:hover .cat-opt__label { color: var(--accent-ink); }
+    .cat-opt__box { appearance: none; -webkit-appearance: none; flex: none; margin: 0; width: 17px; height: 17px; border: 1.5px solid var(--ink); background: transparent; cursor: pointer; transition: background .12s var(--ease); }
+    .cat-opt__box:checked { background: var(--ink); }
+    .cat-opt__box:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+    .cat-panel__actions { display: flex; justify-content: flex-end; align-items: center; gap: 24px; margin-top: clamp(14px, 2vw, 22px); padding-top: 16px; border-top: 1px solid var(--line); }
+    .cat-panel__clear, .cat-panel__close { font-family: var(--sans-product); font-size: var(--fs-small); background: none; border: none; cursor: pointer; padding: 4px 2px; letter-spacing: .02em; }
+    .cat-panel__clear { color: var(--muted); }
+    .cat-panel__clear:hover { color: var(--ink); }
+    .cat-panel__close { color: var(--accent-ink); border-bottom: 1px solid currentColor; }
+    @media (max-width: 900px) { .cat-panel__grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .cat-panel__grid { grid-template-columns: 1fr; } }
   </style>
   <script>
     /* Page créateur (?designer=<slug>) — flag the document BEFORE first
@@ -224,22 +250,11 @@
   </div>
 
   <div class="filterbar" data-chips>
-    <div class="chips">
-      <button class="chip" data-cat="tous">Tous</button>
-      <button class="chip" data-cat="assises">Assises</button>
-      <button class="chip" data-cat="tables">Tables</button>
-      <button class="chip" data-cat="luminaires">Luminaires</button>
-      <button class="chip" data-cat="rangements">Rangements</button>
-      <button class="chip" data-cat="objets">Objets</button>
+    <div class="filterbar__left">
+      <button type="button" class="cat-trigger" data-cat-trigger aria-expanded="false" aria-controls="cat-panel">
+        <span class="cat-trigger__label">Catégorie</span><span class="cat-trigger__count" data-cat-count hidden></span><span class="cat-trigger__caret" aria-hidden="true">▾</span>
+      </button>
     </div>
-    <select class="chips-select" data-chips-select aria-label="Filtrer par catégorie">
-      <option value="tous">Tous</option>
-      <option value="assises">Assises</option>
-      <option value="tables">Tables</option>
-      <option value="luminaires">Luminaires</option>
-      <option value="rangements">Rangements</option>
-      <option value="objets">Objets</option>
-    </select>
     <div class="filterbar__right">
       <span class="plp-count" data-plp-count></span>
       <select class="fselect" data-filter-brand aria-label="Marque"><option value="">Toutes les marques</option></select>
@@ -249,6 +264,16 @@
         <option value="desc">Prix décroissant</option>
         <option value="az">A → Z</option>
       </select>
+    </div>
+  </div>
+
+  <!-- Panneau Catégorie : multi-sélection, filtrage serveur (façon Vitra · DA
+       Mikado). Rempli par le module ; n'apparaît que sur le catalogue. -->
+  <div class="cat-panel wrap" id="cat-panel" data-cat-panel hidden>
+    <div class="cat-panel__grid" data-cat-grid></div>
+    <div class="cat-panel__actions">
+      <button type="button" class="cat-panel__clear" data-cat-clear>Supprimer le filtre</button>
+      <button type="button" class="cat-panel__close" data-cat-close>Fermer les filtres</button>
     </div>
   </div>
 
@@ -429,7 +454,50 @@
       : (params.get("brand") || BRAND_HANDLES.has(collFromPath)) ? "Marques" : "Mobilier";
     initShell({ active: activeNav, transparentNav: true });
 
-    const state = { coll: collFromPath, cat: params.get("cat") || "tous", brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false, designer: null };
+    // Catégories (36, alphabétique) — handle + libellé pour le panneau multi-
+    // sélection. Le filtrage est SERVEUR (?cats=<handles> → clauses Shopify dans
+    // server.js) ; on ne garde ici que de quoi peindre les cases.
+    const CATEGORIES = [
+      { h: "accessoires-jardin", t: "Accessoires jardin" },
+      { h: "appliques", t: "Appliques" },
+      { h: "bains-de-soleil-transats", t: "Bains de soleil & transats" },
+      { h: "bougeoirs-bougies-photophores", t: "Bougeoirs, bougies & photophores" },
+      { h: "brasero-barbecue", t: "Brasero & barbecue" },
+      { h: "bureaux", t: "Bureaux" },
+      { h: "cache-pots-jardinieres", t: "Cache-pots & jardinières" },
+      { h: "canapes", t: "Canapés" },
+      { h: "chaises", t: "Chaises" },
+      { h: "chaises-longues", t: "Chaises longues" },
+      { h: "commodes-et-buffets", t: "Commodes et buffets" },
+      { h: "coussins-plaids-tapis", t: "Coussins, plaids & tapis" },
+      { h: "couverts", t: "Couverts" },
+      { h: "dessertes-et-chariots", t: "Dessertes et chariots" },
+      { h: "etageres-et-bibliotheques", t: "Étagères et bibliothèques" },
+      { h: "fauteuils", t: "Fauteuils" },
+      { h: "lampadaires", t: "Lampadaires" },
+      { h: "lampes-de-bureau", t: "Lampes de bureau" },
+      { h: "lampes-de-table", t: "Lampes de table" },
+      { h: "lampes-nomades", t: "Lampes nomades" },
+      { h: "miroirs", t: "Miroirs" },
+      { h: "mugs-tasses-cafe", t: "Mugs, tasses & café" },
+      { h: "objets-decoratifs-cadres", t: "Objets décoratifs & cadres" },
+      { h: "paniers-et-corbeilles", t: "Paniers et corbeilles" },
+      { h: "parasols-ombrages", t: "Parasols & ombrages" },
+      { h: "pateres-et-porte-manteaux", t: "Patères et porte-manteaux" },
+      { h: "sieges-de-bureau", t: "Sièges de bureau" },
+      { h: "suspensions", t: "Suspensions" },
+      { h: "tables-basses-et-tables-dappoint", t: "Tables basses et tables d'appoint" },
+      { h: "tables-de-cafe", t: "Tables de café" },
+      { h: "tables-de-salle-a-manger", t: "Tables de salle à manger" },
+      { h: "tabourets-et-bancs", t: "Tabourets et bancs" },
+      { h: "ustensiles-cuisine", t: "Ustensiles & cuisine" },
+      { h: "vaisselle-assiettes", t: "Vaisselle & assiettes" },
+      { h: "vases", t: "Vases" },
+      { h: "verres-carafes", t: "Verres & carafes" },
+    ];
+    const CAT_HANDLES = new Set(CATEGORIES.map((c) => c.h));
+
+    const state = { coll: collFromPath, cats: (params.get("cats") || "").split(",").map((s) => s.trim()).filter((h) => CAT_HANDLES.has(h)), brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false, designer: null };
 
     // Instant paint before the /api/collection/<handle>/products fetch
     // resolves. On ANY collection page: blank the description (V2.1 —
@@ -458,7 +526,7 @@
     function base() {
       let list = ALL.slice();
       if (state.coll) list = list.filter((p) => Array.isArray(p.collections) && p.collections.includes(state.coll));
-      if (state.cat !== "tous") list = list.filter((p) => p.category === state.cat);
+      // Catégorie : filtrée côté SERVEUR (?cats=) — plus de filtre client ici.
       if (state.brand) list = list.filter((p) => slugify(p.brand) === state.brand);
       if (state.tag) list = list.filter((p) => Array.isArray(p.tags) && p.tags.includes(state.tag));
       return list;
@@ -477,7 +545,7 @@
       // the query string (it's in the path already).
       const collInPath = /^\/collections\//.test(location.pathname);
       if (state.coll && !collInPath) q.set("coll", state.coll);
-      if (state.cat !== "tous") q.set("cat", state.cat);
+      if (state.cats.length) q.set("cats", state.cats.join(","));
       if (state.brand) q.set("brand", state.brand);
       if (state.tag) q.set("tag", state.tag);
       history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q : ""));
@@ -498,7 +566,6 @@
                          || state.tag === PROMO_ETE_2026.tagSiege;
         const showBandeau = isPromoEteActive() && !onPromoPage && (
           state.coll === PROMO_ETE_2026.collOutdoor ||
-          state.cat === "exterieur" ||
           state.tag === PROMO_ETE_2026.tagOutdoor
         );
         promoSlot.innerHTML = showBandeau ? promoBandeauHTML("plp") : "";
@@ -507,7 +574,9 @@
       // Always-on "most popular" strip (top 4), independent of the chosen
       // sort. Suppressed on a designer page — there, the whole grid IS that
       // designer's pieces, so a "most popular" split would only fragment it.
-      const showPop = all.length > 4 && !state.designer;
+      // Pas de bande « populaires » quand une catégorie est filtrée → grille
+      // nette (façon Vitra). Sinon, top 4 du catalogue comme avant.
+      const showPop = all.length > 4 && !state.designer && !state.cats.length;
       popSection.style.display = showPop ? "" : "none";
       const pop = showPop ? all.slice().sort((a, b) => popScore(b) - popScore(a)).slice(0, 4) : [];
       if (showPop) popGrid.innerHTML = pop.map(productCard).join("");
@@ -531,12 +600,6 @@
         ? (state.designer.name ? `Les pièces de ${state.designer.name}` : "")
         : (showPop ? "Tout le catalogue" : "Le catalogue");
 
-      chipsBar.querySelectorAll(".chip").forEach((c) => c.classList.toggle("is-active", c.dataset.cat === state.cat));
-      // Keep the mobile <select> in sync with the active category so a
-      // chip click from desktop or a URL reload both reflect on the
-      // dropdown when the viewport drops below 769px.
-      const selectEl = document.querySelector("[data-chips-select]");
-      if (selectEl && selectEl.value !== state.cat) selectEl.value = state.cat;
 
       // Header + filterbar adapt to the active filter:
       //   ?coll  → collection title/description from Shopify (chips hidden)
@@ -572,7 +635,7 @@
         titleEl.textContent = "Promo · 4ème chaise offerte";
         subEl.textContent = "Les sièges d'extérieur éligibles à l'offre du 26 mai au 6 juin.";
       } else {
-        titleEl.textContent = CAT_LABEL[state.cat] || "Le catalogue";
+        titleEl.textContent = "Le catalogue";
         subEl.textContent = "Mobilier de design, choisi pièce par pièce.";
       }
       // Fil d'Ariane (Accueil › niveau › page courante), construit depuis le
@@ -592,7 +655,7 @@
                    { label: state.designer.name || "Designer introuvable" }];
         } else if (brandName) {
           trail = [home, { label: "Marques", href: "/marques.html" }, cur];
-        } else if ((state.cat && state.cat !== "tous") || state.tag) {
+        } else if (state.cats.length || state.tag) {
           trail = [home, { label: "Mobilier", href: "/produits.html" }, cur];
         } else {
           trail = [home, cur];
@@ -635,7 +698,9 @@
           : "__no_designer_match__");
         return `/api/products?${q}`;
       }
+      // Catalogue : filtrage catégorie côté serveur via ?cats=<handles>.
       q.set("paginated", "1");
+      if (state.cats.length) q.set("cats", state.cats.join(","));
       return `/api/products?${q}`;
     }
 
@@ -821,6 +886,30 @@
       }
     }
 
+    // Rechargement complet de la grille (page 1) après changement de catégorie :
+    // c'est une NOUVELLE requête serveur (?cats=) — on réinitialise ALL + curseur,
+    // le bouton « Voir plus » repart du nouveau curseur.
+    async function reloadGrid() {
+      if (state.loading) return;
+      state.loading = true;
+      grid.setAttribute("aria-busy", "true");
+      try {
+        ALL = [];
+        state.cursor = null;
+        state.hasMore = false;
+        const pageData = await fetchPage(null);
+        ALL = (pageData.items || []).filter((p) => p.image);
+        state.cursor  = pageData.pageInfo?.endCursor || null;
+        state.hasMore = !!pageData.pageInfo?.hasNextPage;
+        render();
+      } catch (e) {
+        console.warn("[plp] reloadGrid:", e.message);
+      } finally {
+        state.loading = false;
+        grid.removeAttribute("aria-busy");
+      }
+    }
+
     loadInitial();
 
     // Background promo fetch — re-applies to the current grid (and to every
@@ -828,17 +917,61 @@
     fetchPromos().then((map) => { PROMOS = map; applyPromos(PROMOS); })
       .catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
-    chipsBar.addEventListener("click", (e) => {
-      const c = e.target.closest(".chip"); if (!c) return;
-      state.cat = c.dataset.cat; syncURL(); render();
-    });
-    // Mobile dropdown (visible ≤ 768px) shares the same state.cat.
-    const chipsSelectEl = document.querySelector("[data-chips-select]");
-    if (chipsSelectEl) {
-      chipsSelectEl.addEventListener("change", (e) => {
-        state.cat = e.target.value; syncURL(); render();
+    // ── Panneau Catégorie (multi-sélection, filtrage serveur) ──────────────
+    // N'existe que sur le catalogue : en mode collection / marque / designer /
+    // tag, la filterbar (donc le déclencheur) est déjà masquée par render().
+    const catTrigger = document.querySelector("[data-cat-trigger]");
+    const catPanel   = document.querySelector("[data-cat-panel]");
+    const catGrid    = document.querySelector("[data-cat-grid]");
+    const catCount   = document.querySelector("[data-cat-count]");
+    if (catGrid && !state.coll && !state.tag && !state.designer) {
+      catGrid.innerHTML = CATEGORIES.map((c) =>
+        `<label class="cat-opt"><input type="checkbox" class="cat-opt__box" value="${c.h}"${state.cats.includes(c.h) ? " checked" : ""} /><span class="cat-opt__label">${escapeHtml(c.t)}</span></label>`
+      ).join("");
+
+      const syncTrigger = () => {
+        const n = state.cats.length;
+        catCount.hidden = n === 0;
+        catCount.textContent = n ? ` · ${n}` : "";
+        catTrigger.classList.toggle("is-active", n > 0);
+      };
+      syncTrigger();
+
+      const setOpen = (open) => {
+        catPanel.hidden = !open;
+        catTrigger.setAttribute("aria-expanded", open ? "true" : "false");
+      };
+      catTrigger.addEventListener("click", (e) => { e.stopPropagation(); setOpen(catPanel.hidden); });
+      document.querySelector("[data-cat-close]").addEventListener("click", () => setOpen(false));
+      // Fermer au clic en dehors (déclencheur et panneau restent cliquables).
+      document.addEventListener("click", (e) => {
+        if (catPanel.hidden) return;
+        if (catPanel.contains(e.target) || catTrigger.contains(e.target)) return;
+        setOpen(false);
+      });
+
+      // Débounce : cocher plusieurs cases d'affilée → un seul fetch serveur.
+      let catTimer = null;
+      const applyCats = () => {
+        syncTrigger(); syncURL();
+        clearTimeout(catTimer);
+        catTimer = setTimeout(reloadGrid, 220);
+      };
+      catGrid.addEventListener("change", (e) => {
+        const box = e.target.closest(".cat-opt__box"); if (!box) return;
+        const h = box.value;
+        if (box.checked) { if (!state.cats.includes(h)) state.cats.push(h); }
+        else state.cats = state.cats.filter((x) => x !== h);
+        applyCats();
+      });
+      document.querySelector("[data-cat-clear]").addEventListener("click", () => {
+        if (!state.cats.length) return;
+        state.cats = [];
+        catGrid.querySelectorAll(".cat-opt__box").forEach((b) => { b.checked = false; });
+        applyCats();
       });
     }
+
     brandSel.addEventListener("change", () => { state.brand = brandSel.value; syncURL(); render(); });
     sortSel.addEventListener("change", () => { state.sort = sortSel.value; render(); });
     document.querySelector("[data-loadmore]").addEventListener("click", loadMore);
