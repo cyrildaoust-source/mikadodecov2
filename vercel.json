@@ -42,6 +42,8 @@
               { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
               { "src": "/collections/(.+)", "dest": "/v3/produits.html" },
               { "src": "/", "dest": "/v3/index.html" },
-              { "src": "/(.+)", "dest": "/v3/$1.html" }
+              { "src": "/(.+)", "dest": "/v3/$1.html" },
+              { "handle": "error" },
+              { "src": "/(?!api/).*", "status": 404, "dest": "/v3/404.html" }
       ]
 }

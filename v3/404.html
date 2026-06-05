@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <title>Page introuvable · Mikadodeco</title>
+  <link rel="preconnect" href="https://use.typekit.net" />
+  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    /* 404 · centré, dans la DA (crème/ink, bleu --accent, coins nets). */
+    .nf404 { min-height: 58vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; padding-block: clamp(56px, 9vw, 120px); }
+    .nf404 h1 { margin: 0; }
+    .nf404__msg { color: var(--muted); margin: 0; max-width: 42ch; }
+    .nf404__cta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+    .nf404__home { color: var(--accent-ink); border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+    .nf404__home:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="page wrap nf404">
+    <span class="eyebrow">Erreur 404</span>
+    <h1 class="serif">Page introuvable</h1>
+    <p class="nf404__msg">Cette page n'existe pas ou plus.</p>
+    <div class="nf404__cta">
+      <a class="btn btn--blue" href="/produits.html">Voir le catalogue</a>
+      <a class="nf404__home" href="/">Retour à l'accueil</a>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell } from "/shared.js";
+    initShell({ active: "", transparentNav: false });
+  </script>
+</body>
+</html>
