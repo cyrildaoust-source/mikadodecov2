@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <title>Recevoir dehors, sans en faire trop · Mikadodeco</title>
+  <meta name="description" content="Une belle table d'extérieur tient à trois choses, et aucune n'est compliquée." />
+  <!-- Open Graph / Twitter Cards (aperçu au partage social — par article, statique) -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Mikadodeco" />
+  <meta property="og:locale" content="fr_BE" />
+  <meta property="og:title" content="Recevoir dehors, sans en faire trop · Mikadodeco" />
+  <meta property="og:description" content="Une belle table d'extérieur tient à trois choses, et aucune n'est compliquée." />
+  <meta property="og:url" content="https://www.mikadodeco.be/journal/recevoir-dehors.html" />
+  <meta property="og:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Recevoir dehors, sans en faire trop · Mikadodeco" />
+  <meta name="twitter:description" content="Une belle table d'extérieur tient à trois choses, et aucune n'est compliquée." />
+  <meta name="twitter:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
+  <link rel="canonical" href="https://www.mikadodeco.be/journal/recevoir-dehors.html" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Recevoir dehors, sans en faire trop","image":"https://www.mikadodeco.be/images/ref-split-2.webp","author":{"@type":"Organization","name":"Mikadodeco"},"publisher":{"@type":"Organization","name":"Mikadodeco","logo":{"@type":"ImageObject","url":"https://www.mikadodeco.be/apple-touch-icon.png"}}}</script>
+  <link rel="preconnect" href="https://use.typekit.net" />
+  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+  <div class="readbar" data-readbar aria-hidden="true"><span class="readbar__fill" data-readbar-fill></span></div>
+
+  <main class="page wrap">
+    <article class="article" data-article>
+      <div data-breadcrumb></div>
+      <div data-body>
+        <div class="article__meta">Inspiration · 4 min</div>
+        <h1 class="article__title">Recevoir dehors, sans en faire trop</h1>
+        <p class="article__lead">Une belle table d'extérieur tient à trois choses, et aucune n'est compliquée.</p>
+        <img class="article__hero" src="/images/ref-split-2.webp" alt="" />
+        <div class="prose"><p>On surcharge souvent les tables d'été. Le secret est ailleurs : quelques pièces justes, posées avec soin, valent mieux qu'un décor de magazine difficile à tenir.</p><h2>La lumière d'abord</h2><p>Une lampe baladeuse rechargeable change tout à la tombée du jour. Pas de fil, pas de bougie qui s'éteint au vent : juste une lumière chaude qu'on déplace au gré de la soirée.</p><h2>Des matières qui ne craignent rien</h2><p>Lin lavé pour la nappe, grès pour les assiettes, acier pour les assises. Tout ce qui peut prendre une averse sans drame vous libère l'esprit.</p><p>Le reste, c'est l'instant. Et ça, aucune sélection ne peut le livrer.</p></div>
+      </div>
+    </article>
+
+    <div class="section wrap" style="text-align:center;border-top:1px solid var(--line);margin-top:48px">
+      <h2 class="serif" style="font-size:clamp(26px,2.6vw,38px);margin-bottom:16px">Une pièce vous a tapé dans l'œil ?</h2>
+      <a href="/produits.html" class="btn btn--blue">Voir le catalogue</a>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell, breadcrumbHTML } from "/shared.js";
+    initShell({ active: "Le journal", transparentNav: false });
+
+    // Fil d'Ariane (Accueil › Le journal › titre) — seul élément hydraté côté
+    // client (navigationnel, non critique SEO). Le titre est baké en dur.
+    const PAGE_TITLE = "Recevoir dehors, sans en faire trop";
+    const crumbEl = document.querySelector("[data-breadcrumb]");
+    if (crumbEl) {
+      crumbEl.innerHTML = breadcrumbHTML([
+        { label: "Accueil", href: "/" },
+        { label: "Le journal", href: "/journal.html" },
+        { label: PAGE_TITLE },
+      ]);
+    }
+
+    /* Reading progress bar — fills as the article body scrolls past;
+       hidden when the article fits within one screen. Passive + rAF. */
+    (function readingProgress() {
+      const bar  = document.querySelector("[data-readbar]");
+      const fill = document.querySelector("[data-readbar-fill]");
+      const el   = document.querySelector("[data-article]");
+      if (!bar || !fill || !el) return;
+      const chrome = document.querySelector(".chrome");
+      const place = () => { if (chrome) bar.style.top = Math.round(chrome.getBoundingClientRect().bottom) + "px"; };
+      let ticking = false;
+      const measure = () => {
+        const total = el.offsetHeight - window.innerHeight;
+        if (total <= 80) { bar.classList.remove("is-on"); fill.style.transform = "scaleX(0)"; return; }
+        bar.classList.add("is-on");
+        const p = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / total));
+        fill.style.transform = "scaleX(" + p.toFixed(4) + ")";
+      };
+      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { measure(); ticking = false; }); } };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", () => { place(); measure(); }, { passive: true });
+      window.addEventListener("load", () => { place(); measure(); });
+      place();
+      measure();
+    })();
+  </script>
+</body>
+</html>

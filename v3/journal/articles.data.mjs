@@ -1,0 +1,214 @@
+// ─── SOURCE UNIQUE DE VÉRITÉ — articles du journal ───────────────────────────
+// Éditer ici puis lancer `npm run journal` pour régénérer v3/journal/<slug>.html
+// (statiques, commités, servis tels quels — modèle identique à `npm run images`).
+// L'ordre des clés = l'ordre d'affichage. Objet déplacé tel quel depuis
+// l'ancien v3/article.html (copie fidèle, aucun contenu modifié).
+// NB extension .mjs : le repo est CommonJS par défaut (package.json sans
+// "type":"module") ; `export const` exige donc un module ESM explicite (.mjs),
+// importé par scripts/build-journal.mjs. Fichier non lié/non requêté côté site.
+
+export const ARTICLES = {
+      "comment-choisir-couleur-fermob": {
+        meta: "Conseil · 6 min", img: "/images/journal-couleur-fermob.jpg",
+        title: "Comment bien choisir sa couleur Fermob",
+        cta: { label: "Voir le mobilier Fermob", href: "/collections/fermob" },
+        lead: "Fermob propose 25 nuances dans sa palette 2026. Ce guide vous aide à cerner les 3 ou 4 couleurs qui correspondent vraiment à votre projet — terrasse, balcon, jardin ou patio.",
+        body: [["html", `
+          <p>Vous venez d'arrêter votre choix sur une chaise Bistro, une table Bellevie ou un fauteuil Luxembourg. Reste la décision qui va, en réalité, définir l'ambiance de votre extérieur pour les dix prochaines années : la couleur.</p>
+
+          <h2>Pourquoi la couleur est <em>la</em> décision Fermob</h2>
+          <p>La couleur chez Fermob n'est pas un détail — c'est le cœur de l'identité de la marque depuis sa création à Thoissey en 1953. Là où d'autres marques de mobilier d'extérieur déclinent au mieux 4 ou 5 finitions, Fermob propose une <strong>palette de 25 teintes</strong> entièrement développées et nommées dans son atelier de couleur.</p>
+          <p>C'est cette palette qui transforme une chaise Bistro de simple objet utilitaire en élément structurant d'un jardin. C'est aussi la raison pour laquelle deux clients qui achètent le même fauteuil Luxembourg peuvent en faire deux choses radicalement différentes — l'un dans son patio méditerranéen en Cerise noire, l'autre sur son balcon parisien en Bleu acapulco.</p>
+          <p>Conséquence pratique : <strong>prendre le temps de choisir sa couleur Fermob, c'est éviter le piège du "j'ai pris noir, c'est plus sûr"</strong> qui, certes, ne se trompe jamais mais ne crée jamais non plus d'ambiance forte.</p>
+
+          <h2>Les 4 questions à se poser AVANT d'ouvrir la palette</h2>
+          <p>Avant même de regarder les couleurs, posez-vous ces 4 questions. Elles élimineront à elles seules 80 % des nuances Fermob et vous laisseront un choix raisonnable de 4 à 6 couleurs candidates.</p>
+
+          <h3>1. Où ira ce mobilier ?</h3>
+          <ul>
+            <li><strong>Balcon urbain</strong> (étroit, contraste avec la ville) → couleurs claires et lumineuses, à éviter les noirs trop massifs</li>
+            <li><strong>Jardin ouvert</strong> (verdure, fleurs, arbres) → couleurs qui dialoguent avec le végétal, soit en harmonie (verts, terres) soit en contraste (couleurs vives)</li>
+            <li><strong>Terrasse en bois</strong> ou <strong>patio en pierre</strong> → tons chauds qui réchauffent le minéral</li>
+            <li><strong>Cuisine d'été</strong> ou <strong>véranda</strong> → couleurs douces, pas trop saturées (vous y mangerez chaque jour)</li>
+          </ul>
+
+          <h3>2. Quelle est l'ambiance que je cherche ?</h3>
+          <ul>
+            <li><strong>Sérénité, zen, minimalisme</strong> → neutres profonds (Carbone, Réglisse, Gris argile, Beige latte)</li>
+            <li><strong>Joie, vitalité, été</strong> → couleurs vives (Piment, Orange confite, Citron givré, Bleu acapulco)</li>
+            <li><strong>Nature, organique, intemporel</strong> → verts (Romarin, Cactus, Pesto) ou terres (Muscade, Pain d'épices, Tonka)</li>
+            <li><strong>Élégance affirmée</strong> → couleurs profondes (Cerise noire, Bleu abysse)</li>
+          </ul>
+
+          <h3>3. Quelles couleurs dominent déjà autour ?</h3>
+          <p>Regardez sans réfléchir 30 secondes votre extérieur. Notez les 3 couleurs principales que vous voyez :</p>
+          <ul>
+            <li>La façade de la maison</li>
+            <li>Le sol (terrasse, pelouse, dallage)</li>
+            <li>Le végétal dominant (à la saison où vous y êtes le plus)</li>
+          </ul>
+          <p>Ces 3 couleurs vont <strong>soit dialoguer</strong>, <strong>soit contraster</strong> avec votre mobilier. Les deux options fonctionnent — mais il faut choisir consciemment laquelle.</p>
+
+          <h3>4. Plutôt s'intégrer ou créer un point focal ?</h3>
+          <p><strong>S'intégrer</strong> = la couleur du mobilier se fond dans l'environnement. Choisissez une teinte qui reprend une couleur déjà présente. Effet : sérénité, sophistication.</p>
+          <p><strong>Créer un point focal</strong> = la couleur du mobilier devient l'élément structurant qui attire l'œil. Choisissez une teinte qui contraste fortement. Effet : énergie, caractère.</p>
+          <p>Les deux sont bonnes — ce n'est pas une question de goût, c'est une question d'intention.</p>
+
+          <h2>Les 6 familles, en un coup d'œil</h2>
+          <p>La palette 2026 compte 25 nuances. Pour s'y retrouver, on les classe en 6 familles cohérentes — voici à qui chacune s'adresse. Le détail teinte par teinte se parcourt dans le nuancier, juste en dessous.</p>
+          <ul>
+            <li><strong>Les neutres intemporels</strong> — les valeurs sûres : elles s'intègrent partout et ne se démodent jamais (Carbone, Réglisse, Gris orage, Blanc coton…).</li>
+            <li><strong>Les beiges et terres claires</strong> — chaudes et organiques, elles réchauffent immédiatement un espace (Beige latte, Tonka, Pain d'épices, Miel…).</li>
+            <li><strong>Les chaleureux affirmés</strong> — des terres profondes qui montent en intensité et affirment un parti pris (Ocre rouge, Piment, Cerise noire…).</li>
+            <li><strong>Les verts</strong> — ils dialoguent avec la végétation tout en s'en distinguant (Cactus, Romarin, Pesto, Vert tilleul…).</li>
+            <li><strong>Les bleus</strong> — du bleu nuit au glacier, ils couvrent tous les usages (Bleu abysse, Acapulco, Bleu maya, Menthe glaciale).</li>
+            <li><strong>Les acidulés</strong> — les deux outsiders, magnifiques posés en couleur d'accent (Citron givré, Guimauve).</li>
+          </ul>
+
+          <div class="article-cta">
+            <p class="article-cta__lead">Explorez chaque teinte en détail.</p>
+            <a class="article-cta__btn" href="/nuancier-fermob.html">
+              Découvrir le nuancier interactif
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <h2>Combiner les couleurs : 5 harmonies qui fonctionnent toujours</h2>
+          <p>Faut-il vraiment <strong>4 chaises de la même couleur</strong> ? Pas forcément. Voici 5 façons de combiner les couleurs Fermob qui font toutes mouche.</p>
+
+          <h3>1. Monochrome (la valeur sûre)</h3>
+          <p>4 chaises identiques, une table identique. Effet : épure et cohérence absolue. Idéal pour les espaces minimalistes ou les jardins très végétalisés (où le mobilier doit se taire pour laisser parler la nature).<br><em>Exemple Mikado :</em> 4 chaises Bistro <strong>Carbone</strong> autour d'une table 1900 <strong>Carbone</strong>.</p>
+
+          <h3>2. Tonal (variations d'une même teinte)</h3>
+          <p>Toutes les chaises dans la même famille de couleur, mais nuances différentes. Plus subtil que le monochrome, plus harmonieux que la cacophonie.<br><em>Exemple Mikado :</em> 1 Romarin + 1 Cactus + 1 Pesto + 1 Vert tilleul → un dégradé de verts qui dialogue avec un jardin végétalisé.</p>
+
+          <h3>3. Naturel (terre + bois + verre)</h3>
+          <p>Une famille terre + une famille verte, en proportion 3-1.<br><em>Exemple Mikado :</em> 3 chaises Muscade + 1 Romarin (ou inversement) sur une terrasse en bois clair. Effet : chaleureux et organique.</p>
+
+          <h3>4. Statement (1 vive + 3 neutres)</h3>
+          <p>Trois chaises neutres + une couleur vive en accent. Cette 4e chaise devient une sculpture dans l'ensemble.<br><em>Exemple Mikado :</em> 3 chaises Carbone + 1 chaise Cerise noire (ou Orange confite). Sophistiqué.</p>
+
+          <h3>5. Méditerranéen (blanc + vif)</h3>
+          <p>Blanc coton (ou Beige latte) en base + une ou deux couleurs vives en accent.<br><em>Exemple Mikado :</em> 4 chaises Blanc coton + 1 fauteuil Bleu acapulco. Très soleil-du-Sud.</p>
+
+          <h2>Selon votre extérieur — recommandations par contexte</h2>
+
+          <h3>Balcon urbain (étroit, peu de végétation)</h3>
+          <p>Préférez les couleurs claires et lumineuses qui agrandissent visuellement l'espace. Évitez Réglisse et Carbone qui peuvent fermer un petit balcon.<br><strong>Top 3 Mikado :</strong> Blanc coton · Gris argile · Menthe glaciale</p>
+
+          <h3>Jardin classique (verdure, fleurs)</h3>
+          <p>Vos couleurs doivent dialoguer avec le végétal. Les verts Fermob fonctionnent naturellement, mais les terres et les bleus profonds créent aussi de beaux contrastes.<br><strong>Top 3 Mikado :</strong> Romarin · Bleu abysse · Pain d'épices</p>
+
+          <h3>Terrasse en bois ou en pierre</h3>
+          <p>Les terres chaudes prolongent la matière. Évitez les couleurs froides qui peuvent jurer avec le bois chaud.<br><strong>Top 3 Mikado :</strong> Muscade · Miel · Tonka</p>
+
+          <h3>Patio méditerranéen (mur blanc, soleil franc)</h3>
+          <p>La tradition du mobilier de Provence ou d'Italie : blanc dominante + couleur vive. Cerise noire ou Bleu acapulco sont des choix iconiques.<br><strong>Top 3 Mikado :</strong> Blanc coton · Cerise noire · Bleu acapulco</p>
+
+          <h3>Bord de mer (vent salin, lumière forte)</h3>
+          <p>Bleus, verts pâles et blancs résistent visuellement à la lumière dure du bord de mer. Les couleurs vives (Piment, Orange confite) peuvent paraître agressives sous ce type de lumière.<br><strong>Top 3 Mikado :</strong> Bleu acapulco · Menthe glaciale · Blanc coton</p>
+
+          <h3>Cuisine d'été / véranda</h3>
+          <p>Couleurs douces et accueillantes. C'est un espace où vous mangerez chaque jour : évitez les couleurs trop fortes qui fatiguent à long terme.<br><strong>Top 3 Mikado :</strong> Beige latte · Vert tilleul · Gris orage</p>
+
+          <h2>Les 4 pièges à éviter</h2>
+
+          <h3>1. Choisir uniquement sur catalogue ou écran</h3>
+          <p>Une couleur Fermob ne se rend jamais comme sur écran — la finition poudrée mate change la perception. <strong>Toujours voir un échantillon physique avant de commander.</strong> En magasin Mikado Deco à Uccle, nous avons les coffrets d'échantillons Fermob officiels, vous pouvez les manipuler à la lumière naturelle.</p>
+
+          <h3>2. Tout assortir parfaitement</h3>
+          <p>Quatre chaises identiques, une table identique, des coussins assortis, un parasol même couleur. C'est joli sur un catalogue, c'est ennuyeux dans la vraie vie. <strong>Cherchez la cohérence, pas l'identité.</strong></p>
+
+          <h3>3. Suivre la "couleur de l'année"</h3>
+          <p>Chaque année une couleur est mise en avant par les magazines. Tendance = temporalité. Vos chaises Fermob durent 15 ans minimum. Choisissez sur 15 ans, pas sur cette saison.</p>
+
+          <h3>4. Sous-estimer l'impact du sol</h3>
+          <p>Une chaise Carbone sur un parquet exotique foncé devient invisible. Une chaise Blanc coton sur du gravier blanc disparaît aussi. <strong>Toujours penser au contraste avec le sol.</strong></p>
+
+          <h2>Le conseil personnalisé Mikado Deco</h2>
+          <p>Choisir sa couleur Fermob est un vrai sujet — et c'est exactement le genre de décision où il vaut la peine de prendre un avis.</p>
+          <p>En magasin à Uccle, nous avons les coffrets officiels d'échantillons de couleur Fermob. Venez avec une photo de votre terrasse, on vous propose les 3 ou 4 couleurs qui collent à votre contexte, vous les manipulez à la lumière naturelle de la boutique.</p>
+          <p>Et si vous ne pouvez pas vous déplacer : envoyez-nous des photos par mail à <a href="mailto:shop@mikadodeco.be">shop@mikadodeco.be</a>, avec quelques mots sur ce que vous cherchez. Vous recevez une sélection adaptée sous 24 heures, sans engagement.</p>
+          <p><strong>Une terrasse Fermob bien colorée, c'est dix ans de plaisir.</strong> Ça vaut bien 24 heures de réflexion.</p>
+
+          <blockquote>Du 26 mai au 6 juin : achetez 3 chaises d'extérieur Fermob (ou HAY, Vitra, &amp;Tradition, Fatboy), la 4<sup>ème</sup> est offerte automatiquement. Aucun code à entrer. <a href="/collections/promo-4eme-chaise-offerte">Voir la sélection sièges en promo →</a></blockquote>
+        `]],
+      },
+      "tissu-qui-se-patine": {
+        meta: "Conseil · 4 min", img: "/images/ref-feat-1.webp",
+        title: "Choisir un tissu qui se patine",
+        lead: "Le beau vieillissement n'est pas un défaut, c'est une promesse. Petit guide des matières qui gagnent en caractère avec les années.",
+        body: [
+          ["p", "On choisit souvent un canapé pour son allure le jour de la livraison. Le vrai test arrive trois ans plus tard, quand la matière a vécu. Certaines se fatiguent. D'autres deviennent meilleures."],
+          ["h2", "Le lin, l'allié des familles"],
+          ["p", "Froissé d'origine, le lin ne craint pas une vie de tous les jours. Il respire, se détend, et un faux pli y est une qualité, pas un accident. Lavable, robuste, il s'adoucit à chaque passage."],
+          ["h2", "La laine, la chaleur qui dure"],
+          ["p", "Une bonne laine résiste à l'usure et reprend sa forme. Elle pardonne les accrocs et garde sa couleur loin de la lumière directe. C'est un investissement qui se mesure en décennies."],
+          ["blockquote", "Une matière honnête vous dit où elle en est. C'est ça qu'on appelle se patiner."],
+          ["p", "Notre conseil : touchez avant d'acheter. Au showroom, on vous laisse vivre la matière, la froisser, l'asseoir. C'est le meilleur moyen de savoir si elle vieillira avec vous."],
+        ],
+      },
+      "fermob": {
+        meta: "Maison · 6 min", img: "/images/ref-feat-2.webp",
+        title: "Pourquoi Fermob plutôt qu'ailleurs",
+        lead: "Le mobilier d'extérieur est un terrain miné de fausses bonnes affaires. Voici pourquoi nous tenons à une maison comme Fermob.",
+        body: [
+          ["p", "Une chaise de jardin passe ses étés au soleil et ses hivers dehors ou presque. Peu de meubles encaissent un tel régime. La différence ne se voit pas en magasin : elle apparaît à la troisième saison."],
+          ["h2", "Un acier qui ne s'écaille pas"],
+          ["p", "Le traitement compte plus que la couleur. Un acier bien préparé et thermolaqué résiste à la rouille et aux rayures. C'est invisible à l'achat, décisif à l'usage."],
+          ["h2", "Des pièces qui se réparent"],
+          ["p", "Une maison sérieuse vend encore les pièces détachées dix ans après. Cela change tout : un meuble réparable n'est pas un meuble jetable."],
+          ["p", "C'est cette logique de durée, plus que la mode, qui guide ce qu'on fait entrer dans la sélection."],
+        ],
+      },
+      "and-tradition": {
+        meta: "Visite · 5 min", img: "/images/ref-feat-3.webp",
+        title: "Une journée chez &Tradition",
+        lead: "Carnet de visite : ce qu'on retient d'une maison danoise qui réédite les classiques sans les figer.",
+        body: [
+          ["p", "On imagine souvent le design danois comme un musée. La réalité est plus vivante : des archives qu'on rouvre, des teintes qu'on retravaille, des designers d'aujourd'hui invités à dialoguer avec ceux d'hier."],
+          ["h2", "Le respect de l'original"],
+          ["p", "Rééditer, ce n'est pas copier. C'est retrouver les bonnes proportions, les bons matériaux, et résister à la tentation de tout moderniser. Le meilleur compliment, c'est qu'on ne voie pas le travail."],
+          ["blockquote", "Un classique, c'est une pièce qui a déjà survécu à plusieurs modes."],
+          ["p", "On en est revenus avec une conviction simple : mieux vaut une pièce qu'on gardera vingt ans qu'une tendance qu'on regrettera dans deux."],
+        ],
+      },
+      "chene-et-le-temps": {
+        meta: "Matières · 3 min", img: "/images/ref-split-1.webp",
+        title: "Le chêne, et le temps qui passe",
+        lead: "Pourquoi on préfère un chêne huilé qui fonce à un placage parfait qui s'use mal.",
+        body: [
+          ["p", "Le chêne massif a un défaut qu'on adore : il change. Il fonce, prend la lumière, garde la trace d'un verre oublié. Un placage, lui, reste figé jusqu'au jour où il s'écaille."],
+          ["h2", "Huilé plutôt que verni"],
+          ["p", "Une finition huilée laisse le bois respirer et se répare localement. Un coup de papier de verre fin, un peu d'huile, et la marque disparaît. Le verni, à l'inverse, oblige à tout refaire."],
+          ["p", "Nourrissez votre chêne une à deux fois par an. C'est cinq minutes, et c'est ce qui fait la différence entre un meuble qui dure et un meuble qui se remplace."],
+        ],
+      },
+      "recevoir-dehors": {
+        meta: "Inspiration · 4 min", img: "/images/ref-split-2.webp",
+        title: "Recevoir dehors, sans en faire trop",
+        lead: "Une belle table d'extérieur tient à trois choses, et aucune n'est compliquée.",
+        body: [
+          ["p", "On surcharge souvent les tables d'été. Le secret est ailleurs : quelques pièces justes, posées avec soin, valent mieux qu'un décor de magazine difficile à tenir."],
+          ["h2", "La lumière d'abord"],
+          ["p", "Une lampe baladeuse rechargeable change tout à la tombée du jour. Pas de fil, pas de bougie qui s'éteint au vent : juste une lumière chaude qu'on déplace au gré de la soirée."],
+          ["h2", "Des matières qui ne craignent rien"],
+          ["p", "Lin lavé pour la nappe, grès pour les assiettes, acier pour les assises. Tout ce qui peut prendre une averse sans drame vous libère l'esprit."],
+          ["p", "Le reste, c'est l'instant. Et ça, aucune sélection ne peut le livrer."],
+        ],
+      },
+      "choisir-une-piece": {
+        meta: "Atelier · 5 min", img: "/images/ref-tile-3.webp",
+        title: "Comment nous choisissons une pièce",
+        lead: "Derrière chaque produit de la sélection, une petite enquête. Voici nos critères.",
+        body: [
+          ["p", "On nous demande souvent pourquoi telle marque et pas une autre. La réponse tient en quelques questions qu'on se pose avant de faire entrer quoi que ce soit."],
+          ["h2", "Le dessin tient-il debout ?"],
+          ["p", "Une pièce doit avoir une raison d'être au-delà de la mode. Si on ne sait pas dire pourquoi elle est bien dessinée, elle ne reste pas."],
+          ["h2", "Vieillira-t-elle bien ?"],
+          ["p", "Matériaux honnêtes, finitions réparables, maison qui assure le suivi. On préfère défendre peu de marques, mais bien."],
+          ["blockquote", "Choisi, pas seulement vendu. C'est la seule règle."],
+          ["p", "Le reste, prix, disponibilité, livraison, vient après. D'abord, est-ce une bonne pièce ?"],
+        ],
+      },
+    };
