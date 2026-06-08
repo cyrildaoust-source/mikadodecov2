@@ -48,77 +48,199 @@ const PORT = process.env.PORT || 4000;
 // The Mikadodeco storefront (v3/) is served at the site root.
 // Old /v3/* links 301-redirect to the clean root path for backward-compat.
 app.use('/v3', (req, res) => res.redirect(301, req.url && req.url !== '/' ? req.url : '/'));
-// Pretty collection URLs: /collections/<handle> serves the catalog page
-// (the client-side script picks up the handle from the pathname). Matches
-// Shopify's URL convention so links from newsletters and the press work.
-app.get('/collections/:handle', (req, res) => res.sendFile(path.join(__dirname, 'v3', 'produits.html')));
-
-// ─── SSR OPEN GRAPH POUR LES FICHES PRODUIT ────────────
+// ─── SSR OPEN GRAPH (FICHES PRODUIT · COLLECTIONS/MARQUES · CRÉATEURS) ──
 // Les robots d'aperçu social (WhatsApp/iMessage/Messenger/FB…) n'exécutent
-// PAS le JS — un lien produit partagé doit donc déjà porter, dans le <head>,
-// le nom + l'image du produit. On enrichit ici le <head> côté serveur (title,
-// description, Open Graph, Twitter) à partir des données Shopify ; le reste de
-// la page continue de s'hydrater en JS à l'identique (galerie, variantes,
-// panier, JSON-LD client). Cache edge (s-maxage) → quasi-CDN après le 1er hit.
-// vercel.json route /produit.html?handle=… vers cette fonction ; sans handle,
-// la fiche tombe sur le fichier statique (template générique inchangé).
-const PRODUIT_TEMPLATE = path.join(__dirname, 'v3', 'produit.html');
+// PAS le JS — un lien partagé doit donc déjà porter, dans le <head>, le bon
+// titre + la bonne image. On enrichit ici le <head> côté serveur (title,
+// description, Open Graph, Twitter, canonical) à partir des données Shopify /
+// designers-data.json ; le corps de la page continue de s'hydrater en JS à
+// l'identique (galerie, grille, fiche créateur, panier, JSON-LD client).
+// Cache edge (s-maxage) → quasi-CDN après le 1er hit. vercel.json route
+// /produit.html?handle=…, /collections/<handle> et /produits.html?designer=…
+// vers cette fonction ; les autres modes tombent sur le fichier statique.
+const ORIGIN = 'https://www.mikadodeco.be';
+const OG_DEFAULT = ORIGIN + '/images/og-default.jpg';
+const PRODUIT_TEMPLATE  = path.join(__dirname, 'v3', 'produit.html');
+const PRODUITS_TEMPLATE = path.join(__dirname, 'v3', 'produits.html');
+// Marques disposant d'un bandeau header (miroir EXACT de la map HEADERS de
+// v3/produits.html). Pour elles, l'image OG = le bandeau de marque statique.
+const BRAND_HEADERS = new Set(['fatboy', 'ferm-living', 'tradition', 'vitra', 'string-furniture', 'muuto', 'blomus']);
+
 const ogEscape = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-function sendProduitTemplate(res) {
-  // Template générique inchangé (pas de handle / introuvable / erreur). Jamais 500.
+// URL absolue (les URLs Shopify CDN le sont déjà ; les chemins /images/… non ;
+// une URL protocole-relative //host/… reçoit https:).
+const absUrl = (u) => {
+  if (!u) return '';
+  const s = String(u);
+  if (/^https?:\/\//i.test(s)) return s;
+  if (s.charAt(0) === '/' && s.charAt(1) === '/') return 'https:' + s;
+  return ORIGIN + (s.charAt(0) === '/' ? s : '/' + s);
+};
+// Description OG : espaces normalisés, tronquée ~200 (échappement plus tard).
+function ogDesc(s) {
+  let d = String(s == null ? '' : s).replace(/\s+/g, ' ').trim();
+  if (d.length > 200) d = d.slice(0, 199).trimEnd() + '…';
+  return d;
+}
+// Enrichit le <head> d'un template : title + meta description + Open Graph +
+// Twitter + canonical. Échappement attribut HTML. Retire le ratio
+// og:image:width/height en dur (photos produit / bandeaux / portraits ne sont
+// pas en 1.91:1). Mécanisme commun aux 3 types de page partageable.
+// NB : les valeurs sont injectées via une FONCTION de remplacement (pas une
+// chaîne) — String.replace interprète $$, $&, $`, $' dans une chaîne de
+// remplacement ; une description/bio Shopify contenant « $$ » ou « 50$&… »
+// corromprait le <head>. La forme `() => …` neutralise totalement ces motifs.
+function renderWithOg(templateHtml, { title, description, image, url }) {
+  const T = ogEscape(title), D = ogEscape(description), I = ogEscape(image), U = ogEscape(url);
+  let html = templateHtml
+    .replace(/<title>[\s\S]*?<\/title>/, () => `<title>${T}</title>`)
+    .replace(/<meta name="description" content="[^"]*"\s*\/>/, () => `<meta name="description" content="${D}" />`)
+    .replace(/<meta property="og:title" content="[^"]*"\s*\/>/, () => `<meta property="og:title" content="${T}" />`)
+    .replace(/<meta property="og:description" content="[^"]*"\s*\/>/, () => `<meta property="og:description" content="${D}" />`)
+    .replace(/<meta property="og:url" content="[^"]*"\s*\/>/, () => `<meta property="og:url" content="${U}" />`)
+    .replace(/<meta property="og:image" content="[^"]*"\s*\/>/, () => `<meta property="og:image" content="${I}" />`)
+    // Le ratio en dur (1200×630) ne correspond pas aux visuels → on le retire.
+    .replace(/\s*<meta property="og:image:width" content="[^"]*"\s*\/>/, '')
+    .replace(/\s*<meta property="og:image:height" content="[^"]*"\s*\/>/, '')
+    .replace(/<meta name="twitter:title" content="[^"]*"\s*\/>/, () => `<meta name="twitter:title" content="${T}" />`)
+    .replace(/<meta name="twitter:description" content="[^"]*"\s*\/>/, () => `<meta name="twitter:description" content="${D}" />`)
+    .replace(/<meta name="twitter:image" content="[^"]*"\s*\/>/, () => `<meta name="twitter:image" content="${I}" />`);
+  // Canonical propre (URL sans params de filtre/from) : remplace un
+  // <link rel="canonical"> statique s'il existe, sinon l'injecte juste après
+  // og:url. (Les templates posent aussi le canonical en JS, qui réutilise ce
+  // même tag via querySelector → jamais de double canonical.)
+  if (/<link rel="canonical"[^>]*>/i.test(html)) {
+    html = html.replace(/<link rel="canonical"[^>]*>/i, () => `<link rel="canonical" href="${U}" />`);
+  } else {
+    html = html.replace(/<meta property="og:url" content="[^"]*"\s*\/>/, (m) => `${m}\n  <link rel="canonical" href="${U}" />`);
+  }
+  return html;
+}
+function sendTemplate(res, file) {
+  // Template générique inchangé (pas de paramètre / introuvable / erreur). Jamais 500.
   try {
     res.set('Content-Type', 'text/html; charset=utf-8');
-    return res.send(fs.readFileSync(PRODUIT_TEMPLATE, 'utf8'));
+    return res.send(fs.readFileSync(file, 'utf8'));
   } catch (e) {
-    return res.sendFile(PRODUIT_TEMPLATE);
+    return res.sendFile(file);
   }
 }
+const sendProduitTemplate  = (res) => sendTemplate(res, PRODUIT_TEMPLATE);
+const sendProduitsTemplate = (res) => sendTemplate(res, PRODUITS_TEMPLATE);
+function ogCache(res) {
+  res.set('Content-Type', 'text/html; charset=utf-8');
+  res.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=86400');
+}
+// designers-data.json mis en cache module — on ne mémorise QUE le succès non
+// vide : un échec de lecture transitoire (cold start, bundle partiel) renvoie
+// [] sans être figé, et la lecture suivante réessaie (≠ d'un [] collant).
+let _designers = null;
+function getDesigners() {
+  if (_designers) return _designers;
+  try {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'designers-data.json'), 'utf8'));
+    const arr = Array.isArray(data) ? data : (data.designers || []);
+    if (arr.length) _designers = arr;
+    return arr;
+  } catch (e) {
+    return [];
+  }
+}
+// ─── Fiche produit : /produit.html?handle=<handle> (B7) ─
 app.get('/produit.html', async (req, res) => {
   const handle = req.query.handle;
   if (!handle) return sendProduitTemplate(res);
   try {
     const product = await getProductByHandle(handle);
-    if (!product) return sendProduitTemplate(res);
+    // Miss stable (produit inexistant/dépublié) : on cache aussi le repli pour
+    // ne pas ré-invoquer la fonction à chaque bot. (Les erreurs Shopify partent
+    // dans le catch ci-dessous, sans cache.)
+    if (!product) { ogCache(res); return sendProduitTemplate(res); }
 
     const name     = product.name || 'Produit';
     const brand    = product.brand || '';
     const designer = product.designer || '';
     const title = `${name} · Mikadodeco`;
-    let desc = `${name}${brand ? ' — ' + brand : ''}. `
-             + (designer ? `Dessiné par ${designer}. ` : '')
-             + 'Pièce design à voir en boutique à Uccle, livraison en Belgique.';
-    if (desc.length > 200) desc = desc.slice(0, 199).trimEnd() + '…';
+    const description = ogDesc(`${name}${brand ? ' — ' + brand : ''}. `
+      + (designer ? `Dessiné par ${designer}. ` : '')
+      + 'Pièce design à voir en boutique à Uccle, livraison en Belgique.');
     // Première image produit (images[] = full-res CDN Shopify), en absolu, en
     // ajoutant &width=1200 (les URLs Shopify ont déjà ?v=…). Repli og-default.
     const raw = (product.images && product.images[0]) || '';
-    const image = raw
-      ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200'
-      : 'https://www.mikadodeco.be/images/og-default.jpg';
-    const url = 'https://www.mikadodeco.be/produit.html?handle=' + encodeURIComponent(handle);
+    const image = raw ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200' : OG_DEFAULT;
+    const url = ORIGIN + '/produit.html?handle=' + encodeURIComponent(handle);
 
-    const T = ogEscape(title), D = ogEscape(desc), U = ogEscape(url), I = ogEscape(image);
-    let html = fs.readFileSync(PRODUIT_TEMPLATE, 'utf8');
-    html = html
-      .replace(/<title>[\s\S]*?<\/title>/, `<title>${T}</title>`)
-      .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${D}" />`)
-      .replace(/<meta property="og:title" content="[^"]*"\s*\/>/, `<meta property="og:title" content="${T}" />`)
-      .replace(/<meta property="og:description" content="[^"]*"\s*\/>/, `<meta property="og:description" content="${D}" />`)
-      .replace(/<meta property="og:url" content="[^"]*"\s*\/>/, `<meta property="og:url" content="${U}" />`)
-      .replace(/<meta property="og:image" content="[^"]*"\s*\/>/, `<meta property="og:image" content="${I}" />`)
-      // Les photos produit ne sont pas en 1.91:1 → on retire le ratio en dur.
-      .replace(/\s*<meta property="og:image:width" content="[^"]*"\s*\/>/, '')
-      .replace(/\s*<meta property="og:image:height" content="[^"]*"\s*\/>/, '')
-      .replace(/<meta name="twitter:title" content="[^"]*"\s*\/>/, `<meta name="twitter:title" content="${T}" />`)
-      .replace(/<meta name="twitter:description" content="[^"]*"\s*\/>/, `<meta name="twitter:description" content="${D}" />`)
-      .replace(/<meta name="twitter:image" content="[^"]*"\s*\/>/, `<meta name="twitter:image" content="${I}" />`);
-
-    res.set('Content-Type', 'text/html; charset=utf-8');
-    res.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=86400');
+    const html = renderWithOg(fs.readFileSync(PRODUIT_TEMPLATE, 'utf8'), { title, description, image, url });
+    ogCache(res);
     return res.send(html);
   } catch (err) {
     console.warn('[og-produit]', err.message);
     return sendProduitTemplate(res);
+  }
+});
+
+// ─── Collection / marque : /collections/<handle> ───────
+// Nom + description + image via getCollections() (caché). Image par priorité :
+// bandeau de marque statique (BRAND_HEADERS) → image Shopify de la collection →
+// og-default. Collection inconnue → template générique inchangé (jamais 500).
+app.get('/collections/:handle', async (req, res) => {
+  const handle = String(req.params.handle || '').toLowerCase();
+  try {
+    const collections = await getCollections();
+    const col = collections.find((c) => c.handle === handle);
+    // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
+    if (!col) { ogCache(res); return sendProduitsTemplate(res); }
+
+    const name = col.name || 'Catalogue';
+    const title = `${name} · Mikadodeco`;
+    const description = ogDesc(
+      col.description && col.description.trim()
+        ? col.description
+        : `${name} chez Mikadodeco — sélection design. Retrait à Uccle, livraison en Belgique.`
+    );
+    const image = BRAND_HEADERS.has(handle)
+      ? `${ORIGIN}/images/brands/headers/${handle}-1920.jpg`
+      : (col.image ? absUrl(col.image) : OG_DEFAULT);
+    const url = ORIGIN + '/collections/' + encodeURIComponent(handle);
+
+    const html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    ogCache(res);
+    return res.send(html);
+  } catch (err) {
+    console.warn('[og-collection]', err.message);
+    return sendProduitsTemplate(res);
+  }
+});
+
+// ─── Créateur : /produits.html?designer=<slug> ─────────
+// Nom + bio + portrait via designers-data.json (caché). Sans ?designer (ou
+// modes catalogue / ?cats= / ?brand=) → template générique. Designer inconnu →
+// template générique. ~29 créateurs sans photo → repli og-default.
+app.get('/produits.html', async (req, res) => {
+  const slug = req.query.designer ? String(req.query.designer).toLowerCase() : '';
+  if (!slug) return sendProduitsTemplate(res);
+  try {
+    const designer = getDesigners().find((d) => String(d.slug || '').toLowerCase() === slug);
+    // Miss stable (slug inconnu) : repli cachable.
+    if (!designer) { ogCache(res); return sendProduitsTemplate(res); }
+
+    const name = designer.name || 'Créateur';
+    const title = `${name} · Mikadodeco`;
+    const description = ogDesc(
+      designer.bio && designer.bio.trim()
+        ? designer.bio
+        : `Les pièces signées ${name} chez Mikadodeco. Retrait à Uccle, livraison en Belgique.`
+    );
+    const image = designer.photo ? absUrl(designer.photo) : OG_DEFAULT;
+    const url = ORIGIN + '/produits.html?designer=' + encodeURIComponent(designer.slug || slug);
+
+    const html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    ogCache(res);
+    return res.send(html);
+  } catch (err) {
+    console.warn('[og-designer]', err.message);
+    return sendProduitsTemplate(res);
   }
 });
 
