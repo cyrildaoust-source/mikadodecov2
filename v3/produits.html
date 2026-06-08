@@ -29,13 +29,15 @@
     (function () {
       var ORIGIN = "https://www.mikadodeco.be";
       var canon;
+      /* handle / slug en minuscules : aligné sur le canonical normalisé injecté
+         côté serveur (SSR) → SSR et runtime concordent, même URL mal-casée. */
       var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
       if (m) {
-        canon = ORIGIN + "/collections/" + m[1];
+        canon = ORIGIN + "/collections/" + m[1].toLowerCase();
       } else {
         var p = new URLSearchParams(location.search);
-        if (p.get("designer"))   canon = ORIGIN + "/produits.html?designer=" + encodeURIComponent(p.get("designer"));
-        else if (p.get("brand")) canon = ORIGIN + "/produits.html?brand=" + encodeURIComponent(p.get("brand"));
+        if (p.get("designer"))   canon = ORIGIN + "/produits.html?designer=" + encodeURIComponent(p.get("designer").toLowerCase());
+        else if (p.get("brand")) canon = ORIGIN + "/produits.html?brand=" + encodeURIComponent(p.get("brand").toLowerCase());
         else                     canon = ORIGIN + "/produits.html";
       }
       var link = document.querySelector('link[rel="canonical"]') || document.head.appendChild(document.createElement("link"));

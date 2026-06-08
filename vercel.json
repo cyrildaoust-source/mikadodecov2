@@ -4,7 +4,7 @@
               {
                         "src": "api/index.js",
                         "use": "@vercel/node",
-                        "config": { "includeFiles": ["data/**", "v3/produit.html"] }
+                        "config": { "includeFiles": ["data/**", "v3/produit.html", "v3/produits.html", "v3/designers-data.json"] }
               },
               { "src": "v3/**", "use": "@vercel/static" }
       ],
@@ -15,6 +15,7 @@
                         "dest": "/api/index.js"
               },
               { "src": "/produit.html", "has": [{ "type": "query", "key": "handle" }], "dest": "/api/index.js" },
+              { "src": "/produits.html", "has": [{ "type": "query", "key": "designer" }], "dest": "/api/index.js" },
               { "src": "/nos-produits(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
               { "src": "/passez-commande(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
               { "src": "/nos-marques(/.*)?", "status": 301, "headers": { "Location": "/marques.html" } },
@@ -41,7 +42,7 @@
               },
               { "src": "/(.*\\.[a-zA-Z0-9]+)", "dest": "/v3/$1" },
               { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
-              { "src": "/collections/(.+)", "dest": "/v3/produits.html" },
+              { "src": "/collections/([^/]+)", "dest": "/api/index.js" },
               { "src": "/", "dest": "/v3/index.html" },
               { "src": "/(.+)", "dest": "/v3/$1.html" },
               { "handle": "error" },
