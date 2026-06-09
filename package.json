@@ -8,7 +8,8 @@
     "scrape": "node scripts/scrape-vitra.js",
     "import:shopify": "node scripts/import-to-shopify.js",
     "import:shopify:dry": "node scripts/import-to-shopify.js --dry-run",
-    "images": "node scripts/optimize-images.js"
+    "images": "node scripts/optimize-images.js",
+    "journal": "node scripts/build-journal.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",
