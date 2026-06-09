@@ -107,6 +107,26 @@
     .cat-panel__close { color: var(--accent-ink); border-bottom: 1px solid currentColor; }
     @media (max-width: 900px) { .cat-panel__grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 520px) { .cat-panel__grid { grid-template-columns: 1fr; } }
+
+    /* Pagination numérotée (remplace « Voir plus ») · DA Mikado : coins nets,
+       case courante REMPLIE en encre/crème — même langage que le panneau
+       Catégorie (« on remplit »). Masquée si une seule page. */
+    .grid-head { scroll-margin-top: 104px; } /* offset nav fixe au scroll-to-grille */
+    .plp-pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: clamp(34px, 5vw, 60px); }
+    .plp-pagination[hidden] { display: none; }
+    .plp-pagination__numbers { display: flex; align-items: center; gap: 6px; }
+    .plp-pagination__mobile { display: none; font-family: var(--sans-product); font-size: var(--fs-small); color: var(--muted); letter-spacing: .04em; padding: 0 6px; }
+    .plp-page { font-family: var(--sans-product); font-size: var(--fs-small); min-width: 40px; height: 40px; padding: 0 13px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; letter-spacing: .02em; transition: border-color .15s var(--ease), color .15s var(--ease), background .12s var(--ease); }
+    .plp-page:hover:not(:disabled):not(.is-current) { border-color: var(--ink); }
+    .plp-page:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+    .plp-page.is-current { background: var(--ink); border-color: var(--ink); color: var(--paper); cursor: default; }
+    .plp-page:disabled { opacity: .4; cursor: not-allowed; }
+    .plp-page--nav { font-weight: 500; }
+    .plp-page__ellipsis { min-width: 22px; text-align: center; color: var(--muted); user-select: none; }
+    @media (max-width: 560px) {
+      .plp-pagination__numbers { display: none; }
+      .plp-pagination__mobile { display: inline-flex; }
+    }
   </style>
   <script>
     /* Page créateur (?designer=<slug>) — flag the document BEFORE first
@@ -306,9 +326,7 @@
       }
     </script>
     <div class="pgrid" data-grid></div>
-    <div class="loadmore-wrap" data-loadmore-wrap style="display:none">
-      <button class="btn btn--outline" data-loadmore>Voir plus</button>
-    </div>
+    <nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>
   </section>
 
   <div id="site-footer"></div>
@@ -414,7 +432,7 @@
     const brandSel = document.querySelector("[data-filter-brand]");
     const sortSel = document.querySelector("[data-sort]");
     const chipsBar = document.querySelector("[data-chips]");
-    const moreWrap = document.querySelector("[data-loadmore-wrap]");
+    const paginationEl = document.querySelector("[data-pagination]");
     const titleEl = document.querySelector("[data-plp-title]");
     const subEl = document.querySelector("[data-plp-sub]");
     const gridTitle = document.querySelector("[data-grid-title]");
@@ -436,11 +454,19 @@
     let ALL = [];
     let COLLECTIONS_BY_HANDLE = {};
     let COLLECTION_META = null; // set by /api/collection/:handle/products payload
-    const PAGE_SIZE = 50;
-    // V2: server-side pagination via cursor. state.cursor / state.hasMore
-    // drive the "Voir plus" button; state.shown disappeared (we render
-    // every product already loaded into ALL). Client filters (cat/brand/
-    // tag/sort) still operate on the partial set — known V1 tradeoff.
+    // Pagination numérotée : on récupère TOUT le jeu filtré par chunks serveur
+    // (PAGE_SIZE = chunk du walk, cursor existant), puis on pagine côté client
+    // par tranches de DISPLAY_PAGE_SIZE. L'API Storefront n'expose pas de total ;
+    // ce walk donne le compte exact. Volume actuel : designer/collection = 1
+    // chunk, catalogue ≈463 = 2 chunks (chunks cachés côté serveur).
+    const PAGE_SIZE = 250;          // chunk de fetch demandé (le serveur le borne à 100)
+    const DISPLAY_PAGE_SIZE = 36;   // produits affichés par page
+    let TOTAL_PAGES = 1;            // recalculé à chaque render()
+    // V4 (pagination numérotée) : on charge TOUT le jeu filtré dans ALL via le
+    // walk (cursor serveur, chunks de PAGE_SIZE), puis on pagine côté client
+    // par tranches de DISPLAY_PAGE_SIZE (state.page). Le tri couvre tout le set.
+    // Les filtres client (brand/tag) opèrent sur ALL complet. Catégorie (cats)
+    // et collection/designer sont filtrés côté serveur (jeu déjà restreint).
     // V3 (chantier pages-designers-produits): ?designer=<slug> resolves
     // to a tag-OR list against /api/products?tags=... — the designer
     // metadata (name + tags) is fetched from /designers-data.json
@@ -499,7 +525,7 @@
     ];
     const CAT_HANDLES = new Set(CATEGORIES.map((c) => c.h));
 
-    const state = { coll: collFromPath, cats: (params.get("cats") || "").split(",").map((s) => s.trim()).filter((h) => CAT_HANDLES.has(h)), brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", cursor: null, hasMore: false, loading: false, designer: null };
+    const state = { coll: collFromPath, cats: (params.get("cats") || "").split(",").map((s) => s.trim()).filter((h) => CAT_HANDLES.has(h)), brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", page: Math.max(1, parseInt(params.get("page"), 10) || 1), loading: false, designer: null };
 
     // Instant paint before the /api/collection/<handle>/products fetch
     // resolves. On ANY collection page: blank the description (V2.1 —
@@ -541,17 +567,30 @@
       else l.sort((a, b) => popScore(b) - popScore(a)); // "pop"
       return l;
     }
-    function syncURL() {
+    // Construit l'URL reflétant l'état actif. Préserve TOUS les params de
+    // désignation (designer, coll/path, cats, brand, tag) + la page (?page=N,
+    // retirée à la page 1 → URL propre). page=1 ⇒ pas de param (canonical OK).
+    function buildURL() {
       const q = new URLSearchParams();
       // When the URL is already /collections/<handle>, don't echo coll in
       // the query string (it's in the path already).
       const collInPath = /^\/collections\//.test(location.pathname);
       if (state.coll && !collInPath) q.set("coll", state.coll);
+      if (designerSlug) q.set("designer", designerSlug);
       if (state.cats.length) q.set("cats", state.cats.join(","));
       if (state.brand) q.set("brand", state.brand);
       if (state.tag) q.set("tag", state.tag);
-      history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q : ""));
+      if (state.page > 1) q.set("page", String(state.page));
+      return location.pathname + (q.toString() ? "?" + q : "");
     }
+    function writeURL(push) {
+      const url = buildURL();
+      if (push) history.pushState(null, "", url);
+      else history.replaceState(null, "", url);
+    }
+    // Conserve le nom existant : les appelants (marque, catégories) veulent un
+    // replaceState (changement de filtre = pas de nouvelle entrée d'historique).
+    function syncURL() { writeURL(false); }
     function render() {
       const all = base();
       countEl.textContent = `${all.length} pièce${all.length > 1 ? "s" : ""}`;
@@ -584,17 +623,22 @@
       if (showPop) popGrid.innerHTML = pop.map(productCard).join("");
 
       const popIds = new Set(pop.map((p) => p.id));
+      // Tri appliqué à TOUT le set filtré (mainList complet) AVANT le slice :
+      // l'ordre couvre l'ensemble, pas seulement la page courante.
       const mainList = applySort(all.filter((p) => !popIds.has(p.id)));
+      // Pagination client : on borne la page à [1, totalPages] puis on n'affiche
+      // que la tranche de 36 — REMPLACE le contenu de la grille (plus d'accumul.).
+      TOTAL_PAGES = Math.max(1, Math.ceil(mainList.length / DISPLAY_PAGE_SIZE));
+      if (state.page > TOTAL_PAGES) state.page = TOTAL_PAGES;
+      if (state.page < 1) state.page = 1;
+      const pageSlice = mainList.slice((state.page - 1) * DISPLAY_PAGE_SIZE, state.page * DISPLAY_PAGE_SIZE);
       // Designer pages get a dedicated empty message — "élargir les
       // filtres" doesn't apply when the URL itself selects the slice.
       const emptyMsg = state.designer
         ? `<p class="plp-empty">Aucun produit pour ce designer pour le moment. <a href="/designers.html" style="color:var(--accent-ink)">Retour aux designers →</a></p>`
         : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
-      grid.innerHTML = mainList.length ? mainList.map(productCard).join("") : emptyMsg;
-      // "Voir plus" reflects the server-side cursor — visible only when
-      // there is another batch upstream. Client-side filters do NOT hide
-      // it (a filter can match items in unfetched pages).
-      moreWrap.style.display = state.hasMore ? "flex" : "none";
+      grid.innerHTML = pageSlice.length ? pageSlice.map(productCard).join("") : emptyMsg;
+      renderPagination(TOTAL_PAGES);
       // Designer page: the grid title names the créateur ("Les pièces de …").
       // An introuvable slug (name === null) leaves it blank — the hero already
       // says "Designer introuvable".
@@ -669,6 +713,55 @@
       chipsBar.style.display = (state.coll || state.tag || state.designer) ? "none" : "";
 
       applyPromos(PROMOS);
+    }
+
+    // ── Contrôle de pagination ─────────────────────────────────────────────
+    // Fenêtre autour de la page courante : 1 … (courante±2) … N. Si ≤ 7 pages,
+    // on les montre toutes. "…" marque les trous.
+    function pageItems(cur, total) {
+      if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+      const out = [1];
+      const left = Math.max(2, cur - 2);
+      const right = Math.min(total - 1, cur + 2);
+      if (left > 2) out.push("…");
+      for (let i = left; i <= right; i++) out.push(i);
+      if (right < total - 1) out.push("…");
+      out.push(total);
+      return out;
+    }
+    function renderPagination(totalPages) {
+      if (!paginationEl) return;
+      if (totalPages <= 1) { paginationEl.hidden = true; paginationEl.innerHTML = ""; return; }
+      paginationEl.hidden = false;
+      const cur = state.page;
+      const prevOff = cur <= 1, nextOff = cur >= totalPages;
+      const numbers = pageItems(cur, totalPages).map((it) =>
+        it === "…"
+          ? `<span class="plp-page__ellipsis" aria-hidden="true">…</span>`
+          : `<button type="button" class="plp-page${it === cur ? " is-current" : ""}" data-page="${it}"${it === cur ? ' aria-current="page"' : ""}>${it}</button>`
+      ).join("");
+      paginationEl.innerHTML =
+        `<button type="button" class="plp-page plp-page--nav" data-page="${cur - 1}"${prevOff ? " disabled" : ""} aria-label="Page précédente">‹ Précédent</button>`
+      + `<span class="plp-pagination__numbers">${numbers}</span>`
+      + `<span class="plp-pagination__mobile">Page ${cur} / ${totalPages}</span>`
+      + `<button type="button" class="plp-page plp-page--nav" data-page="${cur + 1}"${nextOff ? " disabled" : ""} aria-label="Page suivante">Suivant ›</button>`;
+    }
+    // Navigation client-side : aucune requête réseau (slice de ALL déjà chargé).
+    function scrollToGrid() {
+      const head = document.querySelector(".grid-head");
+      if (head) head.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    function goToPage(n) {
+      const target = Math.max(1, Math.min(n, TOTAL_PAGES));
+      if (target === state.page) return;
+      state.page = target;
+      render();
+      writeURL(true);      // pushState → le bouton retour navigue page N→N-1…
+      scrollToGrid();
+      // a11y : le <nav> a été reconstruit (innerHTML) → le focus était tombé sur
+      // <body>. On le rend au bouton de la page courante (porte aria-current).
+      const curBtn = paginationEl && paginationEl.querySelector(".plp-page.is-current");
+      if (curBtn) curBtn.focus({ preventScroll: true });
     }
 
     let PROMOS = {};
@@ -819,7 +912,46 @@
       }
     }
 
+    // Récupère TOUT le jeu filtré : on suit le cursor existant par chunks de
+    // PAGE_SIZE jusqu'à hasNextPage=false, en concaténant les items (filtrés
+    // p.image). Garde-fou anti-boucle : MAX_CHUNKS (loggé si atteint — on ne
+    // plafonne jamais silencieusement). Retourne { items, collection } ou
+    // { _notFound } si la 1re requête tombe sur une collection inconnue.
+    const MAX_CHUNKS = 25;
+    // Jeton de génération : chaque walk l'incrémente ; au retour, on n'applique
+    // le résultat que s'il est encore le plus récent (un re-walk de catégorie /
+    // un changement de filtre supersède un walk en vol — pas de clobber, pas de
+    // toggle perdu silencieusement).
+    let walkGen = 0;
+    const GRID_SKELETON = Array.from({ length: 12 }, () => '<div class="pcard"><div class="pcard__skel"></div></div>').join("");
+    async function walkAll() {
+      let cursor = null, items = [], collection = null, chunks = 0;
+      while (true) {
+        let data;
+        try {
+          data = await fetchPage(cursor);
+        } catch (e) {
+          if (chunks === 0) throw e; // échec total → message ami via le catch appelant
+          console.warn(`[plp] walk: chunk ${chunks + 1} en échec — affichage partiel (${items.length} produits déjà chargés).`, e.message);
+          break; // on garde les chunks déjà collectés plutôt que tout perdre
+        }
+        if (data && data._notFound) return { _notFound: true };
+        if (data && data.collection) collection = data.collection;
+        items = items.concat(((data && data.items) || []).filter((p) => p.image));
+        chunks += 1;
+        const next = (data && data.pageInfo && data.pageInfo.hasNextPage) ? data.pageInfo.endCursor : null;
+        if (!next) break;
+        cursor = next;
+        if (chunks >= MAX_CHUNKS) {
+          console.warn(`[plp] walk: garde-fou ${MAX_CHUNKS} chunks atteint (${items.length} produits chargés) — jeu possiblement tronqué. Envisager une pagination serveur si le catalogue actif grossit beaucoup.`);
+          break;
+        }
+      }
+      return { items, collection };
+    }
+
     async function loadInitial() {
+      const myGen = ++walkGen;
       try {
         await resolveDesigner();
         renderDesignerHero();
@@ -828,29 +960,32 @@
         if (state.designer) {
           gridTitle.textContent = state.designer.name ? `Les pièces de ${state.designer.name}` : "";
         }
-
-        // NON-BLOCKING render: the grid + title only need the products. Await
-        // ONLY fetchPage, render immediately (~0.8s), then enrich the brand
-        // selector + collection metadata in the background — they must never
-        // hold the grid hostage (/api/brands ~1.8s, /api/collections ~1.5s).
-        const pageData = await fetchPage(null);
         sortSel.value = state.sort;
 
-        if (pageData._notFound) {
+        // Skeleton dans la grille pendant le walk multi-chunks (le catalogue ≈463
+        // se charge en ~5 requêtes serveur, bornées à 100) → feedback de chargement.
+        grid.innerHTML = GRID_SKELETON;
+        grid.setAttribute("aria-busy", "true");
+
+        const res = await walkAll();
+        if (myGen !== walkGen) return; // un re-walk (catégorie) a pris le relais
+
+        if (res._notFound) {
           titleEl.textContent = "Collection introuvable";
           subEl.textContent = "";
           grid.innerHTML = `<p class="plp-empty">Cette collection n'existe pas ou plus. <a href="/marques.html" style="color:var(--accent-ink)">Voir toutes les marques →</a></p>`;
-          moreWrap.style.display = "none";
+          grid.removeAttribute("aria-busy");
+          if (paginationEl) { paginationEl.hidden = true; paginationEl.innerHTML = ""; }
           popSection.style.display = "none";
           chipsBar.style.display = "none";
           countEl.textContent = "";
           return;
         }
-        if (pageData.collection) COLLECTION_META = pageData.collection;
-        ALL = (pageData.items || []).filter((p) => p.image);
-        state.cursor  = pageData.pageInfo?.endCursor || null;
-        state.hasMore = !!pageData.pageInfo?.hasNextPage;
-        render();
+        if (res.collection) COLLECTION_META = res.collection;
+        ALL = res.items;
+        render();              // borne state.page à [1,totalPages] + peint la tranche
+        grid.removeAttribute("aria-busy");
+        writeURL(false);       // normalise l'URL (clamp / retrait de ?page) sans nouvelle entrée
 
         // Background, after the grid is already up — neither blocks first paint:
         populateBrandSelect();
@@ -862,57 +997,61 @@
           .catch((e) => console.warn("[plp] collections indisponibles:", e.message));
       } catch (e) {
         grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`;
+        grid.removeAttribute("aria-busy");
         console.warn(e);
       }
     }
 
-    async function loadMore() {
-      if (!state.hasMore || state.loading) return;
-      state.loading = true;
-      const btn = document.querySelector("[data-loadmore]");
-      const label = btn?.textContent;
-      if (btn) { btn.textContent = "…"; btn.disabled = true; }
-      try {
-        const data = await fetchPage(state.cursor);
-        if (data?.items?.length) {
-          ALL = ALL.concat(data.items.filter((p) => p.image));
-        }
-        state.cursor  = data?.pageInfo?.endCursor || null;
-        state.hasMore = !!data?.pageInfo?.hasNextPage;
-        render();
-      } catch (e) {
-        console.warn("loadMore:", e.message);
-      } finally {
-        state.loading = false;
-        if (btn) { btn.textContent = label || "Voir plus"; btn.disabled = false; }
-      }
-    }
-
-    // Rechargement complet de la grille (page 1) après changement de catégorie :
-    // c'est une NOUVELLE requête serveur (?cats=) — on réinitialise ALL + curseur,
-    // le bouton « Voir plus » repart du nouveau curseur.
+    // Re-walk complet (nouveau jeu serveur après changement de catégorie ?cats=).
+    // L'appelant (applyCats) a déjà posé state.page = 1 + l'URL (sans page). Le
+    // jeton de génération garantit qu'un toggle plus récent supersède celui-ci
+    // (ancien comportement : `if (state.loading) return` perdait le 2e toggle).
     async function reloadGrid() {
-      if (state.loading) return;
-      state.loading = true;
+      const myGen = ++walkGen;
       grid.setAttribute("aria-busy", "true");
       try {
-        ALL = [];
-        state.cursor = null;
-        state.hasMore = false;
-        const pageData = await fetchPage(null);
-        ALL = (pageData.items || []).filter((p) => p.image);
-        state.cursor  = pageData.pageInfo?.endCursor || null;
-        state.hasMore = !!pageData.pageInfo?.hasNextPage;
+        const res = await walkAll();
+        if (myGen !== walkGen) return; // un toggle plus récent a pris le relais
+        ALL = (res && res.items) || [];
         render();
       } catch (e) {
+        if (myGen === walkGen) { ALL = []; render(); } // jamais de grille périmée sous la nouvelle URL
         console.warn("[plp] reloadGrid:", e.message);
       } finally {
-        state.loading = false;
-        grid.removeAttribute("aria-busy");
+        if (myGen === walkGen) grid.removeAttribute("aria-busy");
       }
     }
 
     loadInitial();
+
+    // Navigation pagination (délégation) + bouton retour (popstate).
+    if (paginationEl) {
+      paginationEl.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-page]");
+        if (!btn || btn.disabled) return;
+        const n = parseInt(btn.getAttribute("data-page"), 10);
+        if (n) goToPage(n);
+      });
+    }
+    window.addEventListener("popstate", () => {
+      const p = new URLSearchParams(location.search);
+      const urlCats = (p.get("cats") || "").split(",").map((s) => s.trim()).filter((h) => CAT_HANDLES.has(h)).join(",");
+      const urlBrand = p.get("brand") || "";
+      const urlTag = p.get("tag") || "";
+      // Back/Forward a franchi un changement de FILTRE (cats/brand/tag) : l'état
+      // mémoire (et ALL, et les contrôles) ne correspond plus à l'URL. On
+      // ré-initialise depuis l'URL par un rechargement — comportement d'avant la
+      // pagination, garantit grille/URL/contrôles cohérents. Rare (il faut
+      // paginer PUIS changer un filtre PUIS revenir en arrière).
+      if (urlCats !== state.cats.join(",") || urlBrand !== state.brand || urlTag !== state.tag) {
+        location.reload();
+        return;
+      }
+      // Seule la PAGE a changé → re-slice instantané de ALL, aucune requête : on
+      // reste sur la page designer/collection (hero + bio intacts).
+      state.page = Math.max(1, parseInt(p.get("page"), 10) || 1);
+      render();
+    });
 
     // Background promo fetch — re-applies to the current grid (and to every
     // subsequent render via the applyPromos call inside render()).
@@ -955,7 +1094,8 @@
       // Débounce : cocher plusieurs cases d'affilée → un seul fetch serveur.
       let catTimer = null;
       const applyCats = () => {
-        syncTrigger(); syncURL();
+        state.page = 1;            // nouveau sous-ensemble → page 1
+        syncTrigger(); syncURL();  // URL sans ?page (page=1)
         clearTimeout(catTimer);
         catTimer = setTimeout(reloadGrid, 220);
       };
@@ -974,9 +1114,11 @@
       });
     }
 
-    brandSel.addEventListener("change", () => { state.brand = brandSel.value; syncURL(); render(); });
-    sortSel.addEventListener("change", () => { state.sort = sortSel.value; render(); });
-    document.querySelector("[data-loadmore]").addEventListener("click", loadMore);
+    // Marque & tri = filtres CLIENT sur le set déjà chargé (pas de re-walk) :
+    // on repart page 1 et on re-rend. La marque est dans l'URL ; le tri non
+    // (mais on resync pour retirer un éventuel ?page résiduel).
+    brandSel.addEventListener("change", () => { state.brand = brandSel.value; state.page = 1; syncURL(); render(); });
+    sortSel.addEventListener("change", () => { state.sort = sortSel.value; state.page = 1; syncURL(); render(); });
   </script>
 </body>
 </html>
