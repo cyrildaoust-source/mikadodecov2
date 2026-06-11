@@ -4,7 +4,7 @@
               {
                         "src": "api/index.js",
                         "use": "@vercel/node",
-                        "config": { "includeFiles": ["data/**", "v3/produit.html", "v3/produits.html", "v3/designers-data.json"] }
+                        "config": { "includeFiles": ["data/**", "v3/produit.html", "v3/produits.html", "v3/designers-data.json", "v3/journal/**"] }
               },
               { "src": "v3/**", "use": "@vercel/static" }
       ],
@@ -16,6 +16,7 @@
               },
               { "src": "/produit.html", "has": [{ "type": "query", "key": "handle" }], "dest": "/api/index.js" },
               { "src": "/produits.html", "has": [{ "type": "query", "key": "designer" }], "dest": "/api/index.js" },
+              { "src": "/sitemap.xml", "dest": "/api/index.js" },
               { "src": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "status": 301, "headers": { "Location": "/journal/$slug.html" } },
               { "src": "/nos-produits(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
               { "src": "/passez-commande(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },

@@ -172,8 +172,23 @@ app.get('/produit.html', async (req, res) => {
     const url = ORIGIN + '/produit.html?handle=' + encodeURIComponent(handle);
 
     const html = renderWithOg(fs.readFileSync(PRODUIT_TEMPLATE, 'utf8'), { title, description, image, url });
+    // SEO · Product JSON-LD en SSR (remplace l'IIFE JS de produit.html) — un seul
+    // schéma, visible des crawlers sans exécution JS. Prix/dispo depuis le produit.
+    const ld = {
+      "@context": "https://schema.org", "@type": "Product", "name": name,
+      ...(brand ? { brand: { "@type": "Brand", "name": brand } } : {}),
+      ...(image ? { image } : {}),
+      "offers": {
+        "@type": "Offer", "priceCurrency": "EUR",
+        ...(product.priceMin != null ? { price: String(product.priceMin) } : {}),
+        "availability": product.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        "url": url
+      }
+    };
+    const ldTag = `<script type="application/ld+json">` + JSON.stringify(ld).replace(/</g, '\\u003c') + `</script>`;
+    const out = html.replace('</head>', ldTag + '\n</head>');
     ogCache(res);
-    return res.send(html);
+    return res.send(out);
   } catch (err) {
     console.warn('[og-produit]', err.message);
     return sendProduitTemplate(res);
@@ -193,7 +208,7 @@ app.get('/collections/:handle', async (req, res) => {
     if (!col) { ogCache(res); return sendProduitsTemplate(res); }
 
     const name = col.name || 'Catalogue';
-    const title = `${name} · Mikadodeco`;
+    const title = `${name} — Mikadodeco Bruxelles`;
     const description = ogDesc(
       col.description && col.description.trim()
         ? col.description
@@ -226,7 +241,7 @@ app.get('/produits.html', async (req, res) => {
     if (!designer) { ogCache(res); return sendProduitsTemplate(res); }
 
     const name = designer.name || 'Créateur';
-    const title = `${name} · Mikadodeco`;
+    const title = `${name} — Mikadodeco Bruxelles`;
     const description = ogDesc(
       designer.bio && designer.bio.trim()
         ? designer.bio
@@ -241,6 +256,73 @@ app.get('/produits.html', async (req, res) => {
   } catch (err) {
     console.warn('[og-designer]', err.message);
     return sendProduitsTemplate(res);
+  }
+});
+
+// ─── SEO: sitemap dynamique ────────────────────────────
+// Remplace l'ancien v3/sitemap.xml statique (~24 URLs, sans produits) par un
+// sitemap généré : toutes les fiches produit (walk paginé, getProducts() étant
+// plafonné à 250) + collections + créateurs indexables + articles + pages
+// statiques. URLs absolues et canoniques (aucun paramètre de filtre, seulement
+// ?handle= et ?designer=). Caché 6 h. Routé vers la fonction dans vercel.json.
+app.get('/sitemap.xml', async (req, res) => {
+  try {
+    const xml = await cached('sitemap:xml', async () => {
+      const urls = [];
+      const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const add = (loc, priority) => urls.push(`  <url><loc>${esc(loc)}</loc><priority>${priority}</priority></url>`);
+
+      // a) Pages statiques
+      const STATIC = [
+        ['/', '1.0'], ['/produits.html', '0.9'], ['/marques.html', '0.8'],
+        ['/designers.html', '0.7'], ['/materiaux.html', '0.7'], ['/selection.html', '0.6'],
+        ['/studio.html', '0.6'], ['/rendez-vous.html', '0.7'], ['/contact.html', '0.6'],
+        ['/journal.html', '0.6'], ['/nuancier-fermob.html', '0.6'],
+        ['/mentions-legales.html', '0.3'], ['/conditions-generales-de-vente.html', '0.3'],
+        ['/politique-et-vie-privee.html', '0.3'], ['/politique-cookies.html', '0.3'],
+      ];
+      STATIC.forEach(([p, pr]) => add(ORIGIN + p, pr));
+
+      // b) TOUTES les fiches produit — walk paginé (getProducts() plafonné à 250)
+      let after = null;
+      for (let i = 0; i < 60; i++) { // garde-fou
+        const { items, pageInfo } = await getProductsPage(100, after, null, null);
+        (items || []).forEach((prod) => {
+          if (prod.handle) add(ORIGIN + '/produit.html?handle=' + encodeURIComponent(prod.handle), '0.8');
+        });
+        if (!pageInfo || !pageInfo.hasNextPage) break;
+        after = pageInfo.endCursor;
+      }
+
+      // c) Collections
+      (await getCollections()).forEach((c) => {
+        if (c.handle) add(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6');
+      });
+
+      // d) Créateurs — uniquement les indexables (champ `hidden` dans
+      //    designers-data.json) pour éviter le thin content / les fiches masquées.
+      getDesigners().forEach((d) => {
+        if (d && d.slug && !d.hidden) add(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5');
+      });
+
+      // e) Articles du journal (HTML pré-rendus)
+      try {
+        fs.readdirSync(path.join(__dirname, 'v3', 'journal'))
+          .filter((f) => f.endsWith('.html'))
+          .forEach((f) => add(ORIGIN + '/journal/' + f, '0.5'));
+      } catch (e) { /* dossier absent du bundle → includeFiles v3/journal/** */ }
+
+      return `<?xml version="1.0" encoding="UTF-8"?>\n`
+           + `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
+           + urls.join('\n') + `\n</urlset>\n`;
+    }, 6 * 60 * 60 * 1000); // cache 6 h
+
+    res.set('Content-Type', 'application/xml; charset=utf-8');
+    res.set('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');
+    return res.send(xml);
+  } catch (err) {
+    console.warn('[sitemap]', err.message);
+    return res.status(500).send('');
   }
 });
 
