@@ -697,6 +697,13 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .prose a:hover { color: var(--ink-deep); }
 .prose blockquote { font-family: var(--serif); font-weight: 500; font-size: 26px; line-height: 1.25; color: var(--ink-deep); border-left: 3px solid var(--accent); padding-left: 22px; margin: 28px 0; }
 .prose blockquote a { font-family: var(--sans); font-size: 16px; font-weight: 600; color: var(--accent-ink); display: inline-block; margin-top: 6px; }
+/* Tableaux (pages légales — ex. finalités/bases RGPD). .prose ne les stylait pas. */
+.prose table { width: 100%; border-collapse: collapse; margin: 0 0 24px; font-size: 15px; }
+.prose th, .prose td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); line-height: 1.5; }
+.prose th { font-family: var(--sans); font-weight: 600; color: var(--ink-deep); border-bottom-color: var(--accent); }
+.prose td { color: var(--ink); }
+/* Date discrète en tête de page légale. */
+.legal-updated { color: var(--muted); font-size: var(--fs-small); margin: -8px 0 24px; }
 
 /* ---------- article CTA · generic editorial call-to-action ----------
    Centered block with Cormorant-italic lead + bordered Neue Haas button.

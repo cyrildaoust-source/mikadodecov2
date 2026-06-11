@@ -22,8 +22,6 @@
               { "src": "/nos-marques(/.*)?", "status": 301, "headers": { "Location": "/marques.html" } },
               { "src": "/prendre-rendez-vous(/.*)?", "status": 301, "headers": { "Location": "/rendez-vous.html" } },
               { "src": "/contact", "status": 301, "headers": { "Location": "/contact.html" } },
-              { "src": "/politique-et-vie-privee(/.*)?", "status": 301, "headers": { "Location": "/" } },
-              { "src": "/conditions-generales-de-vente(/.*)?", "status": 301, "headers": { "Location": "/" } },
               { "src": "/v3/(.*)", "status": 301, "headers": { "Location": "/$1" } },
               { "src": "/v3", "status": 301, "headers": { "Location": "/" } },
               {
