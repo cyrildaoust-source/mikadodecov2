@@ -299,7 +299,6 @@
     </div>
   </div>
 
-  <div class="wrap" data-promo-slot></div>
 
   <section class="section wrap" data-pop-section style="padding-bottom:0">
     <h2 class="serif catalogue-head">Les plus populaires</h2>
@@ -332,7 +331,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, isPromoEteActive, promoBandeauHTML, breadcrumbHTML, PROMO_ETE_2026 } from "/shared.js";
+    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, breadcrumbHTML } from "/shared.js";
     // initShell is called below — the active nav entry depends on the route
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
@@ -415,7 +414,6 @@
       "pols-potten": "Pols Potten",
       // Promotions (also valid /collections/<handle> routes)
       "promotions": "Promotions",
-      "promo-4eme-chaise-offerte": "Promo · 4ème chaise offerte",
     };
 
     // Brand handles — the "Marques" subset of COLL_TITLES. Drives the
@@ -598,20 +596,6 @@
       // next to the "Les pièces de …" grid title instead.
       if (pieceCountEl) pieceCountEl.textContent = (state.designer && state.designer.name) ? countEl.textContent : "";
 
-      // Promo bandeau on outdoor entry pages — but NOT on the promo
-      // collection itself (the page header already says everything when
-      // the visitor lands there directly). Auto-removes after the window.
-      const promoSlot = document.querySelector("[data-promo-slot]");
-      if (promoSlot) {
-        const onPromoPage = state.coll === PROMO_ETE_2026.collPromo
-                         || state.tag === PROMO_ETE_2026.tagSiege;
-        const showBandeau = isPromoEteActive() && !onPromoPage && (
-          state.coll === PROMO_ETE_2026.collOutdoor ||
-          state.tag === PROMO_ETE_2026.tagOutdoor
-        );
-        promoSlot.innerHTML = showBandeau ? promoBandeauHTML("plp") : "";
-      }
-
       // Always-on "most popular" strip (top 4), independent of the chosen
       // sort. Suppressed on a designer page — there, the whole grid IS that
       // designer's pieces, so a "most popular" split would only fragment it.
@@ -677,9 +661,6 @@
         // Description stays empty until Shopify responds (V2.1).
         titleEl.textContent = COLL_TITLES[state.coll] || "Le catalogue";
         subEl.textContent = "";
-      } else if (state.tag === PROMO_ETE_2026.tagSiege) {
-        titleEl.textContent = "Promo · 4ème chaise offerte";
-        subEl.textContent = "Les sièges d'extérieur éligibles à l'offre du 26 mai au 6 juin.";
       } else {
         titleEl.textContent = "Le catalogue";
         subEl.textContent = "Mobilier de design, choisi pièce par pièce.";

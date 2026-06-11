@@ -566,19 +566,6 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sel-eta--warn { color: #b9742c; font-style: italic; }
 .sel-eta--warn strong { font-style: normal; }
 
-/* PROMO BANDEAU · summer-2026 hero used on outdoor PLP + eligible PDPs.
-   Warm beige bg, terracotta accents — sits gently in the cream palette. */
-.promo-bandeau { background: var(--paper-2); border: 1px solid var(--line); margin: clamp(20px, 3vw, 36px) 0; }
-.promo-bandeau__inner { padding: clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px); max-width: 760px; }
-.promo-bandeau__eyebrow { display: inline-block; font-family: var(--sans-product); font-weight: 700; font-size: var(--fs-meta); color: var(--accent-ink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
-.promo-bandeau__title { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--ink-deep); margin: 0 0 14px; }
-.promo-bandeau__body { font-size: var(--fs-body); color: var(--ink); line-height: 1.55; margin: 0 0 18px; max-width: 56ch; }
-.promo-bandeau__brands { display: inline-block; margin-top: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
-.promo-bandeau__cta { display: inline-flex; align-items: center; padding: 12px 22px; background: var(--accent); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .04em; text-decoration: none; transition: background .25s var(--ease); }
-.promo-bandeau__cta:hover { background: var(--accent-ink); }
-.promo-bandeau--pdp .promo-bandeau__inner { padding: clamp(20px, 2.4vw, 32px) clamp(20px, 2.4vw, 32px); max-width: 100%; }
-.promo-bandeau--pdp .promo-bandeau__title { font-size: clamp(22px, 2.4vw, 30px); }
-.promo-bandeau--pdp .promo-bandeau__body { font-size: var(--fs-small); margin-bottom: 0; }
 .sel-opt h3 { font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
 .sel-opt label { display: flex; gap: 10px; align-items: baseline; font-size: var(--fs-small); padding: 7px 0; cursor: pointer; }
 .sel-opt input { accent-color: var(--accent-ink); margin-top: 2px; }

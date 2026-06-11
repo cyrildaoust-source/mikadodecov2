@@ -189,25 +189,10 @@ export function loadBrandHandles() {
   }
   return _brandHandles;
 }
-/* ---------- promo été 2026 (4ème chaise offerte) ---------- */
-// Centralized so every consumer (PLP bandeau, PDP bandeau, cart message)
-// uses the same dates and tag names. Update here when the next promo lands.
-export const PROMO_ETE_2026 = {
-  start: new Date("2026-05-26T00:00:00+02:00"),
-  end:   new Date("2026-06-06T23:59:59+02:00"),
-  tagOutdoor: "promo-ete-2026",          // 590 outdoor products (vitrine)
-  tagSiege:   "promo-siege-ete-2026",    // 89 sieges éligibles à la BXGY
-  collOutdoor:"mobilier-exterieur",
-  collPromo:  "promo-4eme-chaise-offerte",
-};
-export const isPromoEteActive = () => {
-  const now = new Date();
-  return now >= PROMO_ETE_2026.start && now <= PROMO_ETE_2026.end;
-};
 // Fil d'Ariane (breadcrumb). `trail` = [{ label, href? }, …]; the LAST item is
 // the current page (rendered without a link, aria-current). Emits schema.org
-// BreadcrumbList microdata for SEO. Pure string helper (like promoBandeauHTML):
-// inject the result into a per-page placeholder — it is NOT rendered by
+// BreadcrumbList microdata for SEO. Pure string helper: inject the result
+// into a per-page placeholder — it is NOT rendered by
 // initShell, because the crumb belongs between the header and the page H1,
 // a region that lives in per-page markup.
 export function breadcrumbHTML(trail) {
@@ -221,25 +206,6 @@ export function breadcrumbHTML(trail) {
     return `<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">${inner}<meta itemprop="position" content="${i + 1}" /></li>`;
   }).join("");
   return `<nav class="breadcrumb" aria-label="Fil d'Ariane"><ol itemscope itemtype="https://schema.org/BreadcrumbList">${items}</ol></nav>`;
-}
-
-// Hero bandeau used on the outdoor PLP and on eligible PDPs. Variants:
-//   "plp"  → full bandeau with CTA (top of /collections/mobilier-exterieur)
-//   "pdp"  → compact bandeau (just under the PDP gallery)
-export function promoBandeauHTML(variant = "plp") {
-  const cta = `<a class="promo-bandeau__cta" href="/collections/${PROMO_ETE_2026.collPromo}">Voir la sélection chaises en promo →</a>`;
-  const intro = variant === "pdp"
-    ? `<p class="promo-bandeau__body">Du <strong>26 mai au 6 juin</strong>, achetez 3 chaises d'extérieur, la 4<sup>ème</sup> est offerte. Automatiquement, sans code.</p>`
-    : `<p class="promo-bandeau__body">Du <strong>26 mai au 6 juin</strong>, achetez 3 chaises d'extérieur, la 4<sup>ème</sup> est offerte. Automatiquement, sans code.<br><span class="promo-bandeau__brands">Fermob · HAY · Vitra · &amp;Tradition · Fatboy</span></p>`;
-  return `
-    <aside class="promo-bandeau promo-bandeau--${escapeHtml(variant)}">
-      <div class="promo-bandeau__inner">
-        <span class="promo-bandeau__eyebrow">Offre été 2026</span>
-        <h2 class="promo-bandeau__title">L'été commence à votre table.</h2>
-        ${intro}
-        ${variant === "plp" ? cta : ""}
-      </div>
-    </aside>`;
 }
 
 export async function fetchPromos() {

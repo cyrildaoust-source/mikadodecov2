@@ -390,12 +390,12 @@ function mapProduct(node) {
     inStock:     (typeof node.totalInventory === 'number') && node.totalInventory > 0,
     longDelay:   node.tags.some(t => /^delai[-_ ]?long$/i.test(t)),
     leadTimeLabel: node.tags.some(t => /^delai[-_ ]?long$/i.test(t)) ? DELIVERY_LONG : DELIVERY_DEFAULT,
-    // Raw Shopify tags exposed so the front can react to seasonal flags
-    // (e.g. `promo-ete-2026`, `promo-siege-ete-2026`) without an extra API.
+    // Raw Shopify tags exposed so the front can react to product flags
+    // (e.g. `delai-long`, `badge:nouveau`) without an extra API.
     tags:        node.tags || [],
     // Shopify collection handles this product belongs to. Lets the front
-    // render true collection pages (Mobilier d'extérieur, Promo 4ème
-    // chaise offerte…) instead of tag-filtered catalog views.
+    // render true collection pages (Mobilier d'extérieur…) instead of
+    // tag-filtered catalog views.
     collections: (node.collections?.edges || []).map(e => e?.node?.handle).filter(Boolean),
     // (kept for backward compat with the PDP metafield — separate from brand lead-time)
     leadTime:    meta.lead_time   || '',
@@ -425,6 +425,46 @@ function mapProduct(node) {
     badge:       badgeTag,
     available:   node.availableForSale && (variant?.availableForSale ?? true),
     featured:    node.tags.some(t => t.toLowerCase() === 'featured'),
+  };
+}
+
+// Maps ONE product reference (from a Search & Discovery recommendation
+// metafield) to the card shape productCard() expects. Lighter than mapProduct:
+// only the fields a card renders (image resized to card width, price range,
+// first-variant id for add-to-cart, availability). The relations themselves
+// live in Shopify — nothing here is hardcoded.
+function mapProductRef(n) {
+  if (!n) return null;
+  const v = n.variants?.nodes?.[0];
+  const tags = n.tags || [];
+  const longDelay = tags.some(t => /^delai[-_ ]?long$/i.test(t));
+  const featured = n.featuredImage?.url;
+  const imgs = (n.images?.nodes || []).map(i => i?.url).filter(Boolean);
+  const second = imgs.find(u => u !== featured) || imgs[1] || null;
+  const priceMin = parseFloat(n.priceRange?.minVariantPrice?.amount ?? v?.price?.amount ?? 0);
+  const priceMax = parseFloat(n.priceRange?.maxVariantPrice?.amount ?? priceMin);
+  // Parité visuelle avec les cartes du catalogue : on émet les MÊMES champs que
+  // productCard lit via mapProduct — disponibilité/délai HONNÊTES (longDelay /
+  // leadTimeLabel, sinon un article delai-long afficherait à tort « Livraison
+  // 3-4 semaines »), image de survol (image2) et badge éditorial. Seul le badge
+  // « X finitions » est omis : le calculer imposerait variants(first:250) ×
+  // jusqu'à 24 références, un coût Storefront disproportionné pour cette section.
+  return {
+    id:        n.id,
+    handle:    n.handle || '',
+    variantId: v?.id || null,
+    name:      n.title,
+    brand:     n.vendor || '',
+    price:     parseFloat(v?.price?.amount ?? priceMin),
+    priceMin,
+    priceMax,
+    image:     shopifyResize(featured || '', CARD_IMAGE_WIDTH),
+    image2:    second ? shopifyResize(second, CARD_IMAGE_WIDTH) : null,
+    badge:     tags.find(t => t.startsWith('badge:'))?.replace('badge:', '') || null,
+    inStock:   (typeof n.totalInventory === 'number') && n.totalInventory > 0,
+    longDelay,
+    leadTimeLabel: longDelay ? DELIVERY_LONG : DELIVERY_DEFAULT,
+    available: n.availableForSale && (v?.availableForSale ?? true),
   };
 }
 
@@ -862,7 +902,31 @@ const PRODUCT_QUERY = `
         { namespace: "custom", key: "lead_time" }
         { namespace: "custom", key: "subcategory" }
       ]) { key value }
+      # Recommandations gérées côté Shopify (app Search & Discovery), stockées en
+      # métafields list.product_reference et lues dynamiquement — rien de hardcodé.
+      complementary: metafield(namespace: "shopify--discovery--product_recommendation", key: "complementary_products") {
+        references(first: 12) { nodes { ...RecoCard } }
+      }
+      related: metafield(namespace: "shopify--discovery--product_recommendation", key: "related_products") {
+        references(first: 12) { nodes { ...RecoCard } }
+      }
     }
+  }
+  fragment RecoCard on Product {
+    id
+    handle
+    title
+    vendor
+    availableForSale
+    totalInventory
+    tags
+    featuredImage { url altText }
+    images(first: 4) { nodes { url } }
+    priceRange {
+      minVariantPrice { amount currencyCode }
+      maxVariantPrice { amount currencyCode }
+    }
+    variants(first: 1) { nodes { id availableForSale price { amount } } }
   }
 `;
 
@@ -873,7 +937,19 @@ async function getProductByHandle(handle) {
     const data = await shopifyFetch(PRODUCT_QUERY, { handle: h });
     const node = data.product;
     if (!node) return null;
-    return mapProduct(node);
+    const product = mapProduct(node);
+    // Recommandations Search & Discovery (métafields list.product_reference)
+    // mappées dans la forme de carte du site. Écarte : entrées sans image, la
+    // self-référence, et les doublons — y compris un produit listé À LA FOIS en
+    // complémentaire et en similaire (il n'apparaît alors que dans « Complétez
+    // avec »). Brouillons/dépubliés absents (la Storefront API ne renvoie que les
+    // produits actifs — c'est voulu).
+    const seen = new Set([node.id]);
+    const toCards = (mf) => (mf?.references?.nodes || []).map(mapProductRef)
+      .filter(r => r && r.image && !seen.has(r.id) && (seen.add(r.id), true));
+    product.complementary = toCards(node.complementary);
+    product.related       = toCards(node.related);
+    return product;
   });
 }
 
