@@ -1,5 +1,5 @@
 {
-  "_note": "186 designers — enrichi 2026-06-04 (audit designer multi-sources). Tri par sortKey.",
+  "_note": "250 designers — enrichi 2026-06-11 (+21 créateurs Alessi sourcés alessi.com via recherche vérifiée, bio à compléter). Tri par sortKey.",
   "designers": [
     {
       "name": "Alvar Aalto",
@@ -82,6 +82,36 @@
       ],
       "bio": "Carlo Alessi (Granerolo, Verbania, 1916 — 2009) est un designer et industriel italien, fils de Giovanni Alessi, fondateur de l'atelier métallurgique familial à Omegna en 1921. Formé au dessin technique à l'institut OMAR de Novare, il entre jeune dans l'entreprise et en devient le dessinateur en chef. Entre 1935 et 1945, il conçoit la majeure partie de la production de la maison, signant notamment les séries Ottagonale, Scalini, Cilindrica et Bombé. Son service à thé et à café Bombé, dessiné en 1945 et d'abord réalisé en laiton chromé et argenté avant l'acier inoxydable, demeure l'une des pièces emblématiques de la marque (éditée par Alessi). Devenu directeur général, il donne à l'entreprise une dimension internationale et amorce les collaborations avec des designers extérieurs. Il en assure la présidence jusqu'à sa disparition.",
       "photo": "/images/designers/carlo-alessi.jpg"
+    },
+    {
+      "name": "Abi Alice",
+      "slug": "abi-alice",
+      "sortKey": "Alice",
+      "tags": [
+        "abi-alice"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "William Alsop",
+      "slug": "william-alsop",
+      "sortKey": "Alsop",
+      "tags": [
+        "william-alsop"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "LUCY.D - Karin Santorso and Barbara Ambrosz",
@@ -260,6 +290,21 @@
       "photo": "/images/designers/carole-baijings.jpg"
     },
     {
+      "name": "Alessandra Baldereschi",
+      "slug": "alessandra-baldereschi",
+      "sortKey": "Baldereschi",
+      "tags": [
+        "alessandra-baldereschi"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Edward Barber & Jay Osgerby",
       "slug": "edward-barber-jay-osgerby",
       "tags": [
@@ -325,6 +370,21 @@
       "photo": "/images/designers/big-game.jpg"
     },
     {
+      "name": "Evelien Bleumink",
+      "slug": "evelien-bleumink",
+      "sortKey": "Bleumink",
+      "tags": [
+        "evelien-bleumink"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Piet Boon",
       "slug": "piet-boon",
       "sortKey": "Boon",
@@ -380,6 +440,21 @@
       "featured": true
     },
     {
+      "name": "Gabriele Chiave & Lorenza Bozzoli",
+      "slug": "gabriele-chiave-lorenza-bozzoli",
+      "sortKey": "Bozzoli",
+      "tags": [
+        "gabriele-chiave-lorenza-bozzoli"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Andrea Branzi",
       "slug": "andrea-branzi",
       "sortKey": "Branzi",
@@ -396,20 +471,19 @@
       "photo": "/images/designers/andrea-branzi.jpg"
     },
     {
-      "name": "Carolina Castiglioni",
-      "slug": "plan-c",
-      "sortKey": "Castiglioni Carolina",
+      "name": "Clare Brass",
+      "slug": "clare-brass",
+      "sortKey": "Brass",
       "tags": [
-        "plan-c"
+        "clare-brass"
       ],
       "brands": [
-        "Serax"
+        "Alessi"
       ],
       "brandHrefs": [
-        "/collections/serax"
+        "/collections/alessi"
       ],
-      "bio": "Carolina Castiglioni est une créatrice de mode et directrice artistique italienne, fondatrice du label milanais Plan C. Fille de Consuelo Castiglioni, créatrice de Marni, elle grandit au sein de la maison familiale où elle occupe le poste de directrice des projets spéciaux. En 2018, après le départ de la famille de Marni, elle lance Plan C, une griffe de prêt-à-porter au vestiaire éclectique, marqué par des associations de couleurs audacieuses et un goût pour les formes et les matières. C'est ce même regard qui la conduit vers les arts de la table : en 2025, elle signe avec l'éditeur belge Serax sa première collection d'objets, Silos — vases, bougeoirs et bougies parfumées en porcelaine aux teintes brun, bleu et orange, dont les volumes géométriques évoquent l'esprit du design Memphis des années 1980.",
-      "photo": "/images/designers/plan-c.jpg"
+      "bio": ""
     },
     {
       "name": "Fratelli Campana",
@@ -492,6 +566,37 @@
       "photo": "/images/designers/pier-giacomo-castiglioni.jpg"
     },
     {
+      "name": "Carolina Castiglioni",
+      "slug": "plan-c",
+      "sortKey": "Castiglioni Carolina",
+      "tags": [
+        "plan-c"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "Carolina Castiglioni est une créatrice de mode et directrice artistique italienne, fondatrice du label milanais Plan C. Fille de Consuelo Castiglioni, créatrice de Marni, elle grandit au sein de la maison familiale où elle occupe le poste de directrice des projets spéciaux. En 2018, après le départ de la famille de Marni, elle lance Plan C, une griffe de prêt-à-porter au vestiaire éclectique, marqué par des associations de couleurs audacieuses et un goût pour les formes et les matières. C'est ce même regard qui la conduit vers les arts de la table : en 2025, elle signe avec l'éditeur belge Serax sa première collection d'objets, Silos — vases, bougeoirs et bougies parfumées en porcelaine aux teintes brun, bleu et orange, dont les volumes géométriques évoquent l'esprit du design Memphis des années 1980.",
+      "photo": "/images/designers/plan-c.jpg"
+    },
+    {
+      "name": "Cristina Celestino",
+      "slug": "cristina-celestino",
+      "sortKey": "Celestino",
+      "tags": [
+        "cristina-celestino"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Gary Chang",
       "slug": "gary-chang",
       "sortKey": "Chang",
@@ -522,6 +627,36 @@
       "bio": "Designer industriel suisse né à Lausanne en 1984, Michel Charlot est diplômé de l'ECAL/University of Art and Design Lausanne en 2009. Il travaille environ dix-huit mois auprès de Jasper Morrison avant d'ouvrir sa propre agence en 2011, d'abord à Bâle puis à Porto. Sa démarche vise l'efficacité entre conception, dessin et production. Pour Vitra, il signe en 2014 la Davy Table, table d'extérieur pensée comme compagne de la chaise Landi dessinée par Hans Coray en 1939. Il collabore également avec Belux, Kettal et Camper. Sa lampe U-Turn (Belux, présentée en 2012) a reçu en 2013 le Design Preis Schweiz et le Swiss Design Award. En 2016, Jasper Morrison le distingue par le A&W Mentor Prize. Il enseigne le design à l'ECAL et à la Tama Art University de Tokyo.",
       "photo": "/images/designers/michel-charlot.jpg",
       "sortKey": "Charlot"
+    },
+    {
+      "name": "Pierre Charpin",
+      "slug": "pierre-charpin",
+      "sortKey": "Charpin",
+      "tags": [
+        "pierre-charpin"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Gabriele Chiave",
+      "slug": "gabriele-chiave",
+      "sortKey": "Chiave",
+      "tags": [
+        "gabriele-chiave"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "David Chipperfield",
@@ -575,6 +710,21 @@
       "featured": true
     },
     {
+      "name": "Eva Claessens",
+      "slug": "eva-claessens",
+      "sortKey": "Claessens",
+      "tags": [
+        "eva-claessens"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Lluís Clotet",
       "slug": "lluis-clotet",
       "sortKey": "Clotet",
@@ -589,6 +739,36 @@
       ],
       "bio": "Architecte et designer né à Barcelone en 1941, Lluís Clotet obtient son diplôme à l'École technique supérieure d'architecture de Barcelone (ETSAB) en 1965, où il enseigne ensuite de 1977 à 1984. En 1964, il fonde le Studio PER aux côtés de Pep Bonet, Cristian Cirici et Oscar Tusquets, et compte parmi les associés fondateurs de l'éditeur BD Ediciones de Diseño (BD Barcelona). Il collabore avec Tusquets jusqu'en 1983, puis poursuit l'essentiel de son œuvre bâtie avec Ignacio Paricio. Souvent présenté, avec Tusquets, comme un précurseur du postmodernisme en Espagne, il reçoit le Prix national d'architecture en 2010. Pour Alessi, il signe une série d'objets en acier inoxydable évoquant une feuille de papier froissée, obtenus par emboutissage à froid en une seule opération, dont la corbeille Port et le plateau Foix.",
       "photo": "/images/designers/lluis-clotet.jpg"
+    },
+    {
+      "name": "Susan Cohn",
+      "slug": "susan-cohn",
+      "sortKey": "Cohn",
+      "tags": [
+        "susan-cohn"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Giulio Confalonieri",
+      "slug": "giulio-confalonieri",
+      "sortKey": "Confalonieri",
+      "tags": [
+        "giulio-confalonieri"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "Terence Conran",
@@ -649,6 +829,21 @@
       ],
       "brandHrefs": [
         "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Fabrizio Crisà",
+      "slug": "fabrizio-crisa",
+      "sortKey": "Crisà",
+      "tags": [
+        "fabrizio-crisa"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
       ],
       "bio": ""
     },
@@ -736,6 +931,21 @@
       "photo": "/images/designers/ruben-deriemaeker.jpg"
     },
     {
+      "name": "Foster + Partners Industrial Design",
+      "slug": "foster-partners-industrial-design",
+      "sortKey": "Design",
+      "tags": [
+        "foster-partners-industrial-design"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Nadine Dewart",
       "slug": "nadine-dewart",
       "sortKey": "Dewart",
@@ -784,6 +994,36 @@
       "photo": "/images/designers/luigi-caccia-dominioni.jpg"
     },
     {
+      "name": "Carolina Doni",
+      "slug": "carolina-doni",
+      "sortKey": "Doni",
+      "tags": [
+        "carolina-doni"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Corrado Dotti",
+      "slug": "corrado-dotti",
+      "sortKey": "Dotti",
+      "tags": [
+        "corrado-dotti"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Lauren Van Driessche",
       "slug": "lauren-van-driessche",
       "sortKey": "Driessche",
@@ -817,6 +1057,36 @@
       "featured": true
     },
     {
+      "name": "Daniel Enoksson",
+      "slug": "daniel-enoksson",
+      "sortKey": "Enoksson",
+      "tags": [
+        "daniel-enoksson"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Simone Fanciullacci",
+      "slug": "simone-fanciullacci",
+      "sortKey": "Fanciullacci",
+      "tags": [
+        "simone-fanciullacci"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Marc Ferrand",
       "slug": "marc-ferrand",
       "sortKey": "Ferrand",
@@ -844,6 +1114,21 @@
       ],
       "brandHrefs": [
         "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Hannes & Fritz",
+      "slug": "hannes-fritz",
+      "sortKey": "Fritz",
+      "tags": [
+        "hannes-fritz"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
       ],
       "bio": ""
     },
@@ -881,6 +1166,21 @@
       "photo": "/images/designers/doriana-e-massimiliano-fuksas.jpg"
     },
     {
+      "name": "Doriana and Massimiliano Fuksas",
+      "slug": "doriana-and-massimiliano-fuksas",
+      "sortKey": "Fuksas",
+      "tags": [
+        "doriana-and-massimiliano-fuksas"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Alex Gabriels",
       "slug": "alex-gabriels",
       "sortKey": "Gabriels",
@@ -911,6 +1211,21 @@
       ],
       "bio": "",
       "photo": "/images/designers/nadia-gallardo.jpg"
+    },
+    {
+      "name": "Alba Gallizia",
+      "slug": "alba-gallizia",
+      "sortKey": "Gallizia",
+      "tags": [
+        "alba-gallizia"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "Elisa Gargan",
@@ -978,6 +1293,21 @@
       "sortKey": "Gehry"
     },
     {
+      "name": "Nick Geipel",
+      "slug": "nick-geipel",
+      "sortKey": "Geipel",
+      "tags": [
+        "nick-geipel"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Olivier Gence",
       "slug": "olivier-gence",
       "sortKey": "Gence",
@@ -989,6 +1319,21 @@
       ],
       "brandHrefs": [
         "/produits.html?marque=Fermob"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Paolo Gerosa",
+      "slug": "paolo-gerosa",
+      "sortKey": "Gerosa",
+      "tags": [
+        "paolo-gerosa"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
       ],
       "bio": ""
     },
@@ -1009,6 +1354,21 @@
       "photo": "/images/designers/massimo-giacon.jpg"
     },
     {
+      "name": "Anna Gili",
+      "slug": "anna-gili",
+      "sortKey": "Gili",
+      "tags": [
+        "anna-gili"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Stefano Giovannoni",
       "slug": "stefano-giovannoni",
       "sortKey": "Giovannoni",
@@ -1023,6 +1383,21 @@
       ],
       "bio": "Né en 1954 à La Spezia, Stefano Giovannoni est un architecte et designer industriel italien, diplômé de la faculté d'architecture de Florence en 1978. Au début des années 1980, il collabore avec le Studio Alchimia d'Ettore Sottsass et Alessandro Mendini, avant de fonder vers 1985 le groupe King-Kong avec Guido Venturini et de participer au mouvement bolidiste. Sa collaboration avec Alessi, débutée à la fin des années 1980, donne naissance à un langage figuratif et coloré. On lui doit la série Girotondo (1989, dessinée avec Venturini), l'un des plus grands succès commerciaux de la marque, le porte-balai Merdolino (1993), la boîte à biscuits Mary Biscuit (1995) et la ligne de cuisson Mami pour Alessi. Il vit et travaille à Milan, où il a fondé la marque qeeboo en 2016.",
       "photo": "/images/designers/stefano-giovannoni.jpg"
+    },
+    {
+      "name": "Elisa Giovannoni",
+      "slug": "elisa-giovannoni",
+      "sortKey": "Giovannoni",
+      "tags": [
+        "elisa-giovannoni"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "Alexander Girard",
@@ -1042,6 +1417,36 @@
       "featured": true
     },
     {
+      "name": "Paolo Golinelli",
+      "slug": "paolo-golinelli",
+      "sortKey": "Golinelli",
+      "tags": [
+        "paolo-golinelli"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Adam Goodrum",
+      "slug": "adam-goodrum",
+      "sortKey": "Goodrum",
+      "tags": [
+        "adam-goodrum"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Frédéric Gooris",
       "slug": "frederic-gooris",
       "sortKey": "Gooris",
@@ -1056,6 +1461,21 @@
       ],
       "bio": "",
       "photo": "/images/designers/frederic-gooris.jpg"
+    },
+    {
+      "name": "Tsukasa Goto",
+      "slug": "tsukasa-goto",
+      "sortKey": "Goto",
+      "tags": [
+        "tsukasa-goto"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "Michael Graves",
@@ -1103,6 +1523,22 @@
         "/produits.html?marque=Fermob"
       ],
       "bio": "Designer autrichien né à Klagenfurt, Harald Guggenbichler s'est d'abord formé comme menuisier avant de se consacrer au design. Avec Heike Guggenbichler, il anime depuis 2004 le studio Guggenbichler Design, basé à Vienne, qui collabore avec des éditeurs internationaux tels que Tonon, Cassina, Ligne Roset, Rossin et Fermob. Sa démarche met en avant la fonctionnalité, le sens du matériau et une économie de moyens, avec des lignes claires et une sensibilité poétique. Pour Fermob, il signe la collection Surprising, des sièges d'extérieur en acier dont la structure filaire d'une seule pièce dessine une silhouette aérienne. Son fauteuil SINO, dessiné en 2004 et édité par Die Collection, a reçu un red dot en 2006."
+    },
+    {
+      "name": "Denis Guidone",
+      "slug": "denis-guidone",
+      "sortKey": "Guidone",
+      "tags": [
+        "denis-guidone",
+        "dennis-guidone"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "Koen Van Guijze",
@@ -1170,6 +1606,21 @@
       "hidden": true
     },
     {
+      "name": "Franco Sargiani & Eija Helander",
+      "slug": "franco-sargiani-eija-helander",
+      "sortKey": "Helander",
+      "tags": [
+        "franco-sargiani-eija-helander"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Wouters & Hendrix",
       "slug": "wouters-hendrix",
       "sortKey": "Hendrix",
@@ -1231,6 +1682,21 @@
       ],
       "bio": "Seppe Van Heusden est un designer industriel néerlandais établi à Utrecht. Diplômé de la Lund University School of Industrial Design (Suède) en 2020, où il enseigne à temps partiel, il a auparavant travaillé au sein de l'agence Snøhetta. Sa pratique s'étend du design produit au design spatial, avec une attention portée à l'éclairage, au mobilier et aux objets. Il cherche à établir un lien architectural avec l'espace pour concevoir des objets durables, en jouant de contrastes et de matériaux honnêtes. Il collabore avec Serax, pour qui il signe en 2022 la collection de luminaires Seam, dont l'abat-jour en porcelaine assume la couture visible du moule de coulage, contrastant avec un bras et un socle en acier noir. Il a également travaillé pour MDF Italia, Lodes, +Halle et Modular Lighting Instruments.",
       "photo": "/images/designers/seppe-van-heusden.jpg"
+    },
+    {
+      "name": "Pascal Hien",
+      "slug": "pascal-hien",
+      "sortKey": "Hien",
+      "tags": [
+        "pascal-hien"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "Ann Van Hoey",
@@ -1313,6 +1779,21 @@
       "photo": "/images/designers/harry-paul-van-iersel.jpg"
     },
     {
+      "name": "Patrik Illo",
+      "slug": "patrik-illo",
+      "sortKey": "Illo",
+      "tags": [
+        "patrik-illo"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Toyo Ito",
       "slug": "toyo-ito",
       "sortKey": "Ito",
@@ -1345,6 +1826,21 @@
       "photo": "/images/designers/arne-jacobsen.jpg",
       "sortKey": "Jacobsen",
       "featured": true
+    },
+    {
+      "name": "Simon Jones",
+      "slug": "simon-jones",
+      "sortKey": "Jones",
+      "tags": [
+        "simon-jones"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
     },
     {
       "name": "Hella Jongerius",
@@ -1394,6 +1890,21 @@
       ],
       "bio": "Designer industriel français né en 1967 à Nantes, Patrick Jouin est diplômé de l'ENSCI – Les Ateliers en 1992. Après plusieurs années dans le studio de Philippe Starck (direction artistique de Thomson multimédia), il fonde en 1998 son agence Patrick Jouin iD, dédiée au design d'objet, puis cofonde en 2006 avec l'architecte Sanjit Manku le studio Jouin Manku, voué à l'architecture intérieure. Sa collaboration avec le chef Alain Ducasse, dont il signe des intérieurs de restaurants à partir de 2000 (bar et restaurant du Plaza Athénée), le révèle sur la scène internationale. Il conçoit en 2004 la collection Solid, parmi les premiers meubles produits par frittage laser, dont la chaise C2 figure aux collections du MoMA et du Stedelijk Museum. Il reçoit le Compasso d'Oro en 2011 pour le Pasta Pot d'Alessi.",
       "photo": "/images/designers/patrick-jouin.jpg"
+    },
+    {
+      "name": "Leif Jørgensen",
+      "slug": "leif-jorgensen",
+      "sortKey": "Jørgensen",
+      "tags": [
+        "leif-jorgensen"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
     },
     {
       "name": "Kranen/Gille",
@@ -1571,6 +2082,36 @@
       "featured": true
     },
     {
+      "name": "Forti e Di Loreto",
+      "slug": "forti-e-di-loreto",
+      "sortKey": "Loreto",
+      "tags": [
+        "forti-e-di-loreto"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Astrid Luglio",
+      "slug": "astrid-luglio",
+      "sortKey": "Luglio",
+      "tags": [
+        "astrid-luglio"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "José Lévy",
       "slug": "jose-levy",
       "sortKey": "Lévy",
@@ -1601,6 +2142,21 @@
       ],
       "bio": "Boucquillon & Maaoui est un duo formé par Michel Boucquillon, né en Belgique en 1962, architecte (diplômé de Saint-Luc à Bruxelles en 1986) et designer industriel, et Donia Maaoui, son épouse, également architecte, qui pratique la sculpture et la peinture. Michel Boucquillon se fait remarquer dès 1988 en remportant le concours pour l'hémicycle du Parlement européen à Bruxelles. En 2000, il installe son atelier, la Casa Boucquillon, à Lucques, en Toscane, lieu de vie et de travail dédié au design industriel et à l'architecture. Le couple y conçoit objets et architectures, et collabore notamment avec Alessi. Leur série Bark, en acier perforé, s'inspire de l'écorce des arbres qui entourent leur maison et décline centres de table, vases et accessoires. Pour Alessi, ils signent aussi la corbeille Barket, issue de cette même famille, et la corbeille Vimini, inspirée de la vannerie en osier. Leur travail est présent dans plusieurs musées.",
       "photo": "/images/designers/boucquillon-maaoui.jpg"
+    },
+    {
+      "name": "Michel Boucquillon & Donia Maaoui",
+      "slug": "michel-boucquillon-donia-maaoui",
+      "sortKey": "Maaoui",
+      "tags": [
+        "michel-boucquillon-donia-maaoui"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "Nel Maertens",
@@ -1746,6 +2302,21 @@
       "photo": "/images/designers/carlo-mazzeri.jpg"
     },
     {
+      "name": "Anselmo Vitale & Carlo Mazzeri",
+      "slug": "anselmo-vitale-carlo-mazzeri",
+      "sortKey": "Mazzeri",
+      "tags": [
+        "anselmo-vitale-carlo-mazzeri"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Fabio Meliota",
       "slug": "fabio-meliota",
       "sortKey": "Meliota",
@@ -1807,6 +2378,36 @@
       ],
       "bio": "Née à Bologne en 1964, Miriam Mirri est une designer industrielle italienne établie à Milan. Formée à la Scuola Superiore di Disegno Anatomico, elle poursuit des études de design et de communication à l'Università del Progetto de Reggio Emilia. Elle travaille d'abord avec Nigel Coates au cabinet Branson-Coates à Londres, puis comme assistante de Stefano Giovannoni à Milan, avant d'ouvrir son activité indépendante en 2000. Son travail couvre les arts de la table, les accessoires pour animaux, le textile, l'horlogerie et les objets du quotidien, pour des maisons telles qu'Alessi, Mandarina Duck, Seiko ou United Pets. Pour Alessi, elle signe la coupe à glace Big Love (2002), issue du métaprojet Family Follows Fiction, et l'infuseur à thé You (2012). En 2006, elle reçoit le Fritz Henkel Award for Innovation. Elle est membre de l'ADI (Associazione per il Disegno Industriale).",
       "photo": "/images/designers/miriam-mirri.jpg"
+    },
+    {
+      "name": "Mist-o",
+      "slug": "mist-o",
+      "sortKey": "Mist-o",
+      "tags": [
+        "mist-o"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Tomoko Mizu",
+      "slug": "tomoko-mizu",
+      "sortKey": "Mizu",
+      "tags": [
+        "tomoko-mizu"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "Bea Mombaers",
@@ -1877,6 +2478,21 @@
       "bio": "Designer français né en 1943 à Neuilly-sur-Seine et mort en 2014 à Montreuil, Pascal Mourgue se forme à l'École Boulle puis à l'École nationale supérieure des arts décoratifs de Paris. Frère cadet du designer Olivier Mourgue, il se revendique autant artiste que designer. En 1985, sa chaise Lune d'argent, éditée par Fermob, structure en fil et tôle d'acier, lui vaut le premier prix du concours de la Fondation Cartier ; elle entre dans les collections du Centre Pompidou en 1997. Il poursuit avec Fermob une série de sièges d'extérieur en acier laqué, dont les lignes Dune et Plein Air. Pour Cinna, il dessine en 1994 le fauteuil Câlin. Lauréat du Grand Prix national de la création industrielle en 1996, il reçoit en 1998 le Prix du Nombre d'or du mobilier contemporain."
     },
     {
+      "name": "Jonathan Muecke",
+      "slug": "jonathan-muecke",
+      "sortKey": "Muecke",
+      "tags": [
+        "jonathan-muecke"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Hvidt & Mølgaard",
       "slug": "hvidt-molgaard",
       "sortKey": "Mølgaard",
@@ -1906,6 +2522,21 @@
       ],
       "bio": "Pascale Naessens (née le 4 juin 1969 à Eeklo) est une autrice culinaire et céramiste belge, connue en Flandre pour son approche de l'alimentation « pure » et saine. Après des études de sciences économiques, elle mène une carrière de mannequin à l'international, puis travaille comme présentatrice à la télévision flamande (VTM) de 1992 à 2006. Son premier livre de cuisine paraît en 2010 ; elle en a depuis signé une quinzaine, dont plusieurs traduits en français, anglais, allemand et chinois. Sa rencontre avec la Tunisienne Sabiha éveille sa passion pour la céramique, qu'elle approfondit par des cours d'émaillage et de cuisson. Elle conçoit dans son atelier une vaisselle qu'elle présente à Serax : de cette collaboration naît la collection « Pure » (2012), prolongée par la ligne « Verde Lanza », inspirée de Lanzarote où elle séjourne régulièrement.",
       "photo": "/images/designers/pascale-naessens.jpg"
+    },
+    {
+      "name": "Studio Naessi",
+      "slug": "studio-naessi",
+      "sortKey": "Naessi",
+      "tags": [
+        "studio-naessi"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "George Nelson",
@@ -1939,6 +2570,21 @@
       ],
       "bio": "Nendo est le studio de design fondé en 2002 à Tokyo par Oki Sato, architecte et designer japonais né à Toronto en 1977. Diplômé d'un master d'architecture de l'université Waseda, il ouvre un second bureau à Milan en 2005. Le nom « nendo » signifie « pâte à modeler » (argile) en japonais, image de souplesse et de malléabilité. Le travail du studio se distingue par un minimalisme épuré, nourri d'influences japonaises et scandinaves, et par le goût du petit détail qui crée un effet de surprise. Pour Alessi, Nendo a conçu en 2024 la collection Toru d'appareils électroménagers en acier inoxydable, dont un élément tubulaire noir fait tour à tour office de bec ou de poignée. Oki Sato a reçu le Good Design Award et a été désigné « Designer of the Year » par le magazine Wallpaper* en 2012.",
       "photo": "/images/designers/nendo.jpg"
+    },
+    {
+      "name": "Marc Newson",
+      "slug": "marc-newson",
+      "sortKey": "Newson",
+      "tags": [
+        "marc-newson"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "Luca Nichetto",
@@ -1989,6 +2635,51 @@
       "bio": "Fondé en 2008 à Copenhague par les architectes Jonas Bjerre-Poulsen et Kasper Rønn, Norm Architects est un studio danois actif en architecture, design d'intérieur, mobilier, objets et photographie. Sa démarche, qu'il qualifie de « soft minimalism », privilégie les matériaux naturels, la lumière et de justes proportions, dans un dialogue entre simplicité nordique et sensibilité japonaise. Le studio signe des pièces pour plusieurs éditeurs scandinaves, dont &Tradition : sa lampe Milk, dont le globe en verre opalin soufflé bouche repose sur trois pieds en bois massif, en illustre l'esthétique épurée. Norm Architects collabore aussi de longue date avec la marque danoise Menu, aujourd'hui intégrée à Audo Copenhagen, pour qui le studio a notamment conçu mobilier, intérieurs (dont la maison-hôtel The Audo) et accessoires.",
       "photo": "/images/designers/norm-architects.jpg",
       "sortKey": "Norm"
+    },
+    {
+      "name": "Jean Nouvel",
+      "slug": "jean-nouvel",
+      "sortKey": "Nouvel",
+      "tags": [
+        "jean-nouvel"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Lina Obregón",
+      "slug": "lina-obregon",
+      "sortKey": "Obregón",
+      "tags": [
+        "lina-obregon"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Chiara Onida",
+      "slug": "chiara-onida",
+      "sortKey": "Onida",
+      "tags": [
+        "chiara-onida"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "Marijn Oomen",
@@ -2089,6 +2780,36 @@
       "bio": "Pagnon & Pelhaître est un duo de designers français formé par Patrick Pagnon et Claude Pelhaître, diplômés de l'École nationale supérieure des Arts décoratifs (ENSAD) de Paris en 1977. Ils participent à la création de la section mobilier de l'ENSAD en 1978, puis fondent leur agence parisienne, Pagnon & Pelhaître Design, en 1979, en orientant leur travail vers le mobilier et l'architecture intérieure. Depuis 2005, ils enseignent à l'ENSAD. Leur écriture privilégie la rigueur, les lignes claires et des formes simples pensées pour dialoguer dans l'espace. Le duo a notamment travaillé pour Cinna, signant First (1983), Straty (1985), Ipso Facto (1999) ou Cineline (2004), ainsi que pour Fermob, pour qui il conçoit la collection d'extérieur Bellevie (banquettes, fauteuils, tables)."
     },
     {
+      "name": "Daniele Dalla Pellegrina",
+      "slug": "daniele-dalla-pellegrina",
+      "sortKey": "Pellegrina",
+      "tags": [
+        "daniele-dalla-pellegrina"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Anna Perugini",
+      "slug": "anna-perugini",
+      "sortKey": "Perugini",
+      "tags": [
+        "anna-perugini"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Annebet Philips",
       "slug": "annebet-philips",
       "sortKey": "Philips",
@@ -2169,22 +2890,6 @@
       "featured": true
     },
     {
-      "name": "Jonas Van Put",
-      "slug": "jonas-van-put",
-      "sortKey": "Van Put Jonas",
-      "tags": [
-        "jonas-van-put"
-      ],
-      "brands": [
-        "Serax"
-      ],
-      "brandHrefs": [
-        "/collections/serax"
-      ],
-      "bio": "",
-      "photo": "/images/designers/jonas-van-put.jpg"
-    },
-    {
       "name": "Claudia Raimondo",
       "slug": "claudia-raimondo",
       "sortKey": "Raimondo",
@@ -2199,6 +2904,36 @@
       ],
       "bio": "Architecte de formation et docteure en design industriel, Claudia Raimondo vit et travaille à Milan. Sa pratique est centrée sur la sphère CMF — couleur, matériaux et finitions (colour, materials and finishes) —, appliquée aux produits comme aux contextes : identité de marque, image d'entreprise et points de vente, notamment pour des maisons telles que Rolex et Tudor. Pour Alessi, elle a signé la collection Joy, des objets de table en acier inoxydable 18/10 à la surface facettée : coupes centrales, paniers ronds et plateaux. Son approche associe rigueur d'architecte et exploration des matières, des teintes et des traitements de surface au service d'objets domestiques.",
       "photo": "/images/designers/claudia-raimondo.jpg"
+    },
+    {
+      "name": "Julien Renault",
+      "slug": "julien-renault",
+      "sortKey": "Renault",
+      "tags": [
+        "julien-renault"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Bruno Rey",
+      "slug": "bruno-rey",
+      "sortKey": "Rey",
+      "tags": [
+        "bruno-rey"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
     },
     {
       "name": "Gerrit Rietveld",
@@ -2245,6 +2980,21 @@
       ],
       "bio": "Architecte et designer italien (Milan, 1931 — 1997), Aldo Rossi est l'une des figures majeures du courant postmoderne. Formé à l'École polytechnique de Milan, il s'impose d'abord par sa réflexion théorique sur la ville et l'architecture, puis par des œuvres bâties comme le cimetière San Cataldo de Modène. En 1990, il devient le premier Italien lauréat du prix Pritzker. Son langage repose sur des formes primaires, la géométrie et une économie de moyens, qu'il transpose à l'objet à partir des années 1980 dans sa collaboration avec Alessi : ses cafetières et bouilloires se lisent comme de petites architectures de table. Parmi elles, la cafetière espresso La Cupola, coiffée d'une coupole, est devenue une icône du design italien.",
       "photo": "/images/designers/aldo-rossi.jpg"
+    },
+    {
+      "name": "Margherita Rui",
+      "slug": "margherita-rui",
+      "sortKey": "Rui",
+      "tags": [
+        "margherita-rui"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "Alejandro Ruiz",
@@ -2311,6 +3061,21 @@
       "photo": "/images/designers/richard-sapper.jpg"
     },
     {
+      "name": "F. Mastropaolo e B. Scarfati",
+      "slug": "f-mastropaolo-e-b-scarfati",
+      "sortKey": "Scarfati",
+      "tags": [
+        "f-mastropaolo-e-b-scarfati"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Nathalie Schellekens",
       "slug": "nathalie-schellekens",
       "sortKey": "Schellekens",
@@ -2343,6 +3108,21 @@
       "photo": "/images/designers/claudia-schoemig.jpg"
     },
     {
+      "name": "Stefan Scholten",
+      "slug": "stefan-scholten",
+      "sortKey": "Scholten",
+      "tags": [
+        "stefan-scholten"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Antonino Sciortino",
       "slug": "antonino-sciortino",
       "sortKey": "Sciortino",
@@ -2373,6 +3153,21 @@
       ],
       "bio": "Née à Paris en 1968, fille du dessinateur Jean-Jacques Sempé et de la peintre danoise Mette Ivers, Inga Sempé est designer. Diplômée de l'ENSCI – Les Ateliers en 1993, elle séjourne à la Villa Médicis à Rome (2000-2001) avant d'ouvrir son studio parisien. Son travail porte sur l'objet domestique et sa production industrielle : un dessin sobre, attentif aux matières et aux usages. Elle conçoit mobilier, luminaires, objets et textiles pour des maisons françaises, italiennes et scandinaves, parmi lesquelles Alessi, Ligne Roset, Luceplan, HAY, Magis et Wästberg. Pour Alessi, elle signe la ménagère Collo-alto (2015), prolongement de sa cuillère à risotto IS01 (2012), au long col effilé caractéristique. On lui doit aussi la suspension Plissé (Luceplan, 2007) et le canapé Ruché (Ligne Roset, 2010). Elle a reçu le Grand Prix de la création de la Ville de Paris (2003) et un Red Dot Design Award (2007).",
       "photo": "/images/designers/inga-sempe.jpg"
+    },
+    {
+      "name": "Muller Van Severen",
+      "slug": "muller-van-severen",
+      "sortKey": "Severen",
+      "tags": [
+        "muller-van-severen"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
     },
     {
       "name": "Bela Silva",
@@ -2421,6 +3216,36 @@
       ],
       "bio": "Studio Simple est un studio de design belge fondé en 2007 par Ann Vereecken et Jeroen Worst, établi à Gand. À l'origine concepteurs d'aménagements intérieurs pour de nombreux clients, ils façonnaient à la main des objets complémentaires pour chacun de leurs projets. Certaines de ces pièces rejoignent Serax en 2013, donnant naissance à une collection d'accessoires et de luminaires développée sous le nom Studio Simple. Ann se concentre sur l'esthétique, tandis que Jeroen prend en charge les aspects pratiques et techniques, en privilégiant les ressources et la production locales. Leur démarche revendique la simplicité, la pérennité et une conscience de l'empreinte du design. Pour Serax, ils signent notamment les séries Dunes (assiettes en bois tourné), Daysign (accessoires de cuisine et de table) et Ceremony (plateaux).",
       "photo": "/images/designers/studio-simple.jpg"
+    },
+    {
+      "name": "Marco Sironi",
+      "slug": "marco-sironi",
+      "sortKey": "Sironi",
+      "tags": [
+        "marco-sironi"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
+      "name": "Brian Sironi",
+      "slug": "brian-sironi",
+      "sortKey": "Sironi",
+      "tags": [
+        "brian-sironi"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     },
     {
       "name": "Frédéric Sofia",
@@ -2540,6 +3365,21 @@
       "bio": ""
     },
     {
+      "name": "Studiopepe",
+      "slug": "studiopepe",
+      "sortKey": "Studiopepe",
+      "tags": [
+        "studiopepe"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
+    },
+    {
       "name": "WAWW La Table",
       "slug": "waww-la-table",
       "sortKey": "Table",
@@ -2574,6 +3414,21 @@
       "photo": "/images/designers/keiji-takeuchi.jpg"
     },
     {
+      "name": "Jonas Trampedach",
+      "slug": "jonas-trampedach",
+      "sortKey": "Trampedach",
+      "tags": [
+        "jonas-trampedach"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Norman Trapman",
       "slug": "norman-trapman",
       "sortKey": "Trapman",
@@ -2588,6 +3443,21 @@
       ],
       "bio": "Norman Trapman (né en 1951 à Amsterdam) est un céramiste et designer néerlandais. Diplômé en 1974 de l'Académie royale d'art et de design (Koninklijke Academie voor Kunst en Vormgeving) à Bois-le-Duc, il enseigne à l'académie St. Joost (Bois-le-Duc et Breda). En 1994, il effectue une résidence au Centre européen de la céramique (EKWC) et en devient ensuite membre du conseil. Surnommé aux Pays-Bas le « gourou du vase », il privilégie une démarche où la matière et l'outil guident la forme : ses pièces sont notamment façonnées à l'aide d'une presse à boudin des années 1960 conçue à l'origine pour la brique. Son vase Coral, en porcelaine émaillée évoquant les récifs coralliens et la tradition des vases à tulipes de Delft, est l'une des pièces phares de la collection Pols Potten. Ses œuvres ont été exposées au Frans Hals Museum de Haarlem et au Stedelijk Museum d'Amsterdam.",
       "photo": "/images/designers/norman-trapman.jpg"
+    },
+    {
+      "name": "John Tree",
+      "slug": "john-tree",
+      "sortKey": "Tree",
+      "tags": [
+        "john-tree"
+      ],
+      "brands": [
+        "HAY"
+      ],
+      "brandHrefs": [
+        "/collections/hay"
+      ],
+      "bio": ""
     },
     {
       "name": "Mario Trimarchi",
@@ -2654,6 +3524,21 @@
       ],
       "bio": "Nynke Tynagel (née en 1977) est une graphiste, designer textile et de produits néerlandaise. Elle étudie les arts graphiques à la Design Academy Eindhoven, dont elle sort diplômée en 2000. La même année, elle cofonde avec Job Smeets le collectif Studio Job, dont elle devient copropriétaire et l'autrice du langage graphique pendant plus de vingt ans. En 2020, elle quitte le studio pour fonder sa propre structure éponyme. Son vocabulaire, narratif, mêle imagerie héraldique et registre populaire, décliné en textile, céramique, illustration ou impression. Ses œuvres figurent dans les collections du MoMA, du Stedelijk Museum d'Amsterdam, du Louisiana Museum, du Centraal Museum et du TextielMuseum. Sous son nom, elle collabore notamment avec Qeeboo, Fatboy et byBorre.",
       "photo": "/images/designers/nynke-tynagel.jpg"
+    },
+    {
+      "name": "Paolo Ulian",
+      "slug": "paolo-ulian",
+      "sortKey": "Ulian",
+      "tags": [
+        "paolo-ulian"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "Ben van Berkel / UNStudio",
@@ -2769,6 +3654,22 @@
       "featured": true
     },
     {
+      "name": "Jonas Van Put",
+      "slug": "jonas-van-put",
+      "sortKey": "Van Put Jonas",
+      "tags": [
+        "jonas-van-put"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": "",
+      "photo": "/images/designers/jonas-van-put.jpg"
+    },
+    {
       "name": "Antoine Vandewoude",
       "slug": "antoine-vandewoude",
       "sortKey": "Vandewoude",
@@ -2848,6 +3749,21 @@
       "photo": "/images/designers/roderick-vos.jpg"
     },
     {
+      "name": "Renate Vos",
+      "slug": "renate-vos",
+      "sortKey": "Vos",
+      "tags": [
+        "renate-vos"
+      ],
+      "brands": [
+        "Serax"
+      ],
+      "brandHrefs": [
+        "/collections/serax"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Marcel Wanders",
       "slug": "marcel-wanders",
       "sortKey": "Wanders",
@@ -2895,6 +3811,21 @@
       "bio": "Né en 1974, Hee Welling est un designer danois actif dans le mobilier, l'aménagement intérieur, le luminaire et le design industriel. Fils d'ébéniste, il s'intéresse tôt aux techniques de production et aux matériaux. Il étudie à l'Université d'art et de design d'Helsinki, puis obtient un master en design de mobilier à l'Académie royale danoise des beaux-arts. En 2003, il fonde son studio à Copenhague. Pour l'éditeur danois HAY, il conçoit la collection Hee (2004), en acier laqué empilable, puis la série About A Chair (AAC) en 2010. Il a reçu le Bo Bedre Award (Danemark) et un Good Design Award (États-Unis), et a été nominé au titre de designer danois de l'année en 2013 et 2014."
     },
     {
+      "name": "Köbi Wiesendanger",
+      "slug": "kobi-wiesendanger",
+      "sortKey": "Wiesendanger",
+      "tags": [
+        "kobi-wiesendanger"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Sylvain Willenz",
       "slug": "sylvain-willenz",
       "sortKey": "Willenz",
@@ -2911,6 +3842,21 @@
       ],
       "bio": "Né à Bruxelles en 1978, Sylvain Willenz suit un master en Design Products au Royal College of Art de Londres, dont il sort diplômé en 2003. Il fonde son studio à Bruxelles en 2004 et y développe un travail de mobilier, de luminaires et d'objets pour une clientèle internationale, avec une approche graphique attentive aux procédés de fabrication. Sa lampe Torch Light, éditée par Established & Sons en 2008, contribue à le faire connaître et lui vaut, l'année suivante, le titre de Designer belge de l'année 2009. Il signe par la suite la série de tables Rebar pour HAY et la collection de sièges Curve pour Serax (2020). Son travail figure dans plusieurs collections muséales, dont le Design Museum Brussels. Il intervient par ailleurs en enseignement à l'ECAL et à l'ENSAV La Cambre (jurys et workshops).",
       "photo": "/images/designers/sylvain-willenz.jpg"
+    },
+    {
+      "name": "Theo Williams",
+      "slug": "theo-williams",
+      "sortKey": "Williams",
+      "tags": [
+        "theo-williams"
+      ],
+      "brands": [
+        "Alessi"
+      ],
+      "brandHrefs": [
+        "/collections/alessi"
+      ],
+      "bio": ""
     },
     {
       "name": "TUDelft - Titus Wybenga",
@@ -2978,6 +3924,23 @@
       "photo": "/images/designers/nika-zupanc.jpg"
     },
     {
+      "name": "Clara von Zweigbergk",
+      "slug": "clara-von-zweigbergk",
+      "sortKey": "Zweigbergk",
+      "tags": [
+        "clara-von-zweigbergk"
+      ],
+      "brands": [
+        "HAY",
+        "Louis Poulsen"
+      ],
+      "brandHrefs": [
+        "/collections/hay",
+        "/produits.html?marque=Louis Poulsen"
+      ],
+      "bio": ""
+    },
+    {
       "name": "Teun Zwets",
       "slug": "teun-zwets",
       "sortKey": "Zwets",
@@ -2994,6 +3957,21 @@
       ],
       "bio": "Teun Zwets (né en 1992) est un designer néerlandais diplômé en 2020 de la Design Academy Eindhoven, où son projet de fin d'études, Teunland, lui vaut le Kazerne Design Award. Depuis son studio installé à Eindhoven, il développe une pratique fondée sur le réemploi de matériaux mis au rebut, qu'il assemble sans plan préétabli, au gré des matières et des impulsions de l'atelier. Son travail se reconnaît à ses couleurs franches, ses surfaces brutes recouvertes de laques épaisses et brillantes, et ses formes qui détournent des objets familiers. À la frontière du design et de l'art, il a été montré notamment à la Dutch Design Week, chez Rossana Orlandi et au Salone del Mobile de Milan. Il a collaboré avec HKliving, Pols Potten et Lensvelt, ainsi qu'avec Piet Hein Eek et G-Star.",
       "photo": "/images/designers/teun-zwets.jpg"
+    },
+    {
+      "name": "Peter Šipoš",
+      "slug": "peter-sipos",
+      "sortKey": "Šipoš",
+      "tags": [
+        "peter-sipos"
+      ],
+      "brands": [
+        "Ichendorf Milano"
+      ],
+      "brandHrefs": [
+        "/produits.html?marque=Ichendorf Milano"
+      ],
+      "bio": ""
     }
   ]
 }
