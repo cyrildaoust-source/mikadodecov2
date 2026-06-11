@@ -43,13 +43,17 @@
 
   <main class="page wrap">
     <div data-breadcrumb></div>
-    <div data-promo-slot></div>
     <div data-pdp>
       <div class="pdp"><div class="pcard__skel" style="aspect-ratio:1/1"></div><div></div></div>
     </div>
 
+    <section class="section" data-complementary-wrap style="display:none">
+      <h2 class="catalogue-head serif">Complétez avec</h2>
+      <div class="pgrid" data-complementary></div>
+    </section>
+
     <section class="section" data-related-wrap style="display:none">
-      <h2 class="catalogue-head serif">Dans le même esprit</h2>
+      <h2 class="catalogue-head serif">Vous aimerez aussi</h2>
       <div class="pgrid" data-related></div>
     </section>
   </main>
@@ -57,7 +61,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, isPromoEteActive, promoBandeauHTML, breadcrumbHTML, loadBrandHandles, PROMO_ETE_2026 } from "/shared.js";
+    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, breadcrumbHTML, loadBrandHandles } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: false });
 
     const params = new URLSearchParams(location.search);
@@ -146,13 +150,6 @@
       // ?from=<type:valeur> par productCard). Repli neutre si from absent/inconnu
       // — on n'invente jamais la marque.
       buildContextualBreadcrumb(p, brandMap);
-
-      // Promo bandeau on PDPs for products tagged as eligible to the BXGY
-      // discount (89 sieges). Auto-hides outside the active window.
-      const promoSlot = document.querySelector("[data-promo-slot]");
-      if (promoSlot && isPromoEteActive() && Array.isArray(p.tags) && p.tags.includes(PROMO_ETE_2026.tagSiege)) {
-        promoSlot.innerHTML = promoBandeauHTML("pdp");
-      }
 
       const imgs = (p.images && p.images.length ? p.images : [p.image, p.image2]).filter(Boolean);
       const metaRows = [
@@ -418,18 +415,22 @@
         }, pickQty);
       });
 
-      // related (same category) — best-effort, fetched separately so the
-      // PDP renders even if the product list is unavailable or capped.
-      fetchProducts().then((all) => {
-        const related = all.filter((x) => x.category === p.category && x.id !== p.id && x.image).slice(0, 4);
-        if (related.length) {
-          document.querySelector("[data-related-wrap]").style.display = "";
-          document.querySelector("[data-related]").innerHTML = related.map(productCard).join("");
-        }
-      }).catch((e) => console.warn("[pdp] related unavailable:", e.message));
+      // Recommandations produit — pilotées par les métafields Search & Discovery
+      // de Shopify (complementary_products / related_products), lues dynamiquement
+      // via /api/product/:handle. RIEN n'est hardcodé : les relations vivent côté
+      // Shopify et s'enrichissent en continu. Chaque bloc reste masqué si sa liste
+      // est vide. productCard() produit des liens /produit.html?handle= (DA).
+      const renderRecos = (items, wrapSel, gridSel) => {
+        const list = Array.isArray(items) ? items.filter((x) => x && x.image) : [];
+        if (!list.length) return;
+        document.querySelector(wrapSel).style.display = "";
+        document.querySelector(gridSel).innerHTML = list.map(productCard).join("");
+      };
+      renderRecos(p.complementary, "[data-complementary-wrap]", "[data-complementary]");
+      renderRecos(p.related, "[data-related-wrap]", "[data-related]");
 
-      // Inject promo badges (both on the main PDP for non-default variants via
-      // probePromo above, and on the related cards via the shared map).
+      // Inject promo badges on the main PDP (non-default variants via probePromo
+      // above) and on the reco cards via the shared generic-discount map.
       fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
     }).catch((e) => { host.innerHTML = `<p class="plp-empty">La pièce se charge bientôt.</p>`; console.warn(e); });
   </script>

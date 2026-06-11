@@ -127,8 +127,8 @@
         } else if (lineDiscount > 0) {
           // Detect BXGY-style "free units": discount expressed as a whole
           // number of unit prices. Only shown when qty ≥ 4 (where the
-          // valorisation makes sense, i.e. the rule "achetez 3, le 4ème
-          // offert"). Floors to 0 if the discount isn't a clean multiple.
+          // valorisation makes sense, i.e. the rule "buy 3, get one
+          // free"). Floors to 0 if the discount isn't a clean multiple.
           const unit  = qty > 0 ? lineSubtotal / qty : 0;
           const freeN = (qty >= 4 && unit > 0) ? Math.floor(lineDiscount / unit) : 0;
           const freeMention = freeN >= 1
@@ -230,11 +230,9 @@
         etaEl.hidden = false;
       }
 
-      // NOTE: per the promo brief (docs/promo-ete-2026/brief_frontend.md
-      // §4) we don't nudge the cart toward a 4th chair. A 3-chair order is
-      // higher margin and we don't want to actively push for the free 4th.
-      // Shopify renders its own "réduction appliquée" line at checkout when
-      // the BXGY threshold is crossed — that's enough.
+      // NOTE: we deliberately don't nudge the cart toward crossing a BXGY
+      // "buy N, get one free" threshold — Shopify renders its own "réduction
+      // appliquée" line at checkout when a threshold is crossed, which is enough.
     }
 
     // Debounced preview fetch: asks Shopify for the *real* totals + automatic
