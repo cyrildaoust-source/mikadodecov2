@@ -433,7 +433,7 @@ function mapProduct(node) {
 // only the fields a card renders (image resized to card width, price range,
 // first-variant id for add-to-cart, availability). The relations themselves
 // live in Shopify — nothing here is hardcoded.
-function mapRecoRef(n) {
+function mapProductRef(n) {
   if (!n) return null;
   const v = n.variants?.nodes?.[0];
   const tags = n.tags || [];
@@ -945,7 +945,7 @@ async function getProductByHandle(handle) {
     // avec »). Brouillons/dépubliés absents (la Storefront API ne renvoie que les
     // produits actifs — c'est voulu).
     const seen = new Set([node.id]);
-    const toCards = (mf) => (mf?.references?.nodes || []).map(mapRecoRef)
+    const toCards = (mf) => (mf?.references?.nodes || []).map(mapProductRef)
       .filter(r => r && r.image && !seen.has(r.id) && (seen.add(r.id), true));
     product.complementary = toCards(node.complementary);
     product.related       = toCards(node.related);
