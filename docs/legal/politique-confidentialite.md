@@ -92,7 +92,7 @@ Conformément à l'article 13.2.e) du RGPD : les données demandées dans le for
 
 ## 8. Cookies
 
-L'utilisation des cookies est décrite dans notre [Politique cookies](politique-cookies.md). À ce jour, le site vitrine n'utilise **aucun cookie de mesure d'audience ni de publicité**.
+L'utilisation des cookies est décrite dans notre [Politique cookies](politique-cookies.md). À ce jour, le site n'utilise **aucun cookie de mesure d'audience ni de publicité** ; seuls des cookies et stockages strictement nécessaires (panier, paiement) sont utilisés.
 
 ## 9. Sécurité
 

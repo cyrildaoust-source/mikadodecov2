@@ -25,8 +25,9 @@ Les présentes conditions générales sont applicables entre :
 **MIKADO M-O-A SRL**
 BCE n° 0839.015.455 — TVA BE 0839.015.455
 Siège : Rue du Doyenné 75 — 1180 Uccle (Bruxelles)
-E-mail : shop@mikadodeco.be — Tél. : +32 (0)493 83 79 83
-www.mikadodeco.be — Administrateur : Cyril D'Aoust
+E-mail : shop@mikadodeco.be
+Tél. : +32 (0)493 83 79 83
+www.mikadodeco.be — Administrateur : Cyril d'Aoust
 
 et son client consommateur, sauf s'il y est expressément dérogé par écrit.
 

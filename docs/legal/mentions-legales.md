@@ -10,7 +10,7 @@ Le site **www.mikadodeco.be** est édité par :
 Siège social : Rue du Doyenné 75 — 1180 Uccle (Bruxelles), Belgique
 Numéro d'entreprise (BCE) : **0839.015.455**
 Numéro de TVA : **BE 0839.015.455**
-Administrateur / responsable de la publication : **Cyril D'Aoust**
+Administrateur / responsable de la publication : **Cyril d'Aoust**
 
 E-mail : **shop@mikadodeco.be**
 Téléphone : **+32 (0)493 83 79 83**

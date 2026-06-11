@@ -448,9 +448,9 @@ const PAGES = {
     layout: 'simple',
     sources: ['politique-cookies.md'],
     h1: 'Politique cookies',
-    intro: "Le site vitrine ne dépose aucun cookie de traçage, de mesure d'audience ni de publicité.",
+    intro: "Le site mikadodeco.be ne dépose aucun cookie de traçage, de mesure d'audience ni de publicité.",
     title: 'Politique cookies · Mikadodeco',
-    desc: 'Le site vitrine ne dépose aucun cookie de traçage/mesure/publicité. Cadre légal et gestion.',
+    desc: 'Le site mikadodeco.be ne dépose aucun cookie de traçage/mesure/publicité ; seuls des cookies strictement nécessaires sont utilisés. Cadre légal et gestion.',
     updated: `Dernière mise à jour : ${PUBLISH_DATE}`,
   },
 };

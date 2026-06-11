@@ -16,9 +16,9 @@ Un cookie est un petit fichier déposé sur votre appareil lors de la visite d'u
 
 ## Les cookies utilisés sur mikadodeco.be
 
-### Site vitrine (www.mikadodeco.be)
+### Le site mikadodeco.be
 
-Le site vitrine **ne dépose aucun cookie de traçage, de mesure d'audience ou de publicité**. Seuls peuvent être utilisés des éléments **strictement nécessaires** au fonctionnement du service que vous demandez (par exemple la mémorisation de votre panier en cours). Ces cookies relèvent de l'exemption prévue à l'article 129 de la loi du 13 juin 2005 et à l'article 5, §3 de la directive 2002/58/CE : **ils ne requièrent pas votre consentement préalable**, et c'est pourquoi aucun bandeau de consentement n'est affiché.
+Le site **mikadodeco.be ne dépose aucun cookie** de traçage, de mesure d'audience ou de publicité. Pour le fonctionnement de la boutique, votre **panier en cours** est conservé dans le **stockage local de votre navigateur** (*localStorage*) : c'est un élément **strictement nécessaire** au service que vous demandez. Il relève de l'exemption prévue à l'article 129 de la loi du 13 juin 2005 et à l'article 5, §3 de la directive 2002/58/CE : **aucun consentement préalable n'est requis**, et c'est pourquoi aucun bandeau de consentement n'est affiché.
 
 ### Tunnel de paiement (Shopify)
 
