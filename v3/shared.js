@@ -551,10 +551,12 @@ function footerHTML() {
         </ul></div>
       </div>
       <div class="footer__bottom">
-        <nav>
-          <a href="/contact.html">Conditions</a>
-          <a href="/contact.html">Confidentialité</a>
-          <span>&copy; 2026 Mikadodeco</span>
+        <nav aria-label="Liens légaux">
+          <a href="/mentions-legales.html">Mentions légales</a>
+          <a href="/conditions-generales-de-vente.html">Conditions générales de vente</a>
+          <a href="/politique-et-vie-privee.html">Confidentialité</a>
+          <a href="/politique-cookies.html">Cookies</a>
+          <span>&copy; 2026 Mikado M-O-A SRL · TVA BE 0839.015.455</span>
         </nav>
         <div class="pay"><span>Visa</span><span>Mastercard</span><span>Bancontact</span><span>PayPal</span></div>
       </div>

@@ -9,7 +9,8 @@
     "import:shopify": "node scripts/import-to-shopify.js",
     "import:shopify:dry": "node scripts/import-to-shopify.js --dry-run",
     "images": "node scripts/optimize-images.js",
-    "journal": "node scripts/build-journal.mjs"
+    "journal": "node scripts/build-journal.mjs",
+    "build:legal": "node scripts/build-legal.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",

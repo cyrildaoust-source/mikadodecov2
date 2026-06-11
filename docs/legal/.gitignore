@@ -1,0 +1,6 @@
+# Documents internes / brouillons de travail — ne JAMAIS versionner ni publier.
+# Seules les 5 sources .md servant de base à `npm run build:legal` sont suivies.
+00-NOTES-avocate-et-cyril.md
+PROMPT-codeur-pages-legales.md
+*.docx
+*.bak-*
