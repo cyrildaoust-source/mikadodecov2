@@ -515,6 +515,7 @@ function footerHTML() {
           <li><a href="tel:+32493837983">+32 (0)493 83 79 83</a></li>
           <li><a href="/contact.html">Nous écrire</a></li>
           <li><a href="https://maps.google.com/?q=75+Rue+du+Doyenné+1180+Uccle" target="_blank" rel="noopener">75 Rue du Doyenné, Uccle</a></li>
+          <li><a href="https://maps.app.goo.gl/NE71nd6NytFjot6K6" target="_blank" rel="noopener">★ Voir nos avis Google</a></li>
         </ul></div>
       </div>
       <div class="footer__bottom">

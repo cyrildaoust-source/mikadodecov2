@@ -300,6 +300,13 @@ ul { list-style: none; }
    (--accent-soft) keeps a whisper of the royal-blue signature, readable on ink. */
 .stat__suf { font-size: .42em; color: var(--accent-soft); letter-spacing: .02em; }
 .stat__label { margin-top: 14px; font-size: var(--fs-small); color: rgba(248,245,239,.72); max-width: 22ch; margin-inline: auto; }
+/* — Bloc avis Google cliquable (sur le panneau sombre .stats) — */
+.stat--google { text-decoration: none; color: inherit; display: block; border-radius: 12px; padding: 10px 6px; transition: background .2s ease; }
+.stat--google:hover { background: rgba(248,245,239,.06); }
+.stat--google:focus-visible { outline: 2px solid var(--on-dark); outline-offset: 2px; }
+.stat__stars { color: #f5c451; letter-spacing: 3px; font-size: 15px; margin-top: 10px; line-height: 1; }
+.stat__label .g-logo { width: 15px; height: 15px; vertical-align: -3px; margin-right: 5px; }
+.stat__arrow { opacity: .55; }
 @media (max-width: 920px) {
   .stats .wrap { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
   .stat__label { max-width: 26ch; }
