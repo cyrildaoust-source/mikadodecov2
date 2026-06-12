@@ -1,13 +1,21 @@
 /* Home page · mounts the shared shell, then fills the product rows. */
-import { initShell, fetchProducts, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml, buildShaReady, versionedImg } from "/shared.js";
+import { initShell, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml, buildShaReady, versionedImg } from "/shared.js";
 
 initShell({ active: "", transparentNav: true });
 
 async function loadRows() {
   const hosts = [...document.querySelectorAll("[data-products]")];
   if (!hosts.length) return;
+  // On n'affiche que la somme des data-count (ici 6). On charge UNE page paginée
+  // dimensionnée à ce besoin + marge x4 (pour absorber le filtre p.image et un
+  // éventuel produit sans visuel), au lieu du catalogue entier (1,76 Mo).
+  const needed = hosts.reduce((n, h) => n + (parseInt(h.dataset.count || "3", 10) || 0), 0);
+  const limit  = Math.max(12, needed * 4);
   try {
-    const all = (await fetchProducts()).filter((p) => p.image);
+    const r = await fetch(`/api/products?paginated=1&limit=${limit}`);
+    if (!r.ok) throw new Error("products " + r.status);
+    const data = await r.json();
+    const all = ((data && data.items) || []).filter((p) => p.image);
     if (!all.length) throw new Error("empty feed");
     let cursor = 0;
     for (const host of hosts) {
