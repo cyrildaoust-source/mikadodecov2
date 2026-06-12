@@ -172,9 +172,11 @@ app.get('/produit.html', async (req, res) => {
     const description = ogDesc(`${name}${brand ? ' — ' + brand : ''}. `
       + (designer ? `Dessiné par ${designer}. ` : '')
       + 'Pièce design à voir en boutique à Uccle, livraison en Belgique.');
-    // Première image produit (images[] = full-res CDN Shopify), en absolu, en
-    // ajoutant &width=1200 (les URLs Shopify ont déjà ?v=…). Repli og-default.
-    const raw = (product.images && product.images[0]) || '';
+    // Première image produit NON redimensionnée (firstImageRaw), en absolu, en
+    // ajoutant &width=1200 → JPEG (pas de format=webp : meilleur support og:image
+    // par les scrapers sociaux). images[] est désormais en webp pour la galerie,
+    // donc on ne le réutilise plus ici. Repli og-default.
+    const raw = product.firstImageRaw || '';
     const image = raw ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200' : OG_DEFAULT;
     const url = ORIGIN + '/produit.html?handle=' + encodeURIComponent(handle);
 
@@ -452,8 +454,9 @@ const TYPE_TO_CATEGORY = Object.entries(CATEGORY_MAP).reduce((acc, [cat, types])
 //   2. These URLs already carry a `?v=…` cache-buster, so we must join with
 //      `&` when a query already exists (`?` otherwise), never blindly with `?`.
 // Only cdn.shopify.com URLs are touched; local /images/… assets pass through
-// untouched. The PDP gallery (images[]) and variant images are intentionally
-// left full-res by mapProduct — only `image`/`image2` (the card fields) resize.
+// untouched. The PDP gallery (images[]) + variant images resize to
+// PDP_IMAGE_WIDTH, and the gallery thumbnail strip (thumbs[]) to PDP_THUMB_WIDTH
+// — the most-visited page no longer ships multi-MB originals.
 function shopifyResize(url, width) {
   if (!url || typeof url !== 'string' || !url.includes('cdn.shopify.com')) return url;
   const sep = url.includes('?') ? '&' : '?';
@@ -465,7 +468,19 @@ function shopifyResize(url, width) {
 // image sharpness vs. weight.
 const CARD_IMAGE_WIDTH = 600;
 
-function mapProduct(node) {
+// PDP gallery widths. PDP_IMAGE_WIDTH = the DEFAULT (src) width of the main
+// product image; the front layers a srcset on top (800/1280/2048w) so large
+// retina desktops stay sharp and phones stay light — this 1400px value is just
+// the no-srcset fallback. Gallery images[] AND variant images resize to it (the
+// front's URL matching strips the query, so any width still matches).
+// PDP_THUMB_WIDTH = the 74px thumbnail strip under the main (×~3 for retina).
+const PDP_IMAGE_WIDTH = 1400;
+const PDP_THUMB_WIDTH = 240;
+
+function mapProduct(node, opts = {}) {
+  // `full` adds PDP-only fields (gallery thumbs[]) that list endpoints don't read,
+  // so PLP/home/collection payloads stay lean. firstImageRaw stays ungated (1 url).
+  const full = opts.full === true;
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
   const variant = node.variants.edges[0]?.node;
@@ -523,16 +538,27 @@ function mapProduct(node) {
       const second = imgs.find(u => u !== featured) || imgs[1] || null;
       return second ? shopifyResize(second, CARD_IMAGE_WIDTH) : null;
     })(),
-    // images = full ordered list, used by the PDP gallery — kept FULL-RES.
-    images:      (node.images?.edges || []).map(e => e?.node?.url).filter(Boolean),
-    // variants = all variants with their selected options, used by the PDP variant picker
+    // images = ordered list for the PDP gallery main image — resized webp. Stays
+    // index-parallel to thumbs[] below (same source/order/filter) so the front
+    // maps a clicked thumbnail back to its full-width image by index.
+    images:      (node.images?.edges || []).map(e => shopifyResize(e?.node?.url, PDP_IMAGE_WIDTH)).filter(Boolean),
+    // thumbs[] (gallery strip, ~8 urls/produit) n'est lu que par la PDP → gated
+    // derrière `full` pour ne pas alourdir les réponses liste (PLP/accueil/collections).
+    ...(full ? { thumbs: (node.images?.edges || []).map(e => shopifyResize(e?.node?.url, PDP_THUMB_WIDTH)).filter(Boolean) } : {}),
+    // firstImageRaw = première image NON redimensionnée (1 url, ungated). La route
+    // SSR OG/JSON-LD s'en sert : elle veut un JPEG (scrapers sociaux gèrent mal le
+    // WebP en og:image) à sa propre largeur — découplé de images[] (webp galerie).
+    firstImageRaw: (node.images?.edges?.[0]?.node?.url) || '',
+    // variants = all variants with their selected options, used by the PDP variant picker.
+    // Variant image resized to PDP_IMAGE_WIDTH — SAME width as the gallery, so the
+    // front's URL matching (active thumb / variant switch) keeps resolving.
     variants:    (node.variants?.edges || []).map(e => e?.node).filter(Boolean).map(v => ({
       id: v.id,
       title: v.title,
       price: parseFloat(v.price?.amount),
       available: v.availableForSale,
       options: (v.selectedOptions || []).map(o => ({ name: o.name, value: o.value })),
-      image: v.image?.url || null,
+      image: shopifyResize(v.image?.url || null, PDP_IMAGE_WIDTH),
     })),
     badge:       badgeTag,
     available:   node.availableForSale && (variant?.availableForSale ?? true),
@@ -1049,7 +1075,7 @@ async function getProductByHandle(handle) {
     const data = await shopifyFetch(PRODUCT_QUERY, { handle: h });
     const node = data.product;
     if (!node) return null;
-    const product = mapProduct(node);
+    const product = mapProduct(node, { full: true });
     // Recommandations Search & Discovery (métafields list.product_reference)
     // mappées dans la forme de carte du site. Écarte : entrées sans image, la
     // self-référence, et les doublons — y compris un produit listé À LA FOIS en

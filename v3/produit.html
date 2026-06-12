@@ -152,6 +152,21 @@
       buildContextualBreadcrumb(p, brandMap);
 
       const imgs = (p.images && p.images.length ? p.images : [p.image, p.image2]).filter(Boolean);
+      // Thumbnail-strip sources: small-width versions, index-parallel to `imgs`.
+      // Falls back to `imgs` when the API didn't supply thumbs[] (older payload).
+      const thumbSrcs = (p.thumbs && p.thumbs.length ? p.thumbs : imgs);
+      // Responsive-image helpers. shopifyResize URLs carry `width=<n>`; swapping
+      // that number yields any size from the same base. Because thumbnails match
+      // on the QUERY-STRIPPED base URL, different widths never break the active /
+      // variant highlight. widthVariant rewrites the width; srcsetFor builds a
+      // density ladder for the main image; MAIN_SIZES tells the browser the
+      // displayed width (gallery col ≈ 53% desktop, near-full <=760px single-col).
+      // Non-Shopify/local images get no srcset (returned untouched).
+      const widthVariant = (url, w) => (url && /[?&]width=\d+/.test(url)) ? url.replace(/([?&]width=)\d+/, `$1${w}`) : url;
+      const srcsetFor = (url) => (url && url.includes("cdn.shopify.com") && /[?&]width=\d+/.test(url))
+        ? [800, 1280, 2048].map((w) => `${widthVariant(url, w)} ${w}w`).join(", ") : "";
+      const MAIN_SIZES = "(max-width: 760px) 92vw, 53vw";
+      const VSELECT_THUMB_W = 128; // dropdown variant thumbnail box is 32px (×4 for retina)
       const metaRows = [
         ["Designer", p.designer], ["Année", p.year], ["Matière", p.material],
         ["Dimensions", p.dimensions], ["Délai", p.leadTime],
@@ -182,9 +197,10 @@
       const imageForOption = (axisName, axisValue) => {
         const sel = { ...currentSelection, [axisName]: axisValue };
         const exact = findVariantBy(sel);
-        if (exact?.image) return exact.image;
+        // Dropdown thumbnails render at 32px — serve them small, not the main width.
+        if (exact?.image) return widthVariant(exact.image, VSELECT_THUMB_W);
         const any = variants.find((v) => (v.options || []).some((o) => o.name === axisName && o.value === axisValue));
-        return any?.image || p.image || "";
+        return widthVariant(any?.image || p.image || "", VSELECT_THUMB_W);
       };
 
       host.innerHTML = `
@@ -192,9 +208,9 @@
           <div class="pdp__gallery">
             <div class="pdp__main-wrap">
               <span class="pdp__promo" data-promo hidden></span>
-              <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" alt="${escapeHtml(p.name)}" />
+              <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" srcset="${escapeHtml(srcsetFor(current.image || imgs[0] || ""))}" sizes="${MAIN_SIZES}" alt="${escapeHtml(p.name)}" fetchpriority="high" decoding="async" />
             </div>
-            ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(src)}" alt="" />`).join("")}</div>` : ""}
+            ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((_src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(thumbSrcs[i] || imgs[i])}" alt="" loading="lazy" decoding="async" />`).join("")}</div>` : ""}
           </div>
           <div class="pdp__info">
             <a class="pdp__brand" href="${brandHref}">${escapeHtml(p.brand || "")}</a>
@@ -208,7 +224,7 @@
               <span class="label">${escapeHtml(axisName)}</span>
               <div class="vselect" data-vselect data-option-name="${escapeHtml(axisName)}">
                 <button class="vselect__toggle" type="button" data-vselect-toggle aria-expanded="false" aria-haspopup="listbox">
-                  <img class="vselect__thumb" data-vselect-current-img src="${escapeHtml(imageForOption(axisName, selVal))}" alt="" />
+                  <img class="vselect__thumb" data-vselect-current-img src="${escapeHtml(imageForOption(axisName, selVal))}" alt="" loading="lazy" decoding="async" />
                   <span class="vselect__value" data-vselect-current-label>${escapeHtml(selVal || 'Choisir')}</span>
                   <svg class="vselect__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
                 </button>
@@ -312,8 +328,15 @@
 
       // gallery thumbnails
       thumbs.forEach((t) => t.addEventListener("click", () => {
-        main.src = t.src;
-        syncActiveThumb(t.getAttribute("src"));
+        // Display the FULL-width gallery image (imgs[index]) in the main, not the
+        // small thumbnail's own src — otherwise the main would show a blown-up
+        // low-res thumb. syncActiveThumb matches on the query-stripped base URL,
+        // so the 240px thumb and the 1400px gallery URL still resolve to it.
+        const i = Number(t.dataset.thumb);
+        const full = imgs[i] || t.src;
+        main.src = full;
+        main.srcset = srcsetFor(full);
+        syncActiveThumb(full);
       }));
 
       // Refresh every dropdown's toggle + active option + main image / price
@@ -342,7 +365,7 @@
           });
         });
         closeAllVselects();
-        if (current.image) { main.src = current.image; syncActiveThumb(current.image); }
+        if (current.image) { main.src = current.image; main.srcset = srcsetFor(current.image); syncActiveThumb(current.image); }
         priceEl.textContent = euro(current.price);
         updateStatus();
         probePromo(current.id);
