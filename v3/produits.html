@@ -606,7 +606,13 @@
       const showPop = all.length > 4 && !state.designer && !state.cats.length;
       popSection.style.display = showPop ? "" : "none";
       const pop = showPop ? all.slice().sort((a, b) => popScore(b) - popScore(a)).slice(0, 4) : [];
-      if (showPop) popGrid.innerHTML = pop.map(productCard).join("");
+      if (showPop) {
+        const popKey = pop.map((p) => p.id).join(",");
+        if (popGrid.dataset.key !== popKey) {
+          popGrid.innerHTML = pop.map(productCard).join("");
+          popGrid.dataset.key = popKey;
+        }
+      }
 
       const popIds = new Set(pop.map((p) => p.id));
       // Tri appliqué à TOUT le set filtré (mainList complet) AVANT le slice :
@@ -623,7 +629,14 @@
       const emptyMsg = state.designer
         ? `<p class="plp-empty">Aucun produit pour ce designer pour le moment. <a href="/designers.html" style="color:var(--accent-ink)">Retour aux designers →</a></p>`
         : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
-      grid.innerHTML = pageSlice.length ? pageSlice.map(productCard).join("") : emptyMsg;
+      // Repeinture idempotente : on ne recrée les cartes (donc les <img>) que si
+      // la tranche visible a changé — sinon les chunks progressifs feraient
+      // clignoter des images identiques. Compteur/pagination/applyPromos restent.
+      const gridKey = pageSlice.length ? pageSlice.map((p) => p.id).join(",") : "__empty__";
+      if (grid.dataset.key !== gridKey) {
+        grid.innerHTML = pageSlice.length ? pageSlice.map(productCard).join("") : emptyMsg;
+        grid.dataset.key = gridKey;
+      }
       renderPagination(TOTAL_PAGES);
       // Designer page: the grid title names the créateur ("Les pièces de …").
       // An introuvable slug (name === null) leaves it blank — the hero already
@@ -952,6 +965,7 @@
         // Skeleton dans la grille pendant le walk multi-chunks (le catalogue ≈463
         // se charge en ~5 requêtes serveur, bornées à 100) → feedback de chargement.
         grid.innerHTML = GRID_SKELETON;
+        grid.dataset.key = ""; // invalide la clé idempotente → le 1er render reconstruit
         grid.setAttribute("aria-busy", "true");
 
         let painted = false;
@@ -969,6 +983,7 @@
           titleEl.textContent = "Collection introuvable";
           subEl.textContent = "";
           grid.innerHTML = `<p class="plp-empty">Cette collection n'existe pas ou plus. <a href="/marques.html" style="color:var(--accent-ink)">Voir toutes les marques →</a></p>`;
+          grid.dataset.key = ""; // contenu non-carte → invalide la clé idempotente
           grid.removeAttribute("aria-busy");
           if (paginationEl) { paginationEl.hidden = true; paginationEl.innerHTML = ""; }
           popSection.style.display = "none";
@@ -993,6 +1008,7 @@
           .catch((e) => console.warn("[plp] collections indisponibles:", e.message));
       } catch (e) {
         grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`;
+        grid.dataset.key = ""; // contenu non-carte → invalide la clé idempotente
         grid.removeAttribute("aria-busy");
         console.warn(e);
       }
