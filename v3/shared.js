@@ -493,6 +493,7 @@ function footerHTML() {
           <p>Recevez nos nouveautés, nos coups de cœur et les rendez-vous de la boutique.</p>
           <form class="footer__form" data-newsletter novalidate>
             <input type="email" name="email" placeholder="Votre adresse e-mail" aria-label="E-mail" required />
+            <input type="text" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
             <button class="btn btn--solid btn--block" type="submit">S'inscrire</button>
             <p class="footer__news-status" data-news-status></p>
           </form>
@@ -756,12 +757,14 @@ function bindNewsletter() {
     btn.disabled = true; const label = btn.textContent; btn.textContent = "…";
     try {
       const res = await fetch("/api/newsletter", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
+      if (res.status === 429) throw new Error("rate_limit");
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || "server");
-      form.querySelector("input").style.display = "none"; btn.style.display = "none";
+      input.style.display = "none"; btn.style.display = "none";
       status.textContent = "Merci, vous êtes inscrit·e."; status.className = "footer__news-status is-ok";
     } catch (e2) {
-      status.textContent = "L'inscription a échoué. Réessayez."; status.className = "footer__news-status is-error";
+      status.textContent = e2.message === "rate_limit" ? "Trop de tentatives. Patientez quelques minutes." : "L'inscription a échoué. Réessayez.";
+      status.className = "footer__news-status is-error";
       btn.disabled = false; btn.textContent = label; console.warn(e2);
     }
   });

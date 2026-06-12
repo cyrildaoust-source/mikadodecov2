@@ -68,6 +68,7 @@
 
     <div class="formwrap" data-form-wrap>
       <form class="form" data-contact-form novalidate>
+          <input type="text" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
         <div class="formgrid2">
           <div class="field"><label for="c-name">Nom *</label><input id="c-name" name="name" type="text" required /></div>
           <div class="field"><label for="c-email">E-mail *</label><input id="c-email" name="email" type="email" required /></div>
@@ -135,12 +136,13 @@
       btn.disabled = true; btn.textContent = "Envoi…";
       try {
         const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...f, source: "v3-contact" }) });
+        if (res.status === 429) throw new Error("rate_limit");
         const data = await res.json();
         if (!res.ok || data.error) throw new Error(data.error || "server");
         document.querySelector("[data-form-wrap]").style.display = "none";
         document.querySelector("[data-success]").style.display = "block";
         window.scrollTo({ top: 0, behavior: "smooth" });
-      } catch (e2) { fail("L'envoi a échoué. Réessayez ou écrivez à shop@mikadodeco.be."); btn.disabled = false; btn.textContent = "Envoyer"; console.warn(e2); }
+      } catch (e2) { fail(e2.message === "rate_limit" ? "Trop de tentatives. Patientez quelques minutes avant de réessayer." : "L'envoi a échoué. Réessayez ou écrivez à shop@mikadodeco.be."); btn.disabled = false; btn.textContent = "Envoyer"; console.warn(e2); }
     });
     function fail(msg) { errEl.textContent = msg; errEl.style.display = "block"; }
   </script>
