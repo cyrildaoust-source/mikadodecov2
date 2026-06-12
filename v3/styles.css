@@ -455,6 +455,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .filterbar__right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
 .fselect { font-family: inherit; font-size: var(--fs-small); border: 1px solid var(--line); background: var(--paper); padding: 9px 12px; color: var(--ink); }
 .plp-count { font-size: var(--fs-small); color: var(--muted); }
+.plp-loading { font-style: italic; opacity: .75; } /* libellé « chargement du catalogue… » pendant le walk progressif */
 .pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2vw, 30px) var(--gap); }
 .catalogue-head { font-size: var(--fs-h2); line-height: 1.05; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 2px solid var(--accent); }
 .plp-empty { grid-column: 1 / -1; color: var(--muted); padding: 60px 0; text-align: center; }

@@ -279,6 +279,7 @@
     </div>
     <div class="filterbar__right">
       <span class="plp-count" data-plp-count></span>
+      <span class="plp-count plp-loading" data-plp-loading hidden>chargement du catalogue…</span>
       <select class="fselect" data-filter-brand aria-label="Marque"><option value="">Toutes les marques</option></select>
       <select class="fselect" data-sort aria-label="Trier">
         <option value="pop">Les plus populaires</option>
@@ -427,6 +428,7 @@
     const popGrid = document.querySelector("[data-pop-grid]");
     const popSection = document.querySelector("[data-pop-section]");
     const countEl = document.querySelector("[data-plp-count]");
+    const catalogLoadingEl = document.querySelector("[data-plp-loading]");
     const brandSel = document.querySelector("[data-filter-brand]");
     const sortSel = document.querySelector("[data-sort]");
     const chipsBar = document.querySelector("[data-chips]");
@@ -905,7 +907,10 @@
     // toggle perdu silencieusement).
     let walkGen = 0;
     const GRID_SKELETON = Array.from({ length: 12 }, () => '<div class="pcard"><div class="pcard__skel"></div></div>').join("");
-    async function walkAll() {
+    // onChunk(itemsSoFar, collection) — appelé après CHAQUE page chargée, pour un
+    // rendu progressif (1er paint dès le 1er chunk). _notFound (1re requête sur
+    // collection inconnue) revient AVANT tout onChunk → l'appelant gère.
+    async function walkAll(onChunk) {
       let cursor = null, items = [], collection = null, chunks = 0;
       while (true) {
         let data;
@@ -920,6 +925,7 @@
         if (data && data.collection) collection = data.collection;
         items = items.concat(((data && data.items) || []).filter((p) => p.image));
         chunks += 1;
+        if (typeof onChunk === "function") onChunk(items, collection);   // ← rendu progressif
         const next = (data && data.pageInfo && data.pageInfo.hasNextPage) ? data.pageInfo.endCursor : null;
         if (!next) break;
         cursor = next;
@@ -948,7 +954,15 @@
         grid.innerHTML = GRID_SKELETON;
         grid.setAttribute("aria-busy", "true");
 
-        const res = await walkAll();
+        let painted = false;
+        const res = await walkAll((itemsSoFar, coll) => {
+          if (myGen !== walkGen) return;          // un re-walk a pris le relais
+          if (coll) COLLECTION_META = coll;
+          ALL = itemsSoFar;
+          render();                                // peint la 1re page dès le 1er chunk
+          if (!painted) { grid.removeAttribute("aria-busy"); painted = true; }
+          if (catalogLoadingEl) catalogLoadingEl.hidden = false;
+        });
         if (myGen !== walkGen) return; // un re-walk (catégorie) a pris le relais
 
         if (res._notFound) {
@@ -964,8 +978,9 @@
         }
         if (res.collection) COLLECTION_META = res.collection;
         ALL = res.items;
-        render();              // borne state.page à [1,totalPages] + peint la tranche
+        render();              // rendu final (set complet : compteur/pagination définitifs)
         grid.removeAttribute("aria-busy");
+        if (catalogLoadingEl) catalogLoadingEl.hidden = true;
         writeURL(false);       // normalise l'URL (clamp / retrait de ?page) sans nouvelle entrée
 
         // Background, after the grid is already up — neither blocks first paint:
@@ -990,8 +1005,13 @@
     async function reloadGrid() {
       const myGen = ++walkGen;
       grid.setAttribute("aria-busy", "true");
+      if (catalogLoadingEl) catalogLoadingEl.hidden = false;
       try {
-        const res = await walkAll();
+        const res = await walkAll((itemsSoFar) => {
+          if (myGen !== walkGen) return;
+          ALL = itemsSoFar;
+          render();                                // rendu progressif au changement de catégorie
+        });
         if (myGen !== walkGen) return; // un toggle plus récent a pris le relais
         ALL = (res && res.items) || [];
         render();
@@ -999,7 +1019,7 @@
         if (myGen === walkGen) { ALL = []; render(); } // jamais de grille périmée sous la nouvelle URL
         console.warn("[plp] reloadGrid:", e.message);
       } finally {
-        if (myGen === walkGen) grid.removeAttribute("aria-busy");
+        if (myGen === walkGen) { grid.removeAttribute("aria-busy"); if (catalogLoadingEl) catalogLoadingEl.hidden = true; }
       }
     }
 
