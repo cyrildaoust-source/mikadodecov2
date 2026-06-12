@@ -3,6 +3,8 @@ const express = require('express');
 const cors    = require('cors');
 const path    = require('path');
 const fs      = require('fs');
+const crypto  = require('crypto');                 // natif — vérif HMAC des webhooks Shopify
+const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-memory, best-effort)
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -44,6 +46,11 @@ async function cached(key, fetcher, ttl = 300_000) {
 
 const app  = express();
 const PORT = process.env.PORT || 4000;
+
+// Vercel place 1 proxy devant l'app → la vraie IP client est dans X-Forwarded-For.
+// Sans ça, req.ip = IP du proxy (tous les clients confondus) et express-rate-limit
+// lève une erreur de validation. Indispensable pour le rate-limit ci-dessous.
+app.set('trust proxy', 1);
 
 // The Mikadodeco storefront (v3/) is served at the site root.
 // Old /v3/* links 301-redirect to the clean root path for backward-compat.
@@ -328,7 +335,30 @@ app.get('/sitemap.xml', async (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'v3')));
 app.use(cors({ origin: process.env.BASE_URL || `http://localhost:${PORT}` }));
-app.use(express.json());
+// Capture le corps brut (req.rawBody) pour la vérification HMAC des webhooks
+// Shopify (calculée sur le body brut, pas le JSON parsé). Comportement JSON
+// identique pour tous les autres endpoints.
+app.use(express.json({ verify: (req, _res, buf) => { req.rawBody = buf; } }));
+
+// ─── RATE-LIMIT ANTI-ABUS (in-memory, best-effort par instance serverless) ──
+// CAVEAT serverless : sur Vercel le store est par-instance et remis à zéro à
+// chaque cold start ; plusieurs instances ne partagent pas le compteur. Stoppe
+// le spam naïf (matraquage d'une instance chaude), pas une attaque distribuée.
+// Version distribuée (Vercel KV / Upstash) = évolution ultérieure si besoin.
+const formLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,           // 10 min
+  max: 5,                             // 5 soumissions / IP / fenêtre (contact, newsletter)
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'too_many_requests' },
+});
+const cartLimiter = rateLimit({
+  windowMs: 60 * 1000,                // 1 min
+  max: 30,                            // 30 calculs panier / IP / min (le front debounce déjà)
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'too_many_requests' },
+});
 
 // ─── SHOPIFY: PRODUCTS QUERY ───────────────────────────
 // Metafields must be enabled in Shopify admin → Settings → Custom data → Products
@@ -1113,10 +1143,37 @@ app.get('/api/build', (req, res) => {
   res.json({ sha: raw ? raw.slice(0, 7) : 'dev' });
 });
 
+// ─── AUTH REVALIDATE ───────────────────────────────────
+// Accepte (a) un webhook Shopify signé (HMAC-SHA256 sur le corps brut) OU
+// (b) un token porteur pour les revalidations manuelles. Sinon 401.
+// Fail-closed : si aucun secret n'est configuré, toute requête tombe en 401.
+function verifyShopifyHmac(req) {
+  const secret = process.env.SHOPIFY_WEBHOOK_SECRET;
+  const sent   = req.get('X-Shopify-Hmac-Sha256');
+  if (!secret || !sent || !req.rawBody) return false;
+  const digest = crypto.createHmac('sha256', secret).update(req.rawBody).digest('base64');
+  const a = Buffer.from(digest);
+  const b = Buffer.from(sent);
+  return a.length === b.length && crypto.timingSafeEqual(a, b); // comparaison constante
+}
+function hasValidToken(req) {
+  const token = process.env.REVALIDATE_TOKEN;
+  if (!token) return false;
+  const sent = (req.get('authorization') || '').replace(/^Bearer\s+/i, '') || String(req.query.token || '');
+  if (!sent) return false;
+  const a = Buffer.from(sent);
+  const b = Buffer.from(token);
+  return a.length === b.length && crypto.timingSafeEqual(a, b); // comparaison constante
+}
+
 // ─── API: REVALIDATE CACHE ─────────────────────────────
 // Call this from a Shopify webhook (Products/update, Collections/update)
 // Setup in Shopify admin → Settings → Notifications → Webhooks
+// Auth : HMAC Shopify (webhook) OU Authorization: Bearer <REVALIDATE_TOKEN> (manuel).
 app.post('/api/revalidate', (req, res) => {
+  if (!verifyShopifyHmac(req) && !hasValidToken(req)) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
   delete _cache['products'];
   delete _cache['brands'];
   delete _cache['collections'];
@@ -1254,7 +1311,7 @@ app.get('/api/promos', async (req, res) => {
 // Returns: { subtotal, total, discount, discounts: [{title, amount}], lines: [{variantId, qty, subtotal, total, discount}] }
 // NOTE: every call creates an orphan Shopify cart that auto-expires after
 // ~10 days. Debounce on the client to keep volume sane.
-app.post('/api/cart/preview', async (req, res) => {
+app.post('/api/cart/preview', cartLimiter, async (req, res) => {
   try {
     const items = req.body?.items;
     if (!Array.isArray(items) || items.length === 0) return res.json({ subtotal: 0, total: 0, discount: 0, discounts: [], lines: [] });
@@ -1351,7 +1408,7 @@ app.post('/api/cart/preview', async (req, res) => {
 // ─── API: CREATE CART → SHOPIFY CHECKOUT ───────────────
 // Body: { items: [{ variantId, qty }], customer: { prenom, nom, email, telephone, projet, message } }
 // Returns: { checkoutUrl } — redirect the browser to this URL
-app.post('/api/cart/create', async (req, res) => {
+app.post('/api/cart/create', cartLimiter, async (req, res) => {
   try {
     const { items, customer } = req.body;
 
@@ -1418,8 +1475,12 @@ app.post('/api/cart/create', async (req, res) => {
 // Body: { name, email, telephone?, projet?, message }
 // Validates server-side, logs structured payload, returns 200.
 // Wire up nodemailer / a webhook later — the endpoint contract stays the same.
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', formLimiter, async (req, res) => {
   try {
+    // Honeypot anti-bot : champ masqué qu'un humain ne remplit jamais. Si rempli
+    // → faux succès silencieux (on ne révèle pas le piège, on ne traite rien).
+    if (String(req.body?.hp_field || '').trim()) return res.json({ ok: true });
+
     const { name = '', email = '', telephone = '', projet = '', message = '', source = 'website' } = req.body || {};
 
     const cleanName    = String(name).trim().slice(0, 120);
@@ -1474,8 +1535,10 @@ app.post('/api/contact', async (req, res) => {
 // Subscribes an email to the Shopify customer list (tagged "newsletter")
 // via the storefront's classic customer form handler. No Admin API needed.
 // Body: { email }
-app.post('/api/newsletter', async (req, res) => {
+app.post('/api/newsletter', formLimiter, async (req, res) => {
   try {
+    if (String(req.body?.hp_field || '').trim()) return res.json({ ok: true }); // honeypot anti-bot (faux succès)
+
     const email = String(req.body?.email || '').trim().toLowerCase().slice(0, 200);
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).json({ error: 'email_invalid' });
