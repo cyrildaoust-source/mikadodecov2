@@ -3988,16 +3988,13 @@
         "clara-von-zweigbergk"
       ],
       "brands": [
-        "HAY",
-        "Louis Poulsen"
+        "HAY"
       ],
       "brandHrefs": [
-        "/collections/hay",
-        "/produits.html?marque=Louis Poulsen"
+        "/collections/hay"
       ],
       "bio": "Clara von Zweigbergk est une graphiste et designer suédoise installée à Stockholm. Elle est diplômée de la Beckmans School of Design à Stockholm et a poursuivi sa formation à l'Art Center College of Design de Pasadena, aux États-Unis. Après plusieurs années comme graphiste senior chez Lissoni Associati à Milan, elle ouvre son propre studio à Stockholm en 2006, où elle explore le papier, la couleur et la forme. Pour Louis Poulsen, elle a conçu la série de suspensions colorées Cirque, et elle collabore étroitement avec HAY depuis 2010 pour son identité visuelle et de nombreux produits.",
-      "photo": "/images/designers/clara-von-zweigbergk.jpg",
-      "featured": true
+      "photo": "/images/designers/clara-von-zweigbergk.jpg"
     },
     {
       "name": "Teun Zwets",
