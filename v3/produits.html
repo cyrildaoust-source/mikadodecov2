@@ -265,7 +265,7 @@
     })();
   </script>
 
-  <div class="wrap plp-promo">
+  <div class="wrap plp-promo" data-plp-promo hidden>
     <a class="plp-promo__link" href="/collections/promotions">
       <span class="plp-promo__dot" aria-hidden="true"></span>Promotions
     </a>
@@ -1072,8 +1072,14 @@
 
     // Background promo fetch — re-applies to the current grid (and to every
     // subsequent render via the applyPromos call inside render()).
-    fetchPromos().then((map) => { PROMOS = map; applyPromos(PROMOS); })
-      .catch((e) => console.warn("[v3] promos unavailable:", e.message));
+    fetchPromos().then((map) => {
+      PROMOS = map;
+      applyPromos(PROMOS);
+      // Bouton "Promotions" : visible uniquement s'il existe au moins une promo
+      // active (source de vérité = /api/promos). Sinon il reste masqué (défaut).
+      const promoBox = document.querySelector("[data-plp-promo]");
+      if (promoBox) promoBox.hidden = !(map && Object.keys(map).length > 0);
+    }).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
     // ── Panneau Catégorie (multi-sélection, filtrage serveur) ──────────────
     // N'existe que sur le catalogue : en mode collection / marque / designer /
