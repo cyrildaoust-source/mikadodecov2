@@ -2107,8 +2107,7 @@
       ],
       "bio": "Tristan Lohner est un designer produit français. Formé d'abord à l'ébénisterie (Brevet des Métiers d'Art auprès de Bernard Daude, qui travailla pour Pierre Paulin au Mobilier national), il rejoint ensuite l'École des Arts décoratifs de Paris, où il étudie le design produit sous la direction de Jean-Marie Massaud. Il dirige par ailleurs le RBC Design Center à Montpellier, concept store imaginé par Jean Nouvel. Son travail privilégie la justesse, la sobriété et le lien sensible entre l'objet et son usager. Collaborateur régulier de Fermob, il y signe la lampe nomade Balad (Étoile de l'Observeur du Design 2017), la table Bebop, le luminaire MOOON! et la chaise Studie, distinguée du Red Dot « Best of the Best » en 2022. Pour Hartô, il a dessiné la lampe de table Nina.",
       "photo": "/images/designers/tristan-lohner.jpg",
-      "sortKey": "Lohner Tristan",
-      "featured": true
+      "sortKey": "Lohner Tristan"
     },
     {
       "name": "Forti e Di Loreto",
@@ -2239,7 +2238,7 @@
       "bio": "Designer danoise née en 1972, lignes épurées et matières chaleureuses.",
       "photo": "/images/designers/cecilie-manz.jpg",
       "sortKey": "Manz",
-      "hidden": true
+      "featured": true
     },
     {
       "name": "Enzo Mari",
@@ -3312,8 +3311,7 @@
       ],
       "bio": "Né en 1967 à Lyon, Frédéric Sofia est un designer français. Issu d'une formation technique et commerciale, il vient au design en autodidacte après un voyage en Australie en 1992. Il fonde d'abord Wombat, société d'édition de luminaires, avant de créer son propre studio à Paris en 2000. Il mène en parallèle une pratique artistique avec Catherine Sofia (duo FC Sofia). Pour Fermob, il signe la collection Luxembourg, éditée à partir de 2004 : relecture contemporaine des fauteuils et chaises du jardin du Luxembourg, présents au Sénat depuis 1923. Ce siège est entré dans les collections du Centre national des arts plastiques (2006), puis du Mobilier national. On lui doit aussi, pour Fermob, la collection Sixties, associant structure tubulaire en aluminium et assise en résine tressée. Depuis 2022, il assure, avec Catherine Sofia, la direction artistique de la revue Intramuros.",
       "photo": "/images/designers/frederic-sofia.jpg",
-      "sortKey": "Sofia",
-      "featured": true
+      "sortKey": "Sofia"
     },
     {
       "name": "Catherine Sofia",
@@ -3624,7 +3622,8 @@
       ],
       "bio": "Née en 1961 à Oviedo, l'architecte et designer espagnole Patricia Urquiola étudie l'architecture à Madrid puis au Politecnico di Milano, où elle obtient son diplôme en 1989 sous la direction d'Achille Castiglioni. Après avoir travaillé avec Vico Magistretti puis chez Lissoni Associati (Piero Lissoni), elle fonde son studio à Milan en 2001. Son travail mêle savoir-faire artisanal et technologie, avec un goût marqué pour la matière, la couleur et la couture. Pour Moroso, elle signe le fauteuil Fjord (2002), la chaise longue Antibodi (2006) et l'assise tressée Tropicalia (2008) ; pour B&B Italia, le canapé modulaire Tufty-Time (2005). Chez Alessi, elle dessine la batterie de cuisine Edo (2017) et les couverts Clivo. Elle a reçu la Médaille d'or du Mérite des Beaux-Arts décernée par l'État espagnol (2011).",
       "photo": "/images/designers/patricia-urquiola.jpg",
-      "sortKey": "Urquiola"
+      "sortKey": "Urquiola",
+      "featured": true
     },
     {
       "name": "Utilise.Objects",
@@ -3988,16 +3987,13 @@
         "clara-von-zweigbergk"
       ],
       "brands": [
-        "HAY",
-        "Louis Poulsen"
+        "HAY"
       ],
       "brandHrefs": [
-        "/collections/hay",
-        "/produits.html?marque=Louis Poulsen"
+        "/collections/hay"
       ],
       "bio": "Clara von Zweigbergk est une graphiste et designer suédoise installée à Stockholm. Elle est diplômée de la Beckmans School of Design à Stockholm et a poursuivi sa formation à l'Art Center College of Design de Pasadena, aux États-Unis. Après plusieurs années comme graphiste senior chez Lissoni Associati à Milan, elle ouvre son propre studio à Stockholm en 2006, où elle explore le papier, la couleur et la forme. Pour Louis Poulsen, elle a conçu la série de suspensions colorées Cirque, et elle collabore étroitement avec HAY depuis 2010 pour son identité visuelle et de nombreux produits.",
-      "photo": "/images/designers/clara-von-zweigbergk.jpg",
-      "featured": true
+      "photo": "/images/designers/clara-von-zweigbergk.jpg"
     },
     {
       "name": "Teun Zwets",
