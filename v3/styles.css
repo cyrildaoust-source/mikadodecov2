@@ -62,8 +62,8 @@
   --tile:       #ECE7DD;   /* product / image backdrop · warm greige */
   --ink:        #1a1916;   /* warm brown-black */
   --ink-deep:   #1a1916;
-  --muted:      #7c756c;   /* secondary text */
-  --subtle:     #a39c91;   /* meta */
+  --muted:      #6b655d;   /* secondary text · AA sur paper/paper-2/tile */
+  --subtle:     #6b655d;   /* meta · fusionné avec --muted pour AA (audit 06/2026) */
   --line:       #e0d9cf;   /* warm beige hairline */
   --line-ink:   #1a1916;   /* button/strong borders */
 

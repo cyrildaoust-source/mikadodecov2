@@ -10,8 +10,8 @@ The source of truth for the Mikadodeco storefront: palette, type, detailing, voi
 | `--paper-2` | `#efe9df` | warm bands (USP, room, alt sections) |
 | `--tile` | `#efeae1` | product / image backdrops |
 | `--ink` / `--ink-deep` | `#1a1916` | warm brown-black, all primary text |
-| `--muted` | `#7c756c` | secondary text |
-| `--subtle` | `#a39c91` | meta / captions |
+| `--muted` | `#6b655d` | secondary text · assombri pour AA (audit 06/2026) |
+| `--subtle` | `#6b655d` | meta / captions · fusionné avec --muted pour AA |
 | `--line` | `#e0d9cf` | warm beige hairline |
 | **`--accent`** | **`#28408F`** | **signature royal blue** · links/text, rules, underlines, btn--blue + announce bg |
 | **`--accent-ink`** | **`#1C2F6B`** | deep royal · legible blue for text/tags/links on cream + btn hover bg |
