@@ -662,6 +662,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .vselect__option:hover { background: var(--paper-2); }
 .vselect__option.is-active { background: var(--accent-soft); font-weight: 600; }
 .vselect__option[aria-disabled="true"] { opacity: .4; cursor: not-allowed; text-decoration: line-through; }
+.vselect__option:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: -2px; background: var(--paper-2); }
 .pdp__desc { color: var(--ink); line-height: 1.7; margin: 18px 0 4px; white-space: pre-line; }
 .pdp__qty { display: flex; align-items: center; gap: 18px; margin: 22px 0 4px; }
 .pdp__qty .label { font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
