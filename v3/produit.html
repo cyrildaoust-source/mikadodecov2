@@ -229,7 +229,7 @@
                   <svg class="vselect__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
                 </button>
                 <ul class="vselect__list" data-vselect-list role="listbox" hidden>
-                  ${optionValues[axisName].map((val) => `<li class="vselect__option${val === selVal ? ' is-active' : ''}" data-option-value="${escapeHtml(val)}" role="option" aria-selected="${val === selVal}">
+                  ${optionValues[axisName].map((val) => `<li class="vselect__option${val === selVal ? ' is-active' : ''}" data-option-value="${escapeHtml(val)}" role="option" aria-selected="${val === selVal}" tabindex="-1">
                     <img class="vselect__thumb" src="${escapeHtml(imageForOption(axisName, val))}" alt="" loading="lazy" />
                     <span>${escapeHtml(val)}</span>
                   </li>`).join('')}
@@ -343,9 +343,15 @@
       // / status / promo to reflect `currentSelection` and `current`. Called
       // after any axis change.
       const closeAllVselects = () => host.querySelectorAll("[data-vselect]").forEach((vs) => {
-        vs.querySelector("[data-vselect-toggle]")?.setAttribute("aria-expanded", "false");
+        const toggle = vs.querySelector("[data-vselect-toggle]");
+        toggle?.setAttribute("aria-expanded", "false");
         const lst = vs.querySelector("[data-vselect-list]");
-        if (lst) lst.hidden = true;
+        if (lst) {
+          // Si le focus clavier est encore DANS la liste qu'on masque, le rendre au
+          // toggle AVANT de cacher — sinon le focus tomberait sur <body> (repère perdu).
+          if (lst.contains(document.activeElement)) toggle?.focus();
+          lst.hidden = true;
+        }
       });
 
       const refreshAllVselects = () => {
@@ -371,9 +377,26 @@
         probePromo(current.id);
       };
 
-      // Option click: update currentSelection on that axis, resolve the new
-      // variant (exact match preferred, else adopt the closest combination).
-      host.querySelectorAll(".vselect__option").forEach((opt) => opt.addEventListener("click", () => {
+      // Ouvre un dropdown et place le focus clavier sur l'option active (ou la 1re).
+      const openVselect = (vs) => {
+        const toggle = vs.querySelector("[data-vselect-toggle]");
+        const list = vs.querySelector("[data-vselect-list]");
+        closeAllVselects();
+        toggle.setAttribute("aria-expanded", "true");
+        list.hidden = false;
+        (list.querySelector(".vselect__option.is-active") || list.querySelector(".vselect__option"))?.focus();
+      };
+      // Ferme un dropdown ; rend éventuellement le focus à son toggle.
+      const closeVselect = (vs, refocus) => {
+        const toggle = vs.querySelector("[data-vselect-toggle]");
+        const list = vs.querySelector("[data-vselect-list]");
+        toggle?.setAttribute("aria-expanded", "false");
+        if (list) list.hidden = true;
+        if (refocus) toggle?.focus();
+      };
+      // Chemin de sélection PARTAGÉ par le clic ET le clavier (extrait de l'ancien
+      // handler click) — mouse et clavier se comportent à l'identique.
+      const selectOption = (opt) => {
         const vs = opt.closest("[data-vselect]");
         const axis = vs?.dataset.optionName;
         const value = opt.dataset.optionValue;
@@ -381,34 +404,58 @@
         currentSelection[axis] = value;
         let v = findVariantBy(currentSelection);
         if (!v) {
-          // Combination doesn't exist — fall back to any variant matching
-          // the just-picked option, then sync currentSelection to its axes.
           v = variants.find((x) => (x.options || []).some((o) => o.name === axis && o.value === value));
           if (v) for (const o of (v.options || [])) currentSelection[o.name] = o.value;
         }
         if (!v) return;
         current = v;
-        refreshAllVselects();
-      }));
+        refreshAllVselects();                                   // ferme les listes + met à jour image/prix/statut
+        vs.querySelector("[data-vselect-toggle]")?.focus();     // rend le focus au toggle après choix
+      };
 
-      // Per-toggle open/close — only one dropdown open at a time.
+      host.querySelectorAll(".vselect__option").forEach((opt) =>
+        opt.addEventListener("click", () => selectOption(opt)));
+
       host.querySelectorAll("[data-vselect-toggle]").forEach((toggle) => {
+        const vs = toggle.closest("[data-vselect]");
+        const list = vs.querySelector("[data-vselect-list]");
         toggle.addEventListener("click", (e) => {
           e.stopPropagation();
-          const vs = toggle.closest("[data-vselect]");
-          const list = vs.querySelector("[data-vselect-list]");
-          const open = toggle.getAttribute("aria-expanded") === "true";
-          closeAllVselects();
-          if (!open) {
-            toggle.setAttribute("aria-expanded", "true");
-            list.hidden = false;
+          if (toggle.getAttribute("aria-expanded") === "true") closeVselect(vs, false);
+          else openVselect(vs);
+        });
+        // ↑/↓ sur le toggle : ouvre la liste et entre dedans.
+        toggle.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+            e.preventDefault();
+            if (toggle.getAttribute("aria-expanded") !== "true") openVselect(vs);
+            else (list.querySelector(".vselect__option.is-active") || list.querySelector(".vselect__option"))?.focus();
+          }
+        });
+        // Navigation clavier (focus tournant) dans la liste.
+        list.addEventListener("keydown", (e) => {
+          const opts = [...list.querySelectorAll(".vselect__option")];
+          if (!opts.length) return;
+          const i = opts.indexOf(document.activeElement);
+          switch (e.key) {
+            case "ArrowDown": e.preventDefault(); (opts[i + 1] || opts[0]).focus(); break;
+            case "ArrowUp":   e.preventDefault(); (opts[i - 1] || opts[opts.length - 1]).focus(); break;
+            case "Home":      e.preventDefault(); opts[0].focus(); break;
+            case "End":       e.preventDefault(); opts[opts.length - 1].focus(); break;
+            case "Enter":
+            case " ":         e.preventDefault();
+                              if (document.activeElement?.classList.contains("vselect__option")) selectOption(document.activeElement);
+                              break;
+            case "Escape":    e.preventDefault(); e.stopPropagation(); closeVselect(vs, true); break;
+            case "Tab":       closeVselect(vs, true); break;   // ferme + refocus toggle, laisse le navigateur tabuler ensuite
           }
         });
       });
+
       document.addEventListener("click", (e) => {
         if (!e.target.closest("[data-vselect]")) closeAllVselects();
       });
-      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeAllVselects(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeAllVselects(); });  // (inchangé) filet Échap global
 
       // add the chosen quantity of the current variant to the selection
       cta.addEventListener("click", () => {
