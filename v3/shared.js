@@ -385,7 +385,7 @@ function chromeHTML(active) {
     const extra = (n.kind === "mega" || n.kind === "dropdown")
       ? ` data-mm-trigger="${n.key}" aria-haspopup="true" aria-expanded="false"`
       : "";
-    return `<a href="${n.href}" class="${cls}"${extra}>${n.label}</a>`;
+    return `<a href="${n.href}" class="${cls}"${extra}${isActive ? ' aria-current="page"' : ''}>${n.label}</a>`;
   }).join("");
 
   // Mega panel stage — single off-flow container, hidden by default.
@@ -443,7 +443,8 @@ function chromeHTML(active) {
     </div>`;
 
   return `
-  <div class="chrome" data-chrome>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="chrome" data-chrome>
     <div class="announce" data-announce>
       <span class="on">Boutique de design à Uccle · du mardi au samedi</span>
       <span>Mobilier de design, choisi pièce par pièce</span>
@@ -468,7 +469,7 @@ function chromeHTML(active) {
       </div>
     </div>
     ${stage}
-  </div>
+  </header>
   ${drawerHTML}
   ${cartDrawerHTML}`;
 }
