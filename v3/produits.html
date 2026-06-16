@@ -92,6 +92,28 @@
     .cat-trigger__caret { font-size: .8em; transition: transform .2s var(--ease); }
     .cat-trigger[aria-expanded="true"] .cat-trigger__caret { transform: rotate(180deg); }
 
+    /* Dropdown filtre custom (Marque/Trier) — même look que .cat-trigger, sans picker natif */
+    .fsel { position: relative; display: inline-block; }
+    .fsel__toggle { font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 500; display: inline-flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 172px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); padding: 9px 14px; cursor: pointer; letter-spacing: .02em; transition: border-color .15s var(--ease); }
+    .fsel__toggle:hover, .fsel__toggle[aria-expanded="true"] { border-color: var(--ink); }
+    .fsel__value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .fsel__caret { font-size: .8em; flex-shrink: 0; transition: transform .2s var(--ease); }
+    .fsel__toggle[aria-expanded="true"] .fsel__caret { transform: rotate(180deg); }
+    .fsel__list { position: absolute; top: calc(100% + 4px); right: 0; min-width: 100%; max-height: 320px; overflow-y: auto; background: var(--paper); border: 1px solid var(--ink); list-style: none; margin: 0; padding: 4px; z-index: 30; box-shadow: 0 16px 36px rgba(26,25,22,.15); }
+    .fsel__opt { padding: 9px 12px; cursor: pointer; font-size: var(--fs-small); color: var(--ink-deep); white-space: nowrap; }
+    .fsel__opt:hover { background: var(--paper-2); }
+    .fsel__opt[aria-selected="true"] { background: var(--accent-soft); font-weight: 600; }
+    .fsel__opt:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: -2px; background: var(--paper-2); }
+    /* Mobile : les filtres custom prennent toute la largeur (remplace le flex de .fselect retiré) */
+    @media (max-width: 760px) {
+      .fsel { width: 100%; }
+      .fsel__toggle { width: 100%; min-width: 0; }
+    }
+    /* Croix de fermeture du panneau Catégorie (haut droite) */
+    .cat-panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .cat-panel__title { font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 600; letter-spacing: .02em; }
+    .cat-panel__x { background: none; border: none; cursor: pointer; font-size: 26px; line-height: 1; color: var(--ink); padding: 4px; margin: -4px; }
+
     .cat-panel { border: 1px solid var(--line); border-top: none; background: var(--paper); padding: clamp(18px, 2.2vw, 28px) var(--gutter); }
     .cat-panel[hidden] { display: none; }
     .cat-panel__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px clamp(20px, 3vw, 40px); }
@@ -281,19 +303,30 @@
     <div class="filterbar__right">
       <span class="plp-count" data-plp-count></span>
       <span class="plp-count plp-loading" data-plp-loading hidden>chargement du catalogue…</span>
-      <select class="fselect" data-filter-brand aria-label="Marque"><option value="">Toutes les marques</option></select>
-      <select class="fselect" data-sort aria-label="Trier">
-        <option value="pop">Les plus populaires</option>
-        <option value="asc">Prix croissant</option>
-        <option value="desc">Prix décroissant</option>
-        <option value="az">A → Z</option>
-      </select>
+      <div class="fsel" data-fsel data-fsel-name="brand">
+        <button class="fsel__toggle" type="button" data-fsel-toggle aria-haspopup="listbox" aria-expanded="false" aria-label="Marque">
+          <span class="fsel__value" data-fsel-label>Toutes les marques</span>
+          <span class="fsel__caret" aria-hidden="true">▾</span>
+        </button>
+        <ul class="fsel__list" data-fsel-list role="listbox" hidden></ul>
+      </div>
+      <div class="fsel" data-fsel data-fsel-name="sort">
+        <button class="fsel__toggle" type="button" data-fsel-toggle aria-haspopup="listbox" aria-expanded="false" aria-label="Trier">
+          <span class="fsel__value" data-fsel-label>Les plus populaires</span>
+          <span class="fsel__caret" aria-hidden="true">▾</span>
+        </button>
+        <ul class="fsel__list" data-fsel-list role="listbox" hidden></ul>
+      </div>
     </div>
   </div>
 
   <!-- Panneau Catégorie : multi-sélection, filtrage serveur (façon Vitra · DA
        Mikado). Rempli par le module ; n'apparaît que sur le catalogue. -->
   <div class="cat-panel wrap" id="cat-panel" data-cat-panel hidden>
+    <div class="cat-panel__head">
+      <span class="cat-panel__title">Catégorie</span>
+      <button type="button" class="cat-panel__x" data-cat-close aria-label="Fermer les filtres">&times;</button>
+    </div>
     <div class="cat-panel__grid" data-cat-grid></div>
     <div class="cat-panel__actions">
       <button type="button" class="cat-panel__clear" data-cat-clear>Supprimer le filtre</button>
@@ -431,8 +464,63 @@
     const popSection = document.querySelector("[data-pop-section]");
     const countEl = document.querySelector("[data-plp-count]");
     const catalogLoadingEl = document.querySelector("[data-plp-loading]");
-    const brandSel = document.querySelector("[data-filter-brand]");
-    const sortSel = document.querySelector("[data-sort]");
+    // ── Filtres custom (dropdowns Marque/Trier accessibles, même pattern que le vselect PDP) ──
+    // Ferme TOUS les contrôles de filtre (dropdowns custom + panneau Catégorie).
+    function closeAllFilters() {
+      document.querySelectorAll("[data-fsel]").forEach((r) => {
+        r.querySelector("[data-fsel-toggle]")?.setAttribute("aria-expanded", "false");
+        const l = r.querySelector("[data-fsel-list]"); if (l) l.hidden = true;
+      });
+      const cp = document.querySelector("[data-cat-panel]"), ct = document.querySelector("[data-cat-trigger]");
+      if (cp && !cp.hidden) { cp.hidden = true; ct?.setAttribute("aria-expanded", "false"); }
+    }
+    // Dropdown custom : opts = [{value, label}] ; onSelect(value) au choix. Retourne { setValue }.
+    function bindFsel(root, opts, current, onSelect) {
+      const toggle = root.querySelector("[data-fsel-toggle]");
+      const list   = root.querySelector("[data-fsel-list]");
+      const labelEl= root.querySelector("[data-fsel-label]");
+      let value = current;
+      const paint = () => {
+        list.innerHTML = opts.map((o) =>
+          `<li class="fsel__opt" role="option" data-value="${escapeHtml(o.value)}" tabindex="-1" aria-selected="${o.value === value ? "true" : "false"}">${escapeHtml(o.label)}</li>`
+        ).join("");
+        const sel = opts.find((o) => o.value === value) || opts[0];
+        if (labelEl && sel) labelEl.textContent = sel.label;
+      };
+      const close = (refocus) => { toggle.setAttribute("aria-expanded", "false"); list.hidden = true; if (refocus) toggle.focus(); };
+      const open  = () => {
+        closeAllFilters();
+        toggle.setAttribute("aria-expanded", "true"); list.hidden = false;
+        (list.querySelector('[aria-selected="true"]') || list.querySelector(".fsel__opt"))?.focus();
+      };
+      const pick = (li) => { value = li.dataset.value; paint(); close(true); onSelect(value); };
+      toggle.addEventListener("click", (e) => { e.stopPropagation(); list.hidden ? open() : close(false); });
+      toggle.addEventListener("keydown", (e) => { if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); if (list.hidden) open(); } });
+      list.addEventListener("click", (e) => { const li = e.target.closest(".fsel__opt"); if (li) pick(li); });
+      list.addEventListener("keydown", (e) => {
+        const o = [...list.querySelectorAll(".fsel__opt")]; if (!o.length) return;
+        const i = o.indexOf(document.activeElement);
+        switch (e.key) {
+          case "ArrowDown": e.preventDefault(); (o[i+1] || o[0]).focus(); break;
+          case "ArrowUp":   e.preventDefault(); (o[i-1] || o[o.length-1]).focus(); break;
+          case "Home":      e.preventDefault(); o[0].focus(); break;
+          case "End":       e.preventDefault(); o[o.length-1].focus(); break;
+          case "Enter": case " ": e.preventDefault(); if (document.activeElement.classList.contains("fsel__opt")) pick(document.activeElement); break;
+          case "Escape":    e.preventDefault(); close(true); break;
+          case "Tab":       close(false); break;
+        }
+      });
+      paint();
+      return { setValue: (v) => { value = v; paint(); } };
+    }
+    // Un clic hors de tout contrôle filtre ferme tout.
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("[data-fsel]") || e.target.closest("[data-cat-panel]") || e.target.closest("[data-cat-trigger]")) return;
+      closeAllFilters();
+    });
+    const brandRoot = document.querySelector('[data-fsel-name="brand"]');
+    const sortRoot  = document.querySelector('[data-fsel-name="sort"]');
+    let brandControl = null, sortControl = null;
     const chipsBar = document.querySelector("[data-chips]");
     const paginationEl = document.querySelector("[data-pagination]");
     const titleEl = document.querySelector("[data-plp-title]");
@@ -528,6 +616,14 @@
     const CAT_HANDLES = new Set(CATEGORIES.map((c) => c.h));
 
     const state = { coll: collFromPath, cats: (params.get("cats") || "").split(",").map((s) => s.trim()).filter((h) => CAT_HANDLES.has(h)), brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", page: Math.max(1, parseInt(params.get("page"), 10) || 1), loading: false, designer: null };
+
+    // Trier = options statiques, bindé dès que `state` existe (bindFsel est hoisté).
+    sortControl = bindFsel(sortRoot, [
+      { value: "pop",  label: "Les plus populaires" },
+      { value: "asc",  label: "Prix croissant" },
+      { value: "desc", label: "Prix décroissant" },
+      { value: "az",   label: "A → Z" },
+    ], state.sort, (v) => { state.sort = v; state.page = 1; syncURL(); render(); });
 
     // Instant paint before the /api/collection/<handle>/products fetch
     // resolves. On ANY collection page: blank the description (V2.1 —
@@ -883,7 +979,7 @@
       + `</div>`;
     }
 
-    // Brand <select> — populated from the curated mega-menu-brands.json (the
+    // Brand dropdown (.fsel) — populated from the curated mega-menu-brands.json (the
     // single source of truth, 22 brands), NOT /api/brands (~1.8s, capped,
     // wrong counts). value = slugify(name) so the existing product filter
     // (slugify(p.brand) === state.brand) keeps matching; label = plain name,
@@ -897,14 +993,10 @@
           .map((b) => ({ name: b.name, value: slugify(b.name) }))
           .filter((b) => b.name && b.value)
           .sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
-        const frag = document.createDocumentFragment();
-        for (const b of brands) {
-          const o = document.createElement("option");
-          o.value = b.value; o.textContent = b.name;
-          if (b.value === state.brand) o.selected = true;
-          frag.appendChild(o);
-        }
-        brandSel.appendChild(frag);
+        const brandOpts = [{ value: "", label: "Toutes les marques" },
+          ...brands.map((b) => ({ value: b.value, label: b.name }))];
+        brandControl = bindFsel(brandRoot, brandOpts, state.brand,
+          (v) => { state.brand = v; state.page = 1; syncURL(); render(); });
       } catch (e) {
         console.warn("[plp] marques (mega-menu-brands.json) indisponibles:", e.message);
       }
@@ -962,7 +1054,7 @@
         if (state.designer) {
           gridTitle.textContent = state.designer.name ? `Les pièces de ${state.designer.name}` : "";
         }
-        sortSel.value = state.sort;
+        sortControl?.setValue(state.sort);
 
         // Skeleton dans la grille pendant le walk multi-chunks (le catalogue ≈463
         // se charge en ~5 requêtes serveur, bornées à 100) → feedback de chargement.
@@ -1104,17 +1196,13 @@
       syncTrigger();
 
       const setOpen = (open) => {
+        if (open) closeAllFilters();   // ferme Marque/Trier avant d'ouvrir Catégorie
         catPanel.hidden = !open;
         catTrigger.setAttribute("aria-expanded", open ? "true" : "false");
       };
       catTrigger.addEventListener("click", (e) => { e.stopPropagation(); setOpen(catPanel.hidden); });
-      document.querySelector("[data-cat-close]").addEventListener("click", () => setOpen(false));
-      // Fermer au clic en dehors (déclencheur et panneau restent cliquables).
-      document.addEventListener("click", (e) => {
-        if (catPanel.hidden) return;
-        if (catPanel.contains(e.target) || catTrigger.contains(e.target)) return;
-        setOpen(false);
-      });
+      document.querySelectorAll("[data-cat-close]").forEach((b) => b.addEventListener("click", () => setOpen(false)));
+      // (outside-click géré par le handler unifié closeAllFilters, défini plus haut)
 
       // Débounce : cocher plusieurs cases d'affilée → un seul fetch serveur.
       let catTimer = null;
@@ -1142,8 +1230,7 @@
     // Marque & tri = filtres CLIENT sur le set déjà chargé (pas de re-walk) :
     // on repart page 1 et on re-rend. La marque est dans l'URL ; le tri non
     // (mais on resync pour retirer un éventuel ?page résiduel).
-    brandSel.addEventListener("change", () => { state.brand = brandSel.value; state.page = 1; syncURL(); render(); });
-    sortSel.addEventListener("change", () => { state.sort = sortSel.value; state.page = 1; syncURL(); render(); });
+    // (filtres Marque/Trier câblés via bindFsel → callbacks onSelect ci-dessus)
   </script>
 </body>
 </html>
