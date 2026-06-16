@@ -193,5 +193,7 @@
     "Philippe Starck",
     "Ronan & Erwan Bouroullec",
     "Verner Panton"
-  ]
+  ],
+  "drawerBrands": ["&Tradition", "Ferm Living", "Fermob", "HAY", "Muuto", "Vitra", "Volta Mobiles"],
+  "drawerDesigners": ["Alvar Aalto", "Ronan & Erwan Bouroullec", "Charles & Ray Eames", "Jasper Morrison", "Marie Michielssen", "Verner Panton", "Philippe Starck"]
 }

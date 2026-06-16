@@ -198,16 +198,19 @@ function hydrateDrawer() {
   // on mobile (V2.1 decision: drawer is already long).
   const brSub = document.querySelector('[data-drawer-sub="marques"]');
   if (brSub && brandsData?.brands?.length) {
-    const links = brandsData.brands.map((b) =>
+    const byName = new Map(brandsData.brands.map((b) => [b.name, b]));
+    const names  = brandsData.drawerBrands?.length ? brandsData.drawerBrands : brandsData.brands.map((b) => b.name);
+    const links  = names.map((n) => byName.get(n)).filter(Boolean).map((b) =>
       `<li><a href="${escapeHtml(b.href)}">${escapeHtml(b.name)}</a></li>`
     ).join("");
     brSub.innerHTML = links + `<li><a href="/marques.html" style="font-style:italic">Toutes les marques →</a></li>`;
   }
   // Designers drawer : même liste "À la une" que le méga desktop (brandsData.designers),
   // un lien par créateur vers sa PLP filtrée, + "Tous les designers →".
-  const desSub = document.querySelector('[data-drawer-sub="designers"]');
-  if (desSub && brandsData?.designers?.length) {
-    const links = brandsData.designers.map((d) =>
+  const desSub   = document.querySelector('[data-drawer-sub="designers"]');
+  const desNames = brandsData?.drawerDesigners?.length ? brandsData.drawerDesigners : (brandsData?.designers || []);
+  if (desSub && desNames.length) {
+    const links = desNames.map((d) =>
       `<li><a href="/produits.html?designer=${slugify(d)}">${escapeHtml(d)}</a></li>`
     ).join("");
     desSub.innerHTML = links + `<li><a href="/designers.html" style="font-style:italic">Tous les designers →</a></li>`;
@@ -306,9 +309,15 @@ function bindDrawerAccordions() {
     const head = g.querySelector(".drawer__group-head");
     if (!head) return;
     head.addEventListener("click", () => {
-      const isOpen = g.dataset.open === "true";
-      g.dataset.open = isOpen ? "false" : "true";
-      head.setAttribute("aria-expanded", isOpen ? "false" : "true");
+      const willOpen = g.dataset.open !== "true";
+      document.querySelectorAll(".drawer__group").forEach((other) => {
+        other.dataset.open = "false";
+        other.querySelector(".drawer__group-head")?.setAttribute("aria-expanded", "false");
+      });
+      if (willOpen) {
+        g.dataset.open = "true";
+        head.setAttribute("aria-expanded", "true");
+      }
     });
   });
 }
