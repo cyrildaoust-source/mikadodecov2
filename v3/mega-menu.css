@@ -376,6 +376,8 @@
   padding: 2px 0;
   border-bottom: 1px solid var(--ink);
 }
+.drawer__foot-compact { display: block; font-family: var(--serif); font-weight: 600; font-size: 1.1rem; color: var(--ink-deep); padding: 2px 0 4px; }
+.drawer__foot-compact:hover { color: var(--accent-ink); }
 
 /* ============================================================
    Responsive

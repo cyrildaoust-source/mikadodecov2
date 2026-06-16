@@ -417,7 +417,10 @@ function chromeHTML(active) {
           <button type="button" class="drawer__group-head" aria-expanded="false">Marques <span class="drawer__chev" aria-hidden="true">▾</span></button>
           <ul class="drawer__sub" data-drawer-sub="marques"></ul>
         </div>
-        <a class="drawer__link" href="/designers.html">Designers</a>
+        <div class="drawer__group" data-open="false" data-drawer-group="designers">
+          <button type="button" class="drawer__group-head" aria-expanded="false">Designers <span class="drawer__chev" aria-hidden="true">▾</span></button>
+          <ul class="drawer__sub" data-drawer-sub="designers"></ul>
+        </div>
         <a class="drawer__link" href="/studio.html">Mikado Studio</a>
         <a class="drawer__link" href="/journal.html">Le journal</a>
         <a class="drawer__link drawer__link--util" href="/rendez-vous.html">Rendez-vous</a>
