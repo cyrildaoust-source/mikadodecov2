@@ -403,7 +403,7 @@ function chromeHTML(active) {
   // flat links for Designers / Studio / Le journal, plus a footer
   // visual block hydrated from mega-menu-config.json.
   const drawerHTML = `
-    <div class="drawer" data-drawer>
+    <div class="drawer" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" data-drawer>
       <div class="drawer__head">
         <span class="drawer__title">Menu</span>
         <button class="drawer__close" data-drawer-close aria-label="Fermer">&times;</button>
@@ -465,7 +465,7 @@ function chromeHTML(active) {
           </svg>
           <span class="cartcount" data-cart-count>0</span>
         </a>
-        <button class="nav__burger" data-burger aria-label="Menu">Menu</button>
+        <button class="nav__burger" data-burger aria-expanded="false" aria-controls="menu-mobile">Menu</button>
       </div>
     </div>
     ${stage}
@@ -554,30 +554,47 @@ function bindDrawer() {
   const burger = document.querySelector("[data-burger]");
   if (!drawer || !burger) return;
   const isOpen = () => drawer.classList.contains("open");
+  let lastFocus = null;
+
+  // Piège de focus + Échap, même logique que le cart drawer.
+  function onKeydown(e) {
+    if (!isOpen()) return;
+    if (e.key === "Escape") { e.preventDefault(); closeDrawer(false); return; }
+    if (e.key !== "Tab") return;
+    const list = [...drawer.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])')]
+      .filter((el) => el.offsetParent !== null && !el.disabled);
+    if (!list.length) { e.preventDefault(); return; }
+    const first = list[0], last = list[list.length - 1], a = document.activeElement;
+    if (!drawer.contains(a)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && a === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && a === last) { e.preventDefault(); first.focus(); }
+  }
 
   function openDrawer() {
     if (isOpen()) return;
+    lastFocus = document.activeElement;
     drawer.classList.add("open");
     lockBodyScroll(true);
-    // Back button closes the drawer instead of leaving the page: push a
-    // marker entry now, pop it on a clean close so history stays tidy.
+    burger.setAttribute("aria-expanded", "true");
+    document.addEventListener("keydown", onKeydown, true);
+    requestAnimationFrame(() => drawer.querySelector("[data-drawer-close]")?.focus());
+    // Back button closes the drawer instead of leaving the page.
     history.pushState({ drawer: true }, "");
   }
-  // closeDrawer(keepHistory): keepHistory=true skips the history.back() —
-  // used when the Back button already popped the marker (popstate) and when
-  // a link is navigating away (calling back() would race the navigation).
   function closeDrawer(keepHistory) {
     if (!isOpen()) return;
     drawer.classList.remove("open");
     lockBodyScroll(false);
+    burger.setAttribute("aria-expanded", "false");
+    document.removeEventListener("keydown", onKeydown, true);
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+    else burger.focus();
     if (!keepHistory && history.state && history.state.drawer) history.back();
   }
 
   burger.addEventListener("click", openDrawer);
   document.querySelector("[data-drawer-close]")?.addEventListener("click", () => closeDrawer(false));
-  // A link navigates away → just close + unlock, let the nav proceed.
   drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => closeDrawer(true)));
-  // Browser Back while open → close the drawer (the marker is already gone).
   window.addEventListener("popstate", () => { if (isOpen()) closeDrawer(true); });
 }
 

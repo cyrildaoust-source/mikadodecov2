@@ -210,7 +210,7 @@
               <span class="pdp__promo" data-promo hidden></span>
               <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" srcset="${escapeHtml(srcsetFor(current.image || imgs[0] || ""))}" sizes="${MAIN_SIZES}" alt="${escapeHtml(p.name)}" fetchpriority="high" decoding="async" />
             </div>
-            ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((_src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(thumbSrcs[i] || imgs[i])}" alt="" loading="lazy" decoding="async" />`).join("")}</div>` : ""}
+            ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((_src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(thumbSrcs[i] || imgs[i])}" alt="" loading="lazy" decoding="async" tabindex="0" role="button" aria-label="Voir la photo ${i + 1}" />`).join("")}</div>` : ""}
           </div>
           <div class="pdp__info">
             <a class="pdp__brand" href="${brandHref}">${escapeHtml(p.brand || "")}</a>
@@ -326,18 +326,22 @@
       // match the initial highlight to the image the main is actually showing
       syncActiveThumb(current.image || imgs[0] || "");
 
-      // gallery thumbnails
-      thumbs.forEach((t) => t.addEventListener("click", () => {
-        // Display the FULL-width gallery image (imgs[index]) in the main, not the
-        // small thumbnail's own src — otherwise the main would show a blown-up
-        // low-res thumb. syncActiveThumb matches on the query-stripped base URL,
-        // so the 240px thumb and the 1400px gallery URL still resolve to it.
+      // gallery thumbnails — clic ET clavier (Entrée/Espace) via le même chemin.
+      // Affiche l'image pleine largeur imgs[index] dans le main (pas le src de la
+      // vignette 240px) ; syncActiveThumb matche sur l'URL sans query.
+      const showThumb = (t) => {
         const i = Number(t.dataset.thumb);
         const full = imgs[i] || t.src;
         main.src = full;
         main.srcset = srcsetFor(full);
         syncActiveThumb(full);
-      }));
+      };
+      thumbs.forEach((t) => {
+        t.addEventListener("click", () => showThumb(t));
+        t.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showThumb(t); }
+        });
+      });
 
       // Refresh every dropdown's toggle + active option + main image / price
       // / status / promo to reflect `currentSelection` and `current`. Called

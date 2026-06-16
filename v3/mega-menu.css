@@ -58,12 +58,15 @@
   opacity: 0;
   transform: translateY(-4px);
   pointer-events: none;
-  transition: opacity .18s var(--ease), transform .18s var(--ease);
+  visibility: hidden;
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s .18s;
 }
 .mm-stage.is-open {
   opacity: 1;
   transform: none;
   pointer-events: auto;
+  visibility: visible;
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s 0s;
 }
 .mm-stage__inner { max-width: var(--container); margin-inline: auto; padding: 32px var(--gutter) 36px; }
 
