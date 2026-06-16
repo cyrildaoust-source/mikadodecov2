@@ -162,7 +162,6 @@ ul { list-style: none; }
 .drawer { position: fixed; inset: 0; background: var(--paper); color: var(--ink); z-index: 100; transform: translateX(-100%); visibility: hidden; transition: transform .4s var(--ease), visibility 0s .4s; display: flex; flex-direction: column; padding: 22px var(--gutter); }
 .drawer.open { transform: none; visibility: visible; transition: transform .4s var(--ease), visibility 0s 0s; }
 .drawer__close { align-self: flex-end; font-size: 30px; line-height: 1; margin-bottom: 14px; }
-.drawer a { font-family: var(--serif); font-weight: 600; font-size: 32px; padding: 11px 0; border-bottom: 1px solid var(--line); color: var(--ink-deep); }
 @media (min-width: 921px) { .drawer { display: none; } }
 
 /* ============================================================
@@ -250,7 +249,7 @@ ul { list-style: none; }
 .pcard__dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: #b9742c; }
 .pcard__dot--stock { background: #5a8c4a; }
 .pcard__dot--order { background: #b9742c; }
-.pcard__cta { margin-top: 14px; }
+.pcard__cta { margin-top: auto; padding-top: 14px; }
 .pcard__skel { aspect-ratio: 1/1; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
 @keyframes pulse { 0%,100%{opacity:.55} 50%{opacity:1} }
 

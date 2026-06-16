@@ -203,18 +203,27 @@ function hydrateDrawer() {
     ).join("");
     brSub.innerHTML = links + `<li><a href="/marques.html" style="font-style:italic">Toutes les marques →</a></li>`;
   }
+  // Designers drawer : même liste "À la une" que le méga desktop (brandsData.designers),
+  // un lien par créateur vers sa PLP filtrée, + "Tous les designers →".
+  const desSub = document.querySelector('[data-drawer-sub="designers"]');
+  if (desSub && brandsData?.designers?.length) {
+    const links = brandsData.designers.map((d) =>
+      `<li><a href="/produits.html?designer=${slugify(d)}">${escapeHtml(d)}</a></li>`
+    ).join("");
+    desSub.innerHTML = links + `<li><a href="/designers.html" style="font-style:italic">Tous les designers →</a></li>`;
+  }
   // Drawer footer reuses the Mobilier coup de cœur as the bottom
   // editorial block (single source of truth, same JSON as desktop).
   const foot = document.querySelector("[data-drawer-foot]");
   const cdc  = config?.mobilier?.coupDeCoeur;
-  if (foot && cdc?.image) {
+  if (foot && (cdc?.title || cdc?.ctaHref)) {
+    const href  = cdc.ctaHref || "";
+    const label = escapeHtml(cdc.label || "Coup de cœur du moment");
+    const title = escapeHtml(cdc.title || cdc.ctaLabel || "Lire l'article");
     foot.innerHTML = `
-      <div class="drawer__foot-label">${escapeHtml(cdc.label || "Coup de cœur du moment")}</div>
-      <img class="drawer__visual" src="${escapeHtml(cdc.image)}" alt="${escapeHtml(cdc.imageAlt || "")}" loading="lazy" />
-      ${cdc.title ? `<div class="drawer__foot-title">${escapeHtml(cdc.title)}</div>` : ""}
-      ${cdc.lead  ? `<p class="drawer__foot-lead">${escapeHtml(cdc.lead)}</p>` : ""}
-      ${cdc.ctaHref ? `<a class="drawer__foot-cta" href="${escapeHtml(cdc.ctaHref)}">${escapeHtml(cdc.ctaLabel || "Lire l'article")} →</a>` : ""}
-    `;
+      <div class="drawer__foot-label">${label}</div>
+      ${href ? `<a class="drawer__foot-compact" href="${escapeHtml(href)}">${title} →</a>`
+             : `<span class="drawer__foot-compact">${title}</span>`}`;
   }
 }
 
