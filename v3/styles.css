@@ -100,8 +100,12 @@
 }
 
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; scrollbar-gutter: stable; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
 body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: var(--fs-body); line-height: 1.55; font-weight: 400; overflow-x: hidden; }
+/* Réserve la gouttière scrollbar SEULEMENT sur desktop (empêche la barre de filtres de
+   se décaler quand la scrollbar classique apparaît). Sur mobile (scrollbars overlay)
+   c'est inutile et peut réserver une bande vide → on ne l'applique pas. */
+@media (min-width: 761px) { html { scrollbar-gutter: stable; } }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
@@ -225,7 +229,7 @@ ul { list-style: none; }
    ============================================================ */
 .prow { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
 .prow--4 { grid-template-columns: repeat(4, 1fr); }
-.pcard { display: flex; flex-direction: column; }
+.pcard { display: flex; flex-direction: column; min-width: 0; }   /* laisse la carte rétrécir sous la largeur de son contenu (bouton) → pas de débordement en 2 colonnes */
 .pcard__media { position: relative; aspect-ratio: 1/1; background: var(--tile); overflow: hidden; }
 .pcard__media img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; transition: opacity .35s var(--ease); }
 .pcard__media img.alt { position: absolute; inset: 0; opacity: 0; }
@@ -481,7 +485,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .fselect:hover, .fselect:focus-visible { border-color: var(--ink); outline: none; }
 .plp-count { font-size: var(--fs-small); color: var(--muted); }
 .plp-loading { font-style: italic; opacity: .75; } /* libellé « chargement du catalogue… » pendant le walk progressif */
-.pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2vw, 30px) var(--gap); }
+.pgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 30px) var(--gap); }
 .catalogue-head { font-size: var(--fs-h2); line-height: 1.05; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 2px solid var(--accent); }
 .plp-empty { grid-column: 1 / -1; color: var(--muted); padding: 60px 0; text-align: center; }
 .loadmore-wrap { display: flex; justify-content: center; padding-top: clamp(32px, 4vw, 56px); }
@@ -631,8 +635,8 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .pdp__back { display: inline-block; font-size: var(--fs-small); color: var(--accent-ink); margin-bottom: 22px; }
 
 /* Fil d'Ariane — discreet breadcrumb on cream (schema.org BreadcrumbList) */
-[data-breadcrumb] { min-height: 1.3em; }
-.breadcrumb { font-size: var(--fs-small); color: var(--muted); margin: 16px 0; }
+[data-breadcrumb] { min-height: 1.3em; margin: 16px 0; }   /* marge sur le conteneur TOUJOURS présent → pas de CLS quand le fil d'Ariane se peuple */
+.breadcrumb { font-size: var(--fs-small); color: var(--muted); }
 .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0; padding: 0; }
 .breadcrumb li { display: inline-flex; align-items: center; gap: 7px; }
 .breadcrumb li + li::before { content: "›"; color: var(--muted); opacity: .6; }
@@ -826,20 +830,27 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
 .jcard:hover .jcard__title { color: var(--accent-ink); }
 
 @media (max-width: 1080px) {
-  .pgrid, .brandgrid { grid-template-columns: repeat(3, 1fr); }
+  .pgrid, .brandgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .jgrid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 900px) {
   .formwrap--three { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 760px) {
-  .pgrid, .brandgrid { grid-template-columns: repeat(2, 1fr); }
+  .pgrid, .brandgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sel, .formwrap, .formwrap--three { grid-template-columns: 1fr; }
   .sel-summary { position: static; }
   .jgrid { grid-template-columns: 1fr; }
   .formgrid2 { grid-template-columns: 1fr; }
-  .filterbar__right { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 10px; }
-  .fselect { flex: 1 1 140px; min-width: 0; }
+  /* Filterbar mobile : promouvoir TOUS les contrôles en enfants flex directs de
+     .filterbar (sinon .filterbar__right en width:100% wrappe seul → Catégorie isolée
+     avec un vide à droite). Résultat : 2 par ligne, équilibré, sans vide.
+     `>` pour battre la règle inline .filterbar__left{display:flex} de produits.html. */
+  .filterbar { gap: 10px; }
+  .filterbar > .filterbar__left, .filterbar > .filterbar__right { display: contents; }
+  .filterbar .cat-trigger, .filterbar .fselect { flex: 1 1 calc(50% - 5px); min-width: 0; }
+  .filterbar .cols-toggle { flex: 0 0 auto; }
+  .filterbar .plp-loading { display: none; }   /* span vide (compteur déplacé en Étape 2) → pas de slot flex parasite */
 }
 
 /* ---------- cart drawer (mini-cart) ----------
