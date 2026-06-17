@@ -92,6 +92,16 @@
     .cat-trigger__caret { font-size: .8em; transition: transform .2s var(--ease); }
     .cat-trigger[aria-expanded="true"] .cat-trigger__caret { transform: rotate(180deg); }
 
+    /* Toggle colonnes (1 / 2) — mobile uniquement, persistant */
+    .cols-toggle { display: none; align-items: center; gap: 4px; }
+    .cols-btn { display: inline-flex; align-items: center; padding: 6px; border: 1px solid var(--line); background: var(--paper); color: var(--muted); cursor: pointer; line-height: 0; transition: border-color .15s var(--ease), color .15s var(--ease); }
+    .cols-btn:hover { color: var(--ink); }
+    .cols-btn[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
+    @media (max-width: 760px) {
+      .cols-toggle { display: inline-flex; }       /* le toggle n'a de sens que sur mobile */
+      .pgrid[data-cols="1"] { grid-template-columns: 1fr; }   /* override de la grille 2-col mobile */
+    }
+
     .cat-panel { border: 1px solid var(--line); border-top: none; background: var(--paper); padding: clamp(18px, 2.2vw, 28px) var(--gutter); }
     .cat-panel[hidden] { display: none; }
     .cat-panel__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px clamp(20px, 3vw, 40px); }
@@ -280,7 +290,7 @@
     </div>
     <div class="filterbar__right">
       <span class="plp-count" data-plp-count></span>
-      <span class="plp-count plp-loading" data-plp-loading hidden>chargement du catalogue…</span>
+      <span class="plp-count plp-loading" data-plp-loading hidden></span>
       <select class="fselect" data-filter-brand aria-label="Marque"><option value="">Toutes les marques</option></select>
       <select class="fselect" data-sort aria-label="Trier">
         <option value="pop">Les plus populaires</option>
@@ -288,6 +298,14 @@
         <option value="desc">Prix décroissant</option>
         <option value="az">A → Z</option>
       </select>
+      <div class="cols-toggle" data-cols-toggle role="group" aria-label="Affichage">
+        <button type="button" class="cols-btn" data-cols="1" aria-label="Une colonne" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="10" height="12" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+        <button type="button" class="cols-btn" data-cols="2" aria-label="Deux colonnes" aria-pressed="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="5" height="12" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="2" width="5" height="12" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -427,6 +445,22 @@
       "fatboy", "hkliving", "pols-potten",
     ]);
     const grid = document.querySelector("[data-grid]");
+
+    // Toggle colonnes (mobile) — persistant en localStorage.
+    const colsToggle = document.querySelector("[data-cols-toggle]");
+    if (grid && colsToggle) {
+      const setCols = (c) => {
+        grid.dataset.cols = c;
+        try { localStorage.setItem("plp-cols", c); } catch (e) {}
+        colsToggle.querySelectorAll(".cols-btn").forEach((b) =>
+          b.setAttribute("aria-pressed", b.dataset.cols === c ? "true" : "false"));
+      };
+      let saved = "2"; try { if (localStorage.getItem("plp-cols") === "1") saved = "1"; } catch (e) {}
+      setCols(saved);
+      colsToggle.addEventListener("click", (e) => {
+        const b = e.target.closest(".cols-btn"); if (b) setCols(b.dataset.cols);
+      });
+    }
     const popGrid = document.querySelector("[data-pop-grid]");
     const popSection = document.querySelector("[data-pop-section]");
     const countEl = document.querySelector("[data-plp-count]");
@@ -605,7 +639,7 @@
       // designer's pieces, so a "most popular" split would only fragment it.
       // Pas de bande « populaires » quand une catégorie est filtrée → grille
       // nette (façon Vitra). Sinon, top 4 du catalogue comme avant.
-      const showPop = all.length > 4 && !state.designer && !state.cats.length;
+      const showPop = all.length > 4 && !state.designer && !state.cats.length && state.sort === "pop";
       popSection.style.display = showPop ? "" : "none";
       const pop = showPop ? all.slice().sort((a, b) => popScore(b) - popScore(a)).slice(0, 4) : [];
       if (showPop) {
