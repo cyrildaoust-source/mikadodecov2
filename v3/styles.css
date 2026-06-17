@@ -467,7 +467,18 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
   .chips-select:focus { outline: none; border-color: var(--accent-ink); }
 }
 .filterbar__right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
-.fselect { font-family: inherit; font-size: var(--fs-small); border: 1px solid var(--line); background: var(--paper); padding: 9px 12px; color: var(--ink); }
+.fselect {
+  font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 500;
+  border: 1px solid var(--line); border-radius: 0;            /* carré, comme Catégorie */
+  background: var(--paper); color: var(--ink);
+  padding: 9px 36px 9px 14px;                                 /* place pour le chevron */
+  cursor: pointer; letter-spacing: .02em;
+  appearance: none; -webkit-appearance: none;                 /* enlève le chrome OS arrondi */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231a1916' stroke-width='1.6'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat: no-repeat; background-position: right 12px center;
+  transition: border-color .15s var(--ease);
+}
+.fselect:hover, .fselect:focus-visible { border-color: var(--ink); outline: none; }
 .plp-count { font-size: var(--fs-small); color: var(--muted); }
 .plp-loading { font-style: italic; opacity: .75; } /* libellé « chargement du catalogue… » pendant le walk progressif */
 .pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2vw, 30px) var(--gap); }
