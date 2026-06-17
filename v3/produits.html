@@ -459,6 +459,12 @@
         try { localStorage.setItem("plp-cols", c); } catch (e) {}
         colsToggle.querySelectorAll(".cols-btn").forEach((b) =>
           b.setAttribute("aria-pressed", b.dataset.cols === c ? "true" : "false"));
+        // 1↔2 colonnes change fortement la hauteur de page : si on était scrollé bas,
+        // ne pas laisser l'utilisateur « dans le vide » sous le footer (no-op sinon).
+        requestAnimationFrame(() => {
+          const maxY = document.documentElement.scrollHeight - window.innerHeight;
+          if (window.scrollY > maxY) window.scrollTo(0, Math.max(0, maxY));
+        });
       };
       let saved = "2"; try { if (localStorage.getItem("plp-cols") === "1") saved = "1"; } catch (e) {}
       setCols(saved);
