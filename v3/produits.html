@@ -122,6 +122,8 @@
        case courante REMPLIE en encre/crème — même langage que le panneau
        Catégorie (« on remplit »). Masquée si une seule page. */
     .grid-head { scroll-margin-top: 104px; } /* offset nav fixe au scroll-to-grille */
+    .plp-countline { margin: 4px 0 2px; }
+    .plp-count { font-family: var(--sans-product); font-size: var(--fs-small); color: var(--muted); letter-spacing: .02em; }
     .plp-pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: clamp(34px, 5vw, 60px); }
     .plp-pagination[hidden] { display: none; }
     .plp-pagination__numbers { display: flex; align-items: center; gap: 6px; }
@@ -289,7 +291,6 @@
       </button>
     </div>
     <div class="filterbar__right">
-      <span class="plp-count" data-plp-count></span>
       <span class="plp-count plp-loading" data-plp-loading hidden></span>
       <select class="fselect" data-filter-brand aria-label="Marque"><option value="">Toutes les marques</option></select>
       <select class="fselect" data-sort aria-label="Trier">
@@ -329,6 +330,8 @@
       <div class="pcard"><div class="pcard__skel"></div></div>
     </div>
   </section>
+
+  <div class="wrap plp-countline"><span class="plp-count" data-plp-count></span></div>
 
   <section class="section wrap">
     <div class="grid-head">
@@ -451,6 +454,8 @@
     if (grid && colsToggle) {
       const setCols = (c) => {
         grid.dataset.cols = c;
+        const pg = document.querySelector("[data-pop-grid]");   // la bande "populaires" est aussi un .pgrid
+        if (pg) pg.dataset.cols = c;
         try { localStorage.setItem("plp-cols", c); } catch (e) {}
         colsToggle.querySelectorAll(".cols-btn").forEach((b) =>
           b.setAttribute("aria-pressed", b.dataset.cols === c ? "true" : "false"));
@@ -629,7 +634,7 @@
     function syncURL() { writeURL(false); }
     function render() {
       const all = base();
-      countEl.textContent = `${all.length} pièce${all.length > 1 ? "s" : ""}`;
+      countEl.textContent = state.loading ? "" : `${all.length} pièce${all.length > 1 ? "s" : ""}`;
       // Designer page hides the filterbar (and its count) — mirror the count
       // next to the "Les pièces de …" grid title instead.
       if (pieceCountEl) pieceCountEl.textContent = (state.designer && state.designer.name) ? countEl.textContent : "";
@@ -1000,6 +1005,7 @@
 
         // Skeleton dans la grille pendant le walk multi-chunks (le catalogue ≈463
         // se charge en ~5 requêtes serveur, bornées à 100) → feedback de chargement.
+        state.loading = true;   // compteur masqué pendant le walk (pas d'incrément visible)
         grid.innerHTML = GRID_SKELETON;
         grid.dataset.key = ""; // invalide la clé idempotente → le 1er render reconstruit
         grid.setAttribute("aria-busy", "true");
@@ -1014,6 +1020,7 @@
           if (catalogLoadingEl) catalogLoadingEl.hidden = false;
         });
         if (myGen !== walkGen) return; // un re-walk (catégorie) a pris le relais
+        state.loading = false;   // walk fini → le compteur final s'affiche d'un coup
 
         if (res._notFound) {
           titleEl.textContent = "Collection introuvable";
@@ -1043,6 +1050,7 @@
           })
           .catch((e) => console.warn("[plp] collections indisponibles:", e.message));
       } catch (e) {
+        state.loading = false;
         grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`;
         grid.dataset.key = ""; // contenu non-carte → invalide la clé idempotente
         grid.removeAttribute("aria-busy");
@@ -1056,6 +1064,7 @@
     // (ancien comportement : `if (state.loading) return` perdait le 2e toggle).
     async function reloadGrid() {
       const myGen = ++walkGen;
+      state.loading = true;   // compteur masqué pendant le re-walk catégorie
       grid.setAttribute("aria-busy", "true");
       if (catalogLoadingEl) catalogLoadingEl.hidden = false;
       try {
@@ -1066,9 +1075,10 @@
         });
         if (myGen !== walkGen) return; // un toggle plus récent a pris le relais
         ALL = (res && res.items) || [];
+        state.loading = false;
         render();
       } catch (e) {
-        if (myGen === walkGen) { ALL = []; render(); } // jamais de grille périmée sous la nouvelle URL
+        if (myGen === walkGen) { ALL = []; state.loading = false; render(); } // jamais de grille périmée sous la nouvelle URL
         console.warn("[plp] reloadGrid:", e.message);
       } finally {
         if (myGen === walkGen) { grid.removeAttribute("aria-busy"); if (catalogLoadingEl) catalogLoadingEl.hidden = true; }
