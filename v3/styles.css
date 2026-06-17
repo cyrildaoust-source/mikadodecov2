@@ -842,8 +842,15 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
   .sel-summary { position: static; }
   .jgrid { grid-template-columns: 1fr; }
   .formgrid2 { grid-template-columns: 1fr; }
-  .filterbar__right { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 10px; }
-  .fselect { flex: 1 1 140px; min-width: 0; }
+  /* Filterbar mobile : promouvoir TOUS les contrôles en enfants flex directs de
+     .filterbar (sinon .filterbar__right en width:100% wrappe seul → Catégorie isolée
+     avec un vide à droite). Résultat : 2 par ligne, équilibré, sans vide.
+     `>` pour battre la règle inline .filterbar__left{display:flex} de produits.html. */
+  .filterbar { gap: 10px; }
+  .filterbar > .filterbar__left, .filterbar > .filterbar__right { display: contents; }
+  .filterbar .cat-trigger, .filterbar .fselect { flex: 1 1 calc(50% - 5px); min-width: 0; }
+  .filterbar .cols-toggle { flex: 0 0 auto; }
+  .filterbar .plp-loading { display: none; }   /* span vide (compteur déplacé en Étape 2) → pas de slot flex parasite */
 }
 
 /* ---------- cart drawer (mini-cart) ----------
