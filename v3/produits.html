@@ -454,6 +454,8 @@
     if (grid && colsToggle) {
       const setCols = (c) => {
         grid.dataset.cols = c;
+        const pg = document.querySelector("[data-pop-grid]");   // la bande "populaires" est aussi un .pgrid
+        if (pg) pg.dataset.cols = c;
         try { localStorage.setItem("plp-cols", c); } catch (e) {}
         colsToggle.querySelectorAll(".cols-btn").forEach((b) =>
           b.setAttribute("aria-pressed", b.dataset.cols === c ? "true" : "false"));
