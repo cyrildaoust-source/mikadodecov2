@@ -107,8 +107,9 @@
     .cat-panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
     .cat-panel__title { font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 600; letter-spacing: .02em; }
     .cat-panel__x { background: none; border: none; cursor: pointer; font-size: 26px; line-height: 1; color: var(--ink); padding: 4px; margin: -4px; }
-    .cat-panel__grid { display: flex; flex-wrap: wrap; gap: 8px; }
-    .cat-opt { display: inline-flex; align-items: center; cursor: pointer; padding: 8px 14px; border: 1px solid var(--line); font-family: var(--sans-product); font-size: var(--fs-small); color: var(--ink); line-height: 1; transition: border-color .12s var(--ease), background .12s var(--ease), color .12s var(--ease); }
+    .cat-panel__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .cat-opt { display: flex; align-items: center; cursor: pointer; padding: 8px 14px; border: 1px solid var(--line); font-family: var(--sans-product); font-size: var(--fs-small); color: var(--ink); line-height: 1; transition: border-color .12s var(--ease), background .12s var(--ease), color .12s var(--ease); }
+    @media (max-width: 760px) { .cat-panel__grid { grid-template-columns: repeat(2, 1fr); } }
     .cat-opt:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
     .cat-opt:has(.cat-opt__box:checked) { border-color: var(--accent-ink); background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
     .cat-opt:has(.cat-opt__box:focus-visible) { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
@@ -126,8 +127,6 @@
     .plp-chip__x { font-size: 1.3em; line-height: 1; color: var(--muted); }
     .plp-chip:hover .plp-chip__x { color: var(--accent-ink); }
     .plp-chip--clear { border: none; color: var(--accent-ink); text-decoration: underline; padding: 6px 4px; }
-    @media (max-width: 900px) { .cat-panel__grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px) { .cat-panel__grid { grid-template-columns: 1fr; } }
 
     /* Pagination numérotée (remplace « Voir plus ») · DA Mikado : coins nets,
        case courante REMPLIE en encre/crème — même langage que le panneau
