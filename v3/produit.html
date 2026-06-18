@@ -343,6 +343,20 @@
         });
       });
 
+      // Précharge les autres images de la galerie (à la bonne résolution via srcset)
+      // pour un changement de photo instantané — différé pour ne pas gêner le LCP.
+      const preloadGallery = () => {
+        imgs.forEach((src) => {
+          if (!src || src === (current.image || imgs[0])) return;  // la principale charge déjà
+          const im = new Image();
+          im.sizes = MAIN_SIZES;
+          im.srcset = srcsetFor(src);
+          im.src = src;
+        });
+      };
+      if ("requestIdleCallback" in window) requestIdleCallback(preloadGallery, { timeout: 1500 });
+      else setTimeout(preloadGallery, 700);
+
       // Refresh every dropdown's toggle + active option + main image / price
       // / status / promo to reflect `currentSelection` and `current`. Called
       // after any axis change.
