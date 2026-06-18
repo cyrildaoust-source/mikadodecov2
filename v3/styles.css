@@ -159,13 +159,13 @@ ul { list-style: none; }
 .chrome a.nlink, .chrome .nav__util { font-size: var(--fs-nav); font-weight: 400; position: relative; white-space: nowrap; }
 .chrome a.nlink::after { content: ''; position: absolute; left: 0; bottom: -3px; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
 .chrome a.nlink:hover::after { transform: scaleX(1); }
-.nav__burger { display: none; font-size: var(--fs-nav); }
+.nav__burger { display: none; align-items: center; min-height: 44px; padding: 0 4px; font-size: var(--fs-nav); }
 .chrome--solid, .chrome:hover { background: var(--paper); color: var(--ink); border-bottom-color: var(--line); }
 
 /* mobile drawer */
 .drawer { position: fixed; inset: 0; background: var(--paper); color: var(--ink); z-index: 100; transform: translateX(-100%); visibility: hidden; transition: transform .4s var(--ease), visibility 0s .4s; display: flex; flex-direction: column; padding: 22px var(--gutter); }
 .drawer.open { transform: none; visibility: visible; transition: transform .4s var(--ease), visibility 0s 0s; }
-.drawer__close { align-self: flex-end; font-size: 30px; line-height: 1; margin-bottom: 14px; }
+.drawer__close { align-self: flex-end; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; font-size: 30px; line-height: 1; margin-bottom: 14px; }
 @media (min-width: 921px) { .drawer { display: none; } }
 
 /* ============================================================
@@ -391,7 +391,9 @@ ul { list-style: none; }
 /* ============================================================
    SHARED PAGE PRIMITIVES (catalogue, brands, selection, forms, journal)
    ============================================================ */
-.nav__cart { position: relative; display: inline-flex; align-items: center; color: inherit; }
+.nav__cart { position: relative; display: inline-flex; align-items: center; justify-content: center; color: inherit; }
+/* WCAG 2.5.8 : zone tactile 44px centrée sur l'icône, sans bouger l'icône ni le badge */
+.nav__cart::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; }
 .nav__cart svg { display: block; }
 .cartcount { position: absolute; top: -7px; right: -9px; display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--accent-ink); color: var(--paper); font-size: 10px; font-weight: 600; line-height: 1; }
 .cartcount.is-empty { display: none; }
@@ -559,7 +561,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sel-item__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .08em; color: var(--subtle); }
 .sel-item__name { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-body); color: var(--ink-deep); margin-top: 2px; }
 .sel-item__price { font-family: var(--sans-product); font-weight: 600; color: var(--accent-ink); }
-.sel-item__remove { background: none; border: none; color: var(--muted); font-size: var(--fs-small); text-decoration: underline; cursor: pointer; }
+.sel-item__remove { display: inline-flex; align-items: center; min-height: 24px; background: none; border: none; color: var(--muted); font-size: var(--fs-small); text-decoration: underline; cursor: pointer; }
 .sel-item__controls { display: flex; align-items: center; gap: 18px; margin-top: 12px; flex-wrap: wrap; }
 .sel-summary { position: sticky; top: 130px; background: var(--paper-2); padding: clamp(24px, 3vw, 36px); }
 .sel-summary h2 { font-family: var(--serif); font-weight: 600; font-size: 28px; margin-bottom: 18px; }
@@ -872,7 +874,7 @@ body.cartd-locked { overflow: hidden; }
 .cartd.open .cartd__panel { transform: none; visibility: visible; transition: transform .4s var(--ease), visibility 0s 0s; }
 .cartd__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px var(--gutter) 16px; border-bottom: 1px solid var(--line); }
 .cartd__title { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1; color: var(--ink-deep); }
-.cartd__close { background: none; border: none; font-size: 30px; line-height: 1; color: var(--ink); cursor: pointer; padding: 0 4px; }
+.cartd__close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: none; border: none; font-size: 30px; line-height: 1; color: var(--ink); cursor: pointer; }
 .cartd__body { flex: 1 1 auto; overflow-y: auto; padding: 4px var(--gutter); -webkit-overflow-scrolling: touch; }
 .cartd__item { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .cartd__img { width: 64px; height: 64px; object-fit: cover; background: var(--tile); }
