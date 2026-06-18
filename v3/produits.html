@@ -104,17 +104,28 @@
 
     .cat-panel { border: 1px solid var(--line); border-top: none; background: var(--paper); padding: clamp(18px, 2.2vw, 28px) var(--gutter); }
     .cat-panel[hidden] { display: none; }
-    .cat-panel__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px clamp(20px, 3vw, 40px); }
-    .cat-opt { display: flex; align-items: center; gap: 11px; cursor: pointer; padding: 5px 0; font-family: var(--sans-product); font-size: var(--fs-small); color: var(--ink); line-height: 1.25; }
-    .cat-opt:hover .cat-opt__label { color: var(--accent-ink); }
-    .cat-opt__box { appearance: none; -webkit-appearance: none; flex: none; margin: 0; width: 17px; height: 17px; border: 1.5px solid var(--ink); background: transparent; cursor: pointer; transition: background .12s var(--ease); }
-    .cat-opt__box:checked { background: var(--ink); }
-    .cat-opt__box:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+    .cat-panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .cat-panel__title { font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 600; letter-spacing: .02em; }
+    .cat-panel__x { background: none; border: none; cursor: pointer; font-size: 26px; line-height: 1; color: var(--ink); padding: 4px; margin: -4px; }
+    .cat-panel__grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cat-opt { display: inline-flex; align-items: center; cursor: pointer; padding: 8px 14px; border: 1px solid var(--line); font-family: var(--sans-product); font-size: var(--fs-small); color: var(--ink); line-height: 1; transition: border-color .12s var(--ease), background .12s var(--ease), color .12s var(--ease); }
+    .cat-opt:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
+    .cat-opt:has(.cat-opt__box:checked) { border-color: var(--accent-ink); background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+    .cat-opt:has(.cat-opt__box:focus-visible) { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+    .cat-opt__box { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
     .cat-panel__actions { display: flex; justify-content: flex-end; align-items: center; gap: 24px; margin-top: clamp(14px, 2vw, 22px); padding-top: 16px; border-top: 1px solid var(--line); }
     .cat-panel__clear, .cat-panel__close { font-family: var(--sans-product); font-size: var(--fs-small); background: none; border: none; cursor: pointer; padding: 4px 2px; letter-spacing: .02em; }
     .cat-panel__clear { color: var(--muted); }
     .cat-panel__clear:hover { color: var(--ink); }
     .cat-panel__close { color: var(--accent-ink); border-bottom: 1px solid currentColor; }
+    /* chips de filtres actifs (sous le compteur) */
+    .plp-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0 2px; }
+    .plp-chips[hidden] { display: none; }
+    .plp-chip { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-size: var(--fs-meta); border: 1px solid var(--line-ink); background: var(--paper); color: var(--ink); padding: 6px 10px; cursor: pointer; letter-spacing: .02em; line-height: 1; }
+    .plp-chip:hover { border-color: var(--accent-ink); }
+    .plp-chip__x { font-size: 1.3em; line-height: 1; color: var(--muted); }
+    .plp-chip:hover .plp-chip__x { color: var(--accent-ink); }
+    .plp-chip--clear { border: none; color: var(--accent-ink); text-decoration: underline; padding: 6px 4px; }
     @media (max-width: 900px) { .cat-panel__grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 520px) { .cat-panel__grid { grid-template-columns: 1fr; } }
 
@@ -313,6 +324,10 @@
   <!-- Panneau Catégorie : multi-sélection, filtrage serveur (façon Vitra · DA
        Mikado). Rempli par le module ; n'apparaît que sur le catalogue. -->
   <div class="cat-panel wrap" id="cat-panel" data-cat-panel hidden>
+    <div class="cat-panel__head">
+      <span class="cat-panel__title">Catégorie</span>
+      <button type="button" class="cat-panel__x" data-cat-close aria-label="Fermer les filtres">&times;</button>
+    </div>
     <div class="cat-panel__grid" data-cat-grid></div>
     <div class="cat-panel__actions">
       <button type="button" class="cat-panel__clear" data-cat-clear>Supprimer le filtre</button>
@@ -332,6 +347,7 @@
   </section>
 
   <div class="wrap plp-countline"><span class="plp-count" data-plp-count></span></div>
+  <div class="wrap plp-chips" data-cat-chips hidden></div>
 
   <section class="section wrap">
     <div class="grid-head">
@@ -1140,16 +1156,27 @@
     const catPanel   = document.querySelector("[data-cat-panel]");
     const catGrid    = document.querySelector("[data-cat-grid]");
     const catCount   = document.querySelector("[data-cat-count]");
+    const catChips   = document.querySelector("[data-cat-chips]");
+    const CHIP_LABELS = new Map(CATEGORIES.map((c) => [c.h, c.t]));   // libellés des chips (CAT_LABEL est déjà pris l.378)
     if (catGrid && !state.coll && !state.tag && !state.designer) {
       catGrid.innerHTML = CATEGORIES.map((c) =>
         `<label class="cat-opt"><input type="checkbox" class="cat-opt__box" value="${c.h}"${state.cats.includes(c.h) ? " checked" : ""} /><span class="cat-opt__label">${escapeHtml(c.t)}</span></label>`
       ).join("");
 
+      const renderChips = () => {
+        if (!catChips) return;
+        if (!state.cats.length) { catChips.hidden = true; catChips.innerHTML = ""; return; }
+        catChips.hidden = false;
+        catChips.innerHTML = state.cats.map((h) =>
+          `<button type="button" class="plp-chip" data-chip-remove="${escapeHtml(h)}">${escapeHtml(CHIP_LABELS.get(h) || h)} <span class="plp-chip__x" aria-hidden="true">&times;</span></button>`
+        ).join("") + `<button type="button" class="plp-chip plp-chip--clear" data-cat-clear>Tout effacer</button>`;
+      };
       const syncTrigger = () => {
         const n = state.cats.length;
         catCount.hidden = n === 0;
         catCount.textContent = n ? ` · ${n}` : "";
         catTrigger.classList.toggle("is-active", n > 0);
+        renderChips();
       };
       syncTrigger();
 
@@ -1158,7 +1185,7 @@
         catTrigger.setAttribute("aria-expanded", open ? "true" : "false");
       };
       catTrigger.addEventListener("click", (e) => { e.stopPropagation(); setOpen(catPanel.hidden); });
-      document.querySelector("[data-cat-close]").addEventListener("click", () => setOpen(false));
+      document.querySelectorAll("[data-cat-close]").forEach((b) => b.addEventListener("click", () => setOpen(false)));
       // Fermer au clic en dehors (déclencheur et panneau restent cliquables).
       document.addEventListener("click", (e) => {
         if (catPanel.hidden) return;
@@ -1181,10 +1208,20 @@
         else state.cats = state.cats.filter((x) => x !== h);
         applyCats();
       });
-      document.querySelector("[data-cat-clear]").addEventListener("click", () => {
+      const clearCats = () => {
         if (!state.cats.length) return;
         state.cats = [];
         catGrid.querySelectorAll(".cat-opt__box").forEach((b) => { b.checked = false; });
+        applyCats();
+      };
+      document.querySelector("[data-cat-clear]").addEventListener("click", clearCats);   // bouton du panneau
+      if (catChips) catChips.addEventListener("click", (e) => {
+        if (e.target.closest("[data-cat-clear]")) { clearCats(); return; }   // "Tout effacer"
+        const rm = e.target.closest("[data-chip-remove]"); if (!rm) return;
+        const h = rm.dataset.chipRemove;
+        state.cats = state.cats.filter((x) => x !== h);
+        const box = catGrid.querySelector(`.cat-opt__box[value="${(window.CSS && CSS.escape) ? CSS.escape(h) : h}"]`);
+        if (box) box.checked = false;
         applyCats();
       });
     }
