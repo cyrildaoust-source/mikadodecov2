@@ -252,7 +252,6 @@
               : p.longDelay
                 ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande`
                 : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}`}</p>
-            <p class="pdp__note">Visible aussi en boutique à Uccle. <a href="/rendez-vous.html">Voir en boutique</a>.</p>
             ${p.description ? `<p class="pdp__desc">${escapeHtml(p.description)}</p>` : ""}
             ${metaRows.length ? `<dl class="pdp__meta">${metaRows.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHtml(v)}</dd></div>`).join("")}</dl>` : ""}
           </div>
