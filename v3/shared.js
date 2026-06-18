@@ -496,10 +496,10 @@ function footerHTML() {
           <h4 class="serif">Restons en contact</h4>
           <p>Recevez nos nouveautés, nos coups de cœur et les rendez-vous de la boutique.</p>
           <form class="footer__form" data-newsletter novalidate>
-            <input type="email" name="email" placeholder="Votre adresse e-mail" aria-label="E-mail" required />
+            <input type="email" name="email" placeholder="Votre adresse e-mail" aria-label="E-mail" autocomplete="email" required />
             <input type="text" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
             <button class="btn btn--solid btn--block" type="submit">S'inscrire</button>
-            <p class="footer__news-status" data-news-status></p>
+            <p class="footer__news-status" data-news-status role="status" aria-live="polite"></p>
           </form>
         </div>
         <div><h5>Boutique</h5><ul>
@@ -796,8 +796,17 @@ function bindAnnounce() {
   if (!host) return;
   const items = [...host.querySelectorAll("span")];
   if (items.length < 2) return;
-  let i = 0;
-  setInterval(() => { items[i].classList.remove("on"); i = (i + 1) % items.length; items[i].classList.add("on"); }, 4000);
+  // WCAG 2.2.2 : si l'utilisateur préfère moins d'animation → pas de défilement ;
+  // sinon défile mais se met en PAUSE au survol/focus de la barre.
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let i = 0, timer = null;
+  const start = () => { if (!timer) timer = setInterval(() => { items[i].classList.remove("on"); i = (i + 1) % items.length; items[i].classList.add("on"); }, 4000); };
+  const stop = () => { clearInterval(timer); timer = null; };
+  host.addEventListener("mouseenter", stop);
+  host.addEventListener("mouseleave", start);
+  host.addEventListener("focusin", stop);
+  host.addEventListener("focusout", start);
+  start();
 }
 
 /* ---------- entry ---------- */
