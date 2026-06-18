@@ -846,7 +846,7 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
      .filterbar (sinon .filterbar__right en width:100% wrappe seul → Catégorie isolée
      avec un vide à droite). Résultat : 2 par ligne, équilibré, sans vide.
      `>` pour battre la règle inline .filterbar__left{display:flex} de produits.html. */
-  .filterbar { gap: 10px; }
+  .filterbar { gap: 10px; position: static; }   /* mobile : non-collante (plus de bout coincé sous l'en-tête) */
   .filterbar > .filterbar__left, .filterbar > .filterbar__right { display: contents; }
   .filterbar .cat-trigger, .filterbar .fselect { flex: 1 1 calc(50% - 5px); min-width: 0; }
   .filterbar .cols-toggle { flex: 0 0 auto; }
