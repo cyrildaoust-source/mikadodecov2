@@ -50,15 +50,15 @@
         <p class="muted">On confirme votre créneau dans la journée.</p>
         <form class="form" data-rdv-form novalidate>
           <input type="text" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
-          <div class="field"><label for="r-name">Nom *</label><input id="r-name" name="name" type="text" required /></div>
-          <div class="field"><label for="r-email">E-mail *</label><input id="r-email" name="email" type="email" required /></div>
-          <div class="field"><label for="r-tel">Téléphone</label><input id="r-tel" name="telephone" type="tel" /></div>
+          <div class="field"><label for="r-name">Nom *</label><input id="r-name" name="name" type="text" autocomplete="name" required /></div>
+          <div class="field"><label for="r-email">E-mail *</label><input id="r-email" name="email" type="email" autocomplete="email" required /></div>
+          <div class="field"><label for="r-tel">Téléphone</label><input id="r-tel" name="telephone" type="tel" autocomplete="tel" /></div>
           <div class="formgrid2">
             <div class="field"><label for="r-date">Date souhaitée</label><input id="r-date" name="date" type="date" /></div>
             <div class="field"><label for="r-slot">Créneau</label><select id="r-slot" name="slot"><option>Matin (10h–13h)</option><option>Après-midi (13h–18h)</option></select></div>
           </div>
           <div class="field"><label for="r-msg">Votre projet (optionnel)</label><textarea id="r-msg" name="projet_msg" style="min-height:84px"></textarea></div>
-          <p class="form-error" data-error style="display:none"></p>
+          <p class="form-error" data-error role="alert" style="display:none"></p>
           <button class="btn btn--blue btn--block" type="submit" data-submit>Demander ce rendez-vous</button>
         </form>
       </div>

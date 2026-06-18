@@ -70,11 +70,11 @@
       <form class="form" data-contact-form novalidate>
           <input type="text" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
         <div class="formgrid2">
-          <div class="field"><label for="c-name">Nom *</label><input id="c-name" name="name" type="text" required /></div>
-          <div class="field"><label for="c-email">E-mail *</label><input id="c-email" name="email" type="email" required /></div>
+          <div class="field"><label for="c-name">Nom *</label><input id="c-name" name="name" type="text" autocomplete="name" required /></div>
+          <div class="field"><label for="c-email">E-mail *</label><input id="c-email" name="email" type="email" autocomplete="email" required /></div>
         </div>
         <div class="formgrid2">
-          <div class="field"><label for="c-tel">Téléphone</label><input id="c-tel" name="telephone" type="tel" /></div>
+          <div class="field"><label for="c-tel">Téléphone</label><input id="c-tel" name="telephone" type="tel" autocomplete="tel" /></div>
           <div class="field"><label for="c-projet">Sujet</label>
             <select id="c-projet" name="projet">
               <option value="">Sélectionner…</option>
@@ -88,7 +88,7 @@
           </div>
         </div>
         <div class="field"><label for="c-msg">Message *</label><textarea id="c-msg" name="message" required></textarea></div>
-        <p class="form-error" data-error style="display:none"></p>
+        <p class="form-error" data-error role="alert" style="display:none"></p>
         <button class="btn btn--solid" type="submit" data-submit>Envoyer</button>
         <p style="font-size:var(--fs-meta);color:var(--subtle)">En envoyant ce message, vous acceptez d'être recontacté au sujet de votre demande.</p>
       </form>
