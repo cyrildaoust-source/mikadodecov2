@@ -507,6 +507,14 @@ function mapProduct(node, opts = {}) {
     subcategory: meta.subcategory || node.tags.find(t => t.startsWith('sub:'))?.replace('sub:', '') || '',
     material:    meta.material    || '',
     dimensions:  meta.dimensions  || '',
+    // Caractéristiques PDP additionnelles (métafields custom.* — vides tant que
+    // l'importer Shopify n'a pas créé+rempli les définitions ; lues seulement par
+    // PRODUCT_QUERY → s'affichent toutes seules une fois remplies, sans déploiement).
+    usage:       meta.usage       || '',
+    entretien:   meta.entretien   || '',
+    origin:      meta.origin      || '',
+    weight:      meta.weight      || '',
+    warranty:    meta.warranty    || '',
     price,
     priceMin,
     priceMax,
@@ -555,6 +563,7 @@ function mapProduct(node, opts = {}) {
     variants:    (node.variants?.edges || []).map(e => e?.node).filter(Boolean).map(v => ({
       id: v.id,
       title: v.title,
+      sku: v.sku || '',
       price: parseFloat(v.price?.amount),
       available: v.availableForSale,
       options: (v.selectedOptions || []).map(o => ({ name: o.name, value: o.value })),
@@ -1025,6 +1034,7 @@ const PRODUCT_QUERY = `
           node {
             id
             title
+            sku
             price { amount currencyCode }
             availableForSale
             selectedOptions { name value }
@@ -1039,6 +1049,11 @@ const PRODUCT_QUERY = `
         { namespace: "custom", key: "dimensions" }
         { namespace: "custom", key: "lead_time" }
         { namespace: "custom", key: "subcategory" }
+        { namespace: "custom", key: "usage" }
+        { namespace: "custom", key: "entretien" }
+        { namespace: "custom", key: "origin" }
+        { namespace: "custom", key: "weight" }
+        { namespace: "custom", key: "warranty" }
       ]) { key value }
       # Recommandations gérées côté Shopify (app Search & Discovery), stockées en
       # métafields list.product_reference et lues dynamiquement — rien de hardcodé.
