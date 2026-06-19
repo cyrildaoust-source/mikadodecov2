@@ -167,7 +167,7 @@
         ? [800, 1280, 2048].map((w) => `${widthVariant(url, w)} ${w}w`).join(", ") : "";
       const MAIN_SIZES = "(max-width: 760px) 92vw, 53vw";
       const variants = Array.isArray(p.variants) ? p.variants : [];
-      let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true, sku: "" };
+      let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true, sku: "", qty: null };
 
       // Walk every variant to collect the option axis NAMES — used only to label
       // the variant drawer/trigger dynamically. The drawer lists a FLAT grid of
@@ -187,20 +187,37 @@
 
       // Image d'une variante (avec repli produit) à la largeur voulue.
       const variantImg = (v, w) => widthVariant((v && v.image) || p.image || imgs[0] || "", w);
-      // Dispo HONNÊTE d'une VARIANTE (§1.3) : `available` = « commandable », PAS
-      // « en stock immédiat ». Point vert = commandable / ambre = indisponible ; le
-      // TEXTE reste ambre dans les deux cas (convention .pdp__avail).
-      const availInline = (v) => (v && v.available !== false)
-        ? `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>Disponible`
-        : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Indisponible`;
-      // Dispo PRODUIT (showroom / livraison) — gâtée sur p.inStock SEUL (jamais sur
-      // une variante) : « À voir en boutique » (lien Maps) UNIQUEMENT si inStock.
+      // Dispo HONNÊTE PAR VARIANTE — 3 états sur le VRAI stock (v.qty = quantityAvailable),
+      // PAS sur availableForSale (= true partout en oversell inventoryPolicy:CONTINUE).
+      //   available===false → "unavailable" · qty>0 → "instock" · sinon → "order".
+      // Fallback : si qty revient null (scope Storefront non exposé), qty n'est PAS un
+      // nombre → jamais "instock" : on n'affirme aucune dispo non vérifiable.
+      const variantState = (v) => {
+        if (!v || v.available === false) return "unavailable";
+        if (typeof v.qty === "number" && v.qty > 0) return "instock";
+        return "order";
+      };
+      // Badge dot+texte (grille tiroir, aperçu, bloc coloris buy-box) — texte ambre
+      // partout ; SEUL le point change : vert --stock (en stock) / ambre --order.
+      const availInline = (v) => {
+        const s = variantState(v);
+        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>Disponible`;
+        if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Indisponible`;
+        return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Sur commande`;
+      };
+      // Ligne dispo PRODUIT (.pdp__avail) — reflète la VARIANTE sélectionnée (plus de
+      // gating p.inStock produit, qui rendait toute variante « À voir en boutique ») :
+      //   en stock → « À voir en boutique » (+ lien Maps) · indispo → « Indisponible »
+      //   · sinon → « Sur commande » (delai-long) / « Livraison · leadTimeLabel ».
       const SHOWROOM_MAPS = "https://www.google.com/maps/dir/?api=1&destination=75%20Rue%20du%20Doyenn%C3%A9%2C%201180%20Uccle";
-      const availStore = () => p.inStock
-        ? `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>À voir en boutique</strong> · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, Uccle</a>`
-        : p.longDelay
+      const availStore = (v) => {
+        const s = variantState(v || current);
+        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>À voir en boutique</strong> · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, Uccle</a>`;
+        if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Indisponible</strong>`;
+        return p.longDelay
           ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande`
           : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}`;
+      };
 
       // Tableau Caractéristiques (section sœur, sous la galerie) — n'affiche QUE les
       // lignes renseignées ; majoritairement vide tant que les métafields custom.*
@@ -253,8 +270,7 @@
             <button class="btn btn--blue btn--block pdp__cta" data-add>+ Ajouter à la sélection</button>
             <p class="pdp__cart-status" data-cart-status></p>
             <div class="pdp__reassure">
-              <p class="pdp__avail" data-avail role="status" aria-live="polite">${availStore()}</p>
-              ${p.inStock ? `<p class="pdp__ship">Livraison · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}</p>` : ""}
+              <p class="pdp__avail" data-avail role="status" aria-live="polite">${availStore(current)}</p>
               <p class="pdp__contact"><a href="/contact.html">Une question ? Écrivez-nous <span aria-hidden="true">→</span></a></p>
             </div>
           </div>
@@ -397,8 +413,8 @@
         if (cName) cName.textContent = current.title || "";
         const cAvail = host.querySelector("[data-coloris-avail]");
         if (cAvail) cAvail.innerHTML = availInline(current);
-        const availEl = host.querySelector("[data-avail]");          // §1.3 : gâtée sur p.inStock SEUL (idempotent par variante, mais ré-annoncé)
-        if (availEl) availEl.innerHTML = availStore();
+        const availEl = host.querySelector("[data-avail]");          // dispo PRODUIT reflète la variante sélectionnée (en stock / indispo / sur commande)
+        if (availEl) availEl.innerHTML = availStore(current);
         const skuEl = host.querySelector("[data-spec-sku]");          // Référence = sku de la variante
         if (skuEl) skuEl.textContent = current.sku || "—";
       };

@@ -678,7 +678,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .pdp__dot-btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 
 /* Variant picker (buy-box) — selected-variant preview + "Voir les N …" trigger
-   that opens the left-sliding variant drawer (.vard). Replaces the old dropdown. */
+   that opens the right-sliding variant drawer (.vard). Replaces the old dropdown. */
 .pdp__variant-pick { margin: 18px 0; }
 .pdp__variant-pick .label { display: block; font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 9px; }
 .pdp__variant-current { display: flex; align-items: center; gap: 14px; }
@@ -935,16 +935,17 @@ body.cartd-locked { overflow: hidden; }
 }
 
 /* ---------- variant drawer (PDP) ----------
-   Mirror of the cart drawer, but slides from the LEFT. Dedicated body lock
-   (vard-locked, NOT cartd-locked). z-index 122 (cartd 120 < vard 122 < lightbox 130). */
+   Slides from the RIGHT (same side/values as the cart drawer .cartd__panel).
+   Dedicated body lock (vard-locked, NOT cartd-locked). z-index 122 (cartd 120 <
+   vard 122 < lightbox 130). Opening the variant drawer closes the cart drawer. */
 body.vard-locked { overflow: hidden; }
 .vard { position: fixed; inset: 0; z-index: 122; pointer-events: none; }
 .vard__backdrop { position: absolute; inset: 0; background: rgba(26, 25, 22, .45); opacity: 0; transition: opacity .4s var(--ease); }
 .vard__panel {
-  position: absolute; top: 0; left: 0; height: 100%; width: min(420px, 88vw);
+  position: absolute; top: 0; right: 0; height: 100%; width: min(560px, 92vw);
   display: flex; flex-direction: column; background: var(--paper); color: var(--ink);
-  box-shadow: 16px 0 48px rgba(26, 25, 22, .18);
-  transform: translateX(-100%); visibility: hidden;
+  box-shadow: -16px 0 48px rgba(26, 25, 22, .18);
+  transform: translateX(100%); visibility: hidden;
   transition: transform .4s var(--ease), visibility 0s .4s;
 }
 .vard.open { pointer-events: auto; }

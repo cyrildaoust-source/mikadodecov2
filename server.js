@@ -566,6 +566,9 @@ function mapProduct(node, opts = {}) {
       sku: v.sku || '',
       price: parseFloat(v.price?.amount),
       available: v.availableForSale,
+      // Vrai stock disponible (Storefront) — distinct de availableForSale qui reste
+      // true en oversell (inventoryPolicy: CONTINUE). null si le scope ne l'expose pas.
+      qty: v.quantityAvailable ?? null,
       options: (v.selectedOptions || []).map(o => ({ name: o.name, value: o.value })),
       image: shopifyResize(v.image?.url || null, PDP_IMAGE_WIDTH),
     })),
@@ -1037,6 +1040,7 @@ const PRODUCT_QUERY = `
             sku
             price { amount currencyCode }
             availableForSale
+            quantityAvailable
             selectedOptions { name value }
             image { url altText }
           }
