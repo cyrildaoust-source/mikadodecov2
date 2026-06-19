@@ -199,9 +199,12 @@
       };
       // Badge dot+texte (grille tiroir, aperçu, bloc coloris buy-box) — texte ambre
       // partout ; SEUL le point change : vert --stock (en stock) / ambre --order.
-      const availInline = (v) => {
+      // En stock → affiche le NOMBRE réel (v.qty = quantityAvailable) : version pleine
+      // « Disponible · X en stock » (aperçu + buy-box) ou compacte « Dispo · X » (vignette).
+      // « Sur commande »/« Indisponible » : jamais de nombre.
+      const availInline = (v, compact) => {
         const s = variantState(v);
-        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>Disponible`;
+        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>${compact ? `Dispo · ${v.qty}` : `Disponible · ${v.qty} en stock`}`;
         if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Indisponible`;
         return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Sur commande`;
       };
@@ -250,24 +253,23 @@
             ${variants.length > 1 ? `
             <div class="pdp__variant-pick">
               <span class="label">${escapeHtml(axisLabel)}</span>
-              <div class="pdp__variant-current">
+              <div class="pdp__variant-bar">
                 <img class="pdp__variant-img" data-coloris-img src="${escapeHtml(variantImg(current, 200))}" alt="" loading="lazy" decoding="async" />
                 <div class="pdp__variant-meta">
                   <span class="pdp__variant-name" data-coloris-name>${escapeHtml(current.title || "")}</span>
                   <span class="pdp__variant-avail" data-coloris-avail role="status" aria-live="polite">${availInline(current)}</span>
                 </div>
               </div>
-              <button class="pdp__variant-open" type="button" data-vard-open aria-haspopup="dialog">Voir les ${variants.length} ${escapeHtml(axisLabelLower)} <span aria-hidden="true">→</span></button>
+              <button class="pdp__variant-open" type="button" data-vard-open aria-haspopup="dialog"><span>Voir les ${variants.length} ${escapeHtml(axisLabelLower)}</span><span aria-hidden="true">→</span></button>
             </div>` : ""}
-            <div class="pdp__qty">
-              <span class="label">Quantité</span>
-              <div class="qty">
+            <div class="pdp__buy">
+              <div class="qty" role="group" aria-label="Quantité">
                 <button class="qty__btn" data-qty-dec aria-label="Diminuer la quantité" type="button">−</button>
                 <input class="qty__val" data-qty-input type="text" inputmode="numeric" value="1" aria-label="Quantité" />
                 <button class="qty__btn" data-qty-inc aria-label="Augmenter la quantité" type="button">+</button>
               </div>
+              <button class="btn btn--blue pdp__cta" data-add>Ajouter au panier</button>
             </div>
-            <button class="btn btn--blue btn--block pdp__cta" data-add>+ Ajouter à la sélection</button>
             <p class="pdp__cart-status" data-cart-status></p>
             <div class="pdp__reassure">
               <p class="pdp__avail" data-avail role="status" aria-live="polite">${availStore(current)}</p>
@@ -293,7 +295,7 @@
       // local "how many to add" — separate from the cart's stored quantity
       let pickQty = 1;
       const setPick = (n) => {
-        pickQty = Math.max(1, Math.min(99, parseInt(n) || 1));
+        pickQty = Math.max(1, Math.min(10, parseInt(n) || 1));   // cap 1–10
         qtyInput.value = pickQty;
       };
       host.querySelector("[data-qty-dec]").addEventListener("click", () => setPick(pickQty - 1));
@@ -303,7 +305,7 @@
       const updateStatus = () => {
         const n = cartQty(current.id);
         status.innerHTML = n > 0
-          ? `Dans la sélection : <strong>${n}</strong> · <a href="/selection.html">Ma sélection</a>`
+          ? `Dans le panier : <strong>${n}</strong> · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`
           : "";
       };
       updateStatus();
@@ -382,6 +384,27 @@
       };
       if ("requestIdleCallback" in window) requestIdleCallback(preloadGallery, { timeout: 1500 });
       else setTimeout(preloadGallery, 700);
+
+      // Précharge les images de TOUTES les variantes (largeur vignette 160 + aperçu 720)
+      // pour que survol ET clic du tiroir soient instantanés — différé (idle), même
+      // esprit que preloadGallery. Sans ça, l'aperçu se chargeait au survol (latence).
+      const preloadVariants = () => {
+        if (variants.length <= 1) return;
+        const seen = new Set();
+        variants.forEach((v) => {
+          const base = (v && v.image) || p.image;
+          if (!base) return;
+          [variantImg(v, 160), variantImg(v, 720)].forEach((src) => {
+            if (!src || seen.has(src)) return;
+            seen.add(src);
+            const im = new Image();
+            im.decoding = "async";
+            im.src = src;
+          });
+        });
+      };
+      if ("requestIdleCallback" in window) requestIdleCallback(preloadVariants, { timeout: 2500 });
+      else setTimeout(preloadVariants, 900);
 
       // ── Application d'une variante (remplace l'ancien refreshAllVselects) ──
       // Source UNIQUE : à partir d'une variante v, met à jour l'image principale
@@ -554,7 +577,7 @@
                   <li class="vard__opt${v.id === current.id ? " is-selected" : ""}" role="option" aria-selected="${v.id === current.id}"${v.available === false ? ' aria-disabled="true"' : ""} data-variant-id="${escapeHtml(v.id)}" tabindex="${v.id === current.id ? "0" : "-1"}">
                     <img class="vard__opt-img" src="${escapeHtml(variantImg(v, 160))}" alt="${escapeHtml(v.title || "")}" loading="lazy" decoding="async" />
                     <span class="vard__opt-name">${escapeHtml(v.title || "")}</span>
-                    <span class="vard__opt-avail">${availInline(v)}</span>
+                    <span class="vard__opt-avail">${availInline(v, true)}</span>
                   </li>`).join("")}</ul>
               </div>
             </aside>
