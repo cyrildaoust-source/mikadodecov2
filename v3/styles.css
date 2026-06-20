@@ -963,9 +963,9 @@ body.vard-locked { overflow: hidden; }
 .vard__preview-avail { display: flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: #b9742c; margin-top: 4px; }
 .vard__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; padding: 0; list-style: none; }
 .vard__opt { display: flex; flex-direction: column; gap: 5px; padding: 0; background: none; border: 1px solid transparent; cursor: pointer; text-align: center; min-height: 44px; }
-.vard__opt:hover { border-color: var(--accent-ink); }
-.vard__opt:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }   /* focus ring DISTINCT de la sélection */
-.vard__opt[aria-selected="true"] { border-color: var(--accent-ink); box-shadow: inset 0 0 0 1px var(--accent-ink); }  /* sélection = bordure renforcée (sans décalage de mise en page) */
+.vard__opt:hover { border-color: var(--line-ink); }                 /* survol = filet encre discret */
+.vard__opt:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }   /* focus ring clavier a11y — inchangé */
+.vard__opt[aria-selected="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }  /* sélection = cadre ENCRE net (DA : bleu réservé au CTA) */
 .vard__opt-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--tile); }
 .vard__opt-name { font-size: var(--fs-meta); color: var(--ink-deep); line-height: 1.2; }
 .vard__opt-avail { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #b9742c; }
