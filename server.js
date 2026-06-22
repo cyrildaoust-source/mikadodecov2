@@ -1027,7 +1027,7 @@ const PRODUCT_QUERY = `
       totalInventory
       collections(first: 20) { edges { node { handle } } }
       featuredImage { url altText }
-      images(first: 10) { edges { node { url altText } } }
+      images(first: 30) { edges { node { url altText } } }
       priceRange {
         minVariantPrice { amount currencyCode }
         maxVariantPrice { amount currencyCode }

@@ -676,22 +676,32 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .pdp__dot-btn::before { content: ""; width: 8px; height: 8px; background: var(--line); transition: background .2s var(--ease); }
 .pdp__dot-btn.is-active::before { background: var(--ink); }
 .pdp__dot-btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+/* Ambiances (desktop) — grandes images ~½ largeur colonne, 2 par ligne. Clic →
+   lightbox. Masquées sur mobile (le rail swipeable les remplace). */
+.pdp__amb { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+.pdp__amb-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--tile); cursor: zoom-in; }
+.pdp__amb-img:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 
 /* Variant picker (buy-box) — selected-variant preview + "Voir les N …" trigger
    that opens the right-sliding variant drawer (.vard). Replaces the old dropdown. */
 .pdp__variant-pick { margin: 18px 0; }
 .pdp__variant-pick .label { display: block; font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 9px; }
-.pdp__variant-bar { display: flex; align-items: center; gap: 16px; padding: 14px; border: 1px solid var(--line); background: var(--paper); }
+/* La barre coloris EST le déclencheur du tiroir (un seul rectangle cliquable) :
+   vignette + nom + dispo à gauche, flèche poussée à droite. Bleu réservé au CTA :
+   survol/focus = filet encre ; l'anneau bleu reste l'indicateur de focus clavier. */
+.pdp__variant-bar { display: flex; align-items: center; gap: 16px; width: 100%; padding: 14px; border: 1px solid var(--line); background: var(--paper); cursor: pointer; text-align: left; font: inherit; color: inherit; transition: border-color .2s var(--ease); }
+.pdp__variant-bar:hover { border-color: var(--line-ink); }
+.pdp__variant-bar:focus-visible { border-color: var(--line-ink); outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 .pdp__variant-img { width: 64px; height: 64px; object-fit: cover; background: var(--tile); flex-shrink: 0; }
 .pdp__variant-meta { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .pdp__variant-name { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-body); color: var(--ink-deep); }
 .pdp__variant-avail { display: flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; color: #b9742c; }
-.pdp__variant-open { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-height: 48px; margin-top: 10px; padding: 0 18px; background: var(--paper); border: 1px solid var(--line-ink); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--ink-deep); cursor: pointer; transition: border-color .2s var(--ease), background .2s var(--ease); }
-.pdp__variant-open:hover { border-color: var(--accent-ink); background: var(--paper-2); }
-.pdp__variant-open:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
-/* buy row — qty stepper (gauche) + CTA (droite, remplit), même hauteur */
+.pdp__variant-bar-arrow { margin-left: auto; flex-shrink: 0; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-body); color: var(--ink-deep); }
+/* buy row — déclencheur Quantité (gauche) + CTA (droite, remplit), même hauteur */
 .pdp__buy { display: flex; align-items: stretch; gap: 14px; margin: 18px 0 6px; }
-.pdp__buy .qty { flex-shrink: 0; }
+.pdp__qty-open { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; min-height: 48px; padding: 0 16px; background: var(--paper); border: 1px solid var(--line-ink); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--ink-deep); cursor: pointer; white-space: nowrap; transition: border-color .2s var(--ease), background .2s var(--ease); }
+.pdp__qty-open:hover { border-color: var(--line-ink); background: var(--paper-2); }
+.pdp__qty-open:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 .pdp__buy .pdp__cta { flex: 1; margin: 0; }
 .pdp__cta { margin: 14px 0 6px; }
 .pdp__cart-status { font-size: var(--fs-small); color: var(--muted); margin-bottom: 14px; min-height: 1.4em; }
@@ -733,7 +743,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 @media (max-width: 760px) {
   .pdp { grid-template-columns: 1fr; }
   .pdp__info { position: static; }
-  .pdp__thumbs { display: none; }   /* miniatures = desktop ; sur mobile le packshot (main) reste affiché + rail d'ambiances dessous */
+  .pdp__amb { display: none; }   /* grille ambiances = desktop ; sur mobile le packshot (main) reste affiché + rail d'ambiances dessous */
   .pdp__rail { display: flex; }
   .pdp__dots { display: flex; }
 }
@@ -973,6 +983,37 @@ body.vard-locked { overflow: hidden; }
 .vard__opt[aria-disabled="true"] .vard__opt-name { opacity: .5; text-decoration: line-through; }
 @media (prefers-reduced-motion: reduce) { .vard__backdrop, .vard__panel { transition: opacity .01s, visibility 0s; } }
 @media (max-width: 760px) { .vard__panel { width: 100vw; } }
+
+/* ---------- quantity drawer (PDP) ----------
+   Slide from the RIGHT (mirror .vard/.cartd). Liste 1→10 + dispo par quantité.
+   Verrou dédié qtyd-locked. z-index 124 (cartd 120 < vard 122 < qtyd 124 < lightbox 130). */
+body.qtyd-locked { overflow: hidden; }
+.qtyd { position: fixed; inset: 0; z-index: 124; pointer-events: none; }
+.qtyd__backdrop { position: absolute; inset: 0; background: rgba(26, 25, 22, .45); opacity: 0; transition: opacity .4s var(--ease); }
+.qtyd__panel {
+  position: absolute; top: 0; right: 0; height: 100%; width: min(380px, 88vw);
+  display: flex; flex-direction: column; background: var(--paper); color: var(--ink);
+  box-shadow: -16px 0 48px rgba(26, 25, 22, .18);
+  transform: translateX(100%); visibility: hidden;
+  transition: transform .4s var(--ease), visibility 0s .4s;
+}
+.qtyd.open { pointer-events: auto; }
+.qtyd.open .qtyd__backdrop { opacity: 1; }
+.qtyd.open .qtyd__panel { transform: none; visibility: visible; transition: transform .4s var(--ease), visibility 0s 0s; }
+.qtyd__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px var(--gutter) 16px; border-bottom: 1px solid var(--line); }
+.qtyd__title { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1; color: var(--ink-deep); }
+.qtyd__close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: none; border: none; font-size: 30px; line-height: 1; color: var(--ink); cursor: pointer; }
+.qtyd__close:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.qtyd__body { flex: 1 1 auto; overflow-y: auto; padding: 8px var(--gutter) 24px; -webkit-overflow-scrolling: touch; }
+.qtyd__list { list-style: none; padding: 0; margin: 0; }
+.qtyd__opt { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 13px 12px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.qtyd__opt:hover { background: var(--paper-2); }
+.qtyd__opt:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: -2px; background: var(--paper-2); }
+.qtyd__opt[aria-selected="true"] { box-shadow: inset 2px 0 0 var(--ink); font-weight: 600; }
+.qtyd__num { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-body); color: var(--ink-deep); }
+.qtyd__state { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; color: #b9742c; }
+@media (prefers-reduced-motion: reduce) { .qtyd__backdrop, .qtyd__panel { transition: opacity .01s, visibility 0s; } }
+@media (max-width: 760px) { .qtyd__panel { width: 100vw; } }
 
 /* ---------- gallery lightbox (PDP) ----------
    Fullscreen image viewer above everything (z-index 130). Dedicated body lock. */

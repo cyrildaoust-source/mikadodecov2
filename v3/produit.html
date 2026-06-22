@@ -255,7 +255,7 @@
             </div>
             ${ambiances.length ? `<div class="pdp__rail" data-rail>${ambiances.map((_src, i) => `<img class="pdp__rail-img" data-rail-img="${i}" src="${escapeHtml(ambiances[i])}" srcset="${escapeHtml(srcsetFor(ambiances[i]))}" sizes="92vw" alt="${escapeHtml(p.name + " — ambiance " + (i + 1))}" loading="lazy" decoding="async" role="button" tabindex="0" aria-label="${escapeHtml("Agrandir la photo d'ambiance " + (i + 1))}" />`).join("")}</div>` : ""}
             ${ambiances.length > 1 ? `<div class="pdp__dots" data-dots role="group" aria-label="Navigation des photos d'ambiance">${ambiances.map((_s, i) => `<button class="pdp__dot-btn${i === 0 ? " is-active" : ""}" data-dot="${i}" type="button" aria-label="Aller à la photo ${i + 1}"></button>`).join("")}</div>` : ""}
-            ${ambiances.length ? `<div class="pdp__thumbs">${ambiances.map((_src, i) => `<img data-thumb="${i}" src="${escapeHtml(ambThumbs[i])}" alt="" loading="lazy" decoding="async" tabindex="0" role="button" aria-label="Voir la photo d'ambiance ${i + 1}" />`).join("")}</div>` : ""}
+            ${ambiances.length ? `<div class="pdp__amb" data-amb-grid>${ambiances.map((_src, i) => `<img class="pdp__amb-img" data-amb="${i}" src="${escapeHtml(ambiances[i])}" srcset="${escapeHtml(srcsetFor(ambiances[i]))}" sizes="(max-width: 760px) 92vw, 26vw" alt="${escapeHtml(p.name + " — ambiance " + (i + 1))}" loading="lazy" decoding="async" role="button" tabindex="0" aria-label="${escapeHtml("Agrandir la photo d'ambiance " + (i + 1))}" />`).join("")}</div>` : ""}
           </div>
           <div class="pdp__info">
             <a class="pdp__brand" href="${brandHref}">${escapeHtml(p.brand || "")}</a>
@@ -265,21 +265,17 @@
             ${variants.length > 1 ? `
             <div class="pdp__variant-pick">
               <span class="label">${escapeHtml(axisLabel)}</span>
-              <div class="pdp__variant-bar">
+              <button class="pdp__variant-bar" type="button" data-vard-open aria-haspopup="dialog">
                 <img class="pdp__variant-img" data-coloris-img src="${escapeHtml(variantImg(current, 200))}" alt="" loading="lazy" decoding="async" />
-                <div class="pdp__variant-meta">
+                <span class="pdp__variant-meta">
                   <span class="pdp__variant-name" data-coloris-name>${escapeHtml(current.title || "")}</span>
                   <span class="pdp__variant-avail" data-coloris-avail role="status" aria-live="polite">${availInline(current)}</span>
-                </div>
-              </div>
-              <button class="pdp__variant-open" type="button" data-vard-open aria-haspopup="dialog"><span>Voir les ${variants.length} ${escapeHtml(axisLabelLower)}</span><span aria-hidden="true">→</span></button>
+                </span>
+                <span class="pdp__variant-bar-arrow" aria-hidden="true">→</span>
+              </button>
             </div>` : ""}
             <div class="pdp__buy">
-              <div class="qty" role="group" aria-label="Quantité">
-                <button class="qty__btn" data-qty-dec aria-label="Diminuer la quantité" type="button">−</button>
-                <input class="qty__val" data-qty-input type="text" inputmode="numeric" value="1" aria-label="Quantité" />
-                <button class="qty__btn" data-qty-inc aria-label="Augmenter la quantité" type="button">+</button>
-              </div>
+              <button class="pdp__qty-open" type="button" data-qtyd-open aria-haspopup="dialog">Quantité : <span data-qty-label>1</span> <span aria-hidden="true">▾</span></button>
               <button class="btn btn--blue pdp__cta" data-add>Ajouter au panier</button>
             </div>
             <p class="pdp__cart-status" data-cart-status></p>
@@ -302,17 +298,15 @@
       const priceEl = host.querySelector("[data-price-el]");
       const cta = host.querySelector("[data-add]");
       const status = host.querySelector("[data-cart-status]");
-      const qtyInput = host.querySelector("[data-qty-input]");
+      const qtyLabel = host.querySelector("[data-qty-label]");
 
-      // local "how many to add" — separate from the cart's stored quantity
+      // local "how many to add" (cap 1–10) — séparé de la quantité stockée au panier.
+      // Choisie via le tiroir Quantité (.qtyd) ; reflétée dans [data-qty-label].
       let pickQty = 1;
       const setPick = (n) => {
         pickQty = Math.max(1, Math.min(10, parseInt(n) || 1));   // cap 1–10
-        qtyInput.value = pickQty;
+        if (qtyLabel) qtyLabel.textContent = pickQty;
       };
-      host.querySelector("[data-qty-dec]").addEventListener("click", () => setPick(pickQty - 1));
-      host.querySelector("[data-qty-inc]").addEventListener("click", () => setPick(pickQty + 1));
-      qtyInput.addEventListener("change", (e) => setPick(e.target.value));
 
       const updateStatus = () => {
         const n = cartQty(current.id);
@@ -453,6 +447,7 @@
         if (availEl) availEl.innerHTML = availStore(current);
         const skuEl = host.querySelector("[data-spec-sku]");          // Référence = sku de la variante
         if (skuEl) skuEl.textContent = current.sku || "—";
+        renderQtyList();                                              // dispo par quantité dépend de current.qty
       };
 
       // ── Lien designer (sous le titre) — progressif & HONNÊTE ──
@@ -582,6 +577,16 @@
         railEl.addEventListener("click", railOpen);
         railEl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") railOpen(e); });
       }
+      // Grille d'ambiances (desktop) → lightbox au clic/Entrée (même séquence).
+      const ambGrid = host.querySelector("[data-amb-grid]");
+      if (ambGrid) {
+        const ambOpen = (e) => {
+          const im = e.target.closest("[data-amb]");
+          if (im) { e.preventDefault(); lbOpen(im.currentSrc || im.getAttribute("src")); }
+        };
+        ambGrid.addEventListener("click", ambOpen);
+        ambGrid.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") ambOpen(e); });
+      }
 
       // ── Tiroir de variantes (glisse de la GAUCHE — miroir du tiroir panier) ──
       // Grille PLATE de toutes les variantes (4/ligne), aperçu en haut, dispo par
@@ -645,7 +650,8 @@
         }
         const openVard = () => {
           vLastFocus = document.activeElement;
-          document.querySelector("[data-cart-drawer]")?.classList.remove("open"); // exclusivité tiroirs : ferme le panier
+          document.querySelector("[data-cart-drawer]")?.classList.remove("open"); // exclusivité tiroirs : ferme panier + quantité
+          document.querySelector("[data-qty-drawer]")?.classList.remove("open");
           vOpts().forEach((o) => {
             const sel = o.dataset.variantId === current.id;
             o.setAttribute("aria-selected", sel ? "true" : "false");
@@ -692,6 +698,97 @@
           }
         });
       }
+
+      // ── Tiroir QUANTITÉ (glisse de la DROITE — calqué sur .vard) ──
+      // Liste 1→10 avec dispo PAR QUANTITÉ : n ≤ current.qty (vrai stock) → point
+      // vert « En stock » ; sinon (ou qty null/0) → point ambre « Sur commande ».
+      // Clic → fixe pickQty (cap 1–10) + ferme. Verrou dédié qtyd-locked ; ferme les
+      // autres tiroirs à l'ouverture. role=listbox, focus-trap, Échap.
+      document.body.insertAdjacentHTML("beforeend", `
+        <div class="qtyd" data-qty-drawer>
+          <div class="qtyd__backdrop" data-qtyd-backdrop></div>
+          <aside class="qtyd__panel" role="dialog" aria-modal="true" aria-label="Choisir la quantité" data-qtyd-panel>
+            <header class="qtyd__head">
+              <h2 class="qtyd__title">Quantité</h2>
+              <button class="qtyd__close" data-qtyd-close type="button" aria-label="Fermer">&times;</button>
+            </header>
+            <div class="qtyd__body">
+              <ul class="qtyd__list" role="listbox" aria-label="Quantité" data-qtyd-list></ul>
+            </div>
+          </aside>
+        </div>`);
+      const QTY_MAX = 10;
+      const qRoot = document.querySelector("[data-qty-drawer]");
+      const qPanel = qRoot.querySelector("[data-qtyd-panel]");
+      const qList = qRoot.querySelector("[data-qtyd-list]");
+      let qLastFocus = null;
+      const lockQtyd = (on) => {
+        const sw = window.innerWidth - document.documentElement.clientWidth;
+        if (on) { if (sw > 0) document.body.style.paddingRight = sw + "px"; document.body.classList.add("qtyd-locked"); }
+        else { document.body.style.paddingRight = ""; document.body.classList.remove("qtyd-locked"); }
+      };
+      // (Re)construit la liste 1→10 selon current.qty. qty null → traité comme 0
+      // (jamais « En stock » — cohérent avec la dispo honnête).
+      function renderQtyList() {
+        const stock = (typeof current.qty === "number") ? current.qty : 0;
+        qList.innerHTML = Array.from({ length: QTY_MAX }, (_x, k) => {
+          const n = k + 1;
+          const ok = n <= stock;
+          return `<li class="qtyd__opt${n === pickQty ? " is-selected" : ""}" role="option" aria-selected="${n === pickQty}" data-qty="${n}" tabindex="${n === pickQty ? "0" : "-1"}">
+            <span class="qtyd__num">${n}</span>
+            <span class="qtyd__state"><span class="pcard__dot ${ok ? "pcard__dot--stock" : "pcard__dot--order"}" aria-hidden="true"></span>${ok ? "En stock" : "Sur commande"}</span>
+          </li>`;
+        }).join("");
+      }
+      const qOpts = () => Array.from(qList.querySelectorAll(".qtyd__opt"));
+      function closeQtyd() {
+        qRoot.classList.remove("open");
+        lockQtyd(false);
+        document.removeEventListener("keydown", qKeydown, true);
+        if (qLastFocus && document.contains(qLastFocus)) qLastFocus.focus();
+        else host.querySelector("[data-qtyd-open]")?.focus();
+      }
+      function qKeydown(e) {
+        if (e.key === "Escape") { e.preventDefault(); closeQtyd(); return; }
+        if (e.key !== "Tab") return;
+        const f = Array.from(qPanel.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')).filter((el) => el.offsetParent !== null && !el.disabled);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      const openQtyd = () => {
+        qLastFocus = document.activeElement;
+        document.querySelector("[data-cart-drawer]")?.classList.remove("open");      // exclusivité tiroirs
+        document.querySelector("[data-variant-drawer]")?.classList.remove("open");
+        renderQtyList();
+        qRoot.classList.add("open");
+        lockQtyd(true);
+        document.addEventListener("keydown", qKeydown, true);
+        requestAnimationFrame(() => (qList.querySelector('.qtyd__opt[tabindex="0"]') || qRoot.querySelector("[data-qtyd-close]"))?.focus());
+      };
+      const qFocus = (t) => { if (!t) return; qOpts().forEach((o) => (o.tabIndex = -1)); t.tabIndex = 0; t.focus(); };
+      const qMove = (from, delta) => {
+        const a = qOpts(); let i = a.indexOf(from); if (i < 0) i = 0;
+        qFocus(a[Math.max(0, Math.min(a.length - 1, i + delta))]);
+      };
+      const pickFromRow = (row) => { if (!row) return; setPick(Number(row.dataset.qty)); closeQtyd(); };
+      host.querySelector("[data-qtyd-open]")?.addEventListener("click", openQtyd);
+      qRoot.querySelector("[data-qtyd-backdrop]").addEventListener("click", closeQtyd);
+      qRoot.querySelector("[data-qtyd-close]").addEventListener("click", closeQtyd);
+      qList.addEventListener("click", (e) => { const o = e.target.closest(".qtyd__opt"); if (o) pickFromRow(o); });
+      qList.addEventListener("keydown", (e) => {
+        const o = e.target.closest(".qtyd__opt"); if (!o) return;
+        switch (e.key) {
+          case "ArrowDown": e.preventDefault(); qMove(o, 1); break;
+          case "ArrowUp":   e.preventDefault(); qMove(o, -1); break;
+          case "Home":      e.preventDefault(); qFocus(qOpts()[0]); break;
+          case "End":       e.preventDefault(); { const a = qOpts(); qFocus(a[a.length - 1]); } break;
+          case "Enter":
+          case " ":         e.preventDefault(); pickFromRow(o); break;
+        }
+      });
+      renderQtyList();   // init
 
       // add the chosen quantity of the current variant to the selection
       cta.addEventListener("click", () => {
