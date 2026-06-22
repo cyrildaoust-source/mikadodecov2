@@ -733,7 +733,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 @media (max-width: 760px) {
   .pdp { grid-template-columns: 1fr; }
   .pdp__info { position: static; }
-  .pdp__main-wrap, .pdp__thumbs { display: none; }   /* le rail swipeable remplace main + miniatures */
+  .pdp__thumbs { display: none; }   /* miniatures = desktop ; sur mobile le packshot (main) reste affiché + rail d'ambiances dessous */
   .pdp__rail { display: flex; }
   .pdp__dots { display: flex; }
 }

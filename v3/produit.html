@@ -169,6 +169,18 @@
       const variants = Array.isArray(p.variants) ? p.variants : [];
       let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true, sku: "", qty: null };
 
+      // Galerie = AMBIANCES uniquement (photos en situation), pas les packshots.
+      // Règle donnée : un packshot = un variant.image. Donc ambiances = imgs privé
+      // de toutes les variants[].image (normalisation URL sans query, comme
+      // syncActiveThumb). L'image PRINCIPALE reste le packshot de la variante
+      // (current.image, change via applyVariant) ; le rail/dots/miniatures/showThumb/
+      // préchargement ne montrent QUE les ambiances. Si vide → aucun strip.
+      const norm = (u) => (u || "").split("?")[0];
+      const variantUrls = new Set(variants.map((v) => norm(v.image)).filter(Boolean));
+      const ambIdx = imgs.map((_s, i) => i).filter((i) => !variantUrls.has(norm(imgs[i])));
+      const ambiances = ambIdx.map((i) => imgs[i]);
+      const ambThumbs = ambIdx.map((i) => thumbSrcs[i] || imgs[i]);
+
       // Walk every variant to collect the option axis NAMES — used only to label
       // the variant drawer/trigger dynamically. The drawer lists a FLAT grid of
       // variants[] (one tile per variant = full combo for multi-axis products),
@@ -241,9 +253,9 @@
             <div class="pdp__main-wrap">
               <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" srcset="${escapeHtml(srcsetFor(current.image || imgs[0] || ""))}" sizes="${MAIN_SIZES}" alt="${escapeHtml(p.name)}" fetchpriority="high" decoding="async" role="button" tabindex="0" aria-label="Agrandir la photo" />
             </div>
-            ${imgs.length ? `<div class="pdp__rail" data-rail>${imgs.map((_src, i) => `<img class="pdp__rail-img" data-rail-img="${i}" src="${escapeHtml(imgs[i])}" srcset="${escapeHtml(srcsetFor(imgs[i]))}" sizes="92vw" alt="${escapeHtml(p.name + " — photo " + (i + 1))}" loading="lazy" decoding="async" role="button" tabindex="0" aria-label="${escapeHtml("Agrandir la photo " + (i + 1))}" />`).join("")}</div>` : ""}
-            ${imgs.length > 1 ? `<div class="pdp__dots" data-dots role="group" aria-label="Navigation des photos">${imgs.map((_s, i) => `<button class="pdp__dot-btn${i === 0 ? " is-active" : ""}" data-dot="${i}" type="button" aria-label="Aller à la photo ${i + 1}"></button>`).join("")}</div>` : ""}
-            ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((_src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(thumbSrcs[i] || imgs[i])}" alt="" loading="lazy" decoding="async" tabindex="0" role="button" aria-label="Voir la photo ${i + 1}" />`).join("")}</div>` : ""}
+            ${ambiances.length ? `<div class="pdp__rail" data-rail>${ambiances.map((_src, i) => `<img class="pdp__rail-img" data-rail-img="${i}" src="${escapeHtml(ambiances[i])}" srcset="${escapeHtml(srcsetFor(ambiances[i]))}" sizes="92vw" alt="${escapeHtml(p.name + " — ambiance " + (i + 1))}" loading="lazy" decoding="async" role="button" tabindex="0" aria-label="${escapeHtml("Agrandir la photo d'ambiance " + (i + 1))}" />`).join("")}</div>` : ""}
+            ${ambiances.length > 1 ? `<div class="pdp__dots" data-dots role="group" aria-label="Navigation des photos d'ambiance">${ambiances.map((_s, i) => `<button class="pdp__dot-btn${i === 0 ? " is-active" : ""}" data-dot="${i}" type="button" aria-label="Aller à la photo ${i + 1}"></button>`).join("")}</div>` : ""}
+            ${ambiances.length ? `<div class="pdp__thumbs">${ambiances.map((_src, i) => `<img data-thumb="${i}" src="${escapeHtml(ambThumbs[i])}" alt="" loading="lazy" decoding="async" tabindex="0" role="button" aria-label="Voir la photo d'ambiance ${i + 1}" />`).join("")}</div>` : ""}
           </div>
           <div class="pdp__info">
             <a class="pdp__brand" href="${brandHref}">${escapeHtml(p.brand || "")}</a>
@@ -355,11 +367,12 @@
       syncActiveThumb(current.image || imgs[0] || "");
 
       // gallery thumbnails — clic ET clavier (Entrée/Espace) via le même chemin.
-      // Affiche l'image pleine largeur imgs[index] dans le main (pas le src de la
-      // vignette 240px) ; syncActiveThumb matche sur l'URL sans query.
+      // Affiche l'AMBIANCE pleine largeur ambiances[index] dans le main (pas le src
+      // de la vignette 240px) ; syncActiveThumb matche sur l'URL sans query. La
+      // principale repassera au packshot au prochain changement de variante.
       const showThumb = (t) => {
         const i = Number(t.dataset.thumb);
-        const full = imgs[i] || t.src;
+        const full = ambiances[i] || t.src;
         main.src = full;
         main.srcset = srcsetFor(full);
         syncActiveThumb(full);
@@ -371,11 +384,11 @@
         });
       });
 
-      // Précharge les autres images de la galerie (à la bonne résolution via srcset)
-      // pour un changement de photo instantané — différé pour ne pas gêner le LCP.
+      // Précharge les AMBIANCES (à la bonne résolution via srcset) pour un changement
+      // de photo instantané — différé pour ne pas gêner le LCP.
       const preloadGallery = () => {
-        imgs.forEach((src) => {
-          if (!src || src === (current.image || imgs[0])) return;  // la principale charge déjà
+        ambiances.forEach((src) => {
+          if (!src) return;
           const im = new Image();
           im.sizes = MAIN_SIZES;
           im.srcset = srcsetFor(src);
@@ -496,19 +509,32 @@
           <div class="pdplb__backdrop" data-lb-backdrop></div>
           <div class="pdplb__stage" role="dialog" aria-modal="true" aria-label="Galerie photos" data-lb-stage>
             <button class="pdplb__close" data-lb-close type="button" aria-label="Fermer">&times;</button>
-            ${imgs.length > 1 ? `<button class="pdplb__nav pdplb__nav--prev" data-lb-prev type="button" aria-label="Photo précédente">&lsaquo;</button>` : ""}
+            ${ambiances.length ? `<button class="pdplb__nav pdplb__nav--prev" data-lb-prev type="button" aria-label="Photo précédente">&lsaquo;</button>` : ""}
             <img class="pdplb__img" data-lb-img alt="" />
-            ${imgs.length > 1 ? `<button class="pdplb__nav pdplb__nav--next" data-lb-next type="button" aria-label="Photo suivante">&rsaquo;</button>` : ""}
+            ${ambiances.length ? `<button class="pdplb__nav pdplb__nav--next" data-lb-next type="button" aria-label="Photo suivante">&rsaquo;</button>` : ""}
           </div>
         </div>`);
       const lbRoot = document.querySelector("[data-lightbox]");
       const lbStage = lbRoot.querySelector("[data-lb-stage]");
       const lbImg = lbRoot.querySelector("[data-lb-img]");
-      let lbIndex = 0, lbLastFocus = null;
+      let lbIndex = 0, lbLastFocus = null, lbSeq = [];
+      // Séquence lightbox = packshot de la variante courante PUIS les ambiances (le
+      // packshot reste zoomable en 1re position). Reconstruite à l'ouverture pour
+      // refléter la variante sélectionnée. Dédupliquée par URL (sans query).
+      const lbBuild = () => {
+        const head = current.image || imgs[0] || "";
+        const seen = new Set(); const out = [];
+        for (const s of [head, ...ambiances]) {
+          if (!s) continue;
+          const k = norm(s);
+          if (!seen.has(k)) { seen.add(k); out.push(s); }
+        }
+        return out;
+      };
       const lbShow = (i) => {
-        if (!imgs.length) return;
-        lbIndex = (i + imgs.length) % imgs.length;
-        const src = imgs[lbIndex];
+        if (!lbSeq.length) return;
+        lbIndex = (i + lbSeq.length) % lbSeq.length;
+        const src = lbSeq[lbIndex];
         lbImg.src = src; lbImg.srcset = srcsetFor(src); lbImg.sizes = "92vw";
         lbImg.alt = `${p.name} — photo ${lbIndex + 1}`;
       };
@@ -530,10 +556,11 @@
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
       const lbOpen = (startSrc) => {
-        if (!imgs.length) return;
+        lbSeq = lbBuild();
+        if (!lbSeq.length) return;
         lbLastFocus = document.activeElement;
-        const target = stripQuery(startSrc);
-        let idx = imgs.findIndex((s) => stripQuery(s) === target);
+        const target = norm(startSrc);
+        let idx = lbSeq.findIndex((s) => norm(s) === target);
         if (idx < 0) idx = 0;
         lbShow(idx);
         lbRoot.classList.add("open");
