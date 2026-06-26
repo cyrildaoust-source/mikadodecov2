@@ -166,117 +166,152 @@
       const srcsetFor = (url) => (url && url.includes("cdn.shopify.com") && /[?&]width=\d+/.test(url))
         ? [800, 1280, 2048].map((w) => `${widthVariant(url, w)} ${w}w`).join(", ") : "";
       const MAIN_SIZES = "(max-width: 760px) 92vw, 53vw";
-      const VSELECT_THUMB_W = 128; // dropdown variant thumbnail box is 32px (×4 for retina)
-      const metaRows = [
-        ["Designer", p.designer], ["Année", p.year], ["Matière", p.material],
-        ["Dimensions", p.dimensions], ["Délai", p.leadTime],
-      ].filter(([, v]) => v);
-
       const variants = Array.isArray(p.variants) ? p.variants : [];
-      let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true };
+      let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true, sku: "", qty: null };
 
-      // Walk every variant to collect the option axes (Couleur, Structure,
-      // Coussin, etc.) and the distinct values per axis. Products like the
-      // Fauteuil cabriolet 1900 have 2 axes (Structure × Coussin) and need
-      // one dropdown each — single-axis products keep one dropdown.
+      // Galerie = AMBIANCES uniquement (photos en situation), pas les packshots.
+      // Règle donnée : un packshot = un variant.image. Donc ambiances = imgs privé
+      // de toutes les variants[].image (normalisation URL sans query, comme
+      // syncActiveThumb). L'image PRINCIPALE reste le packshot de la variante
+      // (current.image, change via applyVariant) ; le rail/dots/miniatures/showThumb/
+      // préchargement ne montrent QUE les ambiances. Si vide → aucun strip.
+      const norm = (u) => (u || "").split("?")[0];
+      const variantUrls = new Set(variants.map((v) => norm(v.image)).filter(Boolean));
+      const ambIdx = imgs.map((_s, i) => i).filter((i) => !variantUrls.has(norm(imgs[i])));
+      const ambiances = ambIdx.map((i) => imgs[i]);
+      const ambThumbs = ambIdx.map((i) => thumbSrcs[i] || imgs[i]);
+
+      // Walk every variant to collect the option axis NAMES — used only to label
+      // the variant drawer/trigger dynamically. The drawer lists a FLAT grid of
+      // variants[] (one tile per variant = full combo for multi-axis products),
+      // so per-axis value maps are no longer needed.
       const optionNames = [];
-      const optionValues = {};
       const _seenAxes = new Set();
       for (const v of variants) for (const o of (v.options || [])) {
-        if (!o?.name) continue;
-        if (!_seenAxes.has(o.name)) { _seenAxes.add(o.name); optionNames.push(o.name); optionValues[o.name] = []; }
-        if (!optionValues[o.name].includes(o.value)) optionValues[o.name].push(o.value);
+        if (o?.name && !_seenAxes.has(o.name)) { _seenAxes.add(o.name); optionNames.push(o.name); }
       }
-      // Currently selected value per axis (mirrors the `current` variant).
-      const currentSelection = {};
-      for (const o of (current.options || [])) currentSelection[o.name] = o.value;
+      // Libellé DYNAMIQUE du sélecteur : 1 axe « Couleur » → « Coloris » ; 1 autre
+      // axe → le nom de l'axe ; plusieurs axes → « Variantes ».
+      const singleAxis = optionNames.length === 1 ? optionNames[0] : "";
+      const isColorAxis = /^couleur$/i.test(singleAxis);
+      const axisLabel = optionNames.length === 1 ? (isColorAxis ? "Coloris" : singleAxis) : "Variantes";
+      const axisLabelLower = optionNames.length === 1 ? (isColorAxis ? "coloris" : singleAxis.toLowerCase()) : "variantes";
 
-      // Variant lookup helpers used by the dropdowns.
-      const findVariantBy = (sel) =>
-        variants.find((v) => (v.options || []).every((o) => sel[o.name] === o.value));
-      const imageForOption = (axisName, axisValue) => {
-        const sel = { ...currentSelection, [axisName]: axisValue };
-        const exact = findVariantBy(sel);
-        // Dropdown thumbnails render at 32px — serve them small, not the main width.
-        if (exact?.image) return widthVariant(exact.image, VSELECT_THUMB_W);
-        const any = variants.find((v) => (v.options || []).some((o) => o.name === axisName && o.value === axisValue));
-        return widthVariant(any?.image || p.image || "", VSELECT_THUMB_W);
+      // Image d'une variante (avec repli produit) à la largeur voulue.
+      const variantImg = (v, w) => widthVariant((v && v.image) || p.image || imgs[0] || "", w);
+      // Dispo HONNÊTE PAR VARIANTE — 3 états sur le VRAI stock (v.qty = quantityAvailable),
+      // PAS sur availableForSale (= true partout en oversell inventoryPolicy:CONTINUE).
+      //   available===false → "unavailable" · qty>0 → "instock" · sinon → "order".
+      // Fallback : si qty revient null (scope Storefront non exposé), qty n'est PAS un
+      // nombre → jamais "instock" : on n'affirme aucune dispo non vérifiable.
+      const variantState = (v) => {
+        if (!v || v.available === false) return "unavailable";
+        if (typeof v.qty === "number" && v.qty > 0) return "instock";
+        return "order";
       };
+      // Badge dot+texte (grille tiroir, aperçu, bloc coloris buy-box) — texte ambre
+      // partout ; SEUL le point change : vert --stock (en stock) / ambre --order.
+      // En stock → affiche le NOMBRE réel (v.qty = quantityAvailable) : version pleine
+      // « Disponible · X en stock » (aperçu + buy-box) ou compacte « Dispo · X » (vignette).
+      // « Sur commande »/« Indisponible » : jamais de nombre.
+      const availInline = (v, compact) => {
+        const s = variantState(v);
+        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>${compact ? `Dispo · ${v.qty}` : `Disponible · ${v.qty} en stock`}`;
+        if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Indisponible`;
+        return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Sur commande`;
+      };
+      // Ligne dispo PRODUIT (.pdp__avail) — reflète la VARIANTE sélectionnée (plus de
+      // gating p.inStock produit, qui rendait toute variante « À voir en boutique ») :
+      //   en stock → « À voir en boutique » (+ lien Maps) · indispo → « Indisponible »
+      //   · sinon → « Sur commande » (delai-long) / « Livraison · leadTimeLabel ».
+      const SHOWROOM_MAPS = "https://www.google.com/maps/dir/?api=1&destination=75%20Rue%20du%20Doyenn%C3%A9%2C%201180%20Uccle";
+      const availStore = (v) => {
+        const s = variantState(v || current);
+        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>À voir en boutique</strong> · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, Uccle</a>`;
+        if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Indisponible</strong>`;
+        return p.longDelay
+          ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande`
+          : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}`;
+      };
+
+      // Tableau Caractéristiques (section sœur, sous la galerie) — n'affiche QUE les
+      // lignes renseignées ; majoritairement vide tant que les métafields custom.*
+      // ne sont pas remplis côté Shopify (ce n'est PAS un bug). Référence = sku par
+      // variante (mis à jour dans applyVariant).
+      const specRows = [
+        ["Dimensions", p.dimensions], ["Matériaux / Finitions", p.material],
+        ["Usage", p.usage], ["Entretien", p.entretien], ["Designer", p.designer],
+        ["Année / Édition", p.year], ["Fabrication / Origine", p.origin],
+        ["Poids", p.weight], ["Garantie", p.warranty],
+      ].filter(([, v]) => v != null && v !== "");
+      const hasSku = variants.some((v) => v && v.sku);
 
       host.innerHTML = `
         <div class="pdp">
           <div class="pdp__gallery">
+            <span class="pdp__promo" data-promo hidden></span>
             <div class="pdp__main-wrap">
-              <span class="pdp__promo" data-promo hidden></span>
-              <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" srcset="${escapeHtml(srcsetFor(current.image || imgs[0] || ""))}" sizes="${MAIN_SIZES}" alt="${escapeHtml(p.name)}" fetchpriority="high" decoding="async" />
+              <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" srcset="${escapeHtml(srcsetFor(current.image || imgs[0] || ""))}" sizes="${MAIN_SIZES}" alt="${escapeHtml(p.name)}" fetchpriority="high" decoding="async" role="button" tabindex="0" aria-label="Agrandir la photo" />
             </div>
-            ${imgs.length > 1 ? `<div class="pdp__thumbs">${imgs.map((_src, i) => `<img data-thumb="${i}" class="${i === 0 ? "is-active" : ""}" src="${escapeHtml(thumbSrcs[i] || imgs[i])}" alt="" loading="lazy" decoding="async" tabindex="0" role="button" aria-label="Voir la photo ${i + 1}" />`).join("")}</div>` : ""}
+            ${ambiances.length ? `<div class="pdp__rail" data-rail>${ambiances.map((_src, i) => `<img class="pdp__rail-img" data-rail-img="${i}" src="${escapeHtml(ambiances[i])}" srcset="${escapeHtml(srcsetFor(ambiances[i]))}" sizes="92vw" alt="${escapeHtml(p.name + " — ambiance " + (i + 1))}" loading="lazy" decoding="async" role="button" tabindex="0" aria-label="${escapeHtml("Agrandir la photo d'ambiance " + (i + 1))}" />`).join("")}</div>` : ""}
+            ${ambiances.length > 1 ? `<div class="pdp__dots" data-dots role="group" aria-label="Navigation des photos d'ambiance">${ambiances.map((_s, i) => `<button class="pdp__dot-btn${i === 0 ? " is-active" : ""}" data-dot="${i}" type="button" aria-label="Aller à la photo ${i + 1}"></button>`).join("")}</div>` : ""}
+            ${ambiances.length ? `<div class="pdp__amb" data-amb-grid>${ambiances.map((_src, i) => `<img class="pdp__amb-img" data-amb="${i}" src="${escapeHtml(ambiances[i])}" srcset="${escapeHtml(srcsetFor(ambiances[i]))}" sizes="(max-width: 760px) 92vw, 26vw" alt="${escapeHtml(p.name + " — ambiance " + (i + 1))}" loading="lazy" decoding="async" role="button" tabindex="0" aria-label="${escapeHtml("Agrandir la photo d'ambiance " + (i + 1))}" />`).join("")}</div>` : ""}
           </div>
           <div class="pdp__info">
             <a class="pdp__brand" href="${brandHref}">${escapeHtml(p.brand || "")}</a>
             <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
-            ${p.designer ? `<div class="pdp__designer">Dessiné par ${escapeHtml(p.designer)}</div>` : ""}
+            ${p.designer ? `<span class="pdp__designer" data-designer>${escapeHtml(p.designer)}</span>` : ""}
             <div class="pdp__price" data-price-el>${priceLabel(p)}</div>
-            ${variants.length > 1 && optionNames.length > 0 ? optionNames.map((axisName) => {
-              const selVal = currentSelection[axisName] || "";
-              return `
-            <div class="pdp__variants">
-              <span class="label">${escapeHtml(axisName)}</span>
-              <div class="vselect" data-vselect data-option-name="${escapeHtml(axisName)}">
-                <button class="vselect__toggle" type="button" data-vselect-toggle aria-expanded="false" aria-haspopup="listbox">
-                  <img class="vselect__thumb" data-vselect-current-img src="${escapeHtml(imageForOption(axisName, selVal))}" alt="" loading="lazy" decoding="async" />
-                  <span class="vselect__value" data-vselect-current-label>${escapeHtml(selVal || 'Choisir')}</span>
-                  <svg class="vselect__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
-                </button>
-                <ul class="vselect__list" data-vselect-list role="listbox" hidden>
-                  ${optionValues[axisName].map((val) => `<li class="vselect__option${val === selVal ? ' is-active' : ''}" data-option-value="${escapeHtml(val)}" role="option" aria-selected="${val === selVal}" tabindex="-1">
-                    <img class="vselect__thumb" src="${escapeHtml(imageForOption(axisName, val))}" alt="" loading="lazy" />
-                    <span>${escapeHtml(val)}</span>
-                  </li>`).join('')}
-                </ul>
-              </div>
-            </div>`;
-            }).join('') : ""}
-            <div class="pdp__qty">
-              <span class="label">Quantité</span>
-              <div class="qty">
-                <button class="qty__btn" data-qty-dec aria-label="Diminuer la quantité" type="button">−</button>
-                <input class="qty__val" data-qty-input type="text" inputmode="numeric" value="1" aria-label="Quantité" />
-                <button class="qty__btn" data-qty-inc aria-label="Augmenter la quantité" type="button">+</button>
-              </div>
+            ${variants.length > 1 ? `
+            <div class="pdp__variant-pick">
+              <span class="label">${escapeHtml(axisLabel)}</span>
+              <button class="pdp__variant-bar" type="button" data-vard-open aria-haspopup="dialog">
+                <img class="pdp__variant-img" data-coloris-img src="${escapeHtml(variantImg(current, 200))}" alt="" loading="lazy" decoding="async" />
+                <span class="pdp__variant-meta">
+                  <span class="pdp__variant-name" data-coloris-name>${escapeHtml(current.title || "")}</span>
+                  <span class="pdp__variant-avail" data-coloris-avail role="status" aria-live="polite">${availInline(current)}</span>
+                </span>
+                <span class="pdp__variant-bar-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>` : ""}
+            <div class="pdp__buy">
+              <button class="pdp__qty-open" type="button" data-qtyd-open aria-haspopup="dialog">Quantité : <span data-qty-label>1</span> <span aria-hidden="true">▾</span></button>
+              <button class="btn btn--blue pdp__cta" data-add>Ajouter au panier</button>
             </div>
-            <button class="btn btn--blue btn--block pdp__cta" data-add>+ Ajouter à la sélection</button>
             <p class="pdp__cart-status" data-cart-status></p>
-            <p class="pdp__avail">${p.inStock
-              ? `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>À voir en boutique</strong> · 75 Rue du Doyenné, Uccle`
-              : p.longDelay
-                ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande`
-                : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}`}</p>
-            ${p.description ? `<p class="pdp__desc">${escapeHtml(p.description)}</p>` : ""}
-            ${metaRows.length ? `<dl class="pdp__meta">${metaRows.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHtml(v)}</dd></div>`).join("")}</dl>` : ""}
+            <div class="pdp__reassure">
+              <p class="pdp__avail" data-avail role="status" aria-live="polite">${availStore(current)}</p>
+              <p class="pdp__contact"><a href="/contact.html">Une question ? Écrivez-nous <span aria-hidden="true">→</span></a></p>
+            </div>
           </div>
-        </div>`;
+        </div>
+        ${p.description ? `<section class="section pdp-section">
+          <h2 class="catalogue-head serif">Description</h2>
+          <p class="pdp-desc">${escapeHtml(p.description)}</p>
+        </section>` : ""}
+        ${(specRows.length || hasSku) ? `<section class="section pdp-section">
+          <h2 class="catalogue-head serif">Caractéristiques</h2>
+          <dl class="pdp-specs">${specRows.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join("")}${hasSku ? `<div><dt>Référence</dt><dd data-spec-sku>${escapeHtml(current.sku || "—")}</dd></div>` : ""}</dl>
+        </section>` : ""}`;
 
       const main = host.querySelector("[data-main]");
       const priceEl = host.querySelector("[data-price-el]");
       const cta = host.querySelector("[data-add]");
       const status = host.querySelector("[data-cart-status]");
-      const qtyInput = host.querySelector("[data-qty-input]");
+      const qtyLabel = host.querySelector("[data-qty-label]");
 
-      // local "how many to add" — separate from the cart's stored quantity
+      // local "how many to add" (cap 1–10) — séparé de la quantité stockée au panier.
+      // Choisie via le tiroir Quantité (.qtyd) ; reflétée dans [data-qty-label].
       let pickQty = 1;
       const setPick = (n) => {
-        pickQty = Math.max(1, Math.min(99, parseInt(n) || 1));
-        qtyInput.value = pickQty;
+        pickQty = Math.max(1, Math.min(10, parseInt(n) || 1));   // cap 1–10
+        if (qtyLabel) qtyLabel.textContent = pickQty;
       };
-      host.querySelector("[data-qty-dec]").addEventListener("click", () => setPick(pickQty - 1));
-      host.querySelector("[data-qty-inc]").addEventListener("click", () => setPick(pickQty + 1));
-      qtyInput.addEventListener("change", (e) => setPick(e.target.value));
 
       const updateStatus = () => {
         const n = cartQty(current.id);
         status.innerHTML = n > 0
-          ? `Dans la sélection : <strong>${n}</strong> · <a href="/selection.html">Ma sélection</a>`
+          ? `Dans le panier : <strong>${n}</strong> · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`
           : "";
       };
       updateStatus();
@@ -326,11 +361,12 @@
       syncActiveThumb(current.image || imgs[0] || "");
 
       // gallery thumbnails — clic ET clavier (Entrée/Espace) via le même chemin.
-      // Affiche l'image pleine largeur imgs[index] dans le main (pas le src de la
-      // vignette 240px) ; syncActiveThumb matche sur l'URL sans query.
+      // Affiche l'AMBIANCE pleine largeur ambiances[index] dans le main (pas le src
+      // de la vignette 240px) ; syncActiveThumb matche sur l'URL sans query. La
+      // principale repassera au packshot au prochain changement de variante.
       const showThumb = (t) => {
         const i = Number(t.dataset.thumb);
-        const full = imgs[i] || t.src;
+        const full = ambiances[i] || t.src;
         main.src = full;
         main.srcset = srcsetFor(full);
         syncActiveThumb(full);
@@ -342,11 +378,11 @@
         });
       });
 
-      // Précharge les autres images de la galerie (à la bonne résolution via srcset)
-      // pour un changement de photo instantané — différé pour ne pas gêner le LCP.
+      // Précharge les AMBIANCES (à la bonne résolution via srcset) pour un changement
+      // de photo instantané — différé pour ne pas gêner le LCP.
       const preloadGallery = () => {
-        imgs.forEach((src) => {
-          if (!src || src === (current.image || imgs[0])) return;  // la principale charge déjà
+        ambiances.forEach((src) => {
+          if (!src) return;
           const im = new Image();
           im.sizes = MAIN_SIZES;
           im.srcset = srcsetFor(src);
@@ -356,123 +392,403 @@
       if ("requestIdleCallback" in window) requestIdleCallback(preloadGallery, { timeout: 1500 });
       else setTimeout(preloadGallery, 700);
 
-      // Refresh every dropdown's toggle + active option + main image / price
-      // / status / promo to reflect `currentSelection` and `current`. Called
-      // after any axis change.
-      const closeAllVselects = () => host.querySelectorAll("[data-vselect]").forEach((vs) => {
-        const toggle = vs.querySelector("[data-vselect-toggle]");
-        toggle?.setAttribute("aria-expanded", "false");
-        const lst = vs.querySelector("[data-vselect-list]");
-        if (lst) {
-          // Si le focus clavier est encore DANS la liste qu'on masque, le rendre au
-          // toggle AVANT de cacher — sinon le focus tomberait sur <body> (repère perdu).
-          if (lst.contains(document.activeElement)) toggle?.focus();
-          lst.hidden = true;
-        }
-      });
-
-      const refreshAllVselects = () => {
-        host.querySelectorAll("[data-vselect]").forEach((vs) => {
-          const axis = vs.dataset.optionName;
-          const sel = currentSelection[axis];
-          const tImg = vs.querySelector("[data-vselect-current-img]");
-          const tLab = vs.querySelector("[data-vselect-current-label]");
-          if (tImg) tImg.src = imageForOption(axis, sel);
-          if (tLab) tLab.textContent = sel || "Choisir";
-          vs.querySelectorAll(".vselect__option").forEach((opt) => {
-            const v = opt.dataset.optionValue;
-            opt.classList.toggle("is-active", v === sel);
-            opt.setAttribute("aria-selected", v === sel ? "true" : "false");
-            const thumb = opt.querySelector(".vselect__thumb");
-            if (thumb) thumb.src = imageForOption(axis, v);
+      // Précharge les images de TOUTES les variantes (largeur vignette 160 + aperçu 720)
+      // pour que survol ET clic du tiroir soient instantanés — différé (idle), même
+      // esprit que preloadGallery. Sans ça, l'aperçu se chargeait au survol (latence).
+      const preloadVariants = () => {
+        if (variants.length <= 1) return;
+        const seen = new Set();
+        variants.forEach((v) => {
+          const base = (v && v.image) || p.image;
+          if (!base) return;
+          [variantImg(v, 160), variantImg(v, 720)].forEach((src) => {
+            if (!src || seen.has(src)) return;
+            seen.add(src);
+            const im = new Image();
+            im.decoding = "async";
+            im.src = src;
           });
         });
-        closeAllVselects();
-        if (current.image) { main.src = current.image; main.srcset = srcsetFor(current.image); syncActiveThumb(current.image); }
-        priceEl.textContent = euro(current.price);
-        updateStatus();
-        probePromo(current.id);
       };
+      if ("requestIdleCallback" in window) requestIdleCallback(preloadVariants, { timeout: 2500 });
+      else setTimeout(preloadVariants, 900);
 
-      // Ouvre un dropdown et place le focus clavier sur l'option active (ou la 1re).
-      const openVselect = (vs) => {
-        const toggle = vs.querySelector("[data-vselect-toggle]");
-        const list = vs.querySelector("[data-vselect-list]");
-        closeAllVselects();
-        toggle.setAttribute("aria-expanded", "true");
-        list.hidden = false;
-        (list.querySelector(".vselect__option.is-active") || list.querySelector(".vselect__option"))?.focus();
+      // ── Application d'une variante (remplace l'ancien refreshAllVselects) ──
+      // Source UNIQUE : à partir d'une variante v, met à jour l'image principale
+      // (+ rail mobile + miniature active), le prix EXACT, le statut panier, le
+      // badge promo, le bloc variantes de la buy-box, la dispo produit (§1.3) et
+      // la référence (sku). Appelée par le tiroir variantes (clic/Tap/Entrée).
+      const scrollRailTo = (src) => {
+        const railEl = host.querySelector("[data-rail]");
+        if (!railEl) return;
+        const target = stripQuery(src);
+        const list = Array.from(railEl.querySelectorAll("[data-rail-img]"));
+        const idx = list.findIndex((im) => stripQuery(im.getAttribute("src")) === target || stripQuery(im.currentSrc) === target);
+        if (idx >= 0) list[idx].scrollIntoView({ behavior: "auto", inline: "center", block: "nearest" });
       };
-      // Ferme un dropdown ; rend éventuellement le focus à son toggle.
-      const closeVselect = (vs, refocus) => {
-        const toggle = vs.querySelector("[data-vselect-toggle]");
-        const list = vs.querySelector("[data-vselect-list]");
-        toggle?.setAttribute("aria-expanded", "false");
-        if (list) list.hidden = true;
-        if (refocus) toggle?.focus();
-      };
-      // Chemin de sélection PARTAGÉ par le clic ET le clavier (extrait de l'ancien
-      // handler click) — mouse et clavier se comportent à l'identique.
-      const selectOption = (opt) => {
-        const vs = opt.closest("[data-vselect]");
-        const axis = vs?.dataset.optionName;
-        const value = opt.dataset.optionValue;
-        if (!axis || !value) return;
-        currentSelection[axis] = value;
-        let v = findVariantBy(currentSelection);
-        if (!v) {
-          v = variants.find((x) => (x.options || []).some((o) => o.name === axis && o.value === value));
-          if (v) for (const o of (v.options || [])) currentSelection[o.name] = o.value;
-        }
+      const applyVariant = (v) => {
         if (!v) return;
         current = v;
-        refreshAllVselects();                                   // ferme les listes + met à jour image/prix/statut
-        vs.querySelector("[data-vselect-toggle]")?.focus();     // rend le focus au toggle après choix
+        const src = current.image || p.image || imgs[0] || "";
+        main.src = src;
+        main.srcset = srcsetFor(src);
+        syncActiveThumb(src);
+        scrollRailTo(src);
+        if (current.price != null && !Number.isNaN(current.price)) priceEl.textContent = euro(current.price);
+        updateStatus();
+        probePromo(current.id);
+        const cImg = host.querySelector("[data-coloris-img]");
+        if (cImg) { cImg.src = variantImg(current, 200); cImg.alt = current.title || ""; }
+        const cName = host.querySelector("[data-coloris-name]");
+        if (cName) cName.textContent = current.title || "";
+        const cAvail = host.querySelector("[data-coloris-avail]");
+        if (cAvail) cAvail.innerHTML = availInline(current);
+        const availEl = host.querySelector("[data-avail]");          // dispo PRODUIT reflète la variante sélectionnée (en stock / indispo / sur commande)
+        if (availEl) availEl.innerHTML = availStore(current);
+        const skuEl = host.querySelector("[data-spec-sku]");          // Référence = sku de la variante
+        if (skuEl) skuEl.textContent = current.sku || "—";
+        renderQtyList();                                              // dispo par quantité dépend de current.qty
       };
 
-      host.querySelectorAll(".vselect__option").forEach((opt) =>
-        opt.addEventListener("click", () => selectOption(opt)));
+      // ── Lien designer (sous le titre) — progressif & HONNÊTE ──
+      // Texte simple par défaut ; promu en lien vers la PLP filtrée UNIQUEMENT si
+      // slugify(p.designer) retombe EXACTEMENT sur un slug de /designers-data.json
+      // (résolu CLIENT-side via le JSON statique). Sinon on garde le nom sans lien
+      // (évite l'écran « Designer introuvable »).
+      if (p.designer) {
+        (async () => {
+          try {
+            const slug = slugify(p.designer);
+            const r = await fetch("/designers-data.json", { cache: "force-cache" });
+            if (!r.ok) return;
+            const list = (await r.json()).designers || [];
+            if (!list.some((x) => x.slug === slug)) return;
+            const el = host.querySelector("[data-designer]");
+            if (!el) return;
+            const a = document.createElement("a");
+            a.className = "pdp__designer pdp__designer--link";
+            a.setAttribute("data-designer", "");
+            a.href = `/produits.html?designer=${encodeURIComponent(slug)}`;
+            a.textContent = p.designer;
+            el.replaceWith(a);
+          } catch (e) { /* garde le nom en texte simple */ }
+        })();
+      }
 
-      host.querySelectorAll("[data-vselect-toggle]").forEach((toggle) => {
-        const vs = toggle.closest("[data-vselect]");
-        const list = vs.querySelector("[data-vselect-list]");
-        toggle.addEventListener("click", (e) => {
-          e.stopPropagation();
-          if (toggle.getAttribute("aria-expanded") === "true") closeVselect(vs, false);
-          else openVselect(vs);
+      // ── Galerie mobile (≤760px) : points de navigation du rail swipeable ──
+      const railEl = host.querySelector("[data-rail]");
+      const dotEls = Array.from(host.querySelectorAll("[data-dot]"));
+      if (railEl && dotEls.length) {
+        const slides = Array.from(railEl.querySelectorAll("[data-rail-img]"));
+        const setActiveDot = (i) => dotEls.forEach((d, di) => d.classList.toggle("is-active", di === i));
+        if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((en) => { if (en.isIntersecting) setActiveDot(Number(en.target.dataset.railImg)); });
+          }, { root: railEl, threshold: 0.6 });
+          slides.forEach((im) => io.observe(im));
+        }
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        dotEls.forEach((d) => d.addEventListener("click", () => {
+          const i = Number(d.dataset.dot);
+          slides[i]?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", inline: "center", block: "nearest" });
+          setActiveDot(i);
+        }));
+      }
+
+      // ── Lightbox plein écran (galerie) ──
+      // Voile encre, z-index 130 (au-dessus des tiroirs). Navigation ←/→, Échap,
+      // focus-trap + retour focus. Ouverte au clic sur la photo principale (desktop)
+      // ou sur une vignette du rail (mobile/tactile).
+      document.body.insertAdjacentHTML("beforeend", `
+        <div class="pdplb" data-lightbox>
+          <div class="pdplb__backdrop" data-lb-backdrop></div>
+          <div class="pdplb__stage" role="dialog" aria-modal="true" aria-label="Galerie photos" data-lb-stage>
+            <button class="pdplb__close" data-lb-close type="button" aria-label="Fermer">&times;</button>
+            ${ambiances.length ? `<button class="pdplb__nav pdplb__nav--prev" data-lb-prev type="button" aria-label="Photo précédente">&lsaquo;</button>` : ""}
+            <img class="pdplb__img" data-lb-img alt="" />
+            ${ambiances.length ? `<button class="pdplb__nav pdplb__nav--next" data-lb-next type="button" aria-label="Photo suivante">&rsaquo;</button>` : ""}
+          </div>
+        </div>`);
+      const lbRoot = document.querySelector("[data-lightbox]");
+      const lbStage = lbRoot.querySelector("[data-lb-stage]");
+      const lbImg = lbRoot.querySelector("[data-lb-img]");
+      let lbIndex = 0, lbLastFocus = null, lbSeq = [];
+      // Séquence lightbox = packshot de la variante courante PUIS les ambiances (le
+      // packshot reste zoomable en 1re position). Reconstruite à l'ouverture pour
+      // refléter la variante sélectionnée. Dédupliquée par URL (sans query).
+      const lbBuild = () => {
+        const head = current.image || imgs[0] || "";
+        const seen = new Set(); const out = [];
+        for (const s of [head, ...ambiances]) {
+          if (!s) continue;
+          const k = norm(s);
+          if (!seen.has(k)) { seen.add(k); out.push(s); }
+        }
+        return out;
+      };
+      const lbShow = (i) => {
+        if (!lbSeq.length) return;
+        lbIndex = (i + lbSeq.length) % lbSeq.length;
+        const src = lbSeq[lbIndex];
+        lbImg.src = src; lbImg.srcset = srcsetFor(src); lbImg.sizes = "92vw";
+        lbImg.alt = `${p.name} — photo ${lbIndex + 1}`;
+      };
+      function lbClose() {
+        lbRoot.classList.remove("open");
+        document.body.classList.remove("pdplb-locked");
+        document.removeEventListener("keydown", lbKeydown, true);
+        if (lbLastFocus && document.contains(lbLastFocus)) lbLastFocus.focus();
+      }
+      function lbKeydown(e) {
+        if (e.key === "Escape") { e.preventDefault(); lbClose(); return; }
+        if (e.key === "ArrowRight") { e.preventDefault(); lbShow(lbIndex + 1); return; }
+        if (e.key === "ArrowLeft") { e.preventDefault(); lbShow(lbIndex - 1); return; }
+        if (e.key !== "Tab") return;
+        const f = Array.from(lbStage.querySelectorAll("button")).filter((el) => el.offsetParent !== null && !el.disabled);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      const lbOpen = (startSrc) => {
+        lbSeq = lbBuild();
+        if (!lbSeq.length) return;
+        lbLastFocus = document.activeElement;
+        const target = norm(startSrc);
+        let idx = lbSeq.findIndex((s) => norm(s) === target);
+        if (idx < 0) idx = 0;
+        lbShow(idx);
+        lbRoot.classList.add("open");
+        document.body.classList.add("pdplb-locked");
+        document.addEventListener("keydown", lbKeydown, true);
+        requestAnimationFrame(() => lbRoot.querySelector("[data-lb-close]")?.focus());
+      };
+      lbRoot.querySelector("[data-lb-backdrop]").addEventListener("click", lbClose);
+      lbRoot.querySelector("[data-lb-close]").addEventListener("click", lbClose);
+      lbRoot.querySelector("[data-lb-prev]")?.addEventListener("click", () => lbShow(lbIndex - 1));
+      lbRoot.querySelector("[data-lb-next]")?.addEventListener("click", () => lbShow(lbIndex + 1));
+      main.addEventListener("click", () => lbOpen(main.currentSrc || main.src));
+      main.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); lbOpen(main.currentSrc || main.src); } });
+      if (railEl) {
+        const railOpen = (e) => {
+          const im = e.target.closest("[data-rail-img]");
+          if (im) { e.preventDefault(); lbOpen(im.currentSrc || im.getAttribute("src")); }
+        };
+        railEl.addEventListener("click", railOpen);
+        railEl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") railOpen(e); });
+      }
+      // Grille d'ambiances (desktop) → lightbox au clic/Entrée (même séquence).
+      const ambGrid = host.querySelector("[data-amb-grid]");
+      if (ambGrid) {
+        const ambOpen = (e) => {
+          const im = e.target.closest("[data-amb]");
+          if (im) { e.preventDefault(); lbOpen(im.currentSrc || im.getAttribute("src")); }
+        };
+        ambGrid.addEventListener("click", ambOpen);
+        ambGrid.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") ambOpen(e); });
+      }
+
+      // ── Tiroir de variantes (glisse de la GAUCHE — miroir du tiroir panier) ──
+      // Grille PLATE de toutes les variantes (4/ligne), aperçu en haut, dispo par
+      // variante. Survol/Focus = aperçu (sans valider) ; clic/Tap/Entrée = applique
+      // + ferme. role=listbox/option, focus-trap, Échap, verrou DÉDIÉ vard-locked.
+      if (variants.length > 1) {
+        document.body.insertAdjacentHTML("beforeend", `
+          <div class="vard" data-variant-drawer>
+            <div class="vard__backdrop" data-vard-backdrop></div>
+            <aside class="vard__panel" role="dialog" aria-modal="true" aria-label="Choisir ${escapeHtml(isColorAxis ? "un coloris" : "une variante")}" data-vard-panel>
+              <header class="vard__head">
+                <h2 class="vard__title">${escapeHtml(axisLabel)} (${variants.length})</h2>
+                <button class="vard__close" data-vard-close type="button" aria-label="Fermer">&times;</button>
+              </header>
+              <div class="vard__body">
+                <img class="vard__preview-img" data-vard-preview-img alt="" />
+                <div class="vard__preview-name" data-vard-preview-name></div>
+                <div class="vard__preview-avail" data-vard-preview-avail role="status" aria-live="polite"></div>
+                <ul class="vard__grid" role="listbox" aria-label="${escapeHtml(axisLabel)} disponibles" data-vard-grid>${variants.map((v) => `
+                  <li class="vard__opt${v.id === current.id ? " is-selected" : ""}" role="option" aria-selected="${v.id === current.id}"${v.available === false ? ' aria-disabled="true"' : ""} data-variant-id="${escapeHtml(v.id)}" tabindex="${v.id === current.id ? "0" : "-1"}">
+                    <img class="vard__opt-img" src="${escapeHtml(variantImg(v, 160))}" alt="${escapeHtml(v.title || "")}" loading="lazy" decoding="async" />
+                    <span class="vard__opt-name">${escapeHtml(v.title || "")}</span>
+                    <span class="vard__opt-avail">${availInline(v, true)}</span>
+                  </li>`).join("")}</ul>
+              </div>
+            </aside>
+          </div>`);
+        const vRoot = document.querySelector("[data-variant-drawer]");
+        const vPanel = vRoot.querySelector("[data-vard-panel]");
+        const vGrid = vRoot.querySelector("[data-vard-grid]");
+        const vById = (id) => variants.find((v) => v.id === id);
+        const vOpts = () => Array.from(vGrid.querySelectorAll(".vard__opt"));
+        let vLastFocus = null;
+        const lockVard = (on) => {
+          const sw = window.innerWidth - document.documentElement.clientWidth;
+          if (on) { if (sw > 0) document.body.style.paddingRight = sw + "px"; document.body.classList.add("vard-locked"); }
+          else { document.body.style.paddingRight = ""; document.body.classList.remove("vard-locked"); }
+        };
+        const vPreview = (v) => {
+          if (!v) return;
+          const pi = vRoot.querySelector("[data-vard-preview-img]");
+          pi.src = variantImg(v, 720); pi.alt = v.title || "";
+          vRoot.querySelector("[data-vard-preview-name]").textContent = v.title || "";
+          vRoot.querySelector("[data-vard-preview-avail]").innerHTML = availInline(v);
+        };
+        function closeVard() {
+          vRoot.classList.remove("open");
+          lockVard(false);
+          document.removeEventListener("keydown", vKeydown, true);
+          if (vLastFocus && document.contains(vLastFocus)) vLastFocus.focus();
+          else host.querySelector("[data-vard-open]")?.focus();
+        }
+        function vKeydown(e) {
+          if (e.key === "Escape") { e.preventDefault(); closeVard(); return; }
+          if (e.key !== "Tab") return;
+          const f = Array.from(vPanel.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])')).filter((el) => el.offsetParent !== null && !el.disabled);
+          if (!f.length) return;
+          const first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+        const openVard = () => {
+          vLastFocus = document.activeElement;
+          document.querySelector("[data-cart-drawer]")?.classList.remove("open"); // exclusivité tiroirs : ferme panier + quantité
+          document.querySelector("[data-qty-drawer]")?.classList.remove("open");
+          vOpts().forEach((o) => {
+            const sel = o.dataset.variantId === current.id;
+            o.setAttribute("aria-selected", sel ? "true" : "false");
+            o.classList.toggle("is-selected", sel);
+            o.tabIndex = sel ? 0 : -1;
+          });
+          vPreview(current);
+          vRoot.classList.add("open");
+          lockVard(true);
+          document.addEventListener("keydown", vKeydown, true);
+          requestAnimationFrame(() => vRoot.querySelector("[data-vard-close]")?.focus());
+        };
+        const focusOpt = (t) => {
+          if (!t) return;
+          vOpts().forEach((o) => (o.tabIndex = -1));
+          t.tabIndex = 0; t.focus(); vPreview(vById(t.dataset.variantId));
+        };
+        const COLS = 4;
+        const moveFocus = (from, delta) => {
+          const opts = vOpts();
+          let i = opts.indexOf(from); if (i < 0) i = 0;
+          focusOpt(opts[Math.max(0, Math.min(opts.length - 1, i + delta))]);
+        };
+        host.querySelector("[data-vard-open]")?.addEventListener("click", openVard);
+        vRoot.querySelector("[data-vard-backdrop]").addEventListener("click", closeVard);
+        vRoot.querySelector("[data-vard-close]").addEventListener("click", closeVard);
+        vGrid.addEventListener("mouseover", (e) => { const o = e.target.closest(".vard__opt"); if (o) vPreview(vById(o.dataset.variantId)); });
+        vGrid.addEventListener("focusin", (e) => { const o = e.target.closest(".vard__opt"); if (o) vPreview(vById(o.dataset.variantId)); });
+        vGrid.addEventListener("click", (e) => {
+          const o = e.target.closest(".vard__opt"); if (!o) return;
+          applyVariant(vById(o.dataset.variantId)); closeVard();
         });
-        // ↑/↓ sur le toggle : ouvre la liste et entre dedans.
-        toggle.addEventListener("keydown", (e) => {
-          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-            e.preventDefault();
-            if (toggle.getAttribute("aria-expanded") !== "true") openVselect(vs);
-            else (list.querySelector(".vselect__option.is-active") || list.querySelector(".vselect__option"))?.focus();
-          }
-        });
-        // Navigation clavier (focus tournant) dans la liste.
-        list.addEventListener("keydown", (e) => {
-          const opts = [...list.querySelectorAll(".vselect__option")];
-          if (!opts.length) return;
-          const i = opts.indexOf(document.activeElement);
+        vGrid.addEventListener("keydown", (e) => {
+          const o = e.target.closest(".vard__opt"); if (!o) return;
           switch (e.key) {
-            case "ArrowDown": e.preventDefault(); (opts[i + 1] || opts[0]).focus(); break;
-            case "ArrowUp":   e.preventDefault(); (opts[i - 1] || opts[opts.length - 1]).focus(); break;
-            case "Home":      e.preventDefault(); opts[0].focus(); break;
-            case "End":       e.preventDefault(); opts[opts.length - 1].focus(); break;
+            case "ArrowRight": e.preventDefault(); moveFocus(o, 1); break;
+            case "ArrowLeft":  e.preventDefault(); moveFocus(o, -1); break;
+            case "ArrowDown":  e.preventDefault(); moveFocus(o, COLS); break;
+            case "ArrowUp":    e.preventDefault(); moveFocus(o, -COLS); break;
+            case "Home":       e.preventDefault(); focusOpt(vOpts()[0]); break;
+            case "End":        e.preventDefault(); { const a = vOpts(); focusOpt(a[a.length - 1]); } break;
             case "Enter":
-            case " ":         e.preventDefault();
-                              if (document.activeElement?.classList.contains("vselect__option")) selectOption(document.activeElement);
-                              break;
-            case "Escape":    e.preventDefault(); e.stopPropagation(); closeVselect(vs, true); break;
-            case "Tab":       closeVselect(vs, true); break;   // ferme + refocus toggle, laisse le navigateur tabuler ensuite
+            case " ":          e.preventDefault(); applyVariant(vById(o.dataset.variantId)); closeVard(); break;
           }
         });
-      });
+      }
 
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest("[data-vselect]")) closeAllVselects();
+      // ── Tiroir QUANTITÉ (glisse de la DROITE — calqué sur .vard) ──
+      // Liste 1→10 avec dispo PAR QUANTITÉ : n ≤ current.qty (vrai stock) → point
+      // vert « En stock » ; sinon (ou qty null/0) → point ambre « Sur commande ».
+      // Clic → fixe pickQty (cap 1–10) + ferme. Verrou dédié qtyd-locked ; ferme les
+      // autres tiroirs à l'ouverture. role=listbox, focus-trap, Échap.
+      document.body.insertAdjacentHTML("beforeend", `
+        <div class="qtyd" data-qty-drawer>
+          <div class="qtyd__backdrop" data-qtyd-backdrop></div>
+          <aside class="qtyd__panel" role="dialog" aria-modal="true" aria-label="Choisir la quantité" data-qtyd-panel>
+            <header class="qtyd__head">
+              <h2 class="qtyd__title">Quantité</h2>
+              <button class="qtyd__close" data-qtyd-close type="button" aria-label="Fermer">&times;</button>
+            </header>
+            <div class="qtyd__body">
+              <ul class="qtyd__list" role="listbox" aria-label="Quantité" data-qtyd-list></ul>
+            </div>
+          </aside>
+        </div>`);
+      const QTY_MAX = 10;
+      const qRoot = document.querySelector("[data-qty-drawer]");
+      const qPanel = qRoot.querySelector("[data-qtyd-panel]");
+      const qList = qRoot.querySelector("[data-qtyd-list]");
+      let qLastFocus = null;
+      const lockQtyd = (on) => {
+        const sw = window.innerWidth - document.documentElement.clientWidth;
+        if (on) { if (sw > 0) document.body.style.paddingRight = sw + "px"; document.body.classList.add("qtyd-locked"); }
+        else { document.body.style.paddingRight = ""; document.body.classList.remove("qtyd-locked"); }
+      };
+      // (Re)construit la liste 1→10 selon current.qty. qty null → traité comme 0
+      // (jamais « En stock » — cohérent avec la dispo honnête).
+      function renderQtyList() {
+        const stock = (typeof current.qty === "number") ? current.qty : 0;
+        qList.innerHTML = Array.from({ length: QTY_MAX }, (_x, k) => {
+          const n = k + 1;
+          const ok = n <= stock;
+          return `<li class="qtyd__opt${n === pickQty ? " is-selected" : ""}" role="option" aria-selected="${n === pickQty}" data-qty="${n}" tabindex="${n === pickQty ? "0" : "-1"}">
+            <span class="qtyd__num">${n}</span>
+            <span class="qtyd__state"><span class="pcard__dot ${ok ? "pcard__dot--stock" : "pcard__dot--order"}" aria-hidden="true"></span>${ok ? "En stock" : "Sur commande"}</span>
+          </li>`;
+        }).join("");
+      }
+      const qOpts = () => Array.from(qList.querySelectorAll(".qtyd__opt"));
+      function closeQtyd() {
+        qRoot.classList.remove("open");
+        lockQtyd(false);
+        document.removeEventListener("keydown", qKeydown, true);
+        if (qLastFocus && document.contains(qLastFocus)) qLastFocus.focus();
+        else host.querySelector("[data-qtyd-open]")?.focus();
+      }
+      function qKeydown(e) {
+        if (e.key === "Escape") { e.preventDefault(); closeQtyd(); return; }
+        if (e.key !== "Tab") return;
+        const f = Array.from(qPanel.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')).filter((el) => el.offsetParent !== null && !el.disabled);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      const openQtyd = () => {
+        qLastFocus = document.activeElement;
+        document.querySelector("[data-cart-drawer]")?.classList.remove("open");      // exclusivité tiroirs
+        document.querySelector("[data-variant-drawer]")?.classList.remove("open");
+        renderQtyList();
+        qRoot.classList.add("open");
+        lockQtyd(true);
+        document.addEventListener("keydown", qKeydown, true);
+        requestAnimationFrame(() => (qList.querySelector('.qtyd__opt[tabindex="0"]') || qRoot.querySelector("[data-qtyd-close]"))?.focus());
+      };
+      const qFocus = (t) => { if (!t) return; qOpts().forEach((o) => (o.tabIndex = -1)); t.tabIndex = 0; t.focus(); };
+      const qMove = (from, delta) => {
+        const a = qOpts(); let i = a.indexOf(from); if (i < 0) i = 0;
+        qFocus(a[Math.max(0, Math.min(a.length - 1, i + delta))]);
+      };
+      const pickFromRow = (row) => { if (!row) return; setPick(Number(row.dataset.qty)); closeQtyd(); };
+      host.querySelector("[data-qtyd-open]")?.addEventListener("click", openQtyd);
+      qRoot.querySelector("[data-qtyd-backdrop]").addEventListener("click", closeQtyd);
+      qRoot.querySelector("[data-qtyd-close]").addEventListener("click", closeQtyd);
+      qList.addEventListener("click", (e) => { const o = e.target.closest(".qtyd__opt"); if (o) pickFromRow(o); });
+      qList.addEventListener("keydown", (e) => {
+        const o = e.target.closest(".qtyd__opt"); if (!o) return;
+        switch (e.key) {
+          case "ArrowDown": e.preventDefault(); qMove(o, 1); break;
+          case "ArrowUp":   e.preventDefault(); qMove(o, -1); break;
+          case "Home":      e.preventDefault(); qFocus(qOpts()[0]); break;
+          case "End":       e.preventDefault(); { const a = qOpts(); qFocus(a[a.length - 1]); } break;
+          case "Enter":
+          case " ":         e.preventDefault(); pickFromRow(o); break;
+        }
       });
-      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeAllVselects(); });  // (inchangé) filet Échap global
+      renderQtyList();   // init
 
       // add the chosen quantity of the current variant to the selection
       cta.addEventListener("click", () => {
