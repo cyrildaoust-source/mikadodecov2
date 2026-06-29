@@ -145,8 +145,8 @@ export function footerHTML() {
         </div>
         <div><h5>Boutique</h5><ul>
           <li><a href="/produits.html">Mobilier</a></li>
-          <li><a href="/produits.html?cat=luminaires">Luminaires</a></li>
-          <li><a href="/produits.html?cat=objets">Objets</a></li>
+          <li><a href="/collections/luminaires">Luminaires</a></li>
+          <li><a href="/collections/decoration">Décoration</a></li>
           <li><a href="/collections/outdoor">Extérieur</a></li>
         </ul></div>
         <div><h5>Maison</h5><ul>

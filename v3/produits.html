@@ -374,8 +374,6 @@
     // initShell is called below — the active nav entry depends on the route
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
-    const CAT_LABEL = { tous:"Le catalogue", assises:"Assises", tables:"Tables", luminaires:"Luminaires", rangements:"Rangements", objets:"Objets", exterieur:"Extérieur" };
-
     // Hardcoded handle → title map for the collections exposed in the
     // mega menu. Used for instant title paint before the
     // /api/collection/<handle>/products fetch resolves — avoids the
@@ -1156,7 +1154,7 @@
     const catGrid    = document.querySelector("[data-cat-grid]");
     const catCount   = document.querySelector("[data-cat-count]");
     const catChips   = document.querySelector("[data-cat-chips]");
-    const CHIP_LABELS = new Map(CATEGORIES.map((c) => [c.h, c.t]));   // libellés des chips (CAT_LABEL est déjà pris l.378)
+    const CHIP_LABELS = new Map(CATEGORIES.map((c) => [c.h, c.t]));   // libellés des chips
     if (catGrid && !state.coll && !state.tag && !state.designer) {
       catGrid.innerHTML = CATEGORIES.map((c) =>
         `<label class="cat-opt"><input type="checkbox" class="cat-opt__box" value="${c.h}"${state.cats.includes(c.h) ? " checked" : ""} /><span class="cat-opt__label">${escapeHtml(c.t)}</span></label>`

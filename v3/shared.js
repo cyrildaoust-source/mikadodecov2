@@ -284,7 +284,7 @@ function variantBadge(p) {
   return `${values.size} ${pluralize(name)}`;
 }
 
-// Encodes the current listing view as a token (coll:<h> | cat:<x> |
+// Encodes the current listing view as a token (coll:<h> |
 // designer:<x> | brand:<x>) so a product link carries the path the user
 // actually took — read by the PDP to build a CONTEXTUAL breadcrumb. Derived
 // from location at card-render time; "" = no context (homepage / bare
@@ -298,8 +298,6 @@ export function currentViewFrom() {
   }
   if (params.get("designer")) return "designer:" + params.get("designer");
   if (params.get("brand")) return "brand:" + params.get("brand");
-  const cat = params.get("cat");
-  if (cat && cat !== "tous") return "cat:" + cat;
   return "";
 }
 
