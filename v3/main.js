@@ -1,5 +1,5 @@
 /* Home page · mounts the shared shell, then fills the product rows. */
-import { initShell, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml, buildShaReady, versionedImg } from "/shared.js";
+import { initShell, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml, buildShaReady, versionedImg, loadBrandHandles } from "/shared.js";
 
 initShell({ active: "", transparentNav: true });
 
@@ -40,9 +40,10 @@ fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailab
    Tries /images/brands/<slug>.svg first; if missing, the <img> onerror
    swaps itself for a Cormorant-italic wordmark (.brandmarquee__name).
    No console 404 noise — the swap is silent for the viewer. */
-function brandLogo(b) {
+function brandLogo(b, handleMap) {
   const slug = slugify(b.name);
-  const href = `/produits.html?brand=${slug}`;
+  const handle = handleMap && handleMap[slug];
+  const href = handle ? `/collections/${handle}` : `/produits.html?brand=${slug}`;
   const name = escapeHtml(b.name);
   const src  = versionedImg(`/images/brands/${slug}.svg`);
   return `<a class="brandmarquee__item" href="${href}" aria-label="${name}">`
@@ -57,14 +58,15 @@ async function loadBrandMarquee() {
   try {
     // Wait for the build SHA so the logo URLs carry ?v=<sha> on the
     // first paint. The fetch is cached server-side, sub-ms warm.
-    const [, brands] = await Promise.all([
+    const [, brands, handleMap] = await Promise.all([
       buildShaReady(),
       fetchBrands(),
+      loadBrandHandles(),
     ]);
     const filtered = brands.filter((b) => b.productCount > 0);
     if (!filtered.length) throw new Error("empty brand feed");
     const ordered = [...filtered].sort((a, b) => b.productCount - a.productCount);
-    const items = ordered.map(brandLogo).join("");
+    const items = ordered.map((b) => brandLogo(b, handleMap)).join("");
     // Duplicate the set so the -50% keyframe loops seamlessly.
     track.innerHTML = items + items;
   } catch (err) {
