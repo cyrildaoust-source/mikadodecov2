@@ -73,6 +73,49 @@ const PRODUITS_TEMPLATE = path.join(__dirname, 'v3', 'produits.html');
 // v3/produits.html). Pour elles, l'image OG = le bandeau de marque statique.
 const BRAND_HEADERS = new Set(['fatboy', 'ferm-living', 'tradition', 'vitra', 'string-furniture', 'muuto', 'blomus']);
 
+// ─── CHROME SSR ────────────────────────────────────────
+// chrome-template.js est ESM + pur → importable en Node via import() dynamique.
+// Chargé une seule fois, mémorisé. Repli gracieux si non prêt (cold start très tôt).
+let _chrome = null;
+const _chromeReady = import('./v3/chrome-template.js')
+  .then((m) => { _chrome = m; })
+  .catch((e) => { console.warn('[chrome-ssr] import échoué:', e.message); _chrome = null; });
+
+// Pages NON-hero (transparentNav:false) : header rendu DÉJÀ solide en SSR pour
+// éviter le flash blanc-sur-blanc (cf. styles.css .chrome color:on-dark par défaut).
+// Toute page absente de ce Set est hero (transparent over-hero, bindChrome gère le scroll).
+const NON_HERO = new Set([
+  'produit.html', 'contact.html', 'selection.html', 'journal.html',
+  'nuancier-fermob.html', '404.html', 'mentions-legales.html',
+  'conditions-generales-de-vente.html', 'politique-cookies.html',
+  'politique-et-vie-privee.html',
+]);
+// Les articles du journal sont tous non-hero (transparentNav:false).
+function isNonHero(rel) {
+  if (!rel) return false;
+  if (rel.startsWith('journal/')) return true;   // v3/journal/*.html
+  return NON_HERO.has(rel);
+}
+
+// Injecte le chrome dans #site-header / #site-footer d'une page HTML.
+// - rel : chemin relatif à v3/ (ex. 'contact.html', 'journal/and-tradition.html'),
+//   sert à décider l'état solide. undefined → header transparent par défaut.
+// - IDEMPOTENT par construction : la regex ne matche qu'un conteneur VIDE
+//   (<div id="site-header"></div>) → un 2e passage ne re-matche pas.
+function injectChrome(html, rel) {
+  if (!_chrome) return html;                 // module pas prêt → repli (page sans chrome SSR, hydratée client)
+  // Header solide pré-rendu pour les pages non-hero (anti flash blanc-sur-blanc).
+  const headerHtml = isNonHero(rel)
+    ? _chrome.chromeHTML('').replace('<header class="chrome"', '<header class="chrome chrome--solid"')
+    : _chrome.chromeHTML('');
+  const footerHtml = _chrome.footerHTML();
+  return html
+    .replace(/(<div id="site-header"[^>]*>)\s*(<\/div>)/i,
+             (_m, open, close) => `${open}${headerHtml}${close}`)
+    .replace(/(<div id="site-footer"[^>]*>)\s*(<\/div>)/i,
+             (_m, open, close) => `${open}${footerHtml}${close}`);
+}
+
 const ogEscape = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // URL absolue (les URLs Shopify CDN le sont déjà ; les chemins /images/… non ;
@@ -126,9 +169,13 @@ function renderWithOg(templateHtml, { title, description, image, url }) {
 }
 function sendTemplate(res, file) {
   // Template générique inchangé (pas de paramètre / introuvable / erreur). Jamais 500.
+  // Passe par injectChrome → chrome SSR aussi sur les replis. Synchrone : si _chrome
+  // n'est pas encore prêt (tout 1er hit post-cold-start), injectChrome renvoie le
+  // HTML brut (repli = comportement actuel, hydraté client) — dégradation acceptée.
   try {
     res.set('Content-Type', 'text/html; charset=utf-8');
-    return res.send(fs.readFileSync(file, 'utf8'));
+    const rel = path.relative(path.join(__dirname, 'v3'), file); // 'produit.html' / 'produits.html'
+    return res.send(injectChrome(fs.readFileSync(file, 'utf8'), rel));
   } catch (e) {
     return res.sendFile(file);
   }
@@ -159,6 +206,7 @@ app.get('/produit.html', async (req, res) => {
   const handle = req.query.handle;
   if (!handle) return sendProduitTemplate(res);
   try {
+    await _chromeReady;
     const product = await getProductByHandle(handle);
     // Miss stable (produit inexistant/dépublié) : on cache aussi le repli pour
     // ne pas ré-invoquer la fonction à chaque bot. (Les erreurs Shopify partent
@@ -195,7 +243,8 @@ app.get('/produit.html', async (req, res) => {
       }
     };
     const ldTag = `<script type="application/ld+json">` + JSON.stringify(ld).replace(/</g, '\\u003c') + `</script>`;
-    const out = html.replace('</head>', ldTag + '\n</head>');
+    let out = html.replace('</head>', ldTag + '\n</head>');
+    out = injectChrome(out, 'produit.html');     // ← non-hero → header solide
     ogCache(res);
     return res.send(out);
   } catch (err) {
@@ -211,6 +260,7 @@ app.get('/produit.html', async (req, res) => {
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
   try {
+    await _chromeReady;
     const collections = await getCollections();
     const col = collections.find((c) => c.handle === handle);
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
@@ -228,7 +278,8 @@ app.get('/collections/:handle', async (req, res) => {
       : (col.image ? absUrl(col.image) : OG_DEFAULT);
     const url = ORIGIN + '/collections/' + encodeURIComponent(handle);
 
-    const html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
   } catch (err) {
@@ -245,6 +296,7 @@ app.get('/produits.html', async (req, res) => {
   const slug = req.query.designer ? String(req.query.designer).toLowerCase() : '';
   if (!slug) return sendProduitsTemplate(res);
   try {
+    await _chromeReady;
     const designer = getDesigners().find((d) => String(d.slug || '').toLowerCase() === slug);
     // Miss stable (slug inconnu) : repli cachable.
     if (!designer) { ogCache(res); return sendProduitsTemplate(res); }
@@ -259,7 +311,8 @@ app.get('/produits.html', async (req, res) => {
     const image = designer.photo ? absUrl(designer.photo) : OG_DEFAULT;
     const url = ORIGIN + '/produits.html?designer=' + encodeURIComponent(designer.slug || slug);
 
-    const html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
   } catch (err) {
@@ -333,6 +386,44 @@ app.get('/sitemap.xml', async (req, res) => {
     console.warn('[sitemap]', err.message);
     return res.status(500).send('');
   }
+});
+
+// ─── SSR CHROME pour les pages HTML statiques ──────────
+// Liste blanche des pages racine servies en statique aujourd'hui (hors 3 routes
+// templatées et hors article.html = stub de redirection sans #site-header).
+const SSR_PAGES = new Set([
+  'index.html', 'marques.html', 'designers.html', 'studio.html',
+  'materiaux.html', 'rendez-vous.html', 'contact.html', 'selection.html',
+  'journal.html', 'nuancier-fermob.html', '404.html', 'mentions-legales.html',
+  'conditions-generales-de-vente.html', 'politique-cookies.html',
+  'politique-et-vie-privee.html',
+]);
+function resolveSsrRel(p) {
+  if (p === '/') return 'index.html';
+  if (p.endsWith('.html')) {
+    const rel = p.slice(1);
+    if (SSR_PAGES.has(rel)) return rel;
+    if (/^journal\/[^/]+\.html$/.test(rel)) return rel;  // articles du journal
+  }
+  return null;
+}
+// APRÈS les 3 routes templatées + le sitemap, AVANT express.static. Ne capte que
+// SSR_PAGES + articles journal ; tout le reste passe à next() (static/api).
+app.get(/.*/, async (req, res, next) => {
+  if (req.path.startsWith('/api/') || req.path.startsWith('/_vercel/')) return next();
+  const rel = resolveSsrRel(req.path);
+  if (!rel) return next();                              // pas une page SSR → static/api gèrent
+  const root = path.join(__dirname, 'v3');
+  const file = path.join(root, rel);
+  if (!file.startsWith(root + path.sep)) return next(); // anti path-traversal
+  let raw;
+  try { raw = fs.readFileSync(file, 'utf8'); }
+  catch { return next(); }                              // inexistant → 404 normal
+  if (!/id="site-header"/.test(raw)) return next();     // page hors-shell → ne pas toucher
+  await _chromeReady;
+  res.set('Content-Type', 'text/html; charset=utf-8');
+  res.set('Cache-Control', 'public, max-age=0, must-revalidate');
+  return res.send(injectChrome(raw, rel));
 });
 
 app.use(express.static(path.join(__dirname, 'v3')));
@@ -1630,6 +1721,17 @@ app.post('/api/newsletter', formLimiter, async (req, res) => {
     console.error('[newsletter] error:', err.message);
     res.status(500).json({ error: 'server_error' });
   }
+});
+
+// 404 : sert 404.html avec chrome SSR + status 404 (Vercel route les URL inconnues
+// ici via { handle: error } → /api/index.js). Dernier middleware enregistré.
+app.use(async (req, res) => {
+  await _chromeReady;
+  let raw;
+  try { raw = fs.readFileSync(path.join(__dirname, 'v3', '404.html'), 'utf8'); }
+  catch { return res.status(404).send('Not found'); }
+  res.status(404).set('Content-Type', 'text/html; charset=utf-8');
+  return res.send(injectChrome(raw, '404.html'));   // non-hero → solide
 });
 
 // ─── START (only when run directly, not when imported by Vercel) ──
