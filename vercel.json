@@ -1,63 +1,51 @@
 {
-      "version": 2,
-      "builds": [
-              {
-                        "src": "api/index.js",
-                        "use": "@vercel/node",
-                        "config": { "includeFiles": ["data/**", "v3/produit.html", "v3/produits.html", "v3/designers-data.json", "v3/journal/**"] }
-              },
-              { "src": "v3/**", "use": "@vercel/static" }
-      ],
-      "routes": [
-              {
-                        "src": "/(.*)",
-                        "headers": {
-                                  "X-Content-Type-Options": "nosniff",
-                                  "X-Frame-Options": "SAMEORIGIN",
-                                  "Referrer-Policy": "strict-origin-when-cross-origin",
-                                  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), browsing-topics=()",
-                                  "Strict-Transport-Security": "max-age=31536000",
-                                  "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net https://unpkg.com; img-src 'self' data: https://cdn.shopify.com https://use.typekit.net https://p.typekit.net https://unpkg.com https://*.basemaps.cartocdn.com; font-src 'self' data: https://use.typekit.net; connect-src 'self' https://use.typekit.net https://p.typekit.net; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
-                        },
-                        "continue": true
-              },
-              {
-                        "src": "/api/(.*)",
-                        "headers": { "cache-control": "no-store" },
-                        "dest": "/api/index.js"
-              },
-              { "src": "/produit.html", "has": [{ "type": "query", "key": "handle" }], "dest": "/api/index.js" },
-              { "src": "/produits.html", "has": [{ "type": "query", "key": "designer" }], "dest": "/api/index.js" },
-              { "src": "/sitemap.xml", "dest": "/api/index.js" },
-              { "src": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "status": 301, "headers": { "Location": "/journal/$slug.html" } },
-              { "src": "/nos-produits(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
-              { "src": "/passez-commande(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
-              { "src": "/nos-marques(/.*)?", "status": 301, "headers": { "Location": "/marques.html" } },
-              { "src": "/prendre-rendez-vous(/.*)?", "status": 301, "headers": { "Location": "/rendez-vous.html" } },
-              { "src": "/contact", "status": 301, "headers": { "Location": "/contact.html" } },
-              { "src": "/v3/(.*)", "status": 301, "headers": { "Location": "/$1" } },
-              { "src": "/v3", "status": 301, "headers": { "Location": "/" } },
-              {
-                        "src": "/(.*\\.(?:css|js|mjs))(?:\\?.*)?$",
-                        "headers": { "cache-control": "public, max-age=0, must-revalidate" },
-                        "continue": true
-              },
-              {
-                        "src": "/(.*\\.html(?:\\?.*)?)?$",
-                        "headers": { "cache-control": "public, max-age=0, must-revalidate" },
-                        "continue": true
-              },
-              {
-                        "src": "/(.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|woff2?|ttf|eot|ico))",
-                        "headers": { "cache-control": "public, max-age=31536000, immutable" },
-                        "dest": "/v3/$1"
-              },
-              { "src": "/(.*\\.[a-zA-Z0-9]+)", "dest": "/v3/$1" },
-              { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
-              { "src": "/collections/([^/]+)", "dest": "/api/index.js" },
-              { "src": "/", "dest": "/v3/index.html" },
-              { "src": "/(.+)", "dest": "/v3/$1.html" },
-              { "handle": "error" },
-              { "src": "/(?!api/).*", "status": 404, "dest": "/v3/404.html" }
-      ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["data/**", "v3/*.html", "v3/chrome-template.js", "v3/designers-data.json", "v3/journal/**"] }
+    },
+    { "src": "v3/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), browsing-topics=()",
+        "Strict-Transport-Security": "max-age=31536000",
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net https://unpkg.com; img-src 'self' data: https://cdn.shopify.com https://use.typekit.net https://p.typekit.net https://unpkg.com https://*.basemaps.cartocdn.com; font-src 'self' data: https://use.typekit.net; connect-src 'self' https://use.typekit.net https://p.typekit.net; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+      },
+      "continue": true
+    },
+    { "src": "/api/(.*)", "headers": { "cache-control": "no-store" }, "dest": "/api/index.js" },
+    { "src": "/produit.html", "has": [{ "type": "query", "key": "handle" }], "dest": "/api/index.js" },
+    { "src": "/produits.html", "has": [{ "type": "query", "key": "designer" }], "dest": "/api/index.js" },
+    { "src": "/sitemap.xml", "dest": "/api/index.js" },
+    { "src": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "status": 301, "headers": { "Location": "/journal/$slug.html" } },
+    { "src": "/nos-produits(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
+    { "src": "/passez-commande(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
+    { "src": "/nos-marques(/.*)?", "status": 301, "headers": { "Location": "/marques.html" } },
+    { "src": "/prendre-rendez-vous(/.*)?", "status": 301, "headers": { "Location": "/rendez-vous.html" } },
+    { "src": "/contact", "status": 301, "headers": { "Location": "/contact.html" } },
+    { "src": "/v3/(.*)", "status": 301, "headers": { "Location": "/$1" } },
+    { "src": "/v3", "status": 301, "headers": { "Location": "/" } },
+    { "src": "/(.*\\.(?:css|js|mjs))(?:\\?.*)?$", "headers": { "cache-control": "public, max-age=0, must-revalidate" }, "continue": true },
+    { "src": "/(.*\\.html(?:\\?.*)?)?$", "headers": { "cache-control": "public, max-age=0, must-revalidate" }, "continue": true },
+    { "src": "/produit.html$", "dest": "/api/index.js" },
+    { "src": "/produits.html$", "dest": "/api/index.js" },
+    { "src": "/(index|marques|designers|studio|materiaux|rendez-vous|contact|selection|journal|nuancier-fermob|mentions-legales|conditions-generales-de-vente|politique-cookies|politique-et-vie-privee|404)\\.html$", "dest": "/api/index.js" },
+    { "src": "/journal/([^/]+\\.html)$", "dest": "/api/index.js" },
+    { "src": "/(.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|woff2?|ttf|eot|ico))", "headers": { "cache-control": "public, max-age=31536000, immutable" }, "dest": "/v3/$1" },
+    { "src": "/(.*\\.[a-zA-Z0-9]+)", "dest": "/v3/$1" },
+    { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
+    { "src": "/collections/([^/]+)", "dest": "/api/index.js" },
+    { "src": "/", "dest": "/api/index.js" },
+    { "src": "/(.+)", "dest": "/v3/$1.html" },
+    { "handle": "error" },
+    { "src": "/(?!api/).*", "status": 404, "dest": "/api/index.js" }
+  ]
 }
