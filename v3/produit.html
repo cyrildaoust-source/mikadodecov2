@@ -83,10 +83,6 @@
       return all.find((x) => x.id === id || encodeURIComponent(x.id) === id) || null;
     }
 
-    // Slug→label for ?cat= views (mirrors produits.html CAT_LABEL — 7 stable
-    // entries). Labels the category crumb on the PDP breadcrumb.
-    const CAT_LABEL = { tous: "Le catalogue", assises: "Assises", tables: "Tables", luminaires: "Luminaires", rangements: "Rangements", objets: "Objets", exterieur: "Extérieur" };
-
     // Build the PDP breadcrumb from the ?from= token — the path the user took
     // to reach this product (set by productCard). Falls back to a neutral
     // "Accueil › Le catalogue › <produit>" when from is absent/unknown; never
@@ -109,11 +105,6 @@
           if (c && c.name) title = c.name;
         } catch (e) { /* keep the handle as label */ }
         trail = [home, { label: title, href: `/collections/${val}` }, last];
-      } else if (type === "cat" && val && val !== "tous") {
-        trail = [home,
-          { label: "Mobilier", href: "/produits.html" },
-          { label: CAT_LABEL[val] || val, href: `/produits.html?cat=${encodeURIComponent(val)}` },
-          last];
       } else if (type === "designer" && val) {
         let name = val;
         try {
