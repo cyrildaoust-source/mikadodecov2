@@ -140,6 +140,7 @@ ul { list-style: none; }
    NAV + ANNOUNCEMENT
    ============================================================ */
 .chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 80; transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease); color: var(--on-dark); border-bottom: 1px solid transparent; }
+.chrome--noanim { transition: none !important; }
 /* Reassurance strip (delivery Belgium / boutique Uccle) — a visible, premium
    royal-blue band with cream text. Slim + full-width; sober, not baby-blue. */
 .announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--paper); }
