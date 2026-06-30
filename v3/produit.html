@@ -6,19 +6,19 @@
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <title>Produit · Mikadodeco</title>
+  <title>Produit · Mikado Deco</title>
   <!-- Open Graph / Twitter Cards (aperçu au partage social — statique) -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Mikadodeco" />
+  <meta property="og:site_name" content="Mikado Deco" />
   <meta property="og:locale" content="fr_BE" />
-  <meta property="og:title" content="Produit · Mikadodeco" />
+  <meta property="og:title" content="Produit · Mikado Deco" />
   <meta property="og:description" content="Découvrez cette pièce de notre sélection design. Retrait à Uccle, livraison en Belgique." />
   <meta property="og:url" content="https://www.mikadodeco.be/produit.html" />
   <meta property="og:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Produit · Mikadodeco" />
+  <meta name="twitter:title" content="Produit · Mikado Deco" />
   <meta name="twitter:description" content="Découvrez cette pièce de notre sélection design. Retrait à Uccle, livraison en Belgique." />
   <meta name="twitter:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
   <meta name="description" content="Découvrez cette pièce de notre sélection design. Retrait à Uccle, livraison en Belgique." />
@@ -130,7 +130,7 @@
 
     Promise.all([loadProduct(), loadBrandHandles()]).then(([p, brandMap]) => {
       if (!p) { host.innerHTML = `<p class="plp-empty">Cette pièce est introuvable. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue</a>.</p>`; return; }
-      document.title = `${p.name} · Mikadodeco`;
+      document.title = `${p.name} · Mikado Deco`;
 
       // Brand collection URL — curated /collections/<handle> when known (joined
       // via mega-menu-brands.json), else the ?brand= filter fallback.
@@ -218,7 +218,7 @@
       const SHOWROOM_MAPS = "https://www.google.com/maps/dir/?api=1&destination=75%20Rue%20du%20Doyenn%C3%A9%2C%201180%20Uccle";
       const availStore = (v) => {
         const s = variantState(v || current);
-        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>À voir en boutique</strong> · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, Uccle</a>`;
+        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>À voir en boutique</strong> · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a>`;
         if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Indisponible</strong>`;
         return p.longDelay
           ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande`
