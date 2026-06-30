@@ -128,7 +128,7 @@ export function footerHTML() {
           <defs><path id="seal-arc" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
           <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1" />
           <circle cx="60" cy="60" r="40" fill="none" stroke="currentColor" stroke-width="1" />
-          <text font-family="'neue-haas-grotesk-display', sans-serif" font-size="8.4" letter-spacing="2.4" fill="currentColor"><textPath href="#seal-arc" startOffset="0">· MIKADODECO · MOBILIER DE DESIGN · BRUXELLES </textPath></text>
+          <text font-family="'neue-haas-grotesk-display', sans-serif" font-size="8.4" letter-spacing="2.4" fill="currentColor"><textPath href="#seal-arc" startOffset="0">· MIKADO DECO · MOBILIER DE DESIGN · BRUXELLES </textPath></text>
           <text x="60" y="67" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="20" fill="currentColor">Uccle</text>
         </svg>
       </div>
