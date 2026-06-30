@@ -52,7 +52,7 @@ const PORT = process.env.PORT || 4000;
 // lève une erreur de validation. Indispensable pour le rate-limit ci-dessous.
 app.set('trust proxy', 1);
 
-// The Mikadodeco storefront (v3/) is served at the site root.
+// The Mikado Deco storefront (v3/) is served at the site root.
 // Old /v3/* links 301-redirect to the clean root path for backward-compat.
 app.use('/v3', (req, res) => res.redirect(301, req.url && req.url !== '/' ? req.url : '/'));
 // ─── SSR OPEN GRAPH (FICHES PRODUIT · COLLECTIONS/MARQUES · CRÉATEURS) ──
@@ -216,7 +216,7 @@ app.get('/produit.html', async (req, res) => {
     const name     = product.name || 'Produit';
     const brand    = product.brand || '';
     const designer = product.designer || '';
-    const title = `${name} · Mikadodeco`;
+    const title = `${name} · Mikado Deco`;
     const description = ogDesc(`${name}${brand ? ' — ' + brand : ''}. `
       + (designer ? `Dessiné par ${designer}. ` : '')
       + 'Pièce design à voir en boutique à Uccle, livraison en Belgique.');
@@ -267,11 +267,11 @@ app.get('/collections/:handle', async (req, res) => {
     if (!col) { ogCache(res); return sendProduitsTemplate(res); }
 
     const name = col.name || 'Catalogue';
-    const title = `${name} — Mikadodeco Bruxelles`;
+    const title = `${name} · Mikado Deco`;
     const description = ogDesc(
       col.description && col.description.trim()
         ? col.description
-        : `${name} chez Mikadodeco — sélection design. Retrait à Uccle, livraison en Belgique.`
+        : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
     const image = BRAND_HEADERS.has(handle)
       ? `${ORIGIN}/images/brands/headers/${handle}-1920.jpg`
@@ -302,11 +302,11 @@ app.get('/produits.html', async (req, res) => {
     if (!designer) { ogCache(res); return sendProduitsTemplate(res); }
 
     const name = designer.name || 'Créateur';
-    const title = `${name} — Mikadodeco Bruxelles`;
+    const title = `${name} · Mikado Deco`;
     const description = ogDesc(
       designer.bio && designer.bio.trim()
         ? designer.bio
-        : `Les pièces signées ${name} chez Mikadodeco. Retrait à Uccle, livraison en Belgique.`
+        : `Les pièces signées ${name} chez Mikado Deco. Retrait à Uccle, livraison en Belgique.`
     );
     const image = designer.photo ? absUrl(designer.photo) : OG_DEFAULT;
     const url = ORIGIN + '/produits.html?designer=' + encodeURIComponent(designer.slug || slug);
@@ -1737,7 +1737,7 @@ app.use(async (req, res) => {
 // ─── START (only when run directly, not when imported by Vercel) ──
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`\n  Mikadodeco — serveur demarre`);
+    console.log(`\n  Mikado Deco — serveur demarre`);
     console.log(`  http://localhost:${PORT}\n`);
   });
 }

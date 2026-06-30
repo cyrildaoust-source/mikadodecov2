@@ -1,5 +1,5 @@
 /* ============================================================
-   Mikadodeco v3 · shared shell + cart + helpers
+   Mikado Deco v3 · shared shell + cart + helpers
    Imported by every page. Injects the chrome (announce + nav +
    drawer) and footer so they stay in sync, wires the selection
    cart (localStorage), and exposes formatting + card helpers.
