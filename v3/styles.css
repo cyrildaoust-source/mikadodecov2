@@ -55,6 +55,16 @@
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
+/* Police nav/UI (neue-haas-grotesk-text n4) déclarée ICI pour qu'elle soit
+   ACTIVE dès le 1er paint (le kit Typekit est chargé en différé via media=print
+   → trop tard, le menu reflow). URL = build actuel du kit gqc3ska ; si le kit
+   Adobe Fonts est republié, re-extraire l'url woff2 (fvd=n4) de gqc3ska.css. */
+@font-face {
+  font-family: 'neue-haas-grotesk-text';
+  src: url('https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
 :root {
   /* --- Mikado palette --- */
   --paper:      #f8f5ef;   /* warm base */
