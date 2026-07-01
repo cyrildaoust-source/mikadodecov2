@@ -65,6 +65,19 @@
   font-weight: 400; font-style: normal; font-display: swap;
 }
 
+/* Repli METRIC-MATCHED de neue-haas-grotesk-text : Arial redimensionnée pour
+   occuper EXACTEMENT la même largeur/hauteur → zéro reflow du menu pendant le
+   chargement de la vraie police (le swap devient invisible). Métriques mesurées
+   sur le woff2 n4 du kit (size-adjust = largeur neue-haas/Arial). */
+@font-face {
+  font-family: 'nhg-fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 128.2%;
+  ascent-override: 76.3%;
+  descent-override: 19.1%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* --- Mikado palette --- */
   --paper:      #f8f5ef;   /* warm base */
@@ -91,7 +104,7 @@
 
   /* --- type --- */
   --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --sans:  'neue-haas-grotesk-text', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;  /* body / UI */
+  --sans:  'neue-haas-grotesk-text', 'nhg-fallback', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;  /* body / UI */
   --sans-product: 'neue-haas-grotesk-display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif; /* product names + same tier */
 
   --fs-display: clamp(44px, 5vw, 92px);   /* Cormorant is narrow/light · runs larger */
