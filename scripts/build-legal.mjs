@@ -296,6 +296,8 @@ function head(cfg, out) {
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3" />
   <link rel="stylesheet" href="/styles.css" />`;
 }
 
@@ -316,7 +318,7 @@ ${head(cfg, out)}
 </head>
 <body>
   <div id="site-header"></div>
-  <main class="page wrap">
+  <main id="contenu" class="page wrap">
 ${pagehead(cfg)}
     <div class="prose">
       <p class="legal-updated"><em>${esc(cfg.updated)}</em></p>
@@ -364,7 +366,7 @@ ${head(cfg, out)}
 </head>
 <body>
   <div id="site-header"></div>
-  <main class="page wrap">
+  <main id="contenu" class="page wrap">
 ${pagehead(cfg)}
     <div class="chips" role="tablist" aria-label="Type de client">
 ${tabBtns}

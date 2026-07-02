@@ -586,11 +586,18 @@ export function bindReveal() {
 function bindChrome(transparent) {
   const chrome = document.querySelector("[data-chrome]");
   if (!chrome) return;
-  if (!transparent) { chrome.classList.add("chrome--solid"); return; }
+  // Pose l'état initial du header (solid si le scroll est restauré au refresh)
+  // SANS transition, puis réactive les transitions au 2e frame → plus de fondu
+  // du filet `--line` au 1er paint, mais scroll/hover restent fluides.
+  chrome.classList.add("chrome--noanim");
+  const reanim = () => requestAnimationFrame(() =>
+    requestAnimationFrame(() => chrome.classList.remove("chrome--noanim")));
+  if (!transparent) { chrome.classList.add("chrome--solid"); reanim(); return; }
   const hero = document.querySelector(".hero, .subhero, .rdv-hero");
-  if (!hero) { chrome.classList.add("chrome--solid"); return; }
+  if (!hero) { chrome.classList.add("chrome--solid"); reanim(); return; }
   const onScroll = () => chrome.classList.toggle("chrome--solid", window.scrollY > hero.offsetHeight - chrome.offsetHeight - 8);
   onScroll();
+  reanim();
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 function bindNewsletter() {
