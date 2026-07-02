@@ -55,6 +55,29 @@
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
+/* Police nav/UI (neue-haas-grotesk-text n4) déclarée ICI pour qu'elle soit
+   ACTIVE dès le 1er paint (le kit Typekit est chargé en différé via media=print
+   → trop tard, le menu reflow). URL = build actuel du kit gqc3ska ; si le kit
+   Adobe Fonts est republié, re-extraire l'url woff2 (fvd=n4) de gqc3ska.css. */
+@font-face {
+  font-family: 'neue-haas-grotesk-text';
+  src: url('https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+/* Repli METRIC-MATCHED de neue-haas-grotesk-text : Arial redimensionnée pour
+   occuper EXACTEMENT la même largeur/hauteur → zéro reflow du menu pendant le
+   chargement de la vraie police (le swap devient invisible). Valeurs calées à
+   l'œil sur le vrai menu rendu (navigateur, Slow-3G), pas sur le xAvg théorique. */
+@font-face {
+  font-family: 'nhg-fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 104.5%;
+  ascent-override: 93.6%;
+  descent-override: 23.4%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* --- Mikado palette --- */
   --paper:      #f8f5ef;   /* warm base */
@@ -81,7 +104,7 @@
 
   /* --- type --- */
   --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --sans:  'neue-haas-grotesk-text', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;  /* body / UI */
+  --sans:  'neue-haas-grotesk-text', 'nhg-fallback', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;  /* body / UI */
   --sans-product: 'neue-haas-grotesk-display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif; /* product names + same tier */
 
   --fs-display: clamp(44px, 5vw, 92px);   /* Cormorant is narrow/light · runs larger */
@@ -140,6 +163,7 @@ ul { list-style: none; }
    NAV + ANNOUNCEMENT
    ============================================================ */
 .chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 80; transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease); color: var(--on-dark); border-bottom: 1px solid transparent; }
+.chrome--noanim { transition: none !important; }
 /* Reassurance strip (delivery Belgium / boutique Uccle) — a visible, premium
    royal-blue band with cream text. Slim + full-width; sober, not baby-blue. */
 .announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--paper); }
