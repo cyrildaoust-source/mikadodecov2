@@ -67,14 +67,14 @@
 
 /* Repli METRIC-MATCHED de neue-haas-grotesk-text : Arial redimensionnée pour
    occuper EXACTEMENT la même largeur/hauteur → zéro reflow du menu pendant le
-   chargement de la vraie police (le swap devient invisible). Métriques mesurées
-   sur le woff2 n4 du kit (size-adjust = largeur neue-haas/Arial). */
+   chargement de la vraie police (le swap devient invisible). Valeurs calées à
+   l'œil sur le vrai menu rendu (navigateur, Slow-3G), pas sur le xAvg théorique. */
 @font-face {
   font-family: 'nhg-fallback';
   src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
-  size-adjust: 128.2%;
-  ascent-override: 76.3%;
-  descent-override: 19.1%;
+  size-adjust: 104.5%;
+  ascent-override: 93.6%;
+  descent-override: 23.4%;
   line-gap-override: 0%;
 }
 
