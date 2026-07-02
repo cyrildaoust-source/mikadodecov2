@@ -139,7 +139,7 @@ ul { list-style: none; }
 .skip-link {
   position: absolute; left: 8px; top: -56px; z-index: 1000;
   background: var(--accent-ink); color: var(--paper);
-  padding: 10px 16px; border-radius: 6px;
+  padding: 10px 16px; border-radius: 0;
   font-size: 14px; font-weight: 600; text-decoration: none;
   transition: top .15s ease;
 }
@@ -343,7 +343,7 @@ ul { list-style: none; }
 .stat__suf { font-size: .42em; color: var(--accent-soft); letter-spacing: .02em; }
 .stat__label { margin-top: 14px; font-size: var(--fs-small); color: rgba(248,245,239,.72); max-width: 22ch; margin-inline: auto; }
 /* — Bloc avis Google cliquable (sur le panneau sombre .stats) — */
-.stat--google { text-decoration: none; color: inherit; display: block; border-radius: 12px; padding: 10px 6px; transition: background .2s ease; }
+.stat--google { text-decoration: none; color: inherit; display: block; border-radius: 0; padding: 10px 6px; transition: background .2s ease; }
 .stat--google:hover { background: rgba(248,245,239,.06); }
 .stat--google:focus-visible { outline: 2px solid var(--on-dark); outline-offset: 2px; }
 .stat__stars { color: #f5c451; letter-spacing: 3px; font-size: 15px; margin-top: 10px; line-height: 1; }
@@ -380,7 +380,7 @@ ul { list-style: none; }
 .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: clamp(40px, 5vw, 64px); padding-top: 22px; border-top: 1px solid var(--line); font-size: var(--fs-small); color: var(--muted); }
 .footer__bottom nav { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
 .pay { display: flex; gap: 8px; }
-.pay span { font-size: var(--fs-meta); border: 1px solid var(--line); padding: 4px 8px; color: var(--subtle); border-radius: 3px; }
+.pay span { font-size: var(--fs-meta); border: 1px solid var(--line); padding: 4px 8px; color: var(--subtle); border-radius: 0; }
 
 /* ============================================================
    RESPONSIVE
@@ -806,7 +806,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    underline). */
 .article-cta { text-align: center; margin: clamp(2.5rem, 5vw, 3.5rem) 0; }
 .article-cta__lead { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.3; color: var(--ink); margin-bottom: 1rem; }
-a.article-cta__btn { display: inline-flex; align-items: center; gap: 0.5em; padding: 0.9rem 1.6rem; border: 1px solid var(--ink); border-bottom: 1px solid var(--ink); border-radius: 2px; background: var(--paper); font-family: var(--sans-product); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease); }
+a.article-cta__btn { display: inline-flex; align-items: center; gap: 0.5em; padding: 0.9rem 1.6rem; border: 1px solid var(--ink); border-bottom: 1px solid var(--ink); border-radius: 0; background: var(--paper); font-family: var(--sans-product); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease); }
 a.article-cta__btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
 @media (max-width: 540px) {
@@ -1092,7 +1092,7 @@ body.pdplb-locked { overflow: hidden; }
   display: grid;
   grid-template-columns: 1.55fr 1fr;
   background: var(--paper-2);
-  border-radius: 2px;
+  border-radius: 0;
   overflow: hidden;
   margin-bottom: clamp(32px, 4vw, 56px);
   transition: background .3s var(--ease);
@@ -1143,7 +1143,7 @@ body.pdplb-locked { overflow: hidden; }
   display: flex;
   flex-direction: column;
   background: var(--paper-2);
-  border-radius: 2px;
+  border-radius: 0;
   overflow: hidden;
   transition: background .3s var(--ease);
 }
