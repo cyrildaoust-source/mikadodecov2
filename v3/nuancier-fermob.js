@@ -1,5 +1,5 @@
 /* ============================================================
-   Mikadodeco · Nuancier Fermob widget
+   Mikado Deco · Nuancier Fermob widget
    Standalone module: mount the interactive palette into any host
    element. No auto-init — callers (page hôte + article) handle
    their own bootstrap.
@@ -182,7 +182,7 @@ export function mountNuancier(rootEl, colors, opts = {}) {
     if (updateHash) {
       history.replaceState(null, "", `#${slug}`);
     }
-    document.title = `${color.name} · Nuancier Fermob · Mikadodeco`;
+    document.title = `${color.name} · Nuancier Fermob · Mikado Deco`;
   }
 
   function writeActiveLabel(color) {

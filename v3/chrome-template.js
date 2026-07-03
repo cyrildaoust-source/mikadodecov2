@@ -1,5 +1,5 @@
 /* ============================================================
-   Mikadodeco · chrome-template (SOURCE UNIQUE du markup chrome)
+   Mikado Deco · chrome-template (SOURCE UNIQUE du markup chrome)
    Module PUR, ESM, zéro DOM, zéro effet de bord top-level.
    Importé par /shared.js (client) ET par server.js (SSR Node).
    NE JAMAIS y mettre fetch/document/window/localStorage.
@@ -123,12 +123,12 @@ export function footerHTML() {
   <footer class="footer">
     <div class="wrap">
       <div class="footer__lockbar">
-        <span class="lockup-lg">Mikadodeco · Boutique de design · Uccle, Bruxelles</span>
-        <svg class="seal" viewBox="0 0 120 120" role="img" aria-label="Mikadodeco, Bruxelles, depuis 2011">
+        <span class="lockup-lg">Mikado Deco · Boutique de design · Uccle, Bruxelles</span>
+        <svg class="seal" viewBox="0 0 120 120" role="img" aria-label="Mikado Deco, Bruxelles, depuis 2011">
           <defs><path id="seal-arc" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
           <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1" />
           <circle cx="60" cy="60" r="40" fill="none" stroke="currentColor" stroke-width="1" />
-          <text font-family="'neue-haas-grotesk-display', sans-serif" font-size="8.4" letter-spacing="2.4" fill="currentColor"><textPath href="#seal-arc" startOffset="0">· MIKADODECO · MOBILIER DE DESIGN · BRUXELLES </textPath></text>
+          <text font-family="'neue-haas-grotesk-display', sans-serif" font-size="8.4" letter-spacing="2.4" fill="currentColor"><textPath href="#seal-arc" startOffset="0">· MIKADO DECO · MOBILIER DE DESIGN · BRUXELLES </textPath></text>
           <text x="60" y="67" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="20" fill="currentColor">Uccle</text>
         </svg>
       </div>
@@ -159,7 +159,7 @@ export function footerHTML() {
           <li><a href="mailto:shop@mikadodeco.be">shop@mikadodeco.be</a></li>
           <li><a href="tel:+32493837983">+32 (0)493 83 79 83</a></li>
           <li><a href="/contact.html">Nous écrire</a></li>
-          <li><a href="https://maps.google.com/?q=75+Rue+du+Doyenné+1180+Uccle" target="_blank" rel="noopener">75 Rue du Doyenné, Uccle</a></li>
+          <li><a href="https://maps.google.com/?q=75+Rue+du+Doyenné+1180+Uccle" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a></li>
           <li><a href="https://maps.app.goo.gl/NE71nd6NytFjot6K6" target="_blank" rel="noopener">★ Voir nos avis Google</a></li>
         </ul></div>
       </div>

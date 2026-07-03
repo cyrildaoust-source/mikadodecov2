@@ -1,6 +1,6 @@
-# Mikadodeco · visual identity
+# Mikado Deco · visual identity
 
-The source of truth for the Mikadodeco storefront: palette, type, detailing, voice.
+The source of truth for the Mikado Deco storefront: palette, type, detailing, voice.
 
 ## Palette (CSS vars in `styles.css`)
 
@@ -42,14 +42,14 @@ Loaded via the Adobe Fonts kit `gqc3ska` (`https://use.typekit.net/gqc3ska.css`)
    - **One** soft-blue panel per page max: `.feature--accent` + its `.btn--blue` CTA.
 2. **Boutique lockups** · store voice + brand furniture:
    - Rotating announcement (boutique hours, selection, delivery, Mikado Studio).
-   - Footer lockbar: "Mikadodeco · Boutique de design · Uccle, Bruxelles" + a slowly-rotating typographic seal (SVG `textPath`).
+   - Footer lockbar: "Mikado Deco · Boutique de design · Uccle, Bruxelles" + a slowly-rotating typographic seal (SVG `textPath`).
 
 ## Voice
 
-French-first, warm, store-as-curator in Uccle (Bruxelles). Short, calm, concrete. No hype. Mikadodeco is a **boutique you can visit** (open Tue–Sat) that also sells online; **Mikado Studio** is the design-advice service by appointment.
+French-first, warm, store-as-curator in Uccle (Bruxelles). Short, calm, concrete. No hype. Mikado Deco is a **boutique you can visit** (open Tue–Sat) that also sells online; **Mikado Studio** is the design-advice service by appointment.
 
 ## Confirmed
-- **Brand name**: **Mikadodeco** (often shortened to **Mikado**, e.g. the logo wordmark).
+- **Brand name**: **Mikado Deco** (two words). The logo wordmark, the rotating seal and the domain `mikadodeco.be` are styled as a single word « mikadodeco » — keep those as-is; all readable text uses the two-word form.
 - **City / address**: **75 Rue du Doyenné, 1180 Uccle (Bruxelles)**. Map coordinates: `50.8030627, 4.3403107` (OSM building geocode).
 - **Hours**: Mardi–Samedi 10h30–18h30, fermé dimanche et lundi.
 - **Email**: shop@mikadodeco.be (single contact address; the earlier info@/contact@ variants were placeholders).

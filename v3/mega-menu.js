@@ -1,5 +1,5 @@
 /* ============================================================
-   Mikadodeco · Mega menu controller (V2.1)
+   Mikado Deco · Mega menu controller (V2.1)
    - Mobilier  : Shopify-driven (menu(handle:"main-menu"))
    - Marques   : fully hardcoded from /mega-menu-brands.json
                  (15 brands + featured collections + flat designer list)
