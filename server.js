@@ -109,11 +109,20 @@ function injectChrome(html, rel) {
     ? _chrome.chromeHTML('').replace('<header class="chrome"', '<header class="chrome chrome--solid"')
     : _chrome.chromeHTML('');
   const footerHtml = _chrome.footerHTML();
-  return html
+  let out = html
     .replace(/(<div id="site-header"[^>]*>)\s*(<\/div>)/i,
              (_m, open, close) => `${open}${headerHtml}${close}`)
     .replace(/(<div id="site-footer"[^>]*>)\s*(<\/div>)/i,
              (_m, open, close) => `${open}${footerHtml}${close}`);
+  // Pages non-hero (header solide) : poser `has-topnav` sur le <body> DÈS le SSR,
+  // comme `chrome--solid` l'est déjà. Sinon initShell (shared.js) l'ajoute trop
+  // tard et le contenu `.page` saute de +116px (padding-top) au 1er paint.
+  // Tous les templates non-hero ont un <body> nu (vérifié) ; le classList.add
+  // côté client devient un no-op idempotent.
+  if (isNonHero(rel)) {
+    out = out.replace(/<body(\s*)>/i, '<body class="has-topnav">');
+  }
+  return out;
 }
 
 const ogEscape = (s) => String(s == null ? '' : s)
