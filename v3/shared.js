@@ -9,6 +9,17 @@ import { chromeHTML, footerHTML } from "/chrome-template.js";
 
 export const CART_KEY = "mikado_v3_cart";
 
+// ── Soldes d'été 2026 (Europe/Brussels) — garder les dates EN SYNC avec
+//    l'inline-script du bandeau dans chrome-template.js.
+export const SALE = {
+  startMs: Date.parse("2026-07-04T00:00:00+02:00"),
+  endMs:   Date.parse("2026-08-01T00:00:00+02:00"),   // fin = 1er août 00:00 (exclu)
+};
+export function isSaleActive() {
+  const n = Date.now();
+  return n >= SALE.startMs && n < SALE.endMs;
+}
+
 /* ---------- formatting ---------- */
 export const euro = (n) =>
   n || n === 0
@@ -220,6 +231,7 @@ export async function fetchPromos() {
 // and keep the full Shopify discount title in a tooltip; the PDP shows
 // the full title in place.
 export function applyPromos(promosMap) {
+  if (isSaleActive()) return;          // ← soldes : pas de badge par produit (remise = niveau commande)
   if (!promosMap || typeof promosMap !== "object") return;
   document.querySelectorAll(".pcard").forEach((card) => {
     const slot = card.querySelector("[data-promo-slot]");
@@ -505,7 +517,7 @@ function bindCartDrawer() {
       ${discounts.map((d) => `<div class="cartd__row cartd__row--discount"><span>Remise · ${escapeHtml(d.title)}</span><span>−${euro(d.amount)}</span></div>`).join("")}
       <div class="cartd__row cartd__row--total"><span>Total</span><span>${euro(total)}</span></div>
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
-      <p class="cartd__note">Remises et livraison calculées au panier</p>
+      <p class="cartd__note">${discount > 0 ? "Remise appliquée automatiquement · " : ""}Livraison offerte dès 1 500 €</p>
       <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Ma sélection →</a>
       <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
   }
@@ -703,6 +715,10 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   bindDrawer();
   bindCartDrawer();
   bindChrome(transparentNav);
+  document.querySelector("[data-sale-close]")?.addEventListener("click", () => {
+    try { localStorage.setItem("mkd-sale-2026", "1"); } catch (e) {}
+    document.documentElement.classList.remove("sale-on");
+  });
   bindAnnounce();
   bindNewsletter();
   bindAddToCart();

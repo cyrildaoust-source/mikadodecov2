@@ -87,10 +87,38 @@ export function chromeHTML(active) {
     </div>`;
 
   return `
+  <script>
+    /* Soldes d'été 2026 — décide AVANT peinture si le bandeau s'affiche (anti-reflow).
+       Dates EN SYNC avec shared.js SALE. */
+    (function () {
+      try {
+        var now = Date.now();
+        var start = Date.parse("2026-07-04T00:00:00+02:00");
+        var end   = Date.parse("2026-08-01T00:00:00+02:00");
+        var dismissed = localStorage.getItem("mkd-sale-2026") === "1";
+        if (now >= start && now < end && !dismissed) {
+          document.documentElement.classList.add("sale-on");
+        }
+      } catch (e) {}
+    })();
+  </script>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="chrome" data-chrome>
+    <div class="sale-banner" role="region" aria-label="Soldes d'été">
+      <div class="sale-banner__in">
+        <p class="sale-banner__text">
+          <strong class="sale-banner__title">Soldes d'été</strong>
+          <span class="sale-banner__sub">Jusqu'à −20% de remise automatique · du 4 au 31 juillet</span>
+          <span class="sale-banner__tiers">−5% dès 300€ · −10% dès 800€ · −15% dès 1500€ · −20% dès 3000€</span>
+          <span class="sale-banner__note">Appliquée au panier, sans code.</span>
+        </p>
+        <a class="btn btn--blue sale-banner__cta" href="/produits.html">Voir les soldes</a>
+      </div>
+      <button class="sale-banner__close" type="button" data-sale-close aria-label="Fermer l'annonce des soldes">&times;</button>
+    </div>
     <div class="announce" data-announce>
-      <span class="on">Boutique de design à Uccle · du mardi au samedi</span>
+      <span class="on">Soldes d'été · jusqu'à −20% de remise automatique</span>
+      <span>Boutique de design à Uccle · du mardi au samedi</span>
       <span>Mobilier de design, choisi pièce par pièce</span>
       <span>Livraison partout en Belgique</span>
       <span>Mikado Studio · le conseil en aménagement</span>
