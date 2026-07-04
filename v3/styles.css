@@ -1,3 +1,4 @@
+@import url("/mega-menu.css");   /* espacement des liens de nav (.nav__primary) — render-blocking pour éviter le reflow du menu au chargement (avant: injecté tard par shared.js ensureMegaMenuCss) */
 /* ============================================================
    Mikado Deco · design system
    Identity decisions in MIKADO_IDENTITY.md.
