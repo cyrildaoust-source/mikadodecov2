@@ -108,9 +108,7 @@ export function chromeHTML(active) {
       <div class="sale-banner__in">
         <p class="sale-banner__text">
           <strong class="sale-banner__title">Soldes d'été</strong>
-          <span class="sale-banner__sub">Jusqu'à −20% de remise automatique · du 4 au 31 juillet</span>
           <span class="sale-banner__tiers">−5% dès 300€ · −10% dès 800€ · −15% dès 1500€ · −20% dès 3000€</span>
-          <span class="sale-banner__note">Appliquée au panier, sans code.</span>
         </p>
         <a class="btn btn--blue sale-banner__cta" href="/produits.html">Voir les soldes</a>
       </div>

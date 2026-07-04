@@ -192,8 +192,9 @@ html.sale-on .sale-banner {
 /* Le bandeau (dans le chrome fixe) ajoute de la hauteur → décaler le contenu
    des pages NON-hero d'autant. (Les pages hero laissent le bandeau recouvrir
    le tout haut de l'image, H1 centré plus bas → OK.) --sale-h = hauteur bandeau. */
-html { --sale-h: 76px; }
-@media (max-width: 760px) { html { --sale-h: 132px; } }   /* le contenu du bandeau s'empile sur mobile */
+html { --sale-h: 72px; }                                  /* desktop large (≥900px) : bandeau 1 ligne */
+@media (max-width: 899px) { html { --sale-h: 128px; } }   /* desktop étroit 761–899 : passe sur 2 lignes */
+@media (max-width: 760px) { html { --sale-h: 168px; } }   /* mobile : layout empilé */
 html.sale-on body.has-topnav .page { padding-top: calc(116px + var(--sale-h)); }
 
 @media (max-width: 760px) {
