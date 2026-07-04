@@ -170,6 +170,37 @@ ul { list-style: none; }
 .announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--paper); }
 .announce span { position: absolute; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
 .announce span.on { opacity: 1; }
+/* ── Bandeau soldes (affiché seulement quand html.sale-on) ── */
+.sale-banner { display: none; }
+html.sale-on .sale-banner {
+  display: flex; align-items: center; gap: 16px;
+  position: relative; z-index: 1;
+  background: var(--paper-2); color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding: 10px var(--gutter);
+  min-height: 56px;
+}
+.sale-banner__in { display: flex; align-items: center; justify-content: center; gap: clamp(14px, 3vw, 40px); flex: 1; flex-wrap: wrap; max-width: var(--container); margin-inline: auto; }
+.sale-banner__text { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; justify-content: center; font-size: var(--fs-small); margin: 0; }
+.sale-banner__title { font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--ink); }
+.sale-banner__tiers { font-weight: 600; }
+.sale-banner__note { color: var(--muted); }
+.sale-banner__cta { flex-shrink: 0; padding: 8px 18px; }
+.sale-banner__close { flex-shrink: 0; background: none; border: 0; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; padding: 4px 8px; min-height: 44px; }
+.sale-banner__close:hover { color: var(--ink); }
+
+/* Le bandeau (dans le chrome fixe) ajoute de la hauteur → décaler le contenu
+   des pages NON-hero d'autant. (Les pages hero laissent le bandeau recouvrir
+   le tout haut de l'image, H1 centré plus bas → OK.) --sale-h = hauteur bandeau. */
+html { --sale-h: 72px; }                                  /* desktop large (≥900px) : bandeau 1 ligne */
+@media (max-width: 899px) { html { --sale-h: 128px; } }   /* desktop étroit 761–899 : passe sur 2 lignes */
+@media (max-width: 760px) { html { --sale-h: 168px; } }   /* mobile : layout empilé */
+html.sale-on body.has-topnav .page { padding-top: calc(116px + var(--sale-h)); }
+
+@media (max-width: 760px) {
+  html.sale-on .sale-banner__in { flex-direction: column; gap: 10px; text-align: center; }
+  .sale-banner__cta { width: 100%; text-align: center; }
+}
 .nav__inner { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; max-width: var(--container); margin-inline: auto; padding: 18px var(--gutter) 16px; }
 .nav__left { display: flex; align-items: center; gap: 16px; }
 .wordmark { display: inline-flex; align-items: center; line-height: 1; }
