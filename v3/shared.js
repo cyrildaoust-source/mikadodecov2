@@ -734,35 +734,34 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   bindDrawer();
   bindCartDrawer();
   bindChrome(transparentNav);
-  // Modale soldes : 1×/visiteur, pendant la période. Superposée → aucun reflow.
-  (function saleModal() {
-    const modal = document.querySelector("[data-sale-modal]");
-    if (!modal) return;
+  // Toast soldes : coin bas-gauche, non bloquant, 1×/visiteur. Glisse, reste ~7 s
+  // (pause au survol/focus), puis s'efface. ✕ pour fermer avant. Marqué « vu » à l'affichage.
+  (function saleToast() {
+    const toast = document.querySelector("[data-sale-toast]");
+    if (!toast) return;
     let dismissed = false;
-    try { dismissed = localStorage.getItem("mkd-sale-2026") === "1"; } catch (e) {}
+    try { dismissed = localStorage.getItem("mkd-sale-toast-2026") === "1"; } catch (e) {}
     if (!isSaleActive() || dismissed) return;
-    const close = () => {
-      modal.hidden = true;
-      document.body.classList.remove("sale-locked");
-      try { localStorage.setItem("mkd-sale-2026", "1"); } catch (e) {}
-      document.removeEventListener("keydown", onKey, true);
+    const AUTO_MS = 7000;
+    let timer = null;
+    const hide = () => {
+      clearTimeout(timer); timer = null;
+      toast.classList.remove("is-visible");
+      const done = () => { toast.hidden = true; toast.removeEventListener("transitionend", done); };
+      toast.addEventListener("transitionend", done);
     };
-    const onKey = (e) => {
-      if (e.key === "Escape") { close(); return; }
-      if (e.key !== "Tab") return;
-      // Piège de focus : Tab/Shift+Tab bouclent entre les focusables de la modale (✕ + CTA).
-      const f = [...modal.querySelectorAll('a[href], button:not([disabled])')].filter((el) => !el.hidden && el.offsetParent !== null);
-      if (!f.length) return;
-      const first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    };
-    modal.hidden = false;
-    document.body.classList.add("sale-locked");
-    try { localStorage.setItem("mkd-sale-2026", "1"); } catch (e) {}   // marquée « vue » dès l'affichage → aucune ré-ouverture (CTA/reload/navigation)
-    modal.querySelectorAll("[data-sale-close]").forEach((el) => el.addEventListener("click", close));
-    document.addEventListener("keydown", onKey, true);
-    requestAnimationFrame(() => modal.querySelector(".sale-modal__card")?.focus());
+    const startTimer = () => { clearTimeout(timer); timer = setTimeout(hide, AUTO_MS); };
+    const stopTimer  = () => { clearTimeout(timer); timer = null; };
+    // 1×/visiteur : marqué « vu » dès l'affichage (auto-disparition OU ✕ → ne revient plus).
+    try { localStorage.setItem("mkd-sale-toast-2026", "1"); } catch (e) {}
+    toast.hidden = false;
+    requestAnimationFrame(() => { toast.classList.add("is-visible"); startTimer(); });
+    toast.querySelector("[data-sale-toast-close]")?.addEventListener("click", hide);
+    // pause du minuteur pendant la lecture / l'interaction (souris + clavier)
+    toast.addEventListener("mouseenter", stopTimer);
+    toast.addEventListener("mouseleave", startTimer);
+    toast.addEventListener("focusin", stopTimer);
+    toast.addEventListener("focusout", startTimer);
   })();
   bindAnnounce();
   bindNewsletter();
