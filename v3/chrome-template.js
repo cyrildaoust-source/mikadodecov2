@@ -128,15 +128,20 @@ export function chromeHTML(active) {
   </header>
   <aside class="sale-toast" data-sale-toast role="region" aria-label="Soldes d'été" hidden>
     <button class="sale-toast__close" type="button" data-sale-toast-close aria-label="Fermer">&times;</button>
-    <p class="sale-toast__title">Soldes d'été</p>
-    <p class="sale-toast__sub">Jusqu'à −20% de remise automatique</p>
-    <ul class="sale-toast__tiers">
-      <li><strong>−5%</strong><span>dès 300 €</span></li>
-      <li><strong>−10%</strong><span>dès 800 €</span></li>
-      <li><strong>−15%</strong><span>dès 1 500 €</span></li>
-      <li><strong>−20%</strong><span>dès 3 000 €</span></li>
-    </ul>
-    <a class="btn btn--blue sale-toast__cta" href="/produits.html">Voir les soldes →</a>
+    <div class="sale-toast__head">
+      <p class="sale-toast__kicker">Du 4 au 31 juillet</p>
+      <p class="sale-toast__title">Soldes d'été</p>
+    </div>
+    <div class="sale-toast__body">
+      <p class="sale-toast__sub">Remise automatique selon le montant du panier, sans code.</p>
+      <ul class="sale-toast__tiers">
+        <li><strong>−5%</strong><span>dès 300 €</span></li>
+        <li><strong>−10%</strong><span>dès 800 €</span></li>
+        <li><strong>−15%</strong><span>dès 1 500 €</span></li>
+        <li><strong>−20%</strong><span>dès 3 000 €</span></li>
+      </ul>
+      <a class="btn btn--blue sale-toast__cta" href="/produits.html">Voir les soldes →</a>
+    </div>
   </aside>
   ${drawerHTML}
   ${cartDrawerHTML}`;

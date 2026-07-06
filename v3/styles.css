@@ -171,31 +171,24 @@ ul { list-style: none; }
 .announce span { position: absolute; white-space: nowrap; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
 .announce span.on { opacity: 1; }
 /* ── Modale soldes (superposée → aucun décalage) ── */
-/* ── Toast soldes : coin bas-gauche, non bloquant, glisse puis s'efface ── */
+/* ── Toast soldes : coin bas-gauche, en-tête bleu royal, non bloquant, glisse puis s'efface ── */
 .sale-toast[hidden] { display: none; }
-.sale-toast {
-  position: fixed; left: 20px; bottom: 20px; z-index: 90;
-  width: min(320px, calc(100vw - 40px));
-  background: var(--paper); color: var(--ink);
-  border: 1px solid var(--line);
-  box-shadow: 0 16px 40px rgba(26, 25, 22, .22);
-  padding: 20px 22px;
-  transform: translateY(calc(100% + 40px)); opacity: 0;
-  transition: transform .5s var(--ease), opacity .5s var(--ease);
-}
+.sale-toast { position: fixed; left: 20px; bottom: 20px; z-index: 90; width: min(360px, calc(100vw - 40px)); background: var(--paper); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 18px 44px rgba(26, 25, 22, .26); transform: translateY(calc(100% + 40px)); opacity: 0; transition: transform .5s var(--ease), opacity .5s var(--ease); }
 .sale-toast.is-visible { transform: translateY(0); opacity: 1; }
-.sale-toast__close { position: absolute; top: 6px; right: 6px; background: none; border: 0; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; padding: 6px 10px; min-height: 44px; min-width: 44px; }
-.sale-toast__close:hover { color: var(--ink); }
-.sale-toast__title { font-family: var(--serif); font-weight: 600; font-size: 22px; color: var(--ink); margin: 0 0 4px; }
-.sale-toast__sub { color: var(--muted); font-size: var(--fs-meta); margin: 0 0 12px; }
-.sale-toast__tiers { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 6px; }
-.sale-toast__tiers li { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 5px; font-size: var(--fs-small); }
-.sale-toast__tiers strong { color: var(--accent-ink); font-weight: 600; }
+.sale-toast__close { position: absolute; top: 6px; right: 6px; width: 44px; height: 44px; min-height: 44px; background: none; border: 0; font-size: 22px; line-height: 1; color: rgba(248, 245, 239, .9); cursor: pointer; }
+.sale-toast__close:hover { color: var(--on-dark); }
+.sale-toast__head { background: var(--accent); color: var(--on-dark); padding: 15px 20px 13px; }
+.sale-toast__kicker { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; opacity: .85; margin: 0 0 2px; }
+.sale-toast__title { font-family: var(--serif); font-weight: 600; font-size: 27px; line-height: 1; margin: 0; color: var(--on-dark); }
+.sale-toast__body { padding: 16px 20px 20px; }
+.sale-toast__sub { color: var(--muted); font-size: var(--fs-small); margin: 0 0 14px; }
+.sale-toast__tiers { list-style: none; margin: 0 0 16px; padding: 0; }
+.sale-toast__tiers li { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-small); }
+.sale-toast__tiers li:last-child { border-bottom: 0; }
+.sale-toast__tiers strong { color: var(--accent-ink); font-weight: 700; }
 .sale-toast__tiers span { color: var(--muted); }
 .sale-toast__cta { width: 100%; }
-@media (prefers-reduced-motion: reduce) {
-  .sale-toast { transform: none; transition: opacity .3s var(--ease); }   /* pas de glissement : simple fondu */
-}
+@media (prefers-reduced-motion: reduce) { .sale-toast { transform: none; transition: opacity .3s var(--ease); } }
 
 /* ── Nudge palier soldes dans le tiroir panier ── */
 .cartd__tier { margin: 10px 0 0; padding: 9px 12px; background: var(--accent-soft); color: var(--ink); font-family: var(--sans-product); font-size: var(--fs-small); text-align: center; }
@@ -650,6 +643,12 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    to the récap now; turns accent-ink when the threshold is reached. */
 .sel-summary__hint { font-size: var(--fs-meta); color: var(--muted); margin: 4px 0 8px; font-style: italic; }
 .sel-summary__hint.is-met { color: var(--accent-ink); font-style: normal; }
+/* Palier soldes dans le récap panier (même esprit que le tiroir .cartd__tier) */
+.sel-tier { display: flex; align-items: center; gap: 9px; background: var(--accent-soft); color: var(--ink); font-size: var(--fs-small); padding: 10px 13px; margin: 12px 0; }
+.sel-tier::before { content: ""; width: 7px; height: 7px; background: var(--accent); flex: none; }
+.sel-tier strong { color: var(--accent-ink); font-weight: 700; }
+/* Livraison offerte : accent au lieu du gris italique */
+.sel-row--delivery-calc.is-free > span:last-child { color: var(--accent-ink); font-style: normal; font-weight: 600; }
 /* Legacy .sel-opt classes kept for backward-compat — toggle markup
    removed in V1.1, but other pages or tests might still reference them. */
 .sel-opt { margin: 18px 0; }

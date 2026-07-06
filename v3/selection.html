@@ -44,8 +44,9 @@
           <h2 class="serif">Récapitulatif</h2>
           <div class="sel-row"><span>Sous-total</span><span data-subtotal>…</span></div>
           <div class="sel-discounts" data-discounts hidden></div>
-          <p class="sel-summary__hint" data-delivery-hint>Livraison offerte dès 1 500 € d'achats.</p>
-          <div class="sel-row sel-row--delivery-calc"><span>Livraison</span><span>Calculée au paiement</span></div>
+          <p class="sel-tier" data-sale-tier hidden></p>
+          <div class="sel-row sel-row--delivery-calc"><span>Livraison</span><span data-delivery-value>Calculée au paiement</span></div>
+          <p class="sel-summary__hint" data-delivery-hint hidden></p>
           <div class="sel-row sel-row--total"><span data-total-label>Total</span><span data-total>…</span></div>
           <div class="sel-row sel-row--savings" data-savings hidden></div>
           <p class="sel-eta" data-cart-eta hidden></p>
@@ -67,7 +68,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml } from "/shared.js";
+    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml, isSaleActive, saleNextTier, SALE } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
     // Free-shipping threshold (Belgium zone). The radio toggle that
@@ -174,16 +175,27 @@
       // crossing the 1500€ threshold for free shipping.
       const grand    = payable;
 
+      // Livraison : UNE seule mention cohérente.
+      //   ≥ 1500 € → ligne "Offerte" (pas de rappel) ; < 1500 € → "Calculée au paiement" + rappel.
+      const deliveryRow = document.querySelector(".sel-row--delivery-calc");
+      const deliveryVal = document.querySelector("[data-delivery-value]");
       const hint = document.querySelector("[data-delivery-hint]");
+      const freeShip = payable >= SHIPPING_FREE_FROM;
+      if (deliveryVal) deliveryVal.textContent = freeShip ? "Offerte" : "Calculée au paiement";
+      if (deliveryRow) deliveryRow.classList.toggle("is-free", freeShip);
       if (hint) {
-        if (payable >= SHIPPING_FREE_FROM) {
-          hint.textContent = "Livraison Belgique offerte sur votre panier.";
-          hint.classList.add("is-met");
-        } else {
-          const missing = SHIPPING_FREE_FROM - payable;
-          hint.textContent = `Plus que ${euro(missing)} pour la livraison offerte.`;
-          hint.classList.remove("is-met");
-        }
+        if (freeShip) { hint.hidden = true; hint.textContent = ""; }
+        else { hint.textContent = `Plus que ${euro(SHIPPING_FREE_FROM - payable)} pour la livraison offerte.`; hint.hidden = false; }
+      }
+
+      // Palier soldes : même encart que le tiroir (« Plus que X € pour −Y% »), pendant les soldes.
+      const tierEl = document.querySelector("[data-sale-tier]");
+      if (tierEl) {
+        if (isSaleActive()) {
+          const nt = saleNextTier(subtotal);
+          if (nt) { tierEl.innerHTML = `Plus que <strong>${euro(Math.ceil(nt.gap))}</strong> pour bénéficier de <strong>−${nt.pct}%</strong>`; tierEl.hidden = false; }
+          else { tierEl.innerHTML = `Remise maximale atteinte · <strong>−${SALE.tiers[SALE.tiers.length - 1][1]}%</strong>`; tierEl.hidden = false; }
+        } else { tierEl.hidden = true; }
       }
 
       document.querySelector("[data-subtotal]").textContent = euro(subtotal);
