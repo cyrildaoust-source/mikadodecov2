@@ -168,13 +168,13 @@ ul { list-style: none; }
 /* Reassurance strip (delivery Belgium / boutique Uccle) — a visible, premium
    royal-blue band with cream text. Slim + full-width; sober, not baby-blue. */
 .announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--paper); }
-.announce span { position: absolute; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
+.announce span { position: absolute; white-space: nowrap; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
 .announce span.on { opacity: 1; }
 /* ── Modale soldes (superposée → aucun décalage) ── */
 .sale-modal[hidden] { display: none; }
-.sale-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.sale-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 20px; }
 .sale-modal__scrim { position: absolute; inset: 0; background: rgba(26, 25, 22, .55); }
-.sale-modal__card { position: relative; z-index: 1; background: var(--paper); color: var(--ink); border: 1px solid var(--line); max-width: 440px; width: 100%; padding: clamp(28px, 5vw, 44px); text-align: center; box-shadow: 0 20px 60px rgba(26, 25, 22, .25); }
+.sale-modal__card { position: relative; z-index: 1; margin: auto; background: var(--paper); color: var(--ink); border: 1px solid var(--line); max-width: 440px; width: 100%; padding: clamp(28px, 5vw, 44px); text-align: center; box-shadow: 0 20px 60px rgba(26, 25, 22, .25); }
 .sale-modal__close { position: absolute; top: 8px; right: 8px; background: none; border: 0; font-size: 26px; line-height: 1; color: var(--muted); cursor: pointer; padding: 6px 10px; min-height: 44px; }
 .sale-modal__close:hover { color: var(--ink); }
 .sale-modal__title { font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 5vw, 40px); margin: 0 0 10px; color: var(--ink); }
@@ -1293,7 +1293,6 @@ body.pdplb-locked { overflow: hidden; }
    designer page render() hides it, but hiding it here too kills the paint-
    then-collapse jump. */
 .plp-designer .subhero,
-.plp-designer .plp-promo,
 .plp-designer .filterbar,
 .plp-designer [data-pop-section] { display: none; }
 /* Reserve the breadcrumb's filled height (it renders after the product

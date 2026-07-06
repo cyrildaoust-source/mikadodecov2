@@ -525,7 +525,7 @@ function bindCartDrawer() {
       ${(() => {
         if (!isSaleActive()) return "";
         const nt = saleNextTier(subtotal);
-        if (nt) return `<p class="cartd__tier">Plus que <strong>${euro(nt.gap)}</strong> pour bénéficier de <strong>−${nt.pct}%</strong></p>`;
+        if (nt) return `<p class="cartd__tier">Plus que <strong>${euro(Math.ceil(nt.gap))}</strong> pour bénéficier de <strong>−${nt.pct}%</strong></p>`;
         const maxPct = SALE.tiers[SALE.tiers.length - 1][1];
         return `<p class="cartd__tier">Remise maximale atteinte · <strong>−${maxPct}%</strong></p>`;
       })()}
@@ -747,9 +747,19 @@ export function initShell({ active = "", transparentNav = false } = {}) {
       try { localStorage.setItem("mkd-sale-2026", "1"); } catch (e) {}
       document.removeEventListener("keydown", onKey, true);
     };
-    const onKey = (e) => { if (e.key === "Escape") close(); };
+    const onKey = (e) => {
+      if (e.key === "Escape") { close(); return; }
+      if (e.key !== "Tab") return;
+      // Piège de focus : Tab/Shift+Tab bouclent entre les focusables de la modale (✕ + CTA).
+      const f = [...modal.querySelectorAll('a[href], button:not([disabled])')].filter((el) => !el.hidden && el.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
     modal.hidden = false;
     document.body.classList.add("sale-locked");
+    try { localStorage.setItem("mkd-sale-2026", "1"); } catch (e) {}   // marquée « vue » dès l'affichage → aucune ré-ouverture (CTA/reload/navigation)
     modal.querySelectorAll("[data-sale-close]").forEach((el) => el.addEventListener("click", close));
     document.addEventListener("keydown", onKey, true);
     requestAnimationFrame(() => modal.querySelector(".sale-modal__card")?.focus());

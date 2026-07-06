@@ -20,6 +20,13 @@ export const NAV_TOP = [
 ];
 
 export function chromeHTML(active) {
+  // Soldes actives ? (SSR — mêmes dates que shared.js SALE) → ne rend les spans
+  // soldes de l'annonce QUE pendant la période (pas de flash post-1er-août).
+  const saleActive = (() => {
+    try { const n = Date.now();
+      return n >= Date.parse("2026-07-04T00:00:00+02:00") && n < Date.parse("2026-08-01T00:00:00+02:00");
+    } catch (e) { return false; }
+  })();
   const links = NAV_TOP.map((n) => {
     const isActive = active === n.label;
     const cls = ["nlink", isActive ? "is-active" : "", n.kind === "promo" ? "nlink--promo" : ""].filter(Boolean).join(" ");
@@ -90,9 +97,12 @@ export function chromeHTML(active) {
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="chrome" data-chrome>
     <div class="announce" data-announce>
-      <span class="on" data-sale>Soldes d'été · jusqu'à −20% de remise automatique</span>
-      <span data-sale>−5% dès 300 € · −10% dès 800 € · −15% dès 1 500 € · −20% dès 3 000 €</span>
-      <span>Boutique de design à Uccle · du mardi au samedi</span>
+      ${saleActive ? `<span class="on" data-sale>Soldes d'été · jusqu'à −20% de remise automatique</span>
+      <span data-sale>−5% dès 300 €</span>
+      <span data-sale>−10% dès 800 €</span>
+      <span data-sale>−15% dès 1 500 €</span>
+      <span data-sale>−20% dès 3 000 €</span>` : ``}
+      <span${saleActive ? `` : ` class="on"`}>Boutique de design à Uccle · du mardi au samedi</span>
       <span>Mobilier de design, choisi pièce par pièce</span>
       <span>Livraison partout en Belgique</span>
       <span>Mikado Studio · le conseil en aménagement</span>
