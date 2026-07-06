@@ -55,33 +55,6 @@
         href="https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3" />
   <link rel="stylesheet" href="/styles.css" />
   <style>
-    /* Promotions · discreet premium destination at the top of the catalog —
-       a route into /collections/promotions, NOT a category filter chip
-       (lives outside [data-chips] so it survives the curated-view hide). */
-    .plp-promo { margin: 18px 0 4px; }
-    .plp-promo__link {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      font-family: var(--sans-product);
-      font-size: var(--fs-meta);
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent-ink);
-      padding-bottom: 3px;
-      border-bottom: 1px solid transparent;
-      transition: color .18s var(--ease), border-color .18s var(--ease);
-    }
-    .plp-promo__link:hover,
-    .plp-promo__link:focus-visible { border-bottom-color: var(--accent-ink); outline: none; }
-    .plp-promo__dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex: none;
-    }
     /* Page créateur : réserve la hauteur du titre de grille pour que le
        passage "vide → Les pièces de {name}" (anti-flash) ne décale rien (CLS). */
     .plp-designer [data-grid-title] { min-height: 1.05em; }
@@ -291,12 +264,6 @@
       + '</div>';
     })();
   </script>
-
-  <div class="wrap plp-promo" data-plp-promo hidden>
-    <a class="plp-promo__link" href="/collections/promotions">
-      <span class="plp-promo__dot" aria-hidden="true"></span>Promotions
-    </a>
-  </div>
 
   <div class="filterbar" data-chips>
     <div class="filterbar__left">
@@ -1144,10 +1111,6 @@
     fetchPromos().then((map) => {
       PROMOS = map;
       applyPromos(PROMOS);
-      // Bouton "Promotions" : visible uniquement s'il existe au moins une promo
-      // active (source de vérité = /api/promos). Sinon il reste masqué (défaut).
-      const promoBox = document.querySelector("[data-plp-promo]");
-      if (promoBox) promoBox.hidden = !(map && Object.keys(map).length > 0);
     }).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
     // ── Panneau Catégorie (multi-sélection, filtrage serveur) ──────────────

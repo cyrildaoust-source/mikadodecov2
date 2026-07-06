@@ -87,35 +87,11 @@ export function chromeHTML(active) {
     </div>`;
 
   return `
-  <script>
-    /* Soldes d'été 2026 — décide AVANT peinture si le bandeau s'affiche (anti-reflow).
-       Dates EN SYNC avec shared.js SALE. */
-    (function () {
-      try {
-        var now = Date.now();
-        var start = Date.parse("2026-07-04T00:00:00+02:00");
-        var end   = Date.parse("2026-08-01T00:00:00+02:00");
-        var dismissed = localStorage.getItem("mkd-sale-2026") === "1";
-        if (now >= start && now < end && !dismissed) {
-          document.documentElement.classList.add("sale-on");
-        }
-      } catch (e) {}
-    })();
-  </script>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="chrome" data-chrome>
-    <div class="sale-banner" role="region" aria-label="Soldes d'été">
-      <div class="sale-banner__in">
-        <p class="sale-banner__text">
-          <strong class="sale-banner__title">Soldes d'été</strong>
-          <span class="sale-banner__tiers">−5% dès 300€ · −10% dès 800€ · −15% dès 1500€ · −20% dès 3000€</span>
-        </p>
-        <a class="btn btn--blue sale-banner__cta" href="/produits.html">Voir les soldes</a>
-      </div>
-      <button class="sale-banner__close" type="button" data-sale-close aria-label="Fermer l'annonce des soldes">&times;</button>
-    </div>
     <div class="announce" data-announce>
-      <span class="on">Soldes d'été · jusqu'à −20% de remise automatique</span>
+      <span class="on" data-sale>Soldes d'été · jusqu'à −20% de remise automatique</span>
+      <span data-sale>−5% dès 300 € · −10% dès 800 € · −15% dès 1 500 € · −20% dès 3 000 €</span>
       <span>Boutique de design à Uccle · du mardi au samedi</span>
       <span>Mobilier de design, choisi pièce par pièce</span>
       <span>Livraison partout en Belgique</span>
@@ -140,6 +116,22 @@ export function chromeHTML(active) {
     </div>
     ${stage}
   </header>
+  <div class="sale-modal" data-sale-modal hidden>
+    <div class="sale-modal__scrim" data-sale-close></div>
+    <div class="sale-modal__card" role="dialog" aria-modal="true" aria-labelledby="sale-modal-title" tabindex="-1">
+      <button class="sale-modal__close" type="button" data-sale-close aria-label="Fermer">&times;</button>
+      <h2 class="sale-modal__title" id="sale-modal-title">Soldes d'été</h2>
+      <p class="sale-modal__sub">Jusqu'à −20% de remise automatique, selon le montant de votre panier.<br>Du 4 au 31 juillet.</p>
+      <ul class="sale-modal__tiers">
+        <li><strong>−5%</strong><span>dès 300 €</span></li>
+        <li><strong>−10%</strong><span>dès 800 €</span></li>
+        <li><strong>−15%</strong><span>dès 1 500 €</span></li>
+        <li><strong>−20%</strong><span>dès 3 000 €</span></li>
+      </ul>
+      <p class="sale-modal__note">Remise appliquée automatiquement au panier, aucun code à saisir.</p>
+      <a class="btn btn--blue sale-modal__cta" href="/produits.html">Voir les soldes →</a>
+    </div>
+  </div>
   ${drawerHTML}
   ${cartDrawerHTML}`;
 }

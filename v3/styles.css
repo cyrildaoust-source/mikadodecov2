@@ -170,37 +170,27 @@ ul { list-style: none; }
 .announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--paper); }
 .announce span { position: absolute; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
 .announce span.on { opacity: 1; }
-/* ── Bandeau soldes (affiché seulement quand html.sale-on) ── */
-.sale-banner { display: none; }
-html.sale-on .sale-banner {
-  display: flex; align-items: center; gap: 16px;
-  position: relative; z-index: 1;
-  background: var(--paper-2); color: var(--ink);
-  border-bottom: 1px solid var(--line);
-  padding: 10px var(--gutter);
-  min-height: 56px;
-}
-.sale-banner__in { display: flex; align-items: center; justify-content: center; gap: clamp(14px, 3vw, 40px); flex: 1; flex-wrap: wrap; max-width: var(--container); margin-inline: auto; }
-.sale-banner__text { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; justify-content: center; font-size: var(--fs-small); margin: 0; }
-.sale-banner__title { font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--ink); }
-.sale-banner__tiers { font-weight: 600; }
-.sale-banner__note { color: var(--muted); }
-.sale-banner__cta { flex-shrink: 0; padding: 8px 18px; }
-.sale-banner__close { flex-shrink: 0; background: none; border: 0; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; padding: 4px 8px; min-height: 44px; }
-.sale-banner__close:hover { color: var(--ink); }
+/* ── Modale soldes (superposée → aucun décalage) ── */
+.sale-modal[hidden] { display: none; }
+.sale-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.sale-modal__scrim { position: absolute; inset: 0; background: rgba(26, 25, 22, .55); }
+.sale-modal__card { position: relative; z-index: 1; background: var(--paper); color: var(--ink); border: 1px solid var(--line); max-width: 440px; width: 100%; padding: clamp(28px, 5vw, 44px); text-align: center; box-shadow: 0 20px 60px rgba(26, 25, 22, .25); }
+.sale-modal__close { position: absolute; top: 8px; right: 8px; background: none; border: 0; font-size: 26px; line-height: 1; color: var(--muted); cursor: pointer; padding: 6px 10px; min-height: 44px; }
+.sale-modal__close:hover { color: var(--ink); }
+.sale-modal__title { font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 5vw, 40px); margin: 0 0 10px; color: var(--ink); }
+.sale-modal__sub { color: var(--muted); font-size: var(--fs-small); margin: 0 0 20px; }
+.sale-modal__tiers { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 8px; text-align: left; max-width: 240px; margin-inline: auto; }
+.sale-modal__tiers li { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 6px; font-size: var(--fs-small); }
+.sale-modal__tiers strong { color: var(--accent-ink); font-weight: 600; }
+.sale-modal__tiers span { color: var(--muted); }
+.sale-modal__note { color: var(--muted); font-size: var(--fs-meta); margin: 0 0 20px; }
+.sale-modal__cta { width: 100%; }
+/* verrou de scroll quand la modale est ouverte (convention du site : X-locked) */
+body.sale-locked { overflow: hidden; }
 
-/* Le bandeau (dans le chrome fixe) ajoute de la hauteur → décaler le contenu
-   des pages NON-hero d'autant. (Les pages hero laissent le bandeau recouvrir
-   le tout haut de l'image, H1 centré plus bas → OK.) --sale-h = hauteur bandeau. */
-html { --sale-h: 72px; }                                  /* desktop large (≥900px) : bandeau 1 ligne */
-@media (max-width: 899px) { html { --sale-h: 128px; } }   /* desktop étroit 761–899 : passe sur 2 lignes */
-@media (max-width: 760px) { html { --sale-h: 168px; } }   /* mobile : layout empilé */
-html.sale-on body.has-topnav .page { padding-top: calc(116px + var(--sale-h)); }
-
-@media (max-width: 760px) {
-  html.sale-on .sale-banner__in { flex-direction: column; gap: 10px; text-align: center; }
-  .sale-banner__cta { width: 100%; text-align: center; }
-}
+/* ── Nudge palier soldes dans le tiroir panier ── */
+.cartd__tier { margin: 10px 0 0; padding: 9px 12px; background: var(--accent-soft); color: var(--ink); font-family: var(--sans-product); font-size: var(--fs-small); text-align: center; }
+.cartd__tier strong { color: var(--accent-ink); font-weight: 600; }
 .nav__inner { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; max-width: var(--container); margin-inline: auto; padding: 18px var(--gutter) 16px; }
 .nav__left { display: flex; align-items: center; gap: 16px; }
 .wordmark { display: inline-flex; align-items: center; line-height: 1; }
