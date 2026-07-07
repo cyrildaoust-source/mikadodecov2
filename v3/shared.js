@@ -734,13 +734,13 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   bindDrawer();
   bindCartDrawer();
   bindChrome(transparentNav);
-  // Toast soldes : coin bas-gauche, non bloquant, 1×/visiteur. Glisse, reste ~7 s
+  // Toast soldes : coin bas-gauche, non bloquant, 1×/session. Glisse, reste ~7 s
   // (pause au survol/focus), puis s'efface. ✕ pour fermer avant. Marqué « vu » à l'affichage.
   (function saleToast() {
     const toast = document.querySelector("[data-sale-toast]");
     if (!toast) return;
     let dismissed = false;
-    try { dismissed = localStorage.getItem("mkd-sale-toast-2026") === "1"; } catch (e) {}
+    try { dismissed = sessionStorage.getItem("mkd-sale-toast-2026") === "1"; } catch (e) {}
     if (!isSaleActive() || dismissed) return;
     const AUTO_MS = 7000;
     let timer = null;
@@ -752,8 +752,8 @@ export function initShell({ active = "", transparentNav = false } = {}) {
     };
     const startTimer = () => { clearTimeout(timer); timer = setTimeout(hide, AUTO_MS); };
     const stopTimer  = () => { clearTimeout(timer); timer = null; };
-    // 1×/visiteur : marqué « vu » dès l'affichage (auto-disparition OU ✕ → ne revient plus).
-    try { localStorage.setItem("mkd-sale-toast-2026", "1"); } catch (e) {}
+    // 1×/session : marqué « vu » dès l'affichage (auto-disparition OU ✕ → ne revient plus de la session ; réapparaît à la prochaine visite).
+    try { sessionStorage.setItem("mkd-sale-toast-2026", "1"); } catch (e) {}
     toast.hidden = false;
     requestAnimationFrame(() => { toast.classList.add("is-visible"); startTimer(); });
     toast.querySelector("[data-sale-toast-close]")?.addEventListener("click", hide);
