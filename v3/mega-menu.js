@@ -235,6 +235,16 @@ function hydrateDrawer() {
 let openKey = null;
 let openTimer = null;
 let closeTimer = null;
+let mmChromeTimer = null;
+// Garde le header « solide » (blanc) tant que le méga-menu est ouvert, et pendant
+// son fondu de fermeture (0,18 s) → pas de header transparent sous un menu encore visible.
+function setChromeMega(on) {
+  const chrome = document.querySelector("[data-chrome]");
+  if (!chrome) return;
+  clearTimeout(mmChromeTimer);
+  if (on) chrome.classList.add("chrome--mm");
+  else mmChromeTimer = setTimeout(() => chrome.classList.remove("chrome--mm"), 220);
+}
 
 function bindHover() {
   document.querySelectorAll("[data-mm-trigger]").forEach((t) => {
@@ -268,6 +278,7 @@ function open(key) {
   panel.classList.add("is-active");
   stageEl.dataset.mmKey = key;
   stageEl.classList.add("is-open");
+  setChromeMega(true);
   setExpanded(key, true);
   openKey = key;
 }
@@ -275,6 +286,7 @@ function open(key) {
 function close() {
   if (!stageEl || !openKey) return;
   stageEl.classList.remove("is-open");
+  setChromeMega(false);
   setExpanded(openKey, false);
   openKey = null;
 }
