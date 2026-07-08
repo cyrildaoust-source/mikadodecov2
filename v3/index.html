@@ -75,14 +75,12 @@
     "name": "Mikado Deco", "url": "https://www.mikadodeco.be/", "inLanguage": "fr-BE" }
   </script>
   <script>
-    /* Grand header soldes — décide AVANT peinture (anti-flash/reflow). Dates EN SYNC avec shared.js SALE. */
+    /* Hero soldes — décide AVANT peinture (anti-flash). Dates EN SYNC avec shared.js SALE. Permanent pendant les soldes. */
     (function () {
       try {
         var n = Date.now();
-        var s = Date.parse("2026-07-04T00:00:00+02:00");
-        var e = Date.parse("2026-08-01T00:00:00+02:00");
-        var dismissed = sessionStorage.getItem("mkd-sale-hd-2026") === "1";
-        if (n >= s && n < e && !dismissed) document.documentElement.classList.add("sale-hd-on");
+        if (n >= Date.parse("2026-07-04T00:00:00+02:00") && n < Date.parse("2026-08-01T00:00:00+02:00"))
+          document.documentElement.classList.add("sale-hd-on");
       } catch (err) {}
     })();
   </script>
@@ -92,33 +90,6 @@
   <!-- shared chrome (announce + nav + drawer) injected by shared.js -->
   <div id="site-header"></div>
   <main id="contenu">
-
-  <!-- 0. GRAND HEADER SOLDES (accueil) -->
-  <aside class="sale-hd" data-sale-hd aria-label="Soldes d'été">
-    <button class="sale-hd__close" type="button" data-sale-hd-close aria-label="Fermer l'annonce des soldes">&times;</button>
-    <div class="sale-hd__in">
-      <p class="sale-hd__kicker">Du 4 au 31 juillet</p>
-      <p class="sale-hd__title">Soldes d'été</p>
-      <p class="sale-hd__sub">Remise automatique appliquée au panier, selon le montant — sans code.</p>
-      <ul class="sale-hd__tiers">
-        <li><b>−5%</b><span>dès 300 €</span></li>
-        <li><b>−10%</b><span>dès 800 €</span></li>
-        <li><b>−15%</b><span>dès 1 500 €</span></li>
-        <li><b>−20%</b><span>dès 3 000 €</span></li>
-      </ul>
-      <a class="btn sale-hd__cta" href="/produits.html">Voir les soldes →</a>
-    </div>
-  </aside>
-  <script>
-    (function () {
-      var btn = document.querySelector("[data-sale-hd-close]");
-      if (!btn) return;
-      btn.addEventListener("click", function () {
-        document.documentElement.classList.remove("sale-hd-on");   // masque le bandeau
-        try { sessionStorage.setItem("mkd-sale-hd-2026", "1"); } catch (e) {}
-      });
-    })();
-  </script>
 
   <!-- 1. HERO -->
   <section class="hero">
@@ -132,6 +103,12 @@
     <div class="hero__content">
       <h1>Le design,<br>pour toute la maison.</h1>
       <div class="hero__cta"><a href="/produits.html" class="btn btn--blue">Découvrir la sélection</a></div>
+    </div>
+    <div class="hero__content hero__content--sale">
+      <p class="hero__eyebrow">Du 4 au 31 juillet · jusqu'à −20%</p>
+      <h1>Soldes d'été</h1>
+      <p class="hero__saletext">Remise automatique appliquée au panier, selon le montant — sans code.</p>
+      <div class="hero__cta"><a href="/produits.html" class="btn btn--blue">Voir les soldes →</a></div>
     </div>
   </section>
 
