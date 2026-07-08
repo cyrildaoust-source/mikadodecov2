@@ -734,35 +734,6 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   bindDrawer();
   bindCartDrawer();
   bindChrome(transparentNav);
-  // Toast soldes : coin bas-gauche, non bloquant, 1×/session. Glisse, reste ~7 s
-  // (pause au survol/focus), puis s'efface. ✕ pour fermer avant. Marqué « vu » à l'affichage.
-  (function saleToast() {
-    const toast = document.querySelector("[data-sale-toast]");
-    if (!toast) return;
-    let dismissed = false;
-    try { dismissed = sessionStorage.getItem("mkd-sale-toast-2026") === "1"; } catch (e) {}
-    if (!isSaleActive() || dismissed) return;
-    const AUTO_MS = 7000;
-    let timer = null;
-    const hide = () => {
-      clearTimeout(timer); timer = null;
-      toast.classList.remove("is-visible");
-      const done = () => { toast.hidden = true; toast.removeEventListener("transitionend", done); };
-      toast.addEventListener("transitionend", done);
-    };
-    const startTimer = () => { clearTimeout(timer); timer = setTimeout(hide, AUTO_MS); };
-    const stopTimer  = () => { clearTimeout(timer); timer = null; };
-    // 1×/session : marqué « vu » dès l'affichage (auto-disparition OU ✕ → ne revient plus de la session ; réapparaît à la prochaine visite).
-    try { sessionStorage.setItem("mkd-sale-toast-2026", "1"); } catch (e) {}
-    toast.hidden = false;
-    requestAnimationFrame(() => { toast.classList.add("is-visible"); startTimer(); });
-    toast.querySelector("[data-sale-toast-close]")?.addEventListener("click", hide);
-    // pause du minuteur pendant la lecture / l'interaction (souris + clavier)
-    toast.addEventListener("mouseenter", stopTimer);
-    toast.addEventListener("mouseleave", startTimer);
-    toast.addEventListener("focusin", stopTimer);
-    toast.addEventListener("focusout", startTimer);
-  })();
   bindAnnounce();
   bindNewsletter();
   bindAddToCart();
