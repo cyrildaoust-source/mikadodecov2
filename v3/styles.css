@@ -178,10 +178,18 @@ ul { list-style: none; }
 /* ── Hero soldes (accueil) : pendant les soldes, le hero montre sa version soldes ── */
 .hero__content--sale { display: none; }
 html.sale-hd-on .hero__content:not(.hero__content--sale) { display: none; }
-html.sale-hd-on .hero__content--sale { display: flex; }
-.hero__eyebrow { font-family: var(--sans-product); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--on-dark); opacity: .9; margin-bottom: 14px; }
-.hero__saletext { color: var(--on-dark); opacity: .92; font-size: 16px; max-width: 46ch; margin-top: 16px; }
+html.sale-hd-on .hero__content--sale { display: flex; align-items: center; text-align: center; }
+.hero__eyebrow { font-family: var(--sans-product); font-size: 13px; letter-spacing: .28em; text-transform: uppercase; color: var(--on-dark); opacity: .92; margin-bottom: 14px; }
+.hero__content--sale h1 { font-size: clamp(48px, 11vw, 128px); line-height: .92; max-width: none; letter-spacing: .005em; }
 .hero__content--sale .hero__cta { margin-top: 26px; }
+.hero__salecta { background: var(--on-dark); color: var(--accent-ink); border: 1px solid var(--on-dark); font-weight: 600; }
+.hero__salecta:hover { background: #fff; color: var(--accent-ink); border-color: #fff; }
+/* pastille ronde soldes — bleu royal, texte crème, coin bas-droit */
+.hero__badge { display: none; position: absolute; z-index: 3; right: clamp(20px, 4vw, 56px); bottom: clamp(20px, 4vw, 56px); width: 158px; height: 158px; border-radius: 50%; background: var(--accent); color: var(--on-dark); flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 12px 30px rgba(26, 25, 22, .32); }
+html.sale-hd-on .hero__badge { display: flex; }
+.hero__badge b { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; opacity: .9; margin-bottom: 2px; }
+.hero__badge strong { font-family: var(--serif); font-weight: 600; font-size: 46px; line-height: 1; }
+@media (max-width: 640px) { .hero__badge { width: 116px; height: 116px; } .hero__badge strong { font-size: 34px; } .hero__badge b { font-size: 10px; } }
 .nav__inner { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; max-width: var(--container); margin-inline: auto; padding: 18px var(--gutter) 16px; }
 .nav__left { display: flex; align-items: center; gap: 16px; }
 .wordmark { display: inline-flex; align-items: center; line-height: 1; }
