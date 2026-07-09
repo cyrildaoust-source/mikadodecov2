@@ -20,6 +20,13 @@ export const NAV_TOP = [
 ];
 
 export function chromeHTML(active) {
+  // Soldes actives ? (SSR — mêmes dates que shared.js SALE) → ne rend les spans
+  // soldes de l'annonce QUE pendant la période (pas de flash post-1er-août).
+  const saleActive = (() => {
+    try { const n = Date.now();
+      return n >= Date.parse("2026-07-04T00:00:00+02:00") && n < Date.parse("2026-08-01T00:00:00+02:00");
+    } catch (e) { return false; }
+  })();
   const links = NAV_TOP.map((n) => {
     const isActive = active === n.label;
     const cls = ["nlink", isActive ? "is-active" : "", n.kind === "promo" ? "nlink--promo" : ""].filter(Boolean).join(" ");
@@ -87,36 +94,15 @@ export function chromeHTML(active) {
     </div>`;
 
   return `
-  <script>
-    /* Soldes d'été 2026 — décide AVANT peinture si le bandeau s'affiche (anti-reflow).
-       Dates EN SYNC avec shared.js SALE. */
-    (function () {
-      try {
-        var now = Date.now();
-        var start = Date.parse("2026-07-04T00:00:00+02:00");
-        var end   = Date.parse("2026-08-01T00:00:00+02:00");
-        var dismissed = localStorage.getItem("mkd-sale-2026") === "1";
-        if (now >= start && now < end && !dismissed) {
-          document.documentElement.classList.add("sale-on");
-        }
-      } catch (e) {}
-    })();
-  </script>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="chrome" data-chrome>
-    <div class="sale-banner" role="region" aria-label="Soldes d'été">
-      <div class="sale-banner__in">
-        <p class="sale-banner__text">
-          <strong class="sale-banner__title">Soldes d'été</strong>
-          <span class="sale-banner__tiers">−5% dès 300€ · −10% dès 800€ · −15% dès 1500€ · −20% dès 3000€</span>
-        </p>
-        <a class="btn btn--blue sale-banner__cta" href="/produits.html">Voir les soldes</a>
-      </div>
-      <button class="sale-banner__close" type="button" data-sale-close aria-label="Fermer l'annonce des soldes">&times;</button>
-    </div>
     <div class="announce" data-announce>
-      <span class="on">Soldes d'été · jusqu'à −20% de remise automatique</span>
-      <span>Boutique de design à Uccle · du mardi au samedi</span>
+      ${saleActive ? `<span class="on" data-sale>Soldes d'été · jusqu'à −20% de remise automatique</span>
+      <span data-sale>−5% dès 300 €</span>
+      <span data-sale>−10% dès 800 €</span>
+      <span data-sale>−15% dès 1 500 €</span>
+      <span data-sale>−20% dès 3 000 €</span>` : ``}
+      <span${saleActive ? `` : ` class="on"`}>Boutique de design à Uccle · du mardi au samedi</span>
       <span>Mobilier de design, choisi pièce par pièce</span>
       <span>Livraison partout en Belgique</span>
       <span>Mikado Studio · le conseil en aménagement</span>

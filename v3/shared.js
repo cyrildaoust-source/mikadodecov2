@@ -14,10 +14,16 @@ export const CART_KEY = "mikado_v3_cart";
 export const SALE = {
   startMs: Date.parse("2026-07-04T00:00:00+02:00"),
   endMs:   Date.parse("2026-08-01T00:00:00+02:00"),   // fin = 1er août 00:00 (exclu)
+  tiers: [[300, 5], [800, 10], [1500, 15], [3000, 20]], // [seuil €, %] CROISSANT (remise au niveau commande)
 };
 export function isSaleActive() {
   const n = Date.now();
   return n >= SALE.startMs && n < SALE.endMs;
+}
+// Palier suivant à atteindre selon le sous-total (null si palier max déjà atteint).
+export function saleNextTier(subtotal) {
+  for (const [min, pct] of SALE.tiers) if (subtotal < min) return { min, pct, gap: min - subtotal };
+  return null;
 }
 
 /* ---------- formatting ---------- */
@@ -516,6 +522,13 @@ function bindCartDrawer() {
       <div class="cartd__row"><span>Sous-total</span><span>${euro(subtotal)}</span></div>
       ${discounts.map((d) => `<div class="cartd__row cartd__row--discount"><span>Remise · ${escapeHtml(d.title)}</span><span>−${euro(d.amount)}</span></div>`).join("")}
       <div class="cartd__row cartd__row--total"><span>Total</span><span>${euro(total)}</span></div>
+      ${(() => {
+        if (!isSaleActive()) return "";
+        const nt = saleNextTier(subtotal);
+        if (nt) return `<p class="cartd__tier">Plus que <strong>${euro(Math.ceil(nt.gap))}</strong> pour bénéficier de <strong>−${nt.pct}%</strong></p>`;
+        const maxPct = SALE.tiers[SALE.tiers.length - 1][1];
+        return `<p class="cartd__tier">Remise maximale atteinte · <strong>−${maxPct}%</strong></p>`;
+      })()}
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
       <p class="cartd__note">${discount > 0 ? "Remise appliquée automatiquement · " : ""}Livraison offerte dès 1 500 €</p>
       <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Ma sélection →</a>
@@ -641,6 +654,12 @@ function bindNewsletter() {
 function bindAnnounce() {
   const host = document.querySelector("[data-announce]");
   if (!host) return;
+  // Hors période de soldes : retire les messages soldes (data-sale) et ré-ancre l'affichage
+  // sur le 1er message restant → la barre revient d'elle-même à la normale après le 1er août.
+  if (!isSaleActive()) {
+    host.querySelectorAll("span[data-sale]").forEach((s) => s.remove());
+    [...host.querySelectorAll("span")].forEach((s, idx) => s.classList.toggle("on", idx === 0));
+  }
   const items = [...host.querySelectorAll("span")];
   if (items.length < 2) return;
   // WCAG 2.2.2 : si l'utilisateur préfère moins d'animation → pas de défilement ;
@@ -715,10 +734,6 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   bindDrawer();
   bindCartDrawer();
   bindChrome(transparentNav);
-  document.querySelector("[data-sale-close]")?.addEventListener("click", () => {
-    try { localStorage.setItem("mkd-sale-2026", "1"); } catch (e) {}
-    document.documentElement.classList.remove("sale-on");
-  });
   bindAnnounce();
   bindNewsletter();
   bindAddToCart();

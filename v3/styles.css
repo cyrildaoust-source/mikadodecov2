@@ -168,39 +168,28 @@ ul { list-style: none; }
 /* Reassurance strip (delivery Belgium / boutique Uccle) — a visible, premium
    royal-blue band with cream text. Slim + full-width; sober, not baby-blue. */
 .announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--paper); }
-.announce span { position: absolute; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
+.announce span { position: absolute; white-space: nowrap; font-size: var(--fs-nav); opacity: 0; transition: opacity .5s var(--ease); }
 .announce span.on { opacity: 1; }
-/* ── Bandeau soldes (affiché seulement quand html.sale-on) ── */
-.sale-banner { display: none; }
-html.sale-on .sale-banner {
-  display: flex; align-items: center; gap: 16px;
-  position: relative; z-index: 1;
-  background: var(--paper-2); color: var(--ink);
-  border-bottom: 1px solid var(--line);
-  padding: 10px var(--gutter);
-  min-height: 56px;
-}
-.sale-banner__in { display: flex; align-items: center; justify-content: center; gap: clamp(14px, 3vw, 40px); flex: 1; flex-wrap: wrap; max-width: var(--container); margin-inline: auto; }
-.sale-banner__text { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; justify-content: center; font-size: var(--fs-small); margin: 0; }
-.sale-banner__title { font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--ink); }
-.sale-banner__tiers { font-weight: 600; }
-.sale-banner__note { color: var(--muted); }
-.sale-banner__cta { flex-shrink: 0; padding: 8px 18px; }
-.sale-banner__close { flex-shrink: 0; background: none; border: 0; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; padding: 4px 8px; min-height: 44px; }
-.sale-banner__close:hover { color: var(--ink); }
+/* ── Modale soldes (superposée → aucun décalage) ── */
+/* ── Nudge palier soldes dans le tiroir panier ── */
+.cartd__tier { margin: 10px 0 0; padding: 9px 12px; background: var(--accent-soft); color: var(--ink); font-family: var(--sans-product); font-size: var(--fs-small); text-align: center; }
+.cartd__tier strong { color: var(--accent-ink); font-weight: 600; }
 
-/* Le bandeau (dans le chrome fixe) ajoute de la hauteur → décaler le contenu
-   des pages NON-hero d'autant. (Les pages hero laissent le bandeau recouvrir
-   le tout haut de l'image, H1 centré plus bas → OK.) --sale-h = hauteur bandeau. */
-html { --sale-h: 72px; }                                  /* desktop large (≥900px) : bandeau 1 ligne */
-@media (max-width: 899px) { html { --sale-h: 128px; } }   /* desktop étroit 761–899 : passe sur 2 lignes */
-@media (max-width: 760px) { html { --sale-h: 168px; } }   /* mobile : layout empilé */
-html.sale-on body.has-topnav .page { padding-top: calc(116px + var(--sale-h)); }
-
-@media (max-width: 760px) {
-  html.sale-on .sale-banner__in { flex-direction: column; gap: 10px; text-align: center; }
-  .sale-banner__cta { width: 100%; text-align: center; }
-}
+/* ── Hero soldes (accueil) : pendant les soldes, le hero montre sa version soldes ── */
+.hero__content--sale { display: none; }
+html.sale-hd-on .hero__content:not(.hero__content--sale) { display: none; }
+html.sale-hd-on .hero__content--sale { display: flex; align-items: center; text-align: center; }
+.hero__eyebrow { font-family: var(--sans-product); font-size: 13px; letter-spacing: .28em; text-transform: uppercase; color: var(--on-dark); opacity: .92; margin-bottom: 14px; }
+.hero__content--sale h1 { font-size: clamp(48px, 11vw, 128px); line-height: .92; max-width: none; letter-spacing: .005em; }
+.hero__content--sale .hero__cta { margin-top: 26px; }
+.hero__salecta { background: var(--on-dark); color: var(--accent-ink); border: 1px solid var(--on-dark); font-weight: 600; }
+.hero__salecta:hover { background: #fff; color: var(--accent-ink); border-color: #fff; }
+/* pastille ronde soldes — bleu royal, texte crème, coin bas-droit */
+.hero__badge { display: none; position: absolute; z-index: 3; right: clamp(20px, 4vw, 56px); bottom: clamp(20px, 4vw, 56px); width: 158px; height: 158px; border-radius: 50%; background: var(--accent); color: var(--on-dark); flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 12px 30px rgba(26, 25, 22, .32); }
+html.sale-hd-on .hero__badge { display: flex; }
+.hero__badge b { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; opacity: .9; margin-bottom: 2px; }
+.hero__badge strong { font-family: var(--serif); font-weight: 600; font-size: 46px; line-height: 1; }
+@media (max-width: 640px) { .hero__badge { width: 116px; height: 116px; } .hero__badge strong { font-size: 34px; } .hero__badge b { font-size: 10px; } }
 .nav__inner { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; max-width: var(--container); margin-inline: auto; padding: 18px var(--gutter) 16px; }
 .nav__left { display: flex; align-items: center; gap: 16px; }
 .wordmark { display: inline-flex; align-items: center; line-height: 1; }
@@ -651,6 +640,12 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    to the récap now; turns accent-ink when the threshold is reached. */
 .sel-summary__hint { font-size: var(--fs-meta); color: var(--muted); margin: 4px 0 8px; font-style: italic; }
 .sel-summary__hint.is-met { color: var(--accent-ink); font-style: normal; }
+/* Palier soldes dans le récap panier (même esprit que le tiroir .cartd__tier) */
+.sel-tier { display: flex; align-items: center; gap: 9px; background: var(--accent-soft); color: var(--ink); font-size: var(--fs-small); padding: 10px 13px; margin: 12px 0; }
+.sel-tier::before { content: ""; width: 7px; height: 7px; background: var(--accent); flex: none; }
+.sel-tier strong { color: var(--accent-ink); font-weight: 700; }
+/* Livraison offerte : accent au lieu du gris italique */
+.sel-row--delivery-calc.is-free > span:last-child { color: var(--accent-ink); font-style: normal; font-weight: 600; }
 /* Legacy .sel-opt classes kept for backward-compat — toggle markup
    removed in V1.1, but other pages or tests might still reference them. */
 .sel-opt { margin: 18px 0; }
@@ -1303,7 +1298,6 @@ body.pdplb-locked { overflow: hidden; }
    designer page render() hides it, but hiding it here too kills the paint-
    then-collapse jump. */
 .plp-designer .subhero,
-.plp-designer .plp-promo,
 .plp-designer .filterbar,
 .plp-designer [data-pop-section] { display: none; }
 /* Reserve the breadcrumb's filled height (it renders after the product

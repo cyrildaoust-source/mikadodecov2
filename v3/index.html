@@ -74,6 +74,16 @@
   { "@context": "https://schema.org", "@type": "WebSite",
     "name": "Mikado Deco", "url": "https://www.mikadodeco.be/", "inLanguage": "fr-BE" }
   </script>
+  <script>
+    /* Hero soldes — décide AVANT peinture (anti-flash). Dates EN SYNC avec shared.js SALE. Permanent pendant les soldes. */
+    (function () {
+      try {
+        var n = Date.now();
+        if (n >= Date.parse("2026-07-04T00:00:00+02:00") && n < Date.parse("2026-08-01T00:00:00+02:00"))
+          document.documentElement.classList.add("sale-hd-on");
+      } catch (err) {}
+    })();
+  </script>
 </head>
 <body>
 
@@ -94,6 +104,12 @@
       <h1>Le design,<br>pour toute la maison.</h1>
       <div class="hero__cta"><a href="/produits.html" class="btn btn--blue">Découvrir la sélection</a></div>
     </div>
+    <div class="hero__content hero__content--sale">
+      <p class="hero__eyebrow">Du 4 au 31 juillet</p>
+      <h1>Soldes d'été</h1>
+      <div class="hero__cta"><a href="/produits.html" class="btn hero__salecta">J'en profite →</a></div>
+    </div>
+    <span class="hero__badge"><b>Jusqu'à</b><strong>−20%</strong></span>
   </section>
 
   <!-- 2. CATEGORY CAROUSEL (7 tiles) -->
