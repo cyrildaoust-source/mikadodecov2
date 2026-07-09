@@ -1653,8 +1653,41 @@ app.post('/api/contact', formLimiter, async (req, res) => {
       ua:       String(req.headers['user-agent'] || '').slice(0, 200),
     };
 
-    // Structured log — surfaces in Vercel logs, Heroku, journalctl, etc.
+    // Structured log — surfaces in Vercel logs (filet de sécurité si l'e-mail échoue).
     console.log('[contact]', JSON.stringify(submission));
+
+    // Notification e-mail via Resend (si configuré). Reply-To = client → réponse directe.
+    if (process.env.RESEND_API_KEY) {
+      const to      = process.env.CONTACT_TO   || 'shop@mikadodeco.be';
+      const from    = process.env.CONTACT_FROM || 'Mikado Deco (site) <no-reply@mikadodeco.be>';
+      const subject = `Nouvelle demande — ${cleanProjet || 'Contact'} — ${cleanName}`;
+      const text = [
+        `Nom : ${cleanName}`,
+        `E-mail : ${cleanEmail}`,
+        cleanPhone  ? `Téléphone : ${cleanPhone}` : null,
+        cleanProjet ? `Objet : ${cleanProjet}`    : null,
+        `Source : ${source}`,
+        `Reçu : ${submission.ts}`,
+        '',
+        cleanMessage,
+      ].filter((l) => l !== null).join('\n');
+      try {
+        const r = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ from, to, reply_to: cleanEmail, subject, text }),
+        });
+        if (!r.ok) {
+          const detail = await r.text().catch(() => '');
+          console.warn('[contact] resend failed:', r.status, detail.slice(0, 300));
+        }
+      } catch (e) {
+        console.warn('[contact] resend error:', e.message);
+      }
+    }
 
     // If a CONTACT_WEBHOOK_URL is set, forward (Slack, Discord, Zapier, etc.)
     if (process.env.CONTACT_WEBHOOK_URL) {
