@@ -841,6 +841,42 @@ async function getBrands() {
   });
 }
 
+// ─── MARQUES DYNAMIQUES ────────────────────────────────
+// Liste dérivée du vendor de TOUS les produits publiés (le Storefront ne renvoie
+// que les produits publiés online). Requête LÉGÈRE (vendor seul) → contourne le
+// plafond 250 de getProducts(). Une marque apparaît dès qu'elle a des produits
+// publiés, disparaît sinon. Cache 30 min (le walk = ~24 requêtes légères).
+const VENDORS_QUERY = `
+  query GetVendors($first: Int!, $after: String) {
+    products(first: $first, after: $after) {
+      edges { node { vendor } }
+      pageInfo { hasNextPage endCursor }
+    }
+  }`;
+
+async function getActiveBrands() {
+  return cached('brands:active', async () => {
+    const counts = new Map();
+    let after = null;
+    for (let guard = 0; guard < 80; guard++) {          // borne dure (80×250 = 20000 produits max)
+      const data = await shopifyFetch(VENDORS_QUERY, { first: 250, after });
+      for (const { node } of (data?.products?.edges || [])) {
+        const v = (node.vendor || '').trim();
+        if (v) counts.set(v, (counts.get(v) || 0) + 1);
+      }
+      if (!data?.products?.pageInfo?.hasNextPage) break;
+      after = data.products.pageInfo.endCursor;
+    }
+    return [...counts.entries()]
+      .map(([name, productCount]) => ({
+        name,
+        slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+        productCount,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
+  }, 1_800_000);   // TTL 30 min — les marques changent rarement
+}
+
 // ─── SHOPIFY: COLLECTIONS QUERY ────────────────────────
 // Real Shopify collections (product lines like Palissade, Bistro, Luxembourg…).
 // Optional metafields: custom.country, custom.city, custom.founded, custom.website,
@@ -934,7 +970,7 @@ app.get('/api/products', async (req, res) => {
 // Derived from product.vendor — returns one entry per unique vendor.
 app.get('/api/brands', async (req, res) => {
   try {
-    const brands = await getBrands();
+    const brands = await getActiveBrands();
     res.json(brands);
   } catch (err) {
     console.error('Brands error:', err.message);
