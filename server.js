@@ -798,7 +798,7 @@ async function getProductsPage(first, after, tags, cats, brand) {
   if (brandSlug) {
     try {
       const match = (await getActiveBrands()).find((b) => b.slug === brandSlug);
-      if (match) vendorClause = `vendor:"${match.name.replace(/"/g, '')}"`;
+      if (match) vendorClause = `vendor:"${match.name.replace(/["\\]/g, '')}"`;
     } catch (e) { /* résolution impossible → pas de filtre marque (repli) */ }
   }
   // tags (designer), cats (catalog panel) et vendor (marque) — indépendants ;
@@ -811,7 +811,7 @@ async function getProductsPage(first, after, tags, cats, brand) {
   const key = `products:page:${f}:${a || 'first'}`
             + (sortedTags.length ? ':tags-' + sortedTags.join(',') : '')
             + (sortedCats.length ? ':cats-' + sortedCats.join(',') : '')
-            + (brandSlug ? ':brand-' + brandSlug : '');
+            + (vendorClause ? ':brand-' + brandSlug : '');
   return cached(key, async () => {
     const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query });
     const items = data.products.edges.map(({ node }) => mapProduct(node));
@@ -884,7 +884,7 @@ async function getActiveBrands() {
     return [...counts.entries()]
       .map(([name, productCount]) => ({
         name,
-        slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+        slug: name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
         productCount,
       }))
       .sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
