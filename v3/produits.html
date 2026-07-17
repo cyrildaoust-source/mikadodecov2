@@ -820,9 +820,10 @@
           : "__no_designer_match__");
         return `/api/products?${q}`;
       }
-      // Catalogue : filtrage catégorie côté serveur via ?cats=<handles>.
+      // Catalogue : filtrage catégorie + MARQUE côté serveur.
       q.set("paginated", "1");
       if (state.cats.length) q.set("cats", state.cats.join(","));
+      if (state.brand) q.set("brand", state.brand);   // filtre marque (vendor) côté serveur → page marque rapide
       return `/api/products?${q}`;
     }
 

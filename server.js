@@ -776,7 +776,7 @@ const CATEGORY_FILTERS = {
   'verres-carafes': '(product_type:"Verre" OR product_type:"Carafe" OR product_type:"Carafe isotherme" OR product_type:"Pichet" OR product_type:"Pichet à eau" OR product_type:"Pichet à lait" OR product_type:"Flûte" OR product_type:"Flûte à champagne" OR product_type:"Decanter" OR product_type:"Huilier")',
 };
 
-async function getProductsPage(first, after, tags, cats) {
+async function getProductsPage(first, after, tags, cats, brand) {
   const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
   const a   = after || null;
   const tagList = Array.isArray(tags)
@@ -791,13 +791,27 @@ async function getProductsPage(first, after, tags, cats) {
   const sortedCats = catList.filter((h) => CATEGORY_FILTERS[h]).sort();
   const tagQuery = tagList.length ? tagList.map((t) => `tag:${t}`).join(' OR ') : '';
   const catQuery = catClauses.length ? catClauses.join(' OR ') : '';
-  // tags (designer) and cats (catalog panel) are independent in practice;
-  // if both are ever sent, intersect them (AND). Otherwise use whichever.
-  const query = (tagQuery && catQuery) ? `(${tagQuery}) AND (${catQuery})`
-              : (tagQuery || catQuery || null);
+  // Filtre MARQUE : slug (?brand=<slug>) → vendor exact via getActiveBrands (déjà en cache)
+  // → clause vendor:"…". Rend la page marque rapide (le serveur ne renvoie QUE la marque).
+  const brandSlug = brand ? String(brand).trim() : '';
+  let vendorClause = '';
+  if (brandSlug) {
+    try {
+      const match = (await getActiveBrands()).find((b) => b.slug === brandSlug);
+      if (match) vendorClause = `vendor:"${match.name.replace(/"/g, '')}"`;
+    } catch (e) { /* résolution impossible → pas de filtre marque (repli) */ }
+  }
+  // tags (designer), cats (catalog panel) et vendor (marque) — indépendants ;
+  // s'ils coexistent, on les intersecte (AND).
+  const parts = [];
+  if (tagQuery)     parts.push(`(${tagQuery})`);
+  if (catQuery)     parts.push(`(${catQuery})`);
+  if (vendorClause) parts.push(vendorClause);
+  const query = parts.length ? parts.join(' AND ') : null;
   const key = `products:page:${f}:${a || 'first'}`
             + (sortedTags.length ? ':tags-' + sortedTags.join(',') : '')
-            + (sortedCats.length ? ':cats-' + sortedCats.join(',') : '');
+            + (sortedCats.length ? ':cats-' + sortedCats.join(',') : '')
+            + (brandSlug ? ':brand-' + brandSlug : '');
   return cached(key, async () => {
     const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query });
     const items = data.products.edges.map(({ node }) => mapProduct(node));
@@ -953,9 +967,9 @@ async function getCollections() {
 // The legacy shape is contractual — 4 callers depend on it.
 app.get('/api/products', async (req, res) => {
   try {
-    const { paginated, cursor, limit, tags, cats } = req.query;
-    if (paginated || cursor || limit || tags || cats) {
-      const page = await getProductsPage(limit, cursor, tags, cats);
+    const { paginated, cursor, limit, tags, cats, brand } = req.query;
+    if (paginated || cursor || limit || tags || cats || brand) {
+      const page = await getProductsPage(limit, cursor, tags, cats, brand);
       return res.json(page);
     }
     const products = await getProducts();
