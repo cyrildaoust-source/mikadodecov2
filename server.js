@@ -467,7 +467,7 @@ const cartLimiter = rateLimit({
 // Namespaces used: "custom" — keys: designer, year, material, dimensions, lead_time, subcategory
 const PRODUCTS_QUERY = `
   query GetProducts($first: Int!, $after: String, $query: String) {
-    products(first: $first, after: $after, query: $query) {
+    products(first: $first, after: $after, query: $query, sortKey: BEST_SELLING) {
       pageInfo { hasNextPage endCursor }
       edges {
         cursor
