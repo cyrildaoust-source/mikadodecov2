@@ -15,6 +15,7 @@ const CLOSE_DELAY = 200;
 
 let config     = null;   // mega-menu-config.json (side panel)
 let brandsData = null;   // mega-menu-brands.json (Marques hardcode)
+let activeBrands = [];   // /api/brands — marques dérivées des produits publiés
 let menu       = null;   // /api/menu (Mobilier only)
 let stageEl    = null;
 
@@ -26,14 +27,16 @@ export async function initMegaMenu() {
   stageEl = document.querySelector("[data-mm-stage]");
   if (!stageEl) return;
   try {
-    const [menuRes, cfgRes, brandsRes] = await Promise.all([
+    const [menuRes, cfgRes, brandsRes, activeRes] = await Promise.all([
       fetch("/api/menu",                  { cache: "no-store"    }).then((r) => r.json()).catch(() => ({ ok: false, items: [] })),
       fetch("/mega-menu-config.json",     { cache: "no-cache" }).then((r) => r.json()).catch(() => ({})),
       fetch("/mega-menu-brands.json",     { cache: "no-cache" }).then((r) => r.json()).catch(() => ({ brands: [], designers: [] })),
+      fetch("/api/brands",                { cache: "no-store"    }).then((r) => r.json()).catch(() => []),
     ]);
     menu       = menuRes;
     config     = cfgRes      || {};
     brandsData = brandsRes   || { brands: [], designers: [] };
+    activeBrands = Array.isArray(activeRes) ? activeRes : [];
     indexTopItems(menu.items || []);
     hydrateMobilier();
     hydrateMarques();
@@ -117,7 +120,12 @@ function hydrateMobilier() {
 function hydrateMarques() {
   const panel = stageEl.querySelector('[data-mm-panel="marques"]');
   if (!panel) return;
-  const brands = brandsData?.brands || [];
+  const curatedHref = {};
+  for (const b of (brandsData?.brands || [])) if (b.name && b.href) curatedHref[b.name.toLowerCase()] = b.href;
+  const brands = (activeBrands || []).map((b) => ({
+    name: b.name,
+    href: curatedHref[b.name.toLowerCase()] || `/produits.html?brand=${b.slug}`,
+  }));
   if (!brands.length) { panel.innerHTML = ""; return; }
 
   // V2.2: featured sub-collections retired from the rendered mega

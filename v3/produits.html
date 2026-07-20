@@ -595,7 +595,7 @@
       if (state.sort === "asc") l.sort((a, b) => (a.price || 0) - (b.price || 0));
       else if (state.sort === "desc") l.sort((a, b) => (b.price || 0) - (a.price || 0));
       else if (state.sort === "az") l.sort((a, b) => String(a.name).localeCompare(String(b.name)));
-      else l.sort((a, b) => popScore(b) - popScore(a)); // "pop"
+      // "pop" (défaut) : on garde l'ordre best-selling renvoyé par le serveur → aucun re-tri client.
       return l;
     }
     // Construit l'URL reflétant l'état actif. Préserve TOUS les params de
@@ -634,9 +634,9 @@
       // designer's pieces, so a "most popular" split would only fragment it.
       // Pas de bande « populaires » quand une catégorie est filtrée → grille
       // nette (façon Vitra). Sinon, top 4 du catalogue comme avant.
-      const showPop = all.length > 4 && !state.designer && !state.cats.length && state.sort === "pop";
+      const showPop = all.length > 4 && !state.designer && !state.cats.length && !state.brand && !state.coll && !state.tag && state.sort === "pop";
       popSection.style.display = showPop ? "" : "none";
-      const pop = showPop ? all.slice().sort((a, b) => popScore(b) - popScore(a)).slice(0, 4) : [];
+      const pop = showPop ? all.slice(0, 4) : [];   // les 4 premiers de `all` = top ventes (serveur best-selling)
       if (showPop) {
         const popKey = pop.map((p) => p.id).join(",");
         if (popGrid.dataset.key !== popKey) {
@@ -820,9 +820,10 @@
           : "__no_designer_match__");
         return `/api/products?${q}`;
       }
-      // Catalogue : filtrage catégorie côté serveur via ?cats=<handles>.
+      // Catalogue : filtrage catégorie + MARQUE côté serveur.
       q.set("paginated", "1");
       if (state.cats.length) q.set("cats", state.cats.join(","));
+      if (state.brand) q.set("brand", state.brand);   // filtre marque (vendor) côté serveur → page marque rapide
       return `/api/products?${q}`;
     }
 
