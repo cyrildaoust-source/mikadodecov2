@@ -189,6 +189,8 @@
       const isColorAxis = /^couleur$/i.test(singleAxis);
       const axisLabel = optionNames.length === 1 ? (isColorAxis ? "Coloris" : singleAxis) : "Variantes";
       const axisLabelLower = optionNames.length === 1 ? (isColorAxis ? "coloris" : singleAxis.toLowerCase()) : "variantes";
+      const moreCount = variants.length - 1;
+      const moreWord = /s$/.test(axisLabelLower) ? axisLabelLower : axisLabelLower + (moreCount > 1 ? "s" : "");
 
       // Image d'une variante (avec repli produit) à la largeur voulue.
       const variantImg = (v, w) => widthVariant((v && v.image) || p.image || imgs[0] || "", w);
@@ -264,6 +266,7 @@
                   <span class="pdp__variant-name" data-coloris-name>${escapeHtml(current.title || "")}</span>
                   <span class="pdp__variant-avail" data-coloris-avail role="status" aria-live="polite">${availInline(current)}</span>
                 </span>
+                <span class="pdp__variant-count">+${moreCount}&nbsp;${escapeHtml(moreWord)}</span>
                 <span class="pdp__variant-bar-arrow" aria-hidden="true">→</span>
               </button>
             </div>` : ""}
