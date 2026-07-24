@@ -38,6 +38,8 @@ export const euro = (n) =>
 export const priceLabel = (p) => {
   const min = p?.priceMin ?? p?.price;
   const max = p?.priceMax ?? p?.price;
+  const was = p?.compareAt;
+  if (was != null && min != null && was - min > 0.5) return `<span class="price-was">${euro(was)}</span><span class="price-now price-now--sale">${euro(min)}</span>`;
   if (min != null && max != null && max - min > 0.5) return `À partir de ${euro(min)}`;
   return euro(min);
 };
@@ -338,6 +340,7 @@ export function productCard(p) {
       <a class="pcard__media" href="${href}" aria-label="${escapeHtml(p.name)}">
         <div class="pcard__tags">${tag}</div>
         <span class="pcard__promo" data-promo-slot hidden></span>
+        ${p.compareAt && (p.priceMin ?? p.price) && p.compareAt - (p.priceMin ?? p.price) > 0.5 ? `<span class="pcard__sale">−${Math.round((p.compareAt - (p.priceMin ?? p.price)) / p.compareAt * 100)}%</span>` : ""}
         <img class="main" src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy" />
         ${alt}
       </a>
