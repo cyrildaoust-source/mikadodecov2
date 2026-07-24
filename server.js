@@ -492,12 +492,14 @@ const PRODUCTS_QUERY = `
             minVariantPrice { amount currencyCode }
             maxVariantPrice { amount currencyCode }
           }
+          compareAtPriceRange { minVariantPrice { amount currencyCode } }
           variants(first: 250) {
             edges {
               node {
                 id
                 title
                 price { amount currencyCode }
+                compareAtPrice { amount }
                 availableForSale
                 selectedOptions { name value }
                 image { url altText }
@@ -591,6 +593,8 @@ function mapProduct(node, opts = {}) {
   const price    = parseFloat(variant?.price?.amount || node.priceRange.minVariantPrice.amount);
   const priceMin = parseFloat(node.priceRange.minVariantPrice.amount);
   const priceMax = parseFloat(node.priceRange.maxVariantPrice?.amount || node.priceRange.minVariantPrice.amount);
+  const _caMin = parseFloat(node.compareAtPriceRange?.minVariantPrice?.amount || 0);
+  const compareAt = _caMin > priceMin + 0.5 ? _caMin : null;
   // Tags: use "badge:nouveau", "badge:limite", "badge:bestseller", "featured" conventions
   const badgeTag = node.tags.find(t => t.startsWith('badge:'))?.replace('badge:', '') || null;
   const rawType  = (node.productType || '').toLowerCase().trim();
@@ -618,6 +622,7 @@ function mapProduct(node, opts = {}) {
     price,
     priceMin,
     priceMax,
+    compareAt,
     // Availability badge — "À voir en boutique" when the article is
     // physically present (regardless of finish/colour — it's an invitation
     // to come see the model, not a real-time stock count). Anything else
@@ -665,6 +670,7 @@ function mapProduct(node, opts = {}) {
       title: v.title,
       sku: v.sku || '',
       price: parseFloat(v.price?.amount),
+      compareAtPrice: parseFloat(v.compareAtPrice?.amount) || null,
       available: v.availableForSale,
       // Vrai stock disponible (Storefront) — distinct de availableForSale qui reste
       // true en oversell (inventoryPolicy: CONTINUE). null si le scope ne l'expose pas.
@@ -693,6 +699,8 @@ function mapProductRef(n) {
   const second = imgs.find(u => u !== featured) || imgs[1] || null;
   const priceMin = parseFloat(n.priceRange?.minVariantPrice?.amount ?? v?.price?.amount ?? 0);
   const priceMax = parseFloat(n.priceRange?.maxVariantPrice?.amount ?? priceMin);
+  const _caMinR = parseFloat(n.compareAtPriceRange?.minVariantPrice?.amount || 0);
+  const compareAt = _caMinR > priceMin + 0.5 ? _caMinR : null;
   // Parité visuelle avec les cartes du catalogue : on émet les MÊMES champs que
   // productCard lit via mapProduct — disponibilité/délai HONNÊTES (longDelay /
   // leadTimeLabel, sinon un article delai-long afficherait à tort « Livraison
@@ -708,6 +716,7 @@ function mapProductRef(n) {
     price:     parseFloat(v?.price?.amount ?? priceMin),
     priceMin,
     priceMax,
+    compareAt,
     image:     shopifyResize(featured || '', CARD_IMAGE_WIDTH),
     image2:    second ? shopifyResize(second, CARD_IMAGE_WIDTH) : null,
     badge:     tags.find(t => t.startsWith('badge:'))?.replace('badge:', '') || null,
@@ -1103,12 +1112,14 @@ const COLLECTION_PRODUCTS_QUERY = `
               minVariantPrice { amount currencyCode }
               maxVariantPrice { amount currencyCode }
             }
+            compareAtPriceRange { minVariantPrice { amount currencyCode } }
             variants(first: 250) {
               edges {
                 node {
                   id
                   title
                   price { amount currencyCode }
+                  compareAtPrice { amount }
                   availableForSale
                   selectedOptions { name value }
                   image { url altText }
@@ -1182,6 +1193,7 @@ const PRODUCT_QUERY = `
         minVariantPrice { amount currencyCode }
         maxVariantPrice { amount currencyCode }
       }
+      compareAtPriceRange { minVariantPrice { amount currencyCode } }
       variants(first: 250) {
         edges {
           node {
@@ -1189,6 +1201,7 @@ const PRODUCT_QUERY = `
             title
             sku
             price { amount currencyCode }
+            compareAtPrice { amount }
             availableForSale
             quantityAvailable
             selectedOptions { name value }
@@ -1233,6 +1246,7 @@ const PRODUCT_QUERY = `
       minVariantPrice { amount currencyCode }
       maxVariantPrice { amount currencyCode }
     }
+    compareAtPriceRange { minVariantPrice { amount currencyCode } }
     variants(first: 1) { nodes { id availableForSale price { amount } } }
   }
 `;
