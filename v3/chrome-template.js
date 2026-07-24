@@ -17,6 +17,7 @@ export const NAV_TOP = [
   { label: "Designers",     href: "/designers.html",  kind: "dropdown", key: "designers" },
   { label: "Mikado Studio", href: "/studio.html",     kind: "link"  },
   { label: "Le journal",    href: "/journal.html",    kind: "link"  },
+  { label: "Promotions",    href: "/collections/promotions", kind: "promo" },
 ];
 
 export function chromeHTML(active) {
@@ -71,6 +72,7 @@ export function chromeHTML(active) {
         </div>
         <a class="drawer__link" href="/studio.html">Mikado Studio</a>
         <a class="drawer__link" href="/journal.html">Le journal</a>
+        <a class="drawer__link drawer__link--promo" href="/collections/promotions">Promotions</a>
         <a class="drawer__link drawer__link--util" href="/rendez-vous.html">Rendez-vous</a>
         <a class="drawer__link drawer__link--util" href="/selection.html">Ma sélection</a>
       </div>
