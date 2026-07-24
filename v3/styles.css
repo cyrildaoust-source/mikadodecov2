@@ -620,6 +620,11 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sel-item__promo-code { font-family: var(--sans-product); font-size: 0.7rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
 .sel-item__price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
 .sel-item__price--original { font-family: var(--sans-product); font-size: 0.9rem; font-weight: 400; color: var(--muted); text-decoration: line-through; }
+/* Prix soldé par produit (compare_at) : prix barré + prix soldé rouge + badge -% sur la carte */
+.price-was { color: var(--muted); text-decoration: line-through; margin-right: 7px; font-weight: 400; font-size: 0.88em; }
+.price-now--sale { color: #b23b3b; }
+.pcard__media { position: relative; }
+.pcard__sale { position: absolute; top: 10px; left: 10px; z-index: 2; background: #b23b3b; color: #fff; font-family: var(--sans-product); font-weight: 700; font-size: 12px; letter-spacing: .03em; padding: 4px 9px; border-radius: 2px; }
 .sel-item__price--final { font-family: var(--sans-product); font-weight: 500; color: var(--ink-deep); }
 .sel-item__price--free { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.1; color: var(--accent-ink); }
 .sel-item__discount-amount { display: block; font-family: var(--sans-product); font-size: 0.85rem; font-weight: 500; color: var(--accent-ink); }
