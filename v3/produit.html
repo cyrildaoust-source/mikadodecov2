@@ -431,7 +431,7 @@
         main.srcset = srcsetFor(src);
         syncActiveThumb(src);
         scrollRailTo(src);
-        if (current.price != null && !Number.isNaN(current.price)) priceEl.textContent = euro(current.price);
+        if (current.price != null && !Number.isNaN(current.price)) { if (current.compareAtPrice != null && current.compareAtPrice - current.price > 0.5) priceEl.innerHTML = `<span class="price-was">${euro(current.compareAtPrice)}</span><span class="price-now price-now--sale">${euro(current.price)}</span>`; else priceEl.textContent = euro(current.price); }
         updateStatus();
         probePromo(current.id);
         const cImg = host.querySelector("[data-coloris-img]");
