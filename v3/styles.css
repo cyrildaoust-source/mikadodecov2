@@ -204,6 +204,8 @@ html.sale-hd-on .hero__badge { display: flex; }
 .chrome a.nlink, .chrome .nav__util { font-size: var(--fs-nav); font-weight: 400; position: relative; white-space: nowrap; }
 .chrome a.nlink::after { content: ''; position: absolute; left: 0; bottom: -3px; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
 .chrome a.nlink:hover::after { transform: scaleX(1); }
+.chrome a.nlink--promo { color: var(--accent); }
+.drawer__link--promo { color: var(--accent); }
 .nav__burger { display: none; align-items: center; min-height: 44px; padding: 0 4px; font-size: var(--fs-nav); }
 .chrome--solid, .chrome--mm, .chrome:hover { background: var(--paper); color: var(--ink); border-bottom-color: var(--line); }
 
