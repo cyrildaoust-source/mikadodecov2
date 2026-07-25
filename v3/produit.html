@@ -299,10 +299,11 @@
       // local "how many to add" (cap 1–10) — séparé de la quantité stockée au panier.
       // Choisie via le tiroir Quantité (.qtyd) ; reflétée dans [data-qty-label].
       let pickQty = 1;
-      // Plafond quantite = stock reel (quantityAvailable) des qu'il y en a ; sinon 10 (sur-commande / oversell).
-      const qtyCap = () => { const s = (typeof current.qty === "number") ? current.qty : 0; return s >= 1 ? s : 10; };
+      // Plafond quantite = stock reel UNIQUEMENT pour les produits en SOLDE (tag promo/promotion/sale) ; produits normaux inchanges.
+      const isPromo = (p.tags || []).some(t => { const x = String(t).toLowerCase(); return x === "promo" || x === "promotion" || x === "sale"; });
+      const qtyCap = () => { const s = (typeof current.qty === "number") ? current.qty : 0; return (isPromo && s >= 1) ? s : 10; };
       const setPick = (n) => {
-        pickQty = Math.max(1, Math.min(qtyCap(), parseInt(n) || 1));   // cap au stock reel, sinon 10
+        pickQty = Math.max(1, Math.min(qtyCap(), parseInt(n) || 1));   // cap au stock si solde, sinon 10
         if (qtyLabel) qtyLabel.textContent = pickQty;
       };
 
@@ -312,7 +313,7 @@
           ? `Dans le panier : <strong>${n}</strong> · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`
           : "";
         const stock = (typeof current.qty === "number") ? current.qty : 0;
-        const atMax = stock >= 1 && n >= stock;
+        const atMax = isPromo && stock >= 1 && n >= stock;
         if (cta) { cta.disabled = atMax; cta.textContent = atMax ? `Maximum en stock (${stock})` : "Ajouter au panier"; }
       };
       updateStatus();
@@ -796,7 +797,7 @@
       cta.addEventListener("click", () => {
         const stock = (typeof current.qty === "number") ? current.qty : 0;
         let add = pickQty;
-        if (stock >= 1) {                                   // piece a stock limite : ne jamais depasser le stock (panier compris)
+        if (isPromo && stock >= 1) {                        // article en SOLDE a stock limite : ne jamais depasser le stock (panier compris)
           const room = stock - (cartQty(current.id) || 0);
           if (room <= 0) { status.innerHTML = `Vous avez déjà le maximum en stock (${stock}) dans votre panier. · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`; return; }
           add = Math.min(pickQty, room);
@@ -809,7 +810,7 @@
           price: current.price || 0,
           image: current.image || p.image,
         }, add);
-        if (stock >= 1 && add < pickQty) status.innerHTML = `Ajouté ${add} — stock limité (${stock} en stock). · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`;
+        if (isPromo && stock >= 1 && add < pickQty) status.innerHTML = `Ajouté ${add} — stock limité (${stock} en stock). · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`;
       });
 
       // Recommandations produit — pilotées par les métafields Search & Discovery
