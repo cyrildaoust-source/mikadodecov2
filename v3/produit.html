@@ -299,8 +299,10 @@
       // local "how many to add" (cap 1–10) — séparé de la quantité stockée au panier.
       // Choisie via le tiroir Quantité (.qtyd) ; reflétée dans [data-qty-label].
       let pickQty = 1;
+      // Plafond quantite = stock reel (quantityAvailable) des qu'il y en a ; sinon 10 (sur-commande / oversell).
+      const qtyCap = () => { const s = (typeof current.qty === "number") ? current.qty : 0; return s >= 1 ? s : 10; };
       const setPick = (n) => {
-        pickQty = Math.max(1, Math.min(10, parseInt(n) || 1));   // cap 1–10
+        pickQty = Math.max(1, Math.min(qtyCap(), parseInt(n) || 1));   // cap au stock reel, sinon 10
         if (qtyLabel) qtyLabel.textContent = pickQty;
       };
 
@@ -309,6 +311,9 @@
         status.innerHTML = n > 0
           ? `Dans le panier : <strong>${n}</strong> · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`
           : "";
+        const stock = (typeof current.qty === "number") ? current.qty : 0;
+        const atMax = stock >= 1 && n >= stock;
+        if (cta) { cta.disabled = atMax; cta.textContent = atMax ? `Maximum en stock (${stock})` : "Ajouter au panier"; }
       };
       updateStatus();
       document.addEventListener("cart:change", updateStatus);
@@ -444,7 +449,7 @@
         if (availEl) availEl.innerHTML = availStore(current);
         const skuEl = host.querySelector("[data-spec-sku]");          // Référence = sku de la variante
         if (skuEl) skuEl.textContent = current.sku || "—";
-        renderQtyList();                                              // dispo par quantité dépend de current.qty
+        setPick(pickQty); renderQtyList(); updateStatus();            // re-plafonne au stock de la variante + rafraichit CTA
       };
 
       // ── Lien designer (sous le titre) — progressif & HONNÊTE ──
@@ -728,7 +733,7 @@
       // (jamais « En stock » — cohérent avec la dispo honnête).
       function renderQtyList() {
         const stock = (typeof current.qty === "number") ? current.qty : 0;
-        qList.innerHTML = Array.from({ length: QTY_MAX }, (_x, k) => {
+        qList.innerHTML = Array.from({ length: qtyCap() }, (_x, k) => {
           const n = k + 1;
           const ok = n <= stock;
           return `<li class="qtyd__opt${n === pickQty ? " is-selected" : ""}" role="option" aria-selected="${n === pickQty}" data-qty="${n}" tabindex="${n === pickQty ? "0" : "-1"}">
@@ -789,6 +794,13 @@
 
       // add the chosen quantity of the current variant to the selection
       cta.addEventListener("click", () => {
+        const stock = (typeof current.qty === "number") ? current.qty : 0;
+        let add = pickQty;
+        if (stock >= 1) {                                   // piece a stock limite : ne jamais depasser le stock (panier compris)
+          const room = stock - (cartQty(current.id) || 0);
+          if (room <= 0) { status.innerHTML = `Vous avez déjà le maximum en stock (${stock}) dans votre panier. · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`; return; }
+          add = Math.min(pickQty, room);
+        }
         addToCart({
           handle: p.id,
           variantId: current.id,
@@ -796,7 +808,8 @@
           brand: p.brand,
           price: current.price || 0,
           image: current.image || p.image,
-        }, pickQty);
+        }, add);
+        if (stock >= 1 && add < pickQty) status.innerHTML = `Ajouté ${add} — stock limité (${stock} en stock). · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`;
       });
 
       // Recommandations produit — pilotées par les métafields Search & Discovery
