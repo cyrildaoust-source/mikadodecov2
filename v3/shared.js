@@ -616,12 +616,27 @@ function bindSearch() {
   if (!root) return;
   const input = root.querySelector("[data-search-input]");
   const results = root.querySelector("[data-search-results]");
-  let lastFocus = null, timer = null, lastTerm = "";
+  const suggest = root.querySelector("[data-search-suggest]");
+  const feat = root.querySelector("[data-search-feat]");
+  let lastFocus = null, timer = null, lastTerm = "", featLoaded = false;
   const onKey = (e) => { if (e.key === "Escape") { e.preventDefault(); close(); } };
+  const pdpHref = (p) => p.handle ? `/produit.html?handle=${encodeURIComponent(p.handle)}` : `/produit.html?id=${encodeURIComponent(p.id)}`;
+  const row = (p) => `<a class="sr__row" href="${pdpHref(p)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span></span><span class="sr__price">${priceLabel(p)}</span></a>`;
+  const showSuggest = () => { if (suggest) suggest.hidden = false; if (results) { results.hidden = true; results.innerHTML = ""; } };
+  const showResults = () => { if (suggest) suggest.hidden = true; if (results) results.hidden = false; };
+  const loadFeat = async () => {
+    if (featLoaded || !feat) return; featLoaded = true;
+    try { const r = await fetch("/api/products?paginated=1&limit=5"); const j = await r.json(); feat.innerHTML = (j.items || []).map(row).join(""); }
+    catch (e) { featLoaded = false; }
+  };
   function open() {
     lastFocus = document.activeElement;
+    const trg = document.querySelector("[data-search-open]");
+    const top = (trg ? trg.getBoundingClientRect().bottom : 68) + 10;
+    root.style.setProperty("--search-top", top + "px");
     root.hidden = false;
     document.body.classList.add("search-locked");
+    showSuggest(); loadFeat();
     requestAnimationFrame(() => input && input.focus());
     document.addEventListener("keydown", onKey, true);
   }
@@ -632,27 +647,23 @@ function bindSearch() {
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
   }
   const gotoResults = () => { const t = input.value.trim(); if (t) location.href = `/produits.html?q=${encodeURIComponent(t)}`; };
-  const pdpHref = (p) => p.handle ? `/produit.html?handle=${encodeURIComponent(p.handle)}` : `/produit.html?id=${encodeURIComponent(p.id)}`;
   const render = (term, items) => {
     if (!items.length) { results.innerHTML = `<p class="searchd__empty">Aucun résultat pour « ${escapeHtml(term)} ».</p>`; return; }
-    const rows = items.map((p) => `<a class="sr__row" href="${pdpHref(p)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span></span><span class="sr__price">${priceLabel(p)}</span></a>`).join("");
+    const rows = items.map(row).join("");
     results.innerHTML = `<div class="sr__lab">Produits</div>${rows}<a class="sr__all" href="/produits.html?q=${encodeURIComponent(term)}">Voir tous les résultats pour « ${escapeHtml(term)} » →</a>`;
   };
   const run = async (term) => {
-    try {
-      const r = await fetch(`/api/products?paginated=1&limit=6&q=${encodeURIComponent(term)}`);
-      const j = await r.json();
-      if (input.value.trim() !== term) return;
-      render(term, j.items || []);
-    } catch (e) { /* silencieux */ }
+    try { const r = await fetch(`/api/products?paginated=1&limit=6&q=${encodeURIComponent(term)}`); const j = await r.json(); if (input.value.trim() !== term) return; render(term, j.items || []); }
+    catch (e) { /* silencieux */ }
   };
   if (input) {
     input.addEventListener("input", () => {
       const term = input.value.trim();
       clearTimeout(timer);
-      if (term.length < 2) { results.innerHTML = ""; lastTerm = ""; return; }
+      if (term.length < 2) { showSuggest(); lastTerm = ""; return; }
       if (term === lastTerm) return;
       lastTerm = term;
+      showResults();
       results.innerHTML = `<p class="searchd__hint">Recherche…</p>`;
       timer = setTimeout(() => run(term), 220);
     });
