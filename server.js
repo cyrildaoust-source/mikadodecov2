@@ -466,8 +466,8 @@ const cartLimiter = rateLimit({
 // Metafields must be enabled in Shopify admin → Settings → Custom data → Products
 // Namespaces used: "custom" — keys: designer, year, material, dimensions, lead_time, subcategory
 const PRODUCTS_QUERY = `
-  query GetProducts($first: Int!, $after: String, $query: String) {
-    products(first: $first, after: $after, query: $query, sortKey: BEST_SELLING) {
+  query GetProducts($first: Int!, $after: String, $query: String, $sortKey: ProductSortKeys = BEST_SELLING) {
+    products(first: $first, after: $after, query: $query, sortKey: $sortKey) {
       pageInfo { hasNextPage endCursor }
       edges {
         cursor
@@ -785,7 +785,7 @@ const CATEGORY_FILTERS = {
   'verres-carafes': '(product_type:"Verre" OR product_type:"Carafe" OR product_type:"Carafe isotherme" OR product_type:"Pichet" OR product_type:"Pichet à eau" OR product_type:"Pichet à lait" OR product_type:"Flûte" OR product_type:"Flûte à champagne" OR product_type:"Decanter" OR product_type:"Huilier")',
 };
 
-async function getProductsPage(first, after, tags, cats, brand) {
+async function getProductsPage(first, after, tags, cats, brand, q) {
   const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
   const a   = after || null;
   const tagList = Array.isArray(tags)
@@ -816,13 +816,16 @@ async function getProductsPage(first, after, tags, cats, brand) {
   if (tagQuery)     parts.push(`(${tagQuery})`);
   if (catQuery)     parts.push(`(${catQuery})`);
   if (vendorClause) parts.push(vendorClause);
-  const query = parts.length ? parts.join(' AND ') : null;
+  const term = q ? String(q).replace(/["\\]/g, ' ').trim().slice(0, 120) : '';
+  const query = term ? term : (parts.length ? parts.join(' AND ') : null);
+  const sortKey = term ? 'RELEVANCE' : 'BEST_SELLING';
   const key = `products:page:${f}:${a || 'first'}`
             + (sortedTags.length ? ':tags-' + sortedTags.join(',') : '')
             + (sortedCats.length ? ':cats-' + sortedCats.join(',') : '')
-            + (vendorClause ? ':brand-' + brandSlug : '');
+            + (vendorClause ? ':brand-' + brandSlug : '')
+            + (term ? ':q-' + term.toLowerCase() : '');
   return cached(key, async () => {
-    const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query });
+    const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query, sortKey });
     const items = data.products.edges.map(({ node }) => mapProduct(node));
     return { items, pageInfo: data.products.pageInfo };
   });
@@ -976,9 +979,9 @@ async function getCollections() {
 // The legacy shape is contractual — 4 callers depend on it.
 app.get('/api/products', async (req, res) => {
   try {
-    const { paginated, cursor, limit, tags, cats, brand } = req.query;
-    if (paginated || cursor || limit || tags || cats || brand) {
-      const page = await getProductsPage(limit, cursor, tags, cats, brand);
+    const { paginated, cursor, limit, tags, cats, brand, q } = req.query;
+    if (paginated || cursor || limit || tags || cats || brand || q) {
+      const page = await getProductsPage(limit, cursor, tags, cats, brand, q);
       return res.json(page);
     }
     const products = await getProducts();
