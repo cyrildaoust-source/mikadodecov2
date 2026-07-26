@@ -611,6 +611,57 @@ export function bindReveal() {
   const io = new IntersectionObserver((ents) => ents.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
   els.forEach((e) => io.observe(e));
 }
+function bindSearch() {
+  const root = document.querySelector("[data-search]");
+  if (!root) return;
+  const input = root.querySelector("[data-search-input]");
+  const results = root.querySelector("[data-search-results]");
+  let lastFocus = null, timer = null, lastTerm = "";
+  const onKey = (e) => { if (e.key === "Escape") { e.preventDefault(); close(); } };
+  function open() {
+    lastFocus = document.activeElement;
+    root.hidden = false;
+    document.body.classList.add("search-locked");
+    requestAnimationFrame(() => input && input.focus());
+    document.addEventListener("keydown", onKey, true);
+  }
+  function close() {
+    root.hidden = true;
+    document.body.classList.remove("search-locked");
+    document.removeEventListener("keydown", onKey, true);
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+  }
+  const gotoResults = () => { const t = input.value.trim(); if (t) location.href = `/produits.html?q=${encodeURIComponent(t)}`; };
+  const pdpHref = (p) => p.handle ? `/produit.html?handle=${encodeURIComponent(p.handle)}` : `/produit.html?id=${encodeURIComponent(p.id)}`;
+  const render = (term, items) => {
+    if (!items.length) { results.innerHTML = `<p class="searchd__empty">Aucun résultat pour « ${escapeHtml(term)} ».</p>`; return; }
+    const rows = items.map((p) => `<a class="sr__row" href="${pdpHref(p)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span></span><span class="sr__price">${priceLabel(p)}</span></a>`).join("");
+    results.innerHTML = `<div class="sr__lab">Produits</div>${rows}<a class="sr__all" href="/produits.html?q=${encodeURIComponent(term)}">Voir tous les résultats pour « ${escapeHtml(term)} » →</a>`;
+  };
+  const run = async (term) => {
+    try {
+      const r = await fetch(`/api/products?paginated=1&limit=6&q=${encodeURIComponent(term)}`);
+      const j = await r.json();
+      if (input.value.trim() !== term) return;
+      render(term, j.items || []);
+    } catch (e) { /* silencieux */ }
+  };
+  if (input) {
+    input.addEventListener("input", () => {
+      const term = input.value.trim();
+      clearTimeout(timer);
+      if (term.length < 2) { results.innerHTML = ""; lastTerm = ""; return; }
+      if (term === lastTerm) return;
+      lastTerm = term;
+      results.innerHTML = `<p class="searchd__hint">Recherche…</p>`;
+      timer = setTimeout(() => run(term), 220);
+    });
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); gotoResults(); } });
+  }
+  document.querySelectorAll("[data-search-open]").forEach((b) => b.addEventListener("click", open));
+  root.querySelectorAll("[data-search-close]").forEach((b) => b.addEventListener("click", close));
+}
+
 function bindChrome(transparent) {
   const chrome = document.querySelector("[data-chrome]");
   if (!chrome) return;
@@ -736,6 +787,7 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   if (!transparentNav) document.body.classList.add("has-topnav");
   bindDrawer();
   bindCartDrawer();
+  bindSearch();
   bindChrome(transparentNav);
   bindAnnounce();
   bindNewsletter();
