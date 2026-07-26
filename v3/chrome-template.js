@@ -85,13 +85,30 @@ export function chromeHTML(active) {
   const searchOverlayHTML = `
     <div class="searchd" data-search hidden>
       <div class="searchd__backdrop" data-search-close></div>
-      <div class="searchd__panel" role="dialog" aria-modal="true" aria-label="Recherche">
-        <div class="searchd__field">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
-          <input class="searchd__input" data-search-input type="search" autocomplete="off" placeholder="Rechercher un produit, une marque…" aria-label="Rechercher" />
-          <button class="searchd__x" type="button" data-search-close aria-label="Fermer la recherche">&times;</button>
+      <div class="searchd__bar" role="dialog" aria-modal="true" aria-label="Recherche">
+        <div class="searchd__inner">
+          <div class="searchd__field">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input class="searchd__input" data-search-input type="search" autocomplete="off" placeholder="Rechercher un produit, une marque…" aria-label="Rechercher" />
+            <button class="searchd__x" type="button" data-search-close aria-label="Fermer la recherche">&times;</button>
+          </div>
+          <div class="searchd__suggest" data-search-suggest>
+            <div class="sr__lab">Recherches populaires</div>
+            <div class="searchd__chips">
+              <a class="searchd__chip" href="/produits.html?q=chaise">Chaises</a>
+              <a class="searchd__chip" href="/produits.html?q=table">Tables</a>
+              <a class="searchd__chip" href="/produits.html?q=lampe">Luminaires</a>
+              <a class="searchd__chip" href="/produits.html?q=vase">Vases</a>
+              <a class="searchd__chip" href="/produits.html?q=coussin">Coussins</a>
+              <a class="searchd__chip" href="/produits.html?q=jardin">Extérieur</a>
+              <a class="searchd__chip" href="/produits.html?q=fermob">Fermob</a>
+              <a class="searchd__chip" href="/produits.html?q=vitra">Vitra</a>
+            </div>
+            <div class="sr__lab">Nos produits phares</div>
+            <div class="searchd__feat" data-search-feat></div>
+          </div>
+          <div class="searchd__results" data-search-results aria-live="polite" hidden></div>
         </div>
-        <div class="searchd__results" data-search-results aria-live="polite"></div>
       </div>
     </div>`;
 
