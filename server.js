@@ -821,34 +821,45 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
   const searchTokens = term
     ? term.toLowerCase().split(/\s+/).map((t) => t.replace(/[^a-z0-9À-ſ-]/gi, '')).filter((t) => t.length >= 2 && !STOP.has(t)).slice(0, 5)
     : [];
-  // ── RECHERCHE ─────────────────────────────────────────────────────────────
-  // On cible titre + type + marque + tags (tag:x* en préfixe pour matcher
-  // "table-de-repas" sans le token isolé de "art-de-la-table"), tous les mots requis.
-  // Puis on RETIRE le bruit : un produit matché SEULEMENT par un tag (score 0 = ni
-  // titre, ni type, ni marque) est éliminé → plus de couverts/mugs sur "table".
-  // Fenêtre large + pagination par offset : le menu (6 lignes) reste plein de
-  // résultats propres même après filtrage.
+  // ── RECHERCHE (pertinence position-consciente) ────────────────────────────
+  // Un mot est un « mot-type » si un produit du lot a un productType dont la TÊTE
+  // commence par ce mot (ex. « table » → « Table »/« Table basse »).
+  //  • mot-type → on n'accepte QUE productType-tête / marque / titre-tête. Jamais
+  //    « de table » en milieu de titre, jamais un tag → « table » ne remonte plus
+  //    ni couverts (Fourchette de table), ni Lampe de table, ni Set de table.
+  //  • mot-nom  → titre (n'importe où) ou tag toléré (ex. « repas », « luminaire »,
+  //    « palissade » vivent dans le titre/les tags, pas dans un productType).
+  // Le produit doit satisfaire TOUS les mots. Fenêtre large + pagination par offset.
   if (searchTokens.length) {
-    const WINDOW = 100;
+    const WINDOW = 120;
     const offset = Math.max(0, parseInt(after, 10) || 0);
     const searchQuery = searchTokens
       .map((t) => `(title:${t}* OR product_type:${t}* OR vendor:${t}* OR tag:${t}*)`)
       .join(' AND ');
     const ranked = await cached('products:search:' + searchTokens.join('+'), async () => {
-      const data = await shopifyFetch(PRODUCTS_QUERY, { first: WINDOW, after: null, query: searchQuery, sortKey: 'RELEVANCE' });
-      const scoreOf = (p) => {
-        const ti = (p.name || '').toLowerCase(), ty = (p.productType || '').toLowerCase(), ve = (p.brand || '').toLowerCase();
-        let s = 0;
-        for (const t of searchTokens) { if (ti.includes(t)) s += 10; if (ty.includes(t)) s += 6; if (ve.includes(t)) s += 3; }
-        if (searchTokens.every((t) => ti.includes(t))) s += 50;
-        return s;
+      const items = (await shopifyFetch(PRODUCTS_QUERY, { first: WINDOW, after: null, query: searchQuery, sortKey: 'RELEVANCE' }))
+        .products.edges.map(({ node }) => mapProduct(node));
+      const wordsOf = (s) => (s || '').toLowerCase().split(/[^a-z0-9à-ÿ]+/).filter(Boolean);
+      const headOf  = (s) => wordsOf(s)[0] || '';
+      const isType  = searchTokens.map((t) => items.some((p) => headOf(p.productType).startsWith(t)));
+      const levelOf = (p, t, typeTok) => {
+        const tyHead = headOf(p.productType).startsWith(t);
+        const tiHead = headOf(p.name).startsWith(t);
+        const vend   = wordsOf(p.brand).some((w) => w.startsWith(t));
+        if (typeTok) return tyHead ? 100 : (vend ? 90 : (tiHead ? 80 : 0));
+        const tiBody = wordsOf(p.name).some((w) => w.startsWith(t));
+        const tag    = (p.tags || []).some((g) => wordsOf(g).some((w) => w.startsWith(t)));
+        return vend ? 90 : (tiHead ? 80 : (tiBody ? 40 : (tag ? 20 : 0)));
       };
-      return data.products.edges
-        .map(({ node }) => mapProduct(node))
-        .map((p, i) => ({ p, i, s: scoreOf(p) }))
-        .filter((x) => x.s > 0)
-        .sort((a, b) => (b.s - a.s) || (a.i - b.i))
-        .map((x) => x.p);
+      return items.map((p, i) => {
+        let total = 0;
+        for (let k = 0; k < searchTokens.length; k++) {
+          const lv = levelOf(p, searchTokens[k], isType[k]);
+          if (!lv) return { p, i, total: -1 };   // un mot non satisfait → produit éliminé
+          total += lv;
+        }
+        return { p, i, total };
+      }).filter((x) => x.total >= 0).sort((a, b) => (b.total - a.total) || (a.i - b.i)).map((x) => x.p);
     });
     return { items: ranked.slice(offset, offset + f), pageInfo: { hasNextPage: offset + f < ranked.length, endCursor: String(offset + f) } };
   }
