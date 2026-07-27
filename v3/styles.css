@@ -659,13 +659,21 @@ body.search-locked { overflow: hidden; }
    sans liseré avec la barre de recherche. */
 body.search-locked .chrome { background: var(--paper); color: var(--ink); border-bottom-color: transparent; z-index: 140; }
 body.search-locked .chrome .wordmark img { filter: none; }
-/* On MASQUE le menu (liens de nav + utilitaires de droite) : pendant la recherche
-   il ne reste que le logo (haut-gauche), la barre de recherche et sa croix (×). */
+/* On MASQUE le menu (liens de nav + utilitaires de droite) et le bandeau : pendant
+   la recherche il ne reste que le logo, la barre de recherche INLINE et sa croix. */
 body.search-locked .nav__primary,
-body.search-locked .nav__right { display: none; }
-/* Bande d'annonce masquée SANS décaler la barre (visibility garde la hauteur,
-   donc --search-top mesuré à l'ouverture reste valable → pas de trou). */
-body.search-locked .announce { visibility: hidden; }
+body.search-locked .nav__right,
+body.search-locked .announce { display: none; }
+/* La barre de recherche prend la PLACE du menu, dans la barre de nav : le logo à
+   gauche, le champ qui s'étire, la croix à droite. Le panneau de résultats descend
+   en dessous (--search-top, remesuré après coup dans shared.js). */
+body.search-locked .nav__inner { grid-template-columns: 1fr; }
+.nav__searchbar { display: none; }
+body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center; gap: 10px; border-bottom: 2px solid var(--ink-deep); padding: 3px 2px 7px; }
+.nav__searchbar-icon { color: var(--muted); flex-shrink: 0; }
+.nav__searchbar-input { flex: 1; min-width: 0; border: 0; background: none; font-family: var(--serif); font-size: clamp(1.15rem, 1.9vw, 1.5rem); color: var(--ink-deep); outline: none; }
+.nav__searchbar-input::placeholder { color: #b7ae9f; }
+.nav__searchbar-x { background: none; border: 0; color: var(--ink-deep); font-size: 26px; line-height: 1; cursor: pointer; flex-shrink: 0; padding: 0 4px; }
 @media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } .searchd__input { font-size: 1.25rem; } }
 
 .pcard__media { position: relative; }
