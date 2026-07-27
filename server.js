@@ -817,7 +817,16 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
   if (catQuery)     parts.push(`(${catQuery})`);
   if (vendorClause) parts.push(vendorClause);
   const term = q ? String(q).replace(/["\\]/g, ' ').trim().slice(0, 120) : '';
-  const query = term ? term : (parts.length ? parts.join(' AND ') : null);
+  const STOP = new Set(['de','la','le','du','des','un','une','et','aux','en','pour','a','au','avec']);
+  const searchTokens = term
+    ? term.toLowerCase().split(/\s+/).map((t) => t.replace(/[^a-z0-9À-ſ-]/gi, '')).filter((t) => t.length >= 2 && !STOP.has(t)).slice(0, 5)
+    : [];
+  // Recherche : on cible titre + type + marque + tags (en PRÉFIXE tag:x* pour
+  // matcher "table-de-repas" sans matcher "art-de-la-table"), tous les mots requis (AND).
+  const searchQuery = searchTokens.length
+    ? searchTokens.map((t) => `(title:${t}* OR product_type:${t}* OR vendor:${t}* OR tag:${t}*)`).join(' AND ')
+    : (term || null);
+  const query = searchQuery ? searchQuery : (parts.length ? parts.join(' AND ') : null);
   const sortKey = term ? 'RELEVANCE' : 'BEST_SELLING';
   const key = `products:page:${f}:${a || 'first'}`
             + (sortedTags.length ? ':tags-' + sortedTags.join(',') : '')
@@ -826,7 +835,19 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
             + (term ? ':q-' + term.toLowerCase() : '');
   return cached(key, async () => {
     const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query, sortKey });
-    const items = data.products.edges.map(({ node }) => mapProduct(node));
+    let items = data.products.edges.map(({ node }) => mapProduct(node));
+    if (searchTokens.length) {
+      // Re-classement : un match dans le TITRE/TYPE/MARQUE prime sur un simple
+      // match de tag → une vraie "Table" passe devant un mug tagué art-de-la-table.
+      const scoreOf = (p) => {
+        const ti = (p.name || '').toLowerCase(), ty = (p.productType || '').toLowerCase(), ve = (p.brand || '').toLowerCase();
+        let s = 0;
+        for (const t of searchTokens) { if (ti.includes(t)) s += 10; if (ty.includes(t)) s += 6; if (ve.includes(t)) s += 3; }
+        if (searchTokens.every((t) => ti.includes(t))) s += 50;
+        return s;
+      };
+      items = items.map((p, i) => ({ p, i, s: scoreOf(p) })).sort((a, b) => (b.s - a.s) || (a.i - b.i)).map((x) => x.p);
+    }
     return { items, pageInfo: data.products.pageInfo };
   });
 }
