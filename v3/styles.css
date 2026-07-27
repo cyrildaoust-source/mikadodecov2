@@ -656,6 +656,9 @@ body.search-locked { overflow: hidden; }
    recherche) au lieu de l'état transparent/texte clair par défaut sur un hero. */
 body.search-locked .chrome { background: var(--paper); color: var(--ink); border-bottom-color: var(--line); }
 body.search-locked .chrome .wordmark img { filter: none; }
+/* …y compris la bande d'annonce : blanchie sur place (texte foncé) pour un haut
+   100% blanc. On la BLANCHIT (pas display:none) pour ne pas décaler la barre. */
+body.search-locked .announce { background: var(--paper); color: var(--ink); }
 @media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } .searchd__input { font-size: 1.25rem; } }
 
 .pcard__media { position: relative; }
