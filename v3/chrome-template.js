@@ -85,13 +85,8 @@ export function chromeHTML(active) {
   const searchOverlayHTML = `
     <div class="searchd" data-search hidden>
       <div class="searchd__backdrop" data-search-close></div>
-      <div class="searchd__bar" role="dialog" aria-modal="true" aria-label="Recherche">
+      <div class="searchd__bar" role="region" aria-label="Résultats de recherche">
         <div class="searchd__inner">
-          <div class="searchd__field">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
-            <input class="searchd__input" data-search-input type="search" autocomplete="off" placeholder="Rechercher un produit, une marque…" aria-label="Rechercher" />
-            <button class="searchd__x" type="button" data-search-close aria-label="Fermer la recherche">&times;</button>
-          </div>
           <div class="searchd__suggest" data-search-suggest>
             <div class="sr__lab">Recherches populaires</div>
             <div class="searchd__chips">
@@ -143,6 +138,11 @@ export function chromeHTML(active) {
       <div class="nav__left">
         <a href="/" class="wordmark" aria-label="mikadodeco"><img src="/logomikado.svg" alt="mikadodeco" /></a>
         <nav class="nav__primary">${links}</nav>
+        <div class="nav__searchbar" data-search-field role="search">
+          <svg class="nav__searchbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+          <input class="nav__searchbar-input" data-search-input type="search" autocomplete="off" placeholder="Rechercher un produit, une marque…" aria-label="Rechercher" />
+          <button class="nav__searchbar-x" type="button" data-search-close aria-label="Fermer la recherche">&times;</button>
+        </div>
       </div>
       <div class="nav__right">
         <button class="nav__search" type="button" data-search-open aria-label="Rechercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
