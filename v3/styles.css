@@ -652,6 +652,10 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sr__price { font-weight: 600; font-size: .95rem; white-space: nowrap; }
 .sr__all { display: block; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--accent-ink); font-weight: 600; font-size: .95rem; text-decoration: none; }
 body.search-locked { overflow: hidden; }
+/* Recherche ouverte : le header au-dessus reste BLANC (cohérent avec la barre de
+   recherche) au lieu de l'état transparent/texte clair par défaut sur un hero. */
+body.search-locked .chrome { background: var(--paper); color: var(--ink); border-bottom-color: var(--line); }
+body.search-locked .chrome .wordmark img { filter: none; }
 @media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } .searchd__input { font-size: 1.25rem; } }
 
 .pcard__media { position: relative; }
