@@ -614,7 +614,8 @@ export function bindReveal() {
 function bindSearch() {
   const root = document.querySelector("[data-search]");
   if (!root) return;
-  const input = root.querySelector("[data-search-input]");
+  // Le champ vit désormais DANS la barre de nav (pas dans l'overlay) → document.
+  const input = document.querySelector("[data-search-input]");
   const results = root.querySelector("[data-search-results]");
   const suggest = root.querySelector("[data-search-suggest]");
   const feat = root.querySelector("[data-search-feat]");
@@ -631,19 +632,25 @@ function bindSearch() {
   };
   function open() {
     lastFocus = document.activeElement;
-    const trg = document.querySelector("[data-search-open]");
-    const top = (trg ? trg.getBoundingClientRect().bottom : 68) + 10;
-    root.style.setProperty("--search-top", top + "px");
     root.hidden = false;
-    document.body.classList.add("search-locked");
+    document.body.classList.add("search-locked");   // le header bascule en mode recherche
     showSuggest(); loadFeat();
-    requestAnimationFrame(() => input && input.focus());
+    // On mesure APRÈS le reflow (bandeau masqué, champ inline affiché) pour que le
+    // panneau de résultats descende pile sous la barre de nav.
+    requestAnimationFrame(() => {
+      const nav = document.querySelector(".nav__inner");
+      const top = nav ? nav.getBoundingClientRect().bottom : 68;
+      root.style.setProperty("--search-top", top + "px");
+      if (input) input.focus();
+    });
     document.addEventListener("keydown", onKey, true);
   }
   function close() {
     root.hidden = true;
-    document.body.classList.remove("search-locked");
+    document.body.classList.remove("search-locked");   // le menu se remet
     document.removeEventListener("keydown", onKey, true);
+    if (input) { input.value = ""; lastTerm = ""; }
+    showSuggest();
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
   }
   const gotoResults = () => { const t = input.value.trim(); if (t) location.href = `/produits.html?q=${encodeURIComponent(t)}`; };
@@ -670,7 +677,8 @@ function bindSearch() {
     input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); gotoResults(); } });
   }
   document.querySelectorAll("[data-search-open]").forEach((b) => b.addEventListener("click", open));
-  root.querySelectorAll("[data-search-close]").forEach((b) => b.addEventListener("click", close));
+  // La croix vit dans le header (hors overlay) + le backdrop dans l'overlay → document.
+  document.querySelectorAll("[data-search-close]").forEach((b) => b.addEventListener("click", close));
 }
 
 function bindChrome(transparent) {
