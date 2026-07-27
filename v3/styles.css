@@ -654,14 +654,18 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 body.search-locked { overflow: hidden; }
 /* Recherche ouverte : le header au-dessus reste BLANC (cohérent avec la barre de
    recherche) au lieu de l'état transparent/texte clair par défaut sur un hero. */
-/* …et le header passe AU-DESSUS de l'overlay (z 140 > .searchd 132) pour que ses
-   boutons — logo, sélection, mega-menus — restent cliquables pendant la recherche.
-   Bordure retirée → raccord blanc sans liseré avec la barre de recherche. */
+/* …et le header passe AU-DESSUS de l'overlay (z 140 > .searchd 132) pour que le
+   logo qui reste soit cliquable (retour accueil). Bordure retirée → raccord blanc
+   sans liseré avec la barre de recherche. */
 body.search-locked .chrome { background: var(--paper); color: var(--ink); border-bottom-color: transparent; z-index: 140; }
 body.search-locked .chrome .wordmark img { filter: none; }
-/* …y compris la bande d'annonce : blanchie sur place (texte foncé) pour un haut
-   100% blanc. On la BLANCHIT (pas display:none) pour ne pas décaler la barre. */
-body.search-locked .announce { background: var(--paper); color: var(--ink); }
+/* On MASQUE le menu (liens de nav + utilitaires de droite) : pendant la recherche
+   il ne reste que le logo (haut-gauche), la barre de recherche et sa croix (×). */
+body.search-locked .nav__primary,
+body.search-locked .nav__right { display: none; }
+/* Bande d'annonce masquée SANS décaler la barre (visibility garde la hauteur,
+   donc --search-top mesuré à l'ouverture reste valable → pas de trou). */
+body.search-locked .announce { visibility: hidden; }
 @media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } .searchd__input { font-size: 1.25rem; } }
 
 .pcard__media { position: relative; }
