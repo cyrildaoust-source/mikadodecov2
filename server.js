@@ -821,24 +821,21 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
   const searchTokens = term
     ? term.toLowerCase().split(/\s+/).map((t) => t.replace(/[^a-z0-9À-ſ-]/gi, '')).filter((t) => t.length >= 2 && !STOP.has(t)).slice(0, 5)
     : [];
-  // Recherche : on cible titre + type + marque + tags (en PRÉFIXE tag:x* pour
-  // matcher "table-de-repas" sans matcher "art-de-la-table"), tous les mots requis (AND).
-  const searchQuery = searchTokens.length
-    ? searchTokens.map((t) => `(title:${t}* OR product_type:${t}* OR vendor:${t}* OR tag:${t}*)`).join(' AND ')
-    : (term || null);
-  const query = searchQuery ? searchQuery : (parts.length ? parts.join(' AND ') : null);
-  const sortKey = term ? 'RELEVANCE' : 'BEST_SELLING';
-  const key = `products:page:${f}:${a || 'first'}`
-            + (sortedTags.length ? ':tags-' + sortedTags.join(',') : '')
-            + (sortedCats.length ? ':cats-' + sortedCats.join(',') : '')
-            + (vendorClause ? ':brand-' + brandSlug : '')
-            + (term ? ':q-' + term.toLowerCase() : '');
-  return cached(key, async () => {
-    const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query, sortKey });
-    let items = data.products.edges.map(({ node }) => mapProduct(node));
-    if (searchTokens.length) {
-      // Re-classement : un match dans le TITRE/TYPE/MARQUE prime sur un simple
-      // match de tag → une vraie "Table" passe devant un mug tagué art-de-la-table.
+  // ── RECHERCHE ─────────────────────────────────────────────────────────────
+  // On cible titre + type + marque + tags (tag:x* en préfixe pour matcher
+  // "table-de-repas" sans le token isolé de "art-de-la-table"), tous les mots requis.
+  // Puis on RETIRE le bruit : un produit matché SEULEMENT par un tag (score 0 = ni
+  // titre, ni type, ni marque) est éliminé → plus de couverts/mugs sur "table".
+  // Fenêtre large + pagination par offset : le menu (6 lignes) reste plein de
+  // résultats propres même après filtrage.
+  if (searchTokens.length) {
+    const WINDOW = 100;
+    const offset = Math.max(0, parseInt(after, 10) || 0);
+    const searchQuery = searchTokens
+      .map((t) => `(title:${t}* OR product_type:${t}* OR vendor:${t}* OR tag:${t}*)`)
+      .join(' AND ');
+    const ranked = await cached('products:search:' + searchTokens.join('+'), async () => {
+      const data = await shopifyFetch(PRODUCTS_QUERY, { first: WINDOW, after: null, query: searchQuery, sortKey: 'RELEVANCE' });
       const scoreOf = (p) => {
         const ti = (p.name || '').toLowerCase(), ty = (p.productType || '').toLowerCase(), ve = (p.brand || '').toLowerCase();
         let s = 0;
@@ -846,8 +843,25 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
         if (searchTokens.every((t) => ti.includes(t))) s += 50;
         return s;
       };
-      items = items.map((p, i) => ({ p, i, s: scoreOf(p) })).sort((a, b) => (b.s - a.s) || (a.i - b.i)).map((x) => x.p);
-    }
+      return data.products.edges
+        .map(({ node }) => mapProduct(node))
+        .map((p, i) => ({ p, i, s: scoreOf(p) }))
+        .filter((x) => x.s > 0)
+        .sort((a, b) => (b.s - a.s) || (a.i - b.i))
+        .map((x) => x.p);
+    });
+    return { items: ranked.slice(offset, offset + f), pageInfo: { hasNextPage: offset + f < ranked.length, endCursor: String(offset + f) } };
+  }
+
+  // ── CATALOGUE (best-selling, curseur Shopify) ─────────────────────────────
+  const query = parts.length ? parts.join(' AND ') : null;
+  const key = `products:page:${f}:${a || 'first'}`
+            + (sortedTags.length ? ':tags-' + sortedTags.join(',') : '')
+            + (sortedCats.length ? ':cats-' + sortedCats.join(',') : '')
+            + (vendorClause ? ':brand-' + brandSlug : '');
+  return cached(key, async () => {
+    const data  = await shopifyFetch(PRODUCTS_QUERY, { first: f, after: a, query, sortKey: 'BEST_SELLING' });
+    const items = data.products.edges.map(({ node }) => mapProduct(node));
     return { items, pageInfo: data.products.pageInfo };
   });
 }
