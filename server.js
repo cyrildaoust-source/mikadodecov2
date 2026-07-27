@@ -818,15 +818,20 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
   if (vendorClause) parts.push(vendorClause);
   const term = q ? String(q).replace(/["\\]/g, ' ').trim().slice(0, 120) : '';
   const STOP = new Set(['de','la','le','du','des','un','une','et','aux','en','pour','a','au','avec']);
+  const fold = (s) => (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  // Tokenise : accents repliés (les tags sont slugifiés sans accent), coupe sur
+  // tout séparateur (espaces, tirets, apostrophes), dé-pluralise (-s/-x final) —
+  // sûr car tout le matching est en préfixe : « chaises » → « chaise » → « Chaise ».
   const searchTokens = term
-    ? term.toLowerCase().split(/\s+/).map((t) => t.replace(/[^a-z0-9À-ſ-]/gi, '')).filter((t) => t.length >= 2 && !STOP.has(t)).slice(0, 5)
+    ? fold(term.toLowerCase()).split(/[^a-z0-9]+/).filter((t) => t.length >= 2 && !STOP.has(t)).map((t) => (t.length > 3 ? t.replace(/[sx]$/, '') : t)).slice(0, 5)
     : [];
   // ── RECHERCHE (pertinence position-consciente) ────────────────────────────
-  // Un mot est un « mot-type » si un produit du lot a un productType dont la TÊTE
-  // commence par ce mot (ex. « table » → « Table »/« Table basse »).
-  //  • mot-type → on n'accepte QUE productType-tête / marque / titre-tête. Jamais
-  //    « de table » en milieu de titre, jamais un tag → « table » ne remonte plus
-  //    ni couverts (Fourchette de table), ni Lampe de table, ni Set de table.
+  // Un mot est « mot-type » si >=3 produits du lot ont ce mot en TÊTE de productType
+  // (ex. « table » → « Table »/« Table basse »). Le seuil de 3 empêche une donnée
+  // sale — 2 lampes mal typées « Table » — de faire basculer « table » en strict.
+  //  • mot-type → garde seulement si productType-tête / marque / titre-tête.
+  //    Jamais « de table » en milieu de titre, jamais un tag → « table » ne remonte
+  //    plus ni couverts (Fourchette de table), ni Lampe de table, ni Set de table.
   //  • mot-nom  → titre (n'importe où) ou tag toléré (ex. « repas », « luminaire »,
   //    « palissade » vivent dans le titre/les tags, pas dans un productType).
   // Le produit doit satisfaire TOUS les mots. Fenêtre large + pagination par offset.
@@ -839,9 +844,9 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
     const ranked = await cached('products:search:' + searchTokens.join('+'), async () => {
       const items = (await shopifyFetch(PRODUCTS_QUERY, { first: WINDOW, after: null, query: searchQuery, sortKey: 'RELEVANCE' }))
         .products.edges.map(({ node }) => mapProduct(node));
-      const wordsOf = (s) => (s || '').toLowerCase().split(/[^a-z0-9à-ÿ]+/).filter(Boolean);
+      const wordsOf = (s) => fold((s || '').toLowerCase()).split(/[^a-z0-9]+/).filter(Boolean);
       const headOf  = (s) => wordsOf(s)[0] || '';
-      const isType  = searchTokens.map((t) => items.some((p) => headOf(p.productType).startsWith(t)));
+      const isType  = searchTokens.map((t) => items.filter((p) => headOf(p.productType).startsWith(t)).length >= 3);
       const levelOf = (p, t, typeTok) => {
         const tyHead = headOf(p.productType).startsWith(t);
         const tiHead = headOf(p.name).startsWith(t);
