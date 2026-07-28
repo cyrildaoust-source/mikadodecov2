@@ -154,7 +154,8 @@
         "string-furniture": "String Furniture",
         "muuto": "Muuto",
         "blomus": "Blomus",
-        "assouline": "Assouline"
+        "assouline": "Assouline",
+        "airborne": "Airborne"
       };
       var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
       var h = m ? decodeURIComponent(m[1]).toLowerCase() : "";
@@ -407,6 +408,7 @@
       "ustensiles-cuisine": "Ustensiles & cuisine",
       // Marques
       "assouline": "Assouline",
+      "airborne": "Airborne",
       "vitra": "Vitra",
       "fermob": "Fermob",
       "tradition": "&Tradition",
@@ -429,7 +431,7 @@
     // Brand handles — the "Marques" subset of COLL_TITLES. Drives the
     // breadcrumb level (Marques vs Mobilier) for a /collections/<handle> view.
     const BRAND_HANDLES = new Set([
-      "assouline", "vitra", "fermob", "tradition", "hay", "muuto", "ferm-living",
+      "airborne", "assouline", "vitra", "fermob", "tradition", "hay", "muuto", "ferm-living",
       "alessi", "iittala", "serax", "marimekko", "anglepoise", "artek",
       "fatboy", "hkliving", "pols-potten",
     ]);
