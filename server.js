@@ -243,6 +243,10 @@ app.get('/produit.html', async (req, res) => {
     const ld = {
       "@context": "https://schema.org", "@type": "Product", "name": name,
       ...(brand ? { brand: { "@type": "Brand", "name": brand } } : {}),
+      // Description produit (texte brut Shopify). Échappement JSON assuré par
+      // JSON.stringify (+ le remplacement `<`→< ci-dessous anti-</script>) ;
+      // surtout PAS escapeHtml, qui corromprait le JSON avec des entités HTML.
+      ...(product.description ? { description: product.description } : {}),
       ...(image ? { image } : {}),
       "offers": {
         "@type": "Offer", "priceCurrency": "EUR",
@@ -619,6 +623,21 @@ function mapProduct(node, opts = {}) {
     origin:      meta.origin      || '',
     weight:      meta.weight      || '',
     warranty:    meta.warranty    || '',
+    lightingType:            meta.lighting_type            || '',
+    lightSourceType:         meta.light_source_type         || '',
+    ledType:                 meta.led_type                  || '',
+    power:                   meta.power_w                   || '',
+    voltage:                 meta.voltage_v                 || '',
+    colorTemperature:        meta.color_temperature_k       || '',
+    dimming:                 meta.dimming                   || '',
+    batteryRuntime:          meta.battery_runtime           || '',
+    chargingTime:            meta.charging_time             || '',
+    cableDetails:            meta.cable_details             || '',
+    ipRating:                meta.ip_rating                 || '',
+    safetyClass:             meta.safety_class              || '',
+    energyLabel:             meta.energy_label              || '',
+    lightSourceReplaceable:  meta.light_source_replaceable  || '',
+    constructionMaterials:   meta.construction_materials    || '',
     price,
     priceMin,
     priceMax,
@@ -1221,6 +1240,21 @@ const PRODUCT_QUERY = `
         { namespace: "custom", key: "origin" }
         { namespace: "custom", key: "weight" }
         { namespace: "custom", key: "warranty" }
+        { namespace: "custom", key: "lighting_type" }
+        { namespace: "custom", key: "light_source_type" }
+        { namespace: "custom", key: "led_type" }
+        { namespace: "custom", key: "power_w" }
+        { namespace: "custom", key: "voltage_v" }
+        { namespace: "custom", key: "color_temperature_k" }
+        { namespace: "custom", key: "dimming" }
+        { namespace: "custom", key: "battery_runtime" }
+        { namespace: "custom", key: "charging_time" }
+        { namespace: "custom", key: "cable_details" }
+        { namespace: "custom", key: "ip_rating" }
+        { namespace: "custom", key: "safety_class" }
+        { namespace: "custom", key: "energy_label" }
+        { namespace: "custom", key: "light_source_replaceable" }
+        { namespace: "custom", key: "construction_materials" }
       ]) { key value }
       # Recommandations gérées côté Shopify (app Search & Discovery), stockées en
       # métafields list.product_reference et lues dynamiquement — rien de hardcodé.
