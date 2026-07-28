@@ -71,7 +71,7 @@ const PRODUIT_TEMPLATE  = path.join(__dirname, 'v3', 'produit.html');
 const PRODUITS_TEMPLATE = path.join(__dirname, 'v3', 'produits.html');
 // Marques disposant d'un bandeau header (miroir EXACT de la map HEADERS de
 // v3/produits.html). Pour elles, l'image OG = le bandeau de marque statique.
-const BRAND_HEADERS = new Set(['fatboy', 'ferm-living', 'tradition', 'vitra', 'string-furniture', 'muuto', 'blomus']);
+const BRAND_HEADERS = new Set(['fatboy', 'ferm-living', 'tradition', 'vitra', 'string-furniture', 'muuto', 'blomus', 'assouline']);
 
 // ─── CHROME SSR ────────────────────────────────────────
 // chrome-template.js est ESM + pur → importable en Node via import() dynamique.
