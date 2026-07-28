@@ -798,16 +798,57 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    Caractéristiques key/value table (only filled rows render). */
 .pdp-section { margin-top: clamp(36px, 5vw, 64px); }
 .pdp-desc { color: var(--ink); line-height: 1.7; white-space: pre-line; max-width: 70ch; }
-.pdp-specs { max-width: 640px; border-top: 1px solid var(--line); }
+.pdp-specs { max-width: 820px; border-top: 1px solid var(--line); }
 .pdp-specs div { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-small); }
-.pdp-specs dt { color: var(--muted); }
-.pdp-specs dd { color: var(--ink-deep); text-align: right; }
+.pdp-specs dt { flex: 0 0 min(42%, 280px); color: var(--muted); }
+.pdp-specs dd { min-width: 0; color: var(--ink-deep); text-align: right; overflow-wrap: anywhere; }
 @media (max-width: 760px) {
   .pdp { grid-template-columns: 1fr; }
   .pdp__info { position: static; }
   .pdp__amb { display: none; }   /* grille ambiances = desktop ; sur mobile le packshot (main) reste affiché + rail d'ambiances dessous */
   .pdp__rail { display: flex; }
   .pdp__dots { display: flex; }
+}
+@media (max-width: 520px) {
+  .pdp-specs div { display: grid; grid-template-columns: 1fr; gap: 4px; }
+  .pdp-specs dt { flex-basis: auto; }
+  .pdp-specs dd { text-align: left; }
+}
+
+/* PDP — accordéon Description + Caractéristiques (6 groupes, single-open).
+   Panneaux TOUJOURS dans le DOM, repliés via l'attribut natif `hidden` :
+   show/hide instantané → pas de piège max-height, le focus-ring n'est jamais
+   rogné (aucun overflow:hidden sur un ancêtre de l'en-tête). En-tête =
+   <h2 class="catalogue-head serif"><button> ; identité conservée (serif +
+   tokens), on retire juste la bordure/marge de titre autonome de catalogue-head. */
+.pdp-acc { max-width: 820px; }
+.pdp-acc__item { border-top: 1px solid var(--line); }
+.pdp-acc__item:last-child { border-bottom: 1px solid var(--line); }
+.pdp-acc__head { margin: 0; padding: 0; border: 0; font-size: clamp(20px, 2.4vw, 26px); }
+.pdp-acc__btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 16px 2px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+.pdp-acc__label { min-width: 0; overflow-wrap: anywhere; }
+.pdp-acc__chevron { flex-shrink: 0; color: var(--muted); transition: transform .25s ease; }
+.pdp-acc__btn[aria-expanded="true"] .pdp-acc__chevron { transform: rotate(180deg); }
+.pdp-acc__btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.pdp-acc__panel { padding: 0 2px 24px; }
+.pdp-acc__panel .pdp-desc { margin-top: 0; }
+.pdp-acc__panel .pdp-specs { border-top: 0; }   /* la bordure de l'item joue déjà ce rôle */
+@media (prefers-reduced-motion: reduce) {
+  .pdp-acc__chevron { transition: none; }
 }
 
 /* ---------- article ---------- */

@@ -64,6 +64,7 @@
 
   <script type="module">
     import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, breadcrumbHTML, loadBrandHandles } from "/shared.js";
+    import { buildProductSpecGroups } from "/product-specs.mjs";
     initShell({ active: "Mobilier", transparentNav: false });
 
     const params = new URLSearchParams(location.search);
@@ -229,17 +230,30 @@
           : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}`;
       };
 
-      // Tableau Caractéristiques (section sœur, sous la galerie) — n'affiche QUE les
-      // lignes renseignées ; majoritairement vide tant que les métafields custom.*
-      // ne sont pas remplis côté Shopify (ce n'est PAS un bug). Référence = sku par
-      // variante (mis à jour dans applyVariant).
-      const specRows = [
-        ["Dimensions", p.dimensions], ["Matériaux / Finitions", p.material],
-        ["Usage", p.usage], ["Entretien", p.entretien], ["Designer", p.designer],
-        ["Année / Édition", p.year], ["Fabrication / Origine", p.origin],
-        ["Poids", p.weight], ["Garantie", p.warranty],
-      ].filter(([, v]) => v != null && v !== "");
+      // Accordéon Description + Caractéristiques (6 groupes, single-open) — le
+      // mapping vit dans product-specs.mjs (source unique, rien de hardcodé). Un
+      // groupe ne s'affiche que s'il porte ≥1 info ; « technique » s'affiche aussi
+      // s'il existe une Référence (SKU) — celle-ci est PAR VARIANTE (data-spec-sku,
+      // mis à jour dans applyVariant). Panneaux TOUJOURS dans le DOM, repliés via
+      // l'attribut natif `hidden` (préserve SEO, arbre a11y et le hook SKU).
+      // Majoritairement vide tant que les métafields custom.* ne sont pas remplis
+      // côté Shopify (import Conductor) : ce n'est PAS un bug de code.
+      const specGroups = buildProductSpecGroups(p);
       const hasSku = variants.some((v) => v && v.sku);
+      const specPanelBody = (g) =>
+        g.key === "description"
+          ? `<p class="pdp-desc">${escapeHtml(g.text)}</p>`
+          : `<dl class="pdp-specs">${g.rows.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join("")}${g.key === "technique" && hasSku ? `<div><dt>Référence</dt><dd data-spec-sku>${escapeHtml(current.sku || "—")}</dd></div>` : ""}</dl>`;
+      const specShown = specGroups.filter((g) =>
+        g.key === "description" ? !!g.text
+        : g.key === "technique" ? (g.rows.length > 0 || hasSku)
+        : g.rows.length > 0);
+      const specAccordionHTML = specShown.length
+        ? `<section class="section pdp-section pdp-acc" data-accordion>${specShown.map((g, i) => `<div class="pdp-acc__item">
+            <h2 class="catalogue-head serif pdp-acc__head"><button type="button" class="pdp-acc__btn" id="pdp-acc-btn-${g.key}" aria-controls="pdp-acc-panel-${g.key}" aria-expanded="${i === 0 ? "true" : "false"}"><span class="pdp-acc__label">${escapeHtml(g.label)}</span><span class="pdp-acc__chevron" aria-hidden="true">▾</span></button></h2>
+            <div class="pdp-acc__panel" id="pdp-acc-panel-${g.key}" role="region" aria-labelledby="pdp-acc-btn-${g.key}"${i === 0 ? "" : " hidden"}>${specPanelBody(g)}</div>
+          </div>`).join("")}</section>`
+        : "";
 
       host.innerHTML = `
         <div class="pdp">
@@ -281,20 +295,37 @@
             </div>
           </div>
         </div>
-        ${p.description ? `<section class="section pdp-section">
-          <h2 class="catalogue-head serif">Description</h2>
-          <p class="pdp-desc">${escapeHtml(p.description)}</p>
-        </section>` : ""}
-        ${(specRows.length || hasSku) ? `<section class="section pdp-section">
-          <h2 class="catalogue-head serif">Caractéristiques</h2>
-          <dl class="pdp-specs">${specRows.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join("")}${hasSku ? `<div><dt>Référence</dt><dd data-spec-sku>${escapeHtml(current.sku || "—")}</dd></div>` : ""}</dl>
-        </section>` : ""}`;
+        ${specAccordionHTML}`;
 
       const main = host.querySelector("[data-main]");
       const priceEl = host.querySelector("[data-price-el]");
       const cta = host.querySelector("[data-add]");
       const status = host.querySelector("[data-cart-status]");
       const qtyLabel = host.querySelector("[data-qty-label]");
+
+      // ── Accordéon specs : single-open, replié via l'attribut natif `hidden` ──
+      // Un seul panneau ouvert à la fois. L'état est porté UNIQUEMENT par
+      // aria-expanded + `hidden` (aucun montage paresseux, aucun max-height:0).
+      // Le focus ne rentre JAMAIS dans le panneau (APG) : il reste sur le bouton
+      // activé ; avant de replier un panneau qui contient le focus (ex. futur lien
+      // du groupe Documents), on ramène le focus sur SON en-tête.
+      const accRoot = host.querySelector("[data-accordion]");
+      if (accRoot) {
+        const accBtns = [...accRoot.querySelectorAll(".pdp-acc__btn")];
+        const setOpen = (btn, open) => {
+          const panel = host.querySelector("#" + btn.getAttribute("aria-controls"));
+          if (!open && panel && panel.contains(document.activeElement)) btn.focus();
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          if (panel) panel.hidden = !open;
+        };
+        accBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const willOpen = btn.getAttribute("aria-expanded") !== "true";
+            if (willOpen) accBtns.forEach((o) => { if (o !== btn) setOpen(o, false); });
+            setOpen(btn, willOpen);
+          });
+        });
+      }
 
       // local "how many to add" (cap 1–10) — séparé de la quantité stockée au panier.
       // Choisie via le tiroir Quantité (.qtyd) ; reflétée dans [data-qty-label].
