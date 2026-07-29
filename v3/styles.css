@@ -550,8 +550,24 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    block sits at the bottom of the flex parent (margin-top:auto). */
 .brandcard__name { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.5rem; line-height: 1.1; color: var(--ink); margin-top: auto; text-align: left; transition: color .25s var(--ease); }
 .brandcard:hover .brandcard__name { color: var(--paper); }
-.brandcard__logo { display: block; height: 32px; width: auto; max-width: 75%; object-fit: contain; object-position: left bottom; margin-top: auto; transition: filter .25s var(--ease); }
+.brandcard__logo { display: block; height: 32px; width: auto; max-width: 75%; object-fit: contain; object-position: left bottom; margin-top: auto; filter: brightness(0); transition: filter .25s var(--ease); }
 .brandcard:hover .brandcard__logo { filter: brightness(0) invert(1); }
+/* Normalisation visuelle des logos marques : les bas-de-casse / à 2 lignes / à
+   texte secondaire paraissent plus petits que les logos EN CAPITALES (dont la
+   casse remplit la boîte). On agrandit ce groupe pour un poids visuel comparable
+   (les capitales restent la référence à 32px). Valeurs à affiner au besoin. */
+.brandcard__logo[src*="airborne.svg"],
+.brandcard__logo[src*="esteban.svg"],
+.brandcard__logo[src*="artek.svg"],
+.brandcard__logo[src*="blomus.svg"],
+.brandcard__logo[src*="fatboy.svg"],
+.brandcard__logo[src*="fermob.svg"],
+.brandcard__logo[src*="hkliving.svg"],
+.brandcard__logo[src*="vitra.svg"],
+.brandcard__logo[src*="ferm-living.svg"],
+.brandcard__logo[src*="stoff-nagel.svg"],
+.brandcard__logo[src*="string-furniture.svg"],
+.brandcard__logo[src*="ichendorf-milano.svg"] { height: 44px; }
 .brandcard__count { font-size: var(--fs-small); color: var(--muted); margin-top: 6px; }
 
 /* ---------- designers ---------- */
