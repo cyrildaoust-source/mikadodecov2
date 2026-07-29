@@ -122,10 +122,15 @@ function hydrateMarques() {
   if (!panel) return;
   const curatedHref = {};
   for (const b of (brandsData?.brands || [])) if (b.name && b.href) curatedHref[b.name.toLowerCase()] = b.href;
-  const brands = (activeBrands || []).map((b) => ({
-    name: b.name,
-    href: curatedHref[b.name.toLowerCase()] || `/produits.html?brand=${b.slug}`,
-  }));
+  // Marques masquées du dropdown méga-menu (restent sur /marques.html) — évite de
+  // surcharger le panneau (nom très long, ex. « Compagnie de Provence »).
+  const HIDDEN_FROM_MENU = new Set(["compagnie de provence"]);
+  const brands = (activeBrands || [])
+    .filter((b) => !HIDDEN_FROM_MENU.has((b.name || "").toLowerCase()))
+    .map((b) => ({
+      name: b.name,
+      href: curatedHref[b.name.toLowerCase()] || `/produits.html?brand=${b.slug}`,
+    }));
   if (!brands.length) { panel.innerHTML = ""; return; }
 
   // V2.2: featured sub-collections retired from the rendered mega

@@ -552,6 +552,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .brandcard:hover .brandcard__name { color: var(--paper); }
 .brandcard__logo { display: block; height: 32px; width: auto; max-width: 75%; object-fit: contain; object-position: left bottom; margin-top: auto; transition: filter .25s var(--ease); }
 .brandcard:hover .brandcard__logo { filter: brightness(0) invert(1); }
+.brandcard__logo[src*="airborne.svg"] { height: 42px; }   /* wordmark large bas-de-casse → agrandi pour matcher visuellement les autres logos */
 .brandcard__count { font-size: var(--fs-small); color: var(--muted); margin-top: 6px; }
 
 /* ---------- designers ---------- */
