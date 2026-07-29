@@ -557,7 +557,6 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    casse remplit la boîte). On agrandit ce groupe pour un poids visuel comparable
    (les capitales restent la référence à 32px). Valeurs à affiner au besoin. */
 .brandcard__logo[src*="airborne.svg"],
-.brandcard__logo[src*="volta-mobiles.svg"],
 .brandcard__logo[src*="esteban.svg"],
 .brandcard__logo[src*="artek.svg"],
 .brandcard__logo[src*="blomus.svg"],
