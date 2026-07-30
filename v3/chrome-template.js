@@ -82,6 +82,40 @@ export function chromeHTML(active) {
   // Cart drawer (mini-cart) — slides from the right, above everything. Body +
   // foot are (re)rendered by bindCartDrawer() from readCart(); the skeleton just
   // holds the slots. Present on every page (injected with the shell).
+  const searchOverlayHTML = `
+    <div class="searchd" data-search hidden>
+      <div class="searchd__backdrop" data-search-close></div>
+      <div class="searchd__bar" role="region" aria-label="Résultats de recherche">
+        <div class="searchd__inner">
+          <div class="searchd__suggest" data-search-suggest>
+            <div class="searchd__cols">
+              <div class="searchd__col">
+                <div class="sr__lab">Mots-clés suggérés</div>
+                <ul class="searchd__kw">
+                  <li><a href="/produits.html?q=chaise">Chaises</a></li>
+                  <li><a href="/produits.html?q=table">Tables</a></li>
+                  <li><a href="/produits.html?q=lampe">Luminaires</a></li>
+                  <li><a href="/produits.html?q=vase">Vases</a></li>
+                  <li><a href="/produits.html?q=coussin">Coussins</a></li>
+                  <li><a href="/produits.html?q=jardin">Extérieur</a></li>
+                </ul>
+              </div>
+              <div class="searchd__col">
+                <div class="sr__lab">Marques populaires</div>
+                <div data-search-brands><p class="searchd__hint">Chargement…</p></div>
+                <a class="searchd__more" href="/marques.html">Toutes les marques →</a>
+              </div>
+              <div class="searchd__col">
+                <div class="sr__lab">Produits recommandés</div>
+                <div data-search-feat><p class="searchd__hint">Chargement…</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="searchd__results" data-search-results aria-live="polite" hidden></div>
+        </div>
+      </div>
+    </div>`;
+
   const cartDrawerHTML = `
     <div class="cartd" data-cart-drawer>
       <div class="cartd__backdrop" data-cartd-backdrop></div>
@@ -113,8 +147,14 @@ export function chromeHTML(active) {
       <div class="nav__left">
         <a href="/" class="wordmark" aria-label="mikadodeco"><img src="/logomikado.svg" alt="mikadodeco" /></a>
         <nav class="nav__primary">${links}</nav>
+        <div class="nav__searchbar" data-search-field role="search">
+          <svg class="nav__searchbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+          <input class="nav__searchbar-input" data-search-input type="search" autocomplete="off" placeholder="Rechercher un produit, une marque…" aria-label="Rechercher" />
+          <button class="nav__searchbar-x" type="button" data-search-close aria-label="Fermer la recherche">&times;</button>
+        </div>
       </div>
       <div class="nav__right">
+        <button class="nav__search" type="button" data-search-open aria-label="Rechercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
         <a href="/rendez-vous.html" class="nav__util nav__util-extra">Rendez-vous</a>
         <a href="/selection.html" class="nav__cart" aria-label="Ma sélection">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" width="22" height="22" aria-hidden="true">
@@ -129,7 +169,8 @@ export function chromeHTML(active) {
     ${stage}
   </header>
   ${drawerHTML}
-  ${cartDrawerHTML}`;
+  ${cartDrawerHTML}
+  ${searchOverlayHTML}`;
 }
 
 export function footerHTML() {
