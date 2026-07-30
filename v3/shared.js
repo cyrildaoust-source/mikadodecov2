@@ -618,23 +618,66 @@ function bindSearch() {
   const input = document.querySelector("[data-search-input]");
   const results = root.querySelector("[data-search-results]");
   const suggest = root.querySelector("[data-search-suggest]");
-  const feat = root.querySelector("[data-search-feat]");
   let lastFocus = null, timer = null, lastTerm = "", featLoaded = false;
   const onKey = (e) => { if (e.key === "Escape") { e.preventDefault(); close(); } };
   const pdpHref = (p) => p.handle ? `/produit.html?handle=${encodeURIComponent(p.handle)}` : `/produit.html?id=${encodeURIComponent(p.id)}`;
   const row = (p) => `<a class="sr__row" href="${pdpHref(p)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span></span><span class="sr__price">${priceLabel(p)}</span></a>`;
+  // Liens marque « curés » (mega-menu-brands.json, même schéma que marques.html) :
+  // clé = nom en minuscules → href /collections/<handle>. Repli ?brand=<slug> si
+  // absent. hrefByName persiste (bindSearch appelé une seule fois) → chargé 1×.
+  // Promesse MÉMOÏSÉE (même patron que loadBrandHandles) : tout appelant qui
+  // `await loadBrandHrefs()` attend la MÊME promesse → hrefByName est garanti
+  // rempli avant de peindre les chips (pas de course sur un flag booléen qui
+  // résout avant la fin du fetch). Repli ?brand= si le JSON échoue.
+  let hrefByName = {}, _brandHrefsP = null;
+  const loadBrandHrefs = () => {
+    if (!_brandHrefsP) {
+      _brandHrefsP = fetch("/mega-menu-brands.json", { cache: "no-cache" })
+        .then((r) => r.json())
+        .then((j) => { for (const b of (j.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href; })
+        .catch(() => { /* repli ?brand= */ });
+    }
+    return _brandHrefsP;
+  };
+  const brandHref = (b) => hrefByName[(b.name || "").toLowerCase()] || `/produits.html?brand=${encodeURIComponent(b.slug)}`;
+  const catHref   = (c) => `/collections/${encodeURIComponent(c.handle)}`;
+  // Belle saison (avril→sept) = extérieur ; sinon intérieur. Le tag EST la saison →
+  // la clé de cache serveur (getProductsPage, keyée par tags) se régénère seule.
+  const seasonTag = () => { const m = new Date().getMonth() + 1; return (m >= 4 && m <= 9) ? "exterieur" : "interieur"; };
+  const chip  = (label, href) => `<a class="sr__chip" href="${href}">${escapeHtml(label)}</a>`;
+  const grp   = (lab, inner) => inner ? `<div class="sr__grp"><div class="sr__lab">${lab}</div>${inner}</div>` : "";
+  const chips = (arr, href) => arr?.length ? `<div class="sr__chips">${arr.map((x) => chip(x.name, href(x))).join("")}</div>` : "";
   const showSuggest = () => { if (suggest) suggest.hidden = false; if (results) { results.hidden = true; results.innerHTML = ""; } };
   const showResults = () => { if (suggest) suggest.hidden = true; if (results) results.hidden = false; };
+  // État vide : produits de saison (data-search-feat) + marques populaires
+  // (data-search-brands). Gardes de présence : .innerHTML sur un slot absent
+  // relançait un re-fetch en boucle (featLoaded jamais posé).
   const loadFeat = async () => {
-    if (featLoaded || !feat) return; featLoaded = true;
-    try { const r = await fetch("/api/products?paginated=1&limit=5"); const j = await r.json(); feat.innerHTML = (j.items || []).map(row).join(""); }
-    catch (e) { featLoaded = false; }
+    const featSlot   = root.querySelector("[data-search-feat]");
+    const brandsSlot = root.querySelector("[data-search-brands]");
+    if (featLoaded || !featSlot || !brandsSlot) return;
+    featLoaded = true;
+    try {
+      // loadBrandHrefs() dans le Promise.all → hrefByName rempli AVANT de peindre
+      // les chips (chips marque curées, pas de repli ?brand= dû à une course).
+      const [, feat, brands] = await Promise.all([
+        loadBrandHrefs(),
+        fetch(`/api/products?paginated=1&limit=4&tags=${seasonTag()}`).then((r) => r.json()),
+        fetch("/api/brands").then((r) => r.json()),
+      ]);
+      // « Populaires » = plus gros catalogues d'abord (productCount desc, champ
+      // exposé par /api/brands) → le label ne montre plus les 6 premières A→Z.
+      const brandList = (Array.isArray(brands) ? brands : [])
+        .slice().sort((a, b) => (b.productCount || 0) - (a.productCount || 0)).slice(0, 6);
+      featSlot.innerHTML   = (Array.isArray(feat.items) ? feat.items : []).map(row).join("");
+      brandsSlot.innerHTML = `<div class="sr__chips">${brandList.map((b) => chip(b.name, brandHref(b))).join("")}</div>`;
+    } catch (e) { featLoaded = false; }
   };
   function open() {
     lastFocus = document.activeElement;
     root.hidden = false;
     document.body.classList.add("search-locked");   // le header bascule en mode recherche
-    showSuggest(); loadFeat();
+    showSuggest(); loadBrandHrefs(); loadFeat();
     // On mesure APRÈS le reflow (bandeau masqué, champ inline affiché) pour que le
     // panneau de résultats descende pile sous la barre de nav.
     requestAnimationFrame(() => {
@@ -654,20 +697,31 @@ function bindSearch() {
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
   }
   const gotoResults = () => { const t = input.value.trim(); if (t) location.href = `/produits.html?q=${encodeURIComponent(t)}`; };
-  const render = (term, items) => {
-    if (!items.length) { results.innerHTML = `<p class="searchd__empty">Aucun résultat pour « ${escapeHtml(term)} ».</p>`; return; }
-    const rows = items.map(row).join("");
-    results.innerHTML = `<div class="sr__lab">Produits</div>${rows}<a class="sr__all" href="/produits.html?q=${encodeURIComponent(term)}">Voir tous les résultats pour « ${escapeHtml(term)} » →</a>`;
+  const render = (term, d) => {
+    if (!(d.products?.length || d.brands?.length || d.categories?.length)) {
+      results.innerHTML = `<p class="searchd__empty">Aucun résultat pour « ${escapeHtml(term)} ».</p>`; return;
+    }
+    // À 1 caractère, le signal utile = les COLLECTIONS (marques + catégories) ; les
+    // produits sont trop bruités → on n'en montre que 2 max. Dès 2 car., tout.
+    const prods = term.length <= 1 ? (d.products || []).slice(0, 2) : (d.products || []);
+    results.innerHTML =
+        grp("Marques",    chips(d.brands, brandHref))
+      + grp("Catégories", chips(d.categories, catHref))
+      + grp("Produits",   prods.map(row).join(""))
+      + `<a class="sr__all" href="/produits.html?q=${encodeURIComponent(term)}">Voir tous les résultats pour « ${escapeHtml(term)} » →</a>`;
   };
   const run = async (term) => {
-    try { const r = await fetch(`/api/products?paginated=1&limit=6&q=${encodeURIComponent(term)}`); const j = await r.json(); if (input.value.trim() !== term) return; render(term, j.items || []); }
-    catch (e) { /* silencieux */ }
+    try {
+      const d = await fetch(`/api/predictive?q=${encodeURIComponent(term)}`).then((r) => r.json());
+      if (input.value.trim() !== term) return;   // garde de course conservée
+      render(term, d);
+    } catch (e) { /* silencieux */ }
   };
   if (input) {
     input.addEventListener("input", () => {
       const term = input.value.trim();
       clearTimeout(timer);
-      if (term.length < 2) { showSuggest(); lastTerm = ""; return; }
+      if (term.length < 1) { showSuggest(); lastTerm = ""; return; }
       if (term === lastTerm) return;
       lastTerm = term;
       showResults();

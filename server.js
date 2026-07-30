@@ -465,62 +465,102 @@ const cartLimiter = rateLimit({
 // ─── SHOPIFY: PRODUCTS QUERY ───────────────────────────
 // Metafields must be enabled in Shopify admin → Settings → Custom data → Products
 // Namespaces used: "custom" — keys: designer, year, material, dimensions, lead_time, subcategory
+// Sélection de champs du node produit, factorisée en fragment pour être SOURCE
+// UNIQUE : PRODUCTS_QUERY (catalogue/PLP/sitemap) ET SEARCH_QUERY (page ?q=)
+// l'utilisent → mapProduct lit exactement les mêmes champs des deux côtés (aucun
+// risque de carte incomplète sur la page de résultats). Toute évolution de carte
+// se fait ICI, une seule fois.
+const PRODUCT_CARD_FIELDS = `
+  fragment ProductCardFields on Product {
+    id
+    handle
+    title
+    vendor
+    productType
+    description
+    tags
+    availableForSale
+    totalInventory
+    collections(first: 20) {
+      edges { node { handle } }
+    }
+    featuredImage { url altText }
+    images(first: 8) {
+      edges { node { url altText } }
+    }
+    priceRange {
+      minVariantPrice { amount currencyCode }
+      maxVariantPrice { amount currencyCode }
+    }
+    compareAtPriceRange { minVariantPrice { amount currencyCode } }
+    variants(first: 250) {
+      edges {
+        node {
+          id
+          title
+          price { amount currencyCode }
+          compareAtPrice { amount }
+          availableForSale
+          selectedOptions { name value }
+          image { url altText }
+        }
+      }
+    }
+    metafields(identifiers: [
+      { namespace: "custom", key: "designer" }
+      { namespace: "custom", key: "year" }
+      { namespace: "custom", key: "material" }
+      { namespace: "custom", key: "dimensions" }
+      { namespace: "custom", key: "lead_time" }
+      { namespace: "custom", key: "subcategory" }
+    ]) {
+      key
+      value
+    }
+  }
+`;
+
 const PRODUCTS_QUERY = `
   query GetProducts($first: Int!, $after: String, $query: String, $sortKey: ProductSortKeys = BEST_SELLING) {
     products(first: $first, after: $after, query: $query, sortKey: $sortKey) {
       pageInfo { hasNextPage endCursor }
       edges {
         cursor
-        node {
-          id
-          handle
-          title
-          vendor
-          productType
-          description
-          tags
-          availableForSale
-          totalInventory
-          collections(first: 20) {
-            edges { node { handle } }
-          }
-          featuredImage { url altText }
-          images(first: 8) {
-            edges { node { url altText } }
-          }
-          priceRange {
-            minVariantPrice { amount currencyCode }
-            maxVariantPrice { amount currencyCode }
-          }
-          compareAtPriceRange { minVariantPrice { amount currencyCode } }
-          variants(first: 250) {
-            edges {
-              node {
-                id
-                title
-                price { amount currencyCode }
-                compareAtPrice { amount }
-                availableForSale
-                selectedOptions { name value }
-                image { url altText }
-              }
-            }
-          }
-          metafields(identifiers: [
-            { namespace: "custom", key: "designer" }
-            { namespace: "custom", key: "year" }
-            { namespace: "custom", key: "material" }
-            { namespace: "custom", key: "dimensions" }
-            { namespace: "custom", key: "lead_time" }
-            { namespace: "custom", key: "subcategory" }
-          ]) {
-            key
-            value
-          }
-        }
+        node { ...ProductCardFields }
       }
     }
   }
+  ${PRODUCT_CARD_FIELDS}
+`;
+
+// ─── SHOPIFY: SEARCH QUERY (page « tous les résultats » /produits.html?q=) ──
+// Recherche plein-texte NATIVE Shopify (tolérante aux fautes, préfixe sur le
+// dernier mot). Réutilise EXACTEMENT le fragment ProductCardFields → mapProduct
+// lit les mêmes champs que pour le catalogue. `search.pageInfo.endCursor` est un
+// vrai curseur Shopify → repassé tel quel en ?cursor= par le front (transparent).
+const SEARCH_QUERY = `
+  query Search($q: String!, $first: Int!, $after: String) {
+    search(query: $q, first: $first, after: $after,
+           types: [PRODUCT], prefix: LAST, unavailableProducts: HIDE) {
+      edges { node { ... on Product { ...ProductCardFields } } }
+      pageInfo { hasNextPage endCursor }
+    }
+  }
+  ${PRODUCT_CARD_FIELDS}
+`;
+
+// Filet de sécurité de la page ?q= : `search` (plein-texte) est parfois MOINS
+// tolérant aux fautes que `predictiveSearch` (ex. transposition « fermbo » →
+// « fermob » : l'overlay matche, `search` renvoie 0). Quand `search` rend une 1re
+// page VIDE, on récupère par ID EXACT (nodes) les produits que l'overlay a su
+// matcher → la page de résultats n'est jamais « Aucun résultat » sur une faute que
+// l'overlay a corrigée (cohérence overlay ↔ page). Réutilise ProductCardFields
+// → cartes complètes. (PREDICTIVE_QUERY est défini plus bas, avec la route.)
+const SEARCH_FALLBACK_QUERY = `
+  query SearchFallback($ids: [ID!]!) {
+    nodes(ids: $ids) { ... on Product { ...ProductCardFields } }
+  }
+  ${PRODUCT_CARD_FIELDS}
 `;
 
 // Boutique-de-quartier delivery promise: a single, honest baseline applies
@@ -816,57 +856,31 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
   if (tagQuery)     parts.push(`(${tagQuery})`);
   if (catQuery)     parts.push(`(${catQuery})`);
   if (vendorClause) parts.push(vendorClause);
+  // ── RECHERCHE (native Shopify `search`, plein-texte, tolérante aux fautes) ──
+  // Remplace l'ancien moteur maison (tokenizer/re-rank/fenêtre) : la recherche
+  // native gère préfixes courts, fautes de frappe et pertinence. `after` = curseur
+  // Shopify opaque (repassé par le front en ?cursor=). Cache par (terme, curseur,
+  // taille de page) — chaque chunk du walk front est mémorisé séparément.
   const term = q ? String(q).replace(/["\\]/g, ' ').trim().slice(0, 120) : '';
-  const STOP = new Set(['de','la','le','du','des','un','une','et','aux','en','pour','a','au','avec']);
-  const fold = (s) => (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  // Tokenise : accents repliés (les tags sont slugifiés sans accent), coupe sur
-  // tout séparateur (espaces, tirets, apostrophes), dé-pluralise (-s/-x final) —
-  // sûr car tout le matching est en préfixe : « chaises » → « chaise » → « Chaise ».
-  const searchTokens = term
-    ? fold(term.toLowerCase()).split(/[^a-z0-9]+/).filter((t) => t.length >= 2 && !STOP.has(t)).map((t) => (t.length > 3 ? t.replace(/[sx]$/, '') : t)).slice(0, 5)
-    : [];
-  // ── RECHERCHE (pertinence position-consciente) ────────────────────────────
-  // Un mot est « mot-type » si >=3 produits du lot ont ce mot en TÊTE de productType
-  // (ex. « table » → « Table »/« Table basse »). Le seuil de 3 empêche une donnée
-  // sale — 2 lampes mal typées « Table » — de faire basculer « table » en strict.
-  //  • mot-type → garde seulement si productType-tête / marque / titre-tête.
-  //    Jamais « de table » en milieu de titre, jamais un tag → « table » ne remonte
-  //    plus ni couverts (Fourchette de table), ni Lampe de table, ni Set de table.
-  //  • mot-nom  → titre (n'importe où) ou tag toléré (ex. « repas », « luminaire »,
-  //    « palissade » vivent dans le titre/les tags, pas dans un productType).
-  // Le produit doit satisfaire TOUS les mots. Fenêtre large + pagination par offset.
-  if (searchTokens.length) {
-    const WINDOW = 120;
-    const offset = Math.max(0, parseInt(after, 10) || 0);
-    const searchQuery = searchTokens
-      .map((t) => `(title:${t}* OR product_type:${t}* OR vendor:${t}* OR tag:${t}*)`)
-      .join(' AND ');
-    const ranked = await cached('products:search:' + searchTokens.join('+'), async () => {
-      const items = (await shopifyFetch(PRODUCTS_QUERY, { first: WINDOW, after: null, query: searchQuery, sortKey: 'RELEVANCE' }))
-        .products.edges.map(({ node }) => mapProduct(node));
-      const wordsOf = (s) => fold((s || '').toLowerCase()).split(/[^a-z0-9]+/).filter(Boolean);
-      const headOf  = (s) => wordsOf(s)[0] || '';
-      const isType  = searchTokens.map((t) => items.filter((p) => headOf(p.productType).startsWith(t)).length >= 3);
-      const levelOf = (p, t, typeTok) => {
-        const tyHead = headOf(p.productType).startsWith(t);
-        const tiHead = headOf(p.name).startsWith(t);
-        const vend   = wordsOf(p.brand).some((w) => w.startsWith(t));
-        if (typeTok) return tyHead ? 100 : (vend ? 90 : (tiHead ? 80 : 0));
-        const tiBody = wordsOf(p.name).some((w) => w.startsWith(t));
-        const tag    = (p.tags || []).some((g) => wordsOf(g).some((w) => w.startsWith(t)));
-        return vend ? 90 : (tiHead ? 80 : (tiBody ? 40 : (tag ? 20 : 0)));
-      };
-      return items.map((p, i) => {
-        let total = 0;
-        for (let k = 0; k < searchTokens.length; k++) {
-          const lv = levelOf(p, searchTokens[k], isType[k]);
-          if (!lv) return { p, i, total: -1 };   // un mot non satisfait → produit éliminé
-          total += lv;
+  if (term) {
+    return cached(`search:${term.toLowerCase()}:${a || 'first'}:${f}`, async () => {
+      const data = await shopifyFetch(SEARCH_QUERY, { q: term, first: f, after: a });
+      let items = (data.search.edges || []).map(({ node }) => mapProduct(node));
+      let pageInfo = data.search.pageInfo;
+      // 1re page vide ? → filet predictive (cf. SEARCH_FALLBACK_QUERY) : on récupère
+      // par ID exact les produits que l'overlay a su matcher (faute que `search`
+      // ne corrige pas, ex. « fermbo »). Predictive n'est pas paginable → 1 page.
+      if (!a && items.length === 0) {
+        const ps = (await shopifyFetch(PREDICTIVE_QUERY, { q: term })).predictiveSearch;
+        const ids = [...new Set((ps.products || []).map((p) => p.id).filter(Boolean))];
+        if (ids.length) {
+          const fb = await shopifyFetch(SEARCH_FALLBACK_QUERY, { ids });
+          items = (fb.nodes || []).filter(Boolean).map((node) => mapProduct(node));
+          pageInfo = { hasNextPage: false, endCursor: null };
         }
-        return { p, i, total };
-      }).filter((x) => x.total >= 0).sort((a, b) => (b.total - a.total) || (a.i - b.i)).map((x) => x.p);
+      }
+      return { items, pageInfo };
     });
-    return { items: ranked.slice(offset, offset + f), pageInfo: { hasNextPage: offset + f < ranked.length, endCursor: String(offset + f) } };
   }
 
   // ── CATALOGUE (best-selling, curseur Shopify) ─────────────────────────────
@@ -1052,6 +1066,74 @@ app.get('/api/brands', async (req, res) => {
   } catch (err) {
     console.error('Brands error:', err.message);
     res.status(500).json({ error: 'Impossible de charger les marques.' });
+  }
+});
+
+// ─── SHOPIFY: PREDICTIVE SEARCH (overlay instantané, dès la 1re lettre) ──
+// searchableFields laissé PAR DÉFAUT (TITLE, PRODUCT_TYPE, VARIANT_TITLE,
+// VENDOR) — ne pas le passer explicitement (sinon on écrase le set par défaut →
+// vendor/product_type cassent). Pas de `types` sur products/collections (aucune
+// suggestion « QUERY » côté store). Produits + collections en 1 appel.
+const PREDICTIVE_QUERY = `
+  query Predictive($q: String!) {
+    predictiveSearch(query: $q, limit: 8, limitScope: EACH,
+                     types: [PRODUCT, COLLECTION],
+                     unavailableProducts: HIDE) {
+      products {
+        id handle title vendor productType
+        featuredImage { url altText }
+        priceRange { minVariantPrice { amount currencyCode } }
+      }
+      collections { id handle title }
+    }
+  }
+`;
+
+// Les nœuds predictiveSearch.products n'ont PAS la forme de PRODUCTS_QUERY (pas
+// de variants/metafields) → mapper léger dédié (ne PAS réutiliser mapProduct).
+// price = priceMin = priceMax → priceLabel() n'affiche jamais « À partir de ».
+function mapPredictiveProduct(n) {
+  const amt = parseFloat(n.priceRange?.minVariantPrice?.amount || 0);
+  return {
+    handle: n.handle || '', name: n.title || '', brand: n.vendor || '',
+    productType: (n.productType || '').toLowerCase(),
+    image: n.featuredImage?.url || '',
+    price: amt, priceMin: amt, priceMax: amt, compareAt: null,
+  };
+}
+
+async function getPredictive(q) {
+  const term = String(q || '').replace(/["\\]/g, ' ').trim().slice(0, 80);
+  if (!term) return { products: [], brands: [], categories: [] };
+  return cached('predictive:' + term.toLowerCase(), async () => {
+    const ps = (await shopifyFetch(PREDICTIVE_QUERY, { q: term })).predictiveSearch;
+    // Une collection est une MARQUE si son handle/titre matche un vendor actif.
+    // On renvoie alors l'objet MARQUE canonique {name, slug} de getActiveBrands
+    // (pas le handle brut : le store publie p.ex. 2 collections « Fermob »
+    // fermob + fermob-1) + on DÉDUPLIQUE par slug → une seule chip par marque.
+    const brandsRef = await getActiveBrands();                 // [{name, slug, productCount}]
+    const bySlug = new Map(brandsRef.map((b) => [b.slug, b]));
+    const byName = new Map(brandsRef.map((b) => [b.name.toLowerCase(), b]));
+    const seen = new Set();
+    const brands = [], categories = [];
+    for (const c of (ps.collections || [])) {
+      const b = bySlug.get(c.handle) || byName.get((c.title || '').toLowerCase());
+      if (b) { if (!seen.has(b.slug)) { seen.add(b.slug); brands.push({ name: b.name, slug: b.slug }); } }
+      else   { categories.push({ handle: c.handle, name: c.title }); }
+    }
+    return { products: (ps.products || []).map(mapPredictiveProduct), brands, categories };
+  }, 120_000);   // TTL court (2 min)
+}
+
+// ─── API: RECHERCHE PRÉDICTIVE (overlay instantané) ────
+app.get('/api/predictive', async (req, res) => {
+  try {
+    const data = await getPredictive(req.query.q);
+    res.set('Cache-Control', 'public, max-age=60');
+    res.json(data);
+  } catch (err) {
+    console.error('Predictive error:', err.message);
+    res.status(500).json({ error: 'Recherche indisponible.' });
   }
 });
 

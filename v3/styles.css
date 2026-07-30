@@ -651,6 +651,19 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .sr__name { font-family: var(--serif); font-size: 1.05rem; }
 .sr__price { font-weight: 600; font-size: .95rem; white-space: nowrap; }
 .sr__all { display: block; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--accent-ink); font-weight: 600; font-size: .95rem; text-decoration: none; }
+/* ─── Recherche : état vide 3 colonnes + groupes/chips de résultats ─── */
+.searchd__cols { display: grid; grid-template-columns: 1fr 1fr 1.35fr; gap: 44px; }
+.searchd__kw { list-style: none; margin: 0; padding: 0; }
+.searchd__kw a { display: inline-block; font-family: var(--serif); font-size: 1.28rem; color: var(--ink-deep); text-decoration: none; padding: 5px 0; transition: color .18s; }
+.searchd__kw a:hover { color: var(--accent); }
+.searchd__more { display: inline-block; margin-top: 14px; padding: 6px 0; color: var(--accent-ink); font-weight: 600; font-size: .92rem; text-decoration: none; }  /* padding → cible ≥24px (WCAG 2.5.8, Lot E) */
+.searchd__more:hover { text-decoration: underline; }
+.sr__grp { margin-bottom: 22px; }
+.sr__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.sr__chip { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 22px; font-size: .92rem; color: var(--ink-deep); text-decoration: none; transition: border-color .18s, background .18s; }
+.sr__chip:hover { border-color: var(--ink-deep); background: var(--paper-2); }
+/* empilement mobile : MÊME seuil que les autres règles recherche (640px) */
+@media (max-width: 640px) { .searchd__cols { grid-template-columns: 1fr; gap: 30px; } }
 body.search-locked { overflow: hidden; }
 /* Recherche ouverte : le header au-dessus reste BLANC (cohérent avec la barre de
    recherche) au lieu de l'état transparent/texte clair par défaut sur un hero. */

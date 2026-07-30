@@ -88,19 +88,28 @@ export function chromeHTML(active) {
       <div class="searchd__bar" role="region" aria-label="Résultats de recherche">
         <div class="searchd__inner">
           <div class="searchd__suggest" data-search-suggest>
-            <div class="sr__lab">Recherches populaires</div>
-            <div class="searchd__chips">
-              <a class="searchd__chip" href="/produits.html?q=chaise">Chaises</a>
-              <a class="searchd__chip" href="/produits.html?q=table">Tables</a>
-              <a class="searchd__chip" href="/produits.html?q=lampe">Luminaires</a>
-              <a class="searchd__chip" href="/produits.html?q=vase">Vases</a>
-              <a class="searchd__chip" href="/produits.html?q=coussin">Coussins</a>
-              <a class="searchd__chip" href="/produits.html?q=jardin">Extérieur</a>
-              <a class="searchd__chip" href="/produits.html?q=fermob">Fermob</a>
-              <a class="searchd__chip" href="/produits.html?q=vitra">Vitra</a>
+            <div class="searchd__cols">
+              <div class="searchd__col">
+                <div class="sr__lab">Mots-clés suggérés</div>
+                <ul class="searchd__kw">
+                  <li><a href="/produits.html?q=chaise">Chaises</a></li>
+                  <li><a href="/produits.html?q=table">Tables</a></li>
+                  <li><a href="/produits.html?q=lampe">Luminaires</a></li>
+                  <li><a href="/produits.html?q=vase">Vases</a></li>
+                  <li><a href="/produits.html?q=coussin">Coussins</a></li>
+                  <li><a href="/produits.html?q=jardin">Extérieur</a></li>
+                </ul>
+              </div>
+              <div class="searchd__col">
+                <div class="sr__lab">Marques populaires</div>
+                <div data-search-brands><p class="searchd__hint">Chargement…</p></div>
+                <a class="searchd__more" href="/marques.html">Toutes les marques →</a>
+              </div>
+              <div class="searchd__col">
+                <div class="sr__lab">Produits recommandés</div>
+                <div data-search-feat><p class="searchd__hint">Chargement…</p></div>
+              </div>
             </div>
-            <div class="sr__lab">Nos produits phares</div>
-            <div class="searchd__feat" data-search-feat></div>
           </div>
           <div class="searchd__results" data-search-results aria-live="polite" hidden></div>
         </div>
