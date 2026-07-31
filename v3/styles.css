@@ -1441,6 +1441,19 @@ body.pdplb-locked { overflow: hidden; }
    richer designers the grid simply grows past this floor, below the fold. */
 .plp-designer [data-grid] { min-height: 380px; }
 
+/* ---------- Page collection / marque (/collections/<handle> ou ?brand=) ----------
+   Flag .plp-collection posé dans <head> avant le 1er paint (comme .plp-designer),
+   MAIS on GARDE le hero (le nom de marque/collection y vit) : on masque seulement
+   la bande populaires + la barre de filtres, et on réserve les hauteurs → aucun
+   flash « populaires » ni « Le catalogue », zéro CLS. Titre/sous-titre vidés au
+   parsing (script inline) ; le module pose le nom exact ensuite. */
+.plp-collection .filterbar,
+.plp-collection [data-pop-section] { display: none; }
+.plp-collection [data-breadcrumb] { min-height: 52px; }
+.plp-collection [data-plp-title] { min-height: 1em; }
+.plp-collection [data-grid-title] { min-height: 1.05em; }
+.plp-collection [data-grid] { min-height: 380px; }
+
 .grid-head__count { display: none; }
 .plp-designer .grid-head {
   display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
