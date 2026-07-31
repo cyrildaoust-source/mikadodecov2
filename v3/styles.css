@@ -785,7 +785,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .breadcrumb a:hover { color: var(--accent); }
 .breadcrumb [aria-current="page"] { color: var(--ink); }
 .pdp__gallery { position: relative; }
-.pdp__main { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: var(--tile); cursor: zoom-in; }
+.pdp__main { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; cursor: zoom-in; }
 .pdp__main:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 .pdp__thumbs { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
 .pdp__thumbs img { width: 74px; height: 74px; object-fit: cover; background: var(--tile); cursor: pointer; opacity: .55; transition: opacity .2s var(--ease); }
@@ -809,7 +809,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
    desktop (which keeps .pdp__main + .pdp__thumbs). */
 .pdp__rail { display: none; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .pdp__rail::-webkit-scrollbar { display: none; }
-.pdp__rail-img { flex: 0 0 100%; width: 100%; aspect-ratio: 1/1; object-fit: contain; background: var(--tile); scroll-snap-align: center; cursor: zoom-in; }
+.pdp__rail-img { flex: 0 0 100%; width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; scroll-snap-align: center; cursor: zoom-in; }
 .pdp__dots { display: none; justify-content: center; gap: 10px; margin-top: 12px; }
 .pdp__dot-btn { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; }
 .pdp__dot-btn::before { content: ""; width: 8px; height: 8px; background: var(--line); transition: background .2s var(--ease); }
@@ -927,6 +927,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp-acc__panel { padding: 0 2px 24px; }
 .pdp-acc__panel .pdp-desc { margin-top: 0; }
 .pdp-acc__panel .pdp-specs { border-top: 0; }   /* la bordure de l'item joue déjà ce rôle */
+.pdp-acc__panel .pdp-specs div:last-child { border-bottom: 0; }   /* pas de double filet avec l'accordeon suivant */
 @media (prefers-reduced-motion: reduce) {
   .pdp-acc__chevron { transition: none; }
 }
@@ -1151,14 +1152,14 @@ body.vard-locked { overflow: hidden; }
 .vard__close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: none; border: none; font-size: 30px; line-height: 1; color: var(--ink); cursor: pointer; }
 .vard__close:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 .vard__body { flex: 1 1 auto; overflow-y: auto; padding: 4px var(--gutter) 24px; -webkit-overflow-scrolling: touch; }
-.vard__preview-img { width: 100%; height: clamp(150px, 22vh, 200px); object-fit: contain; background: var(--tile); }
+.vard__preview-img { width: 100%; height: clamp(150px, 22vh, 200px); object-fit: contain; background: #fff; }
 .vard__preview-name { font-family: var(--serif); font-weight: 600; font-size: 20px; margin-top: 8px; color: var(--ink-deep); }
 .vard__preview-avail { display: flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: #b9742c; margin-top: 4px; }
 .vard__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; padding: 0; list-style: none; }
 .vard__opt { display: flex; flex-direction: column; gap: 5px; padding: 0; background: none; border: 1px solid transparent; cursor: pointer; text-align: center; min-height: 44px; }
 .vard__opt:hover { border-color: var(--line-ink); }                 /* survol = filet encre discret */
 .vard__opt:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }   /* focus ring clavier a11y — inchangé */
-.vard__opt[aria-selected="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }  /* sélection = cadre ENCRE net (DA : bleu réservé au CTA) */
+.vard__opt[aria-selected="true"] { border-color: var(--ink); }  /* sélection = cadre ENCRE net, 1 seul filet (DA : bleu réservé au CTA) */
 .vard__opt-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--tile); }
 .vard__opt-name { font-size: var(--fs-meta); color: var(--ink-deep); line-height: 1.2; }
 .vard__opt-avail { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #b9742c; }
