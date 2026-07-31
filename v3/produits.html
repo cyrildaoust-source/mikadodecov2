@@ -132,7 +132,13 @@
        paint so styles.css can suppress the generic catalog hero / filterbar
        and offset the content under the fixed nav, with no flash or layout
        jump (CLS). The designer-hero is injected by the module below. */
-    try { if (new URLSearchParams(location.search).get("designer")) document.documentElement.classList.add("plp-designer"); } catch (e) {}
+    try {
+      var _q = new URLSearchParams(location.search);
+      if (_q.get("designer")) document.documentElement.classList.add("plp-designer");
+      var _pp = location.pathname.toLowerCase();
+      var _seg = _pp.indexOf("/collections/") === 0 ? _pp.slice(13).split("/")[0] : "";
+      if ((_seg && _seg !== "all") || _q.get("brand")) document.documentElement.classList.add("plp-collection");
+    } catch (e) {}
   </script>
   <!-- Hero resolution + preload. On a curated brand collection page it resolves
        the brand banner, else the generic catalog hero; stashes the choice on
@@ -241,6 +247,14 @@
       <p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>
     </div>
   </section>
+  <script>
+    /* Page collection/marque : vide le titre + sous-titre génériques DÈS le parsing
+       (avant le 1er paint) — le module pose le nom exact ensuite. Zéro flash « Le catalogue ». */
+    if (document.documentElement.classList.contains("plp-collection")) {
+      var _pt = document.querySelector("[data-plp-title]"); if (_pt) _pt.textContent = "";
+      var _ps = document.querySelector("[data-plp-sub]"); if (_ps) _ps.textContent = "";
+    }
+  </script>
 
   <div class="wrap" data-breadcrumb></div>
 
@@ -332,7 +346,7 @@
          premier paint) — aucun flash. Le module pose "Les pièces de {name}"
          dès que le designer est résolu (~15 ms). Le min-height (inline <style>)
          réserve la ligne → pas de décalage (CLS). */
-      if (document.documentElement.classList.contains("plp-designer")) {
+      if (document.documentElement.classList.contains("plp-designer") || document.documentElement.classList.contains("plp-collection")) {
         var _gt = document.querySelector("[data-grid-title]"); if (_gt) _gt.textContent = "";
       }
     </script>
