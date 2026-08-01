@@ -31,8 +31,9 @@
     .fam{max-width:var(--container);margin:0 auto;}
     .fam .sec{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);}
     .fam .lab{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:56px 0 22px;}
-    .ph{position:relative;display:block;background:var(--tile);width:100%;height:100%;overflow:hidden;}
-    .ph-img{width:100%;height:100%;object-fit:cover;display:block;}
+    .ph{position:relative;display:block;background:var(--tile);width:100%;overflow:hidden;}
+    .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+    .fam-empty{grid-column:1/-1;color:var(--muted);font-size:14px;padding:30px 0;}
     /* hero */
     .fam-hero{position:relative;height:clamp(320px,44vw,480px);display:flex;align-items:flex-end;overflow:hidden;}
     .fam-hero .ph{position:absolute;inset:0;}
@@ -128,7 +129,7 @@
 
     <section class="sec" id="grille">
       <div class="fam-gridhead"><h2>Tous les produits jardin</h2><span data-count></span></div>
-      <div class="subnav"><a class="tab is-on" href="/collections/outdoor">Tout</a><a class="tab" href="/collections/chaises-outdoor">Chaises outdoor</a><a class="tab" href="/collections/tables-outdoor">Tables outdoor</a><a class="tab" href="/collections/bains-de-soleil-transats">Bains de soleil & transats</a><a class="tab" href="/collections/parasols-ombrages">Parasols & ombrages</a><a class="tab" href="/collections/brasero-barbecue">Brasero & barbecue</a><a class="tab" href="/collections/bancs-outdoor">Bancs outdoor</a><a class="tab" href="/collections/accessoires-jardin">Accessoires jardin</a><a class="tab" href="/collections/cache-pots-jardinieres">Cache-pots & jardinières</a></div>
+      <div class="subnav"><a class="tab is-on" href="/collections/outdoor" data-cat="outdoor">Tout</a><a class="tab" href="/collections/chaises-outdoor" data-cat="chaises-outdoor">Chaises outdoor</a><a class="tab" href="/collections/tables-outdoor" data-cat="tables-outdoor">Tables outdoor</a><a class="tab" href="/collections/bains-de-soleil-transats" data-cat="bains-de-soleil-transats">Bains de soleil & transats</a><a class="tab" href="/collections/parasols-ombrages" data-cat="parasols-ombrages">Parasols & ombrages</a><a class="tab" href="/collections/brasero-barbecue" data-cat="brasero-barbecue">Brasero & barbecue</a><a class="tab" href="/collections/bancs-outdoor" data-cat="bancs-outdoor">Bancs outdoor</a><a class="tab" href="/collections/accessoires-jardin" data-cat="accessoires-jardin">Accessoires jardin</a><a class="tab" href="/collections/cache-pots-jardinieres" data-cat="cache-pots-jardinieres">Cache-pots & jardinières</a></div>
       <div class="fam-grid" data-grid></div>
     </section>
 
@@ -143,16 +144,26 @@
       var p=document.querySelector('[data-prev]'),n=document.querySelector('[data-next]');
       if(p)p.addEventListener('click',function(){s.scrollBy({left:-step(),behavior:'smooth'});});
       if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});})();
-    // Produits Outdoor réels (best-sellers serveur) : best-sellers + grille
+    // Produits Outdoor réels : best-sellers (serveur, best-selling) + grille (collection outdoor)
+    var grid=document.querySelector('[data-grid]'), cnt=document.querySelector('[data-count]');
+    function cards(items){ return (items&&items.length) ? items.map(productCard).join('') : '<p class="fam-empty">Aucun produit dans cette catégorie pour le moment.</p>'; }
+    async function loadColl(h){ try{ var j=await fetch('/api/collection/'+encodeURIComponent(h)+'/products?limit=24').then(function(r){return r.json();}); return j.items||j.products||[]; }catch(e){ return []; } }
     (async function(){
-      try{
-        var j=await fetch('/api/products?paginated=1&limit=12&tags=exterieur').then(function(r){return r.json();});
-        var items=j.items||[];
-        var best=document.querySelector('[data-bestsellers]'); if(best)best.innerHTML=items.slice(0,5).map(productCard).join('');
-        var grid=document.querySelector('[data-grid]'); if(grid)grid.innerHTML=items.map(productCard).join('');
-        var cnt=document.querySelector('[data-count]'); if(cnt)cnt.textContent=items.length+'+ produits';
-      }catch(e){}
+      try{ var bj=await fetch('/api/products?paginated=1&limit=5&tags=exterieur').then(function(r){return r.json();});
+           var best=document.querySelector('[data-bestsellers]'); if(best)best.innerHTML=(bj.items||[]).map(productCard).join(''); }catch(e){}
+      var all=await loadColl('outdoor');
+      if(grid)grid.innerHTML=cards(all); if(cnt)cnt.textContent=all.length+' produits';
     })();
+    // Sous-filtre : filtre SUR PLACE (aucune navigation)
+    document.querySelectorAll('.subnav .tab').forEach(function(t){
+      t.addEventListener('click', async function(e){
+        e.preventDefault();
+        document.querySelectorAll('.subnav .tab').forEach(function(x){x.classList.remove('is-on');}); t.classList.add('is-on');
+        if(grid)grid.innerHTML='<p class="fam-empty">Chargement…</p>';
+        var items=await loadColl(t.dataset.cat||'outdoor');
+        if(grid)grid.innerHTML=cards(items); if(cnt)cnt.textContent=items.length+' produits';
+      });
+    });
   </script>
 </body>
 </html>
