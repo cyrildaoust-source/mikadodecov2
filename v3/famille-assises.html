@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <title>Assises — chaises, fauteuils, canapés · Mikado Deco</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mikado Deco" />
+  <meta property="og:locale" content="fr_BE" />
+  <meta property="og:title" content="Assises — chaises, fauteuils, canapés · Mikado Deco" />
+  <meta property="og:description" content="Chaises, fauteuils, canapés, chaises longues : l'assise de design signée des plus belles maisons, choisie pièce par pièce." />
+  <meta property="og:url" content="https://www.mikadodeco.be/collections/sieges" />
+  <meta property="og:image" content="https://www.mikadodeco.be/images/familles/assises/hero.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Assises — chaises, fauteuils, canapés · Mikado Deco" />
+  <meta name="twitter:description" content="Chaises, fauteuils, canapés, chaises longues : l'assise de design, choisie pièce par pièce." />
+  <meta name="description" content="Chaises, fauteuils, canapés, chaises longues : l'assise de design signée des plus belles maisons, à Uccle et en ligne." />
+  <link rel="canonical" href="https://www.mikadodeco.be/collections/sieges" />
+  <link rel="preconnect" href="https://use.typekit.net" />
+  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/cormorant-garamond-latin-600-normal.woff2" />
+  <link rel="preload" as="image" href="/images/familles/assises/hero.webp" fetchpriority="high" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    /* ── Page famille (Assises) ── */
+    .fam{max-width:var(--container);margin:0 auto;}
+    .fam .sec{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);}
+    .fam .lab{font-family:var(--serif);font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:56px 0 22px;}
+    .ph{position:relative;display:block;background:var(--tile);width:100%;overflow:hidden;}
+    .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+    .fam-empty{grid-column:1/-1;color:var(--muted);font-size:14px;padding:30px 0;}
+    /* hero */
+    .fam-hero{position:relative;height:clamp(320px,44vw,480px);display:flex;align-items:flex-end;overflow:hidden;}
+    .fam-hero .ph{position:absolute;inset:0;}
+    .fam-hero__scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,18,16,.62) 0%,rgba(20,18,16,.18) 42%,transparent 70%),linear-gradient(90deg,rgba(20,18,16,.5),rgba(20,18,16,.12));z-index:1;}
+    .fam-hero__in{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%;padding:0 clamp(16px,4vw,40px) clamp(30px,4vw,54px);color:var(--paper);}
+    .fam-hero__eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:.9;margin-bottom:12px;}
+    .fam-hero__title{font-family:var(--serif);font-weight:600;font-size:clamp(44px,6vw,82px);line-height:.98;margin:0 0 14px;}
+    .fam-hero__desc{max-width:52ch;font-size:15px;line-height:1.6;opacity:.95;margin:0 0 22px;}
+    .fam-hero__btn{display:inline-block;background:var(--paper);color:var(--ink);font-size:13px;letter-spacing:.04em;padding:13px 26px;text-decoration:none;font-weight:500;}
+    /* catégories slider + flèches */
+    .cathead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:44px 0 22px;}
+    .cathead .lab{margin:0;}
+    .arrows{display:flex;gap:8px;flex-shrink:0;}
+    .arw{width:40px;height:40px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:19px;line-height:1;cursor:pointer;border-radius:0;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s,opacity .2s;}
+    .arw:hover:not(:disabled){border-color:var(--ink);background:var(--paper-2);}
+    .arw:disabled{opacity:.35;cursor:not-allowed;}
+    .arw:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px;}
+    .cslider{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(160px,17vw,200px);gap:clamp(12px,1.4vw,18px);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scroll-behavior:smooth;}
+    .ccard{position:relative;text-decoration:none;color:var(--paper);scroll-snap-align:start;overflow:hidden;}
+    .ccard .ph{aspect-ratio:1/1;transition:opacity .2s;}
+    .ccard:hover .ph{opacity:.9;}
+    .ccard__name{position:absolute;left:0;right:0;bottom:0;padding:14px;font-family:var(--serif);font-weight:600;font-size:1.22rem;line-height:1.1;color:var(--paper);background:linear-gradient(0deg,rgba(20,18,16,.74),rgba(20,18,16,.16) 74%,transparent);z-index:2;}
+    /* rangée produits (best-sellers / icônes) */
+    .fam .prow{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:20px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;}
+    .fam .prow:empty{min-height:300px;}
+    .fam .prow .pcard{scroll-snap-align:start;}
+    /* en-tête de section avec lien (icônes) */
+    .ihead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:52px 0 18px;}
+    .ihead .lab{margin:0;}
+    .ilink{font-size:12px;color:var(--ink);border-bottom:1px solid var(--accent-ink);padding-bottom:2px;white-space:nowrap;text-decoration:none;}
+    .ilink:hover{color:var(--accent-ink);}
+    /* par pièce (éditorial non-cliquable) */
+    .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,22px);}
+    .scard{position:relative;text-decoration:none;color:var(--paper);overflow:hidden;}
+    .scard--static{cursor:default;}
+    .scard .ph{aspect-ratio:3/4;}
+    .scard--feat{grid-column:1/-1;}
+    .scard--feat .ph{aspect-ratio:24/9;}
+    .scard--feat .scard__name{font-size:2.1rem;}
+    .scard__name{position:absolute;left:0;right:0;bottom:0;padding:16px;font-family:var(--serif);font-weight:600;font-size:1.5rem;color:var(--paper);background:linear-gradient(0deg,rgba(20,18,16,.66),rgba(20,18,16,.12) 72%,transparent);z-index:2;}
+    /* marques — photo d'ambiance + scrim foncé + logo blanc */
+    .bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.4vw,18px);}
+    .bcard{position:relative;text-decoration:none;overflow:hidden;display:block;}
+    .bcard .ph{aspect-ratio:1/1;}
+    .bcard__scrim{position:absolute;inset:0;background:rgba(20,18,16,.46);z-index:1;transition:background .2s;}
+    .bcard__logo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;color:#f7f4ee;font-family:var(--serif);font-weight:600;font-size:1.15rem;text-align:center;padding:0 12px;text-shadow:0 1px 3px rgba(0,0,0,.55);}
+    .bcard__logo img{height:30px;width:auto;max-width:66%;filter:brightness(0) invert(1);opacity:.96;}
+    .bcard:hover .bcard__scrim{background:rgba(20,18,16,.54);}
+    /* grille + compteur */
+    .fam-gridhead{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin:60px 0 20px;}
+    .fam-gridhead h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3vw,38px);margin:0;}
+    .fam-gridhead span{font-size:13px;color:var(--muted);}
+    .fam-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,24px);}
+    .fam-grid:empty{min-height:60vh;}
+    /* pagination grille (composant identique au PLP) */
+    .plp-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:clamp(34px,5vw,60px);}
+    .plp-pagination[hidden]{display:none;}
+    .plp-pagination__numbers{display:flex;align-items:center;gap:6px;}
+    .plp-pagination__mobile{display:none;font-family:var(--sans-product);font-size:var(--fs-small);color:var(--muted);letter-spacing:.04em;padding:0 6px;}
+    .plp-page{font-family:var(--sans-product);font-size:var(--fs-small);min-width:40px;height:40px;padding:0 13px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;letter-spacing:.02em;transition:border-color .15s var(--ease),color .15s var(--ease),background .12s var(--ease);}
+    .plp-page:hover:not(:disabled):not(.is-current){border-color:var(--ink);}
+    .plp-page:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px;}
+    .plp-page.is-current{background:var(--ink);border-color:var(--ink);color:var(--paper);cursor:default;}
+    .plp-page:disabled{opacity:.4;cursor:not-allowed;}
+    .plp-page--nav{font-weight:500;}
+    .plp-page__ellipsis{min-width:22px;text-align:center;color:var(--muted);user-select:none;}
+    @media(max-width:760px){.fam-rich{display:none;} #grille .fam-gridhead{margin-top:34px;}}
+    @media(max-width:900px){.fam-grid,.sgrid{grid-template-columns:repeat(2,1fr);}.bgrid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:560px){.fam-grid,.bgrid{grid-template-columns:1fr 1fr;}.plp-pagination__numbers{display:none;}.plp-pagination__mobile{display:inline-flex;}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.cslider{scroll-behavior:auto;}}
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main id="contenu" class="fam">
+
+    <section class="fam-hero">
+      <span class="ph"><img class="ph-img" src="/images/familles/assises/hero.webp" alt="" fetchpriority="high"></span>
+      <div class="fam-hero__scrim"></div>
+      <div class="fam-hero__in">
+        <p class="fam-hero__eyebrow">Mobilier</p>
+        <h1 class="fam-hero__title">Assises</h1>
+        <p class="fam-hero__desc">Chaises, fauteuils, canapés, chaises longues : l'assise de design signée des plus belles maisons, choisie pièce par pièce.</p>
+        <a class="fam-hero__btn" href="#grille">Voir toutes les assises ↓</a>
+      </div>
+    </section>
+
+    <section class="sec fam-rich">
+      <div class="cathead"><h2 class="lab">Nos catégories</h2>
+        <div class="arrows"><button class="arw" data-prev aria-label="Catégories précédentes">‹</button><button class="arw" data-next aria-label="Catégories suivantes">›</button></div></div>
+      <div class="cslider" data-cslider><a class="ccard" href="/collections/chaises"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-chaises.webp" alt="" loading="lazy"></span><span class="ccard__name">Chaises</span></a><a class="ccard" href="/collections/fauteuils"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-fauteuils.webp" alt="" loading="lazy"></span><span class="ccard__name">Fauteuils</span></a><a class="ccard" href="/collections/canapes"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-canapes.webp" alt="" loading="lazy"></span><span class="ccard__name">Canapés</span></a><a class="ccard" href="/collections/chaises-longues"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-chaises-longues.webp" alt="" loading="lazy"></span><span class="ccard__name">Chaises longues</span></a><a class="ccard" href="/collections/tabourets-et-bancs"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-tabourets.webp" alt="" loading="lazy"></span><span class="ccard__name">Tabourets &amp; bancs</span></a></div>
+    </section>
+
+    <section class="sec fam-rich"><h2 class="lab">Meilleures ventes</h2><div class="prow" data-bestsellers></div></section>
+
+    <section class="sec fam-rich" data-icones-sec>
+      <div class="ihead"><h2 class="lab">Les icônes</h2><a class="ilink" href="/produits.html?tag=icone">Voir toutes les icônes →</a></div>
+      <div class="prow" data-icones></div>
+    </section>
+
+    <section class="sec fam-rich"><h2 class="lab">Par pièce</h2><div class="sgrid"><div class="scard scard--static scard--feat"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-sejour.webp" alt="" loading="lazy"></span><span class="scard__name">Séjour</span></div><div class="scard scard--static"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-sam.webp" alt="" loading="lazy"></span><span class="scard__name">Salle à manger</span></div><div class="scard scard--static"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-office.webp" alt="" loading="lazy"></span><span class="scard__name">Home office</span></div></div></section>
+
+    <section class="sec fam-rich"><h2 class="lab">Nos marques</h2><div class="bgrid"><a class="bcard" href="/produits.html?brand=carl-hansen-son"><span class="ph"><img class="ph-img" src="/images/familles/assises/brand-carlhansen.webp" alt="" loading="lazy"></span><span class="bcard__scrim"></span><span class="bcard__logo"><img src="/images/brands/carl-hansen-son.svg" alt="Carl Hansen &amp; Søn" onerror="this.replaceWith(document.createTextNode('Carl Hansen & Søn'))"></span></a><a class="bcard" href="/produits.html?brand=artek"><span class="ph"><img class="ph-img" src="/images/familles/assises/brand-artek.webp" alt="" loading="lazy"></span><span class="bcard__scrim"></span><span class="bcard__logo"><img src="/images/brands/artek.svg" alt="Artek" onerror="this.replaceWith(document.createTextNode('Artek'))"></span></a><a class="bcard" href="/produits.html?brand=vitra"><span class="ph"><img class="ph-img" src="/images/familles/assises/brand-vitra.webp" alt="" loading="lazy"></span><span class="bcard__scrim"></span><span class="bcard__logo"><img src="/images/brands/vitra.svg" alt="Vitra" onerror="this.replaceWith(document.createTextNode('Vitra'))"></span></a><a class="bcard" href="/produits.html?brand=hay"><span class="ph"><img class="ph-img" src="/images/familles/assises/brand-hay.webp" alt="" loading="lazy"></span><span class="bcard__scrim"></span><span class="bcard__logo"><img src="/images/brands/hay.svg" alt="HAY" onerror="this.replaceWith(document.createTextNode('HAY'))"></span></a></div></section>
+
+    <section class="sec" id="grille">
+      <div class="fam-gridhead"><h2>Toutes les assises</h2><span data-count></span></div>
+      <div class="fam-grid" data-grid></div>
+      <nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>
+    </section>
+
+  </main>
+  <div id="site-footer"></div>
+
+  <script type="module">
+    import { initShell, productCard } from "/shared.js";
+    initShell({ active: "Mobilier", transparentNav: true });
+    var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // exclut le mobilier de jardin (contamination outdoor de la collection sieges)
+    function indoor(list){ return (list||[]).filter(function(p){ return !(p.tags && p.tags.indexOf('exterieur')>=0); }); }
+
+    // Slider catégories : flèches + désactivation en bout de course.
+    (function(){
+      var s=document.querySelector('[data-cslider]'); if(!s) return;
+      var p=document.querySelector('[data-prev]'), n=document.querySelector('[data-next]');
+      var step=function(){ return Math.min(s.clientWidth*.8,620); };
+      function sync(){ if(p)p.disabled = s.scrollLeft<=1; if(n)n.disabled = s.scrollLeft+s.clientWidth >= s.scrollWidth-1; }
+      if(p)p.addEventListener('click',function(){ s.scrollBy({left:-step(),behavior:RM?'auto':'smooth'}); });
+      if(n)n.addEventListener('click',function(){ s.scrollBy({left:step(),behavior:RM?'auto':'smooth'}); });
+      s.addEventListener('scroll',function(){ requestAnimationFrame(sync); }, {passive:true});
+      window.addEventListener('resize',sync); sync();
+    })();
+
+    // Best-sellers (intérieur) : pas de fetch sur mobile ; section retirée si vide/erreur.
+    (async function(){
+      var host=document.querySelector('[data-bestsellers]'); if(!host) return;
+      var section=host.closest('section');
+      if(matchMedia('(max-width:760px)').matches){ if(section)section.hidden=true; return; }
+      try{
+        var r=await fetch('/api/collection/sieges/products?limit=12');
+        if(!r.ok) throw new Error('http '+r.status);
+        var j=await r.json(); var items=indoor(j.items||j.products).slice(0,5);
+        if(!items.length){ if(section)section.hidden=true; return; }
+        host.innerHTML=items.map(productCard).join('');
+      }catch(e){ if(section)section.hidden=true; }
+    })();
+
+    // Les icônes : produits tagués « icone » (packshots auto) ; section masquée tant que rien n'est tagué.
+    (async function(){
+      var host=document.querySelector('[data-icones]'); if(!host) return;
+      var section=document.querySelector('[data-icones-sec]');
+      if(matchMedia('(max-width:760px)').matches){ if(section)section.hidden=true; return; }
+      try{
+        var r=await fetch('/api/products?paginated=1&limit=10&tags=icone');
+        if(!r.ok) throw new Error('http '+r.status);
+        var j=await r.json(); var items=(j.items||[]);
+        if(!items.length){ if(section)section.hidden=true; return; }
+        host.innerHTML=items.map(productCard).join('');
+      }catch(e){ if(section)section.hidden=true; }
+    })();
+
+    // Grille « Toutes les assises » : walk complet collection sieges (INTÉRIEUR) puis pagination client-side.
+    (function(){
+      var grid=document.querySelector('[data-grid]'), cnt=document.querySelector('[data-count]'), pag=document.querySelector('[data-pagination]');
+      if(!grid) return;
+      var PAGE=36, ALL=[], TOTAL=1, complete=false;
+      var params=new URLSearchParams(location.search);
+      var page=Math.max(1, parseInt(params.get('page'),10)||1);
+
+      async function chunk(cursor){
+        var r=await fetch('/api/collection/sieges/products?limit=100'+(cursor?'&cursor='+encodeURIComponent(cursor):''));
+        if(!r.ok) throw new Error('http '+r.status);
+        var j=await r.json(); return { items:indoor(j.items||j.products), pi:j.pageInfo||{} };
+      }
+      function pageItems(cur,total){
+        if(total<=7) return Array.from({length:total},function(_,i){return i+1;});
+        var out=[1], l=Math.max(2,cur-2), rg=Math.min(total-1,cur+2);
+        if(l>2)out.push('…'); for(var i=l;i<=rg;i++)out.push(i); if(rg<total-1)out.push('…'); out.push(total); return out;
+      }
+      function renderGrid(){
+        var start=(page-1)*PAGE, slice=ALL.slice(start,start+PAGE);
+        grid.innerHTML = slice.length ? slice.map(productCard).join('') : '<p class="fam-empty">Aucun produit pour le moment.</p>';
+      }
+      function renderCount(){ if(cnt) cnt.textContent = ALL.length + ' produit' + (ALL.length>1?'s':'') + (complete?'':'…'); }
+      function renderPag(){
+        if(!pag) return;
+        if(!complete || TOTAL<=1){ pag.hidden=true; pag.innerHTML=''; return; }
+        pag.hidden=false;
+        var prevOff=page<=1, nextOff=page>=TOTAL;
+        var nums=pageItems(page,TOTAL).map(function(it){
+          return it==='…' ? '<span class="plp-page__ellipsis" aria-hidden="true">…</span>'
+            : '<button type="button" class="plp-page'+(it===page?' is-current':'')+'" data-page="'+it+'"'+(it===page?' aria-current="page"':'')+'>'+it+'</button>';
+        }).join('');
+        pag.innerHTML='<button type="button" class="plp-page plp-page--nav" data-page="'+(page-1)+'"'+(prevOff?' disabled':'')+' aria-label="Page précédente">‹ Précédent</button>'
+          +'<span class="plp-pagination__numbers">'+nums+'</span>'
+          +'<span class="plp-pagination__mobile">Page '+page+' / '+TOTAL+'</span>'
+          +'<button type="button" class="plp-page plp-page--nav" data-page="'+(page+1)+'"'+(nextOff?' disabled':'')+' aria-label="Page suivante">Suivant ›</button>';
+      }
+      function goTo(n){
+        var t=Math.max(1,Math.min(n,TOTAL)); if(t===page) return;
+        page=t; renderGrid(); renderPag();
+        if(page>1) params.set('page',String(page)); else params.delete('page');
+        var qs=params.toString();
+        history.pushState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash);
+        var head=document.querySelector('#grille .fam-gridhead'); if(head)head.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
+        var c=pag&&pag.querySelector('.plp-page.is-current'); if(c)c.focus({preventScroll:true});
+      }
+      if(pag) pag.addEventListener('click',function(e){ var b=e.target.closest('button[data-page]'); if(!b||b.disabled)return; goTo(parseInt(b.getAttribute('data-page'),10)); });
+      window.addEventListener('popstate',function(){ params=new URLSearchParams(location.search); page=Math.max(1,parseInt(params.get('page'),10)||1); if(page>TOTAL)page=TOTAL; renderGrid(); renderPag(); });
+
+      (async function(){
+        try{
+          var first=await chunk('');
+          ALL=first.items.slice();
+          if(page===1){ renderGrid(); } renderCount();
+          var cur=first.pi.hasNextPage?first.pi.endCursor:'';
+          while(cur){ var c=await chunk(cur); ALL.push.apply(ALL,c.items); cur=c.pi.hasNextPage?c.pi.endCursor:''; }
+          complete=true; TOTAL=Math.max(1,Math.ceil(ALL.length/PAGE)); if(page>TOTAL)page=TOTAL;
+          renderGrid(); renderCount(); renderPag();
+        }catch(e){
+          complete=true; TOTAL=Math.max(1,Math.ceil(ALL.length/PAGE));
+          if(!ALL.length){ grid.innerHTML='<p class="fam-empty">Impossible de charger les produits pour le moment. Réessayez.</p>'; if(cnt)cnt.textContent=''; }
+          else { renderGrid(); renderCount(); }
+          renderPag();
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>
