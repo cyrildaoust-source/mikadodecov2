@@ -3,6 +3,19 @@ import { initShell, productCard, fetchBrands, fetchPromos, applyPromos, slugify,
 
 initShell({ active: "", transparentNav: true });
 
+// Rail « Nos familles » — flèches + désactivation en bout de course.
+(function () {
+  const s = document.querySelector("[data-famrail]"); if (!s) return;
+  const p = document.querySelector("[data-prev]"), n = document.querySelector("[data-next]");
+  const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const step = () => Math.min(s.clientWidth * 0.8, 640);
+  const sync = () => { if (p) p.disabled = s.scrollLeft <= 1; if (n) n.disabled = s.scrollLeft + s.clientWidth >= s.scrollWidth - 1; };
+  if (p) p.addEventListener("click", () => s.scrollBy({ left: -step(), behavior: rm ? "auto" : "smooth" }));
+  if (n) n.addEventListener("click", () => s.scrollBy({ left: step(), behavior: rm ? "auto" : "smooth" }));
+  s.addEventListener("scroll", () => requestAnimationFrame(sync), { passive: true });
+  addEventListener("resize", sync); sync();
+})();
+
 async function loadRows() {
   const hosts = [...document.querySelectorAll("[data-products]")];
   if (!hosts.length) return;
