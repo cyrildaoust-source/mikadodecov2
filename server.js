@@ -69,6 +69,10 @@ const ORIGIN = 'https://www.mikadodeco.be';
 const OG_DEFAULT = ORIGIN + '/images/og-default.jpg';
 const PRODUIT_TEMPLATE  = path.join(__dirname, 'v3', 'produit.html');
 const PRODUITS_TEMPLATE = path.join(__dirname, 'v3', 'produits.html');
+const FAMILLE_TEMPLATE  = path.join(__dirname, 'v3', 'famille.html');
+// Familles « Mobilier » qui ont une page catégorie riche dédiée (hero + sections).
+// Pour l'instant : Outdoor (Jardin). Les autres s'ajouteront quand leurs pages sont prêtes.
+const FAMILLES_RICHES = new Set(['outdoor']);
 // Marques disposant d'un bandeau header (miroir EXACT de la map HEADERS de
 // v3/produits.html). Pour elles, l'image OG = le bandeau de marque statique.
 const BRAND_HEADERS = new Set(['fatboy', 'ferm-living', 'tradition', 'vitra', 'string-furniture', 'muuto', 'blomus', 'assouline', 'airborne', 'artek']);
@@ -272,6 +276,14 @@ app.get('/produit.html', async (req, res) => {
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
+  // Page famille riche (Jardin/Outdoor…) : sert le template dédié + chrome SSR.
+  if (FAMILLES_RICHES.has(handle)) {
+    try {
+      await _chromeReady;
+      res.set('Content-Type', 'text/html; charset=utf-8');
+      return res.send(injectChrome(fs.readFileSync(FAMILLE_TEMPLATE, 'utf8'), 'famille.html'));
+    } catch (e) { /* repli sur le template générique ci-dessous */ }
+  }
   try {
     await _chromeReady;
     const collections = await getCollections();
