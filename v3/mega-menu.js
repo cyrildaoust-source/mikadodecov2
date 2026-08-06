@@ -285,7 +285,8 @@ function cancelTimers() {
 function open(key) {
   if (!stageEl || openKey === key) return;
   const panel = stageEl.querySelector(`[data-mm-panel="${key}"]`);
-  if (!panel || !panel.innerHTML.trim()) return;
+  if (!panel) return;
+  if (!panel.innerHTML.trim()) { openTimer = setTimeout(() => open(key), 60); return; }   // panneau pas encore hydrate (course au 1er survol) -> on reessaie ; cancelTimers() (mouseleave) stoppe
   stageEl.querySelectorAll(".mm-panel").forEach((p) => p.classList.remove("is-active"));
   panel.classList.add("is-active");
   stageEl.dataset.mmKey = key;
