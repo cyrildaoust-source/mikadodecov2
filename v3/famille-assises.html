@@ -56,10 +56,10 @@
     .ccard .ph{aspect-ratio:1/1;transition:opacity .2s;}
     .ccard:hover .ph{opacity:.9;}
     .ccard__name{position:absolute;left:0;right:0;bottom:0;padding:14px;font-family:var(--serif);font-weight:600;font-size:1.22rem;line-height:1.1;color:var(--paper);background:linear-gradient(0deg,rgba(20,18,16,.74),rgba(20,18,16,.16) 74%,transparent);z-index:2;}
-    /* rangée produits (best-sellers / icônes) */
-    .fam .prow{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:20px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;}
+    /* rangée produits (icônes) — flex robuste (pas de collapse/empilement en overflow) */
+    .fam .prow{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;}
     .fam .prow:empty{min-height:300px;}
-    .fam .prow .pcard{scroll-snap-align:start;}
+    .fam .prow>*{flex:0 0 clamp(200px,22vw,240px);scroll-snap-align:start;}
     /* par pièce (éditorial non-cliquable) — Séjour en grand + 2 en dessous pleine largeur */
     .sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,1.6vw,22px);}
     .scard{position:relative;text-decoration:none;color:var(--paper);overflow:hidden;}
@@ -122,8 +122,6 @@
       <div class="cslider" data-cslider><a class="ccard" href="/collections/chaises"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-chaises.webp" alt="" loading="lazy"></span><span class="ccard__name">Chaises</span></a><a class="ccard" href="/collections/fauteuils"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-fauteuils.webp" alt="" loading="lazy"></span><span class="ccard__name">Fauteuils</span></a><a class="ccard" href="/collections/canapes"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-canapes.webp" alt="" loading="lazy"></span><span class="ccard__name">Canapés</span></a><a class="ccard" href="/collections/chaises-longues"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-chaises-longues.webp" alt="" loading="lazy"></span><span class="ccard__name">Chaises longues</span></a><a class="ccard" href="/collections/tabourets-et-bancs"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-tabourets.webp" alt="" loading="lazy"></span><span class="ccard__name">Tabourets &amp; bancs</span></a></div>
     </section>
 
-    <section class="sec fam-rich"><h2 class="lab">Meilleures ventes</h2><div class="prow" data-bestsellers></div></section>
-
     <section class="sec fam-rich" data-icones-sec><h2 class="lab">Les icônes</h2><div class="prow" data-icones></div></section>
 
     <section class="sec fam-rich"><h2 class="lab">Par pièce</h2><div class="sgrid"><div class="scard scard--static scard--feat"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-sejour.webp" alt="" loading="lazy"></span><span class="scard__name">Séjour</span></div><div class="scard scard--static"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-sam.webp" alt="" loading="lazy"></span><span class="scard__name">Salle à manger</span></div><div class="scard scard--static"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-office.webp" alt="" loading="lazy"></span><span class="scard__name">Home office</span></div></div></section>
@@ -149,27 +147,13 @@
     // Slider catégories : flèches + désactivation en bout de course.
     (function(){
       var s=document.querySelector('[data-cslider]'); if(!s) return;
-      var p=document.querySelector('[data-prev]'), n=document.querySelector('[data-next]');
+      var p=document.querySelector('[data-prev]'), n=document.querySelector('[data-next]'), arrows=document.querySelector('.arrows');
       var step=function(){ return Math.min(s.clientWidth*.8,620); };
-      function sync(){ if(p)p.disabled = s.scrollLeft<=1; if(n)n.disabled = s.scrollLeft+s.clientWidth >= s.scrollWidth-1; }
+      function sync(){ var ov=s.scrollWidth>s.clientWidth+1; if(arrows)arrows.style.display=ov?'':'none'; if(p)p.disabled = s.scrollLeft<=1; if(n)n.disabled = s.scrollLeft+s.clientWidth >= s.scrollWidth-1; }
       if(p)p.addEventListener('click',function(){ s.scrollBy({left:-step(),behavior:RM?'auto':'smooth'}); });
       if(n)n.addEventListener('click',function(){ s.scrollBy({left:step(),behavior:RM?'auto':'smooth'}); });
       s.addEventListener('scroll',function(){ requestAnimationFrame(sync); }, {passive:true});
       window.addEventListener('resize',sync); sync();
-    })();
-
-    // Best-sellers (intérieur) : pas de fetch sur mobile ; section retirée si vide/erreur.
-    (async function(){
-      var host=document.querySelector('[data-bestsellers]'); if(!host) return;
-      var section=host.closest('section');
-      if(matchMedia('(max-width:760px)').matches){ if(section)section.hidden=true; return; }
-      try{
-        var r=await fetch('/api/collection/sieges/products?limit=12');
-        if(!r.ok) throw new Error('http '+r.status);
-        var j=await r.json(); var items=indoor(j.items||j.products).slice(0,5);
-        if(!items.length){ if(section)section.hidden=true; return; }
-        host.innerHTML=items.map(productCard).join('');
-      }catch(e){ if(section)section.hidden=true; }
     })();
 
     // Les icônes : produits tagués « icone » (packshots auto) ; section masquée tant que rien n'est tagué.
