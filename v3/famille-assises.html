@@ -142,7 +142,7 @@
     initShell({ active: "Mobilier", transparentNav: true });
     var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
     // exclut le mobilier de jardin (contamination outdoor de la collection sieges)
-    function indoor(list){ return (list||[]).filter(function(p){ return !(p.tags && p.tags.indexOf('exterieur')>=0); }); }
+    function indoor(list){ return (list||[]).filter(function(p){ var t=(p&&p.tags)||[]; return t.indexOf('exterieur')<0 || t.indexOf('interieur')>=0; }); }
 
     // Slider catégories : flèches + désactivation en bout de course.
     (function(){
@@ -162,11 +162,16 @@
       var section=document.querySelector('[data-icones-sec]');
       if(matchMedia('(max-width:760px)').matches){ if(section)section.hidden=true; return; }
       try{
-        var r=await fetch('/api/collection/sieges/products?limit=30&tag=icone');
-        if(!r.ok) throw new Error('http '+r.status);
-        var j=await r.json(); var items=indoor(j.items||j.products);
+        var seen={}, items=[];
+        var tags=['icone','icone-design'];   // lit aussi l'alias de transition (contrat backend)
+        for(var i=0;i<tags.length;i++){
+          var r=await fetch('/api/collection/sieges/products?limit=30&tag='+tags[i]);
+          if(!r.ok) continue;
+          var j=await r.json();
+          indoor(j.items||j.products).forEach(function(p){ if(p&&p.handle&&!seen[p.handle]){ seen[p.handle]=1; items.push(p); } });
+        }
         if(!items.length){ if(section)section.hidden=true; return; }
-        host.innerHTML=items.map(productCard).join('');
+        host.innerHTML=items.slice(0,30).map(productCard).join('');
       }catch(e){ if(section)section.hidden=true; }
     })();
 

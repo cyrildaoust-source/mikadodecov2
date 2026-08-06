@@ -101,23 +101,24 @@
       const val  = i === -1 ? "" : from.slice(i + 1);
       let trail;
       if (type === "coll" && val) {
-        let title = val;
+        let title = null;
         try {
           const colls = await fetchCollections();
           const c = (colls || []).find((x) => x.handle === val);
           if (c && c.name) title = c.name;
-        } catch (e) { /* keep the handle as label */ }
-        trail = [home, { label: title, href: `/collections/${val}` }, last];
+        } catch (e) { /* pas de libellé fiable */ }
+        // Contrat : jamais de slug brut comme libellé → si pas de libellé explicite, on masque le crumb intermédiaire.
+        trail = title ? [home, { label: title, href: `/collections/${val}` }, last] : [home, last];
       } else if (type === "designer" && val) {
-        let name = val;
+        let name = null;
         try {
           const r = await fetch("/designers-data.json", { cache: "no-cache" });
-          if (r.ok) { const list = (await r.json()).designers || []; name = (list.find((x) => x.slug === val) || {}).name || val; }
-        } catch (e) { /* keep the slug */ }
-        trail = [home,
-          { label: "Designers", href: "/designers.html" },
-          { label: name, href: `/produits.html?designer=${encodeURIComponent(val)}` },
-          last];
+          if (r.ok) { const list = (await r.json()).designers || []; name = (list.find((x) => x.slug === val) || {}).name || null; }
+        } catch (e) { /* pas de libellé fiable */ }
+        // Contrat : pas de slug brut → si le designer est introuvable, on garde juste le crumb « Designers ».
+        trail = name
+          ? [home, { label: "Designers", href: "/designers.html" }, { label: name, href: `/produits.html?designer=${encodeURIComponent(val)}` }, last]
+          : [home, { label: "Designers", href: "/designers.html" }, last];
       } else if (type === "brand" && val) {
         const handle = brandMap[val];
         const bhref = handle ? `/collections/${handle}` : `/produits.html?brand=${encodeURIComponent(val)}`;
