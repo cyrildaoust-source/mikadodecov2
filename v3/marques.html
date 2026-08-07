@@ -12,16 +12,16 @@
   <meta property="og:site_name" content="Mikado Deco" />
   <meta property="og:locale" content="fr_BE" />
   <meta property="og:title" content="Marques de design — Fermob, Vitra, Blomus… · Mikado Deco" />
-  <meta property="og:description" content="Les maisons de design que nous défendons : un nombre volontairement réduit de marques européennes." />
+  <meta property="og:description" content="Les marques de design que nous défendons : un nombre volontairement réduit de marques européennes." />
   <meta property="og:url" content="https://www.mikadodeco.be/marques.html" />
   <meta property="og:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Marques de design — Fermob, Vitra, Blomus… · Mikado Deco" />
-  <meta name="twitter:description" content="Les maisons de design que nous défendons : un nombre volontairement réduit de marques européennes." />
+  <meta name="twitter:description" content="Les marques de design que nous défendons : un nombre volontairement réduit de marques européennes." />
   <meta name="twitter:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
-  <meta name="description" content="Les maisons de design que nous défendons : un nombre volontairement réduit de marques européennes." />
+  <meta name="description" content="Les marques de design que nous défendons : un nombre volontairement réduit de marques européennes." />
   <link rel="canonical" href="https://www.mikadodeco.be/marques.html" />
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
@@ -42,11 +42,11 @@
       <source type="image/webp"
         srcset="/images/marques-hero-640.webp 640w, /images/marques-hero-960.webp 960w, /images/marques-hero-1280.webp 1280w, /images/marques-hero-1500.webp 1500w"
         sizes="100vw" />
-      <img class="subhero__img" src="/images/marques-hero.jpg" width="1500" height="1875" alt="Les maisons Mikado Deco" fetchpriority="high" />
+      <img class="subhero__img" src="/images/marques-hero.jpg" width="1500" height="1875" alt="Les marques Mikado Deco" fetchpriority="high" />
     </picture>
     <div class="subhero__scrim"></div>
     <div class="subhero__in">
-      <h1>Les maisons que<br>nous défendons.</h1>
+      <h1>Les marques que<br>nous défendons.</h1>
       <p>Un nombre volontairement réduit de marques européennes, pour mieux les connaître.</p>
     </div>
   </section>
@@ -54,7 +54,7 @@
   <div class="wrap" data-breadcrumb></div>
 
   <section class="section wrap reveal">
-    <div class="shead"><h2 class="serif">Toutes les maisons</h2><span class="plp-count" data-brand-count></span></div>
+    <div class="shead"><h2 class="serif">Toutes les marques</h2><span class="plp-count" data-brand-count></span></div>
     <div class="brandgrid" data-brandgrid>
       <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>
       <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>
@@ -68,7 +68,7 @@
     <div class="feature__body">
       <span class="eyebrow">Notre conviction</span>
       <h2 class="serif">Choisi, pas seulement vendu.</h2>
-      <p>Chaque maison entre dans la sélection parce qu'elle tient debout : un dessin juste, des matériaux honnêtes, un savoir-faire qui dure. Nous préférons défendre peu de marques, mais bien.</p>
+      <p>Chaque marque entre dans la sélection parce qu'elle tient debout : un dessin juste, des matériaux honnêtes, un savoir-faire qui dure. Nous préférons défendre peu de marques, mais bien.</p>
       <a href="/produits.html" class="btn btn--blue">Voir le catalogue</a>
     </div>
   </section>
@@ -102,7 +102,7 @@
       const hrefByName = {};
       for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
       const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
-      countEl.textContent = `${brands.length} maisons`;
+      countEl.textContent = `${brands.length} marques`;
       grid.innerHTML = brands.map((b) => {
         const slug = b.slug || slugify(b.name);
         const origin = ORIGIN[slug] || "Europe";
@@ -117,7 +117,7 @@
           </div>
         </a>`;
       }).join("");
-    }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Les maisons se chargent bientôt. <a href="/produits.html">Retour au catalogue</a></p>`; console.warn(e); });
+    }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Les marques se chargent bientôt. <a href="/produits.html">Retour au catalogue</a></p>`; console.warn(e); });
   </script>
 </body>
 </html>
