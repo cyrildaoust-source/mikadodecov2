@@ -10,12 +10,20 @@
 
 import { escapeHtml, slugify } from "/shared.js";
 
-const OPEN_DELAY  = 100;
+const OPEN_DELAY  = 60;
 const CLOSE_DELAY = 200;
 
 // Noms d'affichage premium des familles Mobilier (le libelle Shopify differe du nom de la page).
 // Handle/URL inchanges -> hrefs + SEO intacts. Le mega-menu ET le drawer lisent ce menu -> coherence.
 const FAM_LABEL = { sieges: "Assises", outdoor: "Jardin" };
+// Ordre d affichage des colonnes du mega Mobilier (equilibrage visuel : grandes familles reparties,
+// petites en bas). Presentation uniquement — l ordre semantique du menu Shopify est inchange.
+const MOBILIER_ORDER = ["sieges", "luminaires", "decoration", "outdoor", "tables", "accessoires", "rangement"];
+function mobIdx(cat) {
+  const h = (cat.url || "").replace(/^.*\/collections\//, "").replace(/[/?#].*$/, "");
+  const i = MOBILIER_ORDER.indexOf(h);
+  return i < 0 ? 999 : i;
+}
 
 let config     = null;   // mega-menu-config.json (side panel)
 let brandsData = null;   // mega-menu-brands.json (Marques hardcode)
@@ -113,7 +121,8 @@ function hydrateMobilier() {
   if (!panel) return;
   const top = TOP.mobilier;
   if (!top || !top.items?.length) { panel.innerHTML = ""; return; }
-  const colsHtml = top.items.map((cat) => {
+  const ordered = top.items.slice().sort((x, y) => mobIdx(x) - mobIdx(y));
+  const colsHtml = ordered.map((cat) => {
     const subs = (cat.items || []).map((sub) =>
       `<li><a href="${escapeHtml(sub.url)}">${escapeHtml(sub.title)}</a></li>`
     ).join("");
