@@ -125,6 +125,12 @@ function injectChrome(html, rel) {
   if (isNonHero(rel)) {
     out = out.replace(/<body(\s*)>/i, '<body class="has-topnav">');
   }
+  // Preload du serif d affichage (Cormorant 600) — evite le FOUT des titres sur les
+  // pages qui ne le portent pas deja dans leur <head>. Idempotent (skip si deja present).
+  if (!/cormorant-garamond-latin-600/.test(out)) {
+    out = out.replace(/<\/head>/i,
+      '  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/cormorant-garamond-latin-600-normal.woff2">\n</head>');
+  }
   return out;
 }
 
