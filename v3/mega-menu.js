@@ -10,7 +10,7 @@
 
 import { escapeHtml, slugify } from "/shared.js";
 
-const OPEN_DELAY  = 100;
+const OPEN_DELAY  = 60;
 const CLOSE_DELAY = 200;
 
 // Noms d'affichage premium des familles Mobilier (le libelle Shopify differe du nom de la page).
