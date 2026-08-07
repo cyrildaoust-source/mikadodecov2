@@ -13,6 +13,10 @@ import { escapeHtml, slugify } from "/shared.js";
 const OPEN_DELAY  = 100;
 const CLOSE_DELAY = 200;
 
+// Noms d'affichage premium des familles Mobilier (le libelle Shopify differe du nom de la page).
+// Handle/URL inchanges -> hrefs + SEO intacts. Le mega-menu ET le drawer lisent ce menu -> coherence.
+const FAM_LABEL = { sieges: "Assises", outdoor: "Jardin" };
+
 let config     = null;   // mega-menu-config.json (side panel)
 let brandsData = null;   // mega-menu-brands.json (Marques hardcode)
 let activeBrands = [];   // /api/brands — marques dérivées des produits publiés
@@ -34,6 +38,7 @@ export async function initMegaMenu() {
       fetch("/api/brands",                { cache: "no-store"    }).then((r) => r.json()).catch(() => []),
     ]);
     menu       = menuRes;
+    relabelFamilies(menu);
     config     = cfgRes      || {};
     brandsData = brandsRes   || { brands: [], designers: [] };
     activeBrands = Array.isArray(activeRes) ? activeRes : [];
@@ -48,6 +53,16 @@ export async function initMegaMenu() {
     bindDrawerAccordions();
   } catch (e) {
     console.warn("[mega-menu] init failed:", e.message);
+  }
+}
+
+function relabelFamilies(m) {
+  const items = (m && m.items) || [];
+  const mob = items.find((it) => (it.title || "").trim().toLowerCase() === "mobilier");
+  if (!mob || !mob.items) return;
+  for (const f of mob.items) {
+    const handle = (f.url || "").replace(/^.*\/collections\//, "").replace(/[/?#].*$/, "");
+    if (handle && FAM_LABEL[handle]) f.title = FAM_LABEL[handle];
   }
 }
 
@@ -285,7 +300,8 @@ function cancelTimers() {
 function open(key) {
   if (!stageEl || openKey === key) return;
   const panel = stageEl.querySelector(`[data-mm-panel="${key}"]`);
-  if (!panel || !panel.innerHTML.trim()) return;
+  if (!panel) return;
+  if (!panel.innerHTML.trim()) { openTimer = setTimeout(() => open(key), 60); return; }   // panneau pas encore hydrate (course au 1er survol) -> on reessaie ; cancelTimers() (mouseleave) stoppe
   stageEl.querySelectorAll(".mm-panel").forEach((p) => p.classList.remove("is-active"));
   panel.classList.add("is-active");
   stageEl.dataset.mmKey = key;
