@@ -5,26 +5,48 @@
       "name": "&Tradition",
       "href": "/collections/tradition",
       "collections": [
-        { "name": "Flowerpot", "tag": "flowerpot" },
-        { "name": "Thorvald", "tag": "thorvald" },
-        { "name": "Hi Lo", "tag": "hi-lo" },
-        { "name": "Rely", "tag": "rely" }
+        {
+          "name": "Flowerpot",
+          "tag": "flowerpot"
+        },
+        {
+          "name": "Thorvald",
+          "tag": "thorvald"
+        },
+        {
+          "name": "Hi Lo",
+          "tag": "hi-lo"
+        },
+        {
+          "name": "Rely",
+          "tag": "rely"
+        }
       ]
-    },
-    {
-      "name": "Airborne",
-      "href": "/collections/airborne",
-      "collections": []
     },
     {
       "name": "Alessi",
       "href": "/collections/alessi",
       "collections": [
-        { "name": "9090", "tag": "9090" },
-        { "name": "Itsumo", "tag": "itsumo" },
-        { "name": "Mediterraneo", "tag": "mediterraneo" },
-        { "name": "Plissé", "tag": "plisse" },
-        { "name": "Moka", "tag": "moka" }
+        {
+          "name": "9090",
+          "tag": "9090"
+        },
+        {
+          "name": "Itsumo",
+          "tag": "itsumo"
+        },
+        {
+          "name": "Mediterraneo",
+          "tag": "mediterraneo"
+        },
+        {
+          "name": "Plissé",
+          "tag": "plisse"
+        },
+        {
+          "name": "Moka",
+          "tag": "moka"
+        }
       ]
     },
     {
@@ -36,15 +58,19 @@
       "name": "Artek",
       "href": "/collections/artek",
       "collections": [
-        { "name": "Stool 60", "tag": "stool-60" },
-        { "name": "Screen", "tag": "screen" },
-        { "name": "Arm chair 41", "tag": "arm-chair-41" }
+        {
+          "name": "Stool 60",
+          "tag": "stool-60"
+        },
+        {
+          "name": "Screen",
+          "tag": "screen"
+        },
+        {
+          "name": "Arm chair 41",
+          "tag": "arm-chair-41"
+        }
       ]
-    },
-    {
-      "name": "Assouline",
-      "href": "/collections/assouline",
-      "collections": []
     },
     {
       "name": "Blomus",
@@ -55,51 +81,114 @@
       "name": "Fatboy",
       "href": "/collections/fatboy",
       "collections": [
-        { "name": "Boelleke", "tag": "boelleke" },
-        { "name": "Original", "tag": "original" },
-        { "name": "Edison", "tag": "edison" },
-        { "name": "Sumo", "tag": "sumo" },
-        { "name": "Lamzac", "tag": "lamzac" }
+        {
+          "name": "Boelleke",
+          "tag": "boelleke"
+        },
+        {
+          "name": "Original",
+          "tag": "original"
+        },
+        {
+          "name": "Edison",
+          "tag": "edison"
+        },
+        {
+          "name": "Sumo",
+          "tag": "sumo"
+        },
+        {
+          "name": "Lamzac",
+          "tag": "lamzac"
+        }
       ]
     },
     {
       "name": "Ferm Living",
       "href": "/collections/ferm-living",
       "collections": [
-        { "name": "Ripple", "tag": "ripple" },
-        { "name": "Pond", "tag": "pond" },
-        { "name": "Arum", "tag": "arum" },
-        { "name": "Mist", "tag": "mist" }
+        {
+          "name": "Ripple",
+          "tag": "ripple"
+        },
+        {
+          "name": "Pond",
+          "tag": "pond"
+        },
+        {
+          "name": "Arum",
+          "tag": "arum"
+        },
+        {
+          "name": "Mist",
+          "tag": "mist"
+        }
       ]
     },
     {
       "name": "Fermob",
       "href": "/collections/fermob",
       "collections": [
-        { "name": "Bistro", "tag": "bistro" },
-        { "name": "Luxembourg", "tag": "luxembourg" },
-        { "name": "Bellevie", "tag": "bellevie" },
-        { "name": "1900", "tag": "1900" }
+        {
+          "name": "Bistro",
+          "tag": "bistro"
+        },
+        {
+          "name": "Luxembourg",
+          "tag": "luxembourg"
+        },
+        {
+          "name": "Bellevie",
+          "tag": "bellevie"
+        },
+        {
+          "name": "1900",
+          "tag": "1900"
+        }
       ]
     },
     {
       "name": "HAY",
       "href": "/collections/hay",
       "collections": [
-        { "name": "Palissade", "tag": "palissade" },
-        { "name": "About a chair", "tag": "about-a-chair" },
-        { "name": "Rey", "tag": "rey" },
-        { "name": "Mags", "tag": "mags" },
-        { "name": "Color crate", "tag": "color-crate" }
+        {
+          "name": "Palissade",
+          "tag": "palissade"
+        },
+        {
+          "name": "About a chair",
+          "tag": "about-a-chair"
+        },
+        {
+          "name": "Rey",
+          "tag": "rey"
+        },
+        {
+          "name": "Mags",
+          "tag": "mags"
+        },
+        {
+          "name": "Color crate",
+          "tag": "color-crate"
+        }
       ]
     },
     {
       "name": "HKliving",
       "href": "/collections/hkliving",
       "collections": [
-        { "name": "70s ceramics", "tag": "70s-ceramics" },
-        { "name": "Teun Zwets", "tag": "teun-zwets" },
-        { "name": "New classics", "tag": "new-classics" }
+        {
+          "name": "70s ceramics",
+          "tag": "70s-ceramics"
+        },
+        {
+          "name": "Teun Zwets",
+          "tag": "teun-zwets"
+        },
+        {
+          "name": "New classics",
+          "tag": "new-classics"
+        }
       ]
     },
     {
@@ -111,10 +200,22 @@
       "name": "Iittala",
       "href": "/collections/iittala",
       "collections": [
-        { "name": "Essence", "tag": "essence" },
-        { "name": "Teema", "tag": "teema" },
-        { "name": "Kastehelmi", "tag": "kastehelmi" },
-        { "name": "Vulpes", "tag": "vulpes" }
+        {
+          "name": "Essence",
+          "tag": "essence"
+        },
+        {
+          "name": "Teema",
+          "tag": "teema"
+        },
+        {
+          "name": "Kastehelmi",
+          "tag": "kastehelmi"
+        },
+        {
+          "name": "Vulpes",
+          "tag": "vulpes"
+        }
       ]
     },
     {
@@ -131,20 +232,44 @@
       "name": "Muuto",
       "href": "/collections/muuto",
       "collections": [
-        { "name": "Stacked system", "tag": "stacked-system" },
-        { "name": "Dots wood", "tag": "dots-wood" },
-        { "name": "Connect modular sofa", "tag": "connect-modular-sofa" },
-        { "name": "Restore", "tag": "restore" },
-        { "name": "Linear", "tag": "linear" }
+        {
+          "name": "Stacked system",
+          "tag": "stacked-system"
+        },
+        {
+          "name": "Dots wood",
+          "tag": "dots-wood"
+        },
+        {
+          "name": "Connect modular sofa",
+          "tag": "connect-modular-sofa"
+        },
+        {
+          "name": "Restore",
+          "tag": "restore"
+        },
+        {
+          "name": "Linear",
+          "tag": "linear"
+        }
       ]
     },
     {
       "name": "Pols Potten",
       "href": "/collections/pols-potten",
       "collections": [
-        { "name": "Zigzag", "tag": "zigzag" },
-        { "name": "Rijksmuseum", "tag": "rijksmuseum" },
-        { "name": "Polygon", "tag": "polygon" }
+        {
+          "name": "Zigzag",
+          "tag": "zigzag"
+        },
+        {
+          "name": "Rijksmuseum",
+          "tag": "rijksmuseum"
+        },
+        {
+          "name": "Polygon",
+          "tag": "polygon"
+        }
       ]
     },
     {
@@ -156,11 +281,26 @@
       "name": "Serax",
       "href": "/collections/serax",
       "collections": [
-        { "name": "Carte blanche", "tag": "carte-blanche" },
-        { "name": "Dé", "tag": "de" },
-        { "name": "Sculptural Confluence", "tag": "sculptural-confluence" },
-        { "name": "Verde Lanza", "tag": "verde-lanza" },
-        { "name": "Base", "tag": "base" }
+        {
+          "name": "Carte blanche",
+          "tag": "carte-blanche"
+        },
+        {
+          "name": "Dé",
+          "tag": "de"
+        },
+        {
+          "name": "Sculptural Confluence",
+          "tag": "sculptural-confluence"
+        },
+        {
+          "name": "Verde Lanza",
+          "tag": "verde-lanza"
+        },
+        {
+          "name": "Base",
+          "tag": "base"
+        }
       ]
     },
     {
@@ -177,11 +317,26 @@
       "name": "Vitra",
       "href": "/collections/vitra",
       "collections": [
-        { "name": "Soft pad chair", "tag": "soft-pad-chair" },
-        { "name": "Hal", "tag": "hal" },
-        { "name": "Soft modular sofa", "tag": "soft-modular-sofa" },
-        { "name": "Wooden doll", "tag": "wooden-doll" },
-        { "name": "Akari", "tag": "akari-suspensions" }
+        {
+          "name": "Soft pad chair",
+          "tag": "soft-pad-chair"
+        },
+        {
+          "name": "Hal",
+          "tag": "hal"
+        },
+        {
+          "name": "Soft modular sofa",
+          "tag": "soft-modular-sofa"
+        },
+        {
+          "name": "Wooden doll",
+          "tag": "wooden-doll"
+        },
+        {
+          "name": "Akari",
+          "tag": "akari-suspensions"
+        }
       ]
     },
     {
@@ -192,18 +347,30 @@
   ],
   "designers": [
     "Alvar Aalto",
-    "Antonio Citterio",
     "Arne Jacobsen",
     "Charles & Ray Eames",
-    "George Nelson",
     "Isamu Noguchi",
     "Jasper Morrison",
     "Jean Prouvé",
-    "Marie Michielssen",
     "Philippe Starck",
     "Ronan & Erwan Bouroullec",
     "Verner Panton"
   ],
-  "drawerBrands": ["&Tradition", "Ferm Living", "Fermob", "HAY", "Muuto", "Vitra", "Volta Mobiles"],
-  "drawerDesigners": ["Alvar Aalto", "Ronan & Erwan Bouroullec", "Charles & Ray Eames", "Jasper Morrison", "Marie Michielssen", "Verner Panton", "Philippe Starck"]
+  "drawerBrands": [
+    "&Tradition",
+    "Ferm Living",
+    "Fermob",
+    "HAY",
+    "Muuto",
+    "Vitra",
+    "Volta Mobiles"
+  ],
+  "drawerDesigners": [
+    "Alvar Aalto",
+    "Ronan & Erwan Bouroullec",
+    "Charles & Ray Eames",
+    "Jasper Morrison",
+    "Verner Panton",
+    "Philippe Starck"
+  ]
 }
