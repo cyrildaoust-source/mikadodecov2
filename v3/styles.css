@@ -95,6 +95,7 @@
      DARK now → when used as a BACKGROUND, text must be --paper (cream). */
   --accent:     #38529F;   /* royal blue · links text, rules, underlines, btn--blue bg */
   --accent-ink: #1C2F6B;   /* deep royal · link/hover text on cream + btn hover bg */
+  --danger:     #c43d3d;   /* rouge erreur/validation (etait reference sans etre declare) */
   --accent-soft:#ECEFF7;   /* pale blue tint · soft panels (light bg, dark text) */
 
   /* promotions · ink/charcoal label — monochrome with the royal blue, no gold */
@@ -475,7 +476,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .eyebrow { font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .16em; color: var(--accent-ink); font-weight: 500; margin-bottom: 16px; display: block; }
 
 /* ---------- catalogue ---------- */
-.filterbar { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; padding: 14px var(--gutter); }
+.filterbar { position: sticky; top: 116px; z-index: 40; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; padding: 14px var(--gutter); }
 /* PLP category filter — underline-style chips desktop, native dropdown
    on mobile. Underline avoids the boxy look of the previous pill chips
    while keeping the active state explicit. */
@@ -581,6 +582,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
    bottom alignment of the bio block consistent across rows whatever
    the bio length. */
 .designer-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 1fr; align-items: stretch; gap: clamp(24px, 3vw, 36px); }
+@media (max-width: 1080px) { .designer-grid { grid-template-columns: repeat(3, 1fr); } }
 /* V3.1 (Safari fix): the card is a plain <article> + a transparent
    overlay <a class="designer-card__link"> that covers the whole tile.
    The previous "<a> as flex column" pattern was visually fragmenting
@@ -764,7 +766,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .form-aside { background: var(--paper-2); padding: clamp(24px, 3vw, 40px); }
 .form-aside h3 { font-family: var(--serif); font-weight: 600; font-size: 24px; margin-bottom: 14px; }
 .form-aside p, .form-aside li { font-size: var(--fs-small); color: var(--muted); line-height: 1.7; }
-.form-aside a { color: var(--accent-ink); }
+.form-aside a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
 .form-success { background: var(--accent-soft); padding: clamp(32px, 5vw, 64px); text-align: center; }
 .form-success h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 3vw, 44px); margin-bottom: 14px; }
 .hours { width: 100%; font-size: var(--fs-small); border-collapse: collapse; margin-top: 8px; }
