@@ -302,7 +302,9 @@ html.sale-hd-on .hero__badge { display: flex; }
 .pcard__dot--stock { background: #5a8c4a; }
 .pcard__dot--order { background: #b9742c; }
 .pcard__cta { margin-top: auto; }
-.pcard__skel { aspect-ratio: 1/1; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
+.pcard__skel { background: transparent; }
+.pcard__skel::before { content: ""; display: block; aspect-ratio: 1/1; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
+.pcard__skel::after { content: ""; display: block; height: 54px; margin-top: 14px; animation: pulse 1.4s var(--ease) infinite; background: linear-gradient(var(--tile) 0 0) left 0 / 45% 12px no-repeat, linear-gradient(var(--tile) 0 0) left 22px / 72% 16px no-repeat, linear-gradient(var(--tile) 0 0) left 46px / 30% 12px no-repeat; }
 @keyframes pulse { 0%,100%{opacity:.55} 50%{opacity:1} }
 
 /* ============================================================

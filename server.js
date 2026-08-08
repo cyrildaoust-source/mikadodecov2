@@ -105,12 +105,27 @@ function isNonHero(rel) {
 //   sert à décider l'état solide. undefined → header transparent par défaut.
 // - IDEMPOTENT par construction : la regex ne matche qu'un conteneur VIDE
 //   (<div id="site-header"></div>) → un 2e passage ne re-matche pas.
+// Nav active pour le SSR du chrome : mappe le fichier (rel) -> libelle NAV_TOP, pour que le
+// soulignement d actif soit deja pose au 1er paint (plus d animation apres hydratation).
+// produit/produits.html laisses vides (contexte catalogue/designer resolu client-side).
+const REL_ACTIVE = {
+  'marques.html': 'Marques', 'designers.html': 'Designers',
+  'journal.html': 'Le journal', 'nuancier-fermob.html': 'Le journal',
+  'studio.html': 'Mikado Studio',
+  'famille.html': 'Mobilier', 'famille-assises.html': 'Mobilier', 'famille-tables.html': 'Mobilier',
+};
+function activeForRel(rel) {
+  if (!rel) return '';
+  if (rel.startsWith('journal/')) return 'Le journal';
+  return REL_ACTIVE[rel] || '';
+}
 function injectChrome(html, rel) {
   if (!_chrome) return html;                 // module pas prêt → repli (page sans chrome SSR, hydratée client)
+  const active = activeForRel(rel);          // nav active en SSR (anti-glissement du soulignement)
   // Header solide pré-rendu pour les pages non-hero (anti flash blanc-sur-blanc).
   const headerHtml = isNonHero(rel)
-    ? _chrome.chromeHTML('').replace('<header class="chrome"', '<header class="chrome chrome--solid"')
-    : _chrome.chromeHTML('');
+    ? _chrome.chromeHTML(active).replace('<header class="chrome"', '<header class="chrome chrome--solid"')
+    : _chrome.chromeHTML(active);
   const footerHtml = _chrome.footerHTML();
   let out = html
     .replace(/(<div id="site-header"[^>]*>)\s*(<\/div>)/i,
