@@ -97,7 +97,7 @@ export function chromeHTML(active) {
                   <li><a href="/produits.html?q=lampe">Luminaires</a></li>
                   <li><a href="/produits.html?q=vase">Vases</a></li>
                   <li><a href="/produits.html?q=coussin">Coussins</a></li>
-                  <li><a href="/produits.html?q=jardin">Extérieur</a></li>
+                  <li><a href="/produits.html?q=jardin">Jardin</a></li>
                 </ul>
               </div>
               <div class="searchd__col">
@@ -132,7 +132,7 @@ export function chromeHTML(active) {
   return `
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="chrome" data-chrome>
-    <div class="announce" data-announce>
+    <div class="announce" data-announce tabindex="0">
       ${saleActive ? `<span class="on" data-sale>Soldes d'été · jusqu'à −20% de remise automatique</span>
       <span data-sale>−5% dès 300 €</span>
       <span data-sale>−10% dès 800 €</span>
@@ -189,7 +189,7 @@ export function footerHTML() {
       </div>
       <div class="footer__grid">
         <div class="footer__news">
-          <h4 class="serif">Restons en contact</h4>
+          <h2 class="serif">Restons en contact</h2>
           <p>Recevez nos nouveautés, nos coups de cœur et les rendez-vous de la boutique.</p>
           <form class="footer__form" data-newsletter novalidate>
             <input type="email" name="email" placeholder="Votre adresse e-mail" aria-label="E-mail" autocomplete="email" required />
@@ -198,19 +198,19 @@ export function footerHTML() {
             <p class="footer__news-status" data-news-status role="status" aria-live="polite"></p>
           </form>
         </div>
-        <div><h5>Boutique</h5><ul>
+        <div><h3>Boutique</h3><ul>
           <li><a href="/produits.html">Mobilier</a></li>
           <li><a href="/collections/luminaires">Luminaires</a></li>
           <li><a href="/collections/decoration">Décoration</a></li>
-          <li><a href="/collections/outdoor">Extérieur</a></li>
+          <li><a href="/collections/outdoor">Jardin</a></li>
         </ul></div>
-        <div><h5>Maison</h5><ul>
+        <div><h3>Maison</h3><ul>
           <li><a href="/marques.html">Les marques</a></li>
           <li><a href="/materiaux.html">Les matières</a></li>
           <li><a href="/journal.html">Le journal</a></li>
           <li><a href="/rendez-vous.html">Rendez-vous</a></li>
         </ul></div>
-        <div><h5>Contact</h5><ul>
+        <div><h3>Contact</h3><ul>
           <li><a href="mailto:shop@mikadodeco.be">shop@mikadodeco.be</a></li>
           <li><a href="tel:+32493837983">+32 (0)493 83 79 83</a></li>
           <li><a href="/contact.html">Nous écrire</a></li>
