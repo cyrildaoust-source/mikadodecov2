@@ -86,6 +86,7 @@
     /* pagination grille (composant identique au PLP) */
     .plp-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:clamp(34px,5vw,60px);}
     .plp-pagination[hidden]{display:none;}
+    .plp-pagination__loading{color:var(--muted);font-size:var(--fs-small);letter-spacing:.02em;padding:12px 0;}
     .plp-pagination__numbers{display:flex;align-items:center;gap:6px;}
     .plp-pagination__mobile{display:none;font-family:var(--sans-product);font-size:var(--fs-small);color:var(--muted);letter-spacing:.04em;padding:0 6px;}
     .plp-page{font-family:var(--sans-product);font-size:var(--fs-small);min-width:40px;height:40px;padding:0 13px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;letter-spacing:.02em;transition:border-color .15s var(--ease),color .15s var(--ease),background .12s var(--ease);}
@@ -179,7 +180,7 @@
     (function(){
       var grid=document.querySelector('[data-grid]'), cnt=document.querySelector('[data-count]'), pag=document.querySelector('[data-pagination]');
       if(!grid) return;
-      var PAGE=36, ALL=[], TOTAL=1, complete=false;
+      var PAGE=36, ALL=[], TOTAL=1, complete=false, moreComing=false;
       var params=new URLSearchParams(location.search);
       var page=Math.max(1, parseInt(params.get('page'),10)||1);
 
@@ -200,7 +201,8 @@
       function renderCount(){ if(cnt) cnt.textContent = ALL.length + ' produit' + (ALL.length>1?'s':'') + (complete?'':'…'); }
       function renderPag(){
         if(!pag) return;
-        if(!complete || TOTAL<=1){ pag.hidden=true; pag.innerHTML=''; return; }
+        if(!complete){ if(moreComing){ pag.hidden=false; pag.innerHTML='<span class="plp-pagination__loading">Chargement du catalogue…</span>'; } else { pag.hidden=true; pag.innerHTML=''; } return; }
+        if(TOTAL<=1){ pag.hidden=true; pag.innerHTML=''; return; }
         pag.hidden=false;
         var prevOff=page<=1, nextOff=page>=TOTAL;
         var nums=pageItems(page,TOTAL).map(function(it){
@@ -228,9 +230,10 @@
         try{
           var first=await chunk('');
           ALL=first.items.slice();
-          if(page===1){ renderGrid(); } renderCount();
           var cur=first.pi.hasNextPage?first.pi.endCursor:'';
-          while(cur){ var c=await chunk(cur); ALL.push.apply(ALL,c.items); cur=c.pi.hasNextPage?c.pi.endCursor:''; }
+          moreComing=!!cur;
+          if(page===1){ renderGrid(); } renderCount(); renderPag();
+          while(cur){ var c=await chunk(cur); ALL.push.apply(ALL,c.items); renderCount(); cur=c.pi.hasNextPage?c.pi.endCursor:''; }
           complete=true; TOTAL=Math.max(1,Math.ceil(ALL.length/PAGE)); if(page>TOTAL)page=TOTAL;
           renderGrid(); renderCount(); renderPag();
         }catch(e){
