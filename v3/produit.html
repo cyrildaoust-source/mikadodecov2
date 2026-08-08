@@ -132,7 +132,10 @@
       crumbEl.innerHTML = breadcrumbHTML(trail);
     }
 
-    Promise.all([loadProduct(), loadBrandHandles()]).then(([p, brandMap]) => {
+    Promise.all([loadProduct(), loadBrandHandles(), fetch("/designers-data.json", { cache: "force-cache" }).then((r) => (r.ok ? r.json() : { designers: [] })).catch(() => ({ designers: [] }))]).then(([p, brandMap, designersData]) => {
+      // Slugs designers connus — chargé EN PARALLÈLE du produit → le lien designer est rendu
+      // dès le 1er paint (fin de la recoloration gris→bleu post-rendu).
+      const knownDesigners = new Set((designersData.designers || []).map((x) => x.slug));
       if (!p) { host.innerHTML = `<p class="plp-empty">Cette pièce est introuvable. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue</a>.</p>`; return; }
       document.title = `${p.name} · Mikado Deco`;
 
@@ -256,6 +259,11 @@
           </div>`).join("")}</section>`
         : "";
 
+      const dslug = p.designer ? slugify(p.designer) : "";
+      const designerHTML = !p.designer ? ""
+        : knownDesigners.has(dslug)
+          ? `<a class="pdp__designer pdp__designer--link" href="/produits.html?designer=${encodeURIComponent(dslug)}">${escapeHtml(p.designer)}</a>`
+          : `<span class="pdp__designer">${escapeHtml(p.designer)}</span>`;
       host.innerHTML = `
         <div class="pdp">
           <div class="pdp__gallery">
@@ -270,7 +278,7 @@
           <div class="pdp__info">
             <a class="pdp__brand" href="${brandHref}">${escapeHtml(p.brand || "")}</a>
             <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
-            ${p.designer ? `<span class="pdp__designer" data-designer>${escapeHtml(p.designer)}</span>` : ""}
+            ${designerHTML}
             <div class="pdp__price" data-price-el>${priceLabel(p)}</div>
             ${variants.length > 1 ? `
             <div class="pdp__variant-pick">
@@ -485,30 +493,8 @@
         setPick(pickQty); renderQtyList(); updateStatus();            // re-plafonne au stock de la variante + rafraichit CTA
       };
 
-      // ── Lien designer (sous le titre) — progressif & HONNÊTE ──
-      // Texte simple par défaut ; promu en lien vers la PLP filtrée UNIQUEMENT si
-      // slugify(p.designer) retombe EXACTEMENT sur un slug de /designers-data.json
-      // (résolu CLIENT-side via le JSON statique). Sinon on garde le nom sans lien
-      // (évite l'écran « Designer introuvable »).
-      if (p.designer) {
-        (async () => {
-          try {
-            const slug = slugify(p.designer);
-            const r = await fetch("/designers-data.json", { cache: "force-cache" });
-            if (!r.ok) return;
-            const list = (await r.json()).designers || [];
-            if (!list.some((x) => x.slug === slug)) return;
-            const el = host.querySelector("[data-designer]");
-            if (!el) return;
-            const a = document.createElement("a");
-            a.className = "pdp__designer pdp__designer--link";
-            a.setAttribute("data-designer", "");
-            a.href = `/produits.html?designer=${encodeURIComponent(slug)}`;
-            a.textContent = p.designer;
-            el.replaceWith(a);
-          } catch (e) { /* garde le nom en texte simple */ }
-        })();
-      }
+      // (Lien designer rendu directement à l'innerHTML via designerHTML, décidé avant le 1er
+      //  paint grâce à knownDesigners — plus de promotion post-rendu ni de recoloration.)
 
       // ── Galerie mobile (≤760px) : points de navigation du rail swipeable ──
       const railEl = host.querySelector("[data-rail]");
