@@ -272,10 +272,11 @@ app.get('/produit.html', async (req, res) => {
       // surtout PAS escapeHtml, qui corromprait le JSON avec des entités HTML.
       ...(product.description ? { description: product.description } : {}),
       ...(image ? { image } : {}),
+      "itemCondition": "https://schema.org/NewCondition",
       "offers": {
         "@type": "Offer", "priceCurrency": "EUR",
         ...(product.priceMin != null ? { price: String(product.priceMin) } : {}),
-        "availability": product.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        "availability": "https://schema.org/" + (product.inStock ? "InStock" : (product.available ? "BackOrder" : "OutOfStock")),
         "url": url
       }
     };
