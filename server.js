@@ -215,6 +215,20 @@ function sendTemplate(res, file) {
 }
 const sendProduitTemplate  = (res) => sendTemplate(res, PRODUIT_TEMPLATE);
 const sendProduitsTemplate = (res) => sendTemplate(res, PRODUITS_TEMPLATE);
+// Alias de collection VOLONTAIRES (pas des miss) → catalogue complet, jamais 404.
+const COLLECTION_ALIASES = new Set(['all', 'frontpage']);
+// Soft-404 → vraie 404 : produit/collection/designer inexistant renvoie le shell avec
+// <meta robots noindex> + statut 404 (fini l'indexation Google de pages mortes/dupliquées).
+function send404Shell(res, file) {
+  res.status(404);
+  res.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=86400');
+  res.set('Content-Type', 'text/html; charset=utf-8');
+  try {
+    const rel = path.relative(path.join(__dirname, 'v3'), file);
+    const raw = fs.readFileSync(file, 'utf8').replace('</head>', '  <meta name="robots" content="noindex,follow" />\n</head>');
+    return res.send(injectChrome(raw, rel));
+  } catch (e) { return res.status(404).send('Not found'); }
+}
 function ogCache(res) {
   res.set('Content-Type', 'text/html; charset=utf-8');
   res.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=86400');
@@ -244,7 +258,7 @@ app.get('/produit.html', async (req, res) => {
     // Miss stable (produit inexistant/dépublié) : on cache aussi le repli pour
     // ne pas ré-invoquer la fonction à chaque bot. (Les erreurs Shopify partent
     // dans le catch ci-dessous, sans cache.)
-    if (!product) { ogCache(res); return sendProduitTemplate(res); }
+    if (!product) { return send404Shell(res, PRODUIT_TEMPLATE); }
 
     const name     = product.name || 'Produit';
     const brand    = product.brand || '';
@@ -310,7 +324,7 @@ app.get('/collections/:handle', async (req, res) => {
     const collections = await getCollections();
     const col = collections.find((c) => c.handle === handle);
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
-    if (!col) { ogCache(res); return sendProduitsTemplate(res); }
+    if (!col) { if (COLLECTION_ALIASES.has(handle)) { ogCache(res); return sendProduitsTemplate(res); } return send404Shell(res, PRODUITS_TEMPLATE); }
 
     const name = col.name || 'Catalogue';
     const title = `${name} · Mikado Deco`;
@@ -345,7 +359,7 @@ app.get('/produits.html', async (req, res) => {
     await _chromeReady;
     const designer = getDesigners().find((d) => String(d.slug || '').toLowerCase() === slug);
     // Miss stable (slug inconnu) : repli cachable.
-    if (!designer) { ogCache(res); return sendProduitsTemplate(res); }
+    if (!designer) { return send404Shell(res, PRODUITS_TEMPLATE); }
 
     const name = designer.name || 'Créateur';
     const title = `${name} · Mikado Deco`;
@@ -1922,6 +1936,7 @@ app.post('/api/contact', formLimiter, async (req, res) => {
 
     // Structured log — surfaces in Vercel logs (filet de sécurité si l'e-mail échoue).
     console.log('[contact]', JSON.stringify(submission));
+    let delivered = false;   // au moins un canal de notification a réussi ?
 
     // Notification e-mail via Resend (si configuré). Reply-To = client → réponse directe.
     if (process.env.RESEND_API_KEY) {
@@ -1947,7 +1962,8 @@ app.post('/api/contact', formLimiter, async (req, res) => {
           },
           body: JSON.stringify({ from, to, reply_to: cleanEmail, subject, text }),
         });
-        if (!r.ok) {
+        if (r.ok) { delivered = true; }
+        else {
           const detail = await r.text().catch(() => '');
           console.warn('[contact] resend failed:', r.status, detail.slice(0, 300));
         }
@@ -1959,16 +1975,21 @@ app.post('/api/contact', formLimiter, async (req, res) => {
     // If a CONTACT_WEBHOOK_URL is set, forward (Slack, Discord, Zapier, etc.)
     if (process.env.CONTACT_WEBHOOK_URL) {
       try {
-        await fetch(process.env.CONTACT_WEBHOOK_URL, {
+        const wr = await fetch(process.env.CONTACT_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(submission),
         });
+        if (wr.ok) delivered = true;
       } catch (e) {
         console.warn('[contact] webhook failed:', e.message);
       }
     }
 
+    // Honnêteté : si un canal de notification est configuré mais que l'envoi a échoué, on
+    // ne ment pas au client (« envoyé ») → il verra un message + un repli (tél/e-mail direct).
+    const hasChannel = !!(process.env.RESEND_API_KEY || process.env.CONTACT_WEBHOOK_URL);
+    if (hasChannel && !delivered) return res.status(502).json({ error: 'delivery_failed' });
     res.json({ ok: true });
   } catch (err) {
     console.error('[contact] error:', err.message);
