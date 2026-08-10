@@ -200,6 +200,21 @@ function renderWithOg(templateHtml, { title, description, image, url }) {
   }
   return html;
 }
+// SEO · Fil d'Ariane JSON-LD (BreadcrumbList) reflétant la hiérarchie VISIBLE du
+// site : « Accueil › Le catalogue › <page> » (mêmes mots que le H1 /produits.html
+// et le repli du fil d'Ariane PDP). Injecté en SSR sur PDP / collection / créateur
+// → crawlable sans JS. Dernier maillon = page courante (avec son URL propre).
+function breadcrumbTag(name, url) {
+  const ld = {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": ORIGIN + "/" },
+      { "@type": "ListItem", "position": 2, "name": "Le catalogue", "item": ORIGIN + "/produits.html" },
+      { "@type": "ListItem", "position": 3, "name": String(name), "item": url }
+    ]
+  };
+  return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
+}
 function sendTemplate(res, file) {
   // Template générique inchangé (pas de paramètre / introuvable / erreur). Jamais 500.
   // Passe par injectChrome → chrome SSR aussi sur les replis. Synchrone : si _chrome
@@ -294,7 +309,8 @@ app.get('/produit.html', async (req, res) => {
         "url": url
       }
     };
-    const ldTag = `<script type="application/ld+json">` + JSON.stringify(ld).replace(/</g, '\\u003c') + `</script>`;
+    const ldTag = `<script type="application/ld+json">` + JSON.stringify(ld).replace(/</g, '\\u003c') + `</script>`
+      + '\n' + breadcrumbTag(name, url);
     let out = html.replace('</head>', ldTag + '\n</head>');
     out = injectChrome(out, 'produit.html');     // ← non-hero → header solide
     ogCache(res);
@@ -339,6 +355,7 @@ app.get('/collections/:handle', async (req, res) => {
     const url = ORIGIN + '/collections/' + encodeURIComponent(handle);
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    html = html.replace('</head>', breadcrumbTag(name, url) + '\n</head>');
     html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
@@ -372,6 +389,7 @@ app.get('/produits.html', async (req, res) => {
     const url = ORIGIN + '/produits.html?designer=' + encodeURIComponent(designer.slug || slug);
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    html = html.replace('</head>', breadcrumbTag(name, url) + '\n</head>');
     html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
