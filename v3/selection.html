@@ -187,7 +187,7 @@
       if (hint) {
         if (freeShip) { hint.hidden = true; hint.textContent = ""; }
         else if (payable >= SHIPPING_FREE_FROM * 0.7) { hint.textContent = `Plus que ${euro(SHIPPING_FREE_FROM - payable)} pour la livraison offerte.`; hint.hidden = false; }
-        else { hint.hidden = true; hint.textContent = ""; }
+        else { hint.textContent = `Livraison offerte dès ${euro(SHIPPING_FREE_FROM)}.`; hint.hidden = false; }
       }
 
       // Palier soldes : même encart que le tiroir (« Plus que X € pour −Y% »), pendant les soldes.

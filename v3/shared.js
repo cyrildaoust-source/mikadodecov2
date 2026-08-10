@@ -589,6 +589,13 @@ function bindCartDrawer() {
   // ── live refresh (never auto-open) — re-render + re-fetch discounts while open ──
   document.addEventListener("cart:change", () => { if (isOpen()) { render(); preview.schedule(); } });
 
+  // Retour arrière / bfcache : la page (donc le tiroir) peut être restaurée telle qu'à
+  // sa dernière visite — avec un panier périmé si on l'a modifié ailleurs entre-temps
+  // (ex. retrait d'un article sur /selection.html). On resync depuis localStorage à
+  // chaque affichage de page + sur changement dans un autre onglet.
+  window.addEventListener("pageshow", () => { syncBadge(); render(); if (isOpen()) preview.schedule(); });
+  window.addEventListener("storage", (e) => { if (e.key === CART_KEY) { syncBadge(); render(); if (isOpen()) preview.schedule(); } });
+
   // ── "← Continuer mes achats" closes (foot is re-rendered, so delegate) ──
   foot.addEventListener("click", (e) => { if (e.target.closest("[data-cartd-continue]")) close(); });
 
