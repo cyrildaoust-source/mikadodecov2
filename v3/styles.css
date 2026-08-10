@@ -859,6 +859,11 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp__cart-status strong { color: var(--ink-deep); font-weight: 600; }
 .pdp__cart-status a { color: var(--accent-ink); border-bottom: 1px solid currentColor; }
 .pdp__reassure { margin-top: 6px; }
+.trust-list { list-style: none; margin: 14px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); display: grid; gap: 9px; }
+.trust-list li { display: flex; align-items: center; gap: 10px; font-family: var(--sans-product); font-size: var(--fs-small); color: var(--muted); line-height: 1.3; }
+.trust-list__i { width: 17px; height: 17px; flex-shrink: 0; fill: none; stroke: var(--accent-ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.trust-list a { color: var(--accent-ink); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; }
+.trust-list a:hover { border-bottom-color: currentColor; }
 .pdp__avail { display: flex; align-items: center; gap: 8px; color: var(--warn); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; margin: 10px 0 4px; }
 .pdp__avail strong { font-weight: 700; }
 .pdp__avail a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
