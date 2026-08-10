@@ -1936,6 +1936,7 @@ app.post('/api/contact', formLimiter, async (req, res) => {
 
     // Structured log — surfaces in Vercel logs (filet de sécurité si l'e-mail échoue).
     console.log('[contact]', JSON.stringify(submission));
+    let delivered = false;   // au moins un canal de notification a réussi ?
 
     // Notification e-mail via Resend (si configuré). Reply-To = client → réponse directe.
     if (process.env.RESEND_API_KEY) {
@@ -1961,7 +1962,8 @@ app.post('/api/contact', formLimiter, async (req, res) => {
           },
           body: JSON.stringify({ from, to, reply_to: cleanEmail, subject, text }),
         });
-        if (!r.ok) {
+        if (r.ok) { delivered = true; }
+        else {
           const detail = await r.text().catch(() => '');
           console.warn('[contact] resend failed:', r.status, detail.slice(0, 300));
         }
@@ -1973,16 +1975,21 @@ app.post('/api/contact', formLimiter, async (req, res) => {
     // If a CONTACT_WEBHOOK_URL is set, forward (Slack, Discord, Zapier, etc.)
     if (process.env.CONTACT_WEBHOOK_URL) {
       try {
-        await fetch(process.env.CONTACT_WEBHOOK_URL, {
+        const wr = await fetch(process.env.CONTACT_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(submission),
         });
+        if (wr.ok) delivered = true;
       } catch (e) {
         console.warn('[contact] webhook failed:', e.message);
       }
     }
 
+    // Honnêteté : si un canal de notification est configuré mais que l'envoi a échoué, on
+    // ne ment pas au client (« envoyé ») → il verra un message + un repli (tél/e-mail direct).
+    const hasChannel = !!(process.env.RESEND_API_KEY || process.env.CONTACT_WEBHOOK_URL);
+    if (hasChannel && !delivered) return res.status(502).json({ error: 'delivery_failed' });
     res.json({ ok: true });
   } catch (err) {
     console.error('[contact] error:', err.message);
