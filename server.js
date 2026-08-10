@@ -215,6 +215,51 @@ function breadcrumbTag(name, url) {
   };
   return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
 }
+// SEO/SSR · formatage prix miroir de shared.js (euro/priceLabel), fr-BE, 0 décimale.
+const euroS = (n) => (n || n === 0)
+  ? new Intl.NumberFormat('fr-BE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n)
+  : '';
+const priceLabelS = (p) => {
+  const min = p.priceMin != null ? p.priceMin : p.price;
+  const max = p.priceMax != null ? p.priceMax : p.price;
+  if (min != null && max != null && max - min > 0.5) return 'À partir de ' + euroS(min);
+  return euroS(min);
+};
+const availTextS = (p) => p.inStock ? 'En stock' : (p.available ? 'Sur commande' : 'Épuisé');
+
+// SEO/SSR · Contenu produit rendu CÔTÉ SERVEUR, injecté à la place du squelette
+// (entre <!--PDP-SSR-START/END-->). Reprend les vraies classes (.pdp__brand/__name/
+// __designer/__price/__avail) → 1er paint fidèle ; le module JS remplace ensuite tout
+// [data-pdp] en innerHTML (même mécanisme que le squelette → aucun doublon). Donne aux
+// crawlers marque+nom+prix+dispo SANS JS (la description est déjà dans le JSON-LD Product).
+function pdpSsrBlock(p) {
+  const rawImg = p.firstImageRaw || (p.images && p.images[0]) || '';
+  const img = rawImg ? rawImg + (rawImg.includes('?') ? '&' : '?') + 'width=1000' : '';
+  return '<div class="pdp">'
+    + '<div class="pdp__gallery"><div class="pdp__main-wrap" style="aspect-ratio:1/1">'
+    + (img ? '<img class="pdp__main" src="' + ogEscape(img) + '" alt="' + ogEscape(p.name || '') + '" width="1000" height="1000" fetchpriority="high" decoding="async" />' : '')
+    + '</div></div>'
+    + '<div class="pdp__info">'
+    + (p.brand ? '<span class="pdp__brand">' + ogEscape(p.brand) + '</span>' : '')
+    + '<h1 class="pdp__name">' + ogEscape(p.name || 'Produit') + '</h1>'
+    + (p.designer ? '<span class="pdp__designer">' + ogEscape(p.designer) + '</span>' : '')
+    + '<div class="pdp__price">' + priceLabelS(p) + '</div>'
+    + '<p class="pdp__avail">' + ogEscape(availTextS(p)) + '</p>'
+    + '</div></div>';
+}
+
+// SEO/SSR · Hero créateur (nom + bio + portrait) injecté dans [data-designer-hero]
+// (miroir de renderDesignerHero, hors bloc « Édité par »). Le module le remplace ensuite.
+function designerHeroSsr(d) {
+  const photo = d.photo
+    ? '<picture><source type="image/webp" srcset="' + ogEscape(String(d.photo).replace(/\.jpg$/, '-640.webp')) + '" /><img class="designer-hero__photo" src="' + ogEscape(d.photo) + '" width="640" height="800" alt="' + ogEscape(d.name || '') + '" fetchpriority="high" /></picture>'
+    : '';
+  const bio = d.bio ? '<p class="designer-hero__bio">' + ogEscape(d.bio) + '</p>' : '';
+  return '<div class="designer-hero">' + photo
+    + '<div class="designer-hero__body">'
+    + '<h1 class="designer-hero__name serif">' + ogEscape(d.name || '') + '</h1>'
+    + bio + '</div></div>';
+}
 function sendTemplate(res, file) {
   // Template générique inchangé (pas de paramètre / introuvable / erreur). Jamais 500.
   // Passe par injectChrome → chrome SSR aussi sur les replis. Synchrone : si _chrome
@@ -312,6 +357,8 @@ app.get('/produit.html', async (req, res) => {
     const ldTag = `<script type="application/ld+json">` + JSON.stringify(ld).replace(/</g, '\\u003c') + `</script>`
       + '\n' + breadcrumbTag(name, url);
     let out = html.replace('</head>', ldTag + '\n</head>');
+    // SSR lot 1 · contenu produit (nom/prix/dispo) à la place du squelette → crawlable sans JS.
+    out = out.replace(/<!--PDP-SSR-START-->[\s\S]*?<!--PDP-SSR-END-->/, () => pdpSsrBlock(product));
     out = injectChrome(out, 'produit.html');     // ← non-hero → header solide
     ogCache(res);
     return res.send(out);
@@ -356,6 +403,10 @@ app.get('/collections/:handle', async (req, res) => {
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
     html = html.replace('</head>', breadcrumbTag(name, url) + '\n</head>');
+    // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
+    // le script inline vide ces génériques pour les users → zéro régression de flash).
+    html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title>' + ogEscape(name) + '</h1>');
+    html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
@@ -390,6 +441,10 @@ app.get('/produits.html', async (req, res) => {
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
     html = html.replace('</head>', breadcrumbTag(name, url) + '\n</head>');
+    // SSR lot 3 · classe créateur (masque le subhero « Le catalogue » → un seul H1) +
+    // hero nom/bio/portrait injecté (crawlable sans JS ; le module le remplace ensuite).
+    html = html.replace('<html lang="fr">', '<html lang="fr" class="plp-designer">');
+    html = html.replace('<div class="wrap" data-designer-hero></div>', () => '<div class="wrap" data-designer-hero>' + designerHeroSsr(designer) + '</div>');
     html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
