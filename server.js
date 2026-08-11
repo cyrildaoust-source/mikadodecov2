@@ -225,16 +225,28 @@ const priceLabelS = (p) => {
   if (min != null && max != null && max - min > 0.5) return 'À partir de ' + euroS(min);
   return euroS(min);
 };
-const availTextS = (p) => p.inStock ? 'En stock' : (p.available ? 'Sur commande' : 'Épuisé');
+// SEO/SSR · slugify miroir de shared.js (accents/ø/æ) — pour le lien créateur SSR.
+const slugifyS = (s) => String(s == null ? '' : s).toLowerCase().normalize('NFD')
+  .replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae')
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 // SEO/SSR · Contenu produit rendu CÔTÉ SERVEUR, injecté à la place du squelette
 // (entre <!--PDP-SSR-START/END-->). Reprend les vraies classes (.pdp__brand/__name/
-// __designer/__price/__avail) → 1er paint fidèle ; le module JS remplace ensuite tout
+// __designer/__price) → 1er paint fidèle ; le module JS remplace ensuite tout
 // [data-pdp] en innerHTML (même mécanisme que le squelette → aucun doublon). Donne aux
-// crawlers marque+nom+prix+dispo SANS JS (la description est déjà dans le JSON-LD Product).
+// crawlers marque+nom+créateur(lien)+prix SANS JS. La dispo et la description sont déjà
+// dans le JSON-LD Product (on n'affiche PAS la dispo ici : son libellé exact — « À voir
+// en boutique » / « Sur commande » / « Indisponible » — dépend de la variante côté JS).
 function pdpSsrBlock(p) {
   const rawImg = p.firstImageRaw || (p.images && p.images[0]) || '';
   const img = rawImg ? rawImg + (rawImg.includes('?') ? '&' : '?') + 'width=1000' : '';
+  // Lien créateur si le designer a une page (même règle que produit.html : slug connu)
+  // → +maillage interne crawlable vers les 247 pages créateur (2ᵉ levier de l'audit).
+  const dslug = p.designer ? slugifyS(p.designer) : '';
+  const designerEl = !p.designer ? ''
+    : (dslug && getDesigners().some(d => String(d.slug || '').toLowerCase() === dslug))
+      ? '<a class="pdp__designer pdp__designer--link" href="/produits.html?designer=' + encodeURIComponent(dslug) + '">' + ogEscape(p.designer) + '</a>'
+      : '<span class="pdp__designer">' + ogEscape(p.designer) + '</span>';
   return '<div class="pdp">'
     + '<div class="pdp__gallery"><div class="pdp__main-wrap" style="aspect-ratio:1/1">'
     + (img ? '<img class="pdp__main" src="' + ogEscape(img) + '" alt="' + ogEscape(p.name || '') + '" width="1000" height="1000" fetchpriority="high" decoding="async" />' : '')
@@ -242,9 +254,8 @@ function pdpSsrBlock(p) {
     + '<div class="pdp__info">'
     + (p.brand ? '<span class="pdp__brand">' + ogEscape(p.brand) + '</span>' : '')
     + '<h1 class="pdp__name">' + ogEscape(p.name || 'Produit') + '</h1>'
-    + (p.designer ? '<span class="pdp__designer">' + ogEscape(p.designer) + '</span>' : '')
+    + designerEl
     + '<div class="pdp__price">' + priceLabelS(p) + '</div>'
-    + '<p class="pdp__avail">' + ogEscape(availTextS(p)) + '</p>'
     + '</div></div>';
 }
 
