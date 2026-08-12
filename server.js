@@ -319,6 +319,21 @@ function getDesigners() {
     return [];
   }
 }
+// ─── SEO · 301 /products/<handle> → /produit.html?handle=<handle> ─────────────
+// Les pages de l'online store Shopify (shop.mikadodeco.be) canonisent vers le domaine
+// primaire en gardant LEUR structure d'URL Shopify : www.mikadodeco.be/products/<handle>.
+// Or ce site headless sert les fiches sur /produit.html?handle=<handle> → sans cette
+// redirection, la canonique tombe sur un 404 = cul-de-sac SEO (le shop est noindex ET sa
+// cible canonique est morte). On redirige en UN SEUL saut vers la vraie fiche, handle
+// préservé. Un handle inexistant → 301 → /produit.html qui renvoie un VRAI 404
+// (send404Shell), donc pas de soft-404. Redirect RELATIF (fonctionne sur www + Preview).
+// Placé AVANT le catch-all app.get(/.*/). Les collections Shopify canonisent déjà vers
+// /collections/<handle> qui EXISTE ici (route ci-dessous) → rien à faire pour elles.
+app.get('/products/:handle', (req, res) => {
+  const handle = String(req.params.handle || '');
+  res.redirect(301, '/produit.html?handle=' + encodeURIComponent(handle));
+});
+
 // ─── Fiche produit : /produit.html?handle=<handle> (B7) ─
 app.get('/produit.html', async (req, res) => {
   const handle = req.query.handle;
