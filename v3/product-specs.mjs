@@ -18,6 +18,7 @@ export function buildProductSpecRows(product = {}) {
   add("Fabrication / Origine", product.origin);
   add("Poids", product.weight);
 
+  add("Infos électriques", product.infosElectriques);
   add("Type de luminaire", product.lightingType);
   add("Source lumineuse", product.lightSourceType || product.ledType);
   add("Puissance", product.power);
@@ -75,6 +76,7 @@ export function buildProductSpecGroups(product = {}) {
       // La Référence (SKU) est PAR VARIANTE → ajoutée dans produit.html, pas ici.
       rows: [
         ...row("Usage", product.usage),
+        ...row("Infos électriques", product.infosElectriques),
         ...row("Type de luminaire", product.lightingType),
         ...row("Source lumineuse", product.lightSourceType || product.ledType),
         ...row("Puissance", product.power),

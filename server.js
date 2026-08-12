@@ -799,7 +799,7 @@ function mapProduct(node, opts = {}) {
     category:    TYPE_TO_CATEGORY[rawType] || 'objets',
     productType: rawType,
     subcategory: meta.subcategory || node.tags.find(t => t.startsWith('sub:'))?.replace('sub:', '') || '',
-    material:    meta.material    || '',
+    material:    meta.material    || meta.materiaux || '',
     dimensions:  meta.dimensions  || '',
     // Caractéristiques PDP additionnelles (métafields custom.* — vides tant que
     // l'importer Shopify n'a pas créé+rempli les définitions ; lues seulement par
@@ -824,6 +824,7 @@ function mapProduct(node, opts = {}) {
     energyLabel:             meta.energy_label              || '',
     lightSourceReplaceable:  meta.light_source_replaceable  || '',
     constructionMaterials:   meta.construction_materials    || '',
+    infosElectriques:        meta.infos_electriques          || '',
     price,
     priceMin,
     priceMax,
@@ -1537,6 +1538,8 @@ const PRODUCT_QUERY = `
         { namespace: "custom", key: "energy_label" }
         { namespace: "custom", key: "light_source_replaceable" }
         { namespace: "custom", key: "construction_materials" }
+        { namespace: "custom", key: "materiaux" }
+        { namespace: "custom", key: "infos_electriques" }
       ]) { key value }
       # Recommandations gérées côté Shopify (app Search & Discovery), stockées en
       # métafields list.product_reference et lues dynamiquement — rien de hardcodé.
