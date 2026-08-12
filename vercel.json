@@ -43,6 +43,7 @@
     { "src": "/(.*\\.[a-zA-Z0-9]+)", "dest": "/v3/$1" },
     { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
     { "src": "/collections/([^/]+)", "dest": "/api/index.js" },
+    { "src": "/products/([^/]+)", "dest": "/api/index.js" },
     { "src": "/", "dest": "/api/index.js" },
     { "src": "/(.+)", "dest": "/v3/$1.html" },
     { "handle": "error" },
