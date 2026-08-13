@@ -454,6 +454,15 @@ app.get('/collections/:handle', async (req, res) => {
     // le script inline vide ces génériques pour les users → zéro régression de flash).
     html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title>' + ogEscape(name) + '</h1>');
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
+    // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
+    try {
+      const cp = await getCollectionProducts(handle, 24);
+      const gi = (cp && cp.items) || [];
+      if (gi.length) {
+        const cards = gi.map(plpCardSsr).filter(Boolean).join('');
+        html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
+      }
+    } catch (e) { console.warn('[coll-grid-ssr]', e.message); }
     html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
@@ -511,6 +520,15 @@ app.get('/produits.html', async (req, res) => {
     // hero nom/bio/portrait injecté (crawlable sans JS ; le module le remplace ensuite).
     html = html.replace('<html lang="fr">', '<html lang="fr" class="plp-designer">');
     html = html.replace('<div class="wrap" data-designer-hero></div>', () => '<div class="wrap" data-designer-hero>' + designerHeroSsr(designer) + '</div>');
+    // SSR chantier 3 · grille des pièces du créateur (tags designer) crawlable.
+    try {
+      const dp = await getProductsPage(24, null, designer.tags || [], null, null, null);
+      const gi = (dp && dp.items) || [];
+      if (gi.length) {
+        const cards = gi.map(plpCardSsr).filter(Boolean).join('');
+        html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
+      }
+    } catch (e) { console.warn('[designer-grid-ssr]', e.message); }
     html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
