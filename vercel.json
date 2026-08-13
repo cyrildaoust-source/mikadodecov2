@@ -4,7 +4,7 @@
     {
       "src": "api/index.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["data/**", "v3/*.html", "v3/chrome-template.js", "v3/designers-data.json", "v3/journal/**"] }
+      "config": { "includeFiles": ["data/**", "v3/*.html", "v3/chrome-template.js", "v3/product-specs.mjs", "v3/designers-data.json", "v3/journal/**"] }
     },
     { "src": "v3/**", "use": "@vercel/static" }
   ],

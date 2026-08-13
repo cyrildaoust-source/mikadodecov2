@@ -1227,5 +1227,26 @@
     brandSel.addEventListener("change", () => { state.brand = brandSel.value; state.page = 1; syncURL(); render(); });
     sortSel.addEventListener("change", () => { state.sort = sortSel.value; state.page = 1; syncURL(); render(); });
   </script>
+
+  <script>
+    /* La barre de filtres colle PILE sous le chrome (annonce + nav). Sa hauteur
+       réelle varie (annonce présente ou non) alors que le CSS fige top:116px →
+       bande vide où les produits transparaissaient. On mesure la hauteur RÉELLE
+       du chrome et on cale le sticky-top dessus. (Mobile = filterbar static → top
+       ignoré, sans effet.) */
+    (function () {
+      var chrome = document.querySelector('.chrome, [data-chrome]');
+      var bar = document.querySelector('.filterbar');
+      if (!chrome || !bar) return;
+      var sync = function () {
+        var h = Math.round(chrome.getBoundingClientRect().height);
+        if (h) bar.style.top = h + 'px';
+      };
+      sync();
+      requestAnimationFrame(sync);
+      addEventListener('load', sync);
+      addEventListener('resize', sync, { passive: true });
+    })();
+  </script>
 </body>
 </html>

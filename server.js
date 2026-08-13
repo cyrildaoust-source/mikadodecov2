@@ -83,6 +83,11 @@ let _chrome = null;
 const _chromeReady = import('./v3/chrome-template.js')
   .then((m) => { _chrome = m; })
   .catch((e) => { console.warn('[chrome-ssr] import échoué:', e.message); _chrome = null; });
+// product-specs.mjs (ESM pur) importé comme le chrome → rendu SSR de l'accordéon specs.
+let _specs = null;
+const _specsReady = import('./v3/product-specs.mjs')
+  .then((m) => { _specs = m; })
+  .catch((e) => { console.warn('[specs-ssr] import échoué:', e.message); _specs = null; });
 
 // Pages NON-hero (transparentNav:false) : header rendu DÉJÀ solide en SSR pour
 // éviter le flash blanc-sur-blanc (cf. styles.css .chrome color:on-dark par défaut).
@@ -258,6 +263,23 @@ const slugifyS = (s) => String(s == null ? '' : s).toLowerCase().normalize('NFD'
 // crawlers marque+nom+créateur(lien)+prix SANS JS. La dispo et la description sont déjà
 // dans le JSON-LD Product (on n'affiche PAS la dispo ici : son libellé exact — « À voir
 // en boutique » / « Sur commande » / « Indisponible » — dépend de la variante côté JS).
+// SEO/SSR · Accordéon caractéristiques (dimensions/matériaux/technique…) rendu serveur,
+// miroir de produit.html. buildProductSpecGroups = source unique (product-specs.mjs).
+// La Référence/SKU (par variante) est ajoutée par le JS, pas ici. Le module re-render l'accordéon.
+function specAccordionSsr(p) {
+  if (!_specs || !_specs.buildProductSpecGroups) return '';
+  const esc = ogEscape;
+  const groups = _specs.buildProductSpecGroups(p);
+  const panelBody = (g) => g.key === 'description'
+    ? '<p class="pdp-desc">' + esc(g.text) + '</p>'
+    : '<dl class="pdp-specs">' + g.rows.map((r) => '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(String(r[1])) + '</dd></div>').join('') + '</dl>';
+  const shown = groups.filter((g) => g.key === 'description' ? !!g.text : g.rows.length > 0);
+  if (!shown.length) return '';
+  return '<section class="section pdp-section pdp-acc" data-accordion>' + shown.map((g, i) =>
+    '<div class="pdp-acc__item"><h2 class="catalogue-head serif pdp-acc__head"><button type="button" class="pdp-acc__btn" id="pdp-acc-btn-' + g.key + '" aria-controls="pdp-acc-panel-' + g.key + '" aria-expanded="' + (i === 0 ? 'true' : 'false') + '"><span class="pdp-acc__label">' + esc(g.label) + '</span><span class="pdp-acc__chevron" aria-hidden="true">▾</span></button></h2>'
+    + '<div class="pdp-acc__panel" id="pdp-acc-panel-' + g.key + '" role="region" aria-labelledby="pdp-acc-btn-' + g.key + '"' + (i === 0 ? '' : ' hidden') + '>' + panelBody(g) + '</div></div>'
+  ).join('') + '</section>';
+}
 function pdpSsrBlock(p) {
   const rawImg = p.firstImageRaw || (p.images && p.images[0]) || '';
   const img = rawImg ? rawImg + (rawImg.includes('?') ? '&' : '?') + 'width=1000' : '';
@@ -277,7 +299,8 @@ function pdpSsrBlock(p) {
     + '<h1 class="pdp__name">' + ogEscape(p.name || 'Produit') + '</h1>'
     + designerEl
     + '<div class="pdp__price">' + priceLabelS(p) + '</div>'
-    + '</div></div>';
+    + '</div></div>'
+    + specAccordionSsr(p);
 }
 
 // SEO/SSR · Hero créateur (nom + bio + portrait) injecté dans [data-designer-hero]
@@ -406,6 +429,16 @@ app.get('/produit.html', async (req, res) => {
     let out = html.replace('</head>', ldTag + '\n</head>');
     // SSR lot 1 · contenu produit (nom/prix/dispo) à la place du squelette → crawlable sans JS.
     out = out.replace(/<!--PDP-SSR-START-->[\s\S]*?<!--PDP-SSR-END-->/, () => pdpSsrBlock(product));
+    // SSR chantier 5 · recos « Complétez avec » / « Vous aimerez aussi » crawlables
+    // (maillage interne ; piloté par les métafields Search & Discovery — jamais hardcodé).
+    const recoSsr = (list, grid, wrap) => {
+      const cards = (list || []).map(plpCardSsr).filter(Boolean).join('');
+      if (!cards) return;
+      out = out.replace('<div class="pgrid" ' + grid + '></div>', () => '<div class="pgrid" ' + grid + '>' + cards + '</div>');
+      out = out.replace('<section class="section" ' + wrap + ' style="display:none">', () => '<section class="section" ' + wrap + '>');
+    };
+    recoSsr(product.complementary, 'data-complementary', 'data-complementary-wrap');
+    recoSsr(product.related, 'data-related', 'data-related-wrap');
     out = injectChrome(out, 'produit.html');     // ← non-hero → header solide
     ogCache(res);
     return res.send(out);
@@ -626,6 +659,87 @@ function resolveSsrRel(p) {
 }
 // APRÈS les 3 routes templatées + le sitemap, AVANT express.static. Ne capte que
 // SSR_PAGES + articles journal ; tout le reste passe à next() (static/api).
+// SEO/SSR · Index MARQUES crawlable : rend les vraies cartes marque (lien + logo + nom)
+// dans [data-brandgrid] à la place des squelettes. Données getActiveBrands + liens curés
+// de mega-menu-brands.json. Le module re-render ensuite (grid.innerHTML) → hydratation.
+async function injectBrandsIndex(html) {
+  const active = await getActiveBrands();
+  let curated = { brands: [] };
+  try { curated = JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'mega-menu-brands.json'), 'utf8')); } catch (e) {}
+  const hrefByName = {};
+  for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
+  const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
+  if (!brands.length) return html;
+  const cards = brands.map((b) => {
+    const slug = b.slug || slugifyS(b.name);
+    const safe = ogEscape(b.name);
+    const href = hrefByName[b.name.toLowerCase()] || ('/produits.html?brand=' + slug);
+    return '<a class="brandcard" href="' + href + '">'
+      + '<span class="brandcard__origin">Europe</span>'
+      + '<div><img class="brandcard__logo" src="/images/brands/' + slug + '.svg" alt="' + safe + '" loading="lazy" onerror="this.outerHTML=\'<span class=&quot;brandcard__name&quot;>' + safe + '</span>\'" /></div>'
+      + '</a>';
+  }).join('');
+  // Bloc squelette exact (4 lignes) → on remplace juste le contenu, on garde </div>.
+  const skelBlock = '<div class="brandgrid" data-brandgrid>\n'
+    + Array(4).fill('      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>').join('\n');
+  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid>\n      ' + cards);
+  html = html.replace('<span class="plp-count" data-brand-count></span>', () => '<span class="plp-count" data-brand-count>' + brands.length + ' marques</span>');
+  return html;
+}
+
+// SEO/SSR · Index DESIGNERS crawlable : featured + annuaire A-Z (noms + liens ?designer=).
+// Miroir du render de designers.html. Le module re-render ensuite → hydratation.
+function injectDesignersIndex(html) {
+  const esc = ogEscape;
+  const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  const FOLD = { 'Ø':'O','Œ':'O','Æ':'A','Å':'A','Ł':'L','Đ':'D','Þ':'T','ẞ':'S' };
+  const bucketOf = (d) => {
+    let ch = (d.sortKey || d.name || '').trim().charAt(0).toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    ch = FOLD[ch] || ch;
+    return /[A-Z]/.test(ch) ? ch : '#';
+  };
+  const brandsHTML = (d) => (d.brands || []).map((b, i) => {
+    const href = d.brandHrefs && d.brandHrefs[i];
+    return href ? '<a href="' + esc(href) + '">' + esc(b) + '</a>' : '<span>' + esc(b) + '</span>';
+  }).join('<span class="designer-card__brand-sep" aria-hidden="true"> · </span>');
+  const photoHTML = (d) => d.photo
+    ? '<picture><source type="image/webp" srcset="' + esc(String(d.photo).replace(/\.jpg$/, '-640.webp')) + '" /><img class="designer-card__photo" src="' + esc(d.photo) + '" width="640" height="800" alt="' + esc(d.name) + '" loading="lazy" /></picture>'
+    : '<div class="designer-card__photo" aria-hidden="true"></div>';
+  const featuredCardHTML = (d) => '<article class="designer-card designer-card--lg" id="' + esc(d.slug) + '">'
+    + photoHTML(d) + '<h3 class="designer-card__name">' + esc(d.name) + '</h3>'
+    + '<div class="designer-card__brands">' + brandsHTML(d) + '</div>'
+    + '<a class="designer-card__link" href="/produits.html?designer=' + encodeURIComponent(d.slug) + '" aria-label="Voir les produits de ' + esc(d.name) + '"></a></article>';
+
+  const all = getDesigners().filter((d) => !d.hidden);
+  all.sort((a, b) => (a.sortKey || a.name).localeCompare(b.sortKey || b.name, 'fr', { sensitivity: 'base' }));
+  if (!all.length) return html;
+  const featured = all.filter((d) => d.featured);
+  const featuredSlugs = new Set(featured.map((d) => d.slug));
+  const featHtml = featured.map(featuredCardHTML).join('');
+
+  const groups = {};
+  for (const d of all) { const k = bucketOf(d); (groups[k] = groups[k] || []).push(d); }
+  const bar = ALPHA.map((L) => groups[L]
+    ? '<a class="az-bar__letter" href="#letter-' + L + '">' + L + '</a>'
+    : '<span class="az-bar__letter is-empty" aria-hidden="true">' + L + '</span>');
+  if (groups['#']) bar.push('<a class="az-bar__letter" href="#letter-num">#</a>');
+  const letters = Object.keys(groups).sort((a, b) => a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b, 'fr'));
+  const idxHtml = letters.map((L) => {
+    const anchor = L === '#' ? 'letter-num' : 'letter-' + L;
+    const names = groups[L].map((d) => {
+      const id = featuredSlugs.has(d.slug) ? '' : ' id="' + esc(d.slug) + '"';
+      return '<li class="az-name"' + id + '><a href="/produits.html?designer=' + encodeURIComponent(d.slug) + '">' + esc(d.sortKey || d.name) + '</a></li>';
+    }).join('');
+    return '<div class="az-group"><h3 class="az-letter" id="' + anchor + '">' + L + '</h3><ul class="az-names">' + names + '</ul></div>';
+  }).join('');
+
+  html = html.replace('<div class="designer-grid" data-featured-grid></div>', () => '<div class="designer-grid" data-featured-grid>' + featHtml + '</div>');
+  html = html.replace('<nav class="az-bar" data-az-bar aria-label="Index alphabétique des designers"></nav>', () => '<nav class="az-bar" data-az-bar aria-label="Index alphabétique des designers">' + bar.join('') + '</nav>');
+  html = html.replace('<div class="az-index" data-az-index></div>', () => '<div class="az-index" data-az-index>' + idxHtml + '</div>');
+  html = html.replace('<span class="plp-count" data-designer-count></span>', () => '<span class="plp-count" data-designer-count>' + all.length + ' designers</span>');
+  return html;
+}
+
 // SEO/SSR · Remplit les 2 rails produits de l'accueil (Nouveautés + Meilleures ventes)
 // à la place des squelettes. Miroir de loadRows (main.js) : même flux paginé, tranches
 // séquentielles [0..4] puis [4..8], filtrées sur p.image. Réutilise plpCardSsr ; le module
@@ -662,6 +776,12 @@ app.get(/.*/, async (req, res, next) => {
       const { items } = await getProductsPage(24, null, null, null, null, null);
       raw = injectHomeRails(raw, (items || []).filter((p) => p.image));
     } catch (e) { console.warn('[home-rails]', e.message); }
+  }
+  if (rel === 'marques.html') {
+    try { raw = await injectBrandsIndex(raw); } catch (e) { console.warn('[brands-index]', e.message); }
+  }
+  if (rel === 'designers.html') {
+    try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
   }
   res.set('Content-Type', 'text/html; charset=utf-8');
   res.set('Cache-Control', 'public, max-age=0, must-revalidate');

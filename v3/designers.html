@@ -67,7 +67,7 @@
          viewport. */
       (function () {
         var g = document.querySelector("[data-featured-grid]");
-        if (!g) return;
+        if (!g || g.children.length) return;   // déjà rempli en SSR → pas de squelette (anti-flash)
         var skel = '<div class="designer-card designer-card--lg designer-card--skel">'
                  + '<div class="designer-card__skel-photo"></div>'
                  + '<div class="designer-card__skel-name"></div>'
