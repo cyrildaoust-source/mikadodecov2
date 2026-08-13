@@ -406,6 +406,16 @@ app.get('/produit.html', async (req, res) => {
     let out = html.replace('</head>', ldTag + '\n</head>');
     // SSR lot 1 · contenu produit (nom/prix/dispo) à la place du squelette → crawlable sans JS.
     out = out.replace(/<!--PDP-SSR-START-->[\s\S]*?<!--PDP-SSR-END-->/, () => pdpSsrBlock(product));
+    // SSR chantier 5 · recos « Complétez avec » / « Vous aimerez aussi » crawlables
+    // (maillage interne ; piloté par les métafields Search & Discovery — jamais hardcodé).
+    const recoSsr = (list, grid, wrap) => {
+      const cards = (list || []).map(plpCardSsr).filter(Boolean).join('');
+      if (!cards) return;
+      out = out.replace('<div class="pgrid" ' + grid + '></div>', () => '<div class="pgrid" ' + grid + '>' + cards + '</div>');
+      out = out.replace('<section class="section" ' + wrap + ' style="display:none">', () => '<section class="section" ' + wrap + '>');
+    };
+    recoSsr(product.complementary, 'data-complementary', 'data-complementary-wrap');
+    recoSsr(product.related, 'data-related', 'data-related-wrap');
     out = injectChrome(out, 'produit.html');     // ← non-hero → header solide
     ogCache(res);
     return res.send(out);
