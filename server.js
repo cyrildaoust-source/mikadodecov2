@@ -608,6 +608,24 @@ function resolveSsrRel(p) {
 }
 // APRÈS les 3 routes templatées + le sitemap, AVANT express.static. Ne capte que
 // SSR_PAGES + articles journal ; tout le reste passe à next() (static/api).
+// SEO/SSR · Remplit les 2 rails produits de l'accueil (Nouveautés + Meilleures ventes)
+// à la place des squelettes. Miroir de loadRows (main.js) : même flux paginé, tranches
+// séquentielles [0..4] puis [4..8], filtrées sur p.image. Réutilise plpCardSsr ; le module
+// JS repeint ensuite (host.innerHTML) → hydratation, 0 doublon. Conteneurs distingués par
+// data-sort="new" (Nouveautés) vs sans (Meilleures ventes).
+const HOME_SKEL = "<div class=\"pcard\"><div class=\"pcard__skel\"></div></div><div class=\"pcard\"><div class=\"pcard__skel\"></div></div><div class=\"pcard\"><div class=\"pcard__skel\"></div></div><div class=\"pcard\"><div class=\"pcard__skel\"></div></div>";
+function injectHomeRails(html, items) {
+  const render = (arr) => arr.map(plpCardSsr).filter(Boolean).join('');
+  const r1 = render(items.slice(0, 4)), r2 = render(items.slice(4, 8));
+  if (r1) html = html.replace(
+    '<div class="prow prow--4" data-products data-count="4" data-sort="new">\n      ' + HOME_SKEL,
+    () => '<div class="prow prow--4" data-products data-count="4" data-sort="new">\n      ' + r1);
+  if (r2) html = html.replace(
+    '<div class="prow prow--4" data-products data-count="4">\n      ' + HOME_SKEL,
+    () => '<div class="prow prow--4" data-products data-count="4">\n      ' + r2);
+  return html;
+}
+
 app.get(/.*/, async (req, res, next) => {
   if (req.path.startsWith('/api/') || req.path.startsWith('/_vercel/')) return next();
   const rel = resolveSsrRel(req.path);
@@ -620,6 +638,13 @@ app.get(/.*/, async (req, res, next) => {
   catch { return next(); }                              // inexistant → 404 normal
   if (!/id="site-header"/.test(raw)) return next();     // page hors-shell → ne pas toucher
   await _chromeReady;
+  // SSR des rails produits de l'accueil (liens crawlables + fin des squelettes au 1er paint).
+  if (rel === 'index.html') {
+    try {
+      const { items } = await getProductsPage(24, null, null, null, null, null);
+      raw = injectHomeRails(raw, (items || []).filter((p) => p.image));
+    } catch (e) { console.warn('[home-rails]', e.message); }
+  }
   res.set('Content-Type', 'text/html; charset=utf-8');
   res.set('Cache-Control', 'public, max-age=0, must-revalidate');
   return res.send(injectChrome(raw, rel));
