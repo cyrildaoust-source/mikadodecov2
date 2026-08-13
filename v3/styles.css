@@ -110,7 +110,7 @@
   /* --- type --- */
   --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --sans:  'neue-haas-grotesk-text', 'nhg-fallback', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;  /* body / UI */
-  --sans-product: 'neue-haas-grotesk-display', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif; /* product names + same tier */
+  --sans-product: 'neue-haas-grotesk-display', 'nhg-fallback', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif; /* product names + same tier · nhg-fallback = repli métrique (évite le saut de police sur le contenu SSR) */
 
   --fs-display: clamp(44px, 5vw, 92px);   /* Cormorant is narrow/light · runs larger */
   --fs-h2:      clamp(28px, 2.6vw, 40px);

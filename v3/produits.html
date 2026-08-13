@@ -1023,7 +1023,11 @@
         // Skeleton dans la grille pendant le walk multi-chunks (le catalogue ≈463
         // se charge en ~5 requêtes serveur, bornées à 100) → feedback de chargement.
         state.loading = true;   // compteur masqué pendant le walk (pas d'incrément visible)
-        grid.innerHTML = GRID_SKELETON;
+        // Si la grille est pré-rendue côté serveur (data-ssr : liens produit crawlables),
+        // on la GARDE comme état de chargement au lieu du squelette → pas de flash
+        // cartes→squelette→cartes. Le 1er render la remplacera normalement.
+        if (grid.dataset.ssr === "1") { grid.removeAttribute("data-ssr"); }
+        else { grid.innerHTML = GRID_SKELETON; }
         grid.dataset.key = ""; // invalide la clé idempotente → le 1er render reconstruit
         grid.setAttribute("aria-busy", "true");
 

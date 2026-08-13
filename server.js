@@ -225,6 +225,27 @@ const priceLabelS = (p) => {
   if (min != null && max != null && max - min > 0.5) return 'À partir de ' + euroS(min);
   return euroS(min);
 };
+// SEO/SSR · Carte produit rendue CÔTÉ SERVEUR pour les grilles (lot 4). Miroir crawlable
+// de productCard (shared.js) : lien média + marque + lien nom + dispo + prix ; SANS le
+// bouton « Ajouter au panier » (interactif, posé par le JS). Injectée dans [data-grid] →
+// donne à Google des LIENS produit crawlables + du maillage interne (complète le sitemap).
+function plpCardSsr(p) {
+  const href = p.handle ? '/produit.html?handle=' + encodeURIComponent(p.handle) : '';
+  if (!href) return '';
+  const avail = p.inStock
+    ? '<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>'
+    : '<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>' + (p.longDelay ? 'Sur commande · délai sur demande' : 'Livraison ' + ogEscape(p.leadTimeLabel || '3-4 semaines')) + '</div>';
+  return '<div class="pcard">'
+    + '<a class="pcard__media" href="' + href + '" aria-label="' + ogEscape(p.name || '') + '">'
+    + (p.image ? '<img class="main" src="' + ogEscape(p.image) + '" alt="' + ogEscape(p.name || '') + '" loading="lazy" decoding="async" />' : '')
+    + '</a>'
+    + '<div class="pcard__brand">' + ogEscape(p.brand || '') + '</div>'
+    + '<div class="pcard__row"><a class="pcard__name" href="' + href + '">' + ogEscape(p.name || '') + '</a></div>'
+    + avail
+    + '<div class="pcard__price">' + priceLabelS(p) + '</div>'
+    + '</div>';
+}
+
 // SEO/SSR · slugify miroir de shared.js (accents/ø/æ) — pour le lien créateur SSR.
 const slugifyS = (s) => String(s == null ? '' : s).toLowerCase().normalize('NFD')
   .replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae')
@@ -448,7 +469,26 @@ app.get('/collections/:handle', async (req, res) => {
 // template générique. ~29 créateurs sans photo → repli og-default.
 app.get('/produits.html', async (req, res) => {
   const slug = req.query.designer ? String(req.query.designer).toLowerCase() : '';
-  if (!slug) return sendProduitsTemplate(res);
+  if (!slug) {
+    // Catalogue de base (lot 4) : SSR de la 1re page de grille (24 produits) → liens
+    // produit crawlables dans le HTML (maillage interne + découverte, complète le sitemap).
+    // Le module remplace ensuite la grille (garde data-ssr côté produits.html) : 0 doublon/flash.
+    try {
+      await _chromeReady;
+      const { items } = await getProductsPage(24, null, null, null, null, null);
+      let html = fs.readFileSync(PRODUITS_TEMPLATE, 'utf8');
+      if (items && items.length) {
+        const cards = items.map(plpCardSsr).filter(Boolean).join('');
+        html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
+      }
+      html = injectChrome(html, 'produits.html');
+      ogCache(res);
+      return res.send(html);
+    } catch (e) {
+      console.warn('[plp-ssr]', e.message);
+      return sendProduitsTemplate(res);
+    }
+  }
   try {
     await _chromeReady;
     const designer = getDesigners().find((d) => String(d.slug || '').toLowerCase() === slug);
