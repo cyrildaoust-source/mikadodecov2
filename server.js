@@ -83,6 +83,11 @@ let _chrome = null;
 const _chromeReady = import('./v3/chrome-template.js')
   .then((m) => { _chrome = m; })
   .catch((e) => { console.warn('[chrome-ssr] import échoué:', e.message); _chrome = null; });
+// product-specs.mjs (ESM pur) importé comme le chrome → rendu SSR de l'accordéon specs.
+let _specs = null;
+const _specsReady = import('./v3/product-specs.mjs')
+  .then((m) => { _specs = m; })
+  .catch((e) => { console.warn('[specs-ssr] import échoué:', e.message); _specs = null; });
 
 // Pages NON-hero (transparentNav:false) : header rendu DÉJÀ solide en SSR pour
 // éviter le flash blanc-sur-blanc (cf. styles.css .chrome color:on-dark par défaut).
@@ -258,6 +263,23 @@ const slugifyS = (s) => String(s == null ? '' : s).toLowerCase().normalize('NFD'
 // crawlers marque+nom+créateur(lien)+prix SANS JS. La dispo et la description sont déjà
 // dans le JSON-LD Product (on n'affiche PAS la dispo ici : son libellé exact — « À voir
 // en boutique » / « Sur commande » / « Indisponible » — dépend de la variante côté JS).
+// SEO/SSR · Accordéon caractéristiques (dimensions/matériaux/technique…) rendu serveur,
+// miroir de produit.html. buildProductSpecGroups = source unique (product-specs.mjs).
+// La Référence/SKU (par variante) est ajoutée par le JS, pas ici. Le module re-render l'accordéon.
+function specAccordionSsr(p) {
+  if (!_specs || !_specs.buildProductSpecGroups) return '';
+  const esc = ogEscape;
+  const groups = _specs.buildProductSpecGroups(p);
+  const panelBody = (g) => g.key === 'description'
+    ? '<p class="pdp-desc">' + esc(g.text) + '</p>'
+    : '<dl class="pdp-specs">' + g.rows.map((r) => '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(String(r[1])) + '</dd></div>').join('') + '</dl>';
+  const shown = groups.filter((g) => g.key === 'description' ? !!g.text : g.rows.length > 0);
+  if (!shown.length) return '';
+  return '<section class="section pdp-section pdp-acc" data-accordion>' + shown.map((g, i) =>
+    '<div class="pdp-acc__item"><h2 class="catalogue-head serif pdp-acc__head"><button type="button" class="pdp-acc__btn" id="pdp-acc-btn-' + g.key + '" aria-controls="pdp-acc-panel-' + g.key + '" aria-expanded="' + (i === 0 ? 'true' : 'false') + '"><span class="pdp-acc__label">' + esc(g.label) + '</span><span class="pdp-acc__chevron" aria-hidden="true">▾</span></button></h2>'
+    + '<div class="pdp-acc__panel" id="pdp-acc-panel-' + g.key + '" role="region" aria-labelledby="pdp-acc-btn-' + g.key + '"' + (i === 0 ? '' : ' hidden') + '>' + panelBody(g) + '</div></div>'
+  ).join('') + '</section>';
+}
 function pdpSsrBlock(p) {
   const rawImg = p.firstImageRaw || (p.images && p.images[0]) || '';
   const img = rawImg ? rawImg + (rawImg.includes('?') ? '&' : '?') + 'width=1000' : '';
@@ -277,7 +299,8 @@ function pdpSsrBlock(p) {
     + '<h1 class="pdp__name">' + ogEscape(p.name || 'Produit') + '</h1>'
     + designerEl
     + '<div class="pdp__price">' + priceLabelS(p) + '</div>'
-    + '</div></div>';
+    + '</div></div>'
+    + specAccordionSsr(p);
 }
 
 // SEO/SSR · Hero créateur (nom + bio + portrait) injecté dans [data-designer-hero]
