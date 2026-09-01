@@ -46,6 +46,7 @@
           <div class="sel-discounts" data-discounts hidden></div>
           <p class="sel-tier" data-sale-tier hidden></p>
           <div class="sel-row sel-row--delivery-calc"><span>Livraison</span><span data-delivery-value>Calculée au paiement</span></div>
+          <div data-gift-offer></div>
           <p class="sel-summary__hint" data-delivery-hint hidden></p>
           <div class="sel-row sel-row--total"><span data-total-label>Total</span><span data-total>…</span></div>
           <div class="sel-row sel-row--savings" data-savings hidden></div>
@@ -69,7 +70,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml, isSaleActive, saleNextTier, SALE } from "/shared.js";
+    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml, isSaleActive, saleNextTier, SALE, giftOfferHTML, giftReconcile, giftBind } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
     // Free-shipping threshold (Belgium zone). The radio toggle that
@@ -155,11 +156,11 @@
             <div class="sel-item__name">${escapeHtml(i.name || "")}</div>
             ${promoCodeHTML}
             <div class="sel-item__controls">
-              <div class="qty qty--sm">
+              ${i.gift ? `<span class="sel-item__giftchip">Cadeau</span>` : `<div class="qty qty--sm">
                 <button class="qty__btn" data-qty-dec="${escapeHtml(i.variantId)}" aria-label="Diminuer" type="button">−</button>
                 <input class="qty__val" data-qty-input="${escapeHtml(i.variantId)}" type="text" inputmode="numeric" value="${qty}" aria-label="Quantité" />
                 <button class="qty__btn" data-qty-inc="${escapeHtml(i.variantId)}" aria-label="Augmenter" type="button">+</button>
-              </div>
+              </div>`}
               <button class="sel-item__remove" data-remove="${idx}">Retirer</button>
             </div>
           </div>
@@ -201,6 +202,15 @@
       }
 
       document.querySelector("[data-subtotal]").textContent = euro(subtotal);
+
+      // Offre cadeau « Mois Verner Panton » — module dans le résumé.
+      const gbox = document.querySelector("[data-gift-offer]");
+      if (gbox) {
+        const selVals = {};
+        gbox.querySelectorAll("[data-gift-variant]").forEach((s) => { selVals[s.getAttribute("data-gift-variant")] = s.value; });
+        gbox.innerHTML = giftOfferHTML(lastPreview);
+        gbox.querySelectorAll("[data-gift-variant]").forEach((s) => { const v = selVals[s.getAttribute("data-gift-variant")]; if (v) s.value = v; });
+      }
 
       // Discount lines (visible only when Shopify returned at least one)
       const list = lastPreview?.discounts || [];
@@ -270,6 +280,7 @@
           const data = await res.json();
           if (mySeq !== previewSeq) return; // a newer request already started
           lastPreview = data;
+          giftReconcile(data);   // cohérence cadeaux sur données fraîches (0 € réel, redescente)
           render();
         } catch (e) {
           // silent failure: keep the local (pre-discount) totals
@@ -321,7 +332,7 @@
         const projet = `Livraison: ${deliveryLabel()}`;
         const res = await fetch("/api/cart/create", {
           method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })), customer: { projet } }),
+          body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1, ...(i.gift ? { gift: i.gift } : {}) })), customer: { projet } }),
         });
         const data = await res.json();
         if (data.checkoutUrl) location.href = data.checkoutUrl;
@@ -347,6 +358,8 @@
 
     render();
     schedulePreview();
+    giftBind();
+    document.addEventListener("gift:meta", render);
   </script>
 </body>
 </html>

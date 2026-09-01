@@ -1972,7 +1972,7 @@ const CART_PREVIEW_MUTATION = `
                 ... on CartCodeDiscountAllocation      { code  }
                 ... on CartCustomDiscountAllocation    { title }
               }
-              merchandise { ... on ProductVariant { id } }
+              merchandise { ... on ProductVariant { id product { tags } } }
             }
           }
         }
@@ -2055,6 +2055,12 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
     if (result.userErrors?.length) return res.status(400).json({ error: result.userErrors[0].message });
     const cart = result.cart;
     const titleOf = (d) => d.title || d.code || 'Remise';
+    // Éligibilité « offre cadeau » par ligne : miroir de la collection Shopify
+    // « Hors promotions » (gid 694454944073) = tout le catalogue MOINS ces tags.
+    // Le minimum des remises BXGY (900/1800 €) porte sur CETTE collection, pas
+    // sur le total du panier — le front calcule sa barre de progression dessus.
+    const GIFT_EXCLUDE_TAGS = new Set(['promo', 'promotion', 'sale', 'promo-siege-ete-2026']);
+    const isEligible = (tags) => !(tags || []).some((t) => GIFT_EXCLUDE_TAGS.has(String(t).toLowerCase()));
     // Cart-level discounts (e.g. code "WELCOME10")
     const cartDiscounts = (cart.discountAllocations || []).map(d => ({
       title:  titleOf(d),
@@ -2078,7 +2084,7 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
       const qty = parseInt(n.quantity) || 0;
       if (vid && lineDiscount > 0) lineDiscounts[vid] = (lineDiscounts[vid] || 0) + lineDiscount;
       if (vid) {
-        const agg = byVariant.get(vid) || { subtotal: 0, total: 0, discount: 0, qty: 0, titles: new Set() };
+        const agg = byVariant.get(vid) || { subtotal: 0, total: 0, discount: 0, qty: 0, titles: new Set(), tags: (n.merchandise?.product?.tags) || [] };
         agg.subtotal += lineSub;
         agg.total    += lineTot;
         agg.discount += lineDiscount;
@@ -2113,7 +2119,7 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
       const agg = byVariant.get(item.variantId);
       if (!agg) {
         const qty = Math.max(1, Math.min(99, parseInt(item.qty) || 1));
-        return { variantId: item.variantId, qty, subtotal: 0, total: 0, discount: 0, discountPct: 0, discountTitles: [] };
+        return { variantId: item.variantId, qty, subtotal: 0, total: 0, discount: 0, discountPct: 0, discountTitles: [], eligible: false };
       }
       const pct = agg.subtotal > 0 ? (agg.discount / agg.subtotal) * 100 : 0;
       return {
@@ -2124,6 +2130,7 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
         discount:       agg.discount,
         discountPct:    Math.round(pct * 10) / 10,
         discountTitles: [...agg.titles],
+        eligible:       isEligible(agg.tags),
       };
     });
     // Cart cost totals (post-discount, pre-shipping/tax)
@@ -2150,6 +2157,9 @@ app.post('/api/cart/create', cartLimiter, async (req, res) => {
     const lines = items.map(item => ({
       merchandiseId: item.variantId,
       quantity:      Math.max(1, Math.min(10, parseInt(item.qty) || 1)),
+      // Ligne cadeau (offre Panton) : marquée par un attribut _gift (préfixe _
+      // = masqué au client) — retrouvable dans la commande côté admin.
+      ...(item.gift ? { attributes: [{ key: '_gift', value: String(item.gift).slice(0, 40) }] } : {}),
     }));
 
     // Pass customer context as cart note + attributes
