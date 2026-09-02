@@ -427,9 +427,8 @@ export async function fetchPromos() {
   return r.json();
 }
 // Fills the empty .pcard__promo slot on every card whose variantId is in
-// the promos map. Cards show a short generic label ("Offre exclusive")
-// and keep the full Shopify discount title in a tooltip; the PDP shows
-// the full title in place.
+// the promos map. Cards show the REAL discount title (the admin title —
+// keep those short and client-facing); the PDP shows it in place too.
 export function applyPromos(promosMap) {
   if (isSaleActive()) return;          // ← soldes : pas de badge par produit (remise = niveau commande)
   if (!promosMap || typeof promosMap !== "object") return;
@@ -439,7 +438,7 @@ export function applyPromos(promosMap) {
     if (!slot || !variantId) return;
     const title = promosMap[variantId];
     if (title) {
-      slot.textContent = "Offre exclusive";
+      slot.textContent = title;
       slot.title = title;
       slot.hidden = false;
     } else {

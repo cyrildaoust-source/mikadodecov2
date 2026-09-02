@@ -489,7 +489,7 @@ app.get('/collections/:handle', async (req, res) => {
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
     try {
-      const cp = await getCollectionProducts(handle, 24);
+      const cp = await collectionProductsFor(handle, 24);
       const gi = (cp && cp.items) || [];
       if (gi.length) {
         const cards = gi.map(plpCardSsr).filter(Boolean).join('');
@@ -1817,11 +1817,37 @@ app.get('/api/product/:handle', async (req, res) => {
 // `tag` is an optional Shopify ProductFilter — when present, only
 // products carrying that tag are returned (paginated server-side).
 // 404 when the handle does not exist in Shopify.
+// Page « Promotions » vivante : fusionne la collection Shopify « promotions »
+// (curation manuelle, prioritaire) avec les produits portant une remise
+// automatique ACTIVE (sonde getPromos). Chaque produit est estampillé du handle
+// « promotions » (le PLP re-filtre par p.collections côté client). Pagination :
+// la fusion ne concerne que la 1re page (les offres actives sont peu nombreuses).
+async function getPromotionsProducts(first, after) {
+  const base = await getCollectionProducts('promotions', first, after);
+  if (after) return base;
+  const stamp = (p) => ({ ...p, collections: [...new Set([...(p.collections || []), 'promotions'])] });
+  let promoItems = [];
+  try {
+    const [promos, products] = await Promise.all([getPromos(), getProducts()]);
+    promoItems = products.filter((p) => p.variantId && promos[p.variantId]);
+  } catch (e) { console.warn('[promotions-page]', e.message); }
+  const items = (base?.items || []).map(stamp);
+  const seen = new Set(items.map((p) => p.id));
+  for (const p of promoItems) if (!seen.has(p.id)) { seen.add(p.id); items.push(stamp(p)); }
+  return {
+    collection: base?.collection || { handle: 'promotions', title: 'Promotions', description: '', image: null },
+    items,
+    pageInfo: (base?.items || []).length ? base.pageInfo : { hasNextPage: false, endCursor: null },
+  };
+}
+const collectionProductsFor = (handle, first, after, tag) =>
+  handle === 'promotions' ? getPromotionsProducts(first, after) : getCollectionProducts(handle, first, after, tag);
+
 app.get('/api/collection/:handle/products', async (req, res) => {
   try {
     const { handle } = req.params;
     const { cursor, limit, tag } = req.query;
-    const payload = await getCollectionProducts(handle, limit, cursor, tag);
+    const payload = await collectionProductsFor(handle, limit, cursor, tag);
     if (!payload) return res.status(404).json({ error: 'collection_not_found' });
     res.json(payload);
   } catch (err) {
