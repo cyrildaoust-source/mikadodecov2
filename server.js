@@ -489,7 +489,7 @@ app.get('/collections/:handle', async (req, res) => {
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
     try {
-      const cp = await getCollectionProducts(handle, 24);
+      const cp = await collectionProductsFor(handle, 24);
       const gi = (cp && cp.items) || [];
       if (gi.length) {
         const cards = gi.map(plpCardSsr).filter(Boolean).join('');
@@ -1817,11 +1817,41 @@ app.get('/api/product/:handle', async (req, res) => {
 // `tag` is an optional Shopify ProductFilter — when present, only
 // products carrying that tag are returned (paginated server-side).
 // 404 when the handle does not exist in Shopify.
+// Page « Promotions » vivante : fusionne la collection Shopify « promotions »
+// (curation manuelle, prioritaire) avec les produits portant une remise
+// automatique ACTIVE (sonde getPromos). Chaque produit est estampillé du handle
+// « promotions » (le PLP re-filtre par p.collections côté client). Pagination :
+// la fusion ne concerne que la 1re page (les offres actives sont peu nombreuses).
+async function getPromotionsProducts(first, after) {
+  const base = await getCollectionProducts('promotions', first, after);
+  if (after) return base;
+  const stamp = (p) => ({ ...p, collections: [...new Set([...(p.collections || []), 'promotions'])] });
+  let promoItems = [];
+  try {
+    // Sonde bornée : à froid elle peut prendre ~10 s (un panier-test par
+    // variante) — on sert la page vite et on la laisse finir en arrière-plan.
+    const promosBounded = Promise.race([getPromos(), new Promise((r) => setTimeout(r, 2500, null))]);
+    const [promos, products] = await Promise.all([promosBounded, getProducts()]);
+    if (promos) promoItems = products.filter((p) => p.variantId && promos[p.variantId]);
+    else console.warn('[promotions-page] sonde froide — page servie sans fusion (cache en chauffe)');
+  } catch (e) { console.warn('[promotions-page]', e.message); }
+  const items = (base?.items || []).map(stamp);
+  const seen = new Set(items.map((p) => p.id));
+  for (const p of promoItems) if (!seen.has(p.id)) { seen.add(p.id); items.push(stamp(p)); }
+  return {
+    collection: base?.collection || { handle: 'promotions', title: 'Promotions', description: '', image: null },
+    items,
+    pageInfo: (base?.items || []).length ? base.pageInfo : { hasNextPage: false, endCursor: null },
+  };
+}
+const collectionProductsFor = (handle, first, after, tag) =>
+  handle === 'promotions' ? getPromotionsProducts(first, after) : getCollectionProducts(handle, first, after, tag);
+
 app.get('/api/collection/:handle/products', async (req, res) => {
   try {
     const { handle } = req.params;
     const { cursor, limit, tag } = req.query;
-    const payload = await getCollectionProducts(handle, limit, cursor, tag);
+    const payload = await collectionProductsFor(handle, limit, cursor, tag);
     if (!payload) return res.status(404).json({ error: 'collection_not_found' });
     res.json(payload);
   } catch (err) {
@@ -1972,7 +2002,7 @@ const CART_PREVIEW_MUTATION = `
                 ... on CartCodeDiscountAllocation      { code  }
                 ... on CartCustomDiscountAllocation    { title }
               }
-              merchandise { ... on ProductVariant { id } }
+              merchandise { ... on ProductVariant { id product { tags } } }
             }
           }
         }
@@ -2011,7 +2041,15 @@ async function fetchPromoForVariant(variantId) {
 async function getPromos() {
   return cached('promos', async () => {
     const products = await getProducts();
-    const variantIds = [...new Set(products.map((p) => p.variantId).filter(Boolean))];
+    // La sonde couvre le top ~250 (getProducts) — un produit remisé hors de ce
+    // cap n'aurait JAMAIS de badge (constaté 02/09 : les −10 % Junior/Classic/
+    // Amoebe/Visiona). On sonde donc AUSSI la collection « promotions »
+    // (curation par tag neutre offre-en-cours) : y taguer un produit lui donne
+    // badge + place dans l'onglet, même hors meilleures ventes.
+    let curated = [];
+    try { curated = ((await getCollectionProducts('promotions', 100)) || {}).items || []; }
+    catch (e) { /* collection absente → sonde standard seule */ }
+    const variantIds = [...new Set([...products, ...curated].map((p) => p.variantId).filter(Boolean))];
     const map = {};
     let i = 0;
     const concurrency = 12;
@@ -2055,6 +2093,13 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
     if (result.userErrors?.length) return res.status(400).json({ error: result.userErrors[0].message });
     const cart = result.cart;
     const titleOf = (d) => d.title || d.code || 'Remise';
+    // Éligibilité « offre cadeau » par ligne : miroir de la collection Shopify
+    // « Catalogue — paliers cadeaux » (gid 694454944073). Depuis le 02/09/2026 sa
+    // règle est « prix de variante > 0 » (tout le catalogue) — les tags promo
+    // n'excluent PLUS rien du minimum. Le Set reste la manette si la règle
+    // redevient un jour à base de tags (ex-tags : promo/promotion/sale/…).
+    const GIFT_EXCLUDE_TAGS = new Set([]);
+    const isEligible = (tags) => !(tags || []).some((t) => GIFT_EXCLUDE_TAGS.has(String(t).toLowerCase()));
     // Cart-level discounts (e.g. code "WELCOME10")
     const cartDiscounts = (cart.discountAllocations || []).map(d => ({
       title:  titleOf(d),
@@ -2078,7 +2123,7 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
       const qty = parseInt(n.quantity) || 0;
       if (vid && lineDiscount > 0) lineDiscounts[vid] = (lineDiscounts[vid] || 0) + lineDiscount;
       if (vid) {
-        const agg = byVariant.get(vid) || { subtotal: 0, total: 0, discount: 0, qty: 0, titles: new Set() };
+        const agg = byVariant.get(vid) || { subtotal: 0, total: 0, discount: 0, qty: 0, titles: new Set(), tags: (n.merchandise?.product?.tags) || [] };
         agg.subtotal += lineSub;
         agg.total    += lineTot;
         agg.discount += lineDiscount;
@@ -2113,7 +2158,7 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
       const agg = byVariant.get(item.variantId);
       if (!agg) {
         const qty = Math.max(1, Math.min(99, parseInt(item.qty) || 1));
-        return { variantId: item.variantId, qty, subtotal: 0, total: 0, discount: 0, discountPct: 0, discountTitles: [] };
+        return { variantId: item.variantId, qty, subtotal: 0, total: 0, discount: 0, discountPct: 0, discountTitles: [], eligible: false };
       }
       const pct = agg.subtotal > 0 ? (agg.discount / agg.subtotal) * 100 : 0;
       return {
@@ -2124,6 +2169,7 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
         discount:       agg.discount,
         discountPct:    Math.round(pct * 10) / 10,
         discountTitles: [...agg.titles],
+        eligible:       isEligible(agg.tags),
       };
     });
     // Cart cost totals (post-discount, pre-shipping/tax)
@@ -2150,6 +2196,9 @@ app.post('/api/cart/create', cartLimiter, async (req, res) => {
     const lines = items.map(item => ({
       merchandiseId: item.variantId,
       quantity:      Math.max(1, Math.min(10, parseInt(item.qty) || 1)),
+      // Ligne cadeau (offre Panton) : marquée par un attribut _gift (préfixe _
+      // = masqué au client) — retrouvable dans la commande côté admin.
+      ...(item.gift ? { attributes: [{ key: '_gift', value: String(item.gift).slice(0, 40) }] } : {}),
     }));
 
     // Pass customer context as cart note + attributes
