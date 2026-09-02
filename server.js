@@ -2094,10 +2094,11 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
     const cart = result.cart;
     const titleOf = (d) => d.title || d.code || 'Remise';
     // Éligibilité « offre cadeau » par ligne : miroir de la collection Shopify
-    // « Hors promotions » (gid 694454944073) = tout le catalogue MOINS ces tags.
-    // Le minimum des remises BXGY (900/1800 €) porte sur CETTE collection, pas
-    // sur le total du panier — le front calcule sa barre de progression dessus.
-    const GIFT_EXCLUDE_TAGS = new Set(['promo', 'promotion', 'sale', 'promo-siege-ete-2026']);
+    // « Catalogue — paliers cadeaux » (gid 694454944073). Depuis le 02/09/2026 sa
+    // règle est « prix de variante > 0 » (tout le catalogue) — les tags promo
+    // n'excluent PLUS rien du minimum. Le Set reste la manette si la règle
+    // redevient un jour à base de tags (ex-tags : promo/promotion/sale/…).
+    const GIFT_EXCLUDE_TAGS = new Set([]);
     const isEligible = (tags) => !(tags || []).some((t) => GIFT_EXCLUDE_TAGS.has(String(t).toLowerCase()));
     // Cart-level discounts (e.g. code "WELCOME10")
     const cartDiscounts = (cart.discountAllocations || []).map(d => ({
