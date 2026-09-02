@@ -193,6 +193,7 @@ export const GIFT_OFFER = {
   gifts: [ { handle: "lampe-de-table-flowerpot-vp9" }, { handle: "tabouret-wire-vp11-acier" } ],
 };
 const GIFT_HANDLES = new Set(GIFT_OFFER.gifts.map((g) => g.handle));
+export const isGiftProductHandle = (h) => GIFT_HANDLES.has(String(h || ""));
 export function giftActive(now = Date.now()) {
   return now >= Date.parse(GIFT_OFFER.startsAt) && now <= Date.parse(GIFT_OFFER.endsAt);
 }
@@ -274,7 +275,12 @@ export function giftReconcile(preview) {
         });
         if (notFree.length) {
           notFree.forEach((g) => removeFromCart(g.variantId));
-          setGiftMsg("L'offre n'a pas pu être appliquée — le cadeau a été retiré. Écrivez-nous si le souci persiste.");
+          // Une remise concurrente (ex. 5+1 chaises) a gagné l'arbitrage : guider
+          // vers l'ajout des deux pièces plutôt qu'un message d'erreur sec.
+          const competing = (preview.discounts || []).length > 0;
+          setGiftMsg(competing && allowance >= 2
+            ? "Une autre offre s'applique déjà à votre panier — ajoutez les deux pièces ensemble pour activer vos cadeaux."
+            : "L'offre n'a pas pu être appliquée — le cadeau a été retiré. Écrivez-nous si le souci persiste.");
         }
       }
     }
@@ -314,8 +320,17 @@ export function giftOfferHTML(preview) {
     body = `<p class="gifto__lead">Plus que <strong>${euro(b.gap)}</strong> et vous choisissez votre cadeau Panton</p>${b.html}
       <div class="gifto__tiles">${_giftMeta.map((m) => tile(m, { locked: true })).join("")}</div>`;
   } else if (taken.length === 0) {                                   // État 2 — débloqué, rien de choisi
-    body = `<p class="gifto__lead">Votre cadeau est débloqué — <strong>choisissez votre pièce</strong></p>
+    if (allowance >= 2 && _giftMeta.length >= 2) {
+      // Droit aux deux d'emblée → ajout GROUPÉ mis en avant. Indispensable quand
+      // une remise concurrente (5+1 chaises) est en lice : un SEUL cadeau au panier
+      // perd l'arbitrage Shopify (il resterait payant) ; les DEUX ensemble gagnent.
+      body = `<p class="gifto__lead">Vous avez droit aux <strong>deux pièces</strong> — ajoutez-les</p>
+      <div class="gifto__tiles">${_giftMeta.map((m) => tile(m, { cta: "Ajouter" })).join("")}</div>
+      <button type="button" class="gifto__btn gifto__btn--all" data-gift-add-all>Ajouter les deux pièces</button>`;
+    } else {
+      body = `<p class="gifto__lead">Votre cadeau est débloqué — <strong>choisissez votre pièce</strong></p>
       <div class="gifto__tiles">${_giftMeta.map((m) => tile(m)).join("")}</div>`;
+    }
   } else if (allowance >= 2 && taken.length === 1) {                 // État 4 — droit aux deux
     const other = _giftMeta.find((m) => !takenHandles.has(m.handle));
     body = other
@@ -343,6 +358,23 @@ export function giftBind() {
   // local (la somme locale majore la somme éligible → jamais de sur-retrait).
   document.addEventListener("cart:change", () => giftReconcile(null));
   document.addEventListener("click", (e) => {
+    const addAll = e.target.closest("[data-gift-add-all]");
+    if (addAll) {
+      // Ajout GROUPÉ en UNE écriture → un seul arbitrage Shopify, pas d'état
+      // intermédiaire perdant face au 5+1.
+      addAll.disabled = true;
+      const cart = readCart();
+      let n = 0;
+      for (const m of (_giftMeta || [])) {
+        const sel = document.querySelector(`[data-gift-variant="${m.handle}"]`);
+        const variantId = (sel && sel.value) || m.variants[0].id;
+        if (!cart.some((i) => i.variantId === variantId && i.gift === GIFT_OFFER.id)) {
+          cart.push({ variantId, handle: m.handle, name: m.name, brand: m.brand, price: m.price, image: m.image, qty: 1, gift: GIFT_OFFER.id, giftOrder: Date.now() + n++ });
+        }
+      }
+      if (n) writeCart(cart);
+      return;
+    }
     const add = e.target.closest("[data-gift-add]");
     if (add) {
       const m = (_giftMeta || []).find((x) => x.handle === add.getAttribute("data-gift-add"));
@@ -436,6 +468,11 @@ export function applyPromos(promosMap) {
     const slot = card.querySelector("[data-promo-slot]");
     const variantId = card.querySelector("[data-variant]")?.dataset.variant;
     if (!slot || !variantId) return;
+    // Pas de badge sur les produits CADEAU : l'offre vit dans le module panier,
+    // et le titre complet plaqué sur le packshot dessert la carte.
+    const href = card.querySelector(".pcard__media")?.getAttribute("href") || "";
+    const hm = href.match(/[?&]handle=([^&"]+)/);
+    if (hm && isGiftProductHandle(decodeURIComponent(hm[1]))) { slot.hidden = true; slot.textContent = ""; return; }
     const title = promosMap[variantId];
     if (title) {
       slot.textContent = title;
@@ -658,13 +695,13 @@ function bindCartDrawer() {
   const isOpen    = () => root.classList.contains("open");
 
   // Per-line price, mirroring selection.html's 3 states: fully free (≥99% off)
-  // → struck original + GRATUIT; partial discount → struck original + final;
+  // → struck original + « Offert »; partial discount → struck original + final;
   // else plain price. Uses the per-variant payload from the preview.
   const priceHTML = (i, qty) => {
     const lineSub = (i.price || 0) * qty;
     const pl = lastPreview?.lines?.find((l) => l.variantId === i.variantId);
     const d = pl?.discount || 0;
-    if ((pl?.discountPct || 0) >= 99) return `<s class="cartd__was">${euro(lineSub)}</s><em class="cartd__free">GRATUIT</em>`;
+    if ((pl?.discountPct || 0) >= 99) return `<s class="cartd__was">${euro(lineSub)}</s><em class="cartd__free">Offert</em>`;
     if (d > 0) return `<s class="cartd__was">${euro(lineSub)}</s><span class="cartd__price">${euro(lineSub - d)}</span>`;
     return `<span class="cartd__price">${euro(lineSub)}</span>`;
   };

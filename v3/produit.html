@@ -63,7 +63,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, breadcrumbHTML, loadBrandHandles } from "/shared.js";
+    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, breadcrumbHTML, loadBrandHandles } from "/shared.js";
     import { buildProductSpecGroups } from "/product-specs.mjs";
     initShell({ active: "Mobilier", transparentNav: false });
 
@@ -368,6 +368,9 @@
       let promoSeq = 0;
       async function probePromo(variantId) {
         if (!variantId || !promoEl) return;
+        // Produit CADEAU de l'offre en cours : pas de badge (le module panier
+        // porte l'offre ; le titre long sur le packshot dessert la fiche).
+        if (isGiftProductHandle(handle)) { promoEl.hidden = true; promoEl.textContent = ""; return; }
         if (isSaleActive()) { promoEl.hidden = true; promoEl.textContent = ""; return; }   // ← soldes : pas de badge PDP
         const mySeq = ++promoSeq;
         try {

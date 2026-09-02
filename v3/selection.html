@@ -120,7 +120,7 @@
           : "";
 
         // 3 visual states (brief §3 cases 1/2/3):
-        //   • free (≥99% off)  → original price struck + "GRATUIT" italic
+        //   • free (≥99% off)  → original price struck + « Offert » italic
         //   • partial discount → original struck + final price + −amount
         //                        (+ "dont X OFFERTE(S)" for BXGY qty ≥ 4)
         //   • no discount      → plain price
@@ -128,7 +128,7 @@
         if (discountPct >= 99) {
           priceHTML = `
             <span class="sel-item__price--original">${euro(lineSubtotal)}</span>
-            <span class="sel-item__price--free">GRATUIT</span>`;
+            <span class="sel-item__price--free">Offert</span>`;
         } else if (lineDiscount > 0) {
           // Detect BXGY-style "free units": discount expressed as a whole
           // number of unit prices. Only shown when qty ≥ 4 (where the
