@@ -1723,3 +1723,5 @@ body.pdplb-locked { overflow: hidden; }
 .gifto__btn--all:hover { background: var(--accent-ink); color: var(--paper); }
 
 .gifto__tsub { display: block; font-size: 11px; color: var(--accent-ink); margin-top: 3px; }
+
+.gifto__foot { font-size: 10.5px; color: var(--muted); margin: 10px 0 0; }
