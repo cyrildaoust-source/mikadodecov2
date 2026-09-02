@@ -2037,7 +2037,15 @@ async function fetchPromoForVariant(variantId) {
 async function getPromos() {
   return cached('promos', async () => {
     const products = await getProducts();
-    const variantIds = [...new Set(products.map((p) => p.variantId).filter(Boolean))];
+    // La sonde couvre le top ~250 (getProducts) — un produit remisé hors de ce
+    // cap n'aurait JAMAIS de badge (constaté 02/09 : les −10 % Junior/Classic/
+    // Amoebe/Visiona). On sonde donc AUSSI la collection « promotions »
+    // (curation par tag neutre offre-en-cours) : y taguer un produit lui donne
+    // badge + place dans l'onglet, même hors meilleures ventes.
+    let curated = [];
+    try { curated = ((await getCollectionProducts('promotions', 100)) || {}).items || []; }
+    catch (e) { /* collection absente → sonde standard seule */ }
+    const variantIds = [...new Set([...products, ...curated].map((p) => p.variantId).filter(Boolean))];
     const map = {};
     let i = 0;
     const concurrency = 12;
