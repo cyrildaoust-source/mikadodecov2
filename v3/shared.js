@@ -208,10 +208,10 @@ function loadGiftMeta() {
       const r = await fetch(`/api/product/${encodeURIComponent(g.handle)}`);
       if (!r.ok) return null;
       const p = await r.json();
+      // Seules les variantes EN STOCK sont offertes (pas de cadeau en backorder).
       const variants = (p.variants || [])
-        .filter((v) => v && v.id && v.available !== false)
-        .map((v) => ({ id: v.id, title: v.title || "" , qty: v.qty }))
-        .sort((a, b) => ((b.qty > 0) ? 1 : 0) - ((a.qty > 0) ? 1 : 0));
+        .filter((v) => v && v.id && v.available !== false && (v.qty || 0) > 0)
+        .map((v) => ({ id: v.id, title: v.title || "" , qty: v.qty }));
       if (!variants.length) return null;
       return { handle: g.handle, name: p.name || g.handle, brand: p.brand || "", price: p.priceMin || 0, image: p.image || "", variants };
     } catch (e) { return null; }

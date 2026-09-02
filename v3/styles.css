@@ -1712,3 +1712,9 @@ body.pdplb-locked { overflow: hidden; }
 .gifto__link { background: none; border: none; padding: 0; font-size: inherit; font-family: inherit; color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
 .gifto__link:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 .cartd__giftchip, .sel-item__giftchip { display: inline-flex; align-items: center; font-family: var(--sans-product); font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); border: 1px solid currentColor; padding: 3px 8px; }
+
+/* L'attribut HTML hidden gagne TOUJOURS — un display posé par une classe
+   (.sel-tier{display:flex}, .sel-row{display:flex}…) l'écrasait : encart
+   soldes vide (bande bleue + carré ::before) et rangée économies vide
+   (double filet) visibles sur /selection.html hors période (02/09/2026). */
+[hidden] { display: none !important; }
