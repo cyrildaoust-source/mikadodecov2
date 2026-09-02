@@ -278,8 +278,11 @@ export function giftReconcile(preview) {
           // Une remise concurrente (ex. 5+1 chaises) a gagné l'arbitrage : guider
           // vers l'ajout des deux pièces plutôt qu'un message d'erreur sec.
           const competing = (preview.discounts || []).length > 0;
-          setGiftMsg(competing && allowance >= 2
-            ? "Une autre offre s'applique déjà à votre panier — ajoutez les deux pièces ensemble pour activer vos cadeaux."
+          const hadAll = flagged.length >= Math.min(2, (_giftMeta || []).length || 2);
+          setGiftMsg(competing
+            ? (hadAll || allowance < 2
+              ? "Votre panier bénéficie déjà d'une offre plus avantageuse — les cadeaux Panton ne se cumulent pas avec elle."
+              : "Une autre offre s'applique déjà à votre panier — ajoutez les deux pièces ensemble pour activer vos cadeaux.")
             : "L'offre n'a pas pu être appliquée — le cadeau a été retiré. Écrivez-nous si le souci persiste.");
         }
       }
@@ -315,7 +318,16 @@ export function giftOfferHTML(preview) {
       </div>`;
   };
   let body = "";
-  if (allowance === 0) {                                             // État 1 — le plus fréquent
+  // Remise concurrente (ex. 5+1 ×2) déjà supérieure à la valeur des DEUX cadeaux :
+  // les ajouter perdrait l'arbitrage Shopify (une seule remise s'applique, la
+  // meilleure). On l'explique au lieu de tendre un piège. (taken===0 : dès qu'un
+  // cadeau est pris, les remises du preview incluent celle des cadeaux.)
+  const competingAmt = (preview && Array.isArray(preview.discounts))
+    ? preview.discounts.reduce((s, d) => s + (d.amount || 0), 0) : 0;
+  const giftsValue = _giftMeta.reduce((s, m) => s + (m.price || 0), 0);
+  if (allowance > 0 && taken.length === 0 && competingAmt >= giftsValue) {
+    body = `<p class="gifto__lead">Votre panier bénéficie déjà d'une offre plus avantageuse (−${euro(competingAmt)}). Les cadeaux Panton ne se cumulent pas avec elle.</p>`;
+  } else if (allowance === 0) {                                             // État 1 — le plus fréquent
     const b = bar(GIFT_OFFER.tiers[0].threshold);
     body = `<p class="gifto__lead">Plus que <strong>${euro(b.gap)}</strong> et vous choisissez votre cadeau Panton</p>${b.html}
       <div class="gifto__tiles">${_giftMeta.map((m) => tile(m, { locked: true })).join("")}</div>`;

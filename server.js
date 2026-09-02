@@ -1828,8 +1828,12 @@ async function getPromotionsProducts(first, after) {
   const stamp = (p) => ({ ...p, collections: [...new Set([...(p.collections || []), 'promotions'])] });
   let promoItems = [];
   try {
-    const [promos, products] = await Promise.all([getPromos(), getProducts()]);
-    promoItems = products.filter((p) => p.variantId && promos[p.variantId]);
+    // Sonde bornée : à froid elle peut prendre ~10 s (un panier-test par
+    // variante) — on sert la page vite et on la laisse finir en arrière-plan.
+    const promosBounded = Promise.race([getPromos(), new Promise((r) => setTimeout(r, 2500, null))]);
+    const [promos, products] = await Promise.all([promosBounded, getProducts()]);
+    if (promos) promoItems = products.filter((p) => p.variantId && promos[p.variantId]);
+    else console.warn('[promotions-page] sonde froide — page servie sans fusion (cache en chauffe)');
   } catch (e) { console.warn('[promotions-page]', e.message); }
   const items = (base?.items || []).map(stamp);
   const seen = new Set(items.map((p) => p.id));
