@@ -1726,5 +1726,3 @@ body.pdplb-locked { overflow: hidden; }
 
 .gifto__foot { font-size: 10.5px; color: var(--muted); margin: 10px 0 0; }
 
-.gifto__invite { font-size: var(--fs-small); margin: 12px 0 0; }
-.gifto__invite a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }

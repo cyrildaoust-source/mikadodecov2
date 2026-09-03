@@ -198,9 +198,8 @@ export const GIFT_OFFER = {
     { threshold: 1000, gift: "lampe-de-table-flowerpot-vp9", variants: "stock" },
     { threshold: 2500, gift: "tabouret-visiona",             variants: "all" },
   ],
-  // Pas de palier automatisé au-dessus : les très gros paniers sont invités à
-  // la conversation (l'Amoebe = geste comptoir, annoncé en newsletter).
-  invite: { threshold: 5000, text: "Un projet d'ampleur ? Votre commande mérite une attention particulière — parlons-en", href: "/rendez-vous.html" },
+  // Pas de palier automatisé au-dessus de 2 500 € : l'Amoebe = geste comptoir
+  // (annoncé en newsletter), rien sur le site (décision Cyril 03/09).
 };
 const GIFT_HANDLES = new Set(GIFT_OFFER.tiers.map((t) => t.gift));
 const giftTierIdx = (h) => GIFT_OFFER.tiers.findIndex((t) => t.gift === h);
@@ -365,11 +364,9 @@ export function giftOfferHTML(preview) {
       body = `<p class="gifto__lead">${cur ? escapeHtml(cur.name) : "Votre cadeau"} — le plus beau de l'offre — est dans votre panier.</p>`;
     }
   }
-  const invite = GIFT_OFFER.invite && sum >= GIFT_OFFER.invite.threshold
-    ? `<p class="gifto__invite"><a href="${escapeHtml(GIFT_OFFER.invite.href)}">${escapeHtml(GIFT_OFFER.invite.text)} →</a></p>` : "";
   return `<section class="gifto" aria-label="Offre cadeau du Mois Verner Panton">
       <p class="gifto__eyebrow">Mois Verner Panton · jusqu'au 30 septembre</p>
-      <div aria-live="polite">${msg}${body}</div>${invite}
+      <div aria-live="polite">${msg}${body}</div>
       <p class="gifto__foot">Offres non cumulables entre elles — la plus avantageuse s'applique automatiquement.</p>
     </section>`;
 }
