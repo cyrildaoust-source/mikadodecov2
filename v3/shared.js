@@ -171,43 +171,43 @@ export function createCartPreview(onUpdate, delay = 500) {
   return { schedule };
 }
 
-/* ══════════ OFFRE CADEAU « Mois Verner Panton » (01→30/09/2026) ══════════
+/* ══════════ OFFRE CADEAU « Mois Verner Panton » (01→30/09/2026) — moteur v2 ══════════
    Le front n'applique AUCUNE remise : les remises automatiques Shopify (BXGY)
    mettent les cadeaux à 0 € au checkout. Le module fait 3 choses : informer
    (barre de progression), ajouter les cadeaux (lignes marquées gift), et tenir
-   la cohérence (retrait en redescente en gardant le 1er choisi, vérification
-   du 0 € RÉEL via /api/cart/preview — si la remise ne s'applique pas, on
-   retire le cadeau plutôt que laisser payer un article « offert »).
-   ⚠️ Le minimum Shopify porte sur la collection « Hors promotions » (tout le
-   catalogue MOINS les tags promo/promotion/sale/promo-siege-ete-2026) et
-   EXCLUT les produits cadeaux (constaté par paniers-tests du 01/09) : la
-   barre se calcule sur la somme des lignes éligibles (preview.lines[].eligible,
-   repli local « tout éligible »), hors produits cadeaux, aux prix catalogue.
-   Paliers = DONNÉES : la machine à états fonctionne pour N paliers.
-   Jamais d'ajout automatique — le choix appartient au client. */
+   la cohérence (retraits en redescente, vérification du 0 € RÉEL via
+   /api/cart/preview — si la remise ne s'applique pas, on retire le cadeau
+   plutôt que laisser payer un article « offert »).
+   v2 (03/09, décisions Cyril) : PLUS DE CHOIX de produit — la VP9 est LE cadeau
+   du palier 1 (coloris au choix, en stock, prix de base uniquement — pas de
+   Chrome/Brass-plated à 288 €), le tabouret VP11 la REJOINT au palier 2.
+   Chaque cadeau porte minAllowance (le palier qui le légitime) → retraits
+   par IDENTITÉ, plus par simple comptage. Compagnon coussin : supprimé.
+   ⚠️ Le minimum Shopify porte sur la collection « Catalogue — paliers cadeaux »
+   (prix > 0 SAUF tag exclu-paliers — les chaises Panton en sont sorties : leur
+   5+1 est financé par Vitra et roule seul). Miroir serveur : preview.lines[].eligible.
+   Les offres ne se cumulent JAMAIS entre elles (loi Shopify BXGY) — le module
+   l'affiche en footnote permanente. Jamais d'ajout automatique. */
 export const GIFT_OFFER = {
   id: "panton",
   startsAt: "2026-09-01T19:35:00+02:00",
   endsAt:   "2026-09-30T23:59:59+02:00",
   tiers: [ { threshold: 900, gifts: 1 }, { threshold: 1800, gifts: 2 } ],
-  gifts: [ { handle: "lampe-de-table-flowerpot-vp9" }, { handle: "tabouret-wire-vp11-acier" } ],
-  // Compagnon du palier 2 : DÉSACTIVÉ (retour Cyril 02/09 — « trop de cadeaux à
-  // 1 800 € », la remise Shopify est revenue à 2 articles). La plomberie reste :
-  // pour réactiver, redonner { handle, withHandle, minGifts } ET remettre le produit
-  // dans la remise « les deux cadeaux » (quantité 3).
-  companion: null,
+  gifts: [
+    { handle: "lampe-de-table-flowerpot-vp9", minAllowance: 1 },
+    { handle: "tabouret-wire-vp11-acier",     minAllowance: 2 },
+  ],
 };
 const GIFT_HANDLES = new Set(GIFT_OFFER.gifts.map((g) => g.handle));
-const GIFT_COMPANION = GIFT_OFFER.companion;
-export const isGiftProductHandle = (h) => GIFT_HANDLES.has(String(h || "")) || Boolean(GIFT_COMPANION && String(h || "") === GIFT_COMPANION.handle);
+const giftMinAllowance = (h) => (GIFT_OFFER.gifts.find((g) => g.handle === h) || {}).minAllowance || 1;
+export const isGiftProductHandle = (h) => GIFT_HANDLES.has(String(h || ""));
 export function giftActive(now = Date.now()) {
   return now >= Date.parse(GIFT_OFFER.startsAt) && now <= Date.parse(GIFT_OFFER.endsAt);
 }
-/* Fiches cadeaux (nom/prix/image/variantes) chargées depuis /api/product —
-   source unique de vérité. Un cadeau sans variante disponible est écarté ;
-   les deux écartés → module entièrement masqué (ne jamais promettre un
-   cadeau qui n'existe pas). */
-let _giftMeta = null, _giftMetaStarted = false, _giftCompanion = null;
+/* Fiches cadeaux (nom/prix/image/variantes) depuis /api/product — source unique.
+   Variantes proposées : EN STOCK et AU PRIX DE BASE uniquement. Un cadeau sans
+   variante proposable est écarté ; tous écartés → module masqué. */
+let _giftMeta = null, _giftMetaStarted = false;
 function loadGiftMeta() {
   if (_giftMetaStarted) return; _giftMetaStarted = true;
   Promise.all(GIFT_OFFER.gifts.map(async (g) => {
@@ -215,8 +215,6 @@ function loadGiftMeta() {
       const r = await fetch(`/api/product/${encodeURIComponent(g.handle)}`);
       if (!r.ok) return null;
       const p = await r.json();
-      // Seules les variantes EN STOCK et AU PRIX DE BASE sont offertes : pas de
-      // backorder, et pas de finition majorée (Chrome/Brass-plated 288 € vs 192 €).
       const basePrice = p.priceMin || 0;
       const variants = (p.variants || [])
         .filter((v) => {
@@ -224,42 +222,29 @@ function loadGiftMeta() {
           const pr = parseFloat((v.price && v.price.amount) != null ? v.price.amount : v.price);
           return !(pr > basePrice + 0.01);
         })
-        .map((v) => ({ id: v.id, title: v.title || "" , qty: v.qty }));
+        .map((v) => ({ id: v.id, title: v.title || "", qty: v.qty }));
       if (!variants.length) return null;
-      return { handle: g.handle, name: p.name || g.handle, brand: p.brand || "", price: p.priceMin || 0, image: p.image || "", variants };
+      return { handle: g.handle, minAllowance: g.minAllowance, name: p.name || g.handle, brand: p.brand || "", price: p.priceMin || 0, image: p.image || "", variants };
     } catch (e) { return null; }
-  })).then(async (metas) => {
+  })).then((metas) => {
     _giftMeta = metas.filter(Boolean);
-    // Fiche du coussin compagnon (mêmes règles : variantes EN STOCK only).
-    try {
-      if (!GIFT_COMPANION) throw new Error("companion off");
-      const r = await fetch(`/api/product/${encodeURIComponent(GIFT_COMPANION.handle)}`);
-      if (r.ok) {
-        const p = await r.json();
-        const variants = (p.variants || []).filter((v) => v && v.id && v.available !== false && (v.qty || 0) > 0)
-          .map((v) => ({ id: v.id, title: v.title || "", qty: v.qty }));
-        _giftCompanion = variants.length ? { handle: GIFT_COMPANION.handle, name: p.name || "Coussin d'assise", brand: p.brand || "", price: p.priceMin || 0, image: p.image || "", variants } : null;
-      }
-    } catch (e) { _giftCompanion = null; }
     document.dispatchEvent(new CustomEvent("gift:meta"));
   });
 }
 const _giftMsg = { text: "", at: 0 };
 function setGiftMsg(text) { _giftMsg.text = text; _giftMsg.at = Date.now(); }
 /* Lignes cadeau : seules celles AJOUTÉES PAR LE MODULE (flag gift) sont
-   retirables par lui. Une VP9/VP11 ajoutée normalement depuis sa fiche n'est
-   JAMAIS retirée — mais compte comme « pièce prise » (Shopify la mettra à
-   0 €) et reste exclue du montant éligible (comportement Shopify constaté). */
-const isCompanionHandle = (h) => Boolean(GIFT_COMPANION && h === GIFT_COMPANION.handle);
-const flaggedGiftLines = (cart) => cart.filter((i) => i.gift === GIFT_OFFER.id && !isCompanionHandle(i.handle)).sort((a, b) => (a.giftOrder || 0) - (b.giftOrder || 0));
-const takenGiftLines   = (cart) => cart.filter((i) => (i.gift === GIFT_OFFER.id || GIFT_HANDLES.has(i.handle)) && !isCompanionHandle(i.handle));
-const companionLines   = (cart) => GIFT_COMPANION ? cart.filter((i) => i.gift === GIFT_OFFER.id && i.handle === GIFT_COMPANION.handle) : [];
+   retirables par lui. Une VP9/VP11 achetée normalement n'est JAMAIS retirée —
+   mais compte comme « prise » (Shopify la mettra à 0 €) et reste exclue du
+   montant éligible (comportement Shopify constaté par paniers-tests). */
+const flaggedGiftLines = (cart) => cart.filter((i) => i.gift === GIFT_OFFER.id).sort((a, b) => (a.giftOrder || 0) - (b.giftOrder || 0));
+const takenGiftLines   = (cart) => cart.filter((i) => i.gift === GIFT_OFFER.id || GIFT_HANDLES.has(i.handle));
 export function giftContext(preview) {
   const cart = readCart();
   const pl = preview && Array.isArray(preview.lines) ? preview.lines : null;
   let sum = 0;
   for (const i of cart) {
-    if (i.gift === GIFT_OFFER.id || GIFT_HANDLES.has(i.handle) || isCompanionHandle(i.handle)) continue;
+    if (i.gift === GIFT_OFFER.id || GIFT_HANDLES.has(i.handle)) continue;
     const p = pl ? pl.find((l) => l.variantId === i.variantId) : null;
     if (p && p.eligible === false) continue;
     sum += (i.price || 0) * (i.qty || 1);
@@ -274,54 +259,34 @@ export function giftReconcile(preview) {
   if (_giftReconciling || !giftActive()) return;
   _giftReconciling = true;
   try {
-    const { cart, allowance, taken, flagged } = giftContext(preview);
-    const comps = companionLines(cart);
-    for (const g of [...flagged, ...comps]) if ((g.qty || 1) !== 1) setCartQty(g.variantId, 1);
-    // Compagnon : suit le tabouret, seulement au droit-aux-deux. Sinon retiré.
-    if (GIFT_COMPANION) {
-      const stoolTaken = taken.some((i) => i.handle === GIFT_COMPANION.withHandle);
-      const compAllowed = (allowance >= GIFT_COMPANION.minGifts && stoolTaken) ? 1 : 0;
-      if (comps.length > compAllowed) {
-        comps.slice(compAllowed).forEach((g) => removeFromCart(g.variantId));
-        if (stoolTaken && allowance < GIFT_COMPANION.minGifts) setGiftMsg(`Votre panier est repassé sous ${euro(GIFT_OFFER.tiers[1].threshold)} — le coussin d'assise a été retiré.`);
-      }
-    } else if (comps.length) {
-      // Offre compagnon désactivée : purge d'éventuelles lignes résiduelles.
-      comps.forEach((g) => removeFromCart(g.variantId));
-    }
-    // Redescente sous un palier : retirer les cadeaux en trop (les derniers
-    // choisis), garder le premier. Message neutre, jamais de reproche.
-    const slots = Math.max(0, allowance - (taken.length - flagged.length));
-    if (flagged.length > slots) {
-      flagged.slice(slots).forEach((g) => removeFromCart(g.variantId));
+    const { cart, allowance, flagged } = giftContext(preview);
+    for (const g of flagged) if ((g.qty || 1) !== 1) setCartQty(g.variantId, 1);
+    // Redescente : retraits par IDENTITÉ — chaque cadeau exige son palier
+    // (VP9 dès 900 €, VP11 dès 1 800 €). Message neutre, jamais de reproche.
+    const illegit = flagged.filter((g) => allowance < giftMinAllowance(g.handle));
+    if (illegit.length) {
+      illegit.forEach((g) => removeFromCart(g.variantId));
+      const t = GIFT_OFFER.tiers;
       setGiftMsg(allowance >= 1
-        ? `Votre panier est repassé sous ${euro(GIFT_OFFER.tiers[1].threshold)} — le second cadeau a été retiré.`
-        : `Votre panier est repassé sous ${euro(GIFT_OFFER.tiers[0].threshold)} — le cadeau a été retiré.`);
+        ? `Votre panier est repassé sous ${euro(t[1].threshold)} — le tabouret a été retiré.`
+        : `Votre panier est repassé sous ${euro(t[0].threshold)} — le cadeau a été retiré.`);
       return;
     }
     // Vérification du 0 € RÉEL — uniquement sur un preview FRAIS (mêmes
-    // variantes que le panier). Si Shopify n'a pas mis un cadeau marqué à 0 €
-    // (remises désactivées ?), on le retire et on le dit honnêtement.
-    const flaggedAll = [...flagged, ...companionLines(readCart())];
-    if (preview && Array.isArray(preview.lines) && flaggedAll.length) {
+    // variantes que le panier). Remise absente → retrait + message honnête.
+    if (preview && Array.isArray(preview.lines) && flagged.length) {
       const cartIds = new Set(cart.map((i) => i.variantId));
       const prevIds = new Set(preview.lines.map((l) => l.variantId));
       const fresh = cartIds.size === prevIds.size && [...cartIds].every((id) => prevIds.has(id));
       if (fresh) {
-        const notFree = flaggedAll.filter((g) => {
+        const notFree = flagged.filter((g) => {
           const p = preview.lines.find((l) => l.variantId === g.variantId);
           return p && p.subtotal > 0 && (p.discountPct || 0) < 99;
         });
         if (notFree.length) {
           notFree.forEach((g) => removeFromCart(g.variantId));
-          // Une remise concurrente (ex. 5+1 chaises) a gagné l'arbitrage : guider
-          // vers l'ajout des deux pièces plutôt qu'un message d'erreur sec.
-          const competing = (preview.discounts || []).length > 0;
-          const hadAll = flagged.length >= Math.min(2, (_giftMeta || []).length || 2);
-          setGiftMsg(competing
-            ? (hadAll || allowance < 2
-              ? "Votre panier bénéficie déjà d'une offre plus avantageuse — les cadeaux Panton ne se cumulent pas avec elle."
-              : "Une autre offre s'applique déjà à votre panier — ajoutez les deux pièces ensemble pour activer vos cadeaux.")
+          setGiftMsg((preview.discounts || []).length > 0
+            ? "Une autre offre plus avantageuse s'applique déjà à votre panier — les offres ne se cumulent pas."
             : "L'offre n'a pas pu être appliquée — le cadeau a été retiré. Écrivez-nous si le souci persiste.");
         }
       }
@@ -332,20 +297,22 @@ export function giftOfferHTML(preview) {
   if (!giftActive()) return "";
   loadGiftMeta();
   if (!_giftMeta || !_giftMeta.length) return "";
-  const { cart, sum, allowance, nextTier, taken, flagged } = giftContext(preview);
+  const { cart, sum, allowance, nextTier, taken } = giftContext(preview);
   if (!cart.length) return "";
   const msg = _giftMsg.text && (Date.now() - _giftMsg.at < 8000)
     ? `<p class="gifto__msg">${escapeHtml(_giftMsg.text)}</p>` : "";
   const takenHandles = new Set(taken.map((i) => i.handle));
+  const lamp  = _giftMeta.find((m) => m.minAllowance <= 1);
+  const stool = _giftMeta.find((m) => m.minAllowance >= 2);
   const bar = (target) => {
     const gap = Math.max(0, Math.ceil(target - sum));
     const pct = Math.max(0, Math.min(100, (sum / target) * 100));
     return { gap, html: `<div class="gifto__bar" role="progressbar" aria-label="Progression vers votre cadeau" aria-valuemin="0" aria-valuemax="${target}" aria-valuenow="${Math.min(Math.round(sum), target)}"><span class="gifto__fill" style="width:${pct}%"></span></div>` };
   };
+  // Tuile UNIQUE, horizontale (packshot + infos + coloris + bouton) — plus de
+  // chooser côte à côte (retour UI Cyril : illisible dans le tiroir).
   const tile = (m, opts = {}) => {
     const locked = !!opts.locked;
-    const compSub = (GIFT_COMPANION && m.handle === GIFT_COMPANION.withHandle && allowance >= GIFT_COMPANION.minGifts && _giftCompanion)
-      ? `<span class="gifto__tsub">+ son coussin d'assise offert (${euro(_giftCompanion.price)})</span>` : "";
     const sel = m.variants.length > 1 && !locked
       ? `<select class="gifto__sel" data-gift-variant="${escapeHtml(m.handle)}" aria-label="Coloris — ${escapeHtml(m.name)}">${m.variants.map((v) => `<option value="${escapeHtml(v.id)}">${escapeHtml(v.title || m.name)}</option>`).join("")}</select>` : "";
     return `<div class="gifto__tile${locked ? " is-locked" : ""}"${locked ? ' aria-disabled="true"' : ""}>
@@ -353,52 +320,34 @@ export function giftOfferHTML(preview) {
         <div class="gifto__tinfo">
           <span class="gifto__tname">${escapeHtml(m.name)}</span>
           <span class="gifto__tvalue">Valeur ${euro(m.price)}</span>
-          ${compSub}
           ${sel}
-          ${locked ? "" : `<button type="button" class="gifto__btn" data-gift-add="${escapeHtml(m.handle)}">${escapeHtml(opts.cta || "Choisir")}</button>`}
+          ${locked ? "" : `<button type="button" class="gifto__btn" data-gift-add="${escapeHtml(m.handle)}">${escapeHtml(opts.cta || "Ajouter")}</button>`}
         </div>
       </div>`;
   };
   let body = "";
-  // Remise concurrente (ex. 5+1 ×2) déjà supérieure à la valeur des DEUX cadeaux :
-  // les ajouter perdrait l'arbitrage Shopify (une seule remise s'applique, la
-  // meilleure). On l'explique au lieu de tendre un piège. (taken===0 : dès qu'un
-  // cadeau est pris, les remises du preview incluent celle des cadeaux.)
-  const competingAmt = (preview && Array.isArray(preview.discounts))
-    ? preview.discounts.reduce((s, d) => s + (d.amount || 0), 0) : 0;
-  const giftsValue = _giftMeta.reduce((s, m) => s + (m.price || 0), 0)
-    + (GIFT_COMPANION && allowance >= GIFT_COMPANION.minGifts && _giftCompanion ? (_giftCompanion.price || 0) : 0);
-  if (allowance > 0 && taken.length === 0 && competingAmt >= giftsValue) {
-    body = `<p class="gifto__lead">Votre panier bénéficie déjà d'une offre plus avantageuse (−${euro(competingAmt)}). Les cadeaux Panton ne se cumulent pas avec elle.</p>`;
-  } else if (allowance === 0) {                                             // État 1 — le plus fréquent
+  const lampTaken  = lamp  && takenHandles.has(lamp.handle);
+  const stoolTaken = stool && takenHandles.has(stool.handle);
+  if (allowance === 0) {                                             // État 1 — le plus fréquent
     const b = bar(GIFT_OFFER.tiers[0].threshold);
-    body = `<p class="gifto__lead">Plus que <strong>${euro(b.gap)}</strong> et vous choisissez votre cadeau Panton</p>${b.html}
-      <div class="gifto__tiles">${_giftMeta.map((m) => tile(m, { locked: true })).join("")}</div>`;
-  } else if (taken.length === 0) {                                   // État 2 — débloqué, rien de choisi
-    if (allowance >= 2 && _giftMeta.length >= 2) {
-      // Droit aux deux d'emblée → ajout GROUPÉ mis en avant. Indispensable quand
-      // une remise concurrente (5+1 chaises) est en lice : un SEUL cadeau au panier
-      // perd l'arbitrage Shopify (il resterait payant) ; les DEUX ensemble gagnent.
-      body = `<p class="gifto__lead">Vous avez droit aux <strong>deux pièces</strong> — ajoutez-les</p>
-      <div class="gifto__tiles">${_giftMeta.map((m) => tile(m, { cta: "Ajouter" })).join("")}</div>
-      <button type="button" class="gifto__btn gifto__btn--all" data-gift-add-all>Ajouter les deux pièces</button>`;
-    } else {
-      body = `<p class="gifto__lead">Votre cadeau est débloqué — <strong>choisissez votre pièce</strong></p>
-      <div class="gifto__tiles">${_giftMeta.map((m) => tile(m)).join("")}</div>`;
-    }
-  } else if (allowance >= 2 && taken.length === 1) {                 // État 4 — droit aux deux
-    const other = _giftMeta.find((m) => !takenHandles.has(m.handle));
-    body = other
-      ? `<p class="gifto__lead">Vous avez droit aux deux — ajoutez ${escapeHtml(other.name)}</p><div class="gifto__tiles gifto__tiles--one">${tile(other, { cta: "Ajouter" })}</div>`
-      : `<p class="gifto__lead">Votre cadeau Panton est dans le panier.</p>`;
-  } else if (nextTier) {                                             // État 3 — 1 pris, cap sur le palier 2
-    const chosen = _giftMeta.find((m) => takenHandles.has(m.handle));
+    body = `<p class="gifto__lead">Plus que <strong>${euro(b.gap)}</strong> et votre ${escapeHtml(lamp ? lamp.name : "cadeau")} est offerte</p>${b.html}
+      ${lamp ? tile(lamp, { locked: true }) : ""}
+      ${stool ? `<p class="gifto__teaser">Et dès ${euro(GIFT_OFFER.tiers[1].threshold)}, le ${escapeHtml(stool.name)} la rejoint.</p>` : ""}`;
+  } else if (allowance >= 2 && !lampTaken && !stoolTaken && lamp && stool) { // Droit aux deux d'emblée
+    body = `<p class="gifto__lead">Vos <strong>deux cadeaux</strong> sont débloqués — ajoutez-les</p>
+      ${tile(lamp)}${tile(stool)}
+      <button type="button" class="gifto__btn gifto__btn--all" data-gift-add-all>Ajouter les deux</button>`;
+  } else if (!lampTaken && lamp && allowance >= 1) {                 // État 2 — VP9 débloquée
+    body = `<p class="gifto__lead">Votre cadeau est débloqué — <strong>choisissez votre coloris</strong></p>
+      ${tile(lamp)}`;
+  } else if (allowance >= 2 && stool && !stoolTaken) {               // État 4 — le tabouret est à vous
+    body = `<p class="gifto__lead">Le ${escapeHtml(stool.name)} est à vous — ajoutez-le</p>${tile(stool)}`;
+  } else if (nextTier && stool && !stoolTaken) {                     // État 3 — cap sur le palier 2
     const b = bar(nextTier.threshold);
-    const chg = flagged.length ? ` · <button type="button" class="gifto__link" data-gift-change>Changer de cadeau</button>` : "";
-    body = `<p class="gifto__lead">${chosen ? escapeHtml(chosen.name) + (/lampe/i.test(chosen.name || "") ? " offerte" : " offert") : "Cadeau ajouté"}${chg}</p>
-      <p class="gifto__lead">Plus que <strong>${euro(b.gap)}</strong> et la seconde pièce est offerte aussi</p>${b.html}`;
+    body = `<p class="gifto__lead">${lamp ? escapeHtml(lamp.name) + " offerte" : "Cadeau ajouté"}</p>
+      <p class="gifto__lead">Plus que <strong>${euro(b.gap)}</strong> et le ${escapeHtml(stool.name)} est offert aussi</p>${b.html}`;
   } else {                                                            // État 5 — tout est pris
-    body = `<p class="gifto__lead">Vos deux cadeaux Panton sont dans le panier.</p>`;
+    body = `<p class="gifto__lead">${allowance >= 2 ? "Vos deux cadeaux Panton sont" : "Votre cadeau Panton est"} dans le panier.</p>`;
   }
   return `<section class="gifto" aria-label="Offre cadeau du Mois Verner Panton">
       <p class="gifto__eyebrow">Mois Verner Panton · jusqu'au 30 septembre</p>
@@ -406,28 +355,17 @@ export function giftOfferHTML(preview) {
       <p class="gifto__foot">Offres non cumulables entre elles — la plus avantageuse s'applique automatiquement.</p>
     </section>`;
 }
-// Ajoute le coussin compagnon si le tabouret vient d'être pris au droit-aux-deux
-// (même écriture panier → un seul arbitrage Shopify). Sans stock → tabouret seul.
-function pushCompanionIfDue(cart, addedHandle) {
-  if (!GIFT_COMPANION || addedHandle !== GIFT_COMPANION.withHandle || !_giftCompanion) return;
-  const { allowance } = giftContext(null);
-  if (allowance < GIFT_COMPANION.minGifts) return;
-  if (cart.some((i) => i.gift === GIFT_OFFER.id && i.handle === GIFT_COMPANION.handle)) return;
-  const c = _giftCompanion;
-  cart.push({ variantId: c.variants[0].id, handle: c.handle, name: c.name, brand: c.brand, price: c.price, image: c.image, qty: 1, gift: GIFT_OFFER.id, giftOrder: Date.now() + 1 });
-}
 let _giftBound = false;
 export function giftBind() {
   if (_giftBound) return; _giftBound = true;
   loadGiftMeta();
-  // Cohérence même sans preview : à chaque changement de panier, contrôle
-  // local (la somme locale majore la somme éligible → jamais de sur-retrait).
+  // Cohérence même sans preview : la somme locale majore la somme éligible →
+  // jamais de sur-retrait.
   document.addEventListener("cart:change", () => giftReconcile(null));
   document.addEventListener("click", (e) => {
     const addAll = e.target.closest("[data-gift-add-all]");
     if (addAll) {
-      // Ajout GROUPÉ en UNE écriture → un seul arbitrage Shopify, pas d'état
-      // intermédiaire perdant face au 5+1.
+      // Ajout GROUPÉ en une écriture → un seul recalcul Shopify.
       addAll.disabled = true;
       const cart = readCart();
       let n = 0;
@@ -438,7 +376,7 @@ export function giftBind() {
           cart.push({ variantId, handle: m.handle, name: m.name, brand: m.brand, price: m.price, image: m.image, qty: 1, gift: GIFT_OFFER.id, giftOrder: Date.now() + n++ });
         }
       }
-      if (n) { if (GIFT_COMPANION) pushCompanionIfDue(cart, GIFT_COMPANION.withHandle); writeCart(cart); }
+      if (n) writeCart(cart);
       return;
     }
     const add = e.target.closest("[data-gift-add]");
@@ -451,13 +389,7 @@ export function giftBind() {
       if (cart.some((i) => i.variantId === variantId && i.gift === GIFT_OFFER.id)) return;
       add.disabled = true;                       // anti double-clic (le re-render suit)
       cart.push({ variantId, handle: m.handle, name: m.name, brand: m.brand, price: m.price, image: m.image, qty: 1, gift: GIFT_OFFER.id, giftOrder: Date.now() });
-      pushCompanionIfDue(cart, m.handle);
       writeCart(cart);
-      return;
-    }
-    if (e.target.closest("[data-gift-change]")) {
-      const fl = flaggedGiftLines(readCart());
-      if (fl.length) removeFromCart(fl[0].variantId);   // retour à l'état « choisissez »
     }
   });
 }

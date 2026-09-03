@@ -1697,11 +1697,10 @@ body.pdplb-locked { overflow: hidden; }
 .gifto__bar { position: relative; height: 6px; background: var(--tile); overflow: hidden; margin: 0 0 12px; }
 .gifto__fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--accent); transition: width .4s var(--ease); }
 @media (prefers-reduced-motion: reduce) { .gifto__fill { transition: none; } }
-.gifto__tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.gifto__tiles--one { grid-template-columns: 1fr; }
-.gifto__tile { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line); padding: 10px; background: #fff; }
+.gifto__tile { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); padding: 10px; background: #fff; margin: 0 0 10px; }
 .gifto__tile.is-locked { opacity: .55; }
-.gifto__img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: #fff; }
+.gifto__img { width: 72px; flex: none; aspect-ratio: 1 / 1; object-fit: contain; background: #fff; }
+.gifto__tinfo { flex: 1; min-width: 0; }
 .gifto__tname { display: block; font-family: var(--sans-product); font-weight: 600; font-size: 12.5px; line-height: 1.3; }
 .gifto__tvalue { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
 .gifto__sel { margin-top: 6px; font-size: 12px; padding: 6px 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); width: 100%; }
@@ -1722,6 +1721,6 @@ body.pdplb-locked { overflow: hidden; }
 .gifto__btn--all { width: 100%; margin-top: 10px; background: var(--ink); color: var(--paper); }
 .gifto__btn--all:hover { background: var(--accent-ink); color: var(--paper); }
 
-.gifto__tsub { display: block; font-size: 11px; color: var(--accent-ink); margin-top: 3px; }
+.gifto__teaser { font-size: 11.5px; color: var(--muted); margin: 8px 0 0; }
 
 .gifto__foot { font-size: 10.5px; color: var(--muted); margin: 10px 0 0; }

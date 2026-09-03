@@ -2094,11 +2094,10 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
     const cart = result.cart;
     const titleOf = (d) => d.title || d.code || 'Remise';
     // Éligibilité « offre cadeau » par ligne : miroir de la collection Shopify
-    // « Catalogue — paliers cadeaux » (gid 694454944073). Depuis le 02/09/2026 sa
-    // règle est « prix de variante > 0 » (tout le catalogue) — les tags promo
-    // n'excluent PLUS rien du minimum. Le Set reste la manette si la règle
-    // redevient un jour à base de tags (ex-tags : promo/promotion/sale/…).
-    const GIFT_EXCLUDE_TAGS = new Set([]);
+    // « Catalogue — paliers cadeaux » (gid 694454944073) : prix > 0 SAUF tag
+    // `exclu-paliers` (03/09 : chaise Panton sortie du calcul — son 5+1 est
+    // financé par Vitra et ne doit pas être remplacé par les cadeaux Mikado).
+    const GIFT_EXCLUDE_TAGS = new Set(['exclu-paliers']);
     const isEligible = (tags) => !(tags || []).some((t) => GIFT_EXCLUDE_TAGS.has(String(t).toLowerCase()));
     // Cart-level discounts (e.g. code "WELCOME10")
     const cartDiscounts = (cart.discountAllocations || []).map(d => ({
