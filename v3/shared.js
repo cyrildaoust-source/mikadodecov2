@@ -192,10 +192,15 @@ export const GIFT_OFFER = {
   startsAt: "2026-09-01T19:35:00+02:00",
   endsAt:   "2026-09-30T23:59:59+02:00",
   tiers: [
-    { threshold: 1000, gift: "lampe-de-table-flowerpot-vp9" },
-    { threshold: 3500, gift: "tabouret-visiona" },
-    { threshold: 8000, gift: "fauteuil-amoebe" },
+    // variants: "stock" = coloris en stock only (fait tourner le stock VP9) ;
+    // "all" = tous les coloris commandables (Visiona : vente hors stock active,
+    // le choix de couleur est « le minimum » — décision Cyril 03/09).
+    { threshold: 1000, gift: "lampe-de-table-flowerpot-vp9", variants: "stock" },
+    { threshold: 2500, gift: "tabouret-visiona",             variants: "all" },
   ],
+  // Pas de palier automatisé au-dessus : les très gros paniers sont invités à
+  // la conversation (l'Amoebe = geste comptoir, annoncé en newsletter).
+  invite: { threshold: 5000, text: "Un projet d'ampleur ? Votre commande mérite une attention particulière — parlons-en", href: "/rendez-vous.html" },
 };
 const GIFT_HANDLES = new Set(GIFT_OFFER.tiers.map((t) => t.gift));
 const giftTierIdx = (h) => GIFT_OFFER.tiers.findIndex((t) => t.gift === h);
@@ -215,11 +220,13 @@ function loadGiftMeta() {
       const basePrice = p.priceMin || 0;
       const variants = (p.variants || [])
         .filter((v) => {
-          if (!v || !v.id || v.available === false || (v.qty || 0) <= 0) return false;
+          if (!v || !v.id || v.available === false) return false;
+          if (t.variants !== "all" && (v.qty || 0) <= 0) return false;   // politique « stock »
           const pr = parseFloat((v.price && v.price.amount) != null ? v.price.amount : v.price);
           return !(pr > basePrice + 0.01);
         })
-        .map((v) => ({ id: v.id, title: v.title || "", qty: v.qty }));
+        .map((v) => ({ id: v.id, title: v.title || "", qty: v.qty }))
+        .sort((a, b) => ((b.qty > 0) ? 1 : 0) - ((a.qty > 0) ? 1 : 0));   // en stock d'abord
       if (!variants.length) return null;   // rupture totale → palier sans cadeau proposable
       return { handle: t.gift, threshold: t.threshold, name: p.name || t.gift, brand: p.brand || "", price: p.priceMin || 0, image: p.image || "", variants };
     } catch (e) { return null; }
@@ -311,10 +318,11 @@ export function giftOfferHTML(preview) {
     const locked = !!opts.locked;
     const sel = m.variants.length > 1 && !locked
       ? `<select class="gifto__sel" data-gift-variant="${escapeHtml(m.handle)}" aria-label="Coloris — ${escapeHtml(m.name)}">${m.variants.map((v) => `<option value="${escapeHtml(v.id)}">${escapeHtml(v.title || m.name)}</option>`).join("")}</select>` : "";
+    const pdp = `/produit.html?handle=${encodeURIComponent(m.handle)}`;
     return `<div class="gifto__tile${locked ? " is-locked" : ""}"${locked ? ' aria-disabled="true"' : ""}>
-        <img class="gifto__img" src="${escapeHtml(m.image || "")}" alt="" loading="lazy" />
+        <a href="${pdp}" tabindex="-1" aria-hidden="true"><img class="gifto__img" src="${escapeHtml(m.image || "")}" alt="" loading="lazy" /></a>
         <div class="gifto__tinfo">
-          <span class="gifto__tname">${escapeHtml(m.name)}</span>
+          <a class="gifto__tname" href="${pdp}">${escapeHtml(m.name)}</a>
           <span class="gifto__tvalue">Valeur ${euro(m.price)}</span>
           ${sel}
           ${locked ? "" : `<button type="button" class="gifto__btn" data-gift-add="${escapeHtml(m.handle)}">${escapeHtml(opts.cta || "Ajouter")}</button>`}
@@ -357,9 +365,11 @@ export function giftOfferHTML(preview) {
       body = `<p class="gifto__lead">${cur ? escapeHtml(cur.name) : "Votre cadeau"} — le plus beau de l'offre — est dans votre panier.</p>`;
     }
   }
+  const invite = GIFT_OFFER.invite && sum >= GIFT_OFFER.invite.threshold
+    ? `<p class="gifto__invite"><a href="${escapeHtml(GIFT_OFFER.invite.href)}">${escapeHtml(GIFT_OFFER.invite.text)} →</a></p>` : "";
   return `<section class="gifto" aria-label="Offre cadeau du Mois Verner Panton">
       <p class="gifto__eyebrow">Mois Verner Panton · jusqu'au 30 septembre</p>
-      <div aria-live="polite">${msg}${body}</div>
+      <div aria-live="polite">${msg}${body}</div>${invite}
       <p class="gifto__foot">Offres non cumulables entre elles — la plus avantageuse s'applique automatiquement.</p>
     </section>`;
 }
