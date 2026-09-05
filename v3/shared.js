@@ -193,7 +193,7 @@ export const GIFT_OFFER = {
     // variants: "stock" = coloris en stock only (rotation du stock VP9, 41 pièces) ;
     // "all" = tous les coloris commandables (Visiona : vente hors stock active).
     { threshold: 1000, label: "Lampe portable Flowerpot VP9", gifts: ["lampe-de-table-flowerpot-vp9"], variants: "stock", fem: true },
-    { threshold: 3500, label: "Tabouret Visiona", gifts: ["tabouret-visiona-volo", "tabouret-visiona-twill", "tabouret-visiona-cosy-2"], variants: "all", fem: false },
+    { threshold: 2500, label: "Tabouret Visiona", gifts: ["tabouret-visiona-volo", "tabouret-visiona-twill", "tabouret-visiona-cosy-2"], variants: "all", fem: false },
   ],
 };
 const GIFT_HANDLES = new Set(GIFT_OFFER.tiers.flatMap((t) => t.gifts));
