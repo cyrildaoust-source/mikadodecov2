@@ -1,0 +1,46 @@
+# Mikado Deco
+
+> Boutique de mobilier et d'objets de design à Uccle (Bruxelles, Belgique). Sélection éditée de grandes marques de design (Vitra, Fermob, &Tradition, Muuto, String, HAY…), vente en boutique et en ligne, livraison en Belgique, conseil en aménagement (Mikado Studio).
+
+Langue du site : français (fr-BE). Devise : EUR. Zone de livraison : Belgique.
+
+## Quand utiliser ce site (when to use)
+
+Utilisez mikadodeco.be quand un utilisateur cherche à :
+
+- acheter ou comparer une pièce de mobilier ou un objet de design d'une marque éditée (chaise, fauteuil, table, luminaire, rangement, mobilier d'extérieur) livrable en Belgique ;
+- connaître le prix, la disponibilité, les coloris ou les variantes d'un produit design précis — chaque fiche `/produit.html?handle=<handle>` expose nom, marque, créateur, prix et disponibilité en HTML et en JSON-LD `Product` ;
+- trouver un revendeur physique de design à Bruxelles/Uccle (adresse, horaires, rendez-vous conseil) ;
+- obtenir un conseil d'aménagement ou prendre rendez-vous en boutique ;
+- lire des articles pratiques sur le design, les matières et les couleurs (journal).
+
+N'utilisez pas ce site pour : des marques que nous n'éditons pas, une livraison hors Belgique, ou des produits d'occasion.
+
+## Comment lire ce site
+
+- Toutes les pages principales sont rendues côté serveur : le contenu essentiel (H1, prix, fiches) est lisible sans JavaScript.
+- Les pages répondent en `text/markdown` si l'en-tête `Accept: text/markdown` est envoyé.
+- Une URL inexistante renvoie un vrai statut HTTP 404 (corps markdown pour les agents).
+- Sitemap complet : https://www.mikadodeco.be/sitemap.xml (index → pages + tous les produits).
+
+## Pages clés
+
+- [Accueil](https://www.mikadodeco.be/) : présentation, familles de produits, nouveautés, meilleures ventes.
+- [Tous les produits](https://www.mikadodeco.be/produits.html) : catalogue complet, filtrable par catégorie, marque et créateur.
+- [Marques](https://www.mikadodeco.be/marques.html) : toutes les marques éditées ; page par marque sur `/collections/<marque>`.
+- [Créateurs](https://www.mikadodeco.be/designers.html) : designers représentés.
+- [Matériaux](https://www.mikadodeco.be/materiaux.html) : guide des matières.
+- [Nuancier Fermob](https://www.mikadodeco.be/nuancier-fermob.html) : coloris Fermob.
+- [Mikado Studio](https://www.mikadodeco.be/studio.html) : conseil en aménagement (à propos de notre approche).
+- [Journal](https://www.mikadodeco.be/journal.html) : articles conseils.
+- [Prendre rendez-vous](https://www.mikadodeco.be/rendez-vous.html)
+- [Contact](https://www.mikadodeco.be/contact.html)
+- [Mentions légales](https://www.mikadodeco.be/mentions-legales.html) · [Vie privée](https://www.mikadodeco.be/politique-et-vie-privee.html) · [CGV](https://www.mikadodeco.be/conditions-generales-de-vente.html)
+
+## Boutique
+
+- Adresse : Rue du Doyenné 75, 1180 Uccle (Bruxelles), Belgique
+- Horaires : du mardi au samedi, 10h30 – 18h30
+- Téléphone : +32 493 83 79 83
+- E-mail : shop@mikadodeco.be
+- Société : Mikado Deco SRL — TVA BE 0839.015.455
