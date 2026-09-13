@@ -332,11 +332,72 @@ const sendProduitTemplate  = (res) => sendTemplate(res, PRODUIT_TEMPLATE);
 const sendProduitsTemplate = (res) => sendTemplate(res, PRODUITS_TEMPLATE);
 // Alias de collection VOLONTAIRES (pas des miss) → catalogue complet, jamais 404.
 const COLLECTION_ALIASES = new Set(['all', 'frontpage']);
+// ─── AGENT READINESS · négociation text/markdown + 404 lisibles par les agents ──
+// Les agents IA (ChatGPT, Claude, Perplexity…) demandent souvent `Accept:
+// text/markdown` (convention acceptmarkdown.com) et n'annoncent pas text/html.
+// On leur sert alors une version markdown sobre de la page (titre, description,
+// titres, paragraphes, liens absolus) ; les navigateurs, qui annoncent
+// explicitement text/html, reçoivent l'HTML inchangé. `Vary: Accept` est
+// OBLIGATOIRE dès qu'une URL varie selon Accept, sinon le CDN Vercel peut
+// servir la variante HTML en cache à un agent (ou l'inverse). res.vary() AJOUTE
+// la valeur (ne remplace pas le `Vary: Origin` posé par cors).
+const AGENT_LINKS = `\n\n---\n\n- Sitemap : ${ORIGIN}/sitemap.xml\n- Guide agents : ${ORIGIN}/llms.txt\n`
+  + `- Catalogue : ${ORIGIN}/produits.html\n- Marques : ${ORIGIN}/marques.html\n- Contact : ${ORIGIN}/contact.html\n`;
+// Préférence EXPLICITE pour le markdown (q > text/html, ou text/html absent).
+// `*/*` seul (curl, monitoring) reste sur l'HTML : on ne change rien pour eux.
+const wantsMarkdown = (req) => req.accepts(['text/html', 'text/markdown']) === 'text/markdown';
+// 404 : un navigateur annonce toujours text/html en clair ; un agent ou un
+// outil envoie `*/*` (ou rien) → corps markdown court avec des liens de reprise.
+const acceptsHtmlExplicitly = (req) => /text\/html/i.test(String(req.headers.accept || ''));
+function sendMarkdown(res, md) {
+  res.vary('Accept');
+  res.set('Content-Type', 'text/markdown; charset=utf-8');
+  return res.send(md);
+}
+const markdown404 = (reqPath) =>
+  `# 404 — Page introuvable\n\nAucune page à l'adresse ${String(reqPath).replace(/[`\n\r]/g, '')} sur ${ORIGIN}.\n\n`
+  + `Où chercher ensuite :${AGENT_LINKS}`;
+// Conversion HTML → markdown sans dépendance : on part du <main> de la page
+// AVANT injection du chrome (nav/pied/panier exclus), scripts/styles retirés,
+// titres/listes/gras/liens convertis, entités décodées. Pas de rendu de nœuds
+// imbriqués complexes : c'est un extrait fidèle, pas un rendu exhaustif.
+function htmlToMarkdown(html, url) {
+  const grp = (re) => { const m = html.match(re); return m ? m[1] : ''; };
+  const dec = (s) => String(s || '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&#(\d+);/g, (_, n) => String.fromCharCode(+n));
+  const title = dec(grp(/<title[^>]*>([\s\S]*?)<\/title>/i)).replace(/\s+/g, ' ').trim();
+  const desc  = dec(grp(/<meta\s+name="description"\s+content="([^"]*)"/i)).trim();
+  let body = grp(/<main[^>]*>([\s\S]*?)<\/main>/i) || grp(/<body[^>]*>([\s\S]*?)<\/body>/i) || html;
+  body = body
+    .replace(/<(script|style|noscript|svg|template|iframe)\b[\s\S]*?<\/\1>/gi, '')
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<img\b[^>]*\balt="([^"]*)"[^>]*>/gi, (_, a) => (a ? ` ${a} ` : ''))
+    .replace(/<img\b[^>]*>/gi, '')
+    .replace(/<br\s*\/?>/gi, '\n')
+    // Titre sur UNE ligne : un <br> ou un retour dans le <h1> casserait l'en-tête markdown.
+    .replace(/<(h[1-6])\b[^>]*>([\s\S]*?)<\/\1>/gi, (_, h, t) => `\n\n${'#'.repeat(+h[1])} ${t.replace(/<br\s*\/?>|\s+/gi, ' ').trim()}\n\n`)
+    .replace(/<li\b[^>]*>([\s\S]*?)<\/li>/gi, '\n- $1')
+    .replace(/<(strong|b)\b[^>]*>([\s\S]*?)<\/\1>/gi, '**$2**')
+    .replace(/<(em|i)\b[^>]*>([\s\S]*?)<\/\1>/gi, '_$2_')
+    .replace(/<a\b[^>]*\bhref="([^"#][^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, (_, href, t) => {
+      const label = t.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+      return label ? `[${label}](${absUrl(href)})` : '';
+    })
+    .replace(/<\/(p|div|section|article|header|footer|ul|ol|tr|blockquote|figure|figcaption)>/gi, '\n\n')
+    .replace(/<[^>]+>/g, ' ');
+  body = dec(body).replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  return `# ${title || 'Mikado Deco'}\n\n${desc ? '> ' + desc + '\n\n' : ''}Source : ${url}\n\n${body}${AGENT_LINKS}`;
+}
+
 // Soft-404 → vraie 404 : produit/collection/designer inexistant renvoie le shell avec
 // <meta robots noindex> + statut 404 (fini l'indexation Google de pages mortes/dupliquées).
+// Agents (pas de text/html annoncé) : corps markdown court au lieu du shell HTML.
 function send404Shell(res, file) {
   res.status(404);
+  res.vary('Accept');
   res.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=86400');
+  if (res.req && !acceptsHtmlExplicitly(res.req)) return sendMarkdown(res, markdown404(res.req.path));
   res.set('Content-Type', 'text/html; charset=utf-8');
   try {
     const rel = path.relative(path.join(__dirname, 'v3'), file);
@@ -571,69 +632,82 @@ app.get('/produits.html', async (req, res) => {
   }
 });
 
-// ─── SEO: sitemap dynamique ────────────────────────────
-// Remplace l'ancien v3/sitemap.xml statique (~24 URLs, sans produits) par un
-// sitemap généré : toutes les fiches produit (walk paginé, getProducts() étant
-// plafonné à 250) + collections + créateurs indexables + articles + pages
-// statiques. URLs absolues et canoniques (aucun paramètre de filtre, seulement
-// ?handle= et ?designer=). Caché 6 h. Routé vers la fonction dans vercel.json.
-app.get('/sitemap.xml', async (req, res) => {
+// ─── SEO: sitemap = INDEX instantané → pages (statique) + produits (walk) ──
+// /sitemap.xml était UN fichier généré par un walk paginé de tout le catalogue
+// Shopify (~3 300 URLs). À froid (cache serverless vide) ce walk dépasse le
+// budget de la fonction → connexion coupée (curl : http=000), et crawlers/agents
+// concluent « pas de sitemap ». On sert désormais un sitemapindex qui répond
+// immédiatement et pointe vers deux sitemaps : les pages (statique, avec
+// lastmod) et les produits/collections (walk caché 6 h). Aucune URL perdue ;
+// les 3 chemins sont routés vers la fonction dans vercel.json.
+const SM_ESC = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const SM_LASTMOD = new Date().toISOString().slice(0, 10);   // ≈ date du dernier déploiement (cold start)
+const SM_STATIC = [
+  ['/', '1.0'], ['/produits.html', '0.9'], ['/marques.html', '0.8'],
+  ['/designers.html', '0.7'], ['/materiaux.html', '0.7'], ['/selection.html', '0.6'],
+  ['/studio.html', '0.6'], ['/rendez-vous.html', '0.7'], ['/contact.html', '0.6'],
+  ['/journal.html', '0.6'], ['/nuancier-fermob.html', '0.6'],
+  ['/mentions-legales.html', '0.3'], ['/conditions-generales-de-vente.html', '0.3'],
+  ['/politique-et-vie-privee.html', '0.3'], ['/politique-cookies.html', '0.3'],
+];
+const smUrl = (loc, priority, lastmod) =>
+  `  <url><loc>${SM_ESC(loc)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}<priority>${priority}</priority></url>`;
+const smUrlset = (urls) => `<?xml version="1.0" encoding="UTF-8"?>\n`
+  + `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` + urls.join('\n') + `\n</urlset>\n`;
+function sendXml(res, xml) {
+  res.set('Content-Type', 'application/xml; charset=utf-8');
+  res.set('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');
+  return res.send(xml);
+}
+
+app.get('/sitemap.xml', (req, res) => sendXml(res,
+  `<?xml version="1.0" encoding="UTF-8"?>\n`
+  + `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
+  + `  <sitemap><loc>${ORIGIN}/sitemap-pages.xml</loc><lastmod>${SM_LASTMOD}</lastmod></sitemap>\n`
+  + `  <sitemap><loc>${ORIGIN}/sitemap-products.xml</loc></sitemap>\n`
+  + `</sitemapindex>\n`));
+
+// Pages statiques + créateurs indexables + articles : aucun appel Shopify → instantané.
+app.get('/sitemap-pages.xml', (req, res) => {
+  const urls = [];
+  SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr, SM_LASTMOD)));
+  // Créateurs — uniquement les indexables (champ `hidden` dans designers-data.json)
+  // pour éviter le thin content / les fiches masquées.
+  getDesigners().forEach((d) => {
+    if (d && d.slug && !d.hidden) urls.push(smUrl(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5'));
+  });
+  // Articles du journal (HTML pré-rendus)
   try {
-    const xml = await cached('sitemap:xml', async () => {
+    fs.readdirSync(path.join(__dirname, 'v3', 'journal'))
+      .filter((f) => f.endsWith('.html'))
+      .forEach((f) => urls.push(smUrl(ORIGIN + '/journal/' + f, '0.5')));
+  } catch (e) { /* dossier absent du bundle → includeFiles v3/journal/** */ }
+  return sendXml(res, smUrlset(urls));
+});
+
+// TOUTES les fiches produit (walk paginé, getProducts() plafonné à 250) + collections.
+// URLs canoniques (seulement ?handle=). Caché 6 h.
+app.get('/sitemap-products.xml', async (req, res) => {
+  try {
+    const xml = await cached('sitemap:products', async () => {
       const urls = [];
-      const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      const add = (loc, priority) => urls.push(`  <url><loc>${esc(loc)}</loc><priority>${priority}</priority></url>`);
-
-      // a) Pages statiques
-      const STATIC = [
-        ['/', '1.0'], ['/produits.html', '0.9'], ['/marques.html', '0.8'],
-        ['/designers.html', '0.7'], ['/materiaux.html', '0.7'], ['/selection.html', '0.6'],
-        ['/studio.html', '0.6'], ['/rendez-vous.html', '0.7'], ['/contact.html', '0.6'],
-        ['/journal.html', '0.6'], ['/nuancier-fermob.html', '0.6'],
-        ['/mentions-legales.html', '0.3'], ['/conditions-generales-de-vente.html', '0.3'],
-        ['/politique-et-vie-privee.html', '0.3'], ['/politique-cookies.html', '0.3'],
-      ];
-      STATIC.forEach(([p, pr]) => add(ORIGIN + p, pr));
-
-      // b) TOUTES les fiches produit — walk paginé (getProducts() plafonné à 250)
       let after = null;
       for (let i = 0; i < 60; i++) { // garde-fou
         const { items, pageInfo } = await getProductsPage(100, after, null, null);
         (items || []).forEach((prod) => {
-          if (prod.handle) add(ORIGIN + '/produit.html?handle=' + encodeURIComponent(prod.handle), '0.8');
+          if (prod.handle) urls.push(smUrl(ORIGIN + '/produit.html?handle=' + encodeURIComponent(prod.handle), '0.8'));
         });
         if (!pageInfo || !pageInfo.hasNextPage) break;
         after = pageInfo.endCursor;
       }
-
-      // c) Collections
       (await getCollections()).forEach((c) => {
-        if (c.handle) add(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6');
+        if (c.handle) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6'));
       });
-
-      // d) Créateurs — uniquement les indexables (champ `hidden` dans
-      //    designers-data.json) pour éviter le thin content / les fiches masquées.
-      getDesigners().forEach((d) => {
-        if (d && d.slug && !d.hidden) add(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5');
-      });
-
-      // e) Articles du journal (HTML pré-rendus)
-      try {
-        fs.readdirSync(path.join(__dirname, 'v3', 'journal'))
-          .filter((f) => f.endsWith('.html'))
-          .forEach((f) => add(ORIGIN + '/journal/' + f, '0.5'));
-      } catch (e) { /* dossier absent du bundle → includeFiles v3/journal/** */ }
-
-      return `<?xml version="1.0" encoding="UTF-8"?>\n`
-           + `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
-           + urls.join('\n') + `\n</urlset>\n`;
+      return smUrlset(urls);
     }, 6 * 60 * 60 * 1000); // cache 6 h
-
-    res.set('Content-Type', 'application/xml; charset=utf-8');
-    res.set('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');
-    return res.send(xml);
+    return sendXml(res, xml);
   } catch (err) {
-    console.warn('[sitemap]', err.message);
+    console.warn('[sitemap-products]', err.message);
     return res.status(500).send('');
   }
 });
@@ -648,7 +722,13 @@ const SSR_PAGES = new Set([
   'conditions-generales-de-vente.html', 'politique-cookies.html',
   'politique-et-vie-privee.html',
 ]);
+// Alias « pages de confiance » attendus par les agents IA (/about, /privacy) :
+// servis en 200 (pas de saut de redirection) avec le contenu des pages
+// existantes, qui portent leur propre <link rel="canonical"> → pas de doublon.
+// Routés vers la fonction dans vercel.json.
+const AGENT_ALIASES = { '/about': 'studio.html', '/privacy': 'politique-et-vie-privee.html' };
 function resolveSsrRel(p) {
+  if (AGENT_ALIASES[p]) return AGENT_ALIASES[p];
   if (p === '/') return 'index.html';
   if (p.endsWith('.html')) {
     const rel = p.slice(1);
@@ -783,8 +863,12 @@ app.get(/.*/, async (req, res, next) => {
   if (rel === 'designers.html') {
     try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
   }
-  res.set('Content-Type', 'text/html; charset=utf-8');
   res.set('Cache-Control', 'public, max-age=0, must-revalidate');
+  res.vary('Accept');
+  // Agents demandant text/markdown : extrait markdown du contenu de page (AVANT
+  // injectChrome → sans nav/pied/panier). Navigateurs : HTML inchangé.
+  if (wantsMarkdown(req)) return sendMarkdown(res, htmlToMarkdown(raw, ORIGIN + req.path));
+  res.set('Content-Type', 'text/html; charset=utf-8');
   return res.send(injectChrome(raw, rel));
 });
 
@@ -2410,10 +2494,14 @@ app.post('/api/newsletter', formLimiter, async (req, res) => {
 // ici via { handle: error } → /api/index.js). Dernier middleware enregistré.
 app.use(async (req, res) => {
   await _chromeReady;
+  res.status(404);
+  res.vary('Accept');
+  // Agents/outils (pas de text/html annoncé) : corps markdown court + liens de reprise.
+  if (!acceptsHtmlExplicitly(req)) return sendMarkdown(res, markdown404(req.path));
   let raw;
   try { raw = fs.readFileSync(path.join(__dirname, 'v3', '404.html'), 'utf8'); }
   catch { return res.status(404).send('Not found'); }
-  res.status(404).set('Content-Type', 'text/html; charset=utf-8');
+  res.set('Content-Type', 'text/html; charset=utf-8');
   return res.send(injectChrome(raw, '404.html'));   // non-hero → solide
 });
 

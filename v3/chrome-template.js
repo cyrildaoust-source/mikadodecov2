@@ -121,7 +121,7 @@ export function chromeHTML(active) {
       <div class="cartd__backdrop" data-cartd-backdrop></div>
       <aside class="cartd__panel" role="dialog" aria-modal="true" aria-label="Mon panier" data-cartd-panel>
         <header class="cartd__head">
-          <h2 class="cartd__title" data-cartd-title>Mon panier</h2>
+          <p class="cartd__title" data-cartd-title>Mon panier</p>
           <button class="cartd__close" data-cartd-close type="button" aria-label="Fermer le panier">&times;</button>
         </header>
         <div class="cartd__body" data-cartd-body></div>
