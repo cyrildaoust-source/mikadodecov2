@@ -45,9 +45,9 @@
 
     <section class="section wrap">
       <div class="home-railhead"><h2 class="serif">Nos catégories</h2>
-        <div class="home-arrows"><button class="home-arw" type="button" data-prev aria-label="Catégories précédentes">‹</button><button class="home-arw" type="button" data-next aria-label="Catégories suivantes">›</button></div>
+        <div class="home-arrows" hidden><button class="home-arw" type="button" data-prev aria-label="Catégories précédentes">‹</button><button class="home-arw" type="button" data-next aria-label="Catégories suivantes">›</button></div>
       </div>
-      <div class="home-rail" data-famrail>
+      <div class="home-rail home-rail--fit" data-famrail>
         <a class="home-rc" href="/collections/chaises">
           <img class="home-rc__img" src="/images/familles/assises/cat-chaises.webp" alt="" loading="lazy">
           <span class="home-rc__scrim" aria-hidden="true"></span>
@@ -98,17 +98,26 @@
     // exclut le mobilier de jardin (contamination outdoor de la collection sieges)
     function indoor(list){ return (list||[]).filter(function(p){ var t=(p&&p.tags)||[]; return t.indexOf('exterieur')<0 || t.indexOf('interieur')>=0; }); }
 
-    // Même carrousel et même défilement que « Nos familles » sur l’accueil.
+    // Les commandes ne sont utiles que si la rangée déborde réellement.
     (function () {
       const s = document.querySelector("[data-famrail]"); if (!s) return;
-      const p = document.querySelector("[data-prev]"), n = document.querySelector("[data-next]");
+      const section = s.closest("section");
+      const arrows = section.querySelector(".home-arrows");
+      const p = section.querySelector("[data-prev]"), n = section.querySelector("[data-next]");
       const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
       const step = () => Math.min(s.clientWidth * 0.8, 640);
-      const sync = () => { if (p) p.disabled = s.scrollLeft <= 1; if (n) n.disabled = s.scrollLeft + s.clientWidth >= s.scrollWidth - 1; };
+      const sync = () => {
+        const overflows = s.scrollWidth > s.clientWidth + 1;
+        if (arrows) arrows.hidden = !overflows;
+        if (p) p.disabled = !overflows || s.scrollLeft <= 1;
+        if (n) n.disabled = !overflows || s.scrollLeft + s.clientWidth >= s.scrollWidth - 1;
+      };
       if (p) p.addEventListener("click", () => s.scrollBy({ left: -step(), behavior: rm ? "auto" : "smooth" }));
       if (n) n.addEventListener("click", () => s.scrollBy({ left: step(), behavior: rm ? "auto" : "smooth" }));
       s.addEventListener("scroll", () => requestAnimationFrame(sync), { passive: true });
-      addEventListener("resize", sync); sync();
+      addEventListener("resize", sync);
+      if ("ResizeObserver" in window) new ResizeObserver(sync).observe(s);
+      sync();
     })();
 
     // Les icônes : produits tagués « icone » (packshots auto) ; section masquée tant que rien n'est tagué.
