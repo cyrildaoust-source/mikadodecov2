@@ -5,6 +5,7 @@ const path    = require('path');
 const fs      = require('fs');
 const crypto  = require('crypto');                 // natif — vérif HMAC des webhooks Shopify
 const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-memory, best-effort)
+const { families, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage } = require('./lib/family-pages');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -70,8 +71,9 @@ const OG_DEFAULT = ORIGIN + '/images/og-default.jpg';
 const PRODUIT_TEMPLATE  = path.join(__dirname, 'v3', 'produit.html');
 const PRODUITS_TEMPLATE = path.join(__dirname, 'v3', 'produits.html');
 // Familles « Mobilier » qui ont une page catégorie riche dédiée (hero + sections).
-// Pour l'instant : Outdoor (Jardin). Les autres s'ajouteront quand leurs pages sont prêtes.
+// Jardin et Assises conservent leurs compositions éditoriales validées.
 const FAMILLES_RICHES = { outdoor: 'famille.html', sieges: 'famille-assises.html' };
+const FAMILY_TEMPLATE = path.join(__dirname, 'templates', 'family-page.html');
 // Marques disposant d'un bandeau header (miroir EXACT de la map HEADERS de
 // v3/produits.html). Pour elles, l'image OG = le bandeau de marque statique.
 const BRAND_HEADERS = new Set(['fatboy', 'ferm-living', 'tradition', 'vitra', 'string-furniture', 'muuto', 'blomus', 'assouline', 'airborne', 'artek']);
@@ -118,6 +120,7 @@ const REL_ACTIVE = {
   'journal.html': 'Le journal', 'nuancier-fermob.html': 'Le journal',
   'studio.html': 'Mikado Studio',
   'famille.html': 'Mobilier', 'famille-assises.html': 'Mobilier', 'famille-tables.html': 'Mobilier',
+  'family-page.html': 'Mobilier',
 };
 function activeForRel(rel) {
   if (!rel) return '';
@@ -522,6 +525,30 @@ app.get('/collections/:handle', async (req, res) => {
       res.set('Content-Type', 'text/html; charset=utf-8');
       return res.send(injectChrome(fs.readFileSync(path.join(__dirname, 'v3', FAMILLES_RICHES[handle]), 'utf8'), FAMILLES_RICHES[handle]));
     } catch (e) { /* repli sur le template générique ci-dessous */ }
+  }
+  if (Object.hasOwn(families, handle)) {
+    await _chromeReady;
+    const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : '';
+    let payload = null;
+    let failed = false;
+    try {
+      payload = await getCollectionProducts(handle, FAMILY_PAGE_SIZE, cursor || null);
+      failed = !payload;
+    } catch (error) {
+      failed = true;
+      console.warn('[family-products]', handle, error.message);
+    }
+    const items = payload?.items || [];
+    let html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
+      items, pageInfo: payload?.pageInfo || {}, cursor, failed,
+      cards: items.map(plpCardSsr).filter(Boolean).join(''),
+    });
+    html = html.replace('</head>', breadcrumbTag(families[handle].title, ORIGIN + '/collections/' + handle) + '\n</head>');
+    res.set('Content-Type', 'text/html; charset=utf-8');
+    // Ne pas conserver une panne de Shopify dans le cache de la page.
+    if (failed) res.set('Cache-Control', 'no-store');
+    else ogCache(res);
+    return res.send(injectChrome(html, 'family-page.html'));
   }
   try {
     await _chromeReady;

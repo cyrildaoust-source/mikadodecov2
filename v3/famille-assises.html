@@ -93,6 +93,7 @@
 
   <script type="module">
     import { initShell, productCard } from "/shared.js";
+    import { isFamilyIcon } from "/family-policy.mjs";
     initShell({ active: "Mobilier", transparentNav: true });
     var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
     // exclut le mobilier de jardin (contamination outdoor de la collection sieges)
@@ -132,7 +133,7 @@
           var r=await fetch('/api/collection/sieges/products?limit=30&tag='+tags[i]);
           if(!r.ok) continue;
           var j=await r.json();
-          indoor(j.items||j.products).forEach(function(p){ if(p&&p.handle&&!seen[p.handle]){ seen[p.handle]=1; items.push(p); } });
+          indoor(j.items||j.products).filter(isFamilyIcon).forEach(function(p){ if(p&&p.handle&&!seen[p.handle]){ seen[p.handle]=1; items.push(p); } });
         }
         if(!items.length){ if(section)section.hidden=true; return; }
         host.innerHTML=items.slice(0,30).map(productCard).join('');

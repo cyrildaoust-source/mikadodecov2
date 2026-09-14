@@ -1658,6 +1658,11 @@ body.pdplb-locked { overflow: hidden; }
     .fam-gridhead span{font-size:13px;color:var(--muted);}
     .fam-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,24px);}
     .fam-grid:empty{min-height:60vh;}
+    .fam-grid-status{font-size:var(--fs-small);color:var(--muted);margin:16px 0 0;}
+    .fam-grid-status:empty{display:none;}
+    .fam [data-more][aria-disabled="true"]{opacity:.55;cursor:wait;}
+    .fam .scard:focus-visible,.fam .home-rc:focus-visible,.fam .bcard:focus-visible{outline:3px solid var(--accent-ink);outline-offset:4px;}
+    .fam .fam-gridhead{flex-wrap:wrap;}
     /* pagination grille (composant identique au PLP) */
     .plp-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:clamp(34px,5vw,60px);}
     .plp-pagination[hidden]{display:none;}
