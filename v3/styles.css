@@ -1601,7 +1601,7 @@ body.pdplb-locked { overflow: hidden; }
 /* ── Page famille (ex. Jardin) ── */
     .fam{max-width:var(--container);margin:0 auto;}
     .fam .sec{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);}
-    .fam .lab{font-family:var(--serif);font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:56px 0 22px;}
+    .fam .lab{font-family:var(--serif);font-weight:600;font-size:var(--fs-h2);line-height:1.05;letter-spacing:0;color:var(--ink-deep);margin:56px 0 28px;padding-bottom:16px;border-bottom:2px solid var(--accent);}
     .ph{position:relative;display:block;background:var(--tile);width:100%;overflow:hidden;}
     .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
     .fam-empty{grid-column:1/-1;color:var(--muted);font-size:14px;padding:30px 0;}
@@ -1615,23 +1615,10 @@ body.pdplb-locked { overflow: hidden; }
     .fam-hero__title{font-family:var(--serif);font-weight:600;font-size:clamp(44px,6vw,82px);line-height:.98;margin:0 0 14px;}
     .fam-hero__desc{max-width:52ch;font-size:15px;line-height:1.6;opacity:.95;margin:0 0 22px;}
     .fam-hero__btn{display:inline-block;background:var(--paper);color:var(--ink);font-size:13px;letter-spacing:.04em;padding:13px 26px;text-decoration:none;font-weight:500;}
-    /* catégories slider + flèches */
-    .cathead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:44px 0 22px;}
-    .cathead .lab{margin:0;}
-    .arrows{display:flex;gap:8px;flex-shrink:0;}
-    .arw{width:40px;height:40px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:19px;line-height:1;cursor:pointer;border-radius:0;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s,opacity .2s;}
-    .arw:hover:not(:disabled){border-color:var(--ink);background:var(--paper-2);}
-    .arw:disabled{opacity:.35;cursor:not-allowed;}
-    .arw:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px;}
-    .cslider{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(160px,17vw,200px);gap:clamp(12px,1.4vw,18px);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scroll-behavior:smooth;}
-    .ccard{position:relative;text-decoration:none;color:var(--paper);scroll-snap-align:start;overflow:hidden;}
-    .ccard .ph{aspect-ratio:1/1;transition:opacity .2s;}
-    .ccard:hover .ph{opacity:.9;}
-    .ccard__name{position:absolute;left:0;right:0;bottom:0;padding:14px;font-family:var(--serif);font-weight:600;font-size:1.22rem;line-height:1.1;color:var(--paper);background:linear-gradient(0deg,rgba(var(--scrim),.74),rgba(var(--scrim),.16) 74%,transparent);z-index:2;}
-    .ccard--promo .promo{aspect-ratio:1/1;background:var(--promo);color:var(--paper);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:20px;}
-    .promo__k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;}
-    .promo__t{font-family:var(--serif);font-weight:600;font-size:1.55rem;line-height:1.05;}
-    .promo__a{font-size:12px;margin-top:auto;opacity:.85;}
+    /* Les carrousels catégories réutilisent .home-rail / .home-rc de l'accueil. */
+    .home-rc--promo{background:var(--promo);color:var(--on-dark);flex-direction:column;align-items:flex-start;justify-content:center;gap:8px;}
+    .home-rc__eyebrow{font-size:var(--fs-meta);letter-spacing:.14em;text-transform:uppercase;opacity:.7;}
+    .home-rc__more{font-size:var(--fs-small);margin-top:auto;opacity:.85;}
     /* rangée produits (best-sellers) */
     .fam .prow{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;}
     .fam .prow:empty{min-height:300px;}
@@ -1644,8 +1631,7 @@ body.pdplb-locked { overflow: hidden; }
     .scard .ph{aspect-ratio:3/4;}
     .scard--feat{grid-column:1/-1;}
     .scard--feat .ph{aspect-ratio:24/9;}
-    .scard--feat .scard__name{font-size:2.1rem;}
-    .scard__name{position:absolute;left:0;right:0;bottom:0;padding:16px;font-family:var(--serif);font-weight:600;font-size:1.5rem;color:var(--paper);background:linear-gradient(0deg,rgba(var(--scrim),.66),rgba(var(--scrim),.12) 72%,transparent);z-index:2;}
+    .scard__name{position:absolute;left:0;right:0;bottom:0;padding:16px;font-family:var(--serif);font-weight:600;font-size:1.6rem;color:var(--paper);background:linear-gradient(0deg,rgba(var(--scrim),.66),rgba(var(--scrim),.12) 72%,transparent);z-index:2;}
     /* collections (texte sous l'image) */
     .lgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.8vw,26px);}
     .lcard{text-decoration:none;color:var(--ink);}
@@ -1664,8 +1650,8 @@ body.pdplb-locked { overflow: hidden; }
     .bcard__logo img{height:30px;width:auto;max-width:66%;filter:brightness(0) invert(1);opacity:.96;}
     .bcard:hover .bcard__scrim{background:rgba(var(--scrim),.54);}
     /* grille + compteur */
-    .fam-gridhead{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin:60px 0 20px;}
-    .fam-gridhead h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3vw,38px);margin:0;}
+    .fam-gridhead{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin:60px 0 20px;padding-bottom:16px;border-bottom:2px solid var(--accent);}
+    .fam-gridhead h2{font-family:var(--serif);font-weight:600;font-size:var(--fs-h2);line-height:1.05;margin:0;}
     .fam-gridhead span{font-size:13px;color:var(--muted);}
     .fam-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,24px);}
     .fam-grid:empty{min-height:60vh;}
@@ -1682,11 +1668,11 @@ body.pdplb-locked { overflow: hidden; }
     .plp-page:disabled{opacity:.4;cursor:not-allowed;}
     .plp-page--nav{font-weight:500;}
     .plp-page__ellipsis{min-width:22px;text-align:center;color:var(--muted);user-select:none;}
-    /* Mobile : on retire les sections riches, on garde hero + grille. */
+    /* Mobile : carrousel catégories visible comme sur l’accueil ; autres sections éditoriales masquées. */
     @media(max-width:760px){.fam-rich{display:none;} #grille .fam-gridhead{margin-top:34px;}}
     @media(max-width:900px){.lgrid,.fam-grid,.sgrid{grid-template-columns:repeat(2,1fr);}.bgrid{grid-template-columns:repeat(3,1fr);}}
     @media(max-width:560px){.lgrid,.fam-grid,.bgrid{grid-template-columns:1fr 1fr;}.plp-pagination__numbers{display:none;}.plp-pagination__mobile{display:inline-flex;}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.cslider{scroll-behavior:auto;}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fam .home-rail{scroll-behavior:auto;}.fam .home-rc__img{transition:none;}.fam .home-rc:hover .home-rc__img{transform:none;}}
 
 /* ═══ Offre cadeau « Mois Verner Panton » (sept. 2026) — module tiroir + sélection ═══ */
 .gifto { border: 1px solid var(--line); background: var(--paper); padding: 14px 16px; margin: 0 0 16px; }

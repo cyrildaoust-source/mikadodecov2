@@ -43,10 +43,57 @@
       </div>
     </section>
 
-    <section class="sec fam-rich">
-      <div class="cathead"><h2 class="lab">Nos catégories jardin</h2>
-        <div class="arrows"><button class="arw" data-prev aria-label="Catégories précédentes">‹</button><button class="arw" data-next aria-label="Catégories suivantes">›</button></div></div>
-      <div class="cslider" data-cslider><a class="ccard" href="/collections/chaises-outdoor"><span class="ph"><img class="ph-img" src="/images/familles/jardin/2.webp" alt="" loading="lazy"></span><span class="ccard__name">Chaises outdoor</span></a><a class="ccard" href="/collections/tables-outdoor"><span class="ph"><img class="ph-img" src="/images/familles/jardin/3.webp" alt="" loading="lazy"></span><span class="ccard__name">Tables outdoor</span></a><a class="ccard" href="/collections/bains-de-soleil-transats"><span class="ph"><img class="ph-img" src="/images/familles/jardin/4.webp" alt="" loading="lazy"></span><span class="ccard__name">Bains de soleil &amp; transats</span></a><a class="ccard" href="/collections/parasols-ombrages"><span class="ph"><img class="ph-img" src="/images/familles/jardin/5.webp" alt="" loading="lazy"></span><span class="ccard__name">Parasols &amp; ombrages</span></a><a class="ccard" href="/collections/brasero-barbecue"><span class="ph"><img class="ph-img" src="/images/familles/jardin/6.webp" alt="" loading="lazy"></span><span class="ccard__name">Brasero &amp; barbecue</span></a><a class="ccard" href="/collections/bancs-outdoor"><span class="ph"><img class="ph-img" src="/images/familles/jardin/7.webp" alt="" loading="lazy"></span><span class="ccard__name">Bancs outdoor</span></a><a class="ccard" href="/collections/accessoires-jardin"><span class="ph"><img class="ph-img" src="/images/familles/jardin/8.webp" alt="" loading="lazy"></span><span class="ccard__name">Accessoires jardin</span></a><a class="ccard" href="/collections/cache-pots-jardinieres"><span class="ph"><img class="ph-img" src="/images/familles/jardin/11.webp" alt="" loading="lazy"></span><span class="ccard__name">Cache-pots &amp; jardinières</span></a><a class="ccard ccard--promo" href="/collections/promotions"><span class="promo"><span class="promo__k">Bons plans</span><span class="promo__t">Promotions jardin</span><span class="promo__a">Voir les offres →</span></span></a></div>
+    <section class="section wrap">
+      <div class="home-railhead"><h2 class="serif">Nos catégories jardin</h2>
+        <div class="home-arrows"><button class="home-arw" type="button" data-prev aria-label="Catégories précédentes">‹</button><button class="home-arw" type="button" data-next aria-label="Catégories suivantes">›</button></div>
+      </div>
+      <div class="home-rail" data-famrail>
+        <a class="home-rc" href="/collections/chaises-outdoor">
+          <img class="home-rc__img" src="/images/familles/jardin/2.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Chaises outdoor</span>
+        </a>
+        <a class="home-rc" href="/collections/tables-outdoor">
+          <img class="home-rc__img" src="/images/familles/jardin/3.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Tables outdoor</span>
+        </a>
+        <a class="home-rc" href="/collections/bains-de-soleil-transats">
+          <img class="home-rc__img" src="/images/familles/jardin/4.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Bains de soleil &amp; transats</span>
+        </a>
+        <a class="home-rc" href="/collections/parasols-ombrages">
+          <img class="home-rc__img" src="/images/familles/jardin/5.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Parasols &amp; ombrages</span>
+        </a>
+        <a class="home-rc" href="/collections/brasero-barbecue">
+          <img class="home-rc__img" src="/images/familles/jardin/6.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Brasero &amp; barbecue</span>
+        </a>
+        <a class="home-rc" href="/collections/bancs-outdoor">
+          <img class="home-rc__img" src="/images/familles/jardin/7.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Bancs outdoor</span>
+        </a>
+        <a class="home-rc" href="/collections/accessoires-jardin">
+          <img class="home-rc__img" src="/images/familles/jardin/8.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Accessoires jardin</span>
+        </a>
+        <a class="home-rc" href="/collections/cache-pots-jardinieres">
+          <img class="home-rc__img" src="/images/familles/jardin/11.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Cache-pots &amp; jardinières</span>
+        </a>
+        <a class="home-rc home-rc--promo" href="/collections/promotions">
+          <span class="home-rc__eyebrow">Bons plans</span>
+          <span class="home-rc__n">Promotions jardin</span>
+          <span class="home-rc__more">Voir les offres →</span>
+        </a>
+      </div>
     </section>
 
     <section class="sec fam-rich"><h2 class="lab">Meilleures ventes</h2><div class="prow" data-bestsellers></div></section>
@@ -71,16 +118,17 @@
     initShell({ active: "Mobilier", transparentNav: true });
     var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Slider catégories : flèches + désactivation en bout de course.
-    (function(){
-      var s=document.querySelector('[data-cslider]'); if(!s) return;
-      var p=document.querySelector('[data-prev]'), n=document.querySelector('[data-next]');
-      var step=function(){ return Math.min(s.clientWidth*.8,620); };
-      function sync(){ if(p)p.disabled = s.scrollLeft<=1; if(n)n.disabled = s.scrollLeft+s.clientWidth >= s.scrollWidth-1; }
-      if(p)p.addEventListener('click',function(){ s.scrollBy({left:-step(),behavior:RM?'auto':'smooth'}); });
-      if(n)n.addEventListener('click',function(){ s.scrollBy({left:step(),behavior:RM?'auto':'smooth'}); });
-      s.addEventListener('scroll',function(){ requestAnimationFrame(sync); }, {passive:true});
-      window.addEventListener('resize',sync); sync();
+    // Même carrousel et même défilement que « Nos familles » sur l’accueil.
+    (function () {
+      const s = document.querySelector("[data-famrail]"); if (!s) return;
+      const p = document.querySelector("[data-prev]"), n = document.querySelector("[data-next]");
+      const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const step = () => Math.min(s.clientWidth * 0.8, 640);
+      const sync = () => { if (p) p.disabled = s.scrollLeft <= 1; if (n) n.disabled = s.scrollLeft + s.clientWidth >= s.scrollWidth - 1; };
+      if (p) p.addEventListener("click", () => s.scrollBy({ left: -step(), behavior: rm ? "auto" : "smooth" }));
+      if (n) n.addEventListener("click", () => s.scrollBy({ left: step(), behavior: rm ? "auto" : "smooth" }));
+      s.addEventListener("scroll", () => requestAnimationFrame(sync), { passive: true });
+      addEventListener("resize", sync); sync();
     })();
 
     // Best-sellers : pas de fetch sur mobile (section masquée) ; section retirée si vide ou erreur.

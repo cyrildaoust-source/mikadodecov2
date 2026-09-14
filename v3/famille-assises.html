@@ -43,10 +43,37 @@
       </div>
     </section>
 
-    <section class="sec fam-rich">
-      <div class="cathead"><h2 class="lab">Nos catégories</h2>
-        <div class="arrows"><button class="arw" data-prev aria-label="Catégories précédentes">‹</button><button class="arw" data-next aria-label="Catégories suivantes">›</button></div></div>
-      <div class="cslider" data-cslider><a class="ccard" href="/collections/chaises"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-chaises.webp" alt="" loading="lazy"></span><span class="ccard__name">Chaises</span></a><a class="ccard" href="/collections/fauteuils"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-fauteuils.webp" alt="" loading="lazy"></span><span class="ccard__name">Fauteuils</span></a><a class="ccard" href="/collections/canapes"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-canapes.webp" alt="" loading="lazy"></span><span class="ccard__name">Canapés</span></a><a class="ccard" href="/collections/chaises-longues"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-chaises-longues.webp" alt="" loading="lazy"></span><span class="ccard__name">Chaises longues</span></a><a class="ccard" href="/collections/tabourets-et-bancs"><span class="ph"><img class="ph-img" src="/images/familles/assises/cat-tabourets.webp" alt="" loading="lazy"></span><span class="ccard__name">Tabourets &amp; bancs</span></a></div>
+    <section class="section wrap">
+      <div class="home-railhead"><h2 class="serif">Nos catégories</h2>
+        <div class="home-arrows"><button class="home-arw" type="button" data-prev aria-label="Catégories précédentes">‹</button><button class="home-arw" type="button" data-next aria-label="Catégories suivantes">›</button></div>
+      </div>
+      <div class="home-rail" data-famrail>
+        <a class="home-rc" href="/collections/chaises">
+          <img class="home-rc__img" src="/images/familles/assises/cat-chaises.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Chaises</span>
+        </a>
+        <a class="home-rc" href="/collections/fauteuils">
+          <img class="home-rc__img" src="/images/familles/assises/cat-fauteuils.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Fauteuils</span>
+        </a>
+        <a class="home-rc" href="/collections/canapes">
+          <img class="home-rc__img" src="/images/familles/assises/cat-canapes.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Canapés</span>
+        </a>
+        <a class="home-rc" href="/collections/chaises-longues">
+          <img class="home-rc__img" src="/images/familles/assises/cat-chaises-longues.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Chaises longues</span>
+        </a>
+        <a class="home-rc" href="/collections/tabourets-et-bancs">
+          <img class="home-rc__img" src="/images/familles/assises/cat-tabourets.webp" alt="" loading="lazy">
+          <span class="home-rc__scrim" aria-hidden="true"></span>
+          <span class="home-rc__n">Tabourets &amp; bancs</span>
+        </a>
+      </div>
     </section>
 
     <section class="sec fam-rich" data-icones-sec><h2 class="lab">Les icônes</h2><div class="prow" data-icones></div></section>
@@ -71,16 +98,17 @@
     // exclut le mobilier de jardin (contamination outdoor de la collection sieges)
     function indoor(list){ return (list||[]).filter(function(p){ var t=(p&&p.tags)||[]; return t.indexOf('exterieur')<0 || t.indexOf('interieur')>=0; }); }
 
-    // Slider catégories : flèches + désactivation en bout de course.
-    (function(){
-      var s=document.querySelector('[data-cslider]'); if(!s) return;
-      var p=document.querySelector('[data-prev]'), n=document.querySelector('[data-next]'), arrows=document.querySelector('.arrows');
-      var step=function(){ return Math.min(s.clientWidth*.8,620); };
-      function sync(){ var ov=s.scrollWidth>s.clientWidth+1; if(arrows)arrows.style.display=ov?'':'none'; if(p)p.disabled = s.scrollLeft<=1; if(n)n.disabled = s.scrollLeft+s.clientWidth >= s.scrollWidth-1; }
-      if(p)p.addEventListener('click',function(){ s.scrollBy({left:-step(),behavior:RM?'auto':'smooth'}); });
-      if(n)n.addEventListener('click',function(){ s.scrollBy({left:step(),behavior:RM?'auto':'smooth'}); });
-      s.addEventListener('scroll',function(){ requestAnimationFrame(sync); }, {passive:true});
-      window.addEventListener('resize',sync); sync();
+    // Même carrousel et même défilement que « Nos familles » sur l’accueil.
+    (function () {
+      const s = document.querySelector("[data-famrail]"); if (!s) return;
+      const p = document.querySelector("[data-prev]"), n = document.querySelector("[data-next]");
+      const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const step = () => Math.min(s.clientWidth * 0.8, 640);
+      const sync = () => { if (p) p.disabled = s.scrollLeft <= 1; if (n) n.disabled = s.scrollLeft + s.clientWidth >= s.scrollWidth - 1; };
+      if (p) p.addEventListener("click", () => s.scrollBy({ left: -step(), behavior: rm ? "auto" : "smooth" }));
+      if (n) n.addEventListener("click", () => s.scrollBy({ left: step(), behavior: rm ? "auto" : "smooth" }));
+      s.addEventListener("scroll", () => requestAnimationFrame(sync), { passive: true });
+      addEventListener("resize", sync); sync();
     })();
 
     // Les icônes : produits tagués « icone » (packshots auto) ; section masquée tant que rien n'est tagué.
