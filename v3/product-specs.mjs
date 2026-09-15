@@ -124,5 +124,5 @@ export function renderDimensionImages(group, escapeHtml) {
   return (group.images || []).filter(image => {
     try { const u = new URL(image.url); return u.protocol === "https:" && u.hostname === "cdn.shopify.com"; }
     catch { return false; }
-  }).map(image => `<figure class="pdp-dimension-image"><a href="${escapeHtml(image.url)}" target="_blank" rel="noopener" aria-label="Agrandir le dessin de dimensions"><img src="${escapeHtml(image.url)}" alt="${escapeHtml(image.alt || "Dessin de dimensions")}" loading="lazy" decoding="async" /></a></figure>`).join("");
+  }).map(image => `<figure class="pdp-dimension-image"><a data-dimension-image href="${escapeHtml(image.url)}" target="_blank" rel="noopener" aria-label="Agrandir le dessin de dimensions"><img src="${escapeHtml(image.url)}" alt="${escapeHtml(image.alt || "Dessin de dimensions")}" loading="lazy" decoding="async" /></a></figure>`).join("");
 }
