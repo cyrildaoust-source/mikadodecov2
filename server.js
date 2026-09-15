@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const { splitAndTraditionMedia } = require('./lib/andtradition-media');
+const { splitDimensionMedia } = require('./lib/dimension-media');
 const cors    = require('cors');
 const path    = require('path');
 const fs      = require('fs');
@@ -1107,7 +1107,7 @@ function mapProduct(node, opts = {}) {
   // `full` adds PDP-only fields (gallery thumbs[]) that list endpoints don't read,
   // so PLP/home/collection payloads stay lean. firstImageRaw stays ungated (1 url).
   const full = opts.full === true;
-  const { photos, dimensions: dimensionImages } = splitAndTraditionMedia(node);
+  const { photos, dimensions: dimensionImages } = splitDimensionMedia(node);
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
   const variant = node.variants.edges[0]?.node;
