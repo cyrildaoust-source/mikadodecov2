@@ -1748,3 +1748,8 @@ body.pdplb-locked { overflow: hidden; }
 }
 
 .subhero--editorial .subhero__scrim { background: linear-gradient(95deg, rgba(var(--scrim),.58) 0%, rgba(var(--scrim),.25) 46%, transparent 82%); }
+
+/* Technical drawings belong to Dimensions, at their original aspect ratio. */
+.pdp-dimension-image { margin: var(--gap) 0 0; }
+.pdp-dimension-image a { display: block; width: fit-content; max-width: 100%; }
+.pdp-dimension-image img { display: block; width: 100%; max-width: 480px; height: auto; }
