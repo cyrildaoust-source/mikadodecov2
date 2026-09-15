@@ -50,3 +50,9 @@ Cette règle s'applique au rôle « dessin de dimensions », jamais aux photogra
 de produits ou d'ambiance. Vérifier les contours, les cotes et le retour clavier
 après fermeture de l'agrandissement. Ne pas annoncer une transparence du fichier
 source : il reste intact dans Shopify.
+
+Le pipeline principal transmet ce rôle avec le préfixe alternatif réservé
+`Dessin de dimensions — `. Le site le reconnaît pour toutes les marques et utilise
+le même composant Dimensions sur fond papier. Les anciens libellés libres restent
+pris en charge uniquement pour les schémas AndTradition déjà revus. Une URL ou un
+nom de fichier ne suffisent pas à déclarer ce rôle.

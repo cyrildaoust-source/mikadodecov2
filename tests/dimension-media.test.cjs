@@ -1,17 +1,17 @@
 const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
-const { splitAndTraditionMedia } = require('../lib/andtradition-media');
+const { splitDimensionMedia } = require('../lib/dimension-media');
 const photo = { url: 'https://cdn.shopify.com/VP7-133089A170-OFF.png', altText: 'Black & White pattern' };
 const drawing = { url: 'https://cdn.shopify.com/flowerpot-vp7_black_white_pattern.rs.jpg', altText: 'Suspension Flowerpot VP7 - dessin technique officiel' };
 const ambience = { url: 'https://cdn.shopify.com/lifestyle.jpg', altText: 'Flowerpot en situation' };
 const images = [photo, drawing, ambience].map(node => ({ node }));
 test('uses reviewed role despite misleading finish filename and preserves photo order', () => {
-  assert.deepEqual(splitAndTraditionMedia({ vendor: '&Tradition', images: { edges: images } }), { photos: [photo, ambience], dimensions: [drawing] });
-  assert.deepEqual(splitAndTraditionMedia({ vendor: 'Another brand', images: { edges: images } }), { photos: [photo, drawing, ambience], dimensions: [] });
+  assert.deepEqual(splitDimensionMedia({ vendor: '&Tradition', images: { edges: images } }), { photos: [photo, ambience], dimensions: [drawing] });
+  assert.deepEqual(splitDimensionMedia({ vendor: 'Another brand', images: { edges: images } }), { photos: [photo, drawing, ambience], dimensions: [] });
 });
 test('deduplicates drawings with different CDN parameters, including unlabelled copies', () => {
   const copy = { url: drawing.url + '?width=400' };
-  assert.deepEqual(splitAndTraditionMedia({ vendor: 'AndTradition', images: { edges: [...images, { node: copy }] } }), { photos: [photo, ambience], dimensions: [drawing] });
+  assert.deepEqual(splitDimensionMedia({ vendor: 'AndTradition', images: { edges: [...images, { node: copy }] } }), { photos: [photo, ambience], dimensions: [drawing] });
 });
 const realFetch = global.fetch;
 let server, base;
@@ -52,4 +52,12 @@ test('server renders drawing inside Dimensions, outside gallery', async () => {
   assert.match(html, /id="pdp-acc-panel-dimensions"[^>]*>[\s\S]*?<figure class="pdp-dimension-image">/);
   const gallery = html.split('<div class="pdp__gallery">')[1].split('<div class="pdp__info">')[0];
   assert.ok(!gallery.includes(drawing.url));
+});
+
+test('common pipeline prefix routes future drawings for every brand', () => {
+  const canonical = { ...drawing, altText: 'Dessin de dimensions — Objet' };
+  for (const vendor of ['Fermob', 'HAY', '&Tradition']) {
+    assert.deepEqual(splitDimensionMedia({ vendor, images: { edges: [{ node: photo }, { node: canonical }] } }), { photos: [photo], dimensions: [canonical] });
+  }
+  assert.deepEqual(splitDimensionMedia({ vendor: 'Fermob', images: { edges: images } }).dimensions, []);
 });
