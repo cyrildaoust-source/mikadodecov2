@@ -12,7 +12,7 @@
 | Rangement | `/collections/rangement` | 5 |
 | Arts de la table | `/collections/accessoires` | 5 |
 
-`data/family-pages.json` contient les textes, liens, photos et marques choisis pour ces cinq pages. Les 26 liens de catégories reprennent le méga menu Shopify observé le 14 septembre. Les photos sont des choix éditoriaux explicites, pas la première image du premier produit renvoyé par Shopify. `sourceProduct` permet de retrouver leur provenance lorsqu’elles viennent d’une fiche produit.
+`data/family-pages.json` contient les textes, liens, photos et marques choisis pour ces cinq pages. Les liens de catégories s’appuient sur le méga menu Shopify. Sur Tables, la carte « Tables outdoor » remplace « Tables de café » : la collection café actuelle contient surtout du mobilier de jardin et une carafe mal classée, sans table d’intérieur identifiée. Les photos sont des choix éditoriaux explicites, pas la première image du premier produit renvoyé par Shopify. `sourceProduct` permet de retrouver leur provenance lorsqu’elles viennent d’une fiche produit.
 
 `templates/family-page.html`, `lib/family-pages.js` et `v3/family-page.js` fournissent le modèle commun. Jardin et Assises gardent leurs compositions validées. Les cartes de catégories utilisent les classes de l’accueil ; jusqu’à cinq catégories, elles occupent la largeur disponible sur grand écran. Les sept pages familles partagent `v3/family-rail.js` : défilement natif au tactile/trackpad, glissement à la souris et navigation avec les flèches du clavier, Début et Fin. Les boutons de flèches au-dessus des catégories sont retirés. Un glissement ne déclenche pas le lien ; un clic simple garde son comportement habituel. Le rail devient tabulable seulement lorsqu’il déborde. L’accueil conserve ses contrôles existants.
 
@@ -24,11 +24,9 @@ Les collections sont chargées par lots de 24, sans plafond global ajouté par c
 
 La rubrique est désactivée pour Arts de la table : aucun bloc ni appel API d’icônes n’y est généré.
 
-Sur Assises uniquement, « Les chaises iconiques » se place après les catégories. `data/seating-icons.json` contient huit modèles : Panton, CH24 Wishbone, Standard, Domus, Rey, 69, 611 et CH20 Elbow. Les fiches sont chargées en parallèle et rendues côté serveur avec les mêmes cartes produits que le catalogue. Une fiche dépubliée ou une erreur isolée laisse la sélection restante disponible. Tables retrouve sa propre sélection par tags, sans requête pour les chaises.
+Sur Assises uniquement, « Les chaises iconiques » se place après les catégories. `data/seating-icons.json` contient quatre modèles fixes : Panton, CH24 Wishbone, Standard et Domus. Les fiches sont rendues côté serveur avec les mêmes cartes produits que le catalogue, puis hydratées dans le même ordre. Une fiche dépubliée ou en panne laisse les autres disponibles. Aucun mélange, aucun roulement automatique ; la barre horizontale est masquée et le défilement reste disponible si l’écran l’exige.
 
-À l’ouverture d’Assises, un mélange Fisher–Yates présente les huit modèles dans un nouvel ordre : quatre cartes visibles sur grand écran, les suivantes par glissement ou clavier. Aucun doublon, aucune rotation automatique pendant la lecture. Le rendu sans JavaScript conserve la liste complète dans son ordre éditorial. Aucun tag Shopify n’est modifié.
-
-Repères de curation : [Panton / Verner Panton](https://www.verner-panton.com/en/collection/prod-panton-chair/), [CH24](https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/ch24), [Standard](https://www.vitra.com/en-us/product/standard), [Domus](https://www.artek.fi/en/products/domus-chair), [Rey](https://www.hay.com/shared/designers/bruno-rey), [69](https://www.artek.fi/en/products/chair-69), [611](https://www.artek.fi/en/products/chair-611), [CH20 Elbow](https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/ch20). La liste reste un choix éditorial modifiable dans le site.
+Sur Tables, « Notre sélection de tables » utilise quatre handles explicites dans `data/family-pages.json` : Noguchi Dining, Drop Leaf HM6, Kaari REB004 et CH006. Cette proposition éditoriale peut être remplacée par les favoris du propriétaire. Elle ne prétend pas refléter les meilleures ventes. Seules des fiches de type table sans classement outdoor sont affichées. Les photos, prix et boutons gardent le composant standard.
 
 Pour les autres familles, les tags `icone` et `icone-design` servent à une sélection éditoriale au sein de chaque collection. Une meilleure vente, une nouveauté, la notoriété d’une marque ou un mot trouvé sur le site fournisseur ne suffisent pas à attribuer ces tags. Une rubrique sans sélection reste masquée. Toutes les sélections utilisent le composant `productCard` et son agencement standard, même pour un ou deux produits : photo carrée au-dessus, marque, nom, disponibilité, prix puis bouton. Aucune variante horizontale ne déplace les éléments.
 
@@ -40,7 +38,14 @@ Le site exclut provisoirement ce handle dans `v3/family-policy.mjs`, même si le
 
 ## Action catalogue : contrôler les appartenances aux collections
 
-Les nouvelles pages affichent les collections Shopify existantes. Elles ne filtrent pas les erreurs de classement au cas par cas dans le navigateur.
+`lib/table-collections.js` définit la séparation appliquée aux réponses serveur et à la pagination :
+
+- `tables`, `tables-de-salle-a-manger`, `tables-de-cafe` et `tables-basses-et-tables-dappoint` conservent les produits de type table qui ne sont pas marqués pour l’extérieur.
+- Un tag `exterieur`, `mobilier-exterieur`, `mobilier-de-jardin`, ou l’appartenance à `outdoor`/`tables-outdoor`, classe le modèle côté jardin. Un modèle à double usage reste dans Outdoor pour cette séparation éditoriale.
+- `tables-outdoor` conserve ses tables existantes et ajoute celles de `tables` classées outdoor. Les membres déjà présents ne sont pas répétés ; un tabouret mal classé est exclu par son type fonctionnel. Les produits ajoutés portent l’appartenance outdoor dans la réponse du site pour que la grille les conserve.
+- Les lots sont remplis en parcourant les curseurs Shopify, sans charger toute la collection d’un coup. Un produit supplémentaire sert à vérifier l’existence d’une page suivante. Les curseurs de continuation reprennent après le dernier élément consommé et distinguent les deux sources outdoor.
+
+Le relevé du 15 septembre contenait 125 produits dans Tables, dont 54 marqués pour l’extérieur. La collection physique Tables outdoor avait 15 produits, dont un tabouret. Cette séparation est réalisée dans le site et sa preview ; elle ne modifie pas les collections Shopify. L’importer doit ensuite harmoniser ces règles à la source, notamment les appartenances parentes et sous-catégories. Les champs d’usage et le type fonctionnel doivent être explicites et révisables, sans déduction à partir de la seule marque ou d’un mot de gamme.
 
 Cas concrets observés via les API publiques les 14 et 15 septembre :
 
@@ -64,6 +69,6 @@ L’accès en lecture au dépôt importer permet de comparer ses évolutions lor
 
 ## Vérifications
 
-Commande : `node --test tests/family-pages.test.cjs tests/product-specs.test.mjs`.
+Commande : `node --test tests/family-pages.test.cjs tests/table-collections.test.cjs tests/product-specs.test.mjs`.
 
-Les tests des familles couvrent les cinq routes, le rendu serveur des produits et du chrome, les métadonnées, les curseurs opaques, la fin de pagination, les collections vides, les pannes, l’échappement du JSON initial et la sélection d’icônes, y compris la sélection de chaises, une fiche dépubliée, une requête produit en panne et l’absence de rubrique sur Arts de la table. Ils couvrent aussi l’appartenance des chaises à Assises, le mélange sans doublons et la transmission du filtre verrerie au rendu serveur. Les réponses Shopify sont simulées : ces tests ne certifient ni le classement du catalogue réel, ni le rendu visuel, ni une commande payée.
+Les tests des familles couvrent les cinq routes, le rendu serveur des produits et du chrome, les métadonnées, les curseurs opaques, la fin de pagination, les collections vides, les pannes, l’échappement du JSON initial et la sélection d’icônes, y compris la sélection de chaises, une fiche dépubliée, une requête produit en panne et l’absence de rubrique sur Arts de la table. Ils couvrent aussi l’appartenance des chaises à Assises, la transmission du filtre verrerie au rendu serveur, les lots de tables remplis malgré les exclusions, la continuité des curseurs, les deux sources outdoor sans doublons et les pannes en cours de pagination. Les réponses Shopify sont simulées : ces tests ne certifient ni le classement du catalogue réel, ni le rendu visuel, ni une commande payée.

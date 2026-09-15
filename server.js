@@ -6,6 +6,7 @@ const fs      = require('fs');
 const crypto  = require('crypto');                 // natif — vérif HMAC des webhooks Shopify
 const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-memory, best-effort)
 const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, renderSeatingPage } = require('./lib/family-pages');
+const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -538,6 +539,7 @@ app.get('/collections/:handle', async (req, res) => {
   if (Object.hasOwn(families, handle)) {
     await _chromeReady;
     const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : '';
+    const featuredPromise = Promise.allSettled((families[handle].featured?.handles || []).map(getProductByHandle));
     let payload = null;
     let failed = false;
     try {
@@ -548,14 +550,17 @@ app.get('/collections/:handle', async (req, res) => {
       console.warn('[family-products]', handle, error.message);
     }
     const items = payload?.items || [];
+    const featuredResults = await featuredPromise;
+    const featuredItems = featuredResults.flatMap(result => result.status === 'fulfilled' && result.value && isTable(result.value) && !isOutdoor(result.value) ? [result.value] : []);
     let html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
       items, pageInfo: payload?.pageInfo || {}, cursor, failed,
       cards: items.map(plpCardSsr).filter(Boolean).join(''),
+      featuredItems, featuredCards: featuredItems.map(plpCardSsr).filter(Boolean).join(''),
     });
     html = html.replace('</head>', breadcrumbTag(families[handle].title, ORIGIN + '/collections/' + handle) + '\n</head>');
     res.set('Content-Type', 'text/html; charset=utf-8');
     // Ne pas conserver une panne de Shopify dans le cache de la page.
-    if (failed) res.set('Cache-Control', 'no-store');
+    if (failed || featuredResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
     else ogCache(res);
     return res.send(injectChrome(html, 'family-page.html'));
   }
@@ -1768,7 +1773,7 @@ const COLLECTION_PRODUCTS_QUERY = `
   }
 `;
 
-async function getCollectionProducts(handle, first, after, tag) {
+async function getCollectionChunk(handle, first, after, tag) {
   const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
   const a   = after || null;
   const t   = (tag || '').trim() || null;
@@ -1790,9 +1795,22 @@ async function getCollectionProducts(handle, first, after, tag) {
         image:       c.image?.url || null,
       },
       items,
+      edges: c.products.edges.map((edge, index) => ({ cursor: edge.cursor, product: items[index] })),
       pageInfo: c.products.pageInfo,
     };
   });
+}
+
+async function getCollectionProducts(handle, first, after, tag) {
+  if (tableSources(handle)) {
+    const limit = Math.max(1, Math.min(100, parseInt(first) || 50));
+    return cached(`table-scope-v1:${handle}:${limit}:${after || ''}:${tag || ''}`, () =>
+      tablePage({ handle, first: limit, after }, (source, size, cursor) => getCollectionChunk(source, size, cursor, tag)));
+  }
+  const chunk = await getCollectionChunk(handle, first, after, tag);
+  if (!chunk) return null;
+  const { edges, ...payload } = chunk;
+  return payload;
 }
 
 // ─── SHOPIFY: SINGLE PRODUCT BY HANDLE ─────────────────

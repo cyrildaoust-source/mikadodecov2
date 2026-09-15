@@ -40,10 +40,13 @@ before(async () => {
     requests.push(variables);
     if (variables.after === 'unavailable') return new Response('Unavailable', { status: 503 });
     if (variables.after === 'missing') return Response.json({ data: { collection: null } });
-    const ids = variables.after === 'empty' ? [] : variables.after ? [25, 26] : Array.from({ length: variables.first }, (_, i) => i + 1);
+    const isTables = variables.handle === 'tables';
+    const start = variables.after?.startsWith('edge:') ? Number(variables.after.slice(5)) + 1 : 1;
+    const ids = variables.after === 'empty' ? [] : variables.after && !variables.after.startsWith('edge:') ? [25, 26] : Array.from({ length: Math.min(variables.first, isTables ? 31 - start : variables.first) }, (_, i) => start + i);
+    const hasNextPage = isTables ? ids.at(-1) < 30 && (!variables.after || variables.after.startsWith('edge:')) : !variables.after;
     return Response.json({ data: { collection: {
       title: families[variables.handle]?.title || 'Verres et carafes', description: '', image: null,
-      products: { edges: ids.map(id => ({ node: product(id) })), pageInfo: { hasNextPage: !variables.after, endCursor: variables.after ? 'end' : nextCursor } },
+      products: { edges: ids.map(id => ({ cursor: 'edge:' + id, node: { ...product(id), tags: isTables && id <= 3 ? ['exterieur'] : [] } })), pageInfo: { hasNextPage, endCursor: isTables ? 'edge:' + ids.at(-1) : variables.after ? 'end' : nextCursor } },
     } } });
   };
   const app = require('../server');
@@ -83,7 +86,7 @@ test('all five family routes render 24 crawlable products, navigation and metada
     assert.equal(seed(html).items.length, 24);
     assert.equal(seed(html).pageSize, 24);
   }
-  assert.ok(requests.every(request => request.first === 24));
+  assert.ok(requests.every(request => request.first <= 25), 'bounded queries including one item of lookahead');
 });
 
 test('chairs belong to Assises only, and unavailable models do not block the selection', async () => {
@@ -92,6 +95,9 @@ test('chairs belong to Assises only, and unavailable models do not block the sel
   assert.equal(productRequests.length, beforeRequests, 'Tables never fetches the curated chairs');
   assert.doesNotMatch(html, /Les chaises iconiques|handle=chaise-panton/);
   assert.equal(seed(html).items.length, 24);
+  assert.equal(seed(html).items[0].handle, 'family-product-4', 'outdoor prefix is excluded before SSR');
+  assert.equal(seed(html).featuredItems.length, 4);
+  assert.match(html, /Notre sélection de tables/);
   const assises = await page('/collections/sieges');
   assert.equal(assises.response.status, 200);
   assert.equal(assises.response.headers.get('cache-control'), 'no-store');
@@ -99,7 +105,7 @@ test('chairs belong to Assises only, and unavailable models do not block the sel
   assert.ok(assises.html.indexOf('Nos catégories') < assises.html.indexOf('data-icones-sec'));
   assert.ok(assises.html.indexOf('data-icones-sec') < assises.html.indexOf('Par pièce'));
   const initial = JSON.parse(assises.html.match(/id="seating-icons-initial">([\s\S]*?)<\/script>/)[1]);
-  assert.equal(initial.items.length, 6);
+  assert.equal(initial.items.length, 2);
   assert.ok(initial.items.every(item => !['chaise-standard', 'artek-domus-chair'].includes(item.handle)));
   assert.deepEqual(productRequests.slice(beforeRequests), seatingIcons.handles);
   assert.ok(assises.html.includes('/produit.html?handle=chaise-panton'));
@@ -115,18 +121,6 @@ test('glass inspiration and server-rendered destination preserve the glassware f
   assert.deepEqual(requests.at(-1).filters, [{ tag: 'verrerie' }]);
   assert.match(html, /data-ssr="1"/);
   assert.ok(html.includes('/produit.html?handle=family-product-24'));
-});
-
-test('chair rotation keeps each model once, changes order and leaves the source unchanged', async () => {
-  const { shuffledProducts } = await import('../v3/family-policy.mjs');
-  const items = seatingIcons.handles.map(handle => ({ handle }));
-  const original = items.map(item => item.handle);
-  const shuffled = shuffledProducts([...items, items[0], null], () => 0);
-  assert.equal(shuffled.length, 8);
-  assert.deepEqual(new Set(shuffled.map(item => item.handle)), new Set(original));
-  assert.notDeepEqual(shuffled.map(item => item.handle), original);
-  assert.deepEqual(items.map(item => item.handle), original);
-  assert.deepEqual(shuffledProducts([], () => 0), []);
 });
 
 test('opaque cursor is encoded, sent upstream and final page remains accessible without JS', async () => {

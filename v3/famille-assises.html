@@ -94,7 +94,6 @@
   <script type="module">
     import { bindFamilyRails } from "/family-rail.js";
     import { initShell, productCard } from "/shared.js";
-    import { shuffledProducts } from "/family-policy.mjs";
     initShell({ active: "Mobilier", transparentNav: true });
     var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
     // exclut le mobilier de jardin (contamination outdoor de la collection sieges)
@@ -102,11 +101,11 @@
 
     bindFamilyRails(document.querySelector(".fam"));
 
-    // Les huit modèles sont déjà rendus par le serveur. Un nouvel ordre par visite.
+    // Quatre modèles fixes, rendus par le serveur dans leur ordre éditorial.
     const iconSeed = JSON.parse(document.querySelector('#seating-icons-initial').textContent);
     const iconRail = document.querySelector('[data-icones]');
     if (iconRail && iconSeed.items.length) {
-      iconRail.innerHTML = shuffledProducts(iconSeed.items).map(productCard).join('');
+      iconRail.innerHTML = iconSeed.items.map(productCard).join('');
     }
 
     // Grille « Toutes les assises » : walk complet collection sieges (INTÉRIEUR) puis pagination client-side.

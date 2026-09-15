@@ -18,6 +18,8 @@ let displayed = initial.items.length;
 let pageInfo = initial.pageInfo;
 let loading = false;
 if (initial.items.length) grid.innerHTML = initial.items.map(productCard).join('');
+const featured = root.querySelector('[data-featured-products]');
+if (featured && initial.featuredItems.length) featured.innerHTML = initial.featuredItems.map(productCard).join('');
 
 function syncMore() {
   if (!more) return;

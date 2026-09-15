@@ -1,10 +1,10 @@
 {
   "tables": {
     "title": "Tables",
-    "description": "Partager un repas, travailler, poser un livre. Des tables de caractère pour accompagner chaque moment de la journée.",
+    "description": "Partager un repas, travailler, poser un livre. Des tables de caractère pour accompagner chaque moment de la journée à l’intérieur.",
     "hero": "/images/home/room-sam.webp",
     "cta": "Découvrir les tables",
-    "gridTitle": "Toutes les tables",
+    "gridTitle": "Toutes les tables d’intérieur",
     "inspiration": {
       "title": "Autour de la table",
       "items": [
@@ -55,8 +55,8 @@
         "sourceProduct": null
       },
       {
-        "handle": "tables-de-cafe",
-        "title": "Tables de café",
+        "handle": "tables-outdoor",
+        "title": "Tables outdoor",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/BISTRO_CACTUS_MOOON__COLOR_MIX_UCHAUX_BCJ2022_SEBASTIEN_EROME_jpg.webp?v=1777662196&width=800&format=webp",
         "sourceProduct": "chaise-bistro-metal"
       },
@@ -72,7 +72,17 @@
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Aslak_Chair_Pendant_Light_AMA500_Kaari_Desk_web.jpg?v=1784838937&width=800&format=webp",
         "sourceProduct": "artek-kaari-desk-reb005"
       }
-    ]
+    ],
+    "featured": {
+      "title": "Notre sélection de tables",
+      "handles": [
+        "table-noguchi-dining",
+        "table-tradition-drop-leaf-hm6",
+        "artek-kaari-table-round-reb004",
+        "table-ch006"
+      ]
+    },
+    "icons": false
   },
   "luminaires": {
     "title": "Luminaires",
