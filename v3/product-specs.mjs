@@ -57,6 +57,7 @@ export function buildProductSpecGroups(product = {}) {
     {
       key: "dimensions",
       label: "Dimensions",
+      images: Array.isArray(product.dimensionImages) ? product.dimensionImages : [],
       rows: [
         ...row("Dimensions", product.dimensions),
         ...row("Poids", product.weight),
@@ -114,4 +115,14 @@ export function buildProductSpecGroups(product = {}) {
       ],
     },
   ];
+}
+
+// Shared by server rendering and the hydrated PDP. Images stay in Dimensions,
+// including when no textual measurement has been supplied yet.
+export function renderDimensionImages(group, escapeHtml) {
+  if (group.key !== "dimensions") return "";
+  return (group.images || []).filter(image => {
+    try { const u = new URL(image.url); return u.protocol === "https:" && u.hostname === "cdn.shopify.com"; }
+    catch { return false; }
+  }).map(image => `<figure class="pdp-dimension-image"><a href="${escapeHtml(image.url)}" target="_blank" rel="noopener" aria-label="Agrandir le dessin de dimensions"><img src="${escapeHtml(image.url)}" alt="${escapeHtml(image.alt || "Dessin de dimensions")}" loading="lazy" decoding="async" /></a></figure>`).join("");
 }
