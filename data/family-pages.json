@@ -11,7 +11,7 @@
         {
           "title": "Le plaisir de recevoir",
           "href": "/collections/tables-de-salle-a-manger",
-          "image": "/images/home/room-sam.webp"
+          "image": "/images/brands/headers/muuto-2400.webp"
         },
         {
           "title": "À portée de main",
@@ -72,7 +72,16 @@
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Aslak_Chair_Pendant_Light_AMA500_Kaari_Desk_web.jpg?v=1784838937&width=800&format=webp",
         "sourceProduct": "artek-kaari-desk-reb005"
       }
-    ]
+    ],
+    "icons": {
+      "title": "Les chaises iconiques",
+      "handles": [
+        "chaise-panton",
+        "chaise-ch24-wishbone",
+        "chaise-standard",
+        "artek-domus-chair"
+      ]
+    }
   },
   "luminaires": {
     "title": "Luminaires",
@@ -84,14 +93,14 @@
       "title": "La lumière au quotidien",
       "items": [
         {
-          "title": "Éclairer les idées",
-          "href": "/collections/lampes-de-bureau",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/90-mini-mini-vivid-23.jpg?v=1778147331&width=1400&format=webp"
+          "title": "Une lumière pour recevoir",
+          "href": "/collections/suspensions",
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/artek-pendant-lights-a331-beehive-dining-room.jpg?v=1778596086&width=1000&format=webp"
         },
         {
           "title": "Une présence dans le salon",
           "href": "/collections/lampadaires",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Apex_20Floor_20Lamp_imageslider_1.jpg?v=1776808001&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9154877_Akari_10A_v_fullbleed_1440x_33146fcb-c491-4516-bbfa-7fafa998cf1b.jpg?v=1779956902&width=1000&format=webp"
         },
         {
           "title": "À emporter partout",
@@ -126,8 +135,8 @@
       {
         "handle": "suspensions",
         "title": "Suspensions",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/fatboy-bolleke-taupe-1920x1280-ambiance-02-100303.jpg?v=1778020582&width=800&format=webp",
-        "sourceProduct": "suspension-bolleke"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/artek-pendant-light-a331-beehive-white-brass-off-colourful-artwork-interior.jpg?v=1778596086&width=800&format=webp",
+        "sourceProduct": "artek-a331-beehive"
       },
       {
         "handle": "lampes-de-table",
@@ -144,8 +153,8 @@
       {
         "handle": "lampadaires",
         "title": "Lampadaires",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Apex_20Floor_20Lamp_imageslider_1.jpg?v=1776808001&width=800&format=webp",
-        "sourceProduct": "lampadaire-hay-apex-floor-lamp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9154877_Akari_10A_v_fullbleed_1440x_33146fcb-c491-4516-bbfa-7fafa998cf1b.jpg?v=1779956902&width=800&format=webp",
+        "sourceProduct": "lampadaire-akari-10a"
       },
       {
         "handle": "appliques",
@@ -408,6 +417,7 @@
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ALTO_GRIS_ARGILE_VISUELS25_JURA_SEBASTIEN_EROME_3.jpg?v=1776897842&width=800&format=webp",
         "sourceProduct": "plateau-metal-alto-alto-53-x-38-5-cm"
       }
-    ]
+    ],
+    "icons": false
   }
 }

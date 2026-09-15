@@ -27,6 +27,12 @@ before(async () => {
   global.fetch = async (url, options) => {
     assert.equal(new URL(url).hostname, 'family-test.invalid', 'No real upstream calls');
     const { query, variables } = JSON.parse(options.body);
+    if (/query GetProduct\(/.test(query)) {
+      // Une chaise dépubliée et une requête en panne ne bloquent pas le catalogue.
+      if (variables.handle === 'chaise-standard') return Response.json({ data: { product: null } });
+      if (variables.handle === 'artek-domus-chair') return new Response('Unavailable', { status: 503 });
+      return Response.json({ data: { product: { ...product(100), handle: variables.handle } } });
+    }
     assert.match(query, /query GetCollectionProducts/);
     requests.push(variables);
     if (variables.after === 'unavailable') return new Response('Unavailable', { status: 503 });
@@ -60,14 +66,14 @@ test('all five family routes render 24 crawlable products, navigation and metada
   for (const [handle, count] of Object.entries(expected)) {
     const { response, html } = await page('/collections/' + handle);
     assert.equal(response.status, 200);
-    assert.match(response.headers.get('cache-control'), /s-maxage/);
+    assert.match(response.headers.get('cache-control'), handle === 'tables' ? /no-store/ : /s-maxage/);
     assert.ok(html.includes(`<h1 class="fam-hero__title">${families[handle].title}</h1>`));
     assert.ok(html.includes(`href="https://www.mikadodeco.be/collections/${handle}"`));
     assert.match(html, /BreadcrumbList/);
     assert.match(html, /<header class="chrome/);
     assert.match(html, /<footer/);
     assert.equal((html.match(/class="home-rc"/g) || []).length, count);
-    assert.equal((html.match(/class="pcard"/g) || []).length, 24);
+    assert.equal((html.split('data-grid>')[1].split('</section>')[0].match(/class="pcard"/g) || []).length, 24);
     assert.ok(html.includes('/produit.html?handle=family-product-24'));
     assert.match(html, /data-more href=/);
     assert.doesNotMatch(html, /\[\[[A-Z_]+\]\]/);
@@ -75,6 +81,22 @@ test('all five family routes render 24 crawlable products, navigation and metada
     assert.equal(seed(html).pageSize, 24);
   }
   assert.ok(requests.every(request => request.first === 24));
+});
+
+test('Tables shows the explicit chair selection before inspiration; Arts de la table has no icons', async () => {
+  const { html } = await page('/collections/tables');
+  const initial = seed(html);
+  assert.equal(initial.curatedIcons, true);
+  assert.deepEqual(initial.iconItems.map(item => item.handle), ['chaise-panton', 'chaise-ch24-wishbone']);
+  assert.match(html, /Les chaises iconiques/);
+  assert.ok(html.indexOf('id="family-categories"') < html.indexOf('data-icones-sec'));
+  assert.ok(html.indexOf('data-icones-sec') < html.indexOf('id="family-inspiration"'));
+  assert.match(html, /data-icones-sec aria-labelledby/);
+  assert.ok(html.includes('/produit.html?handle=chaise-panton'));
+  assert.equal(initial.items.length, 24, 'chairs do not replace or enter the tables grid');
+  const arts = await page('/collections/accessoires');
+  assert.doesNotMatch(arts.html, /data-icones-sec|id="family-icons"/);
+  assert.ok(arts.html.indexOf('id="grille"') < arts.html.indexOf('id="family-brands"'));
 });
 
 test('opaque cursor is encoded, sent upstream and final page remains accessible without JS', async () => {

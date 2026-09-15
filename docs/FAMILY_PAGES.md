@@ -14,13 +14,21 @@
 
 `data/family-pages.json` contient les textes, liens, photos et marques choisis pour ces cinq pages. Les 26 liens de catégories reprennent le méga menu Shopify observé le 14 septembre. Les photos sont des choix éditoriaux explicites, pas la première image du premier produit renvoyé par Shopify. `sourceProduct` permet de retrouver leur provenance lorsqu’elles viennent d’une fiche produit.
 
-`templates/family-page.html`, `lib/family-pages.js` et `v3/family-page.js` fournissent le modèle commun. Jardin et Assises gardent leurs compositions validées. Les cartes de catégories utilisent les classes de l’accueil ; jusqu’à cinq catégories, elles occupent la largeur disponible sur grand écran. Les flèches ne sont proposées que si le contenu déborde. Les catégories restent accessibles par défilement tactile et clavier.
+`templates/family-page.html`, `lib/family-pages.js` et `v3/family-page.js` fournissent le modèle commun. Jardin et Assises gardent leurs compositions validées. Les cartes de catégories utilisent les classes de l’accueil ; jusqu’à cinq catégories, elles occupent la largeur disponible sur grand écran. Les sept pages familles partagent `v3/family-rail.js` : défilement natif au tactile/trackpad, glissement à la souris et navigation avec les flèches du clavier, Début et Fin. Les boutons de flèches au-dessus des catégories sont retirés. Un glissement ne déclenche pas le lien ; un clic simple garde son comportement habituel. Le rail devient tabulable seulement lorsqu’il déborde. L’accueil conserve ses contrôles existants.
+
+Les cinq nouvelles pages présentent leurs inspirations sur une seule rangée de trois images, de 180 à 280 px de haut sur ordinateur, et dans une rangée défilante de 200 px de haut sur mobile. Les marques suivent désormais le catalogue pour rapprocher les produits du début de page. Sur Tables, « Le plaisir de recevoir » utilise une autre photo que le bandeau. Sur Luminaires, la suspension Beehive Artek et le lampadaire Akari 10A Vitra remplacent Bolleke et Apex Floor ; Apex Table reste dans sa catégorie.
 
 Les collections sont chargées par lots de 24, sans plafond global ajouté par ces pages. Le premier lot est rendu côté serveur, avec des liens produits et une pagination qui fonctionne sans JavaScript. « Voir plus de produits » ajoute ensuite les lots dans la même grille. Une panne conserve la navigation et offre une nouvelle tentative ; elle n’est pas mise en cache comme une page de produits normale.
 
 ## Action éditoriale : les icônes
 
-Les tags `icone` et `icone-design` servent à une sélection éditoriale au sein de chaque collection. Une meilleure vente, une nouveauté, la notoriété d’une marque ou un mot trouvé sur le site fournisseur ne suffisent pas à attribuer ces tags. Une rubrique sans sélection reste masquée.
+La rubrique est désactivée pour Arts de la table : aucun bloc ni appel API d’icônes n’y est généré.
+
+Sur Tables, « Les chaises iconiques » se place entre les catégories et les inspirations. Elle utilise une sélection explicite dans `data/family-pages.json` : Panton, CH24 Wishbone, Standard et Domus. Ces quatre fiches sont chargées en parallèle avec le catalogue et rendues côté serveur, puis hydratées comme les autres cartes. Une fiche dépubliée ou une erreur isolée ne bloque pas les tables. Ce choix de présentation ne modifie aucun tag Shopify et ne place pas les chaises dans la grille des tables.
+
+Repères de curation : [Panton / Verner Panton](https://www.verner-panton.com/en/collection/prod-panton-chair/), [CH24 / Carl Hansen & Søn](https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/ch24), [Standard / Vitra](https://www.vitra.com/en-us/product/standard), [Domus / Artek](https://www.artek.fi/en/products/domus-chair). La liste reste un choix éditorial modifiable dans le site.
+
+Pour les autres familles, les tags `icone` et `icone-design` servent à une sélection éditoriale au sein de chaque collection. Une meilleure vente, une nouveauté, la notoriété d’une marque ou un mot trouvé sur le site fournisseur ne suffisent pas à attribuer ces tags. Une rubrique sans sélection reste masquée.
 
 Décision demandée : retirer `icone` de la fiche `chaise-hay-aac-26` dans Shopify, ainsi que `icone-design` s’il y était ajouté. Le contrôle public du 14 septembre montrait `icone` et une sélection Assises ne contenant que ce produit.
 
@@ -54,4 +62,4 @@ L’accès en lecture au dépôt importer permet de comparer ses évolutions lor
 
 Commande : `node --test tests/family-pages.test.cjs tests/product-specs.test.mjs`.
 
-Les tests des familles couvrent les cinq routes, le rendu serveur des produits et du chrome, les métadonnées, les curseurs opaques, la fin de pagination, les collections vides, les pannes, l’échappement du JSON initial et la sélection d’icônes. Les réponses Shopify sont simulées : ces tests ne certifient ni le classement du catalogue réel, ni le rendu visuel, ni une commande payée.
+Les tests des familles couvrent les cinq routes, le rendu serveur des produits et du chrome, les métadonnées, les curseurs opaques, la fin de pagination, les collections vides, les pannes, l’échappement du JSON initial et la sélection d’icônes, y compris la sélection de chaises, une fiche dépubliée, une requête produit en panne et l’absence de rubrique sur Arts de la table. Les réponses Shopify sont simulées : ces tests ne certifient ni le classement du catalogue réel, ni le rendu visuel, ni une commande payée.

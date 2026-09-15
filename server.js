@@ -529,6 +529,9 @@ app.get('/collections/:handle', async (req, res) => {
   if (Object.hasOwn(families, handle)) {
     await _chromeReady;
     const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : '';
+    // Sélection éditoriale explicite, indépendante du classement de la collection.
+    // Une chaise indisponible ne doit pas empêcher d'afficher les tables.
+    const iconsPromise = Promise.allSettled((families[handle].icons?.handles || []).map(getProductByHandle));
     let payload = null;
     let failed = false;
     try {
@@ -539,14 +542,17 @@ app.get('/collections/:handle', async (req, res) => {
       console.warn('[family-products]', handle, error.message);
     }
     const items = payload?.items || [];
+    const iconResults = await iconsPromise;
+    const iconItems = iconResults.flatMap(result => result.status === 'fulfilled' && result.value ? [result.value] : []);
     let html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
       items, pageInfo: payload?.pageInfo || {}, cursor, failed,
       cards: items.map(plpCardSsr).filter(Boolean).join(''),
+      iconItems, iconCards: iconItems.map(plpCardSsr).filter(Boolean).join(''),
     });
     html = html.replace('</head>', breadcrumbTag(families[handle].title, ORIGIN + '/collections/' + handle) + '\n</head>');
     res.set('Content-Type', 'text/html; charset=utf-8');
     // Ne pas conserver une panne de Shopify dans le cache de la page.
-    if (failed) res.set('Cache-Control', 'no-store');
+    if (failed || iconResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
     else ogCache(res);
     return res.send(injectChrome(html, 'family-page.html'));
   }

@@ -1,4 +1,5 @@
 import { initShell, productCard } from '/shared.js';
+import { bindFamilyRails } from '/family-rail.js';
 import { ICON_TAGS, isFamilyIcon, uniqueProducts } from '/family-policy.mjs';
 
 initShell({ active: 'Mobilier', transparentNav: true });
@@ -6,25 +7,7 @@ const root = document.querySelector('[data-family]');
 const initial = JSON.parse(document.querySelector('#family-initial').textContent);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-for (const rail of root.querySelectorAll('[data-famrail]')) {
-  const section = rail.closest('section');
-  const arrows = section.querySelector('.home-arrows');
-  const previous = section.querySelector('[data-prev]');
-  const next = section.querySelector('[data-next]');
-  const sync = () => {
-    const overflow = rail.scrollWidth > rail.clientWidth + 1;
-    arrows.hidden = !overflow;
-    previous.disabled = !overflow || rail.scrollLeft <= 1;
-    next.disabled = !overflow || rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 1;
-  };
-  const move = direction => rail.scrollBy({ left: direction * Math.min(rail.clientWidth * .8, 640), behavior: reducedMotion ? 'auto' : 'smooth' });
-  previous.addEventListener('click', () => move(-1));
-  next.addEventListener('click', () => move(1));
-  rail.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
-  window.addEventListener('resize', sync);
-  if ('ResizeObserver' in window) new ResizeObserver(sync).observe(rail);
-  sync();
-}
+bindFamilyRails(root);
 
 const grid = root.querySelector('[data-grid]');
 const count = root.querySelector('[data-count]');
@@ -84,6 +67,12 @@ if (more) more.addEventListener('click', async event => {
 // Curation explicite, par famille. Aucun remplacement automatique par des meilleures ventes.
 (async () => {
   const section = root.querySelector('[data-icones-sec]');
+  if (!section) return;
+  if (initial.curatedIcons) {
+    section.querySelector('[data-icones]').innerHTML = initial.iconItems.map(productCard).join('');
+    section.hidden = !initial.iconItems.length;
+    return;
+  }
   const results = await Promise.allSettled(ICON_TAGS.map(async tag => {
     const response = await fetch(`/api/collection/${encodeURIComponent(initial.handle)}/products?limit=30&tag=${encodeURIComponent(tag)}`);
     if (!response.ok) throw new Error('Icons unavailable');
