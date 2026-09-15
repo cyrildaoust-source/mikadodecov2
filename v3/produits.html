@@ -141,6 +141,7 @@
       if ((_seg && _seg !== "all") || _q.get("brand")) document.documentElement.classList.add("plp-collection");
     } catch (e) {}
   </script>
+  <script type="application/json" id="collection-hero-initial">null</script>
   <!-- Hero resolution + preload. On a curated brand collection page it resolves
        the brand banner, else the generic catalog hero; stashes the choice on
        window.__hero and preloads the chosen WebP so the LCP fetch starts
@@ -167,8 +168,11 @@
       };
       var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
       var h = m ? decodeURIComponent(m[1]).toLowerCase() : "";
+      var curatedHero = JSON.parse(document.getElementById("collection-hero-initial").textContent);
       var hero;
-      if (Object.prototype.hasOwnProperty.call(HEADERS, h)) {
+      if (curatedHero) {
+        hero = curatedHero;
+      } else if (Object.prototype.hasOwnProperty.call(HEADERS, h)) {
         var d = "/images/brands/headers/";
         hero = {
           brand: true,
@@ -227,13 +231,14 @@
           : '';
         document.write(
           '<picture>' +
-            '<source type="image/webp" srcset="' + hero.srcset + '" sizes="100vw">' +
-            '<img class="subhero__img" src="' + hero.img + '" width="' + hero.width + '" height="' + hero.height + '" ' +
+            '<source type="image/webp" srcset="' + enc(hero.srcset) + '" sizes="100vw">' +
+            '<img class="subhero__img" src="' + enc(hero.img) + '" width="' + hero.width + '" height="' + hero.height + '" ' +
               'alt="' + enc(hero.alt) + '" fetchpriority="high" style="object-position:' + hero.obj + '"' + onerr + '>' +
           '</picture>'
         );
       })();
     </script>
+    <!-- COLLECTION_HERO_NOSCRIPT -->
     <noscript>
       <picture>
         <source type="image/webp"

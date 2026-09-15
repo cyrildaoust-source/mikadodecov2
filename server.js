@@ -5,6 +5,8 @@ const path    = require('path');
 const fs      = require('fs');
 const crypto  = require('crypto');                 // natif — vérif HMAC des webhooks Shopify
 const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-memory, best-effort)
+const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, renderSeatingPage } = require('./lib/family-pages');
+const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -70,8 +72,9 @@ const OG_DEFAULT = ORIGIN + '/images/og-default.jpg';
 const PRODUIT_TEMPLATE  = path.join(__dirname, 'v3', 'produit.html');
 const PRODUITS_TEMPLATE = path.join(__dirname, 'v3', 'produits.html');
 // Familles « Mobilier » qui ont une page catégorie riche dédiée (hero + sections).
-// Pour l'instant : Outdoor (Jardin). Les autres s'ajouteront quand leurs pages sont prêtes.
+// Jardin et Assises conservent leurs compositions éditoriales validées.
 const FAMILLES_RICHES = { outdoor: 'famille.html', sieges: 'famille-assises.html' };
+const FAMILY_TEMPLATE = path.join(__dirname, 'templates', 'family-page.html');
 // Marques disposant d'un bandeau header (miroir EXACT de la map HEADERS de
 // v3/produits.html). Pour elles, l'image OG = le bandeau de marque statique.
 const BRAND_HEADERS = new Set(['fatboy', 'ferm-living', 'tradition', 'vitra', 'string-furniture', 'muuto', 'blomus', 'assouline', 'airborne', 'artek']);
@@ -118,6 +121,7 @@ const REL_ACTIVE = {
   'journal.html': 'Le journal', 'nuancier-fermob.html': 'Le journal',
   'studio.html': 'Mikado Studio',
   'famille.html': 'Mobilier', 'famille-assises.html': 'Mobilier', 'famille-tables.html': 'Mobilier',
+  'family-page.html': 'Mobilier',
 };
 function activeForRel(rel) {
   if (!rel) return '';
@@ -520,8 +524,45 @@ app.get('/collections/:handle', async (req, res) => {
     try {
       await _chromeReady;
       res.set('Content-Type', 'text/html; charset=utf-8');
-      return res.send(injectChrome(fs.readFileSync(path.join(__dirname, 'v3', FAMILLES_RICHES[handle]), 'utf8'), FAMILLES_RICHES[handle]));
+      let html = fs.readFileSync(path.join(__dirname, 'v3', FAMILLES_RICHES[handle]), 'utf8');
+      if (handle === 'sieges') {
+        // Une fiche dépubliée ou en panne ne bloque pas la sélection restante.
+        const results = await Promise.allSettled(seatingIcons.handles.map(getProductByHandle));
+        const items = results.flatMap(result => result.status === 'fulfilled' && result.value ? [result.value] : []);
+        html = renderSeatingPage(html, items, items.map(plpCardSsr).filter(Boolean).join(''));
+        if (results.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
+        else ogCache(res);
+      }
+      return res.send(injectChrome(html, FAMILLES_RICHES[handle]));
     } catch (e) { /* repli sur le template générique ci-dessous */ }
+  }
+  if (Object.hasOwn(families, handle)) {
+    await _chromeReady;
+    const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : '';
+    const featuredPromise = Promise.allSettled((families[handle].featured?.handles || []).map(getProductByHandle));
+    let payload = null;
+    let failed = false;
+    try {
+      payload = await getCollectionProducts(handle, FAMILY_PAGE_SIZE, cursor || null);
+      failed = !payload;
+    } catch (error) {
+      failed = true;
+      console.warn('[family-products]', handle, error.message);
+    }
+    const items = payload?.items || [];
+    const featuredResults = await featuredPromise;
+    const featuredItems = featuredResults.flatMap(result => result.status === 'fulfilled' && result.value && isTable(result.value) && !isOutdoor(result.value) ? [result.value] : []);
+    let html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
+      items, pageInfo: payload?.pageInfo || {}, cursor, failed,
+      cards: items.map(plpCardSsr).filter(Boolean).join(''),
+      featuredItems, featuredCards: featuredItems.map(plpCardSsr).filter(Boolean).join(''),
+    });
+    html = html.replace('</head>', breadcrumbTag(families[handle].title, ORIGIN + '/collections/' + handle) + '\n</head>');
+    res.set('Content-Type', 'text/html; charset=utf-8');
+    // Ne pas conserver une panne de Shopify dans le cache de la page.
+    if (failed || featuredResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
+    else ogCache(res);
+    return res.send(injectChrome(html, 'family-page.html'));
   }
   try {
     await _chromeReady;
@@ -530,6 +571,7 @@ app.get('/collections/:handle', async (req, res) => {
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
     if (!col) { if (COLLECTION_ALIASES.has(handle)) { ogCache(res); return sendProduitsTemplate(res); } return send404Shell(res, PRODUITS_TEMPLATE); }
 
+    const collectionHero = handle === 'tables-outdoor' ? families.tables.categories.find(category => category.handle === handle) : null;
     const name = col.name || 'Catalogue';
     const title = `${name} · Mikado Deco`;
     const description = ogDesc(
@@ -537,12 +579,24 @@ app.get('/collections/:handle', async (req, res) => {
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
-    const image = BRAND_HEADERS.has(handle)
+    const image = collectionHero ? collectionHero.image.replace('width=800', 'width=1600') : BRAND_HEADERS.has(handle)
       ? `${ORIGIN}/images/brands/headers/${handle}-1920.jpg`
       : (col.image ? absUrl(col.image) : OG_DEFAULT);
     const url = ORIGIN + '/collections/' + encodeURIComponent(handle);
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    if (collectionHero) {
+      const hero = {
+        brand: false,
+        srcset: [800, 1200, 1600].map(width => collectionHero.image.replace('width=800', 'width=' + width) + ' ' + width + 'w').join(', '),
+        img: image, width: 800, height: 1200,
+        alt: 'Table Ribambelle dressée sur une terrasse', obj: 'center 38%',
+      };
+      const seed = JSON.stringify(hero).replace(/</g, '\\u003c');
+      html = html.replace('<script type="application/json" id="collection-hero-initial">null</script>', () => '<script type="application/json" id="collection-hero-initial">' + seed + '</script>');
+      html = html.replace(/<!-- COLLECTION_HERO_NOSCRIPT -->\s*<noscript>[\s\S]*?<\/noscript>/, () =>
+        '<noscript><img class="subhero__img" src="' + ogEscape(hero.img) + '" width="800" height="1200" alt="' + ogEscape(hero.alt) + '" fetchpriority="high" style="object-position:' + hero.obj + '"></noscript>');
+    }
     html = html.replace('</head>', breadcrumbTag(name, url) + '\n</head>');
     // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
     // le script inline vide ces génériques pour les users → zéro régression de flash).
@@ -550,7 +604,9 @@ app.get('/collections/:handle', async (req, res) => {
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
     try {
-      const cp = await collectionProductsFor(handle, 24);
+      // Le premier rendu doit respecter le même filtre que la grille hydratée.
+      const tag = typeof req.query.tag === 'string' ? req.query.tag : null;
+      const cp = await collectionProductsFor(handle, 24, null, tag);
       const gi = (cp && cp.items) || [];
       if (gi.length) {
         const cards = gi.map(plpCardSsr).filter(Boolean).join('');
@@ -1730,7 +1786,7 @@ const COLLECTION_PRODUCTS_QUERY = `
   }
 `;
 
-async function getCollectionProducts(handle, first, after, tag) {
+async function getCollectionChunk(handle, first, after, tag) {
   const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
   const a   = after || null;
   const t   = (tag || '').trim() || null;
@@ -1752,9 +1808,22 @@ async function getCollectionProducts(handle, first, after, tag) {
         image:       c.image?.url || null,
       },
       items,
+      edges: c.products.edges.map((edge, index) => ({ cursor: edge.cursor, product: items[index] })),
       pageInfo: c.products.pageInfo,
     };
   });
+}
+
+async function getCollectionProducts(handle, first, after, tag) {
+  if (tableSources(handle)) {
+    const limit = Math.max(1, Math.min(100, parseInt(first) || 50));
+    return cached(`table-scope-v1:${handle}:${limit}:${after || ''}:${tag || ''}`, () =>
+      tablePage({ handle, first: limit, after }, (source, size, cursor) => getCollectionChunk(source, size, cursor, tag)));
+  }
+  const chunk = await getCollectionChunk(handle, first, after, tag);
+  if (!chunk) return null;
+  const { edges, ...payload } = chunk;
+  return payload;
 }
 
 // ─── SHOPIFY: SINGLE PRODUCT BY HANDLE ─────────────────
