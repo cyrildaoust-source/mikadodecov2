@@ -24,7 +24,7 @@ Les collections sont chargées par lots de 24, sans plafond global ajouté par c
 
 La rubrique est désactivée pour Arts de la table : aucun bloc ni appel API d’icônes n’y est généré.
 
-Sur Assises uniquement, « Les chaises iconiques » se place après les catégories. `data/seating-icons.json` contient quatre modèles fixes : Panton, CH24 Wishbone, Standard et Domus. Les fiches sont rendues côté serveur avec les mêmes cartes produits que le catalogue, puis hydratées dans le même ordre. Une fiche dépubliée ou en panne laisse les autres disponibles. Aucun mélange, aucun roulement automatique ; la barre horizontale est masquée et le défilement reste disponible si l’écran l’exige.
+Sur Assises uniquement, « Les chaises iconiques » se place après les catégories. `data/seating-icons.json` contient quatre modèles fixes : Panton, CH24 Wishbone, Standard et Rey Chair de HAY. Les fiches sont rendues côté serveur avec les mêmes cartes produits que le catalogue, puis hydratées dans le même ordre. Une fiche dépubliée ou en panne laisse les autres disponibles. Aucun mélange, aucun roulement automatique ; la barre horizontale est masquée et le défilement reste disponible si l’écran l’exige.
 
 Sur Tables, « Notre sélection de tables » utilise quatre handles explicites dans `data/family-pages.json` : Noguchi Dining, Drop Leaf HM6, Kaari REB004 et CH006. Cette proposition éditoriale peut être remplacée par les favoris du propriétaire. Elle ne prétend pas refléter les meilleures ventes. Seules des fiches de type table sans classement outdoor sont affichées. Les photos, prix et boutons gardent le composant standard.
 

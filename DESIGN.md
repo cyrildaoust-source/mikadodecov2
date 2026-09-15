@@ -30,7 +30,7 @@ Les pages composent les composants. Elles ne redéfinissent pas leurs éléments
 
 ## Décisions éditoriales actuelles
 
-- Assises : quatre chaises fixes, Panton, CH24 Wishbone, Standard et Domus. Aucun mélange ni roulement automatique.
+- Assises : quatre chaises fixes, Panton, CH24 Wishbone, Standard et Rey Chair de HAY. Aucun mélange ni roulement automatique.
 - Tables : sélection explicite de quatre tables d’intérieur dans `data/family-pages.json`, intitulée « Notre sélection de tables ». Ne pas présenter une préférence éditoriale comme un classement de ventes.
 - Tables outdoor : accès distinct aux modèles prévus pour l’extérieur. Les erreurs d’import restent à corriger à la source.
 - Arts de la table : aucune rubrique « Icônes ». Une promesse de matière dans un titre doit correspondre à la photo et aux produits accessibles après le clic.

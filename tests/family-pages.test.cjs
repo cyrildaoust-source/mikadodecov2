@@ -33,7 +33,7 @@ before(async () => {
       productRequests.push(variables.handle);
       // Une chaise dépubliée et une requête en panne ne bloquent pas le catalogue.
       if (variables.handle === 'chaise-standard') return Response.json({ data: { product: null } });
-      if (variables.handle === 'artek-domus-chair') return new Response('Unavailable', { status: 503 });
+      if (variables.handle === 'chaise-hay-rey-chair') return new Response('Unavailable', { status: 503 });
       return Response.json({ data: { product: { ...product(100), handle: variables.handle } } });
     }
     assert.match(query, /query GetCollectionProducts/);
@@ -106,7 +106,7 @@ test('chairs belong to Assises only, and unavailable models do not block the sel
   assert.ok(assises.html.indexOf('data-icones-sec') < assises.html.indexOf('Par pièce'));
   const initial = JSON.parse(assises.html.match(/id="seating-icons-initial">([\s\S]*?)<\/script>/)[1]);
   assert.equal(initial.items.length, 2);
-  assert.ok(initial.items.every(item => !['chaise-standard', 'artek-domus-chair'].includes(item.handle)));
+  assert.ok(initial.items.every(item => !['chaise-standard', 'chaise-hay-rey-chair'].includes(item.handle)));
   assert.deepEqual(productRequests.slice(beforeRequests), seatingIcons.handles);
   assert.ok(assises.html.includes('/produit.html?handle=chaise-panton'));
   const arts = await page('/collections/accessoires');
