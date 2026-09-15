@@ -129,11 +129,11 @@ function activeForRel(rel) {
   if (rel.startsWith('journal/')) return 'Le journal';
   return REL_ACTIVE[rel] || '';
 }
-function injectChrome(html, rel) {
+function injectChrome(html, rel, solidHeader = false) {
   if (!_chrome) return html;                 // module pas prêt → repli (page sans chrome SSR, hydratée client)
   const active = activeForRel(rel);          // nav active en SSR (anti-glissement du soulignement)
   // Header solide pré-rendu pour les pages non-hero (anti flash blanc-sur-blanc).
-  const headerHtml = isNonHero(rel)
+  const headerHtml = (isNonHero(rel) || solidHeader)
     ? _chrome.chromeHTML(active).replace('<header class="chrome"', '<header class="chrome chrome--solid"')
     : _chrome.chromeHTML(active);
   const footerHtml = _chrome.footerHTML();
@@ -603,7 +603,7 @@ app.get('/collections/:handle', async (req, res) => {
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       }
     } catch (e) { console.warn('[coll-grid-ssr]', e.message); }
-    html = injectChrome(html, 'produits.html');
+    html = injectChrome(html, 'produits.html', Boolean(collectionHero));
     ogCache(res);
     return res.send(html);
   } catch (err) {

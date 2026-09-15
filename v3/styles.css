@@ -1746,3 +1746,5 @@ body.pdplb-locked { overflow: hidden; }
 @media (max-width: 760px) {
   .editorial-photo { object-position: var(--photo-position-mobile, var(--photo-position, 50% 50%)); }
 }
+
+.subhero--editorial .subhero__scrim { background: linear-gradient(95deg, rgba(var(--scrim),.58) 0%, rgba(var(--scrim),.25) 46%, transparent 82%); }

@@ -190,6 +190,7 @@ test('curated collection hero agrees across bootstrap, social preview and no-JS 
   const { html } = await page('/collections/verres-carafes');
   const initial = JSON.parse(html.match(/id="collection-hero-initial">([\s\S]*?)<\/script>/)[1]);
   assert.deepEqual(initial, expected);
+  assert.match(html, /<header class="chrome chrome--solid"/);
   assert.ok(html.includes(`content="${expected.img.replace(/&/g, '&amp;')}"`));
   const fallback = html.match(/<noscript><img class="subhero__img editorial-photo"[^>]*>/)[0];
   assert.ok(fallback.includes(`width="${expected.width}" height="${expected.height}"`));

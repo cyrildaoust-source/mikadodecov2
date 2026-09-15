@@ -536,7 +536,7 @@
     const activeNav = designerSlug
       ? "Designers"
       : (params.get("brand") || BRAND_HANDLES.has(collFromPath)) ? "Marques" : "Mobilier";
-    initShell({ active: activeNav, transparentNav: true });
+    initShell({ active: activeNav, transparentNav: !window.__hero?.editorial });
 
     // Catégories (36, alphabétique) — handle + libellé pour le panneau multi-
     // sélection. Le filtrage est SERVEUR (?cats=<handles> → clauses Shopify dans
