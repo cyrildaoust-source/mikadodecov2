@@ -590,7 +590,7 @@ app.get('/collections/:handle', async (req, res) => {
         brand: false,
         srcset: [800, 1200, 1600].map(width => collectionHero.image.replace('width=800', 'width=' + width) + ' ' + width + 'w').join(', '),
         img: image, width: 800, height: 1200,
-        alt: 'Table Ribambelle dressée sur une terrasse', obj: 'center 64%',
+        alt: 'Table Ribambelle dressée sur une terrasse', obj: 'center 38%',
       };
       const seed = JSON.stringify(hero).replace(/</g, '\\u003c');
       html = html.replace('<script type="application/json" id="collection-hero-initial">null</script>', () => '<script type="application/json" id="collection-hero-initial">' + seed + '</script>');
