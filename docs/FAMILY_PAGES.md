@@ -28,7 +28,7 @@ Sur Tables, « Les chaises iconiques » se place entre les catégories et les in
 
 Repères de curation : [Panton / Verner Panton](https://www.verner-panton.com/en/collection/prod-panton-chair/), [CH24 / Carl Hansen & Søn](https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/ch24), [Standard / Vitra](https://www.vitra.com/en-us/product/standard), [Domus / Artek](https://www.artek.fi/en/products/domus-chair). La liste reste un choix éditorial modifiable dans le site.
 
-Pour les autres familles, les tags `icone` et `icone-design` servent à une sélection éditoriale au sein de chaque collection. Une meilleure vente, une nouveauté, la notoriété d’une marque ou un mot trouvé sur le site fournisseur ne suffisent pas à attribuer ces tags. Une rubrique sans sélection reste masquée.
+Pour les autres familles, les tags `icone` et `icone-design` servent à une sélection éditoriale au sein de chaque collection. Une meilleure vente, une nouveauté, la notoriété d’une marque ou un mot trouvé sur le site fournisseur ne suffisent pas à attribuer ces tags. Une rubrique sans sélection reste masquée. Une sélection d’un ou deux produits utilise des cartes horizontales compactes afin d’éviter une grande grille presque vide.
 
 Décision demandée : retirer `icone` de la fiche `chaise-hay-aac-26` dans Shopify, ainsi que `icone-design` s’il y était ajouté. Le contrôle public du 14 septembre montrait `icone` et une sélection Assises ne contenant que ce produit.
 

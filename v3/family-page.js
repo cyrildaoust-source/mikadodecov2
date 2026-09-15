@@ -68,9 +68,14 @@ if (more) more.addEventListener('click', async event => {
 (async () => {
   const section = root.querySelector('[data-icones-sec]');
   if (!section) return;
+  const show = products => {
+    const rail = section.querySelector('[data-icones]');
+    rail.classList.toggle('fam-icon-rail--compact', products.length < 3);
+    rail.innerHTML = products.map(productCard).join('');
+    section.hidden = !products.length;
+  };
   if (initial.curatedIcons) {
-    section.querySelector('[data-icones]').innerHTML = initial.iconItems.map(productCard).join('');
-    section.hidden = !initial.iconItems.length;
+    show(initial.iconItems);
     return;
   }
   const results = await Promise.allSettled(ICON_TAGS.map(async tag => {
@@ -80,6 +85,5 @@ if (more) more.addEventListener('click', async event => {
   }));
   const products = uniqueProducts(results.flatMap(result => result.status === 'fulfilled' ? result.value : [])).filter(isFamilyIcon);
   if (!products.length) return;
-  section.querySelector('[data-icones]').innerHTML = products.map(productCard).join('');
-  section.hidden = false;
+  show(products);
 })();
