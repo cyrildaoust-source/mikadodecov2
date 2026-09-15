@@ -1740,3 +1740,11 @@ body.pdplb-locked { overflow: hidden; }
 .gifto__teaser { font-size: 11.5px; color: var(--muted); margin: 8px 0 0; }
 
 .gifto__foot { font-size: 10.5px; color: var(--muted); margin: 10px 0 0; }
+
+/* Cadrage des photos éditoriales : points distincts possibles selon le format. */
+.editorial-photo { object-position: var(--photo-position, 50% 50%); }
+@media (max-width: 760px) {
+  .editorial-photo { object-position: var(--photo-position-mobile, var(--photo-position, 50% 50%)); }
+}
+
+.subhero--editorial .subhero__scrim { background: linear-gradient(95deg, rgba(var(--scrim),.58) 0%, rgba(var(--scrim),.25) 46%, transparent 82%); }

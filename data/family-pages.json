@@ -2,7 +2,7 @@
   "tables": {
     "title": "Tables",
     "description": "Partager un repas, travailler, poser un livre. Des tables de caractère pour accompagner chaque moment de la journée à l’intérieur.",
-    "hero": "/images/home/room-sam.webp",
+    "hero": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/6633228_The_Hamlet_v_fullbleed_1440x_0d50bd42-2e9d-4a7d-90eb-0c98779eb7f4.jpg?v=1780350562&width=2000&format=webp",
     "cta": "Découvrir les tables",
     "gridTitle": "Toutes les tables d’intérieur",
     "inspiration": {
@@ -11,17 +11,23 @@
         {
           "title": "Le plaisir de recevoir",
           "href": "/collections/tables-de-salle-a-manger",
-          "image": "/images/brands/headers/muuto-2400.webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9639803_Echt_AG_St._Gallen_2025_4__v_fullbleed_1440x_6d59efe3-8169-40f3-b62e-5a1a968747cc.jpg?v=1778701927&width=1000&format=webp",
+          "sourceProduct": "chaise-standard",
+          "position": "50% 55%"
         },
         {
           "title": "À portée de main",
           "href": "/collections/tables-basses-et-tables-dappoint",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/384982_1104269205_10_ba9b0639-ef76-4534-b2e2-574e723da9ad.jpg?v=1783157267&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/541794_1104269205_11.jpg?v=1783157267&width=1000&format=webp",
+          "sourceProduct": "tables-gigognes-shard",
+          "position": "50% 55%"
         },
         {
           "title": "Un espace pour créer",
           "href": "/collections/bureaux",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Aslak_Chair_Pendant_Light_AMA500_Kaari_Desk_web.jpg?v=1784838937&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Kaari_Desk_clear_varnish_Stool_60_black_lacquer_web.jpg?v=1784838934&width=1000&format=webp",
+          "sourceProduct": "artek-kaari-desk-reb005",
+          "position": "50% 55%"
         }
       ]
     },
@@ -29,22 +35,29 @@
       {
         "slug": "vitra",
         "name": "Vitra",
-        "image": "/images/home/room-sam.webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/6510781_Maison_Prouve_Dining_close_v_fullbleed_1440x_99e5f355-29b9-4556-96c1-dc2ee039adb2.jpg?v=1778701928&width=700&format=webp",
+        "sourceProduct": "chaise-standard",
+        "position": "50% 50%"
       },
       {
         "slug": "ferm-living",
         "name": "Ferm Living",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/384982_1104269205_10_ba9b0639-ef76-4534-b2e2-574e723da9ad.jpg?v=1783157267&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/352591_1104269203_10.jpg?v=1783157267&width=700&format=webp",
+        "sourceProduct": "tables-gigognes-shard",
+        "position": "50% 50%"
       },
       {
         "slug": "muuto",
         "name": "Muuto",
-        "image": "/images/brands/headers/muuto-2400.webp"
+        "image": "/images/brands/headers/muuto-2400.webp",
+        "position": "50% 50%"
       },
       {
         "slug": "artek",
         "name": "Artek",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Aslak_Chair_Pendant_Light_AMA500_Kaari_Desk_web.jpg?v=1784838937&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Artek_Helsinki_Christmas_2025_2_new_web_f65980b5-b489-46b2-9ac8-02078096dceb.jpg?v=1778675162&width=700&format=webp",
+        "sourceProduct": "artek-aalto-table-foldable-dl81c",
+        "position": "50% 50%"
       }
     ],
     "categories": [
@@ -52,25 +65,29 @@
         "handle": "tables-de-salle-a-manger",
         "title": "Tables de salle à manger",
         "image": "/images/home/room-sam.webp",
-        "sourceProduct": null
+        "sourceProduct": null,
+        "position": "50% 50%"
       },
       {
         "handle": "tables-outdoor",
         "title": "Tables outdoor",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/RIBAMBELLE_STUDIE_GRIS_ORAGE_MENTHE_ACAPULCO_DOMAINE-SAINT-SAUVEUR_ALBUM2022_TOM_WATSON.jpg?v=1776898361&width=800&format=webp",
-        "sourceProduct": "table-aluminium-ribambelle-3-allonges-xl-149-299-x-100-cm"
+        "sourceProduct": "table-aluminium-ribambelle-3-allonges-xl-149-299-x-100-cm",
+        "position": "50% 50%"
       },
       {
         "handle": "tables-basses-et-tables-dappoint",
         "title": "Tables basses et tables d'appoint",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/384982_1104269205_10_ba9b0639-ef76-4534-b2e2-574e723da9ad.jpg?v=1783157267&width=800&format=webp",
-        "sourceProduct": "tables-gigognes-shard"
+        "sourceProduct": "tables-gigognes-shard",
+        "position": "50% 50%"
       },
       {
         "handle": "bureaux",
         "title": "Bureaux",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Aslak_Chair_Pendant_Light_AMA500_Kaari_Desk_web.jpg?v=1784838937&width=800&format=webp",
-        "sourceProduct": "artek-kaari-desk-reb005"
+        "sourceProduct": "artek-kaari-desk-reb005",
+        "position": "50% 50%"
       }
     ],
     "featured": {
@@ -82,12 +99,15 @@
         "table-ch006"
       ]
     },
-    "icons": false
+    "icons": false,
+    "heroSourceProduct": "table-noguchi-dining",
+    "heroPosition": "50% 65%",
+    "heroAlt": "Table Noguchi dans une salle à manger lumineuse"
   },
   "luminaires": {
     "title": "Luminaires",
     "description": "Une lumière pour lire, recevoir ou ralentir. Suspensions, lampes et appliques dessinent l’atmosphère de votre intérieur.",
-    "hero": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/90-mini-mini-vivid-23.jpg?v=1778147331&width=2000&format=webp",
+    "hero": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Floor_light_A811_On_web.jpg?v=1778596578&width=2000&format=webp",
     "cta": "Découvrir les luminaires",
     "gridTitle": "Tous les luminaires",
     "inspiration": {
@@ -96,17 +116,23 @@
         {
           "title": "Une lumière pour recevoir",
           "href": "/collections/suspensions",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/artek-pendant-lights-a331-beehive-dining-room.jpg?v=1778596086&width=1000&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/artek-pendant-lights-a331-beehive-dining-room.jpg?v=1778596086&width=1000&format=webp",
+          "sourceProduct": "artek-a331-beehive",
+          "position": "50% 35%"
         },
         {
           "title": "Une présence dans le salon",
           "href": "/collections/lampadaires",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9154877_Akari_10A_v_fullbleed_1440x_33146fcb-c491-4516-bbfa-7fafa998cf1b.jpg?v=1779956902&width=1000&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/308539_100133101_13.jpg?v=1779300950&width=1000&format=webp",
+          "sourceProduct": "lampadaire-metal-arum-floor",
+          "position": "50% 10%"
         },
         {
           "title": "À emporter partout",
           "href": "/collections/lampes-nomades",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/BALAD_SIXTIES_ORANGE_CONFITE_BLEU_MAYA_CANNES_VISUEL26_NICOLAS_MATHEUS_1.jpg?v=1778012751&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/SOMERSET_GRIS_ARGILE_BALAD2_ORANGE_CONFITE_BARTHAS_VISUELS26_NICOLAS_MATHEUS_1_BD.jpg?v=1778012751&width=1000&format=webp",
+          "sourceProduct": "lampe-balad-h-25-cm",
+          "position": "50% 55%"
         }
       ]
     },
@@ -114,22 +140,29 @@
       {
         "slug": "hay",
         "name": "HAY",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Apex_20Table_20Lamp_imageslider_1.jpg?v=1776808065&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Apex_20Table_20Lamp_imageslider_3.jpg?v=1776808065&width=700&format=webp",
+        "sourceProduct": "lampe-de-table-hay-apex-table-lamp",
+        "position": "50% 25%"
       },
       {
         "slug": "anglepoise",
         "name": "Anglepoise",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/90-mini-mini-vivid-23.jpg?v=1778147331&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/original-1227-mini-desk-lamp-dove-grey_4924.LS_.SQ_.W.S1.UK_.4.jpg?v=1778150029&width=700&format=webp",
+        "sourceProduct": "lampe-de-bureau-anglepoise-original-1227-mini-desk-lamp",
+        "position": "50% 50%"
       },
       {
         "slug": "artek",
         "name": "Artek",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Aslak_Chair_Wall_Light_A330S_photo_Mikko_Ryhanen_master.jpg?v=1778596735&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Wall-Light-A330S-white-Aalto-Table-Half-Round-white-Riihitie-A-white_web.jpg?v=1778596735&width=700&format=webp",
+        "sourceProduct": "artek-wall-light-a330s-eu",
+        "position": "50% 50%"
       },
       {
         "slug": "tradition",
         "name": "&Tradition",
-        "image": "/images/brands/headers/tradition-2400.webp"
+        "image": "/images/brands/headers/tradition-2400.webp",
+        "position": "50% 50%"
       }
     ],
     "categories": [
@@ -137,44 +170,53 @@
         "handle": "suspensions",
         "title": "Suspensions",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/artek-pendant-light-a331-beehive-white-brass-off-colourful-artwork-interior.jpg?v=1778596086&width=800&format=webp",
-        "sourceProduct": "artek-a331-beehive"
+        "sourceProduct": "artek-a331-beehive",
+        "position": "50% 50%"
       },
       {
         "handle": "lampes-de-table",
         "title": "Lampes de table",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Apex_20Table_20Lamp_imageslider_1.jpg?v=1776808065&width=800&format=webp",
-        "sourceProduct": "lampe-de-table-hay-apex-table-lamp"
+        "sourceProduct": "lampe-de-table-hay-apex-table-lamp",
+        "position": "50% 50%"
       },
       {
         "handle": "lampes-de-bureau",
         "title": "Lampes de bureau",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/90-mini-mini-vivid-23.jpg?v=1778147331&width=800&format=webp",
-        "sourceProduct": "lampe-de-bureau-anglepoise-90-mini-mini-desk-lamp"
+        "sourceProduct": "lampe-de-bureau-anglepoise-90-mini-mini-desk-lamp",
+        "position": "50% 50%"
       },
       {
         "handle": "lampadaires",
         "title": "Lampadaires",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9154877_Akari_10A_v_fullbleed_1440x_33146fcb-c491-4516-bbfa-7fafa998cf1b.jpg?v=1779956902&width=800&format=webp",
-        "sourceProduct": "lampadaire-akari-10a"
+        "sourceProduct": "lampadaire-akari-10a",
+        "position": "50% 50%"
       },
       {
         "handle": "appliques",
         "title": "Appliques",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Aslak_Chair_Wall_Light_A330S_photo_Mikko_Ryhanen_master.jpg?v=1778596735&width=800&format=webp",
-        "sourceProduct": "artek-wall-light-a330s-eu"
+        "sourceProduct": "artek-wall-light-a330s-eu",
+        "position": "50% 50%"
       },
       {
         "handle": "lampes-nomades",
         "title": "Lampes nomades",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/BALAD_SIXTIES_ORANGE_CONFITE_BLEU_MAYA_CANNES_VISUEL26_NICOLAS_MATHEUS_1.jpg?v=1778012751&width=800&format=webp",
-        "sourceProduct": "lampe-balad-h-25-cm"
+        "sourceProduct": "lampe-balad-h-25-cm",
+        "position": "50% 50%"
       }
-    ]
+    ],
+    "heroSourceProduct": "artek-a811-eu",
+    "heroPosition": "50% 0%",
+    "heroAlt": "Lampadaire Artek dans un salon lumineux"
   },
   "decoration": {
     "title": "Décoration",
     "description": "Une matière, une couleur, un objet qui attire le regard. Des pièces choisies pour composer un intérieur qui vous ressemble.",
-    "hero": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9007-9057-9037.jpg?v=1779323316&width=2000&format=webp",
+    "hero": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2324_collection_hkliving_shoot_2_lr_-6_9c760c4c-07eb-423b-8f0b-913a0d13ada8.jpg?v=1778073271&width=2000&format=webp",
     "cta": "Découvrir la décoration",
     "gridTitle": "Tous les objets de décoration",
     "inspiration": {
@@ -183,17 +225,23 @@
         {
           "title": "Composer avec les matières",
           "href": "/collections/coussins-plaids-tapis",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2024_additions_hkliving_shoot_1_lr_045.jpg?v=1778073271&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ttk3111-lr_a_01.jpg?v=1778073271&width=1000&format=webp",
+          "sourceProduct": "hkliving-tapis-set-0",
+          "position": "50% 55%"
         },
         {
           "title": "Le sens du détail",
           "href": "/collections/objets-decoratifs-cadres",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2425_collection_hkliving_shoot_1_lr_-555_7dc04308-97bb-41d9-af56-c9b73308f87c.jpg?v=1778062922&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/1104272629_10.jpg?v=1786746040&width=1000&format=webp",
+          "sourceProduct": "centre-de-table-fountain-verre",
+          "position": "50% 55%"
         },
         {
           "title": "Une place pour le végétal",
           "href": "/collections/cache-pots-jardinieres",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2425_collection_hkliving_shoot_1_lr_-667.jpg?v=1777984543&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/artek-riihitie-plant-pot-a-large-white-bench-153a-slatted-top-interior.jpg?v=1785096475&width=1000&format=webp",
+          "sourceProduct": "cache-pot-riihitie-40-x-27-cm",
+          "position": "50% 55%"
         }
       ]
     },
@@ -201,22 +249,29 @@
       {
         "slug": "pols-potten",
         "name": "Pols Potten",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/140-205-387_10_mood_47070b4a-22c8-4f98-87c0-2c27732ab37a.jpg?v=1777831353&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/140-205-385_1_mood_9007a08b-560a-4155-bd61-3f4b10f6c6ea.jpg?v=1777831342&width=700&format=webp",
+        "sourceProduct": "vase-steps",
+        "position": "50% 50%"
       },
       {
         "slug": "stoff-nagel",
         "name": "STOFF Nagel",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9007-9057-9037.jpg?v=1779323316&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9054-36028.jpg?v=1779323403&width=700&format=webp",
+        "sourceProduct": "bougie-chandelier-nagel-29-cm-boite-de-6",
+        "position": "50% 50%"
       },
       {
         "slug": "hkliving",
         "name": "HKliving",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2425_collection_hkliving_shoot_1_lr_-555_7dc04308-97bb-41d9-af56-c9b73308f87c.jpg?v=1778062922&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2425_collection_hkliving_shoot_1_lr_-597_75bd80da-aec5-48d2-b978-433d24851695.jpg?v=1778062946&width=700&format=webp",
+        "sourceProduct": "hkliving-horloge-retro-pink-set-0",
+        "position": "50% 50%"
       },
       {
         "slug": "vitra",
         "name": "Vitra",
-        "image": "/images/brands/headers/vitra-2400.webp"
+        "image": "/images/brands/headers/vitra-2400.webp",
+        "position": "50% 50%"
       }
     ],
     "categories": [
@@ -224,44 +279,53 @@
         "handle": "vases",
         "title": "Vases",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/140-205-387_10_mood_47070b4a-22c8-4f98-87c0-2c27732ab37a.jpg?v=1777831353&width=800&format=webp",
-        "sourceProduct": "vase-steps"
+        "sourceProduct": "vase-steps",
+        "position": "50% 50%"
       },
       {
         "handle": "bougeoirs-bougies-photophores",
         "title": "Bougeoirs, bougies & photophores",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9007-9057-9037.jpg?v=1779323316&width=800&format=webp",
-        "sourceProduct": "bougeoir-nagel"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/80280100-candela-candle-holder-light-grey-80280101-candela-candle-holder-grey-80280102-candela-candle-holder-dark-grey_2.jpg?v=1783003944&width=800&format=webp",
+        "sourceProduct": "bougeoir-candela",
+        "position": "50% 50%"
       },
       {
         "handle": "miroirs",
         "title": "Miroirs",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/vla62_oak_oil_detail.jpg?v=1783004221&width=800&format=webp",
-        "sourceProduct": "miroir-vla62-radio-house"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/vla62_oak_oil_vla26t_oak_lacquer_steel_black_v2.jpg?v=1783004221&width=800&format=webp",
+        "sourceProduct": "miroir-vla62-radio-house",
+        "position": "50% 50%"
       },
       {
         "handle": "coussins-plaids-tapis",
         "title": "Coussins, plaids & tapis",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2024_additions_hkliving_shoot_1_lr_045.jpg?v=1778073271&width=800&format=webp",
-        "sourceProduct": "hkliving-tapis-set-0"
+        "sourceProduct": "hkliving-tapis-set-0",
+        "position": "50% 50%"
       },
       {
         "handle": "cache-pots-jardinieres",
         "title": "Cache-pots & jardinières",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2425_collection_hkliving_shoot_1_lr_-667.jpg?v=1777984543&width=800&format=webp",
-        "sourceProduct": "hkliving-cache-pot-stoneware-cream-36-set-0"
+        "sourceProduct": "hkliving-cache-pot-stoneware-cream-36-set-0",
+        "position": "50% 50%"
       },
       {
         "handle": "objets-decoratifs-cadres",
         "title": "Objets décoratifs & cadres",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2425_collection_hkliving_shoot_1_lr_-555_7dc04308-97bb-41d9-af56-c9b73308f87c.jpg?v=1778062922&width=800&format=webp",
-        "sourceProduct": "hkliving-horloge-retro-pink-set-0"
+        "sourceProduct": "hkliving-horloge-retro-pink-set-0",
+        "position": "50% 50%"
       }
-    ]
+    ],
+    "heroSourceProduct": "hkliving-tapis-set-0",
+    "heroPosition": "50% 65%",
+    "heroAlt": "Un salon habité, composé de matières naturelles et de couleurs"
   },
   "rangement": {
     "title": "Rangement",
     "description": "Donner une place aux livres, aux objets et aux essentiels. Des rangements qui organisent la maison et participent à son décor.",
-    "hero": "/images/brands/headers/string-furniture-2400.webp",
+    "hero": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/mikado-hkliving-commode-space-160-80-cm-008-2e3c15e1733e.jpg?v=1786863597&width=2000&format=webp",
     "cta": "Découvrir les rangements",
     "gridTitle": "Tous les rangements",
     "inspiration": {
@@ -270,17 +334,23 @@
         {
           "title": "Une bibliothèque à composer",
           "href": "/collections/etageres-et-bibliotheques",
-          "image": "/images/brands/headers/string-furniture-2400.webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/mikado-hkliving-etagere-acrylic-160-cm-002-5e44b55fbd0d.jpg?v=1786839873&width=1000&format=webp",
+          "sourceProduct": "etagere-acrylic-160-cm",
+          "position": "50% 55%"
         },
         {
-          "title": "Un accueil bien pensé",
+          "title": "Les essentiels à portée de main",
           "href": "/collections/pateres-et-porte-manteaux",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/dots-wood-light-blue-burgundy-burnt-orange-dots-metal-light-green-hi-res_7.jpg?v=1778760760&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/dots-wood-light-blue-burgundy-burnt-orange-dots-metal-light-green-hi-res_7.jpg?v=1778760760&width=1000&format=webp",
+          "sourceProduct": "patere-the-dots-wood",
+          "position": "50% 30%"
         },
         {
           "title": "Le rangement en mouvement",
           "href": "/collections/dessertes-et-chariots",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ATD_Lifestyle-Images_Collection-2026.02_Alima-NDS2.jpg?v=1785262666&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/fatboy-jolly-trolley-anthracite-1920x1280-ambiance-02-106514.jpg?v=1778021127&width=1000&format=webp",
+          "sourceProduct": "accessoire-jolly-trolley",
+          "position": "50% 55%"
         }
       ]
     },
@@ -288,22 +358,29 @@
       {
         "slug": "string-furniture",
         "name": "String Furniture",
-        "image": "/images/brands/headers/string-furniture-2400.webp"
+        "image": "/images/brands/headers/string-furniture-2400.webp",
+        "position": "50% 50%"
       },
       {
         "slug": "muuto",
         "name": "Muuto",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Restore-basket-concept-Muuto_7.jpg?v=1778882082&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/stacked-bookcase-1-oak-relevo-rug-burnt-orange-kink-vase-light-blue-muuto-org_3.jpg?v=1779020589&width=700&format=webp",
+        "sourceProduct": "module-stacked-avec-fond",
+        "position": "50% 50%"
       },
       {
         "slug": "tradition",
         "name": "&Tradition",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ATD_Lifestyle-Images_Collection-2026.02_Alima-NDS2.jpg?v=1785262666&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ATD_Lifestyle-Images_Collection-2026.02_Alima-NDS2_01.jpg?v=1785262666&width=700&format=webp",
+        "sourceProduct": "desserte-alima-nds2",
+        "position": "50% 50%"
       },
       {
         "slug": "hkliving",
         "name": "HKliving",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/mikado-hkliving-commode-space-160-80-cm-008-2e3c15e1733e.jpg?v=1786863597&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/mikado-hkliving-commode-space-160-80-cm-009-3f5bb22a366f.jpg?v=1786863597&width=700&format=webp",
+        "sourceProduct": "commode-space-160-80-cm",
+        "position": "50% 50%"
       }
     ],
     "categories": [
@@ -311,33 +388,41 @@
         "handle": "etageres-et-bibliotheques",
         "title": "Étagères et bibliothèques",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/MUUTO-EDITORIAL-Q1-2024-6-HI-res_7.jpg?v=1778925785&width=800&format=webp",
-        "sourceProduct": "etagere-stacked"
+        "sourceProduct": "etagere-stacked",
+        "position": "50% 50%"
       },
       {
         "handle": "commodes-et-buffets",
         "title": "Commodes et buffets",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/mikado-hkliving-commode-space-160-80-cm-008-2e3c15e1733e.jpg?v=1786863597&width=800&format=webp",
-        "sourceProduct": "commode-space-160-80-cm"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/1104273075_10.jpg?v=1786736795&width=800&format=webp",
+        "sourceProduct": "commode-tilu",
+        "position": "50% 50%"
       },
       {
         "handle": "paniers-et-corbeilles",
         "title": "Paniers et corbeilles",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Restore-basket-concept-Muuto_7.jpg?v=1778882082&width=800&format=webp",
-        "sourceProduct": "panier-de-rangement-restore-rectangulaire-grand"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Restore-stacked-leaf-org_7_b65dffd3-8001-421e-a700-de86196bfcc7.jpg?v=1778882243&width=800&format=webp",
+        "sourceProduct": "panier-de-rangement-restore-rond",
+        "position": "50% 50%"
       },
       {
         "handle": "pateres-et-porte-manteaux",
         "title": "Patères et porte-manteaux",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/dots-wood-light-blue-burgundy-burnt-orange-dots-metal-light-green-hi-res_7.jpg?v=1778760760&width=800&format=webp",
-        "sourceProduct": "patere-the-dots-wood"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/1045312_1104271090_10.jpg?v=1786908649&width=800&format=webp",
+        "sourceProduct": "patere-harbour-poisson",
+        "position": "50% 50%"
       },
       {
         "handle": "dessertes-et-chariots",
         "title": "Dessertes et chariots",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ATD_Lifestyle-Images_Collection-2026.02_Alima-NDS2.jpg?v=1785262666&width=800&format=webp",
-        "sourceProduct": "desserte-alima-nds2"
+        "sourceProduct": "desserte-alima-nds2",
+        "position": "50% 50%"
       }
-    ]
+    ],
+    "heroSourceProduct": "commode-space-160-80-cm",
+    "heroPosition": "50% 65%",
+    "heroAlt": "Commode Space dans un intérieur coloré avec un miroir et des objets"
   },
   "accessoires": {
     "title": "Arts de la table",
@@ -351,17 +436,23 @@
         {
           "title": "Dresser une belle table",
           "href": "/collections/vaisselle-assiettes",
-          "image": "/images/brands/headers/ferm-living-2400.webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/KL12-kl13-02_53800a12-9877-4c64-932d-48fc52c30240.jpg?v=1778237712&width=1000&format=webp",
+          "sourceProduct": "fourchette-tibidabo",
+          "position": "50% 55%"
         },
         {
           "title": "Le rituel du café",
           "href": "/collections/mugs-tasses-cafe",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2324_collection_hkliving_showroom_lr_-16.jpg?v=1777891432&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2324_collection_hkliving_showroom_lr_-16.jpg?v=1777891432&width=1000&format=webp",
+          "sourceProduct": "hkliving-tasse-a-cappuccino-rock-set-0",
+          "position": "50% 55%"
         },
         {
           "title": "La transparence et la couleur",
           "href": "/collections/verres-carafes?tag=verrerie",
-          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/pichet-tube-amb-09359540-0935956-0935957-tube.jpg?v=1782813482&width=1400&format=webp"
+          "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/pichet-tube-amb-09359559-tube.jpg?v=1782813471&width=1000&format=webp",
+          "sourceProduct": "pichet-tube",
+          "position": "50% 55%"
         }
       ]
     },
@@ -369,22 +460,29 @@
       {
         "slug": "ferm-living",
         "name": "Ferm Living",
-        "image": "/images/brands/headers/ferm-living-2400.webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/227613_1104270133_10.jpg?v=1777651412&width=700&format=webp",
+        "sourceProduct": "pichet-a-eau-verre-ripple-water-jug",
+        "position": "50% 50%"
       },
       {
         "slug": "hkliving",
         "name": "HKliving",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2324_collection_hkliving_showroom_lr_-16.jpg?v=1777891432&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2324_collection_hkliving_shoot_3_lr-88_139267b0-ad5a-4618-9dc7-79b3ed45735b.jpg?v=1777891458&width=700&format=webp",
+        "sourceProduct": "hkliving-tasse-a-cappuccino-rock-set-0",
+        "position": "50% 50%"
       },
       {
         "slug": "ichendorf-milano",
         "name": "Ichendorf Milano",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/pichet-tube-amb-09359540-0935956-0935957-tube.jpg?v=1782813482&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/huilier-vegetables-amb-09354129-09354183-vegetables.jpg?v=1782813233&width=700&format=webp",
+        "sourceProduct": "huilier-vegetables",
+        "position": "50% 50%"
       },
       {
         "slug": "alessi",
         "name": "Alessi",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/022_ACO02.jpg?v=1778237921&width=700&format=webp"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/022_ACO02.jpg?v=1778237921&width=700&format=webp",
+        "position": "50% 50%"
       }
     ],
     "categories": [
@@ -392,33 +490,39 @@
         "handle": "vaisselle-assiettes",
         "title": "Vaisselle & assiettes",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/lr-2022_hk_campaign_antwerp_polina-17.jpg?v=1777943671&width=800&format=webp",
-        "sourceProduct": "hkliving-coupelle-rustic-blue-9-set-0"
+        "sourceProduct": "hkliving-coupelle-rustic-blue-9-set-0",
+        "position": "50% 50%"
       },
       {
         "handle": "verres-carafes",
         "title": "Verres & carafes",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/pichet-tube-amb-09359540-0935956-0935957-tube.jpg?v=1782813482&width=800&format=webp",
-        "sourceProduct": "pichet-tube"
+        "sourceProduct": "pichet-tube",
+        "position": "50% 50%"
       },
       {
         "handle": "couverts",
         "title": "Couverts",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/cuillere-the-coccinelles-fruits-flowers-ambiance-352199.jpg?v=1786780592&width=800&format=webp",
-        "sourceProduct": "cuillere-the-fruits-flowers-coccinelles-15-cm-lot-de-2"
+        "sourceProduct": "cuillere-the-fruits-flowers-coccinelles-15-cm-lot-de-2",
+        "position": "50% 50%"
       },
       {
         "handle": "mugs-tasses-cafe",
         "title": "Mugs, tasses & café",
-        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2324_collection_hkliving_showroom_lr_-16.jpg?v=1777891432&width=800&format=webp",
-        "sourceProduct": "hkliving-tasse-a-cappuccino-rock-set-0"
+        "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/2425_collection_hkliving_shoot_1_lr_-282.jpg?v=1777891546&width=800&format=webp",
+        "sourceProduct": "hkliving-tasse-a-cappuccino-rock-set-0",
+        "position": "50% 50%"
       },
       {
         "handle": "ustensiles-cuisine",
         "title": "Ustensiles & cuisine",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ALTO_GRIS_ARGILE_VISUELS25_JURA_SEBASTIEN_EROME_3.jpg?v=1776897842&width=800&format=webp",
-        "sourceProduct": "plateau-metal-alto-alto-53-x-38-5-cm"
+        "sourceProduct": "plateau-metal-alto-alto-53-x-38-5-cm",
+        "position": "50% 50%"
       }
     ],
-    "icons": false
+    "icons": false,
+    "heroPosition": "50% 50%"
   }
 }
