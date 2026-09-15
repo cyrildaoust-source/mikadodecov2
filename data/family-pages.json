@@ -72,16 +72,7 @@
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Aslak_Chair_Pendant_Light_AMA500_Kaari_Desk_web.jpg?v=1784838937&width=800&format=webp",
         "sourceProduct": "artek-kaari-desk-reb005"
       }
-    ],
-    "icons": {
-      "title": "Les chaises iconiques",
-      "handles": [
-        "chaise-panton",
-        "chaise-ch24-wishbone",
-        "chaise-standard",
-        "artek-domus-chair"
-      ]
-    }
+    ]
   },
   "luminaires": {
     "title": "Luminaires",
@@ -359,7 +350,7 @@
         },
         {
           "title": "La transparence et la couleur",
-          "href": "/collections/verres-carafes",
+          "href": "/collections/verres-carafes?tag=verrerie",
           "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/pichet-tube-amb-09359540-0935956-0935957-tube.jpg?v=1782813482&width=1400&format=webp"
         }
       ]

@@ -70,14 +70,9 @@ if (more) more.addEventListener('click', async event => {
   if (!section) return;
   const show = products => {
     const rail = section.querySelector('[data-icones]');
-    rail.classList.toggle('fam-icon-rail--compact', products.length < 3);
     rail.innerHTML = products.map(productCard).join('');
     section.hidden = !products.length;
   };
-  if (initial.curatedIcons) {
-    show(initial.iconItems);
-    return;
-  }
   const results = await Promise.allSettled(ICON_TAGS.map(async tag => {
     const response = await fetch(`/api/collection/${encodeURIComponent(initial.handle)}/products?limit=30&tag=${encodeURIComponent(tag)}`);
     if (!response.ok) throw new Error('Icons unavailable');

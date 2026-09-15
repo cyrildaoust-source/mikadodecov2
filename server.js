@@ -5,7 +5,7 @@ const path    = require('path');
 const fs      = require('fs');
 const crypto  = require('crypto');                 // natif — vérif HMAC des webhooks Shopify
 const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-memory, best-effort)
-const { families, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage } = require('./lib/family-pages');
+const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, renderSeatingPage } = require('./lib/family-pages');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -523,15 +523,21 @@ app.get('/collections/:handle', async (req, res) => {
     try {
       await _chromeReady;
       res.set('Content-Type', 'text/html; charset=utf-8');
-      return res.send(injectChrome(fs.readFileSync(path.join(__dirname, 'v3', FAMILLES_RICHES[handle]), 'utf8'), FAMILLES_RICHES[handle]));
+      let html = fs.readFileSync(path.join(__dirname, 'v3', FAMILLES_RICHES[handle]), 'utf8');
+      if (handle === 'sieges') {
+        // Une fiche dépubliée ou en panne ne bloque pas la sélection restante.
+        const results = await Promise.allSettled(seatingIcons.handles.map(getProductByHandle));
+        const items = results.flatMap(result => result.status === 'fulfilled' && result.value ? [result.value] : []);
+        html = renderSeatingPage(html, items, items.map(plpCardSsr).filter(Boolean).join(''));
+        if (results.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
+        else ogCache(res);
+      }
+      return res.send(injectChrome(html, FAMILLES_RICHES[handle]));
     } catch (e) { /* repli sur le template générique ci-dessous */ }
   }
   if (Object.hasOwn(families, handle)) {
     await _chromeReady;
     const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : '';
-    // Sélection éditoriale explicite, indépendante du classement de la collection.
-    // Une chaise indisponible ne doit pas empêcher d'afficher les tables.
-    const iconsPromise = Promise.allSettled((families[handle].icons?.handles || []).map(getProductByHandle));
     let payload = null;
     let failed = false;
     try {
@@ -542,17 +548,14 @@ app.get('/collections/:handle', async (req, res) => {
       console.warn('[family-products]', handle, error.message);
     }
     const items = payload?.items || [];
-    const iconResults = await iconsPromise;
-    const iconItems = iconResults.flatMap(result => result.status === 'fulfilled' && result.value ? [result.value] : []);
     let html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
       items, pageInfo: payload?.pageInfo || {}, cursor, failed,
       cards: items.map(plpCardSsr).filter(Boolean).join(''),
-      iconItems, iconCards: iconItems.map(plpCardSsr).filter(Boolean).join(''),
     });
     html = html.replace('</head>', breadcrumbTag(families[handle].title, ORIGIN + '/collections/' + handle) + '\n</head>');
     res.set('Content-Type', 'text/html; charset=utf-8');
     // Ne pas conserver une panne de Shopify dans le cache de la page.
-    if (failed || iconResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
+    if (failed) res.set('Cache-Control', 'no-store');
     else ogCache(res);
     return res.send(injectChrome(html, 'family-page.html'));
   }
@@ -583,7 +586,9 @@ app.get('/collections/:handle', async (req, res) => {
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
     try {
-      const cp = await collectionProductsFor(handle, 24);
+      // Le premier rendu doit respecter le même filtre que la grille hydratée.
+      const tag = typeof req.query.tag === 'string' ? req.query.tag : null;
+      const cp = await collectionProductsFor(handle, 24, null, tag);
       const gi = (cp && cp.items) || [];
       if (gi.length) {
         const cards = gi.map(plpCardSsr).filter(Boolean).join('');

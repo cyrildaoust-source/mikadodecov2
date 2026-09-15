@@ -75,7 +75,7 @@
       </div>
     </section>
 
-    <section class="sec fam-rich" data-icones-sec><h2 class="lab">Les icônes</h2><div class="prow" data-icones></div></section>
+    <!-- SEATING_ICONS -->
 
     <section class="sec fam-rich"><h2 class="lab">Par pièce</h2><div class="sgrid"><div class="scard scard--static scard--feat"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-sejour.webp" alt="" loading="lazy"></span><span class="scard__name">Séjour</span></div><div class="scard scard--static"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-sam.webp" alt="" loading="lazy"></span><span class="scard__name">Salle à manger</span></div><div class="scard scard--static"><span class="ph"><img class="ph-img" src="/images/familles/assises/esp-office.webp" alt="" loading="lazy"></span><span class="scard__name">Home office</span></div></div></section>
 
@@ -90,10 +90,11 @@
   </main>
   <div id="site-footer"></div>
 
+  <script type="application/json" id="seating-icons-initial">{"items":[]}</script>
   <script type="module">
     import { bindFamilyRails } from "/family-rail.js";
     import { initShell, productCard } from "/shared.js";
-    import { isFamilyIcon } from "/family-policy.mjs";
+    import { shuffledProducts } from "/family-policy.mjs";
     initShell({ active: "Mobilier", transparentNav: true });
     var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
     // exclut le mobilier de jardin (contamination outdoor de la collection sieges)
@@ -101,24 +102,12 @@
 
     bindFamilyRails(document.querySelector(".fam"));
 
-    // Les icônes : produits tagués « icone » (packshots auto) ; section masquée tant que rien n'est tagué.
-    (async function(){
-      var host=document.querySelector('[data-icones]'); if(!host) return;
-      var section=document.querySelector('[data-icones-sec]');
-      if(matchMedia('(max-width:760px)').matches){ if(section)section.hidden=true; return; }
-      try{
-        var seen={}, items=[];
-        var tags=['icone','icone-design'];   // lit aussi l'alias de transition (contrat backend)
-        for(var i=0;i<tags.length;i++){
-          var r=await fetch('/api/collection/sieges/products?limit=30&tag='+tags[i]);
-          if(!r.ok) continue;
-          var j=await r.json();
-          indoor(j.items||j.products).filter(isFamilyIcon).forEach(function(p){ if(p&&p.handle&&!seen[p.handle]){ seen[p.handle]=1; items.push(p); } });
-        }
-        if(!items.length){ if(section)section.hidden=true; return; }
-        host.innerHTML=items.slice(0,30).map(productCard).join('');
-      }catch(e){ if(section)section.hidden=true; }
-    })();
+    // Les huit modèles sont déjà rendus par le serveur. Un nouvel ordre par visite.
+    const iconSeed = JSON.parse(document.querySelector('#seating-icons-initial').textContent);
+    const iconRail = document.querySelector('[data-icones]');
+    if (iconRail && iconSeed.items.length) {
+      iconRail.innerHTML = shuffledProducts(iconSeed.items).map(productCard).join('');
+    }
 
     // Grille « Toutes les assises » : walk complet collection sieges (INTÉRIEUR) puis pagination client-side.
     (function(){
