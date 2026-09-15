@@ -183,3 +183,41 @@ test('icon curation excludes only the rejected AAC 26 and requires an editorial 
   assert.equal(isFamilyIcon(null), false);
   assert.equal(uniqueProducts([{ handle: 'one' }, { id: 1, handle: 'one' }, null, { handle: 'two' }]).length, 2);
 });
+
+test('curated collection hero agrees across bootstrap, social preview and no-JS fallback', async () => {
+  const { collectionHero } = require('../lib/editorial-media');
+  const expected = collectionHero('verres-carafes');
+  const { html } = await page('/collections/verres-carafes');
+  const initial = JSON.parse(html.match(/id="collection-hero-initial">([\s\S]*?)<\/script>/)[1]);
+  assert.deepEqual(initial, expected);
+  assert.ok(html.includes(`content="${expected.img.replace(/&/g, '&amp;')}"`));
+  const fallback = html.match(/<noscript><img class="subhero__img editorial-photo"[^>]*>/)[0];
+  assert.ok(fallback.includes(`width="${expected.width}" height="${expected.height}"`));
+  assert.ok(fallback.includes(expected.style));
+  assert.match(fallback, /sizes="100vw"/);
+});
+
+test('editorial curation has distinct photographs, safe focal points and known sources', () => {
+  const { collectionHeroes, collectionHero, photoStyle, injectCollectionHero } = require('../lib/editorial-media');
+  const imageKey = image => new URL(image, 'https://www.mikadodeco.be').pathname;
+  assert.equal(Object.keys(collectionHeroes).length, 39);
+  assert.equal(new Set(Object.values(collectionHeroes).map(photo => imageKey(photo.image))).size, 39);
+  for (const [handle, photo] of Object.entries(collectionHeroes)) {
+    assert.match(photo.sourceProduct, /^[a-z0-9-]+$/);
+    assert.equal(new URL(photo.image).hostname, 'cdn.shopify.com');
+    assert.doesNotMatch(photo.image, /chatgpt|generated/i);
+    assert.ok(photo.width >= 1000 && photo.height > 0, handle);
+    assert.match(photo.position, /^(100|\d{1,2})% (100|\d{1,2})%$/);
+    const hero = collectionHero(handle);
+    assert.ok(hero.srcset.endsWith(photo.width + 'w'));
+    assert.ok(!hero.srcset.includes('undefined'));
+  }
+  for (const family of Object.values(families)) {
+    const images = [family.hero, ...family.categories.map(item => item.image), ...family.inspiration.items.map(item => item.image), ...family.brands.map(item => item.image)].map(imageKey);
+    assert.equal(new Set(images).size, images.length, family.title + ': no reused photograph within a page');
+  }
+  assert.equal(collectionHero('vitra'), null, 'brand headers keep their own treatment');
+  assert.equal(collectionHero('__proto__'), null);
+  assert.equal(injectCollectionHero('unchanged template', null), 'unchanged template');
+  assert.equal(photoStyle({ position: '0; background:url(https://untrusted.invalid)' }), '--photo-position:50% 50%;--photo-position-mobile:50% 50%');
+});

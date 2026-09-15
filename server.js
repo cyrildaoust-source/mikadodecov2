@@ -6,6 +6,7 @@ const fs      = require('fs');
 const crypto  = require('crypto');                 // natif — vérif HMAC des webhooks Shopify
 const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-memory, best-effort)
 const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, renderSeatingPage } = require('./lib/family-pages');
+const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
@@ -571,7 +572,7 @@ app.get('/collections/:handle', async (req, res) => {
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
     if (!col) { if (COLLECTION_ALIASES.has(handle)) { ogCache(res); return sendProduitsTemplate(res); } return send404Shell(res, PRODUITS_TEMPLATE); }
 
-    const collectionHero = handle === 'tables-outdoor' ? families.tables.categories.find(category => category.handle === handle) : null;
+    const collectionHero = getCollectionHero(handle);
     const name = col.name || 'Catalogue';
     const title = `${name} · Mikado Deco`;
     const description = ogDesc(
@@ -579,24 +580,13 @@ app.get('/collections/:handle', async (req, res) => {
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
-    const image = collectionHero ? collectionHero.image.replace('width=800', 'width=1600') : BRAND_HEADERS.has(handle)
+    const image = collectionHero ? collectionHero.img : BRAND_HEADERS.has(handle)
       ? `${ORIGIN}/images/brands/headers/${handle}-1920.jpg`
       : (col.image ? absUrl(col.image) : OG_DEFAULT);
     const url = ORIGIN + '/collections/' + encodeURIComponent(handle);
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
-    if (collectionHero) {
-      const hero = {
-        brand: false,
-        srcset: [800, 1200, 1600].map(width => collectionHero.image.replace('width=800', 'width=' + width) + ' ' + width + 'w').join(', '),
-        img: image, width: 800, height: 1200,
-        alt: 'Table Ribambelle dressée sur une terrasse', obj: 'center 38%',
-      };
-      const seed = JSON.stringify(hero).replace(/</g, '\\u003c');
-      html = html.replace('<script type="application/json" id="collection-hero-initial">null</script>', () => '<script type="application/json" id="collection-hero-initial">' + seed + '</script>');
-      html = html.replace(/<!-- COLLECTION_HERO_NOSCRIPT -->\s*<noscript>[\s\S]*?<\/noscript>/, () =>
-        '<noscript><img class="subhero__img" src="' + ogEscape(hero.img) + '" width="800" height="1200" alt="' + ogEscape(hero.alt) + '" fetchpriority="high" style="object-position:' + hero.obj + '"></noscript>');
-    }
+    html = injectCollectionHero(html, collectionHero);
     html = html.replace('</head>', breadcrumbTag(name, url) + '\n</head>');
     // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
     // le script inline vide ces génériques pour les users → zéro régression de flash).
