@@ -87,7 +87,7 @@ test('Mobilier renders the family composition with real photos and one complete 
   const { landing } = require('../lib/catalog-landing');
   allowCatalogueQuery = true;
   try {
-    for (const route of ['/produits.html', '/produits.html?cats=chaises', '/produits.html?sort=price-asc&page=2']) {
+    for (const route of ['/produits.html', '/produits.html?cats=chaises', '/produits.html?sort=asc&page=2']) {
       const { response, html } = await page(route);
       const documentHtml = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
       assert.equal(response.status, 200);
