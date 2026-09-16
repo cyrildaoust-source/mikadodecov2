@@ -485,10 +485,10 @@ export function syncProductLinks(root = document) {
 }
 
 let selectionRestored = false;
-export function restoreSelectionPosition() {
+export function restoreSelectionPosition(root = document) {
   if (selectionRestored || !location.hash.startsWith('#product-')) return;
   const handle = location.hash.slice(9);
-  const card = [...document.querySelectorAll('.pcard__media')].find(a => new URL(a.href).searchParams.get('handle') === handle);
+  const card = [...root.querySelectorAll('.pcard__media')].find(a => a.getClientRects().length && new URL(a.href).searchParams.get('handle') === handle);
   if (!card) return;
   selectionRestored = true;
   requestAnimationFrame(() => {
