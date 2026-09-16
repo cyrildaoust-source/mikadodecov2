@@ -391,7 +391,7 @@
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
     import { listingTrail } from '/navigation.mjs';
-    import { walkCatalog, sortCatalog, catalogPagination } from '/catalog-pagination.mjs';
+    import { walkCatalog, sortCatalog, catalogPagination, DISPLAY_PAGE_SIZE } from '/catalog-pagination.mjs';
     const navigation = await loadNavigation();
     const COLL_TITLES = Object.fromEntries(Object.entries(navigation.collections).map(([h, c]) => [h, c.label]));
     const BRAND_HANDLES = new Set(Object.entries(navigation.collections).filter(([, c]) => c.kind === 'brand').map(([h]) => h));
@@ -456,7 +456,6 @@
     // ce walk donne le compte exact. Les premiers produits restent consultables
     // pendant le chargement ; les numéros attendent le total définitif.
     const PAGE_SIZE = 250;          // chunk de fetch demandé (le serveur le borne à 100)
-    const DISPLAY_PAGE_SIZE = 36;   // produits affichés par page
     let TOTAL_PAGES = 1;            // recalculé à chaque render()
     // V4 (pagination numérotée) : on charge TOUT le jeu filtré dans ALL via le
     // walk (cursor serveur, chunks de PAGE_SIZE), puis on pagine côté client
@@ -575,7 +574,7 @@
       // l'ordre couvre l'ensemble, pas seulement la page courante.
       const mainList = applySort(all.filter((p) => !popIds.has(p.id)));
       // Pagination client : on borne la page à [1, totalPages] puis on n'affiche
-      // que la tranche de 36 — REMPLACE le contenu de la grille (plus d'accumul.).
+      // que la tranche demandée — REMPLACE le contenu de la grille (plus d'accumul.).
       const pagination = catalogPagination(mainList.length, { ...state, pageSize: DISPLAY_PAGE_SIZE });
       TOTAL_PAGES = pagination.totalPages;
       state.page = pagination.page;
