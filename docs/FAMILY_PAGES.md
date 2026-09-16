@@ -110,3 +110,7 @@ L’accès en lecture au dépôt importer permet de comparer ses évolutions lor
 Commande : `node --test tests/family-pages.test.cjs tests/table-collections.test.cjs tests/product-specs.test.mjs`.
 
 Les tests des familles couvrent les cinq routes, le rendu serveur des produits et du chrome, les métadonnées, les curseurs opaques, la fin de pagination, les collections vides, les pannes, l’échappement du JSON initial et la sélection d’icônes, y compris la sélection de chaises, une fiche dépubliée, une requête produit en panne et l’absence de rubrique sur Arts de la table. Ils couvrent aussi l’appartenance des chaises à Assises, la transmission du filtre verrerie au rendu serveur, les lots de tables remplis malgré les exclusions, la continuité des curseurs, les deux sources outdoor sans doublons et les pannes en cours de pagination. Les réponses Shopify sont simulées : ces tests ne certifient ni le classement du catalogue réel, ni le rendu visuel, ni une commande payée.
+
+## Pilote des filtres Chaises
+
+Le contrat, les règles de variantes, les données Shopify réellement complétées et le travail restant dans l’importer sont détaillés dans [CATALOG_FILTERS.md](CATALOG_FILTERS.md). Cette refonte concerne `/collections/chaises` : son index, ses comptes et sa pagination sont désormais calculés côté serveur ; les autres catalogues gardent leur contrôleur existant.

@@ -125,7 +125,8 @@
         ? [800, 1280, 2048].map((w) => `${widthVariant(url, w)} ${w}w`).join(", ") : "";
       const MAIN_SIZES = "(max-width: 760px) 92vw, 53vw";
       const variants = Array.isArray(p.variants) ? p.variants : [];
-      let current = variants.find(v => String(v.id).split("/").pop() === params.get("variant")) || variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true, sku: "", qty: null };
+      const requestedVariant = variants.find(v => String(v.id).split("/").pop() === params.get("variant"));
+      let current = requestedVariant || variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true, sku: "", qty: null };
 
       // Galerie = AMBIANCES uniquement (photos en situation), pas les packshots.
       // Règle donnée : un packshot = un variant.image. Donc ambiances = imgs privé
@@ -239,7 +240,7 @@
             <a class="pdp__brand" href="${brandHref}">${escapeHtml(p.brand || "")}</a>
             <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
             ${designerHTML}
-            <div class="pdp__price" data-price-el>${priceLabel(p)}</div>
+            <div class="pdp__price" data-price-el>${priceLabel(requestedVariant ? {...p,price:current.price,priceMin:current.price,priceMax:current.price,compareAt:current.compareAtPrice} : p)}</div>
             ${variants.length > 1 ? `
             <div class="pdp__variant-pick">
               <span class="label">${escapeHtml(axisLabel)}</span>

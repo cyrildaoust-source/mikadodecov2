@@ -38,10 +38,14 @@ export function selectionURL(value) {
   if (path === '/produits.html' && HANDLE.test(legacy || '') && legacy !== 'all') path = '/collections/' + legacy;
   if (['/collections/all','/collections/frontpage'].includes(path)) path = '/produits.html';
   const params = new URLSearchParams();
-  for (const key of ['brand','designer','cats','q','tag','sort','page','cursor','shown']) {
+  const chair = path === '/collections/chaises';
+  for (const key of ['brand','designer','cats','q','tag','sort','page','cursor','shown',...(chair?['color','material','usage','feature','min','max','seat_min','seat_max','stock']:[])]) {
     const val = url.searchParams.get(key);
     if (!val) continue;
-    if (['brand','designer','tag'].includes(key) && !HANDLE.test(val)) continue;
+    if (['brand','designer','tag'].includes(key) && !(chair && key==='brand' ? /^[a-z0-9-]+(?:,[a-z0-9-]+)*$/.test(val) : HANDLE.test(val))) continue;
+    if (['color','material','usage','feature'].includes(key) && !/^[a-z0-9-]+(?:,[a-z0-9-]+)*$/.test(val)) continue;
+    if (['min','max','seat_min','seat_max'].includes(key) && (!/^\d+(?:\.\d{1,2})?$/.test(val) || Number(val)>1000000)) continue;
+    if (key==='stock' && val!=='1') continue;
     if (key === 'cats' && !/^[a-z0-9-]+(?:,[a-z0-9-]+)*$/.test(val)) continue;
     if (key === 'sort' && !['pop','asc','desc','az'].includes(val)) continue;
     if (['page','shown'].includes(key) && (!/^[1-9][0-9]*$/.test(val) || Number(val) > 100000)) continue;
@@ -57,7 +61,7 @@ export function listingContext(url) {
   if (!clean || clean === '/selection.html') return '';
   const parsed = new URL(clean, ORIGIN), p = parsed.searchParams;
   const handle = parsed.pathname.match(/^\/collections\/([a-z0-9-]+)$/)?.[1];
-  if (handle) return p.get('brand') ? `coll-brand:${handle}:${p.get('brand')}` : `coll:${handle}`;
+  if (handle) return p.get('brand') && HANDLE.test(p.get('brand')) ? `coll-brand:${handle}:${p.get('brand')}` : `coll:${handle}`;
   if (p.get('designer')) return 'designer:' + p.get('designer');
   if (p.get('brand')) return 'brand:' + p.get('brand');
   return '';
@@ -90,7 +94,7 @@ export function productHref(product, source = '', variant = '') {
     if (from) params.set('from', from);
     params.set('returnTo', back);
   }
-  const variantId = String(variant || '').match(/^(?:gid:\/\/shopify\/ProductVariant\/)?([0-9]+)$/)?.[1];
+  const variantId = String(variant || product.matchedVariantId || '').match(/^(?:gid:\/\/shopify\/ProductVariant\/)?([0-9]+)$/)?.[1];
   if (variantId) params.set('variant', variantId);
   return '/produit.html?' + params;
 }
@@ -116,7 +120,7 @@ export function listingTrail(url, nav, { title = '', brandName = '' } = {}) {
   const p = new URL(path, ORIGIN).searchParams;
   const handle = new URL(path, ORIGIN).pathname.match(/^\/collections\/([a-z0-9-]+)$/)?.[1];
   const brand = p.get('brand');
-  const brandLabel = nav.brands[brand]?.label || (navigationSlug(brandName) === brand ? brandName : 'Marque introuvable');
+  const brandLabel = brand?.includes(',') ? 'Sélection de marques' : nav.brands[brand]?.label || (navigationSlug(brandName) === brand ? brandName : 'Marque introuvable');
   if (handle) {
     const trail = collectionTrail(handle, nav, title);
     if (brand) trail.push({ label: brandLabel, href: '/collections/' + handle + '?brand=' + encodeURIComponent(brand) });
@@ -140,7 +144,7 @@ export function productTrail(product, url, nav) {
   if (source && source !== '/selection.html') {
     const listing = new URL(source, ORIGIN);
     // Un ancien lien combinant une autre marque ne doit pas afficher une fausse appartenance.
-    if (listing.searchParams.has('brand') && listing.searchParams.get('brand') !== navigationSlug(product.brand)) listing.searchParams.delete('brand');
+    if (listing.searchParams.has('brand') && !listing.searchParams.get('brand').split(',').includes(navigationSlug(product.brand))) listing.searchParams.delete('brand');
     const handle = listing.pathname.match(/^\/collections\/([a-z0-9-]+)$/)?.[1];
     const entry = nav.collections[handle];
     if (!entry || entry.kind !== 'brand' || (entry.brand || navigationSlug(entry.label)) === navigationSlug(product.brand)) trail = listingTrail(listing, nav, { brandName: product.brand });

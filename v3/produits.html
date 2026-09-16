@@ -28,6 +28,7 @@
        ?designer / ?brand (self avec le param), sinon catalogue /produits.html
        (params de filtre cat/sort/tag retirés). Toujours UN seul rel="canonical". */
     (function () {
+      if (document.documentElement.hasAttribute('data-chair-catalog')) return;
       var ORIGIN = "https://www.mikadodeco.be";
       var canon;
       /* handle / slug en minuscules : aligné sur le canonical normalisé injecté

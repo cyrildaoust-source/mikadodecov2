@@ -7,3 +7,5 @@ node_modules/
 
 # Backups horodatés de designers-data.json — ne JAMAIS versionner
 v3/designers-data.json.bak-*
+.vercel
+.env*

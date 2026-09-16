@@ -12,6 +12,9 @@ const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-col
 const { brandCollectionPage, brandName } = require('./lib/collection-brand');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = require('./lib/catalog-landing');
+const { chairQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readChairCatalog, filterCatalog } = require('./lib/chair-catalog');
+const { renderChairCatalog } = require('./lib/chair-catalog-page');
+const chairViewReady = import('./v3/catalog-filters-view.mjs');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -239,9 +242,9 @@ function listingNavigation(html, req, hints = {}) {
 function canRenderInitialGrid(req) {
   return !(Number(req.query.page) > 1 || (req.query.sort && req.query.sort !== 'pop'));
 }
-// SEO/SSR · formatage prix miroir de shared.js (euro/priceLabel), fr-BE, 0 décimale.
+// SEO/SSR · formatage prix miroir de shared.js, en conservant les centimes utiles.
 const euroS = (n) => (n || n === 0)
-  ? new Intl.NumberFormat('fr-BE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n)
+  ? new Intl.NumberFormat('fr-BE', { style: 'currency', currency: 'EUR', maximumFractionDigits: Number.isInteger(Number(n)) ? 0 : 2 }).format(n)
   : '';
 const priceLabelS = (p) => {
   const min = p.priceMin != null ? p.priceMin : p.price;
@@ -256,7 +259,9 @@ const priceLabelS = (p) => {
 function plpCardSsr(p, source = '') {
   const href = ogEscape(navigation.productHref(p, typeof source === 'string' ? source : ''));
   if (!href) return '';
-  const avail = p.inStock
+  const avail = p.availabilityLabel
+    ? '<div class="pcard__avail"><span class="pcard__dot pcard__dot--' + (p.inStock ? 'stock' : 'order') + '" aria-hidden="true"></span>' + ogEscape(p.availabilityLabel) + '</div>'
+    : p.inStock
     ? '<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>'
     : '<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>' + (p.longDelay ? 'Sur commande · délai sur demande' : 'Livraison ' + ogEscape(p.leadTimeLabel || '3-4 semaines')) + '</div>';
   return '<div class="pcard">'
@@ -300,8 +305,10 @@ function specAccordionSsr(p) {
   ).join('') + '</section>';
 }
 function pdpSsrBlock(p, sourceURL) {
-  const rawImg = p.firstImageRaw || (p.images && p.images[0]) || '';
-  const img = rawImg ? rawImg + (rawImg.includes('?') ? '&' : '?') + 'width=1000' : '';
+  const selected = p.variants?.find(v => String(v.id).split('/').pop() === sourceURL?.searchParams.get('variant'));
+  if (selected) p = {...p, price: selected.price, priceMin: selected.price, priceMax: selected.price, compareAt: selected.compareAtPrice};
+  const rawImg = selected?.image || p.firstImageRaw || (p.images && p.images[0]) || '';
+  const img = shopifyResize(rawImg, 1000);
   // Lien créateur si le designer a une page (même règle que produit.html : slug connu)
   // → +maillage interne crawlable vers les 247 pages créateur (2ᵉ levier de l'audit).
   const dslug = p.designer ? slugifyS(p.designer) : '';
@@ -549,6 +556,7 @@ app.get('/produit.html', async (req, res) => {
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
+  if (handle === 'chaises') return sendChairCatalog(req, res);
   if (COLLECTION_ALIASES.has(handle)) {
     await _navigationReady;
     return res.redirect(301, navigation.selectionURL(req.originalUrl) || '/produits.html');
@@ -1141,6 +1149,59 @@ const PRODUCTS_QUERY = `
   }
   ${PRODUCT_CARD_FIELDS}
 `;
+
+const CHAIR_QUERY = chairQuery(PRODUCT_CARD_FIELDS);
+let chairLoading = null;
+async function getChairIndex() {
+  return cached('chairs:index', async () => {
+    if (!chairLoading) chairLoading = readChairCatalog(
+      async after => (await shopifyFetch(CHAIR_QUERY, { after })).collection,
+      node => {
+        const card = mapProduct(node);
+        card.variants.forEach(variant => { variant.image = shopifyResize(variant.image, CARD_IMAGE_WIDTH); });
+        return card;
+      },
+      async (handle, after) => (await shopifyFetch(CHAIR_VARIANT_QUERY, { handle, after })).product?.variants,
+    ).finally(() => { chairLoading = null; });
+    return chairLoading;
+  });
+}
+async function getChairPage(query) {
+  const [{collection,products},{DISPLAY_PAGE_SIZE}] = await Promise.all([getChairIndex(),import('./v3/catalog-pagination.mjs')]);
+  return {collection,...filterCatalog(products,query,DISPLAY_PAGE_SIZE)};
+}
+async function sendChairCatalog(req,res) {
+  await Promise.all([_chromeReady,_navigationReady]);
+  const view = await chairViewReady;
+  let data;
+  try { data = await getChairPage(req.query); }
+  catch(error) {
+    console.warn('[chair-catalog]',error.message);
+    data = {...filterCatalog([],req.query),error:true};
+  }
+  const url = ORIGIN + view.chairURL(data.state);
+  let html = fs.readFileSync(PRODUITS_TEMPLATE,'utf8');
+  const photo = getCollectionHero('chaises');
+  html = renderChairCatalog(html,data,view,plpCardSsr);
+  html = injectCollectionHero(html,photo);
+  html = renderWithOg(html,{title:'Chaises de design · Mikado Deco',description:'Trouvez votre chaise par marque, prix, couleur, matière et usage. Une sélection de design chez Mikado, à Uccle.',image:photo?.img || OG_DEFAULT,url});
+  html = listingNavigation(html,req,{title:'Chaises',brandName:data.state.brand.length===1 ? data.facets.brand.find(b=>b.value===data.state.brand[0])?.label : ''});
+  if (data.error) {
+    html = html.replace(view.emptyChairs(),`<p class="plp-empty">Impossible de charger les chaises pour le moment. <a href="${ogEscape(req.originalUrl)}">Réessayer</a>.</p>`);
+    res.status(503).set('Cache-Control','no-store');
+  } else {
+    const {state}=data;
+    const filtered = state.brand.length>1 || state.color.length || state.material.length || state.usage.length || state.feature.length || state.stock || state.tag || state.sort!=='pop' || state.min!==null || state.max!==null || state.seat_min!==null || state.seat_max!==null;
+    if(filtered) html = html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
+    // Les informations de prix et de stock se renouvellent via le cache de données.
+    res.set('Cache-Control','no-store');
+  }
+  return res.send(injectChrome(html,'produits.html',data.state.page===1));
+}
+app.get('/api/catalog/chaises',async (req,res)=>{
+  try { res.set('Cache-Control','no-store').json(await getChairPage(req.query)); }
+  catch(error) { console.warn('[chair-api]',error.message);res.status(503).json({error:'Les chaises ne peuvent pas être chargées. Réessayez.'}); }
+});
 
 // ─── SHOPIFY: SEARCH QUERY (page « tous les résultats » /produits.html?q=) ──
 // Recherche plein-texte NATIVE Shopify (tolérante aux fautes, préfixe sur le
@@ -2219,6 +2280,7 @@ app.post('/api/revalidate', (req, res) => {
   delete _cache['collections'];
   delete _cache['promos'];
   delete _cache['menu'];
+  delete _cache['chairs:index'];
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });
 });
