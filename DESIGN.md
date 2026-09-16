@@ -41,6 +41,8 @@ Décision du propriétaire du 16 septembre, après la première refonte de Mobil
 
 Décision du propriétaire du 16 septembre, pagination : à partir de la page 2 de Mobilier, conserver un en-tête compact, le fil d’Ariane et les filtres ; masquer le bandeau photographique, les familles, les icônes et les sous-catégories. Le retour à la page 1 rétablit la découverte. La remontée automatique reste active. Dans tous les catalogues numérotés, afficher les numéros seulement lorsque le total est connu, jamais un total provisoire qui augmente au chargement.
 
+À la demande du propriétaire d’afficher davantage de produits, le réglage retenu est de 60 produits par page pour les catalogues numérotés (auparavant 36). Les cartes gardent leurs dimensions et leurs images à chargement différé. La taille de page reste commune aux appareils pour conserver les mêmes tranches dans les liens et les retours de fiches. Les familles à bouton « Voir plus » gardent leurs lots de 24.
+
 ## Vérification d’une modification
 
 Contrôler la page réelle dans la preview sur ordinateur, priorité actuelle du propriétaire : proportions, ordre des éléments, images, liens, défilement et produits réellement affichés. Comparer les cartes modifiées à celles du catalogue. Les tests de données et de pagination ne remplacent pas cette revue visuelle. Donner le lien de preview dans la livraison.

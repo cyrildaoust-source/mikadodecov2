@@ -89,9 +89,9 @@ test('numbered pagination stays unknown until completion and preserves a request
   assert.deepEqual(catalogPagination(count, { page: 12, loading: true }), { page: 12, totalPages: null, status: 'loading' });
  }
  assert.deepEqual(catalogPagination(100, { page: 12, incomplete: true }), { page: 12, totalPages: null, status: 'error' });
- assert.deepEqual(catalogPagination(2920, { page: 12 }), { page: 12, totalPages: 82, status: 'ready' });
- assert.deepEqual(catalogPagination(50, { page: 12 }), { page: 2, totalPages: 2, status: 'ready' });
+ assert.deepEqual(catalogPagination(2920, { page: 12 }), { page: 12, totalPages: 49, status: 'ready' });
+ assert.deepEqual(catalogPagination(80, { page: 12 }), { page: 2, totalPages: 2, status: 'ready' });
  assert.deepEqual(catalogPagination(0, { page: 2 }), { page: 1, totalPages: 1, status: 'ready' });
- assert.equal(catalogPagination(36).totalPages, 1);
- assert.equal(catalogPagination(37).totalPages, 2);
+ assert.equal(catalogPagination(60).totalPages, 1);
+ assert.equal(catalogPagination(61).totalPages, 2);
 });
