@@ -1119,11 +1119,21 @@
       var sync = function () {
         var h = Math.round(chrome.getBoundingClientRect().height);
         if (h) bar.style.top = h + 'px';
+        // Le titre reste visible après le CTA, la pagination et un retour PDP,
+        // y compris lorsque la barre de filtres occupe plusieurs lignes.
+        var head = document.querySelector('.grid-head');
+        var stickyHeight = getComputedStyle(bar).position === 'sticky' ? bar.getBoundingClientRect().height : 0;
+        if (head) head.style.scrollMarginTop = Math.ceil(h + stickyHeight + 20) + 'px';
       };
       sync();
       requestAnimationFrame(sync);
       addEventListener('load', sync);
       addEventListener('resize', sync, { passive: true });
+      if ('ResizeObserver' in window) {
+        var observer = new ResizeObserver(sync);
+        observer.observe(chrome);
+        observer.observe(bar);
+      }
     })();
   </script>
 </body>
