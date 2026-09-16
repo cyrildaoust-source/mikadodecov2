@@ -726,7 +726,7 @@
       } else if (state.coll && brandName) {
         const familyName = collectionContext?.collectionName || coll?.name || COLL_TITLES[state.coll] || state.coll;
         titleEl.textContent = `${familyName} · ${brandName}`;
-        subEl.textContent = `La sélection ${familyName.toLowerCase()} de ${brandName} chez Mikado Deco.`;
+        subEl.textContent = `Les créations ${brandName} de notre sélection « ${familyName} ».`;
       } else if (coll) {
         titleEl.textContent = coll.name;
         subEl.textContent = coll.description || "";

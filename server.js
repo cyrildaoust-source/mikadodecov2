@@ -10,7 +10,7 @@ const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, r
 const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 const { brandCollectionPage, brandName } = require('./lib/collection-brand');
-const { photoStyle } = require('./lib/editorial-media');
+const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -572,30 +572,34 @@ app.get('/collections/:handle', async (req, res) => {
   }
   try {
     await _chromeReady;
-    const family = Object.hasOwn(families, handle) ? families[handle] : {
+    const richFamilies = {
       sieges: { title: 'Assises', hero: '/images/familles/assises/hero.webp' },
       outdoor: { title: 'Jardin', hero: '/images/familles/jardin/1.webp' },
-    }[handle];
+    };
+    const family = Object.hasOwn(families, handle) ? families[handle] : Object.hasOwn(richFamilies, handle) ? richFamilies[handle] : null;
     const col = family ? { name: family.title, description: family.description } : (await getCollections()).find(c => c.handle === handle);
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
     if (!col) { if (COLLECTION_ALIASES.has(handle)) { ogCache(res); return sendProduitsTemplate(res); } return send404Shell(res, PRODUITS_TEMPLATE); }
 
     const brandPhoto = family?.brands?.find(item => item.slug === brand);
-    const legacyBrandPhoto = ({
+    // Le bandeau Luminaires montre déjà une scène Artek large, adaptée à ce format.
+    const useFamilyPhoto = handle === 'luminaires' && brand === 'artek';
+    const legacyPhotos = {
       sieges: { 'carl-hansen-son': 'assises/brand-carlhansen', artek: 'assises/brand-artek', vitra: 'assises/brand-vitra', hay: 'assises/brand-hay' },
       outdoor: { fermob: 'jardin/20', hay: 'jardin/21', fatboy: 'jardin/22', tradition: 'jardin/23' },
-    })[handle]?.[brand];
-    const familyImage = brandPhoto?.image || (legacyBrandPhoto ? '/images/familles/' + legacyBrandPhoto + '.webp' : family?.hero);
+    };
+    const legacyBrandPhoto = Object.hasOwn(legacyPhotos, handle) && Object.hasOwn(legacyPhotos[handle], brand) ? legacyPhotos[handle][brand] : null;
+    const familyImage = family ? imageAtWidth((useFamilyPhoto ? family.hero : brandPhoto?.image) || (legacyBrandPhoto ? '/images/familles/' + legacyBrandPhoto + '.webp' : family.hero), 2000) : null;
     const collectionHero = family ? {
       brand: false, editorial: true, img: familyImage, srcset: familyImage,
       alt: brandPhoto || legacyBrandPhoto ? family.title + ' · ' + brandName(brand) : family.heroAlt || family.title,
-      style: photoStyle(brandPhoto || (legacyBrandPhoto ? {} : { position: family.heroPosition, mobilePosition: family.heroMobilePosition })),
+      style: photoStyle(!useFamilyPhoto && brandPhoto ? { position: brandPhoto.heroPosition || brandPhoto.position, mobilePosition: brandPhoto.mobilePosition } : legacyBrandPhoto ? {} : { position: family.heroPosition, mobilePosition: family.heroMobilePosition }),
     } : getCollectionHero(handle);
     const collectionName = col.name || 'Catalogue';
     const name = collectionName + (brand ? ' · ' + brandName(brand) : '');
     const title = `${name} · Mikado Deco`;
     const description = ogDesc(
-      brand ? `La sélection ${collectionName.toLowerCase()} de ${brandName(brand)} chez Mikado Deco.` : col.description && col.description.trim()
+      brand ? `Les créations ${brandName(brand)} de notre sélection « ${collectionName} ».` : col.description && col.description.trim()
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
