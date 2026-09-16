@@ -382,6 +382,7 @@
     if (catalogueLanding) {
       paintCatalogueIcons(location.pathname + location.search);
       bindFamilyRails(catalogueLanding);
+      if (catalogueIconRail) restoreSelectionPosition(catalogueIconRail);
     }
     // initShell is called below — the active nav entry depends on the route
     // (designer / brand / mobilier), so it waits until the URL is parsed.
