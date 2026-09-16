@@ -723,7 +723,7 @@
       const coll = collFromMeta || (state.coll ? COLLECTIONS_BY_HANDLE[state.coll] : null);
       const brandName = state.brand ? (collectionContext?.brand?.name || ALL.find((p) => slugify(p.brand) === state.brand)?.brand || state.brand) : "";
       if (state.q) {
-        titleEl.textContent = `Résultats pour « ${state.q} »`;
+        titleEl.textContent = `Résultats pour « ${state.q} »${brandName ? " · " + brandName : ""}`;
         subEl.textContent = "";
       } else if (state.coll && brandName) {
         const familyName = collectionContext?.collectionName || coll?.name || COLL_TITLES[state.coll] || state.coll;
@@ -960,18 +960,14 @@
       + `</div>`;
     }
 
-    // Brand <select> — populated from the curated mega-menu-brands.json (the
-    // single source of truth, 22 brands), NOT /api/brands (~1.8s, capped,
-    // wrong counts). value = slugify(name) so the existing product filter
-    // (slugify(p.brand) === state.brand) keeps matching; label = plain name,
-    // no count. no-cache → a curated edit shows up on the next visit.
+    // Même inventaire publié que le répertoire et le méga menu : les nouvelles marques restent accessibles.
     async function populateBrandSelect() {
       try {
-        const r = await fetch("/mega-menu-brands.json", { cache: "no-cache" });
+        const r = await fetch("/api/brands", { cache: "no-cache" });
         if (!r.ok) return;
         const data = await r.json();
-        const brands = (data.brands || [])
-          .map((b) => ({ name: b.name, value: slugify(b.name) }))
+        const brands = (data || [])
+          .map((b) => ({ name: b.name, value: b.slug || slugify(b.name) }))
           .filter((b) => b.name && b.value)
           .sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
         const frag = document.createDocumentFragment();
@@ -983,7 +979,7 @@
         }
         brandSel.appendChild(frag);
       } catch (e) {
-        console.warn("[plp] marques (mega-menu-brands.json) indisponibles:", e.message);
+        console.warn("[plp] marques publiées indisponibles:", e.message);
       }
     }
 

@@ -5,6 +5,7 @@
    cart (localStorage), and exposes formatting + card helpers.
    ============================================================ */
 
+import { listingContext } from "/brand-navigation.mjs";
 import { chromeHTML, footerHTML } from "/chrome-template.js";
 
 export const CART_KEY = "mikado_v3_cart";
@@ -551,17 +552,7 @@ function variantBadge(p) {
 // from location at card-render time; "" = no context (homepage / bare
 // catalogue / PDP related) → the PDP shows the neutral catalogue trail.
 export function currentViewFrom() {
-  const params = new URLSearchParams(location.search);
-  const collMatch = location.pathname.match(/^\/collections\/(.+?)\/?$/);
-  if (collMatch) {
-    const h = decodeURIComponent(collMatch[1]);
-    if (h && h !== "all") return params.get("brand")
-      ? "coll-brand:" + h + ":" + params.get("brand")
-      : "coll:" + h;
-  }
-  if (params.get("designer")) return "designer:" + params.get("designer");
-  if (params.get("brand")) return "brand:" + params.get("brand");
-  return "";
+  return listingContext(new URL(location.href));
 }
 
 export function productCard(p) {

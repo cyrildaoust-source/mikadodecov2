@@ -30,6 +30,10 @@ Le résultat ne dépend pas de l’activation d’un filtre Shopify Search & Dis
 
 Dans Jardin, l’appartenance à la collection Outdoor remplace le filtre limité au seul tag `exterieur`, afin de conserver aussi les modèles classés jardin avec d’autres tags.
 
+Le lien « Toutes les marques » des sept familles ouvre `/marques.html?collection=<famille>`. Ce répertoire réutilise les cartes de marques communes et énumère automatiquement les marques réellement présentes dans la famille et ses enfants. Les quatre cartes éditoriales restent en place. Les comptes dédoublonnent les fiches et appliquent la même séparation des tables d’intérieur et outdoor. L’API `/api/collection/<famille>/brands` fournit cet inventaire, mis en cache 30 minutes ; une panne ne déclenche jamais un retour silencieux au répertoire global.
+
+Le lien de marque sur chaque fiche produit conserve aussi la catégorie d’arrivée, pour toutes les marques. Les anciennes URLs `?coll=...&brand=...` redirigent vers le parcours canonique. Le catalogue global rend dès le serveur la marque demandée, son nom lisible et ses produits ; une marque inconnue reste vide, une panne de résolution reste une erreur. La recherche combinée à une marque parcourt ses résultats jusqu’à remplir le lot sans mélanger les vendeurs. Le sélecteur de marques utilise désormais les marques publiées, comme le méga menu et le répertoire, au lieu de la seule liste éditoriale.
+
 ## Photos des familles et sous-catégories
 
 `data/collection-heroes.json` définit les 39 bandeaux des sous-catégories du méga menu. Chaque entrée référence une photographie de galerie produit, son `sourceProduct`, un texte alternatif, ses dimensions et son point de cadrage (`position`, `mobilePosition`). Les fichiers identifiés comme générés et les schémas techniques sont exclus de cette sélection. Une photo de produit en situation peut illustrer une catégorie sans modifier son classement Shopify.

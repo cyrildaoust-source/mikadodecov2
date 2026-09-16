@@ -9,7 +9,7 @@ const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-m
 const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, renderSeatingPage } = require('./lib/family-pages');
 const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
-const { brandCollectionPage, brandName } = require('./lib/collection-brand');
+const { brandCollectionPage, brandName, collectionBrands } = require('./lib/collection-brand');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
@@ -581,6 +581,12 @@ app.get('/collections/:handle', async (req, res) => {
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
     if (!col) { if (COLLECTION_ALIASES.has(handle)) { ogCache(res); return sendProduitsTemplate(res); } return send404Shell(res, PRODUITS_TEMPLATE); }
 
+    const tag = typeof req.query.tag === 'string' ? req.query.tag : null;
+    const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : null;
+    let cp = null, failed = false;
+    try { cp = await collectionProductsFor(handle, 24, cursor, tag, brand); }
+    catch (error) { failed = true; console.warn('[collection-selection]', error.message); }
+    const brandLabel = cp?.brand?.name || brandName(brand);
     const brandPhoto = family?.brands?.find(item => item.slug === brand);
     // Le bandeau Luminaires montre déjà une scène Artek large, adaptée à ce format.
     const useFamilyPhoto = handle === 'luminaires' && brand === 'artek';
@@ -592,14 +598,14 @@ app.get('/collections/:handle', async (req, res) => {
     const familyImage = family ? imageAtWidth((useFamilyPhoto ? family.hero : brandPhoto?.image) || (legacyBrandPhoto ? '/images/familles/' + legacyBrandPhoto + '.webp' : family.hero), 2000) : null;
     const collectionHero = family ? {
       brand: false, editorial: true, img: familyImage, srcset: familyImage,
-      alt: brandPhoto || legacyBrandPhoto ? family.title + ' · ' + brandName(brand) : family.heroAlt || family.title,
+      alt: brandPhoto || legacyBrandPhoto ? family.title + ' · ' + brandLabel : family.heroAlt || family.title,
       style: photoStyle(!useFamilyPhoto && brandPhoto ? { position: brandPhoto.heroPosition || brandPhoto.position, mobilePosition: brandPhoto.mobilePosition } : legacyBrandPhoto ? {} : { position: family.heroPosition, mobilePosition: family.heroMobilePosition }),
     } : getCollectionHero(handle);
     const collectionName = col.name || 'Catalogue';
-    const name = collectionName + (brand ? ' · ' + brandName(brand) : '');
+    const name = collectionName + (brand ? ' · ' + brandLabel : '');
     const title = `${name} · Mikado Deco`;
     const description = ogDesc(
-      brand ? `Les créations ${brandName(brand)} de notre sélection « ${collectionName} ».` : col.description && col.description.trim()
+      brand ? `Les créations ${brandLabel} de notre sélection « ${collectionName} ».` : col.description && col.description.trim()
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
@@ -611,11 +617,11 @@ app.get('/collections/:handle', async (req, res) => {
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
     html = injectCollectionHero(html, collectionHero);
-    html = html.replace('</head>', breadcrumbTag(brand ? brandName(brand) : name, url, brand ? { name: collectionName, url: ORIGIN + collectionUrl } : null) + '\n</head>');
+    html = html.replace('</head>', breadcrumbTag(brand ? brandLabel : name, url, brand ? { name: collectionName, url: ORIGIN + collectionUrl } : null) + '\n</head>');
     if (brand) {
-      const context = { handle, collectionName, brand: { slug: brand, name: brandName(brand) }, title: name, description };
+      const context = { handle, collectionName, brand: { slug: brand, name: brandLabel }, title: name, description };
       html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
-      const trail = [{ label: 'Accueil', href: '/' }, { label: 'Mobilier', href: '/produits.html' }, { label: collectionName, href: collectionUrl }, { label: brandName(brand) }];
+      const trail = [{ label: 'Accueil', href: '/' }, { label: 'Mobilier', href: '/produits.html' }, { label: collectionName, href: collectionUrl }, { label: brandLabel }];
       html = html.replace('<div class="wrap" data-breadcrumb></div>', () => '<div class="wrap" data-breadcrumb><nav class="breadcrumb" aria-label="Fil d\'Ariane"><ol>' + trail.map(item => '<li>' + (item.href ? `<a href="${ogEscape(item.href)}">${ogEscape(item.label)}</a>` : `<span aria-current="page">${ogEscape(item.label)}</span>`) + '</li>').join('') + '</ol></nav></div>');
     }
     // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
@@ -623,12 +629,7 @@ app.get('/collections/:handle', async (req, res) => {
     html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title' + (brand ? ' data-context' : '') + '>' + ogEscape(name) + '</h1>');
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
-    let failed = false;
     try {
-      // Le premier rendu doit respecter le même filtre que la grille hydratée.
-      const tag = typeof req.query.tag === 'string' ? req.query.tag : null;
-      const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : null;
-      const cp = await collectionProductsFor(handle, 24, cursor, tag, brand);
       if (!cp) throw new Error('Collection unavailable');
       const gi = (cp && cp.items) || [];
       if (gi.length) {
@@ -664,26 +665,47 @@ app.get('/collections/:handle', async (req, res) => {
 // modes catalogue / ?cats= / ?brand=) → template générique. Designer inconnu →
 // template générique. ~29 créateurs sans photo → repli og-default.
 app.get('/produits.html', async (req, res) => {
+  if (typeof req.query.coll === 'string' && /^[a-z0-9-]+$/.test(req.query.coll) && req.query.coll !== 'all') {
+    const query = new URLSearchParams(Object.entries(req.query).filter(([key, value]) => key !== 'coll' && typeof value === 'string'));
+    return res.redirect(302, '/collections/' + req.query.coll + (query.size ? '?' + query : ''));
+  }
   const slug = req.query.designer ? String(req.query.designer).toLowerCase() : '';
   if (!slug) {
     // Catalogue de base (lot 4) : SSR de la 1re page de grille (24 produits) → liens
     // produit crawlables dans le HTML (maillage interne + découverte, complète le sitemap).
     // Le module remplace ensuite la grille (garde data-ssr côté produits.html) : 0 doublon/flash.
+    const brand = typeof req.query.brand === 'string' ? req.query.brand.trim().toLowerCase() : '';
+    const q = typeof req.query.q === 'string' ? req.query.q : '';
+    let html = fs.readFileSync(PRODUITS_TEMPLATE, 'utf8');
+    let failed = false, brandItems = [];
     try {
       await _chromeReady;
-      const { items } = await getProductsPage(24, null, null, null, null, null);
-      let html = fs.readFileSync(PRODUITS_TEMPLATE, 'utf8');
+      const { items } = await getProductsPage(24, null, null, req.query.cats, brand, q);
+      brandItems = items;
       if (items && items.length) {
-        const cards = items.map(plpCardSsr).filter(Boolean).join('');
+        const cards = items.map(product => plpCardSsr(product, brand ? 'brand:' + brand : '')).filter(Boolean).join('');
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
+      } else if (brand) {
+        html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Aucun produit pour cette sélection.</p></div>');
       }
-      html = injectChrome(html, 'produits.html');
-      ogCache(res);
-      return res.send(html);
     } catch (e) {
+      failed = true;
+      html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid><p class="plp-empty">Impossible de charger cette sélection. Veuillez réessayer.</p></div>');
       console.warn('[plp-ssr]', e.message);
-      return sendProduitsTemplate(res);
     }
+    if (brand) {
+      const name = brandName(brand, brandItems.map(product => ({ name: product.brand })));
+      const title = q ? `Résultats pour « ${q} » · ${name}` : name;
+      const description = `Toutes les pièces ${name} de notre catalogue.`;
+      const url = ORIGIN + '/produits.html?' + new URLSearchParams(Object.entries(req.query).filter(([, value]) => typeof value === 'string'));
+      html = renderWithOg(html, { title: title + ' · Mikado Deco', description, image: OG_DEFAULT, url });
+      html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify({ brand: { slug: brand, name } }).replace(/</g, '\\u003c') + '</script>');
+      html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title data-context>' + ogEscape(title) + '</h1>');
+      html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
+    }
+    if (failed) res.set('Cache-Control', 'no-store');
+    else ogCache(res);
+    return res.send(injectChrome(html, 'produits.html'));
   }
   try {
     await _chromeReady;
@@ -835,18 +857,18 @@ function resolveSsrRel(p) {
 // SEO/SSR · Index MARQUES crawlable : rend les vraies cartes marque (lien + logo + nom)
 // dans [data-brandgrid] à la place des squelettes. Données getActiveBrands + liens curés
 // de mega-menu-brands.json. Le module re-render ensuite (grid.innerHTML) → hydratation.
-async function injectBrandsIndex(html) {
-  const active = await getActiveBrands();
+async function injectBrandsIndex(html, context = null) {
+  const active = context ? context.brands : await getActiveBrands();
   let curated = { brands: [] };
   try { curated = JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'mega-menu-brands.json'), 'utf8')); } catch (e) {}
   const hrefByName = {};
   for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
   const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
-  if (!brands.length) return html;
   const cards = brands.map((b) => {
     const slug = b.slug || slugifyS(b.name);
     const safe = ogEscape(b.name);
-    const href = hrefByName[b.name.toLowerCase()] || ('/produits.html?brand=' + slug);
+    const href = context ? '/collections/' + encodeURIComponent(context.collection.handle) + '?brand=' + encodeURIComponent(slug)
+      : hrefByName[b.name.toLowerCase()] || ('/produits.html?brand=' + slug);
     return '<a class="brandcard" href="' + href + '">'
       + '<span class="brandcard__origin">Europe</span>'
       + '<div><img class="brandcard__logo" src="/images/brands/' + slug + '.svg" alt="' + safe + '" loading="lazy" onerror="this.outerHTML=\'<span class=&quot;brandcard__name&quot;>' + safe + '</span>\'" /></div>'
@@ -855,8 +877,27 @@ async function injectBrandsIndex(html) {
   // Bloc squelette exact (4 lignes) → on remplace juste le contenu, on garde </div>.
   const skelBlock = '<div class="brandgrid" data-brandgrid>\n'
     + Array(4).fill('      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>').join('\n');
-  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid>\n      ' + cards);
+  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid>\n      ' + (cards || '<p class="plp-empty">Aucune marque disponible dans cette catégorie pour le moment.</p>'));
   html = html.replace('<span class="plp-count" data-brand-count></span>', () => '<span class="plp-count" data-brand-count>' + brands.length + ' marques</span>');
+  if (context) {
+    const title = context.collection.title + ' · Les marques';
+    const description = `Toutes les marques de notre sélection « ${context.collection.title} ».`;
+    const href = '/collections/' + encodeURIComponent(context.collection.handle);
+    const family = Object.hasOwn(families, context.collection.handle) ? families[context.collection.handle] : null;
+    const richImage = ({ sieges: '/images/familles/assises/hero.webp', outdoor: '/images/familles/jardin/1.webp' })[context.collection.handle];
+    const hero = family || richImage ? { img: family ? imageAtWidth(family.hero, 2000) : richImage, alt: family?.heroAlt || context.collection.title,
+      style: photoStyle({ position: family?.heroPosition, mobilePosition: family?.heroMobilePosition }) } : getCollectionHero(context.collection.handle);
+    if (hero) {
+      html = html.replace('<section class="subhero">', '<section class="subhero subhero--editorial">');
+      html = html.replace(/<picture>[\s\S]*?<\/picture>/, () => `<img class="subhero__img editorial-photo" src="${ogEscape(hero.img)}" alt="${ogEscape(hero.alt)}" style="${ogEscape(hero.style)}" fetchpriority="high">`);
+    }
+    html = renderWithOg(html, { title: title + ' · Mikado Deco', description, image: hero ? absUrl(hero.img) : OG_DEFAULT, url: ORIGIN + '/marques.html?collection=' + encodeURIComponent(context.collection.handle) });
+    html = html.replace('<h1>Les marques que<br>nous défendons.</h1>', () => '<h1>' + ogEscape(title) + '</h1>');
+    html = html.replace('Un nombre volontairement réduit de marques européennes, pour mieux les connaître.', () => ogEscape(description));
+    html = html.replace('<div class="wrap" data-breadcrumb></div>', () => `<div class="wrap" data-breadcrumb><nav class="breadcrumb" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="${href}">${ogEscape(context.collection.title)}</a></li><li><span aria-current="page">Les marques</span></li></ol></nav></div>`);
+    html = html.replace('<a href="/produits.html" class="btn btn--blue">Voir le catalogue</a>', () => `<a href="${href}" class="btn btn--blue">Revenir à ${ogEscape(context.collection.title)}</a>`);
+    html = html.replace('id="brands-context-initial">null</script>', () => 'id="brands-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
+  }
   return html;
 }
 
@@ -951,7 +992,18 @@ app.get(/.*/, async (req, res, next) => {
     } catch (e) { console.warn('[home-rails]', e.message); }
   }
   if (rel === 'marques.html') {
-    try { raw = await injectBrandsIndex(raw); } catch (e) { console.warn('[brands-index]', e.message); }
+    try {
+      const handle = typeof req.query.collection === 'string' ? req.query.collection : '';
+      const context = handle ? await getCollectionBrands(handle) : null;
+      if (handle && !context) return send404Shell(res, path.join(__dirname, 'v3', 'marques.html'));
+      raw = await injectBrandsIndex(raw, context);
+    } catch (e) {
+      console.warn('[brands-index]', e.message);
+      if (req.query.collection) {
+        res.set('Cache-Control', 'no-store');
+        return res.status(503).send(injectChrome(raw, rel));
+      }
+    }
   }
   if (rel === 'designers.html') {
     try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
@@ -962,7 +1014,7 @@ app.get(/.*/, async (req, res, next) => {
   // injectChrome → sans nav/pied/panier). Navigateurs : HTML inchangé.
   if (wantsMarkdown(req)) return sendMarkdown(res, htmlToMarkdown(raw, ORIGIN + req.path));
   res.set('Content-Type', 'text/html; charset=utf-8');
-  return res.send(injectChrome(raw, rel));
+  return res.send(injectChrome(raw, rel, rel === 'marques.html' && Boolean(req.query.collection)));
 });
 
 app.use(express.static(path.join(__dirname, 'v3')));
@@ -1393,10 +1445,9 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
   const brandSlug = brand ? String(brand).trim() : '';
   let vendorClause = '';
   if (brandSlug) {
-    try {
-      const match = (await getActiveBrands()).find((b) => b.slug === brandSlug);
-      if (match) vendorClause = `vendor:"${match.name.replace(/["\\]/g, '')}"`;
-    } catch (e) { /* résolution impossible → pas de filtre marque (repli) */ }
+    const match = (await getActiveBrands()).find((b) => b.slug === brandSlug);
+    if (!match) return { items: [], pageInfo: { hasNextPage: false, endCursor: null } };
+    vendorClause = `vendor:"${match.name.replace(/["\\]/g, '')}"`;
   }
   // tags (designer), cats (catalog panel) et vendor (marque) — indépendants ;
   // s'ils coexistent, on les intersecte (AND).
@@ -1411,6 +1462,11 @@ async function getProductsPage(first, after, tags, cats, brand, q) {
   // taille de page) — chaque chunk du walk front est mémorisé séparément.
   const term = q ? String(q).replace(/["\\]/g, ' ').trim().slice(0, 120) : '';
   if (term) {
+    if (brandSlug) {
+      return brandCollectionPage({ first: f, after: a, brand: brandSlug, tag: term }, async (size, cursor) => ({
+        collection: {}, ...await getProductsPage(size, cursor, tags, cats, null, term),
+      }));
+    }
     return cached(`search:${term.toLowerCase()}:${a || 'first'}:${f}`, async () => {
       const data = await shopifyFetch(SEARCH_QUERY, { q: term, first: f, after: a });
       let items = (data.search.edges || []).map(({ node }) => mapProduct(node));
@@ -2042,6 +2098,22 @@ const collectionProductsFor = (handle, first, after, tag, brand) => {
   const slug = typeof brand === 'string' ? brand.trim().toLowerCase() : '';
   return slug ? brandCollectionPage({ handle, first, after, brand: slug, tag: tag || '' }, fetchPage) : fetchPage(first, after);
 };
+
+function getCollectionBrands(handle) {
+  if (!/^[a-z0-9-]+$/.test(handle)) return null;
+  return cached('collection-brands:' + handle, () => collectionBrands(handle,
+    (size, cursor, source) => getCollectionProducts(source, size, cursor)), 1_800_000);
+}
+app.get('/api/collection/:handle/brands', async (req, res) => {
+  try {
+    const payload = await getCollectionBrands(req.params.handle);
+    if (!payload) return res.status(404).json({ error: 'collection_not_found' });
+    res.json(payload);
+  } catch (error) {
+    console.warn('[collection-brands]', error.message);
+    res.status(503).json({ error: 'Impossible de charger les marques de cette catégorie.' });
+  }
+});
 
 app.get('/api/collection/:handle/products', async (req, res) => {
   try {
