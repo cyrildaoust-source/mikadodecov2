@@ -1,0 +1,5404 @@
+{
+  "method": "Exact application functions executed in a Node VM with public-data fixtures; this is code verification, not browser verification.",
+  "results": [
+    {
+      "path": "/collections/sieges",
+      "kind": "family",
+      "realProduct": true,
+      "product": "Chaise Panton",
+      "from": "coll:sieges",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Sièges",
+          "href": "/collections/sieges"
+        },
+        {
+          "label": "Chaise Panton"
+        }
+      ],
+      "productBrandHref": "/collections/sieges?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-panton",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/chaises",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Chaise Bistro Métal",
+      "from": "coll:chaises",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Chaises",
+          "href": "/collections/chaises"
+        },
+        {
+          "label": "Chaise Bistro Métal"
+        }
+      ],
+      "productBrandHref": "/collections/chaises?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-bistro-metal",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/fauteuils",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Fauteuil bas Luxembourg",
+      "from": "coll:fauteuils",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Fauteuils",
+          "href": "/collections/fauteuils"
+        },
+        {
+          "label": "Fauteuil bas Luxembourg"
+        }
+      ],
+      "productBrandHref": "/collections/fauteuils?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=fauteuil-aluminium-luxembourg-bas",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/canapes",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Canapé Living Tower Tonus",
+      "from": "coll:canapes",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Canapés",
+          "href": "/collections/canapes"
+        },
+        {
+          "label": "Canapé Living Tower Tonus"
+        }
+      ],
+      "productBrandHref": "/collections/canapes?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=canape-tonus-living-tower",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/sieges-de-bureau",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Chaise de bureau Soft Pad EA 217",
+      "from": "coll:sieges-de-bureau",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Sièges de bureau",
+          "href": "/collections/sieges-de-bureau"
+        },
+        {
+          "label": "Chaise de bureau Soft Pad EA 217"
+        }
+      ],
+      "productBrandHref": "/collections/sieges-de-bureau?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-de-bureau-soft-pad-ea-217-track",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/chaises-longues",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Chaise longue extérieure en teck",
+      "from": "coll:chaises-longues",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Chaises longues",
+          "href": "/collections/chaises-longues"
+        },
+        {
+          "label": "Chaise longue extérieure en teck"
+        }
+      ],
+      "productBrandHref": "/collections/chaises-longues?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-longue-exterieure-en-teck",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/tabourets-et-bancs",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Tabouret Cocotte H.45 cm",
+      "from": "coll:tabourets-et-bancs",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tabourets et bancs",
+          "href": "/collections/tabourets-et-bancs"
+        },
+        {
+          "label": "Tabouret Cocotte H.45 cm"
+        }
+      ],
+      "productBrandHref": "/collections/tabourets-et-bancs?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=tabouret-metal-cocotte-h-45-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/tables",
+      "kind": "family",
+      "realProduct": true,
+      "product": "Table Noguchi Dining",
+      "from": "coll:tables",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables",
+          "href": "/collections/tables"
+        },
+        {
+          "label": "Table Noguchi Dining"
+        }
+      ],
+      "productBrandHref": "/collections/tables?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=table-noguchi-dining",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/tables-de-salle-a-manger",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Table Ita OS2 260 × 95 cm",
+      "from": "coll:tables-de-salle-a-manger",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables de salle à manger",
+          "href": "/collections/tables-de-salle-a-manger"
+        },
+        {
+          "label": "Table Ita OS2 260 × 95 cm"
+        }
+      ],
+      "productBrandHref": "/collections/tables-de-salle-a-manger?brand=tradition",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=table-tradition-ita-os2",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/tables-de-cafe",
+      "kind": "subcategory",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:tables-de-cafe",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables de café",
+          "href": "/collections/tables-de-cafe"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/tables-basses-et-tables-dappoint",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Tables gigognes Shard (Lot de 3)",
+      "from": "coll:tables-basses-et-tables-dappoint",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables basses et tables d'appoint",
+          "href": "/collections/tables-basses-et-tables-dappoint"
+        },
+        {
+          "label": "Tables gigognes Shard (Lot de 3)"
+        }
+      ],
+      "productBrandHref": "/collections/tables-basses-et-tables-dappoint?brand=ferm-living",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=tables-gigognes-shard",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/bureaux",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Bureau enfant Feve",
+      "from": "coll:bureaux",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Bureaux",
+          "href": "/collections/bureaux"
+        },
+        {
+          "label": "Bureau enfant Feve"
+        }
+      ],
+      "productBrandHref": "/collections/bureaux?brand=ferm-living",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bureau-enfant-feve",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/luminaires",
+      "kind": "family",
+      "realProduct": true,
+      "product": "Suspension Bolleke",
+      "from": "coll:luminaires",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Luminaires",
+          "href": "/collections/luminaires"
+        },
+        {
+          "label": "Suspension Bolleke"
+        }
+      ],
+      "productBrandHref": "/collections/luminaires?brand=fatboy",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=suspension-bolleke",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/suspensions",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Suspension Bolleke",
+      "from": "coll:suspensions",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Suspensions",
+          "href": "/collections/suspensions"
+        },
+        {
+          "label": "Suspension Bolleke"
+        }
+      ],
+      "productBrandHref": "/collections/suspensions?brand=fatboy",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=suspension-bolleke",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/lampes-de-table",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Lampe Prêt à Racket (Lot de 3)",
+      "from": "coll:lampes-de-table",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Lampes de table",
+          "href": "/collections/lampes-de-table"
+        },
+        {
+          "label": "Lampe Prêt à Racket (Lot de 3)"
+        }
+      ],
+      "productBrandHref": "/collections/lampes-de-table?brand=fatboy",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-pret-a-racket",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/lampes-de-bureau",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Lampe à pince Apex",
+      "from": "coll:lampes-de-bureau",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Lampes de bureau",
+          "href": "/collections/lampes-de-bureau"
+        },
+        {
+          "label": "Lampe à pince Apex"
+        }
+      ],
+      "productBrandHref": "/collections/lampes-de-bureau?brand=hay",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-a-pince-hay-apex-clip-lamp",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/lampadaires",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Lampadaire Apex",
+      "from": "coll:lampadaires",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Lampadaires",
+          "href": "/collections/lampadaires"
+        },
+        {
+          "label": "Lampadaire Apex"
+        }
+      ],
+      "productBrandHref": "/collections/lampadaires?brand=hay",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampadaire-hay-apex-floor-lamp",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/appliques",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Applique Apex",
+      "from": "coll:appliques",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Appliques",
+          "href": "/collections/appliques"
+        },
+        {
+          "label": "Applique Apex"
+        }
+      ],
+      "productBrandHref": "/collections/appliques?brand=hay",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=applique-hay-apex-wall-lamp",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/lampes-nomades",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Lampe Balad² H.25 cm",
+      "from": "coll:lampes-nomades",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Lampes nomades",
+          "href": "/collections/lampes-nomades"
+        },
+        {
+          "label": "Lampe Balad² H.25 cm"
+        }
+      ],
+      "productBrandHref": "/collections/lampes-nomades?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-balad-h-25-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/decoration",
+      "kind": "family",
+      "realProduct": true,
+      "product": "Cache-pot Stoneware",
+      "from": "coll:decoration",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Décoration",
+          "href": "/collections/decoration"
+        },
+        {
+          "label": "Cache-pot Stoneware"
+        }
+      ],
+      "productBrandHref": "/collections/decoration?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-cache-pot-stoneware-cream-36-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/vases",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Vase Sicily",
+      "from": "coll:vases",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Vases",
+          "href": "/collections/vases"
+        },
+        {
+          "label": "Vase Sicily"
+        }
+      ],
+      "productBrandHref": "/collections/vases?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=vase-01-sicily",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/bougeoirs-bougies-photophores",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Bougie Nagel 18 cm (Lot de 12)",
+      "from": "coll:bougeoirs-bougies-photophores",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Bougeoirs, bougies & photophores",
+          "href": "/collections/bougeoirs-bougies-photophores"
+        },
+        {
+          "label": "Bougie Nagel 18 cm (Lot de 12)"
+        }
+      ],
+      "productBrandHref": "/collections/bougeoirs-bougies-photophores?brand=stoff-nagel",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bougie-nagel-18-cm-boite-de-12",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/miroirs",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Miroir sur pied Pillar petit",
+      "from": "coll:miroirs",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Miroirs",
+          "href": "/collections/miroirs"
+        },
+        {
+          "label": "Miroir sur pied Pillar petit"
+        }
+      ],
+      "productBrandHref": "/collections/miroirs?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=miroir-sur-pied-pillar-petit",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/coussins-plaids-tapis",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Coussin Basics Bistro 38 x 28 cm",
+      "from": "coll:coussins-plaids-tapis",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Coussins, plaids & tapis",
+          "href": "/collections/coussins-plaids-tapis"
+        },
+        {
+          "label": "Coussin Basics Bistro 38 x 28 cm"
+        }
+      ],
+      "productBrandHref": "/collections/coussins-plaids-tapis?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=coussin-basics-bistro-38-x-28-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/cache-pots-jardinieres",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Cache-pot Stoneware",
+      "from": "coll:cache-pots-jardinieres",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Cache-pots & jardinières",
+          "href": "/collections/cache-pots-jardinieres"
+        },
+        {
+          "label": "Cache-pot Stoneware"
+        }
+      ],
+      "productBrandHref": "/collections/cache-pots-jardinieres?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-cache-pot-stoneware-cream-36-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/objets-decoratifs-cadres",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Figurine Wooden Doll",
+      "from": "coll:objets-decoratifs-cadres",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Objets décoratifs & cadres",
+          "href": "/collections/objets-decoratifs-cadres"
+        },
+        {
+          "label": "Figurine Wooden Doll"
+        }
+      ],
+      "productBrandHref": "/collections/objets-decoratifs-cadres?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=sculpture-wooden-doll-vitra",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/outdoor",
+      "kind": "family",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:outdoor",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Mobilier outdoor",
+          "href": "/collections/outdoor"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/chaises-outdoor",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Chaise Bistro Métal",
+      "from": "coll:chaises-outdoor",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Chaises outdoor",
+          "href": "/collections/chaises-outdoor"
+        },
+        {
+          "label": "Chaise Bistro Métal"
+        }
+      ],
+      "productBrandHref": "/collections/chaises-outdoor?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-bistro-metal",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/bancs-outdoor",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Banc 3/4 places Luxembourg",
+      "from": "coll:bancs-outdoor",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Bancs outdoor",
+          "href": "/collections/bancs-outdoor"
+        },
+        {
+          "label": "Banc 3/4 places Luxembourg"
+        }
+      ],
+      "productBrandHref": "/collections/bancs-outdoor?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=banc-aluminium-luxembourg-3-4-places",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/bains-de-soleil-transats",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Hamac Headdemock",
+      "from": "coll:bains-de-soleil-transats",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Bains de soleil & transats",
+          "href": "/collections/bains-de-soleil-transats"
+        },
+        {
+          "label": "Hamac Headdemock"
+        }
+      ],
+      "productBrandHref": "/collections/bains-de-soleil-transats?brand=fatboy",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hamac-headdemock",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/parasols-ombrages",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Parasol Miasun",
+      "from": "coll:parasols-ombrages",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Parasols & ombrages",
+          "href": "/collections/parasols-ombrages"
+        },
+        {
+          "label": "Parasol Miasun"
+        }
+      ],
+      "productBrandHref": "/collections/parasols-ombrages?brand=fatboy",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=parasol-miasun",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/brasero-barbecue",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Brasero Solene",
+      "from": "coll:brasero-barbecue",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Brasero & barbecue",
+          "href": "/collections/brasero-barbecue"
+        },
+        {
+          "label": "Brasero Solene"
+        }
+      ],
+      "productBrandHref": "/collections/brasero-barbecue?brand=ferm-living",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=brasero-solene",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/accessoires-jardin",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Mangeoire à oiseaux Picoti",
+      "from": "coll:accessoires-jardin",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Accessoires jardin",
+          "href": "/collections/accessoires-jardin"
+        },
+        {
+          "label": "Mangeoire à oiseaux Picoti"
+        }
+      ],
+      "productBrandHref": "/collections/accessoires-jardin?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=mangeoire-a-oiseaux-metal-picoti-3089",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/tables-outdoor",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Table Luxembourg 165 x 100 cm",
+      "from": "coll:tables-outdoor",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables outdoor",
+          "href": "/collections/tables-outdoor"
+        },
+        {
+          "label": "Table Luxembourg 165 x 100 cm"
+        }
+      ],
+      "productBrandHref": "/collections/tables-outdoor?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=table-aluminium-luxembourg-165-x-100-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/rangement",
+      "kind": "family",
+      "realProduct": true,
+      "product": "Caisse de rangement Toolbox RE",
+      "from": "coll:rangement",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Rangement",
+          "href": "/collections/rangement"
+        },
+        {
+          "label": "Caisse de rangement Toolbox RE"
+        }
+      ],
+      "productBrandHref": "/collections/rangement?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=caisse-de-rangement-toolbox-re",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/etageres-et-bibliotheques",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Armoire String System portes coulissantes",
+      "from": "coll:etageres-et-bibliotheques",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Étagères et bibliothèques",
+          "href": "/collections/etageres-et-bibliotheques"
+        },
+        {
+          "label": "Armoire String System portes coulissantes"
+        }
+      ],
+      "productBrandHref": "/collections/etageres-et-bibliotheques?brand=string-furniture",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=armoire-string-system-portes-coulissantes",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/commodes-et-buffets",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Armoire String System portes coulissantes",
+      "from": "coll:commodes-et-buffets",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Commodes et buffets",
+          "href": "/collections/commodes-et-buffets"
+        },
+        {
+          "label": "Armoire String System portes coulissantes"
+        }
+      ],
+      "productBrandHref": "/collections/commodes-et-buffets?brand=string-furniture",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=armoire-string-system-portes-coulissantes",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/paniers-et-corbeilles",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Caisse de rangement Toolbox RE",
+      "from": "coll:paniers-et-corbeilles",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Paniers et corbeilles",
+          "href": "/collections/paniers-et-corbeilles"
+        },
+        {
+          "label": "Caisse de rangement Toolbox RE"
+        }
+      ],
+      "productBrandHref": "/collections/paniers-et-corbeilles?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=caisse-de-rangement-toolbox-re",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/pateres-et-porte-manteaux",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Patère The Dots bois",
+      "from": "coll:pateres-et-porte-manteaux",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Patères et porte-manteaux",
+          "href": "/collections/pateres-et-porte-manteaux"
+        },
+        {
+          "label": "Patère The Dots bois"
+        }
+      ],
+      "productBrandHref": "/collections/pateres-et-porte-manteaux?brand=muuto",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=patere-the-dots-wood",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/dessertes-et-chariots",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Desserte Alima NDS2",
+      "from": "coll:dessertes-et-chariots",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Dessertes et chariots",
+          "href": "/collections/dessertes-et-chariots"
+        },
+        {
+          "label": "Desserte Alima NDS2"
+        }
+      ],
+      "productBrandHref": "/collections/dessertes-et-chariots?brand=tradition",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=desserte-alima-nds2",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/accessoires",
+      "kind": "family",
+      "realProduct": true,
+      "product": "Plateau de service",
+      "from": "coll:accessoires",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Arts de la table",
+          "href": "/collections/accessoires"
+        },
+        {
+          "label": "Plateau de service"
+        }
+      ],
+      "productBrandHref": "/collections/accessoires?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-plateau-de-service-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/vaisselle-assiettes",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Bol chromé",
+      "from": "coll:vaisselle-assiettes",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Vaisselle & assiettes",
+          "href": "/collections/vaisselle-assiettes"
+        },
+        {
+          "label": "Bol chromé"
+        }
+      ],
+      "productBrandHref": "/collections/vaisselle-assiettes?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-bol-chrome-small-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/verres-carafes",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Bouteille Animal Farm",
+      "from": "coll:verres-carafes",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Verres & carafes",
+          "href": "/collections/verres-carafes"
+        },
+        {
+          "label": "Bouteille Animal Farm"
+        }
+      ],
+      "productBrandHref": "/collections/verres-carafes?brand=ichendorf-milano",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bouteille-animal-farm",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/couverts",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Cuillères de service 70s Ceramics (Lot de 2)",
+      "from": "coll:couverts",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Couverts",
+          "href": "/collections/couverts"
+        },
+        {
+          "label": "Cuillères de service 70s Ceramics (Lot de 2)"
+        }
+      ],
+      "productBrandHref": "/collections/couverts?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-cuillere-de-service-sprinkle-set-2",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/mugs-tasses-cafe",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Mug à cappuccino 70s Ceramics",
+      "from": "coll:mugs-tasses-cafe",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Mugs, tasses & café",
+          "href": "/collections/mugs-tasses-cafe"
+        },
+        {
+          "label": "Mug à cappuccino 70s Ceramics"
+        }
+      ],
+      "productBrandHref": "/collections/mugs-tasses-cafe?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-tasse-a-cappuccino-rock-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/ustensiles-cuisine",
+      "kind": "subcategory",
+      "realProduct": true,
+      "product": "Plateau de service",
+      "from": "coll:ustensiles-cuisine",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Ustensiles & cuisine",
+          "href": "/collections/ustensiles-cuisine"
+        },
+        {
+          "label": "Plateau de service"
+        }
+      ],
+      "productBrandHref": "/collections/ustensiles-cuisine?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-plateau-de-service-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": true
+    },
+    {
+      "path": "/collections/tradition",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Lampe portable Flowerpot VP9",
+      "from": "coll:tradition",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "&Tradition",
+          "href": "/collections/tradition"
+        },
+        {
+          "label": "Lampe portable Flowerpot VP9"
+        }
+      ],
+      "productBrandHref": "/collections/tradition",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-de-table-flowerpot-vp9",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/alessi",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Bocal de conservation Gianni a little man",
+      "from": "coll:alessi",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Alessi",
+          "href": "/collections/alessi"
+        },
+        {
+          "label": "Bocal de conservation Gianni a little man"
+        }
+      ],
+      "productBrandHref": "/collections/alessi",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bocal-de-conservation-gianni-a-little-man",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/anglepoise",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Lampe de bureau Mini Mini 90",
+      "from": "coll:anglepoise",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Anglepoise",
+          "href": "/collections/anglepoise"
+        },
+        {
+          "label": "Lampe de bureau Mini Mini 90"
+        }
+      ],
+      "productBrandHref": "/collections/anglepoise",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-de-bureau-anglepoise-90-mini-mini-desk-lamp",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/artek",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Lampe de table Kori",
+      "from": "coll:artek",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Artek",
+          "href": "/collections/artek"
+        },
+        {
+          "label": "Lampe de table Kori"
+        }
+      ],
+      "productBrandHref": "/collections/artek",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=artek-kori-table-light-eu",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?brand=avolt",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Multiprise Square 2",
+      "from": "brand:avolt",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Marques",
+          "href": "/marques.html"
+        },
+        {
+          "label": "Avolt",
+          "href": "/produits.html?brand=avolt"
+        },
+        {
+          "label": "Multiprise Square 2"
+        }
+      ],
+      "productBrandHref": "/produits.html?brand=avolt",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=multiprise-square-2&from=brand%3Aavolt",
+      "ssrFirstLinkContext": "brand:avolt",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/blomus",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Poubelle à pédale Sono 3 L",
+      "from": "coll:blomus",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Blomus",
+          "href": "/collections/blomus"
+        },
+        {
+          "label": "Poubelle à pédale Sono 3 L"
+        }
+      ],
+      "productBrandHref": "/collections/blomus",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=poubelle-a-pedale-sono-3l",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?brand=carl-hansen-son",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Coussin TK8 100 cm Cuir",
+      "from": "brand:carl-hansen-son",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Marques",
+          "href": "/marques.html"
+        },
+        {
+          "label": "Carl Hansen & Søn",
+          "href": "/produits.html?brand=carl-hansen-son"
+        },
+        {
+          "label": "Coussin TK8 100 cm Cuir"
+        }
+      ],
+      "productBrandHref": "/produits.html?brand=carl-hansen-son",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=coussin-tk8-100-cm-cuir&from=brand%3Acarl-hansen-son",
+      "ssrFirstLinkContext": "brand:carl-hansen-son",
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?brand=compagnie-de-provence",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Savon liquide pour les mains Extra Pur 300 ml",
+      "from": "brand:compagnie-de-provence",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Marques",
+          "href": "/marques.html"
+        },
+        {
+          "label": "Compagnie de Provence",
+          "href": "/produits.html?brand=compagnie-de-provence"
+        },
+        {
+          "label": "Savon liquide pour les mains Extra Pur 300 ml"
+        }
+      ],
+      "productBrandHref": "/produits.html?brand=compagnie-de-provence",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=savon-mains-300ml-extra-pur&from=brand%3Acompagnie-de-provence",
+      "ssrFirstLinkContext": "brand:compagnie-de-provence",
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?brand=esteban",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Bouquet parfumé Ellipse 950 ml",
+      "from": "brand:esteban",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Marques",
+          "href": "/marques.html"
+        },
+        {
+          "label": "Esteban",
+          "href": "/produits.html?brand=esteban"
+        },
+        {
+          "label": "Bouquet parfumé Ellipse 950 ml"
+        }
+      ],
+      "productBrandHref": "/produits.html?brand=esteban",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=esteban-bouquet-parfume-ellipse-950ml&from=brand%3Aesteban",
+      "ssrFirstLinkContext": "brand:esteban",
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?brand=ester-erik",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Bougie conique Matt 25 cm",
+      "from": "brand:ester-erik",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Marques",
+          "href": "/marques.html"
+        },
+        {
+          "label": "Ester & Erik",
+          "href": "/produits.html?brand=ester-erik"
+        },
+        {
+          "label": "Bougie conique Matt 25 cm"
+        }
+      ],
+      "productBrandHref": "/produits.html?brand=ester-erik",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bougie-conique-matt-25-cm&from=brand%3Aester-erik",
+      "ssrFirstLinkContext": "brand:ester-erik",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/fatboy",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Suspension Bolleke",
+      "from": "coll:fatboy",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Fatboy",
+          "href": "/collections/fatboy"
+        },
+        {
+          "label": "Suspension Bolleke"
+        }
+      ],
+      "productBrandHref": "/collections/fatboy",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=suspension-bolleke",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/ferm-living",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Moulin à épices Cairn",
+      "from": "coll:ferm-living",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Ferm Living",
+          "href": "/collections/ferm-living"
+        },
+        {
+          "label": "Moulin à épices Cairn"
+        }
+      ],
+      "productBrandHref": "/collections/ferm-living",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=moulin-a-epices-bois-cairn",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/fermob",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Lampe Balad² H.25 cm",
+      "from": "coll:fermob",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Fermob",
+          "href": "/collections/fermob"
+        },
+        {
+          "label": "Lampe Balad² H.25 cm"
+        }
+      ],
+      "productBrandHref": "/collections/fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-balad-h-25-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/hay",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Lampe à pince Apex",
+      "from": "coll:hay",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "HAY",
+          "href": "/collections/hay"
+        },
+        {
+          "label": "Lampe à pince Apex"
+        }
+      ],
+      "productBrandHref": "/collections/hay",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-a-pince-hay-apex-clip-lamp",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/hkliving",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Mug à cappuccino 70s Ceramics",
+      "from": "coll:hkliving",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "HKliving",
+          "href": "/collections/hkliving"
+        },
+        {
+          "label": "Mug à cappuccino 70s Ceramics"
+        }
+      ],
+      "productBrandHref": "/collections/hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-tasse-a-cappuccino-rock-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/ichendorf-milano",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Verre à eau Animal Farm",
+      "from": "coll:ichendorf-milano",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Ichendorf Milano",
+          "href": "/collections/ichendorf-milano"
+        },
+        {
+          "label": "Verre à eau Animal Farm"
+        }
+      ],
+      "productBrandHref": "/collections/ichendorf-milano",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=verre-a-eau-animal-farm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/iittala",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Vase Aalto 140 mm",
+      "from": "coll:iittala",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Iittala",
+          "href": "/collections/iittala"
+        },
+        {
+          "label": "Vase Aalto 140 mm"
+        }
+      ],
+      "productBrandHref": "/collections/iittala",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=vase-aalto-140-mm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/lind-dna",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Set de table Cuir Nupo Curve Repas",
+      "from": "coll:lind-dna",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "LIND DNA",
+          "href": "/collections/lind-dna"
+        },
+        {
+          "label": "Set de table Cuir Nupo Curve Repas"
+        }
+      ],
+      "productBrandHref": "/collections/lind-dna",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=set-de-table-nup-curve-repas",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/marimekko",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Mug 2,5 dl",
+      "from": "coll:marimekko",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Marimekko",
+          "href": "/collections/marimekko"
+        },
+        {
+          "label": "Mug 2,5 dl"
+        }
+      ],
+      "productBrandHref": "/collections/marimekko",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=mug-2-5-dl",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/muuto",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Patère The Dots bois",
+      "from": "coll:muuto",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Muuto",
+          "href": "/collections/muuto"
+        },
+        {
+          "label": "Patère The Dots bois"
+        }
+      ],
+      "productBrandHref": "/collections/muuto",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=patere-the-dots-wood",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/pols-potten",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Vase Steps",
+      "from": "coll:pols-potten",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Pols Potten",
+          "href": "/collections/pols-potten"
+        },
+        {
+          "label": "Vase Steps"
+        }
+      ],
+      "productBrandHref": "/collections/pols-potten",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=vase-steps",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/relaxound",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Boîte sonore Zwitscherbox Plastique",
+      "from": "coll:relaxound",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Relaxound",
+          "href": "/collections/relaxound"
+        },
+        {
+          "label": "Boîte sonore Zwitscherbox Plastique"
+        }
+      ],
+      "productBrandHref": "/collections/relaxound",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=boite-sonore-zwitscherbox-plastique",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Vase Sicily",
+      "from": "coll:serax",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax",
+          "href": "/collections/serax"
+        },
+        {
+          "label": "Vase Sicily"
+        }
+      ],
+      "productBrandHref": "/collections/serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=vase-01-sicily",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/stoff-nagel",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Bougie Nagel 18 cm (Lot de 12)",
+      "from": "coll:stoff-nagel",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Stoff Nagel",
+          "href": "/collections/stoff-nagel"
+        },
+        {
+          "label": "Bougie Nagel 18 cm (Lot de 12)"
+        }
+      ],
+      "productBrandHref": "/collections/stoff-nagel",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bougie-nagel-18-cm-boite-de-12",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/string-furniture",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Armoire String System portes coulissantes",
+      "from": "coll:string-furniture",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "String Furniture",
+          "href": "/collections/string-furniture"
+        },
+        {
+          "label": "Armoire String System portes coulissantes"
+        }
+      ],
+      "productBrandHref": "/collections/string-furniture",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=armoire-string-system-portes-coulissantes",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?brand=tiptoe",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Lampe de table NOD",
+      "from": "brand:tiptoe",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Marques",
+          "href": "/marques.html"
+        },
+        {
+          "label": "Tiptoe",
+          "href": "/produits.html?brand=tiptoe"
+        },
+        {
+          "label": "Lampe de table NOD"
+        }
+      ],
+      "productBrandHref": "/produits.html?brand=tiptoe",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-de-table-nod&from=brand%3Atiptoe",
+      "ssrFirstLinkContext": "brand:tiptoe",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/vitra",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Caisse de rangement Toolbox RE",
+      "from": "coll:vitra",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Vitra",
+          "href": "/collections/vitra"
+        },
+        {
+          "label": "Caisse de rangement Toolbox RE"
+        }
+      ],
+      "productBrandHref": "/collections/vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=caisse-de-rangement-toolbox-re",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/volta",
+      "kind": "brand",
+      "realProduct": true,
+      "product": "Mobile Himalaya sur pied",
+      "from": "coll:volta",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Volta",
+          "href": "/collections/volta"
+        },
+        {
+          "label": "Mobile Himalaya sur pied"
+        }
+      ],
+      "productBrandHref": "/collections/volta",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=mobile-sur-pied-himalaya",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/tables?brand=vitra",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Table Noguchi Dining",
+      "from": "coll-brand:tables:vitra",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables",
+          "href": "/collections/tables"
+        },
+        {
+          "label": "Vitra",
+          "href": "/collections/tables?brand=vitra"
+        },
+        {
+          "label": "Table Noguchi Dining"
+        }
+      ],
+      "productBrandHref": "/collections/tables?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=table-noguchi-dining&from=coll-brand%3Atables%3Avitra",
+      "ssrFirstLinkContext": "coll-brand:tables:vitra",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/tables?brand=ferm-living",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Tables gigognes Shard (Lot de 3)",
+      "from": "coll-brand:tables:ferm-living",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables",
+          "href": "/collections/tables"
+        },
+        {
+          "label": "Ferm Living",
+          "href": "/collections/tables?brand=ferm-living"
+        },
+        {
+          "label": "Tables gigognes Shard (Lot de 3)"
+        }
+      ],
+      "productBrandHref": "/collections/tables?brand=ferm-living",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=tables-gigognes-shard&from=coll-brand%3Atables%3Aferm-living",
+      "ssrFirstLinkContext": "coll-brand:tables:ferm-living",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/tables?brand=muuto",
+      "kind": "family-brand",
+      "realProduct": false,
+      "product": null,
+      "from": "coll-brand:tables:muuto",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables",
+          "href": "/collections/tables"
+        },
+        {
+          "label": "Muuto",
+          "href": "/collections/tables?brand=muuto"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/collections/tables?brand=muuto",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/tables?brand=artek",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Table Kaari REB011 75 × 75 cm",
+      "from": "coll-brand:tables:artek",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tables",
+          "href": "/collections/tables"
+        },
+        {
+          "label": "Artek",
+          "href": "/collections/tables?brand=artek"
+        },
+        {
+          "label": "Table Kaari REB011 75 × 75 cm"
+        }
+      ],
+      "productBrandHref": "/collections/tables?brand=artek",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=artek-kaari-table-square-reb011&from=coll-brand%3Atables%3Aartek",
+      "ssrFirstLinkContext": "coll-brand:tables:artek",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/luminaires?brand=hay",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Lampadaire Apex",
+      "from": "coll-brand:luminaires:hay",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Luminaires",
+          "href": "/collections/luminaires"
+        },
+        {
+          "label": "HAY",
+          "href": "/collections/luminaires?brand=hay"
+        },
+        {
+          "label": "Lampadaire Apex"
+        }
+      ],
+      "productBrandHref": "/collections/luminaires?brand=hay",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampadaire-hay-apex-floor-lamp&from=coll-brand%3Aluminaires%3Ahay",
+      "ssrFirstLinkContext": "coll-brand:luminaires:hay",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/luminaires?brand=anglepoise",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Lampadaire Type 75",
+      "from": "coll-brand:luminaires:anglepoise",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Luminaires",
+          "href": "/collections/luminaires"
+        },
+        {
+          "label": "Anglepoise",
+          "href": "/collections/luminaires?brand=anglepoise"
+        },
+        {
+          "label": "Lampadaire Type 75"
+        }
+      ],
+      "productBrandHref": "/collections/luminaires?brand=anglepoise",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampadaire-anglepoise-type-75-floor-lamp&from=coll-brand%3Aluminaires%3Aanglepoise",
+      "ssrFirstLinkContext": "coll-brand:luminaires:anglepoise",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/luminaires?brand=artek",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Applique A330S",
+      "from": "coll-brand:luminaires:artek",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Luminaires",
+          "href": "/collections/luminaires"
+        },
+        {
+          "label": "Artek",
+          "href": "/collections/luminaires?brand=artek"
+        },
+        {
+          "label": "Applique A330S"
+        }
+      ],
+      "productBrandHref": "/collections/luminaires?brand=artek",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=artek-wall-light-a330s-eu&from=coll-brand%3Aluminaires%3Aartek",
+      "ssrFirstLinkContext": "coll-brand:luminaires:artek",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/luminaires?brand=tradition",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Suspension Utzon JU1",
+      "from": "coll-brand:luminaires:tradition",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Luminaires",
+          "href": "/collections/luminaires"
+        },
+        {
+          "label": "&Tradition",
+          "href": "/collections/luminaires?brand=tradition"
+        },
+        {
+          "label": "Suspension Utzon JU1"
+        }
+      ],
+      "productBrandHref": "/collections/luminaires?brand=tradition",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=suspension-utzon-ju1&from=coll-brand%3Aluminaires%3Atradition",
+      "ssrFirstLinkContext": "coll-brand:luminaires:tradition",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/decoration?brand=pols-potten",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Vase Steps",
+      "from": "coll-brand:decoration:pols-potten",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Décoration",
+          "href": "/collections/decoration"
+        },
+        {
+          "label": "Pols Potten",
+          "href": "/collections/decoration?brand=pols-potten"
+        },
+        {
+          "label": "Vase Steps"
+        }
+      ],
+      "productBrandHref": "/collections/decoration?brand=pols-potten",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=vase-steps&from=coll-brand%3Adecoration%3Apols-potten",
+      "ssrFirstLinkContext": "coll-brand:decoration:pols-potten",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/decoration?brand=stoff-nagel",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Bougie Nagel 18 cm (Lot de 12)",
+      "from": "coll-brand:decoration:stoff-nagel",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Décoration",
+          "href": "/collections/decoration"
+        },
+        {
+          "label": "Stoff Nagel",
+          "href": "/collections/decoration?brand=stoff-nagel"
+        },
+        {
+          "label": "Bougie Nagel 18 cm (Lot de 12)"
+        }
+      ],
+      "productBrandHref": "/collections/decoration?brand=stoff-nagel",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bougie-nagel-18-cm-boite-de-12&from=coll-brand%3Adecoration%3Astoff-nagel",
+      "ssrFirstLinkContext": "coll-brand:decoration:stoff-nagel",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/decoration?brand=hkliving",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Cache-pot Stoneware",
+      "from": "coll-brand:decoration:hkliving",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Décoration",
+          "href": "/collections/decoration"
+        },
+        {
+          "label": "HKliving",
+          "href": "/collections/decoration?brand=hkliving"
+        },
+        {
+          "label": "Cache-pot Stoneware"
+        }
+      ],
+      "productBrandHref": "/collections/decoration?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-cache-pot-stoneware-cream-36-set-0&from=coll-brand%3Adecoration%3Ahkliving",
+      "ssrFirstLinkContext": "coll-brand:decoration:hkliving",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/decoration?brand=vitra",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Figurine Wooden Doll",
+      "from": "coll-brand:decoration:vitra",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Décoration",
+          "href": "/collections/decoration"
+        },
+        {
+          "label": "Vitra",
+          "href": "/collections/decoration?brand=vitra"
+        },
+        {
+          "label": "Figurine Wooden Doll"
+        }
+      ],
+      "productBrandHref": "/collections/decoration?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=sculpture-wooden-doll-vitra&from=coll-brand%3Adecoration%3Avitra",
+      "ssrFirstLinkContext": "coll-brand:decoration:vitra",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/rangement?brand=string-furniture",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Armoire String System portes coulissantes",
+      "from": "coll-brand:rangement:string-furniture",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Rangement",
+          "href": "/collections/rangement"
+        },
+        {
+          "label": "String Furniture",
+          "href": "/collections/rangement?brand=string-furniture"
+        },
+        {
+          "label": "Armoire String System portes coulissantes"
+        }
+      ],
+      "productBrandHref": "/collections/rangement?brand=string-furniture",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=armoire-string-system-portes-coulissantes&from=coll-brand%3Arangement%3Astring-furniture",
+      "ssrFirstLinkContext": "coll-brand:rangement:string-furniture",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/rangement?brand=muuto",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Patère The Dots bois",
+      "from": "coll-brand:rangement:muuto",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Rangement",
+          "href": "/collections/rangement"
+        },
+        {
+          "label": "Muuto",
+          "href": "/collections/rangement?brand=muuto"
+        },
+        {
+          "label": "Patère The Dots bois"
+        }
+      ],
+      "productBrandHref": "/collections/rangement?brand=muuto",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=patere-the-dots-wood&from=coll-brand%3Arangement%3Amuuto",
+      "ssrFirstLinkContext": "coll-brand:rangement:muuto",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/rangement?brand=tradition",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Desserte Alima NDS2",
+      "from": "coll-brand:rangement:tradition",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Rangement",
+          "href": "/collections/rangement"
+        },
+        {
+          "label": "&Tradition",
+          "href": "/collections/rangement?brand=tradition"
+        },
+        {
+          "label": "Desserte Alima NDS2"
+        }
+      ],
+      "productBrandHref": "/collections/rangement?brand=tradition",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=desserte-alima-nds2&from=coll-brand%3Arangement%3Atradition",
+      "ssrFirstLinkContext": "coll-brand:rangement:tradition",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/rangement?brand=hkliving",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Commode Space 160 × 80 cm",
+      "from": "coll-brand:rangement:hkliving",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Rangement",
+          "href": "/collections/rangement"
+        },
+        {
+          "label": "HKliving",
+          "href": "/collections/rangement?brand=hkliving"
+        },
+        {
+          "label": "Commode Space 160 × 80 cm"
+        }
+      ],
+      "productBrandHref": "/collections/rangement?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=commode-space-160-80-cm&from=coll-brand%3Arangement%3Ahkliving",
+      "ssrFirstLinkContext": "coll-brand:rangement:hkliving",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/accessoires?brand=ferm-living",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Carafe Ripple 1 L",
+      "from": "coll-brand:accessoires:ferm-living",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Arts de la table",
+          "href": "/collections/accessoires"
+        },
+        {
+          "label": "Ferm Living",
+          "href": "/collections/accessoires?brand=ferm-living"
+        },
+        {
+          "label": "Carafe Ripple 1 L"
+        }
+      ],
+      "productBrandHref": "/collections/accessoires?brand=ferm-living",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=carafe-verre-ripple&from=coll-brand%3Aaccessoires%3Aferm-living",
+      "ssrFirstLinkContext": "coll-brand:accessoires:ferm-living",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/accessoires?brand=hkliving",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Plateau de service",
+      "from": "coll-brand:accessoires:hkliving",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Arts de la table",
+          "href": "/collections/accessoires"
+        },
+        {
+          "label": "HKliving",
+          "href": "/collections/accessoires?brand=hkliving"
+        },
+        {
+          "label": "Plateau de service"
+        }
+      ],
+      "productBrandHref": "/collections/accessoires?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-plateau-de-service-set-0&from=coll-brand%3Aaccessoires%3Ahkliving",
+      "ssrFirstLinkContext": "coll-brand:accessoires:hkliving",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/accessoires?brand=ichendorf-milano",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Bouteille Animal Farm",
+      "from": "coll-brand:accessoires:ichendorf-milano",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Arts de la table",
+          "href": "/collections/accessoires"
+        },
+        {
+          "label": "Ichendorf Milano",
+          "href": "/collections/accessoires?brand=ichendorf-milano"
+        },
+        {
+          "label": "Bouteille Animal Farm"
+        }
+      ],
+      "productBrandHref": "/collections/accessoires?brand=ichendorf-milano",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bouteille-animal-farm&from=coll-brand%3Aaccessoires%3Aichendorf-milano",
+      "ssrFirstLinkContext": "coll-brand:accessoires:ichendorf-milano",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/accessoires?brand=alessi",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Mug Nouvel",
+      "from": "coll-brand:accessoires:alessi",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Arts de la table",
+          "href": "/collections/accessoires"
+        },
+        {
+          "label": "Alessi",
+          "href": "/collections/accessoires?brand=alessi"
+        },
+        {
+          "label": "Mug Nouvel"
+        }
+      ],
+      "productBrandHref": "/collections/accessoires?brand=alessi",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=mug-jn03cp&from=coll-brand%3Aaccessoires%3Aalessi",
+      "ssrFirstLinkContext": "coll-brand:accessoires:alessi",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/sieges?brand=carl-hansen-son",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Chaise MG501 Cuba",
+      "from": "coll-brand:sieges:carl-hansen-son",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Assises",
+          "href": "/collections/sieges"
+        },
+        {
+          "label": "Carl Hansen & Søn",
+          "href": "/collections/sieges?brand=carl-hansen-son"
+        },
+        {
+          "label": "Chaise MG501 Cuba"
+        }
+      ],
+      "productBrandHref": "/collections/sieges?brand=carl-hansen-son",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-mg501-cuba&from=coll-brand%3Asieges%3Acarl-hansen-son",
+      "ssrFirstLinkContext": "coll-brand:sieges:carl-hansen-son",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/sieges?brand=artek",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Tabouret 60",
+      "from": "coll-brand:sieges:artek",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Assises",
+          "href": "/collections/sieges"
+        },
+        {
+          "label": "Artek",
+          "href": "/collections/sieges?brand=artek"
+        },
+        {
+          "label": "Tabouret 60"
+        }
+      ],
+      "productBrandHref": "/collections/sieges?brand=artek",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=artek-stool-60&from=coll-brand%3Asieges%3Aartek",
+      "ssrFirstLinkContext": "coll-brand:sieges:artek",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/sieges?brand=vitra",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Tabouret Eames Elephant",
+      "from": "coll-brand:sieges:vitra",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Assises",
+          "href": "/collections/sieges"
+        },
+        {
+          "label": "Vitra",
+          "href": "/collections/sieges?brand=vitra"
+        },
+        {
+          "label": "Tabouret Eames Elephant"
+        }
+      ],
+      "productBrandHref": "/collections/sieges?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=tabouret-eames-elephant&from=coll-brand%3Asieges%3Avitra",
+      "ssrFirstLinkContext": "coll-brand:sieges:vitra",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/sieges?brand=hay",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Chaise Rey",
+      "from": "coll-brand:sieges:hay",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Assises",
+          "href": "/collections/sieges"
+        },
+        {
+          "label": "HAY",
+          "href": "/collections/sieges?brand=hay"
+        },
+        {
+          "label": "Chaise Rey"
+        }
+      ],
+      "productBrandHref": "/collections/sieges?brand=hay",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-hay-rey-chair&from=coll-brand%3Asieges%3Ahay",
+      "ssrFirstLinkContext": "coll-brand:sieges:hay",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/outdoor?brand=fermob",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Lampe Balad² H.25 cm",
+      "from": "coll-brand:outdoor:fermob",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Jardin",
+          "href": "/collections/outdoor"
+        },
+        {
+          "label": "Fermob",
+          "href": "/collections/outdoor?brand=fermob"
+        },
+        {
+          "label": "Lampe Balad² H.25 cm"
+        }
+      ],
+      "productBrandHref": "/collections/outdoor?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-balad-h-25-cm&from=coll-brand%3Aoutdoor%3Afermob",
+      "ssrFirstLinkContext": "coll-brand:outdoor:fermob",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/outdoor?brand=hay",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Torchons Outdoor Market (Lot de 2)",
+      "from": "coll-brand:outdoor:hay",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Jardin",
+          "href": "/collections/outdoor"
+        },
+        {
+          "label": "HAY",
+          "href": "/collections/outdoor?brand=hay"
+        },
+        {
+          "label": "Torchons Outdoor Market (Lot de 2)"
+        }
+      ],
+      "productBrandHref": "/collections/outdoor?brand=hay",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=torchon-hay-outdoor-market-tea-towel&from=coll-brand%3Aoutdoor%3Ahay",
+      "ssrFirstLinkContext": "coll-brand:outdoor:hay",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/outdoor?brand=fatboy",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Suspension Bolleke",
+      "from": "coll-brand:outdoor:fatboy",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Jardin",
+          "href": "/collections/outdoor"
+        },
+        {
+          "label": "Fatboy",
+          "href": "/collections/outdoor?brand=fatboy"
+        },
+        {
+          "label": "Suspension Bolleke"
+        }
+      ],
+      "productBrandHref": "/collections/outdoor?brand=fatboy",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=suspension-bolleke&from=coll-brand%3Aoutdoor%3Afatboy",
+      "ssrFirstLinkContext": "coll-brand:outdoor:fatboy",
+      "missingParent": false
+    },
+    {
+      "path": "/collections/outdoor?brand=tradition",
+      "kind": "family-brand",
+      "realProduct": true,
+      "product": "Table à manger ronde RFH Terrace RD6",
+      "from": "coll-brand:outdoor:tradition",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Jardin",
+          "href": "/collections/outdoor"
+        },
+        {
+          "label": "&Tradition",
+          "href": "/collections/outdoor?brand=tradition"
+        },
+        {
+          "label": "Table à manger ronde RFH Terrace RD6"
+        }
+      ],
+      "productBrandHref": "/collections/outdoor?brand=tradition",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=table-manger-ronde-tradition-rfh-terrace-rd6&from=coll-brand%3Aoutdoor%3Atradition",
+      "ssrFirstLinkContext": "coll-brand:outdoor:tradition",
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html",
+      "kind": "other",
+      "realProduct": true,
+      "product": "Mug à cappuccino 70s Ceramics",
+      "from": "",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Le catalogue",
+          "href": "/produits.html"
+        },
+        {
+          "label": "Mug à cappuccino 70s Ceramics"
+        }
+      ],
+      "productBrandHref": "/collections/hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-tasse-a-cappuccino-rock-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?designer=alvar-aalto",
+      "kind": "other",
+      "realProduct": true,
+      "product": "Tabouret 60",
+      "from": "designer:alvar-aalto",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Designers",
+          "href": "/designers.html"
+        },
+        {
+          "label": "Alvar Aalto",
+          "href": "/produits.html?designer=alvar-aalto"
+        },
+        {
+          "label": "Tabouret 60"
+        }
+      ],
+      "productBrandHref": "/collections/artek",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=artek-stool-60",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?q=Bistro&brand=fermob",
+      "kind": "other",
+      "realProduct": true,
+      "product": "Table Bistro Ø 96 cm",
+      "from": "brand:fermob",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Marques",
+          "href": "/marques.html"
+        },
+        {
+          "label": "Fermob",
+          "href": "/collections/fermob"
+        },
+        {
+          "label": "Table Bistro Ø 96 cm"
+        }
+      ],
+      "productBrandHref": "/collections/fermob",
+      "ignoredState": [
+        "q"
+      ],
+      "ssrFirstLink": "/produit.html?handle=table-metal-bistro-o-96-cm&from=brand%3Afermob",
+      "ssrFirstLinkContext": "brand:fermob",
+      "missingParent": false
+    },
+    {
+      "path": "/produits.html?cats=chaises",
+      "kind": "other",
+      "realProduct": true,
+      "product": "Chaise Bistro Métal",
+      "from": "",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Le catalogue",
+          "href": "/produits.html"
+        },
+        {
+          "label": "Chaise Bistro Métal"
+        }
+      ],
+      "productBrandHref": "/collections/fermob",
+      "ignoredState": [
+        "cats"
+      ],
+      "ssrFirstLink": "/produit.html?handle=chaise-bistro-metal",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/verres-carafes?tag=verrerie",
+      "kind": "other",
+      "realProduct": true,
+      "product": "Bouteille Animal Farm",
+      "from": "coll:verres-carafes",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Verres & carafes",
+          "href": "/collections/verres-carafes"
+        },
+        {
+          "label": "Bouteille Animal Farm"
+        }
+      ],
+      "productBrandHref": "/collections/verres-carafes?brand=ichendorf-milano",
+      "ignoredState": [
+        "tag"
+      ],
+      "ssrFirstLink": "/produit.html?handle=bouteille-animal-farm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/chaises?page=2",
+      "kind": "other",
+      "realProduct": true,
+      "product": "Chaise Bistro Métal",
+      "from": "coll:chaises",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Chaises",
+          "href": "/collections/chaises"
+        },
+        {
+          "label": "Chaise Bistro Métal"
+        }
+      ],
+      "productBrandHref": "/collections/chaises?brand=fermob",
+      "ignoredState": [
+        "page"
+      ],
+      "ssrFirstLink": "/produit.html?handle=chaise-bistro-metal",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/promotions",
+      "kind": "other",
+      "realProduct": true,
+      "product": "Chaise Panton",
+      "from": "coll:promotions",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Promotions",
+          "href": "/collections/promotions"
+        },
+        {
+          "label": "Chaise Panton"
+        }
+      ],
+      "productBrandHref": "/collections/promotions?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-panton",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/nouveautes",
+      "kind": "other",
+      "realProduct": true,
+      "product": "Figurine Panton Cubes Chat",
+      "from": "coll:nouveautes",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Nouveautés",
+          "href": "/collections/nouveautes"
+        },
+        {
+          "label": "Figurine Panton Cubes Chat"
+        }
+      ],
+      "productBrandHref": "/collections/nouveautes?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=figurine-panton-cubes-chat",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/all",
+      "kind": "other",
+      "realProduct": false,
+      "product": null,
+      "from": "",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Le catalogue",
+          "href": "/produits.html"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/bistro",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Chaise Bistro Métal",
+      "from": "coll:bistro",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Bistro",
+          "href": "/collections/bistro"
+        },
+        {
+          "label": "Chaise Bistro Métal"
+        }
+      ],
+      "productBrandHref": "/collections/bistro?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-bistro-metal",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/luxembourg",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Chaise Luxembourg",
+      "from": "coll:luxembourg",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Luxembourg",
+          "href": "/collections/luxembourg"
+        },
+        {
+          "label": "Chaise Luxembourg"
+        }
+      ],
+      "productBrandHref": "/collections/luxembourg?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=chaise-aluminium-luxembourg-4101",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/1900",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Table 1900 Ø 96 cm",
+      "from": "coll:1900",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "1900",
+          "href": "/collections/1900"
+        },
+        {
+          "label": "Table 1900 Ø 96 cm"
+        }
+      ],
+      "productBrandHref": "/collections/1900?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=table-metal-1900-o-96-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/montmartre",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Chaise avec accoudoirs Montmartre",
+      "from": "coll:montmartre",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Montmartre",
+          "href": "/collections/montmartre"
+        },
+        {
+          "label": "Chaise avec accoudoirs Montmartre"
+        }
+      ],
+      "productBrandHref": "/collections/montmartre?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=fauteuil-metal-montmartre-4602",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/70s-ceramics",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Mug à cappuccino 70s Ceramics",
+      "from": "coll:70s-ceramics",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "70s Ceramics",
+          "href": "/collections/70s-ceramics"
+        },
+        {
+          "label": "Mug à cappuccino 70s Ceramics"
+        }
+      ],
+      "productBrandHref": "/collections/70s-ceramics?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-tasse-a-cappuccino-rock-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/chef-ceramics",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Coupelle Chef Ceramics",
+      "from": "coll:chef-ceramics",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Chef ceramics",
+          "href": "/collections/chef-ceramics"
+        },
+        {
+          "label": "Coupelle Chef Ceramics"
+        }
+      ],
+      "productBrandHref": "/collections/chef-ceramics?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-coupelle-rustic-blue-9-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/caractere",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Table Caractère 190 x 90 cm",
+      "from": "coll:caractere",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Caractère",
+          "href": "/collections/caractere"
+        },
+        {
+          "label": "Table Caractère 190 x 90 cm"
+        }
+      ],
+      "productBrandHref": "/collections/caractere?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=table-metal-caractere-190-x-90-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/verner-panton",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Lampe portable Flowerpot VP9",
+      "from": "coll:verner-panton",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Verner Panton",
+          "href": "/collections/verner-panton"
+        },
+        {
+          "label": "Lampe portable Flowerpot VP9"
+        }
+      ],
+      "productBrandHref": "/collections/verner-panton?brand=tradition",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-de-table-flowerpot-vp9",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/palissade",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Table Palissade Cone 65 x 65 cm",
+      "from": "coll:palissade",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Palissade",
+          "href": "/collections/palissade"
+        },
+        {
+          "label": "Table Palissade Cone 65 x 65 cm"
+        }
+      ],
+      "productBrandHref": "/collections/palissade?brand=hay",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=table-hay-palissade-cone-table-65-x-65-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/ripple",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Pichet à eau Ripple",
+      "from": "coll:ripple",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Ripple",
+          "href": "/collections/ripple"
+        },
+        {
+          "label": "Pichet à eau Ripple"
+        }
+      ],
+      "productBrandHref": "/collections/ripple?brand=ferm-living",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=pichet-a-eau-verre-ripple-water-jug",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/taika",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Verre à eau Taika Sato 38 cl (Lot de 2)",
+      "from": "coll:taika",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Taika",
+          "href": "/collections/taika"
+        },
+        {
+          "label": "Verre à eau Taika Sato 38 cl (Lot de 2)"
+        }
+      ],
+      "productBrandHref": "/collections/taika?brand=iittala",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=verre-a-eau-taika-lot-de-2",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/kastehelmi",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Bol Kastehelmi 23 cl",
+      "from": "coll:kastehelmi",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Kastehelmi",
+          "href": "/collections/kastehelmi"
+        },
+        {
+          "label": "Bol Kastehelmi 23 cl"
+        }
+      ],
+      "productBrandHref": "/collections/kastehelmi?brand=iittala",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bol-kastehelmi",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/kartio",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Verre à eau Kartio 40 cl (Lot de 2)",
+      "from": "coll:kartio",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Kartio",
+          "href": "/collections/kartio"
+        },
+        {
+          "label": "Verre à eau Kartio 40 cl (Lot de 2)"
+        }
+      ],
+      "productBrandHref": "/collections/kartio?brand=iittala",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=verre-a-eau-kartio-40-cl-lot-de-2",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/essence",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Verre à vin rouge Essence (Lot de 2)",
+      "from": "coll:essence",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Essence",
+          "href": "/collections/essence"
+        },
+        {
+          "label": "Verre à vin rouge Essence (Lot de 2)"
+        }
+      ],
+      "productBrandHref": "/collections/essence?brand=iittala",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=verre-a-vin-rouge-essence-lot-de-2",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/zig-zag",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Tabouret Zig Zag",
+      "from": "coll:zig-zag",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Zig Zag",
+          "href": "/collections/zig-zag"
+        },
+        {
+          "label": "Tabouret Zig Zag"
+        }
+      ],
+      "productBrandHref": "/collections/zig-zag?brand=pols-potten",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=tabouret-zig-zag",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serviettes-noel",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serviettes-noel",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serviettes Noël",
+          "href": "/collections/serviettes-noel"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serviettes-amour",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serviettes-amour",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serviettes Amour",
+          "href": "/collections/serviettes-amour"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serviettes-ete",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serviettes-ete",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serviettes Reste",
+          "href": "/collections/serviettes-ete"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/plisse",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Bouilloire Plissé thermostat",
+      "from": "coll:plisse",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Plissé",
+          "href": "/collections/plisse"
+        },
+        {
+          "label": "Bouilloire Plissé thermostat"
+        }
+      ],
+      "productBrandHref": "/collections/plisse?brand=alessi",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bouilloire-plisse-thermostat",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/sono",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Poubelle à pédale Sono 3 L",
+      "from": "coll:sono",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Sono",
+          "href": "/collections/sono"
+        },
+        {
+          "label": "Poubelle à pédale Sono 3 L"
+        }
+      ],
+      "productBrandHref": "/collections/sono?brand=blomus",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=poubelle-a-pedale-sono-3l",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/carte-blanche",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Coquetier Carte Blanche (Lot de 2)",
+      "from": "coll:carte-blanche",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Carte Blanche",
+          "href": "/collections/carte-blanche"
+        },
+        {
+          "label": "Coquetier Carte Blanche (Lot de 2)"
+        }
+      ],
+      "productBrandHref": "/collections/carte-blanche?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=coquetier-carte-blanche-set-de-2",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/alvar-aalto",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Vase Aalto 140 mm",
+      "from": "coll:alvar-aalto",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Alvar Aalto",
+          "href": "/collections/alvar-aalto"
+        },
+        {
+          "label": "Vase Aalto 140 mm"
+        }
+      ],
+      "productBrandHref": "/collections/alvar-aalto?brand=iittala",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=vase-aalto-140-mm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/arts-de-la-table",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Mug à cappuccino 70s Ceramics",
+      "from": "coll:arts-de-la-table",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Arts de la table",
+          "href": "/collections/arts-de-la-table"
+        },
+        {
+          "label": "Mug à cappuccino 70s Ceramics"
+        }
+      ],
+      "productBrandHref": "/collections/arts-de-la-table?brand=hkliving",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=hkliving-tasse-a-cappuccino-rock-set-0",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/ihr",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Serviette de Noël (Lot de 4) 42 × 42 cm",
+      "from": "coll:ihr",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "IHR",
+          "href": "/collections/ihr"
+        },
+        {
+          "label": "Serviette de Noël (Lot de 4) 42 × 42 cm"
+        }
+      ],
+      "productBrandHref": "/collections/ihr?brand=carl-hansen-son",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=serviette-de-noel-lot-de-4-42-x-42-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/mediterraneo",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Porte-rouleau Mediterraneo",
+      "from": "coll:mediterraneo",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Mediterraneo",
+          "href": "/collections/mediterraneo"
+        },
+        {
+          "label": "Porte-rouleau Mediterraneo"
+        }
+      ],
+      "productBrandHref": "/collections/mediterraneo?brand=alessi",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=porte-rouleau-mediterraneo",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/noel",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Décoration de Noël Bonhomme de neige",
+      "from": "coll:noel",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Noël",
+          "href": "/collections/noel"
+        },
+        {
+          "label": "Décoration de Noël Bonhomme de neige"
+        }
+      ],
+      "productBrandHref": "/collections/noel?brand=carl-hansen-son",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=decoration-de-noel-bonhomme-de-neige",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/jean-prouve",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Fauteuil de Salon Dedar Karandash",
+      "from": "coll:jean-prouve",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Jean Prouvé",
+          "href": "/collections/jean-prouve"
+        },
+        {
+          "label": "Fauteuil de Salon Dedar Karandash"
+        }
+      ],
+      "productBrandHref": "/collections/jean-prouve?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=fauteuil-de-salon-dedar-karandash",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/claude-modifs-2026-05-16",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Guirlande Hoopik L.1200 cm – Type E & F",
+      "from": "coll:claude-modifs-2026-05-16",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Claude — Modifs 2026-05-16",
+          "href": "/collections/claude-modifs-2026-05-16"
+        },
+        {
+          "label": "Guirlande Hoopik L.1200 cm – Type E & F"
+        }
+      ],
+      "productBrandHref": "/collections/claude-modifs-2026-05-16?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=guirlande-hoopik-l-1200-cm-type-e-f",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/julien-de-smedt",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Module avec fond Stacked",
+      "from": "coll:julien-de-smedt",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Julien De Smedt",
+          "href": "/collections/julien-de-smedt"
+        },
+        {
+          "label": "Module avec fond Stacked"
+        }
+      ],
+      "productBrandHref": "/collections/julien-de-smedt?brand=muuto",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=module-stacked-avec-fond",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/bureau",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Lampe de bureau Mini Mini 90",
+      "from": "coll:bureau",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Bureau",
+          "href": "/collections/bureau"
+        },
+        {
+          "label": "Lampe de bureau Mini Mini 90"
+        }
+      ],
+      "productBrandHref": "/collections/bureau?brand=anglepoise",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-de-bureau-anglepoise-90-mini-mini-desk-lamp",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/featured",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:featured",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Notre sélection",
+          "href": "/collections/featured"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/remember",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:remember",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Remember",
+          "href": "/collections/remember"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/charles-ray-eames",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Tabouret Eames Elephant",
+      "from": "coll:charles-ray-eames",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Charles & Ray Eames",
+          "href": "/collections/charles-ray-eames"
+        },
+        {
+          "label": "Tabouret Eames Elephant"
+        }
+      ],
+      "productBrandHref": "/collections/charles-ray-eames?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=tabouret-eames-elephant",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/pierre-paulin",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:pierre-paulin",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Pierre Paulin",
+          "href": "/collections/pierre-paulin"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/pascal-mourgue",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:pascal-mourgue",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Pascal Mourgue",
+          "href": "/collections/pascal-mourgue"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/achille-castiglioni",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:achille-castiglioni",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Achille Castiglioni",
+          "href": "/collections/achille-castiglioni"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/hella-jongerius",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:hella-jongerius",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Hella Jongerius",
+          "href": "/collections/hella-jongerius"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/hans-wegner",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:hans-wegner",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Hans Wegner",
+          "href": "/collections/hans-wegner"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-marie",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-marie",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Marie",
+          "href": "/collections/serax-marie"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-metal-sculptures",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Corbeille Iron Oval Meo Metal Sculptures",
+      "from": "coll:serax-metal-sculptures",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Metal Sculptures",
+          "href": "/collections/serax-metal-sculptures"
+        },
+        {
+          "label": "Corbeille Iron Oval Meo Metal Sculptures"
+        }
+      ],
+      "productBrandHref": "/collections/serax-metal-sculptures?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=corbeille-iron-oval-meo-metal-sculptures",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-la-mere",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Saladier de service La Mère",
+      "from": "coll:serax-la-mere",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — La Mère",
+          "href": "/collections/serax-la-mere"
+        },
+        {
+          "label": "Saladier de service La Mère"
+        }
+      ],
+      "productBrandHref": "/collections/serax-la-mere?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=saladier-de-service-la-mere",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-urban-jungle",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-urban-jungle",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Urban Jungle",
+          "href": "/collections/serax-urban-jungle"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-perfect-imperfection",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-perfect-imperfection",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Perfect Imperfection",
+          "href": "/collections/serax-perfect-imperfection"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-lighting",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-lighting",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Lighting",
+          "href": "/collections/serax-lighting"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-feast",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Tasse à thé 33cl Feast",
+      "from": "coll:serax-feast",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Feast",
+          "href": "/collections/serax-feast"
+        },
+        {
+          "label": "Tasse à thé 33cl Feast"
+        }
+      ],
+      "productBrandHref": "/collections/serax-feast?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=tasse-a-the-33cl-feast",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-les-objets-mouleversants",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Rond de serviette Les Objets Mouleversants (Lot de 4)",
+      "from": "coll:serax-les-objets-mouleversants",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Les Objets Mouleversants",
+          "href": "/collections/serax-les-objets-mouleversants"
+        },
+        {
+          "label": "Rond de serviette Les Objets Mouleversants (Lot de 4)"
+        }
+      ],
+      "productBrandHref": "/collections/serax-les-objets-mouleversants?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=rond-de-serviette-les-objets-mouleversants-set-de-4",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-verde-lanza",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Saladier Verde Lanza",
+      "from": "coll:serax-verde-lanza",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Verde Lanza",
+          "href": "/collections/serax-verde-lanza"
+        },
+        {
+          "label": "Saladier Verde Lanza"
+        }
+      ],
+      "productBrandHref": "/collections/serax-verde-lanza?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=saladier-de-service-verde-lanza",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-earth",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-earth",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Earth",
+          "href": "/collections/serax-earth"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-carte-blanche",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Coquetier Carte Blanche (Lot de 2)",
+      "from": "coll:serax-carte-blanche",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Carte Blanche",
+          "href": "/collections/serax-carte-blanche"
+        },
+        {
+          "label": "Coquetier Carte Blanche (Lot de 2)"
+        }
+      ],
+      "productBrandHref": "/collections/serax-carte-blanche?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=coquetier-carte-blanche-set-de-2",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-sophia",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-sophia",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Sophia",
+          "href": "/collections/serax-sophia"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-pawn",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-pawn",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Pawn",
+          "href": "/collections/serax-pawn"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-santiago-de-borja",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-santiago-de-borja",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Santiago de Borja",
+          "href": "/collections/serax-santiago-de-borja"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-bazaar",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-bazaar",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Bazaar",
+          "href": "/collections/serax-bazaar"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-construct",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-construct",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Construct",
+          "href": "/collections/serax-construct"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-silos",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Bougeoir Silos (Lot de 2)",
+      "from": "coll:serax-silos",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Silos",
+          "href": "/collections/serax-silos"
+        },
+        {
+          "label": "Bougeoir Silos (Lot de 2)"
+        }
+      ],
+      "productBrandHref": "/collections/serax-silos?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bougeoir-silos-set-de-2",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-candles",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-candles",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Candles",
+          "href": "/collections/serax-candles"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-sicily",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Vase Sicily",
+      "from": "coll:serax-sicily",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Sicily",
+          "href": "/collections/serax-sicily"
+        },
+        {
+          "label": "Vase Sicily"
+        }
+      ],
+      "productBrandHref": "/collections/serax-sicily?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=vase-01-sicily",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-midnight-creatures",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Vase Hibou S After Midnight",
+      "from": "coll:serax-midnight-creatures",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Midnight Creatures",
+          "href": "/collections/serax-midnight-creatures"
+        },
+        {
+          "label": "Vase Hibou S After Midnight"
+        }
+      ],
+      "productBrandHref": "/collections/serax-midnight-creatures?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=vase-hibou-moyen-after-midnight",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-wind-fire",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-wind-fire",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Wind & Fire",
+          "href": "/collections/serax-wind-fire"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-serving-spring",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-serving-spring",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Serving Spring",
+          "href": "/collections/serax-serving-spring"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-wind-fire-1",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-wind-fire-1",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Wind & Fire",
+          "href": "/collections/serax-wind-fire-1"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-terres-de-reves",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Lampe de table Celine n°1 - Terres de Rêves",
+      "from": "coll:serax-terres-de-reves",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Terres de Rêves",
+          "href": "/collections/serax-terres-de-reves"
+        },
+        {
+          "label": "Lampe de table Celine n°1 - Terres de Rêves"
+        }
+      ],
+      "productBrandHref": "/collections/serax-terres-de-reves?brand=serax",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-table-celine-ndeg1-terres-de-reves",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-dune",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-dune",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Dune",
+          "href": "/collections/serax-dune"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-rudolph",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-rudolph",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Rudolph",
+          "href": "/collections/serax-rudolph"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-august",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-august",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — August",
+          "href": "/collections/serax-august"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-sofisticato",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-sofisticato",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Sofisticato",
+          "href": "/collections/serax-sofisticato"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-surface",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-surface",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Surface",
+          "href": "/collections/serax-surface"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-pure",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-pure",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Pure",
+          "href": "/collections/serax-pure"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-fck",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-fck",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — FCK",
+          "href": "/collections/serax-fck"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-zuma",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-zuma",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Zuma",
+          "href": "/collections/serax-zuma"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-the-josephine-collection",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-the-josephine-collection",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — The Josephine Collection",
+          "href": "/collections/serax-the-josephine-collection"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-pottery",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-pottery",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Pottery",
+          "href": "/collections/serax-pottery"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-out-of-lines",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-out-of-lines",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Out of Lines",
+          "href": "/collections/serax-out-of-lines"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-passe-partout",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-passe-partout",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Passe-partout",
+          "href": "/collections/serax-passe-partout"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-silhouette",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-silhouette",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Silhouette",
+          "href": "/collections/serax-silhouette"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/fermob-1",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Lampe Balad² H.25 cm",
+      "from": "coll:fermob-1",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Fermob",
+          "href": "/collections/fermob-1"
+        },
+        {
+          "label": "Lampe Balad² H.25 cm"
+        }
+      ],
+      "productBrandHref": "/collections/fermob-1?brand=fermob",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-balad-h-25-cm",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/serax-wind-fire-2",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:serax-wind-fire-2",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Serax — Wind & Fire",
+          "href": "/collections/serax-wind-fire-2"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/mobilier-exterieur",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:mobilier-exterieur",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Mobilier d'extérieur",
+          "href": "/collections/mobilier-exterieur"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/promo-4eme-chaise-offerte",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:promo-4eme-chaise-offerte",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Promo : 4ème chaise offerte",
+          "href": "/collections/promo-4eme-chaise-offerte"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/toni",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Bougeoir Toní",
+      "from": "coll:toni",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Toní — Fatboy",
+          "href": "/collections/toni"
+        },
+        {
+          "label": "Bougeoir Toní"
+        }
+      ],
+      "productBrandHref": "/collections/toni?brand=fatboy",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=bougeoir-toni-candle-holder",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/thorvald",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Banc Thorvald SC112",
+      "from": "coll:thorvald",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Thorvald — &Tradition",
+          "href": "/collections/thorvald"
+        },
+        {
+          "label": "Banc Thorvald SC112"
+        }
+      ],
+      "productBrandHref": "/collections/thorvald?brand=tradition",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=banc-lounge-tradition-thorvald-sc112",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/promo-chaises-hay",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:promo-chaises-hay",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Promo été 2026 — Chaises HAY",
+          "href": "/collections/promo-chaises-hay"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/promo-chaises-fermob",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:promo-chaises-fermob",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Promo été 2026 — Chaises Fermob",
+          "href": "/collections/promo-chaises-fermob"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/promo-chaises-vitra",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:promo-chaises-vitra",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Promo été 2026 — Chaises Vitra",
+          "href": "/collections/promo-chaises-vitra"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/promo-chaises-tradition",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:promo-chaises-tradition",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Promo été 2026 — Chaises &Tradition",
+          "href": "/collections/promo-chaises-tradition"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/promo-chaises-fatboy",
+      "kind": "collection-outside-menu",
+      "realProduct": false,
+      "product": null,
+      "from": "coll:promo-chaises-fatboy",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Promo été 2026 — Chaises Fatboy",
+          "href": "/collections/promo-chaises-fatboy"
+        },
+        {
+          "label": "[Produit témoin — pas de fiche SSR disponible]"
+        }
+      ],
+      "productBrandHref": "/produits.html",
+      "ignoredState": [],
+      "ssrFirstLink": null,
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/avolt",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Multiprise Square 2",
+      "from": "coll:avolt",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Avolt",
+          "href": "/collections/avolt"
+        },
+        {
+          "label": "Multiprise Square 2"
+        }
+      ],
+      "productBrandHref": "/collections/avolt?brand=avolt",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=multiprise-square-2",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/compagnie-de-provence",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Savon liquide pour les mains Extra Pur 300 ml",
+      "from": "coll:compagnie-de-provence",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Compagnie de Provence",
+          "href": "/collections/compagnie-de-provence"
+        },
+        {
+          "label": "Savon liquide pour les mains Extra Pur 300 ml"
+        }
+      ],
+      "productBrandHref": "/collections/compagnie-de-provence?brand=compagnie-de-provence",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=savon-mains-300ml-extra-pur",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/carl-hansen-son",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Coussin TK8 100 cm Cuir",
+      "from": "coll:carl-hansen-son",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Carl Hansen & Søn",
+          "href": "/collections/carl-hansen-son"
+        },
+        {
+          "label": "Coussin TK8 100 cm Cuir"
+        }
+      ],
+      "productBrandHref": "/collections/carl-hansen-son?brand=carl-hansen-son",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=coussin-tk8-100-cm-cuir",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/tiptoe",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Lampe de table NOD",
+      "from": "coll:tiptoe",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Tiptoe",
+          "href": "/collections/tiptoe"
+        },
+        {
+          "label": "Lampe de table NOD"
+        }
+      ],
+      "productBrandHref": "/collections/tiptoe?brand=tiptoe",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=lampe-de-table-nod",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/volta-mobiles",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Mobile Himalaya sur pied",
+      "from": "coll:volta-mobiles",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Volta Mobiles",
+          "href": "/collections/volta-mobiles"
+        },
+        {
+          "label": "Mobile Himalaya sur pied"
+        }
+      ],
+      "productBrandHref": "/collections/volta-mobiles?brand=volta-mobiles",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=mobile-sur-pied-himalaya",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    },
+    {
+      "path": "/collections/panton-cubes",
+      "kind": "collection-outside-menu",
+      "realProduct": true,
+      "product": "Figurine Panton Cubes Girafe",
+      "from": "coll:panton-cubes",
+      "trail": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Panton Cubes",
+          "href": "/collections/panton-cubes"
+        },
+        {
+          "label": "Figurine Panton Cubes Girafe"
+        }
+      ],
+      "productBrandHref": "/collections/panton-cubes?brand=vitra",
+      "ignoredState": [],
+      "ssrFirstLink": "/produit.html?handle=figurine-panton-cubes-girafe",
+      "ssrFirstLinkContext": null,
+      "missingParent": false
+    }
+  ],
+  "misclassifiedBrands": [
+    {
+      "name": "Blomus",
+      "path": "/collections/blomus"
+    },
+    {
+      "name": "Ichendorf Milano",
+      "path": "/collections/ichendorf-milano"
+    },
+    {
+      "name": "LIND DNA",
+      "path": "/collections/lind-dna"
+    },
+    {
+      "name": "Relaxound",
+      "path": "/collections/relaxound"
+    },
+    {
+      "name": "Stoff Nagel",
+      "path": "/collections/stoff-nagel"
+    },
+    {
+      "name": "String Furniture",
+      "path": "/collections/string-furniture"
+    },
+    {
+      "name": "Volta Mobiles",
+      "path": "/collections/volta"
+    }
+  ],
+  "templates": [
+    {
+      "path": "v3/404.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/article.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/conditions-generales-de-vente.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/contact.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/designers.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/famille-assises.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/famille.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/index.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/journal.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/marques.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/materiaux.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/mentions-legales.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/nuancier-fermob.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/politique-cookies.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/politique-et-vie-privee.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/produit.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/produits.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/rendez-vous.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/selection.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/studio.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    },
+    {
+      "path": "v3/journal/and-tradition.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/journal/chene-et-le-temps.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/journal/choisir-une-piece.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/journal/comment-choisir-couleur-fermob.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/journal/fermob.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/journal/recevoir-dehors.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "v3/journal/tissu-qui-se-patine.html",
+      "breadcrumbPlaceholder": true,
+      "breadcrumbHelper": true
+    },
+    {
+      "path": "templates/family-page.html",
+      "breadcrumbPlaceholder": false,
+      "breadcrumbHelper": false
+    }
+  ]
+}
