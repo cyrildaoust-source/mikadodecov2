@@ -144,7 +144,7 @@ export function productTrail(product, url, nav) {
   if (source && source !== '/selection.html') {
     const listing = new URL(source, ORIGIN);
     // Un ancien lien combinant une autre marque ne doit pas afficher une fausse appartenance.
-    if (listing.searchParams.has('brand') && listing.searchParams.get('brand') !== navigationSlug(product.brand)) listing.searchParams.delete('brand');
+    if (listing.searchParams.has('brand') && !listing.searchParams.get('brand').split(',').includes(navigationSlug(product.brand))) listing.searchParams.delete('brand');
     const handle = listing.pathname.match(/^\/collections\/([a-z0-9-]+)$/)?.[1];
     const entry = nav.collections[handle];
     if (!entry || entry.kind !== 'brand' || (entry.brand || navigationSlug(entry.label)) === navigationSlug(product.brand)) trail = listingTrail(listing, nav, { brandName: product.brand });

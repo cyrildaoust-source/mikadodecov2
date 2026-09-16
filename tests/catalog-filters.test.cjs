@@ -1,6 +1,6 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {buildFilterProduct,filterCatalog,parseFilters,filterParams,colors,measure}=require('../lib/catalog-filters');
+const {buildFilterProduct,filterCatalog,parseFilters,filterParams,colors,measure,slug}=require('../lib/catalog-filters');
 const {readChairCatalog}=require('../lib/chair-catalog');
 const field=(key,value)=>({namespace:'custom',key,type:'single_line_text_field',value});
 function chair(id, variants, extra={}) {
@@ -28,6 +28,11 @@ test('les options secondaires des patins ne deviennent pas des couleurs de chais
   const p=chair(1,[{options:[{name:'Couleur',value:'Blanc'},{name:'Patin',value:'Noir'}]}]);
   assert.equal(filterCatalog([p],{color:'noir'}).total,0);
   assert.deepEqual(colors('Pesto','Fermob'),['vert']);assert.deepEqual(colors('Pesto','Autre marque'),[]);
+});
+test('les marques scandinaves conservent les slugs de la navigation commune',async()=>{
+  const {navigationSlug}=await import('../v3/navigation.mjs');
+  for(const brand of ['Carl Hansen & Søn','&Tradition','Ferm Living','HAY','Møbel Æ'])assert.equal(slug(brand),navigationSlug(brand));
+  assert.equal(filterCatalog([chair(1,[{}],{card:{brand:'Carl Hansen & Søn'}})],{brand:'carl-hansen-son'}).total,1);
 });
 test('absence et faux explicite sont distincts ; les négations ne deviennent pas des caractéristiques positives',()=>{
   const missing=chair(1,[{}]);
