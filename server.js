@@ -580,9 +580,16 @@ app.get('/collections/:handle', async (req, res) => {
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
     if (!col) { if (COLLECTION_ALIASES.has(handle)) { ogCache(res); return sendProduitsTemplate(res); } return send404Shell(res, PRODUITS_TEMPLATE); }
 
+    const brandPhoto = family?.brands?.find(item => item.slug === brand);
+    const legacyBrandPhoto = ({
+      sieges: { 'carl-hansen-son': 'assises/brand-carlhansen', artek: 'assises/brand-artek', vitra: 'assises/brand-vitra', hay: 'assises/brand-hay' },
+      outdoor: { fermob: 'jardin/20', hay: 'jardin/21', fatboy: 'jardin/22', tradition: 'jardin/23' },
+    })[handle]?.[brand];
+    const familyImage = brandPhoto?.image || (legacyBrandPhoto ? '/images/familles/' + legacyBrandPhoto + '.webp' : family?.hero);
     const collectionHero = family ? {
-      brand: false, editorial: true, img: family.hero, srcset: family.hero,
-      alt: family.heroAlt || family.title, style: photoStyle({ position: family.heroPosition, mobilePosition: family.heroMobilePosition }),
+      brand: false, editorial: true, img: familyImage, srcset: familyImage,
+      alt: brandPhoto || legacyBrandPhoto ? family.title + ' · ' + brandName(brand) : family.heroAlt || family.title,
+      style: photoStyle(brandPhoto || (legacyBrandPhoto ? {} : { position: family.heroPosition, mobilePosition: family.heroMobilePosition })),
     } : getCollectionHero(handle);
     const collectionName = col.name || 'Catalogue';
     const name = collectionName + (brand ? ' · ' + brandName(brand) : '');

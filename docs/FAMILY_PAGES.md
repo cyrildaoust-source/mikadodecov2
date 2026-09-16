@@ -22,7 +22,7 @@ Les collections sont chargées par lots de 24, sans plafond global ajouté par c
 
 ## Parcours famille → marque
 
-Les 28 cartes de marques des sept familles pointent vers `/collections/<famille>?brand=<marque>` : Tables → Artek affiche uniquement les tables Artek ; Luminaires → Artek affiche uniquement les luminaires Artek. La photo reste celle de la famille. Le titre, le fil d’Ariane avec retour vers la famille, les métadonnées et les produits rendus côté serveur conservent ce contexte. Retirer la marque ramène à la page famille.
+Les 28 cartes de marques des sept familles pointent vers `/collections/<famille>?brand=<marque>` : Tables → Artek affiche uniquement les tables Artek ; Luminaires → Artek affiche uniquement les luminaires Artek. La photo reprend la carte de cette marque dans la famille lorsque celle-ci est disponible. Le titre, le fil d’Ariane avec retour vers la famille, les métadonnées et les produits rendus côté serveur conservent ce contexte. Retirer la marque ramène à la page famille.
 
 `lib/collection-brand.js` intersecte la collection avec la marque après les règles de classement, en remplissant les lots à travers les curseurs. Le résultat ne dépend pas de l’activation d’un filtre Shopify Search & Discovery. Une marque absente donne une sélection vide ; une panne conserve le contexte et n’est pas mise en cache. Les paramètres `brand` et `tag` sont transmis à chaque lot. Le changement de marque recharge sa sélection complète, sans filtrer uniquement les produits de la marque précédente.
 
