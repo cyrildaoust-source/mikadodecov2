@@ -111,7 +111,10 @@ test('Mobilier renders the family composition with real photos and one complete 
       const { response, html } = await page(route);
       const documentHtml = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
       assert.equal(response.status, 200);
-      assert.match(html, /<main id="contenu" class="fam" data-catalogue-landing>/);
+      assert.match(html, /<main id="contenu" class="fam" data-catalogue-landing[ >]/);
+      assert.equal(documentHtml.includes('data-catalogue-continuation'), route.includes('page=2'), 'continuation layout is present in the server HTML');
+      assert.match(documentHtml, /<div data-catalogue-families>/);
+      if (route.includes('page=2')) assert.match(documentHtml, /class="ph-img editorial-photo"[^>]*loading="lazy"/);
       assert.equal((documentHtml.match(/<h1\b/g) || []).length, 1);
       assert.match(html, /data-plp-title data-context>Mobilier<\/h1>/);
       assert.match(html, /class="fam-hero__btn" href="#grille"/);

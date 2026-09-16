@@ -32,3 +32,11 @@ export function sortCatalog(products, sort) {
   else if (sort === 'az') list.sort((a, b) => String(a.name).localeCompare(String(b.name), 'fr'));
   return list;
 }
+
+// Un lot partiel ne permet ni d'annoncer le total ni de borner la page demandée.
+export function catalogPagination(itemCount, { page = 1, pageSize = 36, loading = false, incomplete = false } = {}) {
+  const requested = Math.max(1, Number.parseInt(page, 10) || 1);
+  if (loading || incomplete) return { page: requested, totalPages: null, status: loading ? 'loading' : 'error' };
+  const totalPages = Math.max(1, Math.ceil(itemCount / pageSize));
+  return { page: Math.min(requested, totalPages), totalPages, status: 'ready' };
+}

@@ -732,6 +732,7 @@ app.get('/produits.html', async (req, res) => {
       html = renderCatalogLanding(html, {
         iconItems, iconCards: iconItems.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''),
         discoveryHidden: Boolean(req.query.cats || req.query.tag || Number(req.query.page) > 1),
+        continuation: Number.parseInt(req.query.page, 10) > 1,
       });
       html = renderWithOg(html, {
         title: 'Mobilier & objets de design · Mikado Deco', description: catalogLanding.description,

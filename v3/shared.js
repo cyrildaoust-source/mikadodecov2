@@ -1018,10 +1018,11 @@ function bindChrome(transparent) {
   if (!transparent) { chrome.classList.add("chrome--solid"); reanim(); return; }
   const hero = document.querySelector(".hero, .subhero, .rdv-hero, .fam-hero");
   if (!hero) { chrome.classList.add("chrome--solid"); reanim(); return; }
-  const onScroll = () => chrome.classList.toggle("chrome--solid", window.scrollY > hero.offsetHeight - chrome.offsetHeight - 8);
+  const onScroll = () => chrome.classList.toggle("chrome--solid", !!document.querySelector('[data-catalogue-continuation]') || window.scrollY > hero.offsetHeight - chrome.offsetHeight - 8);
   onScroll();
   reanim();
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("catalogue:layout", onScroll);
 }
 function bindNewsletter() {
   const form = document.querySelector("[data-newsletter]");

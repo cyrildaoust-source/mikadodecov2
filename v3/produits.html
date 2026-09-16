@@ -114,7 +114,7 @@
     .grid-head { scroll-margin-top: 104px; } /* offset nav fixe au scroll-to-grille */
     .plp-countline { margin: 4px 0 2px; }
     .plp-count { font-family: var(--sans-product); font-size: var(--fs-small); color: var(--muted); letter-spacing: .02em; }
-    .plp-pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: clamp(34px, 5vw, 60px); }
+    .plp-pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; min-height: 40px; margin-top: clamp(34px, 5vw, 60px); }
     .plp-pagination[hidden] { display: none; }
     .plp-pagination__numbers { display: flex; align-items: center; gap: 6px; }
     .plp-pagination__mobile { display: none; font-family: var(--sans-product); font-size: var(--fs-small); color: var(--muted); letter-spacing: .04em; padding: 0 6px; }
@@ -196,6 +196,9 @@
         };
       }
       window.__hero = hero;
+      // La photo de Mobilier ne s'affiche pas sur les pages suivantes.
+      var query = new URLSearchParams(location.search);
+      if (!m && !query.get('brand') && !query.get('designer') && !query.get('q') && (!query.get('coll') || query.get('coll') === 'all') && parseInt(query.get('page'), 10) > 1) return;
       var link = document.createElement("link");
       link.rel = "preload";
       link.as = "image";
@@ -388,7 +391,7 @@
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
     import { listingTrail } from '/navigation.mjs';
-    import { walkCatalog, sortCatalog } from '/catalog-pagination.mjs';
+    import { walkCatalog, sortCatalog, catalogPagination } from '/catalog-pagination.mjs';
     const navigation = await loadNavigation();
     const COLL_TITLES = Object.fromEntries(Object.entries(navigation.collections).map(([h, c]) => [h, c.label]));
     const BRAND_HANDLES = new Set(Object.entries(navigation.collections).filter(([, c]) => c.kind === 'brand').map(([h]) => h));
@@ -450,8 +453,8 @@
     // Pagination numérotée : on récupère TOUT le jeu filtré par chunks serveur
     // (PAGE_SIZE = chunk du walk, cursor existant), puis on pagine côté client
     // par tranches de DISPLAY_PAGE_SIZE. L'API Storefront n'expose pas de total ;
-    // ce walk donne le compte exact. Volume actuel : designer/collection = 1
-    // chunk, catalogue ≈463 = 2 chunks (chunks cachés côté serveur).
+    // ce walk donne le compte exact. Les premiers produits restent consultables
+    // pendant le chargement ; les numéros attendent le total définitif.
     const PAGE_SIZE = 250;          // chunk de fetch demandé (le serveur le borne à 100)
     const DISPLAY_PAGE_SIZE = 36;   // produits affichés par page
     let TOTAL_PAGES = 1;            // recalculé à chaque render()
@@ -573,9 +576,13 @@
       const mainList = applySort(all.filter((p) => !popIds.has(p.id)));
       // Pagination client : on borne la page à [1, totalPages] puis on n'affiche
       // que la tranche de 36 — REMPLACE le contenu de la grille (plus d'accumul.).
-      TOTAL_PAGES = Math.max(1, Math.ceil(mainList.length / DISPLAY_PAGE_SIZE));
-      if (!state.loading && !state.incomplete && state.page > TOTAL_PAGES) state.page = TOTAL_PAGES;
-      if (state.page < 1) state.page = 1;
+      const pagination = catalogPagination(mainList.length, { ...state, pageSize: DISPLAY_PAGE_SIZE });
+      TOTAL_PAGES = pagination.totalPages;
+      state.page = pagination.page;
+      if (catalogueLanding && catalogueLanding.hasAttribute('data-catalogue-continuation') !== (state.page > 1)) {
+        catalogueLanding.toggleAttribute('data-catalogue-continuation', state.page > 1);
+        window.dispatchEvent(new Event('catalogue:layout'));
+      }
       const discovery = catalogueLanding?.querySelector('[data-catalogue-discovery]');
       if (discovery) {
         discovery.hidden = Boolean(state.cats.length || state.tag || state.page > 1);
@@ -599,7 +606,7 @@
         grid.innerHTML = pageSlice.length ? pageSlice.map(p => productCard(p, buildURL())).join("") : emptyMsg;
         grid.dataset.key = gridKey;
       }
-      renderPagination(TOTAL_PAGES);
+      renderPagination(pagination);
       // Designer page: the grid title names the créateur ("Les pièces de …").
       // An introuvable slug (name === null) leaves it blank — the hero already
       // says "Designer introuvable".
@@ -672,11 +679,20 @@
       out.push(total);
       return out;
     }
-    function renderPagination(totalPages) {
+    function renderPagination({ totalPages, status, page: cur }) {
       if (!paginationEl) return;
+      const key = `${status}:${cur}:${totalPages}`;
+      if (paginationEl.dataset.key === key) return;
+      paginationEl.dataset.key = key;
+      if (status !== 'ready') {
+        paginationEl.hidden = false;
+        paginationEl.innerHTML = status === 'loading'
+          ? '<span class="plp-count" role="status">Chargement des pages…</span>'
+          : '<span class="plp-count" role="status">Pages indisponibles.</span><button class="plp-page" type="button" data-retry-catalog>Réessayer</button>';
+        return;
+      }
       if (totalPages <= 1) { paginationEl.hidden = true; paginationEl.innerHTML = ""; return; }
       paginationEl.hidden = false;
-      const cur = state.page;
       const prevOff = cur <= 1, nextOff = cur >= totalPages;
       const numbers = pageItems(cur, totalPages).map((it) =>
         it === "…"
@@ -692,9 +708,10 @@
     // Navigation client-side : aucune requête réseau (slice de ALL déjà chargé).
     function scrollToGrid() {
       const head = document.querySelector(".grid-head");
-      if (head) head.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (head) head.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? "instant" : "smooth", block: "start" });
     }
     function goToPage(n) {
+      if (state.loading || state.incomplete) return;
       const target = Math.max(1, Math.min(n, TOTAL_PAGES));
       if (target === state.page) return;
       state.page = target;
@@ -878,6 +895,7 @@
       return walkCatalog(fetchPage, onChunk, new URLSearchParams(location.search).get('cursor'), () => generation === walkGen);
     }
     function renderLoadStatus() {
+      if (state.loading || state.incomplete) renderPagination(catalogPagination(0, state));
       if (!catalogLoadingEl) return;
       catalogLoadingEl.hidden = !state.incomplete && !state.loading;
       catalogLoadingEl.innerHTML = state.incomplete
@@ -900,8 +918,7 @@
         }
         sortSel.value = state.sort;
 
-        // Skeleton dans la grille pendant le walk multi-chunks (le catalogue ≈463
-        // se charge en ~5 requêtes serveur, bornées à 100) → feedback de chargement.
+        // Squelette ou cartes SSR pendant le chargement progressif.
         state.loading = true; state.incomplete = false; renderLoadStatus();   // compteur masqué pendant le walk (pas d'incrément visible)
         // Si la grille est pré-rendue côté serveur (data-ssr : liens produit crawlables),
         // on la GARDE comme état de chargement au lieu du squelette → pas de flash
@@ -996,6 +1013,7 @@
     // Navigation pagination (délégation) + bouton retour (popstate).
     if (paginationEl) {
       paginationEl.addEventListener("click", (e) => {
+        if (e.target.closest('[data-retry-catalog]')) { loadInitial(); return; }
         const btn = e.target.closest("button[data-page]");
         if (!btn || btn.disabled) return;
         const n = parseInt(btn.getAttribute("data-page"), 10);
@@ -1017,7 +1035,7 @@
         return;
       }
       // Seule la PAGE a changé → re-slice instantané de ALL, aucune requête : on
-      // reste sur la page designer/collection (hero + bio intacts).
+      // conserve le contexte et rétablit la composition de la page demandée.
       state.sort = ["pop", "asc", "desc", "az"].includes(p.get("sort")) ? p.get("sort") : "pop";
       sortSel.value = state.sort;
       state.page = Math.max(1, parseInt(p.get("page"), 10) || 1);
@@ -1135,6 +1153,8 @@
       var sync = function () {
         var h = Math.round(chrome.getBoundingClientRect().height);
         if (h) bar.style.top = h + 'px';
+        var landing = document.querySelector('[data-catalogue-landing]');
+        if (h && landing) landing.style.setProperty('--plp-chrome-height', h + 'px');
         // Le titre reste visible après le CTA, la pagination et un retour PDP,
         // y compris lorsque la barre de filtres occupe plusieurs lignes.
         var head = document.querySelector('.grid-head');

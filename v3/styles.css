@@ -1619,6 +1619,14 @@ body.pdplb-locked { overflow: hidden; }
     .fam:is([data-family], [data-catalogue-landing]) .fam-hero{height:auto;min-height:clamp(320px,44vw,480px);}
     .fam:is([data-family], [data-catalogue-landing]) .fam-hero__in{padding-top:140px;}
     .catalogue-products{padding-top:24px;}
+    /* Mobilier : la découverte appartient à la première page. Le titre et le
+       fil d'Ariane restent disponibles sur les pages de résultats suivantes. */
+    [data-catalogue-continuation]{padding-top:var(--plp-chrome-height,var(--nav-h));}
+    [data-catalogue-continuation] :is([data-catalogue-families],[data-catalogue-discovery]),
+    [data-catalogue-continuation] .fam-hero :is(.ph,.fam-hero__scrim,.fam-hero__eyebrow,.fam-hero__desc,.fam-hero__btn){display:none;}
+    .fam[data-catalogue-continuation] .fam-hero{min-height:0;height:auto;}
+    .fam[data-catalogue-continuation] .fam-hero__in{padding-block:28px 8px;color:var(--ink);}
+    [data-catalogue-continuation] .fam-hero__title{font-size:var(--fs-h2);margin:0;}
     /* Même grille et mêmes gouttières que l'accueil. Les cinq assises remplissent
        la largeur disponible sur grand écran ; le rail défile sur écran étroit. */
     @media(min-width:1200px){.fam .home-rail--fit{grid-auto-columns:minmax(0,1fr);}}
