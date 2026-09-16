@@ -2037,10 +2037,10 @@ async function getPromotionsProducts(first, after) {
   };
 }
 const collectionProductsFor = (handle, first, after, tag, brand) => {
-  const fetchPage = (size, cursor) => handle === 'promotions'
-    ? getPromotionsProducts(size, cursor) : getCollectionProducts(handle, size, cursor, tag);
+  const fetchPage = (size, cursor, source = handle) => source === 'promotions'
+    ? getPromotionsProducts(size, cursor) : getCollectionProducts(source, size, cursor, tag);
   const slug = typeof brand === 'string' ? brand.trim().toLowerCase() : '';
-  return slug ? brandCollectionPage({ first, after, brand: slug }, fetchPage) : fetchPage(first, after);
+  return slug ? brandCollectionPage({ handle, first, after, brand: slug, tag: tag || '' }, fetchPage) : fetchPage(first, after);
 };
 
 app.get('/api/collection/:handle/products', async (req, res) => {

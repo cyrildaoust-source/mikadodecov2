@@ -40,7 +40,7 @@ before(async () => {
     requests.push(variables);
     if (variables.after === 'unavailable') return new Response('Unavailable', { status: 503 });
     if (variables.after === 'missing') return Response.json({ data: { collection: null } });
-    const isTables = variables.handle === 'tables';
+    const isTables = ['tables', 'tables-de-salle-a-manger', 'tables-de-cafe', 'tables-basses-et-tables-dappoint'].includes(variables.handle);
     const start = variables.after?.startsWith('edge:') ? Number(variables.after.slice(5)) + 1 : 1;
     const ids = variables.after === 'empty' ? [] : variables.after && !variables.after.startsWith('edge:') ? [25, 26] : Array.from({ length: Math.min(variables.first, isTables ? 31 - start : variables.first) }, (_, i) => start + i);
     const hasNextPage = isTables ? ids.at(-1) < 30 && (!variables.after || variables.after.startsWith('edge:')) : !variables.after;
@@ -191,6 +191,31 @@ test('brand intersection never skips matching products and rejects broken contin
   } while (after);
   assert.deepEqual(found, products.filter(item => item.brand === 'Artek').map(item => item.handle));
   await assert.rejects(brandCollectionPage({ first: 2, brand: 'artek' }, async () => ({ collection: {}, items: [], pageInfo: { hasNextPage: true, endCursor: 'stuck' } })), /did not advance/);
+});
+
+test('family brand selections include child-only products once across every cursor', async () => {
+  const { brandCollectionPage } = require('../lib/collection-brand');
+  const shared = { handle: 'shared', brand: 'HAY', collections: ['luminaires', 'lampes-de-table'] };
+  const childOnly = { handle: 'child', brand: 'HAY', collections: ['lampes-de-table', 'lampes-de-bureau'] };
+  const sourceItems = {
+    luminaires: [shared], 'lampes-de-table': [shared, childOnly], 'lampes-de-bureau': [childOnly],
+    lampadaires: [{ handle: 'floor', brand: 'HAY', collections: ['lampadaires'] }],
+  };
+  const fetchPage = async (first, cursor, source) => {
+    const list = sourceItems[source] || [];
+    const start = Number(cursor || 0), end = Math.min(list.length, start + first);
+    return { collection: { handle: source, title: source }, items: list.slice(start, end), pageInfo: { hasNextPage: end < list.length, endCursor: String(end) } };
+  };
+  let after = null, found = [];
+  do {
+    const result = await brandCollectionPage({ handle: 'luminaires', first: 1, after, brand: 'hay' }, fetchPage);
+    assert.equal(result.collection.handle, 'luminaires');
+    assert.ok(result.items.every(item => item.collections.includes('luminaires')));
+    found.push(...result.items.map(item => item.handle));
+    after = result.pageInfo.endCursor;
+    if (after) await assert.rejects(brandCollectionPage({ handle: 'luminaires', first: 1, after, brand: 'artek' }, fetchPage), /Invalid family brand cursor/);
+  } while (after);
+  assert.deepEqual(found, ['shared', 'child', 'floor']);
 });
 
 test('opaque cursor is encoded, sent upstream and final page remains accessible without JS', async () => {
