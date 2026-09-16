@@ -24,3 +24,11 @@ export async function walkCatalog(fetchPage, onChunk, start = null, isCurrent = 
     return { cancelled: true };
   } catch (error) { return { items, collection, complete: false, error }; }
 }
+
+export function sortCatalog(products, sort) {
+  const list = products.slice(), price = p => p.priceMin ?? p.price ?? 0;
+  if (sort === 'asc') list.sort((a, b) => price(a) - price(b));
+  else if (sort === 'desc') list.sort((a, b) => price(b) - price(a));
+  else if (sort === 'az') list.sort((a, b) => String(a.name).localeCompare(String(b.name), 'fr'));
+  return list;
+}

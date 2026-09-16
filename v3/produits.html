@@ -372,7 +372,7 @@
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
     import { listingTrail } from '/navigation.mjs';
-    import { walkCatalog } from '/catalog-pagination.mjs';
+    import { walkCatalog, sortCatalog } from '/catalog-pagination.mjs';
     const navigation = await loadNavigation();
     const COLL_TITLES = Object.fromEntries(Object.entries(navigation.collections).map(([h, c]) => [h, c.label]));
     const BRAND_HANDLES = new Set(Object.entries(navigation.collections).filter(([, c]) => c.kind === 'brand').map(([h]) => h));
@@ -499,14 +499,7 @@
       if (state.tag) list = list.filter((p) => Array.isArray(p.tags) && p.tags.includes(state.tag));
       return list;
     }
-    function applySort(list) {
-      const l = list.slice();
-      if (state.sort === "asc") l.sort((a, b) => (a.price || 0) - (b.price || 0));
-      else if (state.sort === "desc") l.sort((a, b) => (b.price || 0) - (a.price || 0));
-      else if (state.sort === "az") l.sort((a, b) => String(a.name).localeCompare(String(b.name)));
-      // "pop" (défaut) : on garde l'ordre best-selling renvoyé par le serveur → aucun re-tri client.
-      return l;
-    }
+    const applySort = list => sortCatalog(list, state.sort);
     // Construit l'URL reflétant l'état actif. Préserve TOUS les params de
     // désignation (designer, coll/path, cats, brand, tag) + la page (?page=N,
     // retirée à la page 1 → URL propre). page=1 ⇒ pas de param (canonical OK).

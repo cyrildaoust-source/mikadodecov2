@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createNavigation, selectionURL, sourceSelection, productHref, listingTrail, productTrail, collectionTrail, breadcrumbHTML, breadcrumbData, productBrandDestination } from '../v3/navigation.mjs';
-import { walkCatalog } from '../v3/catalog-pagination.mjs';
+import { walkCatalog, sortCatalog } from '../v3/catalog-pagination.mjs';
 const read = path => JSON.parse(fs.readFileSync(new URL(path, import.meta.url)));
 const nav = createNavigation(read('../v3/navigation-data.json'), read('../v3/mega-menu-brands.json').brands, read('../v3/designers-data.json').designers);
 const url = path => new URL(path, 'https://www.mikadodeco.be');
@@ -75,4 +75,11 @@ test('pagination goes beyond the old 25-page ceiling, deduplicates and keeps err
  let n=0;
  const failed=await walkCatalog(async ()=>{if(n++)throw Error('offline');return {items:[{id:1,image:'x'}],pageInfo:{hasNextPage:true,endCursor:'2'}}});
  assert.equal(failed.items.length,1);assert.equal(failed.complete,false);
+});
+
+test('price sort follows the displayed starting price, including multi-variant products', () => {
+ const products=[{name:'A',price:400,priceMin:316},{name:'B',price:319},{name:'C',price:315}];
+ assert.deepEqual(sortCatalog(products,'asc').map(p=>p.name),['C','A','B']);
+ assert.deepEqual(sortCatalog(products,'desc').map(p=>p.name),['B','A','C']);
+ assert.equal(products[0].name,'A');
 });
