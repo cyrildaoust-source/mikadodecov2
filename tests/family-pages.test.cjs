@@ -9,6 +9,7 @@ const requests = [];
 const productRequests = [];
 let server, base;
 let vendorsUnavailable = false;
+let allowCatalogueQuery = false;
 const nextCursor = 'opaque+/=cursor';
 const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Carl Hansen & Søn', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Muuto', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
 const brandSlug = name => name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -34,7 +35,8 @@ before(async () => {
     if (/query GetVendors\(/.test(query)) return vendorsUnavailable ? new Response('Unavailable', { status: 503 }) : Response.json({ data: { products: { edges: activeNames.map(vendor => ({ node: { vendor } })), pageInfo: { hasNextPage: false, endCursor: null } } } });
     if (/query GetProducts\(/.test(query)) {
       const name = variables.query?.match(/vendor:"([^"]+)"/)?.[1];
-      assert.ok(name, 'A brand request must never become an unfiltered catalogue query');
+      assert.ok(name || allowCatalogueQuery, 'A brand request must never become an unfiltered catalogue query');
+      if (!name) return Response.json({ data: { products: { edges: Array.from({ length: 24 }, (_, i) => ({ node: product(i + 1) })), pageInfo: { hasNextPage: true, endCursor: nextCursor } } } });
       return Response.json({ data: { products: { edges: [{ node: { ...product(1), vendor: name } }], pageInfo: { hasNextPage: false, endCursor: null } } } });
     }
     if (/query Search\(/.test(query)) {
@@ -80,6 +82,36 @@ const page = async suffix => {
   const response = await realFetch(base + suffix, { headers: { Accept: 'text/html' } });
   return { response, html: await response.text() };
 };
+
+test('Mobilier renders the family composition with real photos and one complete product grid', async () => {
+  const { landing } = require('../lib/catalog-landing');
+  allowCatalogueQuery = true;
+  try {
+    for (const route of ['/produits.html', '/produits.html?cats=chaises', '/produits.html?sort=asc&page=2']) {
+      const { response, html } = await page(route);
+      const documentHtml = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
+      assert.equal(response.status, 200);
+      assert.match(html, /<main id="contenu" class="fam" data-catalogue-landing>/);
+      assert.equal((documentHtml.match(/<h1\b/g) || []).length, 1);
+      assert.match(html, /data-plp-title data-context>Mobilier<\/h1>/);
+      assert.match(html, /class="fam-hero__btn" href="#grille"/);
+      assert.match(html, /class="ph-img editorial-photo" src=/, 'hero is crawlable without JavaScript');
+      assert.ok(html.includes(landing.hero.image.replaceAll('&', '&amp;')));
+      assert.equal((html.match(/class="home-rc"/g) || []).length, 7);
+      for (const category of landing.categories) assert.ok(html.includes(`class="home-rc" href="/collections/${category.handle}"`));
+      assert.doesNotMatch(html, /<section[^>]*data-pop-section|<h2[^>]*>Les plus populaires/);
+      assert.match(html, /data-cat-trigger/);
+      assert.match(html, /data-pagination/);
+      assert.match(html, /BreadcrumbList/);
+      const cardCount = (documentHtml.match(/class="pcard"/g) || []).length;
+      assert.equal(cardCount, route.includes('page=2') ? 0 : 24, 'requested page is not replaced by page 1 during hydration');
+    }
+    const searchPage = await page('/produits.html?q=lampe');
+    assert.doesNotMatch(searchPage.html, /<main[^>]*data-catalogue-landing/);
+  } finally {
+    allowCatalogueQuery = false;
+  }
+});
 
 test('all five family routes render 24 crawlable products, navigation and metadata', async () => {
   const expected = { tables: 4, luminaires: 6, decoration: 6, rangement: 5, accessoires: 5 };
@@ -169,6 +201,7 @@ test('all active brands filter the generic catalogue from the first HTML respons
   for (const name of activeNames) {
     const slug = brandSlug(name);
     const { html } = await page('/produits.html?brand=' + slug);
+    assert.doesNotMatch(html, /<main[^>]*data-catalogue-landing/, 'brand views keep their own header');
     const context = JSON.parse(html.match(/id="collection-context-initial">(.*?)<\/script>/s)[1]);
     assert.equal(context.brand.name, name);
     assert.equal(context.brand.slug, slug);

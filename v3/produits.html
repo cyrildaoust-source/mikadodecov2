@@ -368,6 +368,11 @@
 
   <script type="module">
     import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, loadNavigation, paintBreadcrumb, restoreSelectionPosition } from "/shared.js";
+    import { bindFamilyRails } from "/family-rail.js";
+    const catalogueLanding = document.querySelector('[data-catalogue-landing]');
+    const landingTitle = catalogueLanding?.querySelector('[data-plp-title]').textContent;
+    const landingDescription = catalogueLanding?.querySelector('[data-plp-sub]').textContent;
+    if (catalogueLanding) bindFamilyRails(catalogueLanding);
     // initShell is called below — the active nav entry depends on the route
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
@@ -457,7 +462,7 @@
     const activeNav = designerSlug
       ? "Designers"
       : ((params.get("brand") && !collFromPath) || BRAND_HANDLES.has(collFromPath)) ? "Marques" : "Mobilier";
-    initShell({ active: activeNav, transparentNav: !window.__hero?.editorial });
+    initShell({ active: activeNav, transparentNav: !!catalogueLanding || !window.__hero?.editorial });
 
     // Catégories (36, alphabétique) — handle + libellé pour le panneau multi-
     // sélection. Le filtrage est SERVEUR (?cats=<handles> → clauses Shopify dans
@@ -540,8 +545,8 @@
       // designer's pieces, so a "most popular" split would only fragment it.
       // Pas de bande « populaires » quand une catégorie est filtrée → grille
       // nette (façon Vitra). Sinon, top 4 du catalogue comme avant.
-      const showPop = all.length > 4 && !state.designer && !state.cats.length && !state.brand && !state.coll && !state.tag && !state.q && state.sort === "pop";
-      popSection.style.display = showPop ? "" : "none";
+      const showPop = !catalogueLanding && all.length > 4 && !state.designer && !state.cats.length && !state.brand && !state.coll && !state.tag && !state.q && state.sort === "pop";
+      if (popSection) popSection.style.display = showPop ? "" : "none";
       const pop = showPop ? all.slice(0, 4) : [];   // les 4 premiers de `all` = top ventes (serveur best-selling)
       if (showPop) {
         const popKey = pop.map((p) => p.id).join(",") + buildURL();
@@ -584,7 +589,7 @@
       // says "Designer introuvable".
       gridTitle.textContent = state.designer
         ? (state.designer.name ? `Les pièces de ${state.designer.name}` : "")
-        : (showPop ? "Tout le catalogue" : "Le catalogue");
+        : ((showPop || catalogueLanding) ? "Tout le catalogue" : "Le catalogue");
 
 
       // Header + filterbar adapt to the active filter:
@@ -624,8 +629,8 @@
         titleEl.textContent = COLL_TITLES[state.coll] || "Le catalogue";
         subEl.textContent = "";
       } else {
-        titleEl.textContent = "Le catalogue";
-        subEl.textContent = "Mobilier de design, choisi pièce par pièce.";
+        titleEl.textContent = landingTitle || "Le catalogue";
+        subEl.textContent = landingDescription || "Mobilier de design, choisi pièce par pièce.";
       }
       if (state.coll && state.brand) gridTitle.textContent = titleEl.textContent;
       paintBreadcrumb(listingTrail(new URL(buildURL(), location.origin), navigation, { title: COLL_TITLES[state.coll] || coll?.name || titleEl.textContent, brandName }));
@@ -1114,11 +1119,21 @@
       var sync = function () {
         var h = Math.round(chrome.getBoundingClientRect().height);
         if (h) bar.style.top = h + 'px';
+        // Le titre reste visible après le CTA, la pagination et un retour PDP,
+        // y compris lorsque la barre de filtres occupe plusieurs lignes.
+        var head = document.querySelector('.grid-head');
+        var stickyHeight = getComputedStyle(bar).position === 'sticky' ? bar.getBoundingClientRect().height : 0;
+        if (head) head.style.scrollMarginTop = Math.ceil(h + stickyHeight + 20) + 'px';
       };
       sync();
       requestAnimationFrame(sync);
       addEventListener('load', sync);
       addEventListener('resize', sync, { passive: true });
+      if ('ResizeObserver' in window) {
+        var observer = new ResizeObserver(sync);
+        observer.observe(chrome);
+        observer.observe(bar);
+      }
     })();
   </script>
 </body>

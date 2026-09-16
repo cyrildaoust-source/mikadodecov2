@@ -20,6 +20,14 @@ Les cinq nouvelles pages présentent leurs inspirations sur une seule rangée de
 
 Les collections sont chargées par lots de 24, sans plafond global ajouté par ces pages. Le premier lot est rendu côté serveur, avec des liens produits et une pagination qui fonctionne sans JavaScript. « Voir plus de produits » ajoute ensuite les lots dans la même grille. Une panne conserve la navigation et offre une nouvelle tentative ; elle n’est pas mise en cache comme une page de produits normale.
 
+## Entrée Mobilier
+
+Le catalogue général (`/produits.html`) reprend depuis le 16 septembre la composition des familles : bandeau photographique pleine largeur, fil d’Ariane, sept cartes de catégories puis une seule grille de produits avec ses filtres, son tri et sa pagination. La rubrique séparée « Les plus populaires » est retirée de cette entrée ; ses produits rejoignent la grille complète. Les cartes et le défilement réutilisent les composants communs, sans nouvelles flèches ni barre grise.
+
+`data/catalog-landing.json` contient la photographie de galerie du canapé Vita (source de 2560 × 1920 px), son cadrage et les sept photos de catégories avec leur provenance. `lib/catalog-landing.js` compose cette entrée à partir du modèle catalogue existant. Le bandeau est rendu côté serveur et utilise les mêmes sources responsive pour l’image visible et son chargement prioritaire. Les vues filtrées par catégorie, le tri et les pages suivantes gardent cette composition au rechargement. Les vues marque, recherche, créateur et sous-catégorie conservent leurs propres en-têtes. Les liens produits et le retour à la sélection suivent les règles de navigation communes.
+
+Recette du 16 septembre : preview contrôlée à 1626 px puis à 390 px de large ; sept images chargées, rail à la souris et au clavier, accès au catalogue sans titre caché, filtre Chaises, tri par prix et retour depuis la fiche Dapple vers la page 2 vérifiés. Le menu reconnaît désormais les bandeaux `.fam-hero` ; l’ancre de la grille tient compte de la hauteur réelle du menu et des filtres. Les 44 tests des quatre suites passent.
+
 ## Parcours famille → marque
 
 Les 28 cartes de marques des sept familles pointent vers `/collections/<famille>?brand=<marque>` : Tables → Artek affiche uniquement les tables Artek ; Luminaires → Artek affiche uniquement les luminaires Artek. La photo reprend la carte de cette marque dans la famille lorsque celle-ci est disponible. Le titre, le fil d’Ariane avec retour vers la famille, les métadonnées et les produits rendus côté serveur conservent ce contexte. Retirer la marque ramène à la page famille. Les liens produits portent aussi ce contexte (`from=coll-brand:...`) : le fil d’Ariane de la fiche permet de revenir à la sélection de cette marque dans cette famille.
@@ -38,7 +46,7 @@ Le lien de marque sur chaque fiche produit conserve aussi la catégorie d’arri
 
 `data/collection-heroes.json` définit les 39 bandeaux des sous-catégories du méga menu. Chaque entrée référence une photographie de galerie produit, son `sourceProduct`, un texte alternatif, ses dimensions et son point de cadrage (`position`, `mobilePosition`). Les fichiers identifiés comme générés et les schémas techniques sont exclus de cette sélection. Une photo de produit en situation peut illustrer une catégorie sans modifier son classement Shopify.
 
-`lib/editorial-media.js` aligne le bandeau visible, son chargement prioritaire, sa version sans JavaScript et son image de partage. Les tailles responsive restent limitées à la largeur disponible du fichier ; demander `width=2000` au CDN ne crée pas une source haute résolution. Les pages marques et le catalogue général conservent leurs bandeaux existants.
+`lib/editorial-media.js` aligne le bandeau visible, son chargement prioritaire, sa version sans JavaScript et son image de partage. Les tailles responsive restent limitées à la largeur disponible du fichier ; demander `width=2000` au CDN ne crée pas une source haute résolution. Les pages marques conservent leurs bandeaux existants.
 
 Les cinq familles utilisent des photos distinctes entre leur bandeau, leurs catégories, leurs inspirations et leurs marques. Les photos des catégories validées sont conservées lorsque leur sujet et leur cadrage conviennent. Les paramètres `heroPosition` et `position` règlent le cadrage sans changer les cartes, les boutons ou les proportions communes. Une même gamme peut apparaître dans plusieurs photos et une sous-catégorie peut reprendre une ambiance de sa famille.
 

@@ -11,6 +11,7 @@ const { collectionHero: getCollectionHero, injectCollectionHero } = require('./l
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 const { brandCollectionPage, brandName } = require('./lib/collection-brand');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
+const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = require('./lib/catalog-landing');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -704,6 +705,13 @@ app.get('/produits.html', async (req, res) => {
     const brand = typeof req.query.brand === 'string' ? req.query.brand.trim().toLowerCase() : '';
     const q = typeof req.query.q === 'string' ? req.query.q : '';
     let html = fs.readFileSync(PRODUITS_TEMPLATE, 'utf8');
+    if (isCatalogLanding(req.query)) {
+      html = renderCatalogLanding(html);
+      html = renderWithOg(html, {
+        title: 'Mobilier & objets de design · Mikado Deco', description: catalogLanding.description,
+        image: catalogLanding.hero.image, url: ORIGIN + '/produits.html',
+      });
+    }
     let failed = false, brandItems = [];
     try {
       await Promise.all([_chromeReady, _navigationReady]);

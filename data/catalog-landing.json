@@ -1,0 +1,64 @@
+{
+  "title": "Mobilier",
+  "description": "Assises, tables, luminaires et objets : des pièces choisies pour les lieux que vous aimez.",
+  "hero": {
+    "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/img_003_2143f7fe-dc0f-4d81-8411-968145cbdcf3.jpg?v=1782730220&width=2000&format=webp",
+    "sourceProduct": "canape-nd52-3-vita",
+    "alt": "Canapé Vita en bois et tissu, table basse et lampadaire dans un salon ouvert sur le jardin",
+    "width": 2560,
+    "height": 1920,
+    "position": "50% 70%",
+    "mobilePosition": "65% 65%"
+  },
+  "categories": [
+    {
+      "handle": "sieges",
+      "title": "Assises",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/img_003_17f165e0-66e3-4d42-828e-8952436ef9bb.jpg?v=1782401950&width=800&format=webp",
+      "sourceProduct": "fauteuil-vla76-foyer",
+      "position": "50% 75%"
+    },
+    {
+      "handle": "tables",
+      "title": "Tables",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/6633228_The_Hamlet_v_fullbleed_1440x_0d50bd42-2e9d-4a7d-90eb-0c98779eb7f4.jpg?v=1780350562&width=800&format=webp",
+      "sourceProduct": "table-noguchi-dining",
+      "position": "60% 65%"
+    },
+    {
+      "handle": "luminaires",
+      "title": "Luminaires",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/artek-pendant-light-a331-beehive-white-brass-off-colourful-artwork-interior.jpg?v=1778596086&width=800&format=webp",
+      "sourceProduct": "artek-a331-beehive",
+      "position": "50% 50%"
+    },
+    {
+      "handle": "decoration",
+      "title": "Décoration",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/140-205-387_10_mood_47070b4a-22c8-4f98-87c0-2c27732ab37a.jpg?v=1777831353&width=800&format=webp",
+      "sourceProduct": "vase-steps",
+      "position": "50% 50%"
+    },
+    {
+      "handle": "outdoor",
+      "title": "Jardin",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/RIBAMBELLE_STUDIE_GRIS_ORAGE_MENTHE_ACAPULCO_DOMAINE-SAINT-SAUVEUR_ALBUM2022_TOM_WATSON.jpg?v=1776898361&width=800&format=webp",
+      "sourceProduct": "table-aluminium-ribambelle-3-allonges-xl-149-299-x-100-cm",
+      "position": "50% 50%"
+    },
+    {
+      "handle": "rangement",
+      "title": "Rangement",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/MUUTO-EDITORIAL-Q1-2024-6-HI-res_7.jpg?v=1778925785&width=800&format=webp",
+      "sourceProduct": "etagere-stacked",
+      "position": "50% 50%"
+    },
+    {
+      "handle": "accessoires",
+      "title": "Arts de la table",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/lr-2022_hk_campaign_antwerp_polina-17.jpg?v=1777943671&width=800&format=webp",
+      "sourceProduct": "hkliving-coupelle-rustic-blue-9-set-0",
+      "position": "50% 50%"
+    }
+  ]
+}

@@ -1616,8 +1616,9 @@ body.pdplb-locked { overflow: hidden; }
     .fam-hero__desc{max-width:52ch;font-size:15px;line-height:1.6;opacity:.95;margin:0 0 22px;}
     .fam-hero__btn{display:inline-block;background:var(--paper);color:var(--ink);font-size:13px;letter-spacing:.04em;padding:13px 26px;text-decoration:none;font-weight:500;}
     /* Le contenu peut grandir sur mobile, sous les 116px du menu fixe + 24px d'air. */
-    .fam[data-family] .fam-hero{height:auto;min-height:clamp(320px,44vw,480px);}
-    .fam[data-family] .fam-hero__in{padding-top:140px;}
+    .fam:is([data-family], [data-catalogue-landing]) .fam-hero{height:auto;min-height:clamp(320px,44vw,480px);}
+    .fam:is([data-family], [data-catalogue-landing]) .fam-hero__in{padding-top:140px;}
+    .catalogue-products{padding-top:24px;}
     /* Même grille et mêmes gouttières que l'accueil. Les cinq assises remplissent
        la largeur disponible sur grand écran ; le rail défile sur écran étroit. */
     @media(min-width:1200px){.fam .home-rail--fit{grid-auto-columns:minmax(0,1fr);}}

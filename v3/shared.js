@@ -1016,7 +1016,7 @@ function bindChrome(transparent) {
   const reanim = () => requestAnimationFrame(() =>
     requestAnimationFrame(() => chrome.classList.remove("chrome--noanim")));
   if (!transparent) { chrome.classList.add("chrome--solid"); reanim(); return; }
-  const hero = document.querySelector(".hero, .subhero, .rdv-hero");
+  const hero = document.querySelector(".hero, .subhero, .rdv-hero, .fam-hero");
   if (!hero) { chrome.classList.add("chrome--solid"); reanim(); return; }
   const onScroll = () => chrome.classList.toggle("chrome--solid", window.scrollY > hero.offsetHeight - chrome.offsetHeight - 8);
   onScroll();
