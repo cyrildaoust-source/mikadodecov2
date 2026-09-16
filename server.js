@@ -548,6 +548,10 @@ app.get('/produit.html', async (req, res) => {
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
+  if (COLLECTION_ALIASES.has(handle)) {
+    await _navigationReady;
+    return res.redirect(301, navigation.selectionURL(req.originalUrl) || '/produits.html');
+  }
   const brand = typeof req.query.brand === 'string' ? req.query.brand.trim().toLowerCase() : '';
   // Page famille riche (Jardin/Outdoor…) : sert le template dédié + chrome SSR.
   if (FAMILLES_RICHES[handle] && !brand) {
@@ -603,7 +607,7 @@ app.get('/collections/:handle', async (req, res) => {
     const family = Object.hasOwn(families, handle) ? families[handle] : Object.hasOwn(richFamilies, handle) ? richFamilies[handle] : null;
     const col = family ? { name: family.title, description: family.description } : (await getCollections()).find(c => c.handle === handle);
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
-    if (!col) { if (COLLECTION_ALIASES.has(handle)) { ogCache(res); return sendProduitsTemplate(res); } return send404Shell(res, PRODUITS_TEMPLATE); }
+    if (!col) return send404Shell(res, PRODUITS_TEMPLATE);
 
     const tag = typeof req.query.tag === 'string' ? req.query.tag : null;
     const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : null;
