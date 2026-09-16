@@ -1618,6 +1618,7 @@ body.pdplb-locked { overflow: hidden; }
     /* Le contenu peut grandir sur mobile, sous les 116px du menu fixe + 24px d'air. */
     .fam:is([data-family], [data-catalogue-landing]) .fam-hero{height:auto;min-height:clamp(320px,44vw,480px);}
     .fam:is([data-family], [data-catalogue-landing]) .fam-hero__in{padding-top:140px;}
+    .catalogue-products{padding-top:24px;}
     /* Même grille et mêmes gouttières que l'accueil. Les cinq assises remplissent
        la largeur disponible sur grand écran ; le rail défile sur écran étroit. */
     @media(min-width:1200px){.fam .home-rail--fit{grid-auto-columns:minmax(0,1fr);}}
