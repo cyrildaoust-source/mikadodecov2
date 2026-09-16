@@ -1,0 +1,780 @@
+{
+  "_note": "Hiérarchie de présentation revue le 16 septembre 2026. Ne modifie aucune appartenance Shopify. Les sélections sans parent validé restent sous Catalogue. Les marques du méga menu complètent ce registre à la lecture.",
+  "collections": {
+    "bistro": {
+      "label": "Bistro",
+      "kind": "range",
+      "parent": "fermob"
+    },
+    "luxembourg": {
+      "label": "Luxembourg",
+      "kind": "range",
+      "parent": "fermob"
+    },
+    "1900": {
+      "label": "1900",
+      "kind": "range",
+      "parent": "fermob"
+    },
+    "montmartre": {
+      "label": "Montmartre",
+      "kind": "range",
+      "parent": "fermob"
+    },
+    "70s-ceramics": {
+      "label": "70s Ceramics",
+      "kind": "range",
+      "parent": "hkliving"
+    },
+    "chef-ceramics": {
+      "label": "Chef ceramics",
+      "kind": "range",
+      "parent": "hkliving"
+    },
+    "caractere": {
+      "label": "Caractère",
+      "kind": "selection"
+    },
+    "verner-panton": {
+      "label": "Verner Panton",
+      "kind": "designer"
+    },
+    "palissade": {
+      "label": "Palissade",
+      "kind": "range",
+      "parent": "hay"
+    },
+    "ripple": {
+      "label": "Ripple",
+      "kind": "range",
+      "parent": "ferm-living"
+    },
+    "taika": {
+      "label": "Taika",
+      "kind": "range",
+      "parent": "iittala"
+    },
+    "kastehelmi": {
+      "label": "Kastehelmi",
+      "kind": "range",
+      "parent": "iittala"
+    },
+    "kartio": {
+      "label": "Kartio",
+      "kind": "range",
+      "parent": "iittala"
+    },
+    "essence": {
+      "label": "Essence",
+      "kind": "range",
+      "parent": "iittala"
+    },
+    "zig-zag": {
+      "label": "Zig Zag",
+      "kind": "range",
+      "parent": "pols-potten"
+    },
+    "serviettes-noel": {
+      "label": "Serviettes Noël",
+      "kind": "selection"
+    },
+    "serviettes-amour": {
+      "label": "Serviettes Amour",
+      "kind": "selection"
+    },
+    "serviettes-ete": {
+      "label": "Serviettes Reste",
+      "kind": "selection"
+    },
+    "plisse": {
+      "label": "Plissé",
+      "kind": "range",
+      "parent": "alessi"
+    },
+    "sono": {
+      "label": "Sono",
+      "kind": "range",
+      "parent": "blomus"
+    },
+    "carte-blanche": {
+      "label": "Carte Blanche",
+      "kind": "selection"
+    },
+    "alvar-aalto": {
+      "label": "Alvar Aalto",
+      "kind": "designer"
+    },
+    "arts-de-la-table": {
+      "label": "Arts de la table",
+      "kind": "selection"
+    },
+    "tradition": {
+      "label": "&Tradition",
+      "kind": "brand",
+      "brand": "tradition"
+    },
+    "relaxound": {
+      "label": "Relaxound",
+      "kind": "brand",
+      "brand": "relaxound"
+    },
+    "hkliving": {
+      "label": "HKliving",
+      "kind": "brand",
+      "brand": "hkliving"
+    },
+    "alessi": {
+      "label": "Alessi",
+      "kind": "brand",
+      "brand": "alessi"
+    },
+    "volta": {
+      "label": "Volta Mobiles",
+      "kind": "brand"
+    },
+    "ferm-living": {
+      "label": "Ferm Living",
+      "kind": "brand",
+      "brand": "ferm-living"
+    },
+    "ichendorf-milano": {
+      "label": "Ichendorf Milano",
+      "kind": "brand",
+      "brand": "ichendorf-milano"
+    },
+    "fermob": {
+      "label": "Fermob",
+      "kind": "brand",
+      "brand": "fermob"
+    },
+    "fatboy": {
+      "label": "Fatboy",
+      "kind": "brand",
+      "brand": "fatboy"
+    },
+    "iittala": {
+      "label": "Iittala",
+      "kind": "brand",
+      "brand": "iittala"
+    },
+    "serax": {
+      "label": "Serax",
+      "kind": "brand",
+      "brand": "serax"
+    },
+    "ihr": {
+      "label": "IHR",
+      "kind": "brand",
+      "brand": "ihr"
+    },
+    "vitra": {
+      "label": "Vitra",
+      "kind": "brand",
+      "brand": "vitra"
+    },
+    "hay": {
+      "label": "HAY",
+      "kind": "brand",
+      "brand": "hay"
+    },
+    "mediterraneo": {
+      "label": "Mediterraneo",
+      "kind": "range",
+      "parent": "alessi"
+    },
+    "noel": {
+      "label": "Noël",
+      "kind": "selection"
+    },
+    "artek": {
+      "label": "Artek",
+      "kind": "brand",
+      "brand": "artek"
+    },
+    "jean-prouve": {
+      "label": "Jean Prouvé",
+      "kind": "designer"
+    },
+    "claude-modifs-2026-05-16": {
+      "label": "Claude — Modifs 2026-05-16",
+      "kind": "selection"
+    },
+    "julien-de-smedt": {
+      "label": "Julien De Smedt",
+      "kind": "designer"
+    },
+    "sieges": {
+      "label": "Assises",
+      "kind": "family"
+    },
+    "tables": {
+      "label": "Tables",
+      "kind": "family"
+    },
+    "luminaires": {
+      "label": "Luminaires",
+      "kind": "family"
+    },
+    "outdoor": {
+      "label": "Jardin",
+      "kind": "family"
+    },
+    "decoration": {
+      "label": "Décoration",
+      "kind": "family"
+    },
+    "rangement": {
+      "label": "Rangement",
+      "kind": "family"
+    },
+    "bureau": {
+      "label": "Bureau",
+      "kind": "selection"
+    },
+    "accessoires": {
+      "label": "Arts de la table",
+      "kind": "family"
+    },
+    "muuto": {
+      "label": "Muuto",
+      "kind": "brand",
+      "brand": "muuto"
+    },
+    "nouveautes": {
+      "label": "Nouveautés",
+      "kind": "selection"
+    },
+    "promotions": {
+      "label": "Promotions",
+      "kind": "selection"
+    },
+    "featured": {
+      "label": "Notre sélection",
+      "kind": "selection"
+    },
+    "lind-dna": {
+      "label": "LIND DNA",
+      "kind": "brand",
+      "brand": "lind-dna"
+    },
+    "anglepoise": {
+      "label": "Anglepoise",
+      "kind": "brand",
+      "brand": "anglepoise"
+    },
+    "blomus": {
+      "label": "Blomus",
+      "kind": "brand",
+      "brand": "blomus"
+    },
+    "marimekko": {
+      "label": "Marimekko",
+      "kind": "brand",
+      "brand": "marimekko"
+    },
+    "pols-potten": {
+      "label": "Pols Potten",
+      "kind": "brand",
+      "brand": "pols-potten"
+    },
+    "string-furniture": {
+      "label": "String Furniture",
+      "kind": "brand",
+      "brand": "string-furniture"
+    },
+    "remember": {
+      "label": "Remember",
+      "kind": "brand",
+      "brand": "remember"
+    },
+    "chaises": {
+      "label": "Chaises",
+      "kind": "subcategory",
+      "parent": "sieges"
+    },
+    "fauteuils": {
+      "label": "Fauteuils",
+      "kind": "subcategory",
+      "parent": "sieges"
+    },
+    "canapes": {
+      "label": "Canapés",
+      "kind": "subcategory",
+      "parent": "sieges"
+    },
+    "sieges-de-bureau": {
+      "label": "Sièges de bureau",
+      "kind": "subcategory",
+      "parent": "sieges"
+    },
+    "chaises-longues": {
+      "label": "Chaises longues",
+      "kind": "subcategory",
+      "parent": "sieges"
+    },
+    "tabourets-et-bancs": {
+      "label": "Tabourets et bancs",
+      "kind": "subcategory",
+      "parent": "sieges"
+    },
+    "tables-de-salle-a-manger": {
+      "label": "Tables de salle à manger",
+      "kind": "subcategory",
+      "parent": "tables"
+    },
+    "tables-de-cafe": {
+      "label": "Tables de café",
+      "kind": "subcategory",
+      "parent": "tables"
+    },
+    "tables-basses-et-tables-dappoint": {
+      "label": "Tables basses et tables d'appoint",
+      "kind": "subcategory",
+      "parent": "tables"
+    },
+    "bureaux": {
+      "label": "Bureaux",
+      "kind": "subcategory",
+      "parent": "tables"
+    },
+    "suspensions": {
+      "label": "Suspensions",
+      "kind": "subcategory",
+      "parent": "luminaires"
+    },
+    "lampes-de-table": {
+      "label": "Lampes de table",
+      "kind": "subcategory",
+      "parent": "luminaires"
+    },
+    "lampes-de-bureau": {
+      "label": "Lampes de bureau",
+      "kind": "subcategory",
+      "parent": "luminaires"
+    },
+    "lampadaires": {
+      "label": "Lampadaires",
+      "kind": "subcategory",
+      "parent": "luminaires"
+    },
+    "appliques": {
+      "label": "Appliques",
+      "kind": "subcategory",
+      "parent": "luminaires"
+    },
+    "lampes-nomades": {
+      "label": "Lampes nomades",
+      "kind": "subcategory",
+      "parent": "luminaires"
+    },
+    "etageres-et-bibliotheques": {
+      "label": "Étagères et bibliothèques",
+      "kind": "subcategory",
+      "parent": "rangement"
+    },
+    "commodes-et-buffets": {
+      "label": "Commodes et buffets",
+      "kind": "subcategory",
+      "parent": "rangement"
+    },
+    "paniers-et-corbeilles": {
+      "label": "Paniers et corbeilles",
+      "kind": "subcategory",
+      "parent": "rangement"
+    },
+    "pateres-et-porte-manteaux": {
+      "label": "Patères et porte-manteaux",
+      "kind": "subcategory",
+      "parent": "rangement"
+    },
+    "dessertes-et-chariots": {
+      "label": "Dessertes et chariots",
+      "kind": "subcategory",
+      "parent": "rangement"
+    },
+    "vases": {
+      "label": "Vases",
+      "kind": "subcategory",
+      "parent": "decoration"
+    },
+    "bougeoirs-bougies-photophores": {
+      "label": "Bougeoirs, bougies & photophores",
+      "kind": "subcategory",
+      "parent": "decoration"
+    },
+    "miroirs": {
+      "label": "Miroirs",
+      "kind": "subcategory",
+      "parent": "decoration"
+    },
+    "coussins-plaids-tapis": {
+      "label": "Coussins, plaids & tapis",
+      "kind": "subcategory",
+      "parent": "decoration"
+    },
+    "cache-pots-jardinieres": {
+      "label": "Cache-pots & jardinières",
+      "kind": "subcategory",
+      "parent": "decoration"
+    },
+    "objets-decoratifs-cadres": {
+      "label": "Objets décoratifs & cadres",
+      "kind": "subcategory",
+      "parent": "decoration"
+    },
+    "bains-de-soleil-transats": {
+      "label": "Bains de soleil & transats",
+      "kind": "subcategory",
+      "parent": "outdoor"
+    },
+    "parasols-ombrages": {
+      "label": "Parasols & ombrages",
+      "kind": "subcategory",
+      "parent": "outdoor"
+    },
+    "brasero-barbecue": {
+      "label": "Brasero & barbecue",
+      "kind": "subcategory",
+      "parent": "outdoor"
+    },
+    "accessoires-jardin": {
+      "label": "Accessoires jardin",
+      "kind": "subcategory",
+      "parent": "outdoor"
+    },
+    "vaisselle-assiettes": {
+      "label": "Vaisselle & assiettes",
+      "kind": "subcategory",
+      "parent": "accessoires"
+    },
+    "verres-carafes": {
+      "label": "Verres & carafes",
+      "kind": "subcategory",
+      "parent": "accessoires"
+    },
+    "couverts": {
+      "label": "Couverts",
+      "kind": "subcategory",
+      "parent": "accessoires"
+    },
+    "mugs-tasses-cafe": {
+      "label": "Mugs, tasses & café",
+      "kind": "subcategory",
+      "parent": "accessoires"
+    },
+    "ustensiles-cuisine": {
+      "label": "Ustensiles & cuisine",
+      "kind": "subcategory",
+      "parent": "accessoires"
+    },
+    "charles-ray-eames": {
+      "label": "Charles & Ray Eames",
+      "kind": "designer"
+    },
+    "pierre-paulin": {
+      "label": "Pierre Paulin",
+      "kind": "designer"
+    },
+    "pascal-mourgue": {
+      "label": "Pascal Mourgue",
+      "kind": "designer"
+    },
+    "achille-castiglioni": {
+      "label": "Achille Castiglioni",
+      "kind": "designer"
+    },
+    "hella-jongerius": {
+      "label": "Hella Jongerius",
+      "kind": "designer"
+    },
+    "hans-wegner": {
+      "label": "Hans Wegner",
+      "kind": "designer"
+    },
+    "serax-marie": {
+      "label": "Serax — Marie",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-metal-sculptures": {
+      "label": "Serax — Metal Sculptures",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-la-mere": {
+      "label": "Serax — La Mère",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-urban-jungle": {
+      "label": "Serax — Urban Jungle",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-perfect-imperfection": {
+      "label": "Serax — Perfect Imperfection",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-lighting": {
+      "label": "Serax — Lighting",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-feast": {
+      "label": "Serax — Feast",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-les-objets-mouleversants": {
+      "label": "Serax — Les Objets Mouleversants",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-verde-lanza": {
+      "label": "Serax — Verde Lanza",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-earth": {
+      "label": "Serax — Earth",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-carte-blanche": {
+      "label": "Serax — Carte Blanche",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-sophia": {
+      "label": "Serax — Sophia",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-pawn": {
+      "label": "Serax — Pawn",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-santiago-de-borja": {
+      "label": "Serax — Santiago de Borja",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-bazaar": {
+      "label": "Serax — Bazaar",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-construct": {
+      "label": "Serax — Construct",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-silos": {
+      "label": "Serax — Silos",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-candles": {
+      "label": "Serax — Candles",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-sicily": {
+      "label": "Serax — Sicily",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-midnight-creatures": {
+      "label": "Serax — Midnight Creatures",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-wind-fire": {
+      "label": "Serax — Wind & Fire",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-serving-spring": {
+      "label": "Serax — Serving Spring",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-wind-fire-1": {
+      "label": "Serax — Wind & Fire",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-terres-de-reves": {
+      "label": "Serax — Terres de Rêves",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-dune": {
+      "label": "Serax — Dune",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-rudolph": {
+      "label": "Serax — Rudolph",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-august": {
+      "label": "Serax — August",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-sofisticato": {
+      "label": "Serax — Sofisticato",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-surface": {
+      "label": "Serax — Surface",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-pure": {
+      "label": "Serax — Pure",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-fck": {
+      "label": "Serax — FCK",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-zuma": {
+      "label": "Serax — Zuma",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-the-josephine-collection": {
+      "label": "Serax — The Josephine Collection",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-pottery": {
+      "label": "Serax — Pottery",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-out-of-lines": {
+      "label": "Serax — Out of Lines",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-passe-partout": {
+      "label": "Serax — Passe-partout",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "serax-silhouette": {
+      "label": "Serax — Silhouette",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "fermob-1": {
+      "label": "Fermob",
+      "kind": "brand",
+      "brand": "fermob"
+    },
+    "serax-wind-fire-2": {
+      "label": "Serax — Wind & Fire",
+      "kind": "range",
+      "parent": "serax"
+    },
+    "mobilier-exterieur": {
+      "label": "Mobilier d'extérieur",
+      "kind": "selection"
+    },
+    "promo-4eme-chaise-offerte": {
+      "label": "Promo : 4ème chaise offerte",
+      "kind": "selection"
+    },
+    "toni": {
+      "label": "Toní — Fatboy",
+      "kind": "range",
+      "parent": "fatboy"
+    },
+    "thorvald": {
+      "label": "Thorvald — &Tradition",
+      "kind": "range",
+      "parent": "tradition"
+    },
+    "chaises-outdoor": {
+      "label": "Chaises outdoor",
+      "kind": "subcategory",
+      "parent": "outdoor",
+      "catalogFilter": false
+    },
+    "tables-outdoor": {
+      "label": "Tables outdoor",
+      "kind": "subcategory",
+      "parent": "outdoor",
+      "catalogFilter": false
+    },
+    "bancs-outdoor": {
+      "label": "Bancs outdoor",
+      "kind": "subcategory",
+      "parent": "outdoor",
+      "catalogFilter": false
+    },
+    "stoff-nagel": {
+      "label": "Stoff Nagel",
+      "kind": "brand",
+      "brand": "stoff-nagel"
+    },
+    "promo-chaises-hay": {
+      "label": "Promo été 2026 — Chaises HAY",
+      "kind": "selection"
+    },
+    "promo-chaises-fermob": {
+      "label": "Promo été 2026 — Chaises Fermob",
+      "kind": "selection"
+    },
+    "promo-chaises-vitra": {
+      "label": "Promo été 2026 — Chaises Vitra",
+      "kind": "selection"
+    },
+    "promo-chaises-tradition": {
+      "label": "Promo été 2026 — Chaises &Tradition",
+      "kind": "selection"
+    },
+    "promo-chaises-fatboy": {
+      "label": "Promo été 2026 — Chaises Fatboy",
+      "kind": "selection"
+    },
+    "avolt": {
+      "label": "Avolt",
+      "kind": "brand",
+      "brand": "avolt"
+    },
+    "compagnie-de-provence": {
+      "label": "Compagnie de Provence",
+      "kind": "brand",
+      "brand": "compagnie-de-provence"
+    },
+    "carl-hansen-son": {
+      "label": "Carl Hansen & Søn",
+      "kind": "brand",
+      "brand": "carl-hansen-son"
+    },
+    "tiptoe": {
+      "label": "Tiptoe",
+      "kind": "brand",
+      "brand": "tiptoe"
+    },
+    "volta-mobiles": {
+      "label": "Volta Mobiles",
+      "kind": "brand",
+      "brand": "volta-mobiles"
+    },
+    "panton-cubes": {
+      "label": "Panton Cubes",
+      "kind": "selection"
+    }
+  }
+}

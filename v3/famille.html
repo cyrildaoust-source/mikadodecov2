@@ -42,6 +42,7 @@
         <a class="fam-hero__btn" href="#grille">Voir tous les produits ↓</a>
       </div>
     </section>
+    <div class="wrap" data-breadcrumb></div>
 
     <section class="section wrap">
       <div class="home-railhead"><h2 class="serif">Nos catégories jardin</h2>
@@ -114,7 +115,7 @@
 
   <script type="module">
     import { bindFamilyRails } from "/family-rail.js";
-    import { initShell, productCard } from "/shared.js";
+    import { initShell, productCard, restoreSelectionPosition } from "/shared.js";
     initShell({ active: "Mobilier", transparentNav: true });
     var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -174,10 +175,11 @@
       }
       function goTo(n){
         var t=Math.max(1,Math.min(n,TOTAL)); if(t===page) return;
-        page=t; renderGrid(); renderPag();
+        page=t;
         if(page>1) params.set('page',String(page)); else params.delete('page');
         var qs=params.toString();
         history.pushState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash);
+        renderGrid(); renderPag();
         var head=document.querySelector('#grille .fam-gridhead'); if(head)head.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
         var c=pag&&pag.querySelector('.plp-page.is-current'); if(c)c.focus({preventScroll:true});
       }
@@ -191,13 +193,15 @@
           var cur=first.pi.hasNextPage?first.pi.endCursor:'';
           moreComing=!!cur;
           if(page===1){ renderGrid(); } renderCount(); renderPag();
-          while(cur){ var c=await chunk(cur); ALL.push.apply(ALL,c.items); renderCount(); cur=c.pi.hasNextPage?c.pi.endCursor:''; }
+          var visited=new Set();
+          while(cur){ if(visited.has(cur))throw new Error('Cursor did not advance'); visited.add(cur); var c=await chunk(cur); ALL.push.apply(ALL,c.items); renderCount(); cur=c.pi.hasNextPage?c.pi.endCursor:''; }
           complete=true; TOTAL=Math.max(1,Math.ceil(ALL.length/PAGE)); if(page>TOTAL)page=TOTAL;
-          renderGrid(); renderCount(); renderPag();
+          renderGrid(); renderCount(); renderPag(); restoreSelectionPosition();
         }catch(e){
-          complete=true; TOTAL=Math.max(1,Math.ceil(ALL.length/PAGE));
+          complete=false; TOTAL=Math.max(1,Math.ceil(ALL.length/PAGE));
+          if(cnt)cnt.textContent="Chargement incomplet · réessayez en rechargeant la page";
           if(!ALL.length){ grid.innerHTML='<p class="fam-empty">Impossible de charger les produits pour le moment. Réessayez.</p>'; if(cnt)cnt.textContent=''; }
-          else { renderGrid(); renderCount(); }
+          else { renderGrid(); renderPag(); }
           renderPag();
         }
       })();

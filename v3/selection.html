@@ -70,7 +70,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml, isSaleActive, saleNextTier, SALE, giftOfferHTML, giftReconcile, giftBind } from "/shared.js";
+    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml, isSaleActive, saleNextTier, SALE, giftOfferHTML, giftReconcile, giftBind, productHref } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
     // Free-shipping threshold (Belgium zone). The radio toggle that
@@ -150,10 +150,10 @@
 
         return `
         <div class="sel-item" data-row="${idx}">
-          <img class="sel-item__img" src="${escapeHtml(i.image)}" alt="${escapeHtml(i.name)}" />
+          <a class="navigation-product-link" href="${escapeHtml(productHref(i, "/selection.html", i.variantId))}" aria-label="${escapeHtml(i.name)}"><img class="sel-item__img" src="${escapeHtml(i.image)}" alt="" /></a>
           <div>
             <div class="sel-item__brand">${escapeHtml(i.brand || "")}</div>
-            <div class="sel-item__name">${escapeHtml(i.name || "")}</div>
+            <a class="sel-item__name navigation-product-link" href="${escapeHtml(productHref(i, "/selection.html", i.variantId))}">${escapeHtml(i.name || "")}</a>
             ${promoCodeHTML}
             <div class="sel-item__controls">
               ${i.gift ? `<span class="sel-item__giftchip">Cadeau</span>` : `<div class="qty qty--sm">

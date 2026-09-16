@@ -1,4 +1,4 @@
-import { initShell, productCard } from '/shared.js';
+import { initShell, productCard, syncProductLinks, restoreSelectionPosition } from '/shared.js';
 import { bindFamilyRails } from '/family-rail.js';
 import { ICON_TAGS, isFamilyIcon, uniqueProducts } from '/family-policy.mjs';
 
@@ -28,9 +28,7 @@ function syncMore() {
   if (canLoad) more.href = `/collections/${encodeURIComponent(initial.handle)}?cursor=${encodeURIComponent(pageInfo.endCursor)}#grille`;
 }
 
-if (more) more.addEventListener('click', async event => {
-  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-  event.preventDefault();
+async function loadMore(restoring = false) {
   if (loading) return;
   loading = true;
   more.setAttribute('aria-disabled', 'true');
@@ -49,22 +47,43 @@ if (more) more.addEventListener('click', async event => {
     grid.insertAdjacentHTML('beforeend', products.map(productCard).join(''));
     products.forEach(product => seen.add(product.handle || product.id));
     displayed += products.length;
+    const url = new URL(location.href);
+    url.searchParams.set('shown', String(displayed));
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+    syncProductLinks(root);
     pageInfo = payload.pageInfo;
     count.textContent = `${displayed} produit${displayed > 1 ? 's' : ''} affiché${displayed > 1 ? 's' : ''}`;
     syncMore();
     status.textContent = products.length ? `${products.length} produits supplémentaires affichés.` : 'Tous les produits disponibles sont affichés.';
     // Keep keyboard users in the newly revealed products, including the last batch.
     const firstLink = grid.children[firstIndex]?.querySelector('a');
-    firstLink?.focus({ preventScroll: true });
-    grid.children[firstIndex]?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    if (!restoring) {
+      firstLink?.focus({ preventScroll: true });
+      grid.children[firstIndex]?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    }
+    return true;
   } catch (error) {
     status.textContent = 'Impossible de charger la suite. Réessayez ou ouvrez le lien dans un nouvel onglet.';
+    return false;
   } finally {
     loading = false;
     more.removeAttribute('aria-disabled');
     grid.removeAttribute('aria-busy');
   }
+}
+if (more) more.addEventListener('click', event => {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault(); loadMore();
 });
+(async () => {
+  const wanted = Math.min(100000, Number(new URLSearchParams(location.search).get('shown')) || 0);
+  const cursors = new Set();
+  while (displayed < wanted && pageInfo?.hasNextPage && !cursors.has(pageInfo.endCursor)) {
+    cursors.add(pageInfo.endCursor);
+    if (!await loadMore(true)) break;
+  }
+  restoreSelectionPosition();
+})();
 
 // Curation explicite, par famille. Aucun remplacement automatique par des meilleures ventes.
 (async () => {

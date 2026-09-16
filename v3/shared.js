@@ -5,7 +5,8 @@
    cart (localStorage), and exposes formatting + card helpers.
    ============================================================ */
 
-import { listingContext } from "/brand-navigation.mjs";
+import { listingContext, createNavigation, selectionURL, productHref, breadcrumbHTML, breadcrumbData, listingTrail, returnLinkHTML } from "/navigation.mjs";
+export { breadcrumbHTML, productHref } from "/navigation.mjs";
 import { chromeHTML, footerHTML } from "/chrome-template.js";
 
 export const CART_KEY = "mikado_v3_cart";
@@ -448,23 +449,54 @@ export function loadBrandHandles() {
   }
   return _brandHandles;
 }
-// Fil d'Ariane (breadcrumb). `trail` = [{ label, href? }, …]; the LAST item is
-// the current page (rendered without a link, aria-current). Emits schema.org
-// BreadcrumbList microdata for SEO. Pure string helper: inject the result
-// into a per-page placeholder — it is NOT rendered by
-// initShell, because the crumb belongs between the header and the page H1,
-// a region that lives in per-page markup.
-export function breadcrumbHTML(trail) {
-  if (!Array.isArray(trail) || trail.length === 0) return "";
-  const items = trail.map((c, i) => {
-    const isLast = i === trail.length - 1;
-    const label = escapeHtml(c.label);
-    const inner = (!isLast && c.href)
-      ? `<a itemprop="item" href="${escapeHtml(c.href)}"><span itemprop="name">${label}</span></a>`
-      : `<span itemprop="name"${isLast ? ' aria-current="page"' : ""}>${label}</span>`;
-    return `<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">${inner}<meta itemprop="position" content="${i + 1}" /></li>`;
-  }).join("");
-  return `<nav class="breadcrumb" aria-label="Fil d'Ariane"><ol itemscope itemtype="https://schema.org/BreadcrumbList">${items}</ol></nav>`;
+// Même registre et même rendu que le serveur ; aucun appel Shopify pour le fil.
+let navigationPromise;
+export function loadNavigation() {
+  return navigationPromise ||= Promise.all(['/navigation-data.json', '/mega-menu-brands.json', '/designers-data.json'].map(async path => {
+    const response = await fetch(path, { cache: 'no-cache' });
+    if (!response.ok) throw new Error('Navigation indisponible');
+    return response.json();
+  })).then(([data, curated, designers]) => createNavigation(data, curated.brands, designers.designers));
+}
+export function paintBreadcrumb(trail, source = '') {
+  const slot = document.querySelector('[data-breadcrumb]');
+  if (slot) slot.innerHTML = breadcrumbHTML(trail);
+  const back = document.querySelector('[data-selection-return]');
+  if (back) back.innerHTML = returnLinkHTML(source);
+  let schema = document.getElementById('navigation-breadcrumb');
+  if (!schema) {
+    schema = document.createElement('script');
+    schema.type = 'application/ld+json'; schema.id = 'navigation-breadcrumb';
+    document.head.appendChild(schema);
+  }
+  const current = location.pathname === '/produit.html'
+    ? '/produit.html?handle=' + encodeURIComponent(new URLSearchParams(location.search).get('handle') || '')
+    : location.pathname + location.search;
+  schema.textContent = JSON.stringify(breadcrumbData(trail, current));
+}
+// Recalcule les liens après une pagination sans toucher aux cartes partagées.
+export function syncProductLinks(root = document) {
+  const source = selectionURL(location.pathname + location.search);
+  if (!source) return;
+  root.querySelectorAll('.pcard a[href*="/produit.html?"]').forEach(a => {
+    const params = new URL(a.href).searchParams;
+    a.href = productHref({ handle: params.get('handle'), id: params.get('id') }, source);
+  });
+}
+
+let selectionRestored = false;
+export function restoreSelectionPosition() {
+  if (selectionRestored || !location.hash.startsWith('#product-')) return;
+  const handle = location.hash.slice(9);
+  const card = [...document.querySelectorAll('.pcard__media')].find(a => new URL(a.href).searchParams.get('handle') === handle);
+  if (!card) return;
+  selectionRestored = true;
+  requestAnimationFrame(() => {
+    let saved;
+    try { saved = JSON.parse(sessionStorage.getItem('mikado-selection-position')); } catch {}
+    if (saved?.source === selectionURL(location.pathname + location.search + location.hash)) window.scrollTo({ top: saved.top, behavior: 'instant' });
+    else card.scrollIntoView({ block: 'center', behavior: 'instant' });
+  });
 }
 
 export async function fetchPromos() {
@@ -555,16 +587,8 @@ export function currentViewFrom() {
   return listingContext(new URL(location.href));
 }
 
-export function productCard(p) {
-  // Prefer ?handle= so the PDP can hit /api/product/:handle directly
-  // (no /api/products cap). Fall back to ?id= for products served from
-  // a stale cache that doesn't carry .handle yet.
-  const base = p.handle
-    ? `/produit.html?handle=${encodeURIComponent(p.handle)}`
-    : `/produit.html?id=${encodeURIComponent(p.id)}`;
-  // Carry the current view so the PDP breadcrumb reflects the real path.
-  const from = currentViewFrom();
-  const href = from ? `${base}&from=${encodeURIComponent(from)}` : base;
+export function productCard(p, source) {
+  const href = escapeHtml(productHref(p, typeof source === 'string' ? source : location.pathname + location.search));
   const alt = p.image2 && p.image2 !== p.image ? `<img class="alt" src="${p.image2}" alt="" loading="lazy" />` : "";
   const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`
@@ -588,7 +612,7 @@ export function productCard(p) {
         : `<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>${p.longDelay ? "Sur commande · délai sur demande" : "Livraison " + escapeHtml(p.leadTimeLabel || "3-4 semaines")}</div>`}
       <div class="pcard__price">${priceLabel(p)}</div>
       <button class="btn btn--outline btn--block pcard__cta" data-add
-        data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.id)}"
+        data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.handle || p.id)}"
         data-name="${escapeHtml(p.name)}" data-brand="${escapeHtml(p.brand || "")}"
         data-price="${p.price || 0}" data-image="${escapeHtml(p.image || "")}">
         ${cardLabel(p.variantId)}
@@ -714,12 +738,13 @@ function bindCartDrawer() {
 
   const lineHTML = (i, idx) => {
     const qty = Math.max(1, parseInt(i.qty) || 1);
+    const href = escapeHtml(productHref(i, "/selection.html", i.variantId));
     return `
       <div class="cartd__item">
-        <img class="cartd__img" src="${escapeHtml(i.image || "")}" alt="" loading="lazy" />
+        <a class="navigation-product-link" href="${href}" aria-label="${escapeHtml(i.name)}"><img class="cartd__img" src="${escapeHtml(i.image || "")}" alt="" loading="lazy" /></a>
         <div class="cartd__info">
           <div class="cartd__brand">${escapeHtml(i.brand || "")}</div>
-          <div class="cartd__name">${escapeHtml(i.name || "")}</div>
+          <a class="cartd__name navigation-product-link" href="${href}">${escapeHtml(i.name || "")}</a>
           <div class="cartd__line">
             ${i.gift ? `<span class="cartd__giftchip">Cadeau</span>` : `<div class="cartd__qty">
               <button class="cartd__qbtn" type="button" data-cartd-dec="${escapeHtml(i.variantId)}" aria-label="Diminuer la quantité">−</button>
@@ -866,8 +891,8 @@ function bindSearch() {
   const suggest = root.querySelector("[data-search-suggest]");
   let lastFocus = null, timer = null, lastTerm = "", featLoaded = false;
   const onKey = (e) => { if (e.key === "Escape") { e.preventDefault(); close(); } };
-  const pdpHref = (p) => p.handle ? `/produit.html?handle=${encodeURIComponent(p.handle)}` : `/produit.html?id=${encodeURIComponent(p.id)}`;
-  const row = (p) => `<a class="sr__row" href="${pdpHref(p)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span></span><span class="sr__price">${priceLabel(p)}</span></a>`;
+  const pdpHref = (p, source) => escapeHtml(productHref(p, typeof source === "string" ? source : ""));
+  const row = (p, source) => `<a class="sr__row" href="${pdpHref(p, source)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span></span><span class="sr__price">${priceLabel(p)}</span></a>`;
   // Liens marque « curés » (mega-menu-brands.json, même schéma que marques.html) :
   // clé = nom en minuscules → href /collections/<handle>. Repli ?brand=<slug> si
   // absent. hrefByName persiste (bindSearch appelé une seule fois) → chargé 1×.
@@ -953,7 +978,7 @@ function bindSearch() {
     results.innerHTML =
         grp("Marques",    chips(d.brands, brandHref))
       + grp("Catégories", chips(d.categories, catHref))
-      + grp("Produits",   prods.map(row).join(""))
+      + grp("Produits",   prods.map(p => row(p, "/produits.html?q=" + encodeURIComponent(term))).join(""))
       + `<a class="sr__all" href="/produits.html?q=${encodeURIComponent(term)}">Voir tous les résultats pour « ${escapeHtml(term)} » →</a>`;
   };
   const run = async (term) => {
@@ -1111,6 +1136,18 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   bindAnnounce();
   bindNewsletter();
   bindAddToCart();
+  // Les familles possèdent un hero dédié ; leur fil est placé juste après.
+  if (document.querySelector('[data-family], .fam-rich')) {
+    loadNavigation().then(nav => paintBreadcrumb(listingTrail(new URL(location.href), nav))).catch(console.warn);
+  }
+  document.addEventListener('click', e => {
+    const link = e.target.closest('.pcard a[href*="/produit.html?"]');
+    if (link) {
+      syncProductLinks(link.closest('.pcard'));
+      const source = new URL(link.href).searchParams.get('returnTo');
+      if (source) try { sessionStorage.setItem('mikado-selection-position', JSON.stringify({ source, top: window.scrollY })); } catch {}
+    }
+  }, true);
   syncBadge();
   document.addEventListener("cart:change", syncBadge);
   bindReveal();

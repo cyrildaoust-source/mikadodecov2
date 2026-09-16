@@ -213,21 +213,30 @@ function renderWithOg(templateHtml, { title, description, image, url }) {
   }
   return html;
 }
-// SEO · Fil d'Ariane JSON-LD (BreadcrumbList) reflétant la hiérarchie VISIBLE du
-// site : « Accueil › Le catalogue › <page> » (mêmes mots que le H1 /produits.html
-// et le repli du fil d'Ariane PDP). Injecté en SSR sur PDP / collection / créateur
-// → crawlable sans JS. Dernier maillon = page courante (avec son URL propre).
-function breadcrumbTag(name, url, parent) {
-  const ld = {
-    "@context": "https://schema.org", "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": ORIGIN + "/" },
-      { "@type": "ListItem", "position": 2, "name": "Le catalogue", "item": ORIGIN + "/produits.html" },
-      ...(parent ? [{ "@type": "ListItem", "position": 3, "name": parent.name, "item": parent.url }] : []),
-      { "@type": "ListItem", "position": parent ? 4 : 3, "name": String(name), "item": url }
-    ]
-  };
-  return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
+// Une seule règle de hiérarchie et un seul BreadcrumbList, visibles avant le JS.
+let navigation, navigationRules;
+const _navigationReady = import('./v3/navigation.mjs').then(m => {
+  navigation = m;
+  navigationRules = m.createNavigation(
+    JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/navigation-data.json'), 'utf8')),
+    JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/mega-menu-brands.json'), 'utf8')).brands,
+    getDesigners()
+  );
+});
+function injectNavigation(html, trail, currentURL, source = '') {
+  html = html.replace(/(<div[^>]* data-breadcrumb>)<\/div>/, (_, open) => open + navigation.breadcrumbHTML(trail) + '</div>');
+  html = html.replace('<div data-selection-return></div>', () => '<div data-selection-return>' + navigation.returnLinkHTML(source) + '</div>');
+  const ld = JSON.stringify(navigation.breadcrumbData(trail, currentURL)).replace(/</g, '\\u003c');
+  return html.replace('</head>', () => '<script type="application/ld+json" id="navigation-breadcrumb">' + ld + '</script>\n</head>');
+}
+function listingNavigation(html, req, hints = {}) {
+  const url = new URL(req.originalUrl, ORIGIN);
+  return injectNavigation(html, navigation.listingTrail(url, navigationRules, hints), url.pathname + url.search);
+}
+// Les grilles paginées/triées sont calculées sur le jeu complet dans le navigateur.
+// Ne pas présenter la première tranche SSR comme la page N ou comme un tri global.
+function canRenderInitialGrid(req) {
+  return !(Number(req.query.page) > 1 || (req.query.sort && req.query.sort !== 'pop'));
 }
 // SEO/SSR · formatage prix miroir de shared.js (euro/priceLabel), fr-BE, 0 décimale.
 const euroS = (n) => (n || n === 0)
@@ -243,8 +252,8 @@ const priceLabelS = (p) => {
 // de productCard (shared.js) : lien média + marque + lien nom + dispo + prix ; SANS le
 // bouton « Ajouter au panier » (interactif, posé par le JS). Injectée dans [data-grid] →
 // donne à Google des LIENS produit crawlables + du maillage interne (complète le sitemap).
-function plpCardSsr(p, from = '') {
-  const href = p.handle ? '/produit.html?handle=' + encodeURIComponent(p.handle) + (typeof from === 'string' && from ? '&amp;from=' + encodeURIComponent(from) : '') : '';
+function plpCardSsr(p, source = '') {
+  const href = ogEscape(navigation.productHref(p, typeof source === 'string' ? source : ''));
   if (!href) return '';
   const avail = p.inStock
     ? '<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>'
@@ -289,14 +298,14 @@ function specAccordionSsr(p) {
     + '<div class="pdp-acc__panel" id="pdp-acc-panel-' + g.key + '" role="region" aria-labelledby="pdp-acc-btn-' + g.key + '"' + (i === 0 ? '' : ' hidden') + '>' + panelBody(g) + '</div></div>'
   ).join('') + '</section>';
 }
-function pdpSsrBlock(p) {
+function pdpSsrBlock(p, sourceURL) {
   const rawImg = p.firstImageRaw || (p.images && p.images[0]) || '';
   const img = rawImg ? rawImg + (rawImg.includes('?') ? '&' : '?') + 'width=1000' : '';
   // Lien créateur si le designer a une page (même règle que produit.html : slug connu)
   // → +maillage interne crawlable vers les 247 pages créateur (2ᵉ levier de l'audit).
   const dslug = p.designer ? slugifyS(p.designer) : '';
   const designerEl = !p.designer ? ''
-    : (dslug && getDesigners().some(d => String(d.slug || '').toLowerCase() === dslug))
+    : (dslug && getDesigners().some(d => String(d.slug || '').toLowerCase() === dslug && !d.hidden))
       ? '<a class="pdp__designer pdp__designer--link" href="/produits.html?designer=' + encodeURIComponent(dslug) + '">' + ogEscape(p.designer) + '</a>'
       : '<span class="pdp__designer">' + ogEscape(p.designer) + '</span>';
   return '<div class="pdp">'
@@ -304,7 +313,7 @@ function pdpSsrBlock(p) {
     + (img ? '<img class="pdp__main" src="' + ogEscape(img) + '" alt="' + ogEscape(p.name || '') + '" width="1000" height="1000" fetchpriority="high" decoding="async" />' : '')
     + '</div></div>'
     + '<div class="pdp__info">'
-    + (p.brand ? '<span class="pdp__brand">' + ogEscape(p.brand) + '</span>' : '')
+    + (p.brand ? '<a class="pdp__brand" href="' + ogEscape(navigation.productBrandDestination(p, sourceURL, navigationRules)) + '">' + ogEscape(p.brand) + '</a>' : '')
     + '<h1 class="pdp__name">' + ogEscape(p.name || 'Produit') + '</h1>'
     + designerEl
     + '<div class="pdp__price">' + priceLabelS(p) + '</div>'
@@ -443,17 +452,31 @@ function getDesigners() {
 // (send404Shell), donc pas de soft-404. Redirect RELATIF (fonctionne sur www + Preview).
 // Placé AVANT le catch-all app.get(/.*/). Les collections Shopify canonisent déjà vers
 // /collections/<handle> qui EXISTE ici (route ci-dessous) → rien à faire pour elles.
-app.get('/products/:handle', (req, res) => {
+app.get('/products/:handle', async (req, res) => {
+  await _navigationReady;
   const handle = String(req.params.handle || '');
-  res.redirect(301, '/produit.html?handle=' + encodeURIComponent(handle));
+  res.redirect(301, navigation.productHref({ handle }, navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)), req.query.variant) || '/produits.html');
 });
 
 // ─── Fiche produit : /produit.html?handle=<handle> (B7) ─
 app.get('/produit.html', async (req, res) => {
   const handle = req.query.handle;
+  if (!handle && req.query.id) {
+    await _navigationReady;
+    const id = String(req.query.id).match(/^(?:gid:\/\/shopify\/Product\/)?([0-9]+)$/)?.[1];
+    if (!id) return send404Shell(res, PRODUIT_TEMPLATE);
+    try {
+      const data = await cached('product-handle:' + id, () => shopifyFetch(
+        'query ProductHandle($id: ID!) { node(id: $id) { ... on Product { handle } } }',
+        { id: 'gid://shopify/Product/' + id }
+      ));
+      if (!data.node?.handle) return send404Shell(res, PRODUIT_TEMPLATE);
+      return res.redirect(301, navigation.productHref({ handle: data.node.handle }, navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)), req.query.variant));
+    } catch (error) { return res.status(503).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
+  }
   if (!handle) return sendProduitTemplate(res);
   try {
-    await _chromeReady;
+    await Promise.all([_chromeReady, _navigationReady]);
     const product = await getProductByHandle(handle);
     // Miss stable (produit inexistant/dépublié) : on cache aussi le repli pour
     // ne pas ré-invoquer la fonction à chaque bot. (Les erreurs Shopify partent
@@ -495,10 +518,11 @@ app.get('/produit.html', async (req, res) => {
       }
     };
     const ldTag = `<script type="application/ld+json">` + JSON.stringify(ld).replace(/</g, '\\u003c') + `</script>`
-      + '\n' + breadcrumbTag(name, url);
+      ;
     let out = html.replace('</head>', ldTag + '\n</head>');
+    out = injectNavigation(out, navigation.productTrail(product, new URL(req.originalUrl, ORIGIN), navigationRules), url, navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)));
     // SSR lot 1 · contenu produit (nom/prix/dispo) à la place du squelette → crawlable sans JS.
-    out = out.replace(/<!--PDP-SSR-START-->[\s\S]*?<!--PDP-SSR-END-->/, () => pdpSsrBlock(product));
+    out = out.replace(/<!--PDP-SSR-START-->[\s\S]*?<!--PDP-SSR-END-->/, () => pdpSsrBlock(product, new URL(req.originalUrl, ORIGIN)));
     // SSR chantier 5 · recos « Complétez avec » / « Vous aimerez aussi » crawlables
     // (maillage interne ; piloté par les métafields Search & Discovery — jamais hardcodé).
     const recoSsr = (list, grid, wrap) => {
@@ -528,22 +552,22 @@ app.get('/collections/:handle', async (req, res) => {
   // Page famille riche (Jardin/Outdoor…) : sert le template dédié + chrome SSR.
   if (FAMILLES_RICHES[handle] && !brand) {
     try {
-      await _chromeReady;
+      await Promise.all([_chromeReady, _navigationReady]);
       res.set('Content-Type', 'text/html; charset=utf-8');
       let html = fs.readFileSync(path.join(__dirname, 'v3', FAMILLES_RICHES[handle]), 'utf8');
       if (handle === 'sieges') {
         // Une fiche dépubliée ou en panne ne bloque pas la sélection restante.
         const results = await Promise.allSettled(seatingIcons.handles.map(getProductByHandle));
         const items = results.flatMap(result => result.status === 'fulfilled' && result.value ? [result.value] : []);
-        html = renderSeatingPage(html, items, items.map(plpCardSsr).filter(Boolean).join(''));
+        html = renderSeatingPage(html, items, items.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''));
         if (results.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
         else ogCache(res);
       }
-      return res.send(injectChrome(html, FAMILLES_RICHES[handle]));
+      return res.send(injectChrome(listingNavigation(html, req), FAMILLES_RICHES[handle]));
     } catch (e) { /* repli sur le template générique ci-dessous */ }
   }
   if (Object.hasOwn(families, handle) && !brand) {
-    await _chromeReady;
+    await Promise.all([_chromeReady, _navigationReady]);
     const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : '';
     const featuredPromise = Promise.allSettled((families[handle].featured?.handles || []).map(getProductByHandle));
     let payload = null;
@@ -560,10 +584,10 @@ app.get('/collections/:handle', async (req, res) => {
     const featuredItems = featuredResults.flatMap(result => result.status === 'fulfilled' && result.value && isTable(result.value) && !isOutdoor(result.value) ? [result.value] : []);
     let html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
       items, pageInfo: payload?.pageInfo || {}, cursor, failed,
-      cards: items.map(plpCardSsr).filter(Boolean).join(''),
-      featuredItems, featuredCards: featuredItems.map(plpCardSsr).filter(Boolean).join(''),
+      cards: items.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''),
+      featuredItems, featuredCards: featuredItems.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''),
     });
-    html = html.replace('</head>', breadcrumbTag(families[handle].title, ORIGIN + '/collections/' + handle) + '\n</head>');
+    html = listingNavigation(html, req);
     res.set('Content-Type', 'text/html; charset=utf-8');
     // Ne pas conserver une panne de Shopify dans le cache de la page.
     if (failed || featuredResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
@@ -571,7 +595,7 @@ app.get('/collections/:handle', async (req, res) => {
     return res.send(injectChrome(html, 'family-page.html'));
   }
   try {
-    await _chromeReady;
+    await Promise.all([_chromeReady, _navigationReady]);
     const richFamilies = {
       sieges: { title: 'Assises', hero: '/images/familles/assises/hero.webp' },
       outdoor: { title: 'Jardin', hero: '/images/familles/jardin/1.webp' },
@@ -601,7 +625,7 @@ app.get('/collections/:handle', async (req, res) => {
       alt: brandPhoto || legacyBrandPhoto ? family.title + ' · ' + brandLabel : family.heroAlt || family.title,
       style: photoStyle(!useFamilyPhoto && brandPhoto ? { position: brandPhoto.heroPosition || brandPhoto.position, mobilePosition: brandPhoto.mobilePosition } : legacyBrandPhoto ? {} : { position: family.heroPosition, mobilePosition: family.heroMobilePosition }),
     } : getCollectionHero(handle);
-    const collectionName = col.name || 'Catalogue';
+    const collectionName = navigationRules.collections[handle]?.label || col.name || 'Catalogue';
     const name = collectionName + (brand ? ' · ' + brandLabel : '');
     const title = `${name} · Mikado Deco`;
     const description = ogDesc(
@@ -617,12 +641,11 @@ app.get('/collections/:handle', async (req, res) => {
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
     html = injectCollectionHero(html, collectionHero);
-    html = html.replace('</head>', breadcrumbTag(brand ? brandLabel : name, url, brand ? { name: collectionName, url: ORIGIN + collectionUrl } : null) + '\n</head>');
+    html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
     if (brand) {
       const context = { handle, collectionName, brand: { slug: brand, name: brandLabel }, title: name, description };
       html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
-      const trail = [{ label: 'Accueil', href: '/' }, { label: 'Mobilier', href: '/produits.html' }, { label: collectionName, href: collectionUrl }, { label: brandLabel }];
-      html = html.replace('<div class="wrap" data-breadcrumb></div>', () => '<div class="wrap" data-breadcrumb><nav class="breadcrumb" aria-label="Fil d\'Ariane"><ol>' + trail.map(item => '<li>' + (item.href ? `<a href="${ogEscape(item.href)}">${ogEscape(item.label)}</a>` : `<span aria-current="page">${ogEscape(item.label)}</span>`) + '</li>').join('') + '</ol></nav></div>');
+
     }
     // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
     // le script inline vide ces génériques pour les users → zéro régression de flash).
@@ -632,8 +655,8 @@ app.get('/collections/:handle', async (req, res) => {
     try {
       if (!cp) throw new Error('Collection unavailable');
       const gi = (cp && cp.items) || [];
-      if (gi.length) {
-        const cards = gi.map(product => plpCardSsr(product, brand ? 'coll-brand:' + handle + ':' + brand : '')).filter(Boolean).join('');
+      if (gi.length && canRenderInitialGrid(req)) {
+        const cards = gi.map(product => plpCardSsr(product, req.originalUrl)).filter(Boolean).join('');
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       }
       if (brand) {
@@ -679,11 +702,11 @@ app.get('/produits.html', async (req, res) => {
     let html = fs.readFileSync(PRODUITS_TEMPLATE, 'utf8');
     let failed = false, brandItems = [];
     try {
-      await _chromeReady;
-      const { items } = await getProductsPage(24, null, null, req.query.cats, brand, q);
+      await Promise.all([_chromeReady, _navigationReady]);
+      const { items } = await getProductsPage(24, req.query.cursor || null, req.query.tag ? [req.query.tag] : null, req.query.cats, brand, q);
       brandItems = items;
-      if (items && items.length) {
-        const cards = items.map(product => plpCardSsr(product, brand ? 'brand:' + brand : '')).filter(Boolean).join('');
+      if (items && items.length && canRenderInitialGrid(req)) {
+        const cards = items.map(product => plpCardSsr(product, req.originalUrl)).filter(Boolean).join('');
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       } else if (brand) {
         html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Aucun produit pour cette sélection.</p></div>');
@@ -705,11 +728,12 @@ app.get('/produits.html', async (req, res) => {
     }
     if (failed) res.set('Cache-Control', 'no-store');
     else ogCache(res);
+    html = listingNavigation(html, req, { brandName: brandItems.find(p => navigation.navigationSlug(p.brand) === brand)?.brand || brandName(brand) });
     return res.send(injectChrome(html, 'produits.html'));
   }
   try {
-    await _chromeReady;
-    const designer = getDesigners().find((d) => String(d.slug || '').toLowerCase() === slug);
+    await Promise.all([_chromeReady, _navigationReady]);
+    const designer = getDesigners().find((d) => String(d.slug || '').toLowerCase() === slug && !d.hidden);
     // Miss stable (slug inconnu) : repli cachable.
     if (!designer) { return send404Shell(res, PRODUITS_TEMPLATE); }
 
@@ -724,17 +748,17 @@ app.get('/produits.html', async (req, res) => {
     const url = ORIGIN + '/produits.html?designer=' + encodeURIComponent(designer.slug || slug);
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
-    html = html.replace('</head>', breadcrumbTag(name, url) + '\n</head>');
+    html = listingNavigation(html, req);
     // SSR lot 3 · classe créateur (masque le subhero « Le catalogue » → un seul H1) +
     // hero nom/bio/portrait injecté (crawlable sans JS ; le module le remplace ensuite).
     html = html.replace('<html lang="fr">', '<html lang="fr" class="plp-designer">');
     html = html.replace('<div class="wrap" data-designer-hero></div>', () => '<div class="wrap" data-designer-hero>' + designerHeroSsr(designer) + '</div>');
     // SSR chantier 3 · grille des pièces du créateur (tags designer) crawlable.
     try {
-      const dp = await getProductsPage(24, null, designer.tags || [], null, null, null);
+      const dp = await getProductsPage(24, req.query.cursor || null, designer.tags || [], null, req.query.brand || null, req.query.q || null);
       const gi = (dp && dp.items) || [];
-      if (gi.length) {
-        const cards = gi.map(plpCardSsr).filter(Boolean).join('');
+      if (gi.length && canRenderInitialGrid(req)) {
+        const cards = gi.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join('');
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       }
     } catch (e) { console.warn('[designer-grid-ssr]', e.message); }
@@ -973,7 +997,7 @@ app.get(/.*/, async (req, res, next) => {
   try { raw = fs.readFileSync(file, 'utf8'); }
   catch { return next(); }                              // inexistant → 404 normal
   if (!/id="site-header"/.test(raw)) return next();     // page hors-shell → ne pas toucher
-  await _chromeReady;
+  await Promise.all([_chromeReady, _navigationReady]);
   // SSR des rails produits de l'accueil (liens crawlables + fin des squelettes au 1er paint).
   if (rel === 'index.html') {
     try {
@@ -987,6 +1011,7 @@ app.get(/.*/, async (req, res, next) => {
   if (rel === 'designers.html') {
     try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
   }
+  if (['marques.html', 'designers.html'].includes(rel)) raw = listingNavigation(raw, req);
   res.set('Cache-Control', 'public, max-age=0, must-revalidate');
   res.vary('Accept');
   // Agents demandant text/markdown : extrait markdown du contenu de page (AVANT
@@ -2640,7 +2665,7 @@ app.post('/api/newsletter', formLimiter, async (req, res) => {
 // 404 : sert 404.html avec chrome SSR + status 404 (Vercel route les URL inconnues
 // ici via { handle: error } → /api/index.js). Dernier middleware enregistré.
 app.use(async (req, res) => {
-  await _chromeReady;
+  await Promise.all([_chromeReady, _navigationReady]);
   res.status(404);
   res.vary('Accept');
   // Agents/outils (pas de text/html annoncé) : corps markdown court + liens de reprise.
