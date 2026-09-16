@@ -42,6 +42,7 @@ before(async () => {
       return Response.json({ data: { search: { edges: Array.from({ length: end - start }, (_, i) => ({ node: { ...product(start + i), vendor: start + i < 120 ? 'Artek' : 'HAY' } })), pageInfo: { hasNextPage: end < 135, endCursor: String(end) } } } });
     }
     if (/query GetCollections\(/.test(query)) return Response.json({ data: { collections: { edges: [{ node: { id: 'gid://shopify/Collection/1', handle: 'verres-carafes', title: 'Verres et carafes' } }] } } });
+    if (/query ProductHandle\(/.test(query)) return Response.json({ data: { node: variables.id.endsWith('/999') ? null : { handle: 'family-product-100' } } });
     if (/query GetProduct\(/.test(query)) {
       productRequests.push(variables.handle);
       // Une chaise dépubliée et une requête en panne ne bloquent pas le catalogue.
@@ -397,4 +398,28 @@ test('editorial curation has distinct photographs, safe focal points and known s
   assert.equal(collectionHero('__proto__'), null);
   assert.equal(injectCollectionHero('unchanged template', null), 'unchanged template');
   assert.equal(photoStyle({ position: '0; background:url(https://untrusted.invalid)' }), '--photo-position:50% 50%;--photo-position-mobile:50% 50%');
+});
+
+
+test('server breadcrumbs and JSON-LD share the full hierarchy, and product links retain selection state', async () => {
+  const { html } = await page('/collections/verres-carafes?brand=hay');
+  const ld = JSON.parse(html.match(/id="navigation-breadcrumb">(.*?)<\/script>/s)[1]);
+  assert.deepEqual(ld.itemListElement.map(x => x.name), ['Accueil', 'Catalogue', 'Arts de la table', 'Verres & carafes', 'HAY']);
+  assert.match(html, /href="\/collections\/accessoires"/);
+  const link = html.match(/class="pcard__media" href="([^"]+)"/)[1].replaceAll('&amp;', '&');
+  assert.equal(new URL(link, base).searchParams.get('returnTo').split('#')[0], '/collections/verres-carafes?brand=hay');
+  const pdp = await page(link);
+  const productLd = JSON.parse(pdp.html.match(/id="navigation-breadcrumb">(.*?)<\/script>/s)[1]);
+  assert.deepEqual(productLd.itemListElement.map(x => x.name).slice(0,-1), ld.itemListElement.map(x => x.name));
+  assert.match(pdp.html, /Retour à ma sélection/);
+  assert.equal((pdp.html.match(/"@type":"BreadcrumbList"/g) || []).length, 1);
+});
+test('legacy cart identifiers resolve directly and preserve selected variant; unpublished products return 404', async () => {
+  const response = await realFetch(base + '/produit.html?id=gid%3A%2F%2Fshopify%2FProduct%2F100&variant=456&returnTo=%2Fselection.html', { redirect: 'manual' });
+  assert.equal(response.status, 301);
+  const target = new URL(response.headers.get('location'), base);
+  assert.equal(target.searchParams.get('handle'), 'family-product-100');
+  assert.equal(target.searchParams.get('variant'), '456');
+  assert.equal(target.searchParams.get('returnTo'), '/selection.html');
+  assert.equal((await page('/produit.html?id=999')).response.status, 404);
 });

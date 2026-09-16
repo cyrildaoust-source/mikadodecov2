@@ -4,7 +4,7 @@
     {
       "src": "api/index.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["data/**", "templates/**", "v3/*.html", "v3/chrome-template.js", "v3/product-specs.mjs", "v3/designers-data.json", "v3/journal/**"] }
+      "config": { "includeFiles": ["data/**", "templates/**", "v3/*.html", "v3/chrome-template.js", "v3/product-specs.mjs", "v3/navigation.mjs", "v3/navigation-data.json", "v3/mega-menu-brands.json", "v3/designers-data.json", "v3/journal/**"] }
     },
     { "src": "v3/**", "use": "@vercel/static" }
   ],
@@ -22,7 +22,7 @@
       "continue": true
     },
     { "src": "/api/(.*)", "headers": { "cache-control": "no-store" }, "dest": "/api/index.js" },
-    { "src": "/produit.html", "has": [{ "type": "query", "key": "handle" }], "dest": "/api/index.js" },
+    { "src": "/produit.html", "dest": "/api/index.js" },
     { "src": "/produits.html", "has": [{ "type": "query", "key": "designer" }], "dest": "/api/index.js" },
     { "src": "/sitemap.xml", "dest": "/api/index.js" },
     { "src": "/sitemap-(pages|products)\\.xml", "dest": "/api/index.js" },

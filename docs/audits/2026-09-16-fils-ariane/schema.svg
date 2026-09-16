@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="1000" viewBox="0 0 1200 1000" role="img" aria-labelledby="title desc">
+<title id="title">Mikado — schéma des fils d’Ariane</title><desc id="desc">En haut, trois incohérences observées. En dessous, quatre parcours proposés vers les pages existantes et un retour distinct à la sélection exacte.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#6d7690"/></marker></defs>
+<rect width="1200" height="1000" fill="#f7f5f0"/><style>text{font-family:Arial,sans-serif;fill:#20232b}.title{font-size:34px;font-weight:700}.sub{font-size:17px;fill:#5b626e}.label{font-size:15px;letter-spacing:1px;font-weight:700;fill:#405494}.node{fill:white;stroke:#c4cbd9}.nt{font-size:18px}.small{font-size:14px;fill:#5b626e}.warn{font-size:19px;fill:#824628}.line{stroke:#6d7690;stroke-width:1.6;fill:none;marker-end:url(#arrow)}</style>
+<text x="40" y="48" class="title">Mikado · Le chemin jusqu’au produit</text>
+<text x="40" y="80" class="sub">Audit du 16 septembre 2026 · version publiée 981c471 · ordinateur</text>
+<text x="40" y="130" class="label">AUJOURD’HUI — EXEMPLES CONFIRMÉS</text>
+<text x="40" y="178" class="small">SOUS-CATÉGORIE</text>
+<text x="270" y="178" class="nt">Accueil  ›  Lampes de table  ›  Produit</text>
+<text x="890" y="178" class="warn">Luminaires manque</text>
+<text x="40" y="229" class="small">MARQUE GLOBALE</text>
+<text x="270" y="229" class="nt">Accueil  ›  Artek  ›  Produit</text>
+<text x="890" y="229" class="warn">Marques disparaît</text>
+<text x="40" y="280" class="small">RETOUR DE RECHERCHE</text>
+<text x="270" y="280" class="nt">Bistro + Fermob  →  Produit  →  Tout Fermob</text>
+<text x="890" y="280" class="warn">Bistro est perdu</text>
+<line x1="40" y1="314" x2="1160" y2="314" stroke="#d2d2cd"/>
+<text x="40" y="355" class="label">CIBLE PROPOSÉE — PAGES ET FILTRES DÉJÀ EXISTANTS</text>
+<text x="40" y="383" class="sub">Les ancêtres permettent de remonter dans la hiérarchie du site.</text>
+<path d="M221,453 H266" class="line"/>
+<path d="M457,453 H502" class="line"/>
+<path d="M693,453 H738" class="line"/>
+<path d="M929,453 H974" class="line"/>
+<a xlink:href="https://www.mikadodeco.be/" target="_blank">
+<rect x="40" y="421" width="176" height="64" rx="5" class="node"/>
+<text x="54" y="459" class="nt">Accueil</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/produits.html" target="_blank">
+<rect x="276" y="421" width="176" height="64" rx="5" class="node"/>
+<text x="290" y="459" class="nt">Catalogue</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/collections/luminaires" target="_blank">
+<rect x="512" y="421" width="176" height="64" rx="5" class="node"/>
+<text x="526" y="459" class="nt">Luminaires</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/collections/lampes-de-table" target="_blank">
+<rect x="748" y="421" width="176" height="64" rx="5" class="node"/>
+<text x="762" y="459" class="nt">Lampes de table</text>
+</a>
+<rect x="984" y="421" width="176" height="64" rx="5" class="node"/>
+<text x="998" y="459" class="nt">Produit</text>
+<path d="M221,543 H266" class="line"/>
+<path d="M457,543 H502" class="line"/>
+<path d="M693,543 H738" class="line"/>
+<path d="M929,543 H974" class="line"/>
+<a xlink:href="https://www.mikadodeco.be/" target="_blank">
+<rect x="40" y="511" width="176" height="64" rx="5" class="node"/>
+<text x="54" y="549" class="nt">Accueil</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/produits.html" target="_blank">
+<rect x="276" y="511" width="176" height="64" rx="5" class="node"/>
+<text x="290" y="549" class="nt">Catalogue</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/collections/luminaires" target="_blank">
+<rect x="512" y="511" width="176" height="64" rx="5" class="node"/>
+<text x="526" y="549" class="nt">Luminaires</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/collections/luminaires?brand=hay" target="_blank">
+<rect x="748" y="511" width="176" height="64" rx="5" class="node"/>
+<text x="762" y="538" class="nt">HAY</text>
+<text x="762" y="559" class="small">dans Luminaires</text>
+</a>
+<rect x="984" y="511" width="176" height="64" rx="5" class="node"/>
+<text x="998" y="549" class="nt">Produit</text>
+<path d="M221,633 H266" class="line"/>
+<path d="M457,633 H502" class="line"/>
+<path d="M693,633 H974" class="line"/>
+<a xlink:href="https://www.mikadodeco.be/" target="_blank">
+<rect x="40" y="601" width="176" height="64" rx="5" class="node"/>
+<text x="54" y="639" class="nt">Accueil</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/marques.html" target="_blank">
+<rect x="276" y="601" width="176" height="64" rx="5" class="node"/>
+<text x="290" y="639" class="nt">Marques</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/collections/hay" target="_blank">
+<rect x="512" y="601" width="176" height="64" rx="5" class="node"/>
+<text x="526" y="628" class="nt">HAY</text>
+<text x="526" y="649" class="small">toute la marque</text>
+</a>
+<rect x="984" y="601" width="176" height="64" rx="5" class="node"/>
+<text x="998" y="639" class="nt">Produit</text>
+<path d="M221,723 H266" class="line"/>
+<path d="M457,723 H502" class="line"/>
+<path d="M693,723 H974" class="line"/>
+<a xlink:href="https://www.mikadodeco.be/" target="_blank">
+<rect x="40" y="691" width="176" height="64" rx="5" class="node"/>
+<text x="54" y="729" class="nt">Accueil</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/designers.html" target="_blank">
+<rect x="276" y="691" width="176" height="64" rx="5" class="node"/>
+<text x="290" y="729" class="nt">Designers</text>
+</a>
+<a xlink:href="https://www.mikadodeco.be/produits.html?designer=alvar-aalto" target="_blank">
+<rect x="512" y="691" width="176" height="64" rx="5" class="node"/>
+<text x="526" y="729" class="nt">Alvar Aalto</text>
+</a>
+<rect x="984" y="691" width="176" height="64" rx="5" class="node"/>
+<text x="998" y="729" class="nt">Produit</text>
+<rect x="40" y="801" width="1120" height="116" rx="6" fill="#e8ecf5"/>
+<text x="64" y="835" class="label">EN COMPLÉMENT, SUR LA FICHE</text>
+<text x="64" y="871" class="nt">← Retour à ma sélection</text>
+<text x="420" y="871" class="nt">Recherche + filtres + tri + page d’origine</text>
+<text x="40" y="956" class="sub">Aucun nouvel annuaire « luminaires par marque ». Les corrections restent à mettre en œuvre.</text>
+</svg>

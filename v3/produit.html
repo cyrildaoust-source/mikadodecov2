@@ -44,7 +44,7 @@
   <div id="site-header"></div>
 
   <main id="contenu" class="page wrap">
-    <div data-breadcrumb></div>
+    <div class="product-navigation"><div data-breadcrumb></div><div data-selection-return></div></div>
     <div data-pdp>
       <!--PDP-SSR-START--><div class="pdp"><div class="pcard__skel" style="aspect-ratio:1/1"></div><div class="pdp__info-skel" aria-hidden="true"><span class="pdp__skel-bar" style="width:36%;height:13px"></span><span class="pdp__skel-bar" style="width:82%;height:30px;margin-top:14px"></span><span class="pdp__skel-bar" style="width:50%;height:30px;margin-top:4px"></span><span class="pdp__skel-bar" style="width:28%;height:20px;margin-top:22px"></span><span class="pdp__skel-bar" style="width:100%;height:46px;margin-top:26px"></span></div></div><!--PDP-SSR-END-->
     </div>
@@ -63,8 +63,8 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, breadcrumbHTML, loadBrandHandles } from "/shared.js";
-    import { productBrandHref } from "/brand-navigation.mjs";
+    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, loadNavigation, paintBreadcrumb } from "/shared.js";
+    import { productTrail, sourceSelection, productBrandDestination } from "/navigation.mjs";
     import { buildProductSpecGroups, renderDimensionImages } from "/product-specs.mjs";
     initShell({ active: "Mobilier", transparentNav: false });
 
@@ -87,80 +87,27 @@
       return all.find((x) => x.id === id || encodeURIComponent(x.id) === id) || null;
     }
 
-    // Build the PDP breadcrumb from the ?from= token — the path the user took
-    // to reach this product (set by productCard). Falls back to a neutral
-    // "Accueil › Le catalogue › <produit>" when from is absent/unknown; never
-    // invents the brand.
-    async function buildContextualBreadcrumb(p, brandMap) {
-      const crumbEl = document.querySelector("[data-breadcrumb]");
-      if (!crumbEl) return;
-      const home = { label: "Accueil", href: "/" };
-      const last = { label: p.name };
-      const from = new URLSearchParams(location.search).get("from") || "";
-      const i = from.indexOf(":");
-      const type = i === -1 ? from : from.slice(0, i);
-      const val  = i === -1 ? "" : from.slice(i + 1);
-      let trail;
-      const selection = type === "coll-brand" ? val.match(/^([a-z0-9-]+):([a-z0-9-]+)$/) : null;
-      if (selection) {
-        const [, handle, brand] = selection;
-        const familyTitles = { tables: 'Tables', luminaires: 'Luminaires', decoration: 'Décoration', rangement: 'Rangement', accessoires: 'Arts de la table', sieges: 'Assises', outdoor: 'Jardin' };
-        let title = Object.hasOwn(familyTitles, handle) ? familyTitles[handle] : null;
-        if (!title) {
-          try { title = (await fetchCollections()).find(c => c.handle === handle)?.name; } catch (e) { /* repli vers le catalogue */ }
-        }
-        const href = `/collections/${encodeURIComponent(handle)}`;
-        trail = title ? [home, { label: title, href },
-          ...(slugify(p.brand) === brand ? [{ label: p.brand, href: href + '?brand=' + encodeURIComponent(brand) }] : []), last]
-          : [home, { label: 'Le catalogue', href: '/produits.html' }, last];
-      } else if (type === "coll" && val) {
-        let title = null;
-        try {
-          const colls = await fetchCollections();
-          const c = (colls || []).find((x) => x.handle === val);
-          if (c && c.name) title = c.name;
-        } catch (e) { /* pas de libellé fiable */ }
-        // Contrat : jamais de slug brut comme libellé → si pas de libellé explicite, on masque le crumb intermédiaire.
-        trail = title ? [home, { label: title, href: `/collections/${val}` }, last] : [home, last];
-      } else if (type === "designer" && val) {
-        let name = null;
-        try {
-          const r = await fetch("/designers-data.json", { cache: "no-cache" });
-          if (r.ok) { const list = (await r.json()).designers || []; name = (list.find((x) => x.slug === val) || {}).name || null; }
-        } catch (e) { /* pas de libellé fiable */ }
-        // Contrat : pas de slug brut → si le designer est introuvable, on garde juste le crumb « Designers ».
-        trail = name
-          ? [home, { label: "Designers", href: "/designers.html" }, { label: name, href: `/produits.html?designer=${encodeURIComponent(val)}` }, last]
-          : [home, { label: "Designers", href: "/designers.html" }, last];
-      } else if (type === "brand" && val) {
-        const handle = brandMap[val];
-        const bhref = handle ? `/collections/${handle}` : `/produits.html?brand=${encodeURIComponent(val)}`;
-        trail = [home,
-          { label: "Marques", href: "/marques.html" },
-          { label: p.brand || val, href: bhref },
-          last];
-      } else {
-        trail = [home, { label: "Le catalogue", href: "/produits.html" }, last];
-      }
-      crumbEl.innerHTML = breadcrumbHTML(trail);
+    async function buildContextualBreadcrumb(p) {
+      const nav = await loadNavigation();
+      paintBreadcrumb(productTrail(p, new URL(location.href), nav), sourceSelection(new URL(location.href)));
     }
 
-    Promise.all([loadProduct(), loadBrandHandles(), fetch("/designers-data.json", { cache: "force-cache" }).then((r) => (r.ok ? r.json() : { designers: [] })).catch(() => ({ designers: [] }))]).then(([p, brandMap, designersData]) => {
+    Promise.all([loadProduct(), loadNavigation(), fetch("/designers-data.json", { cache: "force-cache" }).then((r) => (r.ok ? r.json() : { designers: [] })).catch(() => ({ designers: [] }))]).then(([p, navigation, designersData]) => {
       // Slugs designers connus — chargé EN PARALLÈLE du produit → le lien designer est rendu
       // dès le 1er paint (fin de la recoloration gris→bleu post-rendu).
-      const knownDesigners = new Set((designersData.designers || []).map((x) => x.slug));
+      const knownDesigners = new Set((designersData.designers || []).filter(d => !d.hidden).map((x) => x.slug));
       if (!p) { host.innerHTML = `<p class="plp-empty">Cette pièce est introuvable. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue</a>.</p>`; return; }
       document.title = `${p.name} · Mikado Deco`;
 
       // Brand collection URL — curated /collections/<handle> when known (joined
       // via mega-menu-brands.json), else the ?brand= filter fallback.
       const bslug = slugify(p.brand || "");
-      const brandHref = productBrandHref(bslug, brandMap, params.get("from") || "");
+      const brandHref = productBrandDestination(p, new URL(location.href), navigation);
 
       // Fil d'Ariane CONTEXTUEL — reflète le chemin réel d'arrivée (encodé en
       // ?from=<type:valeur> par productCard). Repli neutre si from absent/inconnu
       // — on n'invente jamais la marque.
-      buildContextualBreadcrumb(p, brandMap);
+      buildContextualBreadcrumb(p);
 
       const imgs = (p.images && p.images.length ? p.images : [p.image, p.image2]).filter(Boolean);
       // Thumbnail-strip sources: small-width versions, index-parallel to `imgs`.
@@ -178,7 +125,7 @@
         ? [800, 1280, 2048].map((w) => `${widthVariant(url, w)} ${w}w`).join(", ") : "";
       const MAIN_SIZES = "(max-width: 760px) 92vw, 53vw";
       const variants = Array.isArray(p.variants) ? p.variants : [];
-      let current = variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true, sku: "", qty: null };
+      let current = variants.find(v => String(v.id).split("/").pop() === params.get("variant")) || variants.find((v) => v.id === p.variantId) || variants[0] || { id: p.variantId, price: p.price, image: p.image, title: "", available: true, sku: "", qty: null };
 
       // Galerie = AMBIANCES uniquement (photos en situation), pas les packshots.
       // Règle donnée : un packshot = un variant.image. Donc ambiances = imgs privé
@@ -487,6 +434,11 @@
         if (idx >= 0) list[idx].scrollIntoView({ behavior: "auto", inline: "center", block: "nearest" });
       };
       const applyVariant = (v) => {
+        if (v?.id) {
+          const url = new URL(location.href);
+          url.searchParams.set('variant', String(v.id).split('/').pop());
+          history.replaceState(null, '', url.pathname + url.search);
+        }
         if (!v) return;
         current = v;
         const src = current.image || p.image || imgs[0] || "";
@@ -848,7 +800,7 @@
           add = Math.min(pickQty, room);
         }
         addToCart({
-          handle: p.id,
+          handle: p.handle || p.id,
           variantId: current.id,
           name: p.name + (current.title && variants.length > 1 ? ` · ${current.title}` : ""),
           brand: p.brand,

@@ -367,98 +367,15 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, breadcrumbHTML } from "/shared.js";
+    import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, productCard, slugify, escapeHtml, loadNavigation, paintBreadcrumb, restoreSelectionPosition } from "/shared.js";
     // initShell is called below — the active nav entry depends on the route
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
-    // Hardcoded handle → title map for the collections exposed in the
-    // mega menu. Used for instant title paint before the
-    // /api/collection/<handle>/products fetch resolves — avoids the
-    // "Le catalogue" flash. The Shopify payload still overrides this
-    // silently once it arrives (lets Cyril rename in admin).
-    const COLL_TITLES = {
-      // Mobilier > Sièges
-      "sieges": "Sièges",
-      "chaises": "Chaises",
-      "fauteuils": "Fauteuils",
-      "canapes": "Canapés",
-      "sieges-de-bureau": "Sièges de bureau",
-      "chaises-longues": "Chaises longues",
-      "tabourets-et-bancs": "Tabourets et bancs",
-      // Mobilier > Tables
-      "tables": "Tables",
-      "tables-de-salle-a-manger": "Tables de salle à manger",
-      "tables-de-cafe": "Tables de café",
-      "tables-basses-et-tables-dappoint": "Tables basses et tables d'appoint",
-      "bureaux": "Bureaux",
-      // Mobilier > Luminaires
-      "luminaires": "Luminaires",
-      "suspensions": "Suspensions",
-      "lampes-de-table": "Lampes de table",
-      "lampes-de-bureau": "Lampes de bureau",
-      "lampadaires": "Lampadaires",
-      "appliques": "Appliques",
-      "lampes-nomades": "Lampes nomades",
-      // Mobilier > Décoration
-      "decoration": "Décoration",
-      "vases": "Vases",
-      "bougeoirs-bougies-photophores": "Bougeoirs, bougies & photophores",
-      "miroirs": "Miroirs",
-      "coussins-plaids-tapis": "Coussins, plaids & tapis",
-      "cache-pots-jardinieres": "Cache-pots & jardinières",
-      "objets-decoratifs-cadres": "Objets décoratifs & cadres",
-      // Mobilier > Outdoor
-      "outdoor": "Mobilier outdoor",
-      "chaises-outdoor": "Chaises outdoor",
-      "tables-outdoor": "Tables outdoor",
-      "bancs-outdoor": "Bancs outdoor",
-      "bains-de-soleil-transats": "Bains de soleil & transats",
-      "parasols-ombrages": "Parasols & ombrages",
-      "brasero-barbecue": "Brasero & barbecue",
-      "accessoires-jardin": "Accessoires jardin",
-      // Mobilier > Rangement
-      "rangement": "Rangement",
-      "etageres-et-bibliotheques": "Étagères et bibliothèques",
-      "commodes-et-buffets": "Commodes et buffets",
-      "paniers-et-corbeilles": "Paniers et corbeilles",
-      "pateres-et-porte-manteaux": "Patères et porte-manteaux",
-      "dessertes-et-chariots": "Dessertes et chariots",
-      // Mobilier > Arts de la table
-      "accessoires": "Arts de la table",
-      "vaisselle-assiettes": "Vaisselle & assiettes",
-      "verres-carafes": "Verres & carafes",
-      "couverts": "Couverts",
-      "mugs-tasses-cafe": "Mugs, tasses & café",
-      "ustensiles-cuisine": "Ustensiles & cuisine",
-      // Marques
-      "assouline": "Assouline",
-      "airborne": "Airborne",
-      "vitra": "Vitra",
-      "fermob": "Fermob",
-      "tradition": "&Tradition",
-      "hay": "HAY",
-      "muuto": "Muuto",
-      "ferm-living": "Ferm Living",
-      "alessi": "Alessi",
-      "iittala": "Iittala",
-      "serax": "Serax",
-      "marimekko": "Marimekko",
-      "anglepoise": "Anglepoise",
-      "artek": "Artek",
-      "fatboy": "Fatboy",
-      "hkliving": "HKliving",
-      "pols-potten": "Pols Potten",
-      // Promotions (also valid /collections/<handle> routes)
-      "promotions": "Promotions",
-    };
-
-    // Brand handles — the "Marques" subset of COLL_TITLES. Drives the
-    // breadcrumb level (Marques vs Mobilier) for a /collections/<handle> view.
-    const BRAND_HANDLES = new Set([
-      "airborne", "assouline", "vitra", "fermob", "tradition", "hay", "muuto", "ferm-living",
-      "alessi", "iittala", "serax", "marimekko", "anglepoise", "artek",
-      "fatboy", "hkliving", "pols-potten",
-    ]);
+    import { listingTrail } from '/navigation.mjs';
+    import { walkCatalog, sortCatalog } from '/catalog-pagination.mjs';
+    const navigation = await loadNavigation();
+    const COLL_TITLES = Object.fromEntries(Object.entries(navigation.collections).map(([h, c]) => [h, c.label]));
+    const BRAND_HANDLES = new Set(Object.entries(navigation.collections).filter(([, c]) => c.kind === 'brand').map(([h]) => h));
     const grid = document.querySelector("[data-grid]");
 
     // Toggle colonnes (mobile) — persistant en localStorage.
@@ -545,47 +462,10 @@
     // Catégories (36, alphabétique) — handle + libellé pour le panneau multi-
     // sélection. Le filtrage est SERVEUR (?cats=<handles> → clauses Shopify dans
     // server.js) ; on ne garde ici que de quoi peindre les cases.
-    const CATEGORIES = [
-      { h: "accessoires-jardin", t: "Accessoires jardin" },
-      { h: "appliques", t: "Appliques" },
-      { h: "bains-de-soleil-transats", t: "Bains de soleil & transats" },
-      { h: "bougeoirs-bougies-photophores", t: "Bougeoirs, bougies & photophores" },
-      { h: "brasero-barbecue", t: "Brasero & barbecue" },
-      { h: "bureaux", t: "Bureaux" },
-      { h: "cache-pots-jardinieres", t: "Cache-pots & jardinières" },
-      { h: "canapes", t: "Canapés" },
-      { h: "chaises", t: "Chaises" },
-      { h: "chaises-longues", t: "Chaises longues" },
-      { h: "commodes-et-buffets", t: "Commodes et buffets" },
-      { h: "coussins-plaids-tapis", t: "Coussins, plaids & tapis" },
-      { h: "couverts", t: "Couverts" },
-      { h: "dessertes-et-chariots", t: "Dessertes et chariots" },
-      { h: "etageres-et-bibliotheques", t: "Étagères et bibliothèques" },
-      { h: "fauteuils", t: "Fauteuils" },
-      { h: "lampadaires", t: "Lampadaires" },
-      { h: "lampes-de-bureau", t: "Lampes de bureau" },
-      { h: "lampes-de-table", t: "Lampes de table" },
-      { h: "lampes-nomades", t: "Lampes nomades" },
-      { h: "miroirs", t: "Miroirs" },
-      { h: "mugs-tasses-cafe", t: "Mugs, tasses & café" },
-      { h: "objets-decoratifs-cadres", t: "Objets décoratifs & cadres" },
-      { h: "paniers-et-corbeilles", t: "Paniers et corbeilles" },
-      { h: "parasols-ombrages", t: "Parasols & ombrages" },
-      { h: "pateres-et-porte-manteaux", t: "Patères et porte-manteaux" },
-      { h: "sieges-de-bureau", t: "Sièges de bureau" },
-      { h: "suspensions", t: "Suspensions" },
-      { h: "tables-basses-et-tables-dappoint", t: "Tables basses et tables d'appoint" },
-      { h: "tables-de-cafe", t: "Tables de café" },
-      { h: "tables-de-salle-a-manger", t: "Tables de salle à manger" },
-      { h: "tabourets-et-bancs", t: "Tabourets et bancs" },
-      { h: "ustensiles-cuisine", t: "Ustensiles & cuisine" },
-      { h: "vaisselle-assiettes", t: "Vaisselle & assiettes" },
-      { h: "vases", t: "Vases" },
-      { h: "verres-carafes", t: "Verres & carafes" },
-    ];
+    const CATEGORIES = Object.entries(navigation.collections).filter(([, c]) => c.kind === 'subcategory' && c.catalogFilter !== false).map(([h, c]) => ({ h, t: c.label })).sort((a, b) => a.t.localeCompare(b.t, 'fr'));
     const CAT_HANDLES = new Set(CATEGORIES.map((c) => c.h));
 
-    const state = { coll: collFromPath, cats: (params.get("cats") || "").split(",").map((s) => s.trim()).filter((h) => CAT_HANDLES.has(h)), brand: params.get("brand") || "", tag: params.get("tag") || "", sort: "pop", page: Math.max(1, parseInt(params.get("page"), 10) || 1), loading: false, designer: null, q: params.get("q") || "" };
+    const state = { coll: collFromPath, cats: (params.get("cats") || "").split(",").map((s) => s.trim()).filter((h) => CAT_HANDLES.has(h)), brand: params.get("brand") || "", tag: params.get("tag") || "", sort: ["pop", "asc", "desc", "az"].includes(params.get("sort")) ? params.get("sort") : "pop", page: Math.max(1, parseInt(params.get("page"), 10) || 1), loading: false, incomplete: false, designer: null, q: params.get("q") || "" };
 
     // Instant paint before the /api/collection/<handle>/products fetch
     // resolves. On ANY collection page: blank the description (V2.1 —
@@ -619,14 +499,7 @@
       if (state.tag) list = list.filter((p) => Array.isArray(p.tags) && p.tags.includes(state.tag));
       return list;
     }
-    function applySort(list) {
-      const l = list.slice();
-      if (state.sort === "asc") l.sort((a, b) => (a.price || 0) - (b.price || 0));
-      else if (state.sort === "desc") l.sort((a, b) => (b.price || 0) - (a.price || 0));
-      else if (state.sort === "az") l.sort((a, b) => String(a.name).localeCompare(String(b.name)));
-      // "pop" (défaut) : on garde l'ordre best-selling renvoyé par le serveur → aucun re-tri client.
-      return l;
-    }
+    const applySort = list => sortCatalog(list, state.sort);
     // Construit l'URL reflétant l'état actif. Préserve TOUS les params de
     // désignation (designer, coll/path, cats, brand, tag) + la page (?page=N,
     // retirée à la page 1 → URL propre). page=1 ⇒ pas de param (canonical OK).
@@ -642,19 +515,22 @@
       if (state.brand) q.set("brand", state.brand);
       if (state.tag) q.set("tag", state.tag);
       if (state.page > 1) q.set("page", String(state.page));
+      if (state.sort !== "pop") q.set("sort", state.sort);
+      const cursor = new URLSearchParams(location.search).get("cursor");
+      if (cursor) q.set("cursor", cursor);
       return location.pathname + (q.toString() ? "?" + q : "");
     }
     function writeURL(push) {
       const url = buildURL();
       if (push) history.pushState(null, "", url);
-      else history.replaceState(null, "", url);
+      else history.replaceState(null, "", url + location.hash);
     }
     // Conserve le nom existant : les appelants (marque, catégories) veulent un
     // replaceState (changement de filtre = pas de nouvelle entrée d'historique).
     function syncURL() { writeURL(false); }
     function render() {
       const all = base();
-      countEl.textContent = state.loading ? "" : `${all.length} pièce${all.length > 1 ? "s" : ""}`;
+      countEl.textContent = state.loading || state.incomplete ? "" : `${all.length} pièce${all.length > 1 ? "s" : ""}`;
       // Designer page hides the filterbar (and its count) — mirror the count
       // next to the "Les pièces de …" grid title instead.
       if (pieceCountEl) pieceCountEl.textContent = (state.designer && state.designer.name) ? countEl.textContent : "";
@@ -668,9 +544,9 @@
       popSection.style.display = showPop ? "" : "none";
       const pop = showPop ? all.slice(0, 4) : [];   // les 4 premiers de `all` = top ventes (serveur best-selling)
       if (showPop) {
-        const popKey = pop.map((p) => p.id).join(",");
+        const popKey = pop.map((p) => p.id).join(",") + buildURL();
         if (popGrid.dataset.key !== popKey) {
-          popGrid.innerHTML = pop.map(productCard).join("");
+          popGrid.innerHTML = pop.map(p => productCard(p, buildURL())).join("");
           popGrid.dataset.key = popKey;
         }
       }
@@ -682,12 +558,12 @@
       // Pagination client : on borne la page à [1, totalPages] puis on n'affiche
       // que la tranche de 36 — REMPLACE le contenu de la grille (plus d'accumul.).
       TOTAL_PAGES = Math.max(1, Math.ceil(mainList.length / DISPLAY_PAGE_SIZE));
-      if (state.page > TOTAL_PAGES) state.page = TOTAL_PAGES;
+      if (!state.loading && !state.incomplete && state.page > TOTAL_PAGES) state.page = TOTAL_PAGES;
       if (state.page < 1) state.page = 1;
       const pageSlice = mainList.slice((state.page - 1) * DISPLAY_PAGE_SIZE, state.page * DISPLAY_PAGE_SIZE);
       // Designer pages get a dedicated empty message — "élargir les
       // filtres" doesn't apply when the URL itself selects the slice.
-      const emptyMsg = state.q
+      const emptyMsg = state.loading ? GRID_SKELETON : state.incomplete ? `<p class="plp-empty">Cette page n’a pas pu être chargée entièrement. Réessayez.</p>` : state.q
         ? `<p class="plp-empty">Aucun résultat pour « ${escapeHtml(state.q)} ». Essayez un autre mot-clé.</p>`
         : state.coll && state.brand
         ? `<p class="plp-empty">Aucune pièce de cette marque n’est disponible dans cette catégorie pour le moment. <a href="/collections/${encodeURIComponent(state.coll)}">Revenir à ${escapeHtml(collectionContext?.collectionName || COLL_TITLES[state.coll] || 'la catégorie')}</a>.</p>`
@@ -697,9 +573,9 @@
       // Repeinture idempotente : on ne recrée les cartes (donc les <img>) que si
       // la tranche visible a changé — sinon les chunks progressifs feraient
       // clignoter des images identiques. Compteur/pagination/applyPromos restent.
-      const gridKey = pageSlice.length ? pageSlice.map((p) => p.id).join(",") : "__empty__";
+      const gridKey = (pageSlice.length ? pageSlice.map((p) => p.id).join(",") : "__empty__" + state.loading + state.incomplete) + buildURL();
       if (grid.dataset.key !== gridKey) {
-        grid.innerHTML = pageSlice.length ? pageSlice.map(productCard).join("") : emptyMsg;
+        grid.innerHTML = pageSlice.length ? pageSlice.map(p => productCard(p, buildURL())).join("") : emptyMsg;
         grid.dataset.key = gridKey;
       }
       renderPagination(TOTAL_PAGES);
@@ -721,16 +597,16 @@
         ? { name: COLLECTION_META.title, description: COLLECTION_META.description }
         : null;
       const coll = collFromMeta || (state.coll ? COLLECTIONS_BY_HANDLE[state.coll] : null);
-      const brandName = state.brand ? (collectionContext?.brand?.name || ALL.find((p) => slugify(p.brand) === state.brand)?.brand || state.brand) : "";
+      const brandName = state.brand ? (collectionContext?.brand?.name || ALL.find((p) => slugify(p.brand) === state.brand)?.brand || navigation.brands[state.brand]?.label || "Marque introuvable") : "";
       if (state.q) {
         titleEl.textContent = `Résultats pour « ${state.q} »${brandName ? " · " + brandName : ""}`;
         subEl.textContent = "";
       } else if (state.coll && brandName) {
-        const familyName = collectionContext?.collectionName || coll?.name || COLL_TITLES[state.coll] || state.coll;
+        const familyName = COLL_TITLES[state.coll] || collectionContext?.collectionName || coll?.name || state.coll;
         titleEl.textContent = `${familyName} · ${brandName}`;
         subEl.textContent = `Les créations ${brandName} de notre sélection « ${familyName} ».`;
       } else if (coll) {
-        titleEl.textContent = coll.name;
+        titleEl.textContent = COLL_TITLES[state.coll] || coll.name;
         subEl.textContent = coll.description || "";
       } else if (state.designer?.name) {
         titleEl.textContent = `Produits de ${state.designer.name}`;
@@ -752,39 +628,13 @@
         subEl.textContent = "Mobilier de design, choisi pièce par pièce.";
       }
       if (state.coll && state.brand) gridTitle.textContent = titleEl.textContent;
-      // Fil d'Ariane (Accueil › niveau › page courante), construit depuis le
-      // mode résolu + le titre final ci-dessus. render() est rappelé à chaque
-      // changement de filtre, donc le fil reste synchronisé.
-      if (breadcrumbEl) {
-        const home = { label: "Accueil", href: "/" };
-        const cur = { label: titleEl.textContent };
-        let trail;
-        if (state.coll && brandName) {
-          trail = [home, { label: "Mobilier", href: "/produits.html" },
-            { label: collectionContext?.collectionName || coll?.name || COLL_TITLES[state.coll] || state.coll, href: `/collections/${encodeURIComponent(state.coll)}` },
-            { label: brandName }];
-        } else if (state.coll) {
-          const lvl = BRAND_HANDLES.has(state.coll)
-            ? { label: "Marques", href: "/marques.html" }
-            : { label: "Mobilier", href: "/produits.html" };
-          trail = [home, lvl, cur];
-        } else if (state.designer) {
-          trail = [home, { label: "Designers", href: "/designers.html" },
-                   { label: state.designer.name || "Designer introuvable" }];
-        } else if (brandName) {
-          trail = [home, { label: "Marques", href: "/marques.html" }, cur];
-        } else if (state.cats.length || state.tag) {
-          trail = [home, { label: "Mobilier", href: "/produits.html" }, cur];
-        } else {
-          trail = [home, cur];
-        }
-        breadcrumbEl.innerHTML = breadcrumbHTML(trail);
-      }
+      paintBreadcrumb(listingTrail(new URL(buildURL(), location.origin), navigation, { title: COLL_TITLES[state.coll] || coll?.name || titleEl.textContent, brandName }));
       // Hide categorical chips when we're inside a curated view (collection
       // or tag) — they don't make sense and dilute the page identity.
       chipsBar.style.display = (state.coll || state.tag || state.designer) ? "none" : "";
 
       applyPromos(PROMOS);
+      if (!state.loading && !state.incomplete) restoreSelectionPosition();
     }
 
     // ── Contrôle de pagination ─────────────────────────────────────────────
@@ -827,8 +677,8 @@
       const target = Math.max(1, Math.min(n, TOTAL_PAGES));
       if (target === state.page) return;
       state.page = target;
-      render();
-      writeURL(true);      // pushState → le bouton retour navigue page N→N-1…
+      writeURL(true);
+      render();      // pushState → le bouton retour navigue page N→N-1…
       scrollToGrid();
       // a11y : le <nav> a été reconstruit (innerHTML) → le focus était tombé sur
       // <body>. On le rend au bouton de la page courante (porte aria-current).
@@ -864,12 +714,15 @@
         q.set("tags", state.designer.tags?.length
           ? state.designer.tags.join(",")
           : "__no_designer_match__");
+        if (state.brand) q.set("brand", state.brand);
+        if (state.q) q.set("q", state.q);
         return `/api/products?${q}`;
       }
       // Catalogue : filtrage catégorie + MARQUE côté serveur.
       q.set("paginated", "1");
       if (state.cats.length) q.set("cats", state.cats.join(","));
       if (state.brand) q.set("brand", state.brand);   // filtre marque (vendor) côté serveur → page marque rapide
+      if (state.tag) q.set("tags", state.tag);
       if (state.q) q.set("q", state.q);   // recherche → filtre serveur RELEVANCE
       return `/api/products?${q}`;
     }
@@ -897,7 +750,7 @@
         const r = await fetch("/designers-data.json", { cache: "no-cache" });
         if (!r.ok) { notFound(); return; }
         const data = await r.json();
-        const d = (data.designers || []).find((x) => x.slug === designerSlug);
+        const d = (data.designers || []).find((x) => x.slug === designerSlug && !x.hidden);
         if (d) {
           // V3.1: also carry the editorial fields so the designer-hero
           // (portrait + bio + "Édité par") can render without a second fetch.
@@ -985,10 +838,11 @@
 
     // Récupère TOUT le jeu filtré : on suit le cursor existant par chunks de
     // PAGE_SIZE jusqu'à hasNextPage=false, en concaténant les items (filtrés
-    // p.image). Garde-fou anti-boucle : MAX_CHUNKS (loggé si atteint — on ne
-    // plafonne jamais silencieusement). Retourne { items, collection } ou
+    // p.image). Les curseurs sont suivis jusqu’au bout ; un curseur répété est une erreur.
+    // (Ancien plafond retiré : il ne doit jamais tronquer silencieusement le catalogue.)
+    // Retourne { items, collection, complete } ou
     // { _notFound } si la 1re requête tombe sur une collection inconnue.
-    const MAX_CHUNKS = 25;
+
     // Jeton de génération : chaque walk l'incrémente ; au retour, on n'applique
     // le résultat que s'il est encore le plus récent (un re-walk de catégorie /
     // un changement de filtre supersède un walk en vol — pas de clobber, pas de
@@ -998,32 +852,20 @@
     // onChunk(itemsSoFar, collection) — appelé après CHAQUE page chargée, pour un
     // rendu progressif (1er paint dès le 1er chunk). _notFound (1re requête sur
     // collection inconnue) revient AVANT tout onChunk → l'appelant gère.
-    async function walkAll(onChunk) {
-      let cursor = null, items = [], collection = null, chunks = 0;
-      while (true) {
-        let data;
-        try {
-          data = await fetchPage(cursor);
-        } catch (e) {
-          if (chunks === 0) throw e; // échec total → message ami via le catch appelant
-          console.warn(`[plp] walk: chunk ${chunks + 1} en échec — affichage partiel (${items.length} produits déjà chargés).`, e.message);
-          break; // on garde les chunks déjà collectés plutôt que tout perdre
-        }
-        if (data && data._notFound) return { _notFound: true };
-        if (data && data.collection) collection = data.collection;
-        items = items.concat(((data && data.items) || []).filter((p) => p.image));
-        chunks += 1;
-        if (typeof onChunk === "function") onChunk(items, collection);   // ← rendu progressif
-        const next = (data && data.pageInfo && data.pageInfo.hasNextPage) ? data.pageInfo.endCursor : null;
-        if (!next) break;
-        cursor = next;
-        if (chunks >= MAX_CHUNKS) {
-          console.warn(`[plp] walk: garde-fou ${MAX_CHUNKS} chunks atteint (${items.length} produits chargés) — jeu possiblement tronqué. Envisager une pagination serveur si le catalogue actif grossit beaucoup.`);
-          break;
-        }
-      }
-      return { items, collection };
+    function walkAll(onChunk) {
+      const generation = walkGen;
+      return walkCatalog(fetchPage, onChunk, new URLSearchParams(location.search).get('cursor'), () => generation === walkGen);
     }
+    function renderLoadStatus() {
+      if (!catalogLoadingEl) return;
+      catalogLoadingEl.hidden = !state.incomplete && !state.loading;
+      catalogLoadingEl.innerHTML = state.incomplete
+        ? 'Chargement incomplet. <button class="plp-page" type="button" data-retry-catalog>Réessayer</button>'
+        : 'Chargement des produits…';
+    }
+    catalogLoadingEl?.addEventListener('click', event => {
+      if (event.target.closest('[data-retry-catalog]')) loadInitial();
+    });
 
     async function loadInitial() {
       const myGen = ++walkGen;
@@ -1039,7 +881,7 @@
 
         // Skeleton dans la grille pendant le walk multi-chunks (le catalogue ≈463
         // se charge en ~5 requêtes serveur, bornées à 100) → feedback de chargement.
-        state.loading = true;   // compteur masqué pendant le walk (pas d'incrément visible)
+        state.loading = true; state.incomplete = false; renderLoadStatus();   // compteur masqué pendant le walk (pas d'incrément visible)
         // Si la grille est pré-rendue côté serveur (data-ssr : liens produit crawlables),
         // on la GARDE comme état de chargement au lieu du squelette → pas de flash
         // cartes→squelette→cartes. Le 1er render la remplacera normalement.
@@ -1061,9 +903,11 @@
         state.loading = false;   // walk fini → le compteur final s'affiche d'un coup
 
         if (res._notFound) {
+          paintBreadcrumb([{ label: 'Accueil', href: '/' }, { label: 'Catalogue', href: '/produits.html' }, { label: 'Collection introuvable' }]);
+          if (catalogLoadingEl) catalogLoadingEl.hidden = true;
           titleEl.textContent = "Collection introuvable";
           subEl.textContent = "";
-          grid.innerHTML = `<p class="plp-empty">Cette collection n'existe pas ou plus. <a href="/marques.html" style="color:var(--accent-ink)">Voir toutes les marques →</a></p>`;
+          grid.innerHTML = `<p class="plp-empty">Cette collection n'existe pas ou plus. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue →</a></p>`;
           grid.dataset.key = ""; // contenu non-carte → invalide la clé idempotente
           grid.removeAttribute("aria-busy");
           if (paginationEl) { paginationEl.hidden = true; paginationEl.innerHTML = ""; }
@@ -1072,11 +916,12 @@
           countEl.textContent = "";
           return;
         }
+        state.incomplete = !res.complete;
         if (res.collection) COLLECTION_META = res.collection;
         ALL = res.items;
         render();              // rendu final (set complet : compteur/pagination définitifs)
         grid.removeAttribute("aria-busy");
-        if (catalogLoadingEl) catalogLoadingEl.hidden = true;
+        renderLoadStatus();
         writeURL(false);       // normalise l'URL (clamp / retrait de ?page) sans nouvelle entrée
 
         // Background, after the grid is already up — neither blocks first paint:
@@ -1089,7 +934,8 @@
           .catch((e) => console.warn("[plp] collections indisponibles:", e.message));
       } catch (e) {
         state.loading = false;
-        grid.innerHTML = `<p class="plp-empty">Le catalogue se charge bientôt.</p>`;
+        state.incomplete = true; renderLoadStatus();
+        grid.innerHTML = `<p class="plp-empty">Impossible de charger le catalogue. Réessayez.</p>`;
         grid.dataset.key = ""; // contenu non-carte → invalide la clé idempotente
         grid.removeAttribute("aria-busy");
         console.warn(e);
@@ -1102,7 +948,7 @@
     // (ancien comportement : `if (state.loading) return` perdait le 2e toggle).
     async function reloadGrid() {
       const myGen = ++walkGen;
-      state.loading = true;   // compteur masqué pendant le re-walk catégorie
+      state.loading = true; state.incomplete = false; renderLoadStatus();   // compteur masqué pendant le re-walk catégorie
       grid.setAttribute("aria-busy", "true");
       if (catalogLoadingEl) catalogLoadingEl.hidden = false;
       try {
@@ -1112,6 +958,7 @@
           render();                                // rendu progressif au changement de catégorie
         });
         if (myGen !== walkGen) return; // un toggle plus récent a pris le relais
+        state.incomplete = !res.complete;
         ALL = (res && res.items) || [];
         state.loading = false;
         render();
@@ -1119,7 +966,7 @@
         if (myGen === walkGen) { ALL = []; state.loading = false; render(); } // jamais de grille périmée sous la nouvelle URL
         console.warn("[plp] reloadGrid:", e.message);
       } finally {
-        if (myGen === walkGen) { grid.removeAttribute("aria-busy"); if (catalogLoadingEl) catalogLoadingEl.hidden = true; }
+        if (myGen === walkGen) { grid.removeAttribute("aria-busy"); renderLoadStatus(); }
       }
     }
 
@@ -1150,6 +997,8 @@
       }
       // Seule la PAGE a changé → re-slice instantané de ALL, aucune requête : on
       // reste sur la page designer/collection (hero + bio intacts).
+      state.sort = ["pop", "asc", "desc", "az"].includes(p.get("sort")) ? p.get("sort") : "pop";
+      sortSel.value = state.sort;
       state.page = Math.max(1, parseInt(p.get("page"), 10) || 1);
       render();
     });
