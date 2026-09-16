@@ -10,6 +10,7 @@ const productRequests = [];
 let server, base;
 let vendorsUnavailable = false;
 let allowCatalogueQuery = false;
+let catalogueIconsUnavailable = false;
 const nextCursor = 'opaque+/=cursor';
 const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Carl Hansen & Søn', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Muuto', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
 const brandSlug = name => name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -47,6 +48,7 @@ before(async () => {
     if (/query ProductHandle\(/.test(query)) return Response.json({ data: { node: variables.id.endsWith('/999') ? null : { handle: 'family-product-100' } } });
     if (/query GetProduct\(/.test(query)) {
       productRequests.push(variables.handle);
+      if (catalogueIconsUnavailable && variables.handle === 'artek-stool-60') return new Response('Unavailable', { status: 503 });
       // Une chaise dépubliée et une requête en panne ne bloquent pas le catalogue.
       if (variables.handle === 'chaise-standard') return Response.json({ data: { product: null } });
       if (variables.handle === 'chaise-hay-rey-chair') return new Response('Unavailable', { status: 503 });
@@ -83,6 +85,24 @@ const page = async suffix => {
   return { response, html: await response.text() };
 };
 
+test('a failed icon leaves the remaining curation and catalogue available without caching the failure', async () => {
+  allowCatalogueQuery = true;
+  catalogueIconsUnavailable = true;
+  try {
+    const { response, html } = await page('/produits.html');
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('cache-control'), 'no-store');
+    const icons = JSON.parse(html.match(/id="catalogue-icons-initial">(.*?)<\/script>/s)[1]);
+    assert.equal(icons.items.length, 3);
+    assert.ok(icons.items.every(p => p.handle !== 'artek-stool-60'));
+    assert.match(html, /data-grid data-ssr="1"/);
+    assert.match(html, /handle=family-product-24/);
+  } finally {
+    allowCatalogueQuery = false;
+    catalogueIconsUnavailable = false;
+  }
+});
+
 test('Mobilier renders the family composition with real photos and one complete product grid', async () => {
   const { landing } = require('../lib/catalog-landing');
   allowCatalogueQuery = true;
@@ -97,20 +117,43 @@ test('Mobilier renders the family composition with real photos and one complete 
       assert.match(html, /class="fam-hero__btn" href="#grille"/);
       assert.match(html, /class="ph-img editorial-photo" src=/, 'hero is crawlable without JavaScript');
       assert.ok(html.includes(landing.hero.image.replaceAll('&', '&amp;')));
-      assert.equal((html.match(/class="home-rc"/g) || []).length, 7);
+      assert.equal((html.match(/class="home-rc"/g) || []).length, 17);
       for (const category of landing.categories) assert.ok(html.includes(`class="home-rc" href="/collections/${category.handle}"`));
       assert.doesNotMatch(html, /<section[^>]*data-pop-section|<h2[^>]*>Les plus populaires/);
       assert.match(html, /data-cat-trigger/);
       assert.match(html, /data-pagination/);
       assert.match(html, /BreadcrumbList/);
-      const cardCount = (documentHtml.match(/class="pcard"/g) || []).length;
+      const cardCount = (documentHtml.split('class="section wrap catalogue-products"')[1].match(/class="pcard"/g) || []).length;
       assert.equal(cardCount, route.includes('page=2') ? 0 : 24, 'requested page is not replaced by page 1 during hydration');
+      const icons = JSON.parse(html.match(/id="catalogue-icons-initial">(.*?)<\/script>/s)[1]);
+      assert.deepEqual(icons.items.map(p => p.handle), landing.icons.handles);
+      assert.match(html, /id="catalogue-icons">Les icônes du design/);
+      assert.ok(html.indexOf('id="family-categories"') < html.indexOf('id="catalogue-icons"'));
+      assert.ok(html.indexOf('id="catalogue-icons"') < html.indexOf('id="catalogue-discovery"'));
+      assert.ok(html.indexOf('id="catalogue-discovery"') < html.indexOf('id="grille"'));
+      assert.ok(html.includes('<div data-catalogue-discovery' + (route.includes('?') ? ' hidden' : '') + '>'));
+      const ids = [...documentHtml.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+      assert.equal(new Set(ids).size, ids.length, 'the two rails have distinct accessible headings');
     }
     const searchPage = await page('/produits.html?q=lampe');
     assert.doesNotMatch(searchPage.html, /<main[^>]*data-catalogue-landing/);
   } finally {
     allowCatalogueQuery = false;
   }
+});
+
+test('Mobilier discovery uses valid subcategories and distinct editorial images', () => {
+  const { landing } = require('../lib/catalog-landing');
+  const nav = require('../v3/navigation-data.json');
+  assert.equal(landing.icons.handles.length, 4);
+  assert.equal(new Set(landing.icons.handles).size, 4);
+  for (const category of landing.discovery.categories) {
+    assert.equal(nav.collections[category.handle]?.kind, 'subcategory');
+    assert.ok(category.sourceProduct);
+    assert.ok(category.image.startsWith('https://cdn.shopify.com/'));
+  }
+  const photos = [landing.hero, ...landing.categories, ...landing.discovery.categories].map(p => new URL(p.image).pathname);
+  assert.equal(new Set(photos).size, photos.length, 'no photograph is repeated on the landing page');
 });
 
 test('all five family routes render 24 crawlable products, navigation and metadata', async () => {
@@ -153,7 +196,7 @@ test('chairs belong to Assises only, and unavailable models do not block the sel
   const initial = JSON.parse(assises.html.match(/id="seating-icons-initial">([\s\S]*?)<\/script>/)[1]);
   assert.equal(initial.items.length, 2);
   assert.ok(initial.items.every(item => !['chaise-standard', 'chaise-hay-rey-chair'].includes(item.handle)));
-  assert.deepEqual(productRequests.slice(beforeRequests), seatingIcons.handles);
+  assert.deepEqual(productRequests.slice(beforeRequests), seatingIcons.handles.filter(handle => !productRequests.slice(0, beforeRequests).includes(handle)), 'models already loaded by Mobilier reuse the product cache');
   assert.ok(assises.html.includes('/produit.html?handle=chaise-panton'));
   const arts = await page('/collections/accessoires');
   assert.doesNotMatch(arts.html, /data-icones-sec|id="family-icons"/);

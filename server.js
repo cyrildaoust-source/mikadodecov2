@@ -705,13 +705,10 @@ app.get('/produits.html', async (req, res) => {
     const brand = typeof req.query.brand === 'string' ? req.query.brand.trim().toLowerCase() : '';
     const q = typeof req.query.q === 'string' ? req.query.q : '';
     let html = fs.readFileSync(PRODUITS_TEMPLATE, 'utf8');
-    if (isCatalogLanding(req.query)) {
-      html = renderCatalogLanding(html);
-      html = renderWithOg(html, {
-        title: 'Mobilier & objets de design · Mikado Deco', description: catalogLanding.description,
-        image: catalogLanding.hero.image, url: ORIGIN + '/produits.html',
-      });
-    }
+    const landingRequest = isCatalogLanding(req.query);
+    // Quatre choix explicites chargés en parallèle de la grille. Une fiche
+    // indisponible n'est jamais remplacée par une meilleure vente arbitraire.
+    const iconsPromise = Promise.allSettled((landingRequest ? catalogLanding.icons.handles : []).map(getProductByHandle));
     let failed = false, brandItems = [];
     try {
       await Promise.all([_chromeReady, _navigationReady]);
@@ -727,6 +724,19 @@ app.get('/produits.html', async (req, res) => {
       failed = true;
       html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid><p class="plp-empty">Impossible de charger cette sélection. Veuillez réessayer.</p></div>');
       console.warn('[plp-ssr]', e.message);
+    }
+    if (landingRequest) {
+      const results = await iconsPromise;
+      const iconItems = results.flatMap(result => result.status === 'fulfilled' && result.value ? [result.value] : []);
+      if (results.some(result => result.status === 'rejected')) failed = true;
+      html = renderCatalogLanding(html, {
+        iconItems, iconCards: iconItems.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''),
+        discoveryHidden: Boolean(req.query.cats || req.query.tag || Number(req.query.page) > 1),
+      });
+      html = renderWithOg(html, {
+        title: 'Mobilier & objets de design · Mikado Deco', description: catalogLanding.description,
+        image: catalogLanding.hero.image, url: ORIGIN + '/produits.html',
+      });
     }
     if (brand) {
       const name = brandName(brand, brandItems.map(product => ({ name: product.brand })));
