@@ -35,6 +35,7 @@ Les pages composent les composants. Elles ne redéfinissent pas leurs éléments
 - Tables outdoor : accès distinct aux modèles prévus pour l’extérieur. Les erreurs d’import restent à corriger à la source.
 - Arts de la table : aucune rubrique « Icônes ». Une promesse de matière dans un titre doit correspondre à la photo et aux produits accessibles après le clic.
 - Inspirations des cinq familles communes : une rangée de trois cartes compactes ; les marques suivent le catalogue.
+- Navigation des marques : depuis une famille, les cartes existantes ouvrent directement le catalogue filtré par famille ET marque. Ne pas ajouter de répertoire de marques par famille ni d’étape intermédiaire.
 
 ## Vérification d’une modification
 

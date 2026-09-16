@@ -9,7 +9,7 @@ const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-m
 const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, renderSeatingPage } = require('./lib/family-pages');
 const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
-const { brandCollectionPage, brandName, collectionBrands } = require('./lib/collection-brand');
+const { brandCollectionPage, brandName } = require('./lib/collection-brand');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
@@ -857,18 +857,18 @@ function resolveSsrRel(p) {
 // SEO/SSR · Index MARQUES crawlable : rend les vraies cartes marque (lien + logo + nom)
 // dans [data-brandgrid] à la place des squelettes. Données getActiveBrands + liens curés
 // de mega-menu-brands.json. Le module re-render ensuite (grid.innerHTML) → hydratation.
-async function injectBrandsIndex(html, context = null) {
-  const active = context ? context.brands : await getActiveBrands();
+async function injectBrandsIndex(html) {
+  const active = await getActiveBrands();
   let curated = { brands: [] };
   try { curated = JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'mega-menu-brands.json'), 'utf8')); } catch (e) {}
   const hrefByName = {};
   for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
   const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
+  if (!brands.length) return html;
   const cards = brands.map((b) => {
     const slug = b.slug || slugifyS(b.name);
     const safe = ogEscape(b.name);
-    const href = context ? '/collections/' + encodeURIComponent(context.collection.handle) + '?brand=' + encodeURIComponent(slug)
-      : hrefByName[b.name.toLowerCase()] || ('/produits.html?brand=' + slug);
+    const href = hrefByName[b.name.toLowerCase()] || ('/produits.html?brand=' + slug);
     return '<a class="brandcard" href="' + href + '">'
       + '<span class="brandcard__origin">Europe</span>'
       + '<div><img class="brandcard__logo" src="/images/brands/' + slug + '.svg" alt="' + safe + '" loading="lazy" onerror="this.outerHTML=\'<span class=&quot;brandcard__name&quot;>' + safe + '</span>\'" /></div>'
@@ -877,27 +877,8 @@ async function injectBrandsIndex(html, context = null) {
   // Bloc squelette exact (4 lignes) → on remplace juste le contenu, on garde </div>.
   const skelBlock = '<div class="brandgrid" data-brandgrid>\n'
     + Array(4).fill('      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>').join('\n');
-  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid>\n      ' + (cards || '<p class="plp-empty">Aucune marque disponible dans cette catégorie pour le moment.</p>'));
+  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid>\n      ' + cards);
   html = html.replace('<span class="plp-count" data-brand-count></span>', () => '<span class="plp-count" data-brand-count>' + brands.length + ' marques</span>');
-  if (context) {
-    const title = context.collection.title + ' · Les marques';
-    const description = `Toutes les marques de notre sélection « ${context.collection.title} ».`;
-    const href = '/collections/' + encodeURIComponent(context.collection.handle);
-    const family = Object.hasOwn(families, context.collection.handle) ? families[context.collection.handle] : null;
-    const richImage = ({ sieges: '/images/familles/assises/hero.webp', outdoor: '/images/familles/jardin/1.webp' })[context.collection.handle];
-    const hero = family || richImage ? { img: family ? imageAtWidth(family.hero, 2000) : richImage, alt: family?.heroAlt || context.collection.title,
-      style: photoStyle({ position: family?.heroPosition, mobilePosition: family?.heroMobilePosition }) } : getCollectionHero(context.collection.handle);
-    if (hero) {
-      html = html.replace('<section class="subhero">', '<section class="subhero subhero--editorial">');
-      html = html.replace(/<picture>[\s\S]*?<\/picture>/, () => `<img class="subhero__img editorial-photo" src="${ogEscape(hero.img)}" alt="${ogEscape(hero.alt)}" style="${ogEscape(hero.style)}" fetchpriority="high">`);
-    }
-    html = renderWithOg(html, { title: title + ' · Mikado Deco', description, image: hero ? absUrl(hero.img) : OG_DEFAULT, url: ORIGIN + '/marques.html?collection=' + encodeURIComponent(context.collection.handle) });
-    html = html.replace('<h1>Les marques que<br>nous défendons.</h1>', () => '<h1>' + ogEscape(title) + '</h1>');
-    html = html.replace('Un nombre volontairement réduit de marques européennes, pour mieux les connaître.', () => ogEscape(description));
-    html = html.replace('<div class="wrap" data-breadcrumb></div>', () => `<div class="wrap" data-breadcrumb><nav class="breadcrumb" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="${href}">${ogEscape(context.collection.title)}</a></li><li><span aria-current="page">Les marques</span></li></ol></nav></div>`);
-    html = html.replace('<a href="/produits.html" class="btn btn--blue">Voir le catalogue</a>', () => `<a href="${href}" class="btn btn--blue">Revenir à ${ogEscape(context.collection.title)}</a>`);
-    html = html.replace('id="brands-context-initial">null</script>', () => 'id="brands-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
-  }
   return html;
 }
 
@@ -972,6 +953,15 @@ function injectHomeRails(html, items) {
   return html;
 }
 
+// Les anciens liens du répertoire par famille reviennent à la famille.
+// Le clic sur une carte marque mène directement au catalogue à deux filtres.
+app.get('/marques.html', (req, res, next) => {
+  if (!Object.hasOwn(req.query, 'collection')) return next();
+  const handle = req.query.collection;
+  return res.redirect(302, typeof handle === 'string' && /^[a-z0-9-]+$/.test(handle)
+    ? '/collections/' + handle : '/marques.html');
+});
+
 app.get(/.*/, async (req, res, next) => {
   if (req.path.startsWith('/api/') || req.path.startsWith('/_vercel/')) return next();
   const rel = resolveSsrRel(req.path);
@@ -992,18 +982,7 @@ app.get(/.*/, async (req, res, next) => {
     } catch (e) { console.warn('[home-rails]', e.message); }
   }
   if (rel === 'marques.html') {
-    try {
-      const handle = typeof req.query.collection === 'string' ? req.query.collection : '';
-      const context = handle ? await getCollectionBrands(handle) : null;
-      if (handle && !context) return send404Shell(res, path.join(__dirname, 'v3', 'marques.html'));
-      raw = await injectBrandsIndex(raw, context);
-    } catch (e) {
-      console.warn('[brands-index]', e.message);
-      if (req.query.collection) {
-        res.set('Cache-Control', 'no-store');
-        return res.status(503).send(injectChrome(raw, rel));
-      }
-    }
+    try { raw = await injectBrandsIndex(raw); } catch (e) { console.warn('[brands-index]', e.message); }
   }
   if (rel === 'designers.html') {
     try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
@@ -1014,7 +993,7 @@ app.get(/.*/, async (req, res, next) => {
   // injectChrome → sans nav/pied/panier). Navigateurs : HTML inchangé.
   if (wantsMarkdown(req)) return sendMarkdown(res, htmlToMarkdown(raw, ORIGIN + req.path));
   res.set('Content-Type', 'text/html; charset=utf-8');
-  return res.send(injectChrome(raw, rel, rel === 'marques.html' && Boolean(req.query.collection)));
+  return res.send(injectChrome(raw, rel));
 });
 
 app.use(express.static(path.join(__dirname, 'v3')));
@@ -2098,22 +2077,6 @@ const collectionProductsFor = (handle, first, after, tag, brand) => {
   const slug = typeof brand === 'string' ? brand.trim().toLowerCase() : '';
   return slug ? brandCollectionPage({ handle, first, after, brand: slug, tag: tag || '' }, fetchPage) : fetchPage(first, after);
 };
-
-function getCollectionBrands(handle) {
-  if (!/^[a-z0-9-]+$/.test(handle)) return null;
-  return cached('collection-brands:' + handle, () => collectionBrands(handle,
-    (size, cursor, source) => getCollectionProducts(source, size, cursor)), 1_800_000);
-}
-app.get('/api/collection/:handle/brands', async (req, res) => {
-  try {
-    const payload = await getCollectionBrands(req.params.handle);
-    if (!payload) return res.status(404).json({ error: 'collection_not_found' });
-    res.json(payload);
-  } catch (error) {
-    console.warn('[collection-brands]', error.message);
-    res.status(503).json({ error: 'Impossible de charger les marques de cette catégorie.' });
-  }
-});
 
 app.get('/api/collection/:handle/products', async (req, res) => {
   try {
