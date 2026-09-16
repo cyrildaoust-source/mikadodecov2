@@ -8,7 +8,10 @@ const realFetch = global.fetch;
 const requests = [];
 const productRequests = [];
 let server, base;
+let vendorsUnavailable = false;
 const nextCursor = 'opaque+/=cursor';
+const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Carl Hansen & Søn', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Muuto', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
+const brandSlug = name => name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 function product(id) {
   return {
@@ -28,6 +31,16 @@ before(async () => {
   global.fetch = async (url, options) => {
     assert.equal(new URL(url).hostname, 'family-test.invalid', 'No real upstream calls');
     const { query, variables } = JSON.parse(options.body);
+    if (/query GetVendors\(/.test(query)) return vendorsUnavailable ? new Response('Unavailable', { status: 503 }) : Response.json({ data: { products: { edges: activeNames.map(vendor => ({ node: { vendor } })), pageInfo: { hasNextPage: false, endCursor: null } } } });
+    if (/query GetProducts\(/.test(query)) {
+      const name = variables.query?.match(/vendor:"([^"]+)"/)?.[1];
+      assert.ok(name, 'A brand request must never become an unfiltered catalogue query');
+      return Response.json({ data: { products: { edges: [{ node: { ...product(1), vendor: name } }], pageInfo: { hasNextPage: false, endCursor: null } } } });
+    }
+    if (/query Search\(/.test(query)) {
+      const start = Number(variables.after || 0), end = Math.min(135, start + variables.first);
+      return Response.json({ data: { search: { edges: Array.from({ length: end - start }, (_, i) => ({ node: { ...product(start + i), vendor: start + i < 120 ? 'Artek' : 'HAY' } })), pageInfo: { hasNextPage: end < 135, endCursor: String(end) } } } });
+    }
     if (/query GetCollections\(/.test(query)) return Response.json({ data: { collections: { edges: [{ node: { id: 'gid://shopify/Collection/1', handle: 'verres-carafes', title: 'Verres et carafes' } }] } } });
     if (/query GetProduct\(/.test(query)) {
       productRequests.push(variables.handle);
@@ -46,7 +59,7 @@ before(async () => {
     const hasNextPage = isTables ? ids.at(-1) < 30 && (!variables.after || variables.after.startsWith('edge:')) : !variables.after;
     return Response.json({ data: { collection: {
       title: families[variables.handle]?.title || 'Verres et carafes', description: '', image: null,
-      products: { edges: ids.map(id => ({ cursor: 'edge:' + id, node: { ...product(id), tags: isTables && id <= 3 ? ['exterieur'] : [] } })), pageInfo: { hasNextPage, endCursor: isTables ? 'edge:' + ids.at(-1) : variables.after ? 'end' : nextCursor } },
+      products: { edges: ids.map(id => ({ cursor: 'edge:' + id, node: { ...product(id), ...(id % 11 === 0 ? { vendor: 'Carl Hansen & Søn' } : {}), tags: isTables && id <= 3 ? ['exterieur'] : [] } })), pageInfo: { hasNextPage, endCursor: isTables ? 'edge:' + ids.at(-1) : variables.after ? 'end' : nextCursor } },
     } } });
   };
   const app = require('../server');
@@ -128,6 +141,7 @@ test('all 28 family brand cards preserve their family in the destination', async
     const { html } = await page('/collections/' + handle);
     const links = [...html.matchAll(/class="bcard" href="([^"]+)"/g)].map(match => match[1]);
     assert.equal(links.length, 4, handle);
+    assert.ok(html.includes('href="/marques.html?collection=' + handle + '"'), 'Every family links to all of its brands');
     for (const link of links) {
       const url = new URL(link, base);
       assert.equal(url.pathname, '/collections/' + handle);
@@ -135,6 +149,92 @@ test('all 28 family brand cards preserve their family in the destination', async
       assert.equal(url.searchParams.get('tag'), null, 'collection membership covers every outdoor tag');
     }
   }
+});
+
+test('failed brand resolution never returns the unfiltered catalogue', async () => {
+  vendorsUnavailable = true;
+  try {
+    const api = await realFetch(base + '/api/products?paginated=1&brand=hay');
+    assert.equal(api.status, 500);
+    const { html, response } = await page('/produits.html?brand=hay');
+    assert.equal(response.headers.get('cache-control'), 'no-store');
+    assert.match(html, /<h1 data-plp-title data-context>HAY<\/h1>/);
+    assert.match(html, /Impossible de charger cette sélection/);
+    assert.doesNotMatch(html, /class="pcard__brand"/);
+  } finally { vendorsUnavailable = false; }
+});
+
+test('all active brands filter the generic catalogue from the first HTML response', async () => {
+  for (const name of activeNames) {
+    const slug = brandSlug(name);
+    const { html } = await page('/produits.html?brand=' + slug);
+    const context = JSON.parse(html.match(/id="collection-context-initial">(.*?)<\/script>/s)[1]);
+    assert.equal(context.brand.name, name);
+    assert.equal(context.brand.slug, slug);
+    assert.ok(html.includes('from=brand%3A' + slug));
+    const api = await (await realFetch(base + '/api/products?paginated=1&brand=' + slug)).json();
+    assert.ok(api.items.length && api.items.every(product => product.brand === name), name);
+  }
+  const unknown = await page('/produits.html?brand=unknown-brand');
+  assert.match(unknown.html, /Aucun produit pour cette sélection/);
+  assert.doesNotMatch(unknown.html, /class="pcard__brand"/);
+});
+
+test('unlisted brand names and all contextual brand directories retain the category', async () => {
+  const carl = await page('/collections/sieges?brand=carl-hansen-son');
+  assert.match(carl.html, /Assises · Carl Hansen &amp; Søn/);
+  for (const handle of [...Object.keys(families), 'sieges', 'outdoor']) {
+    const { html } = await page('/marques.html?collection=' + handle);
+    const context = JSON.parse(html.match(/id="brands-context-initial">(.*?)<\/script>/s)[1]);
+    assert.equal(context.collection.handle, handle);
+    assert.ok(context.brands.some(brand => brand.slug === 'carl-hansen-son'));
+    const links = [...html.split('<script type="module">')[0].matchAll(/class="brandcard" href="([^"]+)"/g)].map(match => match[1]);
+    assert.equal(links.length, context.brands.length);
+    assert.ok(links.every(link => link.startsWith('/collections/' + handle + '?brand=')));
+    const api = await (await realFetch(base + '/api/collection/' + handle + '/brands')).json();
+    assert.deepEqual(api, context);
+  }
+  const legacy = await realFetch(base + '/produits.html?coll=sieges&brand=hay', { redirect: 'manual' });
+  assert.equal(legacy.headers.get('location'), '/collections/sieges?brand=hay');
+});
+
+test('brand search fills sparse pages without returning another vendor', async () => {
+  const first = await (await realFetch(base + '/api/products?paginated=1&brand=hay&q=chair&limit=8')).json();
+  assert.equal(first.items.length, 8);
+  assert.ok(first.items.every(product => product.brand === 'HAY'));
+  const next = await (await realFetch(base + '/api/products?paginated=1&brand=hay&q=chair&limit=8&cursor=' + encodeURIComponent(first.pageInfo.endCursor))).json();
+  assert.equal(next.items.length, 7);
+  assert.equal(next.pageInfo.hasNextPage, false);
+  assert.equal(new Set([...first.items, ...next.items].map(product => product.handle)).size, 15);
+});
+
+test('product brand links preserve every category and brand, with a global fallback for global visits', async () => {
+  const { listingContext, productBrandHref } = await import('../v3/brand-navigation.mjs');
+  const brandMap = Object.fromEntries(activeNames.map(name => [brandSlug(name), brandSlug(name)]));
+  const handles = [...Object.keys(families), 'sieges', 'outdoor', ...Object.values(families).flatMap(family => family.categories.map(category => category.handle))];
+  for (const handle of handles) for (const name of activeNames) {
+    const slug = brandSlug(name);
+    const href = '/collections/' + handle + '?brand=' + slug;
+    assert.equal(productBrandHref(slug, brandMap, listingContext(new URL(href, base))), href);
+    assert.equal(productBrandHref(slug, brandMap, 'coll:' + handle), href);
+    assert.equal(listingContext(new URL('/produits.html?coll=' + handle + '&brand=' + slug, base)), 'coll-brand:' + handle + ':' + slug);
+  }
+  assert.equal(productBrandHref('hay', brandMap, 'coll:hay'), '/collections/hay');
+  assert.equal(productBrandHref('new-brand', brandMap), '/produits.html?brand=new-brand');
+});
+
+test('brand directory deduplicates child-only products, separates outdoor tables and fails on broken cursors', async () => {
+  const { collectionBrands } = require('../lib/collection-brand');
+  const chair = { id: 'chair', handle: 'chair', brand: 'Carl Hansen & Søn' };
+  const sources = { sieges: [chair], chaises: [chair, { id: 'hay', brand: 'HAY' }] };
+  const result = await collectionBrands('sieges', async (_, __, handle) => ({ collection: { handle }, items: sources[handle] || [], pageInfo: {} }));
+  assert.deepEqual(result.brands.map(brand => [brand.name, brand.productCount]), [['Carl Hansen & Søn', 1], ['HAY', 1]]);
+  const tables = await collectionBrands('tables', async (_, __, handle) => ({ collection: { handle }, items: handle === 'tables' ? [
+    { id: 'in', brand: 'Artek', productType: 'Table', tags: [] },
+    { id: 'out', brand: 'Fermob', productType: 'Table', tags: ['exterieur'] },
+  ] : [], pageInfo: {} }));
+  assert.deepEqual(tables.brands.map(brand => brand.name), ['Artek']);
+  await assert.rejects(collectionBrands('sieges', async () => ({ collection: {}, items: [], pageInfo: { hasNextPage: true, endCursor: 'stuck' } })), /did not advance/);
 });
 
 test('family brand destinations show the intersection in SSR, metadata and breadcrumb', async () => {

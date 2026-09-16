@@ -64,6 +64,7 @@
 
   <script type="module">
     import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, breadcrumbHTML, loadBrandHandles } from "/shared.js";
+    import { productBrandHref } from "/brand-navigation.mjs";
     import { buildProductSpecGroups, renderDimensionImages } from "/product-specs.mjs";
     initShell({ active: "Mobilier", transparentNav: false });
 
@@ -154,7 +155,7 @@
       // Brand collection URL — curated /collections/<handle> when known (joined
       // via mega-menu-brands.json), else the ?brand= filter fallback.
       const bslug = slugify(p.brand || "");
-      const brandHref = brandMap[bslug] ? `/collections/${brandMap[bslug]}` : (bslug ? `/produits.html?brand=${bslug}` : "/produits.html");
+      const brandHref = productBrandHref(bslug, brandMap, params.get("from") || "");
 
       // Fil d'Ariane CONTEXTUEL — reflète le chemin réel d'arrivée (encodé en
       // ?from=<type:valeur> par productCard). Repli neutre si from absent/inconnu
