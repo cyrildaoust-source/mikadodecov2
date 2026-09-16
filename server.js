@@ -243,8 +243,8 @@ const priceLabelS = (p) => {
 // de productCard (shared.js) : lien média + marque + lien nom + dispo + prix ; SANS le
 // bouton « Ajouter au panier » (interactif, posé par le JS). Injectée dans [data-grid] →
 // donne à Google des LIENS produit crawlables + du maillage interne (complète le sitemap).
-function plpCardSsr(p) {
-  const href = p.handle ? '/produit.html?handle=' + encodeURIComponent(p.handle) : '';
+function plpCardSsr(p, from = '') {
+  const href = p.handle ? '/produit.html?handle=' + encodeURIComponent(p.handle) + (typeof from === 'string' && from ? '&amp;from=' + encodeURIComponent(from) : '') : '';
   if (!href) return '';
   const avail = p.inStock
     ? '<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>'
@@ -632,7 +632,7 @@ app.get('/collections/:handle', async (req, res) => {
       if (!cp) throw new Error('Collection unavailable');
       const gi = (cp && cp.items) || [];
       if (gi.length) {
-        const cards = gi.map(plpCardSsr).filter(Boolean).join('');
+        const cards = gi.map(product => plpCardSsr(product, brand ? 'coll-brand:' + handle + ':' + brand : '')).filter(Boolean).join('');
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       }
       if (brand) {

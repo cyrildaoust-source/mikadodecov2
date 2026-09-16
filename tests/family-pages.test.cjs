@@ -150,6 +150,7 @@ test('family brand destinations show the intersection in SSR, metadata and bread
     assert.ok(html.includes(`href="/collections/${handle}">${context.collectionName}</a>`));
     assert.match(html, /<span aria-current="page">Artek<\/span>/);
     assert.match(html, /class="pcard__brand">Artek/);
+    assert.ok(html.includes('from=coll-brand%3A' + handle + '%3Aartek'), 'product links retain the family and brand before hydration');
     assert.doesNotMatch(html, /class="pcard__brand">HAY/);
     assert.match(html, /<header class="chrome chrome--solid"/);
     assert.doesNotMatch(html, /width="undefined"|height="undefined"/);
