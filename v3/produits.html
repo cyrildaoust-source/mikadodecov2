@@ -375,6 +375,7 @@
     import { walkCatalog } from '/catalog-pagination.mjs';
     const navigation = await loadNavigation();
     const COLL_TITLES = Object.fromEntries(Object.entries(navigation.collections).map(([h, c]) => [h, c.label]));
+    const BRAND_HANDLES = new Set(Object.entries(navigation.collections).filter(([, c]) => c.kind === 'brand').map(([h]) => h));
     const grid = document.querySelector("[data-grid]");
 
     // Toggle colonnes (mobile) — persistant en localStorage.
@@ -846,8 +847,7 @@
     // PAGE_SIZE jusqu'à hasNextPage=false, en concaténant les items (filtrés
     // p.image). Les curseurs sont suivis jusqu’au bout ; un curseur répété est une erreur.
     // (Ancien plafond retiré : il ne doit jamais tronquer silencieusement le catalogue.)
-    // On ne
-    // plafonne jamais silencieusement). Retourne { items, collection } ou
+    // Retourne { items, collection, complete } ou
     // { _notFound } si la 1re requête tombe sur une collection inconnue.
 
     // Jeton de génération : chaque walk l'incrémente ; au retour, on n'applique
