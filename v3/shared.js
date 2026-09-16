@@ -31,7 +31,7 @@ export function saleNextTier(subtotal) {
 /* ---------- formatting ---------- */
 export const euro = (n) =>
   n || n === 0
-    ? new Intl.NumberFormat("fr-BE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
+    ? new Intl.NumberFormat("fr-BE", { style: "currency", currency: "EUR", maximumFractionDigits: Number.isInteger(Number(n)) ? 0 : 2 }).format(n)
     : "";
 
 // Card / PDP price label. Returns "À partir de X €" when the product has a
@@ -480,7 +480,7 @@ export function syncProductLinks(root = document) {
   if (!source) return;
   root.querySelectorAll('.pcard a[href*="/produit.html?"]').forEach(a => {
     const params = new URL(a.href).searchParams;
-    a.href = productHref({ handle: params.get('handle'), id: params.get('id') }, source);
+    a.href = productHref({ handle: params.get('handle'), id: params.get('id') }, source, params.get('variant'));
   });
 }
 
@@ -562,6 +562,11 @@ const pluralize = (name) => VARIANT_PLURALS[name] || (name.toLowerCase().endsWit
 // "25 couleurs" · "3 tailles" · "120 variantes" — empty string when the product
 // has a single variant or only one distinct value on its primary option.
 function variantBadge(p) {
+  if (Array.isArray(p?.variantOptions)) {
+    const ranked = [...p.variantOptions].sort((a,b)=>b.count-a.count);
+    if (ranked[0]?.count > 1) return `${ranked[0].count} ${pluralize(ranked[0].name)}`;
+    return p.variantCount > 1 ? `${p.variantCount} variantes` : '';
+  }
   const vs = Array.isArray(p?.variants) ? p.variants : [];
   if (vs.length < 2) return "";
   // primary option: the one with the most distinct values; ties → first option
@@ -607,15 +612,18 @@ export function productCard(p, source) {
         <a class="pcard__name" href="${href}">${escapeHtml(p.name)}</a>
         ${variantBadge(p) ? `<span class="pcard__variants">${variantBadge(p)}</span>` : ""}
       </div>
-      ${p.inStock
+      ${p.availabilityLabel
+        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--${p.inStock ? 'stock' : 'order'}" aria-hidden="true"></span>${escapeHtml(p.availabilityLabel)}</div>`
+        : p.inStock
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>`
         : `<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>${p.longDelay ? "Sur commande · délai sur demande" : "Livraison " + escapeHtml(p.leadTimeLabel || "3-4 semaines")}</div>`}
       <div class="pcard__price">${priceLabel(p)}</div>
       <button class="btn btn--outline btn--block pcard__cta" data-add
+        ${p.purchaseDisabled ? 'disabled' : ''}
         data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.handle || p.id)}"
         data-name="${escapeHtml(p.name)}" data-brand="${escapeHtml(p.brand || "")}"
         data-price="${p.price || 0}" data-image="${escapeHtml(p.image || "")}">
-        ${cardLabel(p.variantId)}
+        ${p.purchaseDisabled ? 'Indisponible' : cardLabel(p.variantId)}
       </button>
     </div>`;
 }
@@ -638,7 +646,7 @@ function bindAddToCart() {
   document.addEventListener("cart:change", () => {
     document.querySelectorAll("[data-add]").forEach((b) => {
       const v = b.dataset.variant;
-      if (v) b.textContent = cardLabel(v);
+      if (v && !b.disabled) b.textContent = cardLabel(v);
     });
   });
 }

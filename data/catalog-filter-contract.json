@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "pilotCollection": "chaises",
+  "owner": "merchant",
+  "existingSources": ["shopify.color-pattern", "shopify.furniture-fixture-material", "shopify.material", "shopify.chair-features", "custom.material", "custom.dimensions", "custom.usage"],
+  "definitions": [
+    {"ownerType":"PRODUCT","namespace":"custom","key":"width_cm","name":"Largeur (cm)","type":"number_decimal","description":"Largeur exacte en centimètres, issue d'une source fabricant vérifiée. Ne pas arrondir comme dans le titre.","access":{"storefront":"PUBLIC_READ"}},
+    {"ownerType":"PRODUCT","namespace":"custom","key":"depth_cm","name":"Profondeur (cm)","type":"number_decimal","description":"Profondeur exacte en centimètres, issue d'une source fabricant vérifiée.","access":{"storefront":"PUBLIC_READ"}},
+    {"ownerType":"PRODUCT","namespace":"custom","key":"height_cm","name":"Hauteur totale (cm)","type":"number_decimal","description":"Hauteur totale exacte en centimètres. Distincte de la hauteur d'assise.","access":{"storefront":"PUBLIC_READ"}},
+    {"ownerType":"PRODUCT","namespace":"custom","key":"seat_height_cm","name":"Hauteur d’assise (cm)","type":"number_decimal","description":"Hauteur d'assise exacte et vérifiée en centimètres. Laisser vide si inconnue ou variable selon les configurations.","access":{"storefront":"PUBLIC_READ"}},
+    {"ownerType":"PRODUCT","namespace":"custom","key":"has_armrests","name":"Avec accoudoirs","type":"boolean","description":"Caractéristique vérifiée commune aux variantes. Vrai : avec accoudoirs ; faux : sans accoudoirs ; vide : non renseigné.","access":{"storefront":"PUBLIC_READ"}},
+    {"ownerType":"PRODUCT","namespace":"custom","key":"stackable","name":"Empilable","type":"boolean","description":"Empilabilité confirmée par la source fabricant. Laisser vide si non renseignée. Ne pas confondre vide et faux.","access":{"storefront":"PUBLIC_READ"}},
+    {"ownerType":"PRODUCT","namespace":"custom","key":"foldable","name":"Pliant","type":"boolean","description":"Pliage confirmé par la source fabricant. Laisser vide si non renseigné.","access":{"storefront":"PUBLIC_READ"}},
+    {"ownerType":"PRODUCTVARIANT","namespace":"custom","key":"color_family","name":"Familles de couleur","type":"list.single_line_text_field","description":"Familles de couleur vérifiées pour cette variante. Conserver le nom fabricant dans les options. Valeurs du contrat catalogue Mikado.","access":{"storefront":"PUBLIC_READ"}},
+    {"ownerType":"PRODUCTVARIANT","namespace":"custom","key":"material_family","name":"Familles de matière","type":"list.single_line_text_field","description":"Matières vérifiées de cette variante : structure, assise et revêtement. Valeurs du contrat catalogue Mikado.","access":{"storefront":"PUBLIC_READ"}}
+  ],
+  "colorValues": ["blanc","beige","gris","noir","brun","rouge","rose","orange","jaune","vert","bleu","violet","naturel","dore","argent"],
+  "materialValues": ["bois","metal","plastique","tissu","cuir","corde"],
+  "rules": {
+    "unknown": "Omettre la valeur ; jamais remplacer une absence par false ou par une estimation.",
+    "variants": "Couleur, matière, prix et stock doivent être satisfaits par la même variante.",
+    "provenance": "Conserver la source fabricant et la transformation dans le rapport privé de l'importer.",
+    "preserve": "Conserver handles, identités de variantes, options fabricant, médias, tags éditoriaux et données commerciales manuelles.",
+    "publication": "Les créations de produits destinées à un contrôle restent DRAFT et sans publication, conformément aux consignes de l'importer."
+  }
+}
