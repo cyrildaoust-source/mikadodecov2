@@ -20,6 +20,14 @@ Les cinq nouvelles pages présentent leurs inspirations sur une seule rangée de
 
 Les collections sont chargées par lots de 24, sans plafond global ajouté par ces pages. Le premier lot est rendu côté serveur, avec des liens produits et une pagination qui fonctionne sans JavaScript. « Voir plus de produits » ajoute ensuite les lots dans la même grille. Une panne conserve la navigation et offre une nouvelle tentative ; elle n’est pas mise en cache comme une page de produits normale.
 
+## Parcours famille → marque
+
+Les 28 cartes de marques des sept familles pointent vers `/collections/<famille>?brand=<marque>` : Tables → Artek affiche uniquement les tables Artek ; Luminaires → Artek affiche uniquement les luminaires Artek. La photo reste celle de la famille. Le titre, le fil d’Ariane avec retour vers la famille, les métadonnées et les produits rendus côté serveur conservent ce contexte. Retirer la marque ramène à la page famille.
+
+`lib/collection-brand.js` intersecte la collection avec la marque après les règles de classement, en remplissant les lots à travers les curseurs. Le résultat ne dépend pas de l’activation d’un filtre Shopify Search & Discovery. Une marque absente donne une sélection vide ; une panne conserve le contexte et n’est pas mise en cache. Les paramètres `brand` et `tag` sont transmis à chaque lot. Le changement de marque recharge sa sélection complète, sans filtrer uniquement les produits de la marque précédente.
+
+Dans Jardin, l’appartenance à la collection Outdoor remplace le filtre limité au seul tag `exterieur`, afin de conserver aussi les modèles classés jardin avec d’autres tags.
+
 ## Photos des familles et sous-catégories
 
 `data/collection-heroes.json` définit les 39 bandeaux des sous-catégories du méga menu. Chaque entrée référence une photographie de galerie produit, son `sourceProduct`, un texte alternatif, ses dimensions et son point de cadrage (`position`, `mobilePosition`). Les fichiers identifiés comme générés et les schémas techniques sont exclus de cette sélection. Une photo de produit en situation peut illustrer une catégorie sans modifier son classement Shopify.

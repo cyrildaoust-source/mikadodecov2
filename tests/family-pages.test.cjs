@@ -13,7 +13,7 @@ const nextCursor = 'opaque+/=cursor';
 function product(id) {
   return {
     id: `gid://shopify/Product/${id}`, handle: `family-product-${id}`, title: `Produit ${id}`,
-    vendor: 'Mikado', productType: 'table', description: '', tags: [],
+    vendor: id % 3 === 0 ? 'Artek' : 'HAY', productType: 'table', description: '', tags: [],
     availableForSale: true, totalInventory: 1, collections: { edges: [] },
     images: { edges: [{ node: { url: 'https://cdn.shopify.com/example.jpg' } }] },
     priceRange: { minVariantPrice: { amount: '199' }, maxVariantPrice: { amount: '199' } },
@@ -121,6 +121,76 @@ test('glass inspiration and server-rendered destination preserve the glassware f
   assert.deepEqual(requests.at(-1).filters, [{ tag: 'verrerie' }]);
   assert.match(html, /data-ssr="1"/);
   assert.ok(html.includes('/produit.html?handle=family-product-24'));
+});
+
+test('all 28 family brand cards preserve their family in the destination', async () => {
+  for (const handle of [...Object.keys(families), 'sieges', 'outdoor']) {
+    const { html } = await page('/collections/' + handle);
+    const links = [...html.matchAll(/class="bcard" href="([^"]+)"/g)].map(match => match[1]);
+    assert.equal(links.length, 4, handle);
+    for (const link of links) {
+      const url = new URL(link, base);
+      assert.equal(url.pathname, '/collections/' + handle);
+      assert.ok(url.searchParams.get('brand'));
+      assert.equal(url.searchParams.get('tag'), null, 'collection membership covers every outdoor tag');
+    }
+  }
+});
+
+test('family brand destinations show the intersection in SSR, metadata and breadcrumb', async () => {
+  for (const handle of [...Object.keys(families), 'sieges', 'outdoor']) {
+    const { response, html } = await page('/collections/' + handle + '?brand=artek');
+    assert.equal(response.status, 200);
+    assert.doesNotMatch(html, /data-family=/, 'filtered destination is the catalogue for this family');
+    const context = JSON.parse(html.match(/id="collection-context-initial">(.*?)<\/script>/s)[1]);
+    assert.equal(context.handle, handle);
+    assert.equal(context.brand.name, 'Artek');
+    assert.ok(html.includes(`<h1 data-plp-title data-context>${context.collectionName} · Artek</h1>`));
+    assert.ok(html.includes(`href="https://www.mikadodeco.be/collections/${handle}?brand=artek"`));
+    assert.ok(html.includes(`href="/collections/${handle}">${context.collectionName}</a>`));
+    assert.match(html, /<span aria-current="page">Artek<\/span>/);
+    assert.match(html, /class="pcard__brand">Artek/);
+    assert.doesNotMatch(html, /class="pcard__brand">HAY/);
+    assert.match(html, /<header class="chrome chrome--solid"/);
+    assert.doesNotMatch(html, /width="undefined"|height="undefined"/);
+  }
+});
+
+test('brand pagination fills sparse lots, keeps table policy and transmits material tags', async () => {
+  const first = await (await realFetch(base + '/api/collection/tables/products?brand=artek&limit=2')).json();
+  assert.deepEqual(first.items.map(item => item.handle), ['family-product-6', 'family-product-9']);
+  assert.ok(first.items.every(item => item.brand === 'Artek'));
+  const next = await (await realFetch(base + '/api/collection/tables/products?brand=artek&limit=2&cursor=' + encodeURIComponent(first.pageInfo.endCursor))).json();
+  assert.deepEqual(next.items.map(item => item.handle), ['family-product-12', 'family-product-15']);
+  const glass = await (await realFetch(base + '/api/collection/verres-carafes/products?brand=artek&tag=verrerie&limit=2')).json();
+  assert.ok(glass.items.every(item => item.brand === 'Artek'));
+  assert.deepEqual(requests.at(-1).filters, [{ tag: 'verrerie' }]);
+  const empty = await page('/collections/tables?brand=unknown-brand');
+  assert.match(empty.html, /Aucun produit pour cette marque/);
+  assert.doesNotMatch(empty.html, /class="pcard__brand"/);
+  const failed = await page('/collections/tables?brand=artek&cursor=unavailable');
+  assert.equal(failed.response.headers.get('cache-control'), 'no-store');
+  assert.match(failed.html, /Tables · Artek/);
+  assert.match(failed.html, /Impossible de charger cette sélection/);
+  assert.doesNotMatch(failed.html, /class="pcard__brand"/);
+});
+
+test('brand intersection never skips matching products and rejects broken continuations', async () => {
+  const { brandCollectionPage } = require('../lib/collection-brand');
+  const products = Array.from({ length: 90 }, (_, index) => ({ handle: 'p' + index, brand: index < 12 || index % 2 ? 'HAY' : 'Artek' }));
+  const fetchPage = async (first, after) => {
+    const start = Number(after || 0);
+    const end = Math.min(products.length, start + first);
+    return { collection: { handle: 'luminaires' }, items: products.slice(start, end), pageInfo: { hasNextPage: end < products.length, endCursor: String(end) } };
+  };
+  let after = null, found = [];
+  do {
+    const result = await brandCollectionPage({ first: 7, after, brand: 'artek' }, fetchPage);
+    found.push(...result.items.map(item => item.handle));
+    after = result.pageInfo.hasNextPage ? result.pageInfo.endCursor : null;
+  } while (after);
+  assert.deepEqual(found, products.filter(item => item.brand === 'Artek').map(item => item.handle));
+  await assert.rejects(brandCollectionPage({ first: 2, brand: 'artek' }, async () => ({ collection: {}, items: [], pageInfo: { hasNextPage: true, endCursor: 'stuck' } })), /did not advance/);
 });
 
 test('opaque cursor is encoded, sent upstream and final page remains accessible without JS', async () => {
