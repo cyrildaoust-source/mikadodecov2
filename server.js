@@ -305,8 +305,10 @@ function specAccordionSsr(p) {
   ).join('') + '</section>';
 }
 function pdpSsrBlock(p, sourceURL) {
-  const rawImg = p.firstImageRaw || (p.images && p.images[0]) || '';
-  const img = rawImg ? rawImg + (rawImg.includes('?') ? '&' : '?') + 'width=1000' : '';
+  const selected = p.variants?.find(v => String(v.id).split('/').pop() === sourceURL?.searchParams.get('variant'));
+  if (selected) p = {...p, price: selected.price, priceMin: selected.price, priceMax: selected.price, compareAt: selected.compareAtPrice};
+  const rawImg = selected?.image || p.firstImageRaw || (p.images && p.images[0]) || '';
+  const img = shopifyResize(rawImg, 1000);
   // Lien créateur si le designer a une page (même règle que produit.html : slug connu)
   // → +maillage interne crawlable vers les 247 pages créateur (2ᵉ levier de l'audit).
   const dslug = p.designer ? slugifyS(p.designer) : '';

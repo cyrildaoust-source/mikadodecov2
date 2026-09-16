@@ -12,6 +12,7 @@ before(async()=>{
   global.fetch=async(url,options)=>{
     if(!String(url).includes('chairs.test'))return realFetch(url,options);
     const {query,variables}=JSON.parse(options.body);
+    if(query.includes('query GetProduct('))return Response.json({data:{product:node(1)}});
     assert.match(query,/query ChairCatalog/);reads++;
     if(fail)return new Response('offline',{status:503});
     const start=Number(variables.after||0),end=Math.min(start+50,65);
@@ -48,6 +49,13 @@ test('les filtres serveur combinent la marque, la couleur et le prix exact de la
   assert.match(html,/700,95/);assert.match(html,/content="noindex,follow"/);
   assert.match(html,/returnTo=[^"\s]*color/);
   const empty=await (await realFetch(base+'/api/catalog/chaises?brand=hay&color=noir&max=500')).json();assert.equal(empty.total,0);
+});
+test('la fiche rend dès le serveur le prix et la photo demandés sans modifier le produit en cache',async()=>{
+  const selected=await (await realFetch(base+'/produit.html?handle=chaise-1&variant=11')).text();
+  assert.match(selected,/<div class="pdp__price">700,95\s*€<\/div>/);
+  assert.match(selected,/<img class="pdp__main" src="[^\"]*1-noir\.jpg/);
+  const standard=await (await realFetch(base+'/produit.html?handle=chaise-1')).text();
+  assert.match(standard,/<div class="pdp__price">À partir de 400\s*€<\/div>/);
 });
 test('un échec amont reste une erreur et un nouvel essai recharge les données',async()=>{
   await realFetch(base+'/api/revalidate',{method:'POST',headers:{Authorization:'Bearer chair-test'}});
