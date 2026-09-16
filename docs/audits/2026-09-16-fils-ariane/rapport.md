@@ -1,6 +1,8 @@
 # Audit des fils d’Ariane et des retours produit — Mikado
 
-Audit du 16 septembre 2026, sur le site public **www.mikadodeco.be**, version **981c471**. Le contenu du code local correspond à cette version de `origin/main`. Cet audit ne modifie pas le site.
+**Mise à jour : les corrections ont été publiées. [Lire le bilan, les preuves après correction et les points restants](BILAN_CORRECTIONS.md).**
+
+Audit initial du 16 septembre 2026, sur le site public **www.mikadodeco.be**, version **981c471**. Le contenu du code local correspond à cette version de `origin/main`. Cet audit ne modifie pas le site.
 
 **Verdict : les destinations contrôlées répondent correctement, mais le parcours n’est pas encore cohérent de bout en bout.** Les principales faiblesses sont la perte de la sélection d’origine, l’absence des familles parentes et deux traitements différents des marques. Une page qui répond en HTTP 200 ne garantit ni un bon classement, ni un retour utile.
 

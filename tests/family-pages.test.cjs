@@ -423,3 +423,11 @@ test('legacy cart identifiers resolve directly and preserve selected variant; un
   assert.equal(target.searchParams.get('returnTo'), '/selection.html');
   assert.equal((await page('/produit.html?id=999')).response.status, 404);
 });
+
+test('historical all/frontpage collections redirect to the real catalogue with filters preserved', async () => {
+ for (const handle of ['all','frontpage']) {
+  const r=await realFetch(base+'/collections/'+handle+'?brand=hay&sort=asc&page=2',{redirect:'manual'});
+  assert.equal(r.status,301);
+  assert.equal(r.headers.get('location'),'/produits.html?brand=hay&sort=asc&page=2');
+ }
+});
