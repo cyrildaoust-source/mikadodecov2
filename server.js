@@ -9,6 +9,8 @@ const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-m
 const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, renderSeatingPage } = require('./lib/family-pages');
 const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
+const { brandCollectionPage, brandName } = require('./lib/collection-brand');
+const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -215,13 +217,14 @@ function renderWithOg(templateHtml, { title, description, image, url }) {
 // site : « Accueil › Le catalogue › <page> » (mêmes mots que le H1 /produits.html
 // et le repli du fil d'Ariane PDP). Injecté en SSR sur PDP / collection / créateur
 // → crawlable sans JS. Dernier maillon = page courante (avec son URL propre).
-function breadcrumbTag(name, url) {
+function breadcrumbTag(name, url, parent) {
   const ld = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Accueil", "item": ORIGIN + "/" },
       { "@type": "ListItem", "position": 2, "name": "Le catalogue", "item": ORIGIN + "/produits.html" },
-      { "@type": "ListItem", "position": 3, "name": String(name), "item": url }
+      ...(parent ? [{ "@type": "ListItem", "position": 3, "name": parent.name, "item": parent.url }] : []),
+      { "@type": "ListItem", "position": parent ? 4 : 3, "name": String(name), "item": url }
     ]
   };
   return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
@@ -240,8 +243,8 @@ const priceLabelS = (p) => {
 // de productCard (shared.js) : lien média + marque + lien nom + dispo + prix ; SANS le
 // bouton « Ajouter au panier » (interactif, posé par le JS). Injectée dans [data-grid] →
 // donne à Google des LIENS produit crawlables + du maillage interne (complète le sitemap).
-function plpCardSsr(p) {
-  const href = p.handle ? '/produit.html?handle=' + encodeURIComponent(p.handle) : '';
+function plpCardSsr(p, from = '') {
+  const href = p.handle ? '/produit.html?handle=' + encodeURIComponent(p.handle) + (typeof from === 'string' && from ? '&amp;from=' + encodeURIComponent(from) : '') : '';
   if (!href) return '';
   const avail = p.inStock
     ? '<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>'
@@ -521,8 +524,9 @@ app.get('/produit.html', async (req, res) => {
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
+  const brand = typeof req.query.brand === 'string' ? req.query.brand.trim().toLowerCase() : '';
   // Page famille riche (Jardin/Outdoor…) : sert le template dédié + chrome SSR.
-  if (FAMILLES_RICHES[handle]) {
+  if (FAMILLES_RICHES[handle] && !brand) {
     try {
       await _chromeReady;
       res.set('Content-Type', 'text/html; charset=utf-8');
@@ -538,7 +542,7 @@ app.get('/collections/:handle', async (req, res) => {
       return res.send(injectChrome(html, FAMILLES_RICHES[handle]));
     } catch (e) { /* repli sur le template générique ci-dessous */ }
   }
-  if (Object.hasOwn(families, handle)) {
+  if (Object.hasOwn(families, handle) && !brand) {
     await _chromeReady;
     const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : '';
     const featuredPromise = Promise.allSettled((families[handle].featured?.handles || []).map(getProductByHandle));
@@ -568,44 +572,86 @@ app.get('/collections/:handle', async (req, res) => {
   }
   try {
     await _chromeReady;
-    const collections = await getCollections();
-    const col = collections.find((c) => c.handle === handle);
+    const richFamilies = {
+      sieges: { title: 'Assises', hero: '/images/familles/assises/hero.webp' },
+      outdoor: { title: 'Jardin', hero: '/images/familles/jardin/1.webp' },
+    };
+    const family = Object.hasOwn(families, handle) ? families[handle] : Object.hasOwn(richFamilies, handle) ? richFamilies[handle] : null;
+    const col = family ? { name: family.title, description: family.description } : (await getCollections()).find(c => c.handle === handle);
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
     if (!col) { if (COLLECTION_ALIASES.has(handle)) { ogCache(res); return sendProduitsTemplate(res); } return send404Shell(res, PRODUITS_TEMPLATE); }
 
-    const collectionHero = getCollectionHero(handle);
-    const name = col.name || 'Catalogue';
+    const brandPhoto = family?.brands?.find(item => item.slug === brand);
+    // Le bandeau Luminaires montre déjà une scène Artek large, adaptée à ce format.
+    const useFamilyPhoto = handle === 'luminaires' && brand === 'artek';
+    const legacyPhotos = {
+      sieges: { 'carl-hansen-son': 'assises/brand-carlhansen', artek: 'assises/brand-artek', vitra: 'assises/brand-vitra', hay: 'assises/brand-hay' },
+      outdoor: { fermob: 'jardin/20', hay: 'jardin/21', fatboy: 'jardin/22', tradition: 'jardin/23' },
+    };
+    const legacyBrandPhoto = Object.hasOwn(legacyPhotos, handle) && Object.hasOwn(legacyPhotos[handle], brand) ? legacyPhotos[handle][brand] : null;
+    const familyImage = family ? imageAtWidth((useFamilyPhoto ? family.hero : brandPhoto?.image) || (legacyBrandPhoto ? '/images/familles/' + legacyBrandPhoto + '.webp' : family.hero), 2000) : null;
+    const collectionHero = family ? {
+      brand: false, editorial: true, img: familyImage, srcset: familyImage,
+      alt: brandPhoto || legacyBrandPhoto ? family.title + ' · ' + brandName(brand) : family.heroAlt || family.title,
+      style: photoStyle(!useFamilyPhoto && brandPhoto ? { position: brandPhoto.heroPosition || brandPhoto.position, mobilePosition: brandPhoto.mobilePosition } : legacyBrandPhoto ? {} : { position: family.heroPosition, mobilePosition: family.heroMobilePosition }),
+    } : getCollectionHero(handle);
+    const collectionName = col.name || 'Catalogue';
+    const name = collectionName + (brand ? ' · ' + brandName(brand) : '');
     const title = `${name} · Mikado Deco`;
     const description = ogDesc(
-      col.description && col.description.trim()
+      brand ? `Les créations ${brandName(brand)} de notre sélection « ${collectionName} ».` : col.description && col.description.trim()
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
-    const image = collectionHero ? collectionHero.img : BRAND_HEADERS.has(handle)
+    const image = collectionHero ? absUrl(collectionHero.img) : BRAND_HEADERS.has(handle)
       ? `${ORIGIN}/images/brands/headers/${handle}-1920.jpg`
       : (col.image ? absUrl(col.image) : OG_DEFAULT);
-    const url = ORIGIN + '/collections/' + encodeURIComponent(handle);
+    const collectionUrl = '/collections/' + encodeURIComponent(handle);
+    const url = ORIGIN + collectionUrl + (brand ? '?brand=' + encodeURIComponent(brand) : '');
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
     html = injectCollectionHero(html, collectionHero);
-    html = html.replace('</head>', breadcrumbTag(name, url) + '\n</head>');
+    html = html.replace('</head>', breadcrumbTag(brand ? brandName(brand) : name, url, brand ? { name: collectionName, url: ORIGIN + collectionUrl } : null) + '\n</head>');
+    if (brand) {
+      const context = { handle, collectionName, brand: { slug: brand, name: brandName(brand) }, title: name, description };
+      html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
+      const trail = [{ label: 'Accueil', href: '/' }, { label: 'Mobilier', href: '/produits.html' }, { label: collectionName, href: collectionUrl }, { label: brandName(brand) }];
+      html = html.replace('<div class="wrap" data-breadcrumb></div>', () => '<div class="wrap" data-breadcrumb><nav class="breadcrumb" aria-label="Fil d\'Ariane"><ol>' + trail.map(item => '<li>' + (item.href ? `<a href="${ogEscape(item.href)}">${ogEscape(item.label)}</a>` : `<span aria-current="page">${ogEscape(item.label)}</span>`) + '</li>').join('') + '</ol></nav></div>');
+    }
     // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
     // le script inline vide ces génériques pour les users → zéro régression de flash).
-    html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title>' + ogEscape(name) + '</h1>');
+    html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title' + (brand ? ' data-context' : '') + '>' + ogEscape(name) + '</h1>');
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
+    let failed = false;
     try {
       // Le premier rendu doit respecter le même filtre que la grille hydratée.
       const tag = typeof req.query.tag === 'string' ? req.query.tag : null;
-      const cp = await collectionProductsFor(handle, 24, null, tag);
+      const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : null;
+      const cp = await collectionProductsFor(handle, 24, cursor, tag, brand);
+      if (!cp) throw new Error('Collection unavailable');
       const gi = (cp && cp.items) || [];
       if (gi.length) {
-        const cards = gi.map(plpCardSsr).filter(Boolean).join('');
+        const cards = gi.map(product => plpCardSsr(product, brand ? 'coll-brand:' + handle + ':' + brand : '')).filter(Boolean).join('');
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       }
-    } catch (e) { console.warn('[coll-grid-ssr]', e.message); }
+      if (brand) {
+        if (!gi.length) html = html.replace('<div class="pgrid" data-grid></div>', () => `<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Aucun produit pour cette marque dans cette catégorie. <a href="${collectionUrl}">Revenir à ${ogEscape(collectionName)}</a>.</p></div>`);
+        const next = new URLSearchParams({ brand });
+        if (tag) next.set('tag', tag);
+        if (cp.pageInfo?.hasNextPage && cp.pageInfo.endCursor) {
+          next.set('cursor', cp.pageInfo.endCursor);
+          html = html.replace('<nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>', () => `<nav class="plp-pagination" data-pagination aria-label="Pagination"><a class="plp-page" href="${ogEscape(collectionUrl + '?' + next + '#grille')}">Voir plus de produits</a></nav>`);
+        }
+      }
+    } catch (e) {
+      failed = true;
+      html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid><p class="plp-empty">Impossible de charger cette sélection. Veuillez réessayer.</p></div>');
+      console.warn('[coll-grid-ssr]', e.message);
+    }
     html = injectChrome(html, 'produits.html', Boolean(collectionHero));
-    ogCache(res);
+    if (failed) res.set('Cache-Control', 'no-store');
+    else ogCache(res);
     return res.send(html);
   } catch (err) {
     console.warn('[og-collection]', err.message);
@@ -1990,14 +2036,18 @@ async function getPromotionsProducts(first, after) {
     pageInfo: (base?.items || []).length ? base.pageInfo : { hasNextPage: false, endCursor: null },
   };
 }
-const collectionProductsFor = (handle, first, after, tag) =>
-  handle === 'promotions' ? getPromotionsProducts(first, after) : getCollectionProducts(handle, first, after, tag);
+const collectionProductsFor = (handle, first, after, tag, brand) => {
+  const fetchPage = (size, cursor, source = handle) => source === 'promotions'
+    ? getPromotionsProducts(size, cursor) : getCollectionProducts(source, size, cursor, tag);
+  const slug = typeof brand === 'string' ? brand.trim().toLowerCase() : '';
+  return slug ? brandCollectionPage({ handle, first, after, brand: slug, tag: tag || '' }, fetchPage) : fetchPage(first, after);
+};
 
 app.get('/api/collection/:handle/products', async (req, res) => {
   try {
     const { handle } = req.params;
-    const { cursor, limit, tag } = req.query;
-    const payload = await collectionProductsFor(handle, limit, cursor, tag);
+    const { cursor, limit, tag, brand } = req.query;
+    const payload = await collectionProductsFor(handle, limit, cursor, tag, brand);
     if (!payload) return res.status(404).json({ error: 'collection_not_found' });
     res.json(payload);
   } catch (err) {

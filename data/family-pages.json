@@ -142,7 +142,8 @@
         "name": "HAY",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Apex_20Table_20Lamp_imageslider_3.jpg?v=1776808065&width=700&format=webp",
         "sourceProduct": "lampe-de-table-hay-apex-table-lamp",
-        "position": "50% 25%"
+        "position": "50% 25%",
+        "heroPosition": "50% 0%"
       },
       {
         "slug": "anglepoise",

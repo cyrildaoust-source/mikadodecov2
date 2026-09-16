@@ -555,7 +555,9 @@ export function currentViewFrom() {
   const collMatch = location.pathname.match(/^\/collections\/(.+?)\/?$/);
   if (collMatch) {
     const h = decodeURIComponent(collMatch[1]);
-    if (h && h !== "all") return "coll:" + h;
+    if (h && h !== "all") return params.get("brand")
+      ? "coll-brand:" + h + ":" + params.get("brand")
+      : "coll:" + h;
   }
   if (params.get("designer")) return "designer:" + params.get("designer");
   if (params.get("brand")) return "brand:" + params.get("brand");

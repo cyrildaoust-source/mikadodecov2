@@ -35,6 +35,8 @@
       var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
       if (m) {
         canon = ORIGIN + "/collections/" + m[1].toLowerCase();
+        var brand = new URLSearchParams(location.search).get("brand");
+        if (brand) canon += "?brand=" + encodeURIComponent(brand.trim().toLowerCase());
       } else {
         var p = new URLSearchParams(location.search);
         if (p.get("designer"))   canon = ORIGIN + "/produits.html?designer=" + encodeURIComponent(p.get("designer").toLowerCase());
@@ -142,6 +144,7 @@
     } catch (e) {}
   </script>
   <script type="application/json" id="collection-hero-initial">null</script>
+  <script type="application/json" id="collection-context-initial">null</script>
   <!-- Hero resolution + preload. On a curated brand collection page it resolves
        the brand banner, else the generic catalog hero; stashes the choice on
        window.__hero and preloads the chosen WebP so the LCP fetch starts
@@ -232,7 +235,7 @@
         document.write(
           '<picture>' +
             '<source type="image/webp" srcset="' + enc(hero.srcset) + '" sizes="100vw">' +
-            '<img class="subhero__img' + (hero.editorial ? ' editorial-photo' : '') + '" src="' + enc(hero.img) + '" width="' + hero.width + '" height="' + hero.height + '" ' +
+            '<img class="subhero__img' + (hero.editorial ? ' editorial-photo' : '') + '" src="' + enc(hero.img) + '" ' + (hero.width && hero.height ? 'width="' + hero.width + '" height="' + hero.height + '" ' : '') +
               'alt="' + enc(hero.alt) + '" fetchpriority="high" style="' + enc(hero.editorial ? hero.style : 'object-position:' + hero.obj) + '"' + onerr + '>' +
           '</picture>'
         );
@@ -256,7 +259,7 @@
   <script>
     /* Page collection/marque : vide le titre + sous-titre génériques DÈS le parsing
        (avant le 1er paint) — le module pose le nom exact ensuite. Zéro flash « Le catalogue ». */
-    if (document.documentElement.classList.contains("plp-collection")) {
+    if (document.documentElement.classList.contains("plp-collection") && !document.querySelector('[data-plp-title][data-context]')) {
       var _pt = document.querySelector("[data-plp-title]"); if (_pt) _pt.textContent = "";
       var _ps = document.querySelector("[data-plp-sub]"); if (_ps) _ps.textContent = "";
     }
@@ -343,7 +346,7 @@
   <div class="wrap plp-chips" data-cat-chips hidden></div>
 
   <section class="section wrap">
-    <div class="grid-head">
+    <div class="grid-head" id="grille">
       <h2 class="serif catalogue-head" data-grid-title>Tout le catalogue</h2>
       <span class="plp-count grid-head__count" data-piece-count></span>
     </div>
@@ -497,6 +500,7 @@
     const designerHeroEl = document.querySelector("[data-designer-hero]");
 
     const params = new URLSearchParams(location.search);
+    const collectionContext = JSON.parse(document.querySelector('#collection-context-initial').textContent);
     // Pretty Shopify-style URL: /collections/<handle> sets the coll filter
     // from the path. Falls back to ?coll= for backward-compat with anywhere
     // we still build URLs that way.
@@ -535,7 +539,7 @@
     // collection like /collections/chaises) -> "Mobilier".
     const activeNav = designerSlug
       ? "Designers"
-      : (params.get("brand") || BRAND_HANDLES.has(collFromPath)) ? "Marques" : "Mobilier";
+      : ((params.get("brand") && !collFromPath) || BRAND_HANDLES.has(collFromPath)) ? "Marques" : "Mobilier";
     initShell({ active: activeNav, transparentNav: !window.__hero?.editorial });
 
     // Catégories (36, alphabétique) — handle + libellé pour le panneau multi-
@@ -589,7 +593,7 @@
     // Title is set from the hardcoded map when known (V1.1 — avoids
     // the "Le catalogue" flash). Both get silently overwritten by the
     // Shopify payload when it arrives.
-    if (state.coll) {
+    if (state.coll && !collectionContext) {
       subEl.textContent = "";
       chipsBar.style.display = "none";
       if (COLL_TITLES[state.coll]) {
@@ -685,6 +689,8 @@
       // filtres" doesn't apply when the URL itself selects the slice.
       const emptyMsg = state.q
         ? `<p class="plp-empty">Aucun résultat pour « ${escapeHtml(state.q)} ». Essayez un autre mot-clé.</p>`
+        : state.coll && state.brand
+        ? `<p class="plp-empty">Aucune pièce de cette marque n’est disponible dans cette catégorie pour le moment. <a href="/collections/${encodeURIComponent(state.coll)}">Revenir à ${escapeHtml(collectionContext?.collectionName || COLL_TITLES[state.coll] || 'la catégorie')}</a>.</p>`
         : state.designer
         ? `<p class="plp-empty">Aucun produit pour ce designer pour le moment. <a href="/designers.html" style="color:var(--accent-ink)">Retour aux designers →</a></p>`
         : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
@@ -715,10 +721,14 @@
         ? { name: COLLECTION_META.title, description: COLLECTION_META.description }
         : null;
       const coll = collFromMeta || (state.coll ? COLLECTIONS_BY_HANDLE[state.coll] : null);
-      const brandName = state.brand ? (ALL.find((p) => slugify(p.brand) === state.brand)?.brand || "") : "";
+      const brandName = state.brand ? (collectionContext?.brand?.name || ALL.find((p) => slugify(p.brand) === state.brand)?.brand || state.brand) : "";
       if (state.q) {
         titleEl.textContent = `Résultats pour « ${state.q} »`;
         subEl.textContent = "";
+      } else if (state.coll && brandName) {
+        const familyName = collectionContext?.collectionName || coll?.name || COLL_TITLES[state.coll] || state.coll;
+        titleEl.textContent = `${familyName} · ${brandName}`;
+        subEl.textContent = `Les créations ${brandName} de notre sélection « ${familyName} ».`;
       } else if (coll) {
         titleEl.textContent = coll.name;
         subEl.textContent = coll.description || "";
@@ -741,6 +751,7 @@
         titleEl.textContent = "Le catalogue";
         subEl.textContent = "Mobilier de design, choisi pièce par pièce.";
       }
+      if (state.coll && state.brand) gridTitle.textContent = titleEl.textContent;
       // Fil d'Ariane (Accueil › niveau › page courante), construit depuis le
       // mode résolu + le titre final ci-dessus. render() est rappelé à chaque
       // changement de filtre, donc le fil reste synchronisé.
@@ -748,7 +759,11 @@
         const home = { label: "Accueil", href: "/" };
         const cur = { label: titleEl.textContent };
         let trail;
-        if (state.coll) {
+        if (state.coll && brandName) {
+          trail = [home, { label: "Mobilier", href: "/produits.html" },
+            { label: collectionContext?.collectionName || coll?.name || COLL_TITLES[state.coll] || state.coll, href: `/collections/${encodeURIComponent(state.coll)}` },
+            { label: brandName }];
+        } else if (state.coll) {
           const lvl = BRAND_HANDLES.has(state.coll)
             ? { label: "Marques", href: "/marques.html" }
             : { label: "Mobilier", href: "/produits.html" };
@@ -835,6 +850,7 @@
       if (cursor) q.set("cursor", cursor);
       if (state.coll) {
         if (state.tag) q.set("tag", state.tag);
+        if (state.brand) q.set("brand", state.brand);
         return `/api/collection/${encodeURIComponent(state.coll)}/products?${q}`;
       }
       // V3 designer route: OR-tag query against /api/products. Tags are
@@ -1226,10 +1242,17 @@
       });
     }
 
-    // Marque & tri = filtres CLIENT sur le set déjà chargé (pas de re-walk) :
-    // on repart page 1 et on re-rend. La marque est dans l'URL ; le tri non
-    // (mais on resync pour retirer un éventuel ?page résiduel).
-    brandSel.addEventListener("change", () => { state.brand = brandSel.value; state.page = 1; syncURL(); render(); });
+    // La marque est filtrée côté serveur : repartir de la nouvelle URL charge
+    // sa sélection complète et conserve le retour navigateur vers la précédente.
+    brandSel.addEventListener("change", () => {
+      const url = new URL(location.href);
+      if (brandSel.value) url.searchParams.set("brand", brandSel.value);
+      else url.searchParams.delete("brand");
+      url.searchParams.delete("page");
+      url.searchParams.delete("cursor");
+      url.hash = "";
+      location.assign(url.pathname + url.search);
+    });
     sortSel.addEventListener("change", () => { state.sort = sortSel.value; state.page = 1; syncURL(); render(); });
   </script>
 
