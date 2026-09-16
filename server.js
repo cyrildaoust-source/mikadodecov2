@@ -636,7 +636,7 @@ app.get('/collections/:handle', async (req, res) => {
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       }
       if (brand) {
-        if (!gi.length) html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Aucun produit pour cette marque dans cette catégorie.</p></div>');
+        if (!gi.length) html = html.replace('<div class="pgrid" data-grid></div>', () => `<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Aucun produit pour cette marque dans cette catégorie. <a href="${collectionUrl}">Revenir à ${ogEscape(collectionName)}</a>.</p></div>`);
         const next = new URLSearchParams({ brand });
         if (tag) next.set('tag', tag);
         if (cp.pageInfo?.hasNextPage && cp.pageInfo.endCursor) {

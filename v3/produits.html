@@ -689,6 +689,8 @@
       // filtres" doesn't apply when the URL itself selects the slice.
       const emptyMsg = state.q
         ? `<p class="plp-empty">Aucun résultat pour « ${escapeHtml(state.q)} ». Essayez un autre mot-clé.</p>`
+        : state.coll && state.brand
+        ? `<p class="plp-empty">Aucune pièce de cette marque n’est disponible dans cette catégorie pour le moment. <a href="/collections/${encodeURIComponent(state.coll)}">Revenir à ${escapeHtml(collectionContext?.collectionName || COLL_TITLES[state.coll] || 'la catégorie')}</a>.</p>`
         : state.designer
         ? `<p class="plp-empty">Aucun produit pour ce designer pour le moment. <a href="/designers.html" style="color:var(--accent-ink)">Retour aux designers →</a></p>`
         : `<p class="plp-empty">Aucune pièce ne correspond. Essayez d'élargir les filtres.</p>`;
