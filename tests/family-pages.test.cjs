@@ -141,7 +141,7 @@ test('all 28 family brand cards preserve their family in the destination', async
     const { html } = await page('/collections/' + handle);
     const links = [...html.matchAll(/class="bcard" href="([^"]+)"/g)].map(match => match[1]);
     assert.equal(links.length, 4, handle);
-    assert.ok(html.includes('href="/marques.html?collection=' + handle + '"'), 'Every family links to all of its brands');
+    assert.ok(!html.includes('/marques.html?collection='), 'Brand cards go straight to filtered products, without another directory');
     for (const link of links) {
       const url = new URL(link, base);
       assert.equal(url.pathname, '/collections/' + handle);
@@ -180,21 +180,13 @@ test('all active brands filter the generic catalogue from the first HTML respons
   assert.doesNotMatch(unknown.html, /class="pcard__brand"/);
 });
 
-test('unlisted brand names and all contextual brand directories retain the category', async () => {
+test('brand names stay readable and retired directories return to their family', async () => {
   const carl = await page('/collections/sieges?brand=carl-hansen-son');
   assert.match(carl.html, /Assises · Carl Hansen &amp; Søn/);
   for (const handle of [...Object.keys(families), 'sieges', 'outdoor']) {
-    const { html } = await page('/marques.html?collection=' + handle);
-    const context = JSON.parse(html.match(/id="brands-context-initial">(.*?)<\/script>/s)[1]);
-    assert.equal(context.collection.handle, handle);
-    assert.doesNotMatch(html.split('<script type="module">')[0], /marques-hero/);
-    assert.match(html, /<header class="chrome chrome--solid"/);
-    assert.ok(context.brands.some(brand => brand.slug === 'carl-hansen-son'));
-    const links = [...html.split('<script type="module">')[0].matchAll(/class="brandcard" href="([^"]+)"/g)].map(match => match[1]);
-    assert.equal(links.length, context.brands.length);
-    assert.ok(links.every(link => link.startsWith('/collections/' + handle + '?brand=')));
-    const api = await (await realFetch(base + '/api/collection/' + handle + '/brands')).json();
-    assert.deepEqual(api, context);
+    const response = await realFetch(base + '/marques.html?collection=' + handle, { redirect: 'manual' });
+    assert.equal(response.status, 302);
+    assert.equal(response.headers.get('location'), '/collections/' + handle);
   }
   const legacy = await realFetch(base + '/produits.html?coll=sieges&brand=hay', { redirect: 'manual' });
   assert.equal(legacy.headers.get('location'), '/collections/sieges?brand=hay');
@@ -223,20 +215,6 @@ test('product brand links preserve every category and brand, with a global fallb
   }
   assert.equal(productBrandHref('hay', brandMap, 'coll:hay'), '/collections/hay');
   assert.equal(productBrandHref('new-brand', brandMap), '/produits.html?brand=new-brand');
-});
-
-test('brand directory deduplicates child-only products, separates outdoor tables and fails on broken cursors', async () => {
-  const { collectionBrands } = require('../lib/collection-brand');
-  const chair = { id: 'chair', handle: 'chair', brand: 'Carl Hansen & Søn' };
-  const sources = { sieges: [chair], chaises: [chair, { id: 'hay', brand: 'HAY' }] };
-  const result = await collectionBrands('sieges', async (_, __, handle) => ({ collection: { handle }, items: sources[handle] || [], pageInfo: {} }));
-  assert.deepEqual(result.brands.map(brand => [brand.name, brand.productCount]), [['Carl Hansen & Søn', 1], ['HAY', 1]]);
-  const tables = await collectionBrands('tables', async (_, __, handle) => ({ collection: { handle }, items: handle === 'tables' ? [
-    { id: 'in', brand: 'Artek', productType: 'Table', tags: [] },
-    { id: 'out', brand: 'Fermob', productType: 'Table', tags: ['exterieur'] },
-  ] : [], pageInfo: {} }));
-  assert.deepEqual(tables.brands.map(brand => brand.name), ['Artek']);
-  await assert.rejects(collectionBrands('sieges', async () => ({ collection: {}, items: [], pageInfo: { hasNextPage: true, endCursor: 'stuck' } })), /did not advance/);
 });
 
 test('family brand destinations show the intersection in SSR, metadata and breadcrumb', async () => {

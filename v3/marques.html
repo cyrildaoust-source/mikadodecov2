@@ -76,13 +76,10 @@
   </main>
   <div id="site-footer"></div>
 
-  <script type="application/json" id="brands-context-initial">null</script>
   <script type="module">
     import { initShell, slugify, buildShaReady, versionedImg, breadcrumbHTML, escapeHtml } from "/shared.js";
-    const collection = new URLSearchParams(location.search).get("collection") || "";
-    initShell({ active: "Marques", transparentNav: !collection });
-    const initial = JSON.parse(document.querySelector("#brands-context-initial").textContent);
-    if (!collection) document.querySelector("[data-breadcrumb]").innerHTML =
+    initShell({ active: "Marques", transparentNav: true });
+    document.querySelector("[data-breadcrumb]").innerHTML =
       breadcrumbHTML([{ label: "Accueil", href: "/" }, { label: "Marques" }]);
 
     const ORIGIN = { fermob:"France", hay:"Danemark", vitra:"Suisse", muuto:"Danemark", "tradition":"Danemark", "ferm-living":"Danemark", fatboy:"Pays-Bas", hkliving:"Pays-Bas", "pols-potten":"Pays-Bas", alessi:"Italie", artek:"Finlande", relaxound:"Allemagne", gubi:"Danemark" };
@@ -99,19 +96,9 @@
     // (href). buildShaReady reste pour le cache-busting logos.
     Promise.all([
       buildShaReady(),
-      (initial ? Promise.resolve(initial) : fetch(collection ? `/api/collection/${encodeURIComponent(collection)}/brands` : "/api/brands", { cache: "no-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status))),
+      fetch("/api/brands", { cache: "no-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status)),
       fetch("/mega-menu-brands.json", { cache: "no-cache" }).then((r) => r.ok ? r.json() : { brands: [] }).catch(() => ({ brands: [] })),
-    ]).then(([, payload, curated]) => {
-      const active = collection ? payload.brands : payload;
-      if (collection) {
-        const name = payload.collection.title;
-        const href = `/collections/${encodeURIComponent(collection)}`;
-        document.querySelector("h1").textContent = `${name} · Les marques`;
-        document.querySelector(".subhero__in p").textContent = `Toutes les marques de notre sélection « ${name} ».`;
-        document.querySelector("[data-breadcrumb]").innerHTML = breadcrumbHTML([{ label: "Accueil", href: "/" }, { label: name, href }, { label: "Les marques" }]);
-        const back = document.querySelector(".feature__body .btn");
-        back.href = href; back.textContent = `Revenir à ${name}`;
-      }
+    ]).then(([, active, curated]) => {
       const hrefByName = {};
       for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
       const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
@@ -121,7 +108,7 @@
         const origin = ORIGIN[slug] || "Europe";
         const safeName = escapeHtml(b.name);
         const logoSrc  = versionedImg(`/images/brands/${slug}.svg`);
-        const href = collection ? `/collections/${encodeURIComponent(collection)}?brand=${encodeURIComponent(slug)}` : hrefByName[b.name.toLowerCase()] || `/produits.html?brand=${slug}`;
+        const href = hrefByName[b.name.toLowerCase()] || `/produits.html?brand=${slug}`;
         return `<a class="brandcard" href="${href}">
           <span class="brandcard__origin">${origin}</span>
           <div>
@@ -129,8 +116,8 @@
               onerror="const name=document.createElement('span');name.className='brandcard__name';name.textContent=this.alt;this.replaceWith(name)" />
           </div>
         </a>`;
-      }).join("") || `<p class="plp-empty">Aucune marque disponible dans cette catégorie pour le moment.</p>`;
-    }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Impossible de charger les marques. <a href="${collection ? `/marques.html?collection=${encodeURIComponent(collection)}` : "/marques.html"}">Réessayer</a></p>`; console.warn(e); });
+      }).join("");
+    }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Les marques se chargent bientôt. <a href="/produits.html">Retour au catalogue</a></p>`; console.warn(e); });
   </script>
 </body>
 </html>
