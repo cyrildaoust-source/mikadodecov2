@@ -883,7 +883,15 @@ async function injectBrandsIndex(html, context = null) {
     const title = context.collection.title + ' · Les marques';
     const description = `Toutes les marques de notre sélection « ${context.collection.title} ».`;
     const href = '/collections/' + encodeURIComponent(context.collection.handle);
-    html = renderWithOg(html, { title: title + ' · Mikado Deco', description, image: OG_DEFAULT, url: ORIGIN + '/marques.html?collection=' + encodeURIComponent(context.collection.handle) });
+    const family = Object.hasOwn(families, context.collection.handle) ? families[context.collection.handle] : null;
+    const richImage = ({ sieges: '/images/familles/assises/hero.webp', outdoor: '/images/familles/jardin/1.webp' })[context.collection.handle];
+    const hero = family || richImage ? { img: family ? imageAtWidth(family.hero, 2000) : richImage, alt: family?.heroAlt || context.collection.title,
+      style: photoStyle({ position: family?.heroPosition, mobilePosition: family?.heroMobilePosition }) } : getCollectionHero(context.collection.handle);
+    if (hero) {
+      html = html.replace('<section class="subhero">', '<section class="subhero subhero--editorial">');
+      html = html.replace(/<picture>[\s\S]*?<\/picture>/, () => `<img class="subhero__img editorial-photo" src="${ogEscape(hero.img)}" alt="${ogEscape(hero.alt)}" style="${ogEscape(hero.style)}" fetchpriority="high">`);
+    }
+    html = renderWithOg(html, { title: title + ' · Mikado Deco', description, image: hero ? absUrl(hero.img) : OG_DEFAULT, url: ORIGIN + '/marques.html?collection=' + encodeURIComponent(context.collection.handle) });
     html = html.replace('<h1>Les marques que<br>nous défendons.</h1>', () => '<h1>' + ogEscape(title) + '</h1>');
     html = html.replace('Un nombre volontairement réduit de marques européennes, pour mieux les connaître.', () => ogEscape(description));
     html = html.replace('<div class="wrap" data-breadcrumb></div>', () => `<div class="wrap" data-breadcrumb><nav class="breadcrumb" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="${href}">${ogEscape(context.collection.title)}</a></li><li><span aria-current="page">Les marques</span></li></ol></nav></div>`);
@@ -1006,7 +1014,7 @@ app.get(/.*/, async (req, res, next) => {
   // injectChrome → sans nav/pied/panier). Navigateurs : HTML inchangé.
   if (wantsMarkdown(req)) return sendMarkdown(res, htmlToMarkdown(raw, ORIGIN + req.path));
   res.set('Content-Type', 'text/html; charset=utf-8');
-  return res.send(injectChrome(raw, rel));
+  return res.send(injectChrome(raw, rel, rel === 'marques.html' && Boolean(req.query.collection)));
 });
 
 app.use(express.static(path.join(__dirname, 'v3')));

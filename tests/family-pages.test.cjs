@@ -187,6 +187,8 @@ test('unlisted brand names and all contextual brand directories retain the categ
     const { html } = await page('/marques.html?collection=' + handle);
     const context = JSON.parse(html.match(/id="brands-context-initial">(.*?)<\/script>/s)[1]);
     assert.equal(context.collection.handle, handle);
+    assert.doesNotMatch(html.split('<script type="module">')[0], /marques-hero/);
+    assert.match(html, /<header class="chrome chrome--solid"/);
     assert.ok(context.brands.some(brand => brand.slug === 'carl-hansen-son'));
     const links = [...html.split('<script type="module">')[0].matchAll(/class="brandcard" href="([^"]+)"/g)].map(match => match[1]);
     assert.equal(links.length, context.brands.length);

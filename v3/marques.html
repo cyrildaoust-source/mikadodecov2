@@ -79,8 +79,8 @@
   <script type="application/json" id="brands-context-initial">null</script>
   <script type="module">
     import { initShell, slugify, buildShaReady, versionedImg, breadcrumbHTML, escapeHtml } from "/shared.js";
-    initShell({ active: "Marques", transparentNav: true });
     const collection = new URLSearchParams(location.search).get("collection") || "";
+    initShell({ active: "Marques", transparentNav: !collection });
     const initial = JSON.parse(document.querySelector("#brands-context-initial").textContent);
     if (!collection) document.querySelector("[data-breadcrumb]").innerHTML =
       breadcrumbHTML([{ label: "Accueil", href: "/" }, { label: "Marques" }]);
