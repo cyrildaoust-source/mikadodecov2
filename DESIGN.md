@@ -39,6 +39,8 @@ Les pages composent les composants. Elles ne redéfinissent pas leurs éléments
 
 Décision du propriétaire du 16 septembre, après la première refonte de Mobilier : enrichir l’entrée du catalogue avec « Les icônes du design » et des sous-catégories du méga menu. La sélection globale comporte quatre modèles fixes de quatre marques : CH24 Wishbone, Flowerpot VP9, Noguchi Dining et Tabouret 60. Elle est distincte des quatre chaises d’Assises. Dix sous-catégories photographiques suivent cette sélection. Réutiliser les cartes standards ; la refonte des filtres reste une étape séparée.
 
+Décision du propriétaire du 16 septembre, pagination : à partir de la page 2 de Mobilier, conserver un en-tête compact, le fil d’Ariane et les filtres ; masquer le bandeau photographique, les familles, les icônes et les sous-catégories. Le retour à la page 1 rétablit la découverte. La remontée automatique reste active. Dans tous les catalogues numérotés, afficher les numéros seulement lorsque le total est connu, jamais un total provisoire qui augmente au chargement.
+
 ## Vérification d’une modification
 
 Contrôler la page réelle dans la preview sur ordinateur, priorité actuelle du propriétaire : proportions, ordre des éléments, images, liens, défilement et produits réellement affichés. Comparer les cartes modifiées à celles du catalogue. Les tests de données et de pagination ne remplacent pas cette revue visuelle. Donner le lien de preview dans la livraison.

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createNavigation, selectionURL, sourceSelection, productHref, listingTrail, productTrail, collectionTrail, breadcrumbHTML, breadcrumbData, productBrandDestination } from '../v3/navigation.mjs';
-import { walkCatalog, sortCatalog } from '../v3/catalog-pagination.mjs';
+import { walkCatalog, sortCatalog, catalogPagination } from '../v3/catalog-pagination.mjs';
 const read = path => JSON.parse(fs.readFileSync(new URL(path, import.meta.url)));
 const nav = createNavigation(read('../v3/navigation-data.json'), read('../v3/mega-menu-brands.json').brands, read('../v3/designers-data.json').designers);
 const url = path => new URL(path, 'https://www.mikadodeco.be');
@@ -82,4 +82,16 @@ test('price sort follows the displayed starting price, including multi-variant p
  assert.deepEqual(sortCatalog(products,'asc').map(p=>p.name),['C','A','B']);
  assert.deepEqual(sortCatalog(products,'desc').map(p=>p.name),['B','A','C']);
  assert.equal(products[0].name,'A');
+});
+
+test('numbered pagination stays unknown until completion and preserves a requested later page', () => {
+ for (const count of [0, 100, 500, 1700, 2920]) {
+  assert.deepEqual(catalogPagination(count, { page: 12, loading: true }), { page: 12, totalPages: null, status: 'loading' });
+ }
+ assert.deepEqual(catalogPagination(100, { page: 12, incomplete: true }), { page: 12, totalPages: null, status: 'error' });
+ assert.deepEqual(catalogPagination(2920, { page: 12 }), { page: 12, totalPages: 82, status: 'ready' });
+ assert.deepEqual(catalogPagination(50, { page: 12 }), { page: 2, totalPages: 2, status: 'ready' });
+ assert.deepEqual(catalogPagination(0, { page: 2 }), { page: 1, totalPages: 1, status: 'ready' });
+ assert.equal(catalogPagination(36).totalPages, 1);
+ assert.equal(catalogPagination(37).totalPages, 2);
 });
