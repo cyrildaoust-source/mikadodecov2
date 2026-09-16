@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const { splitDimensionMedia } = require('./lib/dimension-media');
 const cors    = require('cors');
 const path    = require('path');
 const fs      = require('fs');
@@ -280,8 +281,8 @@ function specAccordionSsr(p) {
   const groups = _specs.buildProductSpecGroups(p);
   const panelBody = (g) => g.key === 'description'
     ? '<p class="pdp-desc">' + esc(g.text) + '</p>'
-    : '<dl class="pdp-specs">' + g.rows.map((r) => '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(String(r[1])) + '</dd></div>').join('') + '</dl>';
-  const shown = groups.filter((g) => g.key === 'description' ? !!g.text : g.rows.length > 0);
+    : '<dl class="pdp-specs">' + g.rows.map((r) => '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(String(r[1])) + '</dd></div>').join('') + '</dl>' + _specs.renderDimensionImages(g, esc);
+  const shown = groups.filter((g) => g.key === 'description' ? !!g.text : (g.rows.length > 0 || g.images?.length > 0));
   if (!shown.length) return '';
   return '<section class="section pdp-section pdp-acc" data-accordion>' + shown.map((g, i) =>
     '<div class="pdp-acc__item"><h2 class="catalogue-head serif pdp-acc__head"><button type="button" class="pdp-acc__btn" id="pdp-acc-btn-' + g.key + '" aria-controls="pdp-acc-panel-' + g.key + '" aria-expanded="' + (i === 0 ? 'true' : 'false') + '"><span class="pdp-acc__label">' + esc(g.label) + '</span><span class="pdp-acc__chevron" aria-hidden="true">▾</span></button></h2>'
@@ -1141,6 +1142,7 @@ function mapProduct(node, opts = {}) {
   // `full` adds PDP-only fields (gallery thumbs[]) that list endpoints don't read,
   // so PLP/home/collection payloads stay lean. firstImageRaw stays ungated (1 url).
   const full = opts.full === true;
+  const { photos, dimensions: dimensionImages } = splitDimensionMedia(node);
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
   const variant = node.variants.edges[0]?.node;
@@ -1169,6 +1171,7 @@ function mapProduct(node, opts = {}) {
     subcategory: meta.subcategory || node.tags.find(t => t.startsWith('sub:'))?.replace('sub:', '') || '',
     material:    meta.material    || meta.materiaux || '',
     dimensions:  meta.dimensions  || '',
+    ...(full ? { dimensionImages: dimensionImages.map(i => ({ url: shopifyResize(i.url, PDP_IMAGE_WIDTH), alt: i.altText || 'Dessin de dimensions' })) } : {}),
     // Caractéristiques PDP additionnelles (métafields custom.* — vides tant que
     // l'importer Shopify n'a pas créé+rempli les définitions ; lues seulement par
     // PRODUCT_QUERY → s'affichent toutes seules une fois remplies, sans déploiement).
@@ -1221,17 +1224,17 @@ function mapProduct(node, opts = {}) {
     // Dedup runs on the RAW urls; only the chosen url is resized afterwards.
     image2:      (() => {
       const featured = node.featuredImage?.url;
-      const imgs = (node.images?.edges || []).map(e => e?.node?.url).filter(Boolean);
+      const imgs = photos.map(i => i.url);
       const second = imgs.find(u => u !== featured) || imgs[1] || null;
       return second ? shopifyResize(second, CARD_IMAGE_WIDTH) : null;
     })(),
     // images = ordered list for the PDP gallery main image — resized webp. Stays
     // index-parallel to thumbs[] below (same source/order/filter) so the front
     // maps a clicked thumbnail back to its full-width image by index.
-    images:      (node.images?.edges || []).map(e => shopifyResize(e?.node?.url, PDP_IMAGE_WIDTH)).filter(Boolean),
+    images:      photos.map(i => shopifyResize(i.url, PDP_IMAGE_WIDTH)),
     // thumbs[] (gallery strip, ~8 urls/produit) n'est lu que par la PDP → gated
     // derrière `full` pour ne pas alourdir les réponses liste (PLP/accueil/collections).
-    ...(full ? { thumbs: (node.images?.edges || []).map(e => shopifyResize(e?.node?.url, PDP_THUMB_WIDTH)).filter(Boolean) } : {}),
+    ...(full ? { thumbs: photos.map(i => shopifyResize(i.url, PDP_THUMB_WIDTH)) } : {}),
     // firstImageRaw = première image NON redimensionnée (1 url, ungated). La route
     // SSR OG/JSON-LD s'en sert : elle veut un JPEG (scrapers sociaux gèrent mal le
     // WebP en og:image) à sa propre largeur — découplé de images[] (webp galerie).

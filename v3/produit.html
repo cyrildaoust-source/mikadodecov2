@@ -64,7 +64,7 @@
 
   <script type="module">
     import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, breadcrumbHTML, loadBrandHandles } from "/shared.js";
-    import { buildProductSpecGroups } from "/product-specs.mjs";
+    import { buildProductSpecGroups, renderDimensionImages } from "/product-specs.mjs";
     initShell({ active: "Mobilier", transparentNav: false });
 
     const params = new URLSearchParams(location.search);
@@ -247,11 +247,11 @@
       const specPanelBody = (g) =>
         g.key === "description"
           ? `<p class="pdp-desc">${escapeHtml(g.text)}</p>`
-          : `<dl class="pdp-specs">${g.rows.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join("")}${g.key === "technique" && hasSku ? `<div><dt>Référence</dt><dd data-spec-sku>${escapeHtml(current.sku || "—")}</dd></div>` : ""}</dl>`;
+          : `<dl class="pdp-specs">${g.rows.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join("")}${g.key === "technique" && hasSku ? `<div><dt>Référence</dt><dd data-spec-sku>${escapeHtml(current.sku || "—")}</dd></div>` : ""}</dl>${renderDimensionImages(g, escapeHtml)}`;
       const specShown = specGroups.filter((g) =>
         g.key === "description" ? !!g.text
         : g.key === "technique" ? (g.rows.length > 0 || hasSku)
-        : g.rows.length > 0);
+        : (g.rows.length > 0 || g.images?.length > 0));
       const specAccordionHTML = specShown.length
         ? `<section class="section pdp-section pdp-acc" data-accordion>${specShown.map((g, i) => `<div class="pdp-acc__item">
             <h2 class="catalogue-head serif pdp-acc__head"><button type="button" class="pdp-acc__btn" id="pdp-acc-btn-${g.key}" aria-controls="pdp-acc-panel-${g.key}" aria-expanded="${i === 0 ? "true" : "false"}"><span class="pdp-acc__label">${escapeHtml(g.label)}</span><span class="pdp-acc__chevron" aria-hidden="true">▾</span></button></h2>
@@ -556,7 +556,7 @@
         lbIndex = (i + lbSeq.length) % lbSeq.length;
         const src = lbSeq[lbIndex];
         lbImg.src = src; lbImg.srcset = srcsetFor(src); lbImg.sizes = "92vw";
-        lbImg.alt = `${p.name} — photo ${lbIndex + 1}`;
+        lbImg.alt = lbRoot.classList.contains("pdplb--dimensions") ? `${p.name} — dessin de dimensions` : `${p.name} — photo ${lbIndex + 1}`;
       };
       function lbClose() {
         lbRoot.classList.remove("open");
@@ -575,8 +575,10 @@
         if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
-      const lbOpen = (startSrc) => {
-        lbSeq = lbBuild();
+      const lbOpen = (startSrc, dimensions = false) => {
+        lbRoot.classList.toggle("pdplb--dimensions", dimensions);
+        lbStage.setAttribute("aria-label", dimensions ? "Dessin de dimensions" : "Galerie photos");
+        lbSeq = dimensions ? [startSrc] : lbBuild();
         if (!lbSeq.length) return;
         lbLastFocus = document.activeElement;
         const target = norm(startSrc);
@@ -592,6 +594,14 @@
       lbRoot.querySelector("[data-lb-close]").addEventListener("click", lbClose);
       lbRoot.querySelector("[data-lb-prev]")?.addEventListener("click", () => lbShow(lbIndex - 1));
       lbRoot.querySelector("[data-lb-next]")?.addEventListener("click", () => lbShow(lbIndex + 1));
+      host.querySelectorAll("[data-dimension-image]").forEach(link => {
+        link.addEventListener("click", e => {
+          // Retain normal browser behavior for explicitly requested new tabs.
+          if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+          e.preventDefault();
+          lbOpen(link.href, true);
+        });
+      });
       main.addEventListener("click", () => lbOpen(main.currentSrc || main.src));
       main.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); lbOpen(main.currentSrc || main.src); } });
       if (railEl) {

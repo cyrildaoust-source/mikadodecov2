@@ -39,3 +39,20 @@ Les pages composent les composants. Elles ne redéfinissent pas leurs éléments
 ## Vérification d’une modification
 
 Contrôler la page réelle dans la preview sur ordinateur, priorité actuelle du propriétaire : proportions, ordre des éléments, images, liens, défilement et produits réellement affichés. Comparer les cartes modifiées à celles du catalogue. Les tests de données et de pagination ne remplacent pas cette revue visuelle. Donner le lien de preview dans la livraison.
+
+## Dessins de dimensions
+
+Les schémas techniques doivent se fondre dans le fond `--paper`, sans rectangle
+blanc, dans la rubrique Dimensions comme dans leur agrandissement. Le composant
+commun utilise une fusion multiplicative : le blanc prend la couleur du fond,
+les traits et cotes noirs restent lisibles. Les proportions sont conservées.
+Cette règle s'applique au rôle « dessin de dimensions », jamais aux photographies
+de produits ou d'ambiance. Vérifier les contours, les cotes et le retour clavier
+après fermeture de l'agrandissement. Ne pas annoncer une transparence du fichier
+source : il reste intact dans Shopify.
+
+Le pipeline principal transmet ce rôle avec le préfixe alternatif réservé
+`Dessin de dimensions — `. Le site le reconnaît pour toutes les marques et utilise
+le même composant Dimensions sur fond papier. Les anciens libellés libres restent
+pris en charge uniquement pour les schémas AndTradition déjà revus. Une URL ou un
+nom de fichier ne suffisent pas à déclarer ce rôle.

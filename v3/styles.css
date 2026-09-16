@@ -1748,3 +1748,14 @@ body.pdplb-locked { overflow: hidden; }
 }
 
 .subhero--editorial .subhero__scrim { background: linear-gradient(95deg, rgba(var(--scrim),.58) 0%, rgba(var(--scrim),.25) 46%, transparent 82%); }
+
+/* Technical drawings belong to Dimensions, at their original aspect ratio. */
+.pdp-dimension-image { margin: var(--gap) 0 0; background: var(--paper); isolation: isolate; }
+.pdp-dimension-image a { display: block; width: fit-content; max-width: 100%; }
+.pdp-dimension-image img { display: block; width: 100%; max-width: 480px; height: auto; mix-blend-mode: multiply; }
+
+/* White in technical line drawings blends into the site's paper, also in zoom.
+   Keep this role-specific: product photography must retain its actual colours. */
+.pdplb--dimensions .pdplb__stage { background: var(--paper); isolation: isolate; }
+.pdplb--dimensions .pdplb__img { background: transparent; mix-blend-mode: multiply; }
+.pdplb--dimensions .pdplb__nav { display: none; }
