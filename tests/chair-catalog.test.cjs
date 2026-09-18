@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const realFetch=global.fetch;
 let server,base,reads=0,fail=false;
 const node=id=>({id:`gid://shopify/Product/${id}`,handle:`chaise-${id}`,title:`Chaise ${id}`,vendor:id%2?'HAY':'Vitra',productType:'chaise',description:'Une chaise.',tags:[],availableForSale:true,totalInventory:2,
-  collections:{edges:[{node:{handle:'chaises'}}]},featuredImage:{url:`https://cdn.shopify.com/${id}.jpg`},images:{edges:[{node:{url:`https://cdn.shopify.com/${id}.jpg`}}]},
+  collections:{edges:[{node:{handle:'chaises'}}]},featuredImage:{url:`https://cdn.shopify.com/${id}.jpg`},images:{edges:[{node:{url:`https://cdn.shopify.com/${id}.jpg`}},{node:{url:`https://cdn.shopify.com/${id}-ambiance.jpg`}}]},
   priceRange:{minVariantPrice:{amount:'400',currencyCode:'EUR'},maxVariantPrice:{amount:'700.95',currencyCode:'EUR'}},compareAtPriceRange:{minVariantPrice:{amount:'0'}},metafields:[],
   filterMetafields:[{namespace:'custom',key:'usage',type:'single_line_text_field',value:'Intérieur'},{namespace:'custom',key:'material',type:'single_line_text_field',value:'Bois'}],
   variants:{pageInfo:{hasNextPage:false,endCursor:null},edges:[{node:{id:`gid://shopify/ProductVariant/${id*10}`,title:'Beige',price:{amount:'400'},availableForSale:true,quantityAvailable:2,selectedOptions:[{name:'Couleur',value:'Beige'}],image:{url:`https://cdn.shopify.com/${id}-beige.jpg`}}},{node:{id:`gid://shopify/ProductVariant/${id*10+1}`,title:'Noir',price:{amount:'700.95'},availableForSale:true,quantityAvailable:0,selectedOptions:[{name:'Couleur',value:'Noir'}],image:{url:`https://cdn.shopify.com/${id}-noir.jpg`}}}]} });
@@ -38,6 +38,8 @@ test('le rendu serveur et le contrôleur utilisent les mêmes filtres ; liens pa
   assert.match(html,/aria-label="Filtrer les chaises"/);
   assert.match(html,/variant=10/);
   assert.match(html,/pcard__finish-label/);assert.match(html,/data-card-finish=/);assert.match(html,/aria-current="true"/);
+  assert.match(html,/<img class="alt" src="https:\/\/cdn.shopify.com\/1-ambiance.jpg/);
+  assert.ok(data.items.every(p=>p.image2.includes('-ambiance.jpg')&&p.finishChoices.every(v=>v.image2===p.image2)));
   const page2=await (await realFetch(base+'/collections/chaises?page=2')).text();
   assert.equal(seed(page2).items.length,5);assert.match(page2,/data-chair-continuation/);
   assert.doesNotMatch(page2,/<section class="subhero/);
