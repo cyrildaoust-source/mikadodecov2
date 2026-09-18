@@ -84,8 +84,6 @@ La source est le [guide d’entretien officiel Artek](https://www.artek.fi/en/gu
 
 Après correction, l’API publique retourne toujours 132 modèles, avec 87 références pour l’intérieur et 53 pour l’extérieur ; les produits à double usage participent aux deux comptes. La facette d’usage non renseigné a disparu naturellement. La preview sur ordinateur confirme 18 modèles Artek classés en intérieur. Les 63 tests ont été relancés après la modification des données et passent. Cette intervention porte sur les données ; le propriétaire a demandé de reprendre la présentation des filtres ultérieurement.
 
-## Recherche du site : état réel et prochain raccordement
-
 ## Finitions représentatives — 18 septembre 2026
 
 Le pilote conserve un modèle par carte. Parmi les variantes satisfaisant tous les critères, le classement privilégie les variantes achetables, puis la correspondance de couleur (autres couleurs et composants explicitement nommés pénalisés), puis le prix et un identifiant stable. Le texte des options sert de reprise déterministe ; ce classement n’est pas une reconnaissance des photos ni une certification de couleur. Les familles de couleur vérifiées restent prioritaires pour le filtrage. Le bois peint reste distinct d’un aspect bois naturel. Une matière commune explicitement renseignée n’est plus perdue quand les variantes ne proposent pas de famille de matière alternative.

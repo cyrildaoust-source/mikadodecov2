@@ -8,7 +8,7 @@ export function finishHTML(p, hrefFor) {
   if (!p.finishLabel) return '';
   const choices = Array.isArray(p.finishChoices) ? p.finishChoices : [];
   const label = `<div class="pcard__finish-label" title="${escape(p.finishLabel)}">${escape(p.finishLabel)}</div>`;
-  if (choices.length < 2) return label;
+  if (choices.length < 2) return label + '<div class="pcard__finishes" aria-hidden="true"></div>';
   const links = choices.map(v => {
     const src = thumbnail(v.image);
     if (!src) return '';
