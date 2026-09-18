@@ -24,6 +24,28 @@ test('les matières proposées par les options restent liées à la variante cho
   assert.equal(filterCatalog([p],{material:'bois',color:'noir'}).total,0);
   assert.equal(filterCatalog([p],{material:'metal',color:'noir'}).total,1);
 });
+test('le survol garde une vue du modèle après filtrage et pour chaque finition proposée',()=>{
+  const scene='https://cdn.shopify.com/scene.jpg?v=4&width=1400&format=webp';
+  const p=chair(1,[{options:[{name:'Couleur',value:'Blanc'}]},{options:[{name:'Couleur',value:'Noir'}]}],{card:{image2:scene,images:[scene]}});
+  const hit=filterCatalog([p],{color:'blanc'}).items[0];
+  assert.equal(hit.image,p.variants[0].image);
+  assert.equal(hit.image2,'https://cdn.shopify.com/scene.jpg?v=4&width=600&format=webp');
+  assert.equal(hit.variantId,p.variants[0].id);assert.equal(hit.price,p.variants[0].price);
+  const all=filterCatalog([p],{}).items[0];
+  assert.ok(all.finishChoices.every(v=>v.image2===hit.image2));
+});
+test('le survol ignore les packshots des autres variantes et les doublons CDN',()=>{
+  const white='https://cdn.shopify.com/white.jpg?v=1&width=1400';
+  const black='https://cdn.shopify.com/black.jpg?v=1&width=1400';
+  const p=chair(1,[{image:white,options:[{name:'Couleur',value:'Blanc'}]},{image:black}],{card:{
+    image2:'https://cdn.shopify.com/black.jpg?v=2&width=600&format=webp',
+    images:['https://cdn.shopify.com/white.jpg?v=2&width=600&format=webp',black,'https://cdn.shopify.com/detail.jpg'],
+  }});
+  const hit=filterCatalog([p],{color:'blanc'}).items[0];
+  assert.equal(hit.image2,'https://cdn.shopify.com/detail.jpg?width=600&format=webp');
+  p.card.images=[white,black];
+  assert.equal(filterCatalog([p],{color:'blanc'}).items[0].image2,null);
+});
 test('la couleur choisit une finition représentative ; budget, stock et images restent sur la même variante',()=>{
   const finish=(value,price,extra={})=>({price,options:[{name:'Finition',value}],...extra});
   const p=chair(69,[finish('Bouleau',476),finish('Lamifié blanc',509),finish('Bouleau / laqué blanc',510),finish('Laqué blanc',534),finish('Laqué noir',534)],{card:{brand:'Artek',tags:['bouleau'],material:''}});

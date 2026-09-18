@@ -270,6 +270,7 @@ function plpCardSsr(p, source = '') {
   return '<div class="pcard">'
     + '<a class="pcard__media" href="' + href + '" aria-label="' + ogEscape(p.name || '') + '">'
     + (p.image ? '<img class="main" src="' + ogEscape(p.image) + '" alt="' + ogEscape((p.name || '') + (p.finishLabel ? ' · ' + p.finishLabel : '')) + '" loading="lazy" decoding="async" />' : '')
+    + (p.image2 && p.image2 !== p.image ? '<img class="alt" src="' + ogEscape(p.image2) + '" alt="" loading="lazy" decoding="async" />' : '')
     + '</a>'
     + '<div class="pcard__brand">' + ogEscape(p.brand || '') + '</div>'
     + '<div class="pcard__row"><a class="pcard__name" href="' + href + '">' + ogEscape(p.name || '') + '</a></div>'

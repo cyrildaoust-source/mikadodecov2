@@ -595,7 +595,7 @@ export function currentViewFrom() {
 
 export function productCard(p, source) {
   const href = escapeHtml(productHref(p, typeof source === 'string' ? source : location.pathname + location.search));
-  const alt = p.image2 && p.image2 !== p.image ? `<img class="alt" src="${p.image2}" alt="" loading="lazy" />` : "";
+  const alt = p.image2 && p.image2 !== p.image ? `<img class="alt" src="${escapeHtml(p.image2)}" alt="" loading="lazy" />` : "";
   const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`
     : p.badge === "limite" ? `<span class="tag">Édition limitée</span>` : "";

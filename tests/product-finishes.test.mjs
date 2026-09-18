@@ -6,9 +6,10 @@ import {productHref} from '../v3/navigation.mjs';
 test('changer de finition conserve la fiche et le retour filtré, remplace prix, image et disponibilité ensemble',()=>{
   const p={handle:'chaise-69',name:'Chaise 69',variantId:'gid://shopify/ProductVariant/1',matchedVariantId:'gid://shopify/ProductVariant/1',price:534,finishLabel:'Blanc',finishCount:2,finishChoices:[
     {variantId:'gid://shopify/ProductVariant/1',matchedVariantId:'gid://shopify/ProductVariant/1',finishLabel:'Blanc',price:534,image:'https://cdn.shopify.com/white.jpg'},
-    {variantId:'gid://shopify/ProductVariant/2',matchedVariantId:'gid://shopify/ProductVariant/2',finishLabel:'Bouleau / blanc',price:510,priceIsExact:true,image:'https://cdn.shopify.com/mixed.jpg',image2:null,availabilityLabel:'En stock',inStock:true,purchaseDisabled:false}]};
+    {variantId:'gid://shopify/ProductVariant/2',matchedVariantId:'gid://shopify/ProductVariant/2',finishLabel:'Bouleau / blanc',price:510,priceIsExact:true,image:'https://cdn.shopify.com/mixed.jpg',image2:'https://cdn.shopify.com/scene.jpg',availabilityLabel:'En stock',inStock:true,purchaseDisabled:false}]};
   const selected=selectCardFinish(p,p.finishChoices[1].variantId);
   assert.equal(selected.price,510);assert.equal(selected.image,'https://cdn.shopify.com/mixed.jpg');assert.equal(selected.inStock,true);
+  assert.equal(selected.image2,'https://cdn.shopify.com/scene.jpg');
   assert.equal(p.price,534);assert.equal(selectCardFinish(p,'absent'),p);
   const href=id=>productHref(selected,'/collections/chaises?brand=artek&color=blanc',id);
   const html=finishHTML(selected,href);
