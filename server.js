@@ -219,9 +219,10 @@ function renderWithOg(templateHtml, { title, description, image, url }) {
   return html;
 }
 // Une seule règle de hiérarchie et un seul BreadcrumbList, visibles avant le JS.
-let navigation, navigationRules;
-const _navigationReady = import('./v3/navigation.mjs').then(m => {
+let navigation, navigationRules, finishHTML;
+const _navigationReady = Promise.all([import('./v3/navigation.mjs'), import('./v3/product-finishes.mjs')]).then(([m, finishes]) => {
   navigation = m;
+  finishHTML = finishes.finishHTML;
   navigationRules = m.createNavigation(
     JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/navigation-data.json'), 'utf8')),
     JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/mega-menu-brands.json'), 'utf8')).brands,
@@ -248,6 +249,7 @@ const euroS = (n) => (n || n === 0)
   ? new Intl.NumberFormat('fr-BE', { style: 'currency', currency: 'EUR', maximumFractionDigits: Number.isInteger(Number(n)) ? 0 : 2 }).format(n)
   : '';
 const priceLabelS = (p) => {
+  if (p.priceIsExact) return euroS(p.price);
   const min = p.priceMin != null ? p.priceMin : p.price;
   const max = p.priceMax != null ? p.priceMax : p.price;
   if (min != null && max != null && max - min > 0.5) return 'À partir de ' + euroS(min);
@@ -267,10 +269,11 @@ function plpCardSsr(p, source = '') {
     : '<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>' + (p.longDelay ? 'Sur commande · délai sur demande' : 'Livraison ' + ogEscape(p.leadTimeLabel || '3-4 semaines')) + '</div>';
   return '<div class="pcard">'
     + '<a class="pcard__media" href="' + href + '" aria-label="' + ogEscape(p.name || '') + '">'
-    + (p.image ? '<img class="main" src="' + ogEscape(p.image) + '" alt="' + ogEscape(p.name || '') + '" loading="lazy" decoding="async" />' : '')
+    + (p.image ? '<img class="main" src="' + ogEscape(p.image) + '" alt="' + ogEscape((p.name || '') + (p.finishLabel ? ' · ' + p.finishLabel : '')) + '" loading="lazy" decoding="async" />' : '')
     + '</a>'
     + '<div class="pcard__brand">' + ogEscape(p.brand || '') + '</div>'
     + '<div class="pcard__row"><a class="pcard__name" href="' + href + '">' + ogEscape(p.name || '') + '</a></div>'
+    + finishHTML(p, variant => navigation.productHref(p, source, variant))
     + avail
     + '<div class="pcard__price">' + priceLabelS(p) + '</div>'
     + '</div>';

@@ -24,6 +24,38 @@ test('les matières proposées par les options restent liées à la variante cho
   assert.equal(filterCatalog([p],{material:'bois',color:'noir'}).total,0);
   assert.equal(filterCatalog([p],{material:'metal',color:'noir'}).total,1);
 });
+test('la couleur choisit une finition représentative ; budget, stock et images restent sur la même variante',()=>{
+  const finish=(value,price,extra={})=>({price,options:[{name:'Finition',value}],...extra});
+  const p=chair(69,[finish('Bouleau',476),finish('Lamifié blanc',509),finish('Bouleau / laqué blanc',510),finish('Laqué blanc',534),finish('Laqué noir',534)],{card:{brand:'Artek',tags:['bouleau'],material:''}});
+  const white=filterCatalog([p],{color:'blanc'}).items[0];
+  assert.equal(white.finishLabel,'Laqué blanc');assert.equal(white.price,534);assert.equal(white.priceIsExact,true);
+  assert.equal(white.variantId,p.variants[3].id);assert.equal(white.image,p.variants[3].image);
+  assert.equal(white.finishChoices.length,3);assert.equal(white.finishCount,3);
+  assert.ok(white.finishChoices.every(v=>v.finishLabel.includes('blanc')));
+  assert.equal(filterCatalog([p],{color:'blanc',max:520}).items[0].finishLabel,'Lamifié blanc');
+  assert.equal(filterCatalog([p],{color:'blanc',max:500}).total,0);
+  assert.equal(filterCatalog([p],{color:'naturel'}).items[0].finishLabel,'Bouleau');
+  assert.equal(filterCatalog([p],{color:'blanc',material:'bois'}).items[0].finishLabel,'Laqué blanc');
+  const stocked=chair(70,[finish('Bouleau / laqué blanc',510,{qty:2}),finish('Laqué blanc',534)]);
+  assert.equal(filterCatalog([stocked],{color:'blanc',stock:'1'}).items[0].price,510);
+  const unavailable=chair(71,[finish('Bouleau / laqué blanc',510),finish('Laqué blanc',534,{available:false})]);
+  assert.equal(filterCatalog([unavailable],{color:'blanc'}).items[0].price,510);
+});
+test('le tri suit le prix de la finition montrée, les aperçus sont bornés, les filtres restent stables',()=>{
+  const a=chair(1,[{price:400,options:[{name:'Finition',value:'Bouleau / blanc'}]},{price:600,options:[{name:'Finition',value:'Blanc'}]}]);
+  const b=chair(2,[{price:550,options:[{name:'Couleur',value:'Blanc'}]}]);
+  assert.deepEqual(filterCatalog([a,b],{color:'blanc',sort:'asc'}).items.map(p=>p.price),[550,600]);
+  assert.deepEqual(filterCatalog([a,b],{color:'blanc',sort:'desc'}).items.map(p=>p.price),[600,550]);
+  const many=chair(3,Array.from({length:12},(_,i)=>({price:500+i,options:[{name:'Finition',value:'Blanc '+i}]})));
+  const card=filterCatalog([many],{color:'blanc'}).items[0];
+  assert.equal(card.finishChoices.length,4);assert.equal(card.finishCount,12);assert.equal(card.variantCount,12);
+});
+test('les couleurs des composants sont secondaires et une matière peinte ne devient pas du bois naturel',()=>{
+  const p=chair(1,[{price:400,options:[{name:'Finition',value:'Bouleau / laqué blanc'}]},{price:500,options:[{name:'Finition',value:'Laqué blanc'}]}]);
+  assert.equal(filterCatalog([p],{color:'blanc'}).items[0].price,500);
+  assert.deepEqual(colors('Bouleau laqué blanc'),['blanc']);
+  assert.deepEqual(colors('Bouleau'),['naturel']);
+});
 test('les options secondaires des patins ne deviennent pas des couleurs de chaise',()=>{
   const p=chair(1,[{options:[{name:'Couleur',value:'Blanc'},{name:'Patin',value:'Noir'}]}]);
   assert.equal(filterCatalog([p],{color:'noir'}).total,0);

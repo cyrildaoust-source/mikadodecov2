@@ -8,6 +8,7 @@
 import { listingContext, createNavigation, selectionURL, productHref, breadcrumbHTML, breadcrumbData, listingTrail, returnLinkHTML } from "/navigation.mjs";
 export { breadcrumbHTML, productHref } from "/navigation.mjs";
 import { chromeHTML, footerHTML } from "/chrome-template.js";
+import { finishHTML } from "/product-finishes.mjs";
 
 export const CART_KEY = "mikado_v3_cart";
 
@@ -38,8 +39,8 @@ export const euro = (n) =>
 // variant price range; otherwise the plain price. Falls back to p.price when
 // priceMin/priceMax aren't on the object (older feeds / safety).
 export const priceLabel = (p) => {
-  const min = p?.priceMin ?? p?.price;
-  const max = p?.priceMax ?? p?.price;
+  const min = p?.priceIsExact ? p.price : p?.priceMin ?? p?.price;
+  const max = p?.priceIsExact ? p.price : p?.priceMax ?? p?.price;
   const was = p?.compareAt;
   if (was != null && min != null && was - min > 0.5) return `<span class="price-was">${euro(was)}</span><span class="price-now price-now--sale">${euro(min)}</span>`;
   if (min != null && max != null && max - min > 0.5) return `À partir de ${euro(min)}`;
@@ -603,8 +604,8 @@ export function productCard(p, source) {
       <a class="pcard__media" href="${href}" aria-label="${escapeHtml(p.name)}">
         <div class="pcard__tags">${tag}</div>
         <span class="pcard__promo" data-promo-slot hidden></span>
-        ${p.compareAt && (p.priceMin ?? p.price) && p.compareAt - (p.priceMin ?? p.price) > 0.5 ? `<span class="pcard__sale">−${Math.round((p.compareAt - (p.priceMin ?? p.price)) / p.compareAt * 100)}%</span>` : ""}
-        <img class="main" src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy" />
+        ${p.compareAt && p.price && p.compareAt - (p.priceIsExact ? p.price : p.priceMin ?? p.price) > 0.5 ? `<span class="pcard__sale">−${Math.round((p.compareAt - (p.priceIsExact ? p.price : p.priceMin ?? p.price)) / p.compareAt * 100)}%</span>` : ""}
+        <img class="main" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name + (p.finishLabel ? ' · ' + p.finishLabel : ''))}" loading="lazy" />
         ${alt}
       </a>
       <div class="pcard__brand">${escapeHtml(p.brand || "")}</div>
@@ -612,6 +613,7 @@ export function productCard(p, source) {
         <a class="pcard__name" href="${href}">${escapeHtml(p.name)}</a>
         ${variantBadge(p) ? `<span class="pcard__variants">${variantBadge(p)}</span>` : ""}
       </div>
+      ${finishHTML(p, variant => productHref(p, typeof source === 'string' ? source : location.pathname + location.search, variant))}
       ${p.availabilityLabel
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--${p.inStock ? 'stock' : 'order'}" aria-hidden="true"></span>${escapeHtml(p.availabilityLabel)}</div>`
         : p.inStock
