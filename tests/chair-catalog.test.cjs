@@ -37,6 +37,7 @@ test('le rendu serveur et le contrôleur utilisent les mêmes filtres ; liens pa
   assert.match(html,/href="\/collections\/chaises\?page=2#grille"/);
   assert.match(html,/aria-label="Filtrer les chaises"/);
   assert.match(html,/variant=10/);
+  assert.match(html,/pcard__finish-label/);assert.match(html,/data-card-finish=/);assert.match(html,/aria-current="true"/);
   const page2=await (await realFetch(base+'/collections/chaises?page=2')).text();
   assert.equal(seed(page2).items.length,5);assert.match(page2,/data-chair-continuation/);
   assert.doesNotMatch(page2,/<section class="subhero/);

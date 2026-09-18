@@ -75,3 +75,29 @@ Preview du code `811ac92` : [Chaises](https://mikadodecov2-fn64unhq4-mikadodeco.
 - Aucun avertissement ni erreur n’a été capturé dans la console de cette preview pendant le parcours. Les scénarios de panne sont couverts par les tests automatisés ; le paiement et les règles commerciales de livraison restent hors de cette recette.
 
 Les accoudoirs et les mesures ne disposent pas encore d’une couverture permettant une comparaison complète. Les filtres de caractéristiques disponibles reflètent uniquement les informations explicitement encodées ; leur enrichissement, comme celui des familles de couleur et de matière par variante, reste à reprendre dans l’importer avant généralisation aux autres familles.
+
+## Correction des usages du 17 septembre 2026
+
+Les quatre fiches publiées dont l’usage était absent ont reçu `custom.usage = Intérieur` dans Shopify : `artek-domus-chair-seat-upholstered`, `artek-domus-chair-seat-and-back-upholstered`, `artek-domus-chair` et `artek-rope-chair`. Les créations ont utilisé `compareDigest: null`, puis chaque valeur a été relue. Aucun prix, stock, média, tag ou statut de publication n’a changé.
+
+La source est le [guide d’entretien officiel Artek](https://www.artek.fi/en/guides/care-maintenance), qui prévoit un usage intérieur sauf mention contraire dans les spécifications. La [fiche Rope](https://www.artek.fi/en/products/rope-chair) ne mentionne pas d’usage extérieur ; la référence à un usage marin décrit sa corde, pas l’usage de la chaise. L’importer doit préserver ces valeurs vérifiées, ou présenter une source fabricant et un différentiel avant de les modifier. Il ne faut pas généraliser « rembourré = intérieur » aux autres fabricants ni remplacer toutes les données absentes par intérieur.
+
+Après correction, l’API publique retourne toujours 132 modèles, avec 87 références pour l’intérieur et 53 pour l’extérieur ; les produits à double usage participent aux deux comptes. La facette d’usage non renseigné a disparu naturellement. La preview sur ordinateur confirme 18 modèles Artek classés en intérieur. Les 63 tests ont été relancés après la modification des données et passent. Cette intervention porte sur les données ; le propriétaire a demandé de reprendre la présentation des filtres ultérieurement.
+
+## Recherche du site : état réel et prochain raccordement
+
+## Finitions représentatives — 18 septembre 2026
+
+Le pilote conserve un modèle par carte. Parmi les variantes satisfaisant tous les critères, le classement privilégie les variantes achetables, puis la correspondance de couleur (autres couleurs et composants explicitement nommés pénalisés), puis le prix et un identifiant stable. Le texte des options sert de reprise déterministe ; ce classement n’est pas une reconnaissance des photos ni une certification de couleur. Les familles de couleur vérifiées restent prioritaires pour le filtrage. Le bois peint reste distinct d’un aspect bois naturel. Une matière commune explicitement renseignée n’est plus perdue quand les variantes ne proposent pas de famille de matière alternative.
+
+La carte affiche la finition et son prix exact, même si une autre finition est moins chère. Le tri suit ce prix affiché. Quatre aperçus au maximum respectent les mêmes filtres ; le lien vers toutes les finitions ouvre la fiche complète. Les liens fonctionnent sans JavaScript ; avec JavaScript, la vignette met à jour la carte entière, conserve le focus et annonce la finition. La sélection de vignette est conservée pour le retour depuis la fiche dans la même sélection. Le composant `product-finishes.mjs` est partagé entre le rendu serveur et navigateur.
+
+Deux associations ont été corrigées dans Shopify sur `artek-chair-69`, sans toucher aux données commerciales : SKU `ART-C69-28100472` → image `artek-chair-69-white-lacquer-seat-back.jpg` ; SKU `ART-C69-28100480` → image `artek-chair-69-black-lacquer.jpg`. Les images ont été contrôlées visuellement dans la galerie existante. Les associations et le catalogue publié sont relus après l’opération. Ce contrôle ciblé ne certifie pas toutes les photos du catalogue.
+
+### Recherche globale : chantier distinct
+
+Au 17 septembre 2026, les nouveaux critères ne sont **pas raccordés à la recherche textuelle globale**. L’autocomplétion appelle `predictiveSearch` de Shopify sans étendre ses champs par défaut (titre, type de produit, titre de variante, marque). La page de résultats appelle la recherche Shopify `search`. Aucun de ces parcours ne transforme actuellement une demande en critères du moteur `lib/catalog-filters.js`. Le fait de lire des métachamps dans une réponse GraphQL ne les rend pas recherchables automatiquement.
+
+Référence : [documentation Shopify de predictiveSearch](https://shopify.dev/docs/api/storefront/latest/queries/predictiveSearch).
+
+Le prochain chantier proposé, non implémenté ici, est de faire partager aux suggestions et aux résultats une interprétation des critères : famille, marque, familles de couleur et matière, usage, caractéristiques connues et budget. Par exemple, « chaise noire en bois à moins de 500 € » doit appliquer ces critères ensemble à une même variante et ouvrir cette variante avec son prix exact. Les synonymes devront être normalisés sans renommer les finitions fabricant ni multiplier les tags. Les dimensions et caractéristiques incomplètes devront rester explicitement limitées aux valeurs connues. Commencer par le pilote Chaises, tester la pertinence et les temps de réponse, puis dimensionner un index durable avant une extension à tout le catalogue.
