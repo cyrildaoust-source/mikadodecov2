@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const { splitDimensionMedia } = require('./lib/dimension-media');
+const { selectInitialVariant } = require('./v3/product-variant');
 const cors    = require('cors');
 const path    = require('path');
 const fs      = require('fs');
@@ -308,7 +309,7 @@ function specAccordionSsr(p) {
   ).join('') + '</section>';
 }
 function pdpSsrBlock(p, sourceURL) {
-  const selected = p.variants?.find(v => String(v.id).split('/').pop() === sourceURL?.searchParams.get('variant'));
+  const selected = selectInitialVariant(p.variants, { requestedId: sourceURL?.searchParams.get('variant'), coverUrl: p.image || p.firstImageRaw, fallback: false });
   if (selected) p = {...p, price: selected.price, priceMin: selected.price, priceMax: selected.price, compareAt: selected.compareAtPrice};
   const rawImg = selected?.image || p.firstImageRaw || (p.images && p.images[0]) || '';
   const img = shopifyResize(rawImg, 1000);
@@ -1299,8 +1300,10 @@ function mapProduct(node, opts = {}) {
   const { photos, dimensions: dimensionImages } = splitDimensionMedia(node);
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
-  const variant = node.variants.edges[0]?.node;
-  // `price` is the first variant's price (what gets stored in the cart when
+  const variant = selectInitialVariant((node.variants?.edges || []).map(e => e.node), {
+    coverUrl: node.featuredImage?.url || node.images?.edges?.[0]?.node?.url,
+  });
+  // `price` is the selected variant's price (what gets stored in the cart when
   // adding from a product card). `priceMin` / `priceMax` come from Shopify's
   // priceRange and cover every variant. The front-end shows "À partir de"
   // when priceMin < priceMax.
