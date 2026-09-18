@@ -52,6 +52,10 @@ before(async () => {
       // Une chaise dépubliée et une requête en panne ne bloquent pas le catalogue.
       if (variables.handle === 'chaise-standard') return Response.json({ data: { product: null } });
       if (variables.handle === 'chaise-hay-rey-chair') return new Response('Unavailable', { status: 503 });
+      if (variables.handle === 'seo-example') return Response.json({ data: { product: {
+        ...product(100), handle: variables.handle,
+        seo: { title: 'Titre Shopify & design', description: 'Description Shopify & utile' },
+      } } });
       return Response.json({ data: { product: { ...product(100), handle: variables.handle } } });
     }
     assert.match(query, /query GetCollectionProducts/);
@@ -501,6 +505,14 @@ test('legacy cart identifiers resolve directly and preserve selected variant; un
   assert.equal(target.searchParams.get('variant'), '456');
   assert.equal(target.searchParams.get('returnTo'), '/selection.html');
   assert.equal((await page('/produit.html?id=999')).response.status, 404);
+});
+
+test('la fiche utilise les métadonnées SEO Shopify dans le HTML servi aux robots', async () => {
+  const { html, response } = await page('/produit.html?handle=seo-example');
+  assert.equal(response.status, 200);
+  assert.match(html, /<title>Titre Shopify &amp; design<\/title>/);
+  assert.match(html, /<meta name="description" content="Description Shopify &amp; utile"/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/www\.mikadodeco\.be\/produit\.html\?handle=seo-example"/);
 });
 
 test('historical all/frontpage collections redirect to the real catalogue with filters preserved', async () => {

@@ -99,7 +99,7 @@
       // dès le 1er paint (fin de la recoloration gris→bleu post-rendu).
       const knownDesigners = new Set((designersData.designers || []).filter(d => !d.hidden).map((x) => x.slug));
       if (!p) { host.innerHTML = `<p class="plp-empty">Cette pièce est introuvable. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue</a>.</p>`; return; }
-      document.title = `${p.name} · Mikado Deco`;
+      document.title = p.seoTitle || `${p.name} · Mikado Deco`;
 
       // Brand collection URL — curated /collections/<handle> when known (joined
       // via mega-menu-brands.json), else the ?brand= filter fallback.
