@@ -274,7 +274,7 @@ function plpCardSsr(p, source = '') {
     + '</a>'
     + '<div class="pcard__brand">' + ogEscape(p.brand || '') + '</div>'
     + '<div class="pcard__row"><a class="pcard__name" href="' + href + '">' + ogEscape(p.name || '') + '</a></div>'
-    + finishHTML(p, variant => navigation.productHref(p, source, variant))
+    + finishHTML(p)
     + avail
     + '<div class="pcard__price">' + priceLabelS(p) + '</div>'
     + '</div>';

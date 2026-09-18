@@ -613,7 +613,7 @@ export function productCard(p, source) {
         <a class="pcard__name" href="${href}">${escapeHtml(p.name)}</a>
         ${variantBadge(p) ? `<span class="pcard__variants">${variantBadge(p)}</span>` : ""}
       </div>
-      ${finishHTML(p, variant => productHref(p, typeof source === 'string' ? source : location.pathname + location.search, variant))}
+      ${finishHTML(p)}
       ${p.availabilityLabel
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--${p.inStock ? 'stock' : 'order'}" aria-hidden="true"></span>${escapeHtml(p.availabilityLabel)}</div>`
         : p.inStock

@@ -37,7 +37,7 @@ test('le rendu serveur et le contrôleur utilisent les mêmes filtres ; liens pa
   assert.match(html,/href="\/collections\/chaises\?page=2#grille"/);
   assert.match(html,/aria-label="Filtrer les chaises"/);
   assert.match(html,/variant=10/);
-  assert.match(html,/pcard__finish-label/);assert.match(html,/data-card-finish=/);assert.match(html,/aria-current="true"/);
+  assert.match(html,/pcard__finish-label/);assert.doesNotMatch(html,/data-card-finish=|class="pcard__finishes"|class="pcard__finish-more"/);
   assert.match(html,/<img class="alt" src="https:\/\/cdn.shopify.com\/1-ambiance.jpg/);
   assert.ok(data.items.every(p=>p.image2.includes('-ambiance.jpg')&&p.finishChoices.every(v=>v.image2===p.image2)));
   const page2=await (await realFetch(base+'/collections/chaises?page=2')).text();
