@@ -44,7 +44,16 @@ before(async () => {
       const start = Number(variables.after || 0), end = Math.min(135, start + variables.first);
       return Response.json({ data: { search: { edges: Array.from({ length: end - start }, (_, i) => ({ node: { ...product(start + i), vendor: start + i < 120 ? 'Artek' : 'HAY' } })), pageInfo: { hasNextPage: end < 135, endCursor: String(end) } } } });
     }
-    if (/query GetCollections\(/.test(query)) return Response.json({ data: { collections: { edges: [{ node: { id: 'gid://shopify/Collection/1', handle: 'verres-carafes', title: 'Verres et carafes' } }] } } });
+    if (/query SitemapProducts\(/.test(query)) return Response.json({ data: { products: { nodes: [{ handle: 'seo-example' }], pageInfo: { hasNextPage: false, endCursor: null } } } });
+    if (/query GetCollections\(/.test(query)) return Response.json({ data: { collections: variables.after ? {
+      edges: [{ node: { id: 'gid://shopify/Collection/3', handle: 'outdoor', title: 'Jardin', products: { edges: [] } } }],
+      pageInfo: { hasNextPage: false, endCursor: null },
+    } : {
+      edges: [
+        { node: { id: 'gid://shopify/Collection/1', handle: 'verres-carafes', title: 'Verres et carafes', products: { edges: [{ node: { id: 'gid://shopify/Product/1' } }] } } },
+        { node: { id: 'gid://shopify/Collection/2', handle: 'empty-collection', title: 'Collection vide', products: { edges: [] } } },
+      ], pageInfo: { hasNextPage: true, endCursor: 'collection-page-2' },
+    } } });
     if (/query ProductHandle\(/.test(query)) return Response.json({ data: { node: variables.id.endsWith('/999') ? null : { handle: 'family-product-100' } } });
     if (/query GetProduct\(/.test(query)) {
       productRequests.push(variables.handle);
@@ -64,7 +73,7 @@ before(async () => {
     if (variables.after === 'missing') return Response.json({ data: { collection: null } });
     const isTables = ['tables', 'tables-de-salle-a-manger', 'tables-de-cafe', 'tables-basses-et-tables-dappoint'].includes(variables.handle);
     const start = variables.after?.startsWith('edge:') ? Number(variables.after.slice(5)) + 1 : 1;
-    const ids = variables.after === 'empty' ? [] : variables.after && !variables.after.startsWith('edge:') ? [25, 26] : Array.from({ length: Math.min(variables.first, isTables ? 31 - start : variables.first) }, (_, i) => start + i);
+    const ids = variables.handle === 'empty-collection' || variables.after === 'empty' ? [] : variables.after && !variables.after.startsWith('edge:') ? [25, 26] : Array.from({ length: Math.min(variables.first, isTables ? 31 - start : variables.first) }, (_, i) => start + i);
     const hasNextPage = isTables ? ids.at(-1) < 30 && (!variables.after || variables.after.startsWith('edge:')) : !variables.after;
     return Response.json({ data: { collection: {
       title: families[variables.handle]?.title || 'Verres et carafes', description: '', image: null,
@@ -403,7 +412,8 @@ test('empty collection and upstream failure are distinct; failures are not cache
   assert.doesNotMatch(empty.html, /data-more href=/);
   for (const cursor of ['unavailable', 'missing']) {
     const { response, html } = await page('/collections/tables?cursor=' + cursor);
-    assert.equal(response.status, 200);
+    assert.equal(response.status, 503);
+    assert.equal(response.headers.get('retry-after'), '60');
     assert.equal(response.headers.get('cache-control'), 'no-store');
     assert.match(html, /Les produits ne sont pas disponibles/);
     assert.match(html, /Réessayer/);
@@ -513,6 +523,48 @@ test('la fiche utilise les métadonnées SEO Shopify dans le HTML servi aux robo
   assert.match(html, /<title>Titre Shopify &amp; design<\/title>/);
   assert.match(html, /<meta name="description" content="Description Shopify &amp; utile"/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.mikadodeco\.be\/produit\.html\?handle=seo-example"/);
+});
+
+test('les lots de collections sont liés sans JavaScript avec une canonique propre et les filtres conservés', async () => {
+  const first = await page('/collections/verres-carafes?tag=verrerie');
+  const next = first.html.match(/class="plp-page" href="([^"]+)">Voir plus de produits/)[1].replace(/&amp;/g, '&');
+  const url = new URL(next, base);
+  assert.equal(url.searchParams.get('tag'), 'verrerie');
+  assert.equal(url.searchParams.get('cursor'), nextCursor);
+  const second = await page(url.pathname + url.search);
+  assert.equal(second.response.status, 200);
+  assert.match(second.html, /handle=family-product-25/);
+  assert.doesNotMatch(second.html, /handle=family-product-1(?:&|"|%)/);
+  const canonical = second.html.match(/<link rel="canonical" href="([^"]+)"/)[1].replace(/&amp;/g, '&');
+  assert.equal(new URL(canonical).search, url.search);
+  assert.match(second.html, /Revenir au début/);
+  assert.doesNotMatch(second.html, />Voir plus de produits<\/a>/);
+  const family = await page('/collections/tables?cursor=empty');
+  assert.match(family.html, /rel="canonical" href="https:\/\/www.mikadodeco.be\/collections\/tables\?cursor=empty"/);
+});
+
+test('les erreurs Shopify retournent 503 sans cache tandis qu’une fiche retirée garde 404', async () => {
+  for (const url of ['/produit.html?handle=chaise-hay-rey-chair', '/collections/verres-carafes?cursor=unavailable']) {
+    const { response } = await page(url);
+    assert.equal(response.status, 503);
+    assert.equal(response.headers.get('cache-control'), 'no-store');
+    assert.equal(response.headers.get('retry-after'), '60');
+  }
+  assert.equal((await page('/produit.html?handle=chaise-standard')).response.status, 404);
+});
+
+test('le sitemap omet les collections vides, conserve les familles et parcourt toutes les collections', async () => {
+  const { html, response } = await page('/sitemap-products.xml');
+  assert.equal(response.status, 200);
+  assert.match(html, /handle=seo-example/);
+  assert.match(html, /\/collections\/verres-carafes/);
+  assert.match(html, /\/collections\/outdoor/);
+  assert.doesNotMatch(html, /empty-collection/);
+  const empty = await page('/collections/empty-collection');
+  assert.equal(empty.response.status, 200);
+  assert.equal(empty.response.headers.get('x-robots-tag'), 'noindex, follow');
+  assert.match(empty.html, /name="robots" content="noindex,follow"/);
+  assert.doesNotMatch((await page('/sitemap-pages.xml')).html, /<lastmod>/);
 });
 
 test('historical all/frontpage collections redirect to the real catalogue with filters preserved', async () => {

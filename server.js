@@ -244,6 +244,33 @@ function listingNavigation(html, req, hints = {}) {
 function canRenderInitialGrid(req) {
   return !(Number(req.query.page) > 1 || (req.query.sort && req.query.sort !== 'pop'));
 }
+// Les curseurs parcourent les lots rendus sur le serveur, y compris sans JS.
+function listingPagination(html, req, pageInfo = {}) {
+  if (!canRenderInitialGrid(req)) return html;
+  const params = new URLSearchParams();
+  for (const key of ['designer', 'brand', 'tag', 'cats', 'q', 'cursor']) {
+    if (typeof req.query[key] === 'string' && req.query[key]) params.set(key, req.query[key]);
+  }
+  const href = () => req.path + (params.size ? '?' + params : '');
+  const links = [];
+  if (params.has('cursor')) {
+    const canonical = ogEscape(ORIGIN + href());
+    html = html.replace(/<link rel="canonical"[^>]*>/i, () => `<link rel="canonical" href="${canonical}" />`)
+      .replace(/<meta property="og:url"[^>]*>/i, () => `<meta property="og:url" content="${canonical}" />`);
+    params.delete('cursor');
+    links.push(`<a class="plp-page" href="${ogEscape(href())}#grille">Revenir au début</a>`);
+  }
+  if (pageInfo.hasNextPage && pageInfo.endCursor) {
+    params.set('cursor', pageInfo.endCursor);
+    links.push(`<a class="plp-page" href="${ogEscape(href())}#grille">Voir plus de produits</a>`);
+  }
+  if (links.length) html = html.replace('<nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>',
+    () => `<nav class="plp-pagination" data-pagination aria-label="Pagination">${links.join('')}</nav>`);
+  return html;
+}
+function temporaryUnavailable(res) {
+  return res.status(503).set('Cache-Control', 'no-store').set('Retry-After', '60');
+}
 // SEO/SSR · formatage prix miroir de shared.js, en conservant les centimes utiles.
 const euroS = (n) => (n || n === 0)
   ? new Intl.NumberFormat('fr-BE', { style: 'currency', currency: 'EUR', maximumFractionDigits: Number.isInteger(Number(n)) ? 0 : 2 }).format(n)
@@ -485,7 +512,7 @@ app.get('/produit.html', async (req, res) => {
       ));
       if (!data.node?.handle) return send404Shell(res, PRODUIT_TEMPLATE);
       return res.redirect(301, navigation.productHref({ handle: data.node.handle }, navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)), req.query.variant));
-    } catch (error) { return res.status(503).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
+    } catch (error) { return temporaryUnavailable(res).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
   }
   if (!handle) return sendProduitTemplate(res);
   try {
@@ -552,7 +579,7 @@ app.get('/produit.html', async (req, res) => {
     return res.send(out);
   } catch (err) {
     console.warn('[og-produit]', err.message);
-    return sendProduitTemplate(res);
+    return sendProduitTemplate(temporaryUnavailable(res));
   }
 });
 
@@ -609,7 +636,8 @@ app.get('/collections/:handle', async (req, res) => {
     html = listingNavigation(html, req);
     res.set('Content-Type', 'text/html; charset=utf-8');
     // Ne pas conserver une panne de Shopify dans le cache de la page.
-    if (failed || featuredResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
+    if (failed) temporaryUnavailable(res);
+    else if (featuredResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
     else ogCache(res);
     return res.send(injectChrome(html, 'family-page.html'));
   }
@@ -680,12 +708,13 @@ app.get('/collections/:handle', async (req, res) => {
       }
       if (brand) {
         if (!gi.length) html = html.replace('<div class="pgrid" data-grid></div>', () => `<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Aucun produit pour cette marque dans cette catégorie. <a href="${collectionUrl}">Revenir à ${ogEscape(collectionName)}</a>.</p></div>`);
-        const next = new URLSearchParams({ brand });
-        if (tag) next.set('tag', tag);
-        if (cp.pageInfo?.hasNextPage && cp.pageInfo.endCursor) {
-          next.set('cursor', cp.pageInfo.endCursor);
-          html = html.replace('<nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>', () => `<nav class="plp-pagination" data-pagination aria-label="Pagination"><a class="plp-page" href="${ogEscape(collectionUrl + '?' + next + '#grille')}">Voir plus de produits</a></nav>`);
-        }
+      }
+      html = listingPagination(html, req, cp.pageInfo);
+      // Une collection vide reste accessible au client, mais hors de l’index.
+      // Une panne ne doit jamais déclencher ce signal : elle passe en 503.
+      if (!gi.length && !cursor && !brand && !tag && col.hasProducts === false) {
+        res.set('X-Robots-Tag', 'noindex, follow');
+        html = html.replace('</head>', '<meta name="robots" content="noindex,follow" />\n</head>');
       }
     } catch (e) {
       failed = true;
@@ -693,12 +722,12 @@ app.get('/collections/:handle', async (req, res) => {
       console.warn('[coll-grid-ssr]', e.message);
     }
     html = injectChrome(html, 'produits.html', Boolean(collectionHero));
-    if (failed) res.set('Cache-Control', 'no-store');
+    if (failed) temporaryUnavailable(res);
     else ogCache(res);
     return res.send(html);
   } catch (err) {
     console.warn('[og-collection]', err.message);
-    return sendProduitsTemplate(res);
+    return sendProduitsTemplate(temporaryUnavailable(res));
   }
 });
 
@@ -723,10 +752,12 @@ app.get('/produits.html', async (req, res) => {
     // Quatre choix explicites chargés en parallèle de la grille. Une fiche
     // indisponible n'est jamais remplacée par une meilleure vente arbitraire.
     const iconsPromise = Promise.allSettled((landingRequest ? catalogLanding.icons.handles : []).map(getProductByHandle));
-    let failed = false, brandItems = [];
+    let failed = false, gridFailed = false, brandItems = [], pageInfo = {};
     try {
       await Promise.all([_chromeReady, _navigationReady]);
-      const { items } = await getProductsPage(24, req.query.cursor || null, req.query.tag ? [req.query.tag] : null, req.query.cats, brand, q);
+      const page = await getProductsPage(24, req.query.cursor || null, req.query.tag ? [req.query.tag] : null, req.query.cats, brand, q);
+      const { items } = page;
+      pageInfo = page.pageInfo;
       brandItems = items;
       if (items && items.length && canRenderInitialGrid(req)) {
         const cards = items.map(product => plpCardSsr(product, req.originalUrl)).filter(Boolean).join('');
@@ -736,6 +767,7 @@ app.get('/produits.html', async (req, res) => {
       }
     } catch (e) {
       failed = true;
+      gridFailed = true;
       html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid><p class="plp-empty">Impossible de charger cette sélection. Veuillez réessayer.</p></div>');
       console.warn('[plp-ssr]', e.message);
     }
@@ -763,7 +795,9 @@ app.get('/produits.html', async (req, res) => {
       html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title data-context>' + ogEscape(title) + '</h1>');
       html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     }
-    if (failed) res.set('Cache-Control', 'no-store');
+    html = listingPagination(html, req, pageInfo);
+    if (gridFailed) temporaryUnavailable(res);
+    else if (failed) res.set('Cache-Control', 'no-store');
     else ogCache(res);
     html = listingNavigation(html, req, { brandName: brandItems.find(p => navigation.navigationSlug(p.brand) === brand)?.brand || brandName(brand) });
     return res.send(injectChrome(html, 'produits.html'));
@@ -798,13 +832,17 @@ app.get('/produits.html', async (req, res) => {
         const cards = gi.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join('');
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       }
-    } catch (e) { console.warn('[designer-grid-ssr]', e.message); }
+      html = listingPagination(html, req, dp.pageInfo);
+    } catch (e) {
+      console.warn('[designer-grid-ssr]', e.message);
+      return sendProduitsTemplate(temporaryUnavailable(res));
+    }
     html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
   } catch (err) {
     console.warn('[og-designer]', err.message);
-    return sendProduitsTemplate(res);
+    return sendProduitsTemplate(temporaryUnavailable(res));
   }
 });
 
@@ -817,7 +855,7 @@ app.get('/produits.html', async (req, res) => {
 // lastmod) et les produits/collections (walk caché 6 h). Aucune URL perdue ;
 // les 3 chemins sont routés vers la fonction dans vercel.json.
 const SM_ESC = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const SM_LASTMOD = new Date().toISOString().slice(0, 10);   // ≈ date du dernier déploiement (cold start)
+// Une date de démarrage serveur ne constitue pas une date de modification.
 const SM_STATIC = [
   ['/', '1.0'], ['/produits.html', '0.9'], ['/marques.html', '0.8'],
   ['/designers.html', '0.7'], ['/materiaux.html', '0.7'], ['/selection.html', '0.6'],
@@ -839,14 +877,14 @@ function sendXml(res, xml) {
 app.get('/sitemap.xml', (req, res) => sendXml(res,
   `<?xml version="1.0" encoding="UTF-8"?>\n`
   + `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
-  + `  <sitemap><loc>${ORIGIN}/sitemap-pages.xml</loc><lastmod>${SM_LASTMOD}</lastmod></sitemap>\n`
+  + `  <sitemap><loc>${ORIGIN}/sitemap-pages.xml</loc></sitemap>\n`
   + `  <sitemap><loc>${ORIGIN}/sitemap-products.xml</loc></sitemap>\n`
   + `</sitemapindex>\n`));
 
 // Pages statiques + créateurs indexables + articles : aucun appel Shopify → instantané.
 app.get('/sitemap-pages.xml', (req, res) => {
   const urls = [];
-  SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr, SM_LASTMOD)));
+  SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr)));
   // Créateurs — uniquement les indexables (champ `hidden` dans designers-data.json)
   // pour éviter le thin content / les fiches masquées.
   getDesigners().forEach((d) => {
@@ -890,7 +928,9 @@ app.get('/sitemap-products.xml', async (req, res) => {
         after = pageInfo.endCursor;
       }
       (await getCollections()).forEach((c) => {
-        if (c.handle) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6'));
+        // Les familles éditoriales et les sélections composites ont leurs propres sources.
+        const composed = Object.hasOwn(families, c.handle) || Object.hasOwn(FAMILLES_RICHES, c.handle) || ['chaises', 'tables-outdoor', 'promotions'].includes(c.handle);
+        if (c.handle && (c.hasProducts !== false || composed)) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6'));
       });
       return smUrlset(urls);
     }, 6 * 60 * 60 * 1000); // cache 6 h
@@ -1687,14 +1727,16 @@ async function getActiveBrands() {
 // Optional metafields: custom.country, custom.city, custom.founded, custom.website,
 // custom.tagline, custom.color, custom.featured
 const COLLECTIONS_QUERY = `
-  query GetCollections($first: Int!) {
-    collections(first: $first) {
+  query GetCollections($first: Int!, $after: String) {
+    collections(first: $first, after: $after) {
+      pageInfo { hasNextPage endCursor }
       edges {
         node {
           id
           handle
           title
           description
+          products(first: 1) { edges { node { id } } }
           image { url altText }
           metafields(identifiers: [
             { namespace: "custom", key: "country" }
@@ -1729,6 +1771,7 @@ function mapCollection(node, index) {
     founded:     meta.founded   ? parseInt(meta.founded) : null,
     tagline:     meta.tagline   || '',
     description: node.description || '',
+    hasProducts: node.products ? node.products.edges.length > 0 : null,
     website:     meta.website   || '',
     image:       node.image?.url || null,
     color:       meta.color     || '#d4c5b0',
@@ -1739,10 +1782,17 @@ function mapCollection(node, index) {
 
 async function getCollections() {
   return cached('collections', async () => {
-    // Shopify shop currently has 147 collections; 250 leaves headroom
-    // without needing pagination.
-    const data = await shopifyFetch(COLLECTIONS_QUERY, { first: 250 });
-    return data.collections.edges
+    const edges = [], seen = new Set();
+    let after = null;
+    do {
+      const data = await shopifyFetch(COLLECTIONS_QUERY, { first: 250, after });
+      edges.push(...data.collections.edges);
+      if (!data.collections.pageInfo?.hasNextPage) break;
+      after = data.collections.pageInfo.endCursor;
+      if (!after || seen.has(after)) throw new Error('Curseur collections Shopify invalide');
+      seen.add(after);
+    } while (true);
+    return edges
       .map(({ node }, i) => mapCollection(node, i))
       // Exclude Shopify's built-in "All" / "Home page" collections
       .filter(c => !['all', 'frontpage'].includes(c.handle));
