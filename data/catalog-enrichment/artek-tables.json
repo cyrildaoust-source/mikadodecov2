@@ -1,7 +1,7 @@
 {
   "version": 1,
   "batchId": "artek-tables-2026-09-21",
-  "status": "reviewed_sources",
+  "status": "published_verified_rows",
   "scope": "32 tables Artek ; cotes hors tout, configurations séparées et capacité explicite uniquement.",
   "products": [
     {
@@ -2941,5 +2941,13 @@
         "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
       ]
     }
-  ]
+  ],
+  "publication": {
+    "date": "2026-09-21",
+    "productFactsWritten": 32,
+    "verifiedCapacityProducts": 14,
+    "variantsChecked": 122,
+    "method": "Lecture Admin avant/après ; sources SHA-256 vérifiées ; metafieldsSet avec compareDigest null ; 32 valeurs relues conformes.",
+    "preview": "https://mikadodecov2-o8lmx3f3c-mikadodeco.vercel.app/produits.html?q=table+Artek+pour+6+personnes"
+  }
 }

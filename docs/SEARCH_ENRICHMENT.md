@@ -117,3 +117,17 @@ Preview : [table pour six personnes — 14 modèles](https://mikadodecov2-b4zyhh
 Contrôle sur ordinateur à 1626 px : recherche depuis la barre du haut puis page complète ; Luxembourg 143 × 80 cm pour six personnes, une seule correspondance à 889 €. Les dimensions déjà connues des modèles ronds ne produisent plus de faux signalement de données manquantes pour une recherche de format rectangulaire. La recherche générale pour six personnes affiche 14 modèles.
 
 Contrôle mobile à 390 × 844 px : Ribambelle pour 14 personnes, une correspondance avec « Avec les 3 allonges · longueur 299 cm » lisible sur la carte commune. En ajoutant une longueur maximale de 150 cm, aucun résultat ; retirer explicitement la longueur propose une correspondance, retirer la capacité en propose neuf. Aucun débordement horizontal (document et viewport à 390 px), avertissement ou erreur de console observé sur ce parcours. La taille du navigateur a été réinitialisée après recette.
+
+## Lot Artek publié le 21 septembre 2026
+
+32 nouvelles fiches enrichies et relues dans Shopify ; 122 variantes rapprochées par référence modèle, format, distinction adulte/H60 et options de finition. Les sources officielles comprennent 32 fiches Artek, 31 dessins cotés et le tableau fabricant des formats Aalto. Les mesures hors tout sont conservées ; les entre-axes et cotes du piètement sont exclus. La table enfant 80B utilise le tableau officiel, sa fiche ne proposant pas de dessin individuel.
+
+14 capacités sont explicitement chiffrées. Les 18 autres restent inconnues, avec une action de suivi dans le lot. Les capacités adultes ne sont pas reprises sur les sept tables enfant. Pour Aalto 91, seule la capacité chiffrée de quatre personnes est retenue ; les convives supplémentaires évoqués sans nombre ne justifient pas une capacité supérieure. Aalto 97 et DL81C conservent deux formats séparés, avec capacité inconnue pour chacun.
+
+Les faits et empreintes sont dans `data/catalog-enrichment/artek-tables.json`. Captures privées : `.context/search-enrichment/artek/`. Les 32 champs ont été créés avec contrôle de concurrence, puis relus à l’identique. Aucun titre, prix, stock, média, variante ni canal n'a été changé.
+
+Preview avant application : [tables Artek pour six personnes](https://mikadodecov2-o8lmx3f3c-mikadodeco.vercel.app/produits.html?q=table+Artek+pour+6+personnes), dix modèles et dix-huit capacités signalées comme à confirmer. L’injection de simulation était limitée à cette preview ; la production utilise désormais les métachamps Shopify. Le total des fiches enrichies par ces deux lots est de 55, dont 30 avec capacité chiffrée sourcée.
+
+Le pipeline importer reconnaît maintenant le contrat produit, contrôle la présence des sources et conserve le JSON à l’export. L’absence de faits omet la colonne pour préserver les valeurs déjà publiées. Le mapping des futurs lots reste un travail par marque ; le CSV de variante demeure bloqué et nécessite un patch Admin ciblé. La validation technique ne signifie pas que les 2 920 fiches sont toutes qualifiées.
+
+Restent la résolution des capacités inconnues/contradictoires, les autres tables, les canapés/bancs, puis les finitions et caractéristiques par variante. Chaque exception du lot Artek indique la source consultée et l’action nécessaire ; aucune donnée absente n’a été inventée pour fermer le suivi.

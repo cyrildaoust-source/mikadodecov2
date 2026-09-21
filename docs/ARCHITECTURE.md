@@ -30,3 +30,7 @@ Avant cette séparation, les fichiers suivis contenaient environ 1 018 Ko de HTM
 Le chantier réduit le serveur principal d'environ 2 850 à 2 200 lignes et le module partagé du navigateur d'environ 1 190 à 970 lignes. Les suggestions ne sont plus téléchargées au premier affichage. Cette séparation améliore la maintenance ; elle ne constitue pas, à elle seule, une mesure de gain de vitesse. La performance doit être vérifiée dans une preview réelle.
 
 Pour les prochaines évolutions, extraire les contrôleurs ou les scripts de page lorsqu'ils changent, en gardant le rendu serveur et les modules natifs. Un changement de framework n'est pas un objectif en soi. Les contrats visuels sont dans `DESIGN.md`, les règles éditoriales dans `docs/FAMILY_PAGES.md`.
+
+## Recette de la livraison
+
+Preview du 21 septembre : https://mikadodecov2-rg7ptut41-mikadodeco.vercel.app. Recherche depuis le haut de l’accueil puis validation par Entrée : « chaise noire 500€ », 45 modèles. Vérification sur ordinateur à 1635 px et sur mobile à 390 × 844 px : cartes communes, critères, prix et contrôles présents ; largeur de page 390 px, aucune erreur de console sur ce parcours. Les 110 tests passent, dont les suites obligatoires des familles, tables et caractéristiques. Les contrôles de performance chiffrés ne font pas partie de cette recette.
