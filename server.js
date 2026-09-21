@@ -503,8 +503,9 @@ app.get('/produit.html', async (req, res) => {
     const name     = product.name || 'Produit';
     const brand    = product.brand || '';
     const designer = product.designer || '';
-    const title = `${name} · Mikado Deco`;
-    const description = ogDesc(`${name}${brand ? ' — ' + brand : ''}. `
+    const title = product.seoTitle || `${name} · Mikado Deco`;
+    const description = ogDesc(product.seoDescription || product.description ||
+      `${name}${brand ? ' — ' + brand : ''}. `
       + (designer ? `Dessiné par ${designer}. ` : '')
       + 'Pièce design à voir en boutique à Uccle, livraison en Belgique.');
     // Première image produit NON redimensionnée (firstImageRaw), en absolu, en
@@ -865,7 +866,18 @@ app.get('/sitemap-pages.xml', (req, res) => {
   return sendXml(res, smUrlset(urls));
 });
 
-// TOUTES les fiches produit (walk paginé, getProducts() plafonné à 250) + collections.
+// Le sitemap ne lit que les handles : les champs de carte et les 250 variantes
+// par produit rendent le parcours complet trop lent lors d'un démarrage à froid.
+const SITEMAP_PRODUCTS_QUERY = `
+  query SitemapProducts($after: String) {
+    products(first: 250, after: $after) {
+      pageInfo { hasNextPage endCursor }
+      nodes { handle }
+    }
+  }
+`;
+
+// Toutes les fiches visibles par le canal Storefront + collections.
 // URLs canoniques (seulement ?handle=). Caché 6 h.
 app.get('/sitemap-products.xml', async (req, res) => {
   try {
@@ -873,11 +885,13 @@ app.get('/sitemap-products.xml', async (req, res) => {
       const urls = [];
       let after = null;
       for (let i = 0; i < 60; i++) { // garde-fou
-        const { items, pageInfo } = await getProductsPage(100, after, null, null);
-        (items || []).forEach((prod) => {
+        const { nodes, pageInfo } = (await shopifyFetch(SITEMAP_PRODUCTS_QUERY, { after })).products;
+        (nodes || []).forEach((prod) => {
           if (prod.handle) urls.push(smUrl(ORIGIN + '/produit.html?handle=' + encodeURIComponent(prod.handle), '0.8'));
         });
         if (!pageInfo || !pageInfo.hasNextPage) break;
+        if (i === 59) throw new Error('Catalogue trop grand pour le sitemap actuel');
+        if (!pageInfo.endCursor) throw new Error('Curseur Shopify manquant pendant le parcours du sitemap');
         after = pageInfo.endCursor;
       }
       (await getCollections()).forEach((c) => {
@@ -1442,6 +1456,7 @@ function mapProduct(node, opts = {}) {
     // thumbs[] (gallery strip, ~8 urls/produit) n'est lu que par la PDP → gated
     // derrière `full` pour ne pas alourdir les réponses liste (PLP/accueil/collections).
     ...(full ? { thumbs: photos.map(i => shopifyResize(i.url, PDP_THUMB_WIDTH)) } : {}),
+    ...(full ? { seoTitle: node.seo?.title || '', seoDescription: node.seo?.description || '' } : {}),
     // firstImageRaw = première image NON redimensionnée (1 url, ungated). La route
     // SSR OG/JSON-LD s'en sert : elle veut un JPEG (scrapers sociaux gèrent mal le
     // WebP en og:image) à sa propre largeur — découplé de images[] (webp galerie).
@@ -2086,6 +2101,7 @@ const PRODUCT_QUERY = `
       vendor
       productType
       description
+      seo { title description }
       tags
       availableForSale
       totalInventory
