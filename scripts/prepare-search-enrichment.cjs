@@ -19,7 +19,7 @@ function plan(snapshot,readSource,preparedBatch=batch) {
     if(canonical(p.variants.nodes)!==canonical(row.binding.variants)){block('Identités, SKU ou options des variantes modifiés');continue;}
     if(p.facts){block('Métachamp déjà présent : comparaison et revue nécessaires, aucun écrasement automatique');continue;}
     for(const [index,source] of row.sources.entries()) {
-      const bytes=readSource(row.handle,index===0?'html':'png');
+      const bytes=readSource(row.handle,index===0?'html':'png',source);
       if(createHash('sha256').update(bytes).digest('hex')!==source.sha256)throw new Error('Source absente ou altérée : '+row.handle);
     }
     proposals.push({id:row.id,handle:row.handle,preconditions:{updatedAt:p.updatedAt,metafieldAbsent:true,variants:row.binding.variants},metafield:{namespace:'custom',key:'search_facts',type:'json',before:null,after:row.facts},sourceEvidence:row.sources,issues:row.issues});
@@ -27,9 +27,13 @@ function plan(snapshot,readSource,preparedBatch=batch) {
   return {version:1,batchId:preparedBatch.batchId,generatedAt:new Date().toISOString(),status:'review_required',shopifyWrites:0,proposals,blocked};
 }
 if(require.main===module) {
-  const [snapshot,sources,output]=process.argv.slice(2);
+  const [snapshot,sources,output,batchFile]=process.argv.slice(2);
   if(!snapshot||!sources||!output)throw new Error('Usage: node scripts/prepare-search-enrichment.cjs snapshot.json sources-dir proposals.json');
-  const result=plan(JSON.parse(fs.readFileSync(snapshot,'utf8')),(handle,ext)=>fs.readFileSync(path.join(sources,handle+'.'+ext)));
+  const result=plan(JSON.parse(fs.readFileSync(snapshot,'utf8')),(handle,ext,source)=>{
+    const file=source.file||handle+'.'+ext;
+    if(path.basename(file)!==file)throw new Error('Nom de source local invalide');
+    return fs.readFileSync(path.join(sources,file));
+  },batchFile?JSON.parse(fs.readFileSync(batchFile,'utf8')):batch);
   fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
   console.log(JSON.stringify({proposals:result.proposals.length,blocked:result.blocked.length,shopifyWrites:0}));
 }

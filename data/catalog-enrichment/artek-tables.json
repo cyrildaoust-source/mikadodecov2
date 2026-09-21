@@ -1,0 +1,2945 @@
+{
+  "version": 1,
+  "batchId": "artek-tables-2026-09-21",
+  "status": "reviewed_sources",
+  "scope": "32 tables Artek ; cotes hors tout, configurations séparées et capacité explicite uniquement.",
+  "products": [
+    {
+      "id": "gid://shopify/Product/10314369925449",
+      "handle": "artek-kaari-table-square-reb011",
+      "name": "Table Kaari REB011 75 × 75 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "REB011",
+        "supplierReferences": [
+          "REB011"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:16:07Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54916690805065",
+            "sku": "ART-KTSREB011-320110",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916690837833",
+            "sku": "ART-KTSREB011-320112",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916690870601",
+            "sku": "ART-KTSREB011-320114",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916690903369",
+            "sku": "ART-KTSREB011-320111",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916690936137",
+            "sku": "ART-KTSREB011-320113",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916690968905",
+            "sku": "ART-KTSREB011-320115",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 75,
+              "width": 75,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/kaari-table-reb-011",
+          "sha256": "894e8889c4b8e8e87fb2c5d487aa0ff7430dc5a1b0b071c7ae9b3c71f211a26c",
+          "file": "artek-kaari-table-square-reb011.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Kaari_Table_square_REB011_cm-inch_web_1024x1024.png?v=1730810596",
+          "sha256": "5975316b970730298e1d0821d775be7f093f5d9a9872254114171e674ef8c5f1",
+          "file": "artek-kaari-table-square-reb011.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10314369859913",
+      "handle": "artek-kaari-table-round-reb004",
+      "name": "Table Kaari REB004 Ø 110 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "REB004",
+        "supplierReferences": [
+          "REB004"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:15:50Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54916689428809",
+            "sku": "ART-KTRREB004-320040",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689461577",
+            "sku": "ART-KTRREB004-320042",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689494345",
+            "sku": "ART-KTRREB004-320044",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689527113",
+            "sku": "ART-KTRREB004-320041",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689559881",
+            "sku": "ART-KTRREB004-320043",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689592649",
+            "sku": "ART-KTRREB004-320045",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "diameter": 110,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/kaari-table-reb-004",
+          "sha256": "7df966c8b03a46636b3b6056e4e91ac7c53e24200229f45b4156631a988da054",
+          "file": "artek-kaari-table-round-reb004.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Kaari_Table_Round_REB004_cm-inch_web_1024x1024.png?v=1730819701",
+          "sha256": "10fd195b7a97ccb3c5fe8315fdefdc7de19e36cc71a045533f64e55c348ba2b6",
+          "file": "artek-kaari-table-round-reb004.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10314369794377",
+      "handle": "artek-kaari-table-round-reb003",
+      "name": "Table Kaari REB003 Ø 80 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "REB003",
+        "supplierReferences": [
+          "REB003"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:15:48Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54916689035593",
+            "sku": "ART-KTRREB003-320030",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689068361",
+            "sku": "ART-KTRREB003-320032",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689101129",
+            "sku": "ART-KTRREB003-320034",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689133897",
+            "sku": "ART-KTRREB003-320031",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689166665",
+            "sku": "ART-KTRREB003-320033",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916689199433",
+            "sku": "ART-KTRREB003-320035",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "diameter": 80,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/kaari-table-reb-003",
+          "sha256": "24f5a09ceec0048eef71ab2a5caaf656bab8f3a1f74c1ab951c64e543162be0f",
+          "file": "artek-kaari-table-round-reb003.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Kaari_Table_Round_REB003_cm-inch_web_1024x1024.png?v=1730810298",
+          "sha256": "ac880a01dd29bea8d60ce69feb554856dd974ef34c987ada403c697bf3236303",
+          "file": "artek-kaari-table-round-reb003.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10314369728841",
+      "handle": "artek-kaari-table-rectangular-reb012",
+      "name": "Table Kaari REB012 160 × 80 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "REB012",
+        "supplierReferences": [
+          "REB012"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:15:47Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54916688806217",
+            "sku": "ART-KTRREB012-320120",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688838985",
+            "sku": "ART-KTRREB012-320122",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688871753",
+            "sku": "ART-KTRREB012-320124",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688904521",
+            "sku": "ART-KTRREB012-320121",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688937289",
+            "sku": "ART-KTRREB012-320123",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688970057",
+            "sku": "ART-KTRREB012-320125",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 160,
+              "width": 80,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 6
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/kaari-table-reb-012",
+          "sha256": "b026d79aff26a99fb2127ccd952379b4a6aa470f23009ea8468478e8639ed938",
+          "file": "artek-kaari-table-rectangular-reb012.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Kaari_Table_rectangular_REB012_cm-inch_web_1024x1024.png?v=1730810025",
+          "sha256": "9c979c95a299f573abcae4384c8a02fdaf95266b6e0214a33301460ff24f6c5c",
+          "file": "artek-kaari-table-rectangular-reb012.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Kaari Table REB 012 is the perfect size for a dining group of 4-6 people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10314369663305",
+      "handle": "artek-kaari-table-rectangular-reb002",
+      "name": "Table Kaari REB002 240 × 90 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "REB002",
+        "supplierReferences": [
+          "REB002"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:15:45Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54916688511305",
+            "sku": "ART-KTRREB002-320020",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688544073",
+            "sku": "ART-KTRREB002-320022",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688576841",
+            "sku": "ART-KTRREB002-320024",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688609609",
+            "sku": "ART-KTRREB002-320021",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688642377",
+            "sku": "ART-KTRREB002-320023",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688675145",
+            "sku": "ART-KTRREB002-320025",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 240,
+              "width": 90,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 8
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/kaari-table-reb-002",
+          "sha256": "4a3c5b253f42b46ee7d7531c6b46aac8bd10e1e14366caa54f42d803dba86d5e",
+          "file": "artek-kaari-table-rectangular-reb002.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Kaari_Table_rectangular_REB002_cm-inch_web_1024x1024.png?v=1730809557",
+          "sha256": "86c589841355ffc3ca3e182bc2e67bcf742666f8e10dbe2b9f095e7e207ad15b",
+          "file": "artek-kaari-table-rectangular-reb002.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Kaari Table REB 002 can easily seat eight people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10314369532233",
+      "handle": "artek-kaari-table-rectangular-reb001",
+      "name": "Table Kaari REB001 200 × 85 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "REB001",
+        "supplierReferences": [
+          "REB001"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:15:43Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54916688216393",
+            "sku": "ART-KTRREB001-320010",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688249161",
+            "sku": "ART-KTRREB001-320012",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688281929",
+            "sku": "ART-KTRREB001-320014",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne — linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688314697",
+            "sku": "ART-KTRREB001-320011",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié blanc brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688347465",
+            "sku": "ART-KTRREB001-320013",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — lamifié noir brillant"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54916688380233",
+            "sku": "ART-KTRREB001-320015",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Chêne noir — linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 200,
+              "width": 85,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 8
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/kaari-table-reb-001",
+          "sha256": "aef0e5b71155e8a4c76cbcbc8b036e84ca0305978f14f1173ac04673d816a853",
+          "file": "artek-kaari-table-rectangular-reb001.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Kaari_Table_rectangular_REB001_cm-inch_web_1b53c5f0-e5dd-460d-aa1a-986bb242616f_1024x1024.png?v=1730809318",
+          "sha256": "de50044f5787871ff5018520529b57e1f9a069966ee99aa69c479b5ff7c79af7",
+          "file": "artek-kaari-table-rectangular-reb001.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Kaari Table REB 001 is the perfect size for a dining group of 6-8 people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192742777161",
+      "handle": "artek-aalto-table-round-90a-60cm",
+      "name": "Table enfant Aalto 90A Ø 100 cm H60",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "90A",
+        "supplierReferences": [
+          "90A"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:14:03Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54374046695753",
+            "sku": "ART-ATR90A60CM-28301761",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374046728521",
+            "sku": "ART-ATR90A60CM-28301762",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374046761289",
+            "sku": "ART-ATR90A60CM-28301763",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "diameter": 100,
+              "height": 60
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-childrens-table-90a",
+          "sha256": "c30848d00d61b007ef380aa851117a114313f698766ff7118671406e8d09da18",
+          "file": "artek-aalto-table-round-90a-60cm.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Childrens_Table_round_90A_cm-inch_web_1024x1024.png?v=1730817061",
+          "sha256": "0baa58c250f48eb257cf05d0cfd1f86dc0382ae95b0fb385dce85fb33b0eef84",
+          "file": "artek-aalto-table-round-90a-60cm.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité enfant non déclarée ; ne pas reprendre celle du modèle adulte."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192742711625",
+      "handle": "artek-aalto-table-square-81c-60cm",
+      "name": "Table enfant Aalto 81C 75 × 75 cm H60",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "81C",
+        "supplierReferences": [
+          "81C"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:14:05Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54374046368073",
+            "sku": "ART-ATS81C60CM-28304561",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374046400841",
+            "sku": "ART-ATS81C60CM-28304562",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374046433609",
+            "sku": "ART-ATS81C60CM-28304563",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 75,
+              "width": 75,
+              "height": 60
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-childrens-table-81c",
+          "sha256": "b7375fba6ac9b738a131285ace74e181e7847951afaac3e3fd405556549724fa",
+          "file": "artek-aalto-table-square-81c-60cm.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Childrens_Table_square_81C_cm-inch_web_1024x1024.png?v=1730818394",
+          "sha256": "ea39205f7de7a19eb7c242b8a44474b47a694298ac60446c4ba14238641a8ccb",
+          "file": "artek-aalto-table-square-81c-60cm.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité enfant non déclarée ; ne pas reprendre celle du modèle adulte."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192742678857",
+      "handle": "artek-aalto-table-square-80c-60cm",
+      "name": "Table enfant Aalto 80C 60 × 60 cm H60",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "80C",
+        "supplierReferences": [
+          "80C"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:51:11Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54374046269769",
+            "sku": "ART-ATS80C60CM-28306261",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374046302537",
+            "sku": "ART-ATS80C60CM-28306263",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374046335305",
+            "sku": "ART-ATS80C60CM-28306262",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Iki blanc hp"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 60,
+              "width": 60,
+              "height": 60
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-childrens-table-80c",
+          "sha256": "91be115d07b0a5a8469e84aa48b78ba18ba7a7407dc1254abac51ea6095653e9",
+          "file": "artek-aalto-table-square-80c-60cm.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto-Children_s-Table-square-80C_cm-inch_web-3234509_af5e5e95-a522-4312-933f-df3d485d619f_1024x1024.png?v=1730820189",
+          "sha256": "9ac4f0f5d288f19caa9cd86068ec17cd94f1b16cb3ab20935b95ee5ddb07f39c",
+          "file": "artek-aalto-table-square-80c-60cm.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité enfant non déclarée ; ne pas reprendre celle du modèle adulte."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192742547785",
+      "handle": "artek-aalto-table-rectangular-81b-60cm",
+      "name": "Table enfant Aalto 81B 120 × 75 cm H60",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "81B",
+        "supplierReferences": [
+          "81B"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:13:59Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54374044270921",
+            "sku": "ART-ATR81B60CM-28300461",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374044303689",
+            "sku": "ART-ATR81B60CM-28300462",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374044336457",
+            "sku": "ART-ATR81B60CM-28300463",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 120,
+              "width": 75,
+              "height": 60
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-childrens-table-81b",
+          "sha256": "6e56ddf529aff09fe7ab00ba66e442c2042ac5b47fd57042e9096d9b4355ecea",
+          "file": "artek-aalto-table-rectangular-81b-60cm.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Childrens_Table_rectangular_81B_cm-inch_web_4ae6bcfc-652e-4cb0-b37a-5fa64bef4a64_1024x1024.png?v=1730979020",
+          "sha256": "595be74e3839e0b42ad904613d5a7bf593271fb4dee550765fec5d4fbe7eea42",
+          "file": "artek-aalto-table-rectangular-81b-60cm.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité enfant non déclarée ; ne pas reprendre celle du modèle adulte."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192742515017",
+      "handle": "artek-aalto-table-rectangular-81a-60cm",
+      "name": "Table enfant Aalto 81A 150 × 75 cm H60",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "81A",
+        "supplierReferences": [
+          "81A"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:13:58Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54374044107081",
+            "sku": "ART-ATR81A60CM-28304461",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374044139849",
+            "sku": "ART-ATR81A60CM-28304462",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374044172617",
+            "sku": "ART-ATR81A60CM-28304463",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 150,
+              "width": 75,
+              "height": 60
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-childrens-table-81a",
+          "sha256": "0d389f45584835dd45da9948455a6870f884a0f42389855e04a03a815f7beec7",
+          "file": "artek-aalto-table-rectangular-81a-60cm.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Childrens_Table_rectangular_81A_cm-inch_web_1024x1024.png?v=1730817645",
+          "sha256": "2034a6932ffc3d3e576167dc0bc7a1549b2ad215b75e773791b7bf57a4efbbe0",
+          "file": "artek-aalto-table-rectangular-81a-60cm.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité enfant non déclarée ; ne pas reprendre celle du modèle adulte."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192742482249",
+      "handle": "artek-aalto-table-rectangular-80b-60cm",
+      "name": "Table enfant Aalto 80B 100 × 60 cm H60",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "80B",
+        "supplierReferences": [
+          "80B"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:13:25Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54374044008777",
+            "sku": "ART-ATR80B60CM-28306161",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374044041545",
+            "sku": "ART-ATR80B60CM-28306163",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374044074313",
+            "sku": "ART-ATR80B60CM-28306162",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Iki blanc hp"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 100,
+              "width": 60,
+              "height": 60
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-childrens-table-80b",
+          "sha256": "5260cfccb1c6684a7f0c9a1545def2067a615fb624e90324ab646f743533bd4e",
+          "file": "artek-aalto-table-rectangular-80b-60cm.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://www.artek.fi/downloads/Artek-Aalto-Tables_shapes-sizes-surfaces.pdf",
+          "sha256": "6ac623bb0fc29c86303619e09a29088896b8c1ca7cabcbe6df4ed10b20e72c8c",
+          "file": "tables.pdf",
+          "capturedAt": "2026-09-21",
+          "page": 1
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité enfant non déclarée ; ne pas reprendre celle du modèle adulte."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192742416713",
+      "handle": "artek-aalto-table-rectangular-80a-60cm",
+      "name": "Table enfant Aalto 80A 120 × 60 cm H60",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "80A",
+        "supplierReferences": [
+          "80A"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:13:21Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54374043779401",
+            "sku": "ART-ATR80A60CM-28300261",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374043812169",
+            "sku": "ART-ATR80A60CM-28300262",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54374043844937",
+            "sku": "ART-ATR80A60CM-28300263",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 120,
+              "width": 60,
+              "height": 60
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-childrens-table-80a",
+          "sha256": "e0210e78890280aad72faab6e7cf5e8c8e590a6cc2efbb30adcea71a54056fa4",
+          "file": "artek-aalto-table-rectangular-80a-60cm.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Childrens_Table_rectangular_80A_cm-inch_web_1024x1024.png?v=1730818036",
+          "sha256": "a354121e11e739cce814e80aa721fe99ff7cbf886fe085abfc22ff5975821df9",
+          "file": "artek-aalto-table-rectangular-80a-60cm.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité enfant non déclarée ; ne pas reprendre celle du modèle adulte."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192354967881",
+      "handle": "artek-aalto-table-foldable-dl81c",
+      "name": "Table pliante Aalto DL81C 75/112,5 × 75 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "DL81C",
+        "supplierReferences": [
+          "DL81C"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:13:17Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371158393161",
+            "sku": "ART-ATFDL81C-28306081",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371158425929",
+            "sku": "ART-ATFDL81C-28306083",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371158458697",
+            "sku": "ART-ATFDL81C-28306082",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371158491465",
+            "sku": "ART-ATFDL81C-28306084",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Clay linoléum"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371158524233",
+            "sku": "ART-ATFDL81C-28306085",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Pistachio linoléum"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371158557001",
+            "sku": "ART-ATFDL81C-28306086",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Vapour linoléum"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "Rabat replié",
+            "dimensions": {
+              "length": 75,
+              "width": 75,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          },
+          {
+            "id": "extended",
+            "label": "Rabat déplié",
+            "dimensions": {
+              "length": 112.5,
+              "width": 75,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-foldable-dl81c",
+          "sha256": "ad8bbd1cb60c7a3205b8e96d58f957914b430f632cbcc0d668531a6d415f4797",
+          "file": "artek-aalto-table-foldable-dl81c.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto-Table-foldable-DL81C_extended_cm-inch_web-8479129_9398660f-35dd-4068-bc23-b0e844529429_1024x1024.png?v=1730808135",
+          "sha256": "8bc6f90173d5cbbb342e268763a34c69465a4aa10c82d883eec448d81663879d",
+          "file": "artek-aalto-table-foldable-dl81c.png",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://www.artek.fi/downloads/Artek-Aalto-Tables_shapes-sizes-surfaces.pdf",
+          "sha256": "6ac623bb0fc29c86303619e09a29088896b8c1ca7cabcbe6df4ed10b20e72c8c",
+          "file": "tables.pdf",
+          "capturedAt": "2026-09-21",
+          "page": 1
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192354279753",
+      "handle": "artek-aalto-table-extendable-97",
+      "name": "Table à rallonge Aalto 97 135/190 × 85 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "97",
+        "supplierReferences": [
+          "97"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:21Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371153281353",
+            "sku": "ART-ATE97-28302481",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371153314121",
+            "sku": "ART-ATE97-28302482",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "Sans rallonge",
+            "dimensions": {
+              "length": 135,
+              "width": 85,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          },
+          {
+            "id": "extended",
+            "label": "Avec la rallonge",
+            "dimensions": {
+              "length": 190,
+              "width": 85,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-97-extendable",
+          "sha256": "14bb13bf1253a5da64d33c1e44a7466b56697ee0cb5fc1dd1c8dab6a6729a2fb",
+          "file": "artek-aalto-table-extendable-97.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_extendable_97_cm_extended-inch_web_1024x1024.png?v=1727096664",
+          "sha256": "8ff4a7c016c4b1d37a18d2312e80b7d114f856b0cbac6da203001736e31e7396",
+          "file": "artek-aalto-table-extendable-97.png",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://www.artek.fi/downloads/Artek-Aalto-Tables_shapes-sizes-surfaces.pdf",
+          "sha256": "6ac623bb0fc29c86303619e09a29088896b8c1ca7cabcbe6df4ed10b20e72c8c",
+          "file": "tables.pdf",
+          "capturedAt": "2026-09-21",
+          "page": 1
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192353919305",
+      "handle": "artek-aalto-table-half-round-96",
+      "name": "Table demi-ronde Aalto 96 150 × 75 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "96",
+        "supplierReferences": [
+          "96"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:21Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371151249737",
+            "sku": "ART-ATH96-28306481",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371151282505",
+            "sku": "ART-ATH96-28306483",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371151315273",
+            "sku": "ART-ATH96-28306482",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 150,
+              "width": 75,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-96",
+          "sha256": "1bb0be21ca83852b01244d5880408efd5170b4b6f5b83e1d05dc37a7eae175f3",
+          "file": "artek-aalto-table-half-round-96.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto-Table-halfround-96_cm-inch_web-8479131_1024x1024.png?v=1730819499",
+          "sha256": "1098418a5c1c2bf5d094a6ac5b724e4f7abafdec53250cba0e03f3d97ed019be",
+          "file": "artek-aalto-table-half-round-96.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192353493321",
+      "handle": "artek-aalto-table-half-round-95",
+      "name": "Table demi-ronde Aalto 95 120 × 60 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "95",
+        "supplierReferences": [
+          "95"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:21Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371148792137",
+            "sku": "ART-ATH95-28302381",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371148824905",
+            "sku": "ART-ATH95-28302382",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371148857673",
+            "sku": "ART-ATH95-28302383",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 120,
+              "width": 60,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-95",
+          "sha256": "1188c249e4e50f0499a6aece2fe92ae895a4037d8e213900e1085d2cd7ced6b4",
+          "file": "artek-aalto-table-half-round-95.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_half_round_95_cm-inch_web_1024x1024.png?v=1727096696",
+          "sha256": "5df095a34ce5fc93ec779ff01d402898abae94bdb709e23c76eb59722e5fc0ca",
+          "file": "artek-aalto-table-half-round-95.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192353067337",
+      "handle": "artek-aalto-table-round-91",
+      "name": "Table Aalto 91 Ø 125 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "91",
+        "supplierReferences": [
+          "91"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:51:11Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371145875785",
+            "sku": "ART-ATR91-28302181",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371145908553",
+            "sku": "ART-ATR91-28302182",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371145941321",
+            "sku": "ART-ATR91-28302183",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371145974089",
+            "sku": "ART-ATR91-28302186",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau teinté noyer"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "diameter": 125,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 4
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-91",
+          "sha256": "1e175995b92bab9bad2885408186e3cf5a8ff27bbccb3c97088f6e88a20b81a1",
+          "file": "artek-aalto-table-round-91.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_round_91_cm-inch_web_1024x1024.png?v=1727096851",
+          "sha256": "acdc155ddc866cfc9eebc698322da4577a9e321e8ee53d6a8d54fc0f8556fe5d",
+          "file": "artek-aalto-table-round-91.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 91 comfortably seats four people but, thanks to its inset legs, it can accommodate more diners.",
+      "issues": [
+        "Quatre personnes explicitement déclarées ; le nombre supplémentaire évoqué sans chiffre n’est pas retenu."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192351920457",
+      "handle": "artek-aalto-table-round-90b",
+      "name": "Table Aalto 90B Ø 75 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "90B",
+        "supplierReferences": [
+          "90B"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:51:10Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371140075849",
+            "sku": "ART-ATR90B-28301881",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371140108617",
+            "sku": "ART-ATR90B-28301880",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau sauvage"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371140141385",
+            "sku": "ART-ATR90B-28301882",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau verni naturel / lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371140174153",
+            "sku": "ART-ATR90B-28301883",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau verni naturel / linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "diameter": 75,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 3
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-90b",
+          "sha256": "c4edcf3d1cc557a00020ab342f903f69b57229e577bf487c385c42e9c5ef1929",
+          "file": "artek-aalto-table-round-90b.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_round_90B_cm-inch_web_1024x1024.png?v=1727096804",
+          "sha256": "9a1c1a169d522dcff7460214f059e8fbd20353605b48b79eefc6ae098cdb90c7",
+          "file": "artek-aalto-table-round-90b.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "The three-legged Table 90B fits into a small space and seats three diners.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192351428937",
+      "handle": "artek-aalto-table-round-90a",
+      "name": "Table Aalto 90A Ø 100 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "90A",
+        "supplierReferences": [
+          "90A"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:55Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371136569673",
+            "sku": "ART-ATR90A-28301781",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371136602441",
+            "sku": "ART-ATR90A-28301780",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau sauvage"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371136635209",
+            "sku": "ART-ATR90A-28301782",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau verni naturel / lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371136667977",
+            "sku": "ART-ATR90A-28301783",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau verni naturel / linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "diameter": 100,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 4
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-90a",
+          "sha256": "10a92cb1ace8817f2c445592a1f80f912bedbb3ac99225a10f932a3314c1e546",
+          "file": "artek-aalto-table-round-90a.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_round_90A_cm-inch_web_1024x1024.png?v=1727096775",
+          "sha256": "5605653882497c0bcabcb9910cd81eb6d0a71e7ec4f882d0aa73d5d32d495ef9",
+          "file": "artek-aalto-table-round-90a.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 90A comfortably seats four people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192351166793",
+      "handle": "artek-aalto-table-square-84",
+      "name": "Table Aalto 84 120 × 120 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "84",
+        "supplierReferences": [
+          "84"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:51:25Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371133587785",
+            "sku": "ART-ATS84-28306381",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371133620553",
+            "sku": "ART-ATS84-28306383",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371133653321",
+            "sku": "ART-ATS84-28306382",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 120,
+              "width": 120,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 8
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-84",
+          "sha256": "da8b23df53b19d78b1034e7512a311622a2f4d6b0bfdcc54f40df399258b0e27",
+          "file": "artek-aalto-table-square-84.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_square_84_cm-inch_web_old_1024x1024.png?v=1727096442",
+          "sha256": "60030a01f855b09f31b8c522e705c6e1a780447843b409ee9501f9277d130ba1",
+          "file": "artek-aalto-table-square-84.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 84 is large enough to serve as a dining group for four or even eight people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192350937417",
+      "handle": "artek-aalto-table-square-81c",
+      "name": "Table Aalto 81C 75 × 75 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "81C",
+        "supplierReferences": [
+          "81C"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:51:10Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371131556169",
+            "sku": "ART-ATS81C-28304581",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371131588937",
+            "sku": "ART-ATS81C-28304582",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371131621705",
+            "sku": "ART-ATS81C-28304583",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 75,
+              "width": 75,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-81c",
+          "sha256": "2e3a8a80efce91c7f49e05664b37d6cbbfce69133534a1a960aa513aa8a1ace6",
+          "file": "artek-aalto-table-square-81c.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto-Table-square-81C_cm-inch_web-3234509_1024x1024.png?v=1730819215",
+          "sha256": "6b247d8afd0426dda772cff25acbf617ded27ea4e4baf0cc1c5f9ae6fd095b85",
+          "file": "artek-aalto-table-square-81c.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192350052681",
+      "handle": "artek-aalto-table-square-80c",
+      "name": "Table Aalto 80C 60 × 60 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "80C",
+        "supplierReferences": [
+          "80C"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:51:10Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371126804809",
+            "sku": "ART-ATS80C-28306281",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371126837577",
+            "sku": "ART-ATS80C-28306283",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371126870345",
+            "sku": "ART-ATS80C-28306282",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 60,
+              "width": 60,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-80c",
+          "sha256": "e875ebca76940389d96a6000d709efd1850a6a68835128da682d229309d308d2",
+          "file": "artek-aalto-table-square-80c.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto-Table-square-80C_cm-inch_web-3234509_1024x1024.png?v=1730820019",
+          "sha256": "9cd029efde073d1ca1ae5128c3fb0496716faaed157fb3b1d4851791d4c17384",
+          "file": "artek-aalto-table-square-80c.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192349561161",
+      "handle": "artek-aalto-table-rectangular-86a",
+      "name": "Table Aalto 86A 240 × 100 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "86A",
+        "supplierReferences": [
+          "86A"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:50Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371120939337",
+            "sku": "ART-ATR86A-28300981",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371120972105",
+            "sku": "ART-ATR86A-28300982",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371121004873",
+            "sku": "ART-ATR86A-28300983",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 240,
+              "width": 100,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 10
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-86a",
+          "sha256": "3b15bee9ec8e2157e9b30de6a03810104611301bb85f74e6ddbb05d3c70fccee",
+          "file": "artek-aalto-table-rectangular-86a.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_86A_cm-inch_web_1024x1024.png?v=1727096607",
+          "sha256": "f12b9137e5adc8e08fcec3f14b0ed70dfb5e3f4ee205d8d8d9530076468e593c",
+          "file": "artek-aalto-table-rectangular-86a.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "The 86A table can easily seat eight or even ten people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192349135177",
+      "handle": "artek-aalto-table-rectangular-86",
+      "name": "Table Aalto 86 210 × 100 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "86",
+        "supplierReferences": [
+          "86"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:55Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371118678345",
+            "sku": "ART-ATR86-28300881",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371118711113",
+            "sku": "ART-ATR86-28300882",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371118743881",
+            "sku": "ART-ATR86-28300883",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 210,
+              "width": 100,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 8
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-86",
+          "sha256": "c7e82dee8b5fa0132e728f7671949b076854f352c3c4b5beb758709d62c45bd3",
+          "file": "artek-aalto-table-rectangular-86.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_86_cm-inch_web_1024x1024.png?v=1727096581",
+          "sha256": "f94d3e84866a4452f7e65187b0d7020263af2c93e7cba0ac3905aab3d1bcbb49",
+          "file": "artek-aalto-table-rectangular-86.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 86 comfortably seats 6-8 people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192348512585",
+      "handle": "artek-aalto-table-rectangular-83",
+      "name": "Table Aalto 83 182 × 91 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "83",
+        "supplierReferences": [
+          "83"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:50Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371115270473",
+            "sku": "ART-ATR83-28300781",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371115303241",
+            "sku": "ART-ATR83-28300780",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau sauvage"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371115336009",
+            "sku": "ART-ATR83-28300782",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau verni naturel / lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371115368777",
+            "sku": "ART-ATR83-28300783",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau verni naturel / linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371115401545",
+            "sku": "ART-ATR83-28300786",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau teinté noyer / chêne veneer teinté noyer"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 182,
+              "width": 91,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 8
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-83",
+          "sha256": "5ad122440ec811d74d410b643342c5cd02716c900d85725a420cabb1333b0d2d",
+          "file": "artek-aalto-table-rectangular-83.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_83_cm-inch_web_1024x1024.png?v=1727096382",
+          "sha256": "82ecf6bd203b208fcecd6ce6f818a2c184430bd98aaff95ca6ba46550a88a5e3",
+          "file": "artek-aalto-table-rectangular-83.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 83 is the perfect size for a dining group of 6-8 people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192346874185",
+      "handle": "artek-aalto-table-rectangular-82b",
+      "name": "Table Aalto 82B 135 × 85 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "82B",
+        "supplierReferences": [
+          "82B"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:55Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371103867209",
+            "sku": "ART-ATR82B-28300681",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371103899977",
+            "sku": "ART-ATR82B-28300682",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371103932745",
+            "sku": "ART-ATR82B-28300683",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 135,
+              "width": 85,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 6
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-82b",
+          "sha256": "2c54224e5a3ddac5b28bee0b52e79c52bc9948f074fb50eb5c95141af3e21570",
+          "file": "artek-aalto-table-rectangular-82b.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_82B_cm-inch_web_1024x1024.png?v=1727096321",
+          "sha256": "a9c346c5aad5bfde45d17ebc45557ee115f65226ea0c321a3395cd8a0d1d8a54",
+          "file": "artek-aalto-table-rectangular-82b.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 82B is the perfect size for a dining group of 4-6 people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192346120521",
+      "handle": "artek-aalto-table-rectangular-82a",
+      "name": "Table Aalto 82A 150 × 85 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "82A",
+        "supplierReferences": [
+          "82A"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:14:01Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371099902281",
+            "sku": "ART-ATR82A-28300581",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371099935049",
+            "sku": "ART-ATR82A-28300582",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371099967817",
+            "sku": "ART-ATR82A-28300583",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 150,
+              "width": 85,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 6
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-82a",
+          "sha256": "cd8b72fa820fb0167892e55eaac6bddab408b2262efd21600d5370ed074469c7",
+          "file": "artek-aalto-table-rectangular-82a.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_82A_cm-inch_web_1024x1024.png?v=1727096343",
+          "sha256": "58a26e23ec8546d3afdff9d6998be2ef0bb591090cec580db574cc11e908d1b3",
+          "file": "artek-aalto-table-rectangular-82a.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 82A is the perfect size for a dining group of 4-6 people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192345432393",
+      "handle": "artek-aalto-table-rectangular-81b",
+      "name": "Table Aalto 81B 120 × 75 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "81B",
+        "supplierReferences": [
+          "81B"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:35Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371096166729",
+            "sku": "ART-ATR81B-28300481",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371096199497",
+            "sku": "ART-ATR81B-28300480",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau sauvage"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371096232265",
+            "sku": "ART-ATR81B-28300482",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau verni naturel / lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371096265033",
+            "sku": "ART-ATR81B-28300483",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau verni naturel / linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 120,
+              "width": 75,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 4
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-81b",
+          "sha256": "064ba70a4498f8b49656206b855212b194d0efbaeaac08249b32d7940a131f5e",
+          "file": "artek-aalto-table-rectangular-81b.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_81B_cm-inch_web_1024x1024.png?v=1727084004",
+          "sha256": "f3af2fa3931936a1e243f0c402db6e5f657d4aaf22b1865a94bab9ac2ab0023d",
+          "file": "artek-aalto-table-rectangular-81b.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 81B is the perfect size for a dining group of 4 people or for a home office work station.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192344056137",
+      "handle": "artek-aalto-table-rectangular-81a",
+      "name": "Table Aalto 81A 150 × 75 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "81A",
+        "supplierReferences": [
+          "81A"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T20:13:29Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371088040265",
+            "sku": "ART-ATR81A-28304481",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371088073033",
+            "sku": "ART-ATR81A-28304482",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371088105801",
+            "sku": "ART-ATR81A-28304483",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 150,
+              "width": 75,
+              "height": 74
+            },
+            "capacity": {
+              "status": "verified",
+              "max": 6
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-81a",
+          "sha256": "e760c28cd6e40f4f30e1615e4672baca13fa41108fc610f894b575edacca9270",
+          "file": "artek-aalto-table-rectangular-81a.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_81A_cm-inch_web_1a07430c-85e4-41f0-abdf-af80ef660b77_1024x1024.png?v=1727096961",
+          "sha256": "c98ebd190a816da17c939e3c6a214bc5303c436188abfa8aca0d2547ab160a93",
+          "file": "artek-aalto-table-rectangular-81a.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": "Table 81A is the perfect size for a dining group of 4-6 people.",
+      "issues": []
+    },
+    {
+      "id": "gid://shopify/Product/10192343236937",
+      "handle": "artek-aalto-table-rectangular-80b",
+      "name": "Table Aalto 80B 100 × 60 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "80B",
+        "supplierReferences": [
+          "80B"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:35Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371083780425",
+            "sku": "ART-ATR80B-28306181",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371083813193",
+            "sku": "ART-ATR80B-28306183",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371083845961",
+            "sku": "ART-ATR80B-28306182",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 100,
+              "width": 60,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-80b",
+          "sha256": "a5d3b38764c53a9e185be29acfec88503080076c03ac2aeb22061c07f371ea57",
+          "file": "artek-aalto-table-rectangular-80b.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_80B_cm-inch_web_old_1024x1024.png?v=1727083896",
+          "sha256": "da38ce0d170f39ffdd9d9ec0f96b500ca0a471e791ae6af955080a9d63f0eb9a",
+          "file": "artek-aalto-table-rectangular-80b.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/10192342122825",
+      "handle": "artek-aalto-table-rectangular-80a",
+      "name": "Table Aalto 80A 120 × 60 cm",
+      "brand": "Artek",
+      "binding": {
+        "status": "verified",
+        "sourceReference": "80A",
+        "supplierReferences": [
+          "80A"
+        ],
+        "checkedAt": "2026-09-21",
+        "shopifyUpdatedAt": "2026-08-14T17:50:35Z",
+        "method": "Référence modèle du titre officiel et du dessin, référence dans chaque SKU, format exact, distinction H60 enfant ; variantes de finition uniquement. Les SKU complets de la boutique fabricant ne sont pas assimilés aux SKU Mikado.",
+        "variants": [
+          {
+            "id": "gid://shopify/ProductVariant/54371078242633",
+            "sku": "ART-ATR80A-28300281",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Bouleau"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371078275401",
+            "sku": "ART-ATR80A-28300282",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Lamifié blanc"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/54371078308169",
+            "sku": "ART-ATR80A-28300283",
+            "options": [
+              {
+                "name": "Finition",
+                "value": "Linoléum noir"
+              }
+            ]
+          }
+        ]
+      },
+      "facts": {
+        "version": 1,
+        "configurations": [
+          {
+            "id": "standard",
+            "label": "",
+            "dimensions": {
+              "length": 120,
+              "width": 60,
+              "height": 74
+            },
+            "capacity": {
+              "status": "unknown"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://shop.artek.fi/products/aalto-table-80a",
+          "sha256": "0d1b02a2b48a489dcc9450ba19e73d2eaf2a9ab34153d84dc8e774c2d05eca5b",
+          "file": "artek-aalto-table-rectangular-80a.html",
+          "capturedAt": "2026-09-21"
+        },
+        {
+          "url": "https://shop.artek.fi/cdn/shop/files/Aalto_Table_rectangular_80A_cm-inch_web_1024x1024.png?v=1727077463",
+          "sha256": "4e5b4894056caf5a72c7eb1172c32a07a1479e789a53e9660252e1de0b0bd21f",
+          "file": "artek-aalto-table-rectangular-80a.png",
+          "capturedAt": "2026-09-21"
+        }
+      ],
+      "capacityEvidence": null,
+      "issues": [
+        "Capacité non chiffrée dans la fiche officielle consultée ; demander la capacité par configuration au fabricant."
+      ]
+    }
+  ]
+}
