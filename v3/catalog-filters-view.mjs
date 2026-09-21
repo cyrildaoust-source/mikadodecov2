@@ -9,13 +9,14 @@ export function chairParams(state, page = state.page) {
   for(const key of ['min','max','seat_min','seat_max']) if(state[key] !== null && state[key] !== undefined) q.set(key,String(state[key]));
   if(state.stock) q.set('stock','1');
   if(state.tag) q.set('tag',state.tag);
+  if(state.q) q.set('q',state.q);
   if(state.sort !== 'pop') q.set('sort',state.sort);
   if(page > 1) q.set('page',String(page));
   return q;
 }
 export const chairURL = (state, page = state.page) => {const q=chairParams(state,page);return '/collections/chaises'+(q.size?'?'+q:'');};
 export function filterCount(state) {
-  return ['brand','color','material','usage','feature'].reduce((n,k)=>n+state[k].length,0)+Number(state.min!==null||state.max!==null)+Number(state.stock)+Number(state.seat_min!==null||state.seat_max!==null)+Number(Boolean(state.tag));
+  return ['brand','color','material','usage','feature'].reduce((n,k)=>n+state[k].length,0)+Number(state.min!==null||state.max!==null)+Number(state.stock)+Number(state.seat_min!==null||state.seat_max!==null)+Number(Boolean(state.tag))+Number(Boolean(state.q));
 }
 function listFilter(key, data) {
   const values=data.facets[key],selected=data.state[key];
@@ -44,6 +45,7 @@ export function filterControls(data) {
         ${showSeat?`<details class="catalog-filters__group" data-filter-group="seat"><summary>Hauteur d’assise<span class="catalog-filters__chevron" aria-hidden="true"></span></summary><div class="catalog-filters__popover catalog-filters__price"><div class="catalog-filters__range"><label>Minimum (cm)<input type="number" min="0" step="0.1" name="seat_min" value="${state.seat_min??''}"></label><label>Maximum (cm)<input type="number" min="0" step="0.1" name="seat_max" value="${state.seat_max??''}"></label></div><button class="btn btn--outline" type="submit">Appliquer</button></div></details>`:''}
         <label class="catalog-filters__stock"><input type="checkbox" name="stock" value="1"${state.stock?' checked':''}>En stock <span class="catalog-filters__count">${facets.stock}</span></label>
         ${state.tag?`<input type="hidden" name="tag" value="${esc(state.tag)}">`:''}
+        ${state.q?`<input type="hidden" name="q" value="${esc(state.q)}">`:''}
         <button type="submit" class="btn btn--outline catalog-filters__submit">Afficher les résultats</button>
       </div>
       <label class="catalog-filters__sort"><span class="sr-only">Trier les chaises</span><select class="fselect" name="sort">${[['pop','Les plus populaires'],['asc','Prix croissant'],['desc','Prix décroissant'],['az','Nom : A → Z']].map(([v,l])=>`<option value="${v}"${state.sort===v?' selected':''}>${l}</option>`).join('')}</select></label>
@@ -57,6 +59,7 @@ function activeChips(data) {
   if(state.min!==null||state.max!==null)chip(state.min!==null&&state.max!==null?`${money(state.min)} – ${money(state.max)}`:state.min!==null?`Dès ${money(state.min)}`:`Jusqu’à ${money(state.max)}`,{...state,min:null,max:null});
   if(state.stock)chip('En stock',{...state,stock:false});
   if(state.tag)chip(state.tag,{...state,tag:''});
+  if(state.q)chip(`Recherche : ${state.q}`,{...state,q:''});
   if(state.seat_min!==null||state.seat_max!==null)chip(`Assise : ${state.seat_min??'…'} – ${state.seat_max??'…'} cm`,{...state,seat_min:null,seat_max:null});
   return chips.join('');
 }

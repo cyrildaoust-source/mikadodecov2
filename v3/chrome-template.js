@@ -90,11 +90,11 @@ export function chromeHTML(active) {
           <div class="searchd__suggest" data-search-suggest>
             <div class="searchd__cols">
               <div class="searchd__col">
-                <div class="sr__lab">Mots-clés suggérés</div>
+                <div class="sr__lab">Décrivez ce que vous cherchez</div>
                 <ul class="searchd__kw">
-                  <li><a href="/produits.html?q=chaise">Chaises</a></li>
-                  <li><a href="/produits.html?q=table">Tables</a></li>
-                  <li><a href="/produits.html?q=lampe">Luminaires</a></li>
+                  <li><a href="/produits.html?q=chaise+noire+500%E2%82%AC">Une chaise noire, 500 €</a></li>
+                  <li><a href="/produits.html?q=table+pour+6+personnes">Une table pour 6 personnes</a></li>
+                  <li><a href="/produits.html?q=canap%C3%A9+3+places">Un canapé 3 places</a></li>
                   <li><a href="/produits.html?q=vase">Vases</a></li>
                   <li><a href="/produits.html?q=coussin">Coussins</a></li>
                   <li><a href="/produits.html?q=jardin">Jardin</a></li>
@@ -149,7 +149,7 @@ export function chromeHTML(active) {
         <nav class="nav__primary">${links}</nav>
         <div class="nav__searchbar" data-search-field role="search">
           <svg class="nav__searchbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
-          <input class="nav__searchbar-input" data-search-input type="search" autocomplete="off" placeholder="Rechercher un produit, une marque…" aria-label="Rechercher" />
+          <input class="nav__searchbar-input" data-search-input type="search" autocomplete="off" maxlength="200" placeholder="Un meuble, une finition, un budget…" aria-label="Rechercher" />
           <button class="nav__searchbar-x" type="button" data-search-close aria-label="Fermer la recherche">&times;</button>
         </div>
       </div>

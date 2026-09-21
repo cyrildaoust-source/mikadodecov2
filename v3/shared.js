@@ -9,6 +9,7 @@ import { listingContext, createNavigation, selectionURL, productHref, breadcrumb
 export { breadcrumbHTML, productHref } from "/navigation.mjs";
 import { chromeHTML, footerHTML } from "/chrome-template.js";
 import { finishHTML } from "/product-finishes.mjs";
+import {searchCriteria,searchNotes,searchSuggestions} from '/search-view.mjs';
 
 export const CART_KEY = "mikado_v3_cart";
 
@@ -899,10 +900,10 @@ function bindSearch() {
   const input = document.querySelector("[data-search-input]");
   const results = root.querySelector("[data-search-results]");
   const suggest = root.querySelector("[data-search-suggest]");
-  let lastFocus = null, timer = null, lastTerm = "", featLoaded = false;
+  let lastFocus = null, timer = null, lastTerm = "", featLoaded = false, pendingSearch = null, searchGeneration = 0;
   const onKey = (e) => { if (e.key === "Escape") { e.preventDefault(); close(); } };
   const pdpHref = (p, source) => escapeHtml(productHref(p, typeof source === "string" ? source : ""));
-  const row = (p, source) => `<a class="sr__row" href="${pdpHref(p, source)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span></span><span class="sr__price">${priceLabel(p)}</span></a>`;
+  const row = (p, source) => `<a class="sr__row" href="${pdpHref(p, source)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span>${p.finishLabel ? `<span class="sr__finish">${escapeHtml(p.finishLabel)}</span>` : ''}</span><span class="sr__price">${priceLabel(p)}</span></a>`;
   // Liens marque « curés » (mega-menu-brands.json, même schéma que marques.html) :
   // clé = nom en minuscules → href /collections/<handle>. Repli ?brand=<slug> si
   // absent. hrefByName persiste (bindSearch appelé une seule fois) → chargé 1×.
@@ -970,6 +971,8 @@ function bindSearch() {
     document.addEventListener("keydown", onKey, true);
   }
   function close() {
+    clearTimeout(timer); pendingSearch?.abort(); searchGeneration++;
+    results.removeAttribute('aria-busy');
     root.hidden = true;
     document.body.classList.remove("search-locked");   // le menu se remet
     document.removeEventListener("keydown", onKey, true);
@@ -979,31 +982,47 @@ function bindSearch() {
   }
   const gotoResults = () => { const t = input.value.trim(); if (t) location.href = `/produits.html?q=${encodeURIComponent(t)}`; };
   const render = (term, d) => {
+    const source = selectionURL(d.resultsUrl) || '/produits.html?q=' + encodeURIComponent(term);
+    let label = `Voir tous les résultats pour « ${term} »`;
+    if (d.resultsUrl) label = d.total === 1 ? 'Voir le modèle' : d.total > 1 ? `Voir les ${d.total} modèles` : 'Modifier ma recherche';
+    const all = `<a class="sr__all" href="${escapeHtml(source)}">${escapeHtml(label)} →</a>`;
+    const intent = searchCriteria(d) + searchNotes(d);
     if (!(d.products?.length || d.brands?.length || d.categories?.length)) {
-      results.innerHTML = `<p class="searchd__empty">Aucun résultat pour « ${escapeHtml(term)} ».</p>`; return;
+      results.innerHTML = `${intent}${d.needsCategory?'':'<p class="searchd__empty">Aucun modèle ne réunit tous ces critères.</p>'}${searchSuggestions(d)}${all}`; return;
     }
     // À 1 caractère, le signal utile = les COLLECTIONS (marques + catégories) ; les
     // produits sont trop bruités → on n'en montre que 2 max. Dès 2 car., tout.
     const prods = term.length <= 1 ? (d.products || []).slice(0, 2) : (d.products || []);
-    results.innerHTML =
-        grp("Marques",    chips(d.brands, brandHref))
+    results.innerHTML = intent
+      + grp("Marques",    chips(d.brands, brandHref))
       + grp("Catégories", chips(d.categories, catHref))
-      + grp("Produits",   prods.map(p => row(p, "/produits.html?q=" + encodeURIComponent(term))).join(""))
-      + `<a class="sr__all" href="/produits.html?q=${encodeURIComponent(term)}">Voir tous les résultats pour « ${escapeHtml(term)} » →</a>`;
+      + grp(d.family || "Produits", prods.map(p => row(p, source)).join(""))
+      + all;
   };
   const run = async (term) => {
+    const request = ++searchGeneration;
+    pendingSearch?.abort(); pendingSearch = new AbortController();
+    results.setAttribute('aria-busy', 'true');
     try {
-      const d = await fetch(`/api/predictive?q=${encodeURIComponent(term)}`).then((r) => r.json());
-      if (input.value.trim() !== term) return;   // garde de course conservée
+      const response = await fetch(`/api/predictive?q=${encodeURIComponent(term)}`, { signal: pendingSearch.signal });
+      if (!response.ok) throw new Error('search unavailable');
+      const d = await response.json();
+      if (!Array.isArray(d.products)) throw new Error('invalid search');
+      if (request !== searchGeneration || root.hidden || input.value.trim() !== term) return;
       render(term, d);
-    } catch (e) { /* silencieux */ }
+    } catch (e) {
+      if (e.name === 'AbortError' || request !== searchGeneration || root.hidden || input.value.trim() !== term) return;
+      results.innerHTML = '<p class="searchd__hint" role="status">La recherche est momentanément indisponible.</p><button type="button" class="btn btn--outline" data-search-retry>Réessayer</button>';
+      results.querySelector('[data-search-retry]').addEventListener('click', () => run(term));
+    } finally { if (request === searchGeneration) results.removeAttribute('aria-busy'); }
   };
   if (input) {
     input.addEventListener("input", () => {
       const term = input.value.trim();
-      clearTimeout(timer);
-      if (term.length < 1) { showSuggest(); lastTerm = ""; return; }
       if (term === lastTerm) return;
+      clearTimeout(timer);
+      pendingSearch?.abort(); searchGeneration++; results.removeAttribute('aria-busy');
+      if (term.length < 1) { showSuggest(); lastTerm = ""; return; }
       lastTerm = term;
       showResults();
       results.innerHTML = `<p class="searchd__hint">Recherche…</p>`;
