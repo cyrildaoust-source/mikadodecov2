@@ -1,6 +1,6 @@
 # Chantier données de recherche — 19 septembre 2026
 
-Première tranche préparée et testable en preview. **Zéro écriture Shopify**, zéro publication de code en production. Le lot couvre les 25 fiches Fermob publiées classées Table, dont une console et un modèle enfant qui nécessitent un traitement distinct.
+Première tranche préparée le 19 septembre, puis validée pour mise en ligne par le propriétaire le 21 septembre 2026. **23 métachamps produit publiés dans Shopify et relus**, deux références restent bloquées. Le lot couvre les 25 fiches Fermob publiées classées Table, dont une console et un modèle enfant qui nécessitent un traitement distinct. La recette du 19 septembre ci-dessous constitue l’historique avant publication.
 
 ## Mesure initiale
 
@@ -72,7 +72,7 @@ La couverture des capacités passe de 9 à 25 sur les 126 fiches classées table
 
 ## Contrat de stockage et lecture
 
-La définition merchant-owned custom.search_facts, type json, est prévue sur PRODUCT et PRODUCTVARIANT, accessible en Storefront PUBLIC_READ. Elle complète le contrat data/catalog-filter-contract.json v2. Les deux définitions sont préparées, **pas créées dans Shopify**. Ce namespace commun permet à l’importer et au site de partager les données ; aucune app ni métaobjet supplémentaire n’est nécessaire.
+La définition merchant-owned custom.search_facts, type json, existe sur PRODUCT et PRODUCTVARIANT, accessible en Storefront PUBLIC_READ. Elle complète le contrat data/catalog-filter-contract.json v2. Les deux définitions ont été créées dans Shopify le 21 septembre. Ce namespace commun permet à l’importer et au site de partager les données ; aucune app ni métaobjet supplémentaire n’est nécessaire.
 
 Version 1 : configurations distinctes contenant id, label, dimensions et capacity. Dimensions : nombres exacts en cm, axes length, width, depth, height, diameter. Pour les tables de ce lot, length est le grand axe du plateau et width le petit axe ; pour la console, width est la largeur de façade et depth la profondeur. Aucun axe n’est inventé à partir d’un triplet sans légende. Les cotes W/D/H déjà explicitement nommées dans les fiches sont aussi reconnues.
 
@@ -80,7 +80,7 @@ Capacity porte un état verified avec max entier positif, ou unknown / conflict 
 
 Les faits de variante priment. Les faits produit ne s’appliquent qu’en l’absence d’option de taille/capacité variable. Les dimensions, la capacité, la finition, le prix et la disponibilité doivent être satisfaits par la même variante **et la même configuration**. Une extension ne permet pas de combiner 149 cm fermé avec 14 personnes à 299 cm. Le libellé des allonges nécessaires apparaît dans le libellé existant de la carte. Une capacité non attribuée par la source à la table fermée reste inconnue.
 
-La recherche lit le métachamp sur chaque page de produits et de variantes. En attendant le passage du lot dans l’importer, la preview peut injecter le lot avec VERCEL_ENV=preview ET CATALOG_ENRICHMENT_PREVIEW=1 ; la production ne lit jamais ce lot local. Même dans cette preview, une identité ou des options différentes empêchent l’injection. Un métachamp existant est toujours prioritaire.
+La recherche lit le métachamp sur chaque page de produits et de variantes. La simulation historique peut injecter le lot avec VERCEL_ENV=preview ET CATALOG_ENRICHMENT_PREVIEW=1 ; la production ne lit jamais ce lot local. Même dans cette preview, une identité ou des options différentes empêchent l’injection. Un métachamp existant est toujours prioritaire. La livraison du 21 septembre utilise les valeurs Shopify réelles, avec la simulation désactivée.
 
 ## Passage dans l’importer
 
@@ -89,6 +89,8 @@ Le site ne devient pas propriétaire des fiches. scripts/prepare-search-enrichme
 Raccordement restant : intégrer ces faits comme source/mapping dans CatalogExecution, ajouter le contrôle au gate commun puis exporter le patch ciblé. Le pipeline importer n’a pas été modifié dans ce workspace. Préserver titres, handles, options, SKU, EAN, prix, coûts, stocks, médias, tags éditoriaux et publications. Relire Shopify juste avant application ; utiliser le contrôle de concurrence du métachamp (création seulement si toujours absent), puis relire après écriture et invalider le cache du site. Ne jamais réimporter toute une fiche pour ajouter ces faits.
 
 Le standard importer actuel impose une sortie de préparation pour revue, sans écriture automatique sur les fiches existantes (docs/CATALOG_ENCODING_STANDARD.md, ENC-10). La preview est la première validation concrète de ce lot. La validation de données n’est ni une certification Gold ni une autorisation de publication.
+
+Le propriétaire a ensuite explicitement validé la publication le 21 septembre. Application ciblée des 23 propositions par le connecteur Shopify, sans réimporter les fiches : définitions créées d’abord, métachamps ajoutés avec compareDigest null, puis lecture de contrôle. Les 25 identités et 625 variantes ont été relues ; les 23 propositions satisfaisaient encore les préconditions du lot et les empreintes des sources. Aucune valeur préexistante n’a été écrasée. Les deux références non résolues n’ont reçu aucun métachamp ; les cinq capacités contradictoires restent sans chiffre. Captures privées : .context/search-enrichment/shopify-release-before.json, release-proposals.json, shopify-release-write.json et shopify-release-after.json. Le raccordement automatique à CatalogExecution reste à réaliser pour les futurs lots.
 
 ## Suite ordonnée et critères de fin
 

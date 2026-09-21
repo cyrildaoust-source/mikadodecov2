@@ -1,7 +1,16 @@
 {
   "version": 1,
   "batchId": "fermob-tables-2026-09-19",
-  "status": "prepared_for_review",
+  "status": "published_verified_rows",
+  "publication": {
+    "date": "2026-09-21",
+    "authorization": "Validation du propriétaire et demande de mise en ligne le 21 septembre 2026.",
+    "productFactsWritten": 23,
+    "blockedProducts": 2,
+    "method": "metafieldsSet avec compareDigest null ; lecture Admin avant et après ; sources et identités revérifiées.",
+    "storefrontAccess": "PUBLIC_READ",
+    "importerPipelineIntegrated": false
+  },
   "scope": "25 fiches Fermob publiées classées Table ; aucun prix, stock, média, titre ou statut modifié.",
   "products": [
     {
