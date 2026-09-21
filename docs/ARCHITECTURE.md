@@ -34,3 +34,5 @@ Pour les prochaines évolutions, extraire les contrôleurs ou les scripts de pag
 ## Recette de la livraison
 
 Preview du 21 septembre : https://mikadodecov2-rg7ptut41-mikadodeco.vercel.app. Recherche depuis le haut de l’accueil puis validation par Entrée : « chaise noire 500€ », 45 modèles. Vérification sur ordinateur à 1635 px et sur mobile à 390 × 844 px : cartes communes, critères, prix et contrôles présents ; largeur de page 390 px, aucune erreur de console sur ce parcours. Les 110 tests passent, dont les suites obligatoires des familles, tables et caractéristiques. Les contrôles de performance chiffrés ne font pas partie de cette recette.
+
+Publication : [PR 114](https://github.com/cyrildaoust-source/mikadodecov2/pull/114), commit `3ac7a5f`, déploiement Vercel de production prêt. Le parcours depuis le haut de l’accueil a été revérifié sur [le site public](https://www.mikadodeco.be/produits.html?q=table+Artek+160+x+80+cm+pour+6+personnes) avec les données Shopify réelles. La preview finale sans simulation est https://mikadodecov2-hdjy77wku-mikadodeco.vercel.app.

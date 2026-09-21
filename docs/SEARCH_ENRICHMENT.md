@@ -86,7 +86,7 @@ La recherche lit le métachamp sur chaque page de produits et de variantes. La s
 
 Le site ne devient pas propriétaire des fiches. scripts/prepare-search-enrichment.cjs produit 23 propositions avec état avant, faits proposés, preuves et préconditions ; il n’écrit pas dans Shopify. Il refuse une source altérée, une fiche changée depuis la capture, des variantes incomplètes/modifiées et l’écrasement d’un métachamp existant. Les deux identités non résolues restent bloquées.
 
-Raccordement restant : intégrer ces faits comme source/mapping dans CatalogExecution, ajouter le contrôle au gate commun puis exporter le patch ciblé. Le pipeline importer n’a pas été modifié dans ce workspace. Préserver titres, handles, options, SKU, EAN, prix, coûts, stocks, médias, tags éditoriaux et publications. Relire Shopify juste avant application ; utiliser le contrôle de concurrence du métachamp (création seulement si toujours absent), puis relire après écriture et invalider le cache du site. Ne jamais réimporter toute une fiche pour ajouter ces faits.
+Le raccordement commun à CatalogExecution est suivi dans [la PR importer 86](https://github.com/cyrildaoust-source/mikado-importer/pull/86) : contrat JSON, provenance, validation et conservation à l’export. Le mapping des sources reste propre à chaque marque. Préserver titres, handles, options, SKU, EAN, prix, coûts, stocks, médias, tags éditoriaux et publications. Relire Shopify juste avant application ; utiliser le contrôle de concurrence du métachamp (création seulement si toujours absent), puis relire après écriture et invalider le cache du site. Ne jamais réimporter toute une fiche pour ajouter ces faits.
 
 Le standard importer actuel impose une sortie de préparation pour revue, sans écriture automatique sur les fiches existantes (docs/CATALOG_ENCODING_STANDARD.md, ENC-10). La preview est la première validation concrète de ce lot. La validation de données n’est ni une certification Gold ni une autorisation de publication.
 
@@ -94,7 +94,7 @@ Le propriétaire a ensuite explicitement validé la publication le 21 septembre.
 
 ## Suite ordonnée et critères de fin
 
-1. Tables : terminer les 101 capacités encore inconnues/non retenues après ce lot, d’abord Artek (32 fiches), Carl Hansen (25), &Tradition (20), HAY (10). Source exacte par format ; distinguer table repas, table haute, enfant, console, fixe et extensible. Résoudre les 5 contradictions Fermob et la référence du guéridon.
+1. Tables : poursuivre après les lots Fermob et Artek, d’abord Carl Hansen (25 fiches), &Tradition (20), HAY (10). Les 18 exceptions Artek gardent une action de suivi. Source exacte par format ; distinguer table repas, table haute, enfant, console, fixe et extensible. Résoudre les 5 contradictions Fermob et les références du guéridon et d’Airloop.
 2. Canapés et bancs : places par configuration vendue, dimensions exactes et couchage séparé. Ne pas confondre modules et canapé complet, ni largeur et nombre de places.
 3. Finitions et matières : couleur normalisée par variante, essence, revêtement, finition, usage intérieur/extérieur. Les noms commerciaux restent visibles. Revoir notamment les tags extérieurs de So’o Chêne, dont la source produit décrit un usage intérieur.
 4. Rangement puis luminaires : largeur/profondeur/hauteur, fonctions pertinentes par famille ; toute capacité doit préciser son unité. Prix et stock restent ceux de Shopify, au niveau de la variante.
@@ -131,3 +131,9 @@ Preview avant application : [tables Artek pour six personnes](https://mikadodeco
 Le pipeline importer reconnaît maintenant le contrat produit, contrôle la présence des sources et conserve le JSON à l’export. L’absence de faits omet la colonne pour préserver les valeurs déjà publiées. Le mapping des futurs lots reste un travail par marque ; le CSV de variante demeure bloqué et nécessite un patch Admin ciblé. La validation technique ne signifie pas que les 2 920 fiches sont toutes qualifiées.
 
 Restent la résolution des capacités inconnues/contradictoires, les autres tables, les canapés/bancs, puis les finitions et caractéristiques par variante. Chaque exception du lot Artek indique la source consultée et l’action nécessaire ; aucune donnée absente n’a été inventée pour fermer le suivi.
+
+## Vérification de production — 21 septembre 2026
+
+Le site est publié par [la PR 114](https://github.com/cyrildaoust-source/mikadodecov2/pull/114), commit `3ac7a5f`. La variable de simulation a été retirée de la branche preview. Vérification sur `www.mikadodeco.be`, à partir de la recherche du haut : « table Artek 160 x 80 cm pour 6 personnes » mène à la table Kaari REB012, six finitions, 2 190 €. Aucun avertissement ou erreur de console observé.
+
+L’API publique confirme 45 modèles pour « chaise noire 500€ », dix tables Artek pour six personnes, une au format 160 × 80 cm, et sept tables Artek de hauteur 60 cm. La recherche générale pour six personnes donne 17 modèles ; ce comptage utilise les faits canoniques et ne doit pas être additionné aux anciennes simulations fondées sur les descriptions. « table Fermob pour 14 personnes » donne une réponse ; la limite de longueur 150 cm en donne zéro.
