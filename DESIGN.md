@@ -12,7 +12,7 @@ Mikado utilise Express, du HTML, des modules JavaScript et une feuille CSS commu
 
 | Composant | Source | Ce que la page peut régler | Apparence commune à préserver |
 | --- | --- | --- | --- |
-| Carte produit | `productCard` dans `v3/shared.js`, `plpCardSsr` dans `server.js` | Produits, ordre, nombre et grille parente | Photo carrée au-dessus, marque, nom/variantes, disponibilité, prix, bouton en bas |
+| Carte produit | `v3/product-card.mjs`, commun au serveur et au navigateur | Produits, ordre, nombre et grille parente | Photo carrée au-dessus, marque, nom/variantes, disponibilité, prix, bouton en bas |
 | Carte de catégorie | `.home-rc` / `.home-rail` dans `v3/styles.css` | Image, texte, lien et nombre de catégories | Proportions, scrim, typographie et placement du libellé identiques à l’accueil |
 | Titre de section | `.serif`, `.lab`, `.fam-gridhead` | Texte et position de la section | `--serif`, graisse 600 et échelle existante `--fs-h2` |
 | Bouton de sélection | `.btn.btn--outline.btn--block.pcard__cta` | Données produit | Police, bordure, espacements et position définis par la carte |

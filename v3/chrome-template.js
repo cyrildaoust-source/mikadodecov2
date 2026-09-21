@@ -147,11 +147,11 @@ export function chromeHTML(active) {
       <div class="nav__left">
         <a href="/" class="wordmark" aria-label="mikadodeco"><img src="/logomikado.svg" alt="mikadodeco" /></a>
         <nav class="nav__primary">${links}</nav>
-        <div class="nav__searchbar" data-search-field role="search">
+        <form class="nav__searchbar" data-search-field role="search" action="/produits.html" method="get">
           <svg class="nav__searchbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
-          <input class="nav__searchbar-input" data-search-input type="search" autocomplete="off" maxlength="200" placeholder="Un meuble, une finition, un budget…" aria-label="Rechercher" />
+          <input class="nav__searchbar-input" data-search-input name="q" type="search" autocomplete="off" maxlength="200" placeholder="Un meuble, une finition, un budget…" aria-label="Rechercher" />
           <button class="nav__searchbar-x" type="button" data-search-close aria-label="Fermer la recherche">&times;</button>
-        </div>
+        </form>
       </div>
       <div class="nav__right">
         <button class="nav__search" type="button" data-search-open aria-label="Rechercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
