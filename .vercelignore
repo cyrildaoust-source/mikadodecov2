@@ -1,0 +1,6 @@
+.git
+.context
+.env*
+.claude
+.gstack
+node_modules

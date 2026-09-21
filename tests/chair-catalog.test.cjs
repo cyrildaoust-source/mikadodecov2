@@ -13,15 +13,16 @@ before(async()=>{
     if(!String(url).includes('chairs.test'))return realFetch(url,options);
     const {query,variables}=JSON.parse(options.body);
     if(query.includes('query GetProduct('))return Response.json({data:{product:node(1)}});
-    assert.match(query,/query ChairCatalog/);reads++;
+    assert.match(query,/query (ChairCatalog|SearchCatalog|ScopedSearchCatalog)/);if(query.includes("query ChairCatalog"))reads++;
     if(fail)return new Response('offline',{status:503});
     const start=Number(variables.after||0),end=Math.min(start+50,65);
-    return Response.json({data:{collection:{handle:'chaises',title:'Chaises',description:'',products:{edges:Array.from({length:end-start},(_,i)=>({node:node(start+i+1)})),pageInfo:{hasNextPage:end<65,endCursor:String(end)}}}}});
+    const products={edges:Array.from({length:end-start},(_,i)=>({node:node(start+i+1)})),pageInfo:{hasNextPage:end<65,endCursor:String(end)}};
+    return Response.json({data:/query (?:Scoped)?SearchCatalog/.test(query)?{search:products}:{collection:{handle:'chaises',title:'Chaises',description:'',products}}});
   };
   server=require('../server').listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));base=`http://127.0.0.1:${server.address().port}`;
 });
 after(async()=>{global.fetch=realFetch;await new Promise(r=>server.close(r));});
-const seed=html=>JSON.parse(html.match(/id="chair-catalog-initial">([\s\S]*?)<\/script>/)[1]);
+const seed=html=>JSON.parse(html.match(/id="(?:chair-catalog-initial|search-initial)">([\s\S]*?)<\/script>/)[1]);
 test('API calcule la sélection complète une fois et renvoie seulement la page demandée',async()=>{
   const a=await (await realFetch(base+'/api/catalog/chaises')).json();
   assert.equal(a.total,65);assert.equal(a.items.length,60);assert.equal(reads,2);
@@ -37,7 +38,7 @@ test('le rendu serveur et le contrôleur utilisent les mêmes filtres ; liens pa
   assert.match(html,/href="\/collections\/chaises\?page=2#grille"/);
   assert.match(html,/aria-label="Filtrer les chaises"/);
   assert.match(html,/variant=10/);
-  assert.match(html,/pcard__finish-label/);assert.match(html,/data-card-finish=/);assert.match(html,/aria-current="true"/);
+  assert.match(html,/pcard__finish-label/);assert.doesNotMatch(html,/data-card-finish=|class="pcard__finishes"|class="pcard__finish-more"/);
   assert.match(html,/<img class="alt" src="https:\/\/cdn.shopify.com\/1-ambiance.jpg/);
   assert.ok(data.items.every(p=>p.image2.includes('-ambiance.jpg')&&p.finishChoices.every(v=>v.image2===p.image2)));
   const page2=await (await realFetch(base+'/collections/chaises?page=2')).text();
@@ -53,6 +54,26 @@ test('les filtres serveur combinent la marque, la couleur et le prix exact de la
   assert.match(html,/returnTo=[^"\s]*color/);
   const empty=await (await realFetch(base+'/api/catalog/chaises?brand=hay&color=noir&max=500')).json();assert.equal(empty.total,0);
 });
+test('les suggestions et la recherche soumise ouvrent la même sélection et la même finition',async()=>{
+  const q=encodeURIComponent('chaises HAY noires en bois entre 700 et 701 euros');
+  const response=await realFetch(base+'/api/predictive?q='+q);
+  assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
+  const predictive=await response.json();assert.equal(predictive.total,33);assert.equal(predictive.products.length,8);
+  assert.ok(predictive.products.every(p=>p.brand==='HAY'&&p.price===700.95&&p.image.includes('noir')&&p.matchedVariantId));
+  const submitted=await realFetch(base+'/produits.html?q='+q,{redirect:'manual'});
+  assert.equal(submitted.status,200);assert.equal(new URL(predictive.resultsUrl,base).searchParams.get('q'),decodeURIComponent(q));
+  const html=await (await realFetch(base+predictive.resultsUrl)).text();
+  assert.deepEqual(seed(html).items.slice(0,8),predictive.products);assert.match(html,/variant=11/);
+  const noHits=await (await realFetch(base+'/api/predictive?q='+encodeURIComponent('chaise noire en bois à moins de 500 €'))).json();
+  assert.equal(noHits.total,0);assert.deepEqual(noHits.products,[]);assert.ok(noHits.criteria.some(c=>c.id==='price'));assert.ok(noHits.suggestions.length);
+});
+test('la recherche de modèle conserve son texte côté serveur, dans le tri et les liens paginés',async()=>{
+  const submitted=await realFetch(base+'/produits.html?q=chaise+HAY+1+noire&sort=desc',{redirect:'manual'});
+  assert.equal(submitted.status,200);
+  const html=await submitted.text();
+  assert.equal(seed(html).total,1);assert.equal(seed(html).items[0].handle,'chaise-1');
+  assert.match(html,/Retirer 1/);assert.match(html,/name="q" value="chaise HAY 1 noire"/);assert.match(html,/noindex,follow/);
+});
 test('la fiche rend dès le serveur le prix et la photo demandés sans modifier le produit en cache',async()=>{
   const selected=await (await realFetch(base+'/produit.html?handle=chaise-1&variant=11')).text();
   assert.match(selected,/<div class="pdp__price">700,95\s*€<\/div>/);
@@ -63,6 +84,7 @@ test('la fiche rend dès le serveur le prix et la photo demandés sans modifier 
 test('un échec amont reste une erreur et un nouvel essai recharge les données',async()=>{
   await realFetch(base+'/api/revalidate',{method:'POST',headers:{Authorization:'Bearer chair-test'}});
   fail=true;
+  const predictive=await realFetch(base+'/api/predictive?q=chaise+noire');assert.equal(predictive.status,503);assert.equal(predictive.headers.get('cache-control'),'no-store');
   const error=await realFetch(base+'/api/catalog/chaises');assert.equal(error.status,503);
   const page=await realFetch(base+'/collections/chaises?color=noir');assert.equal(page.status,503);assert.match(await page.text(),/Impossible de charger les chaises/);
   fail=false;

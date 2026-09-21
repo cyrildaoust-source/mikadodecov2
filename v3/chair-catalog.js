@@ -1,7 +1,6 @@
 import {initShell,productCard,fetchPromos,applyPromos,loadNavigation,paintBreadcrumb,restoreSelectionPosition} from '/shared.js';
 import {listingTrail} from '/navigation.mjs';
 import {filterControls,chairPagination,chairURL,emptyChairs} from '/catalog-filters-view.mjs';
-import {selectCardFinish} from '/product-finishes.mjs';
 
 const initial = JSON.parse(document.querySelector('#chair-catalog-initial').textContent);
 const controls = document.querySelector('[data-chair-controls]');
@@ -9,8 +8,6 @@ const grid = document.querySelector('[data-grid]');
 const pagination = document.querySelector('[data-pagination]');
 const status = document.querySelector('[data-chair-status]');
 let current = initial, pending = null, generation = 0, promos = null, navigation = null;
-let finishes = {};
-try { const saved=JSON.parse(sessionStorage.getItem('mikado-chair-finishes')); if(saved?.url===chairURL(initial.state))finishes=saved.values || {}; } catch {}
 initShell({active:'Mobilier',transparentNav:initial.state.page===1});
 document.documentElement.classList.add('chair-filters-ready');
 loadNavigation().then(nav=>{navigation=nav;updateBreadcrumb();}).catch(()=>{});
@@ -36,7 +33,6 @@ function scrollToResults() {
   syncOffset();controls.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
 }
 function paint(data,{keepOpen=false}={}) {
-  if(chairURL(data.state)!==chairURL(current.state))finishes={};
   const open=keepOpen?[...controls.querySelectorAll('details[open]')].map(el=>el.dataset.filterGroup):[];
   const active=document.activeElement;
   const focus=controls.contains(active)?{name:active.name,value:active.value,group:active.closest('details')?.dataset.filterGroup,summary:active.tagName==='SUMMARY'}:null;
@@ -48,7 +44,7 @@ function paint(data,{keepOpen=false}={}) {
   for(const el of controls.querySelectorAll('details'))el.open=open.includes(el.dataset.filterGroup);
   const form=controls.querySelector('form');form.classList.toggle('is-open',Boolean(mobileOpen));
   form.querySelector('[data-filters-toggle]').setAttribute('aria-expanded',String(Boolean(mobileOpen)));
-  grid.innerHTML=data.items.length?data.items.map(p=>productCard(selectCardFinish(p,finishes[p.handle]),chairURL(data.state))).join(''):emptyChairs();
+  grid.innerHTML=data.items.length?data.items.map(p=>productCard(p,chairURL(data.state))).join(''):emptyChairs();
   pagination.innerHTML=chairPagination(data);pagination.hidden=data.totalPages<=1;
   document.documentElement.toggleAttribute('data-chair-continuation',data.state.page>1);
   if(focus) {
@@ -97,21 +93,6 @@ async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
 
 controls.addEventListener('change',event=>{
   if(event.target.matches('input[type=checkbox],select[name=sort]'))load(formURL(),{keepOpen:true});
-});
-grid.addEventListener('click',event=>{
-  const link=event.target.closest('[data-card-finish]');
-  if(!link||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
-  const product=current.items.find(p=>p.handle===link.dataset.productHandle);
-  if(!product?.finishChoices?.some(v=>v.variantId===link.dataset.cardFinish))return;
-  event.preventDefault();
-  const selected=selectCardFinish(product,link.dataset.cardFinish),card=link.closest('.pcard');
-  finishes[product.handle]=selected.variantId;
-  try { sessionStorage.setItem('mikado-chair-finishes',JSON.stringify({url:chairURL(current.state),values:finishes})); } catch {}
-  const template=document.createElement('template');template.innerHTML=productCard(selected,chairURL(current.state)).trim();
-  const replacement=template.content.firstElementChild;card.replaceWith(replacement);
-  [...replacement.querySelectorAll('[data-card-finish]')].find(a=>a.dataset.cardFinish===selected.variantId)?.focus({preventScroll:true});
-  if(promos)applyPromos(promos);
-  status.textContent=`${product.name} · ${selected.finishLabel}`;
 });
 controls.addEventListener('submit',event=>{event.preventDefault();load(formURL(),{scroll:matchMedia('(max-width: 760px)').matches});});
 controls.addEventListener('input',event=>{

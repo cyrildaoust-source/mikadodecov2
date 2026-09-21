@@ -16,6 +16,10 @@ const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = requ
 const { chairQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readChairCatalog, filterCatalog } = require('./lib/chair-catalog');
 const { renderChairCatalog } = require('./lib/chair-catalog-page');
 const chairViewReady = import('./v3/catalog-filters-view.mjs');
+const {parseSearch} = require('./lib/search-intent');
+const {searchQuery,scopedSearchQuery,readSearchCatalog,searchCatalog} = require('./lib/search-catalog');
+const {renderSearchPage} = require('./lib/search-page');
+const searchViewReady = import('./v3/search-view.mjs');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
 const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
@@ -274,7 +278,7 @@ function plpCardSsr(p, source = '') {
     + '</a>'
     + '<div class="pcard__brand">' + ogEscape(p.brand || '') + '</div>'
     + '<div class="pcard__row"><a class="pcard__name" href="' + href + '">' + ogEscape(p.name || '') + '</a></div>'
-    + finishHTML(p, variant => navigation.productHref(p, source, variant))
+    + finishHTML(p)
     + avail
     + '<div class="pcard__price">' + priceLabelS(p) + '</div>'
     + '</div>';
@@ -707,6 +711,7 @@ app.get('/collections/:handle', async (req, res) => {
 // modes catalogue / ?cats= / ?brand=) → template générique. Designer inconnu →
 // template générique. ~29 créateurs sans photo → repli og-default.
 app.get('/produits.html', async (req, res) => {
+  if (typeof req.query.q === 'string' && req.query.q.trim() && Object.keys(req.query).every(key => ['q','omit','page','sort'].includes(key))) return sendSearchPage(req,res);
   if (typeof req.query.coll === 'string' && /^[a-z0-9-]+$/.test(req.query.coll) && req.query.coll !== 'all') {
     const query = new URLSearchParams(Object.entries(req.query).filter(([key, value]) => key !== 'coll' && typeof value === 'string'));
     return res.redirect(302, '/collections/' + req.query.coll + (query.size ? '?' + query : ''));
@@ -1170,6 +1175,50 @@ const PRODUCTS_QUERY = `
 `;
 
 const CHAIR_QUERY = chairQuery(PRODUCT_CARD_FIELDS);
+const GLOBAL_SEARCH_QUERY = searchQuery(PRODUCT_CARD_FIELDS);
+const SCOPED_SEARCH_QUERY = scopedSearchQuery(PRODUCT_CARD_FIELDS);
+const searchIndexes = new Map(), searchLoading = new Map();
+let searchEpoch = 0;
+async function getSearchIndex(intent) {
+  const core=intent.scopeQuery||intent.core;
+  const key=(intent.scopeQuery?'scope:':'text:')+core.toLowerCase(), previous=searchIndexes.get(key);
+  if(previous?.expires>Date.now())return previous.products;
+  if(searchLoading.has(key))return searchLoading.get(key);
+  const epoch=searchEpoch;
+  const pending=readSearchCatalog(
+    async after=>(await shopifyFetch(intent.scopeQuery?SCOPED_SEARCH_QUERY:GLOBAL_SEARCH_QUERY,{q:core,after})).search,
+    node=>{const card=mapProduct(node);card.variants.forEach(v=>{v.image=shopifyResize(v.image,CARD_IMAGE_WIDTH);});return card;},
+    async(handle,after)=>(await shopifyFetch(CHAIR_VARIANT_QUERY,{handle,after})).product?.variants,
+  ).then(products=>{
+    if(epoch===searchEpoch) {
+      // Borné : les anciennes recherches ne s'accumulent pas dans la fonction.
+      searchIndexes.delete(key);while(searchIndexes.size>=12)searchIndexes.delete(searchIndexes.keys().next().value);
+      searchIndexes.set(key,{products,expires:Date.now()+300000});
+    }
+    return products;
+  }).finally(()=>{if(searchLoading.get(key)===pending)searchLoading.delete(key);});
+  searchLoading.set(key,pending);return pending;
+}
+async function getSearchPage(input) {
+  const intent=parseSearch(input.q,input.omit);
+  const [{DISPLAY_PAGE_SIZE},products]=await Promise.all([import('./v3/catalog-pagination.mjs'),intent.issues.length||intent.needsCategory?[]:getSearchIndex(intent)]);
+  return searchCatalog(products,input,DISPLAY_PAGE_SIZE);
+}
+async function sendSearchPage(req,res) {
+  const [,view]=await Promise.all([_chromeReady,searchViewReady,_navigationReady]);let data;
+  try {data=await getSearchPage(req.query);}
+  catch(error) {console.warn('[search-page]',error.message);data={...searchCatalog([],req.query),error:true};res.status(503);}
+  let html=renderSearchPage(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr);
+  html=renderWithOg(html,{title:'Votre recherche · Mikado Deco',description:'Trouvez votre pièce de design par finition, dimensions, capacité et budget.',url:ORIGIN+data.resultsUrl,image:OG_DEFAULT});
+  html=html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
+  return res.set('Cache-Control','no-store').send(injectChrome(html,'produits.html',true));
+}
+app.get('/api/search',async(req,res)=>{
+  res.set('Cache-Control','no-store');
+  if(typeof req.query.q!=='string'||!req.query.q.trim())return res.status(400).json({error:'Indiquez votre recherche.'});
+  try {res.json(await getSearchPage(req.query));}
+  catch(error){console.warn('[search-api]',error.message);res.status(503).json({error:'Recherche momentanément indisponible.'});}
+});
 let chairLoading = null;
 async function getChairIndex() {
   return cached('chairs:index', async () => {
@@ -1210,7 +1259,7 @@ async function sendChairCatalog(req,res) {
     res.status(503).set('Cache-Control','no-store');
   } else {
     const {state}=data;
-    const filtered = state.brand.length>1 || state.color.length || state.material.length || state.usage.length || state.feature.length || state.stock || state.tag || state.sort!=='pop' || state.min!==null || state.max!==null || state.seat_min!==null || state.seat_max!==null;
+    const filtered = state.q || state.brand.length>1 || state.color.length || state.material.length || state.usage.length || state.feature.length || state.stock || state.tag || state.sort!=='pop' || state.min!==null || state.max!==null || state.seat_min!==null || state.seat_max!==null;
     if(filtered) html = html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
     // Les informations de prix et de stock se renouvellent via le cache de données.
     res.set('Cache-Control','no-store');
@@ -1817,6 +1866,12 @@ function mapPredictiveProduct(n) {
 }
 
 async function getPredictive(q) {
+  // Les débuts de mots et les noms seuls gardent l'autocomplétion native légère.
+  // Dès qu'une demande comporte des critères, toute la sélection est vérifiée.
+  if (typeof q === 'string' && q.trim().length >= 2 && parseSearch(q).criteria.some(c=>!['text','brand'].includes(c.kind))) {
+    const {items,...data}=await getSearchPage({q});
+    return {...data,products:items.slice(0,8),brands:[],categories:[],resultsUrl:data.resultsUrl+'#grille'};
+  }
   const term = String(q || '').replace(/["\\]/g, ' ').trim().slice(0, 80);
   if (!term) return { products: [], brands: [], categories: [] };
   return cached('predictive:' + term.toLowerCase(), async () => {
@@ -1843,11 +1898,11 @@ async function getPredictive(q) {
 app.get('/api/predictive', async (req, res) => {
   try {
     const data = await getPredictive(req.query.q);
-    res.set('Cache-Control', 'public, max-age=60');
+    res.set('Cache-Control', data.resultsUrl ? 'no-store' : 'public, max-age=60');
     res.json(data);
   } catch (err) {
     console.error('Predictive error:', err.message);
-    res.status(500).json({ error: 'Recherche indisponible.' });
+    res.status(503).set('Cache-Control','no-store').json({ error: 'Recherche indisponible.' });
   }
 });
 
@@ -2304,6 +2359,7 @@ app.post('/api/revalidate', (req, res) => {
   delete _cache['promos'];
   delete _cache['menu'];
   delete _cache['chairs:index'];
+  searchEpoch++;searchIndexes.clear();searchLoading.clear();
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });
 });
