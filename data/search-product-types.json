@@ -1,0 +1,123 @@
+{
+  "lampe-table": [
+    "lampe de bureau",
+    "lampe de table",
+    "lampe de table et applique murale"
+  ],
+  "lampe-portable": [
+    "lampe baladeuse",
+    "lampe portable"
+  ],
+  "table-chevet": [
+    "table de chevet"
+  ],
+  "table-basse": [
+    "table basse"
+  ],
+  "table-appoint": [
+    "table d'appoint"
+  ],
+  "chaise-bar": [
+    "chaise de bar",
+    "chaise haute",
+    "chaise snack",
+    "tabouret de bar",
+    "tabouret snack"
+  ],
+  "chaise-longue": [
+    "chaise longue"
+  ],
+  "meuble-tv": [
+    "meuble tv"
+  ],
+  "table": [
+    "table",
+    "table à manger"
+  ],
+  "chaise": [
+    "chaise",
+    "chaise avec accoudoirs"
+  ],
+  "canape": [
+    "canapé"
+  ],
+  "fauteuil": [
+    "fauteuil",
+    "fauteuil avec accoudoirs",
+    "fauteuil à bascule"
+  ],
+  "tabouret": [
+    "tabouret",
+    "tabouret de bar",
+    "tabouret snack"
+  ],
+  "banc": [
+    "banc",
+    "banc à manger"
+  ],
+  "buffet": [
+    "buffet"
+  ],
+  "armoire": [
+    "armoire",
+    "buffet"
+  ],
+  "commode": [
+    "commode"
+  ],
+  "etagere": [
+    "étagère",
+    "étagère murale"
+  ],
+  "bureau": [
+    "bureau"
+  ],
+  "console": [
+    "console"
+  ],
+  "lampe": [
+    "applique",
+    "applique et plafonnier",
+    "lampadaire",
+    "lampe",
+    "lampe baladeuse",
+    "lampe de bureau",
+    "lampe de table",
+    "lampe de table et applique murale",
+    "lampe portable",
+    "lampe à pince",
+    "plafonnier",
+    "suspension"
+  ],
+  "suspension": [
+    "suspension"
+  ],
+  "lampadaire": [
+    "lampadaire"
+  ],
+  "applique": [
+    "applique",
+    "applique et plafonnier"
+  ],
+  "tapis": [
+    "tapis",
+    "tapis de bain",
+    "tapis de couloir",
+    "tapis de souris"
+  ],
+  "miroir": [
+    "miroir"
+  ],
+  "vase": [
+    "vase",
+    "vase de sol",
+    "vase gleam",
+    "vase à fleur"
+  ],
+  "coussin": [
+    "coussin"
+  ],
+  "pouf": [
+    "pouf"
+  ]
+}

@@ -1,6 +1,9 @@
 require('dotenv').config();
+const { shopifyFetch, SHOPIFY_STORE } = require('./lib/shopify/client');
+const { mapProduct, mapProductRef, shopifyResize, CARD_IMAGE_WIDTH } = require('./lib/shopify/product-mapper');
+const { getSearchPage, clearSearchCache } = require('./lib/services/search');
+const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
 const express = require('express');
-const { splitDimensionMedia } = require('./lib/dimension-media');
 const { selectInitialVariant } = require('./v3/product-variant');
 const cors    = require('cors');
 const path    = require('path');
@@ -16,35 +19,12 @@ const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = requ
 const { chairQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readChairCatalog, filterCatalog } = require('./lib/chair-catalog');
 const { renderChairCatalog } = require('./lib/chair-catalog-page');
 const chairViewReady = import('./v3/catalog-filters-view.mjs');
+const {parseSearch} = require('./lib/search-intent');
+const {searchCatalog} = require('./lib/search-catalog');
+const {renderSearchPage} = require('./lib/search-page');
+const searchViewReady = import('./v3/search-view.mjs');
 
 // ─── SHOPIFY STOREFRONT API ────────────────────────────
-const SHOPIFY_STORE   = process.env.SHOPIFY_STORE_DOMAIN;    // e.g. mystore.myshopify.com
-const SHOPIFY_TOKEN   = process.env.SHOPIFY_STOREFRONT_TOKEN; // public Storefront API token
-const SHOPIFY_VERSION = process.env.SHOPIFY_API_VERSION || '2024-10';
-const SHOPIFY_URL     = SHOPIFY_STORE
-  ? `https://${SHOPIFY_STORE}/api/${SHOPIFY_VERSION}/graphql.json`
-  : null;
-
-if (!SHOPIFY_URL || !SHOPIFY_TOKEN) {
-  console.warn('Shopify non configure — SHOPIFY_STORE_DOMAIN ou SHOPIFY_STOREFRONT_TOKEN manquant dans .env\n');
-}
-
-async function shopifyFetch(query, variables = {}) {
-  if (!SHOPIFY_URL) throw new Error('Shopify non configure — verifiez SHOPIFY_STORE_DOMAIN dans .env');
-  const res = await fetch(SHOPIFY_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-  if (!res.ok) throw new Error(`Shopify API ${res.status}: ${res.statusText}`);
-  const { data, errors } = await res.json();
-  if (errors?.length) throw new Error(errors.map(e => e.message).join('; '));
-  return data;
-}
-
 // ─── CACHE (5 min TTL) ─────────────────────────────────
 const _cache = {};
 async function cached(key, fetcher, ttl = 300_000) {
@@ -219,10 +199,10 @@ function renderWithOg(templateHtml, { title, description, image, url }) {
   return html;
 }
 // Une seule règle de hiérarchie et un seul BreadcrumbList, visibles avant le JS.
-let navigation, navigationRules, finishHTML;
-const _navigationReady = Promise.all([import('./v3/navigation.mjs'), import('./v3/product-finishes.mjs')]).then(([m, finishes]) => {
+let navigation, navigationRules, productCardHTML;
+const _navigationReady = Promise.all([import('./v3/navigation.mjs'), import('./v3/product-card.mjs')]).then(([m, cards]) => {
   navigation = m;
-  finishHTML = finishes.finishHTML;
+  productCardHTML = cards.productCardHTML;
   navigationRules = m.createNavigation(
     JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/navigation-data.json'), 'utf8')),
     JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/mega-menu-brands.json'), 'utf8')).brands,
@@ -282,29 +262,10 @@ const priceLabelS = (p) => {
   if (min != null && max != null && max - min > 0.5) return 'À partir de ' + euroS(min);
   return euroS(min);
 };
-// SEO/SSR · Carte produit rendue CÔTÉ SERVEUR pour les grilles (lot 4). Miroir crawlable
-// de productCard (shared.js) : lien média + marque + lien nom + dispo + prix ; SANS le
-// bouton « Ajouter au panier » (interactif, posé par le JS). Injectée dans [data-grid] →
-// donne à Google des LIENS produit crawlables + du maillage interne (complète le sitemap).
+// Shared HTML keeps server-rendered and browser cards in sync.
+// Selection controls are enabled only once the browser cart is bound.
 function plpCardSsr(p, source = '') {
-  const href = ogEscape(navigation.productHref(p, typeof source === 'string' ? source : ''));
-  if (!href) return '';
-  const avail = p.availabilityLabel
-    ? '<div class="pcard__avail"><span class="pcard__dot pcard__dot--' + (p.inStock ? 'stock' : 'order') + '" aria-hidden="true"></span>' + ogEscape(p.availabilityLabel) + '</div>'
-    : p.inStock
-    ? '<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>À voir en boutique</div>'
-    : '<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>' + (p.longDelay ? 'Sur commande · délai sur demande' : 'Livraison ' + ogEscape(p.leadTimeLabel || '3-4 semaines')) + '</div>';
-  return '<div class="pcard">'
-    + '<a class="pcard__media" href="' + href + '" aria-label="' + ogEscape(p.name || '') + '">'
-    + (p.image ? '<img class="main" src="' + ogEscape(p.image) + '" alt="' + ogEscape((p.name || '') + (p.finishLabel ? ' · ' + p.finishLabel : '')) + '" loading="lazy" decoding="async" />' : '')
-    + (p.image2 && p.image2 !== p.image ? '<img class="alt" src="' + ogEscape(p.image2) + '" alt="" loading="lazy" decoding="async" />' : '')
-    + '</a>'
-    + '<div class="pcard__brand">' + ogEscape(p.brand || '') + '</div>'
-    + '<div class="pcard__row"><a class="pcard__name" href="' + href + '">' + ogEscape(p.name || '') + '</a></div>'
-    + finishHTML(p, variant => navigation.productHref(p, source, variant))
-    + avail
-    + '<div class="pcard__price">' + priceLabelS(p) + '</div>'
-    + '</div>';
+  return productCardHTML(p, {source, interactive: false});
 }
 
 // SEO/SSR · slugify miroir de shared.js (accents/ø/æ) — pour le lien créateur SSR.
@@ -736,6 +697,7 @@ app.get('/collections/:handle', async (req, res) => {
 // modes catalogue / ?cats= / ?brand=) → template générique. Designer inconnu →
 // template générique. ~29 créateurs sans photo → repli og-default.
 app.get('/produits.html', async (req, res) => {
+  if (typeof req.query.q === 'string' && req.query.q.trim() && Object.keys(req.query).every(key => ['q','omit','page','sort'].includes(key))) return sendSearchPage(req,res);
   if (typeof req.query.coll === 'string' && /^[a-z0-9-]+$/.test(req.query.coll) && req.query.coll !== 'all') {
     const query = new URLSearchParams(Object.entries(req.query).filter(([key, value]) => key !== 'coll' && typeof value === 'string'));
     return res.redirect(302, '/collections/' + req.query.coll + (query.size ? '?' + query : ''));
@@ -901,14 +863,7 @@ app.get('/sitemap-pages.xml', (req, res) => {
 
 // Le sitemap ne lit que les handles : les champs de carte et les 250 variantes
 // par produit rendent le parcours complet trop lent lors d'un démarrage à froid.
-const SITEMAP_PRODUCTS_QUERY = `
-  query SitemapProducts($after: String) {
-    products(first: 250, after: $after) {
-      pageInfo { hasNextPage endCursor }
-      nodes { handle }
-    }
-  }
-`;
+
 
 // Toutes les fiches visibles par le canal Storefront + collections.
 // URLs canoniques (seulement ?handle=). Caché 6 h.
@@ -1146,70 +1101,26 @@ const cartLimiter = rateLimit({
 // l'utilisent → mapProduct lit exactement les mêmes champs des deux côtés (aucun
 // risque de carte incomplète sur la page de résultats). Toute évolution de carte
 // se fait ICI, une seule fois.
-const PRODUCT_CARD_FIELDS = `
-  fragment ProductCardFields on Product {
-    id
-    handle
-    title
-    vendor
-    productType
-    description
-    tags
-    availableForSale
-    totalInventory
-    collections(first: 20) {
-      edges { node { handle } }
-    }
-    featuredImage { url altText }
-    images(first: 8) {
-      edges { node { url altText } }
-    }
-    priceRange {
-      minVariantPrice { amount currencyCode }
-      maxVariantPrice { amount currencyCode }
-    }
-    compareAtPriceRange { minVariantPrice { amount currencyCode } }
-    variants(first: 250) {
-      edges {
-        node {
-          id
-          title
-          price { amount currencyCode }
-          compareAtPrice { amount }
-          availableForSale
-          selectedOptions { name value }
-          image { url altText }
-        }
-      }
-    }
-    metafields(identifiers: [
-      { namespace: "custom", key: "designer" }
-      { namespace: "custom", key: "year" }
-      { namespace: "custom", key: "material" }
-      { namespace: "custom", key: "dimensions" }
-      { namespace: "custom", key: "lead_time" }
-      { namespace: "custom", key: "subcategory" }
-    ]) {
-      key
-      value
-    }
-  }
-`;
 
-const PRODUCTS_QUERY = `
-  query GetProducts($first: Int!, $after: String, $query: String, $sortKey: ProductSortKeys = BEST_SELLING) {
-    products(first: $first, after: $after, query: $query, sortKey: $sortKey) {
-      pageInfo { hasNextPage endCursor }
-      edges {
-        cursor
-        node { ...ProductCardFields }
-      }
-    }
-  }
-  ${PRODUCT_CARD_FIELDS}
-`;
+
+
 
 const CHAIR_QUERY = chairQuery(PRODUCT_CARD_FIELDS);
+async function sendSearchPage(req,res) {
+  const [,view]=await Promise.all([_chromeReady,searchViewReady,_navigationReady]);let data;
+  try {data=await getSearchPage(req.query);}
+  catch(error) {console.warn('[search-page]',error.message);data={...searchCatalog([],req.query),error:true};res.status(503);}
+  let html=renderSearchPage(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr);
+  html=renderWithOg(html,{title:'Votre recherche · Mikado Deco',description:'Trouvez votre pièce de design par finition, dimensions, capacité et budget.',url:ORIGIN+data.resultsUrl,image:OG_DEFAULT});
+  html=html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
+  return res.set('Cache-Control','no-store').send(injectChrome(html,'produits.html',true));
+}
+app.get('/api/search',async(req,res)=>{
+  res.set('Cache-Control','no-store');
+  if(typeof req.query.q!=='string'||!req.query.q.trim())return res.status(400).json({error:'Indiquez votre recherche.'});
+  try {res.json(await getSearchPage(req.query));}
+  catch(error){console.warn('[search-api]',error.message);res.status(503).json({error:'Recherche momentanément indisponible.'});}
+});
 let chairLoading = null;
 async function getChairIndex() {
   return cached('chairs:index', async () => {
@@ -1250,7 +1161,7 @@ async function sendChairCatalog(req,res) {
     res.status(503).set('Cache-Control','no-store');
   } else {
     const {state}=data;
-    const filtered = state.brand.length>1 || state.color.length || state.material.length || state.usage.length || state.feature.length || state.stock || state.tag || state.sort!=='pop' || state.min!==null || state.max!==null || state.seat_min!==null || state.seat_max!==null;
+    const filtered = state.q || state.brand.length>1 || state.color.length || state.material.length || state.usage.length || state.feature.length || state.stock || state.tag || state.sort!=='pop' || state.min!==null || state.max!==null || state.seat_min!==null || state.seat_max!==null;
     if(filtered) html = html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
     // Les informations de prix et de stock se renouvellent via le cache de données.
     res.set('Cache-Control','no-store');
@@ -1267,16 +1178,7 @@ app.get('/api/catalog/chaises',async (req,res)=>{
 // dernier mot). Réutilise EXACTEMENT le fragment ProductCardFields → mapProduct
 // lit les mêmes champs que pour le catalogue. `search.pageInfo.endCursor` est un
 // vrai curseur Shopify → repassé tel quel en ?cursor= par le front (transparent).
-const SEARCH_QUERY = `
-  query Search($q: String!, $first: Int!, $after: String) {
-    search(query: $q, first: $first, after: $after,
-           types: [PRODUCT], prefix: LAST, unavailableProducts: HIDE) {
-      edges { node { ... on Product { ...ProductCardFields } } }
-      pageInfo { hasNextPage endCursor }
-    }
-  }
-  ${PRODUCT_CARD_FIELDS}
-`;
+
 
 // Filet de sécurité de la page ?q= : `search` (plein-texte) est parfois MOINS
 // tolérant aux fautes que `predictiveSearch` (ex. transposition « fermbo » →
@@ -1285,12 +1187,7 @@ const SEARCH_QUERY = `
 // matcher → la page de résultats n'est jamais « Aucun résultat » sur une faute que
 // l'overlay a corrigée (cohérence overlay ↔ page). Réutilise ProductCardFields
 // → cartes complètes. (PREDICTIVE_QUERY est défini plus bas, avec la route.)
-const SEARCH_FALLBACK_QUERY = `
-  query SearchFallback($ids: [ID!]!) {
-    nodes(ids: $ids) { ... on Product { ...ProductCardFields } }
-  }
-  ${PRODUCT_CARD_FIELDS}
-`;
+
 
 // Boutique-de-quartier delivery promise: a single, honest baseline applies
 // to anything that has to be ordered from a supplier (which is most of the
@@ -1299,224 +1196,6 @@ const SEARCH_FALLBACK_QUERY = `
 // promise (Fermob peak season, Kriptonite, Charolles, Treku, etc.) gets a
 // `delai-long` product tag in Shopify → we fall back to a generic
 // "délai sur demande" line and confirm by mail/phone after the order.
-const DELIVERY_DEFAULT = '3-4 semaines';
-const DELIVERY_LONG    = 'délai sur demande';
-
-// Map fine-grained Shopify product types (Fermob/HAY use FR labels) to the
-// 6 top-level frontend categories. Anything unmatched falls through to "objets".
-const CATEGORY_MAP = {
-  assises:    ['chaise', 'chaise haute', 'fauteuil', 'fauteuil à bascule', 'banc', 'tabouret', 'pouf', 'repose-pieds'],
-  tables:     ['table', 'table basse', 'table à rallonge'],
-  luminaires: ['applique', 'lampadaire', 'lampe baladeuse', 'lampe de bureau', 'lampe de chevet', 'lampe de table', 'lampe à pince', 'pied de lampe'],
-  rangements: ['caisse de rangement', 'patère'],
-  exterieur:  ['accessoires de grill extérieur', 'housse de protection', 'jardinière'],
-};
-const TYPE_TO_CATEGORY = Object.entries(CATEGORY_MAP).reduce((acc, [cat, types]) => {
-  types.forEach(t => { acc[t] = cat; });
-  return acc;
-}, {});
-
-// Shopify's CDN resizes + reformats images on the fly via URL params, but
-// does NOTHING by default: it hands us the full-res original. For product
-// CARDS (1:1, rendered ≈300px CSS / 600px retina) that's megabytes wasted.
-// shopifyResize() appends `width=<w>&format=webp` so the CDN returns a
-// card-sized WebP instead. Two gotchas baked in here:
-//   1. `format=webp` is REQUIRED — `width=` alone still serves JPEG.
-//   2. These URLs already carry a `?v=…` cache-buster, so we must join with
-//      `&` when a query already exists (`?` otherwise), never blindly with `?`.
-// Only cdn.shopify.com URLs are touched; local /images/… assets pass through
-// untouched. The PDP gallery (images[]) + variant images resize to
-// PDP_IMAGE_WIDTH, and the gallery thumbnail strip (thumbs[]) to PDP_THUMB_WIDTH
-// — the most-visited page no longer ships multi-MB originals.
-function shopifyResize(url, width) {
-  if (!url || typeof url !== 'string' || !url.includes('cdn.shopify.com')) return url;
-  const sep = url.includes('?') ? '&' : '?';
-  return `${url}${sep}width=${width}&format=webp`;
-}
-
-// Target width (px) for the 1:1 product-card thumbnail. ~300px CSS box on the
-// PLP/home grids, doubled for retina. Bumping this is the single knob for card
-// image sharpness vs. weight.
-const CARD_IMAGE_WIDTH = 600;
-
-// PDP gallery widths. PDP_IMAGE_WIDTH = the DEFAULT (src) width of the main
-// product image; the front layers a srcset on top (800/1280/2048w) so large
-// retina desktops stay sharp and phones stay light — this 1400px value is just
-// the no-srcset fallback. Gallery images[] AND variant images resize to it (the
-// front's URL matching strips the query, so any width still matches).
-// PDP_THUMB_WIDTH = the 74px thumbnail strip under the main (×~3 for retina).
-const PDP_IMAGE_WIDTH = 1400;
-const PDP_THUMB_WIDTH = 240;
-
-function mapProduct(node, opts = {}) {
-  // `full` adds PDP-only fields (gallery thumbs[]) that list endpoints don't read,
-  // so PLP/home/collection payloads stay lean. firstImageRaw stays ungated (1 url).
-  const full = opts.full === true;
-  const { photos, dimensions: dimensionImages } = splitDimensionMedia(node);
-  const meta = {};
-  (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
-  const variant = selectInitialVariant((node.variants?.edges || []).map(e => e.node), {
-    coverUrl: node.featuredImage?.url || node.images?.edges?.[0]?.node?.url,
-  });
-  // `price` is the selected variant's price (what gets stored in the cart when
-  // adding from a product card). `priceMin` / `priceMax` come from Shopify's
-  // priceRange and cover every variant. The front-end shows "À partir de"
-  // when priceMin < priceMax.
-  const price    = parseFloat(variant?.price?.amount || node.priceRange.minVariantPrice.amount);
-  const priceMin = parseFloat(node.priceRange.minVariantPrice.amount);
-  const priceMax = parseFloat(node.priceRange.maxVariantPrice?.amount || node.priceRange.minVariantPrice.amount);
-  const _caMin = parseFloat(node.compareAtPriceRange?.minVariantPrice?.amount || 0);
-  const compareAt = _caMin > priceMin + 0.5 ? _caMin : null;
-  // Tags: use "badge:nouveau", "badge:limite", "badge:bestseller", "featured" conventions
-  const badgeTag = node.tags.find(t => t.startsWith('badge:'))?.replace('badge:', '') || null;
-  const rawType  = (node.productType || '').toLowerCase().trim();
-  return {
-    id:          node.id,
-    handle:      node.handle || '',
-    variantId:   variant?.id || null,
-    name:        node.title,
-    brand:       node.vendor || '',
-    designer:    meta.designer    || '',
-    year:        meta.year        ? parseInt(meta.year) : null,
-    category:    TYPE_TO_CATEGORY[rawType] || 'objets',
-    productType: rawType,
-    subcategory: meta.subcategory || node.tags.find(t => t.startsWith('sub:'))?.replace('sub:', '') || '',
-    material:    meta.material    || meta.materiaux || '',
-    dimensions:  meta.dimensions  || '',
-    ...(full ? { dimensionImages: dimensionImages.map(i => ({ url: shopifyResize(i.url, PDP_IMAGE_WIDTH), alt: i.altText || 'Dessin de dimensions' })) } : {}),
-    // Caractéristiques PDP additionnelles (métafields custom.* — vides tant que
-    // l'importer Shopify n'a pas créé+rempli les définitions ; lues seulement par
-    // PRODUCT_QUERY → s'affichent toutes seules une fois remplies, sans déploiement).
-    usage:       meta.usage       || '',
-    entretien:   meta.entretien   || '',
-    origin:      meta.origin      || '',
-    weight:      meta.weight      || '',
-    warranty:    meta.warranty    || '',
-    lightingType:            meta.lighting_type            || '',
-    lightSourceType:         meta.light_source_type         || '',
-    ledType:                 meta.led_type                  || '',
-    power:                   meta.power_w                   || '',
-    voltage:                 meta.voltage_v                 || '',
-    colorTemperature:        meta.color_temperature_k       || '',
-    dimming:                 meta.dimming                   || '',
-    batteryRuntime:          meta.battery_runtime           || '',
-    chargingTime:            meta.charging_time             || '',
-    cableDetails:            meta.cable_details             || '',
-    ipRating:                meta.ip_rating                 || '',
-    safetyClass:             meta.safety_class              || '',
-    energyLabel:             meta.energy_label              || '',
-    lightSourceReplaceable:  meta.light_source_replaceable  || '',
-    constructionMaterials:   meta.construction_materials    || '',
-    infosElectriques:        meta.infos_electriques          || '',
-    price,
-    priceMin,
-    priceMax,
-    compareAt,
-    // Availability badge — "À voir en boutique" when the article is
-    // physically present (regardless of finish/colour — it's an invitation
-    // to come see the model, not a real-time stock count). Anything else
-    // ships from the supplier under the standard promise.
-    inStock:     (typeof node.totalInventory === 'number') && node.totalInventory > 0,
-    longDelay:   node.tags.some(t => /^delai[-_ ]?long$/i.test(t)),
-    leadTimeLabel: node.tags.some(t => /^delai[-_ ]?long$/i.test(t)) ? DELIVERY_LONG : DELIVERY_DEFAULT,
-    // Raw Shopify tags exposed so the front can react to product flags
-    // (e.g. `delai-long`, `badge:nouveau`) without an extra API.
-    tags:        node.tags || [],
-    // Shopify collection handles this product belongs to. Lets the front
-    // render true collection pages (Mobilier d'extérieur…) instead of
-    // tag-filtered catalog views.
-    collections: (node.collections?.edges || []).map(e => e?.node?.handle).filter(Boolean),
-    // (kept for backward compat with the PDP metafield — separate from brand lead-time)
-    leadTime:    meta.lead_time   || '',
-    description: node.description || '',
-    // Card thumbnail → card-width WebP. The full-res original still feeds the
-    // PDP through images[]/variant images below (left untouched on purpose).
-    image:       shopifyResize(node.featuredImage?.url || node.images?.edges?.[0]?.node?.url || '', CARD_IMAGE_WIDTH),
-    // image2 = first image that isn't the featured one — used for on-hover swap.
-    // Dedup runs on the RAW urls; only the chosen url is resized afterwards.
-    image2:      (() => {
-      const featured = node.featuredImage?.url;
-      const imgs = photos.map(i => i.url);
-      const second = imgs.find(u => u !== featured) || imgs[1] || null;
-      return second ? shopifyResize(second, CARD_IMAGE_WIDTH) : null;
-    })(),
-    // images = ordered list for the PDP gallery main image — resized webp. Stays
-    // index-parallel to thumbs[] below (same source/order/filter) so the front
-    // maps a clicked thumbnail back to its full-width image by index.
-    images:      photos.map(i => shopifyResize(i.url, PDP_IMAGE_WIDTH)),
-    // thumbs[] (gallery strip, ~8 urls/produit) n'est lu que par la PDP → gated
-    // derrière `full` pour ne pas alourdir les réponses liste (PLP/accueil/collections).
-    ...(full ? { thumbs: photos.map(i => shopifyResize(i.url, PDP_THUMB_WIDTH)) } : {}),
-    ...(full ? { seoTitle: node.seo?.title || '', seoDescription: node.seo?.description || '' } : {}),
-    // firstImageRaw = première image NON redimensionnée (1 url, ungated). La route
-    // SSR OG/JSON-LD s'en sert : elle veut un JPEG (scrapers sociaux gèrent mal le
-    // WebP en og:image) à sa propre largeur — découplé de images[] (webp galerie).
-    firstImageRaw: (node.images?.edges?.[0]?.node?.url) || '',
-    // variants = all variants with their selected options, used by the PDP variant picker.
-    // Variant image resized to PDP_IMAGE_WIDTH — SAME width as the gallery, so the
-    // front's URL matching (active thumb / variant switch) keeps resolving.
-    variants:    (node.variants?.edges || []).map(e => e?.node).filter(Boolean).map(v => ({
-      id: v.id,
-      title: v.title,
-      sku: v.sku || '',
-      price: parseFloat(v.price?.amount),
-      compareAtPrice: parseFloat(v.compareAtPrice?.amount) || null,
-      available: v.availableForSale,
-      // Vrai stock disponible (Storefront) — distinct de availableForSale qui reste
-      // true en oversell (inventoryPolicy: CONTINUE). null si le scope ne l'expose pas.
-      qty: v.quantityAvailable ?? null,
-      options: (v.selectedOptions || []).map(o => ({ name: o.name, value: o.value })),
-      image: shopifyResize(v.image?.url || null, PDP_IMAGE_WIDTH),
-    })),
-    badge:       badgeTag,
-    available:   node.availableForSale && (variant?.availableForSale ?? true),
-    featured:    node.tags.some(t => t.toLowerCase() === 'featured'),
-  };
-}
-
-// Maps ONE product reference (from a Search & Discovery recommendation
-// metafield) to the card shape productCard() expects. Lighter than mapProduct:
-// only the fields a card renders (image resized to card width, price range,
-// first-variant id for add-to-cart, availability). The relations themselves
-// live in Shopify — nothing here is hardcoded.
-function mapProductRef(n) {
-  if (!n) return null;
-  const v = n.variants?.nodes?.[0];
-  const tags = n.tags || [];
-  const longDelay = tags.some(t => /^delai[-_ ]?long$/i.test(t));
-  const featured = n.featuredImage?.url;
-  const imgs = (n.images?.nodes || []).map(i => i?.url).filter(Boolean);
-  const second = imgs.find(u => u !== featured) || imgs[1] || null;
-  const priceMin = parseFloat(n.priceRange?.minVariantPrice?.amount ?? v?.price?.amount ?? 0);
-  const priceMax = parseFloat(n.priceRange?.maxVariantPrice?.amount ?? priceMin);
-  const _caMinR = parseFloat(n.compareAtPriceRange?.minVariantPrice?.amount || 0);
-  const compareAt = _caMinR > priceMin + 0.5 ? _caMinR : null;
-  // Parité visuelle avec les cartes du catalogue : on émet les MÊMES champs que
-  // productCard lit via mapProduct — disponibilité/délai HONNÊTES (longDelay /
-  // leadTimeLabel, sinon un article delai-long afficherait à tort « Livraison
-  // 3-4 semaines »), image de survol (image2) et badge éditorial. Seul le badge
-  // « X finitions » est omis : le calculer imposerait variants(first:250) ×
-  // jusqu'à 24 références, un coût Storefront disproportionné pour cette section.
-  return {
-    id:        n.id,
-    handle:    n.handle || '',
-    variantId: v?.id || null,
-    name:      n.title,
-    brand:     n.vendor || '',
-    price:     parseFloat(v?.price?.amount ?? priceMin),
-    priceMin,
-    priceMax,
-    compareAt,
-    image:     shopifyResize(featured || '', CARD_IMAGE_WIDTH),
-    image2:    second ? shopifyResize(second, CARD_IMAGE_WIDTH) : null,
-    badge:     tags.find(t => t.startsWith('badge:'))?.replace('badge:', '') || null,
-    inStock:   (typeof n.totalInventory === 'number') && n.totalInventory > 0,
-    longDelay,
-    leadTimeLabel: longDelay ? DELIVERY_LONG : DELIVERY_DEFAULT,
-    available: n.availableForSale && (v?.availableForSale ?? true),
-  };
-}
-
 // Legacy: returns up to 250 products as a flat array. Kept untouched
 // because home/selection/produit pages + getBrands/getPromos all read
 // this shape directly. The new paginated mode lives in getProductsPage.
@@ -1691,13 +1370,7 @@ async function getBrands() {
 // que les produits publiés online). Requête LÉGÈRE (vendor seul) → contourne le
 // plafond 250 de getProducts(). Une marque apparaît dès qu'elle a des produits
 // publiés, disparaît sinon. Cache 30 min (le walk = ~24 requêtes légères).
-const VENDORS_QUERY = `
-  query GetVendors($first: Int!, $after: String) {
-    products(first: $first, after: $after) {
-      edges { node { vendor } }
-      pageInfo { hasNextPage endCursor }
-    }
-  }`;
+
 
 async function getActiveBrands() {
   return cached('brands:active', async () => {
@@ -1726,35 +1399,6 @@ async function getActiveBrands() {
 // Real Shopify collections (product lines like Palissade, Bistro, Luxembourg…).
 // Optional metafields: custom.country, custom.city, custom.founded, custom.website,
 // custom.tagline, custom.color, custom.featured
-const COLLECTIONS_QUERY = `
-  query GetCollections($first: Int!, $after: String) {
-    collections(first: $first, after: $after) {
-      pageInfo { hasNextPage endCursor }
-      edges {
-        node {
-          id
-          handle
-          title
-          description
-          products(first: 1) { edges { node { id } } }
-          image { url altText }
-          metafields(identifiers: [
-            { namespace: "custom", key: "country" }
-            { namespace: "custom", key: "city" }
-            { namespace: "custom", key: "founded" }
-            { namespace: "custom", key: "website" }
-            { namespace: "custom", key: "tagline" }
-            { namespace: "custom", key: "color" }
-            { namespace: "custom", key: "featured" }
-          ]) {
-            key
-            value
-          }
-        }
-      }
-    }
-  }
-`;
 
 function mapCollection(node, index) {
   const meta = {};
@@ -1838,20 +1482,7 @@ app.get('/api/brands', async (req, res) => {
 // VENDOR) — ne pas le passer explicitement (sinon on écrase le set par défaut →
 // vendor/product_type cassent). Pas de `types` sur products/collections (aucune
 // suggestion « QUERY » côté store). Produits + collections en 1 appel.
-const PREDICTIVE_QUERY = `
-  query Predictive($q: String!) {
-    predictiveSearch(query: $q, limit: 8, limitScope: EACH,
-                     types: [PRODUCT, COLLECTION],
-                     unavailableProducts: HIDE) {
-      products {
-        id handle title vendor productType
-        featuredImage { url altText }
-        priceRange { minVariantPrice { amount currencyCode } }
-      }
-      collections { id handle title }
-    }
-  }
-`;
+
 
 // Les nœuds predictiveSearch.products n'ont PAS la forme de PRODUCTS_QUERY (pas
 // de variants/metafields) → mapper léger dédié (ne PAS réutiliser mapProduct).
@@ -1867,6 +1498,12 @@ function mapPredictiveProduct(n) {
 }
 
 async function getPredictive(q) {
+  // Les débuts de mots et les noms seuls gardent l'autocomplétion native légère.
+  // Dès qu'une demande comporte des critères, toute la sélection est vérifiée.
+  if (typeof q === 'string' && q.trim().length >= 2 && parseSearch(q).criteria.some(c=>!['text','brand'].includes(c.kind))) {
+    const {items,...data}=await getSearchPage({q});
+    return {...data,products:items.slice(0,8),brands:[],categories:[],resultsUrl:data.resultsUrl+'#grille'};
+  }
   const term = String(q || '').replace(/["\\]/g, ' ').trim().slice(0, 80);
   if (!term) return { products: [], brands: [], categories: [] };
   return cached('predictive:' + term.toLowerCase(), async () => {
@@ -1893,11 +1530,11 @@ async function getPredictive(q) {
 app.get('/api/predictive', async (req, res) => {
   try {
     const data = await getPredictive(req.query.q);
-    res.set('Cache-Control', 'public, max-age=60');
+    res.set('Cache-Control', data.resultsUrl ? 'no-store' : 'public, max-age=60');
     res.json(data);
   } catch (err) {
     console.error('Predictive error:', err.message);
-    res.status(500).json({ error: 'Recherche indisponible.' });
+    res.status(503).set('Cache-Control','no-store').json({ error: 'Recherche indisponible.' });
   }
 });
 
@@ -1907,24 +1544,7 @@ app.get('/api/predictive', async (req, res) => {
 // "Menu principal" (Online Store → Navigation). Cyril edits libellés
 // / ordre / sub-items from the Shopify admin; the site picks it up
 // at the next /api/menu cache refresh (5 min TTL).
-const MENU_QUERY = `
-  query GetMainMenu {
-    menu(handle: "main-menu") {
-      items {
-        title
-        url
-        items {
-          title
-          url
-          items {
-            title
-            url
-          }
-        }
-      }
-    }
-  }
-`;
+
 
 // Shopify returns absolute URLs on the *primary* domain
 // (shop.mikadodeco.be/...). Rewrite to bare paths so the front
@@ -1985,61 +1605,7 @@ app.get('/api/collections', async (req, res) => {
 // handle so the products are pre-filtered server-side — the V1 bug
 // (PLP grid empty on most collections) came from client-side filtering
 // a too-small 250-product window.
-const COLLECTION_PRODUCTS_QUERY = `
-  query GetCollectionProducts($handle: String!, $first: Int!, $after: String, $filters: [ProductFilter!]) {
-    collection(handle: $handle) {
-      title
-      description
-      image { url altText }
-      products(first: $first, after: $after, filters: $filters) {
-        pageInfo { hasNextPage endCursor }
-        edges {
-          cursor
-          node {
-            id
-            handle
-            title
-            vendor
-            productType
-            description
-            tags
-            availableForSale
-            totalInventory
-            collections(first: 20) { edges { node { handle } } }
-            featuredImage { url altText }
-            images(first: 8) { edges { node { url altText } } }
-            priceRange {
-              minVariantPrice { amount currencyCode }
-              maxVariantPrice { amount currencyCode }
-            }
-            compareAtPriceRange { minVariantPrice { amount currencyCode } }
-            variants(first: 250) {
-              edges {
-                node {
-                  id
-                  title
-                  price { amount currencyCode }
-                  compareAtPrice { amount }
-                  availableForSale
-                  selectedOptions { name value }
-                  image { url altText }
-                }
-              }
-            }
-            metafields(identifiers: [
-              { namespace: "custom", key: "designer" }
-              { namespace: "custom", key: "year" }
-              { namespace: "custom", key: "material" }
-              { namespace: "custom", key: "dimensions" }
-              { namespace: "custom", key: "lead_time" }
-              { namespace: "custom", key: "subcategory" }
-            ]) { key value }
-          }
-        }
-      }
-    }
-  }
-`;
+
 
 async function getCollectionChunk(handle, first, after, tag) {
   const f   = Math.max(1, Math.min(100, parseInt(first) || 50));
@@ -2087,100 +1653,7 @@ async function getCollectionProducts(handle, first, after, tag) {
 // — anything beyond the cap rendered "introuvable". This query goes
 // straight to Shopify by handle, so the catalog cap no longer gates
 // individual product pages.
-const PRODUCT_QUERY = `
-  query GetProduct($handle: String!) {
-    product(handle: $handle) {
-      id
-      handle
-      title
-      vendor
-      productType
-      description
-      seo { title description }
-      tags
-      availableForSale
-      totalInventory
-      collections(first: 20) { edges { node { handle } } }
-      featuredImage { url altText }
-      images(first: 30) { edges { node { url altText } } }
-      priceRange {
-        minVariantPrice { amount currencyCode }
-        maxVariantPrice { amount currencyCode }
-      }
-      compareAtPriceRange { minVariantPrice { amount currencyCode } }
-      variants(first: 250) {
-        edges {
-          node {
-            id
-            title
-            sku
-            price { amount currencyCode }
-            compareAtPrice { amount }
-            availableForSale
-            quantityAvailable
-            selectedOptions { name value }
-            image { url altText }
-          }
-        }
-      }
-      metafields(identifiers: [
-        { namespace: "custom", key: "designer" }
-        { namespace: "custom", key: "year" }
-        { namespace: "custom", key: "material" }
-        { namespace: "custom", key: "dimensions" }
-        { namespace: "custom", key: "lead_time" }
-        { namespace: "custom", key: "subcategory" }
-        { namespace: "custom", key: "usage" }
-        { namespace: "custom", key: "entretien" }
-        { namespace: "custom", key: "origin" }
-        { namespace: "custom", key: "weight" }
-        { namespace: "custom", key: "warranty" }
-        { namespace: "custom", key: "lighting_type" }
-        { namespace: "custom", key: "light_source_type" }
-        { namespace: "custom", key: "led_type" }
-        { namespace: "custom", key: "power_w" }
-        { namespace: "custom", key: "voltage_v" }
-        { namespace: "custom", key: "color_temperature_k" }
-        { namespace: "custom", key: "dimming" }
-        { namespace: "custom", key: "battery_runtime" }
-        { namespace: "custom", key: "charging_time" }
-        { namespace: "custom", key: "cable_details" }
-        { namespace: "custom", key: "ip_rating" }
-        { namespace: "custom", key: "safety_class" }
-        { namespace: "custom", key: "energy_label" }
-        { namespace: "custom", key: "light_source_replaceable" }
-        { namespace: "custom", key: "construction_materials" }
-        { namespace: "custom", key: "materiaux" }
-        { namespace: "custom", key: "infos_electriques" }
-      ]) { key value }
-      # Recommandations gérées côté Shopify (app Search & Discovery), stockées en
-      # métafields list.product_reference et lues dynamiquement — rien de hardcodé.
-      complementary: metafield(namespace: "shopify--discovery--product_recommendation", key: "complementary_products") {
-        references(first: 12) { nodes { ...RecoCard } }
-      }
-      related: metafield(namespace: "shopify--discovery--product_recommendation", key: "related_products") {
-        references(first: 12) { nodes { ...RecoCard } }
-      }
-    }
-  }
-  fragment RecoCard on Product {
-    id
-    handle
-    title
-    vendor
-    availableForSale
-    totalInventory
-    tags
-    featuredImage { url altText }
-    images(first: 4) { nodes { url } }
-    priceRange {
-      minVariantPrice { amount currencyCode }
-      maxVariantPrice { amount currencyCode }
-    }
-    compareAtPriceRange { minVariantPrice { amount currencyCode } }
-    variants(first: 1) { nodes { id availableForSale price { amount } } }
-  }
-`;
+
 
 async function getProductByHandle(handle) {
   const h = String(handle || '').trim();
@@ -2354,77 +1827,19 @@ app.post('/api/revalidate', (req, res) => {
   delete _cache['promos'];
   delete _cache['menu'];
   delete _cache['chairs:index'];
+  clearSearchCache();
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });
 });
 
 // ─── SHOPIFY: CART CREATE MUTATION ─────────────────────
-const CART_CREATE_MUTATION = `
-  mutation CartCreate(
-    $lines:      [CartLineInput!]!
-    $note:       String
-    $attributes: [AttributeInput!]
-  ) {
-    cartCreate(input: {
-      lines:      $lines
-      note:       $note
-      attributes: $attributes
-    }) {
-      cart {
-        id
-        checkoutUrl
-      }
-      userErrors {
-        field
-        message
-      }
-    }
-  }
-`;
+
 
 // ─── SHOPIFY: CART PREVIEW (totals + discount allocations) ─────────
 // Same shape as CartCreate, but we ask for cost + discountAllocations so
 // the front-end can show Shopify's actual price after automatic discounts
 // (e.g. "Buy 5 get 1 free") before the customer hits checkout.
-const CART_PREVIEW_MUTATION = `
-  mutation CartPreview($lines: [CartLineInput!]!) {
-    cartCreate(input: { lines: $lines }) {
-      cart {
-        id
-        cost {
-          subtotalAmount { amount currencyCode }
-          totalAmount    { amount currencyCode }
-        }
-        discountAllocations {
-          discountedAmount { amount currencyCode }
-          ... on CartAutomaticDiscountAllocation { title }
-          ... on CartCodeDiscountAllocation      { code  }
-          ... on CartCustomDiscountAllocation    { title }
-        }
-        lines(first: 50) {
-          edges {
-            node {
-              id
-              quantity
-              cost {
-                subtotalAmount { amount currencyCode }
-                totalAmount    { amount currencyCode }
-              }
-              discountAllocations {
-                discountedAmount { amount currencyCode }
-                ... on CartAutomaticDiscountAllocation { title }
-                ... on CartCodeDiscountAllocation      { code  }
-                ... on CartCustomDiscountAllocation    { title }
-              }
-              merchandise { ... on ProductVariant { id product { tags } } }
-            }
-          }
-        }
-      }
-      userErrors { field message }
-    }
-  }
-`;
+
 
 // ─── PROMO DISCOVERY ────────────────────────────────────
 // Probes each variant with a "test cart" of qty=100 to surface any Shopify
