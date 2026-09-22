@@ -70,7 +70,7 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, readCart, removeFromCartAt, setCartQty, fetchProducts, euro, escapeHtml, isSaleActive, saleNextTier, SALE, giftOfferHTML, giftReconcile, giftBind, productHref } from "/shared.js";
+    import { initShell, readCart, removeFromCartAt, setCartQty, euro, escapeHtml, isSaleActive, saleNextTier, SALE, giftOfferHTML, giftReconcile, giftBind, productHref } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
     // Free-shipping threshold (Belgium zone). The radio toggle that
@@ -79,7 +79,6 @@
     // la livraison offerte" hint to drive average cart size, computed
     // against the post-discount payable amount.
     const SHIPPING_FREE_FROM = 1500;
-    function deliveryLabel() { return "À confirmer au paiement"; }
     const populated = document.querySelector("[data-populated]");
     const empty = document.querySelector("[data-empty]");
     const itemsEl = document.querySelector("[data-items]");
@@ -89,17 +88,24 @@
     let lastPreview = null;
     const discountsEl = document.querySelector("[data-discounts]");
 
-    // Map of variantId → { longDelay }. Populated once /api/products
-    // resolves. Used by the cart-wide ETA.
-    let variantInfo = new Map();
-    fetchProducts().then((all) => {
-      for (const p of all) {
-        for (const v of (p.variants || [])) {
-          variantInfo.set(v.id, { longDelay: !!p.longDelay });
-        }
-      }
+    let deliveryEstimate = null;
+    let deliverySequence = 0;
+    async function refreshDelivery() {
+      const seq = ++deliverySequence;
+      deliveryEstimate = null;
       render();
-    }).catch((e) => console.warn("[selection] product info unavailable:", e.message));
+      const items = readCart().map(i => ({ variantId: i.variantId, qty: i.qty || 1 }));
+      if (!items.length) return;
+      try {
+        const response = await fetch('/api/cart/delivery', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items }),
+        });
+        if (!response.ok) throw new Error('delivery');
+        const result = await response.json();
+        if (seq === deliverySequence) { deliveryEstimate = result; render(); }
+      } catch (_) { /* Keep the conditional policy, never invent a short ETA. */ }
+    }
 
     function render() {
       const cart = readCart();
@@ -240,19 +246,12 @@
       document.querySelector("[data-total-label]").textContent = "Total";
       document.querySelector("[data-total]").textContent = euro(grand);
 
-      // Cart-wide ETA. Uniform 3-4 semaines unless any item is tagged as a
-      // long-delay exception (Fermob peak / Kriptonite / sur-mesure…), in
-      // which case we tell the customer we'll confirm by mail/phone.
       const etaEl = document.querySelector("[data-cart-eta]");
       if (etaEl) {
-        const anyLong = cart.some((i) => variantInfo.get(i.variantId)?.longDelay);
-        if (anyLong) {
-          etaEl.innerHTML = `<strong>Délai sur demande</strong> · certains articles de votre sélection peuvent demander un délai plus long. Nous vous contacterons après votre commande pour confirmer.`;
-          etaEl.classList.add("sel-eta--warn");
-        } else {
-          etaEl.innerHTML = `Livraison estimée : <strong>3-4 semaines</strong>`;
-          etaEl.classList.remove("sel-eta--warn");
-        }
+        etaEl.innerHTML = deliveryEstimate?.label
+          ? `Délai estimé : <strong>${escapeHtml(deliveryEstimate.label)}</strong>${deliveryEstimate.onOrder ? ' · envoi groupé dès réception des articles sur commande.' : ''}`
+          : 'En stock : <strong>1–2 jours</strong> · Sur commande : <strong>3–4 semaines</strong>. Le délai le plus long s’applique aux envois groupés.';
+        etaEl.classList.toggle('sel-eta--warn', !!deliveryEstimate?.onOrder);
         etaEl.hidden = false;
       }
 
@@ -329,10 +328,9 @@
       const err = document.querySelector("[data-checkout-error]");
       btn.disabled = true; btn.textContent = "Redirection…"; err.style.display = "none";
       try {
-        const projet = `Livraison: ${deliveryLabel()}`;
         const res = await fetch("/api/cart/create", {
           method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1, ...(i.gift ? { gift: i.gift } : {}) })), customer: { projet } }),
+          body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1, ...(i.gift ? { gift: i.gift } : {}) })) }),
         });
         const data = await res.json();
         if (data.checkoutUrl) location.href = data.checkoutUrl;
@@ -344,7 +342,7 @@
       }
     });
 
-    document.addEventListener("cart:change", () => { render(); schedulePreview(); });
+    document.addEventListener("cart:change", () => { render(); schedulePreview(); refreshDelivery(); });
 
     // Back-button safety: if the user hits "back" from Shopify checkout the
     // page restores from the bfcache with the button still disabled / showing
@@ -358,6 +356,7 @@
 
     render();
     schedulePreview();
+    refreshDelivery();
     giftBind();
     document.addEventListener("gift:meta", render);
   </script>

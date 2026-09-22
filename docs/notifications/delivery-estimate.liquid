@@ -1,0 +1,7 @@
+{% assign mikado_delay = attributes['Délai estimé'] %}
+{% if mikado_delay == '1–2 jours' or mikado_delay == '3–4 semaines' %}
+  <p>Délai estimé de votre commande : <strong>{{ mikado_delay | escape }}</strong>.</p>
+{% else %}
+  <p>Articles en stock : <strong>1–2 jours</strong>. Articles sur commande : <strong>3–4 semaines</strong>.</p>
+{% endif %}
+<p>Pour une commande regroupée, le délai le plus long s’applique. En cas de retrait au magasin, attendez notre e-mail « Prêt pour le retrait » avant de vous déplacer.</p>

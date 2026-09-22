@@ -3,6 +3,7 @@ const { shopifyFetch, SHOPIFY_STORE } = require('./lib/shopify/client');
 const { mapProduct, mapProductRef, shopifyResize, CARD_IMAGE_WIDTH } = require('./lib/shopify/product-mapper');
 const { getSearchPage, clearSearchCache } = require('./lib/services/search');
 const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
+const { normalizeItems, getDeliveryEstimate, realProject } = require('./lib/delivery-estimate');
 const express = require('express');
 const { selectInitialVariant } = require('./v3/product-variant');
 const cors    = require('cors');
@@ -2010,41 +2011,55 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
   }
 });
 
+// Fresh availability for the exact variants and total quantities in the cart.
+app.post('/api/cart/delivery', cartLimiter, async (req, res) => {
+  try {
+    const items = normalizeItems(req.body?.items);
+    res.json(await getDeliveryEstimate(items, shopifyFetch));
+  } catch (err) {
+    res.status(400).json({ error: 'Impossible de vérifier le délai. Réessayez avant de payer.' });
+  }
+});
+
 // ─── API: CREATE CART → SHOPIFY CHECKOUT ───────────────
 // Body: { items: [{ variantId, qty }], customer: { prenom, nom, email, telephone, projet, message } }
 // Returns: { checkoutUrl } — redirect the browser to this URL
 app.post('/api/cart/create', cartLimiter, async (req, res) => {
   try {
-    const { items, customer } = req.body;
-
-    if (!items || !Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ error: 'La selection est vide.' });
-    }
+    const { customer } = req.body;
+    const items = normalizeItems(req.body?.items);
+    const delivery = await getDeliveryEstimate(items, shopifyFetch);
+    const project = realProject(customer?.projet);
+    const checkedAt = new Date().toISOString();
 
     const lines = items.map(item => ({
       merchandiseId: item.variantId,
-      quantity:      Math.max(1, Math.min(10, parseInt(item.qty) || 1)),
+      quantity:      item.qty,
       // Ligne cadeau (offre Panton) : marquée par un attribut _gift (préfixe _
       // = masqué au client) — retrouvable dans la commande côté admin.
-      ...(item.gift ? { attributes: [{ key: '_gift', value: String(item.gift).slice(0, 40) }] } : {}),
+      attributes: [
+        ...(item.gift ? [{ key: '_gift', value: String(item.gift).slice(0, 40) }] : []),
+        ...(delivery.lines.find(l => l.variantId === item.variantId)?.label
+          ? [{ key: 'Délai estimé', value: delivery.lines.find(l => l.variantId === item.variantId).label }] : []),
+      ],
     }));
 
     // Pass customer context as cart note + attributes
     // (visible in Shopify admin → Orders → Notes / Attributes)
-    const noteParts = [];
+    const noteParts = delivery.label ? [`Délai estimé de la commande : ${delivery.label} (envoi groupé).`, 'Mode de réception : voir le mode choisi au paiement dans la commande Shopify.'] : [];
     if (customer?.prenom || customer?.nom) {
       noteParts.push(`Client: ${[customer.prenom, customer.nom].filter(Boolean).join(' ')}`);
     }
     if (customer?.telephone) noteParts.push(`Tel: ${customer.telephone}`);
-    if (customer?.projet)    noteParts.push(`Projet: ${customer.projet}`);
+    if (project) noteParts.push(`Projet: ${project}`);
     if (customer?.message)   noteParts.push(`Message: ${customer.message.substring(0, 500)}`);
 
-    const attributes = [];
+    const attributes = delivery.label ? [{ key: 'Délai estimé', value: delivery.label }, { key: 'Stock vérifié le', value: checkedAt }] : [];
     if (customer?.prenom)    attributes.push({ key: 'Prenom',    value: customer.prenom });
     if (customer?.nom)       attributes.push({ key: 'Nom',       value: customer.nom });
     if (customer?.email)     attributes.push({ key: 'Email',     value: customer.email });
     if (customer?.telephone) attributes.push({ key: 'Telephone', value: customer.telephone });
-    if (customer?.projet)    attributes.push({ key: 'Projet',    value: customer.projet });
+    if (project) attributes.push({ key: 'Projet', value: project });
 
     const data = await shopifyFetch(CART_CREATE_MUTATION, {
       lines,
