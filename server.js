@@ -5,6 +5,7 @@ const { getSearchPage, clearSearchCache } = require('./lib/services/search');
 const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
 const { normalizeItems, getDeliveryEstimate, realProject } = require('./lib/delivery-estimate');
 const express = require('express');
+const { promotionCard } = require('./lib/promotion-card');
 const { selectInitialVariant } = require('./v3/product-variant');
 const cors    = require('cors');
 const path    = require('path');
@@ -1707,8 +1708,8 @@ app.get('/api/product/:handle', async (req, res) => {
 // la fusion ne concerne que la 1re page (les offres actives sont peu nombreuses).
 async function getPromotionsProducts(first, after) {
   const base = await getCollectionProducts('promotions', first, after);
-  if (after) return base;
-  const stamp = (p) => ({ ...p, collections: [...new Set([...(p.collections || []), 'promotions'])] });
+  const stamp = (p) => ({ ...promotionCard(p), collections: [...new Set([...(p.collections || []), 'promotions'])] });
+  if (after) return base && { ...base, items: base.items.map(stamp) };
   let promoItems = [];
   try {
     // Sonde bornée : à froid elle peut prendre ~10 s (un panier-test par
