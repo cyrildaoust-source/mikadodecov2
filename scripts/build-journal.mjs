@@ -58,7 +58,7 @@ async function ogDimsTag(ogImageUrl) {
 async function renderArticle(slug, a) {
   const canonical = `${ORIGIN}/journal/${slug}.html`;
   const metaDesc = a.lead.slice(0, 200);
-  const titleFull = `${a.title} · Mikadodeco`;
+  const titleFull = `${a.title} · Mikado Deco`;
   // og:image (partage social) : seules .jpg/.jpeg/.png sont fiables chez les
   // scrapers ; une image .webp (hero on-page) retombe sur og-default.
   const ogImage = /\.(jpe?g|png)$/i.test(a.img) ? absUrl(a.img) : OG_DEFAULT;
@@ -78,10 +78,10 @@ async function renderArticle(slug, a) {
     '@type': 'Article',
     headline: a.title,
     image: absUrl(a.img),
-    author: { '@type': 'Organization', name: 'Mikadodeco' },
+    author: { '@type': 'Organization', name: 'Mikado Deco' },
     publisher: {
       '@type': 'Organization',
-      name: 'Mikadodeco',
+      name: 'Mikado Deco',
       logo: { '@type': 'ImageObject', url: ORIGIN + '/apple-touch-icon.png' },
     },
   }).replace(/</g, '\\u003c');
@@ -98,7 +98,7 @@ async function renderArticle(slug, a) {
   <meta name="description" content="${attrEsc(metaDesc)}" />
   <!-- Open Graph / Twitter Cards (aperçu au partage social — par article, statique) -->
   <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Mikadodeco" />
+  <meta property="og:site_name" content="Mikado Deco" />
   <meta property="og:locale" content="fr_BE" />
   <meta property="og:title" content="${attrEsc(titleFull)}" />
   <meta property="og:description" content="${attrEsc(metaDesc)}" />

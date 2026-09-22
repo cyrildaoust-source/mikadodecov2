@@ -132,6 +132,25 @@ export const ARTICLES = {
           <p><strong>Une terrasse Fermob bien colorée, c'est dix ans de plaisir.</strong> Ça vaut bien 24 heures de réflexion.</p>
         `]],
       },
+      "moustache": {
+        meta: "Maison \u00b7 5 min", img: "/images/journal-moustache.jpg",
+        title: "Moustache, \u00e9diteur de design fran\u00e7ais",
+        cta: { label: "D\u00e9couvrir Moustache", href: "/produits.html?brand=moustache" },
+        lead: "Une maison d'\u00e9dition parisienne n\u00e9e en 2009, qui fait dessiner ses pi\u00e8ces par des designers choisis plut\u00f4t que de suivre les saisons.",
+        body: [
+          ["p", "\u00c9diter, en design, ce n'est pas fabriquer. Un \u00e9diteur choisit un designer, discute un projet, fait produire la pi\u00e8ce, puis la d\u00e9fend dans la dur\u00e9e. Moustache travaille ainsi depuis son lancement, en avril 2009."],
+          ["h2", "Une maison parisienne"],
+          ["p", "Moustache est une maison d'\u00e9dition de design fran\u00e7aise, bas\u00e9e \u00e0 Paris, port\u00e9e depuis l'origine par St\u00e9phane Arriuberg\u00e9 et Massimiliano Iorio. Son terrain, c'est la maison : mobilier, luminaires, vases, miroirs, objets du quotidien."],
+          ["p", "La maison revendique de pr\u00e9f\u00e9rer un univers domestique p\u00e9renne \u00e0 la demande toujours plus pressante de nouveaut\u00e9s. Concr\u00e8tement : une pi\u00e8ce reste au catalogue, on ne la remplace pas chaque saison."],
+          ["h2", "Des designers, pas un style maison"],
+          ["p", "Plut\u00f4t qu'une signature unique d\u00e9clin\u00e9e \u00e0 l'infini, Moustache r\u00e9unit une communaut\u00e9 : Big-Game, Jean-Baptiste Fastrez, Ionna Vautrin, Inga Semp\u00e9, Constance Guisset, Benjamin Graindorge, Bertjan Pot, Fran\u00e7ois Azambourg, S\u00e9bastien Cordol\u00e9ani, Dylan Martorell. Chaque pi\u00e8ce garde la main de qui l'a dessin\u00e9e \u2014 et l'ensemble tient quand m\u00eame ensemble."],
+          ["h2", "Des objets qui entrent au mus\u00e9e"],
+          ["p", "Les pi\u00e8ces \u00e9dit\u00e9es par Moustache figurent dans les collections permanentes du MoMA \u00e0 New York, du Mus\u00e9e des Arts D\u00e9coratifs \u00e0 Paris, du Vitra Design Museum, du Museum f\u00fcr Gestaltung de Zurich, du MAKK de Cologne et du Fonds national d'art contemporain."],
+          ["h2", "Ce que nous en avons retenu"],
+          ["p", "Notre s\u00e9lection commence par les assises Bold de Big-Game \u2014 chaise, tabouret, banc, et le fauteuil Extra Bold \u2014 et par les vases de Jean-Baptiste Fastrez : Allpa, Pacha, Qucha. S'y ajoutent la collection \u00d4 d'Ionna Vautrin, les vide-poches Balcon et B\u00e9nitier d'Inga Semp\u00e9, le tabouret Canova de Constance Guisset, les \u00e9tag\u00e8res Bagou d'En Bande Organis\u00e9e et les tables basses Touch de Dimitri Bahler."],
+          ["p", "Une maison d'\u00e9dition se juge sur la dur\u00e9e : la pi\u00e8ce sera-t-elle encore l\u00e0 dans dix ans, vieillira-t-elle bien ? C'est exactement la question qu'on se pose avant de faire entrer quoi que ce soit."],
+        ],
+      },
       "tissu-qui-se-patine": {
         meta: "Conseil · 4 min", img: "/images/ref-feat-1.webp",
         title: "Choisir un tissu qui se patine",
