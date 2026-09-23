@@ -857,7 +857,10 @@ function bindNewsletter() {
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || "server");
       input.style.display = "none"; btn.style.display = "none";
-      status.textContent = "Merci, vous êtes inscrit·e."; status.className = "footer__news-status is-ok";
+      status.textContent = ["created", "subscribed"].includes(data.saved)
+        ? "Merci, vous êtes inscrit·e."
+        : "Votre demande a été transmise à la boutique. L’inscription sera finalisée manuellement.";
+      status.className = "footer__news-status is-ok";
     } catch (e2) {
       status.textContent = e2.message === "rate_limit" ? "Trop de tentatives. Patientez quelques minutes." : "L'inscription n'a pas pu être enregistrée. Réessayez ou écrivez-nous à shop@mikadodeco.be.";
       status.className = "footer__news-status is-error";
