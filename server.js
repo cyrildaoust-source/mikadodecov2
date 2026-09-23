@@ -2196,6 +2196,83 @@ app.post('/api/contact', formLimiter, async (req, res) => {
   }
 });
 
+// One-time merchant authorization for the installed newsletter app. The resulting
+// offline token is copied into Vercel as SHOPIFY_ADMIN_TOKEN; this route then closes.
+const NEWSLETTER_OAUTH_COOKIE = '__Host-mikado-newsletter-oauth';
+const NEWSLETTER_OAUTH_REDIRECT = 'https://www.mikadodeco.be/api/shopify/newsletter/callback';
+const newsletterOAuthHeaders = (res) => res.set({
+  'Cache-Control': 'no-store',
+  'Referrer-Policy': 'no-referrer',
+  'X-Robots-Tag': 'noindex, nofollow',
+});
+const newsletterOAuthReady = () =>
+  process.env.SHOPIFY_ADMIN_DOMAIN === 'cqnfzf-qb.myshopify.com' &&
+  !!process.env.SHOPIFY_ADMIN_CLIENT_ID && !!process.env.SHOPIFY_ADMIN_CLIENT_SECRET;
+app.get('/api/shopify/newsletter/connect', formLimiter, (req, res) => {
+  newsletterOAuthHeaders(res);
+  if (process.env.SHOPIFY_ADMIN_TOKEN) return res.status(410).send('Connexion déjà terminée.');
+  if (!newsletterOAuthReady()) return res.status(503).send('Application non configurée.');
+  const state = crypto.randomBytes(32).toString('hex');
+  res.cookie(NEWSLETTER_OAUTH_COOKIE, state, {
+    httpOnly: true, secure: true, sameSite: 'lax', path: '/', maxAge: 10 * 60 * 1000,
+  });
+  const params = new URLSearchParams({
+    client_id: process.env.SHOPIFY_ADMIN_CLIENT_ID,
+    scope: 'read_customers,write_customers',
+    redirect_uri: NEWSLETTER_OAUTH_REDIRECT,
+    state,
+  });
+  return res.redirect('https://cqnfzf-qb.myshopify.com/admin/oauth/authorize?' + params);
+});
+app.get('/api/shopify/newsletter/callback', formLimiter, async (req, res) => {
+  newsletterOAuthHeaders(res);
+  if (process.env.SHOPIFY_ADMIN_TOKEN) return res.status(410).send('Connexion déjà terminée.');
+  if (!newsletterOAuthReady()) return res.status(503).send('Application non configurée.');
+  const params = new URL(req.originalUrl, ORIGIN).searchParams;
+  const keys = [...params.keys()];
+  if (new Set(keys).size !== keys.length) return res.status(400).send('Paramètres dupliqués.');
+  const state = params.get('state') || '';
+  const cookieState = String(req.headers.cookie || '').split(';').map(part => part.trim())
+    .find(part => part.startsWith(NEWSLETTER_OAUTH_COOKIE + '='))?.slice(NEWSLETTER_OAUTH_COOKIE.length + 1) || '';
+  const a = Buffer.from(state), b = Buffer.from(cookieState);
+  if (!state || a.length !== b.length || !crypto.timingSafeEqual(a, b))
+    return res.status(403).send('Session de connexion invalide.');
+  res.clearCookie(NEWSLETTER_OAUTH_COOKIE, { secure: true, sameSite: 'lax', path: '/' });
+  const shop = params.get('shop');
+  const code = params.get('code');
+  const hmac = params.get('hmac');
+  if (shop !== 'cqnfzf-qb.myshopify.com' || !code || !/^[a-f0-9]{64}$/i.test(hmac || ''))
+    return res.status(400).send('Réponse Shopify invalide.');
+  const message = [...params.entries()].filter(([key]) => key !== 'hmac')
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([key, value]) => key + '=' + value).join('&');
+  const expected = crypto.createHmac('sha256', process.env.SHOPIFY_ADMIN_CLIENT_SECRET)
+    .update(message).digest('hex');
+  if (!crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(hmac.toLowerCase())))
+    return res.status(403).send('Signature Shopify invalide.');
+  try {
+    const tokenResponse = await fetch('https://cqnfzf-qb.myshopify.com/admin/oauth/access_token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+      body: new URLSearchParams({
+        client_id: process.env.SHOPIFY_ADMIN_CLIENT_ID,
+        client_secret: process.env.SHOPIFY_ADMIN_CLIENT_SECRET,
+        code,
+      }),
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!tokenResponse.ok) return res.status(502).send('Échange du jeton refusé par Shopify (' + tokenResponse.status + ').');
+    const data = await tokenResponse.json();
+    if (!data.access_token || data.expires_in || !(data.scope || '').split(',').includes('write_customers'))
+      return res.status(502).send('Jeton Shopify ou autorisations inattendus.');
+    const safeToken = String(data.access_token).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return res.type('html').send('<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="referrer" content="no-referrer"><title>Connexion Shopify</title><body><h1>Connexion Shopify autorisée</h1><p>Copiez ce jeton une seule fois dans Vercel, variable SHOPIFY_ADMIN_TOKEN pour Production et Preview. Ne le partagez pas.</p><textarea id="shopify-token" readonly rows="3" cols="90">' + safeToken + '</textarea></body></html>');
+  } catch (error) {
+    console.warn('[newsletter-oauth] token exchange failed:', error.name);
+    return res.status(502).send('Connexion Shopify momentanément indisponible.');
+  }
+});
+
 // ─── API: NEWSLETTER → SHOPIFY ─────────────────────────
 // Abonne l'adresse dans Shopify (Admin API, consentement e-mail + tags). Sans jeton
 // Admin ou en cas d'échec, la boutique reçoit l'adresse par e-mail. Le visiteur ne
