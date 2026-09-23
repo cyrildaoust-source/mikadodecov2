@@ -16,6 +16,7 @@ const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, r
 const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 const { brandCollectionPage, brandName } = require('./lib/collection-brand');
+const { adminClient, subscribeInShopify, notifyByEmail } = require('./lib/newsletter');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = require('./lib/catalog-landing');
 const { chairQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readChairCatalog, filterCatalog } = require('./lib/chair-catalog');
@@ -2196,8 +2197,9 @@ app.post('/api/contact', formLimiter, async (req, res) => {
 });
 
 // ─── API: NEWSLETTER → SHOPIFY ─────────────────────────
-// Subscribes an email to the Shopify customer list (tagged "newsletter")
-// via the storefront's classic customer form handler. No Admin API needed.
+// Abonne l'adresse dans Shopify (Admin API, consentement e-mail + tags). Sans jeton
+// Admin ou en cas d'échec, la boutique reçoit l'adresse par e-mail. Le visiteur ne
+// voit « inscrit » que si l'un des deux enregistrements a réussi.
 // Body: { email }
 app.post('/api/newsletter', formLimiter, async (req, res) => {
   try {
@@ -2207,44 +2209,28 @@ app.post('/api/newsletter', formLimiter, async (req, res) => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).json({ error: 'email_invalid' });
     }
-    if (!SHOPIFY_STORE) {
-      console.log('[newsletter] (no Shopify configured)', email);
-      return res.json({ ok: true });
+    let saved = null, reason = 'application Shopify non configurée';
+    const admin = adminClient();
+    if (admin) {
+      try { saved = await subscribeInShopify(email, admin); }
+      catch (e) { reason = e.message; console.warn('[newsletter] shopify failed:', e.message); }
     }
-    // Best-effort: post to Shopify's classic storefront customer form handler.
-    // (Reliable customer-list signup needs the Admin API; the storefront form
-    // handler is theme/online-store dependent. We never lose the lead: on any
-    // failure we still log + optionally forward to a webhook.)
-    let shopifyOk = false;
-    try {
-      const form = new URLSearchParams();
-      form.set('form_type', 'customer');
-      form.set('utf8', '✓');
-      form.set('contact[email]', email);
-      form.set('contact[tags]', 'newsletter,v3-footer');
-      const r = await fetch(`https://${SHOPIFY_STORE}/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'mikadodeco-newsletter' },
-        body: form.toString(),
-        redirect: 'manual',
-      });
-      shopifyOk = r.status >= 200 && r.status < 400; // 302 = success
-      console.log('[newsletter]', JSON.stringify({ ts: new Date().toISOString(), email, shopifyStatus: r.status, shopifyOk }));
-    } catch (e) {
-      console.warn('[newsletter] shopify post failed:', e.message);
+    if (!saved) {
+      try { if (await notifyByEmail(email, reason)) saved = 'email'; }
+      catch (e) { console.warn('[newsletter] email failed:', e.message); }
     }
-
-    // Always capture the lead, even if Shopify declined.
-    if (process.env.NEWSLETTER_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL) {
+    if (process.env.NEWSLETTER_WEBHOOK_URL) {
       try {
-        await fetch(process.env.NEWSLETTER_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL, {
+        const r = await fetch(process.env.NEWSLETTER_WEBHOOK_URL, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'newsletter', email, shopifyOk, ts: new Date().toISOString() }),
+          body: JSON.stringify({ type: 'newsletter', email, saved, ts: new Date().toISOString() }),
         });
+        if (r.ok) saved ||= 'webhook';
       } catch (e) { console.warn('[newsletter] webhook failed:', e.message); }
     }
-
-    res.json({ ok: true, shopify: shopifyOk });
+    console.log('[newsletter]', JSON.stringify({ ts: new Date().toISOString(), saved }));
+    if (!saved) return res.status(502).json({ error: 'delivery_failed' });
+    res.json({ ok: true, saved });
   } catch (err) {
     console.error('[newsletter] error:', err.message);
     res.status(500).json({ error: 'server_error' });
