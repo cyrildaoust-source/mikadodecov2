@@ -8,7 +8,7 @@
    the chrome renders instantly with no flash.
    ============================================================ */
 
-import { escapeHtml, slugify } from "/shared.js";
+import { escapeHtml, slugify, siteData } from "/shared.js";
 
 const OPEN_DELAY  = 60;
 const CLOSE_DELAY = 200;
@@ -39,11 +39,14 @@ export async function initMegaMenu() {
   stageEl = document.querySelector("[data-mm-stage]");
   if (!stageEl) return;
   try {
+    // Données écrites dans la page par le serveur ; appel réseau seulement si absentes.
+    const read = (key, url, options, fallback) => siteData(key) ? Promise.resolve(siteData(key))
+      : fetch(url, options).then((r) => r.json()).catch(() => fallback);
     const [menuRes, cfgRes, brandsRes, activeRes] = await Promise.all([
-      fetch("/api/menu",                  { cache: "no-store"    }).then((r) => r.json()).catch(() => ({ ok: false, items: [] })),
-      fetch("/mega-menu-config.json",     { cache: "no-cache" }).then((r) => r.json()).catch(() => ({})),
-      fetch("/mega-menu-brands.json",     { cache: "no-cache" }).then((r) => r.json()).catch(() => ({ brands: [], designers: [] })),
-      fetch("/api/brands",                { cache: "no-store"    }).then((r) => r.json()).catch(() => []),
+      read("menu", "/api/menu", { cache: "no-store" }, { ok: false, items: [] }),
+      read("config", "/mega-menu-config.json", { cache: "no-cache" }, {}),
+      read("brandsFile", "/mega-menu-brands.json", { cache: "no-cache" }, { brands: [], designers: [] }),
+      read("brands", "/api/brands", { cache: "no-store" }, []),
     ]);
     menu       = menuRes;
     relabelFamilies(menu);

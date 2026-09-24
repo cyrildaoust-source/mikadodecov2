@@ -19,7 +19,8 @@ initShell({ active: "", transparentNav: true });
 
 async function loadRows() {
   const hosts = [...document.querySelectorAll("[data-products]")];
-  if (!hosts.length) return;
+  // Rails envoyés complets par le serveur : rien à recharger ni à redessiner.
+  if (!hosts.length || hosts.every((h) => h.querySelector(".pcard"))) return;
   // Mêmes produits que le rendu serveur (/api/home-rails) : Nouveautés = vraie collection
   // « nouveautes » en alternant les marques ; Meilleures ventes = ordre BEST_SELLING.
   try {

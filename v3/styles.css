@@ -160,9 +160,8 @@ ul { list-style: none; }
 .wrap { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
 .section { padding-block: var(--section-y); }
 
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-.reveal.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+/* Plus d'apparition au défilement (demande du 24 septembre : un site fluide, sans
+   impression de chargement). Le contenu est visible dès l'arrivée, avec ou sans JS. */
 
 /* ============================================================
    NAV + ANNOUNCEMENT
