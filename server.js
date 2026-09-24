@@ -14,6 +14,8 @@ const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, r
 const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 const { brandCollectionPage, brandName } = require('./lib/collection-brand');
+const { promotionVariantCard } = require('./lib/promotion-variants');
+const { adminClient, subscribeInShopify, notifyByEmail } = require('./lib/newsletter');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = require('./lib/catalog-landing');
 const { chairQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readChairCatalog, filterCatalog } = require('./lib/chair-catalog');
@@ -199,10 +201,11 @@ function renderWithOg(templateHtml, { title, description, image, url }) {
   return html;
 }
 // Une seule règle de hiérarchie et un seul BreadcrumbList, visibles avant le JS.
-let navigation, navigationRules, productCardHTML;
-const _navigationReady = Promise.all([import('./v3/navigation.mjs'), import('./v3/product-card.mjs')]).then(([m, cards]) => {
+let navigation, navigationRules, productCardHTML, priceLabelS;
+const _navigationReady = Promise.all([import('./v3/navigation.mjs'), import('./v3/product-card.mjs'), import('./v3/format.mjs')]).then(([m, cards, format]) => {
   navigation = m;
   productCardHTML = cards.productCardHTML;
+  priceLabelS = format.priceLabel;
   navigationRules = m.createNavigation(
     JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/navigation-data.json'), 'utf8')),
     JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/mega-menu-brands.json'), 'utf8')).brands,
@@ -224,17 +227,6 @@ function listingNavigation(html, req, hints = {}) {
 function canRenderInitialGrid(req) {
   return !(Number(req.query.page) > 1 || (req.query.sort && req.query.sort !== 'pop'));
 }
-// SEO/SSR · formatage prix miroir de shared.js, en conservant les centimes utiles.
-const euroS = (n) => (n || n === 0)
-  ? new Intl.NumberFormat('fr-BE', { style: 'currency', currency: 'EUR', maximumFractionDigits: Number.isInteger(Number(n)) ? 0 : 2 }).format(n)
-  : '';
-const priceLabelS = (p) => {
-  if (p.priceIsExact) return euroS(p.price);
-  const min = p.priceMin != null ? p.priceMin : p.price;
-  const max = p.priceMax != null ? p.priceMax : p.price;
-  if (min != null && max != null && max - min > 0.5) return 'À partir de ' + euroS(min);
-  return euroS(min);
-};
 // Shared HTML keeps server-rendered and browser cards in sync.
 // Selection controls are enabled only once the browser cart is bound.
 function plpCardSsr(p, source = '') {
@@ -476,6 +468,13 @@ app.get('/produit.html', async (req, res) => {
     const html = renderWithOg(fs.readFileSync(PRODUIT_TEMPLATE, 'utf8'), { title, description, image, url });
     // SEO · Product JSON-LD en SSR (remplace l'IIFE JS de produit.html) — un seul
     // schéma, visible des crawlers sans exécution JS. Prix/dispo depuis le produit.
+    // L'offre décrit la variante affichée (URL ?variant= ou photo de couverture),
+    // comme le bloc SSR : même prix, même prix barré et même disponibilité.
+    const ldVariant = selectInitialVariant(product.variants, { requestedId: new URL(req.originalUrl, ORIGIN).searchParams.get('variant'), coverUrl: product.image || product.firstImageRaw, fallback: false });
+    const ldPrice = ldVariant ? ldVariant.price : product.priceMin;
+    const ldWas = ldVariant?.compareAtPrice;
+    const ldInStock = ldVariant ? (typeof ldVariant.qty === 'number' && ldVariant.qty > 0) : product.inStock;
+    const ldAvailable = ldVariant ? ldVariant.available !== false : product.available;
     const ld = {
       "@context": "https://schema.org", "@type": "Product", "name": name,
       ...(brand ? { brand: { "@type": "Brand", "name": brand } } : {}),
@@ -487,8 +486,9 @@ app.get('/produit.html', async (req, res) => {
       "itemCondition": "https://schema.org/NewCondition",
       "offers": {
         "@type": "Offer", "priceCurrency": "EUR",
-        ...(product.priceMin != null ? { price: String(product.priceMin) } : {}),
-        "availability": "https://schema.org/" + (product.inStock ? "InStock" : (product.available ? "BackOrder" : "OutOfStock")),
+        ...(ldPrice != null ? { price: String(ldPrice) } : {}),
+        ...(ldWas != null && ldPrice != null && ldWas > ldPrice ? { priceSpecification: { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": String(ldWas), "priceCurrency": "EUR" } } : {}),
+        "availability": "https://schema.org/" + (ldInStock ? "InStock" : (ldAvailable ? "BackOrder" : "OutOfStock")),
         "url": url
       }
     };
@@ -885,8 +885,9 @@ function resolveSsrRel(p) {
 // SSR_PAGES + articles journal ; tout le reste passe à next() (static/api).
 // SEO/SSR · Index MARQUES crawlable : rend les vraies cartes marque (lien + logo + nom)
 // dans [data-brandgrid] à la place des squelettes. Données getActiveBrands + liens curés
-// de mega-menu-brands.json. Le module re-render ensuite (grid.innerHTML) → hydratation.
+// de mega-menu-brands.json. Le navigateur conserve ces cartes sans les recréer.
 async function injectBrandsIndex(html) {
+  const { brandCardHTML } = await import('./v3/brand-card.mjs');
   const active = await getActiveBrands();
   let curated = { brands: [] };
   try { curated = JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'mega-menu-brands.json'), 'utf8')); } catch (e) {}
@@ -894,19 +895,12 @@ async function injectBrandsIndex(html) {
   for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
   const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
   if (!brands.length) return html;
-  const cards = brands.map((b) => {
-    const slug = b.slug || slugifyS(b.name);
-    const safe = ogEscape(b.name);
-    const href = hrefByName[b.name.toLowerCase()] || ('/produits.html?brand=' + slug);
-    return '<a class="brandcard" href="' + href + '">'
-      + '<span class="brandcard__origin">Europe</span>'
-      + '<div><img class="brandcard__logo" src="/images/brands/' + slug + '.svg" alt="' + safe + '" loading="lazy" onerror="this.outerHTML=\'<span class=&quot;brandcard__name&quot;>' + safe + '</span>\'" /></div>'
-      + '</a>';
-  }).join('');
+  const version = (process.env.VERCEL_GIT_COMMIT_SHA || '').slice(0, 7) || 'dev';
+  const cards = brands.map(b => brandCardHTML(b, { href: hrefByName[b.name.toLowerCase()], imageUrl: url => `${url}?v=${encodeURIComponent(version)}` })).join('');
   // Bloc squelette exact (4 lignes) → on remplace juste le contenu, on garde </div>.
   const skelBlock = '<div class="brandgrid" data-brandgrid>\n'
     + Array(4).fill('      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>').join('\n');
-  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid>\n      ' + cards);
+  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid data-ssr="1">\n      ' + cards);
   html = html.replace('<span class="plp-count" data-brand-count></span>', () => '<span class="plp-count" data-brand-count>' + brands.length + ' marques</span>');
   return html;
 }
@@ -1659,8 +1653,8 @@ app.get('/api/product/:handle', async (req, res) => {
 // la fusion ne concerne que la 1re page (les offres actives sont peu nombreuses).
 async function getPromotionsProducts(first, after) {
   const base = await getCollectionProducts('promotions', first, after);
-  if (after) return base;
-  const stamp = (p) => ({ ...p, collections: [...new Set([...(p.collections || []), 'promotions'])] });
+  const stamp = (p) => ({ ...promotionVariantCard(p), collections: [...new Set([...(p.collections || []), 'promotions'])] });
+  if (after) return base && { ...base, items: base.items.map(stamp) };
   let promoItems = [];
   try {
     // Sonde bornée : à froid elle peut prendre ~10 s (un panier-test par
@@ -2133,8 +2127,9 @@ app.post('/api/contact', formLimiter, async (req, res) => {
 });
 
 // ─── API: NEWSLETTER → SHOPIFY ─────────────────────────
-// Subscribes an email to the Shopify customer list (tagged "newsletter")
-// via the storefront's classic customer form handler. No Admin API needed.
+// Abonne l'adresse dans Shopify (Admin API, consentement e-mail + tags). Sans jeton
+// Admin ou en cas d'échec, la boutique reçoit l'adresse par e-mail. Le visiteur ne
+// voit « inscrit » que si l'un des deux enregistrements a réussi.
 // Body: { email }
 app.post('/api/newsletter', formLimiter, async (req, res) => {
   try {
@@ -2144,44 +2139,28 @@ app.post('/api/newsletter', formLimiter, async (req, res) => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).json({ error: 'email_invalid' });
     }
-    if (!SHOPIFY_STORE) {
-      console.log('[newsletter] (no Shopify configured)', email);
-      return res.json({ ok: true });
+    let saved = null, reason = 'application Shopify non configurée';
+    const admin = adminClient();
+    if (admin) {
+      try { saved = await subscribeInShopify(email, admin); }
+      catch (e) { reason = e.message; console.warn('[newsletter] shopify failed:', e.message); }
     }
-    // Best-effort: post to Shopify's classic storefront customer form handler.
-    // (Reliable customer-list signup needs the Admin API; the storefront form
-    // handler is theme/online-store dependent. We never lose the lead: on any
-    // failure we still log + optionally forward to a webhook.)
-    let shopifyOk = false;
-    try {
-      const form = new URLSearchParams();
-      form.set('form_type', 'customer');
-      form.set('utf8', '✓');
-      form.set('contact[email]', email);
-      form.set('contact[tags]', 'newsletter,v3-footer');
-      const r = await fetch(`https://${SHOPIFY_STORE}/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'mikadodeco-newsletter' },
-        body: form.toString(),
-        redirect: 'manual',
-      });
-      shopifyOk = r.status >= 200 && r.status < 400; // 302 = success
-      console.log('[newsletter]', JSON.stringify({ ts: new Date().toISOString(), email, shopifyStatus: r.status, shopifyOk }));
-    } catch (e) {
-      console.warn('[newsletter] shopify post failed:', e.message);
+    if (!saved) {
+      try { if (await notifyByEmail(email, reason)) saved = 'email'; }
+      catch (e) { console.warn('[newsletter] email failed:', e.message); }
     }
-
-    // Always capture the lead, even if Shopify declined.
-    if (process.env.NEWSLETTER_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL) {
+    if (process.env.NEWSLETTER_WEBHOOK_URL) {
       try {
-        await fetch(process.env.NEWSLETTER_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL, {
+        const r = await fetch(process.env.NEWSLETTER_WEBHOOK_URL, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'newsletter', email, shopifyOk, ts: new Date().toISOString() }),
+          body: JSON.stringify({ type: 'newsletter', email, saved, ts: new Date().toISOString() }),
         });
+        if (r.ok) saved ||= 'webhook';
       } catch (e) { console.warn('[newsletter] webhook failed:', e.message); }
     }
-
-    res.json({ ok: true, shopify: shopifyOk });
+    console.log('[newsletter]', JSON.stringify({ ts: new Date().toISOString(), saved }));
+    if (!saved) return res.status(502).json({ error: 'delivery_failed' });
+    res.json({ ok: true, saved });
   } catch (err) {
     console.error('[newsletter] error:', err.message);
     res.status(500).json({ error: 'server_error' });

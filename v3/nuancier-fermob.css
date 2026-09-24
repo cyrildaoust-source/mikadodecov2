@@ -295,3 +295,6 @@
   .nf-amb:hover img,
   .nf-harm-sq:hover { transform: none; }   /* name still reveals (z-index + opacity), no motion */
 }
+
+/* Le titre de page respire sous l'en-tête fixe. */
+main.page > h1:first-child { margin-top: clamp(20px, 3vw, 32px); }

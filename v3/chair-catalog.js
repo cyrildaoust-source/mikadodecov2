@@ -44,6 +44,7 @@ function paint(data,{keepOpen=false}={}) {
   for(const el of controls.querySelectorAll('details'))el.open=open.includes(el.dataset.filterGroup);
   const form=controls.querySelector('form');form.classList.toggle('is-open',Boolean(mobileOpen));
   form.querySelector('[data-filters-toggle]').setAttribute('aria-expanded',String(Boolean(mobileOpen)));
+  document.documentElement.classList.toggle('filters-locked',Boolean(mobileOpen)&&matchMedia('(max-width: 760px)').matches);
   grid.innerHTML=data.items.length?data.items.map(p=>productCard(p,chairURL(data.state))).join(''):emptyChairs();
   pagination.innerHTML=chairPagination(data);pagination.hidden=data.totalPages<=1;
   document.documentElement.toggleAttribute('data-chair-continuation',data.state.page>1);
@@ -52,7 +53,7 @@ function paint(data,{keepOpen=false}={}) {
     target?.focus({preventScroll:true});
   }
   if(promos)applyPromos(promos);
-  updateBreadcrumb();syncOffset();fitPopovers();
+  updateBreadcrumb();syncOffset();fitPopovers();if(typeof updateFab==='function')updateFab();
 }
 function formURL() {
   const q=new URLSearchParams();
@@ -100,11 +101,29 @@ controls.addEventListener('input',event=>{
   const q=event.target.value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   for(const label of event.target.closest('.catalog-filters__popover').querySelectorAll('.catalog-filters__option'))label.hidden=!label.textContent.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(q);
 });
+function setFiltersOpen(open) {
+  const form=controls.querySelector('form');if(!form)return;
+  form.classList.toggle('is-open',open);form.querySelector('[data-filters-toggle]').setAttribute('aria-expanded',String(open));
+  // Le panneau mobile couvre l'écran : la page derrière ne défile plus.
+  document.documentElement.classList.toggle('filters-locked',open&&matchMedia('(max-width: 760px)').matches);
+  if(open&&matchMedia('(max-width: 760px)').matches)form.querySelector('[data-filters-close]')?.focus({preventScroll:true});
+}
 controls.addEventListener('click',event=>{
-  if(event.target.closest('[data-filters-toggle]')) {
-    const form=controls.querySelector('form'),open=form.classList.toggle('is-open');form.querySelector('[data-filters-toggle]').setAttribute('aria-expanded',String(open));
-  }
+  if(event.target.closest('[data-filters-toggle]'))setFiltersOpen(!controls.querySelector('form').classList.contains('is-open'));
+  else if(event.target.closest('[data-filters-close]')){setFiltersOpen(false);controls.querySelector('[data-filters-toggle]')?.focus({preventScroll:true});}
 });
+// Rappel flottant « Filtrer et trier » quand la barre est remontée hors de l'écran.
+const fab=document.createElement('button');
+fab.type='button';fab.className='catalog-filters-fab';fab.hidden=true;
+document.body.appendChild(fab);
+fab.addEventListener('click',()=>setFiltersOpen(true));
+function updateFab() {
+  const bar=controls.querySelector('[data-filters-toggle]'),active=controls.querySelectorAll('.catalog-filters__chip').length;
+  fab.textContent=`Filtrer et trier${active?` (${active})`:''}`;
+  const past=bar&&bar.getBoundingClientRect().bottom<0,gridLeft=grid.getBoundingClientRect().bottom>innerHeight*.6;
+  fab.hidden=!(matchMedia('(max-width: 760px)').matches&&past&&gridLeft&&!controls.querySelector('form')?.classList.contains('is-open'));
+}
+addEventListener('scroll',updateFab,{passive:true});
 document.addEventListener('click',event=>{
   const link=event.target.closest('[data-chair-link]');
   if(link&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey&&event.button===0){event.preventDefault();load(link.href,{scroll:true});return;}
@@ -124,7 +143,7 @@ document.addEventListener('keydown',event=>{
   if(event.key!=='Escape')return;
   const d=controls.querySelector('details[open]');
   if(d){d.open=false;d.querySelector('summary').focus();}
-  else {const f=controls.querySelector('form');f.classList.remove('is-open');f.querySelector('[data-filters-toggle]').setAttribute('aria-expanded','false');}
+  else setFiltersOpen(false);
 });
 addEventListener('popstate',()=>load(location.href,{historyMode:'none',scroll:true}));
 addEventListener('resize',()=>{syncOffset();fitPopovers();},{passive:true});

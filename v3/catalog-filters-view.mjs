@@ -36,8 +36,10 @@ export function filterControls(data) {
   const showSeat=facets.seat.known===facets.seat.total && facets.seat.known>1 || state.seat_min!==null || state.seat_max!==null;
   return `<div class="catalog-filters__heading"><h2 class="serif catalogue-head">Trouvez votre chaise</h2><span class="plp-count" data-chair-count>${total} modèle${total>1?'s':''}</span></div>
     <form class="catalog-filters" action="/collections/chaises#grille" method="get" aria-label="Filtrer les chaises">
-      <button type="button" class="btn btn--outline catalog-filters__mobile-toggle" data-filters-toggle aria-expanded="false" aria-controls="chair-filter-options">Filtres${active?` (${active})`:''}</button>
+      <button type="button" class="btn btn--outline catalog-filters__mobile-toggle" data-filters-toggle aria-expanded="false" aria-controls="chair-filter-options">Filtrer et trier${active?` (${active})`:''}</button>
       <div class="catalog-filters__groups" id="chair-filter-options">
+        <div class="catalog-filters__sheet-head"><span class="serif">Filtrer et trier</span><button type="button" class="catalog-filters__close" data-filters-close aria-label="Fermer les filtres">&times;</button></div>
+        <label class="catalog-filters__sort"><span class="sr-only">Trier les chaises</span><select class="fselect" name="sort">${[['pop','Les plus populaires'],['asc','Prix croissant'],['desc','Prix décroissant'],['az','Nom : A → Z']].map(([v,l])=>`<option value="${v}"${state.sort===v?' selected':''}>${l}</option>`).join('')}</select></label>
         ${listFilter('brand',data)}
         <details class="catalog-filters__group" data-filter-group="price"><summary>Prix${state.min!==null||state.max!==null?'<span class="catalog-filters__selected">1</span>':''}<span class="catalog-filters__chevron" aria-hidden="true"></span></summary><div class="catalog-filters__popover catalog-filters__price">
           <p>Votre budget</p><div class="catalog-filters__range"><label>Minimum (€)<input type="number" inputmode="decimal" min="0" step="0.01" name="min" value="${state.min??''}" placeholder="${Math.floor(facets.price.min)}"></label><span aria-hidden="true">—</span><label>Maximum (€)<input type="number" inputmode="decimal" min="0" step="0.01" name="max" value="${state.max??''}" placeholder="${Math.ceil(facets.price.max)}"></label></div><button type="submit" class="btn btn--outline" data-filter-apply>Appliquer</button></div></details>
@@ -46,9 +48,8 @@ export function filterControls(data) {
         <label class="catalog-filters__stock"><input type="checkbox" name="stock" value="1"${state.stock?' checked':''}>En stock <span class="catalog-filters__count">${facets.stock}</span></label>
         ${state.tag?`<input type="hidden" name="tag" value="${esc(state.tag)}">`:''}
         ${state.q?`<input type="hidden" name="q" value="${esc(state.q)}">`:''}
-        <button type="submit" class="btn btn--outline catalog-filters__submit">Afficher les résultats</button>
+        <button type="submit" class="btn btn--outline catalog-filters__submit">Afficher les résultats<span class="catalog-filters__submit-count"> (${total})</span></button>
       </div>
-      <label class="catalog-filters__sort"><span class="sr-only">Trier les chaises</span><select class="fselect" name="sort">${[['pop','Les plus populaires'],['asc','Prix croissant'],['desc','Prix décroissant'],['az','Nom : A → Z']].map(([v,l])=>`<option value="${v}"${state.sort===v?' selected':''}>${l}</option>`).join('')}</select></label>
     </form>
     <div class="catalog-filters__active"${active?'':' hidden'}>${activeChips(data)}${active?'<a class="catalog-filters__clear" href="/collections/chaises#grille" data-chair-link>Tout effacer</a>':''}</div>`;
 }

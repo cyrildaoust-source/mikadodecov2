@@ -105,7 +105,30 @@ Avant de publier un lot : comparer le type fonctionnel du produit aux collection
 
 L’accès en lecture au dépôt importer permet de comparer ses évolutions lors de chaque intervention sur le site. Ce document ne configure pas une surveillance automatique entre les dépôts. Une nouvelle recette ou un nouveau format source doit être signalé dans la livraison de l’importer avec son effet attendu sur les données Shopify.
 
-## Vérifications
+## Variantes dans Promotions
+
+Depuis le 22 septembre, `lib/promotion-variants.js` prépare une finition remisée
+pour chaque produit de `/collections/promotions`, dès le serveur et dans chaque
+lot API, y compris après filtrage par marque. Le choix privilégie les variantes
+disponibles, puis le stock réel, puis le prix remisé le plus bas. À prix égal,
+la finition éditoriale existante est conservée, puis l'identifiant départage.
+Les produits à offre conditionnelle sans prix comparé conservent leur affichage.
+
+La carte réutilise la présentation des variantes du catalogue : prix et prix
+comparé de la même finition, photo, libellé et stock. `matchedVariantId` transmet
+la finition à la fiche, où elle est sélectionnée avant et après JavaScript.
+Le retour conserve Promotions, sa marque, son tri et sa page. La vue au survol
+reste une photo de galerie du modèle, en excluant les autres finitions.
+Le prix de la carte sert aussi au tri. La fiche partage le formatage des prix
+avec la carte dès le serveur, prix barré compris.
+
+Cette règle de présentation ne modifie ni les prix Shopify ni l'appartenance
+des produits à Promotions : leur gestion reste dans Shopify/ChatGPT. Les tests
+`promotion-variants.test.cjs` et `promotion-variants-api.test.cjs` couvrent les
+variantes, les liens, les lots suivants et le parcours jusqu'au rendu serveur
+de la fiche.
+
+## Vérifications des familles
 
 Commande : `node --test tests/family-pages.test.cjs tests/table-collections.test.cjs tests/product-specs.test.mjs`.
 

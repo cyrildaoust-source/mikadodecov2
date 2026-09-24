@@ -60,8 +60,10 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
     <div class="pcard">
       <a class="pcard__media" href="${href}" aria-label="${escapeHtml(p.name)}">
         <div class="pcard__tags">${tag}</div>
-        <span class="pcard__promo" data-promo-slot hidden></span>
-        ${p.compareAt && p.price && p.compareAt - (p.priceIsExact ? p.price : p.priceMin ?? p.price) > 0.5 ? `<span class="pcard__sale">−${Math.round((p.compareAt - (p.priceIsExact ? p.price : p.priceMin ?? p.price)) / p.compareAt * 100)}%</span>` : ""}
+        <div class="pcard__offers">
+          <span class="pcard__promo" data-promo-slot hidden></span>
+          ${p.compareAt && p.price != null && p.compareAt > (p.priceIsExact ? p.price : p.priceMin ?? p.price) ? `<span class="pcard__sale">−${Math.round((p.compareAt - (p.priceIsExact ? p.price : p.priceMin ?? p.price)) / p.compareAt * 100)}%</span>` : ""}
+        </div>
         <img class="main" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name + (p.finishLabel ? ' · ' + p.finishLabel : ''))}" loading="lazy" decoding="async" />
         ${alt}
       </a>
@@ -86,4 +88,3 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
       </button>` : ''}
     </div>`;
 }
-

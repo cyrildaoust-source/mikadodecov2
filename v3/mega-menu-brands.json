@@ -1,5 +1,5 @@
 {
-  "_note": "V2.3: Marques mega menu fully hardcoded (no Shopify fetch). 22 brands total, sorted alphabetically (& sorts before letters). Featured `collections` arrays preserved on existing brands for potential revival (V2.2 retired their rendering). Cyril edits this file to add/remove brands.",
+  "_note": "V2.3: Marques mega menu fully hardcoded (no Shopify fetch). 23 brands total, sorted alphabetically (& sorts before letters). Featured `collections` arrays preserved on existing brands for potential revival (V2.2 retired their rendering). Maintained by the site's coding agent on Cyril's behalf.",
   "brands": [
     {
       "name": "&Tradition",
@@ -226,6 +226,11 @@
     {
       "name": "Marimekko",
       "href": "/collections/marimekko",
+      "collections": []
+    },
+    {
+      "name": "Moustache",
+      "href": "/collections/moustache",
       "collections": []
     },
     {

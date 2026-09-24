@@ -77,47 +77,36 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, slugify, buildShaReady, versionedImg, breadcrumbHTML, escapeHtml } from "/shared.js";
+    import { initShell, buildShaReady, versionedImg, breadcrumbHTML } from "/shared.js";
+    import { brandCardHTML } from "/brand-card.mjs";
     initShell({ active: "Marques", transparentNav: true });
     document.querySelector("[data-breadcrumb]").innerHTML =
       breadcrumbHTML([{ label: "Accueil", href: "/" }, { label: "Marques" }]);
 
-    const ORIGIN = { fermob:"France", hay:"Danemark", vitra:"Suisse", muuto:"Danemark", "tradition":"Danemark", "ferm-living":"Danemark", fatboy:"Pays-Bas", hkliving:"Pays-Bas", "pols-potten":"Pays-Bas", alessi:"Italie", artek:"Finlande", relaxound:"Allemagne", gubi:"Danemark", moustache:"France" };
     const grid = document.querySelector("[data-brandgrid]");
     const countEl = document.querySelector("[data-brand-count]");
 
-    // Wait for buildShaReady so the brand logo URLs carry ?v=<sha>
-    // on the first paint — same cache-busting trick as the home
-    // marquee in main.js.
+    // Les cartes SSR sont déjà complètes : ne pas les remplacer ni recharger leurs logos.
+    // Le chargement client sert uniquement au repli sans rendu serveur.
     // Liste DYNAMIQUE depuis /api/brands (vendor de TOUS les produits publiés —
     // walk paginé côté serveur, fini le plafond 250). Une marque apparaît dès
     // qu'elle a des produits publiés online, disparaît sinon (IHR & co, non
     // publiés, n'y sont pas). Enrichie des liens curés de mega-menu-brands.json
     // (href). buildShaReady reste pour le cache-busting logos.
-    Promise.all([
-      buildShaReady(),
-      fetch("/api/brands", { cache: "no-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status)),
-      fetch("/mega-menu-brands.json", { cache: "no-cache" }).then((r) => r.ok ? r.json() : { brands: [] }).catch(() => ({ brands: [] })),
-    ]).then(([, active, curated]) => {
+    async function loadBrands() {
+      if (grid.dataset.ssr === "1") return;
+      const [, active, curated] = await Promise.all([
+        buildShaReady(),
+        fetch("/api/brands", { cache: "no-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status)),
+        fetch("/mega-menu-brands.json", { cache: "no-cache" }).then((r) => r.ok ? r.json() : { brands: [] }).catch(() => ({ brands: [] })),
+      ]);
       const hrefByName = {};
       for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
       const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
       countEl.textContent = `${brands.length} marques`;
-      grid.innerHTML = brands.map((b) => {
-        const slug = b.slug || slugify(b.name);
-        const origin = ORIGIN[slug] || "Europe";
-        const safeName = escapeHtml(b.name);
-        const logoSrc  = versionedImg(`/images/brands/${slug}.svg`);
-        const href = hrefByName[b.name.toLowerCase()] || `/produits.html?brand=${slug}`;
-        return `<a class="brandcard" href="${href}">
-          <span class="brandcard__origin">${origin}</span>
-          <div>
-            <img class="brandcard__logo" src="${logoSrc}" alt="${safeName}" loading="lazy"
-              onerror="const name=document.createElement('span');name.className='brandcard__name';name.textContent=this.alt;this.replaceWith(name)" />
-          </div>
-        </a>`;
-      }).join("");
-    }).catch((e) => { grid.innerHTML = `<p class="plp-empty">Les marques se chargent bientôt. <a href="/produits.html">Retour au catalogue</a></p>`; console.warn(e); });
+      grid.innerHTML = brands.map(b => brandCardHTML(b, { href: hrefByName[b.name.toLowerCase()], imageUrl: versionedImg })).join("");
+    }
+    loadBrands().catch((e) => { grid.innerHTML = `<p class="plp-empty">Les marques se chargent bientôt. <a href="/produits.html">Retour au catalogue</a></p>`; console.warn(e); });
   </script>
 </body>
 </html>

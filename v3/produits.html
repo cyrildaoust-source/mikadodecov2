@@ -70,7 +70,7 @@
     .cat-trigger:hover, .cat-trigger[aria-expanded="true"] { border-color: var(--ink); }
     .cat-trigger.is-active { border-color: var(--accent); }
     .cat-trigger__count { font-weight: 600; color: var(--accent-ink); }
-    .cat-trigger__caret { font-size: .8em; transition: transform .2s var(--ease); }
+    .cat-trigger__caret { font-size: 0; width: 12px; height: 12px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231a1916' stroke-width='1.6'><path d='M6 9l6 6 6-6'/></svg>") no-repeat center / 12px; transition: transform .2s var(--ease); }
     .cat-trigger[aria-expanded="true"] .cat-trigger__caret { transform: rotate(180deg); }
 
     /* Toggle colonnes (1 / 2) — mobile uniquement, persistant */

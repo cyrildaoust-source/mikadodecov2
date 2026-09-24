@@ -4,7 +4,7 @@
     {
       "src": "api/index.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["data/**", "templates/**", "v3/*.html", "v3/chrome-template.js", "v3/product-specs.mjs", "v3/product-card.mjs", "v3/product-finishes.mjs", "v3/format.mjs", "v3/navigation.mjs", "v3/catalog-pagination.mjs", "v3/catalog-filters-view.mjs", "v3/search-view.mjs", "v3/navigation-data.json", "v3/mega-menu-brands.json", "v3/designers-data.json", "v3/journal/**"] }
+      "config": { "includeFiles": ["data/**", "templates/**", "v3/*.html", "v3/chrome-template.js", "v3/product-specs.mjs", "v3/product-card.mjs", "v3/brand-card.mjs", "v3/product-finishes.mjs", "v3/format.mjs", "v3/navigation.mjs", "v3/catalog-pagination.mjs", "v3/catalog-filters-view.mjs", "v3/search-view.mjs", "v3/navigation-data.json", "v3/mega-menu-brands.json", "v3/designers-data.json", "v3/journal/**"] }
     },
     { "src": "v3/**", "use": "@vercel/static" }
   ],
@@ -17,7 +17,7 @@
         "Referrer-Policy": "strict-origin-when-cross-origin",
         "Permissions-Policy": "camera=(), microphone=(), geolocation=(), browsing-topics=()",
         "Strict-Transport-Security": "max-age=31536000",
-        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net https://unpkg.com; img-src 'self' data: https://cdn.shopify.com https://use.typekit.net https://p.typekit.net https://unpkg.com https://*.basemaps.cartocdn.com; font-src 'self' data: https://use.typekit.net; connect-src 'self' https://use.typekit.net https://p.typekit.net; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net https://unpkg.com; img-src 'self' data: https://cdn.shopify.com https://www.fermob.com https://use.typekit.net https://p.typekit.net https://unpkg.com https://tile.openstreetmap.org; font-src 'self' data: https://use.typekit.net; connect-src 'self' https://use.typekit.net https://p.typekit.net; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
       },
       "continue": true
     },

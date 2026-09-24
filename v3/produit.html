@@ -65,6 +65,7 @@
   <script type="module">
     import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, loadNavigation, paintBreadcrumb } from "/shared.js";
     import { productTrail, sourceSelection, productBrandDestination } from "/navigation.mjs";
+    import { stockLabel } from "/format.mjs";
     import { buildProductSpecGroups, renderDimensionImages } from "/product-specs.mjs";
     import "/product-variant.js";
     const { selectInitialVariant, latestVariantSelection } = globalThis.MikadoProductVariant;
@@ -174,12 +175,12 @@
       };
       // Badge dot+texte (grille tiroir, aperçu, bloc coloris buy-box) — texte ambre
       // partout ; SEUL le point change : vert --stock (en stock) / ambre --order.
-      // En stock → affiche le NOMBRE réel (v.qty = quantityAvailable) : version pleine
+      // En stock → nombre exact jusqu'à 10, puis « 10+ » : version pleine
       // « Disponible · X en stock » (aperçu + buy-box) ou compacte « Dispo · X » (vignette).
       // « Sur commande »/« Indisponible » : jamais de nombre.
       const availInline = (v, compact) => {
         const s = variantState(v);
-        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>${compact ? `Dispo · ${v.qty}` : `Disponible · ${v.qty} en stock`}`;
+        if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>${compact ? `Dispo · ${stockLabel(v.qty)}` : `Disponible · ${stockLabel(v.qty)} en stock`}`;
         if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Indisponible`;
         return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>Sur commande`;
       };
@@ -303,9 +304,9 @@
       // local "how many to add" (cap 1–10) — séparé de la quantité stockée au panier.
       // Choisie via le tiroir Quantité (.qtyd) ; reflétée dans [data-qty-label].
       let pickQty = 1;
-      // Plafond quantite = stock reel UNIQUEMENT pour les produits en SOLDE (tag promo/promotion/sale) ; produits normaux inchanges.
+      // Choix de 1 à 10 ; réduire au stock réel pour les produits en solde.
       const isPromo = (p.tags || []).some(t => { const x = String(t).toLowerCase(); return x === "promo" || x === "promotion" || x === "sale"; });
-      const qtyCap = () => { const s = (typeof current.qty === "number") ? current.qty : 0; return (isPromo && s >= 1) ? s : 10; };
+      const qtyCap = () => { const s = (typeof current.qty === "number") ? current.qty : 0; return (isPromo && s >= 1) ? Math.min(s, 10) : 10; };
       const setPick = (n) => {
         pickQty = Math.max(1, Math.min(qtyCap(), parseInt(n) || 1));   // cap au stock si solde, sinon 10
         if (qtyLabel) qtyLabel.textContent = pickQty;
@@ -318,7 +319,7 @@
           : "";
         const stock = (typeof current.qty === "number") ? current.qty : 0;
         const atMax = isPromo && stock >= 1 && n >= stock;
-        if (cta) { cta.disabled = atMax; cta.textContent = atMax ? `Maximum en stock (${stock})` : "Ajouter au panier"; }
+        if (cta) { cta.disabled = atMax; cta.textContent = atMax ? `Maximum en stock (${stockLabel(stock)})` : "Ajouter au panier"; }
       };
       updateStatus();
       document.addEventListener("cart:change", updateStatus);
@@ -457,7 +458,7 @@
         main.srcset = srcsetFor(src);
         syncActiveThumb(src);
         scrollRailTo(src);
-        if (current.price != null && !Number.isNaN(current.price)) { if (current.compareAtPrice != null && current.compareAtPrice - current.price > 0.5) priceEl.innerHTML = `<span class="price-was">${euro(current.compareAtPrice)}</span><span class="price-now price-now--sale">${euro(current.price)}</span>`; else priceEl.textContent = euro(current.price); }
+        if (current.price != null && !Number.isNaN(current.price)) priceEl.innerHTML = priceLabel({ price: current.price, priceIsExact: true, compareAt: current.compareAtPrice });
         updateStatus();
         probePromo(current.id);
         const cImg = host.querySelector("[data-coloris-img]");
@@ -807,7 +808,7 @@
         let add = pickQty;
         if (isPromo && stock >= 1) {                        // article en SOLDE a stock limite : ne jamais depasser le stock (panier compris)
           const room = stock - (cartQty(current.id) || 0);
-          if (room <= 0) { status.innerHTML = `Vous avez déjà le maximum en stock (${stock}) dans votre panier. · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`; return; }
+          if (room <= 0) { status.innerHTML = `Vous avez déjà le maximum en stock (${stockLabel(stock)}) dans votre panier. · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`; return; }
           add = Math.min(pickQty, room);
         }
         addToCart({
@@ -818,8 +819,31 @@
           price: current.price || 0,
           image: current.image || p.image,
         }, add);
-        if (isPromo && stock >= 1 && add < pickQty) status.innerHTML = `Ajouté ${add} — stock limité (${stock} en stock). · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`;
+        if (isPromo && stock >= 1 && add < pickQty) status.innerHTML = `Ajouté ${add} — stock limité (${stockLabel(stock)} en stock). · <a href="/selection.html">Mon panier <span aria-hidden="true">›</span></a>`;
       });
+
+      // Mobile : barre d'achat fixe quand le bouton principal est sorti de l'écran.
+      // Elle reflète le prix et l'état du bouton, et déclenche le même ajout.
+      const buyBlock = host.querySelector(".pdp__buy");
+      if (buyBlock && "IntersectionObserver" in window) {
+        const bar = document.createElement("div");
+        bar.className = "pdp-stickybuy";
+        bar.hidden = true;
+        bar.innerHTML = `<div class="pdp-stickybuy__meta"><span class="pdp-stickybuy__name">${escapeHtml(p.name)}</span><span class="pdp-stickybuy__price" data-sticky-price></span></div><button class="btn btn--blue pdp-stickybuy__cta" type="button" data-sticky-add></button>`;
+        document.body.appendChild(bar);
+        const barPrice = bar.querySelector("[data-sticky-price]");
+        const barCta = bar.querySelector("[data-sticky-add]");
+        const sync = () => { barPrice.innerHTML = priceEl.innerHTML; barCta.textContent = cta.textContent; barCta.disabled = cta.disabled; };
+        sync();
+        new MutationObserver(sync).observe(priceEl, { childList: true, subtree: true, characterData: true });
+        new MutationObserver(sync).observe(cta, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["disabled"] });
+        barCta.addEventListener("click", () => cta.click());
+        const mobile = window.matchMedia("(max-width: 760px)");
+        let passed = false;
+        const update = () => { bar.hidden = !(mobile.matches && passed); document.body.classList.toggle("has-stickybuy", !bar.hidden); };
+        new IntersectionObserver(([entry]) => { passed = !entry.isIntersecting && entry.boundingClientRect.top < 0; update(); }).observe(buyBlock);
+        mobile.addEventListener("change", update);
+      }
 
       // Recommandations produit — pilotées par les métafields Search & Discovery
       // de Shopify (complementary_products / related_products), lues dynamiquement
