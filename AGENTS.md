@@ -4,7 +4,8 @@
 - Réutiliser les cartes et boutons communs. Les pages règlent leur placement et leur contenu, sans redessiner leurs éléments internes.
 - Pour les pages familles et le catalogue, lire `docs/FAMILY_PAGES.md` avant de modifier la curation ou le classement.
 - Après une modification des données, routes ou règles de pagination, exécuter `node --test tests/family-pages.test.cjs tests/table-collections.test.cjs tests/product-specs.test.mjs` et corriger les erreurs pertinentes.
-- Vérifier les modifications visuelles dans une preview réelle, prioritairement sur ordinateur, puis fournir son lien. Ne pas confondre réussite des tests et validation visuelle.
+- Vérifier les modifications visuelles dans une preview réelle, sur ordinateur **et sur mobile (390 px puis 360 px)**, puis fournir son lien. Ne pas confondre réussite des tests et validation visuelle.
+- Penser le mobile dès la conception de chaque changement (demande du propriétaire du 24 septembre) : ordre des informations, zones tactiles de 44 px, aucun débordement horizontal mesuré avec une fenêtre de largeur fixe. Voir la section Mobile de `DESIGN.md`.
 
 ## Promotions Shopify
 
