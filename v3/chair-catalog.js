@@ -73,11 +73,14 @@ function formURL() {
   const q=new URLSearchParams();
   for(const [key,value] of new FormData(controls.querySelector('form')))if(value!==''&&!(key==='sort'&&value==='pop'))q.append(key,value);
   for(const key of ['category','brand','color','material','usage','feature'])if(q.has(key)){const values=q.getAll(key);q.set(key,values.join(','));}
-  return scope.basePath+(q.size?'?'+q:'');
+  const fixed=new URLSearchParams(scope.fixed||{});for(const [k,v] of q)if(!fixed.has(k))fixed.append(k,v);
+  return scope.basePath+(fixed.size?'?'+fixed:'');
 }
 async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
   const next=new URL(url,location.origin);
   if(next.pathname!==scope.basePath||next.origin!==location.origin)return;
+  // Même chemin mais autre page (ex. catalogue et page créateur) : navigation normale.
+  if(Object.entries(scope.fixed||{}).some(([k,v])=>next.searchParams.get(k)!==v)){location.assign(next.href);return;}
   // Un chargement initial de page 2 ne contient pas de photo de bandeau. Le retour
   // à la découverte passe alors par le rendu serveur complet de la page 1.
   if(!(Number(next.searchParams.get('page'))>1)&&!document.querySelector('.subhero,.fam-hero')) {

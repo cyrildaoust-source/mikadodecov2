@@ -30,6 +30,24 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
         href="https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3" />
   <link rel="stylesheet" href="/styles.css" />
+  <script>
+    /* État du panier choisi avant le premier affichage (vide ou rempli) et hauteur
+       des articles réservée : plus de saut quand le module dessine le panier. */
+    try {
+      var _cart = JSON.parse(localStorage.getItem("mikado_v3_cart")) || [];
+      var _rows = Array.isArray(_cart) ? _cart.filter(function (i) { return i && i.variantId; }).length : 0;
+      if (_rows) {
+        document.documentElement.classList.add("cart-has-items");
+        document.documentElement.style.setProperty("--cart-rows", _rows);
+      }
+    } catch (e) {}
+  </script>
+  <style>
+    html:not(.cart-has-items) [data-populated] { display: none; }
+    html.cart-has-items [data-empty] { display: none; }
+    html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * var(--cart-row-h, 128px)); }
+    @media (max-width: 760px) { html.cart-has-items [data-items]:empty { --cart-row-h: 150px; } }
+  </style>
 </head>
 <body>
   <div id="site-header"></div>
@@ -37,7 +55,7 @@
   <main id="contenu" class="page wrap">
     <div class="pagehead"><h1 class="serif">Ma sélection</h1></div>
 
-    <div data-populated style="display:none">
+    <div data-populated>
       <div class="sel">
         <div data-items></div>
         <aside class="sel-summary">
@@ -60,7 +78,7 @@
       </div>
     </div>
 
-    <div class="sel-empty" data-empty style="display:none">
+    <div class="sel-empty" data-empty>
       <h2 class="serif">Ma sélection est vide</h2>
       <p style="color:var(--muted);margin-bottom:24px">Parcourez le catalogue et ajoutez les pièces qui vous parlent.</p>
       <a href="/produits.html" class="btn btn--outline">Voir le catalogue</a>

@@ -16,7 +16,13 @@ export function chairParams(state, page = state.page) {
 }
 // Contexte d'une collection filtrable ; Chaises reste le contexte par défaut du pilote.
 export const CHAIRS_SCOPE = {handle:'chaises',label:'Chaises',basePath:'/collections/chaises',heading:'Trouvez votre chaise',formLabel:'Filtrer les chaises',sortLabel:'Trier les chaises',empty:'Aucune chaise ne correspond à cette sélection.',all:'Voir toutes les chaises'};
-export const scopeURL = (scope, state, page = state.page) => {const q=chairParams(state,page);return (scope||CHAIRS_SCOPE).basePath+(q.size?'?'+q:'');};
+// Paramètres fixes d'une page (ex. ?designer=<slug>) placés avant les filtres.
+export const scopeURL = (scope, state, page = state.page) => {
+  scope ||= CHAIRS_SCOPE;
+  const q=new URLSearchParams(scope.fixed||{});
+  for(const [k,v] of chairParams(state,page))q.append(k,v);
+  return scope.basePath+(q.size?'?'+q:'');
+};
 export const chairURL = (state, page = state.page) => scopeURL(CHAIRS_SCOPE,state,page);
 export function filterCount(state) {
   return ['category','brand','color','material','usage','feature'].reduce((n,k)=>n+(state[k]?.length||0),0)+Number(state.min!==null||state.max!==null)+Number(state.stock)+Number(state.seat_min!==null||state.seat_max!==null)+Number(Boolean(state.tag))+Number(Boolean(state.q));
@@ -39,7 +45,7 @@ export function filterControls(data) {
   // donnerait l'impression de comparer équitablement toute la collection.
   const showSeat=facets.seat.known===facets.seat.total && facets.seat.known>1 || state.seat_min!==null || state.seat_max!==null;
   return `<div class="catalog-filters__heading"><h2 class="serif catalogue-head">${esc(scope.heading)}</h2><span class="plp-count" data-chair-count>${total} modèle${total>1?'s':''}</span></div>
-    <form class="catalog-filters" action="${esc(scope.basePath)}#grille" method="get" aria-label="${esc(scope.formLabel)}">
+    <form class="catalog-filters" action="${esc(scope.basePath)}#grille" method="get" aria-label="${esc(scope.formLabel)}">${Object.entries(scope.fixed||{}).map(([k,v])=>`<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('')}
       <button type="button" class="btn btn--outline catalog-filters__mobile-toggle" data-filters-toggle aria-expanded="false" aria-controls="chair-filter-options">Filtrer et trier${active?` (${active})`:''}</button>
       <div class="catalog-filters__groups" id="chair-filter-options">
         <div class="catalog-filters__sheet-head"><span class="serif">Filtrer et trier</span><button type="button" class="catalog-filters__close" data-filters-close aria-label="Fermer les filtres">&times;</button></div>
@@ -55,7 +61,7 @@ export function filterControls(data) {
         <button type="submit" class="btn btn--outline catalog-filters__submit">Afficher les résultats<span class="catalog-filters__submit-count"> (${total})</span></button>
       </div>
     </form>
-    <div class="catalog-filters__active"${active?'':' hidden'}>${activeChips(data)}${active?`<a class="catalog-filters__clear" href="${esc(scope.basePath)}#grille" data-chair-link>Tout effacer</a>`:''}</div>`;
+    <div class="catalog-filters__active"${active?'':' hidden'}>${activeChips(data)}${active?`<a class="catalog-filters__clear" href="${esc(scopeURL(scope,{...EMPTY_STATE}))}#grille" data-chair-link>Tout effacer</a>`:''}</div>`;
 }
 function activeChips(data) {
   const {state,facets}=data, chips=[], scope=data.scope||CHAIRS_SCOPE;
@@ -76,5 +82,6 @@ export function chairPagination(data) {
   const link=(page,label,extra='')=>`<a class="plp-page ${extra}" href="${esc(scopeURL(scope,state,page))}#grille" data-chair-link>${label}</a>`;
   return `${state.page>1?link(state.page-1,'‹ Précédent','plp-page--nav'):'<span class="plp-page" aria-disabled="true">‹ Précédent</span>'}<span class="plp-pagination__numbers">${items.map(n=>n==='…'?'<span class="plp-page__ellipsis">…</span>':n===state.page?`<span class="plp-page is-current" aria-current="page">${n}</span>`:link(n,n)).join('')}</span><span class="plp-pagination__mobile">Page ${state.page} / ${totalPages}</span>${state.page<totalPages?link(state.page+1,'Suivant ›','plp-page--nav'):'<span class="plp-page" aria-disabled="true">Suivant ›</span>'}`;
 }
-export const emptyState = (scope = CHAIRS_SCOPE) => `<div class="catalog-filters__empty"><p class="serif">${esc(scope.empty)}</p><p>Retirez un filtre pour découvrir davantage de modèles.</p><a class="btn btn--outline" href="${esc(scope.basePath)}#grille" data-chair-link>${esc(scope.all)}</a></div>`;
+const EMPTY_STATE = {sort:'pop',page:1,tag:'',stock:false,q:'',category:[],brand:[],color:[],material:[],usage:[],feature:[],min:null,max:null,seat_min:null,seat_max:null};
+export const emptyState = (scope = CHAIRS_SCOPE) => `<div class="catalog-filters__empty"><p class="serif">${esc(scope.empty)}</p><p>Retirez un filtre pour découvrir davantage de modèles.</p><a class="btn btn--outline" href="${esc(scopeURL(scope,EMPTY_STATE))}#grille" data-chair-link>${esc(scope.all)}</a></div>`;
 export const emptyChairs = () => emptyState(CHAIRS_SCOPE);

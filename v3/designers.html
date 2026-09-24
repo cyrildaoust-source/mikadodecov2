@@ -157,7 +157,9 @@
       if (el) highlight(el);
     }
 
-    fetch("/designers-data.json", { cache: "no-cache" })
+    // Annuaire complet envoyé par le serveur : ne pas le relire ni le redessiner.
+    if (azIndex.children.length && featuredGrid.querySelector(".designer-card:not(.designer-card--skel)")) requestAnimationFrame(gotoHash);
+    else fetch("/designers-data.json", { cache: "no-cache" })
       .then((r) => r.ok ? r.json() : Promise.reject("designers-data " + r.status))
       .then((data) => {
         // Visible directory = every designer that isn't hidden. Hidden ones
