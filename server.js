@@ -16,6 +16,7 @@ const { collectionHero: getCollectionHero, injectCollectionHero } = require('./l
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 const { brandCollectionPage, brandName } = require('./lib/collection-brand');
 const { promotionVariantCard } = require('./lib/promotion-variants');
+const { pickNewArrivals, pickBestSellers } = require('./lib/home-rails');
 const { adminClient, subscribeInShopify, notifyByEmail } = require('./lib/newsletter');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = require('./lib/catalog-landing');
@@ -1025,9 +1026,32 @@ function injectDesignersIndex(html) {
 // JS repeint ensuite (host.innerHTML) → hydratation, 0 doublon. Conteneurs distingués par
 // data-sort="new" (Nouveautés) vs sans (Meilleures ventes).
 const HOME_SKEL = "<div class=\"pcard\"><div class=\"pcard__skel\"></div></div><div class=\"pcard\"><div class=\"pcard__skel\"></div></div><div class=\"pcard\"><div class=\"pcard__skel\"></div></div><div class=\"pcard\"><div class=\"pcard__skel\"></div></div>";
-function injectHomeRails(html, items) {
+// Mêmes produits pour le rendu serveur et /api/home-rails (le navigateur ne change rien).
+async function getHomeRails() {
+  return cached('home-rails-v1', async () => {
+    const [arrivals, best] = await Promise.all([
+      (async () => {
+        // Toute la collection (≈ 230 produits, lots de 100) : un import massif d'une marque
+        // ne doit pas masquer les autres nouveautés plus anciennes de quelques jours.
+        const all = [];
+        let after = null;
+        for (let i = 0; i < 5; i++) {
+          const page = await getCollectionProducts('nouveautes', 100, after);
+          all.push(...(page?.items || []));
+          if (!page?.pageInfo?.hasNextPage) break;
+          after = page.pageInfo.endCursor;
+        }
+        return { items: all };
+      })().catch(() => null),
+      getProductsPage(24, null, null, null, null, null),
+    ]);
+    const nouveautes = pickNewArrivals(arrivals?.items || []);
+    return { nouveautes, best: pickBestSellers(best?.items || [], nouveautes) };
+  });
+}
+function injectHomeRails(html, { nouveautes, best }) {
   const render = (arr) => arr.map(plpCardSsr).filter(Boolean).join('');
-  const r1 = render(items.slice(0, 4)), r2 = render(items.slice(4, 8));
+  const r1 = render(nouveautes), r2 = render(best);
   if (r1) html = html.replace(
     '<div class="prow prow--4" data-products data-count="4" data-sort="new">\n      ' + HOME_SKEL,
     () => '<div class="prow prow--4" data-products data-count="4" data-sort="new">\n      ' + r1);
@@ -1061,8 +1085,7 @@ app.get(/.*/, async (req, res, next) => {
   // SSR des rails produits de l'accueil (liens crawlables + fin des squelettes au 1er paint).
   if (rel === 'index.html') {
     try {
-      const { items } = await getProductsPage(24, null, null, null, null, null);
-      raw = injectHomeRails(raw, (items || []).filter((p) => p.image));
+      raw = injectHomeRails(raw, await getHomeRails());
     } catch (e) { console.warn('[home-rails]', e.message); }
   }
   if (rel === 'marques.html') {
@@ -1468,6 +1491,11 @@ async function getCollections() {
 //   GET /api/products?paginated=1&limit=50&cursor= → { items, pageInfo }
 //     consumed by the new PLP at /produits.html
 // The legacy shape is contractual — 4 callers depend on it.
+app.get('/api/home-rails', async (req, res) => {
+  try { res.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600').json(await getHomeRails()); }
+  catch (err) { console.error('Home rails error:', err.message); res.status(503).set('Cache-Control', 'no-store').json({ error: 'home_rails_unavailable' }); }
+});
+
 app.get('/api/products', async (req, res) => {
   try {
     const { paginated, cursor, limit, tags, cats, brand, q } = req.query;
