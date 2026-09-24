@@ -12,4 +12,4 @@
 - Contrôler la variante réellement remisée (finition, prix, prix comparé, stock, politique de vente), puis la carte publique, son image, le lien vers cette variante et le panier. Ne pas annoncer une mise en ligne sur la seule validation Shopify.
 - Les remises de déstockage sont limitées au stock disponible ; respecter les exceptions explicitement autorisées, comme Panton sur commande par lots de 6.
 - Vérifier les anciennes offres et retirer du classement les produits sans remise ni offre active. Ne pas inventer une nouvelle remise pour conserver un produit dans Promotions.
-- En cas de changement de présentation des promotions, exécuter aussi `node --test tests/promotion-card.test.cjs`.
+- En cas de changement de présentation des promotions, exécuter aussi `node --test tests/promotion-variants.test.cjs tests/promotion-variants-api.test.cjs`.
