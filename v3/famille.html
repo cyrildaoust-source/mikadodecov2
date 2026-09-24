@@ -114,7 +114,7 @@
   <script type="module">
     import { bindFamilyRails } from "/family-rail.js";
     import { initShell, productCard, restoreSelectionPosition } from "/shared.js";
-    initShell({ active: "Mobilier", transparentNav: true });
+    initShell({ active: "Mobilier", transparentNav: !document.documentElement.hasAttribute("data-chair-continuation") });
     var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     bindFamilyRails(document.querySelector(".fam"));
@@ -136,8 +136,9 @@
     // Grille « Tous les produits jardin » : walk complet de la collection outdoor puis pagination client-side (pattern PLP).
     (function(){
       var grid=document.querySelector('[data-grid]'), cnt=document.querySelector('[data-count]'), pag=document.querySelector('[data-pagination]');
-      if(!grid) return;
-      var PAGE=36, ALL=[], TOTAL=1, complete=false, moreComing=false;
+      // Liste filtrée rendue par le serveur : chair-catalog.js la gère (repli ci-dessous sinon).
+      if(!grid || document.querySelector('#chair-catalog-initial')) return;
+      var PAGE=60, ALL=[], TOTAL=1, complete=false, moreComing=false;
       var params=new URLSearchParams(location.search);
       var page=Math.max(1, parseInt(params.get('page'),10)||1);
 

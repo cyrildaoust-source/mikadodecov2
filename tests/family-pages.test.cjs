@@ -187,7 +187,9 @@ test('all five family routes render 24 crawlable products, navigation and metada
   for (const [handle, count] of Object.entries(expected)) {
     const { response, html } = await page('/collections/' + handle);
     assert.equal(response.status, 200);
-    assert.match(response.headers.get('cache-control'), /s-maxage/);
+    // Sans index commun (ce banc ne le fournit pas), la liste d'origine sert de repli
+    // et n'est jamais gardée au CDN : la liste filtrée la remplace dès que l'index est prêt.
+    assert.equal(response.headers.get('cache-control'), 'no-store');
     assert.ok(html.includes(`<h1 class="fam-hero__title">${families[handle].title}</h1>`));
     assert.ok(html.includes(`href="https://www.mikadodeco.be/collections/${handle}"`));
     assert.match(html, /BreadcrumbList/);

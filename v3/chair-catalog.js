@@ -1,5 +1,6 @@
 import {initShell,productCard,fetchPromos,applyPromos,loadNavigation,paintBreadcrumb,restoreSelectionPosition} from '/shared.js';
 import {listingTrail} from '/navigation.mjs';
+import {bindFamilyRails} from '/family-rail.js';
 import {filterControls,chairPagination,scopeURL,emptyState,CHAIRS_SCOPE} from '/catalog-filters-view.mjs';
 
 const initial = JSON.parse(document.querySelector('#chair-catalog-initial').textContent);
@@ -11,9 +12,17 @@ const grid = document.querySelector('[data-grid]');
 const pagination = document.querySelector('[data-pagination]');
 const status = document.querySelector('[data-chair-status]');
 let current = initial, pending = null, generation = 0, promos = null, navigation = null;
-initShell({active:'Mobilier',transparentNav:initial.state.page===1});
+// Les pages familles gardent leur propre script de page (menu, rubriques éditoriales).
+if(initial.shell!==false)initShell({active:'Mobilier',transparentNav:initial.state.page===1});
 document.documentElement.classList.add('chair-filters-ready');
 loadNavigation().then(nav=>{navigation=nav;updateBreadcrumb();}).catch(()=>{});
+// Catalogue complet : rubriques de la composition Mobilier (familles, icônes).
+const landing=document.querySelector('[data-catalogue-landing]');
+if(landing) {
+  bindFamilyRails(landing);
+  const seed=document.querySelector('#catalogue-icons-initial'),rail=landing.querySelector('[data-catalogue-icons]');
+  if(seed&&rail){rail.innerHTML=JSON.parse(seed.textContent).items.map(p=>productCard(p,location.pathname+location.search)).join('');restoreSelectionPosition(rail);}
+}
 fetchPromos().then(value=>{promos=value;applyPromos(promos);}).catch(()=>{});
 
 function updateBreadcrumb() {
@@ -61,7 +70,7 @@ function paint(data,{keepOpen=false}={}) {
 function formURL() {
   const q=new URLSearchParams();
   for(const [key,value] of new FormData(controls.querySelector('form')))if(value!==''&&!(key==='sort'&&value==='pop'))q.append(key,value);
-  for(const key of ['brand','color','material','usage','feature'])if(q.has(key)){const values=q.getAll(key);q.set(key,values.join(','));}
+  for(const key of ['category','brand','color','material','usage','feature'])if(q.has(key)){const values=q.getAll(key);q.set(key,values.join(','));}
   return scope.basePath+(q.size?'?'+q:'');
 }
 async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
@@ -69,7 +78,7 @@ async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
   if(next.pathname!==scope.basePath||next.origin!==location.origin)return;
   // Un chargement initial de page 2 ne contient pas de photo de bandeau. Le retour
   // à la découverte passe alors par le rendu serveur complet de la page 1.
-  if(!(Number(next.searchParams.get('page'))>1)&&!document.querySelector('.subhero')) {
+  if(!(Number(next.searchParams.get('page'))>1)&&!document.querySelector('.subhero,.fam-hero')) {
     if(historyMode==='none')location.reload();else location.assign(next.pathname+next.search+'#grille');
     return;
   }

@@ -1824,7 +1824,9 @@ body.pdplb-locked { overflow: hidden; }
 .chair-catalog__compact { display: none; }
 [data-chair-continuation] .subhero { display: none; }
 [data-chair-continuation] .chair-catalog__compact { display: block; padding-top: 160px; }
-.chair-catalog__compact h1 { font-size: var(--fs-h1); margin: 8px 0 20px; }
+/* Familles et catalogue filtrés : dès la page 2, en-tête compact, fil d'Ariane et liste seulement. */
+[data-chair-continuation] .fam > :not(.chair-catalog__compact, [data-breadcrumb], .catalog-section) { display: none; }
+.chair-catalog__compact h1 { font-family: var(--serif); font-weight: 600; font-size: var(--fs-h2); line-height: 1.05; margin: 8px 0 20px; }
 .chair-catalog__controls { margin-bottom: 0; }
 .catalog-filters__heading { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 22px; }
 .catalog-filters__heading .catalogue-head { margin: 0; }

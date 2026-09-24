@@ -1,11 +1,22 @@
 # Filtres Chaises — contrat site / importer
 
-Pilote du 16 septembre 2026 sur `/collections/chaises`, étendu le 24 septembre aux sous-catégories du méga menu (Fauteuils, Suspensions, Vases, Verres & carafes…) : la liste est dans `lib/filter-scopes.js`. Restent pour l’instant sur leur liste d’origine :
-- les tables, qui ont leurs propres règles intérieur/extérieur (`lib/table-collections.js`) ;
-- Canapés : 712 modèles, environ 11 s de lecture complète à froid ;
-- les familles, Jardin, Assises, les marques, Promotions, le catalogue et la recherche.
+Pilote du 16 septembre 2026 sur `/collections/chaises`, étendu le 24 septembre à toutes les listes du menu : sous-catégories, familles (dont Jardin et Assises) et catalogue complet (`/produits.html`). La liste des pages est dans `lib/filter-scopes.js`. Les familles et le catalogue ajoutent un filtre « Catégorie ». La recherche garde sa propre page ; les marques, créateurs et Promotions ne sont pas encore filtrés.
 
-Chaque collection filtrable garde son titre et sa description Shopify, son bandeau, son fil d’Ariane et son adresse (`/collections/<handle>`). L’API correspondante est `/api/catalog/<handle>`. L’index complet d’une collection reste frais 5 min. Pendant 30 min encore, la version précédente est servie tout de suite, pendant que la collection se relit. Le bandeau, les cartes, les boutons et la pagination de 60 produits suivent les composants du site. Le tri initial utilise l’ordre `BEST_SELLING` de Shopify, libellé « Les plus populaires » ; il ne remplace pas les sélections éditoriales du propriétaire.
+### Index commun
+
+Toutes ces pages lisent un index unique (`lib/catalog-index.js`) : les 4 049 fiches publiées, leurs variantes et leurs données de filtre, dans l'ordre des ventes, avec l'appartenance aux familles et sous-catégories.
+- Une fonction le construit en environ une minute derrière `/index-catalogue/<partie>.json` : la partie `membres`, puis les parties `0` à `3`. Le CDN garde ces parties 15 min, puis les renouvelle en arrière-plan.
+- L'index est allégé (26 Mo bruts, environ 13 Mo après allègement) et découpé en parties d'environ 3 Mo. Essai du 24 septembre : le CDN garde une réponse de 6 Mo, mais refuse une réponse de 18 Mo.
+- Les autres instances lisent ces parties au CDN et gardent l'index 5 min en mémoire. Les résultats sont mémorisés par combinaison de filtres.
+- Prix et stock des listes peuvent avoir jusqu'à environ 20 min de retard. La fiche produit et le panier restent en direct.
+
+Si l'index n'est pas prêt, par exemple juste après un déploiement :
+- les sous-catégories filtrées depuis le premier jour relisent leur collection ;
+- les autres pages reprennent leur liste d'origine, sans que le CDN la garde.
+
+Canapés (712 modèles) et les tables n'ont de filtres qu'avec l'index.
+
+Chaque collection filtrable garde son titre et sa description Shopify, son bandeau, son fil d'Ariane et son adresse. L'API correspondante est `/api/catalog/<handle>` (`catalogue` pour le catalogue complet).
 
 ## Parcours et règles
 

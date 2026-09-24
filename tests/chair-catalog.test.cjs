@@ -103,7 +103,9 @@ test('le retour de fiche conserve chaque filtre et la variante sans accepter une
 test('les sous-catégories reçoivent les mêmes filtres, avec leur propre chemin et leur titre',async()=>{
   const {filterScope,filterScopeHandles}=require('../lib/filter-scopes');
   assert.ok(filterScope('fauteuils')&&filterScope('verres-carafes'));
-  for(const handle of ['tables-de-salle-a-manger','tables','sieges','outdoor','hay','nouveautes','promotions'])assert.equal(filterScope(handle),null,handle);
+  for(const handle of ['hay','nouveautes','promotions','1900'])assert.equal(filterScope(handle),null,handle);
+  // Tables, Canapés et familles n'existent qu'avec l'index commun ; sans lui, liste d'origine.
+  for(const handle of ['tables-de-salle-a-manger','canapes','tables','sieges','outdoor'])assert.equal(filterScope(handle).fallback,'legacy',handle);
   assert.ok(filterScopeHandles().length>20);
   const html=await (await realFetch(base+'/collections/fauteuils?color=noir')).text();
   const data=seed(html);
@@ -117,7 +119,7 @@ test('les sous-catégories reçoivent les mêmes filtres, avec leur propre chemi
   assert.match(html,/content="noindex,follow"/);
   const api=await realFetch(base+'/api/catalog/fauteuils?brand=hay');
   assert.equal(api.status,200);assert.equal((await api.json()).scope.handle,'fauteuils');
-  assert.equal((await realFetch(base+'/api/catalog/tables-de-cafe')).status,404);
+  assert.equal((await realFetch(base+'/api/catalog/hay')).status,404);
   const {selectionURL}=await import('../v3/navigation.mjs');
   assert.equal(selectionURL('/collections/fauteuils?color=noir&min=100&stock=1'),'/collections/fauteuils?color=noir&min=100&stock=1');
 });
