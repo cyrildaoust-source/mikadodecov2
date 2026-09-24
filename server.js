@@ -3,6 +3,7 @@ const { shopifyFetch, SHOPIFY_STORE } = require('./lib/shopify/client');
 const { mapProduct, mapProductRef, shopifyResize, CARD_IMAGE_WIDTH } = require('./lib/shopify/product-mapper');
 const { getSearchPage, clearSearchCache } = require('./lib/services/search');
 const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
+const { normalizeItems, getDeliveryEstimate, realProject } = require('./lib/delivery-estimate');
 const express = require('express');
 const { selectInitialVariant } = require('./v3/product-variant');
 const cors    = require('cors');
@@ -227,6 +228,33 @@ function listingNavigation(html, req, hints = {}) {
 function canRenderInitialGrid(req) {
   return !(Number(req.query.page) > 1 || (req.query.sort && req.query.sort !== 'pop'));
 }
+// Les curseurs parcourent les lots rendus sur le serveur, y compris sans JS.
+function listingPagination(html, req, pageInfo = {}) {
+  if (!canRenderInitialGrid(req)) return html;
+  const params = new URLSearchParams();
+  for (const key of ['designer', 'brand', 'tag', 'cats', 'q', 'cursor']) {
+    if (typeof req.query[key] === 'string' && req.query[key]) params.set(key, req.query[key]);
+  }
+  const href = () => req.path + (params.size ? '?' + params : '');
+  const links = [];
+  if (params.has('cursor')) {
+    const canonical = ogEscape(ORIGIN + href());
+    html = html.replace(/<link rel="canonical"[^>]*>/i, () => `<link rel="canonical" href="${canonical}" />`)
+      .replace(/<meta property="og:url"[^>]*>/i, () => `<meta property="og:url" content="${canonical}" />`);
+    params.delete('cursor');
+    links.push(`<a class="plp-page" href="${ogEscape(href())}#grille">Revenir au début</a>`);
+  }
+  if (pageInfo.hasNextPage && pageInfo.endCursor) {
+    params.set('cursor', pageInfo.endCursor);
+    links.push(`<a class="plp-page" href="${ogEscape(href())}#grille">Voir plus de produits</a>`);
+  }
+  if (links.length) html = html.replace('<nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>',
+    () => `<nav class="plp-pagination" data-pagination aria-label="Pagination">${links.join('')}</nav>`);
+  return html;
+}
+function temporaryUnavailable(res) {
+  return res.status(503).set('Cache-Control', 'no-store').set('Retry-After', '60');
+}
 // Shared HTML keeps server-rendered and browser cards in sync.
 // Selection controls are enabled only once the browser cart is bound.
 function plpCardSsr(p, source = '') {
@@ -438,7 +466,7 @@ app.get('/produit.html', async (req, res) => {
       ));
       if (!data.node?.handle) return send404Shell(res, PRODUIT_TEMPLATE);
       return res.redirect(301, navigation.productHref({ handle: data.node.handle }, navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)), req.query.variant));
-    } catch (error) { return res.status(503).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
+    } catch (error) { return temporaryUnavailable(res).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
   }
   if (!handle) return sendProduitTemplate(res);
   try {
@@ -513,7 +541,7 @@ app.get('/produit.html', async (req, res) => {
     return res.send(out);
   } catch (err) {
     console.warn('[og-produit]', err.message);
-    return sendProduitTemplate(res);
+    return sendProduitTemplate(temporaryUnavailable(res));
   }
 });
 
@@ -570,7 +598,8 @@ app.get('/collections/:handle', async (req, res) => {
     html = listingNavigation(html, req);
     res.set('Content-Type', 'text/html; charset=utf-8');
     // Ne pas conserver une panne de Shopify dans le cache de la page.
-    if (failed || featuredResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
+    if (failed) temporaryUnavailable(res);
+    else if (featuredResults.some(result => result.status === 'rejected')) res.set('Cache-Control', 'no-store');
     else ogCache(res);
     return res.send(injectChrome(html, 'family-page.html'));
   }
@@ -641,12 +670,13 @@ app.get('/collections/:handle', async (req, res) => {
       }
       if (brand) {
         if (!gi.length) html = html.replace('<div class="pgrid" data-grid></div>', () => `<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Aucun produit pour cette marque dans cette catégorie. <a href="${collectionUrl}">Revenir à ${ogEscape(collectionName)}</a>.</p></div>`);
-        const next = new URLSearchParams({ brand });
-        if (tag) next.set('tag', tag);
-        if (cp.pageInfo?.hasNextPage && cp.pageInfo.endCursor) {
-          next.set('cursor', cp.pageInfo.endCursor);
-          html = html.replace('<nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>', () => `<nav class="plp-pagination" data-pagination aria-label="Pagination"><a class="plp-page" href="${ogEscape(collectionUrl + '?' + next + '#grille')}">Voir plus de produits</a></nav>`);
-        }
+      }
+      html = listingPagination(html, req, cp.pageInfo);
+      // Une collection vide reste accessible au client, mais hors de l’index.
+      // Une panne ne doit jamais déclencher ce signal : elle passe en 503.
+      if (!gi.length && !cursor && !brand && !tag && col.hasProducts === false) {
+        res.set('X-Robots-Tag', 'noindex, follow');
+        html = html.replace('</head>', '<meta name="robots" content="noindex,follow" />\n</head>');
       }
     } catch (e) {
       failed = true;
@@ -654,12 +684,12 @@ app.get('/collections/:handle', async (req, res) => {
       console.warn('[coll-grid-ssr]', e.message);
     }
     html = injectChrome(html, 'produits.html', Boolean(collectionHero));
-    if (failed) res.set('Cache-Control', 'no-store');
+    if (failed) temporaryUnavailable(res);
     else ogCache(res);
     return res.send(html);
   } catch (err) {
     console.warn('[og-collection]', err.message);
-    return sendProduitsTemplate(res);
+    return sendProduitsTemplate(temporaryUnavailable(res));
   }
 });
 
@@ -685,10 +715,12 @@ app.get('/produits.html', async (req, res) => {
     // Quatre choix explicites chargés en parallèle de la grille. Une fiche
     // indisponible n'est jamais remplacée par une meilleure vente arbitraire.
     const iconsPromise = Promise.allSettled((landingRequest ? catalogLanding.icons.handles : []).map(getProductByHandle));
-    let failed = false, brandItems = [];
+    let failed = false, gridFailed = false, brandItems = [], pageInfo = {};
     try {
       await Promise.all([_chromeReady, _navigationReady]);
-      const { items } = await getProductsPage(24, req.query.cursor || null, req.query.tag ? [req.query.tag] : null, req.query.cats, brand, q);
+      const page = await getProductsPage(24, req.query.cursor || null, req.query.tag ? [req.query.tag] : null, req.query.cats, brand, q);
+      const { items } = page;
+      pageInfo = page.pageInfo;
       brandItems = items;
       if (items && items.length && canRenderInitialGrid(req)) {
         const cards = items.map(product => plpCardSsr(product, req.originalUrl)).filter(Boolean).join('');
@@ -698,6 +730,7 @@ app.get('/produits.html', async (req, res) => {
       }
     } catch (e) {
       failed = true;
+      gridFailed = true;
       html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid><p class="plp-empty">Impossible de charger cette sélection. Veuillez réessayer.</p></div>');
       console.warn('[plp-ssr]', e.message);
     }
@@ -725,7 +758,9 @@ app.get('/produits.html', async (req, res) => {
       html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title data-context>' + ogEscape(title) + '</h1>');
       html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     }
-    if (failed) res.set('Cache-Control', 'no-store');
+    html = listingPagination(html, req, pageInfo);
+    if (gridFailed) temporaryUnavailable(res);
+    else if (failed) res.set('Cache-Control', 'no-store');
     else ogCache(res);
     html = listingNavigation(html, req, { brandName: brandItems.find(p => navigation.navigationSlug(p.brand) === brand)?.brand || brandName(brand) });
     return res.send(injectChrome(html, 'produits.html'));
@@ -760,13 +795,17 @@ app.get('/produits.html', async (req, res) => {
         const cards = gi.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join('');
         html = html.replace('<div class="pgrid" data-grid></div>', () => '<div class="pgrid" data-grid data-ssr="1">' + cards + '</div>');
       }
-    } catch (e) { console.warn('[designer-grid-ssr]', e.message); }
+      html = listingPagination(html, req, dp.pageInfo);
+    } catch (e) {
+      console.warn('[designer-grid-ssr]', e.message);
+      return sendProduitsTemplate(temporaryUnavailable(res));
+    }
     html = injectChrome(html, 'produits.html');
     ogCache(res);
     return res.send(html);
   } catch (err) {
     console.warn('[og-designer]', err.message);
-    return sendProduitsTemplate(res);
+    return sendProduitsTemplate(temporaryUnavailable(res));
   }
 });
 
@@ -779,7 +818,7 @@ app.get('/produits.html', async (req, res) => {
 // lastmod) et les produits/collections (walk caché 6 h). Aucune URL perdue ;
 // les 3 chemins sont routés vers la fonction dans vercel.json.
 const SM_ESC = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const SM_LASTMOD = new Date().toISOString().slice(0, 10);   // ≈ date du dernier déploiement (cold start)
+// Une date de démarrage serveur ne constitue pas une date de modification.
 const SM_STATIC = [
   ['/', '1.0'], ['/produits.html', '0.9'], ['/marques.html', '0.8'],
   ['/designers.html', '0.7'], ['/materiaux.html', '0.7'], ['/selection.html', '0.6'],
@@ -801,14 +840,14 @@ function sendXml(res, xml) {
 app.get('/sitemap.xml', (req, res) => sendXml(res,
   `<?xml version="1.0" encoding="UTF-8"?>\n`
   + `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
-  + `  <sitemap><loc>${ORIGIN}/sitemap-pages.xml</loc><lastmod>${SM_LASTMOD}</lastmod></sitemap>\n`
+  + `  <sitemap><loc>${ORIGIN}/sitemap-pages.xml</loc></sitemap>\n`
   + `  <sitemap><loc>${ORIGIN}/sitemap-products.xml</loc></sitemap>\n`
   + `</sitemapindex>\n`));
 
 // Pages statiques + créateurs indexables + articles : aucun appel Shopify → instantané.
 app.get('/sitemap-pages.xml', (req, res) => {
   const urls = [];
-  SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr, SM_LASTMOD)));
+  SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr)));
   // Créateurs — uniquement les indexables (champ `hidden` dans designers-data.json)
   // pour éviter le thin content / les fiches masquées.
   getDesigners().forEach((d) => {
@@ -845,7 +884,9 @@ app.get('/sitemap-products.xml', async (req, res) => {
         after = pageInfo.endCursor;
       }
       (await getCollections()).forEach((c) => {
-        if (c.handle) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6'));
+        // Les familles éditoriales et les sélections composites ont leurs propres sources.
+        const composed = Object.hasOwn(families, c.handle) || Object.hasOwn(FAMILLES_RICHES, c.handle) || ['chaises', 'tables-outdoor', 'promotions'].includes(c.handle);
+        if (c.handle && (c.hasProducts !== false || composed)) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6'));
       });
       return smUrlset(urls);
     }, 6 * 60 * 60 * 1000); // cache 6 h
@@ -1354,7 +1395,6 @@ async function getActiveBrands() {
 // Optional metafields: custom.country, custom.city, custom.founded, custom.website,
 // custom.tagline, custom.color, custom.featured
 
-
 function mapCollection(node, index) {
   const meta = {};
   (node.metafields || []).filter(Boolean).forEach(m => { if (m) meta[m.key] = m.value; });
@@ -1370,6 +1410,7 @@ function mapCollection(node, index) {
     founded:     meta.founded   ? parseInt(meta.founded) : null,
     tagline:     meta.tagline   || '',
     description: node.description || '',
+    hasProducts: node.products ? node.products.edges.length > 0 : null,
     website:     meta.website   || '',
     image:       node.image?.url || null,
     color:       meta.color     || '#d4c5b0',
@@ -1380,10 +1421,17 @@ function mapCollection(node, index) {
 
 async function getCollections() {
   return cached('collections', async () => {
-    // Shopify shop currently has 147 collections; 250 leaves headroom
-    // without needing pagination.
-    const data = await shopifyFetch(COLLECTIONS_QUERY, { first: 250 });
-    return data.collections.edges
+    const edges = [], seen = new Set();
+    let after = null;
+    do {
+      const data = await shopifyFetch(COLLECTIONS_QUERY, { first: 250, after });
+      edges.push(...data.collections.edges);
+      if (!data.collections.pageInfo?.hasNextPage) break;
+      after = data.collections.pageInfo.endCursor;
+      if (!after || seen.has(after)) throw new Error('Curseur collections Shopify invalide');
+      seen.add(after);
+    } while (true);
+    return edges
       .map(({ node }, i) => mapCollection(node, i))
       // Exclude Shopify's built-in "All" / "Home page" collections
       .filter(c => !['all', 'frontpage'].includes(c.handle));
@@ -1957,41 +2005,55 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
   }
 });
 
+// Fresh availability for the exact variants and total quantities in the cart.
+app.post('/api/cart/delivery', cartLimiter, async (req, res) => {
+  try {
+    const items = normalizeItems(req.body?.items);
+    res.json(await getDeliveryEstimate(items, shopifyFetch));
+  } catch (err) {
+    res.status(400).json({ error: 'Impossible de vérifier le délai. Réessayez avant de payer.' });
+  }
+});
+
 // ─── API: CREATE CART → SHOPIFY CHECKOUT ───────────────
 // Body: { items: [{ variantId, qty }], customer: { prenom, nom, email, telephone, projet, message } }
 // Returns: { checkoutUrl } — redirect the browser to this URL
 app.post('/api/cart/create', cartLimiter, async (req, res) => {
   try {
-    const { items, customer } = req.body;
-
-    if (!items || !Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ error: 'La selection est vide.' });
-    }
+    const { customer } = req.body;
+    const items = normalizeItems(req.body?.items);
+    const delivery = await getDeliveryEstimate(items, shopifyFetch);
+    const project = realProject(customer?.projet);
+    const checkedAt = new Date().toISOString();
 
     const lines = items.map(item => ({
       merchandiseId: item.variantId,
-      quantity:      Math.max(1, Math.min(10, parseInt(item.qty) || 1)),
+      quantity:      item.qty,
       // Ligne cadeau (offre Panton) : marquée par un attribut _gift (préfixe _
       // = masqué au client) — retrouvable dans la commande côté admin.
-      ...(item.gift ? { attributes: [{ key: '_gift', value: String(item.gift).slice(0, 40) }] } : {}),
+      attributes: [
+        ...(item.gift ? [{ key: '_gift', value: String(item.gift).slice(0, 40) }] : []),
+        ...(delivery.lines.find(l => l.variantId === item.variantId)?.label
+          ? [{ key: 'Délai estimé', value: delivery.lines.find(l => l.variantId === item.variantId).label }] : []),
+      ],
     }));
 
     // Pass customer context as cart note + attributes
     // (visible in Shopify admin → Orders → Notes / Attributes)
-    const noteParts = [];
+    const noteParts = delivery.label ? [`Délai estimé de la commande : ${delivery.label} (envoi groupé).`, 'Mode de réception : voir le mode choisi au paiement dans la commande Shopify.'] : [];
     if (customer?.prenom || customer?.nom) {
       noteParts.push(`Client: ${[customer.prenom, customer.nom].filter(Boolean).join(' ')}`);
     }
     if (customer?.telephone) noteParts.push(`Tel: ${customer.telephone}`);
-    if (customer?.projet)    noteParts.push(`Projet: ${customer.projet}`);
+    if (project) noteParts.push(`Projet: ${project}`);
     if (customer?.message)   noteParts.push(`Message: ${customer.message.substring(0, 500)}`);
 
-    const attributes = [];
+    const attributes = delivery.label ? [{ key: 'Délai estimé', value: delivery.label }, { key: 'Stock vérifié le', value: checkedAt }] : [];
     if (customer?.prenom)    attributes.push({ key: 'Prenom',    value: customer.prenom });
     if (customer?.nom)       attributes.push({ key: 'Nom',       value: customer.nom });
     if (customer?.email)     attributes.push({ key: 'Email',     value: customer.email });
     if (customer?.telephone) attributes.push({ key: 'Telephone', value: customer.telephone });
-    if (customer?.projet)    attributes.push({ key: 'Projet',    value: customer.projet });
+    if (project) attributes.push({ key: 'Projet', value: project });
 
     const data = await shopifyFetch(CART_CREATE_MUTATION, {
       lines,
@@ -2123,6 +2185,83 @@ app.post('/api/contact', formLimiter, async (req, res) => {
   } catch (err) {
     console.error('[contact] error:', err.message);
     res.status(500).json({ error: 'server_error' });
+  }
+});
+
+// One-time merchant authorization for the installed newsletter app. The resulting
+// offline token is copied into Vercel as SHOPIFY_ADMIN_TOKEN; this route then closes.
+const NEWSLETTER_OAUTH_COOKIE = '__Host-mikado-newsletter-oauth';
+const NEWSLETTER_OAUTH_REDIRECT = 'https://www.mikadodeco.be/api/shopify/newsletter/callback';
+const newsletterOAuthHeaders = (res) => res.set({
+  'Cache-Control': 'no-store',
+  'Referrer-Policy': 'no-referrer',
+  'X-Robots-Tag': 'noindex, nofollow',
+});
+const newsletterOAuthReady = () =>
+  process.env.SHOPIFY_ADMIN_DOMAIN === 'cqnfzf-qb.myshopify.com' &&
+  !!process.env.SHOPIFY_ADMIN_CLIENT_ID && !!process.env.SHOPIFY_ADMIN_CLIENT_SECRET;
+app.get('/api/shopify/newsletter/connect', formLimiter, (req, res) => {
+  newsletterOAuthHeaders(res);
+  if (process.env.SHOPIFY_ADMIN_TOKEN) return res.status(410).send('Connexion déjà terminée.');
+  if (!newsletterOAuthReady()) return res.status(503).send('Application non configurée.');
+  const state = crypto.randomBytes(32).toString('hex');
+  res.cookie(NEWSLETTER_OAUTH_COOKIE, state, {
+    httpOnly: true, secure: true, sameSite: 'lax', path: '/', maxAge: 10 * 60 * 1000,
+  });
+  const params = new URLSearchParams({
+    client_id: process.env.SHOPIFY_ADMIN_CLIENT_ID,
+    scope: 'read_customers,write_customers',
+    redirect_uri: NEWSLETTER_OAUTH_REDIRECT,
+    state,
+  });
+  return res.redirect('https://cqnfzf-qb.myshopify.com/admin/oauth/authorize?' + params);
+});
+app.get('/api/shopify/newsletter/callback', formLimiter, async (req, res) => {
+  newsletterOAuthHeaders(res);
+  if (process.env.SHOPIFY_ADMIN_TOKEN) return res.status(410).send('Connexion déjà terminée.');
+  if (!newsletterOAuthReady()) return res.status(503).send('Application non configurée.');
+  const params = new URL(req.originalUrl, ORIGIN).searchParams;
+  const keys = [...params.keys()];
+  if (new Set(keys).size !== keys.length) return res.status(400).send('Paramètres dupliqués.');
+  const state = params.get('state') || '';
+  const cookieState = String(req.headers.cookie || '').split(';').map(part => part.trim())
+    .find(part => part.startsWith(NEWSLETTER_OAUTH_COOKIE + '='))?.slice(NEWSLETTER_OAUTH_COOKIE.length + 1) || '';
+  const a = Buffer.from(state), b = Buffer.from(cookieState);
+  if (!state || a.length !== b.length || !crypto.timingSafeEqual(a, b))
+    return res.status(403).send('Session de connexion invalide.');
+  res.clearCookie(NEWSLETTER_OAUTH_COOKIE, { secure: true, sameSite: 'lax', path: '/' });
+  const shop = params.get('shop');
+  const code = params.get('code');
+  const hmac = params.get('hmac');
+  if (shop !== 'cqnfzf-qb.myshopify.com' || !code || !/^[a-f0-9]{64}$/i.test(hmac || ''))
+    return res.status(400).send('Réponse Shopify invalide.');
+  const message = [...params.entries()].filter(([key]) => key !== 'hmac')
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([key, value]) => key + '=' + value).join('&');
+  const expected = crypto.createHmac('sha256', process.env.SHOPIFY_ADMIN_CLIENT_SECRET)
+    .update(message).digest('hex');
+  if (!crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(hmac.toLowerCase())))
+    return res.status(403).send('Signature Shopify invalide.');
+  try {
+    const tokenResponse = await fetch('https://cqnfzf-qb.myshopify.com/admin/oauth/access_token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+      body: new URLSearchParams({
+        client_id: process.env.SHOPIFY_ADMIN_CLIENT_ID,
+        client_secret: process.env.SHOPIFY_ADMIN_CLIENT_SECRET,
+        code,
+      }),
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!tokenResponse.ok) return res.status(502).send('Échange du jeton refusé par Shopify (' + tokenResponse.status + ').');
+    const data = await tokenResponse.json();
+    if (!data.access_token || data.expires_in || !(data.scope || '').split(',').includes('write_customers'))
+      return res.status(502).send('Jeton Shopify ou autorisations inattendus.');
+    const safeToken = String(data.access_token).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return res.type('html').send('<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="referrer" content="no-referrer"><title>Connexion Shopify</title><body><h1>Connexion Shopify autorisée</h1><p>Copiez ce jeton une seule fois dans Vercel, variable SHOPIFY_ADMIN_TOKEN pour Production et Preview. Ne le partagez pas.</p><textarea id="shopify-token" readonly rows="3" cols="90">' + safeToken + '</textarea></body></html>');
+  } catch (error) {
+    console.warn('[newsletter-oauth] token exchange failed:', error.name);
+    return res.status(502).send('Connexion Shopify momentanément indisponible.');
   }
 });
 

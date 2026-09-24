@@ -59,7 +59,7 @@ export function readCart() {
     const raw = JSON.parse(localStorage.getItem(CART_KEY)) || [];
     if (!Array.isArray(raw)) return [];
     return raw
-      .filter((i) => i && i.variantId)
+      .filter((i) => i && i.variantId && (i.gift !== GIFT_OFFER.id || giftActive()))
       .map((i) => ({ ...i, qty: Math.max(1, parseInt(i.qty) || 1) }));
   } catch { return []; }
 }
@@ -169,6 +169,7 @@ export function createCartPreview(onUpdate, delay = 500) {
    (loi Shopify BXGY) → footnote permanente. Jamais d'ajout automatique. */
 export const GIFT_OFFER = {
   id: "panton",
+  enabled: false,
   startsAt: "2026-09-01T19:35:00+02:00",
   endsAt:   "2026-09-30T23:59:59+02:00",
   tiers: [
@@ -180,9 +181,9 @@ export const GIFT_OFFER = {
 };
 const GIFT_HANDLES = new Set(GIFT_OFFER.tiers.flatMap((t) => t.gifts));
 const giftTierIdx = (h) => GIFT_OFFER.tiers.findIndex((t) => t.gifts.includes(h));
-export const isGiftProductHandle = (h) => GIFT_HANDLES.has(String(h || ""));
+export const isGiftProductHandle = (h) => giftActive() && GIFT_HANDLES.has(String(h || ""));
 export function giftActive(now = Date.now()) {
-  return now >= Date.parse(GIFT_OFFER.startsAt) && now <= Date.parse(GIFT_OFFER.endsAt);
+  return GIFT_OFFER.enabled && now >= Date.parse(GIFT_OFFER.startsAt) && now <= Date.parse(GIFT_OFFER.endsAt);
 }
 /* Fiches cadeaux depuis /api/product — source unique (nom/prix/image/variantes). */
 let _giftMeta = null, _giftMetaStarted = false;
@@ -362,7 +363,7 @@ export function giftOfferHTML(preview) {
 }
 let _giftBound = false;
 export function giftBind() {
-  if (_giftBound) return; _giftBound = true;
+  if (_giftBound || !giftActive()) return; _giftBound = true;
   loadGiftMeta();
   document.addEventListener("cart:change", () => giftReconcile(null));
   // Changement de tissu → mémorise + re-rend (les hôtes écoutent gift:meta).
@@ -856,7 +857,10 @@ function bindNewsletter() {
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || "server");
       input.style.display = "none"; btn.style.display = "none";
-      status.textContent = "Merci, vous êtes inscrit·e."; status.className = "footer__news-status is-ok";
+      status.textContent = ["created", "subscribed"].includes(data.saved)
+        ? "Merci, vous êtes inscrit·e."
+        : "Votre demande a été transmise à la boutique. L’inscription sera finalisée manuellement.";
+      status.className = "footer__news-status is-ok";
     } catch (e2) {
       status.textContent = e2.message === "rate_limit" ? "Trop de tentatives. Patientez quelques minutes." : "L'inscription n'a pas pu être enregistrée. Réessayez ou écrivez-nous à shop@mikadodeco.be.";
       status.className = "footer__news-status is-error";

@@ -29,6 +29,8 @@
        (params de filtre cat/sort/tag retirés). Toujours UN seul rel="canonical". */
     (function () {
       if (document.documentElement.hasAttribute('data-chair-catalog')) return;
+      // Le serveur a déjà défini la canonique du lot et de ses filtres.
+      if (new URLSearchParams(location.search).has('cursor')) return;
       var ORIGIN = "https://www.mikadodeco.be";
       var canon;
       /* handle / slug en minuscules : aligné sur le canonical normalisé injecté
