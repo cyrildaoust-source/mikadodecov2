@@ -38,7 +38,8 @@ export function selectionURL(value) {
   if (path === '/produits.html' && HANDLE.test(legacy || '') && legacy !== 'all') path = '/collections/' + legacy;
   if (['/collections/all','/collections/frontpage'].includes(path)) path = '/produits.html';
   const params = new URLSearchParams();
-  const chair = path === '/collections/chaises';
+  // Les collections filtrables (Chaises, sous-catégories) gardent leurs filtres au retour de fiche.
+  const chair = path.startsWith('/collections/');
   for (const key of ['brand','designer','cats','q','omit','tag','sort','page','cursor','shown',...(chair?['color','material','usage','feature','min','max','seat_min','seat_max','stock']:[])]) {
     const val = url.searchParams.get(key);
     if (!val) continue;

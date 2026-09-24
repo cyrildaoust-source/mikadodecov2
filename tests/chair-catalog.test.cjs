@@ -13,7 +13,7 @@ before(async()=>{
     if(!String(url).includes('chairs.test'))return realFetch(url,options);
     const {query,variables}=JSON.parse(options.body);
     if(query.includes('query GetProduct('))return Response.json({data:{product:node(1)}});
-    assert.match(query,/query (ChairCatalog|SearchCatalog|ScopedSearchCatalog)/);if(query.includes("query ChairCatalog"))reads++;
+    assert.match(query,/query (CollectionCatalog|SearchCatalog|ScopedSearchCatalog)/);if(query.includes("query CollectionCatalog"))reads++;
     if(fail)return new Response('offline',{status:503});
     const start=Number(variables.after||0),end=Math.min(start+50,65);
     const products={edges:Array.from({length:end-start},(_,i)=>({node:node(start+i+1)})),pageInfo:{hasNextPage:end<65,endCursor:String(end)}};
@@ -99,4 +99,25 @@ test('le retour de fiche conserve chaque filtre et la variante sans accepter une
   assert.equal(back.pathname,expected.pathname);assert.equal(back.hash,'#product-chaise-1');
   assert.deepEqual([...back.searchParams].sort(),[...expected.searchParams].sort());
   assert.equal(sourceSelection(new URL('/produit.html?returnTo=https://example.com',base)),'');
+});
+test('les sous-catégories reçoivent les mêmes filtres, avec leur propre chemin et leur titre',async()=>{
+  const {filterScope,filterScopeHandles}=require('../lib/filter-scopes');
+  assert.ok(filterScope('fauteuils')&&filterScope('verres-carafes'));
+  for(const handle of ['tables-de-salle-a-manger','tables','sieges','outdoor','hay','nouveautes','promotions'])assert.equal(filterScope(handle),null,handle);
+  assert.ok(filterScopeHandles().length>20);
+  const html=await (await realFetch(base+'/collections/fauteuils?color=noir')).text();
+  const data=seed(html);
+  assert.equal(data.scope.basePath,'/collections/fauteuils');
+  assert.match(html,/<h1 data-plp-title data-context>Fauteuils<\/h1>/);
+  assert.match(html,/action="\/collections\/fauteuils#grille"/);
+  assert.match(html,/aria-label="Filtrer : Fauteuils"/);
+  assert.match(html,/href="\/collections\/fauteuils#grille" data-chair-link>Tout effacer/);
+  assert.doesNotMatch(html,/Trouvez votre chaise|\/collections\/chaises\?/);
+  assert.match(html,/returnTo=%2Fcollections%2Ffauteuils%3Fcolor%3Dnoir/);
+  assert.match(html,/content="noindex,follow"/);
+  const api=await realFetch(base+'/api/catalog/fauteuils?brand=hay');
+  assert.equal(api.status,200);assert.equal((await api.json()).scope.handle,'fauteuils');
+  assert.equal((await realFetch(base+'/api/catalog/tables-de-cafe')).status,404);
+  const {selectionURL}=await import('../v3/navigation.mjs');
+  assert.equal(selectionURL('/collections/fauteuils?color=noir&min=100&stock=1'),'/collections/fauteuils?color=noir&min=100&stock=1');
 });

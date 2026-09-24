@@ -6,6 +6,7 @@ const { families, seatingIcons, nextPageUrl, renderFamilyPage } = require('../li
 const template = fs.readFileSync(path.join(__dirname, '../templates/family-page.html'), 'utf8');
 const realFetch = global.fetch;
 const requests = [];
+const catalogRequests = [];
 const productRequests = [];
 let server, base;
 let vendorsUnavailable = false;
@@ -51,6 +52,7 @@ before(async () => {
     } : {
       edges: [
         { node: { id: 'gid://shopify/Collection/1', handle: 'verres-carafes', title: 'Verres et carafes', products: { edges: [{ node: { id: 'gid://shopify/Product/1' } }] } } },
+        { node: { id: 'gid://shopify/Collection/4', handle: 'nouveautes', title: 'Nouveautés', products: { edges: [{ node: { id: 'gid://shopify/Product/2' } }] } } },
         { node: { id: 'gid://shopify/Collection/2', handle: 'empty-collection', title: 'Collection vide', products: { edges: [] } } },
       ], pageInfo: { hasNextPage: true, endCursor: 'collection-page-2' },
     } } });
@@ -66,6 +68,14 @@ before(async () => {
         seo: { title: 'Titre Shopify & design', description: 'Description Shopify & utile' },
       } } });
       return Response.json({ data: { product: { ...product(100), handle: variables.handle } } });
+    }
+    // Sous-catégories filtrables : toute la collection est lue, puis filtrée sur le serveur.
+    if (/query CollectionCatalog\(/.test(query)) {
+      catalogRequests.push(variables);
+      return Response.json({ data: { collection: {
+        handle: variables.handle, title: 'Verres et carafes', description: 'Verres et carafes de design.',
+        products: { edges: Array.from({ length: 30 }, (_, i) => ({ node: { ...product(i + 1), tags: (i + 1) % 2 ? [] : ['verrerie'] } })), pageInfo: { hasNextPage: false, endCursor: null } },
+      } } });
     }
     assert.match(query, /query GetCollectionProducts/);
     requests.push(variables);
@@ -223,9 +233,11 @@ test('glass inspiration and server-rendered destination preserve the glassware f
   assert.equal(families.accessoires.inspiration.items[2].href, '/collections/verres-carafes?tag=verrerie');
   const { response, html } = await page('/collections/verres-carafes?tag=verrerie');
   assert.equal(response.status, 200);
-  assert.deepEqual(requests.at(-1).filters, [{ tag: 'verrerie' }]);
+  assert.equal(catalogRequests.at(-1).handle, 'verres-carafes');
   assert.match(html, /data-ssr="1"/);
+  assert.match(html, /aria-label="Filtrer : Verres &amp; carafes"/);
   assert.ok(html.includes('/produit.html?handle=family-product-24'));
+  assert.doesNotMatch(html, /handle=family-product-23(?:&|"|%)/, 'the glassware tag is applied on the server');
 });
 
 test('all 28 family brand cards preserve their family in the destination', async () => {
@@ -526,7 +538,7 @@ test('la fiche utilise les métadonnées SEO Shopify dans le HTML servi aux robo
 });
 
 test('les lots de collections sont liés sans JavaScript avec une canonique propre et les filtres conservés', async () => {
-  const first = await page('/collections/verres-carafes?tag=verrerie');
+  const first = await page('/collections/nouveautes?tag=verrerie');
   const next = first.html.match(/class="plp-page" href="([^"]+)">Voir plus de produits/)[1].replace(/&amp;/g, '&');
   const url = new URL(next, base);
   assert.equal(url.searchParams.get('tag'), 'verrerie');
@@ -544,7 +556,7 @@ test('les lots de collections sont liés sans JavaScript avec une canonique prop
 });
 
 test('les erreurs Shopify retournent 503 sans cache tandis qu’une fiche retirée garde 404', async () => {
-  for (const url of ['/produit.html?handle=chaise-hay-rey-chair', '/collections/verres-carafes?cursor=unavailable']) {
+  for (const url of ['/produit.html?handle=chaise-hay-rey-chair', '/collections/nouveautes?cursor=unavailable']) {
     const { response } = await page(url);
     assert.equal(response.status, 503);
     assert.equal(response.headers.get('cache-control'), 'no-store');

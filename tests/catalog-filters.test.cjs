@@ -135,5 +135,5 @@ test('le parcours serveur refuse les lots incomplets, suit toutes les variantes 
   assert.equal(result.products.length,1);assert.equal(variantReads,1);
   await assert.rejects(readChairCatalog(async()=>{throw new Error('offline')},()=>{}),/offline/);
   await assert.rejects(readChairCatalog(async()=>({products:{edges:[],pageInfo:{hasNextPage:true,endCursor:'same'}}}),()=>{}),/did not advance/);
-  await assert.rejects(readChairCatalog(async()=>({products:{edges:[{node:raw}],pageInfo:{hasNextPage:false}}}),()=>{}),/Incomplete chair variants/);
+  await assert.rejects(readChairCatalog(async()=>({products:{edges:[{node:raw}],pageInfo:{hasNextPage:false}}}),()=>{}),/Incomplete variants/);
 });
