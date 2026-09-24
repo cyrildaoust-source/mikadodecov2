@@ -73,7 +73,7 @@ Les prix sont indiqués en euros, **toutes taxes comprises (TVA belge incluse)**
 
 Mikado livre **uniquement en Belgique** et propose le **retrait au showroom** (Rue du Doyenné 75 — 1180 Uccle).
 
-La **livraison est offerte en Belgique dès 1 500 € d'achats** ; en deçà, les frais de livraison standard s'élèvent à **50 €** (montant affiché et confirmé avant la validation du paiement). Aucune livraison hors Belgique n'est proposée à ce jour.
+Les frais de livraison en Belgique s'élèvent à **50 €** par commande, quel que soit son montant (montant affiché et confirmé avant la validation du paiement). Aucune livraison hors Belgique n'est proposée à ce jour.
 
 Les **risques** liés au bien (perte, détérioration) sont transférés au client lorsque celui-ci, ou un transporteur désigné par lui, prend physiquement possession du bien. Pour les livraisons assurées par un transporteur choisi par Mikado, le transfert des risques s'opère à la remise au client.
 

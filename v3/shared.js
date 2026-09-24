@@ -703,7 +703,7 @@ function bindCartDrawer() {
         return `<p class="cartd__tier">Remise maximale atteinte · <strong>−${maxPct}%</strong></p>`;
       })()}
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
-      <p class="cartd__note">${discount > 0 ? "Remise appliquée automatiquement · " : ""}Livraison offerte dès 1 500 €</p>
+      <p class="cartd__note">${discount > 0 ? "Remise appliquée automatiquement · " : ""}Livraison en Belgique : 50 €</p>
       <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Ma sélection →</a>
       <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
     foot.querySelectorAll("[data-gift-variant]").forEach((s) => { const v = selVals[s.getAttribute("data-gift-variant")]; if (v) s.value = v; });

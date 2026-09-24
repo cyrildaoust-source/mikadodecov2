@@ -762,8 +762,6 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .sel-tier { display: flex; align-items: center; gap: 9px; background: var(--accent-soft); color: var(--ink); font-size: var(--fs-small); padding: 10px 13px; margin: 12px 0; }
 .sel-tier::before { content: ""; width: 7px; height: 7px; background: var(--accent); flex: none; }
 .sel-tier strong { color: var(--accent-ink); font-weight: 700; }
-/* Livraison offerte : accent au lieu du gris italique */
-.sel-row--delivery-calc.is-free > span:last-child { color: var(--accent-ink); font-style: normal; font-weight: 600; }
 /* Legacy .sel-opt classes kept for backward-compat — toggle markup
    removed in V1.1, but other pages or tests might still reference them. */
 .sel-opt { margin: 18px 0; }
