@@ -224,15 +224,6 @@
   padding-left: clamp(20px, 2vw, 32px);
   border-left: 1px solid rgba(26, 25, 22, 0.1);
 }
-.mm-side__label {
-  font-family: var(--sans-product);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-}
-.mm-side__rule { height: 1px; background: var(--line); margin: 2px 0 6px; }
 /* Coup de cœur photo · keeps the 16/10 frame but anchors the visible
    slice to the top of the source. The editorial blog images are often
    portrait (e.g. ref-feat-2.webp 1200×1600) — without object-position
@@ -343,14 +334,6 @@
 }
 
 .drawer__foot { padding: 18px 0 24px; }
-.drawer__foot-label {
-  font-family: var(--sans-product);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-  margin-bottom: 8px;
-}
 .drawer__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); margin-bottom: 10px; }
 .drawer__foot-title {
   font-family: var(--serif);

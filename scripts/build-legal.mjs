@@ -5,7 +5,7 @@
  * de docs/legal/ (rédigées par l'avocate + Cyril). Le contenu juridique est
  * NETTOYÉ (notes internes / encadrés « à retirer » / en-têtes de brouillon),
  * converti md→HTML, puis assemblé dans le gabarit de la DA (même <head> que
- * contact.html, mêmes classes .pagehead/.eyebrow/.prose, header/footer injectés
+ * contact.html, mêmes classes .pagehead/.prose (sans étiquette au-dessus du titre), header/footer injectés
  * par shared.js). Modèle calqué sur build-journal.mjs.
  *
  *   mentions-legales.md ............. → v3/mentions-legales.html
@@ -302,7 +302,6 @@ function head(cfg, out) {
 }
 
 const pagehead = (cfg) => `    <div class="pagehead">
-      <span class="eyebrow">Informations légales</span>
       <h1 class="serif">${esc(cfg.h1)}</h1>
       <p>${esc(cfg.intro)}</p>
     </div>`;

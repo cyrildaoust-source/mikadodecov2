@@ -356,9 +356,8 @@ export function giftOfferHTML(preview) {
     }
   }
   return `<section class="gifto" aria-label="Offre cadeau du Mois Verner Panton">
-      <p class="gifto__eyebrow">Mois Verner Panton · jusqu'au 30 septembre</p>
       <div aria-live="polite">${msg}${body}</div>
-      <p class="gifto__foot">Offres non cumulables entre elles — la plus avantageuse s'applique automatiquement.</p>
+      <p class="gifto__foot">Mois Verner Panton, jusqu'au 30 septembre. Offres non cumulables entre elles — la plus avantageuse s'applique automatiquement.</p>
     </section>`;
 }
 let _giftBound = false;

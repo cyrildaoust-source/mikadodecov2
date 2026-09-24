@@ -16,6 +16,10 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import sharp from 'sharp';
 
+// Aucune étiquette au-dessus du titre (règle de DESIGN.md) : seule la durée de
+// lecture est gardée, sous le titre. « Maison · 6 min » → « 6 min de lecture ».
+const readTime = (meta) => { const m = String(meta || '').match(/(\d+)\s*min/); return m ? `${m[1]} min de lecture` : ''; };
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = join(__dirname, '..', 'v3', 'journal');
 const ORIGIN = 'https://www.mikadodeco.be';
@@ -126,8 +130,8 @@ async function renderArticle(slug, a) {
     <article class="article" data-article>
       <div data-breadcrumb></div>
       <div data-body>
-        <div class="article__meta">${esc(a.meta)}</div>
         <h1 class="article__title">${esc(a.title)}</h1>
+        ${readTime(a.meta) ? `<p class="jread article__read">${esc(readTime(a.meta))}</p>` : ""}
         <p class="article__lead">${esc(a.lead)}</p>
         <img class="article__hero" src="${attrEsc(a.img)}" alt="" />
         <div class="prose">${bodyHtml}</div>
