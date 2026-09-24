@@ -219,6 +219,26 @@ function injectNavigation(html, trail, currentURL, source = '') {
   const ld = JSON.stringify(navigation.breadcrumbData(trail, currentURL)).replace(/</g, '\\u003c');
   return html.replace('</head>', () => '<script type="application/ld+json" id="navigation-breadcrumb">' + ld + '</script>\n</head>');
 }
+// Pages de contenu : fil rendu par le serveur, avec son JSON-LD (audit du 24 septembre).
+const HOME = { label: 'Accueil', href: '/' };
+const CONTENT_TRAILS = {
+  'journal.html': [HOME, { label: 'Le journal' }],
+  'studio.html': [HOME, { label: 'Mikado Studio' }],
+  'materiaux.html': [HOME, { label: 'Matières' }],
+  'rendez-vous.html': [HOME, { label: 'Rendez-vous' }],
+  'contact.html': [HOME, { label: 'Contact' }],
+  'nuancier-fermob.html': [HOME, { label: 'Marques', href: '/marques.html' }, { label: 'Fermob', href: '/collections/fermob' }, { label: 'Nuancier Fermob' }],
+  'mentions-legales.html': [HOME, { label: 'Mentions légales' }],
+  'conditions-generales-de-vente.html': [HOME, { label: 'Conditions générales de vente' }],
+  'politique-cookies.html': [HOME, { label: 'Politique cookies' }],
+  'politique-et-vie-privee.html': [HOME, { label: 'Politique de confidentialité' }],
+};
+function contentPageTrail(rel, html) {
+  if (CONTENT_TRAILS[rel]) return CONTENT_TRAILS[rel];
+  const article = /^journal\/[^/]+\.html$/.test(rel) && html.match(/<h1 class="article__title">([^<]+)<\/h1>/);
+  if (article) return [HOME, { label: 'Le journal', href: '/journal.html' }, { label: article[1].replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"') }];
+  return null;
+}
 function listingNavigation(html, req, hints = {}) {
   const url = new URL(req.originalUrl, ORIGIN);
   return injectNavigation(html, navigation.listingTrail(url, navigationRules, hints), url.pathname + url.search);
@@ -1052,6 +1072,8 @@ app.get(/.*/, async (req, res, next) => {
     try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
   }
   if (['marques.html', 'designers.html'].includes(rel)) raw = listingNavigation(raw, req);
+  const contentTrail = contentPageTrail(rel, raw);
+  if (contentTrail) raw = injectNavigation(raw, contentTrail, req.path);
   res.set('Cache-Control', 'public, max-age=0, must-revalidate');
   res.vary('Accept');
   // Agents demandant text/markdown : extrait markdown du contenu de page (AVANT
@@ -1106,6 +1128,7 @@ async function sendSearchPage(req,res) {
   try {data=await getSearchPage(req.query);}
   catch(error) {console.warn('[search-page]',error.message);data={...searchCatalog([],req.query),error:true};res.status(503);}
   let html=renderSearchPage(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr);
+  html=listingNavigation(html,req);
   html=renderWithOg(html,{title:'Votre recherche · Mikado Deco',description:'Trouvez votre pièce de design par finition, dimensions, capacité et budget.',url:ORIGIN+data.resultsUrl,image:OG_DEFAULT});
   html=html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
   return res.set('Cache-Control','no-store').send(injectChrome(html,'produits.html',true));

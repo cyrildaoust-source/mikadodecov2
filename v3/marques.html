@@ -76,11 +76,9 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, buildShaReady, versionedImg, breadcrumbHTML } from "/shared.js";
+    import { initShell, buildShaReady, versionedImg } from "/shared.js";
     import { brandCardHTML } from "/brand-card.mjs";
     initShell({ active: "Marques", transparentNav: true });
-    document.querySelector("[data-breadcrumb]").innerHTML =
-      breadcrumbHTML([{ label: "Accueil", href: "/" }, { label: "Marques" }]);
 
     const grid = document.querySelector("[data-brandgrid]");
     const countEl = document.querySelector("[data-brand-count]");

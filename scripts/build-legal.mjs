@@ -301,7 +301,8 @@ function head(cfg, out) {
   <link rel="stylesheet" href="/styles.css" />`;
 }
 
-const pagehead = (cfg) => `    <div class="pagehead">
+const pagehead = (cfg) => `    <div data-breadcrumb></div>
+    <div class="pagehead">
       <h1 class="serif">${esc(cfg.h1)}</h1>
       <p>${esc(cfg.intro)}</p>
     </div>`;

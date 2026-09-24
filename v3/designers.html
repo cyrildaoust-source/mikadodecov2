@@ -89,10 +89,8 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, escapeHtml, breadcrumbHTML } from "/shared.js";
+    import { initShell, escapeHtml } from "/shared.js";
     initShell({ active: "Designers", transparentNav: true });
-    document.querySelector("[data-breadcrumb]").innerHTML =
-      breadcrumbHTML([{ label: "Accueil", href: "/" }, { label: "Designers" }]);
 
     const featuredGrid = document.querySelector("[data-featured-grid]");
     const azBar        = document.querySelector("[data-az-bar]");

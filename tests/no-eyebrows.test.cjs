@@ -22,6 +22,7 @@ const banned=[
   [/class="jcat\b|\.jcat\b/,'étiquette de catégorie au-dessus des titres du journal'],
   [/article__meta/,'surtitre des articles'],
   [/mm-side__label|drawer__foot-label/,'étiquette au-dessus du coup de cœur du menu'],
+  [/<(p|span|div) class="lab"/,'étiquette « lab » posée au-dessus d\'un titre (réservée aux titres h2)'],
 ];
 test('aucun surtitre dans le code du site',()=>{
   const hits=[];

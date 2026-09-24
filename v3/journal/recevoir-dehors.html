@@ -57,20 +57,10 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, breadcrumbHTML } from "/shared.js";
+    import { initShell } from "/shared.js";
     initShell({ active: "Le journal", transparentNav: false });
 
-    // Fil d'Ariane (Accueil › Le journal › titre) — seul élément hydraté côté
-    // client (navigationnel, non critique SEO). Le titre est baké en dur.
-    const PAGE_TITLE = "Recevoir dehors, sans en faire trop";
-    const crumbEl = document.querySelector("[data-breadcrumb]");
-    if (crumbEl) {
-      crumbEl.innerHTML = breadcrumbHTML([
-        { label: "Accueil", href: "/" },
-        { label: "Le journal", href: "/journal.html" },
-        { label: PAGE_TITLE },
-      ]);
-    }
+    // Fil d'Ariane rendu par le serveur (Accueil › Le journal › titre), avec son JSON-LD.
 
     /* Reading progress bar — fills as the article body scrolls past;
        hidden when the article fits within one screen. Passive + rAF. */
