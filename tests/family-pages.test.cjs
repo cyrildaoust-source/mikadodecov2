@@ -222,7 +222,8 @@ test('chairs belong to Assises only, and unavailable models do not block the sel
   const initial = JSON.parse(assises.html.match(/id="seating-icons-initial">([\s\S]*?)<\/script>/)[1]);
   assert.equal(initial.items.length, 2);
   assert.ok(initial.items.every(item => !['chaise-standard', 'chaise-hay-rey-chair'].includes(item.handle)));
-  assert.deepEqual(productRequests.slice(beforeRequests), seatingIcons.handles.filter(handle => !productRequests.slice(0, beforeRequests).includes(handle)), 'models already loaded by Mobilier reuse the product cache');
+  // Une fiche en panne est réessayée par le client Shopify : compter les modèles distincts.
+  assert.deepEqual([...new Set(productRequests.slice(beforeRequests))], seatingIcons.handles.filter(handle => !productRequests.slice(0, beforeRequests).includes(handle)), 'models already loaded by Mobilier reuse the product cache');
   assert.ok(assises.html.includes('/produit.html?handle=chaise-panton'));
   const arts = await page('/collections/accessoires');
   assert.doesNotMatch(arts.html, /data-icones-sec|id="family-icons"/);
