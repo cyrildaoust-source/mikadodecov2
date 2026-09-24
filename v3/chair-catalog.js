@@ -1,8 +1,11 @@
 import {initShell,productCard,fetchPromos,applyPromos,loadNavigation,paintBreadcrumb,restoreSelectionPosition} from '/shared.js';
 import {listingTrail} from '/navigation.mjs';
-import {filterControls,chairPagination,chairURL,emptyChairs} from '/catalog-filters-view.mjs';
+import {filterControls,chairPagination,scopeURL,emptyState,CHAIRS_SCOPE} from '/catalog-filters-view.mjs';
 
 const initial = JSON.parse(document.querySelector('#chair-catalog-initial').textContent);
+// Collection filtrée (Chaises ou sous-catégorie) : chemin, API et libellés.
+const scope = initial.scope || CHAIRS_SCOPE;
+const pageURL = (state, page) => scopeURL(scope, state, page);
 const controls = document.querySelector('[data-chair-controls]');
 const grid = document.querySelector('[data-grid]');
 const pagination = document.querySelector('[data-pagination]');
@@ -16,7 +19,7 @@ fetchPromos().then(value=>{promos=value;applyPromos(promos);}).catch(()=>{});
 function updateBreadcrumb() {
   if(!navigation)return;
   const brandName=current.state.brand.length===1?current.facets.brand.find(v=>v.value===current.state.brand[0])?.label:'';
-  paintBreadcrumb(listingTrail(new URL(chairURL(current.state),location.origin),navigation,{title:'Chaises',brandName}));
+  paintBreadcrumb(listingTrail(new URL(pageURL(current.state),location.origin),navigation,{title:scope.label,brandName}));
 }
 function syncOffset() {
   const height=document.querySelector('.chrome')?.getBoundingClientRect().height||100;
@@ -38,15 +41,15 @@ function paint(data,{keepOpen=false}={}) {
   const focus=controls.contains(active)?{name:active.name,value:active.value,group:active.closest('details')?.dataset.filterGroup,summary:active.tagName==='SUMMARY'}:null;
   const mobileOpen=keepOpen&&controls.querySelector('.catalog-filters')?.classList.contains('is-open');
   current=data;
-  const title=data.state.brand.length===1?`Chaises · ${data.facets.brand.find(b=>b.value===data.state.brand[0])?.label||'Sélection'}`:'Chaises';
+  const title=data.state.brand.length===1?`${scope.label} · ${data.facets.brand.find(b=>b.value===data.state.brand[0])?.label||'Sélection'}`:scope.label;
   for(const heading of document.querySelectorAll('[data-plp-title],.chair-catalog__compact h1'))heading.textContent=title;
-  controls.innerHTML=filterControls(data);
+  controls.innerHTML=filterControls({...data,scope});
   for(const el of controls.querySelectorAll('details'))el.open=open.includes(el.dataset.filterGroup);
   const form=controls.querySelector('form');form.classList.toggle('is-open',Boolean(mobileOpen));
   form.querySelector('[data-filters-toggle]').setAttribute('aria-expanded',String(Boolean(mobileOpen)));
   document.documentElement.classList.toggle('filters-locked',Boolean(mobileOpen)&&matchMedia('(max-width: 760px)').matches);
-  grid.innerHTML=data.items.length?data.items.map(p=>productCard(p,chairURL(data.state))).join(''):emptyChairs();
-  pagination.innerHTML=chairPagination(data);pagination.hidden=data.totalPages<=1;
+  grid.innerHTML=data.items.length?data.items.map(p=>productCard(p,pageURL(data.state))).join(''):emptyState(scope);
+  pagination.innerHTML=chairPagination({...data,scope});pagination.hidden=data.totalPages<=1;
   document.documentElement.toggleAttribute('data-chair-continuation',data.state.page>1);
   if(focus) {
     const target=[...controls.querySelectorAll('input,select,summary')].find(el=>focus.summary?el.tagName==='SUMMARY'&&el.closest('details')?.dataset.filterGroup===focus.group:el.name===focus.name&&el.value===focus.value);
@@ -59,11 +62,11 @@ function formURL() {
   const q=new URLSearchParams();
   for(const [key,value] of new FormData(controls.querySelector('form')))if(value!==''&&!(key==='sort'&&value==='pop'))q.append(key,value);
   for(const key of ['brand','color','material','usage','feature'])if(q.has(key)){const values=q.getAll(key);q.set(key,values.join(','));}
-  return '/collections/chaises'+(q.size?'?'+q:'');
+  return scope.basePath+(q.size?'?'+q:'');
 }
 async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
   const next=new URL(url,location.origin);
-  if(next.pathname!=='/collections/chaises'||next.origin!==location.origin)return;
+  if(next.pathname!==scope.basePath||next.origin!==location.origin)return;
   // Un chargement initial de page 2 ne contient pas de photo de bandeau. Le retour
   // à la découverte passe alors par le rendu serveur complet de la page 1.
   if(!(Number(next.searchParams.get('page'))>1)&&!document.querySelector('.subhero')) {
@@ -74,12 +77,12 @@ async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
   pending?.abort();pending=new AbortController();
   status.textContent='Actualisation de votre sélection…';grid.setAttribute('aria-busy','true');
   try {
-    const r=await fetch('/api/catalog/chaises'+next.search,{signal:pending.signal});
+    const r=await fetch('/api/catalog/'+encodeURIComponent(scope.handle)+next.search,{signal:pending.signal});
     if(!r.ok)throw new Error('catalog unavailable');
     const data=await r.json();
     if(!Array.isArray(data.items)||!data.state||!data.facets)throw new Error('invalid catalog');
     if(request!==generation)return;
-    if(historyMode!=='none')history[historyMode==='replace'?'replaceState':'pushState'](null,'',chairURL(data.state));
+    if(historyMode!=='none')history[historyMode==='replace'?'replaceState':'pushState'](null,'',pageURL(data.state));
     paint(data,{keepOpen});
     status.textContent=`${data.total} modèle${data.total>1?'s':''} dans votre sélection.`;
     if(scroll)scrollToResults();

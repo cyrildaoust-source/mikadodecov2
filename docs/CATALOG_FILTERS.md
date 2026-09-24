@@ -1,6 +1,11 @@
 # Filtres Chaises — contrat site / importer
 
-Pilote du 16 septembre 2026, limité à `/collections/chaises`. Les autres familles conservent leurs filtres existants. Le bandeau, les cartes, les boutons et la pagination de 60 produits suivent les composants du site. Le tri initial utilise l’ordre `BEST_SELLING` de Shopify, libellé « Les plus populaires » ; il ne remplace pas les sélections éditoriales du propriétaire.
+Pilote du 16 septembre 2026 sur `/collections/chaises`, étendu le 24 septembre aux sous-catégories du méga menu (Fauteuils, Suspensions, Vases, Verres & carafes…) : la liste est dans `lib/filter-scopes.js`. Restent pour l’instant sur leur liste d’origine :
+- les tables, qui ont leurs propres règles intérieur/extérieur (`lib/table-collections.js`) ;
+- Canapés : 712 modèles, environ 11 s de lecture complète à froid ;
+- les familles, Jardin, Assises, les marques, Promotions, le catalogue et la recherche.
+
+Chaque collection filtrable garde son titre et sa description Shopify, son bandeau, son fil d’Ariane et son adresse (`/collections/<handle>`). L’API correspondante est `/api/catalog/<handle>`. L’index complet d’une collection reste frais 5 min. Pendant 30 min encore, la version précédente est servie tout de suite, pendant que la collection se relit. Le bandeau, les cartes, les boutons et la pagination de 60 produits suivent les composants du site. Le tri initial utilise l’ordre `BEST_SELLING` de Shopify, libellé « Les plus populaires » ; il ne remplace pas les sélections éditoriales du propriétaire.
 
 ## Parcours et règles
 

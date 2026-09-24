@@ -20,8 +20,9 @@ const { pickNewArrivals, pickBestSellers } = require('./lib/home-rails');
 const { adminClient, subscribeInShopify, notifyByEmail } = require('./lib/newsletter');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = require('./lib/catalog-landing');
-const { chairQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readChairCatalog, filterCatalog } = require('./lib/chair-catalog');
+const { scopeQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readScopeCatalog, filterCatalog } = require('./lib/chair-catalog');
 const { renderChairCatalog } = require('./lib/chair-catalog-page');
+const { filterScope } = require('./lib/filter-scopes');
 const chairViewReady = import('./v3/catalog-filters-view.mjs');
 const {parseSearch} = require('./lib/search-intent');
 const {searchCatalog} = require('./lib/search-catalog');
@@ -572,7 +573,11 @@ app.get('/produit.html', async (req, res) => {
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
-  if (handle === 'chaises') return sendChairCatalog(req, res);
+  if (!req.query.coll) {
+    await _navigationReady;
+    const scope = filterScope(handle, navigationRules);
+    if (scope) return sendScopeCatalog(req, res, scope);
+  }
   if (COLLECTION_ALIASES.has(handle)) {
     await _navigationReady;
     return res.redirect(301, navigation.selectionURL(req.originalUrl) || '/produits.html');
@@ -1145,7 +1150,7 @@ const cartLimiter = rateLimit({
 
 
 
-const CHAIR_QUERY = chairQuery(PRODUCT_CARD_FIELDS);
+const SCOPE_QUERY = scopeQuery(PRODUCT_CARD_FIELDS);
 async function sendSearchPage(req,res) {
   const [,view]=await Promise.all([_chromeReady,searchViewReady,_navigationReady]);let data;
   try {data=await getSearchPage(req.query);}
@@ -1162,44 +1167,58 @@ app.get('/api/search',async(req,res)=>{
   try {res.json(await getSearchPage(req.query));}
   catch(error){console.warn('[search-api]',error.message);res.status(503).json({error:'Recherche momentanément indisponible.'});}
 });
-let chairLoading = null;
-async function getChairIndex() {
-  return cached('chairs:index', async () => {
-    if (!chairLoading) chairLoading = readChairCatalog(
-      async after => (await shopifyFetch(CHAIR_QUERY, { after })).collection,
-      node => {
-        const card = mapProduct(node);
-        card.variants.forEach(variant => { variant.image = shopifyResize(variant.image, CARD_IMAGE_WIDTH); });
-        return card;
-      },
-      async (handle, after) => (await shopifyFetch(CHAIR_VARIANT_QUERY, { handle, after })).product?.variants,
-    ).finally(() => { chairLoading = null; });
-    return chairLoading;
-  });
+// Index filtrable par collection (Chaises et les sous-catégories) : toute la collection
+// et toutes ses variantes, calculés une fois et frais 5 min. Un seul chargement à la fois
+// par collection ; /api/revalidate vide ces index.
+const scopeLoading = new Map();
+const SCOPE_FRESH = 5 * 60_000, SCOPE_STALE = 30 * 60_000;
+function loadScopeIndex(handle) {
+  if (!scopeLoading.has(handle)) scopeLoading.set(handle, readScopeCatalog(
+    async after => (await shopifyFetch(SCOPE_QUERY, { handle, after })).collection,
+    node => {
+      const card = mapProduct(node);
+      card.variants.forEach(variant => { variant.image = shopifyResize(variant.image, CARD_IMAGE_WIDTH); });
+      return card;
+    },
+    async (productHandle, after) => (await shopifyFetch(CHAIR_VARIANT_QUERY, { handle: productHandle, after })).product?.variants,
+  ).then(data => { _cache['catalog:index:' + handle] = { data, expiry: Date.now() + SCOPE_FRESH }; return data; })
+    .finally(() => { scopeLoading.delete(handle); }));
+  return scopeLoading.get(handle);
 }
-async function getChairPage(query) {
-  const [{collection,products},{DISPLAY_PAGE_SIZE}] = await Promise.all([getChairIndex(),import('./v3/catalog-pagination.mjs')]);
-  return {collection,...filterCatalog(products,query,DISPLAY_PAGE_SIZE)};
+async function getScopeIndex(handle) {
+  const entry = _cache['catalog:index:' + handle], now = Date.now();
+  if (entry && entry.expiry > now) return entry.data;
+  const load = loadScopeIndex(handle);
+  // Index expiré depuis peu : le visiteur reçoit la version précédente pendant que la
+  // collection se relit (plusieurs secondes pour les plus grandes). Au-delà de 30 min,
+  // ou si la relecture échoue longtemps, la page attend des données fraîches.
+  if (entry && now - entry.expiry < SCOPE_STALE) { load.catch(error => console.warn('[catalog-refresh]', handle, error.message)); return entry.data; }
+  return load;
 }
-async function sendChairCatalog(req,res) {
+async function getScopePage(scope, query) {
+  const [{collection,products},{DISPLAY_PAGE_SIZE}] = await Promise.all([getScopeIndex(scope.handle),import('./v3/catalog-pagination.mjs')]);
+  return {scope,collection,...filterCatalog(products,query,DISPLAY_PAGE_SIZE)};
+}
+async function sendScopeCatalog(req,res,scope) {
   await Promise.all([_chromeReady,_navigationReady]);
   const view = await chairViewReady;
   let data;
-  try { data = await getChairPage(req.query); }
+  try { data = await getScopePage(scope, req.query); }
   catch(error) {
-    console.warn('[chair-catalog]',error.message);
-    data = {...filterCatalog([],req.query),error:true};
+    console.warn('[catalog]',scope.handle,error.message);
+    data = {scope,...filterCatalog([],req.query),error:true};
   }
-  const url = ORIGIN + view.chairURL(data.state);
+  const url = ORIGIN + view.scopeURL(scope,data.state);
   let html = fs.readFileSync(PRODUITS_TEMPLATE,'utf8');
-  const photo = getCollectionHero('chaises');
+  const photo = getCollectionHero(scope.handle);
+  const brandName = data.state.brand.length===1 ? data.facets.brand.find(b=>b.value===data.state.brand[0])?.label : '';
   html = renderChairCatalog(html,data,view,plpCardSsr);
   html = injectCollectionHero(html,photo);
-  html = renderWithOg(html,{title:'Chaises de design · Mikado Deco',description:'Trouvez votre chaise par marque, prix, couleur, matière et usage. Une sélection de design chez Mikado, à Uccle.',image:photo?.img || OG_DEFAULT,url});
-  html = listingNavigation(html,req,{title:'Chaises',brandName:data.state.brand.length===1 ? data.facets.brand.find(b=>b.value===data.state.brand[0])?.label : ''});
+  html = renderWithOg(html,{title:scope.ogTitle,description:scope.ogDescription,image:photo?.img || OG_DEFAULT,url});
+  html = listingNavigation(html,req,{title:scope.label,brandName});
   if (data.error) {
-    html = html.replace(view.emptyChairs(),`<p class="plp-empty">Impossible de charger les chaises pour le moment. <a href="${ogEscape(req.originalUrl)}">Réessayer</a>.</p>`);
-    res.status(503).set('Cache-Control','no-store');
+    html = html.replace(view.emptyState(scope),`<p class="plp-empty">${ogEscape(scope.unavailable)} <a href="${ogEscape(req.originalUrl)}">Réessayer</a>.</p>`);
+    res.status(503).set({'Cache-Control':'no-store','Retry-After':'60'});
   } else {
     const {state}=data;
     const filtered = state.q || state.brand.length>1 || state.color.length || state.material.length || state.usage.length || state.feature.length || state.stock || state.tag || state.sort!=='pop' || state.min!==null || state.max!==null || state.seat_min!==null || state.seat_max!==null;
@@ -1209,9 +1228,12 @@ async function sendChairCatalog(req,res) {
   }
   return res.send(injectChrome(html,'produits.html',data.state.page===1));
 }
-app.get('/api/catalog/chaises',async (req,res)=>{
-  try { res.set('Cache-Control','no-store').json(await getChairPage(req.query)); }
-  catch(error) { console.warn('[chair-api]',error.message);res.status(503).json({error:'Les chaises ne peuvent pas être chargées. Réessayez.'}); }
+app.get('/api/catalog/:handle',async (req,res)=>{
+  await _navigationReady;
+  const scope = filterScope(req.params.handle, navigationRules);
+  if (!scope) return res.status(404).json({error:'catalog_not_found'});
+  try { res.set('Cache-Control','no-store').json(await getScopePage(scope, req.query)); }
+  catch(error) { console.warn('[catalog-api]',scope.handle,error.message);res.status(503).json({error:'Cette sélection ne peut pas être chargée. Réessayez.'}); }
 });
 
 // ─── SHOPIFY: SEARCH QUERY (page « tous les résultats » /produits.html?q=) ──
@@ -1872,7 +1894,7 @@ app.post('/api/revalidate', (req, res) => {
   delete _cache['collections'];
   delete _cache['promos'];
   delete _cache['menu'];
-  delete _cache['chairs:index'];
+  for (const key of Object.keys(_cache)) if (key.startsWith('catalog:index:')) delete _cache[key];
   clearSearchCache();
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });
