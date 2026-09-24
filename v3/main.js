@@ -1,5 +1,6 @@
 /* Home page · mounts the shared shell, then fills the product rows. */
 import { initShell, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml, buildShaReady, versionedImg, loadBrandHandles } from "/shared.js";
+import { brandLogoSrc } from "/brand-logos.mjs";
 
 initShell({ active: "", transparentNav: true });
 
@@ -50,7 +51,7 @@ loadRows();
 fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
 /* Brand logo marquee + live "maisons" count, from the real vendor feed.
-   Tries /images/brands/<slug>.svg first; if missing, the <img> onerror
+   Tries the brand logo (brand-logos.mjs) first; if missing, the <img> onerror
    swaps itself for a Cormorant-italic wordmark (.brandmarquee__name).
    No console 404 noise — the swap is silent for the viewer. */
 function brandLogo(b, handleMap) {
@@ -58,7 +59,7 @@ function brandLogo(b, handleMap) {
   const handle = handleMap && handleMap[slug];
   const href = handle ? `/collections/${handle}` : `/produits.html?brand=${slug}`;
   const name = escapeHtml(b.name);
-  const src  = versionedImg(`/images/brands/${slug}.svg`);
+  const src  = versionedImg(brandLogoSrc(slug));
   return `<a class="brandmarquee__item" href="${href}" aria-label="${name}">`
     + `<img class="brandmarquee__logo" src="${src}" alt="${name}" loading="lazy" `
     + `onerror="this.outerHTML='<span class=&quot;brandmarquee__name&quot;>${name}</span>'" />`

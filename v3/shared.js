@@ -655,7 +655,7 @@ function bindCartDrawer() {
           <a class="cartd__name navigation-product-link" href="${href}">${escapeHtml(i.name || "")}</a>
           <div class="cartd__line">
             ${i.gift ? `<span class="cartd__giftchip">Cadeau</span>` : `<div class="cartd__qty">
-              <button class="cartd__qbtn" type="button" data-cartd-dec="${escapeHtml(i.variantId)}" aria-label="Diminuer la quantité">−</button>
+              <button class="cartd__qbtn" type="button" data-cartd-dec="${escapeHtml(i.variantId)}" data-cartd-idx="${idx}" aria-label="${qty > 1 ? "Diminuer la quantité" : "Retirer l'article"}">−</button>
               <span class="cartd__qval">${qty}</span>
               <button class="cartd__qbtn" type="button" data-cartd-inc="${escapeHtml(i.variantId)}" aria-label="Augmenter la quantité">+</button>
             </div>`}
@@ -776,7 +776,8 @@ function bindCartDrawer() {
     const dec = e.target.closest("[data-cartd-dec]");
     const inc = e.target.closest("[data-cartd-inc]");
     const rem = e.target.closest("[data-cartd-remove]");
-    if (dec) setCartQty(dec.dataset.cartdDec, cartQty(dec.dataset.cartdDec) - 1);
+    // « − » à 1 retire l'article (au lieu de rester bloqué à 1).
+    if (dec) { const n = cartQty(dec.dataset.cartdDec); if (n > 1) setCartQty(dec.dataset.cartdDec, n - 1); else removeFromCartAt(parseInt(dec.dataset.cartdIdx, 10)); }
     else if (inc) setCartQty(inc.dataset.cartdInc, cartQty(inc.dataset.cartdInc) + 1);
     else if (rem) removeFromCartAt(parseInt(rem.dataset.cartdRemove, 10));
   });
