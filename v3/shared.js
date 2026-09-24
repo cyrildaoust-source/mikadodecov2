@@ -438,11 +438,17 @@ export function loadNavigation() {
     return response.json();
   })).then(([data, curated, designers]) => createNavigation(data, curated.brands, designers.designers));
 }
+// N'écrit que si le contenu change : le fil rendu par le serveur reste en place (pas de flash).
+function setHTMLIfChanged(el, html) {
+  const next = document.createElement('template');
+  next.innerHTML = html;
+  if (el.innerHTML !== next.innerHTML) el.innerHTML = html;
+}
 export function paintBreadcrumb(trail, source = '') {
   const slot = document.querySelector('[data-breadcrumb]');
-  if (slot) slot.innerHTML = breadcrumbHTML(trail);
+  if (slot) setHTMLIfChanged(slot, breadcrumbHTML(trail));
   const back = document.querySelector('[data-selection-return]');
-  if (back) back.innerHTML = returnLinkHTML(source);
+  if (back) setHTMLIfChanged(back, returnLinkHTML(source));
   let schema = document.getElementById('navigation-breadcrumb');
   if (!schema) {
     schema = document.createElement('script');
@@ -452,7 +458,8 @@ export function paintBreadcrumb(trail, source = '') {
   const current = location.pathname === '/produit.html'
     ? '/produit.html?handle=' + encodeURIComponent(new URLSearchParams(location.search).get('handle') || '')
     : location.pathname + location.search;
-  schema.textContent = JSON.stringify(breadcrumbData(trail, current));
+  const data = JSON.stringify(breadcrumbData(trail, current));
+  if (schema.textContent !== data) schema.textContent = data;
 }
 // Recalcule les liens après une pagination sans toucher aux cartes partagées.
 export function syncProductLinks(root = document) {

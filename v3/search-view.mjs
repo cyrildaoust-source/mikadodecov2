@@ -22,7 +22,7 @@ export function searchPagination(data) {
 export function searchContent(data,renderCard) {
   const {state}=data;
   return `<section class="search-page__intro wrap">
-    <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a><span aria-hidden="true"> / </span><a href="/produits.html">Catalogue</a><span aria-hidden="true"> / </span><span aria-current="page">Recherche</span></nav>
+    <div data-breadcrumb></div>
     <div class="pagehead"><h1>Votre recherche.</h1><p>Un meuble, une finition, des dimensions, un budget.</p></div>
     <form class="search-page__form" action="/produits.html" method="get" role="search">
       <div class="field"><label for="catalog-search">Décrivez ce que vous cherchez</label><input id="catalog-search" type="search" name="q" value="${esc(state.q)}" maxlength="200" required placeholder="Table en chêne pour 6 personnes, 2 000 €" /></div>
