@@ -28,7 +28,7 @@ test('API selection, selected price and cover agree without reordering variants'
 test('SSR starts on the same cover variant, explicit and invalid URLs follow the shared rule',async()=>{
  for(const [query,expected] of [['',orange],['&variant=1',blue],['&variant=unknown',orange]]){
   const html=await(await realFetch(base+'/produit.html?handle=cover-selection'+query,{headers:{Accept:'text/html'}})).text();
-  const main=html.match(/<img class="pdp__main" src="([^"]+)"/);
+  const main=html.match(/<img class="pdp__main" data-main src="([^"]+)"/);
   assert.ok(main,'server-rendered image');assert.ok(main[1].startsWith(expected));
   assert.match(html,/import "\/product-variant.js"/);
  }

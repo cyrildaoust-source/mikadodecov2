@@ -86,6 +86,9 @@ const _chromeReady = import('./v3/chrome-template.js')
   .catch((e) => { console.warn('[chrome-ssr] import échoué:', e.message); _chrome = null; });
 // product-specs.mjs (ESM pur) importé comme le chrome → rendu SSR de l'accordéon specs.
 let _specs = null;
+// Fiche produit complète : même balisage que le navigateur (pdp-view.mjs).
+let _pdpView = null;
+const _pdpViewReady = import('./v3/pdp-view.mjs').then((m) => { _pdpView = m.pdpView; }).catch((e) => console.warn('[pdp-ssr] import échoué:', e.message));
 const _specsReady = import('./v3/product-specs.mjs')
   .then((m) => { _specs = m; })
   .catch((e) => { console.warn('[specs-ssr] import échoué:', e.message); _specs = null; });
@@ -343,6 +346,16 @@ function specAccordionSsr(p) {
     + '<div class="pdp-acc__panel" id="pdp-acc-panel-' + g.key + '" role="region" aria-labelledby="pdp-acc-btn-' + g.key + '"' + (i === 0 ? '' : ' hidden') + '>' + panelBody(g) + '</div></div>'
   ).join('') + '</section>';
 }
+// Fiche complète (galerie, coloris, achat, disponibilité, garanties, caractéristiques),
+// avec les données que le navigateur réutilise sans relecture (#product-initial).
+function pdpServed(product, sourceURL) {
+  const dslug = product.designer ? slugifyS(product.designer) : '';
+  const designerLink = Boolean(dslug && getDesigners().some(d => String(d.slug || '').toLowerCase() === dslug && !d.hidden));
+  const brandHref = product.brand ? navigation.productBrandDestination(product, sourceURL, navigationRules) : '';
+  if (!_pdpView) return null;
+  const view = _pdpView(product, { requestedVariant: sourceURL.searchParams.get('variant'), selectInitialVariant, brandHref, designerLink });
+  return { html: view.html, data: { ...product, designerLink, brandHref } };
+}
 function pdpSsrBlock(p, sourceURL) {
   const selected = selectInitialVariant(p.variants, { requestedId: sourceURL?.searchParams.get('variant'), coverUrl: p.image || p.firstImageRaw, fallback: false });
   if (selected) p = {...p, price: selected.price, priceMin: selected.price, priceMax: selected.price, compareAt: selected.compareAtPrice};
@@ -580,7 +593,16 @@ app.get('/produit.html', async (req, res) => {
     let out = html.replace('</head>', ldTag + '\n</head>');
     out = injectNavigation(out, navigation.productTrail(product, new URL(req.originalUrl, ORIGIN), navigationRules), url, navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)));
     // SSR lot 1 · contenu produit (nom/prix/dispo) à la place du squelette → crawlable sans JS.
-    out = out.replace(/<!--PDP-SSR-START-->[\s\S]*?<!--PDP-SSR-END-->/, () => pdpSsrBlock(product, new URL(req.originalUrl, ORIGIN)));
+    const sourceURL = new URL(req.originalUrl, ORIGIN);
+    const served = pdpServed(product, sourceURL);
+    if (served) {
+      const ssrKey = handle + '|' + (sourceURL.searchParams.get('variant') || '');
+      out = out.replace('<div data-pdp>', () => `<div data-pdp data-ssr="${ogEscape(ssrKey)}">`)
+        .replace(/<!--PDP-SSR-START-->[\s\S]*?<!--PDP-SSR-END-->/, () => served.html)
+        .replace('</body>', () => '<script type="application/json" id="product-initial">' + JSON.stringify(served.data).replace(/</g, '\\u003c') + '</script>\n</body>');
+    } else {
+      out = out.replace(/<!--PDP-SSR-START-->[\s\S]*?<!--PDP-SSR-END-->/, () => pdpSsrBlock(product, sourceURL));
+    }
     // SSR chantier 5 · recos « Complétez avec » / « Vous aimerez aussi » crawlables
     // (maillage interne ; piloté par les métafields Search & Discovery — jamais hardcodé).
     const recoSsr = (list, grid, wrap) => {

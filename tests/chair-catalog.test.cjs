@@ -76,10 +76,10 @@ test('la recherche de modèle conserve son texte côté serveur, dans le tri et 
 });
 test('la fiche rend dès le serveur le prix et la photo demandés sans modifier le produit en cache',async()=>{
   const selected=await (await realFetch(base+'/produit.html?handle=chaise-1&variant=11')).text();
-  assert.match(selected,/<div class="pdp__price">700,95\s*€<\/div>/);
-  assert.match(selected,/<img class="pdp__main" src="[^\"]*1-noir\.jpg/);
+  assert.match(selected,/<div class="pdp__price" data-price-el>700,95\s*€<\/div>/);
+  assert.match(selected,/<img class="pdp__main" data-main src="[^\"]*1-noir\.jpg/);
   const standard=await (await realFetch(base+'/produit.html?handle=chaise-1')).text();
-  assert.match(standard,/<div class="pdp__price">À partir de 400\s*€<\/div>/);
+  assert.match(standard,/<div class="pdp__price" data-price-el>À partir de 400\s*€<\/div>/);
 });
 test('un échec amont reste une erreur et un nouvel essai recharge les données',async()=>{
   await realFetch(base+'/api/revalidate',{method:'POST',headers:{Authorization:'Bearer chair-test'}});
@@ -124,4 +124,19 @@ test('les sous-catégories reçoivent les mêmes filtres, avec leur propre chemi
   assert.equal((await realFetch(base+'/api/catalog/promotions')).status,404);
   const {selectionURL}=await import('../v3/navigation.mjs');
   assert.equal(selectionURL('/collections/fauteuils?color=noir&min=100&stock=1'),'/collections/fauteuils?color=noir&min=100&stock=1');
+});
+test('la fiche arrive complète du serveur : achat, coloris, disponibilité et données réutilisées sans relecture',async()=>{
+  const html=await (await realFetch(base+'/produit.html?handle=chaise-1&variant=gid%3A%2F%2Fshopify%2FProductVariant%2F11')).text();
+  assert.match(html,/<div data-pdp data-ssr="chaise-1\|gid:\/\/shopify\/ProductVariant\/11">/);
+  assert.doesNotMatch(html,/pdp__info-skel|pcard__skel/,'plus de squelette');
+  assert.match(html,/class="btn btn--blue pdp__cta" data-add>Ajouter au panier/);
+  assert.match(html,/data-vard-open/);
+  assert.match(html,/data-coloris-name>Noir</);
+  assert.match(html,/class="pdp__avail" data-avail/);
+  assert.match(html,/class="trust-list"/);
+  assert.match(html,/srcset="[^"]*1-noir\.jpg[^"]*800w/,'mêmes images que le navigateur (srcset)');
+  const served=JSON.parse(html.match(/id="product-initial">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(served.handle,'chaise-1');
+  assert.equal(typeof served.brandHref,'string');
+  assert.equal(typeof served.designerLink,'boolean');
 });

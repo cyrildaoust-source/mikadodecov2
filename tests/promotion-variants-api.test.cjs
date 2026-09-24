@@ -44,11 +44,11 @@ test('SSR card and destination PDP agree before JavaScript; the ordinary PDP kee
  const href=html.match(/class="pcard__media" href="([^"]+)"/)[1].replaceAll('&amp;','&');
  assert.match(href,/variant=12/);assert.match(html,/Bleu acapulco/);assert.match(html,/−50%/);
  const pdp=await(await realFetch(base+href,{headers:{Accept:'text/html'}})).text();
- assert.match(pdp,/<img class="pdp__main" src="[^"]*promo\.jpg/);
+ assert.match(pdp,/<img class="pdp__main" data-main src="[^"]*promo\.jpg/);
  assert.match(pdp,/<span class="price-was">239\s*€<\/span><span class="price-now price-now--sale">119,50\s*€<\/span>/);
  const normal=await(await realFetch(base+'/produit.html?handle=promo-1',{headers:{Accept:'text/html'}})).text();
- assert.match(normal,/<img class="pdp__main" src="[^"]*normal\.jpg/);
- assert.match(normal,/<div class="pdp__price">239\s*€<\/div>/);
+ assert.match(normal,/<img class="pdp__main" data-main src="[^"]*normal\.jpg/);
+ assert.match(normal,/<div class="pdp__price" data-price-el>239\s*€<\/div>/);
 });
 
 test('product JSON-LD describes the displayed variant: sale price, strikethrough price and stock',async()=>{
