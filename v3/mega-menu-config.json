@@ -2,7 +2,6 @@
   "_note": "Editorial 'coup de cœur du moment' shown in the side panel of each mega menu. Cyril edits this file by hand to rotate the feature (no code change needed). One block per mega: 'mobilier' + 'marques'.",
   "mobilier": {
     "coupDeCoeur": {
-      "label": "Coup de cœur du moment",
       "image": "/images/lifestyle-1.jpg",
       "imageAlt": "Salon Mikado · ambiance contemporaine",
       "title": "Verner Panton chez &Tradition",
@@ -13,7 +12,6 @@
   },
   "marques": {
     "coupDeCoeur": {
-      "label": "Coup de cœur du moment",
       "image": "/images/ref-feat-2.webp",
       "imageAlt": "Pourquoi Fermob plutôt qu'ailleurs",
       "title": "Pourquoi Fermob plutôt qu'ailleurs",

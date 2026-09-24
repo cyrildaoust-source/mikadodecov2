@@ -67,6 +67,20 @@ de remise se place en haut à droite, sous l'éventuelle offre automatique, face
 aux tags « Nouveau ». Sur la page Marques, une marque sans pays certain reste
 « Europe » : ne pas indiquer un pays inexact ou plus précis que la source.
 
+## Surtitres : interdits
+
+Règle permanente du propriétaire (24 septembre 2026) : **aucun surtitre (« eyebrow ») sur le site**.
+Un surtitre est un petit texte placé au-dessus d'un titre pour l'introduire, souvent en capitales
+espacées : catégorie (« Mobilier », « Matières »), contexte (« Le journal », « Informations légales »,
+« Panier »), slogan (« Notre conviction »), numéro (« 01 · Bois »), étiquette de mise en avant
+(« Marque du moment », « Coup de cœur du moment »). Le titre se suffit à lui-même ; une information
+utile va dans le texte qui suit (ex. « 6 min de lecture » sous le titre d'un article).
+
+Ne sont pas des surtitres : le nom de marque d'une carte ou d'une fiche (identité et lien du
+produit), les libellés de formulaire (« Coloris », « Quantité ») et les titres de listes dans les
+menus ou la recherche. `tests/no-eyebrows.test.cjs` bloque les classes connues ;
+`node scripts/detect-eyebrows.cjs <url>` contrôle le rendu réel d'une preview avant publication.
+
 ## Mobile
 
 Audit du 24 septembre (360, 390, 430 et 768 px) : aucun débordement horizontal.

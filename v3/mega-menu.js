@@ -86,13 +86,11 @@ function indexTopItems(items) {
 // Editorial side panel (.mm-side) shared as-is by all three megas: the
 // "Coup de cœur" (Mobilier/Marques) and the "Designer du mois" (Designers)
 // are the SAME visual component — only the data differs.
-function sideHTML({ label, image, imageAlt, title, lead, ctaHref, ctaLabel, imgOnError }) {
+function sideHTML({ image, imageAlt, title, lead, ctaHref, ctaLabel, imgOnError }) {
   if (!image) return "";
   const onerr = imgOnError ? ` onerror="this.remove()"` : "";
   return `
     <aside class="mm-side">
-      <div class="mm-side__label">${escapeHtml(label || "")}</div>
-      <div class="mm-side__rule" aria-hidden="true"></div>
       <img class="mm-side__visual" src="${escapeHtml(image)}" alt="${escapeHtml(imageAlt || "")}" loading="lazy"${onerr} />
       ${title ? `<div class="mm-side__title">${escapeHtml(title)}</div>` : ""}
       ${lead  ? `<p class="mm-side__lead">${escapeHtml(lead)}</p>` : ""}
@@ -104,7 +102,6 @@ function coupDeCoeurHTML(megaKey) {
   const cdc = config?.[megaKey]?.coupDeCoeur;
   if (!cdc || !cdc.image) return "";
   return sideHTML({
-    label: cdc.label || "Coup de cœur du moment",
     image: cdc.image,
     imageAlt: cdc.imageAlt || "",
     title: cdc.title,
@@ -203,7 +200,6 @@ function hydrateDesigners() {
 
   // Designer du mois — the SAME editorial component as the coup de cœur.
   const side = duMois ? sideHTML({
-    label: "Designer du mois",
     image: duMois.photo,
     imageAlt: duMois.name || "",
     title: duMois.name,
@@ -257,10 +253,8 @@ function hydrateDrawer() {
   const cdc  = config?.mobilier?.coupDeCoeur;
   if (foot && (cdc?.title || cdc?.ctaHref)) {
     const href  = cdc.ctaHref || "";
-    const label = escapeHtml(cdc.label || "Coup de cœur du moment");
     const title = escapeHtml(cdc.title || cdc.ctaLabel || "Lire l'article");
     foot.innerHTML = `
-      <div class="drawer__foot-label">${label}</div>
       ${href ? `<a class="drawer__foot-compact" href="${escapeHtml(href)}">${title} →</a>`
              : `<span class="drawer__foot-compact">${title}</span>`}`;
   }
