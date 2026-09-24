@@ -22,6 +22,7 @@
       "continue": true
     },
     { "src": "/api/(.*)", "headers": { "cache-control": "no-store" }, "dest": "/api/index.js" },
+    { "src": "/index-catalogue/([a-z0-9-]+)\\.json", "dest": "/api/index.js" },
     { "src": "/produit.html", "dest": "/api/index.js" },
     { "src": "/produits.html", "has": [{ "type": "query", "key": "designer" }], "dest": "/api/index.js" },
     { "src": "/sitemap.xml", "dest": "/api/index.js" },

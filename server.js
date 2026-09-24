@@ -20,9 +20,13 @@ const { pickNewArrivals, pickBestSellers } = require('./lib/home-rails');
 const { adminClient, subscribeInShopify, notifyByEmail } = require('./lib/newsletter');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = require('./lib/catalog-landing');
-const { scopeQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readScopeCatalog, filterCatalog } = require('./lib/chair-catalog');
-const { renderChairCatalog } = require('./lib/chair-catalog-page');
-const { filterScope } = require('./lib/filter-scopes');
+const { scopeQuery, catalogueQuery, VARIANT_QUERY: CHAIR_VARIANT_QUERY, readScopeCatalog, filterCatalog } = require('./lib/chair-catalog');
+const { buildCatalogIndex, packIndex, unpackIndex, PARTS: INDEX_PARTS } = require('./lib/catalog-index');
+const { parseFilters, filterParams } = require('./lib/catalog-filters');
+const zlib = require('node:zlib');
+const { renderChairCatalog, renderFamilyCatalog, markCatalogueSection, pageTitle } = require('./lib/chair-catalog-page');
+const { filterScope, indexedCollections, acceptProduct, memberSources, categoryScope, CATALOGUE: CATALOGUE_SCOPE } = require('./lib/filter-scopes');
+const { scopeProducts } = require('./lib/catalog-index');
 const chairViewReady = import('./v3/catalog-filters-view.mjs');
 const {parseSearch} = require('./lib/search-intent');
 const {searchCatalog} = require('./lib/search-catalog');
@@ -441,6 +445,8 @@ function send404Shell(res, file) {
 }
 function ogCache(res) {
   res.set('Content-Type', 'text/html; charset=utf-8');
+  // Liste d'origine servie faute d'index (démarrage) : ne pas la figer au CDN.
+  if (res.locals.scopeFallback) return res.set('Cache-Control', 'no-store');
   res.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=86400');
 }
 // designers-data.json mis en cache module — on ne mémorise QUE le succès non
@@ -575,8 +581,12 @@ app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
   if (!req.query.coll) {
     await _navigationReady;
-    const scope = filterScope(handle, navigationRules);
-    if (scope) return sendScopeCatalog(req, res, scope);
+    const scope = filterScope(handle);
+    // Sans index disponible, familles, Canapés et tables reprennent leur liste d'origine.
+    if (scope && scope.basePath === '/collections/' + handle) {
+      if (await sendScopeCatalog(req, res, scope)) return;
+      res.locals.scopeFallback = true;
+    }
   }
   if (COLLECTION_ALIASES.has(handle)) {
     await _navigationReady;
@@ -730,6 +740,11 @@ app.get('/produits.html', async (req, res) => {
     return res.redirect(302, '/collections/' + req.query.coll + (query.size ? '?' + query : ''));
   }
   const slug = req.query.designer ? String(req.query.designer).toLowerCase() : '';
+  // Catalogue complet filtrable (demande du 24 septembre) ; liste d'origine en secours.
+  if (!slug) {
+    if (await sendScopeCatalog(req, res, CATALOGUE_SCOPE)) return;
+    res.locals.scopeFallback = true;
+  }
   if (!slug) {
     // Catalogue de base (lot 4) : SSR de la 1re page de grille (24 produits) → liens
     // produit crawlables dans le HTML (maillage interne + découverte, complète le sitemap).
@@ -1195,10 +1210,157 @@ async function getScopeIndex(handle) {
   if (entry && now - entry.expiry < SCOPE_STALE) { load.catch(error => console.warn('[catalog-refresh]', handle, error.message)); return entry.data; }
   return load;
 }
-async function getScopePage(scope, query) {
-  const [{collection,products},{DISPLAY_PAGE_SIZE}] = await Promise.all([getScopeIndex(scope.handle),import('./v3/catalog-pagination.mjs')]);
-  return {scope,collection,...filterCatalog(products,query,DISPLAY_PAGE_SIZE)};
+// ─── Index commun des pages filtrées ───────────────────
+// Tout le catalogue publié (fiches, variantes, filtres) et l'appartenance aux familles
+// et sous-catégories. Sur Vercel, une fonction le construit (~1 min) derrière
+// /index-catalogue/<partie>.json, que le CDN garde 15 min puis renouvelle en arrière-plan ;
+// les autres instances le lisent au CDN. Hors Vercel (dev, tests), il est construit ici.
+const CATALOGUE_QUERY = catalogueQuery(PRODUCT_CARD_FIELDS);
+const INDEX_FRESH = 5 * 60_000, INDEX_STALE = 24 * 60 * 60_000, INDEX_WAIT = 4000, INDEX_RETRY = 60_000;
+let indexEntry = null, indexPending = null, indexFailedAt = 0, indexBuilding = null, indexResponse = null;
+function indexCard(node) {
+  const card = mapProduct(node);
+  card.variants.forEach(variant => { variant.image = shopifyResize(variant.image, CARD_IMAGE_WIDTH); });
+  delete card.description; // inutile aux listes ; allège l'index
+  return card;
 }
+const buildIndexNow = () => buildCatalogIndex({ fetch: shopifyFetch, catalogueQuery: CATALOGUE_QUERY, variantQuery: CHAIR_VARIANT_QUERY, mapProduct: indexCard, handles: indexedCollections() });
+function indexSourceURL() {
+  if (process.env.CATALOG_INDEX_URL) return process.env.CATALOG_INDEX_URL;
+  if (!process.env.VERCEL) return null;
+  return (process.env.VERCEL_ENV === 'production' ? ORIGIN : 'https://' + process.env.VERCEL_URL) + '/index-catalogue';
+}
+async function fetchIndex(base) {
+  const headers = {};
+  // Les previews sont protégées : la fonction utilise le secret d'automatisation du projet.
+  if (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_AUTOMATION_BYPASS_SECRET) headers['x-vercel-protection-bypass'] = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
+  const texts = await Promise.all(['membres', ...Array.from({ length: INDEX_PARTS }, (_, i) => String(i))].map(async part => {
+    const response = await fetch(`${base}/${part}.json`, { headers });
+    if (!response.ok) throw new Error(`Index ${part} HTTP ${response.status}`);
+    return response.text();
+  }));
+  return unpackIndex(texts[0], texts.slice(1));
+}
+// Hors Vercel, même chemin que le CDN (allègement puis recollage) pour tester le transport.
+async function buildIndexLocally() {
+  const packed = packIndex(await buildIndexNow());
+  return unpackIndex(packed.membres, packed.parts);
+}
+function refreshIndex() {
+  if (!indexPending) {
+    const url = indexSourceURL();
+    indexPending = (url ? fetchIndex(url) : buildIndexLocally())
+      .then(index => { indexEntry = { index, fetchedAt: Date.now() }; return index; })
+      .catch(error => { indexFailedAt = Date.now(); throw error; })
+      .finally(() => { indexPending = null; });
+  }
+  return indexPending;
+}
+async function getCatalogIndex() {
+  const now = Date.now();
+  if (indexEntry && now - indexEntry.fetchedAt < INDEX_FRESH) return indexEntry.index;
+  if (indexEntry && now - indexEntry.index.builtAt < INDEX_STALE) {
+    // Version précédente servie tout de suite ; la suivante arrive en arrière-plan.
+    if (now - indexFailedAt > INDEX_RETRY) refreshIndex().catch(error => console.warn('[catalog-index] relecture', error.message));
+    return indexEntry.index;
+  }
+  if (!indexPending && now - indexFailedAt < INDEX_RETRY) throw new Error('Index indisponible (échec récent)');
+  const pending = refreshIndex();
+  pending.catch(() => {});
+  // Premier chargement après un déploiement : la page n'attend pas la construction complète.
+  let timer;
+  try {
+    return await Promise.race([pending, new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('Index en préparation')), INDEX_WAIT); })]);
+  } finally { clearTimeout(timer); }
+}
+const INDEX_PART_NAMES = new Set(['membres', ...Array.from({ length: INDEX_PARTS }, (_, i) => String(i))]);
+app.get('/index-catalogue/:part.json', async (req, res) => {
+  // Adresses fixes, sans paramètre : personne ne peut forcer de nouvelles constructions via le CDN.
+  if (!INDEX_PART_NAMES.has(req.params.part) || Object.keys(req.query).length) return res.status(404).set('Cache-Control', 'no-store').end();
+  try {
+    if (!indexResponse || Date.now() - indexResponse.builtAt > INDEX_FRESH) {
+      indexBuilding ||= buildIndexNow()
+        .then(index => { const packed = packIndex(index); return { builtAt: index.builtAt, count: index.products.length, texts: { membres: packed.membres, ...Object.fromEntries(packed.parts.map((text, i) => [String(i), text])) }, gzip: {} }; })
+        .finally(() => { indexBuilding = null; });
+      indexResponse = await indexBuilding;
+    }
+    const gzip = indexResponse.gzip[req.params.part] ||= zlib.gzipSync(indexResponse.texts[req.params.part]);
+    res.set({
+      'Content-Type': 'application/json; charset=utf-8', 'Content-Encoding': 'gzip',
+      // Même forme que les pages déjà gardées par le CDN (voir ogCache). 15 min puis
+      // renouvellement en arrière-plan : une construction complète au plus par quart d'heure.
+      'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=86400',
+      'X-Index-Built-At': new Date(indexResponse.builtAt).toISOString(), 'X-Index-Products': String(indexResponse.count),
+    });
+    return res.send(gzip);
+  } catch (error) {
+    console.warn('[index-catalogue]', error.message);
+    return res.status(503).set({ 'Cache-Control': 'no-store', 'Retry-After': '60' }).json({ error: 'index_unavailable' });
+  }
+});
+
+async function scopeCollectionInfo(scope) {
+  if (scope.kind !== 'subcategory') return { handle: scope.handle, title: scope.label, description: scope.sub };
+  try {
+    const c = (await getCollections()).find(item => item.handle === scope.handle);
+    return { handle: scope.handle, title: c?.name || scope.label, description: c?.description || '' };
+  } catch { return { handle: scope.handle, title: scope.label, description: '' }; }
+}
+async function scopeProductsFor(scope) {
+  try { return scopeProducts(await getCatalogIndex(), scope, { acceptProduct, memberSources, categoryScope }); }
+  catch (error) {
+    if (scope.fallback !== 'collection') throw error;
+    console.warn('[catalog-index] liste directe', scope.handle, error.message);
+    return (await getScopeIndex(scope.handle)).products;
+  }
+}
+// Résultats mémorisés par liste et par combinaison de filtres (la page non filtrée
+// revient le plus souvent) ; ils se renouvellent avec l'index.
+const scopePageMemo = new WeakMap();
+async function getScopePage(scope, query) {
+  const [products, collection, { DISPLAY_PAGE_SIZE }] = await Promise.all([scopeProductsFor(scope), scopeCollectionInfo(scope), import('./v3/catalog-pagination.mjs')]);
+  let memo = scopePageMemo.get(products);
+  if (!memo) scopePageMemo.set(products, memo = new Map());
+  const key = filterParams(parseFilters(query)).toString();
+  let result = memo.get(key);
+  if (!result) {
+    result = filterCatalog(products, query, DISPLAY_PAGE_SIZE, { categories: scope.categories });
+    if (memo.size >= 200) memo.delete(memo.keys().next().value);
+    memo.set(key, result);
+  }
+  return { scope, collection, ...result };
+}
+function isFilteredState(state) {
+  return Boolean(state.q || state.category.length || state.brand.length > 1 || state.color.length || state.material.length || state.usage.length || state.feature.length || state.stock || state.tag || state.sort !== 'pop' || state.min !== null || state.max !== null || state.seat_min !== null || state.seat_max !== null);
+}
+async function familyScopeHTML(req, scope, data, view) {
+  const handle = scope.handle;
+  if (FAMILLES_RICHES[handle]) {
+    let html = fs.readFileSync(path.join(__dirname, 'v3', FAMILLES_RICHES[handle]), 'utf8');
+    if (handle === 'sieges') {
+      const results = await Promise.allSettled(seatingIcons.handles.map(getProductByHandle));
+      const items = results.flatMap(result => result.status === 'fulfilled' && result.value ? [result.value] : []);
+      html = renderSeatingPage(html, items, items.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''));
+    }
+    return { html: renderFamilyCatalog(html, data, view, plpCardSsr), page: FAMILLES_RICHES[handle] };
+  }
+  const featuredResults = await Promise.allSettled((families[handle].featured?.handles || []).map(getProductByHandle));
+  const featuredItems = featuredResults.flatMap(result => result.status === 'fulfilled' && result.value && isTable(result.value) && !isOutdoor(result.value) ? [result.value] : []);
+  const html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
+    featuredItems, featuredCards: featuredItems.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''), cards: ' ',
+  });
+  return { html: renderFamilyCatalog(html, data, view, plpCardSsr), page: 'family-page.html' };
+}
+async function catalogueScopeHTML(req, data, view) {
+  const results = await Promise.allSettled(catalogLanding.icons.handles.map(getProductByHandle));
+  const iconItems = results.flatMap(result => result.status === 'fulfilled' && result.value ? [result.value] : []);
+  let html = renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), data, view, plpCardSsr);
+  html = renderCatalogLanding(html, { iconItems, iconCards: iconItems.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join('') });
+  // Même titre que le navigateur (« Mobilier · HAY » quand une marque est choisie).
+  html = html.replace(/(<h1 class="fam-hero__title" id="catalogue-title" data-plp-title data-context>)[^<]*(<\/h1>)/, (_, open, close) => open + ogEscape(pageTitle(data)) + close);
+  return { html: markCatalogueSection(html), page: 'produits.html' };
+}
+// Retourne false quand la page doit reprendre sa liste d'origine (index indisponible).
 async function sendScopeCatalog(req,res,scope) {
   await Promise.all([_chromeReady,_navigationReady]);
   const view = await chairViewReady;
@@ -1206,31 +1368,37 @@ async function sendScopeCatalog(req,res,scope) {
   try { data = await getScopePage(scope, req.query); }
   catch(error) {
     console.warn('[catalog]',scope.handle,error.message);
+    if (scope.fallback === 'legacy') return false;
     data = {scope,...filterCatalog([],req.query),error:true};
   }
   const url = ORIGIN + view.scopeURL(scope,data.state);
-  let html = fs.readFileSync(PRODUITS_TEMPLATE,'utf8');
-  const photo = getCollectionHero(scope.handle);
   const brandName = data.state.brand.length===1 ? data.facets.brand.find(b=>b.value===data.state.brand[0])?.label : '';
-  html = renderChairCatalog(html,data,view,plpCardSsr);
-  html = injectCollectionHero(html,photo);
-  html = renderWithOg(html,{title:scope.ogTitle,description:scope.ogDescription,image:photo?.img || OG_DEFAULT,url});
-  html = listingNavigation(html,req,{title:scope.label,brandName});
+  let html, page = 'produits.html', photo = null;
+  if (scope.kind === 'family') ({ html, page } = await familyScopeHTML(req, scope, data, view));
+  else if (scope.kind === 'catalogue') ({ html, page } = await catalogueScopeHTML(req, data, view));
+  else {
+    photo = getCollectionHero(scope.handle);
+    html = injectCollectionHero(renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr),photo);
+  }
+  const image = scope.kind === 'family' ? absUrl(families[scope.handle]?.hero || (scope.handle === 'sieges' ? '/images/familles/assises/hero.webp' : '/images/familles/jardin/1.webp'))
+    : scope.kind === 'catalogue' ? catalogLanding.hero.image : photo?.img || OG_DEFAULT;
+  html = renderWithOg(html,{title:brandName ? `${scope.label} · ${brandName} · Mikado Deco` : scope.ogTitle,description:scope.ogDescription,image,url});
+  html = listingNavigation(html,req,{title:scope.kind === 'catalogue' ? undefined : scope.label,brandName});
   if (data.error) {
     html = html.replace(view.emptyState(scope),`<p class="plp-empty">${ogEscape(scope.unavailable)} <a href="${ogEscape(req.originalUrl)}">Réessayer</a>.</p>`);
     res.status(503).set({'Cache-Control':'no-store','Retry-After':'60'});
   } else {
-    const {state}=data;
-    const filtered = state.q || state.brand.length>1 || state.color.length || state.material.length || state.usage.length || state.feature.length || state.stock || state.tag || state.sort!=='pop' || state.min!==null || state.max!==null || state.seat_min!==null || state.seat_max!==null;
-    if(filtered) html = html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
-    // Les informations de prix et de stock se renouvellent via le cache de données.
+    if(isFilteredState(data.state)) html = html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
+    // Les informations de prix et de stock se renouvellent via l'index commun.
     res.set('Cache-Control','no-store');
   }
-  return res.send(injectChrome(html,'produits.html',data.state.page===1));
+  res.set('Content-Type', 'text/html; charset=utf-8');
+  res.send(injectChrome(html,page,data.state.page===1));
+  return true;
 }
 app.get('/api/catalog/:handle',async (req,res)=>{
   await _navigationReady;
-  const scope = filterScope(req.params.handle, navigationRules);
+  const scope = filterScope(req.params.handle);
   if (!scope) return res.status(404).json({error:'catalog_not_found'});
   try { res.set('Cache-Control','no-store').json(await getScopePage(scope, req.query)); }
   catch(error) { console.warn('[catalog-api]',scope.handle,error.message);res.status(503).json({error:'Cette sélection ne peut pas être chargée. Réessayez.'}); }

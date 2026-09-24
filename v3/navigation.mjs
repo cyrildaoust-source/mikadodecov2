@@ -39,13 +39,13 @@ export function selectionURL(value) {
   if (['/collections/all','/collections/frontpage'].includes(path)) path = '/produits.html';
   const params = new URLSearchParams();
   // Les collections filtrables (Chaises, sous-catégories) gardent leurs filtres au retour de fiche.
-  const chair = path.startsWith('/collections/');
-  for (const key of ['brand','designer','cats','q','omit','tag','sort','page','cursor','shown',...(chair?['color','material','usage','feature','min','max','seat_min','seat_max','stock']:[])]) {
+  const chair = path.startsWith('/collections/') || path === '/produits.html';
+  for (const key of ['brand','designer','cats','q','omit','tag','sort','page','cursor','shown',...(chair?['category','color','material','usage','feature','min','max','seat_min','seat_max','stock']:[])]) {
     const val = url.searchParams.get(key);
     if (!val) continue;
     if (key === 'omit' && !/^[a-z-]{1,30}(?:,[a-z-]{1,30}){0,20}$/.test(val)) continue;
     if (['brand','designer','tag'].includes(key) && !(chair && key==='brand' ? /^[a-z0-9-]+(?:,[a-z0-9-]+)*$/.test(val) : HANDLE.test(val))) continue;
-    if (['color','material','usage','feature'].includes(key) && !/^[a-z0-9-]+(?:,[a-z0-9-]+)*$/.test(val)) continue;
+    if (['category','color','material','usage','feature'].includes(key) && !/^[a-z0-9-]+(?:,[a-z0-9-]+)*$/.test(val)) continue;
     if (['min','max','seat_min','seat_max'].includes(key) && (!/^\d+(?:\.\d{1,2})?$/.test(val) || Number(val)>1000000)) continue;
     if (key==='stock' && val!=='1') continue;
     if (key === 'cats' && !/^[a-z0-9-]+(?:,[a-z0-9-]+)*$/.test(val)) continue;
