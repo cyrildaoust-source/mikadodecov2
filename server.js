@@ -5,7 +5,6 @@ const { getSearchPage, clearSearchCache } = require('./lib/services/search');
 const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
 const { normalizeItems, getDeliveryEstimate, realProject } = require('./lib/delivery-estimate');
 const express = require('express');
-const { promotionCard } = require('./lib/promotion-card');
 const { selectInitialVariant } = require('./v3/product-variant');
 const cors    = require('cors');
 const path    = require('path');
@@ -16,6 +15,7 @@ const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, r
 const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 const { brandCollectionPage, brandName } = require('./lib/collection-brand');
+const { promotionVariantCard } = require('./lib/promotion-variants');
 const { adminClient, subscribeInShopify, notifyByEmail } = require('./lib/newsletter');
 const { photoStyle, imageAtWidth } = require('./lib/editorial-media');
 const { landing: catalogLanding, isCatalogLanding, renderCatalogLanding } = require('./lib/catalog-landing');
@@ -202,10 +202,11 @@ function renderWithOg(templateHtml, { title, description, image, url }) {
   return html;
 }
 // Une seule règle de hiérarchie et un seul BreadcrumbList, visibles avant le JS.
-let navigation, navigationRules, productCardHTML;
-const _navigationReady = Promise.all([import('./v3/navigation.mjs'), import('./v3/product-card.mjs')]).then(([m, cards]) => {
+let navigation, navigationRules, productCardHTML, priceLabelS;
+const _navigationReady = Promise.all([import('./v3/navigation.mjs'), import('./v3/product-card.mjs'), import('./v3/format.mjs')]).then(([m, cards, format]) => {
   navigation = m;
   productCardHTML = cards.productCardHTML;
+  priceLabelS = format.priceLabel;
   navigationRules = m.createNavigation(
     JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/navigation-data.json'), 'utf8')),
     JSON.parse(fs.readFileSync(path.join(__dirname, 'v3/mega-menu-brands.json'), 'utf8')).brands,
@@ -254,17 +255,6 @@ function listingPagination(html, req, pageInfo = {}) {
 function temporaryUnavailable(res) {
   return res.status(503).set('Cache-Control', 'no-store').set('Retry-After', '60');
 }
-// SEO/SSR · formatage prix miroir de shared.js, en conservant les centimes utiles.
-const euroS = (n) => (n || n === 0)
-  ? new Intl.NumberFormat('fr-BE', { style: 'currency', currency: 'EUR', maximumFractionDigits: Number.isInteger(Number(n)) ? 0 : 2 }).format(n)
-  : '';
-const priceLabelS = (p) => {
-  if (p.priceIsExact) return euroS(p.price);
-  const min = p.priceMin != null ? p.priceMin : p.price;
-  const max = p.priceMax != null ? p.priceMax : p.price;
-  if (min != null && max != null && max - min > 0.5) return 'À partir de ' + euroS(min);
-  return euroS(min);
-};
 // Shared HTML keeps server-rendered and browser cards in sync.
 // Selection controls are enabled only once the browser cart is bound.
 function plpCardSsr(p, source = '') {
@@ -506,6 +496,13 @@ app.get('/produit.html', async (req, res) => {
     const html = renderWithOg(fs.readFileSync(PRODUIT_TEMPLATE, 'utf8'), { title, description, image, url });
     // SEO · Product JSON-LD en SSR (remplace l'IIFE JS de produit.html) — un seul
     // schéma, visible des crawlers sans exécution JS. Prix/dispo depuis le produit.
+    // L'offre décrit la variante affichée (URL ?variant= ou photo de couverture),
+    // comme le bloc SSR : même prix, même prix barré et même disponibilité.
+    const ldVariant = selectInitialVariant(product.variants, { requestedId: new URL(req.originalUrl, ORIGIN).searchParams.get('variant'), coverUrl: product.image || product.firstImageRaw, fallback: false });
+    const ldPrice = ldVariant ? ldVariant.price : product.priceMin;
+    const ldWas = ldVariant?.compareAtPrice;
+    const ldInStock = ldVariant ? (typeof ldVariant.qty === 'number' && ldVariant.qty > 0) : product.inStock;
+    const ldAvailable = ldVariant ? ldVariant.available !== false : product.available;
     const ld = {
       "@context": "https://schema.org", "@type": "Product", "name": name,
       ...(brand ? { brand: { "@type": "Brand", "name": brand } } : {}),
@@ -517,8 +514,9 @@ app.get('/produit.html', async (req, res) => {
       "itemCondition": "https://schema.org/NewCondition",
       "offers": {
         "@type": "Offer", "priceCurrency": "EUR",
-        ...(product.priceMin != null ? { price: String(product.priceMin) } : {}),
-        "availability": "https://schema.org/" + (product.inStock ? "InStock" : (product.available ? "BackOrder" : "OutOfStock")),
+        ...(ldPrice != null ? { price: String(ldPrice) } : {}),
+        ...(ldWas != null && ldPrice != null && ldWas > ldPrice ? { priceSpecification: { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": String(ldWas), "priceCurrency": "EUR" } } : {}),
+        "availability": "https://schema.org/" + (ldInStock ? "InStock" : (ldAvailable ? "BackOrder" : "OutOfStock")),
         "url": url
       }
     };
@@ -928,8 +926,9 @@ function resolveSsrRel(p) {
 // SSR_PAGES + articles journal ; tout le reste passe à next() (static/api).
 // SEO/SSR · Index MARQUES crawlable : rend les vraies cartes marque (lien + logo + nom)
 // dans [data-brandgrid] à la place des squelettes. Données getActiveBrands + liens curés
-// de mega-menu-brands.json. Le module re-render ensuite (grid.innerHTML) → hydratation.
+// de mega-menu-brands.json. Le navigateur conserve ces cartes sans les recréer.
 async function injectBrandsIndex(html) {
+  const { brandCardHTML } = await import('./v3/brand-card.mjs');
   const active = await getActiveBrands();
   let curated = { brands: [] };
   try { curated = JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'mega-menu-brands.json'), 'utf8')); } catch (e) {}
@@ -937,19 +936,12 @@ async function injectBrandsIndex(html) {
   for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
   const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
   if (!brands.length) return html;
-  const cards = brands.map((b) => {
-    const slug = b.slug || slugifyS(b.name);
-    const safe = ogEscape(b.name);
-    const href = hrefByName[b.name.toLowerCase()] || ('/produits.html?brand=' + slug);
-    return '<a class="brandcard" href="' + href + '">'
-      + '<span class="brandcard__origin">Europe</span>'
-      + '<div><img class="brandcard__logo" src="/images/brands/' + slug + '.svg" alt="' + safe + '" loading="lazy" onerror="this.outerHTML=\'<span class=&quot;brandcard__name&quot;>' + safe + '</span>\'" /></div>'
-      + '</a>';
-  }).join('');
+  const version = (process.env.VERCEL_GIT_COMMIT_SHA || '').slice(0, 7) || 'dev';
+  const cards = brands.map(b => brandCardHTML(b, { href: hrefByName[b.name.toLowerCase()], imageUrl: url => `${url}?v=${encodeURIComponent(version)}` })).join('');
   // Bloc squelette exact (4 lignes) → on remplace juste le contenu, on garde </div>.
   const skelBlock = '<div class="brandgrid" data-brandgrid>\n'
     + Array(4).fill('      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>').join('\n');
-  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid>\n      ' + cards);
+  html = html.replace(skelBlock, () => '<div class="brandgrid" data-brandgrid data-ssr="1">\n      ' + cards);
   html = html.replace('<span class="plp-count" data-brand-count></span>', () => '<span class="plp-count" data-brand-count>' + brands.length + ' marques</span>');
   return html;
 }
@@ -1709,7 +1701,7 @@ app.get('/api/product/:handle', async (req, res) => {
 // la fusion ne concerne que la 1re page (les offres actives sont peu nombreuses).
 async function getPromotionsProducts(first, after) {
   const base = await getCollectionProducts('promotions', first, after);
-  const stamp = (p) => ({ ...promotionCard(p), collections: [...new Set([...(p.collections || []), 'promotions'])] });
+  const stamp = (p) => ({ ...promotionVariantCard(p), collections: [...new Set([...(p.collections || []), 'promotions'])] });
   if (after) return base && { ...base, items: base.items.map(stamp) };
   let promoItems = [];
   try {

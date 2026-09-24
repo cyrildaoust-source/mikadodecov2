@@ -45,7 +45,7 @@
     <div class="rdv-hero__in">
       <div class="rdv-hero__text">
         <span class="eyebrow">Le showroom · Uccle</span>
-        <h1>Sur rendez-vous.</h1>
+        <h1>Sur <span style="white-space:nowrap">rendez-vous.</span></h1>
         <p>Trente minutes, rien que pour votre projet. On vous montre les matières, on vous fait asseoir. Sans engagement.</p>
       </div>
 
@@ -133,10 +133,10 @@
       });
       L.control.zoom({ position: "topright" }).addTo(map);
 
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
-        subdomains: "abcd",
-        maxZoom: 20,
-        attribution: '&copy; OpenStreetMap &middot; &copy; CARTO',
+      // Les tuiles CARTO exigent désormais une clé : OpenStreetMap, sans clé, avec attribution.
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
 
       var pin = L.divIcon({

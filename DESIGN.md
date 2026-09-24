@@ -30,6 +30,11 @@ Les pages composent les composants. Elles ne redéfinissent pas leurs éléments
 
 ## Décisions éditoriales actuelles
 
+Décision du propriétaire du 22 septembre, stock : afficher le nombre exact jusqu'à
+10 pièces, puis « 10+ » au-delà, sur la fiche, les variantes et les messages de
+disponibilité. Le sélecteur de quantité propose au maximum 10 pièces par ajout ;
+les contrôles du panier conservent le stock réel.
+
 - Assises : quatre chaises fixes, Panton, CH24 Wishbone, Standard et Rey Chair de HAY. Aucun mélange ni roulement automatique.
 - Tables : sélection explicite de quatre tables d’intérieur dans `data/family-pages.json`, intitulée « Notre sélection de tables ». Ne pas présenter une préférence éditoriale comme un classement de ventes.
 - Tables outdoor : accès distinct aux modèles prévus pour l’extérieur. Les erreurs d’import restent à corriger à la source.
@@ -50,6 +55,37 @@ Rectification du propriétaire du 18 septembre : les petites photos de variantes
 Conserver la seconde photographie au survol de la grande photo. Cette vue complémentaire provient de la galerie du modèle ; elle ne change ni la finition représentative ni son prix. Exclure les photos déjà associées aux autres variantes et les doublons de la photo principale. Sans vue complémentaire admissible, conserver la photo principale.
 
 Contrôler la page réelle dans la preview sur ordinateur, priorité actuelle du propriétaire : proportions, ordre des éléments, images, liens, défilement et produits réellement affichés. Comparer les cartes modifiées à celles du catalogue. Les tests de données et de pagination ne remplacent pas cette revue visuelle. Donner le lien de preview dans la livraison.
+
+Décision du propriétaire du 22 septembre, Promotions : lorsqu'une remise porte
+sur certaines variantes, la carte montre une finition réellement remisée avec
+son libellé, sa photo, son prix exact et sa disponibilité. Le clic ouvre cette
+même variante sur la fiche ; le bouton de sélection utilise aussi son identité.
+Conserver les cartes et boutons communs, sans ajouter de vignettes de finitions.
+
+Décision du propriétaire du 23 septembre : sur la carte produit, le pourcentage
+de remise se place en haut à droite, sous l'éventuelle offre automatique, face
+aux tags « Nouveau ». Sur la page Marques, une marque sans pays certain reste
+« Europe » : ne pas indiquer un pays inexact ou plus précis que la source.
+
+## Mobile
+
+Audit du 24 septembre (360, 390, 430 et 768 px) : aucun débordement horizontal.
+Sur la fiche produit mobile, l'ordre est packshot, nom, prix, finition et achat,
+puis le carrousel des photos d'ambiance : le prix reste dans le premier écran.
+Le nombre de coloris passe sous l'état de stock. En grille à deux colonnes, le
+nombre de finitions passe sous le nom de la carte. Les commandes tactiles
+(recherche, filtres, petits liens) offrent une zone d'au moins 44 px sans
+changer leur apparence. Vérifier chaque évolution à 390 px puis à 360 px.
+
+Adaptation du 24 septembre, inspirée du parcours mobile de Made in Design et
+ramenée au style Mikado (papier, serif, bleu) : sur la fiche, une barre d'achat
+fixe (nom, prix de la finition, « Ajouter au panier ») apparaît quand le bouton
+principal sort de l'écran. Sur le pilote Chaises, un seul bouton « Filtrer et
+trier » ouvre un panneau plein écran (tri en tête, filtres, « Afficher les
+résultats (N) » en bas) ; un rappel flottant suit le défilement de la grille.
+Sur ordinateur, la barre de filtres et la fiche restent inchangées. Mesurer les
+débordements avec une fenêtre de largeur fixe : l'émulation mobile élargit la vue
+au lieu de révéler un débordement.
 
 ## Dessins de dimensions
 

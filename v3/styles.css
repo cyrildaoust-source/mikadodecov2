@@ -290,7 +290,9 @@ html.sale-hd-on .hero__badge { display: flex; }
 .tag { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); padding: 3px 8px; border: 1px solid var(--accent-ink); color: var(--accent-ink); background: var(--paper); letter-spacing: .04em; text-transform: uppercase; }
 /* card-level PROMO badge · flat ink/charcoal label (cream text), same as PDP;
    sits opposite the .pcard__tags stack ("Nouveau"/"Coup de cœur" outlined chips). */
-.pcard__promo { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; padding: 6px 10px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
+/* Offres à droite, face aux tags : l'offre automatique puis le pourcentage remisé. */
+.pcard__offers { position: absolute; top: 12px; right: 12px; z-index: 2; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.pcard__promo { padding: 6px 10px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .05em; text-transform: uppercase; line-height: 1.15; text-align: right; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
 /* product-name tier · Neue Haas Grotesk Display, SemiBold (600) */
 .pcard__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
 .pcard__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 4px; }
@@ -571,6 +573,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .brandcard__logo[src*="fatboy.svg"],
 .brandcard__logo[src*="fermob.svg"],
 .brandcard__logo[src*="hkliving.svg"],
+.brandcard__logo[src*="moustache.svg"],
 .brandcard__logo[src*="vitra.svg"],
 .brandcard__logo[src*="ferm-living.svg"],
 .brandcard__logo[src*="stoff-nagel.svg"],
@@ -652,7 +655,8 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .price-now--sale { color: #b23b3b; }
 .pdp__cta:disabled { opacity: .45; cursor: not-allowed; }
 /* ── Recherche : loupe header + overlay prédictif (descend SOUS le header) ── */
-.nav__search { background: none; border: 0; color: inherit; cursor: pointer; display: inline-flex; align-items: center; padding: 0; }
+.nav__search { position: relative; background: none; border: 0; color: inherit; cursor: pointer; display: inline-flex; align-items: center; padding: 0; }
+.nav__search::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; } /* zone tactile 44 px, comme le panier */
 .searchd[hidden] { display: none; }
 .searchd { position: fixed; inset: 0; z-index: 132; }
 .searchd__backdrop { position: absolute; top: var(--search-top, 72px); left: 0; right: 0; bottom: 0; background: rgba(var(--scrim),.30); }
@@ -733,7 +737,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 @media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } .searchd__input { font-size: 1.25rem; } }
 
 .pcard__media { position: relative; }
-.pcard__sale { position: absolute; top: 10px; left: 10px; z-index: 2; background: #b23b3b; color: #fff; font-family: var(--sans-product); font-weight: 700; font-size: 12px; letter-spacing: .03em; padding: 4px 9px; border-radius: 2px; }
+.pcard__sale { background: #b23b3b; color: #fff; font-family: var(--sans-product); font-weight: 700; font-size: 12px; letter-spacing: .03em; padding: 4px 9px; border-radius: 2px; }
 .sel-item__price--final { font-family: var(--sans-product); font-weight: 500; color: var(--ink-deep); }
 .sel-item__price--free { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.1; color: var(--accent-ink); }
 .sel-item__discount-amount { display: block; font-family: var(--sans-product); font-size: 0.85rem; font-weight: 500; color: var(--accent-ink); }
@@ -921,6 +925,30 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
   .pdp__amb { display: none; }   /* grille ambiances = desktop ; sur mobile le packshot (main) reste affiché + rail d'ambiances dessous */
   .pdp__rail { display: flex; }
   .pdp__dots { display: flex; }
+  /* Achat avant l'inspiration : packshot, nom, prix et achat, puis photos d'ambiance. */
+  .pdp { position: relative; }
+  .pdp__gallery { display: contents; }
+  .pdp__main-wrap { order: 1; }
+  .pdp__info { order: 2; }
+  .pdp__rail { order: 3; }
+  .pdp__dots { order: 4; margin-top: -20px; }
+}
+/* Barre d'achat mobile : sous les tiroirs (panier 120), au-dessus du contenu. */
+.pdp-stickybuy { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: flex; align-items: center; gap: 14px; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(26,25,22,.06); }
+.pdp-stickybuy[hidden] { display: none; }
+.pdp-stickybuy__meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.pdp-stickybuy__name { font-family: var(--serif); font-weight: 600; font-size: 17px; line-height: 1.15; color: var(--ink-deep); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pdp-stickybuy__price { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--ink-deep); }
+.pdp-stickybuy__price .price-was { margin-right: 6px; }
+.pdp-stickybuy__cta { flex: 0 0 auto; min-height: 46px; padding: 12px 18px; }
+body.has-stickybuy .footer { padding-bottom: 76px; }
+@media (max-width: 520px) {
+  /* Le nombre de coloris passe sous l'état de stock pour ne pas le couper. */
+  .pdp__variant-bar { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; column-gap: 12px; row-gap: 2px; align-items: center; }
+  .pdp__variant-img { width: 56px; height: 56px; grid-row: 1 / span 2; }
+  .pdp__variant-meta { grid-column: 2; grid-row: 1; }
+  .pdp__variant-count { grid-column: 2; grid-row: 2; margin-left: 0; font-size: var(--fs-meta); }
+  .pdp__variant-bar-arrow { grid-column: 3; grid-row: 1 / span 2; }
 }
 @media (max-width: 520px) {
   .pdp-specs div { display: grid; grid-template-columns: 1fr; gap: 4px; }
@@ -1111,6 +1139,20 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
   .filterbar .cat-trigger, .filterbar .fselect { flex: 1 1 calc(50% - 5px); min-width: 0; }
   .filterbar .cols-toggle { flex: 0 0 auto; }
   .filterbar .plp-loading { display: none; }   /* span vide (compteur déplacé en Étape 2) → pas de slot flex parasite */
+  /* Contrôles tactiles de 44 px ; libellés entiers dans les demi-largeurs. */
+  .filterbar .cat-trigger, .filterbar .fselect { min-height: 44px; font-size: 13px; letter-spacing: 0; }
+  .filterbar .fselect { padding: 9px 28px 9px 12px; background-position: right 10px center; }
+  .filterbar .cols-btn { padding: 12px; }
+  /* Cartes en 2 colonnes : finitions sous le nom, bouton plus compact. */
+  .pcard__row { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .pcard__cta { font-size: 13px; line-height: 1.25; padding: 10px 8px; text-wrap: balance; }
+  /* Petits liens : zone tactile agrandie sans déplacer la mise en page. */
+  .breadcrumb a, .footer__bottom nav a { display: inline-block; padding-block: 7px; margin-block: -7px; }
+  .pdp__brand { display: inline-block; padding-block: 10px; margin-block: -10px; }
+  /* La page courante tient sur une ligne : jamais de « › » orphelin en début de ligne. */
+  .product-navigation > *, .breadcrumb, .breadcrumb ol { min-width: 0; max-width: 100%; }
+  .breadcrumb li:last-child { min-width: 0; max-width: 100%; }
+  .breadcrumb [aria-current="page"] { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }
 
 /* ---------- cart drawer (mini-cart) ----------
@@ -1634,9 +1676,9 @@ body.pdplb-locked { overflow: hidden; }
     .fam-hero__title{font-family:var(--serif);font-weight:600;font-size:clamp(44px,6vw,82px);line-height:.98;margin:0 0 14px;}
     .fam-hero__desc{max-width:52ch;font-size:15px;line-height:1.6;opacity:.95;margin:0 0 22px;}
     .fam-hero__btn{display:inline-block;background:var(--paper);color:var(--ink);font-size:13px;letter-spacing:.04em;padding:13px 26px;text-decoration:none;font-weight:500;}
-    /* Le contenu peut grandir sur mobile, sous les 116px du menu fixe + 24px d'air. */
-    .fam:is([data-family], [data-catalogue-landing]) .fam-hero{height:auto;min-height:clamp(320px,44vw,480px);}
-    .fam:is([data-family], [data-catalogue-landing]) .fam-hero__in{padding-top:140px;}
+    /* Toutes les familles (Jardin et Assises compris) : le contenu peut grandir sur mobile, sous les 116px du menu fixe + 24px d’air. */
+    .fam .fam-hero{height:auto;min-height:clamp(320px,44vw,480px);}
+    .fam .fam-hero__in{padding-top:140px;}
     .catalogue-products{padding-top:24px;}
     /* Mobilier : la découverte appartient à la première page. Le titre et le
        fil d'Ariane restent disponibles sur les pages de résultats suivantes. */
@@ -1833,6 +1875,10 @@ body.pdplb-locked { overflow: hidden; }
 .catalog-filters__range > span { padding-bottom: 10px; }
 .catalog-filters__popover .btn { width: 100%; margin-top: 16px; flex-shrink: 0; }
 .catalog-filters__sort { flex: 0 0 auto; }
+/* Le tri vit dans le même panneau que les filtres ; sur ordinateur il reste à droite. */
+.catalog-filters__groups { flex: 1; }
+.catalog-filters__groups > .catalog-filters__sort { order: 99; margin-left: auto; }
+.catalog-filters__sheet-head, .catalog-filters__submit-count, .catalog-filters-fab { display: none; }
 .catalog-filters__sort .fselect { min-width: 170px; }
 .catalog-filters__mobile-toggle { display: none; }
 .chair-filters-ready .catalog-filters__submit { display: none; }
@@ -1869,4 +1915,20 @@ body.pdplb-locked { overflow: hidden; }
   .catalog-filters.is-open .catalog-filters__submit { display: inline-flex; margin-top: 10px; }
   .catalog-filters__clear { margin: 8px 0; }
   [data-chair-continuation] .chair-catalog__compact { padding-top: 145px; }
+  /* Un seul bouton « Filtrer et trier » ouvre un panneau plein écran (tri en tête),
+     avec les résultats à afficher en bas ; un rappel flottant suit le défilement. */
+  .chair-filters-ready .catalog-filters__mobile-toggle { width: 100%; min-height: 46px; }
+  .chair-filters-ready .catalog-filters.is-open .catalog-filters__groups { position: fixed; inset: 0; z-index: 125; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; width: auto; background: var(--paper); padding: 0 var(--gutter) calc(96px + env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; }
+  .chair-filters-ready .catalog-filters.is-open .catalog-filters__sheet-head { display: flex; position: sticky; top: 0; z-index: 1; align-items: center; justify-content: space-between; order: -2; min-height: 64px; margin: 0 calc(var(--gutter) * -1) 12px; padding: 0 var(--gutter); background: var(--paper); border-bottom: 1px solid var(--line); }
+  .catalog-filters__sheet-head .serif { font-size: 26px; font-weight: 600; }
+  .catalog-filters__close { width: 44px; height: 44px; margin-right: -10px; border: 0; background: none; color: var(--ink-deep); font-size: 30px; line-height: 1; cursor: pointer; }
+  .catalog-filters__groups > .catalog-filters__sort { order: -1; margin: 0 0 12px; }
+  .catalog-filters__groups > .catalog-filters__sort .fselect { width: 100%; max-width: none; min-height: 46px; }
+  .chair-filters-ready .catalog-filters.is-open .catalog-filters__submit { display: inline-flex; position: fixed; left: var(--gutter); right: var(--gutter); bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 2; margin: 0; min-height: 50px; background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .chair-filters-ready .catalog-filters__submit-count { display: inline; }
+  /* Les cases s'appliquent en direct : « Appliquer » ne reste que pour le prix et la hauteur. */
+  .chair-filters-ready .catalog-filters__group:not([data-filter-group=price]):not([data-filter-group=seat]) [data-filter-apply] { display: none; }
+  html.filters-locked, html.filters-locked body { overflow: hidden; }
+  .catalog-filters-fab { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 70; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 22px; border: 1px solid var(--ink-deep); background: var(--ink-deep); color: var(--paper); font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 500; letter-spacing: .02em; box-shadow: 0 10px 28px rgba(26,25,22,.18); cursor: pointer; }
+  .catalog-filters-fab[hidden] { display: none; }
 }
