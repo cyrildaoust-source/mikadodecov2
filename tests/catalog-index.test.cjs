@@ -14,7 +14,7 @@ function node(id,{type='chaise',vendor=id%2?'HAY':'Vitra',tags=[],handles=[]}={}
     variants:{pageInfo:{hasNextPage:false,endCursor:null},edges:[{node:{id:`gid://shopify/ProductVariant/${id*10}`,title:'Noir',price:{amount:String(100+id)},availableForSale:true,quantityAvailable:id%3,selectedOptions:[{name:'Couleur',value:'Noir'}],image:{url:`https://cdn.shopify.com/${id}-noir.jpg`}}}]}};
 }
 // 40 chaises, 10 chaises de jardin, 10 vases, 5 tables et 3 tables d'extérieur : 68 fiches.
-for(let id=1;id<=40;id++)products.push(node(id,{handles:['chaises','sieges']}));
+for(let id=1;id<=40;id++)products.push(node(id,{tags:id<=6?['verner-panton']:[],handles:['chaises','sieges']}));
 for(let id=41;id<=50;id++)products.push(node(id,{tags:['exterieur'],handles:['chaises-outdoor','outdoor','sieges']}));
 for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone']:[],handles:['vases','decoration']}));
 for(let id=61;id<=65;id++)products.push(node(id,{type:'table',handles:['tables-de-salle-a-manger','tables']}));
@@ -166,4 +166,30 @@ test('« Les icônes » des familles sont calculées par le serveur : aucune rel
   assert.match(section,/handle=produit-52/);
   assert.equal((section.match(/class="pcard"/g)||[]).length,1);
   assert.match(section,/data-add/,'carte complète, bouton compris');
+});
+
+test('le nuancier Fermob arrive complet : première couleur ouverte, couleurs dans la page',async()=>{
+  const colors=require('../v3/nuancier-fermob.data.json');
+  const {html}=await page('/nuancier-fermob.html');
+  assert.match(html,/<div id="nf-root" class="nf-root" data-ssr="[a-z0-9-]+">/);
+  assert.equal((html.match(/class="nf-swatch"/g)||[]).length,colors.length);
+  assert.equal((html.match(/aria-pressed="true"/g)||[]).length,1);
+  assert.ok(html.includes('data-name>'+colors[0].name.replace(/&/g,'&amp;')+'<'));
+  assert.equal(JSON.parse(html.match(/id="nf-data">([\s\S]*?)<\/script>/)[1]).length,colors.length);
+});
+
+test('pages créateurs : pièces portant ses tags, rendues par le serveur, paramètre créateur conservé dans chaque lien',async()=>{
+  const {response,html}=await page('/produits.html?designer=verner-panton&brand=hay');
+  assert.equal(response.status,200);
+  const data=seed(html);
+  assert.equal(data.scope.kind,'designer');
+  assert.equal(data.total,3,'fiches 1, 3 et 5 : tag verner-panton et marque HAY');
+  assert.match(html,/<html lang="fr" class="plp-designer" data-chair-catalog>/);
+  assert.match(html,/designer-hero__name serif">Verner Panton</);
+  assert.match(html,/<input type="hidden" name="designer" value="verner-panton">/);
+  assert.match(html,/href="\/produits.html\?designer=verner-panton#grille" data-chair-link>Tout effacer/);
+  assert.match(html,/href="\/produits.html\?designer=verner-panton#grille" data-chair-link aria-label="Retirer le filtre HAY"/);
+  const api=await (await realFetch(base+'/api/catalog/'+encodeURIComponent('designer:verner-panton'))).json();
+  assert.equal(api.total,6);
+  assert.equal((await page('/produits.html?designer=inconnu')).response.status,404);
 });

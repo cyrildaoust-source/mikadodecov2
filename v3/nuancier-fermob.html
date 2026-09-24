@@ -61,9 +61,9 @@
 
     (async () => {
       try {
-        const r = await fetch("/nuancier-fermob.data.json", { cache: "no-cache" });
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        const colors = await r.json();
+        // Couleurs écrites dans la page par le serveur ; fichier en secours.
+        const inline = document.getElementById("nf-data");
+        const colors = inline ? JSON.parse(inline.textContent) : await fetch("/nuancier-fermob.data.json", { cache: "no-cache" }).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
         // Standalone page: skip scroll-on-load (host is already near top).
         mountNuancier(document.getElementById("nf-root"), colors, { scrollOnLoad: false });
       } catch (err) {

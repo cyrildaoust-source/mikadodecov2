@@ -1521,6 +1521,8 @@ body.pdplb-locked { overflow: hidden; }
 }
 .plp-designer .grid-head .catalogue-head { flex: 1; margin: 0; padding: 0; border-bottom: 0; }
 .plp-designer .grid-head__count { display: inline; white-space: nowrap; }
+/* Page créateur filtrable : la barre de filtres garde sa mise en page commune. */
+.plp-designer .grid-head.chair-catalog__controls { display: block; padding-bottom: 0; border-bottom: 0; }
 
 .designer-hero {
   display: grid; grid-template-columns: minmax(230px, 290px) 1fr;

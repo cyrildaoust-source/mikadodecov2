@@ -268,6 +268,17 @@ const CONTENT_TRAILS = {
   'politique-cookies.html': [HOME, { label: 'Politique cookies' }],
   'politique-et-vie-privee.html': [HOME, { label: 'Politique de confidentialité' }],
 };
+// Nuancier Fermob : page complète dès le serveur (première couleur ouverte) et
+// couleurs dans la page ; auparavant la zone vide se remplissait après le JS (saut de 0,65).
+const NUANCIER_COLORS = JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'nuancier-fermob.data.json'), 'utf8'));
+const _nuancierView = import('./v3/nuancier-view.mjs');
+async function injectNuancier(html) {
+  const { nuancierHTML } = await _nuancierView;
+  const { slugify } = await import('./v3/format.mjs');
+  const first = NUANCIER_COLORS[0];
+  return html.replace('<div id="nf-root"></div>', () => `<div id="nf-root" class="nf-root" data-ssr="${ogEscape(slugify(first.name))}">${nuancierHTML(NUANCIER_COLORS, first)}</div>`
+    + '<script type="application/json" id="nf-data">' + JSON.stringify(NUANCIER_COLORS).replace(/</g, '\\u003c') + '</script>');
+}
 function contentPageTrail(rel, html) {
   if (CONTENT_TRAILS[rel]) return CONTENT_TRAILS[rel];
   const article = /^journal\/[^/]+\.html$/.test(rel) && html.match(/<h1 class="article__title">([^<]+)<\/h1>/);
@@ -790,8 +801,10 @@ app.get('/produits.html', async (req, res) => {
   }
   const slug = req.query.designer ? String(req.query.designer).toLowerCase() : '';
   // Catalogue complet filtrable (demande du 24 septembre) ; liste d'origine en secours.
-  if (!slug) {
-    if (await sendScopeCatalog(req, res, CATALOGUE_SCOPE)) return;
+  // Catalogue complet et pages créateurs filtrables ; liste d'origine en secours.
+  const listScope = slug ? filterScope('designer:' + slug) : CATALOGUE_SCOPE;
+  if (listScope) {
+    if (await sendScopeCatalog(req, res, listScope)) return;
     res.locals.scopeFallback = true;
   }
   if (!slug) {
@@ -1163,6 +1176,9 @@ app.get(/.*/, async (req, res, next) => {
   if (rel === 'designers.html') {
     try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
   }
+  if (rel === 'nuancier-fermob.html') {
+    try { raw = await injectNuancier(raw); } catch (e) { console.warn('[nuancier]', e.message); }
+  }
   if (['marques.html', 'designers.html'].includes(rel)) raw = listingNavigation(raw, req);
   const contentTrail = contentPageTrail(rel, raw);
   if (contentTrail) raw = injectNavigation(raw, contentTrail, req.path);
@@ -1432,6 +1448,14 @@ async function sendScopeCatalog(req,res,scope) {
   let html, page = 'produits.html', photo = null;
   if (scope.kind === 'family') ({ html, page } = await familyScopeHTML(req, scope, data, view));
   else if (scope.kind === 'catalogue') ({ html, page } = await catalogueScopeHTML(req, data, view));
+  else if (scope.kind === 'designer') {
+    // Même présentation que la page créateur d'origine : portrait et biographie.
+    const designer = getDesigners().find(d => d.slug === scope.fixed.designer);
+    html = renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr)
+      .replace('<html lang="fr" class="plp-collection"', '<html lang="fr" class="plp-designer"')
+      .replace('<div class="wrap" data-designer-hero></div>', () => '<div class="wrap" data-designer-hero>' + (designer ? designerHeroSsr(designer) : '') + '</div>');
+    photo = designer?.photo ? { img: designer.photo } : null;
+  }
   else {
     photo = getCollectionHero(scope.handle);
     html = injectCollectionHero(renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr),photo);
@@ -1440,9 +1464,9 @@ async function sendScopeCatalog(req,res,scope) {
     : scope.kind === 'catalogue' ? catalogLanding.hero.image
     : photo?.img ? absUrl(photo.img) : BRAND_HEADERS.has(scope.handle) ? `${ORIGIN}/images/brands/headers/${scope.handle}-1920.jpg` : OG_DEFAULT;
   // Marques, gammes et sélections : description Shopify de la collection, comme avant.
-  const description = scope.kind === 'collection' && data.collection?.description ? ogDesc(data.collection.description) : scope.ogDescription;
+  const description = scope.kind === 'collection' && data.collection?.description ? ogDesc(data.collection.description) : scope.kind === 'designer' ? ogDesc(scope.ogDescription) : scope.ogDescription;
   html = renderWithOg(html,{title:brandName ? `${scope.label} · ${brandName} · Mikado Deco` : scope.ogTitle,description,image,url});
-  html = listingNavigation(html,req,{title:scope.kind === 'catalogue' ? undefined : scope.label,brandName});
+  html = listingNavigation(html,req,{title:['catalogue','designer'].includes(scope.kind) ? undefined : scope.label,brandName});
   if (data.error) {
     html = html.replace(view.emptyState(scope),`<p class="plp-empty">${ogEscape(scope.unavailable)} <a href="${ogEscape(req.originalUrl)}">Réessayer</a>.</p>`);
     res.status(503).set({'Cache-Control':'no-store','Retry-After':'60'});

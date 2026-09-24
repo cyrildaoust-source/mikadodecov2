@@ -12,59 +12,10 @@
                 if a matching hash is present on load (default true)
    ============================================================ */
 import { slugify, escapeHtml } from "/shared.js";
-
-const TEMPLATE = `
-  <header class="nf-nav">
-    <nav class="nf-swatches" aria-label="Toutes les couleurs Fermob">
-      <ol class="nf-swatches__list" data-swatches></ol>
-    </nav>
-  </header>
-
-  <section class="nf-stage" aria-live="polite">
-    <div class="nf-stage__media">
-      <div class="nf-stage__hero-wrap">
-        <img class="nf-stage__hero is-front" data-mood-hero alt="" />
-        <img class="nf-stage__hero" data-mood-hero-top alt="" aria-hidden="true" />
-      </div>
-      <div class="nf-stage__moodgrid">
-        <img data-mood-1 loading="lazy" alt="" />
-        <img data-mood-2 loading="lazy" alt="" />
-      </div>
-    </div>
-
-    <div class="nf-stage__body">
-      <div class="nf-active" data-active>
-        <h2 class="nf-active__name serif" data-name>—</h2>
-        <div class="nf-active__meta">
-          <span class="nf-active__index"><span data-index>—</span> / <span data-total>—</span></span>
-          <span class="nf-active__hex">
-            <span class="nf-active__chip" data-hex-chip aria-hidden="true"></span>
-            <span class="nf-active__code" data-hex-code>—</span>
-          </span>
-        </div>
-      </div>
-
-      <p class="nf-stage__title" data-title>—</p>
-      <p class="nf-stage__desc" data-desc>—</p>
-    </div>
-  </section>
-
-  <section class="nf-stage__harmonies" data-harmonies hidden>
-    <div class="nf-stage__harmonies-label">Harmonies recommandées</div>
-    <div class="nf-stage__harmonies-list" data-harmonies-list></div>
-  </section>
-
-  <section class="nf-ambiances" data-ambiances hidden>
-    <h3 class="nf-ambiances__title serif">Ambiances · <span data-amb-color>—</span></h3>
-    <div class="nf-ambiances__grid" data-thumbs></div>
-  </section>
-`;
+import { nuancierHTML, swatchesHTML, harmoniesHTML, ambiancesHTML, ambianceThumbs } from "/nuancier-view.mjs";
 
 const FADE_MS = 150;
 
-// Harmony squares are placed by CSS grid span (the exact Fermob composition),
-// so the JS only needs the role per square index.
-const HARM_ROLES = ["active", "p1", "p2"];
 
 export function mountNuancier(rootEl, colors, opts = {}) {
   if (!rootEl) return null;
@@ -75,7 +26,9 @@ export function mountNuancier(rootEl, colors, opts = {}) {
   const { scrollOnLoad = true } = opts;
 
   rootEl.classList.add("nf-root");
-  rootEl.innerHTML = TEMPLATE;
+  // Nuancier envoyé complet par le serveur (page dédiée) : on garde son balisage.
+  const served = rootEl.hasAttribute("data-ssr") ? rootEl.getAttribute("data-ssr") : null;
+  if (served === null) rootEl.innerHTML = nuancierHTML();
 
   const $ = (sel) => rootEl.querySelector(sel);
   const els = {
@@ -113,7 +66,8 @@ export function mountNuancier(rootEl, colors, opts = {}) {
 
   const hashSlug = location.hash.replace(/^#/, "");
   const initial  = (hashSlug && bySlug.has(hashSlug)) ? hashSlug : slugify(colors[0].name);
-  setActive(initial, { updateHash: false, fade: false });
+  if (initial === served) { activeSlug = initial; document.title = `${bySlug.get(initial).name} · Nuancier Fermob · Mikado Deco`; }
+  else setActive(initial, { updateHash: false, fade: false });
 
   // Deep-link landing: scroll the widget into view (skip on standalone
   // page where the host is already near the top, so we'd just bounce).
@@ -140,14 +94,7 @@ export function mountNuancier(rootEl, colors, opts = {}) {
   }
 
   function renderSwatches() {
-    els.swatches.innerHTML = colors.map((c) => {
-      const slug = slugify(c.name);
-      return `<li>
-        <button type="button" class="nf-swatch" data-slug="${escapeHtml(slug)}" aria-pressed="false" aria-label="${escapeHtml(c.name)}" title="${escapeHtml(c.name)}" style="--swatch-color:${escapeHtml(c.hex)}">
-          <span class="nf-swatch__dot" aria-hidden="true"></span>
-        </button>
-      </li>`;
-    }).join("");
+    if (served === null) els.swatches.innerHTML = swatchesHTML(colors);
     els.swatches.addEventListener("click", (e) => {
       const btn = e.target.closest(".nf-swatch");
       if (!btn) return;
@@ -242,34 +189,16 @@ export function mountNuancier(rootEl, colors, opts = {}) {
   }
 
   function refreshHarmonies(color) {
-    const assocs = color.associations || {};
-    const rows = Object.values(assocs).filter((row) => Array.isArray(row) && row.length);
-    if (!rows.length) { els.harmonies.hidden = true; return; }
-    els.harmonies.hidden = false;
-    // 4 compositions of overlapping flat-colour squares: the active colour
-    // (big, top-left) + its 1-2 partners (smaller, staggered bottom-right).
-    // Each square reveals its name on hover, with auto-contrasting text.
-    els.harmoniesL.innerHTML = rows.map((row) => {
-      const squares = [color, ...row.slice(0, 2)];   // active + up to 2 partners
-      const cells = squares.map((c, i) => {
-        const txt = luminance(c.hex) > 0.6 ? "var(--ink)" : "var(--paper)";
-        const hidden = i === 0 ? ` aria-hidden="true"` : "";   // active name = the big label already
-        return `<div class="nf-harm-sq nf-harm-sq--${HARM_ROLES[i]}" style="--sq:${escapeHtml(c.hex)}">
-          <span class="nf-harm-sq__name" style="color:${txt}"${hidden}>${escapeHtml(c.name)}</span>
-        </div>`;
-      }).join("");
-      return `<div class="nf-harm">${cells}</div>`;
-    }).join("");
+    const html = harmoniesHTML(color);
+    els.harmonies.hidden = !html;
+    if (html) els.harmoniesL.innerHTML = html;
   }
 
   function refreshAmbiances(color) {
-    const thumbs = Array.isArray(color.ambiance_thumbs) ? color.ambiance_thumbs.slice(0, 6) : [];
-    if (!thumbs.length) { els.ambiances.hidden = true; return; }
+    if (!ambianceThumbs(color).length) { els.ambiances.hidden = true; return; }
     els.ambiances.hidden = false;
     els.ambColor.textContent = color.name;
-    els.thumbs.innerHTML = thumbs.map((url, i) =>
-      `<div class="nf-amb"><img loading="lazy" referrerpolicy="no-referrer" src="${escapeHtml(url)}" alt="${escapeHtml(color.name)} — ambiance ${i + 1}" /></div>`
-    ).join("");
+    els.thumbs.innerHTML = ambiancesHTML(color);
   }
 
   function refreshSwatchPressed(slug) {
@@ -333,16 +262,4 @@ export function mountNuancier(rootEl, colors, opts = {}) {
 
 function prefersReducedMotion() {
   return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-// Perceived brightness of a #rrggbb (or #rgb) colour, 0..1 — used to pick a
-// readable label colour over each harmony square.
-function luminance(hex) {
-  let h = String(hex || "").replace("#", "").trim();
-  if (h.length === 3) h = h.split("").map((x) => x + x).join("");
-  if (h.length !== 6) return 1;
-  const r = parseInt(h.slice(0, 2), 16);
-  const g = parseInt(h.slice(2, 4), 16);
-  const b = parseInt(h.slice(4, 6), 16);
-  return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 }

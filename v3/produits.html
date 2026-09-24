@@ -285,7 +285,7 @@
     (function () {
       if (!document.documentElement.classList.contains("plp-designer")) return;
       var el = document.querySelector("[data-designer-hero]");
-      if (!el) return;
+      if (!el || el.children.length) return;   // portrait déjà envoyé par le serveur : le garder
       el.innerHTML =
         '<div class="designer-hero designer-hero--skel">'
       +   '<div class="designer-hero__photo"></div>'
