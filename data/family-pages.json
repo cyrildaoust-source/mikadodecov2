@@ -57,7 +57,8 @@
         "name": "Artek",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Artek_Helsinki_Christmas_2025_2_new_web_f65980b5-b489-46b2-9ac8-02078096dceb.jpg?v=1778675162&width=700&format=webp",
         "sourceProduct": "artek-aalto-table-foldable-dl81c",
-        "position": "50% 50%"
+        "position": "50% 50%",
+        "logo": "/images/brands/artek.png"
       }
     ],
     "categories": [
@@ -157,7 +158,8 @@
         "name": "Artek",
         "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Wall-Light-A330S-white-Aalto-Table-Half-Round-white-Riihitie-A-white_web.jpg?v=1778596735&width=700&format=webp",
         "sourceProduct": "artek-wall-light-a330s-eu",
-        "position": "50% 50%"
+        "position": "50% 50%",
+        "logo": "/images/brands/artek.png"
       },
       {
         "slug": "tradition",

@@ -160,7 +160,7 @@
             ${promoCodeHTML}
             <div class="sel-item__controls">
               ${i.gift ? `<span class="sel-item__giftchip">Cadeau</span>` : `<div class="qty qty--sm">
-                <button class="qty__btn" data-qty-dec="${escapeHtml(i.variantId)}" aria-label="Diminuer" type="button">−</button>
+                <button class="qty__btn" data-qty-dec="${escapeHtml(i.variantId)}" data-qty-idx="${idx}" aria-label="${qty > 1 ? "Diminuer" : "Retirer l'article"}" type="button">−</button>
                 <input class="qty__val" data-qty-input="${escapeHtml(i.variantId)}" type="text" inputmode="numeric" value="${qty}" aria-label="Quantité" />
                 <button class="qty__btn" data-qty-inc="${escapeHtml(i.variantId)}" aria-label="Augmenter" type="button">+</button>
               </div>`}
@@ -284,7 +284,9 @@
       if (dec) {
         const v = dec.dataset.qtyDec;
         const n = findQty(v);
+        // « − » à 1 retire l'article (au lieu de rester bloqué à 1).
         if (n > 1) setCartQty(v, n - 1);
+        else removeFromCartAt(Number(dec.dataset.qtyIdx));
         return;
       }
       const inc = e.target.closest("[data-qty-inc]");
