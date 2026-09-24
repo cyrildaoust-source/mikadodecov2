@@ -73,12 +73,9 @@
     import { initShell, readCart, removeFromCartAt, setCartQty, euro, escapeHtml, isSaleActive, saleNextTier, SALE, giftOfferHTML, giftReconcile, giftBind, productHref } from "/shared.js";
     initShell({ active: "", transparentNav: false });
 
-    // Free-shipping threshold (Belgium zone). The radio toggle that
-    // selected showroom/standard was removed in V1.1 — Shopify checkout
-    // owns the delivery choice. We still surface the "Plus que X € pour
-    // la livraison offerte" hint to drive average cart size, computed
-    // against the post-discount payable amount.
-    const SHIPPING_FREE_FROM = 1500;
+    // Livraison : tarif unique en Belgique, sans seuil de gratuité (décision du
+    // 24 septembre 2026). Shopify reste la référence au paiement.
+    const DELIVERY_NOTE = "Livraison en Belgique : 50 €, quel que soit le montant.";
     const populated = document.querySelector("[data-populated]");
     const empty = document.querySelector("[data-empty]");
     const itemsEl = document.querySelector("[data-items]");
@@ -178,24 +175,10 @@
       const subtotal = localSubtotal;                  // displayed as "Sous-total" (pre-discount)
       const discount = lastPreview?.discount || 0;     // sum of all Shopify discounts
       const payable  = Math.max(0, subtotal - discount);
-      // V1.1: delivery fee is no longer added to the cart total — Shopify
-      // checkout computes and shows it. The hint below still motivates
-      // crossing the 1500€ threshold for free shipping.
+      // Les frais de livraison s'ajoutent au paiement (Shopify) ; le récapitulatif les annonce.
       const grand    = payable;
-
-      // Livraison : UNE seule mention cohérente.
-      //   ≥ 1500 € → ligne "Offerte" (pas de rappel) ; < 1500 € → "Calculée au paiement" + rappel.
-      const deliveryRow = document.querySelector(".sel-row--delivery-calc");
-      const deliveryVal = document.querySelector("[data-delivery-value]");
       const hint = document.querySelector("[data-delivery-hint]");
-      const freeShip = payable >= SHIPPING_FREE_FROM;
-      if (deliveryVal) deliveryVal.textContent = freeShip ? "Offerte" : "Calculée au paiement";
-      if (deliveryRow) deliveryRow.classList.toggle("is-free", freeShip);
-      if (hint) {
-        if (freeShip) { hint.hidden = true; hint.textContent = ""; }
-        else if (payable >= SHIPPING_FREE_FROM * 0.7) { hint.textContent = `Plus que ${euro(SHIPPING_FREE_FROM - payable)} pour la livraison offerte.`; hint.hidden = false; }
-        else { hint.textContent = `Livraison offerte dès ${euro(SHIPPING_FREE_FROM)}.`; hint.hidden = false; }
-      }
+      if (hint) { hint.textContent = DELIVERY_NOTE; hint.hidden = false; }
 
       // Palier soldes : même encart que le tiroir (« Plus que X € pour −Y% »), pendant les soldes.
       const tierEl = document.querySelector("[data-sale-tier]");

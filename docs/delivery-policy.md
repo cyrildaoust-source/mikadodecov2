@@ -19,3 +19,16 @@ La valeur est une estimation au démarrage du checkout, pas une réservation du 
 Tester les paniers en stock, hors stock, mixtes, avec quantité supérieure au stock et lignes cadeaux. Vérifier les propriétés dans le checkout et l’aperçu de notification. Ne pas envoyer de commande de test payante ni d’e-mail client sans demande.
 
 Le catalogue possède aussi des exceptions historiques `delai-long` sur certaines fiches ; elles n’ont pas été effacées en masse. Cette correction porte sur le panier, la transmission au checkout et la confirmation. Le délai natif interne et certaines surfaces Shopify (Shop, comptes clients, autres notifications) doivent être audités séparément avant de promettre une uniformité totale.
+
+## Frais de livraison — 24 septembre 2026
+
+Décision de Cyril : plus de livraison offerte, quel que soit le montant (l'ancien seuil de 1 500 € est
+supprimé, articles remisés compris). Shopify applique une seule méthode, « Livraison standard », à 50 €
+pour toute commande livrée en Belgique. Le panier, le tiroir et les CGV (version du 24/09/2026) l'annoncent.
+
+Cible validée : une grille selon le poids de la commande (6,90 € jusqu'à 2 kg, 9,90 € de 2 à 10 kg,
+19,90 € de 10 à 30 kg, 70 € de 30 à 70 kg, 120 € au-delà). Elle n'est pas encore activée : au
+24 septembre, 2 663 produits actifs sur 4 290 (8 548 variantes) n'ont aucun poids dans Shopify,
+dont 135 canapés et 518 éléments de canapé. Activer la grille avant de compléter ces poids ferait
+livrer des meubles au tarif de 0 kg. L'abonnement Basic ne permet pas les tarifs calculés par un
+transporteur ; la grille de poids native est la voie retenue.
