@@ -20,27 +20,21 @@ initShell({ active: "", transparentNav: true });
 async function loadRows() {
   const hosts = [...document.querySelectorAll("[data-products]")];
   if (!hosts.length) return;
-  // On n'affiche que la somme des data-count (ici 6). On charge UNE page paginée
-  // dimensionnée à ce besoin + marge x4 (pour absorber le filtre p.image et un
-  // éventuel produit sans visuel), au lieu du catalogue entier (1,76 Mo).
-  const needed = hosts.reduce((n, h) => n + (parseInt(h.dataset.count || "3", 10) || 0), 0);
-  const limit  = Math.max(12, needed * 4);
+  // Mêmes produits que le rendu serveur (/api/home-rails) : Nouveautés = vraie collection
+  // « nouveautes » en alternant les marques ; Meilleures ventes = ordre BEST_SELLING.
   try {
-    const r = await fetch(`/api/products?paginated=1&limit=${limit}`);
-    if (!r.ok) throw new Error("products " + r.status);
-    const data = await r.json();
-    const all = ((data && data.items) || []).filter((p) => p.image);
-    if (!all.length) throw new Error("empty feed");
-    let cursor = 0;
+    const r = await fetch("/api/home-rails");
+    if (!r.ok) throw new Error("home rails " + r.status);
+    const rails = await r.json();
     for (const host of hosts) {
-      const count = parseInt(host.dataset.count || "3", 10);
-      const slice = all.slice(cursor, cursor + count);
-      cursor += count;
+      const list = (host.dataset.sort === "new" ? rails.nouveautes : rails.best) || [];
+      const slice = list.slice(0, parseInt(host.dataset.count || "4", 10));
       if (slice.length) host.innerHTML = slice.map(productCard).join("");
     }
   } catch (err) {
-    hosts.forEach((h) => { h.innerHTML = `<p class="pcard__name" style="grid-column:1/-1;color:var(--muted)">La sélection se charge bientôt.</p>`; });
-    console.warn("[v3] product feed unavailable:", err.message);
+    // Les cartes rendues par le serveur restent en place ; sinon, un message d'attente.
+    hosts.filter((h) => h.querySelector(".pcard__skel")).forEach((h) => { h.innerHTML = `<p class="pcard__name" style="grid-column:1/-1;color:var(--muted)">La sélection se charge bientôt.</p>`; });
+    console.warn("[v3] home rails unavailable:", err.message);
   }
 }
 loadRows();
