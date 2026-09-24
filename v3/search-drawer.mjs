@@ -1,4 +1,5 @@
 import { escapeHtml, priceLabel } from './format.mjs';
+import { megaMenuBrands, fetchBrands } from './shared.js';
 import { selectionURL, productHref } from './navigation.mjs';
 import { searchCriteria, searchNotes, searchSuggestions } from './search-view.mjs';
 
@@ -23,8 +24,7 @@ export function createSearchDrawer() {
   let hrefByName = {}, _brandHrefsP = null;
   const loadBrandHrefs = () => {
     if (!_brandHrefsP) {
-      _brandHrefsP = fetch("/mega-menu-brands.json", { cache: "no-cache" })
-        .then((r) => r.json())
+      _brandHrefsP = megaMenuBrands()
         .then((j) => { for (const b of (j.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href; })
         .catch(() => { /* repli ?brand= */ });
     }
@@ -54,7 +54,7 @@ export function createSearchDrawer() {
       const [, feat, brands] = await Promise.all([
         loadBrandHrefs(),
         fetch(`/api/products?paginated=1&limit=4&tags=${seasonTag()}`).then((r) => r.json()),
-        fetch("/api/brands").then((r) => r.json()),
+        fetchBrands(),
       ]);
       // « Populaires » = plus gros catalogues d'abord (productCount desc, champ
       // exposé par /api/brands) → le label ne montre plus les 6 premières A→Z.

@@ -16,10 +16,13 @@ function node(id,{type='chaise',vendor=id%2?'HAY':'Vitra',tags=[],handles=[]}={}
 // 40 chaises, 10 chaises de jardin, 10 vases, 5 tables et 3 tables d'extérieur : 68 fiches.
 for(let id=1;id<=40;id++)products.push(node(id,{handles:['chaises','sieges']}));
 for(let id=41;id<=50;id++)products.push(node(id,{tags:['exterieur'],handles:['chaises-outdoor','outdoor','sieges']}));
-for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',handles:['vases','decoration']}));
+for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone']:[],handles:['vases','decoration']}));
 for(let id=61;id<=65;id++)products.push(node(id,{type:'table',handles:['tables-de-salle-a-manger','tables']}));
 for(let id=66;id<=68;id++)products.push(node(id,{type:'table',tags:['exterieur'],handles:['tables']}));
 
+// Marque HAY (fiches impaires) dans l'ordre inverse, choisi dans Shopify ; Nouveautés.
+members.hay=products.filter(p=>p.vendor==='HAY').map(p=>p.id).reverse();
+members.nouveautes=[products[59].id,products[2].id];
 before(async()=>{
   process.env.SHOPIFY_STORE_DOMAIN='index.test';process.env.SHOPIFY_STOREFRONT_TOKEN='test';
   global.fetch=async(url,options)=>{
@@ -129,4 +132,38 @@ test('l’index est servi au CDN en parties compressées, sans paramètre, puis 
   assert.equal((await realFetch(base+'/index-catalogue/tout.json')).status,404);
   const {selectionURL}=await import('../v3/navigation.mjs');
   assert.equal(selectionURL('/produits.html?category=sieges&brand=hay'),'/produits.html?brand=hay&category=sieges');
+});
+
+test('marques et Nouveautés : rendu serveur complet, ordre choisi dans Shopify, familles pour catégories',async()=>{
+  const {response,html}=await page('/collections/hay');
+  assert.equal(response.status,200);
+  const data=seed(html);
+  assert.equal(data.scope.kind,'collection');
+  assert.equal(data.items[0].id,members.hay[0],'ordre de la collection, pas des ventes');
+  assert.ok(data.facets.category.some(c=>c.value==='sieges'),'familles comme catégories');
+  assert.match(html,/<option value="pop" selected>Notre sélection<\/option>/);
+  assert.match(html,/data-grid data-ssr="1"/);
+  const news=seed((await page('/collections/nouveautes')).html);
+  assert.deepEqual(news.items.map(p=>p.id),members.nouveautes);
+  assert.match((await page('/collections/nouveautes')).html,/Les plus récents/);
+  const cards=(await (await realFetch(base+'/api/catalog/hay?category=sieges')).json());
+  assert.ok(cards.total>0&&cards.items.every(p=>p.brand==='HAY'));
+});
+
+test('chaque page porte les données du site : aucun appel pour le menu, les marques ni la version',async()=>{
+  const {html}=await page('/collections/sieges');
+  const data=JSON.parse(html.match(/id="site-data">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(data.build,'dev');
+  assert.ok(Array.isArray(data.brandsFile.brands)&&data.brandsFile.brands.length>10);
+  assert.ok(data.config&&typeof data.config==='object');
+});
+
+test('« Les icônes » des familles sont calculées par le serveur : aucune relecture dans le navigateur',async()=>{
+  const {html}=await page('/collections/decoration');
+  const section=html.match(/<section class="sec" data-icones-sec[^>]*>[\s\S]*?<\/section>/)[0];
+  assert.match(section,/data-ssr/);
+  assert.doesNotMatch(section.match(/^<section[^>]*>/)[0],/ hidden/);
+  assert.match(section,/handle=produit-52/);
+  assert.equal((section.match(/class="pcard"/g)||[]).length,1);
+  assert.match(section,/data-add/,'carte complète, bouton compris');
 });

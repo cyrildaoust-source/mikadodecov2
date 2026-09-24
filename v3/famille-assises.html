@@ -104,7 +104,7 @@
     // Quatre modèles fixes, rendus par le serveur dans leur ordre éditorial.
     const iconSeed = JSON.parse(document.querySelector('#seating-icons-initial').textContent);
     const iconRail = document.querySelector('[data-icones]');
-    if (iconRail && iconSeed.items.length) {
+    if (iconRail && iconSeed.items.length && !iconRail.querySelector('.pcard')) {
       iconRail.innerHTML = iconSeed.items.map(productCard).join('');
     }
 

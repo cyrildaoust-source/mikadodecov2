@@ -17,9 +17,10 @@ const seen = new Set(initial.items.map(product => product.handle || product.id))
 let displayed = initial.items.length;
 let pageInfo = initial.pageInfo;
 let loading = false;
-if (initial.items.length) grid.innerHTML = initial.items.map(productCard).join('');
+// Cartes déjà complètes dans la page : ne pas les reconstruire.
+if (initial.items.length && !grid.querySelector('.pcard')) grid.innerHTML = initial.items.map(productCard).join('');
 const featured = root.querySelector('[data-featured-products]');
-if (featured && initial.featuredItems.length) featured.innerHTML = initial.featuredItems.map(productCard).join('');
+if (featured && initial.featuredItems.length && !featured.querySelector('.pcard')) featured.innerHTML = initial.featuredItems.map(productCard).join('');
 
 function syncMore() {
   if (!more) return;
@@ -88,7 +89,8 @@ if (more) more.addEventListener('click', event => {
 // Curation explicite, par famille. Aucun remplacement automatique par des meilleures ventes.
 (async () => {
   const section = root.querySelector('[data-icones-sec]');
-  if (!section) return;
+  // Sélection déjà calculée par le serveur : rien à relire.
+  if (!section || section.hasAttribute('data-ssr')) return;
   const show = products => {
     const rail = section.querySelector('[data-icones]');
     rail.innerHTML = products.map(productCard).join('');

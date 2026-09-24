@@ -126,6 +126,29 @@ function activeForRel(rel) {
   if (rel.startsWith('journal/')) return 'Le journal';
   return REL_ACTIVE[rel] || '';
 }
+// ─── Données du site écrites dans chaque page ──────────
+// Menu, marques actives, promotions, réglages du méga menu et version : le navigateur
+// les lit dans la page au lieu de 5 appels réseau à chaque chargement. Seules les
+// valeurs déjà en cache serveur sont écrites ; sur Vercel, une valeur absente est
+// préparée pour la page suivante. Le navigateur garde son appel réseau en secours.
+const SITE_STATIC = {
+  config: JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'mega-menu-config.json'), 'utf8')),
+  brandsFile: JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'mega-menu-brands.json'), 'utf8')),
+};
+const SITE_CACHED = { menu: ['menu', getMenu], brands: ['brands:active', getActiveBrands], promos: ['promos', getPromos] };
+const siteWarmAt = {};
+function siteData() {
+  const raw = process.env.VERCEL_GIT_COMMIT_SHA || '';
+  const data = { build: raw ? raw.slice(0, 7) : 'dev', ...SITE_STATIC };
+  const now = Date.now();
+  for (const [key, [cacheKey, load]] of Object.entries(SITE_CACHED)) {
+    const entry = _cache[cacheKey];
+    // Au plus 10 min après expiration (les pages elles-mêmes restent 10 min au CDN).
+    if (entry && entry.expiry + 10 * 60_000 > now && !(key === 'menu' && !entry.data?.ok)) data[key] = entry.data;
+    else if (process.env.VERCEL && now - (siteWarmAt[key] || 0) > 60_000) { siteWarmAt[key] = now; load().catch(() => {}); }
+  }
+  return data;
+}
 function injectChrome(html, rel, solidHeader = false) {
   if (!_chrome) return html;                 // module pas prêt → repli (page sans chrome SSR, hydratée client)
   const active = activeForRel(rel);          // nav active en SSR (anti-glissement du soulignement)
@@ -149,6 +172,9 @@ function injectChrome(html, rel, solidHeader = false) {
   }
   // Preload du serif d affichage (Cormorant 600) — evite le FOUT des titres sur les
   // pages qui ne le portent pas deja dans leur <head>. Idempotent (skip si deja present).
+  if (!out.includes('id="site-data"')) {
+    out = out.replace(/<\/body>/i, () => '<script type="application/json" id="site-data">' + JSON.stringify(siteData()).replace(/</g, '\\u003c') + '</script>\n</body>');
+  }
   if (!/cormorant-garamond-latin-600/.test(out)) {
     out = out.replace(/<\/head>/i,
       '  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/cormorant-garamond-latin-600-normal.woff2">\n</head>');
@@ -281,10 +307,11 @@ function listingPagination(html, req, pageInfo = {}) {
 function temporaryUnavailable(res) {
   return res.status(503).set('Cache-Control', 'no-store').set('Retry-After', '60');
 }
-// Shared HTML keeps server-rendered and browser cards in sync.
-// Selection controls are enabled only once the browser cart is bound.
+// Carte complète dès le serveur, bouton de sélection compris : le navigateur la garde
+// telle quelle (plus de reconstruction des grilles) et ajuste seulement le libellé des
+// articles déjà dans le panier (syncCardLabels, shared.js).
 function plpCardSsr(p, source = '') {
-  return productCardHTML(p, {source, interactive: false});
+  return productCardHTML(p, {source});
 }
 
 // SEO/SSR · slugify miroir de shared.js (accents/ø/æ) — pour le lien créateur SSR.
@@ -1216,7 +1243,7 @@ async function getScopeIndex(handle) {
 // /index-catalogue/<partie>.json, que le CDN garde 15 min puis renouvelle en arrière-plan ;
 // les autres instances le lisent au CDN. Hors Vercel (dev, tests), il est construit ici.
 const CATALOGUE_QUERY = catalogueQuery(PRODUCT_CARD_FIELDS);
-const INDEX_FRESH = 5 * 60_000, INDEX_STALE = 24 * 60 * 60_000, INDEX_WAIT = 4000, INDEX_RETRY = 60_000;
+const INDEX_FRESH = 5 * 60_000, INDEX_STALE = 24 * 60 * 60_000, INDEX_WAIT = 4000, INDEX_RETRY = 10_000;
 let indexEntry = null, indexPending = null, indexFailedAt = 0, indexBuilding = null, indexResponse = null;
 function indexCard(node) {
   const card = mapProduct(node);
@@ -1251,7 +1278,7 @@ function refreshIndex() {
     const url = indexSourceURL();
     indexPending = (url ? fetchIndex(url) : buildIndexLocally())
       .then(index => { indexEntry = { index, fetchedAt: Date.now() }; return index; })
-      .catch(error => { indexFailedAt = Date.now(); throw error; })
+      .catch(error => { indexFailedAt = Date.now(); console.warn('[catalog-index] lecture impossible', error.message); throw error; })
       .finally(() => { indexPending = null; });
   }
   return indexPending;
@@ -1300,7 +1327,7 @@ app.get('/index-catalogue/:part.json', async (req, res) => {
 });
 
 async function scopeCollectionInfo(scope) {
-  if (scope.kind !== 'subcategory') return { handle: scope.handle, title: scope.label, description: scope.sub };
+  if (scope.kind !== 'subcategory' && scope.kind !== 'collection') return { handle: scope.handle, title: scope.label, description: scope.sub };
   try {
     const c = (await getCollections()).find(item => item.handle === scope.handle);
     return { handle: scope.handle, title: c?.name || scope.label, description: c?.description || '' };
@@ -1346,8 +1373,15 @@ async function familyScopeHTML(req, scope, data, view) {
   }
   const featuredResults = await Promise.allSettled((families[handle].featured?.handles || []).map(getProductByHandle));
   const featuredItems = featuredResults.flatMap(result => result.status === 'fulfilled' && result.value && isTable(result.value) && !isOutdoor(result.value) ? [result.value] : []);
+  // « Les icônes » : mêmes règles que le navigateur (family-policy.mjs), lues dans l'index.
+  let iconCards = null;
+  try {
+    const [index, { isFamilyIcon }] = await Promise.all([getCatalogIndex(), import('./v3/family-policy.mjs')]);
+    const inFamily = new Set(index.members[handle] || []);
+    iconCards = index.products.filter(p => inFamily.has(p.card.id) && isFamilyIcon(p.card)).slice(0, 30).map(p => plpCardSsr(p.card, req.originalUrl)).join('');
+  } catch { /* le navigateur les chargera */ }
   const html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
-    featuredItems, featuredCards: featuredItems.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''), cards: ' ',
+    featuredItems, featuredCards: featuredItems.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''), cards: ' ', iconCards,
   });
   return { html: renderFamilyCatalog(html, data, view, plpCardSsr), page: 'family-page.html' };
 }
@@ -1381,8 +1415,11 @@ async function sendScopeCatalog(req,res,scope) {
     html = injectCollectionHero(renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr),photo);
   }
   const image = scope.kind === 'family' ? absUrl(families[scope.handle]?.hero || (scope.handle === 'sieges' ? '/images/familles/assises/hero.webp' : '/images/familles/jardin/1.webp'))
-    : scope.kind === 'catalogue' ? catalogLanding.hero.image : photo?.img || OG_DEFAULT;
-  html = renderWithOg(html,{title:brandName ? `${scope.label} · ${brandName} · Mikado Deco` : scope.ogTitle,description:scope.ogDescription,image,url});
+    : scope.kind === 'catalogue' ? catalogLanding.hero.image
+    : photo?.img ? absUrl(photo.img) : BRAND_HEADERS.has(scope.handle) ? `${ORIGIN}/images/brands/headers/${scope.handle}-1920.jpg` : OG_DEFAULT;
+  // Marques, gammes et sélections : description Shopify de la collection, comme avant.
+  const description = scope.kind === 'collection' && data.collection?.description ? ogDesc(data.collection.description) : scope.ogDescription;
+  html = renderWithOg(html,{title:brandName ? `${scope.label} · ${brandName} · Mikado Deco` : scope.ogTitle,description,image,url});
   html = listingNavigation(html,req,{title:scope.kind === 'catalogue' ? undefined : scope.label,brandName});
   if (data.error) {
     html = html.replace(view.emptyState(scope),`<p class="plp-empty">${ogEscape(scope.unavailable)} <a href="${ogEscape(req.originalUrl)}">Réessayer</a>.</p>`);

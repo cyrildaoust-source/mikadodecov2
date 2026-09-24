@@ -38,8 +38,19 @@ import { euro, priceLabel, escapeHtml, slugify } from '/format.mjs';
    cache. We append the current build SHA to long-cached asset URLs:
    every deploy → new SHA → ?v= changes → browser refetches.
    buildShaReady() resolves once /api/build has answered (sub-5ms). */
-let _buildSha = "";
-const _buildShaPromise = fetch("/api/build", { cache: "no-store" })
+/* Données du site écrites par le serveur dans chaque page (#site-data) : menu,
+   marques actives, promotions, réglages du méga menu, version. Lues sans appel
+   réseau ; chaque appelant garde son appel en secours si la valeur manque. */
+let _siteData;
+export function siteData(key) {
+  if (_siteData === undefined) {
+    try { _siteData = JSON.parse(document.getElementById("site-data")?.textContent || "null") || {}; }
+    catch { _siteData = {}; }
+  }
+  return _siteData[key];
+}
+let _buildSha = siteData("build") || "";
+const _buildShaPromise = _buildSha ? Promise.resolve() : fetch("/api/build", { cache: "no-store" })
   .then((r) => (r.ok ? r.json() : null))
   .then((d) => { _buildSha = (d && d.sha) || ""; })
   .catch(() => { _buildSha = ""; });
@@ -397,6 +408,7 @@ export async function fetchProducts() {
   return r.json();
 }
 export async function fetchBrands() {
+  if (siteData("brands")) return siteData("brands");
   const r = await fetch("/api/brands");
   if (!r.ok) throw new Error("brands " + r.status);
   return r.json();
@@ -411,11 +423,15 @@ export async function fetchCollections() {
 // Resolves to { slugify(name): handle }. Memoized so repeated callers (brand
 // cards, PDP brand link/breadcrumb) share one fetch. Brands absent from the
 // map have no curated collection — callers decide the fallback.
+// Registre des marques curées : écrit dans la page, fichier statique en secours.
+export function megaMenuBrands() {
+  return siteData("brandsFile") ? Promise.resolve(siteData("brandsFile"))
+    : fetch("/mega-menu-brands.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : { brands: [] }));
+}
 let _brandHandles = null;
 export function loadBrandHandles() {
   if (!_brandHandles) {
-    _brandHandles = fetch("/mega-menu-brands.json", { cache: "no-cache" })
-      .then((r) => (r.ok ? r.json() : { brands: [] }))
+    _brandHandles = megaMenuBrands()
       .then((d) => {
         const map = {};
         for (const b of (d.brands || [])) {
@@ -433,6 +449,7 @@ export function loadBrandHandles() {
 let navigationPromise;
 export function loadNavigation() {
   return navigationPromise ||= Promise.all(['/navigation-data.json', '/mega-menu-brands.json', '/designers-data.json'].map(async path => {
+    if (path === '/mega-menu-brands.json' && siteData('brandsFile')) return siteData('brandsFile');
     const response = await fetch(path, { cache: 'no-cache' });
     if (!response.ok) throw new Error('Navigation indisponible');
     return response.json();
@@ -487,6 +504,7 @@ export function restoreSelectionPosition(root = document) {
 }
 
 export async function fetchPromos() {
+  if (siteData("promos")) return siteData("promos");
   const r = await fetch("/api/promos");
   if (!r.ok) throw new Error("promos " + r.status);
   return r.json();
@@ -550,11 +568,17 @@ function bindAddToCart() {
     btn.textContent = cardLabel(v);
   });
   // Keep every [data-add] label in sync when the cart changes elsewhere.
-  document.addEventListener("cart:change", () => {
-    document.querySelectorAll("[data-add]").forEach((b) => {
-      const v = b.dataset.variant;
-      if (v && !b.disabled) b.textContent = cardLabel(v);
-    });
+  document.addEventListener("cart:change", () => syncCardLabels());
+  // Cartes envoyées par le serveur : libellé « Dans la sélection » des articles du panier.
+  syncCardLabels();
+}
+export function syncCardLabels(root = document) {
+  root.querySelectorAll("[data-add]").forEach((b) => {
+    const v = b.dataset.variant;
+    if (v && !b.disabled) {
+      const label = cardLabel(v);
+      if (b.textContent.trim() !== label.trim()) b.textContent = label;
+    }
   });
 }
 
@@ -792,12 +816,6 @@ function bindCartDrawer() {
   render(); // seed content so an icon-click before any add shows the current cart
 }
 
-export function bindReveal() {
-  const els = document.querySelectorAll(".reveal");
-  if (!("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("in")); return; }
-  const io = new IntersectionObserver((ents) => ents.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-  els.forEach((e) => io.observe(e));
-}
 function bindSearch() {
   let drawer, pending;
   async function open(event) {
@@ -976,7 +994,6 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   }, true);
   syncBadge();
   document.addEventListener("cart:change", syncBadge);
-  bindReveal();
   // Hydrate mega menu + dropdown async (fetches /api/menu).
   // Top-level is already in the DOM; only sub-items wait on this.
   import("/mega-menu.js").then(({ initMegaMenu }) => initMegaMenu()).catch((e) => console.warn("[shell] mega-menu init failed:", e.message));

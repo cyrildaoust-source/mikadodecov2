@@ -15,13 +15,12 @@ let current = initial, pending = null, generation = 0, promos = null, navigation
 // Les pages familles gardent leur propre script de page (menu, rubriques éditoriales).
 if(initial.shell!==false)initShell({active:'Mobilier',transparentNav:initial.state.page===1});
 document.documentElement.classList.add('chair-filters-ready');
-loadNavigation().then(nav=>{navigation=nav;updateBreadcrumb();}).catch(()=>{});
 // Catalogue complet : rubriques de la composition Mobilier (familles, icônes).
 const landing=document.querySelector('[data-catalogue-landing]');
 if(landing) {
   bindFamilyRails(landing);
   const seed=document.querySelector('#catalogue-icons-initial'),rail=landing.querySelector('[data-catalogue-icons]');
-  if(seed&&rail){rail.innerHTML=JSON.parse(seed.textContent).items.map(p=>productCard(p,location.pathname+location.search)).join('');restoreSelectionPosition(rail);}
+  if(seed&&rail){if(!rail.querySelector('.pcard'))rail.innerHTML=JSON.parse(seed.textContent).items.map(p=>productCard(p,location.pathname+location.search)).join('');restoreSelectionPosition(rail);}
 }
 fetchPromos().then(value=>{promos=value;applyPromos(promos);}).catch(()=>{});
 
@@ -44,7 +43,10 @@ function fitPopovers() {
 function scrollToResults() {
   syncOffset();controls.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
 }
+// Premier affichage : la page du serveur est déjà complète, on ne la redessine pas.
+let served=grid.dataset.ssr==='1';
 function paint(data,{keepOpen=false}={}) {
+  if(served){served=false;current=data;if(promos)applyPromos(promos);syncOffset();fitPopovers();if(typeof updateFab==='function')updateFab();return;}
   const open=keepOpen?[...controls.querySelectorAll('details[open]')].map(el=>el.dataset.filterGroup):[];
   const active=document.activeElement;
   const focus=controls.contains(active)?{name:active.name,value:active.value,group:active.closest('details')?.dataset.filterGroup,summary:active.tagName==='SUMMARY'}:null;
@@ -90,6 +92,9 @@ async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
     if(!r.ok)throw new Error('catalog unavailable');
     const data=await r.json();
     if(!Array.isArray(data.items)||!data.state||!data.facets)throw new Error('invalid catalog');
+    // Le fil d'Ariane de départ vient du serveur : les règles de navigation ne sont
+    // chargées qu'au premier changement de filtre.
+    if(!navigation)navigation=await loadNavigation().catch(()=>null);
     if(request!==generation)return;
     if(historyMode!=='none')history[historyMode==='replace'?'replaceState':'pushState'](null,'',pageURL(data.state));
     paint(data,{keepOpen});
