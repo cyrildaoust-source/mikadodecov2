@@ -568,6 +568,8 @@
         requestAnimationFrame(() => lbRoot.querySelector("[data-lb-close]")?.focus());
       };
       lbRoot.querySelector("[data-lb-backdrop]").addEventListener("click", lbClose);
+      // La scène couvre l'écran au-dessus du fond : un clic à côté de la photo ferme aussi.
+      lbStage.addEventListener("click", (e) => { if (e.target === lbStage) lbClose(); });
       lbRoot.querySelector("[data-lb-close]").addEventListener("click", lbClose);
       lbRoot.querySelector("[data-lb-prev]")?.addEventListener("click", () => lbShow(lbIndex - 1));
       lbRoot.querySelector("[data-lb-next]")?.addEventListener("click", () => lbShow(lbIndex + 1));
