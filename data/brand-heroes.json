@@ -37,11 +37,11 @@
       "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
     },
     "avolt": {
-      "name": "Avolt", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/SQ1LAVENDERGLOWSCENEA.png?v=1780483835",
+      "name": "Avolt", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/SQ1LAVENDERGLOWSCENEA.png?v=1780483835",
       "sourceProduct": "multiprise-square-1-bauhaus", "alt": "Multiprise Avolt lilas sur fond sombre",
-      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 3000, "height": 3000,
-      "blockers": ["three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "blomus": {
       "name": "Blomus", "status": "qualified", "kind": "local",
@@ -49,12 +49,12 @@
       "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
     },
     "carl-hansen-son": {
-      "name": "Carl Hansen & Søn", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/img_001_d09f4c0f-8d41-487b-8319-af0162918dfc.jpg?v=1782393259",
+      "name": "Carl Hansen & Søn", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/img_001_d09f4c0f-8d41-487b-8319-af0162918dfc.jpg?v=1782393259",
       "sourceProduct": "chaise-ch24-wishbone-couleurs-douces",
       "alt": "Détail du tressage d’une chaise CH24 Wishbone en chêne",
-      "position": "50% 55%", "mobilePosition": "58% 55%", "width": 2500, "height": 1875,
-      "blockers": ["three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 55%", "mobilePosition": "58% 55%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "compagnie-de-provence": {
       "name": "Compagnie de Provence", "status": "candidate", "kind": "shopify",
@@ -192,11 +192,11 @@
       "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
     },
     "volta-mobiles": {
-      "name": "Volta Mobiles", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/CUZCO_LIFESTYLE.jpg?v=1780060298",
+      "name": "Volta Mobiles", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/CUZCO_LIFESTYLE.jpg?v=1780060298",
       "sourceProduct": "mobile-sur-pied-cuzco", "alt": "Mobile Volta Cuzco dans un intérieur aux tons rouges",
-      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 5000, "height": 5000,
-      "blockers": ["three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     }
   }
 }
