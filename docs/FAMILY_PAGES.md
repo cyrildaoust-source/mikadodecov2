@@ -54,7 +54,20 @@ Le lien de marque sur chaque fiche produit conserve aussi la catégorie d’arri
 
 `data/collection-heroes.json` définit les 39 bandeaux des sous-catégories du méga menu. Chaque entrée référence une photographie de galerie produit, son `sourceProduct`, un texte alternatif, ses dimensions et son point de cadrage (`position`, `mobilePosition`). Les fichiers identifiés comme générés et les schémas techniques sont exclus de cette sélection. Une photo de produit en situation peut illustrer une catégorie sans modifier son classement Shopify.
 
-`lib/editorial-media.js` aligne le bandeau visible, son chargement prioritaire, sa version sans JavaScript et son image de partage. Les tailles responsive restent limitées à la largeur disponible du fichier ; demander `width=2000` au CDN ne crée pas une source haute résolution. Les pages marques conservent leurs bandeaux existants.
+`lib/editorial-media.js` aligne le bandeau visible, son chargement prioritaire, sa version sans JavaScript et son image de partage. Les tailles responsive restent limitées à la largeur disponible du fichier ; demander `width=2000` au CDN ne crée pas une source haute résolution.
+
+Les pages marques utilisent `data/brand-heroes.json` comme registre de mise en
+service unique côté site (`mikado.site-brand-heroes@1`). Une
+entrée `qualified` fournit le bandeau, le partage social et le repli sans
+JavaScript ; une entrée `candidate` reste invisible en production. La variable
+locale `BRAND_HERO_REVIEW=1` permet de rendre ces candidats dans une preview de
+contrôle, sans les qualifier ni les publier. Les sources locales utilisent les
+dérivés 1280/1920/2400 générés par `scripts/optimize-images.js`. Les sources
+Shopify candidates conservent leur produit ou collection d’origine, leurs
+dimensions, leur alt, leurs points de cadrage et la liste de leurs blocages.
+Ce registre de transition ne se fait pas passer pour le manifeste atomique
+`mikado.brand-heroes@1` de l’importer : ce dernier ne pourra être livré que
+lorsque toutes les marques du périmètre auront franchi leur gate.
 
 Les cinq familles utilisent des photos distinctes entre leur bandeau, leurs catégories, leurs inspirations et leurs marques. Les photos des catégories validées sont conservées lorsque leur sujet et leur cadrage conviennent. Les paramètres `heroPosition` et `position` règlent le cadrage sans changer les cartes, les boutons ou les proportions communes. Une même gamme peut apparaître dans plusieurs photos et une sous-catégorie peut reprendre une ambiance de sa famille.
 
