@@ -1,0 +1,202 @@
+{
+  "schema": "mikado.site-brand-heroes@1",
+  "heroes": {
+    "airborne": {
+      "name": "Airborne", "active": false, "status": "qualified", "kind": "local",
+      "alt": "Collection Airborne dans un intérieur contemporain",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "tradition": {
+      "name": "&Tradition", "status": "qualified", "kind": "local",
+      "alt": "Collection &Tradition dans un intérieur contemporain",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "alessi": {
+      "name": "Alessi", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/HP_HERO_plisse-OK_1.jpg?v=1778161712",
+      "sourceCollection": "alessi", "alt": "Objets Alessi dans une cuisine lumineuse",
+      "position": "50% 50%", "mobilePosition": "58% 50%", "width": 1304, "height": 652,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "anglepoise": {
+      "name": "Anglepoise", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/90-mini-mini-vivid-23.jpg?v=1778147331",
+      "sourceProduct": "lampe-de-bureau-anglepoise-90-mini-mini-desk-lamp",
+      "alt": "Lampe Anglepoise verte éclairant une composition d’agrumes",
+      "position": "50% 52%", "mobilePosition": "43% 52%", "width": 1500, "height": 1500,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "artek": {
+      "name": "Artek", "status": "qualified", "kind": "local",
+      "alt": "Collection Artek dans un intérieur lumineux",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "assouline": {
+      "name": "Assouline", "active": false, "status": "qualified", "kind": "local",
+      "alt": "Livres Assouline mis en scène dans un intérieur",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "avolt": {
+      "name": "Avolt", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/SQ1LAVENDERGLOWSCENEA.png?v=1780483835",
+      "sourceProduct": "multiprise-square-1-bauhaus", "alt": "Multiprise Avolt lilas sur fond sombre",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 3000, "height": 3000,
+      "blockers": ["three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "blomus": {
+      "name": "Blomus", "status": "qualified", "kind": "local",
+      "alt": "Collection Blomus mise en scène dans un intérieur",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "carl-hansen-son": {
+      "name": "Carl Hansen & Søn", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/img_001_d09f4c0f-8d41-487b-8319-af0162918dfc.jpg?v=1782393259",
+      "sourceProduct": "chaise-ch24-wishbone-couleurs-douces",
+      "alt": "Détail du tressage d’une chaise CH24 Wishbone en chêne",
+      "position": "50% 55%", "mobilePosition": "58% 55%", "width": 2500, "height": 1875,
+      "blockers": ["three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "compagnie-de-provence": {
+      "name": "Compagnie de Provence", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/savon-liquide-de-marseille-verveine-fraiche-300ml.jpg?v=1779378934",
+      "sourceProduct": "savon-mains-300ml-extra-pur", "alt": "Savon liquide de Marseille Compagnie de Provence",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 930, "height": 930,
+      "blockers": ["packshot_only", "source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "esteban": {
+      "name": "Esteban", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/bougie-parfumee-initiale-ambre-rechargeable-180g.jpg?v=1784038961",
+      "sourceProduct": "esteban-bougie-parfumee-initiale-180g", "alt": "Bougie parfumée Ambre Esteban et son étui jaune",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 1500, "height": 1500,
+      "blockers": ["packshot_only", "source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "ester-erik": {
+      "name": "Ester & Erik", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/bougie-conique-matt-25-cm-header.jpg?v=1779353445",
+      "sourceProduct": "bougie-conique-matt-25-cm", "alt": "Bougies coniques Ester & Erik suspendues par nuances",
+      "position": "50% 35%", "mobilePosition": "50% 35%", "width": 1024, "height": 924,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "fatboy": {
+      "name": "Fatboy", "status": "qualified", "kind": "local",
+      "alt": "Collection Fatboy dans une scène de vie colorée",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "ferm-living": {
+      "name": "Ferm Living", "status": "qualified", "kind": "local",
+      "alt": "Collection Ferm Living dans un intérieur chaleureux",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "fermob": {
+      "name": "Fermob", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/LUXEMBOURG_ALTO_CARBONE_ENVIE_D_AILLEURS_GRIS-ARGILE_KONG_ALBUM2022_SARAH_BALHADERE.jpg_1.png?v=1778163974",
+      "sourceCollection": "fermob", "alt": "Table Fermob dressée dans un jardin",
+      "position": "50% 50%", "mobilePosition": "58% 50%", "width": 1304, "height": 652,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "hay": {
+      "name": "HAY", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/palissade-table_imageslider_42_1.jpg?v=1778182931",
+      "sourceCollection": "hay", "alt": "Mobilier HAY Palissade autour d’une table dans un jardin",
+      "position": "50% 54%", "mobilePosition": "50% 54%", "width": 1304, "height": 652,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "hkliving": {
+      "name": "HKliving", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/2324_collection_hkliving_shoot_3_lr-88_c456213a-792d-4355-a908-5813a897458e.jpg?v=1778159960",
+      "sourceCollection": "hkliving", "alt": "Céramiques HKliving réunies dans un intérieur coloré",
+      "position": "50% 50%", "mobilePosition": "58% 50%", "width": 1304, "height": 652,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "ichendorf-milano": {
+      "name": "Ichendorf Milano", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/tempImageo5WdUp_1.jpg?v=1778163337",
+      "sourceCollection": "ichendorf-milano", "alt": "Verres Ichendorf Milano décorés de petits animaux",
+      "position": "50% 48%", "mobilePosition": "50% 48%", "width": 1304, "height": 652,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "iittala": {
+      "name": "Iittala", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/1920x822_full_bleed_hero_iittala_ss2026_teema_satumetsa_essence_kartio_piano_01_1.jpg?v=1778166296",
+      "sourceCollection": "iittala", "alt": "Vaisselle Iittala sur une table baignée de lumière",
+      "position": "50% 55%", "mobilePosition": "45% 55%", "width": 1304, "height": 652,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "lind-dna": {
+      "name": "LIND DNA", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/992944-1.jpg?v=1778145692",
+      "sourceProduct": "set-de-table-cor", "alt": "Set de table LIND DNA vert olive à la forme organique",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 800, "height": 800,
+      "blockers": ["packshot_only", "source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "marimekko": {
+      "name": "Marimekko", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/MM_261_vihkiruusu_muki_25_dl_075724_160_FR1.jpg?v=1778875909",
+      "sourceProduct": "mug-2-5-dl", "alt": "Mug Marimekko orné d’un motif floral vert",
+      "position": "50% 45%", "mobilePosition": "50% 45%", "width": 2400, "height": 3000,
+      "blockers": ["packshot_only", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "moustache": {
+      "name": "Moustache", "status": "qualified", "kind": "local",
+      "alt": "Collection Moustache dans un intérieur contemporain lumineux",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "muuto": {
+      "name": "Muuto", "status": "qualified", "kind": "local",
+      "alt": "Collection Muuto dans un intérieur scandinave",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "pols-potten": {
+      "name": "Pols Potten", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/140-205-387_10_mood_47070b4a-22c8-4f98-87c0-2c27732ab37a.jpg?v=1777831353",
+      "sourceProduct": "vase-steps", "alt": "Vase Pols Potten garni de fleurs jaunes dans un intérieur",
+      "position": "50% 45%", "mobilePosition": "50% 45%", "width": 640, "height": 640,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "relaxound": {
+      "name": "Relaxound", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/1421_11ZBX0200002_front-1024x768_fad4f54d-2e4f-4cbf-9c58-3cb16ff23990.jpg?v=1778066877",
+      "sourceProduct": "boite-sonore-zwitscherbox-bois", "alt": "Boîte sonore Relaxound en bois clair",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 1024, "height": 768,
+      "blockers": ["packshot_only", "source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "serax": {
+      "name": "Serax", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/Vector.jpg?v=1778166349",
+      "sourceCollection": "serax", "alt": "Service à café Serax aux formes sculpturales",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 1304, "height": 652,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "stoff-nagel": {
+      "name": "Stoff Nagel", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9054-36028.jpg?v=1779323403",
+      "sourceProduct": "bougie-chandelier-nagel-29-cm-boite-de-6", "alt": "Bougeoirs Stoff Nagel et bougies dans un intérieur chaleureux",
+      "position": "50% 45%", "mobilePosition": "50% 45%", "width": 1600, "height": 2000,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "string-furniture": {
+      "name": "String Furniture", "status": "qualified", "kind": "local",
+      "alt": "Étagères String Furniture dans un intérieur organisé",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "tiptoe": {
+      "name": "Tiptoe", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/09_TIPTOE-PAPOTTE-308500_JMauloubier-WEB.jpg?v=1781810040",
+      "sourceProduct": "lampe-de-table-nod", "alt": "Lampe Tiptoe NOD couleur terracotta dans une niche",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 1500, "height": 1500,
+      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+    },
+    "vitra": {
+      "name": "Vitra", "status": "qualified", "kind": "local",
+      "alt": "Collection Vitra dans un intérieur habité",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
+    },
+    "volta-mobiles": {
+      "name": "Volta Mobiles", "status": "candidate", "kind": "shopify",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/CUZCO_LIFESTYLE.jpg?v=1780060298",
+      "sourceProduct": "mobile-sur-pied-cuzco", "alt": "Mobile Volta Cuzco dans un intérieur aux tons rouges",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 5000, "height": 5000,
+      "blockers": ["three_to_one_derivative_missing", "visual_review_required"]
+    }
+  }
+}

@@ -85,7 +85,7 @@ try {
 
 // 3.6 — brand collection-page heros. Every JPG dropped into
 // v3/images/brands/headers/ is processed generically (drop a <handle>.jpg,
-// add the handle to BRAND_HEADERS in produits.html, run this — done). The
+// run this, then qualify the entry in data/brand-heroes.json). The
 // `-<width>.jpg` regex guard skips OUR OWN resized JPEG output so a second
 // run doesn't treat `fatboy-1920.jpg` as a fresh source and recurse.
 const headersDir = path.join(IMG_DIR, 'brands', 'headers');
@@ -126,13 +126,13 @@ async function generate() {
     const base = path.basename(job.src, path.extname(job.src));
     const widths = capWidths(job.widths, meta.width);
 
-    // produits.html hardcodes the brand-header srcset (-1280/-1920/-2400.webp
+    // brandHero() exposes the fixed brand-header srcset (-1280/-1920/-2400.webp
     // + -1920.jpg). A source narrower than the widest target silently drops
     // variants the front still requests → the banner 404s and falls back to
     // the generic hero. Flag it at build time rather than letting it slip by.
     if (job.label === 'header' && meta.width < Math.max(...job.widths)) {
       console.warn(`⚠  header ${base}.jpg is ${meta.width}px wide (< ${Math.max(...job.widths)}px). ` +
-        `produits.html requests fixed -1280/-1920/-2400 variants, so some will be missing and this ` +
+        `the site requests fixed -1280/-1920/-2400 variants, so some will be missing and this ` +
         `brand will fall back to the generic hero. Use a ≥${Math.max(...job.widths)}px, 3:1 source.`);
     }
 

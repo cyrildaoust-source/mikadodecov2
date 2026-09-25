@@ -12,7 +12,7 @@ const fs      = require('fs');
 const crypto  = require('crypto');                 // natif — vérif HMAC des webhooks Shopify
 const rateLimit = require('express-rate-limit');   // rate-limit anti-abus (in-memory, best-effort)
 const { families, seatingIcons, PAGE_SIZE: FAMILY_PAGE_SIZE, renderFamilyPage, renderSeatingPage } = require('./lib/family-pages');
-const { collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
+const { brandHero: getBrandHero, collectionHero: getCollectionHero, injectCollectionHero } = require('./lib/editorial-media');
 const { tableSources, tablePage, isOutdoor, isTable } = require('./lib/table-collections');
 const { brandCollectionPage, brandName } = require('./lib/collection-brand');
 const { promotionVariantCard } = require('./lib/promotion-variants');
@@ -73,9 +73,10 @@ const PRODUITS_TEMPLATE = path.join(__dirname, 'v3', 'produits.html');
 // Jardin et Assises conservent leurs compositions éditoriales validées.
 const FAMILLES_RICHES = { outdoor: 'famille.html', sieges: 'famille-assises.html' };
 const FAMILY_TEMPLATE = path.join(__dirname, 'templates', 'family-page.html');
-// Marques disposant d'un bandeau header (miroir EXACT de la map HEADERS de
-// v3/produits.html). Pour elles, l'image OG = le bandeau de marque statique.
-const BRAND_HEADERS = new Set(['fatboy', 'ferm-living', 'tradition', 'vitra', 'string-furniture', 'muuto', 'blomus', 'assouline', 'airborne', 'artek']);
+// Les bandeaux de marque proviennent uniquement de data/brand-heroes.json.
+// BRAND_HERO_REVIEW=1 rend aussi les candidats dans une preview locale ; ils
+// restent invisibles en production tant que le gate éditorial ne les qualifie pas.
+const BRAND_HERO_REVIEW = process.env.BRAND_HERO_REVIEW === '1';
 
 // ─── CHROME SSR ────────────────────────────────────────
 // chrome-template.js est ESM + pur → importable en Node via import() dynamique.
@@ -635,7 +636,7 @@ app.get('/produit.html', async (req, res) => {
 
 // ─── Collection / marque : /collections/<handle> ───────
 // Nom + description + image via getCollections() (caché). Image par priorité :
-// bandeau de marque statique (BRAND_HEADERS) → image Shopify de la collection →
+// bandeau de marque qualifié → image Shopify de la collection →
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
@@ -729,7 +730,7 @@ app.get('/collections/:handle', async (req, res) => {
       brand: false, editorial: true, img: familyImage, srcset: familyImage,
       alt: brandPhoto || legacyBrandPhoto ? family.title + ' · ' + brandLabel : family.heroAlt || family.title,
       style: photoStyle(!useFamilyPhoto && brandPhoto ? { position: brandPhoto.heroPosition || brandPhoto.position, mobilePosition: brandPhoto.mobilePosition } : legacyBrandPhoto ? {} : { position: family.heroPosition, mobilePosition: family.heroMobilePosition }),
-    } : getCollectionHero(handle);
+    } : getBrandHero(handle, { includeCandidates: BRAND_HERO_REVIEW }) || getCollectionHero(handle);
     const collectionName = navigationRules.collections[handle]?.label || col.name || 'Catalogue';
     const name = collectionName + (brand ? ' · ' + brandLabel : '');
     const title = `${name} · Mikado Deco`;
@@ -738,9 +739,7 @@ app.get('/collections/:handle', async (req, res) => {
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
-    const image = collectionHero ? absUrl(collectionHero.img) : BRAND_HEADERS.has(handle)
-      ? `${ORIGIN}/images/brands/headers/${handle}-1920.jpg`
-      : (col.image ? absUrl(col.image) : OG_DEFAULT);
+    const image = collectionHero ? absUrl(collectionHero.img) : (col.image ? absUrl(col.image) : OG_DEFAULT);
     const collectionUrl = '/collections/' + encodeURIComponent(handle);
     const url = ORIGIN + collectionUrl + (brand ? '?brand=' + encodeURIComponent(brand) : '');
 
@@ -1457,12 +1456,12 @@ async function sendScopeCatalog(req,res,scope) {
     photo = designer?.photo ? { img: designer.photo } : null;
   }
   else {
-    photo = getCollectionHero(scope.handle);
+    photo = getBrandHero(scope.handle, { includeCandidates: BRAND_HERO_REVIEW }) || getCollectionHero(scope.handle);
     html = injectCollectionHero(renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr),photo);
   }
   const image = scope.kind === 'family' ? absUrl(families[scope.handle]?.hero || (scope.handle === 'sieges' ? '/images/familles/assises/hero.webp' : '/images/familles/jardin/1.webp'))
     : scope.kind === 'catalogue' ? catalogLanding.hero.image
-    : photo?.img ? absUrl(photo.img) : BRAND_HEADERS.has(scope.handle) ? `${ORIGIN}/images/brands/headers/${scope.handle}-1920.jpg` : OG_DEFAULT;
+    : photo?.img ? absUrl(photo.img) : OG_DEFAULT;
   // Marques, gammes et sélections : description Shopify de la collection, comme avant.
   const description = scope.kind === 'collection' && data.collection?.description ? ogDesc(data.collection.description) : scope.kind === 'designer' ? ogDesc(scope.ogDescription) : scope.ogDescription;
   html = renderWithOg(html,{title:brandName ? `${scope.label} · ${brandName} · Mikado Deco` : scope.ogTitle,description,image,url});

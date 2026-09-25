@@ -148,47 +148,17 @@
   </script>
   <script type="application/json" id="collection-hero-initial">null</script>
   <script type="application/json" id="collection-context-initial">null</script>
-  <!-- Hero resolution + preload. On a curated brand collection page it resolves
-       the brand banner, else the generic catalog hero; stashes the choice on
+  <!-- Hero resolution + preload. The server injects a qualified brand or
+       editorial collection hero from the common manifests, else the generic catalog hero; stashes the choice on
        window.__hero and preloads the chosen WebP so the LCP fetch starts
        immediately. The body <picture> reuses the SAME srcset → the LCP image is
        fetched exactly once. -->
   <script>
     (function () {
-      // handle → display name for brands shipping a header banner. Sources
-      // MUST be ≥2400px wide, 3:1 (the markup hardcodes -1280/-1920/-2400.webp
-      // + -1920.jpg — see scripts/optimize-images.js, which warns otherwise).
-      // Drop the file, run `npm run images`, then add the handle here.
-      // Kriptonite ships a file but isn't curated → intentionally absent.
-      var HEADERS = {
-        "fatboy": "Fatboy",
-        "ferm-living": "Ferm Living",
-        "tradition": "&Tradition",
-        "vitra": "Vitra",
-        "string-furniture": "String Furniture",
-        "muuto": "Muuto",
-        "blomus": "Blomus",
-        "assouline": "Assouline",
-        "airborne": "Airborne",
-        "artek": "Artek",
-        "moustache": "Moustache"
-      };
-      var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
-      var h = m ? decodeURIComponent(m[1]).toLowerCase() : "";
       var curatedHero = JSON.parse(document.getElementById("collection-hero-initial").textContent);
       var hero;
       if (curatedHero) {
         hero = curatedHero;
-      } else if (Object.prototype.hasOwnProperty.call(HEADERS, h)) {
-        var d = "/images/brands/headers/";
-        hero = {
-          brand: true,
-          srcset: d + h + "-1280.webp 1280w, " + d + h + "-1920.webp 1920w, " + d + h + "-2400.webp 2400w",
-          img: d + h + "-1920.jpg",
-          width: 2400, height: 800,
-          alt: HEADERS[h],
-          obj: "center 50%"
-        };
       } else {
         hero = {
           brand: false,
@@ -202,6 +172,7 @@
       window.__hero = hero;
       // La photo de Mobilier ne s'affiche pas sur les pages suivantes.
       var query = new URLSearchParams(location.search);
+      var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
       if (!m && !query.get('brand') && !query.get('designer') && !query.get('q') && (!query.get('coll') || query.get('coll') === 'all') && parseInt(query.get('page'), 10) > 1) return;
       var link = document.createElement("link");
       link.rel = "preload";

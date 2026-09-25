@@ -13,7 +13,7 @@ let vendorsUnavailable = false;
 let allowCatalogueQuery = false;
 let catalogueIconsUnavailable = false;
 const nextCursor = 'opaque+/=cursor';
-const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Carl Hansen & Søn', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Muuto', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
+const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Carl Hansen & Søn', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Moustache', 'Muuto', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
 const brandSlug = name => name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 function product(id) {
@@ -52,6 +52,7 @@ before(async () => {
     } : {
       edges: [
         { node: { id: 'gid://shopify/Collection/1', handle: 'verres-carafes', title: 'Verres et carafes', products: { edges: [{ node: { id: 'gid://shopify/Product/1' } }] } } },
+        { node: { id: 'gid://shopify/Collection/5', handle: 'moustache', title: 'Moustache', products: { edges: [{ node: { id: 'gid://shopify/Product/5' } }] } } },
         { node: { id: 'gid://shopify/Collection/4', handle: 'nouveautes', title: 'Nouveautés', products: { edges: [{ node: { id: 'gid://shopify/Product/2' } }] } } },
         { node: { id: 'gid://shopify/Collection/2', handle: 'empty-collection', title: 'Collection vide', products: { edges: [] } } },
       ], pageInfo: { hasNextPage: true, endCursor: 'collection-page-2' },
@@ -481,6 +482,20 @@ test('curated collection hero agrees across bootstrap, social preview and no-JS 
   assert.ok(fallback.includes(`width="${expected.width}" height="${expected.height}"`));
   assert.ok(fallback.includes(expected.style));
   assert.match(fallback, /sizes="100vw"/);
+});
+
+test('qualified brand hero agrees across bootstrap, social preview and no-JS fallback', async () => {
+  const { brandHero } = require('../lib/editorial-media');
+  const expected = brandHero('moustache');
+  const { response, html } = await page('/collections/moustache');
+  assert.equal(response.status, 200);
+  const initial = JSON.parse(html.match(/id="collection-hero-initial">([\s\S]*?)<\/script>/)[1]);
+  assert.deepEqual(initial, expected);
+  assert.ok(html.includes(`content="https://www.mikadodeco.be${expected.img}"`));
+  const fallback = html.match(/<noscript><img class="subhero__img editorial-photo"[^>]*>/)[0];
+  assert.ok(fallback.includes('moustache-1920.jpg'));
+  assert.ok(fallback.includes('width="2400" height="800"'));
+  assert.ok(fallback.includes(expected.alt));
 });
 
 test('editorial curation has distinct photographs, safe focal points and known sources', () => {
