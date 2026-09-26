@@ -12,19 +12,19 @@
       "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
     },
     "alessi": {
-      "name": "Alessi", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/HP_HERO_plisse-OK_1.jpg?v=1778161712",
+      "name": "Alessi", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/HP_HERO_plisse-OK_1.jpg?v=1778161712",
       "sourceCollection": "alessi", "alt": "Objets Alessi dans une cuisine lumineuse",
-      "position": "50% 50%", "mobilePosition": "58% 50%", "width": 1304, "height": 652,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "anglepoise": {
-      "name": "Anglepoise", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/90-mini-mini-vivid-23.jpg?v=1778147331",
+      "name": "Anglepoise", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/90-mini-mini-vivid-23.jpg?v=1778147331",
       "sourceProduct": "lampe-de-bureau-anglepoise-90-mini-mini-desk-lamp",
-      "alt": "Lampe Anglepoise verte éclairant une composition d’agrumes",
-      "position": "50% 52%", "mobilePosition": "43% 52%", "width": 1500, "height": 1500,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "alt": "Lampe Anglepoise verte devant un rideau gris",
+      "position": "50% 50%", "mobilePosition": "43% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "artek": {
       "name": "Artek", "status": "qualified", "kind": "local",
@@ -88,39 +88,39 @@
       "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
     },
     "fermob": {
-      "name": "Fermob", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/LUXEMBOURG_ALTO_CARBONE_ENVIE_D_AILLEURS_GRIS-ARGILE_KONG_ALBUM2022_SARAH_BALHADERE.jpg_1.png?v=1778163974",
+      "name": "Fermob", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/LUXEMBOURG_ALTO_CARBONE_ENVIE_D_AILLEURS_GRIS-ARGILE_KONG_ALBUM2022_SARAH_BALHADERE.jpg_1.png?v=1778163974",
       "sourceCollection": "fermob", "alt": "Table Fermob dressée dans un jardin",
-      "position": "50% 50%", "mobilePosition": "58% 50%", "width": 1304, "height": 652,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "hay": {
-      "name": "HAY", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/palissade-table_imageslider_42_1.jpg?v=1778182931",
+      "name": "HAY", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/palissade-table_imageslider_42_1.jpg?v=1778182931",
       "sourceCollection": "hay", "alt": "Mobilier HAY Palissade autour d’une table dans un jardin",
-      "position": "50% 54%", "mobilePosition": "50% 54%", "width": 1304, "height": 652,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "hkliving": {
-      "name": "HKliving", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/2324_collection_hkliving_shoot_3_lr-88_c456213a-792d-4355-a908-5813a897458e.jpg?v=1778159960",
+      "name": "HKliving", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/2324_collection_hkliving_shoot_3_lr-88_c456213a-792d-4355-a908-5813a897458e.jpg?v=1778159960",
       "sourceCollection": "hkliving", "alt": "Céramiques HKliving réunies dans un intérieur coloré",
-      "position": "50% 50%", "mobilePosition": "58% 50%", "width": 1304, "height": 652,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "ichendorf-milano": {
-      "name": "Ichendorf Milano", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/tempImageo5WdUp_1.jpg?v=1778163337",
+      "name": "Ichendorf Milano", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/tempImageo5WdUp_1.jpg?v=1778163337",
       "sourceCollection": "ichendorf-milano", "alt": "Verres Ichendorf Milano décorés de petits animaux",
-      "position": "50% 48%", "mobilePosition": "50% 48%", "width": 1304, "height": 652,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "iittala": {
-      "name": "Iittala", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/1920x822_full_bleed_hero_iittala_ss2026_teema_satumetsa_essence_kartio_piano_01_1.jpg?v=1778166296",
+      "name": "Iittala", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/1920x822_full_bleed_hero_iittala_ss2026_teema_satumetsa_essence_kartio_piano_01_1.jpg?v=1778166296",
       "sourceCollection": "iittala", "alt": "Vaisselle Iittala sur une table baignée de lumière",
-      "position": "50% 55%", "mobilePosition": "45% 55%", "width": 1304, "height": 652,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "lind-dna": {
       "name": "LIND DNA", "status": "candidate", "kind": "shopify",
@@ -161,18 +161,18 @@
       "blockers": ["packshot_only", "source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
     },
     "serax": {
-      "name": "Serax", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/Vector.jpg?v=1778166349",
+      "name": "Serax", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/Vector.jpg?v=1778166349",
       "sourceCollection": "serax", "alt": "Service à café Serax aux formes sculpturales",
-      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 1304, "height": 652,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "stoff-nagel": {
-      "name": "Stoff Nagel", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9054-36028.jpg?v=1779323403",
-      "sourceProduct": "bougie-chandelier-nagel-29-cm-boite-de-6", "alt": "Bougeoirs Stoff Nagel et bougies dans un intérieur chaleureux",
-      "position": "50% 45%", "mobilePosition": "50% 45%", "width": 1600, "height": 2000,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "name": "Stoff Nagel", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9054-36028.jpg?v=1779323403",
+      "sourceProduct": "bougie-chandelier-nagel-29-cm-boite-de-6", "alt": "Composition de bougeoirs Stoff Nagel dans un intérieur chaleureux",
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "string-furniture": {
       "name": "String Furniture", "status": "qualified", "kind": "local",
@@ -180,11 +180,11 @@
       "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
     },
     "tiptoe": {
-      "name": "Tiptoe", "status": "candidate", "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/09_TIPTOE-PAPOTTE-308500_JMauloubier-WEB.jpg?v=1781810040",
+      "name": "Tiptoe", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/09_TIPTOE-PAPOTTE-308500_JMauloubier-WEB.jpg?v=1781810040",
       "sourceProduct": "lampe-de-table-nod", "alt": "Lampe Tiptoe NOD couleur terracotta dans une niche",
-      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 1500, "height": 1500,
-      "blockers": ["source_width_under_2400", "three_to_one_derivative_missing", "visual_review_required"]
+      "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-center-3:1-sharp", "visualReview": "2026-09-25:desktop-1440-mobile-390-360"
     },
     "vitra": {
       "name": "Vitra", "status": "qualified", "kind": "local",
