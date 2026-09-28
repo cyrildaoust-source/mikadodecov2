@@ -86,6 +86,7 @@ const BRAND_HERO_REVIEW = process.env.BRAND_HERO_REVIEW === '1';
 const CAMPAIGN_COLLECTIONS = {
   'vitra-home-stories-for-winter': {
     name: 'Home Stories for Winter',
+    heroDescription: 'Fauteuils Vitra Grand Relax, Repos ou Grand Repos : l’Ottoman ou la Panchina assorti(e) est offert(e) dans la même configuration que le fauteuil.',
     description: 'Du 1er octobre 2026 au 31 janvier 2027, pour l’achat d’un fauteuil Vitra Grand Relax, Repos ou Grand Repos dans une configuration participante, l’Ottoman ou la Panchina assorti(e) est offert(e) dans la même configuration que le fauteuil. Pour certaines configurations commandées en Europe avant le 27 novembre 2026, une livraison avant Noël est probablement possible, sous réserve de confirmation au moment de la commande. Offre réservée au client final, valable pendant la période de campagne auprès des revendeurs participants et selon les configurations proposées.',
     image: 'https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/hero.webp?v=1790627815',
     imageAlt: 'Vitra Home Stories for Winter — Grand Relax et Ottoman assorti',
@@ -758,7 +759,7 @@ app.get('/collections/:handle', async (req, res) => {
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
-    const bodyDescription = campaign ? campaign.description : description;
+    const bodyDescription = campaign ? campaign.heroDescription : description;
     const image = collectionHero ? absUrl(collectionHero.img) : (col.image ? absUrl(col.image) : OG_DEFAULT);
     const collectionUrl = '/collections/' + encodeURIComponent(handle);
     const url = ORIGIN + collectionUrl + (brand ? '?brand=' + encodeURIComponent(brand) : '');
@@ -766,6 +767,10 @@ app.get('/collections/:handle', async (req, res) => {
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
     html = injectCollectionHero(html, collectionHero);
     html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
+    if (campaign) {
+      const terms = `<section class="section wrap" aria-labelledby="campaign-terms-title"><h2 class="serif catalogue-head" id="campaign-terms-title">Conditions de l’offre</h2><p>${ogEscape(campaign.description)}</p></section>`;
+      html = html.replace('<div class="wrap" data-designer-hero></div>', terms + '<div class="wrap" data-designer-hero></div>');
+    }
     if (brand || campaign) {
       const context = { handle, collectionName, title: name, description: bodyDescription };
       if (brand) context.brand = { slug: brand, name: brandLabel };
@@ -2084,7 +2089,7 @@ app.get('/api/collection/:handle/products', async (req, res) => {
     const campaign = CAMPAIGN_COLLECTIONS[handle];
     if (!payload && campaign && !cursor && !tag && !brand) {
       payload = {
-        collection: { handle, title: campaign.name, description: campaign.description, image: campaign.image },
+        collection: { handle, title: campaign.name, description: campaign.heroDescription, image: campaign.image },
         items: [], pageInfo: { hasNextPage: false, endCursor: null },
       };
     }
