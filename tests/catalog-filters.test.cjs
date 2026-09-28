@@ -34,6 +34,21 @@ test('le survol garde une vue du modèle après filtrage et pour chaque finition
   const all=filterCatalog([p],{}).items[0];
   assert.ok(all.finishChoices.every(v=>v.image2===hit.image2));
 });
+test('sans filtre la finition de couverture reste la première finition de la carte',()=>{
+  const p=chair(12,[
+    {price:320,options:[{name:'Couleur',value:'Rouge bordeaux'}]},
+    {price:320,options:[{name:'Couleur',value:'Jaune'}]},
+  ],{card:{image2:'https://cdn.shopify.com/yellow-scene.jpg'}});
+  p.card.variantId=p.variants[1].id;
+  p.card.image=p.variants[1].image;
+  const all=filterCatalog([p],{}).items[0];
+  assert.equal(all.variantId,p.variants[1].id);
+  assert.equal(all.finishLabel,'Jaune');
+  assert.equal(all.image,p.variants[1].image);
+  assert.equal(all.finishChoices[0].variantId,p.variants[1].id);
+  const red=filterCatalog([p],{color:'rouge'}).items[0];
+  assert.equal(red.variantId,p.variants[0].id,'un filtre explicite reste prioritaire');
+});
 test('le survol ignore les packshots des autres variantes et les doublons CDN',()=>{
   const white='https://cdn.shopify.com/white.jpg?v=1&width=1400';
   const black='https://cdn.shopify.com/black.jpg?v=1&width=1400';
