@@ -1924,3 +1924,67 @@ body.pdplb-locked { overflow: hidden; }
   .catalog-filters-fab { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 70; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 22px; border: 1px solid var(--ink-deep); background: var(--ink-deep); color: var(--paper); font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 500; letter-spacing: .02em; box-shadow: 0 10px 28px rgba(26,25,22,.18); cursor: pointer; }
   .catalog-filters-fab[hidden] { display: none; }
 }
+
+/* Vitra · Home Stories for Winter 2026/27 */
+.winter-hero { position: relative; min-height: min(780px, 82vh); display: grid; align-items: end; overflow: hidden; color: #fff; }
+.winter-hero__img, .winter-hero__scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
+.winter-hero__img { object-fit: cover; object-position: center; }
+.winter-hero__scrim { background: linear-gradient(90deg, rgba(20,17,14,.74) 0%, rgba(20,17,14,.42) 48%, rgba(20,17,14,.08) 76%); }
+.winter-hero__in { position: relative; z-index: 1; width: 100%; padding-top: 220px; padding-bottom: clamp(54px, 8vw, 110px); }
+.winter-hero__in .eyebrow { color: rgba(255,255,255,.82); }
+.winter-hero h1 { max-width: 850px; margin: 10px 0 18px; color: #fff; font-size: clamp(48px, 7.2vw, 104px); line-height: .92; }
+.winter-hero p:not(.eyebrow) { max-width: 650px; margin: 0 0 28px; font-size: clamp(17px, 1.5vw, 22px); line-height: 1.55; }
+.winter-intro { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(36px, 8vw, 120px); align-items: start; }
+.winter-intro h2, .winter-section-head h2, .winter-deadline h2, .winter-cta h2 { margin: 8px 0 0; font-size: clamp(36px, 4.8vw, 66px); line-height: 1; }
+.winter-intro__copy { font-size: clamp(17px, 1.3vw, 20px); line-height: 1.65; }
+.winter-intro__copy > p:first-child { margin-top: 0; }
+.winter-callout { margin: 28px 0 0; padding: 24px 0 0; border-top: 1px solid var(--line); }
+.winter-callout strong { color: var(--accent-ink); }
+.winter-section-head { margin-bottom: clamp(30px, 5vw, 64px); }
+.winter-models { padding-top: 20px; }
+.winter-model { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .82fr); gap: clamp(32px, 7vw, 96px); align-items: center; padding: clamp(38px, 6vw, 80px) 0; border-top: 1px solid var(--line); }
+.winter-model--reverse .winter-model__media { order: 2; }
+.winter-model--reverse .winter-model__body { order: 1; }
+.winter-model__media { background: var(--tile); aspect-ratio: 1 / 1; display: grid; place-items: center; overflow: hidden; }
+.winter-model__media img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.winter-model__body h3 { margin: 6px 0 6px; font-size: clamp(40px, 5vw, 72px); line-height: 1; }
+.winter-model__body > p:not(.eyebrow):not(.winter-price) { color: var(--muted); font-size: 17px; line-height: 1.65; }
+.winter-price { margin: 0 0 22px; font-family: var(--sans-product); font-size: 16px; }
+.winter-price strong { font-size: 23px; color: var(--ink); }
+.winter-gift { display: grid; gap: 5px; margin: 28px 0 22px; padding: 20px 22px; border-left: 4px solid var(--accent-ink); background: var(--tile); font-family: var(--sans-product); }
+.winter-gift span { font-size: 12px; letter-spacing: .09em; text-transform: uppercase; }
+.winter-gift strong { color: var(--accent-ink); font-size: 18px; }
+.winter-configs { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.winter-configs summary { min-height: 56px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; list-style: none; font-family: var(--sans-product); font-size: 13px; letter-spacing: .07em; text-transform: uppercase; }
+.winter-configs summary::-webkit-details-marker { display: none; }
+.winter-configs summary::after { content: "+"; font-size: 20px; font-weight: 400; }
+.winter-configs[open] summary::after { content: "−"; }
+.winter-configs summary:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 4px; }
+.winter-table-wrap { max-height: 360px; overflow: auto; margin: 0 0 18px; border-top: 1px solid var(--line); }
+.winter-table-wrap table { width: 100%; min-width: 520px; border-collapse: collapse; font-family: var(--sans-product); font-size: 12px; line-height: 1.4; }
+.winter-table-wrap th, .winter-table-wrap td { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.winter-table-wrap th { position: sticky; top: 0; background: var(--paper); color: var(--muted); font-weight: 500; }
+.winter-deadline { background: var(--accent-ink); color: var(--paper); }
+.winter-deadline__in { padding-top: clamp(64px, 9vw, 120px); padding-bottom: clamp(64px, 9vw, 120px); }
+.winter-deadline .eyebrow { color: rgba(248,245,239,.72); }
+.winter-deadline p:not(.eyebrow) { max-width: 760px; margin: 25px 0 0; font-size: clamp(17px, 1.4vw, 21px); line-height: 1.65; }
+.winter-terms { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: clamp(40px, 8vw, 120px); }
+.winter-terms ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.winter-terms li { position: relative; padding: 18px 0 18px 30px; border-bottom: 1px solid var(--line); line-height: 1.55; }
+.winter-terms li::before { content: ""; position: absolute; left: 1px; top: 27px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-ink); }
+.winter-cta { text-align: center; padding-top: clamp(50px, 8vw, 100px); }
+.winter-cta > p:not(.eyebrow) { max-width: 650px; margin: 22px auto 28px; color: var(--muted); font-size: 18px; line-height: 1.6; }
+.winter-cta__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 760px) {
+  .winter-hero { min-height: 720px; }
+  .winter-hero__img { object-position: 58% center; }
+  .winter-hero__scrim { background: linear-gradient(0deg, rgba(20,17,14,.82) 0%, rgba(20,17,14,.32) 64%, rgba(20,17,14,.08) 100%); }
+  .winter-hero__in { padding-top: 310px; padding-bottom: 48px; }
+  .winter-hero h1 { font-size: clamp(46px, 15vw, 67px); }
+  .winter-intro, .winter-terms { grid-template-columns: 1fr; gap: 30px; }
+  .winter-model { grid-template-columns: 1fr; gap: 30px; }
+  .winter-model--reverse .winter-model__media, .winter-model--reverse .winter-model__body { order: initial; }
+  .winter-model__body h3 { font-size: 48px; }
+  .winter-model__media { aspect-ratio: 1 / 1.08; }
+  .winter-table-wrap { margin-right: calc(var(--gutter) * -1); }
+}
