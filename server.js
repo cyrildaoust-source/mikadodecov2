@@ -85,8 +85,8 @@ const BRAND_HERO_REVIEW = process.env.BRAND_HERO_REVIEW === '1';
 // this empty state with the usual product cards and configurators.
 const CAMPAIGN_COLLECTIONS = {
   'vitra-home-stories-for-winter': {
-    name: 'Vitra · Home Stories for Winter',
-    description: 'Du 1er octobre 2026 au 31 janvier 2027, pour l’achat d’un fauteuil Vitra Grand Relax, Repos ou Grand Repos dans une configuration participante, l’Ottoman ou la Panchina assorti(e) est offert(e) dans la même configuration que le fauteuil. Pour certaines configurations commandées avant le 27 novembre 2026, une livraison avant Noël est probablement possible, sous réserve de confirmation.',
+    name: 'Home Stories for Winter',
+    description: 'Du 1er octobre 2026 au 31 janvier 2027, pour l’achat d’un fauteuil Vitra Grand Relax, Repos ou Grand Repos dans une configuration participante, l’Ottoman ou la Panchina assorti(e) est offert(e) dans la même configuration que le fauteuil. Pour certaines configurations commandées en Europe avant le 27 novembre 2026, une livraison avant Noël est probablement possible, sous réserve de confirmation au moment de la commande. Offre réservée au client final, valable pendant la période de campagne auprès des revendeurs participants et selon les configurations proposées.',
     image: 'https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/hero.webp?v=1790627815',
     imageAlt: 'Vitra Home Stories for Winter — Grand Relax et Ottoman assorti',
   },
@@ -758,6 +758,7 @@ app.get('/collections/:handle', async (req, res) => {
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
+    const bodyDescription = campaign ? campaign.description : description;
     const image = collectionHero ? absUrl(collectionHero.img) : (col.image ? absUrl(col.image) : OG_DEFAULT);
     const collectionUrl = '/collections/' + encodeURIComponent(handle);
     const url = ORIGIN + collectionUrl + (brand ? '?brand=' + encodeURIComponent(brand) : '');
@@ -766,7 +767,7 @@ app.get('/collections/:handle', async (req, res) => {
     html = injectCollectionHero(html, collectionHero);
     html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
     if (brand || campaign) {
-      const context = { handle, collectionName, title: name, description };
+      const context = { handle, collectionName, title: name, description: bodyDescription };
       if (brand) context.brand = { slug: brand, name: brandLabel };
       if (campaign) context.pendingMessage = 'Les configurations seront disponibles ici dès leur publication pour le lancement de l’offre.';
       html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
@@ -775,7 +776,7 @@ app.get('/collections/:handle', async (req, res) => {
     // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
     // le script inline vide ces génériques pour les users → zéro régression de flash).
     html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title' + (brand || campaign ? ' data-context' : '') + '>' + ogEscape(name) + '</h1>');
-    html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
+    html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(bodyDescription) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
     try {
       if (!cp) throw new Error('Collection unavailable');
