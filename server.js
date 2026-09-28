@@ -765,14 +765,16 @@ app.get('/collections/:handle', async (req, res) => {
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
     html = injectCollectionHero(html, collectionHero);
     html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
-    if (brand) {
-      const context = { handle, collectionName, brand: { slug: brand, name: brandLabel }, title: name, description };
+    if (brand || campaign) {
+      const context = { handle, collectionName, title: name, description };
+      if (brand) context.brand = { slug: brand, name: brandLabel };
+      if (campaign) context.pendingMessage = 'Les configurations seront disponibles ici dès leur publication pour le lancement de l’offre.';
       html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
 
     }
     // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
     // le script inline vide ces génériques pour les users → zéro régression de flash).
-    html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title' + (brand ? ' data-context' : '') + '>' + ogEscape(name) + '</h1>');
+    html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title' + (brand || campaign ? ' data-context' : '') + '>' + ogEscape(name) + '</h1>');
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
     try {
@@ -2077,7 +2079,14 @@ app.get('/api/collection/:handle/products', async (req, res) => {
   try {
     const { handle } = req.params;
     const { cursor, limit, tag, brand } = req.query;
-    const payload = await collectionProductsFor(handle, limit, cursor, tag, brand);
+    let payload = await collectionProductsFor(handle, limit, cursor, tag, brand);
+    const campaign = CAMPAIGN_COLLECTIONS[handle];
+    if (!payload && campaign && !cursor && !tag && !brand) {
+      payload = {
+        collection: { handle, title: campaign.name, description: campaign.description, image: campaign.image },
+        items: [], pageInfo: { hasNextPage: false, endCursor: null },
+      };
+    }
     if (!payload) return res.status(404).json({ error: 'collection_not_found' });
     res.json(payload);
   } catch (err) {
