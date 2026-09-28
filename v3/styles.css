@@ -281,7 +281,15 @@ html.sale-hd-on .hero__badge { display: flex; }
 .pcard { display: flex; flex-direction: column; min-width: 0; }   /* laisse la carte rétrécir sous la largeur de son contenu (bouton) → pas de débordement en 2 colonnes */
 .pcard__media { position: relative; aspect-ratio: 1/1; background: var(--tile); overflow: hidden; }
 .pcard__media img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; transition: opacity .35s var(--ease); }
-.pcard__media img.alt { position: absolute; inset: 0; opacity: 0; }
+.pcard__media img.alt {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  /* La vue complémentaire peut être paysage ou portrait. La montrer entière
+     évite de couper le produit dans le carré de la carte au survol. */
+  object-fit: contain;
+  background: var(--tile);
+}
 .pcard__media:hover:has(img.alt) img.main { opacity: 0; }
 .pcard__media:hover img.alt { opacity: 1; }
 .pcard__tags { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; z-index: 2; }
