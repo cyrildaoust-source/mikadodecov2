@@ -12,6 +12,8 @@ export function buildProductSpecRows(product = {}) {
     product.material || product.constructionMaterials,
   );
   add("Usage", product.usage);
+  add("Capacité", product.capacity);
+  add("Résistance à l’abrasion", product.martindale);
   add("Entretien", product.entretien);
   add("Designer", product.designer);
   add("Année / Édition", product.year);
@@ -34,6 +36,8 @@ export function buildProductSpecRows(product = {}) {
   add("Éléments remplaçables", product.lightSourceReplaceable);
 
   add("Garantie", product.warranty);
+  add("Certifications", product.certifications);
+  add("Tests & normes", product.testsAndStandards);
   return rows;
 }
 
@@ -68,6 +72,7 @@ export function buildProductSpecGroups(product = {}) {
       label: "Matériaux & entretien",
       rows: [
         ...row("Matériaux / Finitions", product.material || product.constructionMaterials),
+        ...row("Résistance à l’abrasion", product.martindale),
         ...row("Entretien", product.entretien),
       ],
     },
@@ -77,6 +82,7 @@ export function buildProductSpecGroups(product = {}) {
       // La Référence (SKU) est PAR VARIANTE → ajoutée dans produit.html, pas ici.
       rows: [
         ...row("Usage", product.usage),
+        ...row("Capacité", product.capacity),
         ...row("Infos électriques", product.infosElectriques),
         ...row("Type de luminaire", product.lightingType),
         ...row("Source lumineuse", product.lightSourceType || product.ledType),

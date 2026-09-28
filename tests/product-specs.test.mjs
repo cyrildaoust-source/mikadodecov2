@@ -8,6 +8,8 @@ test("builds ordered general and technical characteristics", () => {
     dimensions: "Ø 11 × H 25,5 cm",
     material: "Chêne et aluminium",
     usage: "Intérieur",
+    capacity: "1,3 L",
+    martindale: "30 000 tours",
     designer: "Teruhiro Yanagihara",
     year: 2026,
     origin: "Édité par &Tradition",
@@ -70,6 +72,8 @@ test("routes fields into the right groups", () => {
     weight: "0,7 kg",
     material: "Chêne et aluminium",
     entretien: "Chiffon doux",
+    capacity: "1,3 L",
+    martindale: "30 000 tours",
     usage: "Intérieur",
     lightingType: "Lampe portable rechargeable",
     ipRating: "IP44",
@@ -80,8 +84,9 @@ test("routes fields into the right groups", () => {
   const by = Object.fromEntries(groups.map((g) => [g.key, g]));
   assert.equal(by.description.text, "Une lampe portable.");
   assert.deepEqual(by.dimensions.rows, [["Dimensions", "Ø395×H1200mm"], ["Poids", "0,7 kg"]]);
-  assert.deepEqual(by.materiaux.rows, [["Matériaux / Finitions", "Chêne et aluminium"], ["Entretien", "Chiffon doux"]]);
+  assert.deepEqual(by.materiaux.rows, [["Matériaux / Finitions", "Chêne et aluminium"], ["Résistance à l’abrasion", "30 000 tours"], ["Entretien", "Chiffon doux"]]);
   assert.ok(by.technique.rows.some(([l, v]) => l === "Usage" && v === "Intérieur"));
+  assert.ok(by.technique.rows.some(([l, v]) => l === "Capacité" && v === "1,3 L"));
   assert.ok(by.technique.rows.some(([l, v]) => l === "Indice de protection" && v === "IP44"));
   assert.ok(by.conception.rows.some(([l, v]) => l === "Année / Édition" && v === 2026));
   assert.ok(by.conception.rows.some(([l, v]) => l === "Fabrication / Origine"));
