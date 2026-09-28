@@ -78,6 +78,20 @@ const FAMILY_TEMPLATE = path.join(__dirname, 'templates', 'family-page.html');
 // restent invisibles en production tant que le gate éditorial ne les qualifie pas.
 const BRAND_HERO_REVIEW = process.env.BRAND_HERO_REVIEW === '1';
 
+// Campaign collections are created in Shopify before their products are made
+// public. Storefront API omits a collection while every member is still a
+// draft, so keep the standard collection shell available during that handoff.
+// As soon as Shopify publishes the products, the regular query below replaces
+// this empty state with the usual product cards and configurators.
+const CAMPAIGN_COLLECTIONS = {
+  'vitra-home-stories-for-winter': {
+    name: 'Vitra · Home Stories for Winter',
+    description: 'Du 1er octobre 2026 au 31 janvier 2027, pour l’achat d’un fauteuil Vitra Grand Relax, Repos ou Grand Repos dans une configuration participante, l’Ottoman ou la Panchina assorti(e) est offert(e) dans la même configuration que le fauteuil. Pour certaines configurations commandées avant le 27 novembre 2026, une livraison avant Noël est probablement possible, sous réserve de confirmation.',
+    image: 'https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/hero.webp?v=1790627815',
+    imageAlt: 'Vitra Home Stories for Winter — Grand Relax et Ottoman assorti',
+  },
+};
+
 // ─── CHROME SSR ────────────────────────────────────────
 // chrome-template.js est ESM + pur → importable en Node via import() dynamique.
 // Chargé une seule fois, mémorisé. Repli gracieux si non prêt (cold start très tôt).
@@ -706,8 +720,9 @@ app.get('/collections/:handle', async (req, res) => {
       sieges: { title: 'Assises', hero: '/images/familles/assises/hero.webp' },
       outdoor: { title: 'Jardin', hero: '/images/familles/jardin/1.webp' },
     };
+    const campaign = CAMPAIGN_COLLECTIONS[handle] || null;
     const family = Object.hasOwn(families, handle) ? families[handle] : Object.hasOwn(richFamilies, handle) ? richFamilies[handle] : null;
-    const col = family ? { name: family.title, description: family.description } : (await getCollections()).find(c => c.handle === handle);
+    const col = family ? { name: family.title, description: family.description } : (await getCollections()).find(c => c.handle === handle) || campaign;
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
     if (!col) return send404Shell(res, PRODUITS_TEMPLATE);
 
@@ -716,6 +731,7 @@ app.get('/collections/:handle', async (req, res) => {
     let cp = null, failed = false;
     try { cp = await collectionProductsFor(handle, 24, cursor, tag, brand); }
     catch (error) { failed = true; console.warn('[collection-selection]', error.message); }
+    if (!cp && campaign && !brand && !tag && !cursor) cp = { items: [], pageInfo: { hasNextPage: false, endCursor: null } };
     const brandLabel = cp?.brand?.name || brandName(brand);
     const brandPhoto = family?.brands?.find(item => item.slug === brand);
     // Le bandeau Luminaires montre déjà une scène Artek large, adaptée à ce format.
@@ -730,6 +746,9 @@ app.get('/collections/:handle', async (req, res) => {
       brand: false, editorial: true, img: familyImage, srcset: familyImage,
       alt: brandPhoto || legacyBrandPhoto ? family.title + ' · ' + brandLabel : family.heroAlt || family.title,
       style: photoStyle(!useFamilyPhoto && brandPhoto ? { position: brandPhoto.heroPosition || brandPhoto.position, mobilePosition: brandPhoto.mobilePosition } : legacyBrandPhoto ? {} : { position: family.heroPosition, mobilePosition: family.heroMobilePosition }),
+    } : campaign ? {
+      brand: false, editorial: true, img: campaign.image, srcset: campaign.image,
+      alt: campaign.imageAlt, style: '',
     } : getBrandHero(handle, { includeCandidates: BRAND_HERO_REVIEW }) || getCollectionHero(handle);
     const collectionName = navigationRules.collections[handle]?.label || col.name || 'Catalogue';
     const name = collectionName + (brand ? ' · ' + brandLabel : '');
@@ -765,6 +784,9 @@ app.get('/collections/:handle', async (req, res) => {
       }
       if (brand) {
         if (!gi.length) html = html.replace('<div class="pgrid" data-grid></div>', () => `<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Aucun produit pour cette marque dans cette catégorie. <a href="${collectionUrl}">Revenir à ${ogEscape(collectionName)}</a>.</p></div>`);
+      }
+      if (campaign && !gi.length) {
+        html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid data-ssr="1"><p class="plp-empty">Les configurations seront disponibles ici dès leur publication pour le lancement de l’offre.</p></div>');
       }
       html = listingPagination(html, req, cp.pageInfo);
       // Une collection vide reste accessible au client, mais hors de l’index.
