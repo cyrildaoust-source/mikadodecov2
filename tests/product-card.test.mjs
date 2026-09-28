@@ -1,5 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {productCardHTML} from '../v3/product-card.mjs';
 
 const product = {handle:'table', name:'Table <test>', brand:'A & B', image:'/table.jpg', image2:'/detail.jpg',
@@ -27,4 +28,10 @@ test('selection controls preserve disabled state and saved cart quantity',()=>{
   const html=productCardHTML({...product,purchaseDisabled:true});
   assert.match(html,/data-add\s+disabled/);
   assert.match(html,/Indisponible/);
+});
+
+test('hover photos remain entirely visible inside the square product card',()=>{
+  const css=readFileSync(new URL('../v3/styles.css',import.meta.url),'utf8');
+  assert.match(css,/\.pcard__media img\.alt\s*\{[^}]*object-fit:\s*contain;/s);
+  assert.match(css,/\.pcard__media img\s*\{[^}]*object-fit:\s*cover;/s);
 });
