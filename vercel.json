@@ -30,6 +30,7 @@
     { "src": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "status": 301, "headers": { "Location": "/journal/$slug.html" } },
     { "src": "/nos-produits(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
     { "src": "/passez-commande(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
+    { "src": "/vitra-home-stories-for-winter/?", "status": 301, "headers": { "Location": "/collections/vitra-home-stories-for-winter" } },
     { "src": "/nos-marques/vitra/?", "status": 301, "headers": { "Location": "/collections/vitra" } },
     { "src": "/nos-marques/ichendorf/?", "status": 301, "headers": { "Location": "/collections/ichendorf-milano" } },
     { "src": "/nos-marques/polspotten/?", "status": 301, "headers": { "Location": "/collections/pols-potten" } },
