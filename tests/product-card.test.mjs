@@ -30,8 +30,9 @@ test('selection controls preserve disabled state and saved cart quantity',()=>{
   assert.match(html,/Indisponible/);
 });
 
-test('hover photos remain entirely visible inside the square product card',()=>{
+test('hover photos fill the square product card without letterbox bands',()=>{
   const css=readFileSync(new URL('../v3/styles.css',import.meta.url),'utf8');
-  assert.match(css,/\.pcard__media img\.alt\s*\{[^}]*object-fit:\s*contain;/s);
+  assert.match(css,/\.pcard__media img\.alt\s*\{[^}]*object-fit:\s*cover;/s);
+  assert.doesNotMatch(css,/\.pcard__media img\.alt\s*\{[^}]*object-fit:\s*contain;/s);
   assert.match(css,/\.pcard__media img\s*\{[^}]*object-fit:\s*cover;/s);
 });

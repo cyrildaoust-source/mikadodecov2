@@ -285,10 +285,9 @@ html.sale-hd-on .hero__badge { display: flex; }
   position: absolute;
   inset: 0;
   opacity: 0;
-  /* La vue complémentaire peut être paysage ou portrait. La montrer entière
-     évite de couper le produit dans le carré de la carte au survol. */
-  object-fit: contain;
-  background: var(--tile);
+  /* Le survol remplit le carré : les bandes sont plus gênantes qu'un léger
+     recadrage d'ambiance. Les packshots sensibles sont cadrés à la source. */
+  object-fit: cover;
 }
 .pcard__media:hover:has(img.alt) img.main { opacity: 0; }
 .pcard__media:hover img.alt { opacity: 1; }
