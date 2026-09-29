@@ -2,7 +2,10 @@
 
 Audit complet de la marque Artek sur Mikado Deco, produit par produit et variante par variante : photos, variantes, prix, tags, métachamps, textes, SEO, classement, canaux, logistique et rendu public. Le même jour, avec l'accord du propriétaire, les corrections ont été appliquées dans Shopify et sur le site, en deux lots.
 
-Règle retenue par le propriétaire pour la vente en ligne : **montrer ce qu'on a**. On ne propose que des coloris précis et photographiés ; les autres tissus, cuirs et combinaisons se font sur commande ou en boutique.
+Décisions du propriétaire :
+- **Montrer ce qu'on a** pour les coloris et combinaisons simples (Rival, Karuselli, Zebra).
+- **Kiki et lit 710 vendus par classe de tissu Artek** : ce sont des achats sur devis ou en caisse. La structure par classe (F40 à F200, L40 et L60, sans housse) est conservée, et les photos sont présentées comme des exemples de revêtement.
+- **Un tissu arrêté chez Artek ne doit pas être en vente en ligne.** Le tissu H55 est donc retiré des canaux en ligne.
 
 ## Fichiers
 
@@ -16,9 +19,9 @@ Règle retenue par le propriétaire pour la vente en ligne : **montrer ce qu'on 
 
 | | Avant | Après |
 | --- | ---: | ---: |
-| Constats critiques | 26 | **1 partiel** (tissu H55 : qualité à confirmer) |
-| Constats élevés | 368 | 94 à faire, 3 partiels |
-| Contrôles automatiques (mêmes règles avant et après) | 1 668, dont 210 élevés | 778, dont 67 élevés |
+| Constats critiques | 26 | 0 ouvert : 16 corrigés, 9 acceptés (Kiki et lit 710 vendus par classe, sur devis), 1 réglé par le retrait du H55 |
+| Constats élevés | 368 | 106 à faire, 3 partiels |
+| Contrôles automatiques (mêmes règles avant et après) | 1 668, dont 210 élevés | 836, dont 93 élevés (y compris les alertes attendues : H55 hors du site, classes Kiki conservées) |
 
 Informations renseignées :
 
@@ -31,7 +34,7 @@ Informations renseignées :
 | Usage | 108 | 162 |
 | Origine | 109 | 149 |
 
-Le nombre de fiches actives passe de 160 à 162 : le matelas et les coussins du lit 710 sont publiés. Les variantes passent de 645 à 601, après le remplacement des classes de prix Kiki par des coloris réels.
+Le nombre de fiches actives passe de 160 à 162 : le matelas et les coussins du lit 710 sont publiés, vendus par classe de tissu. Le tissu H55 reste actif en caisse uniquement.
 
 ## Corrections appliquées
 
@@ -52,18 +55,18 @@ Toutes les modifications Shopify ont été précédées d'une sauvegarde. L'éta
   - ambiances de Domus rembourrées déplacées vers la bonne fiche, pot du petit modèle déplacé sur sa fiche.
 - **Textes alternatifs** : 146 photos de variantes reprennent « produit — finition ». 426 photos d'ambiance ont reçu une description de ce qu'elles montrent, rédigée après examen de chaque image. Les fichiers partagés entre fiches n'ont pas été modifiés.
 
-### « Montrer ce qu'on a »
+### Revêtements et gammes
 
-- **Kiki** (fauteuil, canapés 2 et 3 places, bancs 1, 2 et 3 places). Les classes de prix F40…L60 sont remplacées par les coloris que montrent les photos officielles Artek, au prix de leur classe.
-  - Classes Artek appliquées : Aura = F80, Hallingdal = F140, Sørensen Prestige = L40, Sørensen Elegance = L60, d'après la grille publiée par deux revendeurs Artek.
-  - Le cuir noir des canapés est un Prestige, donc en L40 : 3 457 € au lieu de 3 981 € pour le 2 places, 4 918 € au lieu de 5 723 € pour le 3 places.
-  - Descriptions réécrites, avec « autres tissus et cuirs sur commande ou en boutique ».
-- **Lit de repos 710**
-  - Le matelas et les coussins de dossier sont publiés dans les deux coloris photographiés : Hallingdal 65 750 bleu et 110 gris clair, classe F140, soit 1 393 € et 864 €. Leur coût d'achat reste à saisir.
-  - La fiche du cadre indique « cadre seul » et renvoie vers eux.
+- **Kiki** (fauteuil, canapés 2 et 3 places, bancs 1, 2 et 3 places) : les 8 classes de prix Artek sont conservées (tissus F40 à F200, cuirs L40 et L60), avec leurs prix, coûts et SKU d'origine.
+  - Un premier passage les avait remplacées par des coloris photographiés. Il a été annulé à la demande du propriétaire, et les fiches sont revenues à l'identique.
+  - La description explique les classes (par exemple Vitra Aura en F80, Kvadrat Hallingdal en F140, cuirs Sørensen Prestige en L40 et Elegance en L60).
+  - Elle précise que les photos montrent un exemple de revêtement, et que le tissu et sa couleur se choisissent sur devis ou en boutique.
+  - Les textes alternatifs le disent aussi (« exemple en tissu Aura 07 vert chasseur »).
+  - Les photos officielles Artek en haute définition sont conservées pour les tissus des bancs.
+- **Lit de repos 710** : le matelas et les coussins de dossier sont publiés, vendus par classe (sans housse, F40 à F200) comme à l'origine. Les photos du lit en Hallingdal 65 bleu et gris servent d'exemple. La fiche du cadre indique « cadre seul » et renvoie vers eux. Leur coût d'achat reste à saisir.
+- **Tissu H55** : absent des textiles d'artek.fi et des 304 produits de la boutique officielle Artek, il est considéré comme arrêté. Il est retiré du site, de l'Online Store et de Facebook & Instagram, et reste disponible en caisse uniquement.
 - **Chaise Rival** : chaque variante indique son piètement photographié (asphalte ou bouleau naturel). Les combinaisons non vendues sont sorties de la galerie.
 - **Karuselli et gamme Zebra** : le coloris vendu est indiqué (coque blanche et cuir noir ; noir/blanc).
-- **Tissu H55** : le coloris « noir sur blanc » est indiqué.
 
 ### Informations fausses et données complétées
 
@@ -159,11 +162,10 @@ Toutes les modifications Shopify ont été précédées d'une sauvegarde. L'éta
 
 1. **19 fiches sans rubrique du menu** : tissus au mètre et coupons, sacs, pochettes, sangle, patins, cartes postales, outils d'architecte, céramiques Secrets of Finland, lit de repos 710 et son matelas. Il faut soit créer des rubriques (« Sacs & pochettes », « Tissus & mercerie », « Papeterie »), soit les laisser sur la seule page Artek.
 2. **Secrets of Finland et outils d'architecte** : faut-il un produit par objet, comme chez Artek ? Aujourd'hui, une seule fiche par collection.
-3. **Tissu H55** : quelle qualité est vendue (coton, lin, laine) ? Faut-il le garder, s'il est arrêté chez Artek ?
 
 ### À confirmer avec Artek
 
-- Références probablement arrêtées : Miroir 124°, tissu H55, tables enfant 80B et 80C H60.
+- Références probablement arrêtées, toujours en vente en ligne : Miroir 124°, tables enfant 80B et 80C H60. Selon la règle du propriétaire, elles devront sortir du site si Artek confirme leur arrêt.
 - Tables enfant : prix identiques aux tables adultes ; les 80A et 81B H60 partagent les mêmes photos.
 - Dimensions non saisies :
   - chaises 65, 66, 68, 69, 611, Domus, Aslak, Lukki, Atelier, Rope, Rival (largeur et profondeur incertaines) ;
@@ -189,7 +191,7 @@ Toutes les modifications Shopify ont été précédées d'une sauvegarde. L'éta
 
 ## Limites
 
-- Les classes de prix Kiki viennent de la grille Artek publiée par des revendeurs. Les prix appliqués sont ceux déjà enregistrés pour chaque classe dans Shopify.
+- Les exemples de tissus par classe cités dans les fiches Kiki viennent de la grille Artek publiée par des revendeurs.
 - Les prix n'ont pas été comparés au tarif Artek, qui n'est pas public.
 - Le statut « arrêté » repose sur l'absence de la page sur artek.fi.
 - Relevé et corrections du 29 septembre 2026.
