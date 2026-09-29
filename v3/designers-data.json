@@ -1,5 +1,5 @@
 {
-  "_note": "250 designers — enrichi 2026-06-11 (+21 créateurs Alessi sourcés alessi.com via recherche vérifiée, bio à compléter). Tri par sortKey.",
+  "_note": "255 designers — enrichi 2026-06-11 (+21 créateurs Alessi sourcés alessi.com via recherche vérifiée, bio à compléter). Tri par sortKey.",
   "designers": [
     {
       "name": "Alvar Aalto",
@@ -28,10 +28,12 @@
         "aino-aalto"
       ],
       "brands": [
-        "Iittala"
+        "Iittala",
+        "Artek"
       ],
       "brandHrefs": [
-        "/produits.html?marque=Iittala"
+        "/produits.html?marque=Iittala",
+        "/collections/artek"
       ],
       "bio": ""
     },
@@ -43,10 +45,12 @@
         "eero-aarnio"
       ],
       "brands": [
-        "Alessi"
+        "Alessi",
+        "Artek"
       ],
       "brandHrefs": [
-        "/collections/alessi"
+        "/collections/alessi",
+        "/collections/artek"
       ],
       "bio": "Né en 1932 à Helsinki, Eero Aarnio est un designer finlandais formé à l'Institut des arts industriels de la ville, diplômé en 1960. Il ouvre son propre studio en 1962. Au cours des années 1960, il s'écarte des conventions du mobilier scandinave en explorant le plastique et la fibre de verre, les formes organiques et les couleurs vives, avec des assises sculpturales et modernes. On lui doit le fauteuil Ball, sphère ouverte montée sur pied conçue en 1963 et éditée par Asko, ainsi que le fauteuil Pastil (1967, American Industrial Design Award 1968) et le fauteuil suspendu Bubble, coque transparente en acrylique conçue en 1968, tous deux édités à l'origine par Asko. Ses œuvres figurent au MoMA et au Victoria & Albert Museum. Pour Alessi, il a dessiné l'arrosoir Diva et le presse-agrumes Citrus.",
       "photo": "/images/designers/eero-aarnio.jpg"
@@ -432,11 +436,13 @@
       ],
       "brands": [
         "Vitra",
-        "HAY"
+        "HAY",
+        "Artek"
       ],
       "brandHrefs": [
         "/collections/vitra",
-        "/collections/hay"
+        "/collections/hay",
+        "/collections/artek"
       ],
       "bio": "Ronan (né en 1971) et Erwan (né en 1976) Bouroullec sont deux designers français, originaires de Quimper, en Bretagne. Formés respectivement à l'École nationale supérieure des arts décoratifs de Paris et à l'école d'art de Cergy, les deux frères travaillent ensemble depuis 1999. Leur démarche explore des formes organiques et des systèmes modulaires, du meuble au textile jusqu'à l'espace urbain. Leur collaboration avec Vitra a donné naissance au paravent Algues (2004), au canapé Alcove (2006) et à la chaise Vegetal (2009), inspirée de structures végétales. Pour HAY, ils signent la collection d'extérieur Palissade (2015). En 2014, leur travail a été distingué par la London Design Medal.",
       "photo": "/images/designers/ronan-erwan-bouroullec.jpg",
@@ -1517,6 +1523,23 @@
       "photo": "/images/designers/michael-graves.jpg"
     },
     {
+      "name": "Konstantin Grcic",
+      "slug": "konstantin-grcic",
+      "tags": [
+        "konstantin-grcic"
+      ],
+      "brands": [
+        "Artek",
+        "Vitra"
+      ],
+      "brandHrefs": [
+        "/collections/artek",
+        "/collections/vitra"
+      ],
+      "bio": "Designer industriel allemand né en 1965 à Munich. Pour Artek, il a dessiné en 2014 la chaise Rival, première chaise pivotante de la marque.",
+      "sortKey": "Grcic"
+    },
+    {
       "name": "Grint",
       "slug": "grint",
       "sortKey": "Grint",
@@ -1966,6 +1989,21 @@
       ],
       "bio": "Kseniya Kravtsova est une artiste et designer ukrainienne, surtout reconnue pour sa céramique. Elle a grandi dans la campagne près de Lviv, dans l'ouest de l'Ukraine, et travaille depuis plus de vingt ans dans le sud de la France. Installée depuis 2020 à Barbentane, au cœur du parc naturel de la Montagnette, elle façonne ses pièces dans son atelier de Provence. Pluridisciplinaire, elle se définit comme « une poète devenue artiste » et fait de la poésie du quotidien le fil conducteur de son travail. Pour Serax, elle signe les vases Gala, en faïence, dont la forme s'inspire d'un sac plastique soulevé par le vent, métaphore de fragilité et de durabilité. Elle conçoit aussi la collection de luminaires Harna, en grès beige inspiré de l'argile brute et des fleurs, déclinée en applique et en lampadaire.",
       "photo": "/images/designers/kseniya-kravtsova.jpg"
+    },
+    {
+      "name": "Yrjö Kukkapuro",
+      "slug": "yrjo-kukkapuro",
+      "tags": [
+        "yrjo-kukkapuro"
+      ],
+      "brands": [
+        "Artek"
+      ],
+      "brandHrefs": [
+        "/collections/artek"
+      ],
+      "bio": "Designer finlandais né en 1933, Yrjö Kukkapuro est l’auteur du fauteuil Karuselli (1964), coque en fibre de verre pivotante et basculante devenue une icône du design des années 1960, éditée par Artek.",
+      "sortKey": "Kukkapuro"
     },
     {
       "name": "Jin Kuramoto",
@@ -3058,6 +3096,21 @@
       "photo": "/images/designers/alejandro-ruiz.jpg"
     },
     {
+      "name": "Daniel Rybakken",
+      "slug": "daniel-rybakken",
+      "tags": [
+        "daniel-rybakken"
+      ],
+      "brands": [
+        "Artek"
+      ],
+      "brandHrefs": [
+        "/collections/artek"
+      ],
+      "bio": "Designer norvégien, Daniel Rybakken travaille la lumière, les matériaux et la perception de l’espace. Pour Artek, il a dessiné le porte-manteau Kiila (2017) et le miroir 124°.",
+      "sortKey": "Rybakken"
+    },
+    {
       "name": "Elena Salmistraro",
       "slug": "elena-salmistraro",
       "sortKey": "Salmistraro",
@@ -3446,6 +3499,23 @@
       "photo": "/images/designers/waww-la-table.jpg"
     },
     {
+      "name": "TAF Studio",
+      "slug": "taf-studio",
+      "tags": [
+        "taf-studio"
+      ],
+      "brands": [
+        "Artek",
+        "Muuto"
+      ],
+      "brandHrefs": [
+        "/collections/artek",
+        "/collections/muuto"
+      ],
+      "bio": "Studio de design fondé à Stockholm par Gabriella Gustafson et Mattias Ståhlbom. Pour Artek, TAF Studio a dessiné la collection de sièges Atelier (2018) et la famille de luminaires Kori (2023).",
+      "sortKey": "TAF Studio"
+    },
+    {
       "name": "Keiji Takeuchi",
       "slug": "keiji-takeuchi",
       "sortKey": "Takeuchi",
@@ -3462,6 +3532,21 @@
       ],
       "bio": "Keiji Takeuchi est un designer japonais né à Fukuoka en 1977. Il passe une grande partie de sa jeunesse en Nouvelle-Zélande, où il obtient un diplôme de design produit à Auckland, complété par une bourse d'études à l'ENSCI-Les Ateliers, à Paris. En 2005, il rejoint le studio tokyoïte de Naoto Fukasawa, auprès duquel il travaille sept ans. Installé à Milan à partir de 2012, il y fonde son propre bureau de design en 2015. En 2016, il reçoit le prix du jeune talent japonais décerné par Elle Deco Japon (EDIDA). Il collabore avec des maisons internationales telles que Fredericia, Boffi De Padova, Living Divani, Karimoku et le groupe MillerKnoll.",
       "photo": "/images/designers/keiji-takeuchi.jpg"
+    },
+    {
+      "name": "Ilmari Tapiovaara",
+      "slug": "ilmari-tapiovaara",
+      "tags": [
+        "ilmari-tapiovaara"
+      ],
+      "brands": [
+        "Artek"
+      ],
+      "brandHrefs": [
+        "/collections/artek"
+      ],
+      "bio": "Ilmari Tapiovaara (1914-1999) est l’une des grandes figures du design finlandais d’après-guerre. Il dessine en 1946 la chaise Domus pour la résidence étudiante Domus Academica d’Helsinki, puis, pour Artek, la chaise Lukki (1951), la table basse Trienna (1954), les fauteuils Mademoiselle (1956), la chaise Aslak (1958) et la collection Kiki (1960), première série à structure en tube d’acier ovale.",
+      "sortKey": "Tapiovaara"
     },
     {
       "name": "Jonas Trampedach",
