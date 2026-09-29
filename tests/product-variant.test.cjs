@@ -24,6 +24,16 @@ test('ambiguous, absent and unassociated cover use a deterministic existing defa
   assert.equal(selectInitialVariant([], { coverUrl }), null);
   assert.equal(selectInitialVariant(variants, { coverUrl: 'https://cdn.shopify.com/other.png' }), variants[0]);
 });
+test('an unavailable cover or default gives way to the first available variant, unless requested', () => {
+  const stock = [{ ...variants[0], available: true }, { ...variants[1], available: false }, { id: 'gid://shopify/ProductVariant/3', available: true }];
+  assert.equal(selectInitialVariant(stock, { coverUrl }), stock[0]);
+  assert.equal(selectInitialVariant(stock, { coverUrl, fallback: false }), stock[0]);
+  assert.equal(selectInitialVariant(stock, { coverUrl: '', defaultId: stock[1].id }), stock[0]);
+  assert.equal(selectInitialVariant(stock, { requestedId: '2', coverUrl }), stock[1]);
+  const soldOut = stock.map(v => ({ ...v, available: false }));
+  assert.equal(selectInitialVariant(soldOut, { coverUrl }), soldOut[1]);
+  assert.equal(selectInitialVariant([{ id: '9', availableForSale: false }, { id: '10', availableForSale: true }]).id, '10');
+});
 test('normalization ignores Shopify delivery transforms, preserves other resource identity', () => {
   assert.equal(imageIdentity({ url: coverUrl }), imageIdentity(variants[1].image));
   assert.notEqual(imageIdentity('https://example.org/image?id=1'), imageIdentity('https://example.org/image?id=2'));

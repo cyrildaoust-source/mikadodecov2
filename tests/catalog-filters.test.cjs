@@ -83,6 +83,11 @@ test('le tri suit le prix de la finition montrée, les aperçus sont bornés, le
   const b=chair(2,[{price:550,options:[{name:'Couleur',value:'Blanc'}]}]);
   assert.deepEqual(filterCatalog([a,b],{color:'blanc',sort:'asc'}).items.map(p=>p.price),[550,600]);
   assert.deepEqual(filterCatalog([a,b],{color:'blanc',sort:'desc'}).items.map(p=>p.price),[600,550]);
+  // Sans filtre, la carte montre la variante de couverture : le tri suit ce prix affiché.
+  const cover=chair(4,[{price:300},{price:500}]);cover.card.variantId=cover.variants[1].id;
+  const plain=chair(5,[{price:400}]);
+  const sorted=filterCatalog([cover,plain],{sort:'asc'}).items;
+  assert.deepEqual(sorted.map(p=>p.price),[400,500]);
   const many=chair(3,Array.from({length:12},(_,i)=>({price:500+i,options:[{name:'Finition',value:'Blanc '+i}]})));
   const card=filterCatalog([many],{color:'blanc'}).items[0];
   assert.equal(card.finishChoices.length,4);assert.equal(card.finishCount,12);assert.equal(card.variantCount,12);

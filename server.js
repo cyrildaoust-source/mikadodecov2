@@ -451,6 +451,8 @@ const sendProduitsTemplate = (res) => sendTemplate(res, PRODUITS_TEMPLATE);
 const COLLECTION_ALIASES = new Set(['all', 'frontpage']);
 // Collections de marque publiées en double dans Shopify : une seule adresse par marque.
 const BRAND_COLLECTION_ALIASES = { 'fermob-1': 'fermob', volta: 'volta-mobiles' };
+// Collections de travail publiées par erreur dans Shopify : jamais servies au public.
+const INTERNAL_COLLECTION = /^claude-/;
 // Toutes les pages de marque ont le même bandeau, avec ou sans photo qualifiée.
 const brandBanner = (html, handle) => navigationRules.collections[handle]?.kind === 'brand' && !html.includes('subhero--brand')
   ? html.replace('<section class="subhero"', '<section class="subhero subhero--brand"') : html;
@@ -580,7 +582,7 @@ app.get('/produit.html', async (req, res) => {
       return res.redirect(301, navigation.productHref({ handle: data.node.handle }, navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)), req.query.variant));
     } catch (error) { return temporaryUnavailable(res).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
   }
-  if (!handle) return sendProduitTemplate(res);
+  if (!handle) return send404Shell(res, PRODUIT_TEMPLATE);   // aucune fiche demandée
   try {
     await Promise.all([_chromeReady, _navigationReady]);
     const product = await getProductByHandle(handle);
@@ -672,6 +674,7 @@ app.get('/produit.html', async (req, res) => {
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
+  if (INTERNAL_COLLECTION.test(handle)) return send404Shell(res, PRODUITS_TEMPLATE);
   if (Object.hasOwn(BRAND_COLLECTION_ALIASES, handle)) {
     const query = req.originalUrl.indexOf('?');
     return res.redirect(301, '/collections/' + BRAND_COLLECTION_ALIASES[handle] + (query < 0 ? '' : req.originalUrl.slice(query)));
@@ -998,13 +1001,17 @@ app.get('/sitemap.xml', (req, res) => sendXml(res,
   + `</sitemapindex>\n`));
 
 // Pages statiques + créateurs indexables + articles : aucun appel Shopify → instantané.
-app.get('/sitemap-pages.xml', (req, res) => {
+app.get('/sitemap-pages.xml', async (req, res) => {
   const urls = [];
   SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr)));
-  // Créateurs — uniquement les indexables (champ `hidden` dans designers-data.json)
-  // pour éviter le thin content / les fiches masquées.
+  // Créateurs visibles et portant au moins un produit publié (tags de l'index commun).
+  // Sans index disponible, la liste reste complète plutôt que de retirer des pages valides.
+  let tags = null;
+  try { tags = new Set((await getCatalogIndex()).products.flatMap(p => p.card.tags || [])); } catch (e) { /* index en préparation */ }
   getDesigners().forEach((d) => {
-    if (d && d.slug && !d.hidden) urls.push(smUrl(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5'));
+    if (!d || !d.slug || d.hidden) return;
+    if (tags && !(d.tags?.length ? d.tags : [d.slug]).some(t => tags.has(t))) return;
+    urls.push(smUrl(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5'));
   });
   // Articles du journal (HTML pré-rendus)
   try {
@@ -1038,7 +1045,7 @@ app.get('/sitemap-products.xml', async (req, res) => {
       }
       (await getCollections()).forEach((c) => {
         // Les familles éditoriales et les sélections composites ont leurs propres sources.
-        if (Object.hasOwn(BRAND_COLLECTION_ALIASES, c.handle)) return;
+        if (Object.hasOwn(BRAND_COLLECTION_ALIASES, c.handle) || INTERNAL_COLLECTION.test(c.handle)) return;
         const composed = Object.hasOwn(families, c.handle) || Object.hasOwn(FAMILLES_RICHES, c.handle) || ['chaises', 'tables-outdoor', 'promotions'].includes(c.handle);
         if (c.handle && (c.hasProducts !== false || composed)) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6'));
       });
@@ -1515,7 +1522,8 @@ async function sendScopeCatalog(req,res,scope) {
     html = html.replace(view.emptyState(scope),`<p class="plp-empty">${ogEscape(scope.unavailable)} <a href="${ogEscape(req.originalUrl)}">Réessayer</a>.</p>`);
     res.status(503).set({'Cache-Control':'no-store','Retry-After':'60'});
   } else {
-    if(isFilteredState(data.state)) html = html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>');
+    // Filtres, ou sélection sans aucun modèle (créateur ou collection vide) : hors de l'index.
+    if(isFilteredState(data.state) || !data.total) { res.set('X-Robots-Tag','noindex, follow'); html = html.replace('</head>','<meta name="robots" content="noindex,follow">\n</head>'); }
     // Les informations de prix et de stock se renouvellent via l'index commun.
     res.set('Cache-Control','no-store');
   }

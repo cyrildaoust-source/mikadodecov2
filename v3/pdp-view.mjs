@@ -153,7 +153,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
         </div>` : ""}
         <div class="pdp__buy">
           <button class="pdp__qty-open" type="button" data-qtyd-open aria-haspopup="dialog">Quantité : <span data-qty-label>1</span> <span aria-hidden="true">▾</span></button>
-          <button class="btn btn--blue pdp__cta" data-add>Ajouter au panier</button>
+          <button class="btn btn--blue pdp__cta" data-add${current.available === false ? " disabled>Indisponible" : ">Ajouter au panier"}</button>
         </div>
         <p class="pdp__cart-status" data-cart-status></p>
         <div class="pdp__reassure">
