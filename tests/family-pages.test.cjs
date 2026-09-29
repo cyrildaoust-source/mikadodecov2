@@ -13,7 +13,7 @@ let vendorsUnavailable = false;
 let allowCatalogueQuery = false;
 let catalogueIconsUnavailable = false;
 const nextCursor = 'opaque+/=cursor';
-const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Carl Hansen & Søn', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Moustache', 'Muuto', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
+const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Carl Hansen & Søn', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Moustache', 'Muuto', 'Pastoe', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
 const brandSlug = name => name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 function product(id) {
@@ -311,19 +311,28 @@ test('brand search fills sparse pages without returning another vendor', async (
   assert.equal(new Set([...first.items, ...next.items].map(product => product.handle)).size, 15);
 });
 
-test('product brand links preserve every category and brand, with a global fallback for global visits', async () => {
-  const { listingContext, productBrandHref } = await import('../v3/brand-navigation.mjs');
-  const brandMap = Object.fromEntries(activeNames.map(name => [brandSlug(name), brandSlug(name)]));
+test('product brand links preserve every category and brand; a brand alone opens its collection', async () => {
+  const { createNavigation, listingContext, productBrandDestination, productHref, brandHref } = await import('../v3/navigation.mjs');
+  const nav = createNavigation(require('../v3/navigation-data.json'), require('../v3/mega-menu-brands.json').brands);
   const handles = [...Object.keys(families), 'sieges', 'outdoor', ...Object.values(families).flatMap(family => family.categories.map(category => category.handle))];
   for (const handle of handles) for (const name of activeNames) {
     const slug = brandSlug(name);
     const href = '/collections/' + handle + '?brand=' + slug;
-    assert.equal(productBrandHref(slug, brandMap, listingContext(new URL(href, base))), href);
-    assert.equal(productBrandHref(slug, brandMap, 'coll:' + handle), href);
+    assert.equal(productBrandDestination({ handle: 'x', brand: name }, new URL(productHref({ handle: 'x' }, '/collections/' + handle), base), nav), href);
     assert.equal(listingContext(new URL('/produits.html?coll=' + handle + '&brand=' + slug, base)), 'coll-brand:' + handle + ':' + slug);
   }
-  assert.equal(productBrandHref('hay', brandMap, 'coll:hay'), '/collections/hay');
-  assert.equal(productBrandHref('new-brand', brandMap), '/produits.html?brand=new-brand');
+  for (const name of activeNames) assert.equal(brandHref(name, nav), '/collections/' + brandSlug(name), name);
+  assert.equal(brandHref('Nouvelle marque', nav), '/produits.html?brand=nouvelle-marque');
+});
+
+test('every active brand exposes its collection page and duplicate brand collections redirect', async () => {
+  const brands = await (await realFetch(base + '/api/brands')).json();
+  assert.deepEqual(brands.map(b => b.href), brands.map(b => '/collections/' + b.slug));
+  for (const [from, to] of [['fermob-1', 'fermob'], ['volta', 'volta-mobiles']]) {
+    const response = await realFetch(base + '/collections/' + from + '?sort=asc', { redirect: 'manual' });
+    assert.equal(response.status, 301);
+    assert.equal(response.headers.get('location'), '/collections/' + to + '?sort=asc');
+  }
 });
 
 test('family brand destinations show the intersection in SSR, metadata and breadcrumb', async () => {

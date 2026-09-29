@@ -89,7 +89,8 @@
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell, escapeHtml } from "/shared.js";
+    import { initShell, escapeHtml, loadNavigation } from "/shared.js";
+    import { brandHref } from "/navigation.mjs";
     initShell({ active: "Designers", transparentNav: true });
 
     const featuredGrid = document.querySelector("[data-featured-grid]");
@@ -113,13 +114,10 @@
       return /[A-Z]/.test(ch) ? ch : "#";
     }
 
+    let nav = { brands: {} };
     function brandsHTML(d) {
-      return (d.brands || []).map((b, i) => {
-        const href = d.brandHrefs?.[i];
-        return href
-          ? `<a href="${escapeHtml(href)}">${escapeHtml(b)}</a>`
-          : `<span>${escapeHtml(b)}</span>`;
-      }).join('<span class="designer-card__brand-sep" aria-hidden="true"> · </span>');
+      return (d.brands || []).map((b) => `<a href="${escapeHtml(brandHref(b, nav))}">${escapeHtml(b)}</a>`)
+        .join('<span class="designer-card__brand-sep" aria-hidden="true"> · </span>');
     }
 
     // Guarded portrait — a missing photo must not throw (one bad record would
@@ -159,9 +157,12 @@
 
     // Annuaire complet envoyé par le serveur : ne pas le relire ni le redessiner.
     if (azIndex.children.length && featuredGrid.querySelector(".designer-card:not(.designer-card--skel)")) requestAnimationFrame(gotoHash);
-    else fetch("/designers-data.json", { cache: "no-cache" })
-      .then((r) => r.ok ? r.json() : Promise.reject("designers-data " + r.status))
-      .then((data) => {
+    else Promise.all([
+      fetch("/designers-data.json", { cache: "no-cache" }).then((r) => r.ok ? r.json() : Promise.reject("designers-data " + r.status)),
+      loadNavigation().catch(() => nav),
+    ])
+      .then(([data, navigation]) => {
+        nav = navigation;
         // Visible directory = every designer that isn't hidden. Hidden ones
         // (no product yet) stay in the JSON but render nowhere.
         const all = (data?.designers || []).filter((d) => !d.hidden);

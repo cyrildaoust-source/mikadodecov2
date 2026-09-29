@@ -146,6 +146,13 @@
       "alt": "Collection Muuto dans un intérieur scandinave",
       "position": "50% 50%", "mobilePosition": "50% 50%", "width": 2400, "height": 800
     },
+    "pastoe": {
+      "name": "Pastoe", "status": "qualified", "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Atelier_20Artiforte_Magneto_20steel_20grey-unfold.jpg",
+      "sourceProduct": "lampadaire-magneto", "alt": "Lampadaire Magneto Pastoe à côté d’un fauteuil en velours",
+      "position": "50% 50%", "mobilePosition": "72% 50%", "width": 2400, "height": 800,
+      "derivation": "crop-4096x1365-top-600-3:1"
+    },
     "pols-potten": {
       "name": "Pols Potten", "status": "candidate", "kind": "shopify",
       "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/140-205-387_10_mood_47070b4a-22c8-4f98-87c0-2c27732ab37a.jpg?v=1777831353",

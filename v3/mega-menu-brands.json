@@ -1,5 +1,5 @@
 {
-  "_note": "V2.3: Marques mega menu fully hardcoded (no Shopify fetch). 23 brands total, sorted alphabetically (& sorts before letters). Featured `collections` arrays preserved on existing brands for potential revival (V2.2 retired their rendering). Maintained by the site's coding agent on Cyril's behalf.",
+  "_note": "Registre unique des marques du site. Chaque entrée correspond à une collection Shopify automatique « Fournisseur = nom », publiée sur le canal du site ; href = /collections/<slug du nom>. Une marque absente d’ici retombe sur le catalogue filtré (/produits.html?brand=). `collections` : gammes mises en avant (non affichées depuis la V2.2).",
   "brands": [
     {
       "name": "&Tradition",
@@ -73,8 +73,33 @@
       ]
     },
     {
+      "name": "Avolt",
+      "href": "/collections/avolt",
+      "collections": []
+    },
+    {
       "name": "Blomus",
       "href": "/collections/blomus",
+      "collections": []
+    },
+    {
+      "name": "Carl Hansen & Søn",
+      "href": "/collections/carl-hansen-son",
+      "collections": []
+    },
+    {
+      "name": "Compagnie de Provence",
+      "href": "/collections/compagnie-de-provence",
+      "collections": []
+    },
+    {
+      "name": "Esteban",
+      "href": "/collections/esteban",
+      "collections": []
+    },
+    {
+      "name": "Ester & Erik",
+      "href": "/collections/ester-erik",
       "collections": []
     },
     {
@@ -197,6 +222,11 @@
       "collections": []
     },
     {
+      "name": "IHR",
+      "href": "/collections/ihr",
+      "collections": []
+    },
+    {
       "name": "Iittala",
       "href": "/collections/iittala",
       "collections": [
@@ -260,6 +290,11 @@
       ]
     },
     {
+      "name": "Pastoe",
+      "href": "/collections/pastoe",
+      "collections": []
+    },
+    {
       "name": "Pols Potten",
       "href": "/collections/pols-potten",
       "collections": [
@@ -280,6 +315,11 @@
     {
       "name": "Relaxound",
       "href": "/collections/relaxound",
+      "collections": []
+    },
+    {
+      "name": "Remember",
+      "href": "/collections/remember",
       "collections": []
     },
     {
@@ -319,6 +359,11 @@
       "collections": []
     },
     {
+      "name": "Tiptoe",
+      "href": "/collections/tiptoe",
+      "collections": []
+    },
+    {
       "name": "Vitra",
       "href": "/collections/vitra",
       "collections": [
@@ -346,7 +391,7 @@
     },
     {
       "name": "Volta Mobiles",
-      "href": "/collections/volta",
+      "href": "/collections/volta-mobiles",
       "collections": []
     }
   ],

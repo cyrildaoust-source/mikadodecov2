@@ -38,7 +38,7 @@ test('the Marques page is complete before JavaScript and uses the shared brand c
  assert(cards.every(c=>/src="\/images\/brands\/[a-z-]+\.svg\?v=dev"/.test(c)));
  for(const [i,name]of ['&Tradition','Atelier <Test>','Moustache'].entries()){
   const href=cards[i].match(/href="([^"]+)"/)[1];
-  assert.equal(cards[i],brandCardHTML({name},{href,imageUrl:url=>`${url}?v=dev`}));
+  assert.equal(cards[i],brandCardHTML({name,href},{imageUrl:url=>`${url}?v=dev`}));
  }
 });
 

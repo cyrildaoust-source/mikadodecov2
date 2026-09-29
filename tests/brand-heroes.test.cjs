@@ -15,7 +15,7 @@ const activeHandles = [
   'tradition', 'alessi', 'anglepoise', 'artek', 'avolt', 'blomus',
   'carl-hansen-son', 'compagnie-de-provence', 'esteban', 'ester-erik',
   'fatboy', 'ferm-living', 'fermob', 'hay', 'hkliving', 'ichendorf-milano',
-  'iittala', 'lind-dna', 'marimekko', 'moustache', 'muuto', 'pols-potten',
+  'iittala', 'lind-dna', 'marimekko', 'moustache', 'muuto', 'pastoe', 'pols-potten',
   'relaxound', 'serax', 'stoff-nagel', 'string-furniture', 'tiptoe', 'vitra',
   'volta-mobiles',
 ];

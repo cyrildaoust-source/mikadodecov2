@@ -449,6 +449,8 @@ const sendProduitTemplate  = (res) => sendTemplate(res, PRODUIT_TEMPLATE);
 const sendProduitsTemplate = (res) => sendTemplate(res, PRODUITS_TEMPLATE);
 // Alias de collection VOLONTAIRES (pas des miss) → catalogue complet, jamais 404.
 const COLLECTION_ALIASES = new Set(['all', 'frontpage']);
+// Collections de marque publiées en double dans Shopify : une seule adresse par marque.
+const BRAND_COLLECTION_ALIASES = { 'fermob-1': 'fermob', volta: 'volta-mobiles' };
 // ─── AGENT READINESS · négociation text/markdown + 404 lisibles par les agents ──
 // Les agents IA (ChatGPT, Claude, Perplexity…) demandent souvent `Accept:
 // text/markdown` (convention acceptmarkdown.com) et n'annoncent pas text/html.
@@ -667,6 +669,10 @@ app.get('/produit.html', async (req, res) => {
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 app.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
+  if (Object.hasOwn(BRAND_COLLECTION_ALIASES, handle)) {
+    const query = req.originalUrl.indexOf('?');
+    return res.redirect(301, '/collections/' + BRAND_COLLECTION_ALIASES[handle] + (query < 0 ? '' : req.originalUrl.slice(query)));
+  }
   if (!req.query.coll) {
     await _navigationReady;
     const scope = filterScope(handle);
@@ -1029,6 +1035,7 @@ app.get('/sitemap-products.xml', async (req, res) => {
       }
       (await getCollections()).forEach((c) => {
         // Les familles éditoriales et les sélections composites ont leurs propres sources.
+        if (Object.hasOwn(BRAND_COLLECTION_ALIASES, c.handle)) return;
         const composed = Object.hasOwn(families, c.handle) || Object.hasOwn(FAMILLES_RICHES, c.handle) || ['chaises', 'tables-outdoor', 'promotions'].includes(c.handle);
         if (c.handle && (c.hasProducts !== false || composed)) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6'));
       });
@@ -1069,19 +1076,15 @@ function resolveSsrRel(p) {
 // APRÈS les 3 routes templatées + le sitemap, AVANT express.static. Ne capte que
 // SSR_PAGES + articles journal ; tout le reste passe à next() (static/api).
 // SEO/SSR · Index MARQUES crawlable : rend les vraies cartes marque (lien + logo + nom)
-// dans [data-brandgrid] à la place des squelettes. Données getActiveBrands + liens curés
-// de mega-menu-brands.json. Le navigateur conserve ces cartes sans les recréer.
+// dans [data-brandgrid] à la place des squelettes, avec les liens de getActiveBrands.
+// Le navigateur conserve ces cartes sans les recréer.
 async function injectBrandsIndex(html) {
   const { brandCardHTML } = await import('./v3/brand-card.mjs');
   const active = await getActiveBrands();
-  let curated = { brands: [] };
-  try { curated = JSON.parse(fs.readFileSync(path.join(__dirname, 'v3', 'mega-menu-brands.json'), 'utf8')); } catch (e) {}
-  const hrefByName = {};
-  for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
   const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
   if (!brands.length) return html;
   const version = (process.env.VERCEL_GIT_COMMIT_SHA || '').slice(0, 7) || 'dev';
-  const cards = brands.map(b => brandCardHTML(b, { href: hrefByName[b.name.toLowerCase()], imageUrl: url => `${url}?v=${encodeURIComponent(version)}` })).join('');
+  const cards = brands.map(b => brandCardHTML(b, { imageUrl: url => `${url}?v=${encodeURIComponent(version)}` })).join('');
   // Bloc squelette exact (4 lignes) → on remplace juste le contenu, on garde </div>.
   const skelBlock = '<div class="brandgrid" data-brandgrid>\n'
     + Array(4).fill('      <div class="brandcard"><div class="pcard__skel" style="aspect-ratio:1/1"></div></div>').join('\n');
@@ -1101,10 +1104,7 @@ function injectDesignersIndex(html) {
     ch = FOLD[ch] || ch;
     return /[A-Z]/.test(ch) ? ch : '#';
   };
-  const brandsHTML = (d) => (d.brands || []).map((b, i) => {
-    const href = d.brandHrefs && d.brandHrefs[i];
-    return href ? '<a href="' + esc(href) + '">' + esc(b) + '</a>' : '<span>' + esc(b) + '</span>';
-  }).join('<span class="designer-card__brand-sep" aria-hidden="true"> · </span>');
+  const brandsHTML = (d) => (d.brands || []).map(b => '<a href="' + esc(navigation.brandHref(b, navigationRules)) + '">' + esc(b) + '</a>').join('<span class="designer-card__brand-sep" aria-hidden="true"> · </span>');
   const photoHTML = (d) => d.photo
     ? '<picture><source type="image/webp" srcset="' + esc(String(d.photo).replace(/\.jpg$/, '-640.webp')) + '" /><img class="designer-card__photo" src="' + esc(d.photo) + '" width="640" height="800" alt="' + esc(d.name) + '" loading="lazy" /></picture>'
     : '<div class="designer-card__photo" aria-hidden="true"></div>';
@@ -1740,10 +1740,12 @@ async function getActiveBrands() {
       if (!data?.products?.pageInfo?.hasNextPage) break;
       after = data.products.pageInfo.endCursor;
     }
+    await _navigationReady;
     return [...counts.entries()]
       .map(([name, productCount]) => ({
         name,
-        slug: name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+        slug: navigation.navigationSlug(name),
+        href: navigation.brandHref(name, navigationRules),
         productCount,
       }))
       .sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
@@ -1826,7 +1828,7 @@ app.get('/api/products', async (req, res) => {
 });
 
 // ─── API: GET BRANDS ───────────────────────────────────
-// Derived from product.vendor — returns one entry per unique vendor.
+// Derived from product.vendor — one entry per vendor, with its page (href).
 app.get('/api/brands', async (req, res) => {
   try {
     const brands = await getActiveBrands();
@@ -1869,17 +1871,17 @@ async function getPredictive(q) {
   return cached('predictive:' + term.toLowerCase(), async () => {
     const ps = (await shopifyFetch(PREDICTIVE_QUERY, { q: term })).predictiveSearch;
     // Une collection est une MARQUE si son handle/titre matche un vendor actif.
-    // On renvoie alors l'objet MARQUE canonique {name, slug} de getActiveBrands
+    // On renvoie alors l'objet MARQUE canonique {name, slug, href} de getActiveBrands
     // (pas le handle brut : le store publie p.ex. 2 collections « Fermob »
     // fermob + fermob-1) + on DÉDUPLIQUE par slug → une seule chip par marque.
-    const brandsRef = await getActiveBrands();                 // [{name, slug, productCount}]
+    const brandsRef = await getActiveBrands();                 // [{name, slug, href, productCount}]
     const bySlug = new Map(brandsRef.map((b) => [b.slug, b]));
     const byName = new Map(brandsRef.map((b) => [b.name.toLowerCase(), b]));
     const seen = new Set();
     const brands = [], categories = [];
     for (const c of (ps.collections || [])) {
       const b = bySlug.get(c.handle) || byName.get((c.title || '').toLowerCase());
-      if (b) { if (!seen.has(b.slug)) { seen.add(b.slug); brands.push({ name: b.name, slug: b.slug }); } }
+      if (b) { if (!seen.has(b.slug)) { seen.add(b.slug); brands.push({ name: b.name, slug: b.slug, href: b.href }); } }
       else   { categories.push({ handle: c.handle, name: c.title }); }
     }
     return { products: (ps.products || []).map(mapPredictiveProduct), brands, categories };

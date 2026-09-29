@@ -8,13 +8,10 @@ const HANDLE = /^[a-z0-9][a-z0-9-]*$/;
 export const navigationSlug = value => String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+// Les marques viennent uniquement de mega-menu-brands.json : une marque = une collection Shopify.
 export function createNavigation(data = {}, curated = [], designers = []) {
   const collections = { ...(data.collections || {}) };
   const brands = {};
-  for (const [handle, entry] of Object.entries(collections)) {
-    if (entry.kind === 'brand') brands[entry.brand || navigationSlug(entry.label)] = { label: entry.label, href: '/produits.html?brand=' + (entry.brand || navigationSlug(entry.label)) };
-  }
-  // La configuration existante reste la source des destinations de marques.
   for (const brand of curated) {
     const handle = brand.href?.match(/^\/collections\/([a-z0-9-]+)$/)?.[1];
     if (!handle || !brand.name) continue;
@@ -23,6 +20,12 @@ export function createNavigation(data = {}, curated = [], designers = []) {
     collections[handle] = { label: brand.name, kind: 'brand', brand: slug };
   }
   return { collections, brands, designers: Object.fromEntries(designers.filter(d => d.slug && d.name && !d.hidden).map(d => [d.slug, d.name])) };
+}
+
+// Page d'une marque : sa collection si elle est inscrite, sinon le catalogue filtré.
+export function brandHref(name, nav) {
+  const slug = navigationSlug(name);
+  return nav.brands[slug]?.href || (slug ? '/produits.html?brand=' + encodeURIComponent(slug) : '/marques.html');
 }
 
 // Ne transporte jamais d'URL externe, d'identifiant de compte ni de paramètre de suivi.
@@ -135,7 +138,7 @@ export function listingTrail(url, nav, { title = '', brandName = '' } = {}) {
   if (cats.length > 1 || p.get('tag')) trail.push({ label: 'Sélection filtrée', href: path });
   if (brand) {
     if (!cats.length && !p.get('tag')) trail = [HOME, BRANDS];
-    trail.push({ label: brandLabel, href: cats.length || p.get('tag') ? path : nav.brands[brand]?.href || '/produits.html?brand=' + encodeURIComponent(brand) });
+    trail.push({ label: brandLabel, href: cats.length || p.get('tag') ? path : brandHref(brand, nav) });
   }
   return trail;
 }
@@ -149,7 +152,7 @@ export function productTrail(product, url, nav) {
     if (listing.searchParams.has('brand') && !listing.searchParams.get('brand').split(',').includes(navigationSlug(product.brand))) listing.searchParams.delete('brand');
     const handle = listing.pathname.match(/^\/collections\/([a-z0-9-]+)$/)?.[1];
     const entry = nav.collections[handle];
-    if (!entry || entry.kind !== 'brand' || (entry.brand || navigationSlug(entry.label)) === navigationSlug(product.brand)) trail = listingTrail(listing, nav, { brandName: product.brand });
+    if (!entry || entry.kind !== 'brand' || entry.brand === navigationSlug(product.brand)) trail = listingTrail(listing, nav, { brandName: product.brand });
   }
   return [...trail, { label: product.name }];
 }
@@ -173,5 +176,5 @@ export function productBrandDestination(product, url, nav) {
   const source = sourceSelection(url);
   const handle = source && new URL(source, ORIGIN).pathname.match(/^\/collections\/([a-z0-9-]+)$/)?.[1];
   if (['family', 'subcategory'].includes(nav.collections[handle]?.kind)) return '/collections/' + handle + '?brand=' + encodeURIComponent(slug);
-  return nav.brands[slug]?.href || (slug ? '/produits.html?brand=' + encodeURIComponent(slug) : '/marques.html');
+  return brandHref(product.brand, nav);
 }

@@ -87,21 +87,17 @@
     // Le chargement client sert uniquement au repli sans rendu serveur.
     // Liste DYNAMIQUE depuis /api/brands (vendor de TOUS les produits publiés —
     // walk paginé côté serveur, fini le plafond 250). Une marque apparaît dès
-    // qu'elle a des produits publiés online, disparaît sinon (IHR & co, non
-    // publiés, n'y sont pas). Enrichie des liens curés de mega-menu-brands.json
-    // (href). buildShaReady reste pour le cache-busting logos.
+    // qu'elle a des produits publiés online, disparaît sinon. Chaque marque porte
+    // son lien (href). buildShaReady reste pour le cache-busting logos.
     async function loadBrands() {
       if (grid.dataset.ssr === "1") return;
-      const [, active, curated] = await Promise.all([
+      const [, active] = await Promise.all([
         buildShaReady(),
         fetch("/api/brands", { cache: "no-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status)),
-        fetch("/mega-menu-brands.json", { cache: "no-cache" }).then((r) => r.ok ? r.json() : { brands: [] }).catch(() => ({ brands: [] })),
       ]);
-      const hrefByName = {};
-      for (const b of (curated.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href;
       const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
       countEl.textContent = `${brands.length} marques`;
-      grid.innerHTML = brands.map(b => brandCardHTML(b, { href: hrefByName[b.name.toLowerCase()], imageUrl: versionedImg })).join("");
+      grid.innerHTML = brands.map(b => brandCardHTML(b, { imageUrl: versionedImg })).join("");
     }
     loadBrands().catch((e) => { grid.innerHTML = `<p class="plp-empty">Les marques se chargent bientôt. <a href="/produits.html">Retour au catalogue</a></p>`; console.warn(e); });
   </script>
