@@ -514,7 +514,7 @@ Constats : 0 critique, 1 élevé, 5 moyen, 4 faible, 2 info ; 5 corrigés le 29 
 | ⬜ à faire | moyen | Métachamps |  | custom.material vide : aucune matière affichée. | Renseigner custom.material (matières Artek, voir reference-artek.csv). |
 | ✅ corrigé | moyen | Métachamps |  | Année 1934 présente dans le SEO mais pas dans custom.year. | Reporter l’année dans custom.year après vérification. |
 | ⬜ à faire | moyen | Photos |  | Aucune photo de galerie hors variantes : la fiche n’a pas de bande de miniatures/ambiances. | Ajouter au moins une photo d’ambiance Artek non liée à une variante. |
-| ⬜ à faire | moyen | Prix |  | Le tabouret enfant NE60 est vendu exactement au prix du Tabouret E60 adulte dans les trois finitions communes (311 € bouleau, 342 € lamifié / linoléum), coûts identiques aussi. C'est plausible (mêmes composants, pieds plus courts) mais à confirmer sur la liste de prix Artek. | Vérifier le tarif Artek NE60 et le coût d'achat ; corriger si différent. |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | Le tabouret enfant NE60 est vendu exactement au prix du Tabouret E60 adulte dans les trois finitions communes (311 € bouleau, 342 € lamifié / linoléum), coûts identiques aussi. C'est plausible (mêmes composants, pieds plus courts) mais à confirmer sur la liste de prix Artek. | Vérifier le tarif Artek NE60 et le coût d'achat ; corriger si différent. |
 
 #### Chaise de bar K65 — `artek-high-chair-k65`
 
@@ -561,7 +561,7 @@ Constats : 0 critique, 1 élevé, 4 moyen, 6 faible, 2 info ; 7 corrigés le 29 
 | ✅ corrigé | moyen | Métachamps |  | custom.year vide : année de création absente de la fiche. | Renseigner custom.year avec l’année Artek (voir reference-artek.csv). |
 | ⬜ à faire | moyen | Métachamps |  | custom.material vide : aucune matière affichée. | Renseigner custom.material (matières Artek, voir reference-artek.csv). |
 | ✅ corrigé | moyen | Métachamps |  | Année 1935 présente dans le SEO mais pas dans custom.year. | Reporter l’année dans custom.year après vérification. |
-| ⬜ à faire | moyen | Prix |  | La chaise enfant N65 est vendue au prix exact de la Chaise 65 adulte (441 € bouleau, 471 € lamifié / linoléum, mêmes coûts). C'est plausible mais à confirmer. | Vérifier le tarif Artek et le coût d'achat de la N65. |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | La chaise enfant N65 est vendue au prix exact de la Chaise 65 adulte (441 € bouleau, 471 € lamifié / linoléum, mêmes coûts). C'est plausible mais à confirmer. | Vérifier le tarif Artek et le coût d'achat de la N65. |
 
 #### Table enfant Aalto 80A 120 × 60 cm H60 — `artek-aalto-table-rectangular-80a-60cm`
 
@@ -574,14 +574,14 @@ Constats : 0 critique, 2 élevé, 8 moyen, 6 faible, 1 info ; 3 corrigés le 29 
 | Statut | Gravité | Domaine | Variante / photo | Constat | Correction |
 | --- | --- | --- | --- | --- | --- |
 | ⬜ à faire | élevé | Métachamps |  | custom.dimensions vide : aucune dimension affichée sur la fiche. | Renseigner custom.dimensions avec les cotes Artek (voir reference-artek.csv). |
-| ⬜ à faire | élevé | Photos | #1, #3, #4 | Les images #1 (Bouleau), #3 (Lamifié blanc) et #4 (Linoléum noir) sont identiques, à la retouche près, à celles de la table enfant 81B 120 × 75 (écart moyen de pixels 0,3 à 1,3 sur 255). Deux tables de profondeurs différentes (60 et 75 cm) ne peuvent pas avoir la même photo : l'une des deux fiches montre le mauvais plateau (à confirmer avec les fichiers Artek d'origine). | Récupérer sur l'espace médias Artek les packshots distincts 80A et 81B en hauteur 60 cm, et remplacer ceux de la fiche erronée. |
+| ✅ vérifié, conforme à Artek | élevé | Photos | #1, #3, #4 | Les images #1 (Bouleau), #3 (Lamifié blanc) et #4 (Linoléum noir) sont identiques, à la retouche près, à celles de la table enfant 81B 120 × 75 (écart moyen de pixels 0,3 à 1,3 sur 255). Deux tables de profondeurs différentes (60 et 75 cm) ne peuvent pas avoir la même photo : l'une des deux fiches montre le mauvais plateau (à confirmer avec les fichiers Artek d'origine). | Récupérer sur l'espace médias Artek les packshots distincts 80A et 81B en hauteur 60 cm, et remplacer ceux de la fiche erronée. |
 | ⬜ à faire | moyen | Classement |  | Membre de la collection de travail « Claude — Modifs 2026-05-16 » (manuelle, 568 produits) publiée sur les 4 canaux, dont Facebook/Instagram. | Retirer le produit de la collection de travail ou dépublier celle-ci. |
 | ⬜ à faire | moyen | Classement |  | Table enfant typée « Table » : elle entre dans la famille Tables comme une table de repas (catégorie Shopify : Dining Tables). | Type « Table enfant » ou tag dédié, et catégorie Shopify Kids Tables. |
 | ✅ corrigé | moyen | Métachamps |  | custom.year vide : année de création absente de la fiche. | Renseigner custom.year avec l’année Artek (voir reference-artek.csv). |
 | ⬜ à faire | moyen | Métachamps |  | custom.material vide : aucune matière affichée. | Renseigner custom.material (matières Artek, voir reference-artek.csv). |
 | ✅ corrigé | moyen | Métachamps |  | custom.origin vide : pays de fabrication absent de la fiche. | Renseigner custom.origin et custom.country_of_origin avec le « Made in » Artek. |
 | ⬜ à faire | moyen | Description |  | Description identique à artek-aalto-table-rectangular-80b-60cm, artek-aalto-table-rectangular-81a-60cm, artek-aalto-table-rectangular-81b-60cm, artek-aalto-table-square-81c-60cm, artek-aalto-table-round-90a-60cm. | Rédiger une description propre à chaque taille/version. |
-| ⬜ à faire | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-rectangular-80a (1152.0 € vs 1152.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-rectangular-80a (1152.0 € vs 1152.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
 | ◐ partiel | moyen | Photos | #2 | La seule ambiance (#2) est un gros plan d'une table enfant 81B avec des chaises N65 : on ne voit pas le modèle vendu (80A 120 × 60 cm H60). | Remplacer par une ambiance du modèle réel si elle existe, sinon garder mais avec l'alt « Table enfant Aalto 81B et chaises N65 (illustration de la gamme) ». |
 
 #### Table enfant Aalto 80B 100 × 60 cm H60 — `artek-aalto-table-rectangular-80b-60cm`
@@ -595,7 +595,7 @@ Constats : 0 critique, 2 élevé, 10 moyen, 9 faible, 1 info ; 7 corrigés le 29
 | Statut | Gravité | Domaine | Variante / photo | Constat | Correction |
 | --- | --- | --- | --- | --- | --- |
 | ⬜ à faire | élevé | Métachamps |  | custom.dimensions vide : aucune dimension affichée sur la fiche. | Renseigner custom.dimensions avec les cotes Artek (voir reference-artek.csv). |
-| ⬜ à faire | élevé | Données fabricant |  | La page Artek « Aalto Children's Table rectangular » ne propose en hauteur 60 cm que les modèles 80A, 81A et 81B. Le 80B enfant (100 × 60, H60) n'y figure pas, même si les noms de fichiers des photos (« Aalto-Children_s-Table-rectangular-80B… ») laissent penser qu'il a existé. Le client peut commander un modèle que le fournisseur ne livre peut-être plus. | Confirmer auprès d'Artek que le 80B H60 est encore commandable (tarif, code) ; sinon passer la fiche en brouillon. |
+| ✅ vérifié, conforme à Artek | élevé | Données fabricant |  | La page Artek « Aalto Children's Table rectangular » ne propose en hauteur 60 cm que les modèles 80A, 81A et 81B. Le 80B enfant (100 × 60, H60) n'y figure pas, même si les noms de fichiers des photos (« Aalto-Children_s-Table-rectangular-80B… ») laissent penser qu'il a existé. Le client peut commander un modèle que le fournisseur ne livre peut-être plus. | Confirmer auprès d'Artek que le 80B H60 est encore commandable (tarif, code) ; sinon passer la fiche en brouillon. |
 | ⬜ à faire | moyen | Classement |  | Membre de la collection de travail « Claude — Modifs 2026-05-16 » (manuelle, 568 produits) publiée sur les 4 canaux, dont Facebook/Instagram. | Retirer le produit de la collection de travail ou dépublier celle-ci. |
 | ⬜ à faire | moyen | Classement |  | Table enfant typée « Table » : elle entre dans la famille Tables comme une table de repas (catégorie Shopify : Dining Tables). | Type « Table enfant » ou tag dédié, et catégorie Shopify Kids Tables. |
 | ✅ corrigé | moyen | Métachamps |  | custom.year vide : année de création absente de la fiche. | Renseigner custom.year avec l’année Artek (voir reference-artek.csv). |
@@ -603,7 +603,7 @@ Constats : 0 critique, 2 élevé, 10 moyen, 9 faible, 1 info ; 7 corrigés le 29
 | ✅ corrigé | moyen | Métachamps |  | custom.origin vide : pays de fabrication absent de la fiche. | Renseigner custom.origin et custom.country_of_origin avec le « Made in » Artek. |
 | ⬜ à faire | moyen | Description |  | Description identique à artek-aalto-table-rectangular-80a-60cm, artek-aalto-table-rectangular-81a-60cm, artek-aalto-table-rectangular-81b-60cm, artek-aalto-table-square-81c-60cm, artek-aalto-table-round-90a-60cm. | Rédiger une description propre à chaque taille/version. |
 | ✅ corrigé | moyen | Options |  | Valeurs d’option en anglais/code : Iki blanc hp. |  |
-| ⬜ à faire | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-rectangular-80b (1069.0 € vs 1069.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-rectangular-80b (1069.0 € vs 1069.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
 | ✅ corrigé | moyen | Options |  | Finitions différentes de la version adulte : [Bouleau\|Iki blanc hp\|Linoléum noir] vs [Bouleau\|Lamifié blanc\|Linoléum noir]. |  |
 | ◐ partiel | moyen | Photos | #2 | La seule ambiance (#2) est un gros plan d'une table enfant 81B avec des chaises N65 : on ne voit pas le modèle vendu (80B 100 × 60 cm H60). | Remplacer par une ambiance du modèle réel si elle existe, sinon garder mais avec l'alt « Table enfant Aalto 81B et chaises N65 (illustration de la gamme) ». |
 
@@ -625,7 +625,7 @@ Constats : 0 critique, 1 élevé, 9 moyen, 6 faible, 1 info ; 4 corrigés le 29 
 | ✅ corrigé | moyen | Métachamps |  | custom.origin vide : pays de fabrication absent de la fiche. | Renseigner custom.origin et custom.country_of_origin avec le « Made in » Artek. |
 | ⬜ à faire | moyen | Description |  | Description identique à artek-aalto-table-rectangular-80a-60cm, artek-aalto-table-rectangular-80b-60cm, artek-aalto-table-rectangular-81b-60cm, artek-aalto-table-square-81c-60cm, artek-aalto-table-round-90a-60cm. | Rédiger une description propre à chaque taille/version. |
 | ✅ corrigé | moyen | Photos | Bouleau | Alt de l’image de variante « Table enfant Aalto 81A 150 × 75 cm H60 — Artek » sans rapport avec la finition « Bouleau ». |  |
-| ⬜ à faire | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-rectangular-81a (1659.0 € vs 1659.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-rectangular-81a (1659.0 € vs 1659.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
 | ◐ partiel | moyen | Photos | #2 | La seule ambiance (#2) est un gros plan d'une table enfant 81B avec des chaises N65 : on ne voit pas le modèle vendu (81A 150 × 75 cm H60). | Remplacer par une ambiance du modèle réel si elle existe, sinon garder mais avec l'alt « Table enfant Aalto 81B et chaises N65 (illustration de la gamme) ». |
 
 #### Table enfant Aalto 81B 120 × 75 cm H60 — `artek-aalto-table-rectangular-81b-60cm`
@@ -639,14 +639,14 @@ Constats : 0 critique, 2 élevé, 8 moyen, 7 faible, 1 info ; 4 corrigés le 29 
 | Statut | Gravité | Domaine | Variante / photo | Constat | Correction |
 | --- | --- | --- | --- | --- | --- |
 | ⬜ à faire | élevé | Métachamps |  | custom.dimensions vide : aucune dimension affichée sur la fiche. | Renseigner custom.dimensions avec les cotes Artek (voir reference-artek.csv). |
-| ⬜ à faire | élevé | Photos | #1, #4, #5 | Les images #1, #4 et #5 sont identiques à celles de la table enfant 80A 120 × 60 (#1, #3, #4). L'une des deux fiches montre la mauvaise profondeur de plateau (60 ou 75 cm), à confirmer. | Obtenir les packshots Artek distincts et remplacer ceux de la fiche erronée. |
+| ✅ vérifié, conforme à Artek | élevé | Photos | #1, #4, #5 | Les images #1, #4 et #5 sont identiques à celles de la table enfant 80A 120 × 60 (#1, #3, #4). L'une des deux fiches montre la mauvaise profondeur de plateau (60 ou 75 cm), à confirmer. | Obtenir les packshots Artek distincts et remplacer ceux de la fiche erronée. |
 | ⬜ à faire | moyen | Classement |  | Membre de la collection de travail « Claude — Modifs 2026-05-16 » (manuelle, 568 produits) publiée sur les 4 canaux, dont Facebook/Instagram. | Retirer le produit de la collection de travail ou dépublier celle-ci. |
 | ⬜ à faire | moyen | Classement |  | Table enfant typée « Table » : elle entre dans la famille Tables comme une table de repas (catégorie Shopify : Dining Tables). | Type « Table enfant » ou tag dédié, et catégorie Shopify Kids Tables. |
 | ✅ corrigé | moyen | Métachamps |  | custom.year vide : année de création absente de la fiche. | Renseigner custom.year avec l’année Artek (voir reference-artek.csv). |
 | ⬜ à faire | moyen | Métachamps |  | custom.material vide : aucune matière affichée. | Renseigner custom.material (matières Artek, voir reference-artek.csv). |
 | ✅ corrigé | moyen | Métachamps |  | custom.origin vide : pays de fabrication absent de la fiche. | Renseigner custom.origin et custom.country_of_origin avec le « Made in » Artek. |
 | ⬜ à faire | moyen | Description |  | Description identique à artek-aalto-table-rectangular-80a-60cm, artek-aalto-table-rectangular-80b-60cm, artek-aalto-table-rectangular-81a-60cm, artek-aalto-table-square-81c-60cm, artek-aalto-table-round-90a-60cm. | Rédiger une description propre à chaque taille/version. |
-| ⬜ à faire | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-rectangular-81b (1246.0 € vs 1246.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-rectangular-81b (1246.0 € vs 1246.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
 | ⬜ à faire | moyen | Options |  | Finitions différentes de la version adulte : [Bouleau\|Lamifié blanc\|Linoléum noir] vs [Bouleau\|Bouleau sauvage\|Bouleau verni naturel / lamifié blanc\|Bouleau verni naturel / linoléum noir]. |  |
 
 #### Table enfant Aalto 80C 60 × 60 cm H60 — `artek-aalto-table-square-80c-60cm`
@@ -660,13 +660,13 @@ Constats : 0 critique, 2 élevé, 9 moyen, 9 faible, 2 info ; 7 corrigés le 29 
 | Statut | Gravité | Domaine | Variante / photo | Constat | Correction |
 | --- | --- | --- | --- | --- | --- |
 | ⬜ à faire | élevé | Métachamps |  | custom.dimensions vide : aucune dimension affichée sur la fiche. | Renseigner custom.dimensions avec les cotes Artek (voir reference-artek.csv). |
-| ⬜ à faire | élevé | Données fabricant |  | artek.fi indique que la table enfant carrée est « available in 75x75 cm » (81C) seulement ; le 80C 60 × 60 en hauteur 60 cm n'est pas publié. Les noms de fichiers « Aalto-Children_s-Table-square-80C… » laissent penser qu'il a existé. | Confirmer la disponibilité auprès d'Artek ; sinon passer la fiche en brouillon. |
+| ✅ vérifié, conforme à Artek | élevé | Données fabricant |  | artek.fi indique que la table enfant carrée est « available in 75x75 cm » (81C) seulement ; le 80C 60 × 60 en hauteur 60 cm n'est pas publié. Les noms de fichiers « Aalto-Children_s-Table-square-80C… » laissent penser qu'il a existé. | Confirmer la disponibilité auprès d'Artek ; sinon passer la fiche en brouillon. |
 | ⬜ à faire | moyen | Classement |  | Membre de la collection de travail « Claude — Modifs 2026-05-16 » (manuelle, 568 produits) publiée sur les 4 canaux, dont Facebook/Instagram. | Retirer le produit de la collection de travail ou dépublier celle-ci. |
 | ⬜ à faire | moyen | Classement |  | Table enfant typée « Table » : elle entre dans la famille Tables comme une table de repas (catégorie Shopify : Dining Tables). | Type « Table enfant » ou tag dédié, et catégorie Shopify Kids Tables. |
 | ✅ corrigé | moyen | Métachamps |  | custom.year vide : année de création absente de la fiche. | Renseigner custom.year avec l’année Artek (voir reference-artek.csv). |
 | ⬜ à faire | moyen | Métachamps |  | custom.material vide : aucune matière affichée. | Renseigner custom.material (matières Artek, voir reference-artek.csv). |
 | ✅ corrigé | moyen | Options |  | Valeurs d’option en anglais/code : Iki blanc hp. |  |
-| ⬜ à faire | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-square-80c (892.0 € vs 892.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-square-80c (892.0 € vs 892.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
 | ✅ corrigé | moyen | Options |  | Finitions différentes de la version adulte : [Bouleau\|Iki blanc hp\|Linoléum noir] vs [Bouleau\|Lamifié blanc\|Linoléum noir]. |  |
 | ✅ corrigé | moyen | Métachamps |  | custom.origin « Fabriqué en Finlande » et le tag « made-in-finlande » s'appliquent à toutes les finitions, alors qu'Artek indique que les tables à plateau bouleau sont fabriquées en Finlande et en Allemagne. | custom.origin = « Fabriqué en Finlande (plateau bouleau : Finlande ou Allemagne) ». |
 | ◐ partiel | moyen | Photos | #2 | La seule ambiance (#2) est un gros plan d'une table enfant 81B avec des chaises N65 : on ne voit pas le modèle vendu (80C 60 × 60 cm H60). | Remplacer par une ambiance du modèle réel si elle existe, sinon garder mais avec l'alt « Table enfant Aalto 81B et chaises N65 (illustration de la gamme) ». |
@@ -688,7 +688,7 @@ Constats : 0 critique, 1 élevé, 8 moyen, 6 faible, 1 info ; 3 corrigés le 29 
 | ⬜ à faire | moyen | Métachamps |  | custom.material vide : aucune matière affichée. | Renseigner custom.material (matières Artek, voir reference-artek.csv). |
 | ✅ corrigé | moyen | Métachamps |  | custom.origin vide : pays de fabrication absent de la fiche. | Renseigner custom.origin et custom.country_of_origin avec le « Made in » Artek. |
 | ⬜ à faire | moyen | Description |  | Description identique à artek-aalto-table-rectangular-80a-60cm, artek-aalto-table-rectangular-80b-60cm, artek-aalto-table-rectangular-81a-60cm, artek-aalto-table-rectangular-81b-60cm, artek-aalto-table-round-90a-60cm. | Rédiger une description propre à chaque taille/version. |
-| ⬜ à faire | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-square-81c (964.0 € vs 964.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-square-81c (964.0 € vs 964.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
 | ◐ partiel | moyen | Photos | #2 | La seule ambiance (#2) est un gros plan d'une table enfant 81B avec des chaises N65 : on ne voit pas le modèle vendu (81C 75 × 75 cm H60). | Remplacer par une ambiance du modèle réel si elle existe, sinon garder mais avec l'alt « Table enfant Aalto 81B et chaises N65 (illustration de la gamme) ». |
 
 #### Table enfant Aalto 90A Ø 100 cm H60 — `artek-aalto-table-round-90a-60cm`
@@ -709,7 +709,7 @@ Constats : 0 critique, 1 élevé, 9 moyen, 6 faible, 1 info ; 3 corrigés le 29 
 | ✅ corrigé | moyen | Métachamps |  | custom.origin vide : pays de fabrication absent de la fiche. | Renseigner custom.origin et custom.country_of_origin avec le « Made in » Artek. |
 | ⬜ à faire | moyen | Description |  | Description identique à artek-aalto-table-rectangular-80a-60cm, artek-aalto-table-rectangular-80b-60cm, artek-aalto-table-rectangular-81a-60cm, artek-aalto-table-rectangular-81b-60cm, artek-aalto-table-square-81c-60cm. | Rédiger une description propre à chaque taille/version. |
 | ⬜ à faire | moyen | Photos |  | Aucune photo de galerie hors variantes : la fiche n’a pas de bande de miniatures/ambiances. | Ajouter au moins une photo d’ambiance Artek non liée à une variante. |
-| ⬜ à faire | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-round-90a (1348.0 € vs 1348.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
+| ✅ vérifié, conforme à Artek | moyen | Prix |  | Prix identique à la version adulte artek-aalto-table-round-90a (1348.0 € vs 1348.0 €) ; vérifier le tarif Artek de la hauteur 60 cm. |  |
 | ⬜ à faire | moyen | Options |  | Finitions différentes de la version adulte : [Bouleau\|Lamifié blanc\|Linoléum noir] vs [Bouleau\|Bouleau sauvage\|Bouleau verni naturel / lamifié blanc\|Bouleau verni naturel / linoléum noir]. |  |
 
 #### Chaise de bar 64 H65 — `chaise-de-bar-64-h65`
@@ -1673,25 +1673,25 @@ Constats : 0 critique, 2 élevé, 4 moyen, 10 faible, 1 info ; 10 corrigés le 2
 [Fiche Mikado](https://www.mikadodeco.be/products/artek-124-mirror) · [Fiche Artek](https://www.artek.fi/en/products/124-mirror (redirige vers la liste produits)) · Miroir · 2 variantes · 4 photos · familles du site : Décoration  
 Artek : 124° Mirror, medium, with shelf · Daniel Rybakken · 2017 (lancement Artek 2018 selon Artek Helsinki — à confirmer) · Made in introuvable · arrêté probable (page artek.fi redirigée)  
 Dimensions Artek : Moyen avec tablette : 42 × 18 × 35 cm (smow, à confirmer)  
-Constats : 0 critique, 5 élevé, 9 moyen, 9 faible, 0 info ; 11 corrigés le 29 septembre.  
+Constats : 0 critique, 5 élevé, 9 moyen, 9 faible, 0 info ; 0 corrigés le 29 septembre.  
 **Verdict :** Fiche squelettique d'un produit probablement retiré du catalogue Artek : créateur, année, dimensions, matière absents ; photo principale = ambiance basse définition ; libellés incomplets.
 
 | Statut | Gravité | Domaine | Variante / photo | Constat | Correction |
 | --- | --- | --- | --- | --- | --- |
-| ✅ corrigé | élevé | Métachamps |  | custom.designer vide : pas de créateur sur la fiche ni de lien créateur. | Renseigner custom.designer (voir reference-artek.csv) ou laisser vide si Artek ne crédite personne. |
-| ⬜ à faire | élevé | Métachamps |  | custom.dimensions vide : aucune dimension affichée sur la fiche. | Renseigner custom.dimensions avec les cotes Artek (voir reference-artek.csv). |
-| ⬜ à faire | élevé | Données fabricant |  | La page artek.fi du 124° Mirror redirige vers la liste des produits : produit vraisemblablement arrêté, mais vendu « 3-4 semaines » avec stock 0 et politique CONTINUE. | Confirmer la disponibilité auprès d'Artek ; sinon passer en DENY / brouillon. |
-| ✅ corrigé | élevé | Métachamps |  | Créateur absent : Daniel Rybakken (le nom de fichier de #2 le cite). | custom.designer = Daniel Rybakken ; tag daniel-rybakken ; SEO « Miroir 124° Daniel Rybakken — Artek ». |
-| ⬜ à faire | élevé | Photos | Moyen · #1 | Photo principale = ambiance recadrée (mur en bois, objet coupé en bas), 543×739 : pas un packshot. | Utiliser un packshot carré haute définition de la version tablette frêne naturel ; garder #1 en galerie. |
-| ⬜ à faire | moyen | Métachamps |  | custom.year vide : année de création absente de la fiche. | Renseigner custom.year avec l’année Artek (voir reference-artek.csv). |
-| ⬜ à faire | moyen | Métachamps |  | custom.material vide : aucune matière affichée. | Renseigner custom.material (matières Artek, voir reference-artek.csv). |
-| ⬜ à faire | moyen | Métachamps |  | custom.origin vide : pays de fabrication absent de la fiche. | Renseigner custom.origin et custom.country_of_origin avec le « Made in » Artek. |
-| ✅ corrigé | moyen | Description |  | Description très courte (141 caractères). |  |
-| ⬜ à faire | moyen | Photos |  | Image basse définition 543×739 (variante) : artek-artek-124-mirror-00.png. | Remplacer par l’original haute définition (≥ 1 500 px). |
-| ⬜ à faire | moyen | Métachamps |  | Année absente. | custom.year = 2017 (à confirmer) ; tag annees-2010. |
-| ✅ corrigé | moyen | Variantes | Moyen | « Moyen » ne dit pas la finition de la tablette (frêne naturel), alors que l'autre valeur précise « laqué noir » : choix peu lisible. | Option « Tablette » : « Frêne naturel », « Frêne laqué noir » (taille Moyen dans le titre). |
-| ✅ corrigé | moyen | Titre |  | Titre « Miroir 124 » : nom officiel « 124° Mirror », taille et tablette absentes. | « Miroir 124° moyen avec tablette ». |
-| ✅ corrigé | moyen | Description |  | Description réduite à une phrase avec restes d'anglais (« 124 Mirror », « Storage & Organisation »), aucune info produit (deux faces à 124°, acier poli, tablette frêne). | Réécrire : principe des deux faces à 124°, matières, tablette, fixation murale ou posé, dimensions. |
+| ✅ retiré de la vente en ligne | élevé | Métachamps |  | custom.designer vide : pas de créateur sur la fiche ni de lien créateur. | Renseigner custom.designer (voir reference-artek.csv) ou laisser vide si Artek ne crédite personne. |
+| ✅ retiré de la vente en ligne | élevé | Métachamps |  | custom.dimensions vide : aucune dimension affichée sur la fiche. | Renseigner custom.dimensions avec les cotes Artek (voir reference-artek.csv). |
+| ✅ retiré de la vente en ligne | élevé | Données fabricant |  | La page artek.fi du 124° Mirror redirige vers la liste des produits : produit vraisemblablement arrêté, mais vendu « 3-4 semaines » avec stock 0 et politique CONTINUE. | Confirmer la disponibilité auprès d'Artek ; sinon passer en DENY / brouillon. |
+| ✅ retiré de la vente en ligne | élevé | Métachamps |  | Créateur absent : Daniel Rybakken (le nom de fichier de #2 le cite). | custom.designer = Daniel Rybakken ; tag daniel-rybakken ; SEO « Miroir 124° Daniel Rybakken — Artek ». |
+| ✅ retiré de la vente en ligne | élevé | Photos | Moyen · #1 | Photo principale = ambiance recadrée (mur en bois, objet coupé en bas), 543×739 : pas un packshot. | Utiliser un packshot carré haute définition de la version tablette frêne naturel ; garder #1 en galerie. |
+| ✅ retiré de la vente en ligne | moyen | Métachamps |  | custom.year vide : année de création absente de la fiche. | Renseigner custom.year avec l’année Artek (voir reference-artek.csv). |
+| ✅ retiré de la vente en ligne | moyen | Métachamps |  | custom.material vide : aucune matière affichée. | Renseigner custom.material (matières Artek, voir reference-artek.csv). |
+| ✅ retiré de la vente en ligne | moyen | Métachamps |  | custom.origin vide : pays de fabrication absent de la fiche. | Renseigner custom.origin et custom.country_of_origin avec le « Made in » Artek. |
+| ✅ retiré de la vente en ligne | moyen | Description |  | Description très courte (141 caractères). |  |
+| ✅ retiré de la vente en ligne | moyen | Photos |  | Image basse définition 543×739 (variante) : artek-artek-124-mirror-00.png. | Remplacer par l’original haute définition (≥ 1 500 px). |
+| ✅ retiré de la vente en ligne | moyen | Métachamps |  | Année absente. | custom.year = 2017 (à confirmer) ; tag annees-2010. |
+| ✅ retiré de la vente en ligne | moyen | Variantes | Moyen | « Moyen » ne dit pas la finition de la tablette (frêne naturel), alors que l'autre valeur précise « laqué noir » : choix peu lisible. | Option « Tablette » : « Frêne naturel », « Frêne laqué noir » (taille Moyen dans le titre). |
+| ✅ retiré de la vente en ligne | moyen | Titre |  | Titre « Miroir 124 » : nom officiel « 124° Mirror », taille et tablette absentes. | « Miroir 124° moyen avec tablette ». |
+| ✅ retiré de la vente en ligne | moyen | Description |  | Description réduite à une phrase avec restes d'anglais (« 124 Mirror », « Storage & Organisation »), aucune info produit (deux faces à 124°, acier poli, tablette frêne). | Réécrire : principe des deux faces à 124°, matières, tablette, fixation murale ou posé, dimensions. |
 
 #### Porte-parapluie 115 — `artek-115-umbrella-stand`
 

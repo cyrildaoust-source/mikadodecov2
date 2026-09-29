@@ -5,7 +5,7 @@ Audit complet de la marque Artek sur Mikado Deco, produit par produit et variant
 Décisions du propriétaire :
 - **Montrer ce qu'on a** pour les coloris et combinaisons simples (Rival, Karuselli, Zebra).
 - **Kiki et lit 710 vendus par classe de tissu Artek** : ce sont des achats sur devis ou en caisse. La structure par classe (F40 à F200, L40 et L60, sans housse) est conservée, et les photos sont présentées comme des exemples de revêtement.
-- **Un tissu arrêté chez Artek ne doit pas être en vente en ligne.** Le tissu H55 est donc retiré des canaux en ligne.
+- **Un produit arrêté chez Artek ne doit pas être en vente en ligne.** Le tissu H55 et le miroir 124° sont donc retirés des canaux en ligne ; ils restent disponibles en caisse.
 
 ## Fichiers
 
@@ -21,7 +21,7 @@ Décisions du propriétaire :
 | --- | ---: | ---: |
 | Constats critiques | 26 | 0 ouvert : 16 corrigés, 9 acceptés (Kiki et lit 710 vendus par classe, sur devis), 1 réglé par le retrait du H55 |
 | Constats élevés | 368 | 106 à faire, 3 partiels |
-| Contrôles automatiques (mêmes règles avant et après) | 1 668, dont 210 élevés | 836, dont 93 élevés (y compris les alertes attendues : H55 hors du site, classes Kiki conservées) |
+| Contrôles automatiques (mêmes règles avant et après) | 1 668, dont 210 élevés | 838, dont 93 élevés (y compris les alertes attendues : H55 et miroir hors du site, classes Kiki conservées) |
 
 Informations renseignées :
 
@@ -65,6 +65,8 @@ Toutes les modifications Shopify ont été précédées d'une sauvegarde. L'éta
   - Les photos officielles Artek en haute définition sont conservées pour les tissus des bancs.
 - **Lit de repos 710** : le matelas et les coussins de dossier sont publiés, vendus par classe (sans housse, F40 à F200) comme à l'origine. Les photos du lit en Hallingdal 65 bleu et gris servent d'exemple. La fiche du cadre indique « cadre seul » et renvoie vers eux. Leur coût d'achat reste à saisir.
 - **Tissu H55** : absent des textiles d'artek.fi et des 304 produits de la boutique officielle Artek, il est considéré comme arrêté. Il est retiré du site, de l'Online Store et de Facebook & Instagram, et reste disponible en caisse uniquement.
+- **Miroir 124°** : il n'a pas de page produit sur artek.fi, n'apparaît ni dans les 94 produits de son catalogue ni dans sa boutique officielle, et le « 124° » était un espace éphémère d'Artek à Stockholm en 2017. Il est retiré de la vente en ligne (stock à zéro) et reste disponible en caisse.
+- **Tables enfant** : l'audit se trompait sur ce point. La boutique officielle Artek vend bien les 80A, 80B, 80C, 81A, 81B, 81C et 90A enfant, au même prix que les tables adultes (sauf la 80C, 9 € moins chère chez Artek). Chaque fiche porte les photos officielles de son propre modèle ; les 80A et 81B se ressemblent parce qu'Artek utilise des visuels presque identiques pour ces deux tables de 120 cm. Rien à corriger.
 - **Chaise Rival** : chaque variante indique son piètement photographié (asphalte ou bouleau naturel). Les combinaisons non vendues sont sorties de la galerie.
 - **Karuselli et gamme Zebra** : le coloris vendu est indiqué (coque blanche et cuir noir ; noir/blanc).
 
@@ -165,8 +167,6 @@ Toutes les modifications Shopify ont été précédées d'une sauvegarde. L'éta
 
 ### À confirmer avec Artek
 
-- Références probablement arrêtées, toujours en vente en ligne : Miroir 124°, tables enfant 80B et 80C H60. Selon la règle du propriétaire, elles devront sortir du site si Artek confirme leur arrêt.
-- Tables enfant : prix identiques aux tables adultes ; les 80A et 81B H60 partagent les mêmes photos.
 - Dimensions non saisies :
   - chaises 65, 66, 68, 69, 611, Domus, Aslak, Lukki, Atelier, Rope, Rival (largeur et profondeur incertaines) ;
   - Tupla, REB007, Buffet 250, AMA500, Kori lampadaire et lampe de table, applique A330S, lit 710, repose-pieds Karuselli.
@@ -193,5 +193,5 @@ Toutes les modifications Shopify ont été précédées d'une sauvegarde. L'éta
 
 - Les exemples de tissus par classe cités dans les fiches Kiki viennent de la grille Artek publiée par des revendeurs.
 - Les prix n'ont pas été comparés au tarif Artek, qui n'est pas public.
-- Le statut « arrêté » repose sur l'absence de la page sur artek.fi.
+- Le statut « arrêté » repose sur l'absence du produit sur artek.fi, dans son catalogue et dans sa boutique officielle.
 - Relevé et corrections du 29 septembre 2026.
