@@ -1005,9 +1005,9 @@ app.get('/sitemap-pages.xml', async (req, res) => {
   const urls = [];
   SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr)));
   // Créateurs visibles et portant au moins un produit publié (tags de l'index commun).
-  // Sans index disponible, la liste reste complète plutôt que de retirer des pages valides.
+  // Si l'index est inaccessible, la liste reste complète plutôt que de retirer des pages valides.
   let tags = null;
-  try { tags = new Set((await getCatalogIndex()).products.flatMap(p => p.card.tags || [])); } catch (e) { /* index en préparation */ }
+  try { tags = new Set((await getCatalogIndex({ patient: true })).products.flatMap(p => p.card.tags || [])); } catch (e) { console.warn('[sitemap-pages] index', e.message); }
   getDesigners().forEach((d) => {
     if (!d || !d.slug || d.hidden) return;
     if (tags && !(d.tags?.length ? d.tags : [d.slug]).some(t => tags.has(t))) return;
@@ -1372,7 +1372,8 @@ function refreshIndex() {
   }
   return indexPending;
 }
-async function getCatalogIndex() {
+// patient : attendre la construction complète (sitemap, lu par les robots et mis en cache).
+async function getCatalogIndex({ patient = false } = {}) {
   const now = Date.now();
   if (indexEntry && now - indexEntry.fetchedAt < INDEX_FRESH) return indexEntry.index;
   if (indexEntry && now - indexEntry.index.builtAt < INDEX_STALE) {
@@ -1383,6 +1384,7 @@ async function getCatalogIndex() {
   if (!indexPending && now - indexFailedAt < INDEX_RETRY) throw new Error('Index indisponible (échec récent)');
   const pending = refreshIndex();
   pending.catch(() => {});
+  if (patient) return pending;
   // Premier chargement après un déploiement : la page n'attend pas la construction complète.
   let timer;
   try {
