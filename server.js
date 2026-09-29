@@ -451,6 +451,9 @@ const sendProduitsTemplate = (res) => sendTemplate(res, PRODUITS_TEMPLATE);
 const COLLECTION_ALIASES = new Set(['all', 'frontpage']);
 // Collections de marque publiées en double dans Shopify : une seule adresse par marque.
 const BRAND_COLLECTION_ALIASES = { 'fermob-1': 'fermob', volta: 'volta-mobiles' };
+// Toutes les pages de marque ont le même bandeau, avec ou sans photo qualifiée.
+const brandBanner = (html, handle) => navigationRules.collections[handle]?.kind === 'brand' && !html.includes('subhero--brand')
+  ? html.replace('<section class="subhero"', '<section class="subhero subhero--brand"') : html;
 // ─── AGENT READINESS · négociation text/markdown + 404 lisibles par les agents ──
 // Les agents IA (ChatGPT, Claude, Perplexity…) demandent souvent `Accept:
 // text/markdown` (convention acceptmarkdown.com) et n'annoncent pas text/html.
@@ -783,7 +786,7 @@ app.get('/collections/:handle', async (req, res) => {
     const url = ORIGIN + collectionUrl + (brand ? '?brand=' + encodeURIComponent(brand) : '');
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
-    html = injectCollectionHero(html, collectionHero);
+    html = brandBanner(injectCollectionHero(html, collectionHero), handle);
     html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
     if (campaign) {
       const terms = `<section class="section wrap" aria-labelledby="campaign-terms-title"><h2 class="serif catalogue-head" id="campaign-terms-title">Conditions de l’offre</h2><p>${ogEscape(campaign.description)}</p></section>`;
@@ -1499,7 +1502,7 @@ async function sendScopeCatalog(req,res,scope) {
   }
   else {
     photo = getBrandHero(scope.handle, { includeCandidates: BRAND_HERO_REVIEW }) || getCollectionHero(scope.handle);
-    html = injectCollectionHero(renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr),photo);
+    html = brandBanner(injectCollectionHero(renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr),photo), scope.handle);
   }
   const image = scope.kind === 'family' ? absUrl(families[scope.handle]?.hero || (scope.handle === 'sieges' ? '/images/familles/assises/hero.webp' : '/images/familles/jardin/1.webp'))
     : scope.kind === 'catalogue' ? catalogLanding.hero.image

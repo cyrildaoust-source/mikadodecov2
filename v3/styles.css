@@ -1812,6 +1812,8 @@ body.pdplb-locked { overflow: hidden; }
 .subhero--brand { height: 62vh; min-height: 440px; max-height: 720px; }
 /* Titre et texte en bas à gauche, comme sur les pages de familles. */
 .subhero--brand .subhero__in { justify-content: flex-end; padding-bottom: clamp(28px, 4vw, 56px); }
+/* Décision du 29 septembre : le nom seul, sans texte de présentation. */
+.subhero--brand [data-plp-sub] { display: none; }
 /* Voiles : en haut pour le menu transparent, en bas à gauche pour le texte. */
 .subhero--brand .subhero__scrim { background: linear-gradient(180deg, rgba(var(--scrim),.4) 0%, transparent 24%), linear-gradient(0deg, rgba(var(--scrim),.6) 0%, rgba(var(--scrim),.18) 45%, transparent 70%), linear-gradient(90deg, rgba(var(--scrim),.45) 0%, rgba(var(--scrim),.1) 60%, transparent 85%); }
 @media (max-width: 700px) {

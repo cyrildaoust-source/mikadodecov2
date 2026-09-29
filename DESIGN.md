@@ -52,9 +52,9 @@ Décision du propriétaire du 29 septembre, pages de marque : le bandeau est plu
 haut que sur les autres collections (62 % de la hauteur d'écran, de 440 à 720 px ;
 58 % sur mobile) et montre une vraie scène où les pièces de la marque se lisent.
 Photo au format 2:1 (2400 × 1200), jamais un packshot, un mur presque vide ou une
-image agrandie au-delà de 1,25×. Titre et texte sont placés en bas à gauche, sur
-ordinateur comme sur mobile, et restent lisibles grâce au voile commun du bandeau
-de marque. Registre et sources : `data/brand-heroes.json`.
+image agrandie au-delà de 1,25×. Seul le nom de la marque figure sur le bandeau,
+en bas à gauche, sur ordinateur comme sur mobile : aucun texte de présentation.
+Il reste lisible grâce au voile commun du bandeau de marque. Registre et sources : `data/brand-heroes.json`.
 
 ## Vérification d’une modification
 
