@@ -123,21 +123,17 @@
     },
     "compagnie-de-provence": {
       "name": "Compagnie de Provence",
-      "status": "candidate",
-      "kind": "shopify",
-      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/savon-liquide-de-marseille-verveine-fraiche-300ml.jpg?v=1779378934",
-      "sourceProduct": "savon-mains-300ml-extra-pur",
-      "alt": "Savon liquide de Marseille Compagnie de Provence",
-      "position": "50% 50%",
-      "mobilePosition": "50% 50%",
-      "width": 930,
-      "height": 930,
-      "blockers": [
-        "packshot_only",
-        "source_width_under_2400",
-        "three_to_one_derivative_missing",
-        "visual_review_required"
-      ]
+      "status": "qualified",
+      "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0088/4706/5203/files/CDP-About-The-Brand.jpg",
+      "sourcePage": "https://www.cieluxe.com/collections/cdp-01-about-compagniedeprovence",
+      "alt": "Compagnie de Provence : flacons de savon liquide de Marseille Figue de Provence et Fleur de Coton entourés de fleurs, sur fond bleu",
+      "position": "50% 35%",
+      "mobilePosition": "68% 35%",
+      "width": 2400,
+      "height": 1200,
+      "derivation": "crop-0x880x3024x1512-2:1",
+      "visualReview": "2026-09-29:desktop-1440-mobile-390-360"
     },
     "esteban": {
       "name": "Esteban",

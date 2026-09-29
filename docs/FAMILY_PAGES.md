@@ -75,8 +75,8 @@ collections (`.subhero--brand`). Chaque entrée qualifiée garde sa source
 (`sourceImage` et `sourceProduct` pour une galerie Shopify, `sourcePage` pour
 le site officiel de la marque), son cadre de découpe (`derivation`), son alt
 citant la marque et ses points de cadrage ordinateur et mobile. Pastoe utilise
-un rendu officiel de la marque ; Compagnie de Provence reste candidate faute de
-photo d’ambiance assez grande.
+un rendu officiel de la marque ; Compagnie de Provence, une photo officielle de
+la marque publiée par son distributeur américain Cie Luxe.
 
 Les cinq familles utilisent des photos distinctes entre leur bandeau, leurs catégories, leurs inspirations et leurs marques. Les photos des catégories validées sont conservées lorsque leur sujet et leur cadrage conviennent. Les paramètres `heroPosition` et `position` règlent le cadrage sans changer les cartes, les boutons ou les proportions communes. Une même gamme peut apparaître dans plusieurs photos et une sous-catégorie peut reprendre une ambiance de sa famille.
 
