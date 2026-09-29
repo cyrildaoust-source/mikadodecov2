@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { isOutdoor, isTable, tablePage } = require('../lib/table-collections');
+const { isOutdoor, isTable, tablePage, tableSources } = require('../lib/table-collections');
 
 const table = (id, outdoor = false, collections = ['tables']) => ({ id, handle: 'table-' + id, productType: 'table', tags: outdoor ? ['exterieur'] : [], collections });
 function source(collections, size = 3) {
@@ -54,4 +54,11 @@ test('empty results terminate and broken cursors or upstream failures do not ret
   await assert.rejects(tablePage({ handle: 'tables', first: 4 }, async () => ({ collection: { handle: 'tables' }, edges: [{ product: table(1, true), cursor: 'stuck' }], pageInfo: { hasNextPage: true, endCursor: 'stuck' } })), /did not advance/);
   const page = await tablePage({ handle: 'tables', first: 1 }, source({ tables: [table(1), table(2)] }));
   await assert.rejects(tablePage({ handle: 'tables-outdoor', first: 1, after: page.pageInfo.endCursor }, source({})), /Invalid table cursor/);
+});
+
+test('café tables keep bistro tables for indoor and outdoor use, never the chairs or accessories', () => {
+  const [source] = tableSources('tables-de-cafe');
+  assert.equal(source.accept({ productType: 'Table', tags: ['exterieur'] }), true);
+  assert.equal(source.accept({ productType: 'Table de bistro', tags: [] }), true);
+  for (const productType of ['Chaise', 'Banc', 'Coussin', 'Carafe à décanter']) assert.equal(source.accept({ productType, tags: ['exterieur'] }), false, productType);
 });

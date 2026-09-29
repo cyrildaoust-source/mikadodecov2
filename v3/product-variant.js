@@ -14,16 +14,23 @@
     } catch { return ''; }
   }
 
+  // Disponibilité portée par le mapper (available) ou par Shopify (availableForSale).
+  const isAvailable = v => (v.available ?? v.availableForSale) !== false;
+
+  // Une variante demandée explicitement est toujours respectée. Sinon, la fiche ne
+  // s'ouvre jamais sur une variante indisponible quand une autre est disponible.
   function selectInitialVariant(variants, { requestedId, coverUrl, defaultId, fallback = true } = {}) {
     const choices = Array.isArray(variants) ? variants.filter(v => v?.id) : [];
     const requested = requestedId && choices.find(v => String(v.id) === String(requestedId)
       || (/^\d+$/.test(String(requestedId)) && String(v.id).split('/').pop() === String(requestedId)));
     if (requested) return requested;
+    const firstAvailable = choices.find(isAvailable);
     const cover = imageIdentity(coverUrl);
     const matches = cover ? choices.filter(v => imageIdentity(v.image) === cover) : [];
-    if (matches.length === 1) return matches[0];
+    if (matches.length === 1) return isAvailable(matches[0]) || !firstAvailable ? matches[0] : firstAvailable;
     if (!fallback) return null;
-    return choices.find(v => v.id === defaultId) || choices[0] || null;
+    const preferred = choices.find(v => v.id === defaultId);
+    return (preferred && (isAvailable(preferred) || !firstAvailable) ? preferred : firstAvailable) || preferred || choices[0] || null;
   }
 
   // Keep image, label, price and cart identity together until the latest image is ready.

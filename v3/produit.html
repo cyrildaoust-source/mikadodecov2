@@ -174,7 +174,8 @@
           : "";
         const stock = (typeof current.qty === "number") ? current.qty : 0;
         const atMax = isPromo && stock >= 1 && n >= stock;
-        if (cta) { cta.disabled = atMax; cta.textContent = atMax ? `Maximum en stock (${stockLabel(stock)})` : "Ajouter au panier"; }
+        const unavailable = current.available === false;   // variante non commandable : pas d'ajout possible
+        if (cta) { cta.disabled = atMax || unavailable; cta.textContent = unavailable ? "Indisponible" : atMax ? `Maximum en stock (${stockLabel(stock)})` : "Ajouter au panier"; }
       };
       updateStatus();
       document.addEventListener("cart:change", updateStatus);
