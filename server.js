@@ -93,6 +93,18 @@ const CAMPAIGN_COLLECTIONS = {
   },
 };
 
+// Shopify schedules the actual Home Stories discounts. The storefront uses
+// the same dates to expose the campaign in the generic Promotions catalogue,
+// without tagging the products early (which would advertise a discount before
+// Shopify starts applying it) or leaving an expired offer there afterwards.
+const HOME_STORIES_PROMOTION = {
+  handle: 'vitra-home-stories-for-winter',
+  startsAt: Date.parse('2026-10-01T00:00:00+02:00'),
+  endsAt: Date.parse('2027-02-01T00:00:00+01:00'),
+};
+const homeStoriesPromotionActive = (now = Date.now()) =>
+  now >= HOME_STORIES_PROMOTION.startsAt && now < HOME_STORIES_PROMOTION.endsAt;
+
 // ─── CHROME SSR ────────────────────────────────────────
 // chrome-template.js est ESM + pur → importable en Node via import() dynamique.
 // Chargé une seule fois, mémorisé. Repli gracieux si non prêt (cold start très tôt).
@@ -2057,6 +2069,7 @@ async function getPromotionsProducts(first, after) {
   const stamp = (p) => ({ ...promotionVariantCard(p), collections: [...new Set([...(p.collections || []), 'promotions'])] });
   if (after) return base && { ...base, items: base.items.map(stamp) };
   let promoItems = [];
+  let campaignItems = [];
   try {
     // Sonde bornée : à froid elle peut prendre ~10 s (un panier-test par
     // variante) — on sert la page vite et on la laisse finir en arrière-plan.
@@ -2065,9 +2078,14 @@ async function getPromotionsProducts(first, after) {
     if (promos) promoItems = products.filter((p) => p.variantId && promos[p.variantId]);
     else console.warn('[promotions-page] sonde froide — page servie sans fusion (cache en chauffe)');
   } catch (e) { console.warn('[promotions-page]', e.message); }
+  if (homeStoriesPromotionActive()) {
+    try {
+      campaignItems = ((await getCollectionProducts(HOME_STORIES_PROMOTION.handle, 100)) || {}).items || [];
+    } catch (e) { console.warn('[promotions-page] Home Stories:', e.message); }
+  }
   const items = (base?.items || []).map(stamp);
   const seen = new Set(items.map((p) => p.id));
-  for (const p of promoItems) if (!seen.has(p.id)) { seen.add(p.id); items.push(stamp(p)); }
+  for (const p of [...promoItems, ...campaignItems]) if (!seen.has(p.id)) { seen.add(p.id); items.push(stamp(p)); }
   return {
     collection: base?.collection || { handle: 'promotions', title: 'Promotions', description: '', image: null },
     items,
@@ -2233,7 +2251,12 @@ async function getPromos() {
     let curated = [];
     try { curated = ((await getCollectionProducts('promotions', 100)) || {}).items || []; }
     catch (e) { /* collection absente → sonde standard seule */ }
-    const variantIds = [...new Set([...products, ...curated].map((p) => p.variantId).filter(Boolean))];
+    let campaign = [];
+    if (homeStoriesPromotionActive()) {
+      try { campaign = ((await getCollectionProducts(HOME_STORIES_PROMOTION.handle, 100)) || {}).items || []; }
+      catch (e) { /* campagne indisponible → sonde standard seule */ }
+    }
+    const variantIds = [...new Set([...products, ...curated, ...campaign].map((p) => p.variantId).filter(Boolean))];
     const map = {};
     let i = 0;
     const concurrency = 12;
