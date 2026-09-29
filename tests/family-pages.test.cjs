@@ -503,7 +503,7 @@ test('qualified brand hero agrees across bootstrap, social preview and no-JS fal
   assert.ok(html.includes(`content="https://www.mikadodeco.be${expected.img}"`));
   const fallback = html.match(/<noscript><img class="subhero__img editorial-photo"[^>]*>/)[0];
   assert.ok(fallback.includes('moustache-1920.jpg'));
-  assert.ok(fallback.includes('width="2400" height="800"'));
+  assert.ok(fallback.includes('width="2400" height="1200"'));
   assert.ok(fallback.includes(expected.alt));
 });
 

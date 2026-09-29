@@ -44,11 +44,11 @@ test('brand hero manifest covers every active Shopify vendor without silently qu
       assert.equal(Boolean(photo.sourceProduct) + Boolean(photo.sourceCollection), 1, handle);
       assert.equal(brandHero(handle), null, handle);
       assert.equal(brandHero(handle, { includeCandidates: true }).candidate, true, handle);
-    } else {
+    } else if (photo.active !== false) {
       assert.equal(photo.status, 'qualified');
       assert.equal(photo.kind, 'local');
       assert.equal(photo.width, 2400);
-      assert.equal(photo.height, 800);
+      assert.equal(photo.height, 1200);
       assert.equal(brandHero(handle).candidate, false, handle);
     }
   }
@@ -56,13 +56,13 @@ test('brand hero manifest covers every active Shopify vendor without silently qu
 
 test('every qualified local hero has the exact responsive files expected by the page', async () => {
   for (const [handle, photo] of Object.entries(brandHeroManifest.heroes)) {
-    if (photo.status !== 'qualified') continue;
+    if (photo.status !== 'qualified' || photo.active === false) continue;
     const expected = [
-      [`${handle}.jpg`, 2400, 800],
-      [`${handle}-1280.webp`, 1280, 427],
-      [`${handle}-1920.webp`, 1920, 640],
-      [`${handle}-2400.webp`, 2400, 800],
-      [`${handle}-1920.jpg`, 1920, 640],
+      [`${handle}.jpg`, 2400, 1200],
+      [`${handle}-1280.webp`, 1280, 640],
+      [`${handle}-1920.webp`, 1920, 960],
+      [`${handle}-2400.webp`, 2400, 1200],
+      [`${handle}-1920.jpg`, 1920, 960],
     ];
     for (const [filename, width, height] of expected) {
       const file = path.join(root, 'v3', 'images', 'brands', 'headers', filename);
@@ -83,7 +83,8 @@ test('Moustache uses the same server payload for visible hero, social image and 
   const html = injectCollectionHero(template, hero);
   assert.ok(html.includes(JSON.stringify(hero)));
   assert.ok(html.includes('moustache-1920.jpg'));
-  assert.ok(html.includes('width="2400" height="800"'));
+  assert.ok(html.includes('width="2400" height="1200"'));
+  assert.ok(html.includes('<section class="subhero subhero--editorial subhero--brand"'));
   assert.ok(html.includes(hero.alt));
 });
 

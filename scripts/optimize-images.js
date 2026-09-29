@@ -38,7 +38,7 @@ const CONTENT_WIDTHS = [800, 1280];
 const TILE_WIDTHS = [480, 800];
 // Designer portraits: single ~640px card thumbnail (capped to native).
 const DESIGNER_WIDTH = 640;
-// Brand collection-page heros: panoramic 3:1 banners (sources ~1.9MB, never
+// Brand collection-page heros: 2:1 banners (2400 × 1200) (sources ~1.9MB, never
 // served). Full-bleed LCP → wide WebP ladder, plus ONE resized JPEG fallback
 // so the ~3% of browsers without WebP don't download the multi-MB original.
 const HEADER_WIDTHS = [1280, 1920, 2400];
@@ -133,7 +133,7 @@ async function generate() {
     if (job.label === 'header' && meta.width < Math.max(...job.widths)) {
       console.warn(`⚠  header ${base}.jpg is ${meta.width}px wide (< ${Math.max(...job.widths)}px). ` +
         `the site requests fixed -1280/-1920/-2400 variants, so some will be missing and this ` +
-        `brand will fall back to the generic hero. Use a ≥${Math.max(...job.widths)}px, 3:1 source.`);
+        `brand will fall back to the generic hero. Use a ≥${Math.max(...job.widths)}px, 2:1 source.`);
     }
 
     for (const w of widths) {
