@@ -365,7 +365,7 @@
     // initShell is called below — the active nav entry depends on the route
     // (designer / brand / mobilier), so it waits until the URL is parsed.
 
-    import { listingTrail } from '/navigation.mjs';
+    import { listingTrail, brandHref } from '/navigation.mjs';
     import { walkCatalog, sortCatalog, catalogPagination, DISPLAY_PAGE_SIZE } from '/catalog-pagination.mjs';
     const navigation = await loadNavigation();
     const COLL_TITLES = Object.fromEntries(Object.entries(navigation.collections).map(([h, c]) => [h, c.label]));
@@ -761,7 +761,7 @@
       // filterbar / popular strip from the URL alone.
       const notFound = () => { state.designer = { slug: designerSlug, name: null, tags: [] }; };
       try {
-        const r = await fetch("/designers-data.json", { cache: "no-cache" });
+        const [r, nav] = await Promise.all([fetch("/designers-data.json", { cache: "no-cache" }), loadNavigation().catch(() => ({ brands: {} }))]);
         if (!r.ok) { notFound(); return; }
         const data = await r.json();
         const d = (data.designers || []).find((x) => x.slug === designerSlug && !x.hidden);
@@ -772,7 +772,7 @@
             slug: d.slug, name: d.name,
             tags: (d.tags && d.tags.length) ? d.tags : [d.slug],
             photo: d.photo || "", bio: d.bio || "",
-            brands: d.brands || [], brandHrefs: d.brandHrefs || [],
+            brands: d.brands || [], brandHrefs: (d.brands || []).map((b) => brandHref(b, nav)),
           };
         } else {
           // Slug not found → flag with a name=null sentinel so render()

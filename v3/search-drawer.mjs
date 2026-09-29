@@ -1,5 +1,5 @@
 import { escapeHtml, priceLabel } from './format.mjs';
-import { megaMenuBrands, fetchBrands } from './shared.js';
+import { fetchBrands } from './shared.js';
 import { selectionURL, productHref } from './navigation.mjs';
 import { searchCriteria, searchNotes, searchSuggestions } from './search-view.mjs';
 
@@ -14,23 +14,8 @@ export function createSearchDrawer() {
   const onKey = (e) => { if (e.key === "Escape") { e.preventDefault(); close(); } };
   const pdpHref = (p, source) => escapeHtml(productHref(p, typeof source === "string" ? source : ""));
   const row = (p, source) => `<a class="sr__row" href="${pdpHref(p, source)}"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span>${p.finishLabel ? `<span class="sr__finish">${escapeHtml(p.finishLabel)}</span>` : ''}</span><span class="sr__price">${priceLabel(p)}</span></a>`;
-  // Liens marque « curés » (mega-menu-brands.json, même schéma que marques.html) :
-  // clé = nom en minuscules → href /collections/<handle>. Repli ?brand=<slug> si
-  // absent. hrefByName persiste (bindSearch appelé une seule fois) → chargé 1×.
-  // Promesse MÉMOÏSÉE (même patron que loadBrandHandles) : tout appelant qui
-  // `await loadBrandHrefs()` attend la MÊME promesse → hrefByName est garanti
-  // rempli avant de peindre les chips (pas de course sur un flag booléen qui
-  // résout avant la fin du fetch). Repli ?brand= si le JSON échoue.
-  let hrefByName = {}, _brandHrefsP = null;
-  const loadBrandHrefs = () => {
-    if (!_brandHrefsP) {
-      _brandHrefsP = megaMenuBrands()
-        .then((j) => { for (const b of (j.brands || [])) if (b.name && b.href) hrefByName[b.name.toLowerCase()] = b.href; })
-        .catch(() => { /* repli ?brand= */ });
-    }
-    return _brandHrefsP;
-  };
-  const brandHref = (b) => hrefByName[(b.name || "").toLowerCase()] || `/produits.html?brand=${encodeURIComponent(b.slug)}`;
+  // Chaque marque de /api/brands et de /api/predictive porte déjà son lien.
+  const brandHref = (b) => b.href || `/produits.html?brand=${encodeURIComponent(b.slug)}`;
   const catHref   = (c) => `/collections/${encodeURIComponent(c.handle)}`;
   // Belle saison (avril→sept) = extérieur ; sinon intérieur. Le tag EST la saison →
   // la clé de cache serveur (getProductsPage, keyée par tags) se régénère seule.
@@ -49,10 +34,7 @@ export function createSearchDrawer() {
     if (featLoaded || !featSlot || !brandsSlot) return;
     featLoaded = true;
     try {
-      // loadBrandHrefs() dans le Promise.all → hrefByName rempli AVANT de peindre
-      // les chips (chips marque curées, pas de repli ?brand= dû à une course).
-      const [, feat, brands] = await Promise.all([
-        loadBrandHrefs(),
+      const [feat, brands] = await Promise.all([
         fetch(`/api/products?paginated=1&limit=4&tags=${seasonTag()}`).then((r) => r.json()),
         fetchBrands(),
       ]);
@@ -68,7 +50,7 @@ export function createSearchDrawer() {
     lastFocus = document.activeElement;
     root.hidden = false;
     document.body.classList.add("search-locked");   // le header bascule en mode recherche
-    showSuggest(); loadBrandHrefs(); loadFeat();
+    showSuggest(); loadFeat();
     // On mesure APRÈS le reflow (bandeau masqué, champ inline affiché) pour que le
     // panneau de résultats descende pile sous la barre de nav.
     requestAnimationFrame(() => {

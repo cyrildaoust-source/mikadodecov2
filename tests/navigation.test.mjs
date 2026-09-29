@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createNavigation, selectionURL, sourceSelection, productHref, listingTrail, productTrail, collectionTrail, breadcrumbHTML, breadcrumbData, productBrandDestination } from '../v3/navigation.mjs';
+import { createNavigation, navigationSlug, brandHref, selectionURL, sourceSelection, productHref, listingTrail, productTrail, collectionTrail, breadcrumbHTML, breadcrumbData, productBrandDestination } from '../v3/navigation.mjs';
 import { walkCatalog, sortCatalog, catalogPagination } from '../v3/catalog-pagination.mjs';
 const read = path => JSON.parse(fs.readFileSync(new URL(path, import.meta.url)));
 const nav = createNavigation(read('../v3/navigation-data.json'), read('../v3/mega-menu-brands.json').brands, read('../v3/designers-data.json').designers);
@@ -9,8 +9,8 @@ const url = path => new URL(path, 'https://www.mikadodeco.be');
 const labels = trail => trail.map(x => x.label);
 const product = { handle: 'chaise', name: 'Chaise <&>', brand: 'HAY' };
 
-test('all 163 collections have a role and acyclic, explicit parents; all 39 children keep their family', () => {
- assert.equal(Object.keys(nav.collections).length, 163);
+test('all 164 collections have a role and acyclic, explicit parents; all 39 children keep their family', () => {
+ assert.equal(Object.keys(nav.collections).length, 164);
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'family').length, 7);
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'subcategory').length, 39);
  for (const [handle, c] of Object.entries(nav.collections)) {
@@ -22,6 +22,18 @@ test('all 163 collections have a role and acyclic, explicit parents; all 39 chil
   if (c.kind === 'designer') assert.equal(trail[1].label, 'Designers', handle);
  }
  assert.deepEqual(labels(collectionTrail('tables-outdoor',nav)), ['Accueil','Catalogue','Jardin','Tables outdoor']);
+});
+test('the brand registry gives each brand one page: /collections/<slug of its Shopify vendor>', () => {
+ const brands = read('../v3/mega-menu-brands.json').brands;
+ for (const b of brands) {
+  assert.equal(b.href, '/collections/' + navigationSlug(b.name), b.name);
+  assert.equal(brandHref(b.name, nav), b.href, b.name);
+ }
+ assert.equal(new Set(brands.map(b => b.href)).size, brands.length);
+ for (const [handle, hero] of Object.entries(read('../data/brand-heroes.json').heroes)) {
+  if (hero.active !== false) assert.ok(brands.some(b => b.href === '/collections/' + handle), handle);
+ }
+ assert.ok(!Object.values(read('../v3/navigation-data.json').collections).some(c => c.kind === 'brand'));
 });
 test('all curated brands keep Marques globally and every family when arriving through that family', () => {
  for (const b of read('../v3/mega-menu-brands.json').brands) {

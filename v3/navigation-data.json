@@ -1,5 +1,5 @@
 {
-  "_note": "Hiérarchie de présentation revue le 16 septembre 2026. Ne modifie aucune appartenance Shopify. Les sélections sans parent validé restent sous Catalogue. Les marques du méga menu complètent ce registre à la lecture.",
+  "_note": "Hiérarchie de présentation revue le 16 septembre 2026. Ne modifie aucune appartenance Shopify. Les sélections sans parent validé restent sous Catalogue. Les marques sont inscrites uniquement dans mega-menu-brands.json.",
   "collections": {
     "bistro": {
       "label": "Bistro",
@@ -108,75 +108,6 @@
       "label": "Arts de la table",
       "kind": "selection"
     },
-    "tradition": {
-      "label": "&Tradition",
-      "kind": "brand",
-      "brand": "tradition"
-    },
-    "relaxound": {
-      "label": "Relaxound",
-      "kind": "brand",
-      "brand": "relaxound"
-    },
-    "hkliving": {
-      "label": "HKliving",
-      "kind": "brand",
-      "brand": "hkliving"
-    },
-    "alessi": {
-      "label": "Alessi",
-      "kind": "brand",
-      "brand": "alessi"
-    },
-    "volta": {
-      "label": "Volta Mobiles",
-      "kind": "brand"
-    },
-    "ferm-living": {
-      "label": "Ferm Living",
-      "kind": "brand",
-      "brand": "ferm-living"
-    },
-    "ichendorf-milano": {
-      "label": "Ichendorf Milano",
-      "kind": "brand",
-      "brand": "ichendorf-milano"
-    },
-    "fermob": {
-      "label": "Fermob",
-      "kind": "brand",
-      "brand": "fermob"
-    },
-    "fatboy": {
-      "label": "Fatboy",
-      "kind": "brand",
-      "brand": "fatboy"
-    },
-    "iittala": {
-      "label": "Iittala",
-      "kind": "brand",
-      "brand": "iittala"
-    },
-    "serax": {
-      "label": "Serax",
-      "kind": "brand",
-      "brand": "serax"
-    },
-    "ihr": {
-      "label": "IHR",
-      "kind": "brand",
-      "brand": "ihr"
-    },
-    "vitra": {
-      "label": "Vitra",
-      "kind": "brand",
-      "brand": "vitra"
-    },
-    "hay": {
-      "label": "HAY",
-      "kind": "brand",
-      "brand": "hay"
-    },
     "mediterraneo": {
       "label": "Mediterraneo",
       "kind": "range",
@@ -185,11 +116,6 @@
     "noel": {
       "label": "Noël",
       "kind": "selection"
-    },
-    "artek": {
-      "label": "Artek",
-      "kind": "brand",
-      "brand": "artek"
     },
     "jean-prouve": {
       "label": "Jean Prouvé",
@@ -235,11 +161,6 @@
       "label": "Arts de la table",
       "kind": "family"
     },
-    "muuto": {
-      "label": "Muuto",
-      "kind": "brand",
-      "brand": "muuto"
-    },
     "nouveautes": {
       "label": "Nouveautés",
       "kind": "selection"
@@ -251,41 +172,6 @@
     "featured": {
       "label": "Notre sélection",
       "kind": "selection"
-    },
-    "lind-dna": {
-      "label": "LIND DNA",
-      "kind": "brand",
-      "brand": "lind-dna"
-    },
-    "anglepoise": {
-      "label": "Anglepoise",
-      "kind": "brand",
-      "brand": "anglepoise"
-    },
-    "blomus": {
-      "label": "Blomus",
-      "kind": "brand",
-      "brand": "blomus"
-    },
-    "marimekko": {
-      "label": "Marimekko",
-      "kind": "brand",
-      "brand": "marimekko"
-    },
-    "pols-potten": {
-      "label": "Pols Potten",
-      "kind": "brand",
-      "brand": "pols-potten"
-    },
-    "string-furniture": {
-      "label": "String Furniture",
-      "kind": "brand",
-      "brand": "string-furniture"
-    },
-    "remember": {
-      "label": "Remember",
-      "kind": "brand",
-      "brand": "remember"
     },
     "chaises": {
       "label": "Chaises",
@@ -676,11 +562,6 @@
       "kind": "range",
       "parent": "serax"
     },
-    "fermob-1": {
-      "label": "Fermob",
-      "kind": "brand",
-      "brand": "fermob"
-    },
     "serax-wind-fire-2": {
       "label": "Serax — Wind & Fire",
       "kind": "range",
@@ -722,11 +603,6 @@
       "parent": "outdoor",
       "catalogFilter": false
     },
-    "stoff-nagel": {
-      "label": "Stoff Nagel",
-      "kind": "brand",
-      "brand": "stoff-nagel"
-    },
     "promo-chaises-hay": {
       "label": "Promo été 2026 — Chaises HAY",
       "kind": "selection"
@@ -746,31 +622,6 @@
     "promo-chaises-fatboy": {
       "label": "Promo été 2026 — Chaises Fatboy",
       "kind": "selection"
-    },
-    "avolt": {
-      "label": "Avolt",
-      "kind": "brand",
-      "brand": "avolt"
-    },
-    "compagnie-de-provence": {
-      "label": "Compagnie de Provence",
-      "kind": "brand",
-      "brand": "compagnie-de-provence"
-    },
-    "carl-hansen-son": {
-      "label": "Carl Hansen & Søn",
-      "kind": "brand",
-      "brand": "carl-hansen-son"
-    },
-    "tiptoe": {
-      "label": "Tiptoe",
-      "kind": "brand",
-      "brand": "tiptoe"
-    },
-    "volta-mobiles": {
-      "label": "Volta Mobiles",
-      "kind": "brand",
-      "brand": "volta-mobiles"
     },
     "panton-cubes": {
       "label": "Panton Cubes",

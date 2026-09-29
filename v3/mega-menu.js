@@ -144,15 +144,13 @@ function hydrateMobilier() {
 function hydrateMarques() {
   const panel = stageEl.querySelector('[data-mm-panel="marques"]');
   if (!panel) return;
-  const curatedHref = {};
-  for (const b of (brandsData?.brands || [])) if (b.name && b.href) curatedHref[b.name.toLowerCase()] = b.href;
   // Marques masquées du dropdown méga-menu (restent sur /marques.html) — ex. nom très long.
   const HIDDEN_FROM_MENU = new Set(["compagnie de provence"]);
   const brands = (activeBrands || [])
     .filter((b) => !HIDDEN_FROM_MENU.has((b.name || "").toLowerCase()))
     .map((b) => ({
       name: b.name,
-      href: curatedHref[b.name.toLowerCase()] || `/produits.html?brand=${b.slug}`,
+      href: b.href || `/produits.html?brand=${b.slug}`,
     }));
   if (!brands.length) { panel.innerHTML = ""; return; }
 

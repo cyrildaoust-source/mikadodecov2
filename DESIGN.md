@@ -48,6 +48,13 @@ Décision du propriétaire du 16 septembre, pagination : à partir de la page 2 
 
 À la demande du propriétaire d’afficher davantage de produits, le réglage retenu est de 60 produits par page pour les catalogues numérotés (auparavant 36). Les cartes gardent leurs dimensions et leurs images à chargement différé. La taille de page reste commune aux appareils pour conserver les mêmes tranches dans les liens et les retours de fiches. Les familles à bouton « Voir plus » gardent leurs lots de 24.
 
+Décision du propriétaire du 29 septembre, pages de marque : le bandeau est plus
+haut que sur les autres collections (62 % de la hauteur d'écran, de 440 à 720 px ;
+58 % sur mobile) et montre une vraie scène où les pièces de la marque se lisent.
+Photo au format 2:1 (2400 × 1200), jamais un packshot, un mur presque vide ou une
+image agrandie au-delà de 1,25×. Le texte reste lisible grâce au voile commun du
+bandeau de marque. Registre et sources : `data/brand-heroes.json`.
+
 ## Vérification d’une modification
 
 Rectification du propriétaire du 18 septembre : les petites photos de variantes sous les cartes n’ont pas été demandées et doivent être retirées. Ne pas ajouter de sélecteur de finitions photographique aux cartes. Conserver une fiche et une carte par modèle dans le pilote Chaises. La carte choisit une finition représentative des filtres et présente son libellé, son prix exact et sa disponibilité ; toutes les variantes restent accessibles sur la fiche. Le composant commun porte cet affichage, sans déplacer le bouton de sélection ni réduire la photo principale.

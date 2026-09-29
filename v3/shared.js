@@ -418,33 +418,6 @@ export async function fetchCollections() {
   if (!r.ok) throw new Error("collections " + r.status);
   return r.json();
 }
-// Curated brand → Shopify collection-handle map, sourced from
-// mega-menu-brands.json (the single source of truth for curated handles).
-// Resolves to { slugify(name): handle }. Memoized so repeated callers (brand
-// cards, PDP brand link/breadcrumb) share one fetch. Brands absent from the
-// map have no curated collection — callers decide the fallback.
-// Registre des marques curées : écrit dans la page, fichier statique en secours.
-export function megaMenuBrands() {
-  return siteData("brandsFile") ? Promise.resolve(siteData("brandsFile"))
-    : fetch("/mega-menu-brands.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : { brands: [] }));
-}
-let _brandHandles = null;
-export function loadBrandHandles() {
-  if (!_brandHandles) {
-    _brandHandles = megaMenuBrands()
-      .then((d) => {
-        const map = {};
-        for (const b of (d.brands || [])) {
-          if (b && b.name && typeof b.href === "string") {
-            map[slugify(b.name)] = b.href.replace(/^\/collections\//, "");
-          }
-        }
-        return map;
-      })
-      .catch(() => ({}));
-  }
-  return _brandHandles;
-}
 // Même registre et même rendu que le serveur ; aucun appel Shopify pour le fil.
 let navigationPromise;
 export function loadNavigation() {

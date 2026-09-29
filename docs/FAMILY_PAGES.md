@@ -69,6 +69,15 @@ Ce registre de transition ne se fait pas passer pour le manifeste atomique
 `mikado.brand-heroes@1` de l’importer : ce dernier ne pourra être livré que
 lorsque toutes les marques du périmètre auront franchi leur gate.
 
+Depuis le 29 septembre, les bandeaux de marque sont au format 2:1 (fichier
+2400 × 1200, dérivés 1280/1920/2400) et s’affichent plus haut que les autres
+collections (`.subhero--brand`). Chaque entrée qualifiée garde sa source
+(`sourceImage` et `sourceProduct` pour une galerie Shopify, `sourcePage` pour
+le site officiel de la marque), son cadre de découpe (`derivation`), son alt
+citant la marque et ses points de cadrage ordinateur et mobile. Pastoe utilise
+un rendu officiel de la marque ; Compagnie de Provence reste candidate faute de
+photo d’ambiance assez grande.
+
 Les cinq familles utilisent des photos distinctes entre leur bandeau, leurs catégories, leurs inspirations et leurs marques. Les photos des catégories validées sont conservées lorsque leur sujet et leur cadrage conviennent. Les paramètres `heroPosition` et `position` règlent le cadrage sans changer les cartes, les boutons ou les proportions communes. Une même gamme peut apparaître dans plusieurs photos et une sous-catégorie peut reprendre une ambiance de sa famille.
 
 Pour remplacer une photo : choisir une vraie scène de la galerie, contrôler son sujet et sa netteté, conserver son URL et son produit source, puis régler le point de cadrage dans une preview sur ordinateur. Préférer une source paysage d’au moins 2000 px pour un bandeau. Plusieurs médias actuels sont limités à environ 1200–1400 px : l’importer doit préserver les originaux et fournir des photos d’ambiance en haute définition lorsqu’elles existent, sans agrandissement artificiel ni suppression des URL déjà publiées.
