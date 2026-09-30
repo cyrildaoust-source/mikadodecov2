@@ -9,7 +9,7 @@ Les deux rubriques ont des rôles distincts :
   modèle. Ce n'est pas une seconde liste d'accessoires génériques.
 
 Les cartes restent celles du composant commun `v3/product-card.mjs`. Chaque
-rubrique contient au plus six cartes et disparaît lorsqu'elle est vide.
+rubrique contient quatre cartes au plus et disparaît lorsqu'elle est vide.
 
 ## Priorité des sources
 
@@ -30,11 +30,11 @@ image ou sans variante achetable sont toujours retirés.
 
 ## Composition d'une table
 
-La sélection réserve les places au lieu de laisser une famille envahir les six
-cartes : au plus deux assises, puis une pièce de vaisselle, un verre ou contenant,
-un textile ou dessous de plat et, pour l'extérieur, une lampe extérieure. Une
-rallonge réellement compatible passe avant cette composition. Les chaises de la
-même gamme sont prioritaires ; à défaut, la même marque et le même usage
+La sélection réserve les quatre places au lieu de les laisser envahir par une
+seule famille : une assise, une pièce de vaisselle, un verre ou contenant, puis
+un textile ou dessous de plat en intérieur, ou une lampe autonome en extérieur.
+Une rallonge réellement compatible passe avant cette composition. Les chaises
+de la même gamme sont prioritaires ; à défaut, la même marque et le même usage
 intérieur/extérieur servent au classement.
 
 Les catégories Storefront sont des règles de recherche, pas une liste de

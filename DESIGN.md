@@ -131,7 +131,7 @@ nom de fichier ne suffisent pas à déclarer ce rôle.
 Décision du propriétaire du 30 septembre 2026 : les deux titres sont « Pour
 compléter vos achats » et « Dans la même famille ». La première rubrique compose
 un usage, pas une rangée de produits presque identiques. Pour une table, elle peut
-associer deux assises différentes, de la vaisselle, des verres, un textile ou un
-dessous de plat et, si la table est extérieure, une lampe extérieure. La seconde
+associer une assise, de la vaisselle, des verres et un textile ou, si la table est
+extérieure, une lampe autonome. La seconde
 rubrique reste réservée à la gamme ou au modèle. Conserver les cartes produit
-communes, six cartes au plus, et ne jamais introduire ces titres par un surtitre.
+communes, quatre cartes au plus, et ne jamais introduire ces titres par un surtitre.

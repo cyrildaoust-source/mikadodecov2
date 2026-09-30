@@ -17,6 +17,7 @@ const card = (id, overrides = {}) => ({
 });
 
 test('les deux rubriques gardent la formulation éditoriale validée', () => {
+  assert.equal(MAX_RECOMMENDATIONS, 4);
   const html = readFileSync(require.resolve('../v3/produit.html'), 'utf8');
   assert.match(html, />Pour compléter vos achats<\/h2>/);
   assert.match(html, />Dans la même famille<\/h2>/);
@@ -71,9 +72,9 @@ test('compléter une table compose une scène variée au lieu d’aligner les as
       ],
     },
   });
-  assert.deepEqual(selected.complementary.map(item => item.id), ['chair', 'armchair', 'plate', 'glass', 'placemat', 'lamp']);
+  assert.deepEqual(selected.complementary.map(item => item.id), ['chair', 'plate', 'glass', 'lamp']);
   assert.deepEqual(selected.complementary.map(item => item.recommendationSource), [
-    'range-functional', 'range-functional', 'scene-composition', 'scene-composition', 'scene-composition', 'scene-composition',
+    'range-functional', 'scene-composition', 'scene-composition', 'scene-composition',
   ]);
 });
 
