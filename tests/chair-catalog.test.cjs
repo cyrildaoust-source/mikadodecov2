@@ -12,6 +12,7 @@ before(async()=>{
   global.fetch=async(url,options)=>{
     if(!String(url).includes('chairs.test'))return realFetch(url,options);
     const {query,variables}=JSON.parse(options.body);
+    if(query.includes('query ProductRecommendations('))return Response.json({data:{complementary:[],related:[],rangeCollections:[],search:{nodes:[]}}});
     if(query.includes('query GetProduct('))return Response.json({data:{product:node(1)}});
     assert.match(query,/query (CollectionCatalog|SearchCatalog|ScopedSearchCatalog)/);if(query.includes("query CollectionCatalog"))reads++;
     if(fail)return new Response('offline',{status:503});

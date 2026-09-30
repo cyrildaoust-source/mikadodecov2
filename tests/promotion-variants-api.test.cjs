@@ -22,6 +22,7 @@ before(async()=>{
   if(/query GetProducts/.test(query))return Response.json({data:{products:{edges:[],pageInfo:{hasNextPage:false,endCursor:null}}}});
   if(/mutation Cart(?:Create|Preview)/.test(query))return Response.json({data:{cartCreate:{cart:{discountAllocations:[],lines:{edges:[]}}}}});
   if(/query GetCollections/.test(query))return Response.json({data:{collections:{edges:[{node:{id:'gid://shopify/Collection/1',handle:'promotions',title:'Promotions'}}]}}});
+  if(/query ProductRecommendations\(/.test(query))return Response.json({data:{complementary:[],related:[],rangeCollections:[],search:{nodes:[]}}});
   if(/query GetProduct\(/.test(query))return Response.json({data:{product:makeProduct(1)}});
   throw Error('Unexpected operation '+query.slice(0,80));
  };
