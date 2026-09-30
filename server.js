@@ -1941,10 +1941,27 @@ function mapMenuItems(items) {
   }));
 }
 
+// Le menu Shopify reste la source de l'ordre ; le registre du site ajoute à chaque
+// famille les sous-catégories qui n'y figurent pas encore (ex. Poufs sous Assises).
+function completeMenu(items, nav) {
+  const handleOf = url => String(url || '').match(/^\/collections\/([a-z0-9-]+)$/)?.[1];
+  return items.map(item => {
+    const family = handleOf(item.url);
+    const children = item.items || [];
+    const present = new Set(children.map(child => handleOf(child.url)));
+    const missing = family && nav.collections[family]?.kind === 'family'
+      ? Object.entries(nav.collections).filter(([handle, entry]) => entry.kind === 'subcategory' && entry.parent === family && !present.has(handle))
+        .map(([handle, entry]) => ({ title: entry.label, url: '/collections/' + handle, items: [] }))
+      : [];
+    return { ...item, items: completeMenu([...children, ...missing], nav) };
+  });
+}
+
 async function getMenu() {
   return cached('menu', async () => {
     const data = await shopifyFetch(MENU_QUERY);
-    const items = mapMenuItems(data?.menu?.items || []);
+    await _navigationReady;
+    const items = completeMenu(mapMenuItems(data?.menu?.items || []), navigationRules);
     return { ok: true, items };
   });
 }
