@@ -313,6 +313,11 @@
       "kind": "subcategory",
       "parent": "decoration"
     },
+    "salle-de-bain": {
+      "label": "Salle de bain",
+      "kind": "subcategory",
+      "parent": "decoration"
+    },
     "bains-de-soleil-transats": {
       "label": "Bains de soleil & transats",
       "kind": "subcategory",

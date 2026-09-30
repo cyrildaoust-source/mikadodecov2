@@ -358,5 +358,14 @@
     "mobilePosition": "22% 80%",
     "width": 2000,
     "height": 1333
+  },
+  "salle-de-bain": {
+    "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/lr-2022_hk_campaign_antwerp_polina-24.jpg?width=2000&format=webp",
+    "sourceProduct": "hkliving-tapis-de-bain-bohemian-set-0",
+    "alt": "Tapis de bain tufté, paniers rayés et serviette au lavabo dans une salle de bain au parquet clair",
+    "position": "50% 60%",
+    "mobilePosition": "55% 60%",
+    "width": 2000,
+    "height": 1333
   }
 }
