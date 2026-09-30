@@ -4,12 +4,14 @@
 // définie dans ce fichier.
 
 import recommendations from '../lib/product-recommendations.js';
-const { selectRangeCollections, functionalCompanion, sameRange, role, sceneBucket, isOutdoor } = recommendations;
+const { selectRangeCollections, functionalCompanion, sameRange, sameUniverse, role, sceneBucket, isOutdoor } = recommendations;
+import { writeFileSync } from 'node:fs';
 
 const host = String(process.env.SHOPIFY_STORE_URL || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
 const token = process.env.SHOPIFY_ADMIN_API_KEY || '';
 const version = process.env.SHOPIFY_ADMIN_API_VERSION || '2026-07';
 const minTotal = Math.max(1, Number(process.argv.find(arg => arg.startsWith('--min-total='))?.split('=')[1]) || 5);
+const detailsPath = process.argv.find(arg => arg.startsWith('--details='))?.slice('--details='.length) || '';
 if (!host || !token) throw new Error('SHOPIFY_STORE_URL et SHOPIFY_ADMIN_API_KEY sont requis.');
 const endpoint = `https://${host}/admin/api/${version}/graphql.json`;
 
@@ -95,6 +97,7 @@ const rows = prepared.map(product => {
       .every(bucket => sceneBuckets.has(bucket));
   const deterministicComplementary = candidates.some(candidate => functionalCompanion(product, candidate, rangeIds)) || tableScene;
   const deterministicRelated = candidates.some(candidate => sameRange(product, candidate, rangeIds));
+  const universeRelated = availableProducts.some(candidate => candidate.id !== product.id && sameUniverse(product, candidate));
   const curatedComplementary = Boolean(product.complementary?.references?.nodes?.length);
   const curatedRelated = Boolean(product.related?.references?.nodes?.length);
   return {
@@ -105,8 +108,8 @@ const rows = prepared.map(product => {
     completeTableScene,
     before: curatedComplementary || curatedRelated,
     afterComplementary: curatedComplementary || deterministicComplementary,
-    afterRelated: curatedRelated || deterministicRelated,
-    after: curatedComplementary || curatedRelated || deterministicComplementary || deterministicRelated,
+    afterRelated: curatedRelated || deterministicRelated || universeRelated,
+    after: curatedComplementary || curatedRelated || deterministicComplementary || deterministicRelated || universeRelated,
   };
 });
 
@@ -127,11 +130,11 @@ function grouped(key) {
     .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name, 'fr'));
 }
 
-console.log(JSON.stringify({
+const report = {
   measuredAt: new Date().toISOString(),
   publication: headless.name,
   availability: 'image présente et une des trois premières variantes en stock, non suivie ou vendue en dépassement',
-  note: 'La couverture après comprend le socle déterministe gamme/modèle et la composition de scène des tables ; le repli productRecommendations de Shopify ne peut que l’augmenter.',
+  note: 'La couverture après comprend la curation, la gamme ou le modèle, les relations fonctionnelles, les scènes de table et le même type ou univers. Le repli productRecommendations de Shopify est mesuré séparément.',
   overall: summary(rows),
   tableScenes: {
     total: rows.filter(row => role(row.product) === 'dining-table').length,
@@ -140,4 +143,29 @@ console.log(JSON.stringify({
   },
   byBrand: grouped('vendor'),
   byType: grouped('productType'),
-}, null, 2));
+};
+
+if (detailsPath) {
+  writeFileSync(detailsPath, JSON.stringify({
+    ...report,
+    products: rows.map(row => ({
+      id: row.product.id,
+      handle: row.product.handle,
+      title: row.product.title,
+      vendor: row.product.vendor,
+      productType: row.product.productType,
+      tags: row.product.tags,
+      collections: row.product.collections.nodes,
+      role: role(row.product),
+      curatedComplementary: row.curatedComplementary,
+      curatedRelated: row.curatedRelated,
+      tableScene: row.tableScene,
+      completeTableScene: row.completeTableScene,
+      afterComplementary: row.afterComplementary,
+      afterRelated: row.afterRelated,
+      after: row.after,
+    })),
+  }, null, 2));
+}
+
+console.log(JSON.stringify(report, null, 2));

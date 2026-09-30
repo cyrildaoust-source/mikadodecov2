@@ -134,5 +134,8 @@ rubrique compose un usage, pas une rangée de produits presque identiques. Pour 
 table, elle peut
 associer une assise, de la vaisselle, des verres et un textile ou, si la table est
 extérieure, une lampe autonome. La seconde
-rubrique reste réservée à la gamme ou au modèle. Conserver les cartes produit
+rubrique privilégie la gamme ou le modèle. Conserver les cartes produit
 communes, quatre cartes au plus, et ne jamais introduire ces titres par un surtitre.
+La règle s'applique à tout le catalogue : lorsqu'une gamme exacte n'existe pas,
+« Vous aimerez aussi » passe au même type puis au même univers fonctionnel. Ne pas
+remplir artificiellement « Complétez avec » lorsqu'aucun complément honnête n'existe.
