@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { shopifyFetch, SHOPIFY_STORE } = require('./lib/shopify/client');
+const { buildRecommendationContext, recommendProducts } = require('./lib/product-recommendations');
 const { mapProduct, mapProductRef, shopifyResize, CARD_IMAGE_WIDTH } = require('./lib/shopify/product-mapper');
 const { getSearchPage, clearSearchCache } = require('./lib/services/search');
 const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
@@ -2038,17 +2039,26 @@ async function getProductByHandle(handle) {
     const node = data.product;
     if (!node) return null;
     const product = mapProduct(node, { full: true });
-    // Recommandations Search & Discovery (métafields list.product_reference)
-    // mappées dans la forme de carte du site. Écarte : entrées sans image, la
-    // self-référence, et les doublons — y compris un produit listé À LA FOIS en
-    // complémentaire et en similaire (il n'apparaît alors que dans « Complétez
-    // avec »). Brouillons/dépubliés absents (la Storefront API ne renvoie que les
-    // produits actifs — c'est voulu).
-    const seen = new Set([node.id]);
-    const toCards = (mf) => (mf?.references?.nodes || []).map(mapProductRef)
-      .filter(r => r && r.image && !seen.has(r.id) && (seen.add(r.id), true));
-    product.complementary = toCards(node.complementary);
-    product.related       = toCards(node.related);
+    const toCards = nodes => (nodes || []).map(mapProductRef).filter(Boolean);
+    let catalog = [], recommendationContext;
+    try {
+      const index = await getCatalogIndex();
+      catalog = index.products.map(entry => entry.card);
+      recommendationContext = buildRecommendationContext(catalog);
+    }
+    catch (error) { console.warn('[product-recommendations] index indisponible', error.message); }
+    const recommendations = recommendProducts({
+      product,
+      catalog,
+      curatedComplementary: toCards(node.complementary?.references?.nodes),
+      curatedRelated: toCards(node.related?.references?.nodes),
+      automaticComplementary: toCards(data.automaticComplementary),
+      automaticRelated: toCards(data.automaticRelated),
+      context: recommendationContext,
+      limit: 4,
+    });
+    product.complementary = recommendations.withPurchase;
+    product.related = recommendations.completePurchase;
     return product;
   });
 }
