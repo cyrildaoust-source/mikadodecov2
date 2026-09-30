@@ -59,10 +59,16 @@ test('compléter une table compose une scène variée au lieu d’aligner les as
     searched: [bench, chair, armchair],
     scene: {
       seating: [unrelated],
-      dishware: [card('plate', { name: 'Assiette Kastehelmi', brand: 'Iittala', productType: 'Assiette' })],
+      dishware: [
+        card('bowl', { name: 'Bol chromé', brand: 'Pols Potten', productType: 'Bol' }),
+        card('plate', { name: 'Assiette Kastehelmi', brand: 'Iittala', productType: 'Assiette' }),
+      ],
       drinkware: [card('glass', { name: 'Verre à eau Ripple', brand: 'Ferm Living', productType: 'Verre à eau' })],
       textiles: [card('placemat', { name: 'Set de table Basics', brand: 'Fermob', productType: 'Set de table', tags: ['exterieur'] })],
-      lighting: [card('lamp', { name: 'Lampe baladeuse Balad', brand: 'Fermob', productType: 'Lampe baladeuse', tags: ['exterieur'] })],
+      lighting: [
+        card('lamp-base', { name: 'Pied Déporté Balad', brand: 'Fermob', productType: 'Pied de lampe', tags: ['exterieur'] }),
+        card('lamp', { name: 'Lampe baladeuse Balad', brand: 'Fermob', productType: 'Lampe baladeuse', tags: ['exterieur'] }),
+      ],
     },
   });
   assert.deepEqual(selected.complementary.map(item => item.id), ['chair', 'armchair', 'plate', 'glass', 'placemat', 'lamp']);
