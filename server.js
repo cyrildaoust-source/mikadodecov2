@@ -90,6 +90,8 @@ const CAMPAIGN_COLLECTIONS = {
     description: 'Du 1er octobre 2026 au 31 janvier 2027, pour l’achat d’un fauteuil Vitra Grand Relax, Repos ou Grand Repos dans une configuration participante, l’Ottoman ou la Panchina assorti(e) est offert(e) dans la même configuration que le fauteuil. Pour certaines configurations commandées en Europe avant le 27 novembre 2026, une livraison avant Noël est probablement possible, sous réserve de confirmation au moment de la commande. Offre réservée au client final, valable pendant la période de campagne auprès des revendeurs participants et selon les configurations proposées.',
     image: 'https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/hero.webp?v=1790627815',
     imageAlt: 'Vitra Home Stories for Winter — Grand Relax et Ottoman assorti',
+    // Modèles, prix et valeurs offertes : relus dans Shopify par scripts/build-home-stories-offer.mjs.
+    offer: require('./data/campaigns/vitra-home-stories-for-winter.json'),
   },
 };
 
@@ -792,8 +794,10 @@ app.get('/collections/:handle', async (req, res) => {
     html = brandBanner(injectCollectionHero(html, collectionHero), handle);
     html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
     if (campaign) {
-      const terms = `<section class="section wrap" aria-labelledby="campaign-terms-title"><h2 class="serif catalogue-head" id="campaign-terms-title">Conditions de l’offre</h2><p>${ogEscape(campaign.description)}</p></section>`;
-      html = html.replace('<div class="wrap" data-designer-hero></div>', terms + '<div class="wrap" data-designer-hero></div>');
+      const terms = campaign.offer
+        ? (await import('./v3/campaign-offer-view.mjs')).campaignOfferHTML(campaign.offer)
+        : `<section class="section wrap" aria-labelledby="campaign-terms-title"><h2 class="serif catalogue-head" id="campaign-terms-title">Conditions de l’offre</h2><p>${ogEscape(campaign.description)}</p></section>`;
+      html = html.replace('<div class="wrap" data-designer-hero></div>', () => terms + '<div class="wrap" data-designer-hero></div>');
     }
     if (brand || campaign) {
       const context = { handle, collectionName, title: name, description: bodyDescription };

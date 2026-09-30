@@ -1,0 +1,457 @@
+{
+  "_note": "Généré depuis Shopify par scripts/build-home-stories-offer.mjs : ensembles de la collection et remises automatiques programmées. Prix TTC ; le prix du fauteuil est le prix de l’ensemble moins la valeur du repose-pieds offert.",
+  "generatedAt": "2026-09-30",
+  "startsAt": "2026-09-30T22:00:00Z",
+  "endsAt": "2027-01-31T23:00:00Z",
+  "christmasOrderBy": "2026-11-27",
+  "models": [
+    {
+      "name": "Grand Relax",
+      "fabrics": [
+        {
+          "name": "Hola",
+          "chair": 5480,
+          "colors": 11,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1790,
+              "handle": "fauteuil-grand-relax-hola-ottoman"
+            }
+          ]
+        },
+        {
+          "name": "Corsaro",
+          "chair": 5700,
+          "colors": 13,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1910,
+              "handle": "fauteuil-grand-relax-corsaro-ottoman"
+            }
+          ]
+        },
+        {
+          "name": "Cosy 2",
+          "chair": 5700,
+          "colors": 15,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1910,
+              "handle": "fauteuil-grand-relax-cosy-2-ottoman"
+            }
+          ]
+        },
+        {
+          "name": "Dumet",
+          "chair": 5700,
+          "colors": 20,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1910,
+              "handle": "fauteuil-grand-relax-dumet-ottoman"
+            }
+          ]
+        },
+        {
+          "name": "Nubia",
+          "chair": 5900,
+          "colors": 11,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 2010,
+              "handle": "fauteuil-grand-relax-nubia-ottoman"
+            }
+          ]
+        },
+        {
+          "name": "Cuir Premium F",
+          "chair": 7570,
+          "colors": 22,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 2750,
+              "handle": "fauteuil-grand-relax-cuir-premium-f-ottoman"
+            }
+          ]
+        }
+      ],
+      "bases": [
+        "Aluminium poli",
+        "Noir époxy"
+      ],
+      "backLeathers": [
+        "Chocolat",
+        "Cognac foncé",
+        "Gris umbra",
+        "Nero",
+        "Sable"
+      ]
+    },
+    {
+      "name": "Repos",
+      "fabrics": [
+        {
+          "name": "Hola",
+          "chair": 4590,
+          "colors": 11,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1720,
+              "handle": "fauteuil-repos-hola-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1080,
+              "handle": "fauteuil-repos-hola-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Volo",
+          "chair": 4700,
+          "colors": 16,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1780,
+              "handle": "fauteuil-repos-volo-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1100,
+              "handle": "fauteuil-repos-volo-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cosy 2",
+          "chair": 4810,
+          "colors": 15,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1790,
+              "handle": "fauteuil-repos-cosy-2-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1120,
+              "handle": "fauteuil-repos-cosy-2-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Dumet",
+          "chair": 4810,
+          "colors": 20,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1790,
+              "handle": "fauteuil-repos-dumet-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1120,
+              "handle": "fauteuil-repos-dumet-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Nubia",
+          "chair": 5010,
+          "colors": 11,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1850,
+              "handle": "fauteuil-repos-nubia-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1150,
+              "handle": "fauteuil-repos-nubia-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cento",
+          "chair": 5310,
+          "colors": 14,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1920,
+              "handle": "fauteuil-repos-cento-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1250,
+              "handle": "fauteuil-repos-cento-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Credo",
+          "chair": 5310,
+          "colors": 22,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1920,
+              "handle": "fauteuil-repos-credo-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1250,
+              "handle": "fauteuil-repos-credo-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cuir",
+          "chair": 5580,
+          "colors": 16,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 2050,
+              "handle": "fauteuil-repos-cuir-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1250,
+              "handle": "fauteuil-repos-cuir-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cuir Premium F",
+          "chair": 6830,
+          "colors": 22,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 2630,
+              "handle": "fauteuil-repos-cuir-premium-f-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1470,
+              "handle": "fauteuil-repos-cuir-premium-f-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cuir Natural F",
+          "chair": 8720,
+          "colors": 4,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 3340,
+              "handle": "fauteuil-repos-cuir-natural-f-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1790,
+              "handle": "fauteuil-repos-cuir-natural-f-panchina"
+            }
+          ]
+        }
+      ],
+      "bases": [
+        "Aluminium poli",
+        "Noir époxy"
+      ],
+      "backLeathers": []
+    },
+    {
+      "name": "Grand Repos",
+      "fabrics": [
+        {
+          "name": "Hola",
+          "chair": 5020,
+          "colors": 11,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1720,
+              "handle": "fauteuil-grand-repos-hola-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1080,
+              "handle": "fauteuil-grand-repos-hola-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Volo",
+          "chair": 5160,
+          "colors": 16,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1780,
+              "handle": "fauteuil-grand-repos-volo-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1100,
+              "handle": "fauteuil-grand-repos-volo-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cosy 2",
+          "chair": 5310,
+          "colors": 15,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1790,
+              "handle": "fauteuil-grand-repos-cosy-2-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1120,
+              "handle": "fauteuil-grand-repos-cosy-2-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Dumet",
+          "chair": 5310,
+          "colors": 20,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1790,
+              "handle": "fauteuil-grand-repos-dumet-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1120,
+              "handle": "fauteuil-grand-repos-dumet-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Nubia",
+          "chair": 5530,
+          "colors": 11,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1850,
+              "handle": "fauteuil-grand-repos-nubia-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1150,
+              "handle": "fauteuil-grand-repos-nubia-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cento",
+          "chair": 5820,
+          "colors": 14,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1920,
+              "handle": "fauteuil-grand-repos-cento-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1250,
+              "handle": "fauteuil-grand-repos-cento-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Credo",
+          "chair": 5820,
+          "colors": 22,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 1920,
+              "handle": "fauteuil-grand-repos-credo-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1250,
+              "handle": "fauteuil-grand-repos-credo-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cuir",
+          "chair": 6110,
+          "colors": 16,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 2050,
+              "handle": "fauteuil-grand-repos-cuir-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1250,
+              "handle": "fauteuil-grand-repos-cuir-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cuir Premium F",
+          "chair": 7510,
+          "colors": 22,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 2630,
+              "handle": "fauteuil-grand-repos-cuir-premium-f-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1470,
+              "handle": "fauteuil-grand-repos-cuir-premium-f-panchina"
+            }
+          ]
+        },
+        {
+          "name": "Cuir Natural F",
+          "chair": 9570,
+          "colors": 4,
+          "offered": [
+            {
+              "footstool": "Ottoman",
+              "value": 3340,
+              "handle": "fauteuil-grand-repos-cuir-natural-f-ottoman"
+            },
+            {
+              "footstool": "Panchina",
+              "value": 1790,
+              "handle": "fauteuil-grand-repos-cuir-natural-f-panchina"
+            }
+          ]
+        }
+      ],
+      "bases": [
+        "Aluminium poli",
+        "Noir époxy"
+      ],
+      "backLeathers": []
+    }
+  ]
+}
