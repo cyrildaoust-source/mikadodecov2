@@ -50,12 +50,12 @@
     </div>
 
     <section class="section" data-complementary-wrap style="display:none">
-      <h2 class="catalogue-head serif">Complétez avec</h2>
+      <h2 class="catalogue-head serif">Ce qui va avec votre achat</h2>
       <div class="pgrid" data-complementary></div>
     </section>
 
     <section class="section" data-related-wrap style="display:none">
-      <h2 class="catalogue-head serif">Vous aimerez aussi</h2>
+      <h2 class="catalogue-head serif">Pour compléter votre achat</h2>
       <div class="pgrid" data-related></div>
     </section>
   </main>
@@ -715,11 +715,9 @@
         mobile.addEventListener("change", update);
       }
 
-      // Recommandations produit — pilotées par les métafields Search & Discovery
-      // de Shopify (complementary_products / related_products), lues dynamiquement
-      // via /api/product/:handle. RIEN n'est hardcodé : les relations vivent côté
-      // Shopify et s'enrichissent en continu. Chaque bloc reste masqué si sa liste
-      // est vide. productCard() produit des liens /produit.html?handle= (DA).
+      // Ventes associées préparées côté serveur : curation Shopify, gamme/modèle,
+      // relation fonctionnelle sûre puis repli Search & Discovery. Chaque bloc
+      // reste masqué si sa liste est vide et réutilise la carte commune.
       const renderRecos = (items, wrapSel, gridSel) => {
         const list = Array.isArray(items) ? items.filter((x) => x && x.image) : [];
         if (!list.length) return;

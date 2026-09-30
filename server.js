@@ -1,8 +1,9 @@
 require('dotenv').config();
 const { shopifyFetch, SHOPIFY_STORE } = require('./lib/shopify/client');
 const { mapProduct, mapProductRef, shopifyResize, CARD_IMAGE_WIDTH } = require('./lib/shopify/product-mapper');
+const { selectRangeCollections, recommendationSearchTerm, selectProductRecommendations } = require('./lib/product-recommendations');
 const { getSearchPage, clearSearchCache } = require('./lib/services/search');
-const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
+const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, PRODUCT_RECOMMENDATIONS_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
 const { normalizeItems, getDeliveryEstimate, realProject } = require('./lib/delivery-estimate');
 const express = require('express');
 const { selectInitialVariant } = require('./v3/product-variant');
@@ -2076,17 +2077,42 @@ async function getProductByHandle(handle) {
     const node = data.product;
     if (!node) return null;
     const product = mapProduct(node, { full: true });
-    // Recommandations Search & Discovery (métafields list.product_reference)
-    // mappées dans la forme de carte du site. Écarte : entrées sans image, la
-    // self-référence, et les doublons — y compris un produit listé À LA FOIS en
-    // complémentaire et en similaire (il n'apparaît alors que dans « Complétez
-    // avec »). Brouillons/dépubliés absents (la Storefront API ne renvoie que les
-    // produits actifs — c'est voulu).
-    const seen = new Set([node.id]);
-    const toCards = (mf) => (mf?.references?.nodes || []).map(mapProductRef)
-      .filter(r => r && r.image && !seen.has(r.id) && (seen.add(r.id), true));
-    product.complementary = toCards(node.complementary);
-    product.related       = toCards(node.related);
+    const toCards = nodes => (nodes || []).map(mapProductRef).filter(Boolean);
+    const curatedComplementary = toCards(node.complementary?.references?.nodes);
+    const curatedRelated = toCards(node.related?.references?.nodes);
+    const recommendationProduct = {
+      ...product,
+      collectionRefs: (node.collections?.edges || []).map(edge => edge?.node).filter(Boolean),
+    };
+    let candidates = {};
+    try {
+      const ranges = selectRangeCollections(recommendationProduct);
+      const recos = await shopifyFetch(PRODUCT_RECOMMENDATIONS_QUERY, {
+        id: node.id,
+        query: recommendationSearchTerm(recommendationProduct) || '__mikado_aucune_gamme__',
+        collectionIds: ranges.map(collection => collection.id),
+      });
+      candidates = {
+        automaticComplementary: toCards(recos.complementary),
+        automaticRelated: toCards(recos.related),
+        range: (recos.rangeCollections || []).flatMap(collection =>
+          toCards(collection?.products?.nodes).map(card => ({
+            ...card,
+            recommendationCollectionIds: [collection.id],
+          }))),
+        searched: toCards(recos.search?.nodes),
+      };
+    } catch (error) {
+      // La fiche et les choix manuels restent disponibles si le moteur de repli
+      // Shopify est momentanément indisponible ou non pris en charge.
+      console.warn('[product-recommendations]', h, error.message);
+    }
+    ({ complementary: product.complementary, related: product.related } = selectProductRecommendations({
+      product: recommendationProduct,
+      curatedComplementary,
+      curatedRelated,
+      ...candidates,
+    }));
     return product;
   });
 }
