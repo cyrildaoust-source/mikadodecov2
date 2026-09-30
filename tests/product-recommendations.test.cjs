@@ -19,9 +19,9 @@ const card = (id, overrides = {}) => ({
 test('les deux rubriques gardent la formulation éditoriale validée', () => {
   assert.equal(MAX_RECOMMENDATIONS, 4);
   const html = readFileSync(require.resolve('../v3/produit.html'), 'utf8');
-  assert.match(html, />Pour compléter vos achats<\/h2>/);
-  assert.match(html, />Dans la même famille<\/h2>/);
-  assert.doesNotMatch(html, /Ce qui va avec votre achat|Vous aimerez aussi|De la même famille/);
+  assert.match(html, />Complétez avec<\/h2>/);
+  assert.match(html, />Vous aimerez aussi<\/h2>/);
+  assert.doesNotMatch(html, /Ce qui va avec votre achat|Pour compléter vos achats|Dans la même famille|De la même famille/);
 });
 
 test('la gamme vient d’une collection ou d’un tag de modèle, jamais de la marque ou de la famille', () => {

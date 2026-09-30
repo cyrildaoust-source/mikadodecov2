@@ -2,10 +2,10 @@
 
 Les deux rubriques ont des rôles distincts :
 
-- **Pour compléter vos achats** compose l'usage du produit : accessoire dédié,
+- **Complétez avec** compose l'usage du produit : accessoire dédié,
   assise autour d'une table, art de la table, textile et, pour une table
   extérieure, éclairage nomade.
-- **Dans la même famille** rassemble les autres pièces de la gamme ou du même
+- **Vous aimerez aussi** rassemble les autres pièces de la gamme ou du même
   modèle. Ce n'est pas une seconde liste d'accessoires génériques.
 
 Les cartes restent celles du composant commun `v3/product-card.mjs`. Chaque
