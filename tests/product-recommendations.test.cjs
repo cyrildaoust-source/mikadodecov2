@@ -20,6 +20,7 @@ test('la gamme vient d’une collection ou d’un tag de modèle, jamais de la m
   assert.deepEqual(identityTerms(product), ['palissade']);
   assert.deepEqual(identityTerms({ name: 'Lampe portable Flowerpot VP9', brand: '&Tradition', productType: 'Lampe de table', tags: ['flowerpot', 'vp9', 'lampe-portable'] }), ['flowerpot', 'vp9']);
   assert.deepEqual(identityTerms({ name: 'Chaise CH24 Soft', brand: 'Carl Hansen & Søn', productType: 'Chaise', tags: ['ch24-soft', 'chaise'] }), ['ch24 soft', 'ch24']);
+  assert.deepEqual(identityTerms({ name: 'Banc à manger Toní Bankski', brand: 'Fatboy', productType: 'Banc', tags: ['toni-bankski'] }), ['toni bankski', 'toni', 'bankski']);
 });
 
 test('une relation fonctionnelle automatique exige aussi la même gamme', () => {
@@ -27,6 +28,7 @@ test('une relation fonctionnelle automatique exige aussi la même gamme', () => 
   const generic = card('generic', { name: 'Coussin décoratif', productType: 'Coussin' });
   assert.equal(functionalCompanion(product, cushion, new Set([collection.id])), true);
   assert.equal(functionalCompanion(product, generic, new Set([collection.id])), false);
+  assert.equal(functionalCompanion({ ...product, productType: 'Table', name: 'Table Aalto 90A', tags: ['aalto'] }, card('extendable', { name: 'Table à rallonge Aalto 97', productType: 'Table', tags: ['aalto'] }), new Set()), false);
 });
 
 test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique', () => {
@@ -35,18 +37,19 @@ test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique',
   const cushion = card('cushion', { name: 'Coussin Palissade', productType: 'Coussin', recommendationCollectionIds: [collection.id] });
   const table = card('table', { name: 'Table Palissade', recommendationCollectionIds: [collection.id] });
   const autoComp = card('auto-comp');
+  const autoRange = card('auto-range', { name: 'Fauteuil Palissade', tags: ['palissade'] });
   const autoRelated = card('auto-related');
   const result = selectProductRecommendations({
     product,
     curatedComplementary: [curatedComp], curatedRelated: [curatedRelated],
     range: [cushion, table, curatedRelated],
-    automaticComplementary: [autoComp], automaticRelated: [autoRelated],
+    automaticComplementary: [autoComp], automaticRelated: [autoRelated, autoRange],
   });
   assert.deepEqual(result.complementary.map(p => [p.id, p.recommendationSource]), [
     ['curated-comp', 'curated'], ['cushion', 'range-functional'], ['auto-comp', 'shopify-complementary'],
   ]);
   assert.deepEqual(result.related.map(p => [p.id, p.recommendationSource]), [
-    ['curated-related', 'curated'], ['table', 'same-range'], ['auto-related', 'shopify-related'],
+    ['curated-related', 'curated'], ['table', 'same-range'], ['auto-range', 'shopify-same-range'], ['auto-related', 'shopify-related'],
   ]);
 });
 

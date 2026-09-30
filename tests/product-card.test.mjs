@@ -36,3 +36,8 @@ test('hover photos fill the square product card without letterbox bands',()=>{
   assert.doesNotMatch(css,/\.pcard__media img\.alt\s*\{[^}]*object-fit:\s*contain;/s);
   assert.match(css,/\.pcard__media img\s*\{[^}]*object-fit:\s*cover;/s);
 });
+
+test('mobile product card actions keep a 44 px touch target',()=>{
+  const css=readFileSync(new URL('../v3/styles.css',import.meta.url),'utf8');
+  assert.match(css,/@media\s*\(max-width:\s*760px\)[\s\S]*?\.pcard__cta\s*\{[^}]*min-height:\s*44px;/s);
+});
