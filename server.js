@@ -97,7 +97,6 @@ const CAMPAIGN_COLLECTIONS = {
       'La valeur du repose-pieds est déduite automatiquement dans le panier.',
       'Offre non cumulable avec une autre remise.',
       'Pour une commande passée avant le 27 novembre 2026, une livraison avant Noël est probablement possible pour certaines configurations, sous réserve de confirmation.',
-      'Offre réservée au client final, auprès des revendeurs participants.',
     ],
   },
 };
