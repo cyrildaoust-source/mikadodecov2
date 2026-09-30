@@ -40,8 +40,8 @@ Mesure en lecture seule du 30 septembre 2026 sur le canal Headless :
 
 - 3 649 produits actifs et publiés ;
 - 69 produits couverts par une curation Search & Discovery existante ;
-- 3 649 produits couverts après les règles et le repli automatique Shopify,
-  soit 100 % du catalogue mesuré ;
+- 3 649 produits couverts par les règles déterministes, soit 100 % du catalogue
+  mesuré ; le repli automatique Shopify reste disponible ensuite ;
 - 152 tables de repas sur 152 disposent d'une composition de scène complète.
 
 Les scripts `audit-product-recommendations.mjs` et
