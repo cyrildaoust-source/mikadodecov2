@@ -1138,6 +1138,10 @@ function injectDesignersIndex(html) {
   const featuredSlugs = new Set(featured.map((d) => d.slug));
   const featHtml = featured.map(featuredCardHTML).join('');
 
+  // Deux créateurs de même nom de famille (Aino et Alvar Aalto) : nom complet pour les distinguer.
+  const keyCount = {};
+  for (const d of all) { const k = (d.sortKey || d.name).toLowerCase(); keyCount[k] = (keyCount[k] || 0) + 1; }
+  const azLabel = (d) => keyCount[(d.sortKey || d.name).toLowerCase()] > 1 ? d.name : (d.sortKey || d.name);
   const groups = {};
   for (const d of all) { const k = bucketOf(d); (groups[k] = groups[k] || []).push(d); }
   const bar = ALPHA.map((L) => groups[L]
@@ -1149,7 +1153,7 @@ function injectDesignersIndex(html) {
     const anchor = L === '#' ? 'letter-num' : 'letter-' + L;
     const names = groups[L].map((d) => {
       const id = featuredSlugs.has(d.slug) ? '' : ' id="' + esc(d.slug) + '"';
-      return '<li class="az-name"' + id + '><a href="/produits.html?designer=' + encodeURIComponent(d.slug) + '">' + esc(d.sortKey || d.name) + '</a></li>';
+      return '<li class="az-name"' + id + '><a href="/produits.html?designer=' + encodeURIComponent(d.slug) + '">' + esc(azLabel(d)) + '</a></li>';
     }).join('');
     return '<div class="az-group"><h3 class="az-letter" id="' + anchor + '">' + L + '</h3><ul class="az-names">' + names + '</ul></div>';
   }).join('');

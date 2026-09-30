@@ -176,6 +176,10 @@
 
         // 2) A-Z index — ALL visible designers (featured included so the
         //    directory is complete). Group by bucket letter.
+        // Two designers sharing a family name (Aino and Alvar Aalto): full name to tell them apart.
+        const keyCount = {};
+        for (const d of all) { const k = (d.sortKey || d.name).toLowerCase(); keyCount[k] = (keyCount[k] || 0) + 1; }
+        const azLabel = (d) => keyCount[(d.sortKey || d.name).toLowerCase()] > 1 ? d.name : (d.sortKey || d.name);
         const groups = {};
         for (const d of all) (groups[bucketOf(d)] ||= []).push(d);
         const letters = Object.keys(groups).sort((a, b) => {
@@ -197,7 +201,7 @@
           const anchor = L === "#" ? "letter-num" : `letter-${L}`;
           const names = groups[L].map((d) => {
             const id = featuredSlugs.has(d.slug) ? "" : ` id="${escapeHtml(d.slug)}"`;
-            const label = escapeHtml(d.sortKey || d.name);
+            const label = escapeHtml(azLabel(d));
             return `<li class="az-name"${id}><a href="/produits.html?designer=${encodeURIComponent(d.slug)}">${label}</a></li>`;
           }).join("");
           return `<div class="az-group">`

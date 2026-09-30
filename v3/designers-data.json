@@ -132,7 +132,7 @@
       ],
       "bio": "",
       "photo": "/images/designers/lucy-d-karin-santorso-barbara-ambrosz.jpg",
-      "sortKey": "Ambrosz"
+      "sortKey": "LUCY.D"
     },
     {
       "name": "Michael Anastassiades",
@@ -159,7 +159,7 @@
       ],
       "bio": "Anderssen & Voll est un studio de design norvégien fondé à Oslo en 2009 par Torbjørn Anderssen (né en 1976 à Elverum) et Espen Voll (né en 1965 à Trondheim). Tous deux formés dans les écoles d'art norvégiennes, à Bergen et à Oslo, ils s'étaient d'abord fait connaître au sein du collectif Norway Says, cofondé en 2000, qui reçut le prix Torsten et Wanja Söderberg en 2007. Leur pratique couvre le mobilier, le luminaire, le textile et les arts de la table. Ils comptent parmi les principaux collaborateurs de Muuto, pour qui ils ont dessiné plusieurs familles de canapés, dont Oslo, Outline et Rest, et travaillent aussi pour Magis, Foscarini et &Tradition.",
       "photo": "/images/designers/anderssen-voll.jpg",
-      "sortKey": "Anderssen",
+      "sortKey": "Anderssen & Voll",
       "featured": true
     },
     {
@@ -382,7 +382,7 @@
       ],
       "bio": "Edward Barber (né à Shrewsbury en 1969) et Jay Osgerby (né à Oxford en 1969) forment un duo de designers britanniques. Ils se rencontrent au Royal College of Art de Londres, où ils étudient tous deux l'architecture, et fondent leur studio en 1996. Leur travail, ancré dans une culture architecturale, couvre le mobilier, le luminaire, le produit et l'installation. Pour Vitra, ils signent la chaise Tip Ton (2011), dont le piètement luge incliné autorise une assise basculée vers l'avant, puis le fauteuil de bureau Pacific (2016). Parmi leurs premières pièces figure la table Loop (1996, éditée par Isokon, puis Cappellini). On leur doit aussi la torche des Jeux olympiques de Londres 2012. Nommés Royal Designers for Industry en 2007, ils sont faits Officiers de l'Ordre de l'Empire britannique (OBE) en 2013.",
       "photo": "/images/designers/edward-barber-jay-osgerby.jpg",
-      "sortKey": "Barber"
+      "sortKey": "Barber & Osgerby"
     },
     {
       "name": "Thomas Bastide",
@@ -559,7 +559,7 @@
       ],
       "bio": "Gabriele Chiave et Lorenza Bozzoli forment un duo de designers italiens. Né à Metz en 1978 de parents diplomates, Gabriele Chiave a étudié le design à l'IED de Milan, s'est formé au studio de Marc Sadler et est aujourd'hui directeur créatif chez Marcel Wanders. Lorenza Bozzoli, née à Milan, a étudié à l'Académie des beaux-arts de Brera et a d'abord travaillé dans la mode avant de se tourner vers le design, signant son premier projet pour Alessi en 2001. Pour Alessi, le duo a notamment conçu la boîte à pilules Chestnut et la râpe à fromage Cheese Please.",
       "photo": "/images/designers/gabriele-chiave-lorenza-bozzoli.jpg",
-      "sortKey": "Bozzoli"
+      "sortKey": "Chiave & Bozzoli"
     },
     {
       "name": "Cees Braakman",
@@ -690,7 +690,7 @@
       ],
       "bio": "Carolina Castiglioni est une créatrice de mode et directrice artistique italienne, fondatrice du label milanais Plan C. Fille de Consuelo Castiglioni, créatrice de Marni, elle grandit au sein de la maison familiale où elle occupe le poste de directrice des projets spéciaux. En 2018, après le départ de la famille de Marni, elle lance Plan C, une griffe de prêt-à-porter au vestiaire éclectique, marqué par des associations de couleurs audacieuses et un goût pour les formes et les matières. C'est ce même regard qui la conduit vers les arts de la table : en 2025, elle signe avec l'éditeur belge Serax sa première collection d'objets, Silos — vases, bougeoirs et bougies parfumées en porcelaine aux teintes brun, bleu et orange, dont les volumes géométriques évoquent l'esprit du design Memphis des années 1980.",
       "photo": "/images/designers/plan-c.jpg",
-      "sortKey": "Castiglioni Carolina"
+      "sortKey": "Castiglioni"
     },
     {
       "name": "Cristina Celestino",
@@ -1301,7 +1301,7 @@
       ],
       "bio": "Goula/Figuera est un studio de design de produit et de direction artistique fondé à Barcelone en 2012 par Álvaro Goula, né à Barcelone en 1989, et Pablo Figuera, né à Madrid en 1988. Tous deux sont diplômés en design de l'école Elisava de Barcelone et titulaires d'un Bachelor of Arts de l'université de Southampton. Depuis 2013, ils associent le travail du studio à l'enseignement universitaire et lancent en 2015 Home Adventures, une marque consacrée à leurs projets expérimentaux, dont la collection de luminaires modulaires Lines & Dots. Leur travail a été distingué notamment par le Design Plus (2012), le prix Injuve (2012) et le Lexus Design Award (2013). Pour Fermob, ils ont dessiné la collection Salsa, une table basse de forme oblongue à corbeille de rangement intégrée et un guéridon assorti.",
       "photo": "/images/designers/goula-figuera.jpg",
-      "sortKey": "Figuera"
+      "sortKey": "Goula & Figuera"
     },
     {
       "name": "Henk Fillekes",
@@ -1379,7 +1379,7 @@
       ],
       "bio": "Hannes & Fritz est un duo de designers germano-suisse formé par Johannes Breuer et Fritz Gräber, qui se sont rencontrés pendant leur master à l'ECAL (École cantonale d'art de Lausanne). Le studio, fondé en 2019, travaille à distance entre Stuttgart et Zurich et conçoit du mobilier, du luminaire et des objets pour des éditeurs internationaux. Pour HAY, ils ont conçu la collection Weekday, des bancs et tables d'extérieur en pin massif.",
       "photo": "/images/designers/hannes-fritz.jpg",
-      "sortKey": "Fritz"
+      "sortKey": "Hannes & Fritz"
     },
     {
       "name": "Rikke Frost",
@@ -1943,7 +1943,7 @@
       ],
       "bio": "Franco Sargiani, architecte italien né à Modène en 1940, et Eija Helander, designer finlandaise née à Lahti en 1944, forment un duo de création installé à Milan. Helander a d'abord collaboré avec Marimekko en Finlande avant de s'établir en Italie en 1969 pour se consacrer au design industriel. Ensemble, ils ont conçu pour Alessi l'image coordonnée et le packaging de la marque, ainsi que le système d'objets modulaires Programma 8, qu'Alessandro Mendini a qualifié de système d'objets ménagers le plus abouti jamais créé au niveau international.",
       "photo": "/images/designers/franco-sargiani-eija-helander.jpg",
-      "sortKey": "Helander"
+      "sortKey": "Sargiani & Helander"
     },
     {
       "name": "Karoliina Hellberg",
@@ -1969,7 +1969,7 @@
       ],
       "bio": "Wouters & Hendrix est une maison de joaillerie anversoise fondée en 1984 par Katrin Wouters et Karen Hendrix. Toutes deux formées en orfèvrerie à l'Académie royale des beaux-arts d'Anvers, elles y côtoient la génération des Six d'Anvers — dont Dries Van Noten et Ann Demeulemeester — et réalisent des bijoux et accessoires pour leurs défilés. Le duo développe une joaillerie d'auteur, faite main dans son atelier anversois et teintée de surréalisme, jouant d'associations de matériaux et de techniques inattendues. En 2024, pour ses quarante ans, la maison étend son langage à l'art de la table avec « Les Objets Mouleversants », une ligne de « bijoux pour la maison » éditée par Serax : vaisselle, verres et objets décoratifs qui prolongent l'esprit de ses créations.",
       "photo": "/images/designers/wouters-hendrix.jpg",
-      "sortKey": "Hendrix"
+      "sortKey": "Wouters & Hendrix"
     },
     {
       "name": "Frits Henningsen",
@@ -2672,7 +2672,7 @@
       ],
       "bio": "Tristan Lohner est un designer produit français. Formé d'abord à l'ébénisterie (Brevet des Métiers d'Art auprès de Bernard Daude, qui travailla pour Pierre Paulin au Mobilier national), il rejoint ensuite l'École des Arts décoratifs de Paris, où il étudie le design produit sous la direction de Jean-Marie Massaud. Il dirige par ailleurs le RBC Design Center à Montpellier, concept store imaginé par Jean Nouvel. Son travail privilégie la justesse, la sobriété et le lien sensible entre l'objet et son usager. Collaborateur régulier de Fermob, il y signe la lampe nomade Balad (Étoile de l'Observeur du Design 2017), la table Bebop, le luminaire MOOON! et la chaise Studie, distinguée du Red Dot « Best of the Best » en 2022. Pour Hartô, il a dessiné la lampe de table Nina.",
       "photo": "/images/designers/tristan-lohner.jpg",
-      "sortKey": "Lohner Tristan"
+      "sortKey": "Lohner"
     },
     {
       "name": "Forti e Di Loreto",
@@ -2725,7 +2725,7 @@
       ],
       "bio": "Michel Boucquillon (né en Belgique en 1962, diplômé en architecture de Saint-Luc à Bruxelles en 1986) et Donia Maaoui (née en Belgique en 1967, diplômée en architecture de La Cambre à Bruxelles en 1993) forment un duo d'architectes et designers installé depuis 2000 à Lucques, en Toscane. Donia Maaoui est aussi sculptrice et peintre. Pour Alessi, ils ont conçu la famille Bark, en acier perforé inspiré de l'écorce des arbres, dont la corbeille Vimini, le panier Barknest et la cafetière Barkoffee.",
       "photo": "/images/designers/boucquillon-maaoui.jpg",
-      "sortKey": "Maaoui"
+      "sortKey": "Boucquillon & Maaoui"
     },
     {
       "name": "Nel Maertens",
@@ -2853,7 +2853,7 @@
       ],
       "bio": "Anselmo Vitale (Milan, 1929, mort en 1978) et Carlo Mazzeri (Oleggio, 1927) sont deux designers et architectes italiens diplômés de l'Istituto Universitario di Architettura de Venise, où ils se sont rencontrés. Ils collaborent à partir de 1961 pour Alessi, dessinant ensemble une collection complète d'objets en acier destinée à l'hôtellerie et la restauration. Parmi leurs pièces éditées par Alessi figurent la mesure à cocktail 865 et un seau à glace isotherme, primé au concours Macef en 1971. Carlo Mazzeri est par ailleurs connu pour le shaker 870, dessiné en 1957 avec Luigi Massoni.",
       "photo": "/images/designers/anselmo-vitale-carlo-mazzeri.jpg",
-      "sortKey": "Mazzeri"
+      "sortKey": "Vitale & Mazzeri"
     },
     {
       "name": "Carlo Mazzeri",
@@ -2982,7 +2982,7 @@
       ],
       "bio": "Hvidt & Mølgaard est le duo danois formé par Peter Hvidt (1916-1986) et Orla Mølgaard-Nielsen (1907-1993). Les deux hommes se rencontrent à l'école d'ébénisterie de la Kunsthåndværkerskolen, où Hvidt est d'abord l'élève de Mølgaard-Nielsen avant d'y enseigner à ses côtés. Lauréats en 1943 d'un concours de l'association suédoise Slöjdföreningen, ils créent en 1944 la série Portex, en hêtre, livrée en éléments à assembler pour l'exportation. Leur fauteuil AX (1950), en bois lamellé-collé, peut être fabriqué en série. &Tradition réédite notamment la lampe Tripod (1953), les chaises Drawn, le fauteuil X et la table Drop Leaf (1956). Leurs pièces figurent dans les collections du MoMA, du Victoria and Albert Museum et du Designmuseum Danmark.",
       "photo": "/images/designers/hvidt-molgaard.jpg",
-      "sortKey": "Mølgaard"
+      "sortKey": "Hvidt & Mølgaard"
     },
     {
       "name": "Bea Mombaers",
@@ -3381,7 +3381,7 @@
       ],
       "bio": "Pagnon & Pelhaître est un duo de designers français formé par Patrick Pagnon et Claude Pelhaître, diplômés de l'École nationale supérieure des Arts décoratifs (ENSAD) de Paris en 1977. Ils participent à la création de la section mobilier de l'ENSAD en 1978, puis fondent leur agence parisienne, Pagnon & Pelhaître Design, en 1979, en orientant leur travail vers le mobilier et l'architecture intérieure. Depuis 2005, ils enseignent à l'ENSAD. Leur écriture privilégie la rigueur, les lignes claires et des formes simples pensées pour dialoguer dans l'espace. Le duo a notamment travaillé pour Cinna, signant First (1983), Straty (1985), Ipso Facto (1999) ou Cineline (2004), ainsi que pour Fermob, pour qui il conçoit la collection d'extérieur Bellevie (banquettes, fauteuils, tables).",
       "photo": "/images/designers/pagnon-et-pelhaitre.jpg",
-      "sortKey": "Pelhaître"
+      "sortKey": "Pagnon & Pelhaître"
     },
     {
       "name": "Daniele Dalla Pellegrina",
@@ -4354,7 +4354,7 @@
       ],
       "bio": "Hortense Pontabry et Valériane Voirin sont les deux créatrices de Miasun, une tente de plage portable. L'idée leur est venue lors de vacances en Australie, alors qu'elles transportaient un parasol classique. Leur abri, monté sur des arceaux pliants en aluminium avec une toile en coton, pèse un peu plus d'un kilo, se monte en 90 secondes environ et offre près de 3 m² d'ombre, de quoi abriter deux adultes et deux enfants. Miasun fait aujourd'hui partie de la collection Fatboy.",
       "photo": "/images/designers/hortense-and-valeriane.jpg",
-      "sortKey": "Valériane"
+      "sortKey": "Hortense & Valériane"
     },
     {
       "name": "De Makers Van",
@@ -4367,7 +4367,7 @@
       ],
       "bio": "DeMakersVan (« Les Faiseurs de ») est un collectif de design néerlandais fondé vers 2005 par les frères jumeaux Jeroen et Joep Verhoeven et par Judith de Graauw, diplômés de la Design Academy Eindhoven. Le studio explore le territoire entre savoir-faire artisanal et procédés industriels de pointe. Il s'est fait connaître par la Cinderella Table de Jeroen Verhoeven (2004), forme générée par ordinateur et assemblée à la main à partir de strates de contreplaqué, conservée notamment au MoMA de New York, au Victoria and Albert Museum de Londres et au Centre Pompidou. La Lace Fence de Joep Verhoeven, qui noue le grillage à la manière de la dentelle, compte parmi ses pièces emblématiques. Pour Fatboy, le collectif a conçu des luminaires d'extérieur, dont la famille Edison (le Petit, le Grand) et le lustre RockCoco.",
       "photo": "/images/designers/de-makers-van.jpg",
-      "sortKey": "Van"
+      "sortKey": "De Makers Van"
     },
     {
       "name": "Roos Van de Velde",
@@ -4407,7 +4407,7 @@
       ],
       "bio": "",
       "photo": "/images/designers/jonas-van-put.jpg",
-      "sortKey": "Van Put Jonas"
+      "sortKey": "Van Put"
     },
     {
       "name": "Antoine Vandewoude",
