@@ -1145,7 +1145,7 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
   .filterbar .cols-btn { padding: 12px; }
   /* Cartes en 2 colonnes : finitions sous le nom, bouton plus compact. */
   .pcard__row { flex-direction: column; align-items: flex-start; gap: 2px; }
-  .pcard__cta { font-size: 13px; line-height: 1.25; padding: 10px 8px; text-wrap: balance; }
+  .pcard__cta { min-height: 44px; font-size: 13px; line-height: 1.25; padding: 10px 8px; text-wrap: balance; }
   /* Petits liens : zone tactile agrandie sans déplacer la mise en page. */
   .breadcrumb a, .footer__bottom nav a { display: inline-block; padding-block: 7px; margin-block: -7px; }
   .pdp__brand { display: inline-block; padding-block: 10px; margin-block: -10px; }
