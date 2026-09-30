@@ -42,6 +42,7 @@ test('la gamme vient d’une collection ou d’un tag de modèle, jamais de la m
   assert.deepEqual(identityTerms({ name: 'Chaise CH24 Soft', brand: 'Carl Hansen & Søn', productType: 'Chaise', tags: ['ch24-soft', 'chaise'] }), ['ch24 soft', 'ch24']);
   assert.deepEqual(identityTerms({ name: 'Banc à manger Toní Bankski', brand: 'Fatboy', productType: 'Banc', tags: ['toni-bankski'] }), ['toni bankski', 'toni', 'bankski']);
   assert.deepEqual(identityTerms({ name: 'Verre à eau Ripple', brand: 'Ferm Living', productType: 'Verre à eau', tags: ['ripple'], collectionRefs: [{ id: 'glasses', handle: 'verres-a-eau', title: 'Verres à eau' }] }), ['ripple']);
+  assert.deepEqual(identityTerms({ name: 'Patins feutre', brand: 'Artek', productType: 'Accessoire', tags: ['artek', 'aalto', 'protection-sol'] }), ['aalto']);
 });
 
 test('une relation fonctionnelle automatique exige aussi la même gamme', () => {
@@ -128,6 +129,9 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
   assert.equal(role({ name: 'Guirlande Hoopik', productType: 'Guirlande' }), 'lamp');
   assert.equal(role({ name: 'Essuie de main', productType: 'Essuie de main' }), 'bath-textile');
   assert.equal(role({ name: 'Arrosoir Antila', productType: 'Arrosoir' }), 'garden-accessory');
+  assert.equal(role({ name: 'Cartes postales', productType: 'Accessoire', tags: ['papeterie'] }), 'desk-space');
+  assert.equal(role({ name: 'Bobèche Nagel', productType: 'Accessoire', tags: ['bobeche'] }), 'candle-holder');
+  assert.equal(role({ name: 'Patins feutre', productType: 'Accessoire', tags: ['protection-sol'] }), 'furniture-care');
   assert.equal(sameUniverse(officeChair, diningChair), true);
   assert.equal(sameUniverse(glass, waterGlass), true);
   assert.equal(sameUniverse(poster, diningChair), false);
