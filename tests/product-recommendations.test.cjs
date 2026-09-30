@@ -19,6 +19,7 @@ test('la gamme vient d’une collection ou d’un tag de modèle, jamais de la m
   assert.deepEqual(selectRangeCollections(product).map(c => c.handle), ['palissade']);
   assert.deepEqual(identityTerms(product), ['palissade']);
   assert.deepEqual(identityTerms({ name: 'Lampe portable Flowerpot VP9', brand: '&Tradition', productType: 'Lampe de table', tags: ['flowerpot', 'vp9', 'lampe-portable'] }), ['flowerpot', 'vp9']);
+  assert.deepEqual(identityTerms({ name: 'Chaise CH24 Soft', brand: 'Carl Hansen & Søn', productType: 'Chaise', tags: ['ch24-soft', 'chaise'] }), ['ch24 soft', 'ch24']);
 });
 
 test('une relation fonctionnelle automatique exige aussi la même gamme', () => {
