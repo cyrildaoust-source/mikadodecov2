@@ -4,7 +4,7 @@
 // définie dans ce fichier.
 
 import recommendations from '../lib/product-recommendations.js';
-const { selectRangeCollections, functionalCompanion, sameRange } = recommendations;
+const { selectRangeCollections, functionalCompanion, sameRange, role, sceneBucket, isOutdoor } = recommendations;
 
 const host = String(process.env.SHOPIFY_STORE_URL || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
 const token = process.env.SHOPIFY_ADMIN_API_KEY || '';
@@ -78,11 +78,22 @@ const prepared = products.map(product => ({
   }).map(collection => collection.id),
 }));
 const byVendor = Map.groupBy(prepared, product => product.vendor || '(vide)');
+const availableProducts = prepared.filter(available);
 
 const rows = prepared.map(product => {
   const rangeIds = new Set(product.recommendationCollectionIds);
   const candidates = (byVendor.get(product.vendor || '(vide)') || []).filter(candidate => candidate.id !== product.id && available(candidate));
-  const deterministicComplementary = candidates.some(candidate => functionalCompanion(product, candidate, rangeIds));
+  const sceneCandidates = availableProducts.filter(candidate => candidate.id !== product.id);
+  const sceneBuckets = new Set(sceneCandidates.filter(candidate => {
+    const bucket = sceneBucket(candidate);
+    if (!bucket) return false;
+    return !isOutdoor(product) || !['seating', 'lighting'].includes(bucket) || isOutdoor(candidate);
+  }).map(sceneBucket));
+  const tableScene = role(product) === 'dining-table' && sceneBuckets.size > 0;
+  const completeTableScene = role(product) === 'dining-table'
+    && ['seating', 'dishware', 'drinkware', 'textiles', ...(isOutdoor(product) ? ['lighting'] : [])]
+      .every(bucket => sceneBuckets.has(bucket));
+  const deterministicComplementary = candidates.some(candidate => functionalCompanion(product, candidate, rangeIds)) || tableScene;
   const deterministicRelated = candidates.some(candidate => sameRange(product, candidate, rangeIds));
   const curatedComplementary = Boolean(product.complementary?.references?.nodes?.length);
   const curatedRelated = Boolean(product.related?.references?.nodes?.length);
@@ -90,6 +101,8 @@ const rows = prepared.map(product => {
     product,
     curatedComplementary,
     curatedRelated,
+    tableScene,
+    completeTableScene,
     before: curatedComplementary || curatedRelated,
     afterComplementary: curatedComplementary || deterministicComplementary,
     afterRelated: curatedRelated || deterministicRelated,
@@ -118,8 +131,13 @@ console.log(JSON.stringify({
   measuredAt: new Date().toISOString(),
   publication: headless.name,
   availability: 'image présente et une des trois premières variantes en stock, non suivie ou vendue en dépassement',
-  note: 'La couverture après est le socle déterministe gamme/modèle ; le repli productRecommendations de Shopify ne peut que l’augmenter.',
+  note: 'La couverture après comprend le socle déterministe gamme/modèle et la composition de scène des tables ; le repli productRecommendations de Shopify ne peut que l’augmenter.',
   overall: summary(rows),
+  tableScenes: {
+    total: rows.filter(row => role(row.product) === 'dining-table').length,
+    withScene: rows.filter(row => row.tableScene).length,
+    complete: rows.filter(row => row.completeTableScene).length,
+  },
   byBrand: grouped('vendor'),
   byType: grouped('productType'),
 }, null, 2));

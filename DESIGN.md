@@ -143,3 +143,13 @@ Le pipeline principal transmet ce rôle avec le préfixe alternatif réservé
 le même composant Dimensions sur fond papier. Les anciens libellés libres restent
 pris en charge uniquement pour les schémas AndTradition déjà revus. Une URL ou un
 nom de fichier ne suffisent pas à déclarer ce rôle.
+
+## Ventes associées sur la fiche produit
+
+Décision du propriétaire du 30 septembre 2026 : les deux titres sont « Pour
+compléter vos achats » et « Dans la même famille ». La première rubrique compose
+un usage, pas une rangée de produits presque identiques. Pour une table, elle peut
+associer deux assises différentes, de la vaisselle, des verres, un textile ou un
+dessous de plat et, si la table est extérieure, une lampe extérieure. La seconde
+rubrique reste réservée à la gamme ou au modèle. Conserver les cartes produit
+communes, six cartes au plus, et ne jamais introduire ces titres par un surtitre.

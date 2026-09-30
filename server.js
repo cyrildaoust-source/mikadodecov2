@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { shopifyFetch, SHOPIFY_STORE } = require('./lib/shopify/client');
 const { mapProduct, mapProductRef, shopifyResize, CARD_IMAGE_WIDTH } = require('./lib/shopify/product-mapper');
-const { selectRangeCollections, recommendationSearchTerm, selectProductRecommendations } = require('./lib/product-recommendations');
+const { selectRangeCollections, recommendationSearchTerm, sceneSearchQueries, selectProductRecommendations } = require('./lib/product-recommendations');
 const { getSearchPage, clearSearchCache } = require('./lib/services/search');
 const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, PRODUCT_RECOMMENDATIONS_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
 const { normalizeItems, getDeliveryEstimate, realProject } = require('./lib/delivery-estimate');
@@ -2087,10 +2087,12 @@ async function getProductByHandle(handle) {
     let candidates = {};
     try {
       const ranges = selectRangeCollections(recommendationProduct);
+      const sceneQueries = sceneSearchQueries(recommendationProduct);
       const recos = await shopifyFetch(PRODUCT_RECOMMENDATIONS_QUERY, {
         id: node.id,
         query: recommendationSearchTerm(recommendationProduct) || '__mikado_aucune_gamme__',
         collectionIds: ranges.map(collection => collection.id),
+        ...sceneQueries,
       });
       candidates = {
         automaticComplementary: toCards(recos.complementary),
@@ -2101,6 +2103,13 @@ async function getProductByHandle(handle) {
             recommendationCollectionIds: [collection.id],
           }))),
         searched: toCards(recos.search?.nodes),
+        scene: {
+          seating: toCards(recos.sceneSeating?.nodes),
+          dishware: toCards(recos.sceneDishware?.nodes),
+          drinkware: toCards(recos.sceneDrinkware?.nodes),
+          textiles: toCards(recos.sceneTextiles?.nodes),
+          lighting: toCards(recos.sceneLighting?.nodes),
+        },
       };
     } catch (error) {
       // La fiche et les choix manuels restent disponibles si le moteur de repli
