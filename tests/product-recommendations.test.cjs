@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const {
   MAX_RECOMMENDATIONS, selectRangeCollections, identityTerms,
-  functionalCompanion, selectProductRecommendations,
+  functionalCompanion, sceneSearchQueries, selectProductRecommendations,
 } = require('../lib/product-recommendations');
 
 const collection = { id: 'gid://shopify/Collection/palissade', handle: 'palissade', title: 'Palissade' };
@@ -18,9 +18,9 @@ const card = (id, overrides = {}) => ({
 
 test('les deux rubriques gardent la formulation éditoriale validée', () => {
   const html = readFileSync(require.resolve('../v3/produit.html'), 'utf8');
-  assert.match(html, />Pour compléter votre achat<\/h2>/);
-  assert.match(html, />De la même famille<\/h2>/);
-  assert.doesNotMatch(html, /Ce qui va avec votre achat|Vous aimerez aussi/);
+  assert.match(html, />Pour compléter vos achats<\/h2>/);
+  assert.match(html, />Dans la même famille<\/h2>/);
+  assert.doesNotMatch(html, /Ce qui va avec votre achat|Vous aimerez aussi|De la même famille/);
 });
 
 test('la gamme vient d’une collection ou d’un tag de modèle, jamais de la marque ou de la famille', () => {
@@ -40,10 +40,11 @@ test('une relation fonctionnelle automatique exige aussi la même gamme', () => 
   assert.equal(functionalCompanion({ ...product, productType: 'Table', name: 'Table Aalto 90A', tags: ['aalto'] }, card('extendable', { name: 'Table à rallonge Aalto 97', productType: 'Table', tags: ['aalto'] }), new Set()), false);
 });
 
-test('compléter compose un ensemble de mobilier cohérent, sans mélanger les gammes', () => {
-  const table = { ...product, name: 'Table Luxembourg', brand: 'Fermob', productType: 'Table', tags: ['luxembourg'] };
+test('compléter une table compose une scène variée au lieu d’aligner les assises', () => {
+  const table = { ...product, name: 'Table Luxembourg', brand: 'Fermob', productType: 'Table', tags: ['luxembourg', 'exterieur'] };
   const chair = card('chair', { name: 'Chaise Luxembourg', brand: 'Fermob', productType: 'Chaise', tags: ['luxembourg'] });
   const armchair = card('armchair', { name: 'Chaise avec accoudoirs Luxembourg', brand: 'Fermob', productType: 'Chaise', tags: ['luxembourg'] });
+  const bench = card('bench', { name: 'Banc Luxembourg', brand: 'Fermob', productType: 'Banc', tags: ['luxembourg'] });
   const barChair = card('bar-chair', { name: 'Chaise de bar Luxembourg', brand: 'Fermob', productType: 'Chaise de bar', tags: ['luxembourg'] });
   const loungeChair = card('lounge-chair', { name: 'Fauteuil bas Luxembourg', brand: 'Fermob', productType: 'Fauteuil', tags: ['luxembourg'] });
   const unrelated = card('unrelated', { name: 'Chaise Bistro', brand: 'Fermob', productType: 'Chaise', tags: ['bistro'] });
@@ -53,12 +54,40 @@ test('compléter compose un ensemble de mobilier cohérent, sans mélanger les g
   assert.equal(functionalCompanion(table, loungeChair, new Set()), false);
   assert.equal(functionalCompanion(table, unrelated, new Set()), false);
   assert.equal(functionalCompanion(chair, table, new Set()), true);
-  const selected = selectProductRecommendations({ product: table, searched: [
-    card('bench', { name: 'Banc Luxembourg', brand: 'Fermob', productType: 'Banc', tags: ['luxembourg'] }),
-    chair,
-    armchair,
-  ] });
-  assert.deepEqual(selected.complementary.map(item => item.id), ['chair', 'armchair', 'bench']);
+  const selected = selectProductRecommendations({
+    product: table,
+    searched: [bench, chair, armchair],
+    scene: {
+      seating: [unrelated],
+      dishware: [card('plate', { name: 'Assiette Kastehelmi', brand: 'Iittala', productType: 'Assiette' })],
+      drinkware: [card('glass', { name: 'Verre à eau Ripple', brand: 'Ferm Living', productType: 'Verre à eau' })],
+      textiles: [card('placemat', { name: 'Set de table Basics', brand: 'Fermob', productType: 'Set de table', tags: ['exterieur'] })],
+      lighting: [card('lamp', { name: 'Lampe baladeuse Balad', brand: 'Fermob', productType: 'Lampe baladeuse', tags: ['exterieur'] })],
+    },
+  });
+  assert.deepEqual(selected.complementary.map(item => item.id), ['chair', 'armchair', 'plate', 'glass', 'placemat', 'lamp']);
+  assert.deepEqual(selected.complementary.map(item => item.recommendationSource), [
+    'range-functional', 'range-functional', 'scene-composition', 'scene-composition', 'scene-composition', 'scene-composition',
+  ]);
+});
+
+test('les recherches de scène sont contextuelles et ne codent aucun produit', () => {
+  const outdoor = sceneSearchQueries({ ...product, name: 'Table Luxembourg', productType: 'Table', tags: ['exterieur'] });
+  assert.match(outdoor.sceneSeating, /product_type:Chaise/);
+  assert.match(outdoor.sceneSeating, /tag:exterieur/);
+  assert.match(outdoor.sceneDishware, /product_type:Assiette/);
+  assert.match(outdoor.sceneDrinkware, /product_type:"Verre à eau"/);
+  assert.match(outdoor.sceneTextiles, /product_type:"Set de table"/);
+  assert.match(outdoor.sceneLighting, /tag:exterieur/);
+  assert.equal(outdoor.includeTableScene, true);
+  assert.equal(outdoor.includeOutdoorLighting, true);
+  assert.doesNotMatch(Object.values(outdoor).join(' '), /luxembourg|fermob|gid:\/\/shopify\/Product/);
+  const chairQueries = sceneSearchQueries(product);
+  assert.equal(chairQueries.includeTableScene, false);
+  assert.equal(chairQueries.includeOutdoorLighting, false);
+  assert.ok(Object.entries(chairQueries)
+    .filter(([, value]) => typeof value === 'string')
+    .every(([, query]) => query.includes('__mikado_aucune_scene__')));
 });
 
 test('les arts de la table associent les contenants qui servent ensemble', () => {
