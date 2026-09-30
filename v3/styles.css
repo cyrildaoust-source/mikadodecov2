@@ -1466,29 +1466,33 @@ body.pdplb-locked { overflow: hidden; }
 
 .az-index { display: grid; }
 .az-group {
-  display: grid; grid-template-columns: 3rem 1fr; align-items: baseline;
+  display: grid; grid-template-columns: 3rem 1fr; align-items: start;
   gap: 0 20px; padding: clamp(18px, 2.4vw, 28px) 0; border-bottom: 1px solid var(--line);
 }
 .az-group:first-child { padding-top: 0; }
 .az-group:last-child { border-bottom: 0; padding-bottom: 0; }
 .az-letter {
   font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 3vw, 38px);
-  line-height: 1; color: var(--accent);
+  line-height: 1; color: var(--accent); padding-top: 6px;
 }
-.az-names { display: flex; flex-wrap: wrap; align-items: baseline; margin: 0; padding: 0; list-style: none; row-gap: 6px; }
-.az-name { display: inline-flex; align-items: baseline; }
-.az-name:not(:last-child)::after { content: "·"; color: var(--subtle); margin: 0 10px; }
+/* Noms en colonnes, lus de haut en bas : 4 sur grand écran, 3 sur tablette, 2 sur mobile.
+   Chaque ligne fait 44 px (zone tactile) ; toute la ligne ouvre la page du créateur. */
+.az-names { columns: 4; column-gap: 32px; margin: 0; padding: 0; list-style: none; }
+.az-name { position: relative; display: flex; align-items: center; min-height: 44px; padding: 4px 0; break-inside: avoid; }
 .az-name a {
-  font-family: var(--sans-product); font-size: 0.95rem; font-weight: 500;
-  color: var(--ink); padding: 1px 2px; border-bottom: 1px solid transparent;
+  font-family: var(--sans-product); font-size: 0.95rem; font-weight: 500; line-height: 1.3;
+  color: var(--ink); padding: 1px 0; border-bottom: 1px solid transparent;
   transition: color .2s var(--ease), border-color .2s var(--ease);
 }
-/* Zone tactile d'au moins 44 × 44 px autour du nom, invisible. */
-.az-name a { position: relative; }
-.az-name a::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: max(100%, 44px); height: 44px; }
+.az-name a::before { content: ""; position: absolute; inset: 0; }
+/* Souris sur grand écran : lignes plus serrées. */
+@media (hover: hover) and (pointer: fine) and (min-width: 1100px) {
+  .az-name { min-height: 34px; padding: 2px 0; }
+}
+@media (max-width: 1099px) { .az-names { columns: 3; } }
 .az-name a:hover { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
 /* Keyboard focus keeps the strong global ring (:focus-visible, line ~109) —
-   the dense `·`-separated list needs more than the 1px hover underline. */
+   a dense list of names needs more than the 1px hover underline. */
 .az-name a:focus-visible { color: var(--accent-ink); border-bottom-color: var(--accent-ink); }
 /* Deep-link pulse sur une entrée texte A-Z (pendant du pulse des cartes). */
 .az-name.is-highlight a { animation: azPulse 1.6s var(--ease); color: var(--accent-ink); }
@@ -1581,8 +1585,10 @@ body.pdplb-locked { overflow: hidden; }
 
 @media (max-width: 768px) {
   .designer-card--lg .designer-card__name { font-size: 1.35rem; }
-  .az-group { grid-template-columns: 2rem 1fr; gap: 0 14px; }
-  .az-letter { font-size: 24px; }
+  /* Lettre au-dessus des noms : toute la largeur pour deux colonnes. */
+  .az-group { grid-template-columns: 1fr; gap: 6px; }
+  .az-letter { font-size: 26px; padding-top: 0; }
+  .az-names { columns: 2; column-gap: 20px; }
   .designer-hero { grid-template-columns: 1fr; gap: 22px; min-height: 0; }
   .designer-hero__photo { max-width: 280px; }
   .designer-hero__name { font-size: clamp(32px, 9vw, 46px); }
