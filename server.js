@@ -358,11 +358,6 @@ function plpCardSsr(p, source = '') {
   return productCardHTML(p, {source});
 }
 
-// SEO/SSR · slugify miroir de shared.js (accents/ø/æ) — pour le lien créateur SSR.
-const slugifyS = (s) => String(s == null ? '' : s).toLowerCase().normalize('NFD')
-  .replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae')
-  .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-
 // SEO/SSR · Contenu produit rendu CÔTÉ SERVEUR, injecté à la place du squelette
 // (entre <!--PDP-SSR-START/END-->). Reprend les vraies classes (.pdp__brand/__name/
 // __designer/__price) → 1er paint fidèle ; le module JS remplace ensuite tout
@@ -390,12 +385,11 @@ function specAccordionSsr(p) {
 // Fiche complète (galerie, coloris, achat, disponibilité, garanties, caractéristiques),
 // avec les données que le navigateur réutilise sans relecture (#product-initial).
 function pdpServed(product, sourceURL) {
-  const dslug = product.designer ? slugifyS(product.designer) : '';
-  const designerLink = Boolean(dslug && getDesigners().some(d => String(d.slug || '').toLowerCase() === dslug && !d.hidden));
+  const designerSlug = navigation.designerSlug(product.designer, getDesigners());
   const brandHref = product.brand ? navigation.productBrandDestination(product, sourceURL, navigationRules) : '';
   if (!_pdpView) return null;
-  const view = _pdpView(product, { requestedVariant: sourceURL.searchParams.get('variant'), selectInitialVariant, brandHref, designerLink });
-  return { html: view.html, data: { ...product, designerLink, brandHref } };
+  const view = _pdpView(product, { requestedVariant: sourceURL.searchParams.get('variant'), selectInitialVariant, brandHref, designerSlug });
+  return { html: view.html, data: { ...product, designerSlug, brandHref } };
 }
 function pdpSsrBlock(p, sourceURL) {
   const selected = selectInitialVariant(p.variants, { requestedId: sourceURL?.searchParams.get('variant'), coverUrl: p.image || p.firstImageRaw, fallback: false });
@@ -404,9 +398,9 @@ function pdpSsrBlock(p, sourceURL) {
   const img = shopifyResize(rawImg, 1000);
   // Lien créateur si le designer a une page (même règle que produit.html : slug connu)
   // → +maillage interne crawlable vers les 247 pages créateur (2ᵉ levier de l'audit).
-  const dslug = p.designer ? slugifyS(p.designer) : '';
+  const dslug = navigation.designerSlug(p.designer, getDesigners());
   const designerEl = !p.designer ? ''
-    : (dslug && getDesigners().some(d => String(d.slug || '').toLowerCase() === dslug && !d.hidden))
+    : dslug
       ? '<a class="pdp__designer pdp__designer--link" href="/produits.html?designer=' + encodeURIComponent(dslug) + '">' + ogEscape(p.designer) + '</a>'
       : '<span class="pdp__designer">' + ogEscape(p.designer) + '</span>';
   return '<div class="pdp">'
@@ -857,6 +851,16 @@ app.get('/produits.html', async (req, res) => {
     return res.redirect(302, '/collections/' + req.query.coll + (query.size ? '?' + query : ''));
   }
   const slug = req.query.designer ? String(req.query.designer).toLowerCase() : '';
+  // Ancienne écriture d'un créateur (doublon unifié, duo inversé) : un seul saut vers sa fiche.
+  if (slug) {
+    await _navigationReady;
+    const canonical = navigation.designerSlug(slug, getDesigners());
+    if (canonical && canonical !== slug) {
+      const query = new URLSearchParams(Object.entries(req.query).filter(([, value]) => typeof value === 'string'));
+      query.set('designer', canonical);
+      return res.redirect(301, '/produits.html?' + query);
+    }
+  }
   // Catalogue complet filtrable (demande du 24 septembre) ; liste d'origine en secours.
   // Catalogue complet et pages créateurs filtrables ; liste d'origine en secours.
   const listScope = slug ? filterScope('designer:' + slug) : CATALOGUE_SCOPE;

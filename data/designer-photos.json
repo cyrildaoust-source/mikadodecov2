@@ -1,0 +1,710 @@
+{
+  "_note": "Portraits ajoutés au répertoire des créateurs : page officielle (éditeur ou créateur) où l'image est publiée, fichier d'origine et crédit s'il est indiqué. Les portraits antérieurs au 30 septembre 2026 n'ont pas de source enregistrée.",
+  "designers": {
+    "aino-aalto": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/aino-aalto",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604820/designers/Aino-Aalto_1.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "aldo-deli": {
+      "sourcePage": "https://www.aldodelistudio.com/about",
+      "imageUrl": "https://cdn.prod.website-files.com/66fc1cb57b26e05097de3b73/67164df4745925b93d15faef_aldo.jpg",
+      "credit": "Charlotte Mendez",
+      "retrieved": "2026-09-30"
+    },
+    "aldo-van-den-nieuwelaar": {
+      "sourcePage": "https://www.pastoe.com/en/designer/aldo-van-den-nieuwelaar",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Aldo%20van%20den%20Nieuwelaar/aldo%20van%20den%20nieuwelaar_portrait.png",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "aleksi-kuokka": {
+      "sourcePage": "https://aivan.fi/about/contact/",
+      "imageUrl": "https://aivan.fi/wp-content/uploads/2021/11/Aivan_Contacts_Aleksi-5.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "alfred-homann": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/alfred-homann",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/homan_portrat_high.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "alfredo-haberli": {
+      "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/origo",
+      "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_iittala_designer_alfredo_haberli_2.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "all-the-way-to-paris": {
+      "sourcePage": "https://www.andtradition.com/designers/all-the-way-to-paris",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2022/02/Tradition_ATWP_Studio_visit.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "anker-bak": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/anker-bak",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/anker-bak_portrait-large.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "anna-maija-jaatinen": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/anna-maija-jaatinen",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604825/designers/Anna-Maija-Jattinen.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "antoine-lesur": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Antoine-LESUR.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "archirivolto": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/ARCHIRIVOLTO.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "atelier-baptiste-et-jaina": {
+      "sourcePage": "https://www.baptistesevin.com/a-propos",
+      "imageUrl": "https://static.wixstatic.com/media/ced0bd_e1e2acadc8c4466bbf64882cde123a8d~mv2.jpg",
+      "credit": "Atelier Baptiste & Jaïna",
+      "retrieved": "2026-09-30"
+    },
+    "benjamin-graindorge": {
+      "sourcePage": "https://www.benjamingraindorge.fr/fr/telechargement.html",
+      "imageUrl": "https://www.benjamingraindorge.fr/assets/files/portrait%20HD/portraitSimple%20tShirt.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "benno-premsela": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Benno-Premsela",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Benno%20Premsela/benno-premsela-spectrumdesign.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "bertjan-pot": {
+      "sourcePage": "https://www.arco.nl/en/about-arco/our-designers/bertjan-pot/",
+      "imageUrl": "https://www.arco.nl/media/wmwhxk3h/onze_ontwerpers-bertjan_pot.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "bodil-kjaer": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/bodil-kjaer",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/bodil-kjaer-1500x1800px.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "bonderup-thorup": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/bonderup-thorup",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/bonnerup-thorup-1500x1800px.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "borge-mogensen": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/borge-mogensen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/boerge-mogensen-1500x1800px.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "brad-ascalon": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/brad-ascalon",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/brad-ascalon-1500x1800px.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "carolina-wilcke": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Carolina-Wilcke",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Caroline%20Wilcke/Carolina%20Wilcke.png",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "catherine-sofia": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Catherine-SOFIA_ok.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "cees-braakman": {
+      "sourcePage": "https://www.pastoe.com/en/designer/cees-braakman",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Cees%20braakman/Cees_Braakman_portrait.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "company": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/company",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604848/designers/Company_2_photo_Elina-SImonen.jpg",
+      "credit": "Elina Simonen (selon le nom de fichier Artek)",
+      "retrieved": "2026-09-30"
+    },
+    "constance-guisset": {
+      "sourcePage": "https://constanceguisset.com/fr/studio",
+      "imageUrl": "https://constanceguisset.com/media/pages/studio/b516fb5019-1779965712/constance-guisset-marion-berrin-1680x-q80.jpg",
+      "credit": "Marion Berrin",
+      "retrieved": "2026-09-30"
+    },
+    "constant-nieuwenhuys": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Constant-Nieuwenhuys",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Constant%20Nieuwenhuys/Constant%20Nieuwenhuys.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "daniel-rybakken": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/daniel-rybakken",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604849/designers/Daniel_Rybakken_Kiila_Collection.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "daphna-laurens": {
+      "sourcePage": "https://www.daphnalaurens.nl/profile/",
+      "imageUrl": "https://www.daphnalaurens.nl/wp-content/uploads/2026/08/HS_05145.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "dimitri-bahler": {
+      "sourcePage": "https://dimitribaehler.ch/about/",
+      "imageUrl": "https://dimitribaehler.ch/wp-content/uploads/2024/11/Dimitri-Bahler-2016-%C2%A9-Julie-Gourdier.jpg",
+      "credit": "Julie Gourdier",
+      "retrieved": "2026-09-30"
+    },
+    "edward-van-vliet": {
+      "sourcePage": "https://www.andtradition.com/designers/edward-van-vliet",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/Edward-van-Vliet-keuze-bw.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "eoos": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/eoos",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/eoos-1500x1800px.png",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "esben-klint": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/esben-klint",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esben-klint/esben-klint_landscape.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "fabricius-kastholm": {
+      "sourcePage": "https://www.andtradition.com/designers/kastholm-fabricius",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/10/kastholm-Fabricius.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "form-us-with-love": {
+      "sourcePage": "https://www.muuto.com/designers2/form-us-with-love/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/form-us-with-love/form_designer.jpg",
+      "credit": "Jonas Jacob Svensson",
+      "retrieved": "2026-09-30"
+    },
+    "friso-kramer": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Friso-Kramer",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Friso%20Kramer/Friso%20Kramer_pastoe.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "frits-henningsen": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/frits-henningsen-1500x1800.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "gerrit-rietveld": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Gerrit-Rietveld",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Gerrit%20Rietveld/Rietveld%20in%201941.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "goula-figuera": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/GOULA-et-FUGUERA.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "gudmundur-ludvik": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/gudmundur-ludvik",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/gudmundur-ludvik/gudmundur_ludvik_portait_02.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "hans-j-wegner": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/hans-j-wegner",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/hans-j-wegner-portrait.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "harald-guggenbichler": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Harald-Guggenbichler-640x722.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "harri-koskinen": {
+      "sourcePage": "https://www.muuto.com/designers2/harri-koskinen/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/harri-koskinen/harri-koskinen-portrait-muuto.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "hee-welling": {
+      "sourcePage": "https://www.andtradition.com/designers/hee-welling",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2020/02/ATD_Designer-Portraits_Hee-Welling_2026_02.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "hella-jongerius": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/hella-jongerius",
+      "imageUrl": "https://static.vitra.com/media/asset/8699877/storage/master/81488818.jpg",
+      "credit": "Markus Jans",
+      "retrieved": "2026-09-30"
+    },
+    "henk-fillekes": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Henk-Fillekes",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Henk%20Fillekes/Henk%20Fillekes%20Atelier%20Artiforte.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "henning-koppel": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/henning-koppel",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-andscape/henningkoppel-desktop-hero-3840x2160px.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "hvidt-molgaard": {
+      "sourcePage": "https://www.andtradition.com/designers/hvidt-molgaard",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/Orla_Peter_v2.png",
+      "credit": null,
+      "note": "photo de la page designer &Tradition, fichier haute définition de la médiathèque &Tradition",
+      "retrieved": "2026-09-30"
+    },
+    "ilmari-tapiovaara": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/ilmari-tapiovaara",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604858/designers/Ilmari-Tapiovaara_1.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "ilse-crawford": {
+      "sourcePage": "https://www.studioilse.com/ilse-crawford/",
+      "imageUrl": "https://www.studioilse.com/wp-content/uploads/2022/11/ILSEC2-1.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "inka-bell": {
+      "sourcePage": "https://www.artek.fi/en/news/celebrating-90-years-of-artek",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1739366492/stories/Inka-Bell-portrait_Photo_Paavo-Lehtonen-2023_master.jpg",
+      "credit": "Paavo Lehtonen, 2023",
+      "retrieved": "2026-09-30"
+    },
+    "ionna-vautrin": {
+      "sourcePage": "https://www.ionnavautrin.com/contact",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/66f31de58f1edc0ad8fb16f2/56680d9b-1a12-408a-bc91-3e0b4585e369/bio.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "j-mazoyer-do": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Joseph-MAZOYIER-_DO_.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "jaime-hayon": {
+      "sourcePage": "https://www.andtradition.com/designers/jaime-hayon",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/01_JH_202.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "jean-baptiste-fastrez": {
+      "sourcePage": "https://jeanbaptistefastrez.com/about/",
+      "imageUrl": "https://jeanbaptistefastrez.com/wp-content/uploads/2025/10/JB-FASTREZ-x-MONOPRIX1425.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "jean-charles-de-castelbajac": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Jean-Charles-DE-CASTELBAJAC.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "john-astbury": {
+      "sourcePage": "https://www.andtradition.com/designers/john-astbury",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2021/01/DSC07149.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "joost-van-der-vecht": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Joost-van-der-Vecht",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Joost%20van%20der%20Vecht/Joost%20van%20der%20Vecht.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "juha-leiviska": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/juha-leivisk%C3%A4",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604860/designers/Juha-Leiviska_1.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "kaare-klint": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/kaare-klint",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/kare-klint_portrait_v1.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "kaj-franck": {
+      "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/scandia",
+      "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_kaj_franck_3.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "karoliina-hellberg": {
+      "sourcePage": "https://www.karoliinahellberg.com/about",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/5afbe478b27e39907ec799a0/1529397787787-ILNFSFA4JG7UOAF3MV8G/b88579960z.1_20161027165144_000gc4ub80u.10.iptcstrip_0+%281%29.jpg",
+      "credit": "Juha Törmälä",
+      "retrieved": "2026-09-30"
+    },
+    "kho-liang-ie": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Kho-Liang-Ie",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Kho%20Liang%20Ie/atelier%20artiforte_kho%20liang%20ie.jpeg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "klaus-haapaniemi": {
+      "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/taika-sato",
+      "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_klaus_haapaniemi.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "koens-middelkoop": {
+      "sourcePage": "https://www.koens-middelkoop.nl/about/",
+      "imageUrl": "https://www.koens-middelkoop.nl/wp-content/uploads/2023/07/Koens-Middelkoop-Design.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "konstantin-grcic": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/konstantin-grcic",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604863/designers/Konstantin-Grcic_2.jpg",
+      "credit": "Markus Jans",
+      "retrieved": "2026-09-30"
+    },
+    "lars-tornoe": {
+      "sourcePage": "https://www.muuto.com/designers2/lars-tornoe2/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/lars-tornoe/lars-tornoe-portrait-muuto.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "larsen-bender-madsen": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/larsen-bender-madsen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/larsen-bender-madsen-1500x1800px.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "louise-liljencrantz": {
+      "sourcePage": "https://www.andtradition.com/designers/louise-liljencrantz",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/DSC08297_220217_01-3.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "luca-nichetto": {
+      "sourcePage": "https://www.nichetto.com/info",
+      "imageUrl": "https://images.prismic.io/nichetto/ablhlrbci2UF6H1J_NW26_Info_Luca.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "mads-odgard": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/mads-odgard",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/mads-odgard-portrait-mobile.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "marianne-tuxen": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/marianne-tuxen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-andscape/marianne-tuxen_portrait.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "martin-visser": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Martin-Visser",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Martin%20Visser/Martin_Visser_cropped.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "matali-crasset": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Matali-CRASSET.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "matteo-fogale": {
+      "sourcePage": "https://www.andtradition.com/designers/matteo-fogale",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2022/02/cid9E1277C3-5CB2-45CE-A66C-4F2850396E22.jpeg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "mika-tolvanen": {
+      "sourcePage": "https://www.muuto.com/designers2/mika-tolvanen/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/mika-tolvanen/mika_tolvanen-portrait-muuto.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "mogens-lassen": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/mogens-lassen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/mogens-lassen-1500x1800px.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "morten-gottler": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/morten-gottler",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/morten-goettler-1500x1800px.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "naja-utzon-popov": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/naja-utzon-popov",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/naja-utzon-hero-desktop.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "nanna-ditzel-jorgen-ditzel": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/nanna-ditzel",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/ditzel-desktop-hero-3840x2160px-v2.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "note-design-studio": {
+      "sourcePage": "https://www.andtradition.com/designers/note-design-studio",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2022/02/ATD_22_NOTE_01.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "oeo-studio": {
+      "sourcePage": "https://www.andtradition.com/designers/oeo-studio",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/ATD24_OEO_STUDIO_01.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "oiva-toikka": {
+      "sourcePage": "https://www.iittala.com/en-gb/universe/inspiration/the-story-of-birds",
+      "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_oiva_toikka_designer.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "ole-wanscher": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/ole-wanscher",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/ole-wanscher-1500x1800px.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "olivier-gence": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Olivier-GENCE.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "pagnon-et-pelhaitre": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/PAGNON-_-PELHAITRE.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "pancho-nikander": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/pancho-nikander",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604865/designers/Pancho_Nikander.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "paola-navone": {
+      "sourcePage": "https://serax.com/pages/paola-navone",
+      "imageUrl": "https://serax.com/cdn/shop/files/Paola_7a4b4177-8d3f-4dd8-a667-efddeb9e173d.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "pascal-mourgue": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Pascal-MOURGUE.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "poul-kjaerholm": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/poul-kjaerholm",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/poul-kjaerholm-1500x1800px.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "rikke-frost": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/rikke-frost",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/rikke-frost-2-mobile.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "robin-day": {
+      "sourcePage": "https://www.andtradition.com/designers/robin-day",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/Screenshot-2024-05-24-at-13.50.07.png",
+      "credit": "© Robin & Lucienne Day Foundation (d'après les autres légendes de la page ; photographe non indiqué)",
+      "retrieved": "2026-09-30"
+    },
+    "sami-kallio": {
+      "sourcePage": "https://www.andtradition.com/designers/sami-kallio",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/Sami-Kallio-03_miccgray.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "samuel-wilkinson": {
+      "sourcePage": "https://astep.design/designers/samuel-wilkinson/",
+      "imageUrl": "https://astep.design/content/wp-content/uploads/2025/01/Samuel-Wilkinson-portrait-BW.jpg",
+      "credit": null,
+      "note": "même photo que la page designer &Tradition (472 px), version haute définition publiée par l'éditeur Astep",
+      "retrieved": "2026-09-30"
+    },
+    "sebastian-herkner": {
+      "sourcePage": "https://www.andtradition.com/designers/sebastian-herkner",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/ATD_2021-Sebastian-Herkner_19.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "sharon-fisher-matteo-barenghi": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/sharon-fisher-and-matteo-barenghi",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/fisherbarenghi_small.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "signe-hytte": {
+      "sourcePage": "https://www.andtradition.com/designers/signe-hytte",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/SigneHytte_05.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "space-copenhagen": {
+      "sourcePage": "https://www.andtradition.com/designers/space-copenhagen",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/230925_TRADITION_SPACECPH_03_0082-1_high.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "strand-hvass": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/strand-hvass",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/strand-hvass-mobile.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "studio-brichetziegler": {
+      "sourcePage": "https://www.brichetziegler.com/about",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/69cceb1feffdb65bef2c2721/1b828bba-bbbd-4b72-a039-4594a47804b1/PORTRAIT_BRICHETZIEGLER_MORGANE-LE-GALL.jpg",
+      "credit": "Morgane Le Gall",
+      "retrieved": "2026-09-30"
+    },
+    "studio-cuno": {
+      "sourcePage": "https://www.studiocuno.com/about",
+      "imageUrl": "https://static.wixstatic.com/media/047925_108ff9b930034426bc61f38b2286e64f~mv2.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "studio-heju": {
+      "sourcePage": "https://www.tiptoe.fr/fr-fr/blogs/lookbooks/tiptoe-x-heju-colorscape",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0999/6347/0166/files/lookbooks_tiptoe-x-heju-colorscape__Copie-de-11_TIPTOE_Heju309895_JMauloubier.jpg",
+      "credit": "J. Mauloubier",
+      "retrieved": "2026-09-30"
+    },
+    "studio-parade": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Studio-Parade",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Studio%20Parade/studio%20parade.png",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "tadao-ando": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/tadao-ando",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/tadao-ando-mobile.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "taf-studio": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/taf-studio",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604871/designers/TAF-Studio_Portrait_Orgatec_photo_Daniele-Ansidei.jpg",
+      "credit": "Daniele Ansidei (selon le nom de fichier Artek)",
+      "retrieved": "2026-09-30"
+    },
+    "tapio-wirkkala": {
+      "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/tapio",
+      "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_iittala_2024_designers_tapio_wirkkala.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "terence-conran": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Terence-CONRAN.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "teruhiro-yanagihara": {
+      "sourcePage": "https://www.andtradition.com/designers/teruhiro-yanagihara/atd_designer-portrait_teruhiro-yanagihara_2026_03/",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2022/02/ATD_Designer-Portrait_Teruhiro-Yanagihara_2026_03.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "thau-kallio": {
+      "sourcePage": "https://www.andtradition.com/designers/thau-kallio",
+      "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/ThauKallio.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "thomas-bastide": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Thomas-BASTIDE.gif",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "thomas-bentzen": {
+      "sourcePage": "https://www.muuto.com/designers2/thomas-bentzen/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/thomas-bentzen/thomas-bentzen_2023_2.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "thomas-bo-kastholm": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/thomas-kastholm",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/thomas-bo-kastholm_mobil.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "urd-moll-gundermann": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/urd-moll-gundermann_mobile.png",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn sous la carte Linie Design ; identité confirmée par sa page designer chez Linie Design",
+      "retrieved": "2026-09-30"
+    },
+    "vilhelm-lauritzen": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/vilhelm-lauritzen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/vilhelm-lauritzen/09_vl-portrat.jpg",
+      "credit": null,
+      "note": "portrait diffusé par Carl Hansen & Søn dans le carrousel « Our designers » de ses pages designers",
+      "retrieved": "2026-09-30"
+    },
+    "walter-antonis": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Walter-Antonis",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Walter%20Antonis/Walter%20Antonis%20portrait.png",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "werner-blaser": {
+      "sourcePage": "https://www.pastoe.com/en/designer/Werner-Blaser",
+      "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Werner%20Blaser/Werner_blaser_designer_profile_portrait%201.png",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    },
+    "yrjo-kukkapuro": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/yrj%C3%B6-kukkapuro",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1758026902/designers/Yrj%C3%B6-Kukkapuro_master.jpg",
+      "credit": null,
+      "retrieved": "2026-09-30"
+    }
+  }
+}

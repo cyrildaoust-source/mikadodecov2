@@ -64,7 +64,7 @@
 
   <script type="module">
     import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, loadNavigation, paintBreadcrumb } from "/shared.js";
-    import { productTrail, sourceSelection, productBrandDestination } from "/navigation.mjs";
+    import { productTrail, sourceSelection, productBrandDestination, designerSlug } from "/navigation.mjs";
     import { stockLabel } from "/format.mjs";
     import { pdpView } from "/pdp-view.mjs";
     import "/product-variant.js";
@@ -101,9 +101,8 @@
     }
 
     Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designers: [] } : fetch("/designers-data.json", { cache: "force-cache" }).then((r) => (r.ok ? r.json() : { designers: [] })).catch(() => ({ designers: [] }))]).then(([p, navigation, designersData]) => {
-      // Slugs designers connus — chargé EN PARALLÈLE du produit → le lien designer est rendu
+      // Répertoire des créateurs chargé EN PARALLÈLE du produit → le lien designer est rendu
       // dès le 1er paint (fin de la recoloration gris→bleu post-rendu).
-      const knownDesigners = new Set((designersData.designers || []).filter(d => !d.hidden).map((x) => x.slug));
       if (!p) { host.innerHTML = `<p class="plp-empty">Cette pièce est introuvable. <a href="/produits.html" style="color:var(--accent-ink)">Retour au catalogue</a>.</p>`; return; }
       document.title = p.seoTitle || `${p.name} · Mikado Deco`;
 
@@ -120,7 +119,7 @@
       // Fiche : même balisage que le serveur (pdp-view.mjs). Déjà présente dans la
       // page envoyée par le serveur : on la garde et on branche seulement les interactions.
       const view = pdpView(p, { requestedVariant: params.get("variant"), selectInitialVariant, brandHref,
-        designerLink: typeof p.designerLink === "boolean" ? p.designerLink : knownDesigners.has(p.designer ? slugify(p.designer) : "") });
+        designerSlug: typeof p.designerSlug === "string" ? p.designerSlug : designerSlug(p.designer, designersData.designers || []) });
       const { imgs, thumbSrcs, widthVariant, srcsetFor, MAIN_SIZES, variants, initialSelection, norm, ambiances, ambThumbs,
         isColorAxis, axisLabel, variantImg, variantState, availInline, availStore, hasSku } = view;
       let current = view.current;
@@ -334,7 +333,7 @@
       });
 
       // (Lien designer rendu directement à l'innerHTML via designerHTML, décidé avant le 1er
-      //  paint grâce à knownDesigners — plus de promotion post-rendu ni de recoloration.)
+      //  paint grâce au répertoire chargé en parallèle — plus de promotion post-rendu ni de recoloration.)
 
       // ── Galerie mobile (≤760px) : points de navigation du rail swipeable ──
       const railEl = host.querySelector("[data-rail]");

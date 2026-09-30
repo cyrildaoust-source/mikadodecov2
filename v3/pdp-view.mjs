@@ -2,10 +2,10 @@
 // 24 septembre : pages complètes dès l'arrivée, sans reconstruction). Le serveur
 // envoie la fiche entière ; le navigateur garde ce balisage et branche seulement
 // les interactions (produit.html). Code repris tel quel du rendu navigateur.
-import { escapeHtml, priceLabel, stockLabel, slugify } from './format.mjs';
+import { escapeHtml, priceLabel, stockLabel } from './format.mjs';
 import { buildProductSpecGroups, renderDimensionImages } from './product-specs.mjs';
 
-export function pdpView(p, { requestedVariant = null, selectInitialVariant, brandHref = '', designerLink = false }) {
+export function pdpView(p, { requestedVariant = null, selectInitialVariant, brandHref = '', designerSlug = '' }) {
   const imgs = (p.images && p.images.length ? p.images : [p.image, p.image2]).filter(Boolean);
   // Thumbnail-strip sources: small-width versions, index-parallel to `imgs`.
   // Falls back to `imgs` when the API didn't supply thumbs[] (older payload).
@@ -117,10 +117,9 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
       </div>`).join("")}</section>`
     : "";
 
-  const dslug = p.designer ? slugify(p.designer) : "";
   const designerHTML = !p.designer ? ""
-    : designerLink
-      ? `<a class="pdp__designer pdp__designer--link" href="/produits.html?designer=${encodeURIComponent(dslug)}">${escapeHtml(p.designer)}</a>`
+    : designerSlug
+      ? `<a class="pdp__designer pdp__designer--link" href="/produits.html?designer=${encodeURIComponent(designerSlug)}">${escapeHtml(p.designer)}</a>`
       : `<span class="pdp__designer">${escapeHtml(p.designer)}</span>`;
   const html = `
     <div class="pdp">

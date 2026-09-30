@@ -138,5 +138,5 @@ test('la fiche arrive complète du serveur : achat, coloris, disponibilité et d
   const served=JSON.parse(html.match(/id="product-initial">([\s\S]*?)<\/script>/)[1]);
   assert.equal(served.handle,'chaise-1');
   assert.equal(typeof served.brandHref,'string');
-  assert.equal(typeof served.designerLink,'boolean');
+  assert.equal(typeof served.designerSlug,'string');
 });

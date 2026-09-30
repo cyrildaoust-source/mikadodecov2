@@ -22,6 +22,15 @@ export function createNavigation(data = {}, curated = [], designers = []) {
   return { collections, brands, designers: Object.fromEntries(designers.filter(d => d.slug && d.name && !d.hidden).map(d => [d.slug, d.name])) };
 }
 
+// Page du créateur nommé par le métachamp custom.designer : son slug, ou une autre
+// écriture inscrite dans ses tags (« Kastholm & Fabricius », « Inga Sempe »).
+export function designerSlug(name, designers = []) {
+  const slug = navigationSlug(name);
+  if (!slug) return '';
+  const visible = designers.filter(d => d.slug && !d.hidden);
+  return (visible.find(d => d.slug === slug) || visible.find(d => d.tags?.includes(slug)))?.slug || '';
+}
+
 // Page d'une marque : sa collection si elle est inscrite, sinon le catalogue filtré.
 export function brandHref(name, nav) {
   const slug = navigationSlug(name);
