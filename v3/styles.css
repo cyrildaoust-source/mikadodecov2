@@ -1808,17 +1808,17 @@ body.pdplb-locked { overflow: hidden; }
 }
 
 .subhero--editorial .subhero__scrim { background: linear-gradient(95deg, rgba(var(--scrim),.58) 0%, rgba(var(--scrim),.25) 46%, transparent 82%); }
-/* Pages de marque : bandeau plus haut que les autres collections (photos 2:1, 2400 × 1200). */
-.subhero--brand { height: 62vh; min-height: 440px; max-height: 720px; }
+/* Pages de marque et de campagne : bandeau plus haut que les autres collections (photos 2:1, 2400 × 1200). */
+.subhero--brand, .subhero--campaign { height: 62vh; min-height: 440px; max-height: 720px; }
 /* Titre et texte en bas à gauche, comme sur les pages de familles. */
-.subhero--brand .subhero__in { justify-content: flex-end; padding-bottom: clamp(28px, 4vw, 56px); }
-/* Décision du 29 septembre : le nom seul, sans texte de présentation. */
+.subhero--brand .subhero__in, .subhero--campaign .subhero__in { justify-content: flex-end; padding-bottom: clamp(28px, 4vw, 56px); }
+/* Décision du 29 septembre : le nom seul, sans texte de présentation. Une campagne garde son offre. */
 .subhero--brand [data-plp-sub] { display: none; }
 /* Voiles : en haut pour le menu transparent, en bas à gauche pour le texte. */
-.subhero--brand .subhero__scrim { background: linear-gradient(180deg, rgba(var(--scrim),.4) 0%, transparent 24%), linear-gradient(0deg, rgba(var(--scrim),.6) 0%, rgba(var(--scrim),.18) 45%, transparent 70%), linear-gradient(90deg, rgba(var(--scrim),.45) 0%, rgba(var(--scrim),.1) 60%, transparent 85%); }
+.subhero--brand .subhero__scrim, .subhero--campaign .subhero__scrim { background: linear-gradient(180deg, rgba(var(--scrim),.4) 0%, transparent 24%), linear-gradient(0deg, rgba(var(--scrim),.6) 0%, rgba(var(--scrim),.18) 45%, transparent 70%), linear-gradient(90deg, rgba(var(--scrim),.45) 0%, rgba(var(--scrim),.1) 60%, transparent 85%); }
 @media (max-width: 700px) {
-  .subhero--brand { height: 58vh; min-height: 400px; }
-  .subhero--brand .subhero__scrim { background: linear-gradient(180deg, rgba(var(--scrim),.4) 0%, transparent 24%), linear-gradient(0deg, rgba(var(--scrim),.72) 0%, rgba(var(--scrim),.3) 55%, rgba(var(--scrim),.12) 100%); }
+  .subhero--brand, .subhero--campaign { height: 58vh; min-height: 400px; }
+  .subhero--brand .subhero__scrim, .subhero--campaign .subhero__scrim { background: linear-gradient(180deg, rgba(var(--scrim),.4) 0%, transparent 24%), linear-gradient(0deg, rgba(var(--scrim),.72) 0%, rgba(var(--scrim),.3) 55%, rgba(var(--scrim),.12) 100%); }
 }
 
 /* Technical drawings belong to Dimensions, at their original aspect ratio. */
@@ -1937,22 +1937,5 @@ body.pdplb-locked { overflow: hidden; }
   .catalog-filters-fab[hidden] { display: none; }
 }
 
-/* Offre de campagne (Vitra Home Stories) : repose-pieds offert présenté par sa valeur. */
-.campaign-offer__lead { max-width: 62ch; margin-bottom: 36px; }
-.campaign-offer__models { display: grid; gap: 48px; }
-.campaign-offer__model h3 { font-size: clamp(26px, 3vw, 34px); line-height: 1.1; margin-bottom: 10px; }
-.campaign-offer__model > p { max-width: 70ch; }
-.campaign-offer__config { margin-top: 6px; color: var(--muted); font-size: var(--fs-small); }
-.campaign-offer__table { width: 100%; margin-top: 18px; border-collapse: collapse; font-family: var(--sans-product); font-size: var(--fs-small); font-variant-numeric: tabular-nums; }
-.campaign-offer__table th, .campaign-offer__table td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-.campaign-offer__table thead th { color: var(--muted); font-weight: 500; font-size: var(--fs-meta); }
-.campaign-offer__table tbody th { font-weight: 500; }
-.campaign-offer__table tbody th span, .campaign-offer__table td span { display: block; }
-.campaign-offer__table tbody th span { color: var(--muted); font-weight: 400; font-size: var(--fs-meta); }
-.campaign-offer__table td:nth-child(2) { white-space: nowrap; }
-.campaign-offer__terms { display: grid; gap: 10px; max-width: 80ch; padding-left: 1.1em; list-style: disc; }
-@media (min-width: 1000px) {
-  .campaign-offer__model { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); column-gap: 48px; }
-  .campaign-offer__model > :not(table) { grid-column: 1; }
-  .campaign-offer__table { grid-column: 2; grid-row: 1 / span 4; margin-top: 0; }
-}
+/* Conditions d'une campagne, sous sa grille de produits. */
+.campaign-terms { display: grid; gap: 8px; max-width: 80ch; padding-left: 1.1em; list-style: disc; color: var(--muted); }

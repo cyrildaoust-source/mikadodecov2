@@ -86,12 +86,19 @@ const BRAND_HERO_REVIEW = process.env.BRAND_HERO_REVIEW === '1';
 const CAMPAIGN_COLLECTIONS = {
   'vitra-home-stories-for-winter': {
     name: 'Home Stories for Winter',
-    heroDescription: 'Fauteuils Vitra Grand Relax, Repos ou Grand Repos : l’Ottoman ou la Panchina assorti(e) est offert(e) dans la même configuration que le fauteuil.',
-    description: 'Du 1er octobre 2026 au 31 janvier 2027, pour l’achat d’un fauteuil Vitra Grand Relax, Repos ou Grand Repos dans une configuration participante, l’Ottoman ou la Panchina assorti(e) est offert(e) dans la même configuration que le fauteuil. Pour certaines configurations commandées en Europe avant le 27 novembre 2026, une livraison avant Noël est probablement possible, sous réserve de confirmation au moment de la commande. Offre réservée au client final, valable pendant la période de campagne auprès des revendeurs participants et selon les configurations proposées.',
+    heroDescription: 'Du 1er octobre 2026 au 31 janvier 2027, le repose-pieds est offert pour l’achat d’un fauteuil Grand Relax, Repos ou Grand Repos, dans la même configuration que le fauteuil.',
+    description: 'Du 1er octobre 2026 au 31 janvier 2027, pour l’achat d’un fauteuil Vitra Grand Relax, Repos ou Grand Repos, le repose-pieds est offert dans la même configuration que le fauteuil : l’Ottoman, ou la Panchina pour le Repos et le Grand Repos.',
     image: 'https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/hero.webp?v=1790627815',
     imageAlt: 'Vitra Home Stories for Winter — Grand Relax et Ottoman assorti',
-    // Modèles, prix et valeurs offertes : relus dans Shopify par scripts/build-home-stories-offer.mjs.
-    offer: require('./data/campaigns/vitra-home-stories-for-winter.json'),
+    gridTitle: 'Les fauteuils de l’offre',
+    terms: [
+      'Offre valable du 1er octobre 2026 au 31 janvier 2027 inclus.',
+      'Un repose-pieds offert par fauteuil, dans la même configuration que le fauteuil : l’Ottoman pour le Grand Relax ; l’Ottoman ou la Panchina, au choix, pour le Repos et le Grand Repos.',
+      'La valeur du repose-pieds est déduite automatiquement dans le panier.',
+      'Offre non cumulable avec une autre remise.',
+      'Pour une commande passée avant le 27 novembre 2026, une livraison avant Noël est probablement possible pour certaines configurations, sous réserve de confirmation.',
+      'Offre réservée au client final, auprès des revendeurs participants.',
+    ],
   },
 };
 
@@ -792,16 +799,17 @@ app.get('/collections/:handle', async (req, res) => {
 
     let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
     html = brandBanner(injectCollectionHero(html, collectionHero), handle);
+    if (campaign) html = html.replace('<section class="subhero subhero--editorial"', '<section class="subhero subhero--editorial subhero--campaign"');
     html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
     if (campaign) {
-      const terms = campaign.offer
-        ? (await import('./v3/campaign-offer-view.mjs')).campaignOfferHTML(campaign.offer)
-        : `<section class="section wrap" aria-labelledby="campaign-terms-title"><h2 class="serif catalogue-head" id="campaign-terms-title">Conditions de l’offre</h2><p>${ogEscape(campaign.description)}</p></section>`;
-      html = html.replace('<div class="wrap" data-designer-hero></div>', () => terms + '<div class="wrap" data-designer-hero></div>');
+      // Les produits d'abord ; les conditions suivent la grille.
+      const terms = `<section class="section wrap" aria-labelledby="campaign-terms-title"><h2 class="serif catalogue-head" id="campaign-terms-title">Conditions de l’offre</h2><ul class="campaign-terms">${campaign.terms.map(term => `<li>${ogEscape(term)}</li>`).join('')}</ul></section>`;
+      html = html.replace('<nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>\n  </section>', match => match + terms);
     }
     if (brand || campaign) {
       const context = { handle, collectionName, title: name, description: bodyDescription };
       if (brand) context.brand = { slug: brand, name: brandLabel };
+      if (campaign) context.gridTitle = campaign.gridTitle;
       if (campaign) context.pendingMessage = 'Les configurations seront disponibles ici dès leur publication pour le lancement de l’offre.';
       html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
 

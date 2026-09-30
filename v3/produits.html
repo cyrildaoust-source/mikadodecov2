@@ -588,7 +588,7 @@
       // says "Designer introuvable".
       gridTitle.textContent = state.designer
         ? (state.designer.name ? `Les pièces de ${state.designer.name}` : "")
-        : ((showPop || catalogueLanding) ? "Tout le catalogue" : "Le catalogue");
+        : collectionContext?.gridTitle || ((showPop || catalogueLanding) ? "Tout le catalogue" : "Le catalogue");
 
 
       // Header + filterbar adapt to the active filter:
@@ -611,7 +611,7 @@
         subEl.textContent = `Les créations ${brandName} de notre sélection « ${familyName} ».`;
       } else if (coll) {
         titleEl.textContent = COLL_TITLES[state.coll] || coll.name;
-        subEl.textContent = coll.description || "";
+        subEl.textContent = collectionContext?.description || coll.description || "";
       } else if (state.designer?.name) {
         titleEl.textContent = `Produits de ${state.designer.name}`;
         subEl.textContent = `Sélection de pièces designées par ${state.designer.name}.`;
