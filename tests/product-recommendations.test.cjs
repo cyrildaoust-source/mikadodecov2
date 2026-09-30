@@ -1,5 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
+const { readFileSync } = require('node:fs');
 const {
   MAX_RECOMMENDATIONS, selectRangeCollections, identityTerms,
   functionalCompanion, selectProductRecommendations,
@@ -13,6 +14,13 @@ const product = {
 const card = (id, overrides = {}) => ({
   id, handle: id, name: `Produit ${id}`, brand: 'HAY', productType: 'Table', tags: [],
   image: `/${id}.jpg`, variantId: `variant-${id}`, available: true, ...overrides,
+});
+
+test('les deux rubriques gardent la formulation éditoriale validée', () => {
+  const html = readFileSync(require.resolve('../v3/produit.html'), 'utf8');
+  assert.match(html, />Pour compléter votre achat<\/h2>/);
+  assert.match(html, />De la même famille<\/h2>/);
+  assert.doesNotMatch(html, /Ce qui va avec votre achat|Vous aimerez aussi/);
 });
 
 test('la gamme vient d’une collection ou d’un tag de modèle, jamais de la marque ou de la famille', () => {
