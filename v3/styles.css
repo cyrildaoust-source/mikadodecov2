@@ -1936,3 +1936,23 @@ body.pdplb-locked { overflow: hidden; }
   .catalog-filters-fab { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 70; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 22px; border: 1px solid var(--ink-deep); background: var(--ink-deep); color: var(--paper); font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 500; letter-spacing: .02em; box-shadow: 0 10px 28px rgba(26,25,22,.18); cursor: pointer; }
   .catalog-filters-fab[hidden] { display: none; }
 }
+
+/* Offre de campagne (Vitra Home Stories) : repose-pieds offert présenté par sa valeur. */
+.campaign-offer__lead { max-width: 62ch; margin-bottom: 36px; }
+.campaign-offer__models { display: grid; gap: 48px; }
+.campaign-offer__model h3 { font-size: clamp(26px, 3vw, 34px); line-height: 1.1; margin-bottom: 10px; }
+.campaign-offer__model > p { max-width: 70ch; }
+.campaign-offer__config { margin-top: 6px; color: var(--muted); font-size: var(--fs-small); }
+.campaign-offer__table { width: 100%; margin-top: 18px; border-collapse: collapse; font-family: var(--sans-product); font-size: var(--fs-small); font-variant-numeric: tabular-nums; }
+.campaign-offer__table th, .campaign-offer__table td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.campaign-offer__table thead th { color: var(--muted); font-weight: 500; font-size: var(--fs-meta); }
+.campaign-offer__table tbody th { font-weight: 500; }
+.campaign-offer__table tbody th span, .campaign-offer__table td span { display: block; }
+.campaign-offer__table tbody th span { color: var(--muted); font-weight: 400; font-size: var(--fs-meta); }
+.campaign-offer__table td:nth-child(2) { white-space: nowrap; }
+.campaign-offer__terms { display: grid; gap: 10px; max-width: 80ch; padding-left: 1.1em; list-style: disc; }
+@media (min-width: 1000px) {
+  .campaign-offer__model { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); column-gap: 48px; }
+  .campaign-offer__model > :not(table) { grid-column: 1; }
+  .campaign-offer__table { grid-column: 2; grid-row: 1 / span 4; margin-top: 0; }
+}
