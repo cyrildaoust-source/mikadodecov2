@@ -510,8 +510,8 @@ test('qualified brand hero agrees across bootstrap, social preview and no-JS fal
 test('editorial curation has distinct photographs, safe focal points and known sources', () => {
   const { collectionHeroes, collectionHero, photoStyle, injectCollectionHero } = require('../lib/editorial-media');
   const imageKey = image => new URL(image, 'https://www.mikadodeco.be').pathname;
-  assert.equal(Object.keys(collectionHeroes).length, 39);
-  assert.equal(new Set(Object.values(collectionHeroes).map(photo => imageKey(photo.image))).size, 39);
+  assert.equal(Object.keys(collectionHeroes).length, 40);
+  assert.equal(new Set(Object.values(collectionHeroes).map(photo => imageKey(photo.image))).size, 40);
   for (const [handle, photo] of Object.entries(collectionHeroes)) {
     assert.match(photo.sourceProduct, /^[a-z0-9-]+$/);
     assert.equal(new URL(photo.image).hostname, 'cdn.shopify.com');
