@@ -9,10 +9,10 @@ const url = path => new URL(path, 'https://www.mikadodeco.be');
 const labels = trail => trail.map(x => x.label);
 const product = { handle: 'chaise', name: 'Chaise <&>', brand: 'HAY' };
 
-test('all 164 collections have a role and acyclic, explicit parents; all 39 children keep their family', () => {
- assert.equal(Object.keys(nav.collections).length, 164);
+test('all 166 collections have a role and acyclic, explicit parents; all 40 children keep their family', () => {
+ assert.equal(Object.keys(nav.collections).length, 166);
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'family').length, 7);
- assert.equal(Object.values(nav.collections).filter(c => c.kind === 'subcategory').length, 39);
+ assert.equal(Object.values(nav.collections).filter(c => c.kind === 'subcategory').length, 40);
  for (const [handle, c] of Object.entries(nav.collections)) {
   const trail = collectionTrail(handle, nav);
   assert.equal(trail.at(-1).label, c.label, handle);

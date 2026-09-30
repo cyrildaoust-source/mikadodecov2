@@ -203,6 +203,11 @@
       "kind": "subcategory",
       "parent": "sieges"
     },
+    "poufs": {
+      "label": "Poufs",
+      "kind": "subcategory",
+      "parent": "sieges"
+    },
     "tables-de-salle-a-manger": {
       "label": "Tables de salle à manger",
       "kind": "subcategory",
@@ -579,6 +584,11 @@
       "label": "Toní — Fatboy",
       "kind": "range",
       "parent": "fatboy"
+    },
+    "zodiac": {
+      "label": "Zodiac",
+      "kind": "range",
+      "parent": "moustache"
     },
     "thorvald": {
       "label": "Thorvald — &Tradition",

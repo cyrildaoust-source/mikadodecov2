@@ -32,5 +32,8 @@ test('import placeholders stay hidden; care, collection and manufacturer publish
   assert.equal(product.weight, '');
   assert.equal(product.entretien, 'Nettoyer avec un chiffon doux.');
   assert.equal(product.collection, 'Zig Zag');
+  const fallback = mapProduct({ ...node, metafields: [{ key: 'country_of_origin', value: 'Danemark' }, { key: 'year_designed', value: '1950' }, { key: 'weight_kg', value: '4.5' }] }, { full: true });
+  assert.deepEqual([fallback.origin, fallback.year, fallback.weight], ['Danemark', 1950, '4,5 kg']);
+  for (const key of ['country_of_origin', 'year_designed', 'weight_kg']) assert.match(PRODUCT_QUERY, new RegExp(`key: "${key}"`));
   for (const key of ['care_instructions', 'collection_name', 'manufacturer']) assert.match(PRODUCT_QUERY, new RegExp(`key: "${key}"`));
 });

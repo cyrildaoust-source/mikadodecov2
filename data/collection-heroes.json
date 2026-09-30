@@ -349,5 +349,14 @@
     "mobilePosition": "50% 55%",
     "width": 1333,
     "height": 2000
+  },
+  "poufs": {
+    "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/fatboy-pfffh-boucle-recycled-creme-ambiance-01-107415.jpg?width=2000&format=webp",
+    "sourceProduct": "pouf-pfffh-boucle",
+    "alt": "Grand pouf rond Pfffh en bouclé crème devant un canapé, dans un jardin d’hiver lumineux",
+    "position": "50% 92%",
+    "mobilePosition": "22% 80%",
+    "width": 2000,
+    "height": 1333
   }
 }
