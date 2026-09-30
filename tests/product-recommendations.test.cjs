@@ -3,7 +3,8 @@ const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const {
   MAX_RECOMMENDATIONS, selectRangeCollections, identityTerms,
-  functionalCompanion, sceneSearchQueries, selectProductRecommendations,
+  role, functionalCompanion, sameUniverse, universeSearchQueries, sceneSearchQueries,
+  selectProductRecommendations,
 } = require('../lib/product-recommendations');
 
 const collection = { id: 'gid://shopify/Collection/palissade', handle: 'palissade', title: 'Palissade' };
@@ -22,6 +23,16 @@ test('les deux rubriques gardent la formulation éditoriale validée', () => {
   assert.match(html, />Complétez avec<\/h2>/);
   assert.match(html, />Vous aimerez aussi<\/h2>/);
   assert.doesNotMatch(html, /Ce qui va avec votre achat|Pour compléter vos achats|Dans la même famille|De la même famille/);
+});
+
+test('la fiche interroge Storefront pour le même type et le même univers', () => {
+  const queries = readFileSync(require.resolve('../lib/shopify/queries'), 'utf8');
+  const server = readFileSync(require.resolve('../server'), 'utf8');
+  assert.match(queries, /sameType: products\(first: 12, query: \$sameTypeQuery/);
+  assert.match(queries, /sameUniverse: products\(first: 16, query: \$sameUniverseQuery/);
+  assert.match(server, /sameTypeQuery: universeQueries\.sameType/);
+  assert.match(server, /sameUniverseQuery: universeQueries\.sameUniverse/);
+  assert.match(server, /universe: toCards/);
 });
 
 test('la gamme vient d’une collection ou d’un tag de modèle, jamais de la marque ou de la famille', () => {
@@ -103,6 +114,51 @@ test('les arts de la table associent les contenants qui servent ensemble', () =>
   const otherJug = card('other-jug', { name: 'Pichet Still', brand: 'Ferm Living', productType: 'Pichet à eau', tags: ['still'] });
   assert.equal(functionalCompanion(glass, jug, new Set()), true);
   assert.equal(functionalCompanion(glass, otherJug, new Set()), false);
+});
+
+test('le dernier filet rapproche le même type puis le même univers sans produit codé en dur', () => {
+  const poster = { ...product, name: 'Affiche 90 ans Artek', brand: 'Artek', productType: 'Affiche', tags: [] };
+  const otherPoster = card('poster-2', { name: 'Affiche 80 ans Artek', brand: 'Artek', productType: 'Affiche' });
+  const officeChair = { ...product, name: 'Chaise de bureau Rival', brand: 'Artek', productType: 'Chaise de bureau', tags: [] };
+  const diningChair = card('chair', { name: 'Chaise 66', brand: 'Artek', productType: 'Chaise' });
+  const glass = { ...product, name: 'Verre à liqueur Tutu', brand: 'Ichendorf Milano', productType: 'Verre à liqueur', tags: [] };
+  const waterGlass = card('water-glass', { name: 'Verre à eau Milano', brand: 'Ichendorf Milano', productType: 'Verre à eau' });
+  assert.equal(sameUniverse(poster, otherPoster), true);
+  assert.equal(role({ name: 'Affiche Tabouret 60', productType: 'Affiche' }), 'wall-decor');
+  assert.equal(role({ name: 'Guirlande Hoopik', productType: 'Guirlande' }), 'lamp');
+  assert.equal(role({ name: 'Essuie de main', productType: 'Essuie de main' }), 'bath-textile');
+  assert.equal(role({ name: 'Arrosoir Antila', productType: 'Arrosoir' }), 'garden-accessory');
+  assert.equal(sameUniverse(officeChair, diningChair), true);
+  assert.equal(sameUniverse(glass, waterGlass), true);
+  assert.equal(sameUniverse(poster, diningChair), false);
+  assert.equal(sameUniverse(
+    { name: 'Outils', productType: 'Accessoire' },
+    { name: 'Bouchon à vin', productType: 'Accessoire' },
+  ), false);
+
+  const queries = universeSearchQueries(glass);
+  assert.match(queries.sameType, /product_type:"Verre à liqueur"/);
+  assert.match(queries.sameUniverse, /product_type:"Verre à eau"/);
+  assert.doesNotMatch(`${queries.sameType} ${queries.sameUniverse}`, /gid:\/\/shopify\/Product|tutu|milano/i);
+
+  const selected = selectProductRecommendations({
+    product: glass,
+    universe: [waterGlass],
+    automaticRelated: [card('automatic')],
+  });
+  assert.deepEqual(selected.related.map(item => [item.id, item.recommendationSource]), [
+    ['water-glass', 'same-universe'],
+    ['automatic', 'shopify-related'],
+  ]);
+
+  const shared = card('shared', { productType: 'Verre à eau' });
+  const sectionPriority = selectProductRecommendations({
+    product: glass,
+    universe: [shared],
+    automaticComplementary: [shared],
+  });
+  assert.deepEqual(sectionPriority.complementary.map(item => item.id), ['shared']);
+  assert.deepEqual(sectionPriority.related, []);
 });
 
 test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique', () => {

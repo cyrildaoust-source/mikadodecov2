@@ -10,6 +10,10 @@ Les deux rubriques ont des rôles distincts :
 
 Les cartes restent celles du composant commun `v3/product-card.mjs`. Chaque
 rubrique contient quatre cartes au plus et disparaît lorsqu'elle est vide.
+Chaque fiche publiée doit toutefois disposer d'au moins une rubrique : le filet
+par type et univers garantit « Vous aimerez aussi » lorsque la fiche n'a ni
+curation ni gamme exploitable. « Complétez avec » reste masqué plutôt que de
+présenter un faux accessoire.
 
 ## Priorité des sources
 
@@ -22,11 +26,27 @@ rubrique contient quatre cartes au plus et disparaît lorsqu'elle est vide.
    recharge, bougeoir et bougie, assise et table assorties.
 4. Pour les tables, une composition de scène issue de recherches Storefront par
    types de produit, sans aucun handle codé en dur.
-5. Les recommandations automatiques Shopify `COMPLEMENTARY` et `RELATED` comme
-   dernier repli.
+5. Pour les fiches sans gamme exploitable, le même type de produit puis le même
+   univers fonctionnel, à partir des types Shopify et sans aucun handle codé en dur.
+6. Les recommandations automatiques Shopify `COMPLEMENTARY` et `RELATED` comme
+   dernier repli et complément de classement.
 
 Le produit courant, les doublons, les produits indisponibles, les produits sans
 image ou sans variante achetable sont toujours retirés.
+
+## Couverture vérifiée
+
+Mesure en lecture seule du 30 septembre 2026 sur le canal Headless :
+
+- 3 649 produits actifs et publiés ;
+- 69 produits couverts par une curation Search & Discovery existante ;
+- 3 649 produits couverts après les règles et le repli automatique Shopify,
+  soit 100 % du catalogue mesuré ;
+- 152 tables de repas sur 152 disposent d'une composition de scène complète.
+
+Les scripts `audit-product-recommendations.mjs` et
+`audit-storefront-recommendations.mjs` reproduisent cette mesure. Ils sont en
+lecture seule et ne contiennent aucune mutation Shopify.
 
 ## Composition d'une table
 
