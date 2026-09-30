@@ -128,9 +128,10 @@ nom de fichier ne suffisent pas à déclarer ce rôle.
 
 ## Ventes associées sur la fiche produit
 
-Décision du propriétaire du 30 septembre 2026 : les deux titres sont « Pour
-compléter vos achats » et « Dans la même famille ». La première rubrique compose
-un usage, pas une rangée de produits presque identiques. Pour une table, elle peut
+Décision du propriétaire du 30 septembre 2026, reprenant le chantier du 11 juin :
+les deux titres sont « Complétez avec » et « Vous aimerez aussi ». La première
+rubrique compose un usage, pas une rangée de produits presque identiques. Pour une
+table, elle peut
 associer une assise, de la vaisselle, des verres et un textile ou, si la table est
 extérieure, une lampe autonome. La seconde
 rubrique reste réservée à la gamme ou au modèle. Conserver les cartes produit
