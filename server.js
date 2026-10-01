@@ -366,11 +366,6 @@ function plpCardSsr(p, source = '') {
   return productCardHTML(p, {source});
 }
 
-// SEO/SSR · slugify miroir de shared.js (accents/ø/æ) — pour le lien créateur SSR.
-const slugifyS = (s) => String(s == null ? '' : s).toLowerCase().normalize('NFD')
-  .replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae')
-  .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-
 // SEO/SSR · Contenu produit rendu CÔTÉ SERVEUR, injecté à la place du squelette
 // (entre <!--PDP-SSR-START/END-->). Reprend les vraies classes (.pdp__brand/__name/
 // __designer/__price) → 1er paint fidèle ; le module JS remplace ensuite tout
@@ -398,12 +393,11 @@ function specAccordionSsr(p) {
 // Fiche complète (galerie, coloris, achat, disponibilité, garanties, caractéristiques),
 // avec les données que le navigateur réutilise sans relecture (#product-initial).
 function pdpServed(product, sourceURL) {
-  const dslug = product.designer ? slugifyS(product.designer) : '';
-  const designerLink = Boolean(dslug && getDesigners().some(d => String(d.slug || '').toLowerCase() === dslug && !d.hidden));
+  const designerSlug = navigation.designerSlug(product.designer, getDesigners());
   const brandHref = product.brand ? navigation.productBrandDestination(product, sourceURL, navigationRules) : '';
   if (!_pdpView) return null;
-  const view = _pdpView(product, { requestedVariant: sourceURL.searchParams.get('variant'), selectInitialVariant, brandHref, designerLink });
-  return { html: view.html, data: { ...product, designerLink, brandHref } };
+  const view = _pdpView(product, { requestedVariant: sourceURL.searchParams.get('variant'), selectInitialVariant, brandHref, designerSlug });
+  return { html: view.html, data: { ...product, designerSlug, brandHref } };
 }
 function pdpSsrBlock(p, sourceURL) {
   const selected = selectInitialVariant(p.variants, { requestedId: sourceURL?.searchParams.get('variant'), coverUrl: p.image || p.firstImageRaw, fallback: false });
@@ -412,9 +406,9 @@ function pdpSsrBlock(p, sourceURL) {
   const img = shopifyResize(rawImg, 1000);
   // Lien créateur si le designer a une page (même règle que produit.html : slug connu)
   // → +maillage interne crawlable vers les 247 pages créateur (2ᵉ levier de l'audit).
-  const dslug = p.designer ? slugifyS(p.designer) : '';
+  const dslug = navigation.designerSlug(p.designer, getDesigners());
   const designerEl = !p.designer ? ''
-    : (dslug && getDesigners().some(d => String(d.slug || '').toLowerCase() === dslug && !d.hidden))
+    : dslug
       ? '<a class="pdp__designer pdp__designer--link" href="/produits.html?designer=' + encodeURIComponent(dslug) + '">' + ogEscape(p.designer) + '</a>'
       : '<span class="pdp__designer">' + ogEscape(p.designer) + '</span>';
   return '<div class="pdp">'
@@ -846,6 +840,16 @@ app.get('/produits.html', async (req, res) => {
     return res.redirect(302, '/collections/' + req.query.coll + (query.size ? '?' + query : ''));
   }
   const slug = req.query.designer ? String(req.query.designer).toLowerCase() : '';
+  // Ancienne écriture d'un créateur (doublon unifié, duo inversé) : un seul saut vers sa fiche.
+  if (slug) {
+    await _navigationReady;
+    const canonical = navigation.designerSlug(slug, getDesigners());
+    if (canonical && canonical !== slug) {
+      const query = new URLSearchParams(Object.entries(req.query).filter(([, value]) => typeof value === 'string'));
+      query.set('designer', canonical);
+      return res.redirect(301, '/produits.html?' + query);
+    }
+  }
   // Catalogue complet filtrable (demande du 24 septembre) ; liste d'origine en secours.
   // Catalogue complet et pages créateurs filtrables ; liste d'origine en secours.
   const listScope = slug ? filterScope('designer:' + slug) : CATALOGUE_SCOPE;
@@ -999,13 +1003,12 @@ app.get('/sitemap.xml', (req, res) => sendXml(res,
 app.get('/sitemap-pages.xml', async (req, res) => {
   const urls = [];
   SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr)));
-  // Créateurs visibles et portant au moins un produit publié (tags de l'index commun).
+  // Créateurs visibles et portant au moins un produit publié.
   // Si l'index est inaccessible, la liste reste complète plutôt que de retirer des pages valides.
-  let tags = null;
-  try { tags = new Set((await getCatalogIndex({ patient: true })).products.flatMap(p => p.card.tags || [])); } catch (e) { console.warn('[sitemap-pages] index', e.message); }
+  const active = await activeDesignerSlugs({ patient: true });
   getDesigners().forEach((d) => {
     if (!d || !d.slug || d.hidden) return;
-    if (tags && !(d.tags?.length ? d.tags : [d.slug]).some(t => tags.has(t))) return;
+    if (active && !active.has(d.slug)) return;
     urls.push(smUrl(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5'));
   });
   // Articles du journal (HTML pré-rendus)
@@ -1098,9 +1101,21 @@ async function injectBrandsIndex(html) {
   return html;
 }
 
+// Créateurs qui portent au moins un produit publié (tags de l'index commun du catalogue).
+// null si l'index est indisponible : l'appelant garde alors la liste complète.
+async function activeDesignerSlugs({ patient = false } = {}) {
+  let tags;
+  try { tags = new Set((await getCatalogIndex({ patient })).products.flatMap(p => p.card.tags || [])); }
+  catch (e) { console.warn('[designers] index', e.message); return null; }
+  return new Set(getDesigners()
+    .filter(d => d && d.slug && !d.hidden && (d.tags?.length ? d.tags : [d.slug]).some(t => tags.has(t)))
+    .map(d => d.slug));
+}
+
 // SEO/SSR · Index DESIGNERS crawlable : featured + annuaire A-Z (noms + liens ?designer=).
-// Miroir du render de designers.html. Le module re-render ensuite → hydratation.
-function injectDesignersIndex(html) {
+// Seuls les créateurs qui ont des produits en ligne y figurent (décision du 1er octobre) ;
+// une fiche réapparaît d'elle-même quand un de ses produits revient.
+function injectDesignersIndex(html, active) {
   const esc = ogEscape;
   const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const FOLD = { 'Ø':'O','Œ':'O','Æ':'A','Å':'A','Ł':'L','Đ':'D','Þ':'T','ẞ':'S' };
@@ -1118,13 +1133,17 @@ function injectDesignersIndex(html) {
     + '<div class="designer-card__brands">' + brandsHTML(d) + '</div>'
     + '<a class="designer-card__link" href="/produits.html?designer=' + encodeURIComponent(d.slug) + '" aria-label="Voir les produits de ' + esc(d.name) + '"></a></article>';
 
-  const all = getDesigners().filter((d) => !d.hidden);
+  const all = getDesigners().filter((d) => !d.hidden && (!active || active.has(d.slug)));
   all.sort((a, b) => (a.sortKey || a.name).localeCompare(b.sortKey || b.name, 'fr', { sensitivity: 'base' }));
   if (!all.length) return html;
   const featured = all.filter((d) => d.featured);
   const featuredSlugs = new Set(featured.map((d) => d.slug));
   const featHtml = featured.map(featuredCardHTML).join('');
 
+  // Deux créateurs de même nom de famille (Aino et Alvar Aalto) : nom complet pour les distinguer.
+  const keyCount = {};
+  for (const d of all) { const k = (d.sortKey || d.name).toLowerCase(); keyCount[k] = (keyCount[k] || 0) + 1; }
+  const azLabel = (d) => keyCount[(d.sortKey || d.name).toLowerCase()] > 1 ? d.name : (d.sortKey || d.name);
   const groups = {};
   for (const d of all) { const k = bucketOf(d); (groups[k] = groups[k] || []).push(d); }
   const bar = ALPHA.map((L) => groups[L]
@@ -1136,7 +1155,7 @@ function injectDesignersIndex(html) {
     const anchor = L === '#' ? 'letter-num' : 'letter-' + L;
     const names = groups[L].map((d) => {
       const id = featuredSlugs.has(d.slug) ? '' : ' id="' + esc(d.slug) + '"';
-      return '<li class="az-name"' + id + '><a href="/produits.html?designer=' + encodeURIComponent(d.slug) + '">' + esc(d.sortKey || d.name) + '</a></li>';
+      return '<li class="az-name"' + id + '><a href="/produits.html?designer=' + encodeURIComponent(d.slug) + '">' + esc(azLabel(d)) + '</a></li>';
     }).join('');
     return '<div class="az-group"><h3 class="az-letter" id="' + anchor + '">' + L + '</h3><ul class="az-names">' + names + '</ul></div>';
   }).join('');
@@ -1220,7 +1239,7 @@ app.get(/.*/, async (req, res, next) => {
     try { raw = await injectBrandsIndex(raw); } catch (e) { console.warn('[brands-index]', e.message); }
   }
   if (rel === 'designers.html') {
-    try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
+    try { raw = injectDesignersIndex(raw, await activeDesignerSlugs()); } catch (e) { console.warn('[designers-index]', e.message); }
   }
   if (rel === 'nuancier-fermob.html') {
     try { raw = await injectNuancier(raw); } catch (e) { console.warn('[nuancier]', e.message); }

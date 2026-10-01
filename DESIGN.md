@@ -56,6 +56,16 @@ image agrandie au-delà de 1,25×. Seul le nom de la marque figure sur le bandea
 en bas à gauche, sur ordinateur comme sur mobile : aucun texte de présentation.
 Il reste lisible grâce au voile commun du bandeau de marque. Registre et sources : `data/brand-heroes.json`.
 
+Décision du propriétaire du 30 septembre, index A-Z des créateurs
+(`/designers.html`) : les noms sont en colonnes, lus de haut en bas (4 sur grand
+écran, 3 sur tablette, 2 sur mobile avec la lettre au-dessus), jamais les uns à
+la suite des autres séparés par des points. Chaque ligne ouvre la page du
+créateur sur toute sa largeur et fait 44 px au toucher. Deux créateurs de même
+nom de famille sont affichés avec leur nom complet. Décision du 1er octobre : la
+page ne montre que les créateurs qui ont au moins un produit en ligne, dans l'index
+comme parmi « Les grands noms du design » ; un créateur réapparaît de lui-même quand
+un de ses produits revient. Sa fiche et sa page restent en place.
+
 ## Vérification d’une modification
 
 Rectification du propriétaire du 18 septembre : les petites photos de variantes sous les cartes n’ont pas été demandées et doivent être retirées. Ne pas ajouter de sélecteur de finitions photographique aux cartes. Conserver une fiche et une carte par modèle dans le pilote Chaises. La carte choisit une finition représentative des filtres et présente son libellé, son prix exact et sa disponibilité ; toutes les variantes restent accessibles sur la fiche. Le composant commun porte cet affichage, sans déplacer le bouton de sélection ni réduire la photo principale.

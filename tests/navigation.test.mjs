@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createNavigation, navigationSlug, brandHref, selectionURL, sourceSelection, productHref, listingTrail, productTrail, collectionTrail, breadcrumbHTML, breadcrumbData, productBrandDestination } from '../v3/navigation.mjs';
+import { createNavigation, navigationSlug, brandHref, selectionURL, sourceSelection, productHref, listingTrail, productTrail, collectionTrail, breadcrumbHTML, breadcrumbData, productBrandDestination, designerSlug } from '../v3/navigation.mjs';
 import { walkCatalog, sortCatalog, catalogPagination } from '../v3/catalog-pagination.mjs';
 const read = path => JSON.parse(fs.readFileSync(new URL(path, import.meta.url)));
 const nav = createNavigation(read('../v3/navigation-data.json'), read('../v3/mega-menu-brands.json').brands, read('../v3/designers-data.json').designers);
@@ -63,6 +63,14 @@ test('brand and designer histories have truthful fallbacks; related products are
  assert.deepEqual(labels(productTrail(product,url(productHref(product,'/produit.html?handle=other')),nav)), ['Accueil','Catalogue','Chaise <&>']);
  assert.equal(productBrandDestination(product,url(productHref(product,'/collections/alvar-aalto')),nav),'/collections/hay');
  assert.equal(productBrandDestination(product,url(productHref(product,'/collections/luminaires')),nav),'/collections/luminaires?brand=hay');
+});
+test('the designer named on a product leads to its page, whatever the recorded spelling', () => {
+ const designers=[{slug:'fabricius-kastholm',tags:['fabricius-kastholm','kastholm-fabricius']},{slug:'masque',tags:['masque'],hidden:true}];
+ assert.equal(designerSlug('Fabricius & Kastholm',designers),'fabricius-kastholm');
+ assert.equal(designerSlug('Kastholm & Fabricius',designers),'fabricius-kastholm');
+ assert.equal(designerSlug('Masque',designers),'','une fiche masquée ne reçoit pas de lien');
+ assert.equal(designerSlug('Inconnu',designers),'');
+ assert.equal(designerSlug('',designers),'');
 });
 test('one accessible breadcrumb and identical JSON-LD hierarchy, with a stable product canonical', () => {
  const trail=productTrail(product,url(productHref(product,'/collections/chaises?brand=hay')),nav);

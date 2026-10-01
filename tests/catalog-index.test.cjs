@@ -192,4 +192,7 @@ test('pages créateurs : pièces portant ses tags, rendues par le serveur, param
   const api=await (await realFetch(base+'/api/catalog/'+encodeURIComponent('designer:verner-panton'))).json();
   assert.equal(api.total,6);
   assert.equal((await page('/produits.html?designer=inconnu')).response.status,404);
+  const alias=await realFetch(base+'/produits.html?designer=ronan-bouroullec&brand=hay',{redirect:'manual'});
+  assert.equal(alias.status,301,'une autre écriture inscrite dans les tags mène à la fiche du créateur');
+  assert.equal(alias.headers.get('location'),'/produits.html?designer=ronan-erwan-bouroullec&brand=hay');
 });
