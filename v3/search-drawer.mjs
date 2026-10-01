@@ -13,7 +13,7 @@ export function createSearchDrawer() {
   let lastFocus = null, timer = null, lastTerm = "", featLoaded = false, pendingSearch = null, searchGeneration = 0;
   const onKey = (e) => { if (e.key === "Escape") { e.preventDefault(); close(); } };
   const pdpHref = (p, source) => escapeHtml(productHref(p, typeof source === "string" ? source : ""));
-  const row = (p, source) => `<a class="sr__row" href="${pdpHref(p, source)}"><span class="sr__media"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /></span><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span>${p.finishLabel ? `<span class="sr__finish">${escapeHtml(p.finishLabel)}</span>` : ''}</span><span class="sr__price">${priceLabel(p)}</span></a>`;
+  const row = (p, source) => `<a class="sr__row" href="${pdpHref(p, source)}"><span class="sr__media"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /></span><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span>${p.finishLabel ? `<span class="sr__finish">${escapeHtml(p.finishLabel)}</span>` : ''}<span class="sr__price">${priceLabel(p)}</span></span></a>`;
   // Chaque marque de /api/brands et de /api/predictive porte déjà son lien.
   const brandHref = (b) => b.href || `/produits.html?brand=${encodeURIComponent(b.slug)}`;
   const catHref   = (c) => `/collections/${encodeURIComponent(c.handle)}`;

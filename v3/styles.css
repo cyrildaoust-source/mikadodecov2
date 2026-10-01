@@ -705,7 +705,8 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
   .search-page__results .grid-head { flex-wrap: wrap; gap: 18px; }
   .search-page__sort { flex-wrap: wrap; }
 }
-.sr__price { font-weight: 600; font-size: .95rem; white-space: nowrap; }
+/* Prix sous le nom : le nom garde toute la largeur de la colonne. */
+.sr__price { margin-top: 2px; font-weight: 600; font-size: .95rem; white-space: nowrap; }
 .sr__all { display: block; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--accent-ink); font-weight: 600; font-size: .95rem; text-decoration: none; }
 /* ─── Recherche : état vide 3 colonnes + groupes/chips de résultats ─── */
 .searchd__cols { display: grid; grid-template-columns: 1fr 1fr 1.35fr; gap: 44px; }
