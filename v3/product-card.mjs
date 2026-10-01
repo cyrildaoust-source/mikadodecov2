@@ -50,9 +50,21 @@ function variantBadge(p) {
   return `${values.size} ${pluralize(name)}`;
 }
 
+// Photos Shopify à la taille de la carte : deux colonnes sur mobile, quatre au plus ailleurs.
+// Le CDN sert du WebP aux navigateurs qui l'acceptent ; une seule largeur par paramètre.
+const CARD_WIDTHS = [360, 480, 600];
+const CARD_SIZES = "(max-width: 760px) 50vw, 25vw";
+function cardImageAttrs(url) {
+  if (!url || !url.includes("cdn.shopify.com")) return `src="${escapeHtml(url || "")}"`;
+  const at = width => { const u = new URL(url); u.searchParams.set("width", width); u.searchParams.set("format", "webp"); return u.href; };
+  return `src="${escapeHtml(at(600))}" srcset="${escapeHtml(CARD_WIDTHS.map(w => at(w) + " " + w + "w").join(", "))}" sizes="${CARD_SIZES}" width="600" height="600"`;
+}
+// Écran tactile sans survol : une image vide remplace la photo de survol, jamais téléchargée.
+const NO_HOVER = '<source media="(hover: none)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">';
+
 export function productCardHTML(p, {source = '', quantity = 0, interactive = true} = {}) {
   const href = escapeHtml(productHref(p, typeof source === 'string' ? source : ''));
-  const alt = p.image2 && p.image2 !== p.image ? `<img class="alt" src="${escapeHtml(p.image2)}" alt="" loading="lazy" decoding="async" />` : "";
+  const alt = p.image2 && p.image2 !== p.image ? `<picture>${NO_HOVER}<img class="alt" ${cardImageAttrs(p.image2)} alt="" loading="lazy" decoding="async" /></picture>` : "";
   const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`
     : p.badge === "limite" ? `<span class="tag">Édition limitée</span>` : "";
@@ -64,7 +76,7 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
           <span class="pcard__promo" data-promo-slot hidden></span>
           ${p.compareAt && p.price != null && p.compareAt > (p.priceIsExact ? p.price : p.priceMin ?? p.price) ? `<span class="pcard__sale">−${Math.round((p.compareAt - (p.priceIsExact ? p.price : p.priceMin ?? p.price)) / p.compareAt * 100)}%</span>` : ""}
         </div>
-        <img class="main" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name + (p.finishLabel ? ' · ' + p.finishLabel : ''))}" loading="lazy" decoding="async" />
+        <img class="main" ${cardImageAttrs(p.image)} alt="${escapeHtml(p.name + (p.finishLabel ? ' · ' + p.finishLabel : ''))}" loading="lazy" decoding="async" />
         ${alt}
       </a>
       <div class="pcard__brand">${escapeHtml(p.brand || "")}</div>

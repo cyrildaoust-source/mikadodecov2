@@ -73,7 +73,7 @@ test('Jardin et Tables appliquent leurs règles ; la marque d’une carte arrive
   const {html}=await page('/collections/sieges?brand=hay');
   assert.equal(seed(html).total,20);
   assert.match(html,/data-plp-title data-context>Assises · HAY<\/h1>/);
-  assert.match(html,/<title>Assises · HAY · Mikado Deco<\/title>/);
+  assert.match(html,/<title>Assises HAY · Mikado Deco<\/title>/);
   const famille=await page('/collections/decoration?category=vases');
   assert.equal(famille.response.status,200);
   assert.equal(seed(famille.html).total,10);

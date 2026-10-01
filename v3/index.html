@@ -22,7 +22,10 @@
   <meta name="twitter:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
   <meta name="description" content="Une sélection de mobilier et d'objets de design. Boutique à Uccle, du mardi au samedi. Livraison en Belgique." />
   <link rel="canonical" href="https://www.mikadodeco.be/" />
-  <link rel="preload" as="image" type="image/webp" href="/images/home/hero.webp" fetchpriority="high" />
+  <!-- Photo d'accueil : recadrages téléphone et tablette, AVIF préchargé (les navigateurs sans AVIF l'ignorent et prennent le WebP). -->
+  <link rel="preload" as="image" type="image/avif" href="/images/home/hero-mobile.avif" media="(max-width: 600px)" fetchpriority="high" />
+  <link rel="preload" as="image" type="image/avif" href="/images/home/hero-tablet.avif" media="(min-width: 601px) and (max-width: 900px)" fetchpriority="high" />
+  <link rel="preload" as="image" type="image/avif" imagesrcset="/images/home/hero-1280.avif 1280w, /images/home/hero-2000.avif 2000w" imagesizes="100vw" media="(min-width: 901px)" fetchpriority="high" />
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
   <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
@@ -54,7 +57,14 @@
 
   <!-- 1 · HERO -->
   <section class="home-hero">
-    <img class="home-hero__img" src="/images/home/hero.webp" alt="Salon de design, fauteuil lounge et ottoman" fetchpriority="high" />
+    <picture>
+      <source type="image/avif" media="(max-width: 600px)" srcset="/images/home/hero-mobile.avif" />
+      <source type="image/webp" media="(max-width: 600px)" srcset="/images/home/hero-mobile.webp" />
+      <source type="image/avif" media="(max-width: 900px)" srcset="/images/home/hero-tablet.avif" />
+      <source type="image/webp" media="(max-width: 900px)" srcset="/images/home/hero-tablet.webp" />
+      <source type="image/avif" srcset="/images/home/hero-1280.avif 1280w, /images/home/hero-2000.avif 2000w" sizes="100vw" />
+      <img class="home-hero__img" src="/images/home/hero.webp" srcset="/images/home/hero-1280.webp 1280w, /images/home/hero.webp 2000w" sizes="100vw" width="2000" height="800" alt="Salon de design, fauteuil lounge et ottoman" fetchpriority="high" />
+    </picture>
     <span class="home-hero__scrim"></span>
     <div class="home-hero__in wrap">
       <h1 class="serif">Le design,<br>pour toute la maison.</h1>
