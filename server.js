@@ -769,7 +769,7 @@ app.get('/collections/:handle', async (req, res) => {
     const name = collectionName + (brand ? ' · ' + brandLabel : '');
     const title = `${name} · Mikado Deco`;
     const description = ogDesc(
-      brand ? `Les créations ${brandLabel} de notre sélection « ${collectionName} ».` : col.description && col.description.trim()
+      brand ? `Les créations ${brandLabel} de notre sélection « ${collectionName} ».` : campaign ? campaign.description : col.description && col.description.trim()
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
