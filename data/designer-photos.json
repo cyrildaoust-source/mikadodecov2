@@ -705,6 +705,1490 @@
       "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1758026902/designers/Yrj%C3%B6-Kukkapuro_master.jpg",
       "credit": null,
       "retrieved": "2026-09-30"
+    },
+    "eero-aarnio": {
+      "sourcePage": "https://alessi.com/collections/eero-aarnio",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Aarnio-Eero.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "virgil-abloh": {
+      "sourcePage": "https://alessi.com/collections/virgil-abloh",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Abloh-Virgil_e261876f-4bf9-4f1e-af54-04a0f51414d8.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "carlo-alessi": {
+      "sourcePage": "https://alessi.com/collections/carlo-alessi",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Alessi-Carlo_e8bd4183-ac85-489b-901b-51cc19c176d8.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "abi-alice": {
+      "sourcePage": "https://alessi.com/collections/abi-alice",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Alice-Abi_590c0767-4399-471e-a24f-33b742864844.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "william-alsop": {
+      "sourcePage": "https://alessi.com/collections/william-alsop",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Alsop-William_89d001c0-040e-4d8b-9538-7037aede0257.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "lucy-d-karin-santorso-barbara-ambrosz": {
+      "sourcePage": "https://lucyd.com/about/",
+      "imageUrl": "https://lucyd.com/wp-content/uploads/2026/03/lucy.d_karin-santorso-barbara-ambrosz2026_sw.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original ; montage côte à côte des membres (photo en largeur)",
+      "retrieved": "2026-10-01"
+    },
+    "michael-anastassiades": {
+      "sourcePage": "https://alessi.com/collections/michael-anastassiades",
+      "imageUrl": "https://alessi.com/cdn/shop/files/1024x1024_0000_Michael_Anastassiades_ph._Matthew_Donaldson.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "federico-angi": {
+      "sourcePage": "https://alessi.com/collections/federico-angi",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Angi_Federico_photo-Alberto-Strada.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "ron-arad": {
+      "sourcePage": "https://alessi.com/collections/ron-arad",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Arad-Ron.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "wiel-arets": {
+      "sourcePage": "https://alessi.com/collections/wiel-arets",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Arets-Wiel-phJanBitter_03d2de6c-76f4-4da1-93aa-ca484b9ee13d.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "antonio-arico": {
+      "sourcePage": "https://alessi.com/collections/antonio-arico",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Arico-Antonio_84ff8f17-bd8d-4837-a45c-a594508aee3e.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "big-game": {
+      "sourcePage": "https://alessi.com/collections/big-game",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Big-Game2_fbf2ec02-5771-4894-812a-f497a4e37cd0.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Portrait N&B officiel Alessi des trois associés. Le recadrage 4:5 est serré : les têtes s'étendent sur x≈175–1250 et 1045 px sont disponibles. Prendre toute la hauteur et x≈190–1235 (les oreilles des ",
+      "retrieved": "2026-10-01"
+    },
+    "mario-botta": {
+      "sourcePage": "https://alessi.com/collections/mario-botta",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Botta-Mario.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "gabriele-chiave-lorenza-bozzoli": {
+      "sourcePage": "https://alessi.com/collections/gabriele-chiave + https://alessi.com/collections/lorenza-bozzoli",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Chiave-Gabriele_7cc0227a-2317-4fda-a5e8-3a3b5f020ae1.jpg + https://alessi.com/cdn/shop/files/Bozzoli-Lorenza.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "andrea-branzi": {
+      "sourcePage": "https://alessi.com/collections/andrea-branzi",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Branzi-Andrea_315c5f3c-dec1-48be-82a9-48066aa38ebf.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "clare-brass": {
+      "sourcePage": "https://alessi.com/collections/clare-brass",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Brass-Clare.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "fratelli-campana": {
+      "sourcePage": "https://estudiocampana.com.br/sobre/",
+      "imageUrl": "https://estudiocampana.com.br/wp-content/uploads/2024/08/Campana_Brothers_Vava_Ribeiro.png",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Portrait N&B officiel de l'Estudio Campana (les deux frères dans une même veste croisée), crédit Vava Ribeiro. Recadrage 4:5 centré sur toute la hauteur (≈1547 px de large) : les deux visages restent ",
+      "retrieved": "2026-10-01"
+    },
+    "achille-castiglioni": {
+      "sourcePage": "https://alessi.com/collections/achille-castiglioni",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Castiglioni-Achille_c9fe24cd-223e-4ad9-a1a9-76a6a69e4faa.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Portrait N&B officiel Alessi (Achille souriant, lunettes rondes, cigarette, bibliothèque derrière). Recadrage 4:5 sur toute la hauteur, centré sur le visage (x≈145–1190).",
+      "retrieved": "2026-10-01"
+    },
+    "gary-chang": {
+      "sourcePage": "https://alessi.com/collections/gary-chang",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Chang-Gary.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "pierre-charpin": {
+      "sourcePage": "https://alessi.com/collections/pierre-charpin",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Charpin-Pierre_219520da-c776-43e5-a94c-028e79f3eda4.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "gabriele-chiave": {
+      "sourcePage": "https://alessi.com/collections/gabriele-chiave",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Chiave-Gabriele_7cc0227a-2317-4fda-a5e8-3a3b5f020ae1.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "david-chipperfield": {
+      "sourcePage": "https://alessi.com/collections/david-chipperfield",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Chipperfield-David_36761915-df16-4a3f-8d9b-7a3f290feb3f.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "biagio-cisotti": {
+      "sourcePage": "https://alessi.com/collections/biagio-cisotti",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Cisotti-Biagio_f4f4b571-6ba8-44f7-aad3-c7e40fdf9e1c.jpg?v=1748186648",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "lluis-clotet": {
+      "sourcePage": "https://alessi.com/collections/lluis-clotet",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Clotet-Lluis_5c78ab48-db62-4020-850c-f67d8f7d0e54.jpg?v=1748186606",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "susan-cohn": {
+      "sourcePage": "https://alessi.com/collections/susan-cohn",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Cohn-Susan_507cc306-ef26-4e79-83c1-5784713d502f.jpg?v=1748186637",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "adam-cornish": {
+      "sourcePage": "https://alessi.com/collections/adam-cornish",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Cornish-Adam.jpg?v=1748186631",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "durbino-lomazzi": {
+      "sourcePage": "https://alessi.com/collections/durbino-lomazzi",
+      "imageUrl": "https://alessi.com/cdn/shop/files/DUrbino-Lomazzi.jpg?v=1748186614",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "michele-de-lucchi": {
+      "sourcePage": "https://alessi.com/collections/michele-de-lucchi",
+      "imageUrl": "https://alessi.com/cdn/shop/files/DeLucchi-Michele_288296b2-b111-486d-9894-9aaf5617ce5b.jpg?v=1748185969",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "pauline-deltour": {
+      "sourcePage": "https://alessi.com/collections/pauline-deltour",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Deltour-Pauline.jpg?v=1748186619",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "anita-dineen": {
+      "sourcePage": "https://alessi.com/collections/anita-dineen",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Dineen-Anita-1.jpg?v=1748186654",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "luigi-caccia-dominioni": {
+      "sourcePage": "https://alessi.com/collections/luigi-caccia-dominioni",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Caccia-Dominioni-Luigi_26208c76-fbff-4748-aabc-5804cdbf4c30.jpg?v=1748186640",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "naoto-fukasawa": {
+      "sourcePage": "https://alessi.com/collections/naoto-fukasawa",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Fukasawa-Naoto_b8cd9d48-1ce4-4e56-af05-99f1f6b9edc2.jpg?v=1748186635",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "doriana-e-massimiliano-fuksas": {
+      "sourcePage": "https://alessi.com/collections/doriana-e-massimiliano-fuksas",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Fuksas-Fabio-Lovino_f777094a-5639-41ea-aa55-38d10eca67b5.jpg?v=1748186622",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "elisa-gargan": {
+      "sourcePage": "https://alessi.com/collections/elisa-giovannoni",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Giovannoni-Elisa_03e68fba-c945-4ef2-8672-487d08ebdf07.jpg?v=1748186668",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "anna-e-gian-franco-gasparini": {
+      "sourcePage": "https://alessi.com/collections/anna-e-gian-franco-gasparini",
+      "imageUrl": "https://alessi.com/cdn/shop/files/gasparini-web-prodotto-store.jpg?v=1748186615",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "paolo-gerosa": {
+      "sourcePage": "https://alessi.com/collections/paolo-gerosa",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Gerosa-Paolo.jpg?v=1748186613",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "massimo-giacon": {
+      "sourcePage": "https://alessi.com/collections/massimo-giacon",
+      "imageUrl": "https://alessi.com/cdn/shop/files/giacon-web-prodotto-store_5cbf920f-c74c-45cf-86e0-40f5f3646333.jpg?v=1748186650",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "elisa-giovannoni": {
+      "sourcePage": "https://alessi.com/collections/elisa-giovannoni",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Giovannoni-Elisa_03e68fba-c945-4ef2-8672-487d08ebdf07.jpg?v=1748186668",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "stefano-giovannoni": {
+      "sourcePage": "https://alessi.com/collections/stefano-giovannoni",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Giovannoni-Stefano_14be2e96-9499-4b4a-ad4c-d29022a5b892.jpg?v=1748185932",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "adam-goodrum": {
+      "sourcePage": "https://alessi.com/collections/adam-goodrum",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Goodrum-Adam-Josh-Purnell.jpg?v=1748186650",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "frederic-gooris": {
+      "sourcePage": "https://alessi.com/collections/frederic-gooris",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Gooris-Fred-2014.jpg?v=1748186634",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "michael-graves": {
+      "sourcePage": "https://alessi.com/collections/michael-graves",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Graves-Michael.jpg?v=1748185990",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "zaha-hadid": {
+      "sourcePage": "https://alessi.com/collections/zaha-hadid",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Hadid-Zaha.jpg?v=1748186624",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "jim-hannon-tan": {
+      "sourcePage": "https://alessi.com/collections/jim-hannon-tan",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Hannon-Tan-Jim-1_68005e1a-08a7-4f6d-b6c4-10154693f8d3.jpg?v=1748186646",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "franco-sargiani-eija-helander": {
+      "sourcePage": "https://alessi.com/collections/franco-sargiani",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Sargiani-Franco_e08d8f4a-fb18-45cd-b765-7380aeae85d7.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "josef-hoffmann": {
+      "sourcePage": "https://alessi.com/collections/josef-hoffmann",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Hoffmann-Josef.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "giulio-iacchetti": {
+      "sourcePage": "https://alessi.com/collections/giulio-iacchetti",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Iacchetti-Giulio.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "harry-paul-van-iersel": {
+      "sourcePage": "https://alessi.com/collections/paul-van-iersel-harry",
+      "imageUrl": "https://alessi.com/cdn/shop/files/HARRY-AMP-ritratto.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "toyo-ito": {
+      "sourcePage": "https://alessi.com/collections/toyo-ito",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Ito-Toyo_1b08cb8f-6e16-48b0-8428-4c5a0f61c6f3.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "marcello-jori": {
+      "sourcePage": "https://alessi.com/collections/marcello-jori",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Jori-Marcello_fdb10541-0bde-42c1-aa8d-59b01bcd7fd8.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "patrick-jouin": {
+      "sourcePage": "https://alessi.com/collections/patrick-jouin",
+      "imageUrl": "https://alessi.com/cdn/shop/files/jouin-web-prodotto-store.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "jin-kuramoto": {
+      "sourcePage": "https://alessi.com/collections/jin-kuramoto",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Kuramoto-Jin_960x960_268f3637-6248-4842-9520-a95d48a2f72a.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "kristiina-lassus": {
+      "sourcePage": "https://alessi.com/collections/kristiina-lassus",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Lassus-Kristiina_e94e48a0-00f8-4147-83e5-f5ac88ccbeca.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "boucquillon-maaoui": {
+      "sourcePage": "https://alessi.com/collections/boucquillon-maaoui",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Boucquillon-Maaoui-2020_dda1981d-c477-422b-94e5-ef7f3c40ce71.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "philippe-malouin": {
+      "sourcePage": "https://alessi.com/collections/philippe-malouin",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Malouin_Philippe_ph_Oliver-Marshall.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "enzo-mari": {
+      "sourcePage": "https://alessi.com/collections/enzo-mari",
+      "imageUrl": "https://alessi.com/cdn/shop/files/enzomari-web-prodotto-store_6e211c88-7ff5-458e-968e-6e5569d12109.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "anselmo-vitale-carlo-mazzeri": {
+      "sourcePage": "https://alessi.com/collections/carlo-mazzeri",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Mazzeri-Carlo_8b87b55a-aca7-407a-99e0-b5c57f959ba9.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "carlo-mazzeri": {
+      "sourcePage": "https://alessi.com/collections/carlo-mazzeri",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Mazzeri-Carlo_8b87b55a-aca7-407a-99e0-b5c57f959ba9.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "alessandro-mendini": {
+      "sourcePage": "https://alessi.com/collections/alessandro-mendini",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Mendini_Alessandro-Lavatori.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "miriam-mirri": {
+      "sourcePage": "https://alessi.com/collections/miriam-mirri",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Mirri-Miriam_bbf807ca-d9b0-474a-a760-4a210ce79cbe.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "moretti-savoy": {
+      "sourcePage": "https://alessi.com/collections/moretti-savoy",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Moretti-Savoy_1b13f61f-9ece-4837-928e-9f6551968f9d.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original ; montage côte à côte des membres (photo en largeur)",
+      "retrieved": "2026-10-01"
+    },
+    "nendo": {
+      "sourcePage": "https://alessi.com/collections/nendo",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Oki-Sato-Nendo-ph-Allan-Abani.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "marc-newson": {
+      "sourcePage": "https://marc-newson.com/marc-newson/",
+      "imageUrl": "https://marc-newson.com/media/about/Phil-Poynter-2025_taXJivL.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "jean-nouvel": {
+      "sourcePage": "https://alessi.com/collections/jean-nouvel",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Nouvel_Jean.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "kuno-prey": {
+      "sourcePage": "https://alessi.com/collections/kuno-prey",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Kuno-prey_61101266-c994-47a5-9dc7-a91e17e483aa.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "claudia-raimondo": {
+      "sourcePage": "https://alessi.com/collections/claudia-raimondo",
+      "imageUrl": "https://alessi.com/cdn/shop/files/raimondo-web-prodotto-store_1b01af0c-ad7b-4905-9645-bdfbc1082966.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "aldo-rossi": {
+      "sourcePage": "https://alessi.com/collections/aldo-rossi",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Rossi-Aldo_1e32f0d5-3db4-4750-9e34-790372c202dc.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "alejandro-ruiz": {
+      "sourcePage": "https://alessi.com/collections/alejandro-ruiz",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Ruiz-Alejandro_892d67fa-5625-4487-a499-981777a5d6bd.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "elena-salmistraro": {
+      "sourcePage": "https://alessi.com/collections/elena-salmistraro",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Salmistraro-Elena_230ab0f5-8bc9-499c-b70e-ab8b94165a6c.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "richard-sapper": {
+      "sourcePage": "https://alessi.com/collections/richard-sapper",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Sapper-Richard_4aac45a1-1f75-408e-8266-595e6b229157.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "inga-sempe": {
+      "sourcePage": "https://alessi.com/collections/inga-sempe",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Sempe-Inga_71c39aa1-7379-4485-a4bc-647df3668fd0.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "emma-silvestris": {
+      "sourcePage": "https://alessi.com/collections/emma-silvestris",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Silvestris-Emma.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "valerio-sommella": {
+      "sourcePage": "https://alessi.com/collections/valerio-sommella",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Sommella-Valerio_57c64594-82c4-4c04-a25d-faa878292742.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "ettore-sottsass": {
+      "sourcePage": "https://alessi.com/collections/ettore-sottsass",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Sottsass_Ettore_Blocco_Designer.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "philippe-starck": {
+      "sourcePage": "https://alessi.com/collections/philippe-starck",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Starck-Philippe-copia-1.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (source non officielle). Portrait noir et blanc sur fond blanc, sweat à capuche. Recadrage 4:5 centré sur le visage, à droite de l'image (environ 1045 x 1306 px). Aucun crédit indiqué.",
+      "retrieved": "2026-10-01"
+    },
+    "keiji-takeuchi": {
+      "sourcePage": "https://alessi.com/collections/keiji-takeuchi",
+      "imageUrl": "https://alessi.com/cdn/shop/files/KEIJI-TAKEUCHI-2023.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "mario-trimarchi": {
+      "sourcePage": "https://alessi.com/collections/mario-trimarchi",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Mario_Trimarchi_ph-Fabio-Vigano.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "john-truex": {
+      "sourcePage": "https://alessi.com/collections/john-truex",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Truex-John.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "ben-van-berkel-unstudio": {
+      "sourcePage": "https://alessi.com/collections/ben-van-berkel-unstudio",
+      "imageUrl": "https://alessi.com/cdn/shop/files/VanBerkel-Ben-Koos-Breukel_a7bef3f8-92e1-4b9d-a114-92534be367dc.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "patricia-urquiola": {
+      "sourcePage": "https://patriciaurquiola.com/studio",
+      "imageUrl": "https://cms.patriciaurquiola.com/wp-content/uploads/2020/02/portrait.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (source non officielle). Portrait couleur devant une bibliothèque, publié sur la page Studio du site de la créatrice. Recadrage 4:5 sur toute la hauteur (environ 645 x 807 px), centré sur le visage. Autre option : la photo d'",
+      "retrieved": "2026-10-01"
+    },
+    "guido-venturini": {
+      "sourcePage": "https://alessi.com/collections/guido-venturini",
+      "imageUrl": "https://alessi.com/cdn/shop/files/venturini-web-prodotto-store_7b4e5097-4d84-4c3c-9edd-cad5a781e220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "marcel-wanders": {
+      "sourcePage": "https://alessi.com/collections/marcel-wanders",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Wanders-Chiave_c112b17f-76e5-4dda-a034-4417101a753d.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "kobi-wiesendanger": {
+      "sourcePage": "https://alessi.com/collections/kobi-wiesendanger",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Wiesendanger-Kobi.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "theo-williams": {
+      "sourcePage": "https://alessi.com/collections/theo-williams",
+      "imageUrl": "https://alessi.com/cdn/shop/files/William-Theo.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "tudelft-titus-wybenga": {
+      "sourcePage": "https://alessi.com/collections/tudelft-titus-wybenga",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Wybenga-Titus.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "marco-zanuso": {
+      "sourcePage": "https://alessi.com/collections/marco-zanuso",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Marco_Zanuso.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "nika-zupanc": {
+      "sourcePage": "https://alessi.com/collections/nika-zupanc",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Zupanc-Nika-Portrait-phcredit-Fulvio-Grisoni.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "alessandra-baldereschi": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/alessandra-baldereschi/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3321/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0007-Alessandra-Baldereschi-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "cristina-celestino": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/cristina-celestino/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3330/10000x10000/nocrop/noenlarge/align-4/01-CRISTINACELESTINO-credit-Sara-1.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "corrado-dotti": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/corrado-doti/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3323/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0004-Foto-CORRADO-DOTTI-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "simone-fanciullacci": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/simone-fanciullacci/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3329/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0006-Boboli-designer-Simone-Fanciullacci-portrait-bn-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "alba-gallizia": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/alba-gallizia/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/1627/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0027-Alba-Gallizia-Ichendorf-672x372-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "nick-geipel": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/nick-geipel/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/7163/10000x10000/nocrop/noenlarge/align-4/NIckGeipel.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "paolo-golinelli": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/paolo-golinelli/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/6636/10000x10000/nocrop/noenlarge/align-4/paolo-golinelli.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "tsukasa-goto": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/tsukasa-goto/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3348/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0010-Tsukasa-Goto-port-2016-01-copia-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "denis-guidone": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/denis-guidone/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3331/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0021-Denis-Guidone-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "pascal-hien": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/pascal-hien/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/6635/10000x10000/nocrop/noenlarge/align-4/23-01-27-PASCAL-HIEN-INANIEHOFF-LOWRES-small-17-BW.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "patrik-illo": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/patrik-illo/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/6540/10000x10000/nocrop/noenlarge/align-4/Schermata-2024-10-03-alle-15.44.41.png",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "forti-e-di-loreto": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designer/forti-e-di-loreto/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3585/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0018-Forti-e-Di-Loreto-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original ; montage côte à côte des membres (photo en largeur)",
+      "retrieved": "2026-10-01"
+    },
+    "astrid-luglio": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/astrid-luglio/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3356/10000x10000/nocrop/noenlarge/align-4/Astrid-Luglio-photocredit-Sirio-.png",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "mist-o": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/misto-o/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3327/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0015-Mist-o-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original ; montage côte à côte des membres (photo en largeur)",
+      "retrieved": "2026-10-01"
+    },
+    "tomoko-mizu": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/tomoko-mizu/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/4629/10000x10000/nocrop/noenlarge/align-4/Tomoko-Mizu-Sito.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "studio-naessi": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/naessi-studio/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/4426/10000x10000/nocrop/noenlarge/align-4/N-ssi-Studio.jpeg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "lina-obregon": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/lina-obregon/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/4627/10000x10000/nocrop/noenlarge/align-4/Lina-Obregon.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "chiara-onida": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/chiara-onida/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/5095/10000x10000/nocrop/noenlarge/align-4/Chiara-Onida-ls.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "daniele-dalla-pellegrina": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/daniele-dalla-pellegrina/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/7182/10000x10000/nocrop/noenlarge/align-4/daniele-dalla-pellegrina-BW.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "anna-perugini": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/anna-perugini/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3335/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0025-Anna-Perugini-Portrait-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "margherita-rui": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/margherita-rui/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/4424/10000x10000/nocrop/noenlarge/align-4/Screenshot-2023-04-16-alle-12.30.15.png",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "marta-sansoni": {
+      "sourcePage": "https://alessi.com/products/cactus-fruit-bowl",
+      "imageUrl": "https://alessi.com/cdn/shop/files/Sansoni-Marta_9a44983d-c43b-456c-b3b7-8c69d68a4432.jpg?v=1748186609",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "f-mastropaolo-e-b-scarfati": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/fabiana-mastropaolo-e-bianca-scarfati/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3619/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0000-mastropietroscarfati.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original ; montage côte à côte des membres (photo en largeur)",
+      "retrieved": "2026-10-01"
+    },
+    "brian-sironi": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/brian-sironi/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/4425/10000x10000/nocrop/noenlarge/align-4/Brian-Sironi.jpeg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "marco-sironi": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/marco-sironi/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/3326/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0016-Marco-Sironi-copy.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "studiopepe": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/studiopepe/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/5994/10000x10000/nocrop/noenlarge/align-4/Studiopepe-SilviaRivoltella-2.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "filip-arickx": {
+      "sourcePage": "https://serax.com/pages/filip-arickx",
+      "imageUrl": "https://serax.com/cdn/shop/files/Filip_Arickx.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "kris-van-assche": {
+      "sourcePage": "https://serax.com/pages/kris-van-assche",
+      "imageUrl": "https://serax.com/cdn/shop/files/KrisVanAssche.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "evelien-bleumink": {
+      "sourcePage": "https://serax.com/pages/evelien-bleumink",
+      "imageUrl": "https://serax.com/cdn/shop/files/EvelienBleumink.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "piet-boon": {
+      "sourcePage": "https://serax.com/pages/piet-boon",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Piet_Boon_96926ec3-9baf-421b-a159-2aef1637d6e7.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "sophie-casier": {
+      "sourcePage": "https://serax.com/pages/sophie-casier",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_SophieCasier.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "plan-c": {
+      "sourcePage": "https://serax.com/pages/plan-c",
+      "imageUrl": "https://serax.com/cdn/shop/files/BW_PlanC.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "eva-claessens": {
+      "sourcePage": "https://serax.com/pages/eva-claessens",
+      "imageUrl": "https://serax.com/cdn/shop/files/Eva_Claessens.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "coseincorso": {
+      "sourcePage": "https://serax.com/pages/coseincorso",
+      "imageUrl": "https://serax.com/cdn/shop/files/cosecorso.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "ruben-deriemaeker": {
+      "sourcePage": "https://serax.com/pages/ruben-deriemaeker",
+      "imageUrl": "https://serax.com/cdn/shop/files/Ruben_Deriemaeker_Ecom.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "nadine-dewart": {
+      "sourcePage": "https://serax.com/pages/nadine-dewart",
+      "imageUrl": "https://serax.com/cdn/shop/files/Nadine_Dewart.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "lauren-van-driessche": {
+      "sourcePage": "https://serax.com/pages/lauren-van-driessche",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portret_Lauren_Van_Driessche.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "marc-ferrand": {
+      "sourcePage": "https://serax.com/pages/marc-ferrand",
+      "imageUrl": "https://serax.com/cdn/shop/files/Marc_Ferrand.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "alex-gabriels": {
+      "sourcePage": "https://serax.com/pages/alex-gabriels",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_AlexGabriels_ZW_Ecom.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "nadia-gallardo": {
+      "sourcePage": "https://serax.com/pages/nadia-gallardo",
+      "imageUrl": "https://serax.com/cdn/shop/files/nadia-gallardo.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "frederick-gautier": {
+      "sourcePage": "https://serax.com/pages/frederick-gautier",
+      "imageUrl": "https://serax.com/cdn/shop/files/Frederick_Gautier.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "grint": {
+      "sourcePage": "https://serax.com/pages/grint",
+      "imageUrl": "https://serax.com/cdn/shop/files/GRiNT.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "koen-van-guijze": {
+      "sourcePage": "https://serax.com/pages/koen-van-guijze",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Koen_Van_Guijze.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "wouters-hendrix": {
+      "sourcePage": "https://wouters-hendrix.com/blogs/about/our-story",
+      "imageUrl": "https://wouters-hendrix.com/cdn/shop/files/Portret_Karen_Katrin.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "sergio-herman": {
+      "sourcePage": "https://serax.com/pages/sergio-herman",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Sergio_Inko.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "seppe-van-heusden": {
+      "sourcePage": "https://serax.com/pages/seppe-van-heusden",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Seppe_Van_Heusden.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "ann-van-hoey": {
+      "sourcePage": "https://serax.com/pages/ann-van-hoey",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_annvanhoey_nathaliesamain_Ecom.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "kseniya-kravtsova": {
+      "sourcePage": "https://serax.com/pages/kseniya-kravtsova",
+      "imageUrl": "https://serax.com/cdn/shop/files/Kseniya_Kravtsova.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "anita-le-grelle": {
+      "sourcePage": "https://serax.com/pages/anita-le-grelle",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Anita_LEGRELLE_dd8f2cad-3c1f-4b1e-9601-7f99529ca637.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Portrait officiel Serax, en pied, salopette dans son atelier. Le visage est petit dans le cadre entier : recadrer en 4:5 sur le haut du corps (par exemple environ 1600x2000 centré sur le visage, ce qu",
+      "retrieved": "2026-10-01"
+    },
+    "bertrand-lejoly": {
+      "sourcePage": "https://serax.com/pages/bertrand-lejoly",
+      "imageUrl": "https://serax.com/cdn/shop/files/Bertrand_Lejoly.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "arik-levy": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/arik-levy",
+      "imageUrl": "https://static.vitra.com/media/asset/8699956/storage/master/87250044.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "jose-levy": {
+      "sourcePage": "https://www.serax.com/pages/jose-levy",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_JoseLevy_Photo_by_Mikael_Lafontan_-_Zwart_Wit.jpg?v=1684155372",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "louis-de-limburg": {
+      "sourcePage": "https://www.serax.com/pages/louis-de-limburg",
+      "imageUrl": "https://serax.com/cdn/shop/files/Louis_de_Limburg.jpg?v=1688374344",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "nel-maertens": {
+      "sourcePage": "https://www.serax.com/pages/nel-maertens",
+      "imageUrl": "https://serax.com/cdn/shop/files/Nel.jpg?v=1772202025",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "marie-michielssen": {
+      "sourcePage": "https://www.serax.com/pages/marie-michielssen",
+      "imageUrl": "https://serax.com/cdn/shop/files/Marie_Michielssen_Portret_BW_V2_c1309178-41be-4e81-a7d9-d65ae9bc53e7.jpg?v=1764862557",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "bea-mombaers": {
+      "sourcePage": "https://www.serax.com/pages/bea-mombaers",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_BeaMombaers_Ecom.jpg?v=1682603363",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "pascale-naessens": {
+      "sourcePage": "https://www.serax.com/pages/pascale-naessens",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Pascal_NAESSENS_87cd70f5-6759-4218-a870-349b6b85111f.jpg?v=1682696417",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "studio-ottawa": {
+      "sourcePage": "https://www.serax.com/pages/studio-ottawa",
+      "imageUrl": "https://serax.com/cdn/shop/files/studio_Ottawa.jpg?v=1746798040",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "ottolenghi": {
+      "sourcePage": "https://www.serax.com/pages/ottolenghi",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Ecom_Ottolenghi_aaac3bfd-0eb2-4873-adf3-116bfe8dcaa9.jpg?v=1682582071",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "patrick-paris": {
+      "sourcePage": "https://www.serax.com/pages/patrick-paris",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Patrick_Paris_Ecom_45f42c99-c31b-45fa-8cd1-9bf74ee6ad10.jpg?v=1684929004",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "annebet-philips": {
+      "sourcePage": "https://www.serax.com/pages/annebet-philips",
+      "imageUrl": "https://serax.com/cdn/shop/files/Annebet_Philips__EliasDerboven_HR_35.jpg?v=1776429207",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "thijs-prinsen": {
+      "sourcePage": "https://www.serax.com/pages/thijs-prinsen",
+      "imageUrl": "https://serax.com/cdn/shop/files/DSC_2861zw.jpg?v=1706702247",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "claudia-schoemig": {
+      "sourcePage": "https://www.serax.com/pages/claudia-schoemig",
+      "imageUrl": "https://serax.com/cdn/shop/files/CS.jpg?v=1772114648",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "antonino-sciortino": {
+      "sourcePage": "https://www.serax.com/pages/antonino-sciortino",
+      "imageUrl": "https://serax.com/cdn/shop/files/mattiaaquila-000001.jpg?v=1683185752",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "bela-silva": {
+      "sourcePage": "https://web.archive.org/web/20250618055020/https://www.serax.com/pages/bela-silva",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_BelaSilva_Ecom.jpg?v=1682604961",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "studio-simple": {
+      "sourcePage": "https://www.serax.com/pages/studio-simple",
+      "imageUrl": "https://serax.com/cdn/shop/files/Studio-Sample.jpg?v=1683896580",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "waww-la-table": {
+      "sourcePage": "https://www.serax.com/pages/waww-la-table",
+      "imageUrl": "https://serax.com/cdn/shop/files/WAWW_La_Table.jpg?v=1771335069",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "luc-tuymans": {
+      "sourcePage": "https://www.serax.com/pages/luc-tuymans",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portreit_LucTuymans_crop_ecom.jpg?v=1684156029",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "utilise-objects": {
+      "sourcePage": "https://www.serax.com/pages/utilise-objects",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Utilise.objects_Ecom.jpg?v=1684324684",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "roos-van-de-velde": {
+      "sourcePage": "https://www.serax.com/pages/roos-van-de-velde",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Roos_Van_De_Velde_ea6f745b-ff4d-4058-a0fb-ddaea33952df.jpg?v=1684320772",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "vincent-van-duysen": {
+      "sourcePage": "https://www.serax.com/pages/vincent-van-duysen",
+      "imageUrl": "https://serax.com/cdn/shop/files/Vincent.jpg?v=1730279781",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "jonas-van-put": {
+      "sourcePage": "https://www.serax.com/pages/jonas-van-put",
+      "imageUrl": "https://serax.com/cdn/shop/files/JonasVanPut_KnackWeekend-1__JefJacobsbw.jpg?v=1744023539",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "antoine-vandewoude": {
+      "sourcePage": "https://www.serax.com/pages/antoine-vandewoude",
+      "imageUrl": "https://serax.com/cdn/shop/files/Antoine_Vandewoude.jpg?v=1742901351",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "bob-verhelst": {
+      "sourcePage": "https://www.serax.com/pages/bob-verhelst",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_BobVerhelst_KoenDeWaal.jpg?v=1732180448",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "renate-vos": {
+      "sourcePage": "https://www.serax.com/pages/renate-vos",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_RenateVos_Ecom.jpg?v=1684320673",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "kelly-wearstler": {
+      "sourcePage": "https://web.archive.org/web/20250807111009/https://www.serax.com/pages/kelly-wearstler",
+      "imageUrl": "https://serax.com/cdn/shop/files/Kelly_W_ASerge_selection_71.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "alvar-aalto": {
+      "sourcePage": "https://www.artek.fi/en/company/designers/alvar-aalto",
+      "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604823/designers/Alvar_Aalto_treated.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "anderssen-voll": {
+      "sourcePage": "https://www.flokk.com/designers/anderssen-voll",
+      "imageUrl": "https://www.flokk.com/hubfs/H%C3%85G%20Tion/Espen-Voll-og-Torbj%C3%B8rn-Anderssen-BW-1.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Portrait officiel de Flokk, éditeur du siège HÅG Tion du duo, en noir et blanc et issu de la même séance que la photo actuelle. Recadrage 4:5 centré sur le duo, x 1260 à 3800 sur toute la hauteur (254",
+      "retrieved": "2026-10-01"
+    },
+    "carole-baijings": {
+      "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+      "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw688e2fa0/Landingspages/Designer%20Stories/05.c-carole-bijings%20(1).jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Photo de la page Designer stories de Fatboy (Carole sur un pouf Fatboy). Le bandeau de produits du bas a été retiré, puis l'image recadrée en 4:5 sur la zone (150,0)-(1558,1760) de l'original 1760x248",
+      "retrieved": "2026-10-01"
+    },
+    "edward-barber-jay-osgerby": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/edward-barber-and-jay-osgerby",
+      "imageUrl": "https://static.vitra.com/media/asset/8682319/storage/v_fullbleed_1440x/81386118.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "dorothee-becker": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/dorothee-becker",
+      "imageUrl": "https://static.vitra.com/media/asset/8694995/storage/v_fullbleed_1440x/87250030.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "ronan-erwan-bouroullec": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/ronan-and-erwan-bouroullec",
+      "imageUrl": "https://static.vitra.com/media/asset/8692653/storage/v_fullbleed_1440x/81447863.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "pier-giacomo-castiglioni": {
+      "sourcePage": "https://flos.com/en/nl/designers/a-and-pg-castiglioni.html",
+      "imageUrl": "https://flos.com/on/demandware.static/-/Library-Sites-FLOS-contentlib/default/dwb18200bd/clp_designers/designers-a-and-pg-castiglioni-flos-entrance-desk.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Photo Flos des deux frères (Achille debout à gauche, Pier Giacomo assis à droite), publiée sur la liste des designers Flos et, teintée en bleu, en tête de leur page. Recadrage 4:5 sur Pier Giacomo : x",
+      "retrieved": "2026-10-01"
+    },
+    "michel-charlot": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/michel-charlot",
+      "imageUrl": "https://static.vitra.com/media/asset/8695170/storage/v_fullbleed_1440x/81448250.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "antonio-citterio": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/antonio-citterio",
+      "imageUrl": "https://static.vitra.com/media/asset/8682274/storage/v_fullbleed_1440x/81385570.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "julien-de-smedt": {
+      "sourcePage": "https://www.juliendesmedt.com/about",
+      "imageUrl": "https://www.juliendesmedt.com/media/pages/about/44fe69ee75-1743759889/05cb97e481386079a2304f86a6dcd25d-min.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "charles-ray-eames": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/charles-and-ray-eames",
+      "imageUrl": "https://static.vitra.com/media/asset/8680079/storage/v_fullbleed_1440x/81353918.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "daniel-enoksson": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=57aaa010-1267-48ee-83f8-fa1daf8d550c",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/daniel-enoksson_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "hannes-fritz": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=1a736296-b5bd-49cb-87a1-cc398e8d23e2",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/hannes-and-fritz_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "frank-gehry": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/frank-gehry",
+      "imageUrl": "https://static.vitra.com/media/asset/8699807/storage/v_fullbleed_1440x/81488512.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "alexander-girard": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/alexander-girard",
+      "imageUrl": "https://static.vitra.com/media/asset/8682269/storage/v_fullbleed_1440x/81385132.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "mette-rolf-hay": {
+      "sourcePage": "https://www.hay.com/footer/about-hay/about-hay",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/brandsite/footer/about/about-hay/icon_mette-and-rolf-2026_1390x800.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Photo officielle HAY 2026 de Mette et Rolf Hay au milieu de meubles HAY (Rolf assis, casquette ; Mette debout). Recadrage 4:5 conseillé : x 855-1575, y 170-1070 (720x900 px, les deux visages bien lisi",
+      "retrieved": "2026-10-01"
+    },
+    "florentijn-hofman": {
+      "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+      "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw9f30cb9d/Landingspages/Designer%20Stories/05.a-florentijn-hofman%20(1).jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (source non officielle). Portrait en noir et blanc de la page Designer stories de Fatboy. Bandeau de produits retiré, recadrage 4:5 sur (176,0)-(1584,1760) de l'original 1760x2488. Le visage remplit le cadre.",
+      "retrieved": "2026-10-01"
+    },
+    "arne-jacobsen": {
+      "sourcePage": "https://www.fritzhansen.com/en/designers/arne-jacobsen",
+      "imageUrl": "https://cloudinary.fritzhansen.com/-/media/images/images/inspiration/designers/arne-jacobsen/arne-jacobsen-close-up.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Gros plan en noir et blanc publié par Fritz Hansen, son éditeur historique, qui n'est pas une marque de Mikado. Recadrage 4:5 : toute la largeur, centré sur le visage (3478×4347). &Tradition n'a que d",
+      "retrieved": "2026-10-01"
+    },
+    "simon-jones": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=42d40a05-90a1-4585-84b5-4e233ec326f4",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/simon-jones-studio_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "leif-jorgensen": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=be80968a-4ccc-4587-be6c-d26d9b46d0c0",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/leif-joergensen_b2b-b2c.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "kranen-gille": {
+      "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+      "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw8817d392/Landingspages/Designer%20Stories/kranen-galle.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "tristan-lohner": {
+      "sourcePage": "https://www.fermob.com/en_int/designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Tristan-LOHNER.gif",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "cecilie-manz": {
+      "sourcePage": "https://www.muuto.com/designers2/cecilie-manz/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/cecilie-manz/cecilie-manz-studio-muuto.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Portrait officiel de Muuto : assise à son bureau, regard vers la droite, visage bien visible. Recadrage 4:5 décalé vers la droite, par exemple x 0 à 1416 et y 0 à 1770. Autre choix : la photo de son s",
+      "retrieved": "2026-10-01"
+    },
+    "jasper-morrison": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/jasper-morrison",
+      "imageUrl": "https://static.vitra.com/media/asset/8682408/storage/v_fullbleed_1440x/81388027.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "jonathan-muecke": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=1a741f96-f18d-40ed-afe6-69c9464bb550",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jonathan-muecke_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "george-nelson": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/george-nelson",
+      "imageUrl": "https://static.vitra.com/media/asset/8682358/storage/v_fullbleed_1440x/81386560.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "isamu-noguchi": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/isamu-noguchi",
+      "imageUrl": "https://static.vitra.com/media/asset/8682363/storage/v_fullbleed_1440x/81387209.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "norm-architects": {
+      "sourcePage": "https://normcph.com/people/",
+      "imageUrl": "https://normcph.com/wp-content/uploads/2026/09/Jonas-1-scaled.jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (origine introuvable). Portraits officiels du studio, un par fondateur : Jonas Bjerre-Poulsen dans photos/norm-architects.jpg, et Kasper Rønn Von Lotzbeck dans photos/norm-architects-2.jpg (https://normcph.com/wp-content/up ; montage côte à côte des membres (photo en largeur)",
+      "retrieved": "2026-10-01"
+    },
+    "marijn-oomen": {
+      "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+      "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dwbf33e348/Landingspages/Designer%20Stories/04.b-marijn-oomen%20(1).jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "verner-panton": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/verner-panton",
+      "imageUrl": "https://static.vitra.com/media/asset/8694738/storage/v_fullbleed_1440x/91272973.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "jean-prouve": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/jean-prouve",
+      "imageUrl": "https://static.vitra.com/media/asset/8682413/storage/v_fullbleed_1440x/81388550.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "julien-renault": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=a85e47cd-edb1-4a48-be63-e469892713cb",
+      "imageUrl": "https://www.hay.com/contentassets/b3a9bde6d9f64f81ab3e9d72a44b3f33/julienrenault_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "bruno-rey": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=35657f5f-f5fb-4755-9dda-160ae5a93747",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/bruno-rey_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "nathalie-schellekens": {
+      "sourcePage": "https://www.studioons.com/",
+      "imageUrl": "https://static.wixstatic.com/media/996499_0b13e30800814d1290570c1c09264831~mv2.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "stefan-scholten": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=147b9a27-a456-4760-ba87-b7f466c2d656",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/stefan-scholten_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "muller-van-severen": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=e991d0a6-473a-485e-922c-9afb6be31550",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/muller-van-severen_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "frederic-sofia": {
+      "sourcePage": "https://www.fermob.com/en_int/designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Fr_d_ric-SOFIA.gif",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "erik-stehmann": {
+      "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+      "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw5335e6ad/Landingspages/Designer%20Stories/02.c-erik-stehmann%20(1).jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (ne montrait pas le créateur). Photo de la page Designer stories de Fatboy : Erik Stehmann assis sur une chaise Toní. Recadrage 4:5 serré sur lui, zone (800,100)-(1760,1300) de l'original 1760x2496. Visage assez petit, mais lisible",
+      "retrieved": "2026-10-01"
+    },
+    "jonas-trampedach": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=d364cf0c-b460-471f-9dd8-23c09a25758c",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jonas-trampedach_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "norman-trapman": {
+      "sourcePage": "https://www.polspotten.com/en/design-collabs/norman-trapman/",
+      "imageUrl": "https://www.polspotten.com/on/demandware.static/-/Sites/default/dw2e6acbaf/plp/ss26/5.png",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "john-tree": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=1b46d189-4fc5-4f17-aa44-bccd028ab551",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/john-tree_portrait.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "nynke-tynagel": {
+      "sourcePage": "https://nynketynagel.com/about",
+      "imageUrl": "https://nynketynagel.com/media/pages/about/b98c2b95cc-1740609039/nynke-tynagel-atelier-portrait.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "hortense-and-valeriane": {
+      "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+      "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dwc1bf0cac/Landingspages/Designer%20Stories/04.a-hortense-and-valeriane%20(1).jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (source non officielle). Photo de la page Designer stories de Fatboy, sous « Hortense and Valériane » : deux femmes sur la plage devant la tente Miasun. Recadrage 4:5 sur (280,260)-(1480,1760) de l'original 1760x2486. À VALID",
+      "retrieved": "2026-10-01"
+    },
+    "de-makers-van": {
+      "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+      "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw41138b3d/Landingspages/Designer%20Stories/02.a-demakersvan%20(2).jpg",
+      "credit": null,
+      "note": "remplace le 1er octobre un portrait importé (officiel mais sans visage reconnaissable). Photo du trio fondateur de la page Designer stories de Fatboy. Recadrage 4:5 sur (176,0)-(1584,1760) de l'original 1760x2496 : les trois visages restent dans le cadre, les épaules des deux hommes sont",
+      "retrieved": "2026-10-01"
+    },
+    "roderick-vos": {
+      "sourcePage": "https://www.polspotten.com/en/design-collabs/roderick-vos/",
+      "imageUrl": "https://www.polspotten.com/on/demandware.static/-/Sites/default/dw7a11093b/plp/ss26/4.png",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
+    },
+    "sylvain-willenz": {
+      "sourcePage": "https://serax.com/pages/sylvain-willenz",
+      "imageUrl": "https://serax.com/cdn/shop/files/Sylvain_willenz.jpg?v=1688373964",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "sori-yanagi": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/sori-yanagi",
+      "imageUrl": "https://static.vitra.com/media/asset/8700064/storage/v_fullbleed_1440x/81491349.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "clara-von-zweigbergk": {
+      "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=000de4fe-ccb2-448b-b6c4-5ea4d2b2d9dd",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/clara-von-zweigbergk-2020_1220x1220.jpg",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre",
+      "retrieved": "2026-10-01"
+    },
+    "teun-zwets": {
+      "sourcePage": "https://www.polspotten.com/en/design-collabs/teun-zwets/",
+      "imageUrl": "https://www.polspotten.com/on/demandware.static/-/Sites/default/dwa7c17d56/plp/ss26/3.png",
+      "credit": null,
+      "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
+      "retrieved": "2026-10-01"
     }
   }
 }

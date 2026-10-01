@@ -25,12 +25,14 @@ test('une fiche par créateur : slug unique, tag propre et marques du registre',
   for (const b of brands) assert.ok(!owners.has(slug(b.name)), `${slug(b.name)} est une marque`);
 });
 
-test('chaque portrait existe avec sa version 640 ; les portraits ajoutés gardent leur source', () => {
+test('chaque portrait existe avec sa version 640 et sa source', () => {
   for (const d of designers.filter(d => d.photo)) {
     const file = path.join(root, 'v3', d.photo);
     assert.ok(fs.existsSync(file), d.photo);
     assert.ok(fs.existsSync(file.replace(/\.jpg$/, '-640.webp')), d.photo + ' -640.webp');
   }
+  // Chaque portrait affiché a une source officielle enregistrée.
+  for (const d of designers.filter(d => d.photo)) assert.ok(photos[d.slug], d.slug + ' : source du portrait');
   for (const [s, source] of Object.entries(photos)) {
     const d = designers.find(x => x.slug === s);
     assert.equal(d?.photo, `/images/designers/${s}.jpg`, s);
