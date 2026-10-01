@@ -6,6 +6,8 @@ const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUER
 const { normalizeItems, getDeliveryEstimate, realProject } = require('./lib/delivery-estimate');
 const express = require('express');
 const { selectInitialVariant } = require('./v3/product-variant');
+const { productJsonLd } = require('./lib/product-jsonld');
+const { seoMeta } = require('./lib/seo-meta');
 const cors    = require('cors');
 const path    = require('path');
 const fs      = require('fs');
@@ -621,27 +623,7 @@ app.get('/produit.html', async (req, res) => {
     // L'offre décrit la variante affichée (URL ?variant= ou photo de couverture),
     // comme le bloc SSR : même prix, même prix barré et même disponibilité.
     const ldVariant = selectInitialVariant(product.variants, { requestedId: new URL(req.originalUrl, ORIGIN).searchParams.get('variant'), coverUrl: product.image || product.firstImageRaw, fallback: false });
-    const ldPrice = ldVariant ? ldVariant.price : product.priceMin;
-    const ldWas = ldVariant?.compareAtPrice;
-    const ldInStock = ldVariant ? (typeof ldVariant.qty === 'number' && ldVariant.qty > 0) : product.inStock;
-    const ldAvailable = ldVariant ? ldVariant.available !== false : product.available;
-    const ld = {
-      "@context": "https://schema.org", "@type": "Product", "name": name,
-      ...(brand ? { brand: { "@type": "Brand", "name": brand } } : {}),
-      // Description produit (texte brut Shopify). Échappement JSON assuré par
-      // JSON.stringify (+ le remplacement `<`→< ci-dessous anti-</script>) ;
-      // surtout PAS escapeHtml, qui corromprait le JSON avec des entités HTML.
-      ...(product.description ? { description: product.description } : {}),
-      ...(image ? { image } : {}),
-      "itemCondition": "https://schema.org/NewCondition",
-      "offers": {
-        "@type": "Offer", "priceCurrency": "EUR",
-        ...(ldPrice != null ? { price: String(ldPrice) } : {}),
-        ...(ldWas != null && ldPrice != null && ldWas > ldPrice ? { priceSpecification: { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": String(ldWas), "priceCurrency": "EUR" } } : {}),
-        "availability": "https://schema.org/" + (ldInStock ? "InStock" : (ldAvailable ? "BackOrder" : "OutOfStock")),
-        "url": url
-      }
-    };
+    const ld = productJsonLd(product, ldVariant, { url, image, seller: 'Mikado Deco' });
     const ldTag = `<script type="application/ld+json">` + JSON.stringify(ld).replace(/</g, '\\u003c') + `</script>`
       ;
     let out = html.replace('</head>', ldTag + '\n</head>');
@@ -994,6 +976,8 @@ const SM_STATIC = [
   ['/mentions-legales.html', '0.3'], ['/conditions-generales-de-vente.html', '0.3'],
   ['/politique-et-vie-privee.html', '0.3'], ['/politique-cookies.html', '0.3'],
 ];
+// Date de dernière modification Shopify (AAAA-MM-JJ) ; absente plutôt qu'inventée.
+const smDate = (iso) => (typeof iso === 'string' && /^\d{4}-\d{2}-\d{2}/.test(iso) ? iso.slice(0, 10) : '');
 const smUrl = (loc, priority, lastmod) =>
   `  <url><loc>${SM_ESC(loc)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}<priority>${priority}</priority></url>`;
 const smUrlset = (urls) => `<?xml version="1.0" encoding="UTF-8"?>\n`
@@ -1047,7 +1031,7 @@ app.get('/sitemap-products.xml', async (req, res) => {
       for (let i = 0; i < 60; i++) { // garde-fou
         const { nodes, pageInfo } = (await shopifyFetch(SITEMAP_PRODUCTS_QUERY, { after })).products;
         (nodes || []).forEach((prod) => {
-          if (prod.handle) urls.push(smUrl(ORIGIN + '/produit.html?handle=' + encodeURIComponent(prod.handle), '0.8'));
+          if (prod.handle) urls.push(smUrl(ORIGIN + '/produit.html?handle=' + encodeURIComponent(prod.handle), '0.8', smDate(prod.updatedAt)));
         });
         if (!pageInfo || !pageInfo.hasNextPage) break;
         if (i === 59) throw new Error('Catalogue trop grand pour le sitemap actuel');
@@ -1058,7 +1042,7 @@ app.get('/sitemap-products.xml', async (req, res) => {
         // Les familles éditoriales et les sélections composites ont leurs propres sources.
         if (Object.hasOwn(BRAND_COLLECTION_ALIASES, c.handle) || INTERNAL_COLLECTION.test(c.handle)) return;
         const composed = Object.hasOwn(families, c.handle) || Object.hasOwn(FAMILLES_RICHES, c.handle) || ['chaises', 'tables-outdoor', 'promotions'].includes(c.handle);
-        if (c.handle && (c.hasProducts !== false || composed)) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6'));
+        if (c.handle && (c.hasProducts !== false || composed)) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6', smDate(c.updatedAt)));
       });
       return smUrlset(urls);
     }, 6 * 60 * 60 * 1000); // cache 6 h
@@ -1507,7 +1491,10 @@ async function sendScopeCatalog(req,res,scope) {
     if (scope.fallback === 'legacy') return false;
     data = {scope,...filterCatalog([],req.query),error:true};
   }
-  const url = ORIGIN + view.scopeURL(scope,data.state);
+  // Catalogue filtré sur une seule marque : la page de la marque est l'URL à indexer.
+  const brandPage = scope.kind === 'catalogue' && data.state.brand.length === 1 && data.state.page === 1 && !isFilteredState(data.state)
+    && navigationRules.collections[data.state.brand[0]]?.kind === 'brand' ? '/collections/' + data.state.brand[0] : null;
+  const url = ORIGIN + (brandPage || view.scopeURL(scope,data.state));
   const brandName = data.state.brand.length===1 ? data.facets.brand.find(b=>b.value===data.state.brand[0])?.label : '';
   let html, page = 'produits.html', photo = null;
   if (scope.kind === 'family') ({ html, page } = await familyScopeHTML(req, scope, data, view));
@@ -1517,6 +1504,8 @@ async function sendScopeCatalog(req,res,scope) {
     const designer = getDesigners().find(d => d.slug === scope.fixed.designer);
     html = renderChairCatalog(fs.readFileSync(PRODUITS_TEMPLATE,'utf8'),data,view,plpCardSsr)
       .replace('<html lang="fr" class="plp-collection"', '<html lang="fr" class="plp-designer"')
+      // Le bandeau générique est masqué sur une page créateur : son titre ne doit pas doubler le H1 du portrait.
+      .replace(/<h1 data-plp-title data-context>([^<]*)<\/h1>/, '<p data-plp-title data-context>$1</p>')
       .replace('<div class="wrap" data-designer-hero></div>', () => '<div class="wrap" data-designer-hero>' + (designer ? designerHeroSsr(designer) : '') + '</div>');
     photo = designer?.photo ? { img: designer.photo } : null;
   }
@@ -1528,8 +1517,9 @@ async function sendScopeCatalog(req,res,scope) {
     : scope.kind === 'catalogue' ? catalogLanding.hero.image
     : photo?.img ? absUrl(photo.img) : OG_DEFAULT;
   // Marques, gammes et sélections : description Shopify de la collection, comme avant.
-  const description = scope.kind === 'collection' && data.collection?.description ? ogDesc(data.collection.description) : scope.kind === 'designer' ? ogDesc(scope.ogDescription) : scope.ogDescription;
-  html = renderWithOg(html,{title:brandName ? `${scope.label} · ${brandName} · Mikado Deco` : scope.ogTitle,description,image,url});
+  const editorial = scope.kind === 'collection' ? data.collection?.description : scope.kind === 'designer' ? scope.ogDescription : '';
+  const { title, description } = seoMeta(scope, data, { brandName, editorial: editorial ? ogDesc(editorial) : '' });
+  html = renderWithOg(html,{title,description,image,url});
   html = listingNavigation(html,req,{title:['catalogue','designer'].includes(scope.kind) ? undefined : scope.label,brandName});
   if (data.error) {
     html = html.replace(view.emptyState(scope),`<p class="plp-empty">${ogEscape(scope.unavailable)} <a href="${ogEscape(req.originalUrl)}">Réessayer</a>.</p>`);
@@ -1796,6 +1786,7 @@ function mapCollection(node, index) {
     founded:     meta.founded   ? parseInt(meta.founded) : null,
     tagline:     meta.tagline   || '',
     description: node.description || '',
+    updatedAt:   node.updatedAt || null,
     hasProducts: node.products ? node.products.edges.length > 0 : null,
     website:     meta.website   || '',
     image:       node.image?.url || null,

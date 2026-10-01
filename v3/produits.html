@@ -3,6 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Placé avant les feuilles de style : un script situé après elles attend leur
+       chargement, ce qui retardait le préchargement du bandeau (LCP mobile). -->
+  <script type="application/json" id="collection-hero-initial">null</script>
+  <!-- Hero resolution + preload. The server injects a qualified brand or
+       editorial collection hero from the common manifests, else the generic catalog hero; stashes the choice on
+       window.__hero and preloads the chosen WebP so the LCP fetch starts
+       immediately. The body <picture> reuses the SAME srcset → the LCP image is
+       fetched exactly once. -->
+  <script>
+    (function () {
+      var curatedHero = JSON.parse(document.getElementById("collection-hero-initial").textContent);
+      var hero;
+      if (curatedHero) {
+        hero = curatedHero;
+      } else {
+        hero = {
+          brand: false,
+          srcset: "/images/produits-hero-640.webp 640w, /images/produits-hero-960.webp 960w, /images/produits-hero-1280.webp 1280w, /images/produits-hero-1600.webp 1600w",
+          img: "/images/produits-hero.jpg",
+          width: 1600, height: 2000,
+          alt: "Catalogue Mikado Deco",
+          obj: "center 70%"
+        };
+      }
+      window.__hero = hero;
+      // La photo de Mobilier ne s'affiche pas sur les pages suivantes.
+      var query = new URLSearchParams(location.search);
+      var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
+      if (!m && !query.get('brand') && !query.get('designer') && !query.get('q') && (!query.get('coll') || query.get('coll') === 'all') && parseInt(query.get('page'), 10) > 1) return;
+      var link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.type = "image/webp";
+      link.setAttribute("imagesrcset", hero.srcset);
+      link.setAttribute("imagesizes", "100vw");
+      link.setAttribute("fetchpriority", "high");
+      document.head.appendChild(link);
+    })();
+  </script>
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -146,44 +185,7 @@
       if ((_seg && _seg !== "all") || _q.get("brand")) document.documentElement.classList.add("plp-collection");
     } catch (e) {}
   </script>
-  <script type="application/json" id="collection-hero-initial">null</script>
   <script type="application/json" id="collection-context-initial">null</script>
-  <!-- Hero resolution + preload. The server injects a qualified brand or
-       editorial collection hero from the common manifests, else the generic catalog hero; stashes the choice on
-       window.__hero and preloads the chosen WebP so the LCP fetch starts
-       immediately. The body <picture> reuses the SAME srcset → the LCP image is
-       fetched exactly once. -->
-  <script>
-    (function () {
-      var curatedHero = JSON.parse(document.getElementById("collection-hero-initial").textContent);
-      var hero;
-      if (curatedHero) {
-        hero = curatedHero;
-      } else {
-        hero = {
-          brand: false,
-          srcset: "/images/produits-hero-640.webp 640w, /images/produits-hero-960.webp 960w, /images/produits-hero-1280.webp 1280w, /images/produits-hero-1600.webp 1600w",
-          img: "/images/produits-hero.jpg",
-          width: 1600, height: 2000,
-          alt: "Catalogue Mikado Deco",
-          obj: "center 70%"
-        };
-      }
-      window.__hero = hero;
-      // La photo de Mobilier ne s'affiche pas sur les pages suivantes.
-      var query = new URLSearchParams(location.search);
-      var m = location.pathname.match(/^\/collections\/([^\/?#]+)/);
-      if (!m && !query.get('brand') && !query.get('designer') && !query.get('q') && (!query.get('coll') || query.get('coll') === 'all') && parseInt(query.get('page'), 10) > 1) return;
-      var link = document.createElement("link");
-      link.rel = "preload";
-      link.as = "image";
-      link.type = "image/webp";
-      link.setAttribute("imagesrcset", hero.srcset);
-      link.setAttribute("imagesizes", "100vw");
-      link.setAttribute("fetchpriority", "high");
-      document.head.appendChild(link);
-    })();
-  </script>
 </head>
 <body>
   <div id="site-header"></div>

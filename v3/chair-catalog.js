@@ -53,7 +53,7 @@ function paint(data,{keepOpen=false}={}) {
   const mobileOpen=keepOpen&&controls.querySelector('.catalog-filters')?.classList.contains('is-open');
   current=data;
   const title=data.state.brand.length===1?`${scope.label} · ${data.facets.brand.find(b=>b.value===data.state.brand[0])?.label||'Sélection'}`:scope.label;
-  for(const heading of document.querySelectorAll('[data-plp-title],.chair-catalog__compact h1'))heading.textContent=title;
+  for(const heading of document.querySelectorAll('[data-plp-title],.chair-catalog__compact > *'))heading.textContent=title;
   controls.innerHTML=filterControls({...data,scope});
   for(const el of controls.querySelectorAll('details'))el.open=open.includes(el.dataset.filterGroup);
   const form=controls.querySelector('form');form.classList.toggle('is-open',Boolean(mobileOpen));
