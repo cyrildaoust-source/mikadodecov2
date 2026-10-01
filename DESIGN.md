@@ -61,7 +61,10 @@ Décision du propriétaire du 30 septembre, index A-Z des créateurs
 écran, 3 sur tablette, 2 sur mobile avec la lettre au-dessus), jamais les uns à
 la suite des autres séparés par des points. Chaque ligne ouvre la page du
 créateur sur toute sa largeur et fait 44 px au toucher. Deux créateurs de même
-nom de famille sont affichés avec leur nom complet.
+nom de famille sont affichés avec leur nom complet. Décision du 1er octobre : la
+page ne montre que les créateurs qui ont au moins un produit en ligne, dans l'index
+comme parmi « Les grands noms du design » ; un créateur réapparaît de lui-même quand
+un de ses produits revient. Sa fiche et sa page restent en place.
 
 ## Vérification d’une modification
 

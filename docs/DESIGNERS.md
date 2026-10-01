@@ -6,7 +6,7 @@
 
 `v3/designers-data.json` contient une fiche par créateur : `name`, `slug`, `tags`, `brands`, `bio`, `photo`, `sortKey`, `featured`, `hidden`. Les liens vers les marques sont calculés par `brandHref()` depuis `v3/mega-menu-brands.json` ; ne pas réintroduire `brandHrefs`. `sortKey` sert au classement et au libellé de l'index A-Z (nom de famille, ou nom du duo ou du studio).
 
-La page `/produits.html?designer=<slug>` montre les produits qui portent l'un des `tags` de la fiche. Le premier tag est le slug ; les suivants sont les autres écritures du métachamp `custom.designer` (duo inversé, « et » ou « & », accents). La fiche produit relie le nom du créateur à sa page par ce même registre (`designerSlug()` dans `v3/navigation.mjs`), et une ancienne écriture dans l'URL redirige vers la fiche. Une page sans produit reste hors de l'index et du sitemap.
+La page `/produits.html?designer=<slug>` montre les produits qui portent l'un des `tags` de la fiche. Le premier tag est le slug ; les suivants sont les autres écritures du métachamp `custom.designer` (duo inversé, « et » ou « & », accents). La fiche produit relie le nom du créateur à sa page par ce même registre (`designerSlug()` dans `v3/navigation.mjs`), et une ancienne écriture dans l'URL redirige vers la fiche. Une page sans produit reste hors de l'index des moteurs, du sitemap et de `/designers.html` (annuaire A-Z et grands noms) : `activeDesignerSlugs()` dans `server.js` lit l'index commun du catalogue ; s'il est indisponible, la liste complète est gardée.
 
 Un tag de créateur ne doit jamais être le tag d'une marque : la page afficherait tout le catalogue de la marque. `tests/designers-data.test.cjs` le vérifie.
 

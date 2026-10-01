@@ -1012,13 +1012,12 @@ app.get('/sitemap.xml', (req, res) => sendXml(res,
 app.get('/sitemap-pages.xml', async (req, res) => {
   const urls = [];
   SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr)));
-  // Créateurs visibles et portant au moins un produit publié (tags de l'index commun).
+  // Créateurs visibles et portant au moins un produit publié.
   // Si l'index est inaccessible, la liste reste complète plutôt que de retirer des pages valides.
-  let tags = null;
-  try { tags = new Set((await getCatalogIndex({ patient: true })).products.flatMap(p => p.card.tags || [])); } catch (e) { console.warn('[sitemap-pages] index', e.message); }
+  const active = await activeDesignerSlugs({ patient: true });
   getDesigners().forEach((d) => {
     if (!d || !d.slug || d.hidden) return;
-    if (tags && !(d.tags?.length ? d.tags : [d.slug]).some(t => tags.has(t))) return;
+    if (active && !active.has(d.slug)) return;
     urls.push(smUrl(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5'));
   });
   // Articles du journal (HTML pré-rendus)
@@ -1111,9 +1110,21 @@ async function injectBrandsIndex(html) {
   return html;
 }
 
+// Créateurs qui portent au moins un produit publié (tags de l'index commun du catalogue).
+// null si l'index est indisponible : l'appelant garde alors la liste complète.
+async function activeDesignerSlugs({ patient = false } = {}) {
+  let tags;
+  try { tags = new Set((await getCatalogIndex({ patient })).products.flatMap(p => p.card.tags || [])); }
+  catch (e) { console.warn('[designers] index', e.message); return null; }
+  return new Set(getDesigners()
+    .filter(d => d && d.slug && !d.hidden && (d.tags?.length ? d.tags : [d.slug]).some(t => tags.has(t)))
+    .map(d => d.slug));
+}
+
 // SEO/SSR · Index DESIGNERS crawlable : featured + annuaire A-Z (noms + liens ?designer=).
-// Miroir du render de designers.html. Le module re-render ensuite → hydratation.
-function injectDesignersIndex(html) {
+// Seuls les créateurs qui ont des produits en ligne y figurent (décision du 1er octobre) ;
+// une fiche réapparaît d'elle-même quand un de ses produits revient.
+function injectDesignersIndex(html, active) {
   const esc = ogEscape;
   const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const FOLD = { 'Ø':'O','Œ':'O','Æ':'A','Å':'A','Ł':'L','Đ':'D','Þ':'T','ẞ':'S' };
@@ -1131,7 +1142,7 @@ function injectDesignersIndex(html) {
     + '<div class="designer-card__brands">' + brandsHTML(d) + '</div>'
     + '<a class="designer-card__link" href="/produits.html?designer=' + encodeURIComponent(d.slug) + '" aria-label="Voir les produits de ' + esc(d.name) + '"></a></article>';
 
-  const all = getDesigners().filter((d) => !d.hidden);
+  const all = getDesigners().filter((d) => !d.hidden && (!active || active.has(d.slug)));
   all.sort((a, b) => (a.sortKey || a.name).localeCompare(b.sortKey || b.name, 'fr', { sensitivity: 'base' }));
   if (!all.length) return html;
   const featured = all.filter((d) => d.featured);
@@ -1237,7 +1248,7 @@ app.get(/.*/, async (req, res, next) => {
     try { raw = await injectBrandsIndex(raw); } catch (e) { console.warn('[brands-index]', e.message); }
   }
   if (rel === 'designers.html') {
-    try { raw = injectDesignersIndex(raw); } catch (e) { console.warn('[designers-index]', e.message); }
+    try { raw = injectDesignersIndex(raw, await activeDesignerSlugs()); } catch (e) { console.warn('[designers-index]', e.message); }
   }
   if (rel === 'nuancier-fermob.html') {
     try { raw = await injectNuancier(raw); } catch (e) { console.warn('[nuancier]', e.message); }
