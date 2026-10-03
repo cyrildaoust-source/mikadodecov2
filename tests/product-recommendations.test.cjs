@@ -129,11 +129,27 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
   assert.equal(role({ name: 'Guirlande Hoopik', productType: 'Guirlande' }), 'lamp');
   assert.equal(role({ name: 'Essuie de main', productType: 'Essuie de main' }), 'bath-textile');
   assert.equal(role({ name: 'Arrosoir Antila', productType: 'Arrosoir' }), 'garden-accessory');
+  assert.equal(role({ name: 'Ouvre-bouteille Virgula Divina', productType: 'Ouvre-bouteille' }), 'bar-accessory');
+  assert.equal(role({ name: 'Aimant Magnet Dots', productType: 'Aimant' }), 'desk-space');
+  assert.equal(role({ name: 'Sous-main Repad', productType: 'Sous-main' }), 'desk-space');
+  assert.equal(role({ name: 'Panier Bakkie Lace', productType: 'Panier' }), 'entry-storage');
   assert.equal(role({ name: 'Cartes postales', productType: 'Accessoire', tags: ['papeterie'] }), 'desk-space');
   assert.equal(role({ name: 'Bobèche Nagel', productType: 'Accessoire', tags: ['bobeche'] }), 'candle-holder');
   assert.equal(role({ name: 'Patins feutre', productType: 'Accessoire', tags: ['protection-sol'] }), 'furniture-care');
   assert.equal(sameUniverse(officeChair, diningChair), true);
   assert.equal(sameUniverse(glass, waterGlass), true);
+  assert.equal(sameUniverse(
+    { name: 'Ouvre-bouteille Virgula Divina', productType: 'Ouvre-bouteille' },
+    { name: 'Bouchon à vin Lilly', productType: 'Bouchon à vin' },
+  ), true);
+  assert.equal(sameUniverse(
+    { name: 'Aimant Magnet Dots', productType: 'Aimant' },
+    { name: 'Sous-main Repad', productType: 'Sous-main' },
+  ), true);
+  assert.equal(sameUniverse(
+    { name: 'Panier Bakkie Lace', productType: 'Panier' },
+    { name: 'Panier Restore', productType: 'Panier de rangement' },
+  ), true);
   assert.equal(sameUniverse(poster, diningChair), false);
   assert.equal(sameUniverse(
     { name: 'Outils', productType: 'Accessoire' },
@@ -144,6 +160,9 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
   assert.match(queries.sameType, /product_type:"Verre à liqueur"/);
   assert.match(queries.sameUniverse, /product_type:"Verre à eau"/);
   assert.doesNotMatch(`${queries.sameType} ${queries.sameUniverse}`, /gid:\/\/shopify\/Product|tutu|milano/i);
+  assert.match(universeSearchQueries({ productType: 'Ouvre-bouteille' }).sameUniverse, /product_type:"Bouchon à vin"/);
+  assert.match(universeSearchQueries({ productType: 'Aimant' }).sameUniverse, /product_type:"Sous-main"/);
+  assert.match(universeSearchQueries({ productType: 'Panier' }).sameUniverse, /product_type:"Panier de rangement"/);
 
   const selected = selectProductRecommendations({
     product: glass,
