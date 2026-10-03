@@ -85,6 +85,14 @@ de remise se place en haut à droite, sous l'éventuelle offre automatique, face
 aux tags « Nouveau ». Sur la page Marques, une marque sans pays certain reste
 « Europe » : ne pas indiquer un pays inexact ou plus précis que la source.
 
+Décision du propriétaire du 3 octobre, fiches à plusieurs options : au lieu d'un
+seul bouton listant toutes les combinaisons, la fiche affiche un bouton par option
+Shopify qui compte au moins deux valeurs (deux ou trois en pratique), libellé du nom
+de l'option (« Couleur », « Piètement », « Cuir du dos »). Seul le premier bouton
+montre la photo et la disponibilité ; les suivants tiennent sur une ligne. Chaque
+bouton ouvre le même tiroir avec les valeurs de son option ; une combinaison absente
+mène à la variante la plus proche. Une fiche à une seule option garde son bouton unique.
+
 ## Surtitres : interdits
 
 Règle permanente du propriétaire (24 septembre 2026) : **aucun surtitre (« eyebrow ») sur le site**.

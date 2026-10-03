@@ -5,6 +5,32 @@
 import { escapeHtml, priceLabel, stockLabel } from './format.mjs';
 import { buildProductSpecGroups, renderDimensionImages } from './product-specs.mjs';
 
+// Fiches à plusieurs options (Couleur × Piètement × Cuir du dos…) : un bouton par
+// option qui compte au moins deux valeurs, dans l'ordre de Shopify (demande du 3 octobre).
+export const optionValue = (v, name) => (v?.options || []).find((o) => o.name === name)?.value;
+export function optionAxes(variants) {
+  const axes = [];
+  for (const v of variants || []) for (const o of (v?.options || [])) {
+    if (!o?.name) continue;
+    let axis = axes.find((a) => a.name === o.name);
+    if (!axis) axes.push(axis = { name: o.name, values: [] });
+    if (!axis.values.includes(o.value)) axis.values.push(o.value);
+  }
+  return axes.filter((a) => a.values.length > 1);
+}
+// Toutes les combinaisons n'existent pas : on garde la valeur choisie et le plus
+// possible des autres options en cours, une variante disponible de préférence.
+export function variantForOption(variants, current, name, value) {
+  const others = (current?.options || []).filter((o) => o.name !== name);
+  let best = null, bestScore = -1;
+  for (const v of variants || []) {
+    if (optionValue(v, name) !== value) continue;
+    const score = others.filter((o) => optionValue(v, o.name) === o.value).length * 2 + (v.available === false ? 0 : 1);
+    if (score > bestScore) { best = v; bestScore = score; }
+  }
+  return best;
+}
+
 export function pdpView(p, { requestedVariant = null, selectInitialVariant, brandHref = '', designerSlug = '' }) {
   const imgs = (p.images && p.images.length ? p.images : [p.image, p.image2]).filter(Boolean);
   // Thumbnail-strip sources: small-width versions, index-parallel to `imgs`.
@@ -37,10 +63,8 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
   const ambiances = ambIdx.map((i) => imgs[i]);
   const ambThumbs = ambIdx.map((i) => thumbSrcs[i] || imgs[i]);
 
-  // Walk every variant to collect the option axis NAMES — used only to label
-  // the variant drawer/trigger dynamically. The drawer lists a FLAT grid of
-  // variants[] (one tile per variant = full combo for multi-axis products),
-  // so per-axis value maps are no longer needed.
+  // Noms des options. Une seule option : le tiroir liste toutes les variantes ;
+  // plusieurs : un bouton et un tiroir par option (pickAxes).
   const optionNames = [];
   const _seenAxes = new Set();
   for (const v of variants) for (const o of (v.options || [])) {
@@ -53,6 +77,8 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
   const axisLabel = optionNames.length === 1 ? (isColorAxis ? "Coloris" : singleAxis) : "Variantes";
   const axisLabelLower = optionNames.length === 1 ? (isColorAxis ? "coloris" : singleAxis.toLowerCase()) : "variantes";
   const moreCount = variants.length - 1;
+  // Plusieurs options : un bouton par option ; une seule : le bouton unique des variantes.
+  const pickAxes = optionNames.length > 1 ? optionAxes(variants) : [];
   const moreWord = /s$/.test(axisLabelLower) ? axisLabelLower : axisLabelLower + (moreCount > 1 ? "s" : "");
 
   // Image d'une variante (avec repli produit) à la largeur voulue.
@@ -137,7 +163,21 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
         <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
         ${designerHTML}
         <div class="pdp__price" data-price-el>${priceLabel(initialSelection ? {...p,price:current.price,priceMin:current.price,priceMax:current.price,compareAt:current.compareAtPrice} : p)}</div>
-        ${variants.length > 1 ? `
+        ${pickAxes.length ? `
+        <div class="pdp__variant-picks">${pickAxes.map((axis, i) => `
+          <div class="pdp__variant-pick">
+            <span class="label" id="pdp-axis-${i}">${escapeHtml(axis.name)}</span>
+            <button class="pdp__variant-bar${i ? " pdp__variant-bar--text" : ""}" type="button" data-vard-open data-axis="${i}" aria-haspopup="dialog" aria-describedby="pdp-axis-${i}">
+              ${i ? "" : `<img class="pdp__variant-img" data-coloris-img src="${escapeHtml(variantImg(current, 200))}" alt="" loading="lazy" decoding="async" />`}
+              <span class="pdp__variant-meta">
+                <span class="pdp__variant-name" data-axis-value="${i}">${escapeHtml(optionValue(current, axis.name) || "")}</span>
+                ${i ? "" : `<span class="pdp__variant-avail" data-coloris-avail role="status" aria-live="polite">${availInline(current)}</span>`}
+              </span>
+              <span class="pdp__variant-count">${axis.values.length}&nbsp;choix</span>
+              <span class="pdp__variant-bar-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>`).join("")}
+        </div>` : variants.length > 1 ? `
         <div class="pdp__variant-pick">
           <span class="label">${escapeHtml(axisLabel)}</span>
           <button class="pdp__variant-bar" type="button" data-vard-open aria-haspopup="dialog">
@@ -165,5 +205,5 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
     ${specAccordionHTML}`;
 
   return { html, imgs, thumbSrcs, widthVariant, srcsetFor, MAIN_SIZES, variants, initialSelection, current, norm, ambiances, ambThumbs,
-    optionNames, isColorAxis, axisLabel, axisLabelLower, moreCount, moreWord, variantImg, variantState, availInline, availStore, hasSku };
+    optionNames, pickAxes, isColorAxis, axisLabel, axisLabelLower, moreCount, moreWord, variantImg, variantState, availInline, availStore, hasSku };
 }
