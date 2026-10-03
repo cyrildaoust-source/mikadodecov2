@@ -143,3 +143,17 @@ Le pipeline principal transmet ce rôle avec le préfixe alternatif réservé
 le même composant Dimensions sur fond papier. Les anciens libellés libres restent
 pris en charge uniquement pour les schémas AndTradition déjà revus. Une URL ou un
 nom de fichier ne suffisent pas à déclarer ce rôle.
+
+## Ventes associées sur la fiche produit
+
+Décision du propriétaire du 30 septembre 2026, reprenant le chantier du 11 juin :
+les deux titres sont « Complétez avec » et « Vous aimerez aussi ». La première
+rubrique compose un usage, pas une rangée de produits presque identiques. Pour une
+table, elle peut
+associer une assise, de la vaisselle, des verres et un textile ou, si la table est
+extérieure, une lampe autonome. La seconde
+rubrique privilégie la gamme ou le modèle. Conserver les cartes produit
+communes, quatre cartes au plus, et ne jamais introduire ces titres par un surtitre.
+La règle s'applique à tout le catalogue : lorsqu'une gamme exacte n'existe pas,
+« Vous aimerez aussi » passe au même type puis au même univers fonctionnel. Ne pas
+remplir artificiellement « Complétez avec » lorsqu'aucun complément honnête n'existe.

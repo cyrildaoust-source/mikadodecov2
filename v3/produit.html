@@ -715,11 +715,9 @@
         mobile.addEventListener("change", update);
       }
 
-      // Recommandations produit — pilotées par les métafields Search & Discovery
-      // de Shopify (complementary_products / related_products), lues dynamiquement
-      // via /api/product/:handle. RIEN n'est hardcodé : les relations vivent côté
-      // Shopify et s'enrichissent en continu. Chaque bloc reste masqué si sa liste
-      // est vide. productCard() produit des liens /produit.html?handle= (DA).
+      // Ventes associées préparées côté serveur : curation Shopify, gamme/modèle,
+      // relation fonctionnelle sûre puis repli Search & Discovery. Chaque bloc
+      // reste masqué si sa liste est vide et réutilise la carte commune.
       const renderRecos = (items, wrapSel, gridSel) => {
         const list = Array.isArray(items) ? items.filter((x) => x && x.image) : [];
         if (!list.length) return;

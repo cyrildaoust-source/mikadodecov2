@@ -14,7 +14,9 @@ before(async()=>{
  process.env.SHOPIFY_STORE_DOMAIN='variants.test';process.env.SHOPIFY_STOREFRONT_TOKEN='test';
  global.fetch=async(url,options)=>{
   if(!String(url).includes('variants.test'))return realFetch(url,options);
-  const {query}=JSON.parse(options.body);assert.match(query,/query GetProduct\(/);
+  const {query}=JSON.parse(options.body);
+  if(/query ProductRecommendations\(/.test(query))return Response.json({data:{complementary:[],related:[],rangeCollections:[],search:{nodes:[]}}});
+  assert.match(query,/query GetProduct\(/);
   return Response.json({data:{product}});
  };
  server=require('../server').listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));base=`http://127.0.0.1:${server.address().port}`;

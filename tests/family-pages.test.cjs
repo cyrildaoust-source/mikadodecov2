@@ -58,6 +58,7 @@ before(async () => {
       ], pageInfo: { hasNextPage: true, endCursor: 'collection-page-2' },
     } } });
     if (/query ProductHandle\(/.test(query)) return Response.json({ data: { node: variables.id.endsWith('/999') ? null : { handle: 'family-product-100' } } });
+    if (/query ProductRecommendations\(/.test(query)) return Response.json({ data: { complementary: [], related: [], rangeCollections: [], search: { nodes: [] } } });
     if (/query GetProduct\(/.test(query)) {
       productRequests.push(variables.handle);
       if (catalogueIconsUnavailable && variables.handle === 'artek-stool-60') return new Response('Unavailable', { status: 503 });
