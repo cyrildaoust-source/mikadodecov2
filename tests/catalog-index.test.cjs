@@ -35,6 +35,7 @@ before(async()=>{
     }
     if(/query CollectionMembers\(/.test(query))return Response.json({data:{collection:{products:{nodes:(members[variables.handle]||[]).map(id=>({id})),pageInfo:{hasNextPage:false,endCursor:null}}}}});
     if(/query CollectionCatalog\(/.test(query)){collectionReads++;return new Response('unexpected',{status:500});}
+    if(/query ProductRecommendations\(/.test(query))return Response.json({data:{complementary:[],related:[],rangeCollections:[],search:{nodes:[]}}});
     if(/query GetProduct\(/.test(query))return Response.json({data:{product:null}});
     if(/query GetCollections\(/.test(query))return Response.json({data:{collections:{edges:[{node:{id:'gid://shopify/Collection/9',handle:'vases',title:'Vases',description:'Vases design chez Mikado Deco.',products:{edges:[{node:{id:'x'}}]}}}],pageInfo:{hasNextPage:false,endCursor:null}}}});
     return Response.json({data:{products:{edges:[],pageInfo:{hasNextPage:false,endCursor:null}},collection:null}});
