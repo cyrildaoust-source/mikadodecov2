@@ -66,7 +66,7 @@
     import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, loadNavigation, paintBreadcrumb } from "/shared.js";
     import { productTrail, sourceSelection, productBrandDestination, designerSlug } from "/navigation.mjs";
     import { stockLabel } from "/format.mjs";
-    import { pdpView } from "/pdp-view.mjs";
+    import { pdpView, optionValue, variantForOption } from "/pdp-view.mjs";
     import "/product-variant.js";
     const { selectInitialVariant, latestVariantSelection } = globalThis.MikadoProductVariant;
     initShell({ active: "Mobilier", transparentNav: false });
@@ -121,7 +121,7 @@
       const view = pdpView(p, { requestedVariant: params.get("variant"), selectInitialVariant, brandHref,
         designerSlug: typeof p.designerSlug === "string" ? p.designerSlug : designerSlug(p.designer, designersData.designers || []) });
       const { imgs, thumbSrcs, widthVariant, srcsetFor, MAIN_SIZES, variants, initialSelection, norm, ambiances, ambThumbs,
-        isColorAxis, axisLabel, variantImg, variantState, availInline, availStore, hasSku } = view;
+        pickAxes, isColorAxis, axisLabel, variantImg, variantState, availInline, availStore, hasSku } = view;
       let current = view.current;
       if (host.dataset.ssr !== ssrKey) host.innerHTML = view.html;
 
@@ -279,8 +279,8 @@
           });
         });
       };
-      const variantBar = host.querySelector("[data-vard-open]");
-      for (const type of ["pointerenter", "touchstart", "focus"]) variantBar?.addEventListener(type, preloadVariants, { once: true, passive: true });
+      for (const variantBar of host.querySelectorAll("[data-vard-open]"))
+        for (const type of ["pointerenter", "touchstart", "focus"]) variantBar.addEventListener(type, preloadVariants, { once: true, passive: true });
 
       // ── Application d'une variante (remplace l'ancien refreshAllVselects) ──
       // Source UNIQUE : à partir d'une variante v, met à jour l'image principale
@@ -323,6 +323,7 @@
         if (cImg) { cImg.src = variantImg(current, 200); cImg.alt = current.title || ""; }
         const cName = host.querySelector("[data-coloris-name]");
         if (cName) cName.textContent = current.title || "";
+        host.querySelectorAll("[data-axis-value]").forEach((el) => { el.textContent = optionValue(current, pickAxes[Number(el.dataset.axisValue)].name) || ""; });
         const cAvail = host.querySelector("[data-coloris-avail]");
         if (cAvail) cAvail.innerHTML = availInline(current);
         const availEl = host.querySelector("[data-avail]");          // dispo PRODUIT reflète la variante sélectionnée (en stock / indispo / sur commande)
@@ -461,36 +462,49 @@
       }
 
       // ── Tiroir de variantes (glisse de la GAUCHE — miroir du tiroir panier) ──
-      // Grille PLATE de toutes les variantes (4/ligne), aperçu en haut, dispo par
-      // variante. Survol/Focus = aperçu (sans valider) ; clic/Tap/Entrée = applique
-      // + ferme. role=listbox/option, focus-trap, Échap, verrou DÉDIÉ vard-locked.
+      // Une seule option : grille PLATE de toutes les variantes. Plusieurs options :
+      // le bouton ouvert choisit l'option, et chaque valeur mène à la variante la plus
+      // proche (variantForOption). Aperçu en haut, dispo par vignette. Survol/Focus =
+      // aperçu (sans valider) ; clic/Tap/Entrée = applique + ferme. role=listbox/option,
+      // focus-trap, Échap, verrou DÉDIÉ vard-locked.
       if (variants.length > 1) {
         document.body.insertAdjacentHTML("beforeend", `
           <div class="vard" data-variant-drawer>
             <div class="vard__backdrop" data-vard-backdrop></div>
-            <aside class="vard__panel" role="dialog" aria-modal="true" aria-label="Choisir ${escapeHtml(isColorAxis ? "un coloris" : "une variante")}" data-vard-panel>
+            <aside class="vard__panel" role="dialog" aria-modal="true" aria-labelledby="vard-title" data-vard-panel>
               <header class="vard__head">
-                <h2 class="vard__title">${escapeHtml(axisLabel)} (${variants.length})</h2>
+                <h2 class="vard__title" id="vard-title" data-vard-title></h2>
                 <button class="vard__close" data-vard-close type="button" aria-label="Fermer">&times;</button>
               </header>
               <div class="vard__body">
                 <img class="vard__preview-img" data-vard-preview-img alt="" />
                 <div class="vard__preview-name" data-vard-preview-name></div>
                 <div class="vard__preview-avail" data-vard-preview-avail role="status" aria-live="polite"></div>
-                <ul class="vard__grid" role="listbox" aria-label="${escapeHtml(axisLabel)} disponibles" data-vard-grid>${variants.map((v) => `
-                  <li class="vard__opt${v.id === current.id ? " is-selected" : ""}" role="option" aria-selected="${v.id === current.id}"${v.available === false ? ' aria-disabled="true"' : ""} data-variant-id="${escapeHtml(v.id)}" tabindex="${v.id === current.id ? "0" : "-1"}">
-                    <img class="vard__opt-img" src="${escapeHtml(variantImg(v, 160))}" alt="${escapeHtml(v.title || "")}" loading="lazy" decoding="async" />
-                    <span class="vard__opt-name">${escapeHtml(v.title || "")}</span>
-                    <span class="vard__opt-avail">${availInline(v, true)}</span>
-                  </li>`).join("")}</ul>
+                <ul class="vard__grid" role="listbox" data-vard-grid></ul>
               </div>
             </aside>
           </div>`);
         const vRoot = document.querySelector("[data-variant-drawer]");
         const vPanel = vRoot.querySelector("[data-vard-panel]");
         const vGrid = vRoot.querySelector("[data-vard-grid]");
-        const vById = (id) => variants.find((v) => v.id === id);
+        let vItems = [];
+        const vItem = (o) => vItems[Number(o.dataset.index)]?.variant;
         const vOpts = () => Array.from(vGrid.querySelectorAll(".vard__opt"));
+        // Vignettes de l'option ouverte (axis), ou de toutes les variantes (axis = null).
+        const renderVard = (axis) => {
+          vItems = axis
+            ? axis.values.map((value) => ({ label: value, variant: variantForOption(variants, current, axis.name, value), selected: optionValue(current, axis.name) === value }))
+            : variants.map((v) => ({ label: v.title || "", variant: v, selected: v.id === current.id }));
+          const name = axis ? axis.name : axisLabel;
+          vRoot.querySelector("[data-vard-title]").textContent = `${name} (${vItems.length})`;
+          vGrid.setAttribute("aria-label", `${name} disponibles`);
+          vGrid.innerHTML = vItems.map((it, i) => `
+                  <li class="vard__opt${it.selected ? " is-selected" : ""}" role="option" aria-selected="${it.selected}"${it.variant.available === false ? ' aria-disabled="true"' : ""} data-index="${i}" tabindex="${it.selected ? "0" : "-1"}">
+                    <img class="vard__opt-img" src="${escapeHtml(variantImg(it.variant, 160))}" alt="${escapeHtml(it.label)}" loading="lazy" decoding="async" />
+                    <span class="vard__opt-name">${escapeHtml(it.label)}</span>
+                    <span class="vard__opt-avail">${availInline(it.variant, true)}</span>
+                  </li>`).join("");
+        };
         let vLastFocus = null;
         const lockVard = (on) => {
           const sw = window.innerWidth - document.documentElement.clientWidth;
@@ -520,16 +534,12 @@
           if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
           else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         }
-        const openVard = () => {
-          vLastFocus = document.activeElement;
+        const openVard = (e) => {
+          vLastFocus = e.currentTarget;
           document.querySelector("[data-cart-drawer]")?.classList.remove("open"); // exclusivité tiroirs : ferme panier + quantité
           document.querySelector("[data-qty-drawer]")?.classList.remove("open");
-          vOpts().forEach((o) => {
-            const sel = o.dataset.variantId === current.id;
-            o.setAttribute("aria-selected", sel ? "true" : "false");
-            o.classList.toggle("is-selected", sel);
-            o.tabIndex = sel ? 0 : -1;
-          });
+          const axis = e.currentTarget.dataset.axis;
+          renderVard(axis == null ? null : pickAxes[Number(axis)]);
           vPreview(current);
           vRoot.classList.add("open");
           lockVard(true);
@@ -539,7 +549,7 @@
         const focusOpt = (t) => {
           if (!t) return;
           vOpts().forEach((o) => (o.tabIndex = -1));
-          t.tabIndex = 0; t.focus(); vPreview(vById(t.dataset.variantId));
+          t.tabIndex = 0; t.focus(); vPreview(vItem(t));
         };
         const COLS = 4;
         const moveFocus = (from, delta) => {
@@ -547,14 +557,14 @@
           let i = opts.indexOf(from); if (i < 0) i = 0;
           focusOpt(opts[Math.max(0, Math.min(opts.length - 1, i + delta))]);
         };
-        host.querySelector("[data-vard-open]")?.addEventListener("click", openVard);
+        host.querySelectorAll("[data-vard-open]").forEach((bar) => bar.addEventListener("click", openVard));
         vRoot.querySelector("[data-vard-backdrop]").addEventListener("click", closeVard);
         vRoot.querySelector("[data-vard-close]").addEventListener("click", closeVard);
-        vGrid.addEventListener("mouseover", (e) => { const o = e.target.closest(".vard__opt"); if (o) vPreview(vById(o.dataset.variantId)); });
-        vGrid.addEventListener("focusin", (e) => { const o = e.target.closest(".vard__opt"); if (o) vPreview(vById(o.dataset.variantId)); });
+        vGrid.addEventListener("mouseover", (e) => { const o = e.target.closest(".vard__opt"); if (o) vPreview(vItem(o)); });
+        vGrid.addEventListener("focusin", (e) => { const o = e.target.closest(".vard__opt"); if (o) vPreview(vItem(o)); });
         vGrid.addEventListener("click", (e) => {
           const o = e.target.closest(".vard__opt"); if (!o) return;
-          applyVariant(vById(o.dataset.variantId)); closeVard();
+          applyVariant(vItem(o)); closeVard();
         });
         vGrid.addEventListener("keydown", (e) => {
           const o = e.target.closest(".vard__opt"); if (!o) return;
@@ -566,7 +576,7 @@
             case "Home":       e.preventDefault(); focusOpt(vOpts()[0]); break;
             case "End":        e.preventDefault(); { const a = vOpts(); focusOpt(a[a.length - 1]); } break;
             case "Enter":
-            case " ":          e.preventDefault(); applyVariant(vById(o.dataset.variantId)); closeVard(); break;
+            case " ":          e.preventDefault(); applyVariant(vItem(o)); closeVard(); break;
           }
         });
       }
