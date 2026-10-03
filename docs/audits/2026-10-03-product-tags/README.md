@@ -26,10 +26,10 @@ Répartition des tags publics par fréquence : singleton 2858, 2–4 fiches 1271
 
 ## Dépendances à protéger
 
-L'audit croise les tags avec **57 conditions distinctes de collections automatiques**, **261 tags du registre des créateurs**, **55 tags de gammes du registre des marques** et les tags lus directement par le site. Aucun nettoyage global ne doit précéder cette analyse.
+L'audit croise les tags avec **57 conditions distinctes de collections automatiques**, **381 tags du registre des créateurs**, **55 tags de gammes du registre des marques** et les tags lus directement par le site. Aucun nettoyage global ne doit précéder cette analyse.
 
 - Collections automatiques : 35 conditions ont au moins un produit public ; 22 n'en ont actuellement aucun.
-- Registre créateurs : 102 tags alimentent une page publique ; 159 correspondent seulement à des produits non publiés ou à aucune fiche.
+- Registre créateurs : 218 tags alimentent une page publique ; 163 correspondent seulement à des produits non publiés ou à aucune fiche.
 - Registre de gammes des marques : 32 tags sont présents ; 23 sont sans produit public.
 
 Les écarts proches ci-dessous sont des **candidats de vérification**, pas des corrections automatiques :
@@ -43,7 +43,7 @@ Les écarts proches ci-dessous sont des **candidats de vérification**, pas des 
 
 ## Potentiel pour les ventes associées
 
-L'analyse détecte **243 tags candidats de gamme** : au moins deux produits, une marque dominante, présence du tag dans les titres et plusieurs types de produit. Ce filtre retire les marques, types, designers, couleurs de variante, tags génériques et traces techniques les plus évidentes. Ces candidats doivent encore être validés éditorialement avant de devenir une donnée canonique.
+L'analyse détecte **242 tags candidats de gamme** : au moins deux produits, une marque dominante, présence du tag dans les titres et plusieurs types de produit. Ce filtre retire les marques, types, designers, couleurs de variante, tags génériques et traces techniques les plus évidentes. Ces candidats doivent encore être validés éditorialement avant de devenir une donnée canonique.
 
 | Tag candidat | Marque dominante | Produits | Rôles observés | Potentiel |
 | --- | --- | ---: | --- | --- |
@@ -109,7 +109,7 @@ Les 155 tables de repas disposent toujours d'une scène complète.
 
 1. **Conserver les tags comme compatibilité**, sans leur confier seuls le sens métier.
 2. Créer trois données structurées et contrôlées : `recommendation_role`, `recommendation_universe` et `range_key`. Elles ne contiennent ni prix, ni statut, ni sélection de produit.
-3. Amorcer `range_key` depuis les 243 candidats de ce rapport, puis présenter un différentiel au propriétaire. Aucune écriture automatique.
+3. Amorcer `range_key` depuis les 242 candidats de ce rapport, puis présenter un différentiel au propriétaire. Aucune écriture automatique.
 4. Exclure du signal de gamme les valeurs de variantes, marques, types, promotions, styles génériques et identifiants techniques.
 5. Lancer cet audit à chaque activation et quotidiennement : une fiche sans rôle ou sans voisin pertinent entre dans une file d'exception avant qu'une couverture ne soit annoncée à 100 %.
 6. Invalider précisément le cache `product:<handle>` au webhook produit afin qu'une activation ou une correction soit visible sans attendre le TTL.
@@ -118,7 +118,7 @@ Les 155 tables de repas disposent toujours d'une scène complète.
 
 - `tags.csv` : les 13 606 tags, leurs fréquences, marques, types, rôles, dépendances et drapeaux.
 - `produits.csv` : les 15 358 fiches, leur statut, le nombre de tags, les recopies de variantes et la couverture publique.
-- `candidats-gammes.csv` : 243 groupes à examiner pour les ventes associées.
+- `candidats-gammes.csv` : 242 groupes à examiner pour les ventes associées.
 - `dependances-tags.csv` : collections automatiques, créateurs, gammes de marques et lectures directes du site.
 - `types-produits.csv` : tous les types Shopify, leur rôle fonctionnel actuel et les classifications encore à traiter.
 
@@ -158,7 +158,7 @@ Les 155 tables de repas disposent toujours d'une scène complète.
 
 ## Validation de l'intégration issue de l'audit
 
-- `node --test tests/*.test.*` : 187 tests réussis.
+- `node --test tests/*.test.*` : 201 tests réussis.
 - Les quatre exceptions contrôlées sur ordinateur, 390 px et 360 px : 12 parcours, aucune rubrique vide, aucun débordement horizontal, aucune zone tactile sous 44 px et jamais plus de quatre cartes.
 - `tests/no-eyebrows.test.cjs` passe ; le détecteur ne relève aucun surtitre sur la fiche contrôlée.
 - La preview locale peut journaliser le 404 attendu de Vercel Insights, absent hors environnement Vercel ; aucune erreur applicative n'a été relevée.
