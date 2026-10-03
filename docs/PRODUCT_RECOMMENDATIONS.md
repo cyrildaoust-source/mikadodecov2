@@ -36,13 +36,19 @@ image ou sans variante achetable sont toujours retirés.
 
 ## Couverture vérifiée
 
-Mesure en lecture seule du 30 septembre 2026 sur le canal Headless :
+Dernière mesure en lecture seule, le 3 octobre 2026 sur le canal Headless :
 
-- 3 649 produits actifs et publiés ;
+- 4 196 produits actifs et publiés ;
 - 69 produits couverts par une curation Search & Discovery existante ;
-- 3 649 produits couverts par les règles déterministes, soit 100 % du catalogue
+- 4 196 produits couverts par les règles déterministes, soit 100 % du catalogue
   mesuré ; le repli automatique Shopify reste disponible ensuite ;
-- 152 tables de repas sur 152 disposent d'une composition de scène complète.
+- 155 tables de repas sur 155 disposent d'une composition de scène complète.
+
+Cette mesure inclut 556 entrées et 9 sorties du canal depuis le contrôle du 30
+septembre. L'audit des tags a révélé quatre nouveaux types isolés ; les univers
+génériques bar, bureau et rangement les couvrent désormais sans handle de
+produit codé en dur. Le dossier détaillé est conservé dans
+`docs/audits/2026-10-03-product-tags/`.
 
 Les scripts `audit-product-recommendations.mjs` et
 `audit-storefront-recommendations.mjs` reproduisent cette mesure. Ils sont en
