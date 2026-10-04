@@ -185,13 +185,13 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
 });
 
 test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique', () => {
-  const curatedComp = card('curated-comp');
+  const curatedComp = card('curated-comp', { brand: 'Vitra' });
   const curatedRelated = card('curated-related', { name: 'Table Palissade', tags: ['palissade'] });
   const cushion = card('cushion', { name: 'Coussin Palissade', productType: 'Coussin', recommendationCollectionIds: [collection.id] });
   const table = card('table', { name: 'Table Palissade', recommendationCollectionIds: [collection.id] });
-  const autoComp = card('auto-comp');
+  const autoComp = card('auto-comp', { brand: 'Iittala' });
   const autoRange = card('auto-range', { name: 'Fauteuil Palissade', tags: ['palissade'] });
-  const autoRelated = card('auto-related');
+  const autoRelated = card('auto-related', { brand: 'Vitra' });
   const result = selectProductRecommendations({
     product,
     curatedComplementary: [curatedComp], curatedRelated: [curatedRelated],
@@ -204,6 +204,33 @@ test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique',
   assert.deepEqual(result.related.map(p => [p.id, p.recommendationSource]), [
     ['curated-related', 'curated'], ['auto-range', 'shopify-same-range'], ['auto-related', 'shopify-related'],
   ]);
+});
+
+test('les choix automatiques diversifient les marques sans casser la gamme ni la curation', () => {
+  const result = selectProductRecommendations({
+    product,
+    range: [
+      card('range-1', { name: 'Table Palissade', tags: ['palissade'] }),
+      card('range-2', { name: 'Banc Palissade', tags: ['palissade'] }),
+      card('range-3', { name: 'Fauteuil Palissade', tags: ['palissade'] }),
+    ],
+    universe: [
+      card('same-brand', { brand: 'HAY', productType: 'Chaise' }),
+      card('vitra', { brand: 'Vitra', productType: 'Chaise' }),
+      card('iittala', { brand: 'Iittala', productType: 'Chaise' }),
+    ],
+  });
+  assert.deepEqual(result.complementary.map(item => item.id), ['range-1']);
+  assert.deepEqual(result.related.map(item => item.id), ['range-2', 'range-3', 'vitra', 'iittala']);
+  assert.deepEqual(result.related.map(item => item.brand), ['HAY', 'HAY', 'Vitra', 'Iittala']);
+
+  const curated = selectProductRecommendations({
+    product,
+    curatedRelated: ['a', 'b', 'c', 'd'].map(id => card(`curated-${id}`)),
+    universe: [card('vitra', { brand: 'Vitra', productType: 'Chaise' })],
+  });
+  assert.equal(curated.related.length, 4);
+  assert.ok(curated.related.every(item => item.brand === 'HAY' && item.recommendationSource === 'curated'));
 });
 
 test('indisponibles, produit courant et doublons sont exclus ; chaque rubrique reste bornée', () => {
