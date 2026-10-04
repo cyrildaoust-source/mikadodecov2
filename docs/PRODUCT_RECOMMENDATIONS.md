@@ -34,6 +34,12 @@ présenter un faux accessoire.
 Le produit courant, les doublons, les produits indisponibles, les produits sans
 image ou sans variante achetable sont toujours retirés.
 
+Les choix manuels Shopify sont conservés tels quels. Pour les choix automatiques,
+la même gamme peut occuper deux places au plus, puis les candidats sont distribués
+marque par marque, avec un maximum de deux cartes d'une même marque par rubrique.
+La pertinence fonctionnelle reste prioritaire : la diversité ne rapproche jamais
+deux objets sans usage commun uniquement pour changer de fabricant.
+
 ## Couverture vérifiée
 
 Dernière mesure en lecture seule, le 3 octobre 2026 sur le canal Headless :
@@ -60,8 +66,8 @@ La sélection réserve les quatre places au lieu de les laisser envahir par une
 seule famille : une assise, une pièce de vaisselle, un verre ou contenant, puis
 un textile ou dessous de plat en intérieur, ou une lampe autonome en extérieur.
 Une rallonge réellement compatible passe avant cette composition. Les chaises
-de la même gamme sont prioritaires ; à défaut, la même marque et le même usage
-intérieur/extérieur servent au classement.
+de la même gamme sont prioritaires ; à défaut, le même usage intérieur/extérieur
+sert au classement et une autre marque est préférée à pertinence égale.
 
 Les catégories Storefront sont des règles de recherche, pas une liste de
 produits. Une nouvelle assiette, une chaise ou une lampe publiée et disponible
