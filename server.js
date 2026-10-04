@@ -104,6 +104,17 @@ const CAMPAIGN_COLLECTIONS = {
   },
 };
 
+// Textes de page tenus par le site, quel que soit le texte de la collection Shopify.
+// Promotions (demande du 4 octobre) : une phrase générale qui ne met aucune offre
+// en avant ; le détail de chaque offre figure sur ses cartes et ses fiches.
+const COLLECTION_TEXTS = {
+  promotions: {
+    heroDescription: 'Pièces en déstockage et offres du moment, dans la limite des quantités disponibles.',
+    description: 'Pièces de design en déstockage et offres du moment chez Mikado Deco, dans la limite des quantités disponibles. Boutique à Uccle, livraison en Belgique.',
+    gridTitle: 'Toutes les offres',
+  },
+};
+
 // Shopify schedules the actual Home Stories discounts. The storefront uses
 // the same dates to expose the campaign in the generic Promotions catalogue,
 // without tagging the products early (which would advertise a discount before
@@ -731,6 +742,7 @@ app.get('/collections/:handle', async (req, res) => {
       outdoor: { title: 'Jardin', hero: '/images/familles/jardin/1.webp' },
     };
     const campaign = CAMPAIGN_COLLECTIONS[handle] || null;
+    const pageText = campaign || (Object.hasOwn(COLLECTION_TEXTS, handle) ? COLLECTION_TEXTS[handle] : null);
     const family = Object.hasOwn(families, handle) ? families[handle] : Object.hasOwn(richFamilies, handle) ? richFamilies[handle] : null;
     const col = family ? { name: family.title, description: family.description } : (await getCollections()).find(c => c.handle === handle) || campaign;
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
@@ -764,11 +776,11 @@ app.get('/collections/:handle', async (req, res) => {
     const name = collectionName + (brand ? ' · ' + brandLabel : '');
     const title = `${name} · Mikado Deco`;
     const description = ogDesc(
-      brand ? `Les créations ${brandLabel} de notre sélection « ${collectionName} ».` : campaign ? campaign.description : col.description && col.description.trim()
+      brand ? `Les créations ${brandLabel} de notre sélection « ${collectionName} ».` : pageText ? pageText.description : col.description && col.description.trim()
         ? col.description
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
-    const bodyDescription = campaign ? campaign.heroDescription : description;
+    const bodyDescription = pageText && !brand ? pageText.heroDescription : description;
     const image = collectionHero ? absUrl(collectionHero.img) : (col.image ? absUrl(col.image) : OG_DEFAULT);
     const collectionUrl = '/collections/' + encodeURIComponent(handle);
     const url = ORIGIN + collectionUrl + (brand ? '?brand=' + encodeURIComponent(brand) : '');
@@ -782,17 +794,17 @@ app.get('/collections/:handle', async (req, res) => {
       const terms = `<section class="section wrap" aria-labelledby="campaign-terms-title"><h2 class="serif catalogue-head" id="campaign-terms-title">Conditions de l’offre</h2><ul class="campaign-terms">${campaign.terms.map(term => `<li>${ogEscape(term)}</li>`).join('')}</ul></section>`;
       html = html.replace('<nav class="plp-pagination" data-pagination aria-label="Pagination" hidden></nav>\n  </section>', match => match + terms);
     }
-    if (brand || campaign) {
+    if (brand || pageText) {
       const context = { handle, collectionName, title: name, description: bodyDescription };
       if (brand) context.brand = { slug: brand, name: brandLabel };
-      if (campaign) context.gridTitle = campaign.gridTitle;
+      if (pageText?.gridTitle) context.gridTitle = pageText.gridTitle;
       if (campaign) context.pendingMessage = 'Les configurations seront disponibles ici dès leur publication pour le lancement de l’offre.';
       html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify(context).replace(/</g, '\\u003c') + '</script>');
 
     }
     // SSR lot 2 · H1 + sous-titre = nom/description de la collection (crawlable sans JS ;
     // le script inline vide ces génériques pour les users → zéro régression de flash).
-    html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title' + (brand || campaign ? ' data-context' : '') + '>' + ogEscape(name) + '</h1>');
+    html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title' + (brand || pageText ? ' data-context' : '') + '>' + ogEscape(name) + '</h1>');
     html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(bodyDescription) + '</p>');
     // SSR chantier 3 · grille de la collection (catégorie OU marque = collection Shopify) crawlable.
     try {
