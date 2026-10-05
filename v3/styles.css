@@ -743,7 +743,9 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .nav__searchbar-icon { color: var(--muted); flex-shrink: 0; }
 .nav__searchbar-input { flex: 1; min-width: 0; border: 0; background: none; font-family: var(--serif); font-size: clamp(1.15rem, 1.9vw, 1.5rem); color: var(--ink-deep); outline: none; }
 .nav__searchbar-input::placeholder { color: #b7ae9f; }
-.nav__searchbar-x { background: none; border: 0; color: var(--ink-deep); font-size: 26px; line-height: 1; cursor: pointer; flex-shrink: 0; padding: 0 4px; }
+/* Une seule croix : celle du site ferme la recherche ; celle du navigateur (effacer) est masquée. */
+.nav__searchbar-input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; display: none; }
+.nav__searchbar-x { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; background: none; border: 0; color: var(--ink-deep); font-size: 26px; line-height: 1; cursor: pointer; flex-shrink: 0; padding: 0 4px; }
 @media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } .searchd__input { font-size: 1.25rem; } }
 
 .pcard__media { position: relative; }
