@@ -35,10 +35,22 @@ Le produit courant, les doublons, les produits indisponibles, les produits sans
 image ou sans variante achetable sont toujours retirés.
 
 Les choix manuels Shopify sont conservés tels quels. Pour les choix automatiques,
-la même gamme peut occuper deux places au plus, puis les candidats sont distribués
-marque par marque, avec un maximum de deux cartes d'une même marque par rubrique.
-La pertinence fonctionnelle reste prioritaire : la diversité ne rapproche jamais
-deux objets sans usage commun uniquement pour changer de fabricant.
+la pertinence passe avant la diversité des marques (révision du 6 octobre) :
+
+- la même gamme occupe d'abord deux places au plus ; ses compléments (coussins,
+  housses, abat-jour…) reprennent ensuite les places restées libres, si bien
+  qu'une rubrique n'est jamais à moitié vide ;
+- dans « Vous aimerez aussi », les autres meubles de la gamme passent avant ses
+  accessoires, dont la place naturelle est « Complétez avec » ;
+- les candidats sont classés par niveau de pertinence (même type, même usage
+  intérieur ou extérieur). Dans chaque niveau, les marques alternent, deux cartes
+  au plus par marque ; puis le même niveau complète sans limite de marque. Le
+  niveau suivant n'est utilisé que si le précédent est épuisé ;
+- la gamme complète passe avant un produit d'usage différent : une pièce
+  d'intérieur ne propose un meuble de jardin qu'en dernier recours.
+
+Les tags `exterieur` / `interieur` décident de l'usage : un meuble de jardin sans
+tag extérieur est traité comme un meuble d'intérieur.
 
 ## Couverture vérifiée
 

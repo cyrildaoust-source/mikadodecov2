@@ -233,6 +233,25 @@ test('les choix automatiques diversifient les marques sans casser la gamme ni la
   assert.ok(curated.related.every(item => item.brand === 'HAY' && item.recommendationSource === 'curated'));
 });
 
+test('la diversité ne vide jamais une rubrique ni ne passe avant l’usage intérieur ou extérieur', () => {
+  const outdoorChair = { ...product, tags: ['palissade', 'chaise', 'exterieur'] };
+  const cushions = ['a', 'b', 'c', 'd'].map(id => card(`coussin-${id}`, { name: `Coussin Palissade ${id}`, productType: 'Coussin', tags: ['palissade', 'exterieur'] }));
+  const result = selectProductRecommendations({
+    product: outdoorChair,
+    range: cushions,
+    universe: [
+      card('vitra-interieur', { brand: 'Vitra', productType: 'Chaise' }),
+      card('fermob-jardin', { brand: 'Fermob', productType: 'Chaise', tags: ['exterieur'] }),
+      card('fatboy-jardin', { brand: 'Fatboy', productType: 'Chaise', tags: ['jardin'] }),
+      card('iittala-interieur', { brand: 'Iittala', productType: 'Chaise' }),
+    ],
+  });
+  // Les quatre coussins de la gamme restent proposés : rien d'autre ne les remplace.
+  assert.deepEqual(result.complementary.map(item => item.id), cushions.map(item => item.id));
+  // Pour une chaise de jardin, les chaises de jardin d'autres marques passent d'abord.
+  assert.deepEqual(result.related.slice(0, 2).map(item => item.id), ['fermob-jardin', 'fatboy-jardin']);
+});
+
 test('indisponibles, produit courant et doublons sont exclus ; chaque rubrique reste bornée', () => {
   const candidates = Array.from({ length: 12 }, (_, index) => card(`p${index}`));
   const result = selectProductRecommendations({
