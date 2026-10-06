@@ -2189,6 +2189,1224 @@
       "credit": null,
       "note": "portrait importé avant le 30 septembre, source retrouvée le 1er octobre ; recadré depuis l'original",
       "retrieved": "2026-10-01"
+    },
+    "piero-lissoni": {
+      "sourcePage": "https://alessi.com/collections/piero-lissoni",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Piero-Lissoni.jpg?v=1779782077",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Alessi (page designer). Personne assise au centre d'un cadre circulaire, assez petite dans l'image : recadrage 4:5 serré possible (hauteur 1306 px).",
+      "retrieved": "2026-10-06"
+    },
+    "sakura-adachi": {
+      "sourcePage": "https://alessi.com/collections/sakura-adachi",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Adachi-Sakura.jpg?v=1779782089",
+      "credit": null,
+      "note": "Portrait publié par Alessi sur la page designer.",
+      "retrieved": "2026-10-06"
+    },
+    "rodrigo-torres": {
+      "sourcePage": "https://alessi.com/collections/rodrigo-torres",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Torres-Rodrigo.jpg?v=1779782068",
+      "credit": null,
+      "note": "Portrait publié par Alessi sur la page designer.",
+      "retrieved": "2026-10-06"
+    },
+    "bkid": {
+      "sourcePage": "https://alessi.com/collections/bkid",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Bongkyu_Song_Portrait.jpg?v=1779782071",
+      "credit": null,
+      "note": "Portrait noir et blanc de Bongkyu Song, fondateur de BKID, publié par Alessi (page designer). Personne en pied jusqu'aux genoux, assez petite : recadrage 4:5 serré possible.",
+      "retrieved": "2026-10-06"
+    },
+    "marianne-brandt": {
+      "sourcePage": "https://alessi.com/collections/marianne-brandt",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Brandt-Marianne.jpg?v=1779782091",
+      "credit": null,
+      "note": "Photographie historique noir et blanc publiée par Alessi (page designer), visage de profil renversé avec bijou de cou ; portrait reconnaissable mais atypique. Recadrage 4:5 possible.",
+      "retrieved": "2026-10-06"
+    },
+    "daniel-libeskind": {
+      "sourcePage": "https://alessi.com/collections/daniel-libeskind",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Libeskind-Daniel-Stepahn-Ruiz.jpg?v=1779782070",
+      "credit": "Stefan Ruiz (d'après le nom du fichier « Stepahn-Ruiz »)",
+      "note": "Portrait noir et blanc devant une bibliothèque, publié par Alessi (page designer).",
+      "retrieved": "2026-10-06"
+    },
+    "jakob-wagner": {
+      "sourcePage": "https://www.jakobwagner.dk/about",
+      "imageUrl": "https://cdn.prod.website-files.com/5fdf84ce30b61163f22469be/6304b37a3ccd127011044aa5_11.06.20_Jakob_Portrait_Portrait_473.jpg",
+      "credit": null,
+      "note": "Portrait couleur publié sur le site officiel du studio (page About), assis à une table ; déjà au format 4:5.",
+      "retrieved": "2026-10-06"
+    },
+    "medum": {
+      "sourcePage": "https://alessi.com/collections/medum",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Medum-Shintaru-BN-2024.jpg?v=1779782070",
+      "credit": null,
+      "note": "Portrait noir et blanc de Shintaro Monden, fondateur de MEDUM, publié par Alessi (page designer). Nom de fichier « Shintaru » (coquille d'Alessi).",
+      "retrieved": "2026-10-06"
+    },
+    "peter-zumthor": {
+      "sourcePage": "https://alessi.com/collections/peter-zumthor",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Zumthor-Peter.jpg?v=1779782063",
+      "credit": null,
+      "note": "Portrait publié par Alessi sur la page designer.",
+      "retrieved": "2026-10-06"
+    },
+    "riccardo-dalisi": {
+      "sourcePage": "https://alessi.com/collections/riccardo-dalisi",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Dalisi-Riccardo.jpg?v=1779782073",
+      "credit": null,
+      "note": "Photo noir et blanc publiée par Alessi (page designer) : Dalisi tenant une de ses cafetières en métal, visage partiellement masqué par l'objet. Recadrage 4:5 possible, portrait moins classique.",
+      "retrieved": "2026-10-06"
+    },
+    "fabrizio-crisa": {
+      "sourcePage": "https://www.elica.com/NL-en/magazine/in-evidence/fabrizio-crisa-brings-home-a-second-compasso-doro-award",
+      "imageUrl": "https://www.elica.com/storage/Article/editorjs/1719475931_image00017.jpeg",
+      "credit": null,
+      "note": "Photo publiée par Elica : Fabrizio Crisà tenant le Compasso d'Oro 2024 devant le mur de la XXVIIIe édition. Paysage, personne au centre : recadrage 4:5 possible (environ 1620 x 2026). Le portrait studio noir et blanc de la page Elica Design",
+      "retrieved": "2026-10-06"
+    },
+    "anna-gili": {
+      "sourcePage": "https://www.annagili.com/en/about/",
+      "imageUrl": "https://www.annagili.com/wp-content/uploads/2019/07/ritratto-Anna-Gili.jpg",
+      "credit": "Stefano Ferrante",
+      "note": "Portrait officiel du site de la créatrice (fichier « ritratto-Anna-Gili »). Cadrage original : visage vu à travers l'ouverture d'une sculpture rose, une partie du visage masquée. Crédit tiré des métadonnées EXIF (copyright STEFANO FERRANTE)",
+      "retrieved": "2026-10-06"
+    },
+    "mattia-di-rosa": {
+      "sourcePage": "https://alessi.com/fr/collections/mattia-di-rosa",
+      "imageUrl": "https://alessi.com/cdn/shop/files/DiRosa-Mattia_2136dc50-ea1e-4acc-b56b-249b8fd56611.jpg?v=1748186605",
+      "credit": null,
+      "note": "Portrait noir et blanc publié sur la page créateur Alessi, gros plan du visage, net. Format presque carré : recadrage 4:5 possible (environ 1045 x 1306). Version la plus grande servie par le CDN (le paramètre width=2000 renvoie 1424 px).",
+      "retrieved": "2026-10-06"
+    },
+    "paolo-ulian": {
+      "sourcePage": "https://www.kreoo.com/en/designers/paolo-ulian/",
+      "imageUrl": "https://www.kreoo.com/wp-content/uploads/2025/01/Paolo-Ulian.jpg",
+      "credit": null,
+      "note": "Portrait studio noir et blanc publié par Kreoo, éditeur de pièces en marbre de Paolo Ulian. Déjà au format 4:5, visage net et souriant. Alessi ne publie pas de portrait (page créateur sans image).",
+      "retrieved": "2026-10-06"
+    },
+    "hanne-kortegaard": {
+      "sourcePage": "https://liniedesign.com/pages/hanne-kortegaard",
+      "imageUrl": "https://liniedesign.com/cdn/shop/files/Hanne_Kortegaard_Designer_II.jpg?v=1684849533",
+      "credit": null,
+      "note": "Portrait en couleur en tête de la page designer Linie Design : assise à une table de travail, ciseaux et papier en main, regard baissé vers son travail (visage net, de trois quarts). Original Shopify (sans suffixe de taille) 800x1016 ; reca",
+      "retrieved": "2026-10-06"
+    },
+    "kay-bojesen": {
+      "sourcePage": "https://kaybojesen.com/about-kay-bojesen/",
+      "imageUrl": "https://kaybojesen.com/wp-content/uploads/sites/3/2022/07/Kay-Bojesen-Portrait-1.jpeg",
+      "credit": null,
+      "note": "Portrait d'archive noir et blanc en buste, de trois quarts, visage net ; image d'en-tête de la page « About Kay Bojesen » du site officiel tenu par la famille (Kay Bojesen ApS). Recadrage 4:5 facile (1000x1250).",
+      "retrieved": "2026-10-06"
+    },
+    "hans-gustav-ehrenreich": {
+      "sourcePage": "https://www.hoptimist.com/eu/our-story/",
+      "imageUrl": "https://www.hoptimist.com/on/demandware.static/-/Sites-hoptimist-Library/default/dw98d0fd64/historie/Historie_1_txt_image.jpg",
+      "credit": null,
+      "note": "Photo d'archive noir et blanc à l'atelier (section « The Danish wood turner » de la page Our Story) : Ehrenreich debout tenant un Hoptimist, regard vers l'objectif, visage net ; une ouvrière floue au premier plan à gauche. Carré 1330x1330 ;",
+      "retrieved": "2026-10-06"
+    },
+    "bjorn-dahlstrom": {
+      "sourcePage": "https://nola.se/en/designers/bjorn-dahlstrom/",
+      "imageUrl": "https://nola.se/site/assets/files/6023/nola_formgivare_bjorn_dahlstrom.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par l'éditeur suédois Nola : assis à une table, lunettes noires, regard caméra, visage net ; ustensiles de cuisine disposés devant lui. Recadrage 4:5 centré : environ 1084x1355 (x 210-1294). Iittala publie seul",
+      "retrieved": "2026-10-06"
+    },
+    "gitte-annette-knudsen": {
+      "sourcePage": "https://liniedesign.com/pages/gitte-annette-knudsen",
+      "imageUrl": "https://liniedesign.com/cdn/shop/files/Linie_Design_Portraetter_115355.jpg?v=1684849518",
+      "credit": null,
+      "note": "Portrait couleur de la page designer Linie Design (série « Linie Design Portrætter ») : accroupie dans son atelier près de pelotes et d'un tapis, souriante, regard caméra, visage net. Original 800x1200 ; recadrage 4:5 800x1000 en gardant le",
+      "retrieved": "2026-10-06"
+    },
+    "helene-blanche": {
+      "sourcePage": "https://liniedesign.com/pages/helene-blanche",
+      "imageUrl": "https://liniedesign.com/cdn/shop/files/Helene_Blanche_1200x1200_cf1d1ec3-6e02-41ac-97c9-dcc8556ada49.jpg?v=1685550359",
+      "credit": null,
+      "note": "Portrait noir et blanc de la page designer Linie Design : assise à une table, de face, regard caméra, visage net. Carré 1201x1200 ; recadrage 4:5 centré 960x1200. Variante plus grande sur son site officiel (https://heleneblanche.com/cdn/sho",
+      "retrieved": "2026-10-06"
+    },
+    "maija-isola": {
+      "sourcePage": "https://www.marimekko.jp/maripedia/designers/maija-isola",
+      "imageUrl": "https://marimekko.cms01.d-head.biz/designer_list/Designer_MaijaIsola_maripedia_bw.png",
+      "credit": null,
+      "note": "Photo d'archive noir et blanc publiée par Marimekko (site officiel japonais, rubrique Maripedia) : assise par terre, en train de peindre au pinceau un grand motif floral ; visage net mais regard baissé. Déjà au format 4:5 (1200x1500) ; la t",
+      "retrieved": "2026-10-06"
+    },
+    "bodil-jerichau": {
+      "sourcePage": "https://liniedesign.com/pages/bodil-jerichau",
+      "imageUrl": "https://liniedesign.com/cdn/shop/files/Linie_Design_Portraetter_115680.jpg?v=1684849502",
+      "credit": null,
+      "note": "Portrait couleur de la page designer Linie Design (série « Linie Design Portrætter ») : assise dans son atelier, regard caméra, visage net. Original 878x1200 ; recadrage 4:5 878x1098.",
+      "retrieved": "2026-10-06"
+    },
+    "magnus-pettersen": {
+      "sourcePage": "https://www.magnuspettersen.com/about",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/61729cde386213432bfaa14c/1634904796747-55QFF23LQ3DLJQ1WV22V/Shot-12-Portrait-693_RT+-+Copy.jpg?format=original",
+      "credit": null,
+      "note": "Portrait couleur de son site officiel (page About) : debout contre un pilier en béton, veste noire, regard caméra, visage net. 2500x3333 (version JPEG demandée avec Accept: image/jpeg, le CDN Squarespace renvoyant sinon du WebP) ; recadrage",
+      "retrieved": "2026-10-06"
+    },
+    "marta-lavinia-carboni": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/marta-lavinia-carboni/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/8544/2000x2000/nocrop/align-4/MLC-1.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc de la page designer Ichendorf Milano : assise devant des fougères, main contre la joue, souriante, regard caméra, visage net. La page sert 762x1097 ; le redimensionneur d'Ichendorf agrandit sans limite, donc la taille",
+      "retrieved": "2026-10-06"
+    },
+    "hans-van-bentem": {
+      "sourcePage": "https://www.hansvanbentem.nl/about/",
+      "imageUrl": "https://www.hansvanbentem.nl/content/uploads/1511213106-sf-web.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc en gros plan de son site officiel (page About) : visage de trois quarts, reflets de lumière, visage net. 905x1140, déjà proche du 4:5 (recadrage 905x1131).",
+      "retrieved": "2026-10-06"
+    },
+    "matti-klenell": {
+      "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/putki",
+      "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_matti_klenell_lempi_group_bw.jpg",
+      "credit": null,
+      "note": "Portrait studio noir et blanc, assis à une table devant des verres Lempi, regard caméra, visage net. Paysage 1080x680 (plus grande version servie par le CDN Sitecore d'Iittala ; au-delà, l'image est seulement agrandie). Un recadrage 4:5 don",
+      "retrieved": "2026-10-06"
+    },
+    "carina-seth-andersson": {
+      "sourcePage": "https://www.fogia.com/our-designers/carina-seth-andersson",
+      "imageUrl": "https://cdn.sanity.io/images/d6gjqdwj/production/b638637efd4bde856cfa9ca32ef6c3f2d74b5d7d-2000x2500.png",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par l'éditeur Fogia (Fogia_Portrait_Carina-Seth-Andersson.png) : en buste, lunettes rondes, regard caméra, visage net. Déjà en 4:5 (2000x2500), PNG avec canal alpha opaque. Alternative Marimekko (site officiel ",
+      "retrieved": "2026-10-06"
+    },
+    "erik-magnussen": {
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/erik-magnussen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/erik-magnussen/erikmagnussen-desktop-hero-3840x2160px.jpg",
+      "credit": null,
+      "note": "Visuel d'en-tête de la page designer de Carl Hansen & Søn : montage sur fond beige avec, à droite, un portrait noir et blanc de Magnussen (visage net, plan poitrine) et, à gauche, une photo d'ambiance avec les suspensions EM82. Recadrage ma",
+      "retrieved": "2026-10-06"
+    },
+    "studio-verbaan": {
+      "sourcePage": "https://www.studioverbaan.nl/about/",
+      "imageUrl": "https://www.studioverbaan.nl/wp-content/uploads/2026/05/IAC8148.jpg",
+      "credit": "IAC Moonen",
+      "note": "Photo couleur des deux fondateurs devant un mur de briques, publiée sur la page About du studio (original non réduit ; la page affiche IAC8148-scaled.jpg, 1440 × 2560). Elle debout à gauche, lui assis sur une table Kombo orange ; visages ne",
+      "retrieved": "2026-10-06"
+    },
+    "elissa-aalto": {
+      "sourcePage": "https://www.alvaraalto.fi/en/alvar-aalto-foundation/elissa-aalto/",
+      "imageUrl": "https://www.alvaraalto.fi/wp-content/uploads/2021/11/106445-2500px.jpg",
+      "credit": null,
+      "note": "Portrait de studio noir et blanc d'Elissa Aalto jeune, de face, fond clair ; visage net, carré 2500 × 2500. Image principale de la page Elissa Aalto de la Fondation Alvar Aalto (vignette 988 × 659 sur le site, original 2500 px). Recadrage a",
+      "retrieved": "2026-10-06"
+    },
+    "vuokko-eskolin-nurmesniemi": {
+      "sourcePage": "https://web.archive.org/web/20240407022524/https://www.marimekko.com/com_en/maripedia/designers/vuokko-eskolin-nurmesniemi",
+      "imageUrl": "https://www.marimekko.com/media/maripedia/designer/D/e/Designer_VuokkoNurmesniemi_maripedia.png",
+      "credit": null,
+      "note": "Portrait noir et blanc récent (lunettes rondes, haut rayé), publié par Marimekko sur sa page Maripedia ; déjà au format 4:5, visage net. Téléchargé via la copie Internet Archive du 7 avril 2024 (marimekko.com bloque les requêtes directes : ",
+      "retrieved": "2026-10-06"
+    },
+    "marcantonio": {
+      "sourcePage": "https://www.ichendorfmilano.com/en/designers/marcantonio/",
+      "imageUrl": "https://www.ichendorfmilano.com/images/299/8573/4000x4000/nocrop/noenlarge/align-4/Marcantonio-seduto.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc, assis, mains jointes, publié sur la page designer d'Ichendorf Milano ; visage net. Original 1955 × 2470 obtenu avec le paramètre noenlarge (sans agrandissement), proche du 4:5 : recadrage automatique sur le haut du c",
+      "retrieved": "2026-10-06"
+    },
+    "juliette-liberman": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Juliette-LIBERMAN.gif",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 × 722, proche du 4:5) ; visage net, de trois quarts. Seule version trouvée.",
+      "retrieved": "2026-10-06"
+    },
+    "philippe-mathieu": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Philippe-MATHIEU.gif",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 × 722, proche du 4:5) ; profil de trois quarts, regard vers la gauche, visage net. Seule version trouvée.",
+      "retrieved": "2026-10-06"
+    },
+    "fabio-meliota": {
+      "sourcePage": "https://www.fermob.com/fr/les-designers",
+      "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Fabio-MELIOTA.gif",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 × 722, proche du 4:5) ; de face, pull sombre, visage net. Seule version trouvée.",
+      "retrieved": "2026-10-06"
+    },
+    "doshi-levien": {
+      "sourcePage": "https://www.hay.com/shared/designers/doshi-levien",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/doshi-levien_2021_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait du duo (Nipa Doshi à gauche, Jonathan Levien à droite) dans leur atelier, devant un canapé Quilton. Carré 1053 px : recadrage 4:5 serré possible sur les deux personnes.",
+      "retrieved": "2026-10-06"
+    },
+    "holly-golightly": {
+      "sourcePage": "https://www.hay.com/shared/designers/holly-golightly",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/barbara-werner_1220x1220.jpg",
+      "credit": null,
+      "note": "Barbara Maj Husted Werner assise sur un banc devant la vitrine Holly Golightly, un chien dans les bras. Image carrée 5096 px où elle occupe environ un cinquième de la largeur : recadrage 4:5 nécessaire (environ 1000 px de large), visage net",
+      "retrieved": "2026-10-06"
+    },
+    "andreas-bergsaker": {
+      "sourcePage": "https://www.hay.com/shared/designers/andreas-bergsaker",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/andreas-bergsaker_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait en noir et blanc, buste, fond clair, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "amanda-borberg": {
+      "sourcePage": "https://www.hay.com/shared/designers/amanda-borberg",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/amanda-borberg-2017_bw_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait en noir et blanc (2017), à mi-corps dans l'encadrement d'une porte, visage net. Image carrée 1187 px.",
+      "retrieved": "2026-10-06"
+    },
+    "ana-kras": {
+      "sourcePage": "https://www.hay.com/shared/designers/ana-kras",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/ana-kra_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait à mi-corps, accoudée à un abat-jour Bonbon, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "pereira-office": {
+      "sourcePage": "https://www.hay.com/shared/designers/pereira-office",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/rui-pereira_2023_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait de Rui Pereira (2023), à mi-corps, fond clair, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "laila-gohar": {
+      "sourcePage": "https://www.hay.com/shared/designers/laila-gohar",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/laila-gohar_portrait.jpg",
+      "credit": null,
+      "note": "Portrait à mi-corps, tenant un vase Sobremesa Stripe garni de tulipes, visage net mais tourné vers le bas.",
+      "retrieved": "2026-10-06"
+    },
+    "studio-0405": {
+      "sourcePage": "https://www.hay.com/shared/designers/studio-0405",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/nicolaj-mentze_studio-0405_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait serré en noir et blanc de Nikolaj Lorentz Mentze, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "shane-schneck": {
+      "sourcePage": "https://www.hay.com/shared/designers/shane-schneck",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/shane-schneck-portrait_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait en noir et blanc, bras croisés derrière une table, fond blanc avec horloge. Il occupe la moitié inférieure gauche : recadrage 4:5 d'environ 610 px de large, juste au-dessus du minimum.",
+      "retrieved": "2026-10-06"
+    },
+    "jorgen-baekmark": {
+      "sourcePage": "https://www.hay.com/shared/designers/joergen-baekmark",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/joergen-baekmark_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait en noir et blanc, âgé, assis sur une chaise, visage net. Image carrée de 738 px seulement (au-dessus du minimum de 600 px).",
+      "retrieved": "2026-10-06"
+    },
+    "aspekt-office": {
+      "sourcePage": "https://www.hay.com/footer/about/designers",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/brandsite/hays-world/news/2025-news-blocks/buoy-lamps/aspekt-office.jpg",
+      "credit": null,
+      "note": "Les deux membres penchés sur une table de travail (échantillons, maquettes de tabourets). Publiée comme vignette du studio sur la liste des designers HAY (la page designer elle-même n'a pas d'image). Visages de trois quarts, regard vers le ",
+      "retrieved": "2026-10-06"
+    },
+    "stefan-diez": {
+      "sourcePage": "https://www.hay.com/shared/designers/stefan-diez",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/stefan-diez-2020_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait (2020), assis dans une étagère New Order rouge, casquette, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "julie-richoz": {
+      "sourcePage": "https://www.hay.com/shared/designers/julie-richoz",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/julie_richoz_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait en buste, fond sombre, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "leon-ransmeier": {
+      "sourcePage": "https://www.hay.com/shared/designers/leon-ransmeier",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/leon-ransmeier-2020_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait en pied (2020), assis sur un tabouret Revolver, casquette, fond blanc. Recadrage 4:5 nécessaire, visage net mais assez petit.",
+      "retrieved": "2026-10-06"
+    },
+    "marc-morro": {
+      "sourcePage": "https://www.hay.com/shared/designers/marc-morro",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/marc-morro__1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait en pied, assis sur un tabouret dans son atelier, visage net. Recadrage 4:5 confortable.",
+      "retrieved": "2026-10-06"
+    },
+    "niels-jorgen-haugesen": {
+      "sourcePage": "https://www.hay.com/shared/designers/niels-joergen-haugesen",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/niels-joergen-haugensen_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait serré en noir et blanc, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "mario-bellini": {
+      "sourcePage": "https://www.hay.com/shared/designers/mario-bellini",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/mario-bellini_1220x1220.jpg",
+      "credit": null,
+      "note": "Mario Bellini (à droite, pull bleu, crâne rasé, barbe blanche) penché sur un module Amanta, avec une seconde personne à gauche (casquette, t-shirt blanc, probablement Rolf Hay, non confirmé). Recadrer en 4:5 sur la moitié droite (environ x ",
+      "retrieved": "2026-10-06"
+    },
+    "sam-weller": {
+      "sourcePage": "https://www.hay.com/shared/designers/sam-weller",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/sam-weller_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait en buste devant un mur de briques, visage net. Carré 3378 px.",
+      "retrieved": "2026-10-06"
+    },
+    "jochen-holz": {
+      "sourcePage": "https://www.hay.com/shared/designers/jochen-holz",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jochen-holz_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait à mi-corps dans son atelier, pièces de verre en arrière-plan, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "ethan-cook": {
+      "sourcePage": "https://www.hay.com/shared/designers/ethan-cook",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/ethan-cook_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait de face en buste devant une de ses œuvres tissées (rouge, rose, noir) ; visage net et centré, recadrage 4:5 facile.",
+      "retrieved": "2026-10-06"
+    },
+    "martin-solem": {
+      "sourcePage": "https://www.hay.com/shared/designers/martin-solem",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/martin-solem.jpg",
+      "credit": null,
+      "note": "Portrait en buste, manteau sombre, devant un mur de pierre ; visage net, recadrage 4:5 simple.",
+      "retrieved": "2026-10-06"
+    },
+    "smithmatthias": {
+      "sourcePage": "https://www.hay.com/shared/designers/smithmatthias",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/smith--mattias_1220x1220srgb.jpg",
+      "credit": "Anna Batchelor (EXIF, 2014)",
+      "note": "Gemma Matthias et Jack Smith côte à côte devant un mur blanc, à mi-corps ; visages nets. Recadrage 4:5 possible en gardant les deux.",
+      "retrieved": "2026-10-06"
+    },
+    "jessica-hans": {
+      "sourcePage": "https://www.hay.com/shared/designers/jessica-hans",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jessica-hans_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait à mi-corps, écharpe moutarde, devant une toile peinte ; visage net. Image limitée à 960 px.",
+      "retrieved": "2026-10-06"
+    },
+    "rui-pereira-ryosuke-fukusada": {
+      "sourcePage": "https://www.hay.com/shared/designers/rui-pereira-ryosuke-fukusada",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/rui-pereira--ryosuke-fukusada_1220x12202.jpg",
+      "credit": null,
+      "note": "Les deux designers debout côte à côte devant un mur clair, à mi-corps ; visages nets. Recadrage 4:5 possible.",
+      "retrieved": "2026-10-06"
+    },
+    "kaschkasch": {
+      "sourcePage": "https://www.hay.com/shared/designers/kaschkasch",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/kaschkasch-2019-bw_1220x1220.jpg",
+      "credit": "Thomas Rabsch (EXIF)",
+      "note": "Portrait noir et blanc des deux membres, l'un assis devant, l'autre appuyé derrière ; visages nets. Recadrage 4:5 possible.",
+      "retrieved": "2026-10-06"
+    },
+    "moises-hernandez": {
+      "sourcePage": "https://www.hay.com/shared/designers/moises-hernandez",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/moises-hernandez-5_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait à mi-corps, chemise blanche, bras croisés sur fond noir ; visage net, recadrage 4:5 simple.",
+      "retrieved": "2026-10-06"
+    },
+    "cprv": {
+      "sourcePage": "https://www.hay.com/shared/designers/cprv",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/cprv_1220x1220.jpg",
+      "credit": "Maxime Verret (EXIF)",
+      "note": "Les deux membres en pied, appuyés contre une cloison claire ; visages nets mais petits dans l'image. Un recadrage 4:5 garde les deux silhouettes ; à valider visuellement.",
+      "retrieved": "2026-10-06"
+    },
+    "jonas-forsman": {
+      "sourcePage": "https://www.hay.com/shared/designers/jonas-forsman",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jonas-forsman_1220x1220.jpg",
+      "credit": "Bert Leandersson (EXIF)",
+      "note": "Assis sur un tabouret dans un atelier, mur d'outils derrière ; visage net, personne à droite du cadre. Recadrage 4:5 décentré vers la droite.",
+      "retrieved": "2026-10-06"
+    },
+    "kristine-five-melvaer": {
+      "sourcePage": "https://www.hay.com/shared/designers/kristine-five-melvaer",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/kristine-five-melvaer_1220x1220.jpg",
+      "credit": "Erik Five Gunnerud (EXIF)",
+      "note": "Portrait souriant en buste sur fond blanc ; visage net, recadrage 4:5 simple.",
+      "retrieved": "2026-10-06"
+    },
+    "claire-lavabre": {
+      "sourcePage": "https://www.hay.com/shared/designers/claire-lavabre",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/claire-lavabre_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait de face en buste sur fond gris clair ; visage net et centré, recadrage 4:5 simple. EXIF : « ALL RIGHT RESERVED », sans nom de photographe.",
+      "retrieved": "2026-10-06"
+    },
+    "chris-kabel": {
+      "sourcePage": "https://www.hay.com/shared/designers/chris-kabel",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/chris-kabel_1220x1220.jpg",
+      "credit": null,
+      "note": "Vue plongeante : assis sur une chaise bleue en fil sur une dalle de béton, bonnet bleu ; visage net mais assez petit dans l'image. Recadrage 4:5 serré possible, à valider.",
+      "retrieved": "2026-10-06"
+    },
+    "romain-sillon": {
+      "sourcePage": "https://www.hay.com/shared/designers/romain-sillon",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/romain-sillon_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc à mi-corps, mains dans les poches, devant un mur de planches ; visage net, recadrage 4:5 simple.",
+      "retrieved": "2026-10-06"
+    },
+    "christian-juhl": {
+      "sourcePage": "https://www.hay.com/shared/designers/christian-juhl",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/christian-juhl_1220x1220.jpg",
+      "credit": null,
+      "note": "Portrait de trois quarts, assis à une table en train de dessiner, souriant, maquettes de lampe au premier plan ; visage net. Recadrage 4:5 centré sur lui.",
+      "retrieved": "2026-10-06"
+    },
+    "leclercq-viallet": {
+      "sourcePage": "https://www.hay.com/shared/designers/leclercq-viallet",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/leclercq-viallet_1220x1220.jpg",
+      "credit": null,
+      "note": "Duo dans l'atelier : lui debout, elle assise, étagères d'objets derrière ; visages nets mais personnages en pied. Recadrage 4:5 possible en gardant les deux.",
+      "retrieved": "2026-10-06"
+    },
+    "joel-hoff": {
+      "sourcePage": "https://www.hay.com/shared/designers/joel-hoff",
+      "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/joel-hoff.jpg",
+      "credit": null,
+      "note": "Portrait souriant en buste, blouson sombre, devant un mur de béton ; visage net, recadrage 4:5 simple.",
+      "retrieved": "2026-10-06"
+    },
+    "poul-henningsen": {
+      "sourcePage": "https://www.louispoulsen.com/en-gb/private/about-us/designers/poul-henningsen",
+      "imageUrl": "https://www.louispoulsen.com/4adc97/globalassets/about-us/designers/poul-henningsen/about-designers-poulhenningsen-4.jpg",
+      "credit": null,
+      "note": "Photo d'archive noir et blanc publiée par Louis Poulsen (légende : « Poul Henningsen adjusting PH multi-shade lamp during design work, © 2025 Louis Poulsen »). Henningsen de trois quarts, lunettes, visage net en haut à droite ; un abat-jour",
+      "retrieved": "2026-10-06"
+    },
+    "jakob-lange-big-ideas": {
+      "sourcePage": "https://www.louispoulsen.com/en-gb/private/about-us/designers/jakob-lange-big-ideas",
+      "imageUrl": "https://www.louispoulsen.com/4a4f4f/globalassets/about-us/designers/jakob-lange-big-ideas/jakob-lange-big-ideas-louis-poulsen.jpg",
+      "credit": null,
+      "note": "portrait de la page designer Louis Poulsen, 550 × 750 (porté à 640 px, agrandissement 1,16×)",
+      "retrieved": "2026-10-06"
+    },
+    "oivind-slaatto": {
+      "sourcePage": "https://www.carlhansen.com/en/designers/oivind-slaatto",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/oivind-slaatto/carlhansen_portraits_oivinslaatto_77351_lowres_final-copy.jpg",
+      "credit": null,
+      "note": "Portrait en couleur publié par Carl Hansen & Søn : Slaatto debout à son plan de travail, de profil, penché sur un dessin ; visage net mais regard baissé. Déjà au format 4:5. Le portrait de face de Louis Poulsen (oivind-slaatto-550x750.jpg) ",
+      "retrieved": "2026-10-06"
+    },
+    "christian-flindt": {
+      "sourcePage": "https://www.louispoulsen.com/en-gb/private/about-us/designers/christian-flindt",
+      "imageUrl": "https://www.louispoulsen.com/4a66a1/globalassets/about-us/designers/christian-flindt/christian-flindt-550x750.jpg",
+      "credit": null,
+      "note": "portrait de la page designer Louis Poulsen, 550 × 750 (porté à 640 px, agrandissement 1,16×)",
+      "retrieved": "2026-10-06"
+    },
+    "gamfratesi": {
+      "sourcePage": "https://www.gamfratesi.com/studio",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/650c154f043d117e2163420e/ee0c5624-4a7b-4f32-a6c0-a0be6293f9d0/GamFratesi_portrait+01+ph+Petra+Kleis.jpg",
+      "credit": "Petra Kleis",
+      "note": "Portrait en couleur des deux associés, debout contre un mur ensoleillé, publié sur le site officiel du studio (crédit dans le nom du fichier). Visages nets, Enrico Fratesi à gauche, Stine Gam à droite. Format 3:4, recadrage 4:5 facile. Télé",
+      "retrieved": "2026-10-06"
+    },
+    "shoichi-uchiyama": {
+      "sourcePage": "https://www.louispoulsen.com/en-gb/private/about-us/designers/shoichi-uchiyama",
+      "imageUrl": "https://www.louispoulsen.com/4a9600/globalassets/about-us/designers/shoichi-uchiyama/shoichi-uchiyama-550x750.jpg",
+      "credit": null,
+      "note": "portrait de la page designer Louis Poulsen, 550 × 750 (porté à 640 px, agrandissement 1,16×)",
+      "retrieved": "2026-10-06"
+    },
+    "anu-moser": {
+      "sourcePage": "https://www.louispoulsen.com/en-gb/private/about-us/designers/anu-moser",
+      "imageUrl": "https://www.louispoulsen.com/4a659e/globalassets/about-us/designers/anu-moser/anu-moser-550x750.jpg",
+      "credit": null,
+      "note": "portrait de la page designer Louis Poulsen, 550 × 750 (porté à 640 px, agrandissement 1,16×)",
+      "retrieved": "2026-10-06"
+    },
+    "vilhelm-wohlert": {
+      "sourcePage": "https://www.louispoulsen.com/en-gb/private/about-us/designers/vilhelm-wohlert",
+      "imageUrl": "https://www.louispoulsen.com/4a660f/globalassets/about-us/designers/vilhelm-wohlert/vilhelm-wohlert-550x750.jpg",
+      "credit": null,
+      "note": "portrait de la page designer Louis Poulsen, 550 × 750 (porté à 640 px, agrandissement 1,16×)",
+      "retrieved": "2026-10-06"
+    },
+    "formafantasma": {
+      "sourcePage": "https://flos.com/en/wo/designers/formafantasma.html",
+      "imageUrl": "https://flos.com/on/demandware.static/-/Library-Sites-FLOS-contentlib/default/dw61b049c0/clp_designers/designers-formafantasma-flos-entrance-desk.jpg",
+      "credit": null,
+      "note": "Portrait en couleur des deux fondateurs, assis devant un mur blanc sous un luminaire Flos, image d'en-tête de la page designer Flos. Visages nets. Format paysage : un recadrage 4:5 (environ 1666 × 2083) sur la moitié droite garde les deux p",
+      "retrieved": "2026-10-06"
+    },
+    "finn-juhl": {
+      "sourcePage": "https://www.louispoulsen.com/en-gb/private/about-us/designers/finn-juhl",
+      "imageUrl": "https://www.louispoulsen.com/49d16b/globalassets/about-us/designers/finn-juhl/finn-juhl-photo-the-royal-danish-library-pressehuset.png",
+      "credit": null,
+      "note": "Photo d'archive noir et blanc publiée par Louis Poulsen (légende : « Finn Juhl sketching architectural plans at a desk ») ; Juhl assis à sa table à dessin devant une bibliothèque, visage net. Le nom du fichier indique une source « The Royal",
+      "retrieved": "2026-10-06"
+    },
+    "rodolfo-dordoni": {
+      "sourcePage": "https://flos.com/en/si/designers/rodolfo-dordoni.html",
+      "imageUrl": "https://flos.com/on/demandware.static/-/Library-Sites-FLOS-contentlib/default/dw9a5d5de6/designers-rodolfo-dordoni-flos-07.jpg",
+      "credit": "Ramak Fazel",
+      "note": "Portrait en couleur publié sur la page designer Flos (légende « ph. © Ramak Fazel » sous l'image) : Dordoni debout, appuyé à une table dans son studio, regard vers l'objectif, visage net. Format 3:4, recadrage 4:5 facile. Flos publie aussi ",
+      "retrieved": "2026-10-06"
+    },
+    "tobia-scarpa": {
+      "sourcePage": "https://flos.com/en/wo/designers/tobia-scarpa.html",
+      "imageUrl": "https://flos.com/on/demandware.static/-/Library-Sites-FLOS-contentlib/default/dw7f6711ce/designers-tobia-scarpa-flos-02.jpg",
+      "credit": "Alberto Vendrame",
+      "note": "Portrait en couleur publié sur la page designer Flos (figcaption « ph. © Alberto Vendrame » rattachée à cette image) : gros plan, Scarpa de trois quarts, lunettes, regard baissé, visage net. Format 2:3, recadrage 4:5 facile. Fichier lourd (",
+      "retrieved": "2026-10-06"
+    },
+    "louise-campbell": {
+      "sourcePage": "https://www.muuto.com/designers2/louise-campbell/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/louise-campbell/louise-campbell-portrait-muuto.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc de face sur fond clair, publié par Muuto (éditeur autorisé) sur sa page designer ; visage très net, une main floue au premier plan à gauche. Format proche de 4:5. Louis Poulsen publie un autre portrait (louise-campbel",
+      "retrieved": "2026-10-06"
+    },
+    "olafur-eliasson": {
+      "sourcePage": "https://www.louispoulsen.com/en-gb/private/about-us/designers/olafur-eliasson",
+      "imageUrl": "https://www.louispoulsen.com/49f2d5/globalassets/about-us/designers/olafur-eliasson/olafur_eliasson_550x750.jpg",
+      "credit": null,
+      "note": "portrait de la page designer Louis Poulsen, 550 × 750 (porté à 640 px, agrandissement 1,16×)",
+      "retrieved": "2026-10-06"
+    },
+    "gabriel-tan": {
+      "sourcePage": "https://www.louispoulsen.com/en/private/about-us/designers/gabriel-tan",
+      "imageUrl": "https://www.louispoulsen.com/4a736e/globalassets/about-us/designers/gabriel-tan/gabrieltan-designer.png",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Louis Poulsen (texte alternatif : « Portrait of designer Gabriel Tan seated at table with soft curtain backdrop, © 2025 Louis Poulsen ») ; assis à une table, de face, visage net. Format 4:5. PNG en palette ",
+      "retrieved": "2026-10-06"
+    },
+    "anne-boysen": {
+      "sourcePage": "https://www.anneboysen.dk/about",
+      "imageUrl": "https://cdn.prod.website-files.com/661d69ca60156efad42880c2/6637ec334402db0628ae9b49_image%2057%403.webp",
+      "credit": "Petra Kleis",
+      "note": "Portrait en couleur sur fond clair, en tête de la page About du site officiel (mention « Photo by Petra Kleis » sur la page) ; souriante, une main levée, visage net. Format 3:4, recadrage 4:5 facile. Fichier original en WebP. Louis Poulsen ",
+      "retrieved": "2026-10-06"
+    },
+    "gae-aulenti": {
+      "sourcePage": "https://martinelliluce.it/en/designer/gae-aulenti",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/4c8c354a31f16bc5927c64e4db471bfc45aa988a/Gae_Aulenti_1.jpg",
+      "credit": "Ugo Mulas (EXIF : artiste « ugo mulas », copyright « martinelli luce »)",
+      "note": "Photo d'archive noir et blanc, déjà au format portrait : assise à sa table de travail, main au visage, visage net. Le pied d'une lampe Pipistrello entre dans le cadre en haut à gauche.",
+      "retrieved": "2026-10-06"
+    },
+    "elio-martinelli": {
+      "sourcePage": "https://martinelliluce.it/en/designer/elio-martinelli",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/11d20d4bd3546e4a554c9a4a2b1c7e32240ef1d8/Elio_Martinelli.jpg",
+      "credit": null,
+      "note": "Photo d'archive noir et blanc, carrée : assis, une feuille à la main, regard vers la droite, visage net. Recadrage 4:5 centré sur lui sans difficulté.",
+      "retrieved": "2026-10-06"
+    },
+    "studio-natural": {
+      "sourcePage": "https://martinelliluce.it/en/designer/studio-natural",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/97767bf8f668d46c4e2a1b5a23d5b9625929c2a6/Studio_Natural.jpg",
+      "credit": null,
+      "note": "Noir et blanc, carrée : les deux fondateurs debout contre un mur, visages nets. Un recadrage 4:5 garde les deux têtes mais coupe légèrement les épaules extérieures.",
+      "retrieved": "2026-10-06"
+    },
+    "emiliana-martinelli": {
+      "sourcePage": "https://martinelliluce.it/en/designer/emiliana-martinelli",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/dc7897071bfac20e03d57f92ab7272d9a5881e91/Emiliana_Martinelli.jpg",
+      "credit": null,
+      "note": "Noir et blanc, déjà au format 4:5 : assise à son bureau, mains jointes, souriante, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "pio-tito-toso": {
+      "sourcePage": "https://martinelliluce.it/en/designer/piotitotoso",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/a7069b8f82a3d949fc317933f9b04284259994fd/PioeTitotoso.jpg",
+      "credit": null,
+      "note": "Noir et blanc, paysage : les deux frères debout côte à côte dans un intérieur ancien, visages nets. Recadrage 4:5 centré possible (environ 1080 × 1350) en gardant les deux.",
+      "retrieved": "2026-10-06"
+    },
+    "andrea-steidl": {
+      "sourcePage": "https://martinelliluce.it/en/designer/andrea-steidl",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/1f90c4058d9508697d74d829576cd1859816334c/Andrea_Steidl.jpg",
+      "credit": null,
+      "note": "Noir et blanc sur fond blanc, buste de face, visage net ; quasiment au format 4:5.",
+      "retrieved": "2026-10-06"
+    },
+    "neil-poulton": {
+      "sourcePage": "https://martinelliluce.it/en/designer/neil-poulton",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/fc3e0ae7f387626b008d6d8474458a9bbbe68e29/Neil_Poulton.jpg",
+      "credit": null,
+      "note": "Noir et blanc, paysage : bras croisés, lunettes, regard baissé, visage net ; recadrage 4:5 centré possible (environ 990 × 1240).",
+      "retrieved": "2026-10-06"
+    },
+    "moritz-putzier": {
+      "sourcePage": "https://martinelliluce.it/en/designer/studio-moritz-putzer",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/a7870d01d07fdae5af3f354d01b3071fb95165e4/Studio_Moritz_Putzier.jpg",
+      "credit": null,
+      "note": "Noir et blanc, portrait vertical : de profil, penché sur une maquette blanche à son plan de travail, visage net mais vu de côté et un peu bas dans le cadre.",
+      "retrieved": "2026-10-06"
+    },
+    "simon-schmitz": {
+      "sourcePage": "https://www.simon-schmitz.com/about",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/6445ab8436dcf56cb189b4b4/c8df0c1a-1c89-4c74-9bd7-a02a78d28aa2/Simon+Schmitz",
+      "credit": null,
+      "note": "Site officiel du designer, couleur : debout contre un mur clair, t-shirt noir, souriant, visage net. Version 2500 px servie par le CDN (original 5645 × 4262). Préférée à la photo Martinelli (en pied, petit dans le cadre, avec une lampe Dia)",
+      "retrieved": "2026-10-06"
+    },
+    "antonio-de-marco": {
+      "sourcePage": "https://martinelliluce.it/en/designer/antonio-de-marco",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/5cca4c3f49e9d9937d931dc3a50d569b62bb9a65/Antonio_De_Marco.jpg",
+      "credit": null,
+      "note": "Couleur, carrée : debout bras croisés devant un mur d'outils d'atelier, visage net ; recadrage 4:5 centré sur lui sans difficulté.",
+      "retrieved": "2026-10-06"
+    },
+    "karim-rashid": {
+      "sourcePage": "https://martinelliluce.it/en/designer/karim-rashid",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/b05410a467be8186d8ad91a4ec2f29aad54ddb34/Karim_Rashid.jpg",
+      "credit": null,
+      "note": "Noir et blanc, carrée : assis, main au menton, lunettes de soleil blanches, profil trois-quarts ; visage net (yeux cachés par les lunettes). Recadrage 4:5 centré possible.",
+      "retrieved": "2026-10-06"
+    },
+    "sergio-asti": {
+      "sourcePage": "https://martinelliluce.it/en/designer/sergio-asti",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/2f51fb5773c677422a1669a8233a5dd02f224eac/Sergio_Asti.jpg",
+      "credit": null,
+      "note": "Noir et blanc sur fond noir, buste, main au visage, souriant, visage net ; presque au format 4:5. Largeur 849 px (au-dessus du minimum, sous l'idéal de 1000 px), seule version servie.",
+      "retrieved": "2026-10-06"
+    },
+    "marco-ghilarducci": {
+      "sourcePage": "https://martinelliluce.it/en/designer/marco-ghilarducci",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/b1f3f8d6679feb7296fca299e104f26fe40820e3/Marco_Ghilarducci.jpg",
+      "credit": null,
+      "note": "Noir et blanc, carrée : buste, main au menton, lunettes, souriant, visage net ; recadrage 4:5 centré sans difficulté.",
+      "retrieved": "2026-10-06"
+    },
+    "francesco-lucchese": {
+      "sourcePage": "https://martinelliluce.it/en/designer/francesco-lucchese",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/ad1197a6a94261698f894f7335ff3ce625dfce84/Francesco_Lucchese.jpg",
+      "credit": null,
+      "note": "Noir et blanc, portrait vertical : debout, veste, souriant, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "lucci-orlandini-design": {
+      "sourcePage": "https://martinelliluce.it/en/designer/orlandini-design-2",
+      "imageUrl": "https://martinelliluce.onpage.it/api/storage/1e93bfd35d208e1990df4b19c34ff3ac5af5f5e8/Roberto_Lucci_and_Paolo_Orlandini.jpg",
+      "credit": null,
+      "note": "Couleur, paysage : Roberto Lucci et Paolo Orlandini côte à côte, souriants, visages nets (l'éditeur ne précise pas qui est qui). Recadrage 4:5 centré possible (environ 1045 × 1306) en gardant les deux visages.",
+      "retrieved": "2026-10-06"
+    },
+    "iskos-berlin": {
+      "sourcePage": "https://www.muuto.com/designers2/iskos-berlin/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/iskos-berlin/iskos-berlin-muuto-hi-res-1.jpg",
+      "credit": null,
+      "note": "Les deux membres en noir sur fond bleu clair, l'un debout, l'autre assis sur une chaise Fiber ; visages nets. Plus grande version servie par Muuto : 667 x 1000.",
+      "retrieved": "2026-10-06"
+    },
+    "jens-fager": {
+      "sourcePage": "https://www.muuto.com/stories/product-stories/a-friendly-design--tip-lamp-series/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/a-friendly-design--tip-lamp-series/jens-fager-tip-lamp-story-muuto-hi-res-10.jpg",
+      "credit": null,
+      "note": "Assis à son bureau, en train de dessiner à côté d'une lampe Tip ; regard hors champ, visage net. Format 4:5 natif.",
+      "retrieved": "2026-10-06"
+    },
+    "margrethe-odgaard": {
+      "sourcePage": "https://www.muuto.com/designers2/margrethe-odgaard/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/margrethe-odgaard/margrethe-odgaard-portrait-muuto.jpg",
+      "credit": null,
+      "note": "Fichier nommé « portrait » par Muuto : la designer en blouse dans son atelier, de trois quarts, penchée sur une table de peinture ; visage net mais tourné vers le bas. Recadrage 4:5 possible sur elle.",
+      "retrieved": "2026-10-06"
+    },
+    "johan-van-hengel": {
+      "sourcePage": "https://www.muuto.com/designers2/johan-van-hengel/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/johan-van-hengel/johan-van-hengel-studio-visit-13low-res.jpg",
+      "credit": null,
+      "note": "Debout près d'une fenêtre dans son studio, chemise brune, regard vers l'objectif ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "benjamin-hubert": {
+      "sourcePage": "https://www.muuto.com/designers2/benjamin-hubert/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/benjamin-hubert/benjaminhubert_selects_001.jpg",
+      "credit": "Mark Cocksedge",
+      "note": "Portrait en noir et blanc, de face, cadré poitrine ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "kaksikko": {
+      "sourcePage": "https://www.muuto.com/designers2/studio-kaksikko/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/kaksikko/muuto-studio-kaksikko-13-med-res100.png",
+      "credit": null,
+      "note": "Les deux membres debout côte à côte, noir et blanc, dans un atelier ; visages nets. Format 4:5 natif.",
+      "retrieved": "2026-10-06"
+    },
+    "andreas-engesvik": {
+      "sourcePage": "https://www.muuto.com/designers2/andreas-engesvik/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/andreas-engesvik/andreas-engesvik-portrait-muuto-23-roll-up-image.jpg",
+      "credit": null,
+      "note": "Portrait en noir et blanc, bras croisés, cadré mi-corps, regard vers l'objectif ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "broberg-ridderstrale": {
+      "sourcePage": "https://www.muuto.com/stories/product-stories/elevated-subtleties-raise-glass-carafe/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/elevated-subtleties-raise-glass-and-carafe/broberg-ridderstrale-muuto-story-hi-res-37_optimized.png",
+      "credit": null,
+      "note": "Les deux associés debout sur le seuil de leur studio (porte n° 54), en pied ; visages nets mais petits dans l'image entière. La haute définition permet un recadrage 4:5 serré sur les deux silhouettes. Même scène que l'image de la page desig",
+      "retrieved": "2026-10-06"
+    },
+    "earnest-studio": {
+      "sourcePage": "https://www.muuto.com/stories/product-stories/a-sculptural-sentiment-kink-vase/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/a-sculptural-sentiment-kink-vase/rachel-griffin-studio-visit-2025-low-res-7_optimized.jpg",
+      "credit": null,
+      "note": "Rachel Griffin, fondatrice du studio, debout devant sa bibliothèque, tenant un vase Kink, regard vers l'objectif ; visage net. Format 4:5 natif.",
+      "retrieved": "2026-10-06"
+    },
+    "tom-chung": {
+      "sourcePage": "https://www.muuto.com/designers2/tom-chung/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/tom-chung/tom-chung-studio-visit-low-res-13.jpg",
+      "credit": null,
+      "note": "Assis sur un banc près d'une fenêtre, en pied, regard vers l'objectif ; visage net mais assez petit : recadrage 4:5 sur le haut du corps limité par la définition (667 px de large).",
+      "retrieved": "2026-10-06"
+    },
+    "normal-studio": {
+      "sourcePage": "https://www.muuto.com/designers2/normal-studio/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/normal-studio/normal-studio-portrait-4.jpg",
+      "credit": null,
+      "note": "Les deux fondateurs debout côte à côte sur fond sombre, éclairage coloré rouge et bleu ; visages nets.",
+      "retrieved": "2026-10-06"
+    },
+    "david-geckeler": {
+      "sourcePage": "https://www.muuto.com/designers2/david-geckeler2/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/david-geckeler/david-geckeler-portrait-muuto-23-roll-up-image.jpg",
+      "credit": null,
+      "note": "Portrait en noir et blanc, de face, cadré buste ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "jamie-wolfond": {
+      "sourcePage": "https://www.muuto.com/designers2/jamie-wolfond/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/jamie-wolfond/aw-04-04-24-1512.jpg",
+      "credit": null,
+      "note": "Dans son atelier, appuyé à une table derrière un prototype de lampe Set, regard vers l'objectif ; visage net. Image de la série de photos d'atelier publiée sur sa page Muuto.",
+      "retrieved": "2026-10-06"
+    },
+    "claesson-koivisto-rune": {
+      "sourcePage": "https://www.muuto.com/designers2/claesson-koivisto-rune/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/claesson-koivisto-rune/claesson-koivisto-rune-portrait-muuto.jpg",
+      "credit": "Knut Koivisto",
+      "note": "Les trois associés en noir et blanc, en buste, sur fond clair (composition en trois panneaux) ; visages nets.",
+      "retrieved": "2026-10-06"
+    },
+    "phil-procter": {
+      "sourcePage": "https://www.muuto.com/stories/studio-visit/gaze-mirror-a-play-between-reflection-and-material/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/gaze-mirror-a-play-between-reflection-and-material/phil-procter-studio-visit-gaze-mirror-12.jpg",
+      "credit": null,
+      "note": "Debout à son établi dans son atelier, des miroirs Gaze en cours devant lui, regard vers l'objectif ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "soren-rose-studio": {
+      "sourcePage": "https://www.muuto.com/designers2/soren-rose-studio/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/soren-rose-studio/soren-rose-portrait-muuto.jpg",
+      "credit": null,
+      "note": "Søren Rose debout, appuyé contre un montant de porte, chemise sombre, regard vers l'objectif ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "lise-vester": {
+      "sourcePage": "https://www.lisevester.dk/about",
+      "imageUrl": "https://cdn.sanity.io/images/xzjv25b7/production/2b2e70026add0f5bf9cbd9759829c325b06fac0c-1869x2804.webp",
+      "credit": null,
+      "note": "Portrait en pied, noir et blanc, pull rayé, de face ; visage net mais petit dans l'image entière : recadrage 4:5 sur le haut du corps possible grâce à la définition. Le CDN renvoie un JPEG malgré l'extension .webp de l'URL.",
+      "retrieved": "2026-10-06"
+    },
+    "tina-ratzer": {
+      "sourcePage": "https://www.muuto.com/designers2/tina-ratzer/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/tina-ratzar/tina-ratzer-portrait-muuto.jpg",
+      "credit": null,
+      "note": "Portrait de face, cadré buste, haut blanc sur fond gris ; visage net. Même photo que sur ratzer.dk (version paysage 1348 x 899).",
+      "retrieved": "2026-10-06"
+    },
+    "mattias-stahlbom": {
+      "sourcePage": "https://www.muuto.com/designers2/mattias-stahlbom/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/mattias-stahlbom/mattias-stahlbom-portrait-muuto-23-roll-up-image.jpg",
+      "credit": null,
+      "note": "Portrait couleur, chemise noire, cadré mi-corps dans un intérieur clair, regard vers l'objectif ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "rhys-cooper": {
+      "sourcePage": "https://www.muuto.com/designers2/rhys-cooper/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/rhys-cooper/rhys_cooper_designerprofile.png",
+      "credit": null,
+      "note": "Portrait en noir et blanc, de face, cadré buste sur fond blanc ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "msds-studio": {
+      "sourcePage": "https://www.fritzhansen.com/en/inspiration/designers/msds-studio",
+      "imageUrl": "https://cloudinary.fritzhansen.com/-/media/images/images/inspiration/designers/skagerak-designers/msds.jpg",
+      "credit": null,
+      "note": "Les deux fondateurs debout côte à côte sur fond rose pâle, regard vers l'objectif ; visages nets. Image paysage : un recadrage 4:5 (2160 x 2701) garde les deux personnes. Publiée par Fritz Hansen (Skagerak), éditeur du studio.",
+      "retrieved": "2026-10-06"
+    },
+    "whatswhat": {
+      "sourcePage": "https://www.muuto.com/designers2/whatswhat2/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/whatswhat/whatswhat-portrait-muuto.jpg",
+      "credit": null,
+      "note": "Les trois membres en noir et blanc, une femme et deux hommes, regroupés en buste ; visages nets.",
+      "retrieved": "2026-10-06"
+    },
+    "gustav-winsth": {
+      "sourcePage": "https://hem.com/en-us/designers/gustav-winsth",
+      "imageUrl": "https://images.ctfassets.net/v1z1ea1ae17v/xVDKJK6oJAybAxe7blHya/5f7e431cb3b113c422424edd3b584355/_DSC4118.jpg",
+      "credit": null,
+      "note": "Assis dans un intérieur carrelé près d'une fenêtre, pull gris, regard vers l'objectif ; visage net. Très haute définition, recadrage 4:5 aisé. Publiée par Hem.",
+      "retrieved": "2026-10-06"
+    },
+    "sam-hecht-kim-colin": {
+      "sourcePage": "https://www.muuto.com/designers2/sam-hecht-kim-colin/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/sam-hecht--kim-colin/kim-sam-portrait01-square-bw.jpg",
+      "credit": null,
+      "note": "Kim Colin (à gauche) et Sam Hecht en buste, noir et blanc, sur fond blanc ; visages nets. Image plus large que haute : un recadrage 4:5 strict couperait les épaules extérieures, prévoir un cadrage avec marge blanche. ; montage côte à côte d",
+      "retrieved": "2026-10-06"
+    },
+    "cara-davide": {
+      "sourcePage": "https://www.caradavide.com/about",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/5701b2bda3360c0321d81494/3204eb91-55ca-4b02-b438-b71a34aae1e8/FENIX_DesignDuoDoubleFeature_Portrait_CARA+DAVIDE_ph+Claudia+Zalla.jpg?format=2500w",
+      "credit": "Claudia Zalla",
+      "note": "Cara Judd assise sur une chaise, Davide Gramatica debout derrière elle, en pied sur fond blanc ; visages nets. Le CDN Squarespace sert un WebP (plus grande taille disponible). Alternative Muuto carrée 1000 x 999 (cara--davide-designer-portr",
+      "retrieved": "2026-10-06"
+    },
+    "sia-hurtigkarl": {
+      "sourcePage": "https://www.muuto.com/stories/studio-visit/sia-hurtigkarl-verso-rug/",
+      "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/studio-visit/sia-hurtigkarl---verso/sia-hurtigkarl-studio-visit-2026-7low-res.jpg",
+      "credit": null,
+      "note": "Assise dans son studio devant un mur d'échantillons, chemise bleu clair, sourire, regard vers l'objectif ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "maria-bruun": {
+      "sourcePage": "https://mariabruun.com/about",
+      "imageUrl": "https://mariabruun.com/wp-content/uploads/2026/10/Maria-Bruun-Foto-Benjamin-Lund-02-1.jpg",
+      "credit": "Benjamin Lund",
+      "note": "Assise de trois quarts, chemise blanche, le bras sur le dossier d'une chaise en bois, regard vers l'objectif ; visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "uncharted": {
+      "sourcePage": "https://serax.com/pages/uncharted",
+      "imageUrl": "https://serax.com/cdn/shop/files/Uncharted.jpg?v=1732025021",
+      "credit": null,
+      "note": "Portrait noir et blanc des trois membres (Raphael Navot, Julien Cohen debout ; Stéphanie Cohen assise), publié par Serax sur la page du collectif. Format 4:5 natif, visages nets.",
+      "retrieved": "2026-10-06"
+    },
+    "shurleey": {
+      "sourcePage": "https://serax.com/pages/shurleey",
+      "imageUrl": "https://serax.com/cdn/shop/files/Shurleey_4x5_ecom_gray.jpg?v=1756985171",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax : l'artiste en pied dans son atelier, tenant un vase peint au-dessus de sa tête ; visage net mais assez petit dans le cadre. Format 4:5 natif ; un recadrage serré sur le buste (visage vers x 1450-1800",
+      "retrieved": "2026-10-06"
+    },
+    "rene-barba": {
+      "sourcePage": "https://www.renebarba.com/bio/",
+      "imageUrl": "https://www.renebarba.com/wp-content/uploads/2023/03/rene-barba.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié sur le site officiel : l'artiste assis dans son atelier, modelant une sculpture. Format carré ; recadrage 4:5 (≈1360 × 1701) centré sur lui possible, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "gerd-couckhuyt": {
+      "sourcePage": "https://www.buzzi.space/designers/gerd-couckhuyt",
+      "imageUrl": "https://www.buzzi.space/api/dato-asset/www.datocms-assets.com/88108/1680267033/gerd.jpeg",
+      "credit": null,
+      "note": "Portrait couleur publié par l'éditeur BuzziSpace sur la page du designer : buste, tête tournée vers le haut, fond gris. Format paysage ; recadrage 4:5 (≈2265 × 2831) possible en gardant le visage (vers x 700-1800 px), net.",
+      "retrieved": "2026-10-06"
+    },
+    "morris-marigo": {
+      "sourcePage": "https://serax.com/pages/morris-marigo",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Morris_Marigo.jpg?v=1684505960",
+      "credit": null,
+      "note": "Portrait noir et blanc serré publié par Serax, visage net, lunettes. Proche du 4:5.",
+      "retrieved": "2026-10-06"
+    },
+    "niels-datema": {
+      "sourcePage": "https://serax.com/pages/niels-datema",
+      "imageUrl": "https://serax.com/cdn/shop/files/Niels_Datema.jpg?v=1684158552",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax, buste, visage net, fond de verdure. Format 4:5 natif.",
+      "retrieved": "2026-10-06"
+    },
+    "carlo-van-poucke": {
+      "sourcePage": "https://web.archive.org/web/20230120130831/https://www.serax.com/en/designer/carlovanpoucke",
+      "imageUrl": "https://web.archive.org/web/2023im_/https://www.serax.com/media/designers/Designer_carlo_van_poucke_1297x700.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax sur son ancienne page designer, récupéré via l'archive web.archive.org (Serax ne publie plus de page à son nom). Bandeau paysage : visage de face, net, au centre ; recadrage 4:5 ≈ 817 × 1021 possible ",
+      "retrieved": "2026-10-06"
+    },
+    "charles-kaisin": {
+      "sourcePage": "https://www.surrealistdinner.com/biography",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/5c57ee53fd67934e24b9df1e/1549619519366-W38GXGBGT4T9B4LHAS8S/IMG_2936.jpg?format=2500w",
+      "credit": null,
+      "note": "Portrait couleur publié sur le site officiel (surrealistdinner.com, vers lequel redirige charleskaisin.com) : en pied devant un mur gris, visage net mais petit. Format paysage ; un recadrage 4:5 serré sur le buste (≈ 900 × 1125 px, visage v",
+      "retrieved": "2026-10-06"
+    },
+    "roger-van-damme": {
+      "sourcePage": "https://www.atelierrogervandamme.be/",
+      "imageUrl": "https://www.atelierrogervandamme.be/wp-content/uploads/2025/09/490537687_17910995460100226_5168415726839491289_n.jpg",
+      "credit": null,
+      "note": "Portrait couleur publié sur le site officiel Atelier Roger van Damme : en veste de chef, bras croisés, visage net. Format 4:5 natif. Le nom de fichier suggère une image reprise d'Instagram, mais elle est publiée par le chef sur son propre s",
+      "retrieved": "2026-10-06"
+    },
+    "ann-demeulemeester": {
+      "sourcePage": "https://serax.com/pages/ann-demeulemeester",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_AnnDemeulemeester_Ecom_fa19d6bb-ee61-4d61-88aa-5e3309a34974.jpg?v=1682588890",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax, buste de face, visage net. Format 4:5 natif.",
+      "retrieved": "2026-10-06"
+    },
+    "axelle-delhaye": {
+      "sourcePage": "https://serax.com/pages/axelle-delhaye",
+      "imageUrl": "https://serax.com/cdn/shop/files/Axelle_Delhaye.jpg?v=1774003450",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax : assise sur un canapé, main au visage, visage net. Format 4:5 natif.",
+      "retrieved": "2026-10-06"
+    },
+    "giorgio-bonaguro": {
+      "sourcePage": "https://www.bonagurogiorgio.com/about",
+      "imageUrl": "https://static.wixstatic.com/media/e43640_cc9c0f54580c4855a500e394667f4b02~mv2.jpg",
+      "credit": "Livia Scheide Xavier",
+      "note": "Portrait noir et blanc publié sur le site officiel (page About), bras croisés devant un bloc de marbre, visage net. Proche du 4:5.",
+      "retrieved": "2026-10-06"
+    },
+    "white-dirt": {
+      "sourcePage": "https://valerie-objects.com/pages/white-dirt",
+      "imageUrl": "https://valerie-objects.com/cdn/shop/files/white_dirt.jpg?v=1732529459",
+      "credit": null,
+      "note": "Portrait noir et blanc de Dana Harel publié par valerie_objects (même image que sur us.serax.com/pages/white-dirt, où elle n'est servie qu'en 535 × 669 px). Debout, mains dans les poches, visage net. Format 4:5 natif.",
+      "retrieved": "2026-10-06"
+    },
+    "maarten-baas": {
+      "sourcePage": "https://valerie-objects.com/pages/maarten-baas",
+      "imageUrl": "https://valerie-objects.com/cdn/shop/files/maarten_baas_portrait_ZW.png?v=1691498528",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par valerie_objects (marque sœur de Serax) sur la page du designer : buste de face, chapeau, visage net. Format 4:5 natif. Fichier PNG de 4,2 Mo. Le portrait du site officiel (photo d'Anton Corbijn) a été écart",
+      "retrieved": "2026-10-06"
+    },
+    "catherine-martin": {
+      "sourcePage": "https://serax.com/pages/catherine-martin",
+      "imageUrl": "https://serax.com/cdn/shop/files/CM_Serax_headshot_ZW_3200x4000px.jpg?v=1789470807",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax (headshot), souriante, lunettes, visage net. Format 4:5 natif.",
+      "retrieved": "2026-10-06"
+    },
+    "daphne-de-gheldere": {
+      "sourcePage": "https://serax.com/pages/daphne-de-gheldere",
+      "imageUrl": "https://serax.com/cdn/shop/files/Daphne_de_Gheldere.jpg?v=1774003452",
+      "credit": null,
+      "note": "Photo noir et blanc publiée par Serax : la céramiste debout dans son atelier derrière une table de travail, visage net mais assez petit. Format 4:5 natif ; recadrage plus serré sur le buste possible vu la définition.",
+      "retrieved": "2026-10-06"
+    },
+    "helene-lepinay": {
+      "sourcePage": "https://serax.com/pages/helene-lepinay",
+      "imageUrl": "https://serax.com/cdn/shop/files/Helene_Lepinay.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax : Hélène Lepinay souriante dans son atelier, à côté d'un grand pot peint. Format 4:5 natif, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "liz-objets": {
+      "sourcePage": "https://serax.com/pages/liz-objets",
+      "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Liz.Objects.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax : Elise Maes assise dans son atelier, tenant une assiette. Format 4:5 natif, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "isabelle-de-borchgrave": {
+      "sourcePage": "https://isabelledeborchgrave.com/pages/biography",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0006/6109/4458/files/Michel_Figuet-_DSF5128-2.jpg?v=1607524251",
+      "credit": "Michel Figuet (d'après le nom du fichier)",
+      "note": "Portrait couleur en pied publié sur le site officiel de l'artiste (page Biography), devant ses toiles. Visage net mais petit dans le cadre : un recadrage 4:5 serré reste possible à 960 px de large.",
+      "retrieved": "2026-10-06"
+    },
+    "mieke-cuppen": {
+      "sourcePage": "https://www.miekecuppen.com/en/about",
+      "imageUrl": "https://www.miekecuppen.com/user/pages/03.over/101-new_1MiekeCuppen-cropsmall.jpg",
+      "credit": null,
+      "note": "Portrait couleur publié sur le site officiel de la designer (page About) : assise devant des étagères de vaisselle. Personne centrée, recadrage 4:5 possible (environ 1250 x 1567).",
+      "retrieved": "2026-10-06"
+    },
+    "gemma-bernal": {
+      "sourcePage": "https://www.gemmabernal.com/gemma-bernal/",
+      "imageUrl": "https://www.gemmabernal.com/wp-content/uploads/2022/08/Estudio-32-scaled.jpg",
+      "credit": null,
+      "note": "Portrait couleur publié sur le site officiel du studio (page Gemma Bernal) : assise à son bureau, crayon en main. Visage net, cadrage vertical adapté au 4:5.",
+      "retrieved": "2026-10-06"
+    },
+    "filip-janssens": {
+      "sourcePage": "https://www.filipjanssens.be/biography",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/53aeb79be4b0825a4fd0a107/1519988942228-CINZJSPXWYLJCBT4LHI9/F+Janssens++crop+61.jpg",
+      "credit": null,
+      "note": "Photo couleur publiée sur le site officiel (page Biography) : Filip Janssens assis à une table, devant ses étagères. Format paysage ; il occupe la moitié droite, recadrage 4:5 possible (environ 1250 x 1570).",
+      "retrieved": "2026-10-06"
+    },
+    "kiki-van-eijk": {
+      "sourcePage": "https://kikiandjoost.com/kiki/about/",
+      "imageUrl": "https://kikiandjoost.com/kiki/wp-content/uploads/sites/2/2025/03/frits_kiki_cover_HR_05-scaled.jpg",
+      "credit": null,
+      "note": "Portrait couleur publié sur le site officiel (page About) : Kiki van Eijk tient deux disques décoratifs, l'un masquant son œil droit ; visage net et souriant. Cadrage vertical adapté au 4:5.",
+      "retrieved": "2026-10-06"
+    },
+    "loic-willemot": {
+      "sourcePage": "https://web.archive.org/web/20221205021324/https://www.serax.com/en/designer/loicwillemot",
+      "imageUrl": "https://web.archive.org/web/20221205021324im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_loicwillemot__designer_1297x700.jpeg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax sur son ancien site (récupéré via l'archive Wayback ; l'original n'est plus en ligne) : Loïc Willemot bras croisés contre un mur. Format bandeau 1297 x 700 : un recadrage 4:5 ne fait que 560 px de lar",
+      "retrieved": "2026-10-06"
+    },
+    "helena-rohner": {
+      "sourcePage": "https://helenarohner.com/pages/about",
+      "imageUrl": "https://helenarohner.com/cdn/shop/files/helena_rohner_portrait.png",
+      "credit": null,
+      "note": "Portrait couleur publié sur le site officiel (page About) : Helena Rohner, mains sur la tête, chemise vichy bleue. Visage net, cadrage vertical adapté au 4:5. Fichier PNG (fond opaque).",
+      "retrieved": "2026-10-06"
+    },
+    "glenn-sestig": {
+      "sourcePage": "https://www.glennsestigarchitects.com/glenn-sestig/",
+      "imageUrl": "https://www.glennsestigarchitects.com/media/slideshow-photo/3835-portret-glenn-2026-copy.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié sur le site de l'agence (page Glenn Sestig, fichier « portret-glenn-2026 ») : assis sur un bloc près d'une baie vitrée. Format paysage, personne centrée : recadrage 4:5 possible (720 x 900).",
+      "retrieved": "2026-10-06"
+    },
+    "maurice-harris": {
+      "sourcePage": "https://serax.com/pages/maurice-harris",
+      "imageUrl": "https://serax.com/cdn/shop/files/Maurice_Harris_BW_Designer_Portret_01_df7539da-1dda-4bf3-8f52-26aa921ce8cb.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax : Maurice Harris en pied, accoudé à un socle portant un vase Cameo. Format 4:5 natif, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "catharina-bossaert": {
+      "sourcePage": "https://serax.com/pages/catharina-bossaert",
+      "imageUrl": "https://serax.com/cdn/shop/files/Unknown_996eedf0-ac94-451b-8eda-f14caf225647.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax : Catharina Bossaert appuyée contre un pilier, souriante. Cadrage vertical adapté au 4:5, visage net.",
+      "retrieved": "2026-10-06"
+    },
+    "robbrecht-en-daem": {
+      "sourcePage": "https://robbrechtendaem.com/studio",
+      "imageUrl": "https://robbrechtendaem.com/media/fullscreen/1177/rd-31-at-brechtvanmaele.jpg",
+      "credit": "Brecht Van Maele (d'après le nom du fichier)",
+      "note": "Portrait couleur des trois associés publié sur la page Studio de l'agence : Johannes Robbrecht (bras levé), Hilde Daem au centre et Paul Robbrecht. Format 2:3 vertical, recadrage 4:5 possible en gardant les trois visages.",
+      "retrieved": "2026-10-06"
+    },
+    "andrea-croonenberghs": {
+      "sourcePage": "https://web.archive.org/web/20230609235540/https://www.serax.com/en/designer/andreacroonenberghs",
+      "imageUrl": "https://web.archive.org/web/20230609235540im_/https://www.serax.com/media/designers/Andrea_Croonenberghs.jpeg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax sur son ancien site (récupéré via l'archive Wayback ; l'original n'est plus en ligne) : visage de trois quarts, net. Format bandeau 1297 x 700 : un recadrage 4:5 ne fait que 560 px de large. À valider",
+      "retrieved": "2026-10-06"
+    },
+    "miel-cardinael": {
+      "sourcePage": "https://web.archive.org/web/20230529044302/https://www.serax.com/en/designer/mielcardinael",
+      "imageUrl": "https://web.archive.org/web/20230529044302im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_MielCardinael_designer_1297x700.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc publié par Serax sur son ancien site (archive Wayback) : gros plan du visage, haut du crâne coupé. Format bandeau 1297 x 700 : un recadrage 4:5 ne fait que 560 px de large. À valider.",
+      "retrieved": "2026-10-06"
+    },
+    "marcel-wolterinck": {
+      "sourcePage": "https://wolterinck.com/over-ons/",
+      "imageUrl": "https://wolterinck.com/wp-content/uploads/2025/04/PBF4839-2-scaled.jpg",
+      "credit": "Peter Baas Fotografie (métadonnées EXIF)",
+      "note": "Portrait couleur publié sur la page Over ons du studio (titre du média « Wolterinck_art_marcel_wolterinck_001 ») : Marcel Wolterinck à côté d'une sculpture. Visage net, recadrage 4:5 possible en le centrant.",
+      "retrieved": "2026-10-06"
+    },
+    "nedda": {
+      "sourcePage": "https://www.nedda.be/the-studio",
+      "imageUrl": "https://images.squarespace-cdn.com/content/v1/57961fe9e58c622260a5747c/6a42b3a3-1f68-4da3-8e05-f706e87c1128/NeddaCopyrightElyaneVan+Coillie.jpg?format=2500w",
+      "credit": "Elyane Van Coillie",
+      "note": "Portrait de face sur fond noir, publié sur le site officiel du studio. Format 2:3, cadrage 4:5 facile.",
+      "retrieved": "2026-10-06"
+    },
+    "boxy-s": {
+      "sourcePage": "https://web.archive.org/web/20230129151313/https://www.serax.com/en/designer/taketimebyboxys",
+      "imageUrl": "https://web.archive.org/web/20230129151313im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_boxy_designer_1297x700.jpg",
+      "credit": null,
+      "note": "Photo noir et blanc des deux frères debout, de profil, en tablier, publiée par Serax sur son ancienne page créateur (récupérée dans les archives web, l'URL d'origine sur serax.com ne répond plus). Image en paysage : un recadrage 4:5 autour ",
+      "retrieved": "2026-10-06"
+    },
+    "studio-oe": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/studio-oe",
+      "imageUrl": "https://static.vitra.com/media/asset/9931592/storage/master/91614784.jpg",
+      "credit": "Marcus Werner",
+      "note": "Image d'en-tête de la page designer Vitra (texte alternatif « Vitra_Bascule_Studio_OE_web-23 »), fichier master du CDN Vitra (20 Mo). Les deux designers posent sur un fauteuil Bascule et son repose-pieds devant un rideau argenté, visages ne",
+      "retrieved": "2026-10-06"
+    },
+    "eero-saarinen": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/charles-eames-and-eero-saarinen",
+      "imageUrl": "https://static.vitra.com/media/asset/8696850/storage/master/81487539.jpg",
+      "credit": null,
+      "note": "Photo d'archive noir et blanc, en-tête de la page designer Vitra « Charles Eames & Eero Saarinen » (texte alternatif « Eames, Saarinen »). Saarinen est l'homme au centre (nœud papillon, cigarette), visage net ; Charles Eames, à gauche, allu",
+      "retrieved": "2026-10-06"
+    },
+    "maarten-van-severen": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/maarten-van-severen",
+      "imageUrl": "https://static.vitra.com/media/asset/8700059/storage/master/81490342.jpg",
+      "credit": null,
+      "note": "Portrait couleur, en-tête de la page designer Vitra (texte alternatif « Maarten van Severen_P_web_3-2 ») : assis sur une chaise devant des façades de rangement colorées, visage net. Paysage : recadrage 4:5 d'environ 945x1181 px centré sur l",
+      "retrieved": "2026-10-06"
+    },
+    "raw-edges": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/raw-edges",
+      "imageUrl": "https://static.vitra.com/media/asset/8699963/storage/master/81489849.jpg",
+      "credit": "Mark Cocksedge",
+      "note": "Portrait couleur du duo assis à une table sur fond gris clair (Yael Mer à gauche, Shay Alkalay à droite d'après la légende EXIF « Yael Mer & Shay Alkalay »), visages nets ; en-tête de la page designer Vitra, fichier master (27 Mo). Crédit t",
+      "retrieved": "2026-10-06"
+    },
+    "front-design": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/front",
+      "imageUrl": "https://static.vitra.com/media/asset/8699751/storage/master/81488525.jpg",
+      "credit": null,
+      "note": "Portrait couleur des deux designers debout devant une porte métallique patinée, visages nets ; en-tête de la page designer Vitra (texte alternatif « Front (Sofia Lagerkvist & Anna Lindgren) »), fichier master. L'ordre gauche/droite n'est pa",
+      "retrieved": "2026-10-06"
+    },
+    "frank-lloyd-wright": {
+      "sourcePage": "https://franklloydwright.org/a-friendship-in-photographs-pedro-e-guerrero-frank-lloyd-wright/",
+      "imageUrl": "https://franklloydwright.org/wp-content/uploads/2018/09/PGUE016.jpg",
+      "credit": "Pedro E. Guerrero (© Pedro E. Guerrero Archive)",
+      "note": "Photo noir et blanc publiée par la Frank Lloyd Wright Foundation, légendée « Portrait of Wright, Taliesin, Spring Green, Wisconsin, 1947 » : Wright debout derrière une table couverte de plans, visage net mais assez petit dans l'image. Verti",
+      "retrieved": "2026-10-06"
+    },
+    "hans-coray": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/hans-coray",
+      "imageUrl": "https://static.vitra.com/media/asset/8695267/storage/master/81448274.jpg",
+      "credit": null,
+      "note": "Photo noir et blanc, en-tête de la page designer Vitra (texte alternatif « Hans Coray_web_3-2 ») : Coray souriant, assis en plein air devant une pile de chaises Landi, visage net. Paysage : recadrage 4:5 d'environ 1930x2416 px centré sur lu",
+      "retrieved": "2026-10-06"
+    },
+    "alberto-meda": {
+      "sourcePage": "https://www.vitra.com/en-us/product/designer/alberto-meda",
+      "imageUrl": "https://static.vitra.com/media/asset/8699957/storage/master/81489630.jpg",
+      "credit": null,
+      "note": "Portrait couleur, en-tête de la page designer Vitra (texte alternatif « Alberto Meda_web_3-2 ») : Meda assis à son bureau, en chemise blanche, en train de parler, visage net. Paysage, résolution moyenne : recadrage 4:5 d'environ 848x1060 px",
+      "retrieved": "2026-10-06"
+    },
+    "charles-rennie-mackintosh": {
+      "sourcePage": "https://www.cassina.com/ww/en/maestri/charles-rennie-mackintosh.html",
+      "imageUrl": "https://www.cassina.com/content/dam/ld/cassina/designers/detail-pages/i-maestri/Charles-Rennie-Mackintosh.jpg",
+      "credit": null,
+      "note": "Portrait photographique d'archive noir et blanc, de face (lavallière), détouré sur fond blanc ; page designer Cassina (éditeur de ses chaises dans la collection I Maestri). Fichier source de 3840x2860 vraisemblablement agrandi depuis un ori",
+      "retrieved": "2026-10-06"
+    },
+    "harry-bertoia": {
+      "sourcePage": "https://harrybertoia.org/photo-gallery/",
+      "imageUrl": "https://harrybertoia.org/wp-content/uploads/2025/01/harry.jpg",
+      "credit": null,
+      "note": "Photo noir et blanc publiée par la Harry Bertoia Foundation (galerie photo) : Bertoia souriant, allongé dans un fauteuil de sa collection en fil d'acier, devant ses sculptures, visage net. Vertical ; recadrage 4:5 conseillé sur la moitié ga",
+      "retrieved": "2026-10-06"
+    },
+    "franco-albini-franca-helg": {
+      "sourcePage": "https://www.cassina.com/ww/en/maestri/franco-albini.html",
+      "imageUrl": "https://www.cassina.com/content/dam/ld/cassina/designers/detail-pages/i-maestri/Franco-Albini.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc de Franco Albini seul, de trois quarts, détouré sur fond blanc ; page designer Cassina. Fichier vraisemblablement agrandi (grain visible). Recadrage 4:5 d'environ 2290x2860 px centré sur lui (x≈0,50). Franca Helg n'ap",
+      "retrieved": "2026-10-06"
+    },
+    "gaetano-pesce": {
+      "sourcePage": "https://www.cassina.com/ww/en/contemporanei/gaetano-pesce.html",
+      "imageUrl": "https://www.cassina.com/content/dam/ld/cassina/designers/detail-pages/i-contemporanei/Gaetano-Pesce.jpg",
+      "credit": null,
+      "note": "Portrait noir et blanc très contrasté, de profil trois quarts, regard par-dessus ses lunettes, visage net ; détouré sur fond blanc et placé contre le bord gauche de l'image ; page designer Cassina. Recadrage 4:5 d'environ 2290x2860 px calé ",
+      "retrieved": "2026-10-06"
     }
   }
 }
