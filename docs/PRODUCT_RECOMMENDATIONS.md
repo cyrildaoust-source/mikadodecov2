@@ -34,15 +34,39 @@ présenter un faux accessoire.
 Le produit courant, les doublons, les produits indisponibles, les produits sans
 image ou sans variante achetable sont toujours retirés.
 
+Les choix manuels Shopify sont conservés tels quels. Pour les choix automatiques,
+la pertinence passe avant la diversité des marques (révision du 6 octobre) :
+
+- la même gamme occupe d'abord deux places au plus ; ses compléments (coussins,
+  housses, abat-jour…) reprennent ensuite les places restées libres, si bien
+  qu'une rubrique n'est jamais à moitié vide ;
+- dans « Vous aimerez aussi », les autres meubles de la gamme passent avant ses
+  accessoires, dont la place naturelle est « Complétez avec » ;
+- les candidats sont classés par niveau de pertinence (même type, même usage
+  intérieur ou extérieur). Dans chaque niveau, les marques alternent, deux cartes
+  au plus par marque ; puis le même niveau complète sans limite de marque. Le
+  niveau suivant n'est utilisé que si le précédent est épuisé ;
+- la gamme complète passe avant un produit d'usage différent : une pièce
+  d'intérieur ne propose un meuble de jardin qu'en dernier recours.
+
+Les tags `exterieur` / `interieur` décident de l'usage : un meuble de jardin sans
+tag extérieur est traité comme un meuble d'intérieur.
+
 ## Couverture vérifiée
 
-Mesure en lecture seule du 30 septembre 2026 sur le canal Headless :
+Dernière mesure en lecture seule, le 3 octobre 2026 sur le canal Headless :
 
-- 3 649 produits actifs et publiés ;
+- 4 196 produits actifs et publiés ;
 - 69 produits couverts par une curation Search & Discovery existante ;
-- 3 649 produits couverts par les règles déterministes, soit 100 % du catalogue
+- 4 196 produits couverts par les règles déterministes, soit 100 % du catalogue
   mesuré ; le repli automatique Shopify reste disponible ensuite ;
-- 152 tables de repas sur 152 disposent d'une composition de scène complète.
+- 155 tables de repas sur 155 disposent d'une composition de scène complète.
+
+Cette mesure inclut 556 entrées et 9 sorties du canal depuis le contrôle du 30
+septembre. L'audit des tags a révélé quatre nouveaux types isolés ; les univers
+génériques bar, bureau et rangement les couvrent désormais sans handle de
+produit codé en dur. Le dossier détaillé est conservé dans
+`docs/audits/2026-10-03-product-tags/`.
 
 Les scripts `audit-product-recommendations.mjs` et
 `audit-storefront-recommendations.mjs` reproduisent cette mesure. Ils sont en
@@ -54,8 +78,8 @@ La sélection réserve les quatre places au lieu de les laisser envahir par une
 seule famille : une assise, une pièce de vaisselle, un verre ou contenant, puis
 un textile ou dessous de plat en intérieur, ou une lampe autonome en extérieur.
 Une rallonge réellement compatible passe avant cette composition. Les chaises
-de la même gamme sont prioritaires ; à défaut, la même marque et le même usage
-intérieur/extérieur servent au classement.
+de la même gamme sont prioritaires ; à défaut, le même usage intérieur/extérieur
+sert au classement et une autre marque est préférée à pertinence égale.
 
 Les catégories Storefront sont des règles de recherche, pas une liste de
 produits. Une nouvelle assiette, une chaise ou une lampe publiée et disponible

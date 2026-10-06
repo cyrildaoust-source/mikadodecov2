@@ -129,11 +129,27 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
   assert.equal(role({ name: 'Guirlande Hoopik', productType: 'Guirlande' }), 'lamp');
   assert.equal(role({ name: 'Essuie de main', productType: 'Essuie de main' }), 'bath-textile');
   assert.equal(role({ name: 'Arrosoir Antila', productType: 'Arrosoir' }), 'garden-accessory');
+  assert.equal(role({ name: 'Ouvre-bouteille Virgula Divina', productType: 'Ouvre-bouteille' }), 'bar-accessory');
+  assert.equal(role({ name: 'Aimant Magnet Dots', productType: 'Aimant' }), 'desk-space');
+  assert.equal(role({ name: 'Sous-main Repad', productType: 'Sous-main' }), 'desk-space');
+  assert.equal(role({ name: 'Panier Bakkie Lace', productType: 'Panier' }), 'entry-storage');
   assert.equal(role({ name: 'Cartes postales', productType: 'Accessoire', tags: ['papeterie'] }), 'desk-space');
   assert.equal(role({ name: 'Bobèche Nagel', productType: 'Accessoire', tags: ['bobeche'] }), 'candle-holder');
   assert.equal(role({ name: 'Patins feutre', productType: 'Accessoire', tags: ['protection-sol'] }), 'furniture-care');
   assert.equal(sameUniverse(officeChair, diningChair), true);
   assert.equal(sameUniverse(glass, waterGlass), true);
+  assert.equal(sameUniverse(
+    { name: 'Ouvre-bouteille Virgula Divina', productType: 'Ouvre-bouteille' },
+    { name: 'Bouchon à vin Lilly', productType: 'Bouchon à vin' },
+  ), true);
+  assert.equal(sameUniverse(
+    { name: 'Aimant Magnet Dots', productType: 'Aimant' },
+    { name: 'Sous-main Repad', productType: 'Sous-main' },
+  ), true);
+  assert.equal(sameUniverse(
+    { name: 'Panier Bakkie Lace', productType: 'Panier' },
+    { name: 'Panier Restore', productType: 'Panier de rangement' },
+  ), true);
   assert.equal(sameUniverse(poster, diningChair), false);
   assert.equal(sameUniverse(
     { name: 'Outils', productType: 'Accessoire' },
@@ -144,6 +160,9 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
   assert.match(queries.sameType, /product_type:"Verre à liqueur"/);
   assert.match(queries.sameUniverse, /product_type:"Verre à eau"/);
   assert.doesNotMatch(`${queries.sameType} ${queries.sameUniverse}`, /gid:\/\/shopify\/Product|tutu|milano/i);
+  assert.match(universeSearchQueries({ productType: 'Ouvre-bouteille' }).sameUniverse, /product_type:"Bouchon à vin"/);
+  assert.match(universeSearchQueries({ productType: 'Aimant' }).sameUniverse, /product_type:"Sous-main"/);
+  assert.match(universeSearchQueries({ productType: 'Panier' }).sameUniverse, /product_type:"Panier de rangement"/);
 
   const selected = selectProductRecommendations({
     product: glass,
@@ -166,13 +185,13 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
 });
 
 test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique', () => {
-  const curatedComp = card('curated-comp');
+  const curatedComp = card('curated-comp', { brand: 'Vitra' });
   const curatedRelated = card('curated-related', { name: 'Table Palissade', tags: ['palissade'] });
   const cushion = card('cushion', { name: 'Coussin Palissade', productType: 'Coussin', recommendationCollectionIds: [collection.id] });
   const table = card('table', { name: 'Table Palissade', recommendationCollectionIds: [collection.id] });
-  const autoComp = card('auto-comp');
+  const autoComp = card('auto-comp', { brand: 'Iittala' });
   const autoRange = card('auto-range', { name: 'Fauteuil Palissade', tags: ['palissade'] });
-  const autoRelated = card('auto-related');
+  const autoRelated = card('auto-related', { brand: 'Vitra' });
   const result = selectProductRecommendations({
     product,
     curatedComplementary: [curatedComp], curatedRelated: [curatedRelated],
@@ -185,6 +204,52 @@ test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique',
   assert.deepEqual(result.related.map(p => [p.id, p.recommendationSource]), [
     ['curated-related', 'curated'], ['auto-range', 'shopify-same-range'], ['auto-related', 'shopify-related'],
   ]);
+});
+
+test('les choix automatiques diversifient les marques sans casser la gamme ni la curation', () => {
+  const result = selectProductRecommendations({
+    product,
+    range: [
+      card('range-1', { name: 'Table Palissade', tags: ['palissade'] }),
+      card('range-2', { name: 'Banc Palissade', tags: ['palissade'] }),
+      card('range-3', { name: 'Fauteuil Palissade', tags: ['palissade'] }),
+    ],
+    universe: [
+      card('same-brand', { brand: 'HAY', productType: 'Chaise' }),
+      card('vitra', { brand: 'Vitra', productType: 'Chaise' }),
+      card('iittala', { brand: 'Iittala', productType: 'Chaise' }),
+    ],
+  });
+  assert.deepEqual(result.complementary.map(item => item.id), ['range-1']);
+  assert.deepEqual(result.related.map(item => item.id), ['range-2', 'range-3', 'vitra', 'iittala']);
+  assert.deepEqual(result.related.map(item => item.brand), ['HAY', 'HAY', 'Vitra', 'Iittala']);
+
+  const curated = selectProductRecommendations({
+    product,
+    curatedRelated: ['a', 'b', 'c', 'd'].map(id => card(`curated-${id}`)),
+    universe: [card('vitra', { brand: 'Vitra', productType: 'Chaise' })],
+  });
+  assert.equal(curated.related.length, 4);
+  assert.ok(curated.related.every(item => item.brand === 'HAY' && item.recommendationSource === 'curated'));
+});
+
+test('la diversité ne vide jamais une rubrique ni ne passe avant l’usage intérieur ou extérieur', () => {
+  const outdoorChair = { ...product, tags: ['palissade', 'chaise', 'exterieur'] };
+  const cushions = ['a', 'b', 'c', 'd'].map(id => card(`coussin-${id}`, { name: `Coussin Palissade ${id}`, productType: 'Coussin', tags: ['palissade', 'exterieur'] }));
+  const result = selectProductRecommendations({
+    product: outdoorChair,
+    range: cushions,
+    universe: [
+      card('vitra-interieur', { brand: 'Vitra', productType: 'Chaise' }),
+      card('fermob-jardin', { brand: 'Fermob', productType: 'Chaise', tags: ['exterieur'] }),
+      card('fatboy-jardin', { brand: 'Fatboy', productType: 'Chaise', tags: ['jardin'] }),
+      card('iittala-interieur', { brand: 'Iittala', productType: 'Chaise' }),
+    ],
+  });
+  // Les quatre coussins de la gamme restent proposés : rien d'autre ne les remplace.
+  assert.deepEqual(result.complementary.map(item => item.id), cushions.map(item => item.id));
+  // Pour une chaise de jardin, les chaises de jardin d'autres marques passent d'abord.
+  assert.deepEqual(result.related.slice(0, 2).map(item => item.id), ['fermob-jardin', 'fatboy-jardin']);
 });
 
 test('indisponibles, produit courant et doublons sont exclus ; chaque rubrique reste bornée', () => {
