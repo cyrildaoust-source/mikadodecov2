@@ -1538,6 +1538,8 @@ async function sendScopeCatalog(req,res,scope) {
       .replace('<html lang="fr" class="plp-collection"', '<html lang="fr" class="plp-designer"')
       // Le bandeau générique est masqué sur une page créateur : son titre ne doit pas doubler le H1 du portrait.
       .replace(/<h1 data-plp-title data-context>([^<]*)<\/h1>/, '<p data-plp-title data-context>$1</p>')
+      // Le portrait porte le nom sur chaque page : pas de titre compact (vide et doublon dès la page 2).
+      .replace(/<div class="chair-catalog__compact wrap">[\s\S]*?<\/div>/, '')
       .replace('<div class="wrap" data-designer-hero></div>', () => '<div class="wrap" data-designer-hero>' + (designer ? designerHeroSsr(designer) : '') + '</div>');
     photo = designer?.photo ? { img: designer.photo } : null;
   }

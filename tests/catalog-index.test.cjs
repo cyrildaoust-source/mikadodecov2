@@ -185,7 +185,7 @@ test('pages créateurs : pièces portant ses tags, rendues par le serveur, param
   const data=seed(html);
   assert.equal(data.scope.kind,'designer');
   assert.equal(data.total,3,'fiches 1, 3 et 5 : tag verner-panton et marque HAY');
-  assert.match(html,/<html lang="fr" class="plp-designer" data-chair-catalog>/);
+  assert.match(html,/<html lang="fr" class="plp-designer" data-chair-catalog data-catalog-brand>/);
   assert.match(html,/designer-hero__name serif">Verner Panton</);
   assert.match(html,/<input type="hidden" name="designer" value="verner-panton">/);
   assert.match(html,/href="\/produits.html\?designer=verner-panton#grille" data-chair-link>Tout effacer/);

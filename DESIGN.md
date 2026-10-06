@@ -93,6 +93,13 @@ montre la photo et la disponibilité ; les suivants tiennent sur une ligne. Chaq
 bouton ouvre le même tiroir avec les valeurs de son option ; une combinaison absente
 mène à la variante la plus proche. Une fiche à une seule option garde son bouton unique.
 
+Décision du propriétaire du 6 octobre : une famille (ou le catalogue) filtrée par
+une marque montre directement les produits de cette marque, sous le bandeau et le fil
+d'Ariane. Les rubriques de la famille entière (catégories, inspirations, icônes)
+disparaissent, car elles mènent hors de la marque ; « Nos marques » reste sous la grille
+pour changer de marque. Sur une page créateur, le portrait porte le nom sur chaque page :
+aucun titre compact ne s'ajoute à partir de la page 2.
+
 ## Surtitres : interdits
 
 Règle permanente du propriétaire (24 septembre 2026) : **aucun surtitre (« eyebrow ») sur le site**.

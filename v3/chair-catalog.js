@@ -61,7 +61,7 @@ function paint(data,{keepOpen=false}={}) {
   document.documentElement.classList.toggle('filters-locked',Boolean(mobileOpen)&&matchMedia('(max-width: 760px)').matches);
   grid.innerHTML=data.items.length?data.items.map(p=>productCard(p,pageURL(data.state))).join(''):emptyState(scope);
   pagination.innerHTML=chairPagination({...data,scope});pagination.hidden=data.totalPages<=1;
-  document.documentElement.toggleAttribute('data-chair-continuation',data.state.page>1);
+  document.documentElement.toggleAttribute('data-chair-continuation',data.state.page>1);document.documentElement.toggleAttribute('data-catalog-brand',data.state.brand.length>0);
   if(focus) {
     const target=[...controls.querySelectorAll('input,select,summary')].find(el=>focus.summary?el.tagName==='SUMMARY'&&el.closest('details')?.dataset.filterGroup===focus.group:el.name===focus.name&&el.value===focus.value);
     target?.focus({preventScroll:true});

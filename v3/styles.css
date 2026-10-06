@@ -1874,6 +1874,10 @@ body.pdplb-locked { overflow: hidden; }
 [data-chair-continuation] .chair-catalog__compact { display: block; padding-top: 160px; }
 /* Familles et catalogue filtrés : dès la page 2, en-tête compact, fil d'Ariane et liste seulement. */
 [data-chair-continuation] .fam > :not(.chair-catalog__compact, [data-breadcrumb], .catalog-section) { display: none; }
+/* Famille filtrée par marque (demande du 6 octobre) : les rubriques de la famille entière
+   (catégories, inspirations, icônes) mènent hors de la marque ; seuls ses produits restent. */
+[data-catalog-brand] .fam:not([data-catalogue-landing]) > :not(.fam-hero, [data-breadcrumb], .catalog-section, .fam-brands) { display: none; }
+[data-catalog-brand] :is([data-catalogue-families], [data-catalogue-discovery]) { display: none; }
 .chair-catalog__compact > * { font-family: var(--serif); font-weight: 600; font-size: var(--fs-h2); line-height: 1.05; margin: 8px 0 20px; }
 .chair-catalog__controls { margin-bottom: 0; }
 .catalog-filters__heading { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 22px; }
