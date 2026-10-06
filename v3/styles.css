@@ -1973,3 +1973,9 @@ body.pdplb-locked { overflow: hidden; }
 
 /* Conditions d'une campagne, sous sa grille de produits. */
 .campaign-terms { display: grid; gap: 8px; max-width: 80ch; padding-left: 1.1em; list-style: disc; color: var(--muted); }
+
+/* Écrans de moins de 390 px : « + Ajouter à la sélection » passe sur deux lignes, pas
+   « Indisponible ». Même hauteur pour tous les boutons, pour garder les rangées alignées. */
+@media (max-width: 389px) {
+  .pcard__cta { min-height: 55px; }
+}
