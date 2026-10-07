@@ -39,7 +39,8 @@ router.get('/api/catalog/:handle',async (req,res)=>{
   await navigationReady;
   const scope = filterScope(req.params.handle);
   if (!scope) return res.status(404).json({error:'catalog_not_found'});
-  try { res.set('Cache-Control','no-store').json(await getScopePage(scope, req.query)); }
+  // Même politique que la page qu'il complète (pagination, filtres) : 1 min à l'edge.
+  try { res.set('Cache-Control','public, s-maxage=60, stale-while-revalidate=600').json(await getScopePage(scope, req.query)); }
   catch(error) { console.warn('[catalog-api]',scope.handle,error.message);res.status(503).json({error:'Cette sélection ne peut pas être chargée. Réessayez.'}); }
 });
 // ─── API: GET PRODUCTS ─────────────────────────────────
