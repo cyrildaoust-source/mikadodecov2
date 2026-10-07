@@ -1,0 +1,71 @@
+# Budget de performance — Mikado Deco (phase 3.6 du plan)
+# Après chaque déploiement de PRODUCTION réussi (et à la main), Lighthouse mesure quatre
+# pages représentatives sur ordinateur et sur mobile. Le rapport va dans le résumé du job ;
+# les seuils sont des AVERTISSEMENTS pendant la période d'observation (pas d'échec de job),
+# pour établir la base avant de rendre le budget bloquant.
+# Les Previews ne sont pas mesurées ici (protégées) : voir smoke.yml pour leur couverture.
+name: Lighthouse
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      base:
+        description: "URL de base à mesurer"
+        default: "https://www.mikadodeco.be"
+        required: true
+
+jobs:
+  lighthouse:
+    name: Perf et budget
+    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: URL de base
+        id: base
+        run: echo "url=${{ github.event_name == 'workflow_dispatch' && inputs.base || 'https://www.mikadodeco.be' }}" >> "$GITHUB_OUTPUT"
+      - name: Mesurer (desktop puis mobile)
+        env:
+          BASE: ${{ steps.base.outputs.url }}
+        run: |
+          npm i -g @lhci/cli@0.14.x >/dev/null 2>&1
+          pages="/ /produits.html /collections/vitra /produit.html?handle=verre-a-eau-animal-farm"
+          summary() { # $1 = préréglage, $2 = dossier
+            echo "### $1" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "| Page | Perf | Accessibilité | Bonnes pratiques | SEO | LCP (s) | CLS | HTML (Ko) |" >> "$GITHUB_STEP_SUMMARY"
+            echo "|---|---|---|---|---|---|---|---|" >> "$GITHUB_STEP_SUMMARY"
+            for f in "$2"/lhr-*.json; do
+              node -e '
+                const r = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
+                const c = r.categories, a = r.audits, pct = (x) => Math.round(x.score * 100);
+                const url = r.finalDisplayedUrl.replace(process.argv[2], "") || "/";
+                const html = Math.round((a["network-requests"]?.details?.items?.find((i) => i.resourceType === "Document")?.transferSize || 0) / 1024);
+                console.log(`| ${url} | ${pct(c.performance)} | ${pct(c.accessibility)} | ${pct(c["best-practices"])} | ${pct(c.seo)} | ${(a["largest-contentful-paint"].numericValue / 1000).toFixed(2)} | ${a["cumulative-layout-shift"].numericValue.toFixed(3)} | ${html} |`);
+              ' "$f" "$BASE" >> "$GITHUB_STEP_SUMMARY"
+            done
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+          }
+          for p in $pages; do lhci collect --url="$BASE$p" --preset=desktop --numberOfRuns=1 >/dev/null; done
+          mkdir -p out/desktop && mv .lighthouseci/lhr-*.json out/desktop/ && rm -rf .lighthouseci
+          for p in $pages; do lhci collect --url="$BASE$p" --numberOfRuns=1 >/dev/null; done
+          mkdir -p out/mobile && mv .lighthouseci/lhr-*.json out/mobile/
+          echo "## Lighthouse · $BASE · $(date -u +'%Y-%m-%d %H:%M') UTC" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Budget visé (plan, phase 3.6) : perf ≥ 90 desktop, ≥ 75 mobile, CLS < 0,1, HTML des listes < 150 Ko. Avertissements seulement pendant la période d'observation." >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          summary "Desktop" out/desktop
+          summary "Mobile" out/mobile
+          # Avertissements (non bloquants) sous les seuils du plan.
+          for f in out/desktop/lhr-*.json; do node -e 'const r=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));if(r.categories.performance.score<0.9)console.log(`::warning::Perf desktop ${Math.round(r.categories.performance.score*100)} < 90 sur ${r.finalDisplayedUrl}`)' "$f"; done
+          for f in out/mobile/lhr-*.json; do node -e 'const r=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));if(r.categories.performance.score<0.75)console.log(`::warning::Perf mobile ${Math.round(r.categories.performance.score*100)} < 75 sur ${r.finalDisplayedUrl}`);if(r.audits["cumulative-layout-shift"].numericValue>=0.1)console.log(`::warning::CLS ${r.audits["cumulative-layout-shift"].numericValue.toFixed(3)} ≥ 0,1 sur ${r.finalDisplayedUrl}`)' "$f"; done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-${{ github.run_id }}
+          path: out/
+          retention-days: 30

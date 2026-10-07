@@ -1,0 +1,29 @@
+# Mises à jour de dépendances — Mikado Deco (phase 5.4 du plan)
+# Une PR par semaine au plus, regroupée : les dépendances sont peu nombreuses (express,
+# cors, dotenv, express-rate-limit ; nodemon, playwright, sharp) et la CI (npm run check +
+# npm test) dit si la mise à jour casse quelque chose. Les actions GitHub suivent aussi.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Europe/Brussels
+    open-pull-requests-limit: 3
+    groups:
+      production:
+        dependency-type: production
+      development:
+        dependency-type: development
+    commit-message:
+      prefix: "chore(deps)"
+    labels: [dependances]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "chore(ci)"
+    labels: [dependances]

@@ -34,3 +34,10 @@ jobs:
         run: npm run check
       - name: Tests
         run: npm test
+      - name: Contenu généré à jour (journal, pages légales)
+        # Les pages générées sont commitées : la CI vérifie qu'elles correspondent à leurs
+        # sources (phase 4.2). En cas d'échec : npm run journal && npm run build:legal, puis commiter.
+        run: |
+          npm run journal >/dev/null
+          npm run build:legal >/dev/null
+          git diff --exit-code --stat -- v3/journal v3/mentions-legales.html v3/conditions-generales-de-vente.html v3/politique-cookies.html v3/politique-et-vie-privee.html

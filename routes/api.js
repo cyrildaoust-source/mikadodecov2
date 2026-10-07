@@ -6,10 +6,11 @@ const crypto = require('crypto');
 const { filterScope } = require('../lib/filter-scopes');
 const { clearSearchCache, getSearchPage } = require('../lib/services/search');
 const cache = require('../lib/cache');
+const { shopifyFetch } = require('../lib/shopify/client');
 const { CAMPAIGN_COLLECTIONS } = require('../lib/config');
 const { navigationReady } = require('../lib/render/navigation');
 const { collectionProductsFor, getActiveBrands, getCollections, getHomeRails, getMenu, getPredictive, getProductByHandle, getProducts, getProductsPage, getPromos } = require('../lib/services/catalog');
-const { INDEX_PART_NAMES, getScopePage, indexPart } = require('../lib/services/catalog-scope');
+const { INDEX_PART_NAMES, getScopePage, indexPart, indexStatus } = require('../lib/services/catalog-scope');
 
 router.get('/api/search',async(req,res)=>{
   res.set('Cache-Control','no-store');
@@ -223,6 +224,32 @@ router.get('/api/promos', async (req, res) => {
     console.error('Promos error:', err.message);
     res.status(500).set('Cache-Control', 'no-store').json({ error: 'Impossible de charger les promotions.' });
   }
+});
+
+// ─── API: HEALTH ───────────────────────────────────────
+// État de la fonction pour un moniteur externe (phase 5.2) : version déployée, région,
+// âge de l'index catalogue, cache mémoire, Shopify joignable (requête minimale, bornée à
+// 3 s). 200 si Shopify répond, 503 sinon. Jamais caché.
+router.get('/api/health', async (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  const t0 = performance.now();
+  let shopify = 'ok';
+  try {
+    await Promise.race([
+      shopifyFetch('{ shop { name } }'),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout 3 s')), 3000)),
+    ]);
+  } catch (error) { shopify = 'down: ' + error.message; }
+  const ok = shopify === 'ok';
+  res.status(ok ? 200 : 503).json({
+    status: ok ? 'ok' : 'degraded',
+    build: (process.env.VERCEL_GIT_COMMIT_SHA || '').slice(0, 7) || 'dev',
+    region: process.env.VERCEL_REGION || null,
+    uptimeS: Math.round(process.uptime()),
+    shopify, shopifyMs: Math.round(performance.now() - t0),
+    index: indexStatus(),
+    cache: cache.stats(),
+  });
 });
 
 module.exports = router;
