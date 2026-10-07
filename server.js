@@ -6,6 +6,8 @@ const { getSearchPage, clearSearchCache } = require('./lib/services/search');
 const { SITEMAP_PRODUCTS_QUERY, PRODUCT_CARD_FIELDS, PRODUCTS_QUERY, SEARCH_QUERY, SEARCH_FALLBACK_QUERY, VENDORS_QUERY, COLLECTIONS_QUERY, PREDICTIVE_QUERY, MENU_QUERY, COLLECTION_PRODUCTS_QUERY, PRODUCT_QUERY, PRODUCT_RECOMMENDATIONS_QUERY, CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('./lib/shopify/queries');
 const { normalizeItems, getDeliveryEstimate, realProject } = require('./lib/delivery-estimate');
 const express = require('express');
+const { createErrorHandler, installAsyncErrorForwarding } = require('./lib/http-errors');
+installAsyncErrorForwarding();   // promesses rejetées → next(err) → gestionnaire final (Express 4)
 const { selectInitialVariant } = require('./v3/product-variant');
 const { productJsonLd } = require('./lib/product-jsonld');
 const { seoMeta } = require('./lib/seo-meta');
@@ -147,6 +149,7 @@ const _specsReady = import('./v3/product-specs.mjs')
 // éviter le flash blanc-sur-blanc (cf. styles.css .chrome color:on-dark par défaut).
 // Toute page absente de ce Set est hero (transparent over-hero, bindChrome gère le scroll).
 const NON_HERO = new Set([
+  '500.html',
   'produit.html', 'contact.html', 'selection.html', 'journal.html',
   'nuancier-fermob.html', '404.html', 'mentions-legales.html',
   'conditions-generales-de-vente.html', 'politique-cookies.html',
@@ -2809,6 +2812,15 @@ app.use(async (req, res) => {
   res.set('Content-Type', 'text/html; charset=utf-8');
   return res.send(injectChrome(raw, '404.html'));   // non-hero → solide
 });
+
+// ─── ERREURS : dernier middleware ────────────────────────
+// Toute exception d'une route (synchrone, ou promesse rejetée grâce à
+// installAsyncErrorForwarding) arrive ici : une ligne de log JSON, puis une
+// réponse propre — JSON { error } sur /api/*, page 500.html habillée du chrome
+// ailleurs. Plus jamais la page d'erreur brute de Vercel.
+app.use(createErrorHandler({
+  renderHtml: () => injectChrome(fs.readFileSync(path.join(__dirname, 'v3', '500.html'), 'utf8'), '500.html'),
+}));
 
 // ─── START (only when run directly, not when imported by Vercel) ──
 if (require.main === module) {
