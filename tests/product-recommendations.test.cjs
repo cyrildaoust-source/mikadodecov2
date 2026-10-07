@@ -266,6 +266,23 @@ test('une assise et une table vont ensemble seulement si elles sont toutes deux 
   assert.deepEqual(curated.complementary.map(item => item.id), ['bistro-table']);
 });
 
+test('« Vous aimerez aussi » garde deux pièces de la gamme au plus, même choisies à la main', () => {
+  const outdoorChair = { ...product, tags: ['palissade', 'exterieur'] };
+  const curatedRange = ['chaise', 'banc', 'canape', 'longue', 'fauteuil', 'tabouret'].map(id => card(`palissade-${id}`, { name: `${id} Palissade`, productType: 'Chaise', tags: ['palissade', 'exterieur'] }));
+  const result = selectProductRecommendations({
+    product: outdoorChair,
+    curatedRelated: curatedRange,
+    universe: [
+      card('fermob-luxembourg', { brand: 'Fermob', name: 'Chaise Luxembourg', productType: 'Chaise', tags: ['exterieur'] }),
+      card('fatboy-paletti', { brand: 'Fatboy', name: 'Fauteuil Paletti Lounge', productType: 'Fauteuil', tags: ['exterieur'] }),
+    ],
+  });
+  assert.deepEqual(result.related.map(item => item.id), ['palissade-chaise', 'palissade-banc', 'fermob-luxembourg', 'fatboy-paletti']);
+  // Sans autre produit pertinent, la gamme complète la rubrique plutôt que de la laisser vide.
+  const alone = selectProductRecommendations({ product: outdoorChair, curatedRelated: curatedRange, range: curatedRange });
+  assert.equal(alone.related.length, 4);
+});
+
 test('indisponibles, produit courant et doublons sont exclus ; chaque rubrique reste bornée', () => {
   const candidates = Array.from({ length: 12 }, (_, index) => card(`p${index}`));
   const result = selectProductRecommendations({

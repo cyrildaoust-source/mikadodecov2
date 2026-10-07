@@ -42,6 +42,9 @@ la pertinence passe avant la diversité des marques (révision du 6 octobre) :
   qu'une rubrique n'est jamais à moitié vide ;
 - dans « Vous aimerez aussi », les autres meubles de la gamme passent avant ses
   accessoires, dont la place naturelle est « Complétez avec » ;
+- « Vous aimerez aussi » garde deux pièces de la gamme au plus, y compris parmi
+  les choix manuels (demande du 7 octobre) : « Complétez avec » montre déjà la
+  gamme, les autres places vont à d'autres gammes de même usage ;
 - les candidats sont classés par niveau de pertinence (même type, même usage
   intérieur ou extérieur). Dans chaque niveau, les marques alternent, deux cartes
   au plus par marque ; puis le même niveau complète sans limite de marque. Le
