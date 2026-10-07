@@ -22,8 +22,13 @@ const { PORT } = require('./lib/config');
 const { chromeReady, injectChrome } = require('./lib/render/chrome');
 const { navigationReady } = require('./lib/render/navigation');
 const { acceptsHtmlExplicitly, sendMarkdown, markdown404 } = require('./lib/render/agents');
+const { requestLogger } = require('./lib/request-log');
 
 const app = express();
+
+// Journal JSON par requête + en-tête Server-Timing (durée totale, appels Shopify) : premier
+// middleware, pour que tout ce qui suit soit mesuré. Voir lib/request-log.js.
+app.use(requestLogger());
 
 // Vercel place 1 proxy devant l'app → la vraie IP client est dans X-Forwarded-For.
 // Sans ça, req.ip = IP du proxy (tous les clients confondus) et express-rate-limit
