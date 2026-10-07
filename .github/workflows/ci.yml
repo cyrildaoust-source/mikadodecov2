@@ -1,0 +1,36 @@
+# CI — Mikado Deco
+# Sur chaque pull request et sur main : syntaxe (npm run check) puis la suite de
+# tests sans navigateur (npm test, ≈ 15 s). Les tests Playwright vivent dans
+# tests/e2e/ et ne tournent pas ici (npm run test:e2e, en local).
+# Pour que ce statut bloque le merge, activer la protection de branche sur main
+# (Settings → Branches → Require status checks → « Syntaxe et tests »).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Syntaxe et tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Dépendances
+        run: npm ci --no-audit --no-fund
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      - name: Syntaxe JS et JSON
+        run: npm run check
+      - name: Tests
+        run: npm test

@@ -5,9 +5,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "scrape": "node scripts/scrape-vitra.js",
-    "import:shopify": "node scripts/import-to-shopify.js",
-    "import:shopify:dry": "node scripts/import-to-shopify.js --dry-run",
+    "check": "node scripts/check-syntax.mjs",
+    "test": "node --test --test-timeout=30000 \"tests/*.test.cjs\" \"tests/*.test.mjs\"",
+    "test:e2e": "node --test --test-timeout=120000 \"tests/e2e/*.test.cjs\"",
     "images": "node scripts/optimize-images.js",
     "journal": "node scripts/build-journal.mjs",
     "build:legal": "node scripts/build-legal.mjs"
@@ -22,5 +22,8 @@
     "nodemon": "^3.0.2",
     "playwright": "^1.59.1",
     "sharp": "^0.34.5"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

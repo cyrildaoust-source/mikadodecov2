@@ -3,7 +3,8 @@
 - Pour toute modification d’interface, lire `DESIGN.md` et respecter la dernière décision du propriétaire.
 - Réutiliser les cartes et boutons communs. Les pages règlent leur placement et leur contenu, sans redessiner leurs éléments internes.
 - Pour les pages familles et le catalogue, lire `docs/FAMILY_PAGES.md` avant de modifier la curation ou le classement.
-- Après une modification des données, routes ou règles de pagination, exécuter `node --test tests/family-pages.test.cjs tests/table-collections.test.cjs tests/product-specs.test.mjs` et corriger les erreurs pertinentes.
+- Avant d’ouvrir ou de mettre à jour une PR, exécuter `npm run check` (syntaxe JS et JSON) puis `npm test` (toute la suite, ≈ 15 s, sans navigateur) et corriger les erreurs. La CI GitHub (`.github/workflows/ci.yml`) rejoue ces deux commandes sur chaque PR. Les tests qui pilotent un navigateur vivent dans `tests/e2e/` et se lancent à part avec `npm run test:e2e` (Playwright + Chromium installés).
+- Après une modification des données, routes ou règles de pagination, regarder en particulier `tests/family-pages.test.cjs`, `tests/table-collections.test.cjs` et `tests/product-specs.test.mjs`.
 - Vérifier les modifications visuelles dans une preview réelle, sur ordinateur **et sur mobile (390 px puis 360 px)**, puis fournir son lien. Ne pas confondre réussite des tests et validation visuelle.
 - **Aucun surtitre (« eyebrow »)**, jamais : pas de petit texte au-dessus d'un titre pour l'introduire. Règle permanente, voir `DESIGN.md` (« Surtitres ») ; `tests/no-eyebrows.test.cjs` doit passer et `node scripts/detect-eyebrows.cjs <preview>` ne rien trouver.
 - Penser le mobile dès la conception de chaque changement (demande du propriétaire du 24 septembre) : ordre des informations, zones tactiles de 44 px, aucun débordement horizontal mesuré avec une fenêtre de largeur fixe. Voir la section Mobile de `DESIGN.md`.
