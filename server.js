@@ -1864,8 +1864,17 @@ app.get('/api/home-rails', async (req, res) => {
   catch (err) { console.error('Home rails error:', err.message); res.status(503).set('Cache-Control', 'no-store').json({ error: 'home_rails_unavailable' }); }
 });
 
+// Réponses API cachables à l'edge. vercel.json ne force plus `no-store` sur /api/* :
+// chaque endpoint décide. s-maxage = durée servie depuis le CDN sans toucher la
+// fonction ; stale-while-revalidate = fenêtre où l'edge sert l'ancienne réponse en
+// la rafraîchissant en arrière-plan. Les erreurs (catch) repassent en no-store.
+function apiCache(res, seconds, swr = 3600) {
+  res.set('Cache-Control', `public, s-maxage=${seconds}, stale-while-revalidate=${swr}`);
+}
+
 app.get('/api/products', async (req, res) => {
   try {
+    apiCache(res, 300);
     const { paginated, cursor, limit, tags, cats, brand, q } = req.query;
     if (paginated || cursor || limit || tags || cats || brand || q) {
       const page = await getProductsPage(limit, cursor, tags, cats, brand, q);
@@ -1875,7 +1884,7 @@ app.get('/api/products', async (req, res) => {
     res.json(products);
   } catch (err) {
     console.error('Products error:', err.message);
-    res.status(500).json({ error: 'Impossible de charger les produits.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Impossible de charger les produits.' });
   }
 });
 
@@ -1883,11 +1892,12 @@ app.get('/api/products', async (req, res) => {
 // Derived from product.vendor — one entry per vendor, with its page (href).
 app.get('/api/brands', async (req, res) => {
   try {
+    apiCache(res, 1800, 86400);
     const brands = await getActiveBrands();
     res.json(brands);
   } catch (err) {
     console.error('Brands error:', err.message);
-    res.status(500).json({ error: 'Impossible de charger les marques.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Impossible de charger les marques.' });
   }
 });
 
@@ -1944,7 +1954,7 @@ async function getPredictive(q) {
 app.get('/api/predictive', async (req, res) => {
   try {
     const data = await getPredictive(req.query.q);
-    res.set('Cache-Control', data.resultsUrl ? 'no-store' : 'public, max-age=60');
+    res.set('Cache-Control', data.resultsUrl ? 'no-store' : 'public, max-age=60, s-maxage=60, stale-while-revalidate=600');
     res.json(data);
   } catch (err) {
     console.error('Predictive error:', err.message);
@@ -2012,10 +2022,12 @@ async function getMenu() {
 // global and must not surface as a broken request.
 app.get('/api/menu', async (req, res) => {
   try {
-    res.json(await getMenu());
+    const menu = await getMenu();
+    apiCache(res, 300);
+    res.json(menu);
   } catch (err) {
     console.warn('Menu fetch failed:', err.message);
-    res.json({ ok: false, items: [] });
+    res.set('Cache-Control', 'no-store').json({ ok: false, items: [] });
   }
 });
 
@@ -2023,11 +2035,12 @@ app.get('/api/menu', async (req, res) => {
 // Real Shopify collections (product lines: Palissade, Bistro, Luxembourg…).
 app.get('/api/collections', async (req, res) => {
   try {
+    apiCache(res, 300);
     const collections = await getCollections();
     res.json(collections);
   } catch (err) {
     console.error('Collections error:', err.message);
-    res.status(500).json({ error: 'Impossible de charger les collections.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Impossible de charger les collections.' });
   }
 });
 
@@ -2154,11 +2167,12 @@ async function getProductByHandle(handle) {
 app.get('/api/product/:handle', async (req, res) => {
   try {
     const product = await getProductByHandle(req.params.handle);
-    if (!product) return res.status(404).json({ error: 'product_not_found' });
+    if (!product) return res.status(404).set('Cache-Control', 'public, s-maxage=60').json({ error: 'product_not_found' });
+    apiCache(res, 300);
     res.json(product);
   } catch (err) {
     console.error('Product fetch error:', err.message);
-    res.status(500).json({ error: 'Impossible de charger ce produit.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Impossible de charger ce produit.' });
   }
 });
 
@@ -2220,11 +2234,12 @@ app.get('/api/collection/:handle/products', async (req, res) => {
         items: [], pageInfo: { hasNextPage: false, endCursor: null },
       };
     }
-    if (!payload) return res.status(404).json({ error: 'collection_not_found' });
+    if (!payload) return res.status(404).set('Cache-Control', 'public, s-maxage=60').json({ error: 'collection_not_found' });
+    apiCache(res, 300);
     res.json(payload);
   } catch (err) {
     console.error('Collection products error:', err.message);
-    res.status(500).json({ error: 'Impossible de charger la collection.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Impossible de charger la collection.' });
   }
 });
 
@@ -2268,6 +2283,7 @@ function hasValidToken(req) {
 // Setup in Shopify admin → Settings → Notifications → Webhooks
 // Auth : HMAC Shopify (webhook) OU Authorization: Bearer <REVALIDATE_TOKEN> (manuel).
 app.post('/api/revalidate', (req, res) => {
+  res.set('Cache-Control', 'no-store');
   if (!verifyShopifyHmac(req) && !hasValidToken(req)) {
     return res.status(401).json({ error: 'unauthorized' });
   }
@@ -2352,10 +2368,12 @@ async function getPromos() {
 // ─── API: PROMOS (variantId → discount title) ──────────
 app.get('/api/promos', async (req, res) => {
   try {
-    res.json(await getPromos());
+    const promos = await getPromos();
+    apiCache(res, 60, 600);
+    res.json(promos);
   } catch (err) {
     console.error('Promos error:', err.message);
-    res.status(500).json({ error: 'Impossible de charger les promotions.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Impossible de charger les promotions.' });
   }
 });
 
@@ -2365,6 +2383,7 @@ app.get('/api/promos', async (req, res) => {
 // NOTE: every call creates an orphan Shopify cart that auto-expires after
 // ~10 days. Debounce on the client to keep volume sane.
 app.post('/api/cart/preview', cartLimiter, async (req, res) => {
+  res.set('Cache-Control', 'no-store');
   try {
     const items = req.body?.items;
     if (!Array.isArray(items) || items.length === 0) return res.json({ subtotal: 0, total: 0, discount: 0, discounts: [], lines: [] });
@@ -2461,12 +2480,13 @@ app.post('/api/cart/preview', cartLimiter, async (req, res) => {
     res.json({ subtotal: subtotalDisplayed, total, discount, discounts, lineDiscounts, lines: linesOut });
   } catch (err) {
     console.error('Cart preview error:', err.message);
-    res.status(500).json({ error: 'Erreur lors du calcul du panier.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Erreur lors du calcul du panier.' });
   }
 });
 
 // Fresh availability for the exact variants and total quantities in the cart.
 app.post('/api/cart/delivery', cartLimiter, async (req, res) => {
+  res.set('Cache-Control', 'no-store');
   try {
     const items = normalizeItems(req.body?.items);
     res.json(await getDeliveryEstimate(items, shopifyFetch));
@@ -2479,6 +2499,7 @@ app.post('/api/cart/delivery', cartLimiter, async (req, res) => {
 // Body: { items: [{ variantId, qty }], customer: { prenom, nom, email, telephone, projet, message } }
 // Returns: { checkoutUrl } — redirect the browser to this URL
 app.post('/api/cart/create', cartLimiter, async (req, res) => {
+  res.set('Cache-Control', 'no-store');
   try {
     const { customer } = req.body;
     const items = normalizeItems(req.body?.items);
@@ -2544,7 +2565,7 @@ app.post('/api/cart/create', cartLimiter, async (req, res) => {
 
   } catch (err) {
     console.error('Cart create error:', err.message);
-    res.status(500).json({ error: err.message || 'Erreur lors de la creation du panier.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: err.message || 'Erreur lors de la creation du panier.' });
   }
 });
 
@@ -2553,6 +2574,7 @@ app.post('/api/cart/create', cartLimiter, async (req, res) => {
 // Validates server-side, logs structured payload, returns 200.
 // Wire up nodemailer / a webhook later — the endpoint contract stays the same.
 app.post('/api/contact', formLimiter, async (req, res) => {
+  res.set('Cache-Control', 'no-store');
   try {
     // Honeypot anti-bot : champ masqué qu'un humain ne remplit jamais. Si rempli
     // → faux succès silencieux (on ne révèle pas le piège, on ne traite rien).
@@ -2644,7 +2666,7 @@ app.post('/api/contact', formLimiter, async (req, res) => {
     res.json({ ok: true });
   } catch (err) {
     console.error('[contact] error:', err.message);
-    res.status(500).json({ error: 'server_error' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'server_error' });
   }
 });
 
@@ -2731,6 +2753,7 @@ app.get('/api/shopify/newsletter/callback', formLimiter, async (req, res) => {
 // voit « inscrit » que si l'un des deux enregistrements a réussi.
 // Body: { email }
 app.post('/api/newsletter', formLimiter, async (req, res) => {
+  res.set('Cache-Control', 'no-store');
   try {
     if (String(req.body?.hp_field || '').trim()) return res.json({ ok: true }); // honeypot anti-bot (faux succès)
 
@@ -2762,7 +2785,7 @@ app.post('/api/newsletter', formLimiter, async (req, res) => {
     res.json({ ok: true, saved });
   } catch (err) {
     console.error('[newsletter] error:', err.message);
-    res.status(500).json({ error: 'server_error' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'server_error' });
   }
 });
 
