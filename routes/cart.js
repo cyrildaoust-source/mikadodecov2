@@ -136,7 +136,7 @@ router.post('/api/cart/delivery', cartLimiter, async (req, res) => {
 router.post('/api/cart/create', cartLimiter, async (req, res) => {
   res.set('Cache-Control', 'no-store');
   try {
-    const { customer } = req.body;
+    const { customer } = req.body || {};   // Express 5 : req.body est undefined sans corps JSON
     const items = normalizeItems(req.body?.items);
     const delivery = await getDeliveryEstimate(items, shopifyFetch);
     const project = realProject(customer?.projet);

@@ -1,12 +1,11 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const express = require('express');
-const { createErrorHandler, installAsyncErrorForwarding, statusOf, wantsJson } = require('../lib/http-errors');
+const { createErrorHandler, statusOf, wantsJson } = require('../lib/http-errors');
 
-// Petite application de test : les mêmes briques que server.js (patch async +
-// gestionnaire final), avec des routes qui échouent de toutes les façons possibles.
+// Petite application de test : la même brique que server.js (gestionnaire final, Express 5
+// transmet lui-même les promesses rejetées), avec des routes qui échouent de toutes les façons.
 async function withApp(run, { renderHtml } = {}) {
-  installAsyncErrorForwarding();
   const logs = [];
   const app = express();
   app.use(express.json());
@@ -23,7 +22,7 @@ async function withApp(run, { renderHtml } = {}) {
   try { await run(base, logs); } finally { await new Promise((r) => server.close(r)); }
 }
 
-test('une promesse rejetée dans un handler async arrive au gestionnaire (JSON 500, message interne masqué)', async () => {
+test('une promesse rejetée dans un handler async arrive au gestionnaire via Express 5 (JSON 500, message interne masqué)', async () => {
   await withApp(async (base, logs) => {
     const res = await fetch(base + '/api/async');
     assert.equal(res.status, 500);
@@ -81,7 +80,7 @@ test('un corps JSON invalide donne un 400 bad_request (erreur d’express.json)'
   });
 });
 
-test('les routes saines ne sont pas affectées par le patch', async () => {
+test('les routes saines ne sont pas affectées', async () => {
   await withApp(async (base) => {
     const res = await fetch(base + '/ok');
     assert.equal(res.status, 200);
