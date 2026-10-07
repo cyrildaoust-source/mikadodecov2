@@ -1,0 +1,42 @@
+{
+  "_note": "Inventaire des pages HTML du site : UNE source pour le serveur (lib/config.js : pages servies avec le chrome SSR, header solide ou transparent, entrée de nav active) ET pour vercel.json (scripts/build-vercel-config.mjs régénère la règle de routage des pages ; tests/pages-manifest.test.cjs échoue si l'un des deux n'est plus aligné). Ajouter une page = une ligne ici, puis `node scripts/build-vercel-config.mjs`.",
+  "_fields": {
+    "file": "nom du fichier (v3/ par défaut ; templates/ si dir = templates)",
+    "role": "page = servie à son URL · template = rendue par une route (fiche, catalogue, familles, 500) · stub = redirection sans chrome",
+    "ssr": "true = servie par la route générique des pages statiques avec chrome (et donc routée vers la fonction dans vercel.json)",
+    "hero": "false = header rendu solide dès le serveur (pas de hero plein écran) ; true par défaut",
+    "active": "libellé de l'entrée de navigation à souligner (NAV_TOP), vide sinon"
+  },
+  "pages": [
+    { "file": "index.html",                           "role": "page",     "ssr": true,  "hero": true,  "active": "" },
+    { "file": "marques.html",                         "role": "page",     "ssr": true,  "hero": true,  "active": "Marques" },
+    { "file": "designers.html",                       "role": "page",     "ssr": true,  "hero": true,  "active": "Designers" },
+    { "file": "studio.html",                          "role": "page",     "ssr": true,  "hero": true,  "active": "Mikado Studio" },
+    { "file": "materiaux.html",                       "role": "page",     "ssr": true,  "hero": true,  "active": "" },
+    { "file": "rendez-vous.html",                     "role": "page",     "ssr": true,  "hero": true,  "active": "" },
+    { "file": "contact.html",                         "role": "page",     "ssr": true,  "hero": false, "active": "" },
+    { "file": "selection.html",                       "role": "page",     "ssr": true,  "hero": false, "active": "" },
+    { "file": "journal.html",                         "role": "page",     "ssr": true,  "hero": false, "active": "Le journal" },
+    { "file": "nuancier-fermob.html",                 "role": "page",     "ssr": true,  "hero": false, "active": "Le journal" },
+    { "file": "mentions-legales.html",                "role": "page",     "ssr": true,  "hero": false, "active": "" },
+    { "file": "conditions-generales-de-vente.html",   "role": "page",     "ssr": true,  "hero": false, "active": "" },
+    { "file": "politique-cookies.html",               "role": "page",     "ssr": true,  "hero": false, "active": "" },
+    { "file": "politique-et-vie-privee.html",         "role": "page",     "ssr": true,  "hero": false, "active": "" },
+    { "file": "404.html",                             "role": "page",     "ssr": true,  "hero": false, "active": "" },
+
+    { "file": "500.html",                             "role": "template", "ssr": false, "hero": false, "active": "" },
+    { "file": "produit.html",                         "role": "template", "ssr": false, "hero": false, "active": "" },
+    { "file": "produits.html",                        "role": "template", "ssr": false, "hero": true,  "active": "" },
+    { "file": "famille.html",                         "role": "template", "ssr": false, "hero": true,  "active": "Mobilier" },
+    { "file": "famille-assises.html",                 "role": "template", "ssr": false, "hero": true,  "active": "Mobilier" },
+    { "file": "family-page.html", "dir": "templates", "role": "template", "ssr": false, "hero": true,  "active": "Mobilier" },
+
+    { "file": "article.html",                         "role": "stub",     "ssr": false, "hero": true,  "active": "" }
+  ],
+  "journal": { "_note": "Tous les articles v3/journal/*.html : header solide, entrée « Le journal » active.", "hero": false, "active": "Le journal" },
+  "aliases": {
+    "_note": "Pages de confiance attendues par les agents IA, servies en 200 avec le contenu d'une page existante (qui porte sa propre canonical).",
+    "/about": "studio.html",
+    "/privacy": "politique-et-vie-privee.html"
+  }
+}
