@@ -49,6 +49,12 @@ la pertinence passe avant la diversité des marques (révision du 6 octobre) :
 - la gamme complète passe avant un produit d'usage différent : une pièce
   d'intérieur ne propose un meuble de jardin qu'en dernier recours.
 
+Une assise et une table ne sont associées dans « Complétez avec » que si elles sont
+toutes deux pliantes ou toutes deux fixes (tag `pliante`) : une chaise Palissade va avec
+une table fixe, une chaise Bistro avec une table Bistro. Un choix manuel Shopify reste
+prioritaire. Le 7 octobre, 18 tables et 13 assises pliantes ont reçu ce tag d'après
+leur description.
+
 Les tags `exterieur` / `interieur` décident de l'usage : un meuble de jardin sans
 tag extérieur est traité comme un meuble d'intérieur.
 
