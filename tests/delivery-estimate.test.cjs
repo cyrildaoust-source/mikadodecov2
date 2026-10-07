@@ -22,7 +22,7 @@ test('digital items do not postpone physical delivery', () => {
   assert.equal(estimateDelivery([item(2)], [stock(2, null, { requiresShipping: false })]).label, null);
 });
 test('invalid or missing variants fail instead of receiving an invented estimate', () => {
-  for (const items of [[], [item(1, 0)], [item(1, 100)], [item(1, 1.5)], [{variantId:'invalid'}]]) assert.throws(() => normalizeItems(items));
+  for (const items of [[], [item(1, 0)], [item(1, 100)], [item(1, 1.5)], [{variantId:'invalid'}]]) assert.throws(() => normalizeItems(items), (e) => e.status === 400);
   assert.throws(() => estimateDelivery([item(1)], [null]));
   assert.equal(normalizeItems([item(1, 12)])[0].qty, 12);
 });

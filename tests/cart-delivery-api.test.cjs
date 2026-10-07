@@ -48,3 +48,13 @@ test('stock query failure cannot silently create a cart with a false promise', a
   assert.equal(captured, null);
   failStock = false;
 });
+test('un panier vide ou un corps sans articles est une erreur du client : 400, pas 500', async () => {
+  captured = null;
+  for (const body of [{ items: [] }, {}, { items: [{ variantId: 'invalid', qty: 1 }] }]) {
+    const response = await post('/api/cart/create', body);
+    assert.equal(response.status, 400, JSON.stringify(body));
+    assert.equal(response.headers.get('cache-control'), 'no-store');
+    assert.match((await response.json()).error, /panier/);
+  }
+  assert.equal(captured, null, 'aucun panier Shopify créé');
+});
