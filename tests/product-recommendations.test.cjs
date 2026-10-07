@@ -27,7 +27,8 @@ test('les deux rubriques gardent la formulation éditoriale validée', () => {
 
 test('la fiche interroge Storefront pour le même type et le même univers', () => {
   const queries = readFileSync(require.resolve('../lib/shopify/queries'), 'utf8');
-  const server = readFileSync(require.resolve('../server'), 'utf8');
+  // La fiche est lue par lib/services/catalog.js (getProductByHandle) depuis le découpage de server.js.
+  const server = readFileSync(require.resolve('../lib/services/catalog'), 'utf8');
   assert.match(queries, /sameType: products\(first: 12, query: \$sameTypeQuery/);
   assert.match(queries, /sameUniverse: products\(first: 16, query: \$sameUniverseQuery/);
   assert.match(server, /sameTypeQuery: universeQueries\.sameType/);
