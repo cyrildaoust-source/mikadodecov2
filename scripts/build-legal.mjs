@@ -32,7 +32,7 @@ const SRC_DIR = join(__dirname, '..', 'docs', 'legal');
 const OUT_DIR = join(__dirname, '..', 'v3');
 const ORIGIN = 'https://www.mikadodeco.be';
 const OG_IMAGE = ORIGIN + '/images/og-default.jpg';
-const PUBLISH_DATE = '10/06/2026';
+const PUBLISH_DATE = '10/06/2026';   // mentions, confidentialité, cookies ; les CGV portent leur propre date (cfg.date)
 
 // Échappement identique à build-journal (contenu texte) + variante attribut.
 const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
@@ -82,11 +82,11 @@ function isItalicNoteToRemove(t) {
   return ITALIC_MARKERS.some((m) => n.includes(m));
 }
 
-function clean(md) {
+function clean(md, date = PUBLISH_DATE) {
   // Pré-passes lignes (Règles C + D + retrait suffixe cgv-b2c).
   let lines = md.split('\n').map((l) =>
     l
-      .replace(/\[DATE[^\]]*\]/g, PUBLISH_DATE) // Règle C : tout [DATE…] → date de publication
+      .replace(/\[DATE[^\]]*\]/g, date) // Règle C : tout [DATE…] → date de publication (cfg.date ou PUBLISH_DATE)
       .replace(/\s*—\s*adaptée à la vente en ligne/g, '') // cgv-b2c : retrait du suffixe interne
       // Règle D : réécriture des liens markdown internes (fonction → aucun $ interprété)
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, txt, url) => `[${txt}](${rewriteHref(url)})`)
@@ -253,10 +253,10 @@ function mdToHtml(md) {
 // Conversion d'une source → HTML de corps. `stripHeader` retire la 1re ligne
 // italique d'en-tête sous le H1 (pages génériques : la date est réinjectée par
 // le gabarit ; CGV : on garde la ligne « Version applicable à partir du … »).
-function bodyFromSource(file, { stripHeader }) {
+function bodyFromSource(file, { stripHeader, date } = {}) {
   const path = join(SRC_DIR, file);
   if (!existsSync(path)) throw new Error(`Page légale : source manquante « docs/legal/${file} ».`);
-  let md = clean(readFileSync(path, 'utf8'));
+  let md = clean(readFileSync(path, 'utf8'), date);
   if (stripHeader) {
     // Retire la 1re ligne entièrement italique (en-tête de brouillon) si elle a
     // survécu au nettoyage — sécurité (les marqueurs b1 l'ont déjà retirée).
@@ -278,7 +278,7 @@ function head(cfg, out) {
   <title>${esc(cfg.title)}</title>
   <!-- Open Graph / Twitter Cards (aperçu au partage social — statique) -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Mikadodeco" />
+  <meta property="og:site_name" content="Mikado Deco" />
   <meta property="og:locale" content="fr_BE" />
   <meta property="og:title" content="${attrEsc(cfg.title)}" />
   <meta property="og:description" content="${attrEsc(cfg.desc)}" />
@@ -309,7 +309,7 @@ const pagehead = (cfg) => `    <div data-breadcrumb></div>
 
 // Page simple (mentions, confidentialité, cookies).
 function renderSimple(cfg, out) {
-  const body = bodyFromSource(cfg.sources[0], { stripHeader: true });
+  const body = bodyFromSource(cfg.sources[0], { stripHeader: true, date: cfg.date });
   if (!body.trim()) throw new Error(`Page « ${out} » : contenu vide après conversion.`);
   return `<!DOCTYPE html>
 <html lang="fr">
@@ -338,7 +338,7 @@ ${body}
 // Page CGV à onglets (deux panneaux statiques indexables).
 function renderTabs(cfg, out) {
   const panels = cfg.panels.map((p) => {
-    const body = bodyFromSource(p.source, { stripHeader: false });
+    const body = bodyFromSource(p.source, { stripHeader: false, date: cfg.date });
     if (!body.trim()) throw new Error(`Page « ${out} », panneau « ${p.label} » : contenu vide.`);
     return { ...p, body };
   });
@@ -377,37 +377,7 @@ ${options}
 ${sections}
   </main>
   <div id="site-footer"></div>
-  <script type="module">
-    import { initShell } from "/shared.js";
-    initShell({ active: "", transparentNav: false });
-
-    // Onglets Particuliers / Professionnels. Les deux panneaux sont en dur dans
-    // le HTML (indexables) ; le JS ne fait que basculer la visibilité. Le
-    // <select> (.chips-select) prend le relais sur mobile, où .chips est masqué.
-    const tablist = document.querySelector('.chips[role="tablist"]');
-    const tabs = [...tablist.querySelectorAll('[role="tab"]')];
-    const select = document.querySelector('[data-legal-select]');
-    function activate(tab) {
-      tabs.forEach((t) => {
-        const on = t === tab;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-      });
-      if (select) select.value = tab.id.replace('tab-', '');
-    }
-    tablist.addEventListener('click', (e) => { const tab = e.target.closest('[role="tab"]'); if (tab) activate(tab); });
-    tablist.addEventListener('keydown', (e) => {
-      const i = tabs.indexOf(document.activeElement);
-      if (i < 0) return;
-      let n = null;
-      if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
-      if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
-      if (n) { e.preventDefault(); n.focus(); activate(n); }
-    });
-    select?.addEventListener('change', () => { const tab = document.getElementById('tab-' + select.value); if (tab) activate(tab); });
-  </script>
+  <script type="module" src="/pages/conditions-generales-de-vente.js"></script>
 </body>
 </html>
 `;
@@ -422,15 +392,16 @@ const PAGES = {
     sources: ['mentions-legales.md'],
     h1: 'Mentions légales',
     intro: "Informations sur l'éditeur du site, l'hébergement et la propriété intellectuelle.",
-    title: 'Mentions légales · Mikadodeco',
+    title: 'Mentions légales · Mikado Deco',
     desc: 'Mentions légales du site édité par MIKADO M-O-A SRL (Uccle) : éditeur, hébergement, propriété intellectuelle, médiation.',
     updated: `Dernière mise à jour : ${PUBLISH_DATE}`,
   },
   'conditions-generales-de-vente.html': {
     layout: 'tabs',
+    date: '24/09/2026',   // « Version applicable à partir du » : CGV révisées le 24/09/2026 (page publiée)
     h1: 'Conditions générales de vente',
     intro: 'Les règles qui encadrent nos ventes, pour les particuliers comme pour les professionnels.',
-    title: 'Conditions générales de vente · Mikadodeco',
+    title: 'Conditions générales de vente · Mikado Deco',
     desc: 'CGV de MIKADO M-O-A SRL : rétractation, prix, livraison en Belgique, garanties. Volets Particuliers et Professionnels.',
     panels: [
       { id: 'particuliers', label: 'Particuliers', source: 'cgv-b2c.md' },
@@ -442,7 +413,7 @@ const PAGES = {
     sources: ['politique-confidentialite.md'],
     h1: 'Politique de confidentialité',
     intro: 'Comment nous collectons, utilisons et protégeons vos données personnelles.',
-    title: 'Politique de confidentialité · Mikadodeco',
+    title: 'Politique de confidentialité · Mikado Deco',
     desc: 'Comment MIKADO M-O-A SRL traite vos données : finalités, bases RGPD, sous-traitants, durées, droits.',
     updated: `Dernière mise à jour : ${PUBLISH_DATE}`,
   },
@@ -451,7 +422,7 @@ const PAGES = {
     sources: ['politique-cookies.md'],
     h1: 'Politique cookies',
     intro: "Le site mikadodeco.be ne dépose aucun cookie de traçage, de mesure d'audience ni de publicité.",
-    title: 'Politique cookies · Mikadodeco',
+    title: 'Politique cookies · Mikado Deco',
     desc: 'Le site mikadodeco.be ne dépose aucun cookie de traçage/mesure/publicité ; seuls des cookies strictement nécessaires sont utilisés. Cadre légal et gestion.',
     updated: `Dernière mise à jour : ${PUBLISH_DATE}`,
   },

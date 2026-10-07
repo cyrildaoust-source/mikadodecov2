@@ -6,6 +6,23 @@ Date : 6 octobre 2026 · Base analysée : `main` @ `8800d9f` (PR #171) + prod `w
 
 ---
 
+## 0. État d'avancement (mis à jour le 7 octobre 2026)
+
+| Phase | Point | État | Où |
+|---|---|---|---|
+| 0 | 0.1 CI · 0.2 npm test · 0.3 smoke · 0.4 hygiène · 0.5 erreurs · 0.6 clone hors iCloud | ✅ livré | PR #177, #178, #179, #180 (+ #181 = 2.2) |
+| 1 | 1.1 découpage · 1.2 manifeste · 1.3 cache borné · 1.4 data/ · 1.5 journal + Server-Timing | ✅ livré | PR #182 (brouillon, sur les 5 PR de la phase 0) |
+| 2 | 2.1 listes à l'edge · 2.2 API · 2.3 étape 1 (réchauffage) · 2.5 ADR | ✅ livré | PR #181, #183 ; ADR 0001–0003 |
+| 2 | 2.3 étape 2 (Cron Vercel + Blob) · 2.4 prédictive sur l'index | ⏸ attend un store Blob côté Vercel | ADR 0002 |
+| 3 | 3.2 scripts de page externes · 3.3 CSP nonce sans 'unsafe-inline' | ✅ livré | PR #184 |
+| 3 | 3.1 bundler · 3.4 scission shared.js · 3.5 double payload · 3.6 Lighthouse (rapport, non bloquant) | 3.6 ✅ rapport · 3.1 ⏸ décision pipeline Vercel · 3.4/3.5 à faire | PR #185 (3.6) ; commentaire sur #184 (3.1) |
+| 4 | 4.2 contenu généré vérifié en CI · 4.3 contrat de données | ✅ livré | PR #185 |
+| 4 | 4.1 layout unique · 4.3 metaobjects (brief importateur) · 4.4 images hors git | à faire | 4.4 attend Blob/LFS |
+| 5 | 5.2 /api/health · 5.3 ADR · 5.4 Dependabot | ✅ livré | PR #185 ; docs/adr |
+| 5 | 5.1 log drain + alertes (réglage Vercel) · 5.4 Express 5 | à faire | — |
+
+---
+
 ## 1. Verdict en une page
 
 Le site est un **monolithe Express de 2 821 lignes exécuté comme une seule fonction serverless Vercel**, qui sert une arborescence statique `v3/` (HTML + CSS + modules ES bruts, sans build) et parle à Shopify Storefront côté serveur. L'architecture a bien tenu la montée en fonctionnalités (SSR progressif, SEO, GEO 100/100, sécurité correcte, composants isomorphes) mais elle atteint ses limites sur **quatre axes** :
