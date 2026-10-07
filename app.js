@@ -10,7 +10,7 @@
 //   6. 404 (HTML avec chrome, ou markdown pour les agents)
 //   7. gestionnaire d'erreurs global                → lib/http-errors.js
 // Le code métier vit dans lib/ ; ce fichier ne fait que composer.
-require('dotenv').config();
+require('dotenv').config({ quiet: true });   // dotenv ≥ 17 écrit sinon une ligne « injecting env » à chaque démarrage (bruit dans les logs Vercel)
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');

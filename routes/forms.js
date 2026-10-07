@@ -14,7 +14,7 @@ const { ORIGIN } = require('../lib/config');
 // Version distribuée (Vercel KV / Upstash) = évolution ultérieure si besoin.
 const formLimiter = rateLimit({
   windowMs: 10 * 60 * 1000,           // 10 min
-  max: 5,                             // 5 soumissions / IP / fenêtre (contact, newsletter)
+  limit: 5,                             // 5 soumissions / IP / fenêtre (contact, newsletter)
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'too_many_requests' },

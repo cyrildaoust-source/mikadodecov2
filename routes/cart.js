@@ -9,7 +9,7 @@ const { CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('../lib/shopify/
 
 const cartLimiter = rateLimit({
   windowMs: 60 * 1000,                // 1 min
-  max: 30,                            // 30 calculs panier / IP / min (le front debounce déjà)
+  limit: 30,                            // 30 calculs panier / IP / min (le front debounce déjà)
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'too_many_requests' },
