@@ -1,0 +1,33 @@
+# Réchauffage du cache edge — Mikado Deco
+# L'index du catalogue (/index-catalogue/<part>.json, gardé 15 min à l'edge puis servi
+# périmé jusqu'à 24 h pendant sa régénération) et les pages de listes les plus vues sont
+# visités toutes les 30 minutes. Résultat : la régénération coûteuse (dizaines d'appels
+# Shopify) se fait en arrière-plan à l'edge, jamais dans la requête d'un visiteur, et
+# un déploiement ou un cold start ne laisse plus un visiteur attendre une construction.
+# Sans infrastructure supplémentaire (voir docs/adr/0002-index-catalogue.md pour l'étape
+# suivante : Cron Vercel + Blob).
+name: Warm cache
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  warm:
+    name: Index et listes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Visiter les URL clés (en parallèle, tolérant aux échecs)
+        run: |
+          base="https://www.mikadodeco.be"
+          urls="/index-catalogue/membres.json /index-catalogue/0.json /index-catalogue/1.json /index-catalogue/2.json /index-catalogue/3.json \
+                /produits.html /collections/chaises /collections/tables /collections/luminaires /collections/decoration \
+                /collections/rangement /collections/accessoires /collections/outdoor /collections/sieges"
+          for u in $urls; do
+            ( printf "%-36s " "$u"; curl -s -o /dev/null --max-time 120 -H "User-Agent: mikado-warm/1" \
+                -w "HTTP %{http_code}  %{time_total}s  edge=%header{x-vercel-cache}\n" "$base$u" || echo "échec (ignoré)" ) &
+          done
+          wait
+          echo "Terminé : les entrées sont chaudes ou en cours de régénération à l'edge."
