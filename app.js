@@ -15,8 +15,7 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
-const { createErrorHandler, installAsyncErrorForwarding } = require('./lib/http-errors');
-installAsyncErrorForwarding();   // promesses rejetées → next(err) → gestionnaire final (Express 4)
+const { createErrorHandler } = require('./lib/http-errors');   // Express 5 : les promesses rejetées arrivent d'elles-mêmes au gestionnaire
 const { V3_DIR } = require('./lib/paths');
 const { PORT } = require('./lib/config');
 const { chromeReady, injectChrome } = require('./lib/render/chrome');
