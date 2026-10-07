@@ -26,7 +26,7 @@ const banned=[
 ];
 test('aucun surtitre dans le code du site',()=>{
   const hits=[];
-  for(const f of ['v3','lib','templates','scripts','data'].flatMap(files).concat(['server.js'])){
+  for(const f of ['v3','lib','routes','templates','scripts','data'].flatMap(files).concat(['server.js','app.js'])){
     fs.readFileSync(path.join(root,f),'utf8').split('\n').forEach((line,i)=>{
       for(const [re,why] of banned)if(re.test(line))hits.push(`${f}:${i+1} — ${why}`);
     });

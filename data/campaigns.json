@@ -1,0 +1,34 @@
+{
+  "_note": "Campagnes et textes de collection tenus par le site (pas par Shopify). `collections` : coquille éditoriale d'une collection de campagne (servie même quand Shopify l'omet tant que les produits sont en brouillon). `collectionTexts` : textes de page imposés quel que soit le texte Shopify. `promotions` : fenêtres des remises PROGRAMMÉES dans Shopify, reprises ici pour exposer l'offre dans la page Promotions ni avant ni après ; une seule promotion programmée est gérée aujourd'hui (la première). Dates ISO avec fuseau. Source unique lue par lib/config.js.",
+  "collections": {
+    "vitra-home-stories-for-winter": {
+      "name": "Home Stories for Winter",
+      "heroDescription": "Du 1er octobre 2026 au 31 janvier 2027, le repose-pieds est offert pour l’achat d’un fauteuil Grand Relax, Repos ou Grand Repos, dans la même configuration que le fauteuil.",
+      "description": "Du 1er octobre 2026 au 31 janvier 2027, pour l’achat d’un fauteuil Vitra Grand Relax, Repos ou Grand Repos, le repose-pieds est offert dans la même configuration que le fauteuil : l’Ottoman, ou la Panchina pour le Repos et le Grand Repos.",
+      "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/collections/hero.webp?v=1790627815",
+      "imageAlt": "Vitra Home Stories for Winter — Grand Relax et Ottoman assorti",
+      "gridTitle": "Les fauteuils de l’offre",
+      "terms": [
+        "Offre valable du 1er octobre 2026 au 31 janvier 2027 inclus.",
+        "Un repose-pieds offert par fauteuil, dans la même configuration que le fauteuil : l’Ottoman pour le Grand Relax ; l’Ottoman ou la Panchina, au choix, pour le Repos et le Grand Repos.",
+        "La valeur du repose-pieds est déduite automatiquement dans le panier.",
+        "Offre non cumulable avec une autre remise.",
+        "Pour une commande passée avant le 27 novembre 2026, une livraison avant Noël est probablement possible pour certaines configurations, sous réserve de confirmation."
+      ]
+    }
+  },
+  "collectionTexts": {
+    "promotions": {
+      "heroDescription": "Pièces en déstockage et offres du moment, dans la limite des quantités disponibles.",
+      "description": "Pièces de design en déstockage et offres du moment chez Mikado Deco, dans la limite des quantités disponibles. Boutique à Uccle, livraison en Belgique.",
+      "gridTitle": "Toutes les offres"
+    }
+  },
+  "promotions": [
+    {
+      "handle": "vitra-home-stories-for-winter",
+      "startsAt": "2026-10-01T00:00:00+02:00",
+      "endsAt": "2027-02-01T00:00:00+01:00"
+    }
+  ]
+}

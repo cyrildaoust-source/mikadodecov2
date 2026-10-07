@@ -16,3 +16,10 @@
 - Les remises de déstockage sont limitées au stock disponible ; respecter les exceptions explicitement autorisées, comme Panton sur commande par lots de 6.
 - Vérifier les anciennes offres et retirer du classement les produits sans remise ni offre active. Ne pas inventer une nouvelle remise pour conserver un produit dans Promotions.
 - En cas de changement de présentation des promotions, exécuter aussi `node --test tests/promotion-variants.test.cjs tests/promotion-variants-api.test.cjs`.
+
+## Architecture du code (depuis octobre 2026)
+
+- `server.js` ne fait que démarrer `app.js` ; `api/index.js` (Vercel) importe la même application.
+- `app.js` compose les middlewares et monte les routeurs dans l'ordre qui compte : `routes/seo.js` (sitemaps) → `routes/pages.js` (fiche produit, collections, catalogue, pages statiques avec chrome) → statique `v3/` → CORS, JSON → `routes/api.js`, `routes/cart.js`, `routes/forms.js` → 404 → gestionnaire d'erreurs (`lib/http-errors.js`).
+- Le code métier vit dans `lib/` : `config.js` (constantes, pages SSR), `cache.js` (cache mémoire borné), `render/` (chrome, navigation, Open Graph, pages SSR, réponses agents), `services/catalog.js` (lectures Shopify mises en cache), `services/catalog-scope.js` (index du catalogue), `shopify/` (client, requêtes, mapper).
+- Une route ne contient que la lecture de la requête, l'appel au service et la réponse. Toute requête GraphQL vit dans `lib/shopify/queries.js`. Une nouvelle page `v3/*.html` se déclare dans `data/pages.manifest.json` (rôle, `ssr`, `hero`, `active`), puis `npm run build:vercel` régénère la règle de routage de `vercel.json` ; `tests/pages-manifest.test.cjs` échoue tant que les deux ne sont pas alignés ou qu'une page manque au manifeste.
