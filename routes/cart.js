@@ -199,8 +199,9 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
     res.json({ checkoutUrl });
 
   } catch (err) {
-    console.error('Cart create error:', err.message);
-    res.status(500).set('Cache-Control', 'no-store').json({ error: err.message || 'Erreur lors de la creation du panier.' });
+    // 400 pour un corps invalide (normalizeItems), 500 pour une panne (Shopify, stock…).
+    if (err.status !== 400) console.error('Cart create error:', err.message);
+    res.status(err.status || 500).set('Cache-Control', 'no-store').json({ error: err.message || 'Erreur lors de la creation du panier.' });
   }
 });
 
