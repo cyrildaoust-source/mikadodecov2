@@ -930,6 +930,30 @@ function setActiveNav(active) {
   });
 }
 
+/* Images de repli sans onerror inline (interdit par la CSP sans 'unsafe-inline').
+   Une image porte data-fallback="remove|text|brand-name|brand-wordmark|hero" ; l'événement
+   error ne remonte pas, on l'écoute en capture sur le document. Les images déjà en échec
+   avant ce bind ont été mises en file par le script d'en-tête (window.__imgErrors). */
+const IMAGE_FALLBACKS = {
+  remove: (img) => img.remove(),
+  text: (img) => img.replaceWith(document.createTextNode(img.alt)),
+  "brand-name": (img) => { const s = document.createElement("span"); s.className = "brandcard__name"; s.textContent = img.alt; img.replaceWith(s); },
+  "brand-wordmark": (img) => { const s = document.createElement("span"); s.className = "brandmarquee__name"; s.textContent = img.alt; img.replaceWith(s); },
+  hero: (img) => { const src = img.parentNode && img.parentNode.querySelector("source"); if (src) src.remove(); img.src = "/images/produits-hero.jpg"; img.style.objectPosition = "center 70%"; },
+};
+export function applyImageFallback(img) {
+  const fn = img && IMAGE_FALLBACKS[img.dataset.fallback];
+  if (!fn || img.dataset.fallbackDone) return;
+  img.dataset.fallbackDone = "1";
+  fn(img);
+}
+function bindImageFallbacks() {
+  document.addEventListener("error", (e) => { const t = e.target; if (t && t.tagName === "IMG" && t.dataset.fallback) applyImageFallback(t); }, true);
+  const queued = Array.isArray(window.__imgErrors) ? window.__imgErrors : [];
+  queued.forEach(applyImageFallback);
+  window.__imgErrors = { push: applyImageFallback };   // le script d'en-tête continue d'appeler push : traitement direct
+}
+
 export function initShell({ active = "", transparentNav = false } = {}) {
   // Garde d'idempotence : initShell ne doit jamais binder deux fois (sinon
   // double rotation d'annonce, double submit newsletter, double scroll handler).
@@ -953,6 +977,7 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   bindAnnounce();
   bindNewsletter();
   bindAddToCart();
+  bindImageFallbacks();
   // Les familles possèdent un hero dédié ; leur fil est placé juste après.
   if (document.querySelector('[data-family], .fam-rich')) {
     loadNavigation().then(nav => paintBreadcrumb(listingTrail(new URL(location.href), nav))).catch(console.warn);

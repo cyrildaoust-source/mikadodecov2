@@ -12,7 +12,7 @@ export function brandCardHTML(brand, { imageUrl = url => url } = {}) {
     <span class="brandcard__origin">${ORIGIN[slug] || 'Europe'}</span>
     <div>
       <img class="brandcard__logo" src="${escapeHtml(logo)}" alt="${escapeHtml(brand.name)}" loading="lazy"
-        onerror="const name=document.createElement('span');name.className='brandcard__name';name.textContent=this.alt;this.replaceWith(name)" />
+        data-fallback="brand-name" />
     </div>
   </a>`;
 }

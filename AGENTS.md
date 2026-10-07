@@ -23,3 +23,9 @@
 - `app.js` compose les middlewares et monte les routeurs dans l'ordre qui compte : `routes/seo.js` (sitemaps) → `routes/pages.js` (fiche produit, collections, catalogue, pages statiques avec chrome) → statique `v3/` → CORS, JSON → `routes/api.js`, `routes/cart.js`, `routes/forms.js` → 404 → gestionnaire d'erreurs (`lib/http-errors.js`).
 - Le code métier vit dans `lib/` : `config.js` (constantes, pages SSR), `cache.js` (cache mémoire borné), `render/` (chrome, navigation, Open Graph, pages SSR, réponses agents), `services/catalog.js` (lectures Shopify mises en cache), `services/catalog-scope.js` (index du catalogue), `shopify/` (client, requêtes, mapper).
 - Une route ne contient que la lecture de la requête, l'appel au service et la réponse. Toute requête GraphQL vit dans `lib/shopify/queries.js`. Une nouvelle page `v3/*.html` se déclare dans `data/pages.manifest.json` (rôle, `ssr`, `hero`, `active`), puis `npm run build:vercel` régénère la règle de routage de `vercel.json` ; `tests/pages-manifest.test.cjs` échoue tant que les deux ne sont pas alignés ou qu'une page manque au manifeste.
+
+## Sécurité du contenu (CSP)
+
+- La CSP est posée par le serveur (`lib/csp.js`, via `lib/request-log.js`) avec un **nonce par requête** ; `injectChrome` l'ajoute automatiquement à chaque `<script>` inline exécutable. `script-src` n'a plus `'unsafe-inline'`.
+- Donc : **jamais de gestionnaire inline** (`onload=`, `onerror=`, `onclick=`…) ni de `href="javascript:"`. Pour une image de repli, poser `data-fallback="remove|text|brand-name|brand-wordmark|hero"` (traitée par `bindImageFallbacks` dans `shared.js`). Une feuille de style chargée en `media="print"` est basculée en `all` par le script d'en-tête commun.
+- Un script inline reste possible (gardes anti-flash de quelques lignes) ; au-delà de 20 lignes, il va dans `v3/pages/<page>.js`. `tests/csp.test.cjs` et `tests/no-inline-modules.test.cjs` veillent.

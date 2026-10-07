@@ -92,7 +92,7 @@
   </script>
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" />
   <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
   <link rel="preload" as="font" type="font/woff2" crossorigin
         href="/fonts/cormorant-garamond-latin-600-normal.woff2" />
@@ -208,10 +208,9 @@
           alt: "Catalogue Mikado Deco", obj: "center 70%"
         };
         var enc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;"); };
-        var onerr = hero.brand
-          ? ' onerror="this.onerror=null;var s=this.parentNode.querySelector(\'source\');if(s)s.remove();' +
-            'this.src=\'/images/produits-hero.jpg\';this.style.objectPosition=\'center 70%\'"'
-          : '';
+        // Bandeau de marque absent : shared.js (data-fallback="hero") retire la <source> WebP et
+        // bascule sur le visuel générique. Plus de onerror inline (CSP sans 'unsafe-inline').
+        var onerr = hero.brand ? ' data-fallback="hero"' : '';
         document.write(
           '<picture>' +
             '<source type="image/webp" srcset="' + enc(hero.srcset) + '" sizes="100vw">' +

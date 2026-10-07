@@ -91,7 +91,7 @@ function indexTopItems(items) {
 // are the SAME visual component — only the data differs.
 function sideHTML({ image, imageAlt, title, lead, ctaHref, ctaLabel, imgOnError }) {
   if (!image) return "";
-  const onerr = imgOnError ? ` onerror="this.remove()"` : "";
+  const onerr = imgOnError ? ` data-fallback="remove"` : "";   // shared.js retire l'image en erreur (plus d'onerror inline : CSP)
   return `
     <aside class="mm-side">
       <img class="mm-side__visual" src="${escapeHtml(image)}" alt="${escapeHtml(imageAlt || "")}" loading="lazy"${onerr} />
