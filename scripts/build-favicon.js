@@ -8,6 +8,7 @@
  * juste après le M) — posé dans le noir du site (--ink #1a1916, la couleur
  * du logo dans le header) sur un carré crème arrondi (--paper #f8f5ef).
  *
+ * Lancer : node scripts/build-favicon.js (sharp est en devDependency).
  * Sorties (à la racine de v3/, servies en /<fichier> par vercel.json) :
  *   - favicon.svg            onglets modernes (vectoriel)
  *   - favicon.ico (32x32)    fallback Google / vieux navigateurs (PNG dans ICO)
@@ -17,7 +18,7 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-const DIR = __dirname;
+const DIR = path.join(__dirname, '..', 'v3');   // sorties dans v3/ (servies à la racine du site)
 const CREAM = '#f8f5ef';   // --paper
 const INK = '#1a1916';     // --ink (brun-noir chaud, couleur du logo dans le header)
 
