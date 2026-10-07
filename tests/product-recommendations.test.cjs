@@ -252,6 +252,20 @@ test('la diversité ne vide jamais une rubrique ni ne passe avant l’usage int�
   assert.deepEqual(result.related.slice(0, 2).map(item => item.id), ['fermob-jardin', 'fatboy-jardin']);
 });
 
+test('une assise et une table vont ensemble seulement si elles sont toutes deux pliantes ou toutes deux fixes', () => {
+  const palissade = { ...product, tags: ['palissade', 'exterieur'] };
+  const bistroTable = card('bistro-table', { brand: 'Fermob', name: 'Table Bistro Ø 77 cm', productType: 'Table', tags: ['exterieur', 'pliante', 'table-pliante'] });
+  const calvi = card('calvi', { brand: 'Fermob', name: 'Table Calvi 160 x 80 cm', productType: 'Table', tags: ['exterieur'] });
+  const fixed = selectProductRecommendations({ product: palissade, automaticComplementary: [bistroTable, calvi] });
+  assert.deepEqual(fixed.complementary.map(item => item.id), ['calvi']);
+  const bistroChair = { id: 'bistro-chair', name: 'Chaise Bistro', brand: 'Fermob', productType: 'Chaise', tags: ['bistro', 'pliante', 'exterieur'] };
+  const folding = selectProductRecommendations({ product: bistroChair, automaticComplementary: [calvi, bistroTable] });
+  assert.deepEqual(folding.complementary.map(item => item.id), ['bistro-table']);
+  // Un choix fait à la main dans Shopify reste prioritaire.
+  const curated = selectProductRecommendations({ product: palissade, curatedComplementary: [bistroTable] });
+  assert.deepEqual(curated.complementary.map(item => item.id), ['bistro-table']);
+});
+
 test('indisponibles, produit courant et doublons sont exclus ; chaque rubrique reste bornée', () => {
   const candidates = Array.from({ length: 12 }, (_, index) => card(`p${index}`));
   const result = selectProductRecommendations({
