@@ -27,11 +27,14 @@ test('API selection, selected price and cover agree without reordering variants'
  assert.equal(data.variantId,'gid://shopify/ProductVariant/2');assert.equal(data.price,189);
  assert.deepEqual(data.variants.map(v=>v.id),['gid://shopify/ProductVariant/1','gid://shopify/ProductVariant/2']);
 });
+const pageScript=require('node:fs').readFileSync(require('node:path').join(__dirname,'../v3/pages/produit.js'),'utf8');
 test('SSR starts on the same cover variant, explicit and invalid URLs follow the shared rule',async()=>{
  for(const [query,expected] of [['',orange],['&variant=1',blue],['&variant=unknown',orange]]){
   const html=await(await realFetch(base+'/produit.html?handle=cover-selection'+query,{headers:{Accept:'text/html'}})).text();
   const main=html.match(/<img class="pdp__main" data-main src="([^"]+)"/);
   assert.ok(main,'server-rendered image');assert.ok(main[1].startsWith(expected));
-  assert.match(html,/import "\/product-variant.js"/);
+  // Le script de page est externe depuis la phase 3.2 : la page le référence, et c'est lui qui importe la règle partagée.
+  assert.match(html,/<script type="module" src="\/pages\/produit\.js"><\/script>/);
+  assert.match(pageScript,/import "\/product-variant.js"/);
  }
 });
