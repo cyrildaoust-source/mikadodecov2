@@ -59,7 +59,9 @@ function paint(data,{keepOpen=false}={}) {
   const form=controls.querySelector('form');form.classList.toggle('is-open',Boolean(mobileOpen));
   form.querySelector('[data-filters-toggle]').setAttribute('aria-expanded',String(Boolean(mobileOpen)));
   document.documentElement.classList.toggle('filters-locked',Boolean(mobileOpen)&&matchMedia('(max-width: 760px)').matches);
-  grid.innerHTML=data.items.length?data.items.map(p=>productCard(p,pageURL(data.state))).join(''):emptyState(scope);
+  // L'état initial du serveur ne porte pas les cartes (elles sont déjà dans la grille) : au repli
+  // d'erreur, les filtres et la pagination sont redessinés, la grille serveur reste telle quelle.
+  if(Array.isArray(data.items))grid.innerHTML=data.items.length?data.items.map(p=>productCard(p,pageURL(data.state))).join(''):emptyState(scope);
   pagination.innerHTML=chairPagination({...data,scope});pagination.hidden=data.totalPages<=1;
   document.documentElement.toggleAttribute('data-chair-continuation',data.state.page>1);document.documentElement.toggleAttribute('data-catalog-brand',data.state.brand.length>0);
   if(focus) {

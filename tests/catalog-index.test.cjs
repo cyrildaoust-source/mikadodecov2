@@ -86,7 +86,8 @@ test('catalogue complet : composition Mobilier, catégories par famille et pages
   const {response,html}=await page('/produits.html');
   assert.equal(response.status,200);
   const data=seed(html);
-  assert.equal(data.total,68);assert.equal(data.items.length,60);
+  assert.equal(data.total,68);assert.equal('items' in data,false,'les cartes sont dans la grille serveur, pas dans le JSON');
+  assert.equal((await (await realFetch(base+'/api/catalog/catalogue')).json()).items.length,60);
   assert.deepEqual(data.facets.category.map(c=>c.value),['sieges','tables','decoration','outdoor'].filter(v=>data.facets.category.some(c=>c.value===v)).sort((a,b)=>data.scope.categories.findIndex(c=>c.value===a)-data.scope.categories.findIndex(c=>c.value===b)));
   assert.equal(data.facets.category[0].value,'sieges','ordre du menu, pas alphabétique');
   assert.match(html,/data-catalogue-landing/);
@@ -95,7 +96,7 @@ test('catalogue complet : composition Mobilier, catégories par famille et pages
   assert.match(html,/href="\/produits.html\?page=2#grille"/);
   const second=await page('/produits.html?page=2');
   assert.match(second.html,/data-chair-continuation/);
-  assert.equal(seed(second.html).items.length,8);
+  assert.equal((await (await realFetch(base+'/api/catalog/catalogue?page=2')).json()).items.length,8);
   const brand=await page('/produits.html?brand=vitra&category=decoration');
   assert.equal(seed(brand.html).total,5);
   assert.match(brand.html,/data-plp-title data-context>Mobilier · Vitra<\/h1>/);
@@ -140,12 +141,13 @@ test('marques et Nouveautés : rendu serveur complet, ordre choisi dans Shopify,
   assert.equal(response.status,200);
   const data=seed(html);
   assert.equal(data.scope.kind,'collection');
-  assert.equal(data.items[0].id,members.hay[0],'ordre de la collection, pas des ventes');
+  assert.equal((await (await realFetch(base+'/api/catalog/hay')).json()).items[0].id,members.hay[0],'ordre de la collection, pas des ventes');
   assert.ok(data.facets.category.some(c=>c.value==='sieges'),'familles comme catégories');
   assert.match(html,/<option value="pop" selected>Notre sélection<\/option>/);
   assert.match(html,/data-grid data-ssr="1"/);
   const news=seed((await page('/collections/nouveautes')).html);
-  assert.deepEqual(news.items.map(p=>p.id),members.nouveautes);
+  assert.equal(news.scope.handle,'nouveautes');
+  assert.deepEqual((await (await realFetch(base+'/api/catalog/nouveautes')).json()).items.map(p=>p.id),members.nouveautes);
   assert.match((await page('/collections/nouveautes')).html,/Les plus récents/);
   const cards=(await (await realFetch(base+'/api/catalog/hay?category=sieges')).json());
   assert.ok(cards.total>0&&cards.items.every(p=>p.brand==='HAY'));

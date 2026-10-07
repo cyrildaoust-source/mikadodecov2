@@ -41,16 +41,21 @@ test('le rendu serveur et le contrôleur utilisent les mêmes filtres ; liens pa
   assert.match(html,/variant=10/);
   assert.match(html,/pcard__finish-label/);assert.doesNotMatch(html,/data-card-finish=|class="pcard__finishes"|class="pcard__finish-more"/);
   assert.match(html,/<img class="alt" src="https:\/\/cdn.shopify.com\/1-ambiance.jpg/);
-  assert.ok(data.items.every(p=>p.image2.includes('-ambiance.jpg')&&p.finishChoices.every(v=>v.image2===p.image2)));
+  // Les cartes ne sont plus répétées dans le JSON embarqué (elles sont dans la grille serveur) : leurs données se lisent via l'API.
+  assert.equal('items' in data,false,'le JSON embarqué ne porte pas les cartes');
+  const api=await (await realFetch(base+'/api/catalog/chaises')).json();
+  assert.ok(api.items.every(p=>p.image2.includes('-ambiance.jpg')&&p.finishChoices.every(v=>v.image2===p.image2)));
   const page2=await (await realFetch(base+'/collections/chaises?page=2')).text();
-  assert.equal(seed(page2).items.length,5);assert.match(page2,/data-chair-continuation/);
+  assert.equal((page2.match(/class="pcard"/g)||[]).length,5);assert.equal(seed(page2).total,65);assert.match(page2,/data-chair-continuation/);
   assert.doesNotMatch(page2,/<section class="subhero/);
   assert.match(page2,/<link rel="canonical" href="https:\/\/www.mikadodeco.be\/collections\/chaises\?page=2"/);
 });
 test('les filtres serveur combinent la marque, la couleur et le prix exact de la variante',async()=>{
   const html=await (await realFetch(base+'/collections/chaises?brand=hay&color=noir&min=700&max=701')).text();
   const data=seed(html);assert.equal(data.total,33);
-  assert.ok(data.items.every(p=>p.brand==='HAY'&&p.price===700.95&&p.image.includes('noir')));
+  assert.equal((html.match(/class="pcard"/g)||[]).length,33);
+  const filtered=await (await realFetch(base+'/api/catalog/chaises?brand=hay&color=noir&min=700&max=701')).json();
+  assert.ok(filtered.items.every(p=>p.brand==='HAY'&&p.price===700.95&&p.image.includes('noir')));
   assert.match(html,/700,95/);assert.match(html,/content="noindex,follow"/);
   assert.match(html,/returnTo=[^"\s]*color/);
   const empty=await (await realFetch(base+'/api/catalog/chaises?brand=hay&color=noir&max=500')).json();assert.equal(empty.total,0);
