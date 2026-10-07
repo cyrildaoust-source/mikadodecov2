@@ -25,7 +25,7 @@
   <link rel="canonical" href="https://www.mikadodeco.be/conditions-generales-de-vente.html" />
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" />
   <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
   <link rel="preload" as="font" type="font/woff2" crossorigin
         href="https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3" />
@@ -171,36 +171,6 @@ www.mikadodeco.be — Administrateur : Cyril d'Aoust</p>
     </section>
   </main>
   <div id="site-footer"></div>
-  <script type="module">
-    import { initShell } from "/shared.js";
-    initShell({ active: "", transparentNav: false });
-
-    // Onglets Particuliers / Professionnels. Les deux panneaux sont en dur dans
-    // le HTML (indexables) ; le JS ne fait que basculer la visibilité. Le
-    // <select> (.chips-select) prend le relais sur mobile, où .chips est masqué.
-    const tablist = document.querySelector('.chips[role="tablist"]');
-    const tabs = [...tablist.querySelectorAll('[role="tab"]')];
-    const select = document.querySelector('[data-legal-select]');
-    function activate(tab) {
-      tabs.forEach((t) => {
-        const on = t === tab;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-      });
-      if (select) select.value = tab.id.replace('tab-', '');
-    }
-    tablist.addEventListener('click', (e) => { const tab = e.target.closest('[role="tab"]'); if (tab) activate(tab); });
-    tablist.addEventListener('keydown', (e) => {
-      const i = tabs.indexOf(document.activeElement);
-      if (i < 0) return;
-      let n = null;
-      if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
-      if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
-      if (n) { e.preventDefault(); n.focus(); activate(n); }
-    });
-    select?.addEventListener('change', () => { const tab = document.getElementById('tab-' + select.value); if (tab) activate(tab); });
-  </script>
+  <script type="module" src="/pages/conditions-generales-de-vente.js"></script>
 </body>
 </html>

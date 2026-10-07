@@ -46,8 +46,8 @@ loadRows();
 fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
 /* Brand logo marquee + live "maisons" count, from the real vendor feed.
-   Tries the brand logo (brand-logos.mjs) first; if missing, the <img> onerror
-   swaps itself for a Cormorant-italic wordmark (.brandmarquee__name).
+   Tries the brand logo (brand-logos.mjs) first; if missing, data-fallback (shared.js,
+   bindImageFallbacks) swaps the <img> for a Cormorant-italic wordmark (.brandmarquee__name).
    No console 404 noise — the swap is silent for the viewer. */
 function brandLogo(b) {
   const slug = slugify(b.name);
@@ -56,7 +56,7 @@ function brandLogo(b) {
   const src  = versionedImg(brandLogoSrc(slug));
   return `<a class="brandmarquee__item" href="${href}" aria-label="${name}">`
     + `<img class="brandmarquee__logo" src="${src}" alt="${name}" loading="lazy" `
-    + `onerror="this.outerHTML='<span class=&quot;brandmarquee__name&quot;>${name}</span>'" />`
+    + `data-fallback="brand-wordmark" />`
     + `</a>`;
 }
 

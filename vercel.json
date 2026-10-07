@@ -16,8 +16,7 @@
         "X-Frame-Options": "SAMEORIGIN",
         "Referrer-Policy": "strict-origin-when-cross-origin",
         "Permissions-Policy": "camera=(), microphone=(), geolocation=(), browsing-topics=()",
-        "Strict-Transport-Security": "max-age=31536000",
-        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net https://unpkg.com; img-src 'self' data: https://cdn.shopify.com https://www.fermob.com https://use.typekit.net https://p.typekit.net https://unpkg.com https://tile.openstreetmap.org; font-src 'self' data: https://use.typekit.net; connect-src 'self' https://use.typekit.net https://p.typekit.net; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        "Strict-Transport-Security": "max-age=31536000"
       },
       "continue": true
     },

@@ -25,7 +25,7 @@
   <link rel="canonical" href="https://www.mikadodeco.be/contact.html" />
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" />
   <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
   <link rel="preload" as="font" type="font/woff2" crossorigin
         href="https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3" />
@@ -120,34 +120,6 @@
 
   <div id="site-footer"></div>
 
-  <script type="module">
-    import { initShell } from "/shared.js";
-    initShell({ active: "", transparentNav: false });
-
-    const form = document.querySelector("[data-contact-form]");
-    const errEl = document.querySelector("[data-error]");
-    const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      errEl.style.display = "none";
-      const f = Object.fromEntries(new FormData(form).entries());
-      if (!f.name?.trim()) return fail("Indiquez votre nom.");
-      if (!isEmail(f.email || "")) return fail("Indiquez un e-mail valide.");
-      if ((f.message || "").trim().length < 4) return fail("Votre message est un peu court.");
-      const btn = document.querySelector("[data-submit]");
-      btn.disabled = true; btn.textContent = "Envoi…";
-      try {
-        const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...f, source: "v3-contact" }) });
-        if (res.status === 429) throw new Error("rate_limit");
-        const data = await res.json();
-        if (!res.ok || data.error) throw new Error(data.error || "server");
-        document.querySelector("[data-form-wrap]").style.display = "none";
-        document.querySelector("[data-success]").style.display = "block";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } catch (e2) { fail(e2.message === "rate_limit" ? "Trop de tentatives. Patientez quelques minutes avant de réessayer." : "L'envoi a échoué. Réessayez ou écrivez à shop@mikadodeco.be."); btn.disabled = false; btn.textContent = "Envoyer"; console.warn(e2); }
-    });
-    function fail(msg) { errEl.textContent = msg; errEl.style.display = "block"; }
-  </script>
+  <script type="module" src="/pages/contact.js"></script>
 </body>
 </html>

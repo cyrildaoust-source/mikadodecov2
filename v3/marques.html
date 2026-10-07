@@ -25,7 +25,7 @@
   <link rel="canonical" href="https://www.mikadodeco.be/marques.html" />
   <link rel="preconnect" href="https://use.typekit.net" />
   <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" />
   <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
   <link rel="preload" as="font" type="font/woff2" crossorigin
         href="/fonts/cormorant-garamond-latin-600-normal.woff2" />
@@ -75,31 +75,6 @@
   </main>
   <div id="site-footer"></div>
 
-  <script type="module">
-    import { initShell, buildShaReady, versionedImg } from "/shared.js";
-    import { brandCardHTML } from "/brand-card.mjs";
-    initShell({ active: "Marques", transparentNav: true });
-
-    const grid = document.querySelector("[data-brandgrid]");
-    const countEl = document.querySelector("[data-brand-count]");
-
-    // Les cartes SSR sont déjà complètes : ne pas les remplacer ni recharger leurs logos.
-    // Le chargement client sert uniquement au repli sans rendu serveur.
-    // Liste DYNAMIQUE depuis /api/brands (vendor de TOUS les produits publiés —
-    // walk paginé côté serveur, fini le plafond 250). Une marque apparaît dès
-    // qu'elle a des produits publiés online, disparaît sinon. Chaque marque porte
-    // son lien (href). buildShaReady reste pour le cache-busting logos.
-    async function loadBrands() {
-      if (grid.dataset.ssr === "1") return;
-      const [, active] = await Promise.all([
-        buildShaReady(),
-        fetch("/api/brands", { cache: "no-cache" }).then((r) => r.ok ? r.json() : Promise.reject("brands " + r.status)),
-      ]);
-      const brands = (active || []).slice().sort((a, b) => a.name.localeCompare(b.name, "fr", { sensitivity: "base" }));
-      countEl.textContent = `${brands.length} marques`;
-      grid.innerHTML = brands.map(b => brandCardHTML(b, { imageUrl: versionedImg })).join("");
-    }
-    loadBrands().catch((e) => { grid.innerHTML = `<p class="plp-empty">Les marques se chargent bientôt. <a href="/produits.html">Retour au catalogue</a></p>`; console.warn(e); });
-  </script>
+  <script type="module" src="/pages/marques.js"></script>
 </body>
 </html>
