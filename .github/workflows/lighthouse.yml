@@ -51,9 +51,12 @@ jobs:
             done
             echo "" >> "$GITHUB_STEP_SUMMARY"
           }
-          for p in $pages; do lhci collect --url="$BASE$p" --preset=desktop --numberOfRuns=1 >/dev/null; done
+          # Un seul appel `lhci collect` par préréglage : chaque appel vide .lighthouseci, un appel
+          # par page ne gardait que le dernier rapport (constaté au premier passage en prod).
+          urls=""; for p in $pages; do urls="$urls --url=$BASE$p"; done
+          lhci collect $urls --preset=desktop --numberOfRuns=1 >/dev/null
           mkdir -p out/desktop && mv .lighthouseci/lhr-*.json out/desktop/ && rm -rf .lighthouseci
-          for p in $pages; do lhci collect --url="$BASE$p" --numberOfRuns=1 >/dev/null; done
+          lhci collect $urls --numberOfRuns=1 >/dev/null
           mkdir -p out/mobile && mv .lighthouseci/lhr-*.json out/mobile/
           echo "## Lighthouse · $BASE · $(date -u +'%Y-%m-%d %H:%M') UTC" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
