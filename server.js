@@ -2225,38 +2225,6 @@ app.get('/api/collection/:handle/products', async (req, res) => {
   }
 });
 
-// ─── API: VITRA CHAIRS (scraped data) ─────────────────
-// Run `npm run scrape` to regenerate data/vitra-chairs.json
-const VITRA_JSON = path.join(__dirname, 'data/vitra-chairs.json');
-
-app.get('/api/vitra', (req, res) => {
-  if (!fs.existsSync(VITRA_JSON)) {
-    return res.status(404).json({ error: 'Vitra data not found. Run: npm run scrape' });
-  }
-  try {
-    const raw = fs.readFileSync(VITRA_JSON, 'utf8');
-    const { products, scraped_at, count } = JSON.parse(raw);
-
-    // Optional filters
-    let filtered = products;
-    const { q, min, max } = req.query;
-    if (q) {
-      const term = q.toLowerCase();
-      filtered = filtered.filter(p =>
-        p.title?.toLowerCase().includes(term) ||
-        p.designer?.toLowerCase().includes(term) ||
-        p.colours?.some(c => c.includes(term))
-      );
-    }
-    if (min) filtered = filtered.filter(p => p.price >= parseFloat(min));
-    if (max) filtered = filtered.filter(p => p.price <= parseFloat(max));
-
-    res.json({ scraped_at, total: count, count: filtered.length, products: filtered });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to read Vitra data.' });
-  }
-});
-
 // ─── API: BUILD INFO (cache busting) ───────────────────
 // Exposes the current build SHA so the client can append it as a
 // query-string to long-cached asset URLs (e.g. /images/brands/*.svg
