@@ -1,0 +1,53 @@
+# Smoke test après déploiement — Mikado Deco
+# Vercel publie un « deployment_status » à chaque déploiement (Preview et Production).
+# Quand il réussit, on parcourt une quinzaine d'URL clés (scripts/smoke.mjs) et on
+# écrit le tableau dans le résumé du job.
+#
+# - Production : base = https://www.mikadodeco.be (publique).
+# - Preview : base = URL du déploiement, protégée par Vercel → il faut le secret
+#   GitHub VERCEL_AUTOMATION_BYPASS_SECRET (Vercel → Settings → Deployment Protection
+#   → Protection Bypass for Automation). Sans ce secret, les Previews sont ignorées.
+# - À la main : Actions → Smoke → Run workflow, avec l'URL de base voulue.
+name: Smoke
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      base:
+        description: "URL de base à tester"
+        default: "https://www.mikadodeco.be"
+        required: true
+
+jobs:
+  smoke:
+    name: Parcours clés
+    if: github.event_name == 'workflow_dispatch' || github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      IS_PROD: ${{ github.event.deployment.environment == 'Production' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: URL de base
+        id: base
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "url=${{ inputs.base }}" >> "$GITHUB_OUTPUT"
+          elif [ "$IS_PROD" = "true" ]; then
+            echo "url=https://www.mikadodeco.be" >> "$GITHUB_OUTPUT"
+          elif [ -n "$BYPASS" ]; then
+            echo "url=${{ github.event.deployment_status.target_url }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Preview protégée et secret VERCEL_AUTOMATION_BYPASS_SECRET absent : smoke ignoré."
+            echo "url=" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Smoke
+        if: steps.base.outputs.url != ''
+        env:
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ env.BYPASS }}
+        run: node scripts/smoke.mjs --base "${{ steps.base.outputs.url }}"
