@@ -67,7 +67,7 @@ jobs:
           # Avertissements (non bloquants) sous les seuils du plan.
           for f in out/desktop/lhr-*.json; do node -e 'const r=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));if(r.categories.performance.score<0.9)console.log(`::warning::Perf desktop ${Math.round(r.categories.performance.score*100)} < 90 sur ${r.finalDisplayedUrl}`)' "$f"; done
           for f in out/mobile/lhr-*.json; do node -e 'const r=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));if(r.categories.performance.score<0.75)console.log(`::warning::Perf mobile ${Math.round(r.categories.performance.score*100)} < 75 sur ${r.finalDisplayedUrl}`);if(r.audits["cumulative-layout-shift"].numericValue>=0.1)console.log(`::warning::CLS ${r.audits["cumulative-layout-shift"].numericValue.toFixed(3)} ≥ 0,1 sur ${r.finalDisplayedUrl}`)' "$f"; done
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: lighthouse-${{ github.run_id }}
           path: out/
