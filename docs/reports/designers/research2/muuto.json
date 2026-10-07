@@ -1,0 +1,704 @@
+[
+ {
+  "slug": "iskos-berlin",
+  "name": "Iskos-Berlin",
+  "sortKey": "Iskos-Berlin",
+  "brands": [
+   "Muuto",
+   "HAY"
+  ],
+  "bio": "Iskos-Berlin est le duo de designers formé en 2010 à Copenhague par Boris Berlin et Aleksej Iskos. Né en 1958 à Saint-Pétersbourg, Boris Berlin est diplômé de l'Institut des arts appliqués de la ville et fut en 1987 l'un des fondateurs de Komplot Design, que rejoint en 1999 Aleksej Iskos, né en 1965 à Kharkiv et formé à l'architecture, à l'ingénierie et au design industriel en Ukraine et au Danemark. Le studio travaille le mobilier, le design industriel et le graphisme. Pour Muuto, il signe la famille de sièges Fiber ; pour HAY, la série de chaises et tabourets Soft Edge. Aleksej Iskos, qui a ouvert son propre studio en 2018, a dessiné seul l'applique Calm pour Muuto.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/iskos-berlin/",
+   "https://www.hay.com/shared/designers/iskos-berlin",
+   "https://www.muuto.com/designers2/aleksej-iskos2/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/iskos-berlin.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/iskos-berlin/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/iskos-berlin/iskos-berlin-muuto-hi-res-1.jpg",
+   "credit": null,
+   "width": 667,
+   "height": 1000,
+   "notes": "Les deux membres en noir sur fond bleu clair, l'un debout, l'autre assis sur une chaise Fiber ; visages nets. Plus grande version servie par Muuto : 667 x 1000."
+  },
+  "photoMissingReason": null,
+  "remarks": "Les valeurs « Aleksej Iskos » (applique Calm, signée par Aleksej Iskos seul selon Muuto, qui lui consacre une page distincte) sont regroupées sous cette fiche : à valider, une fiche séparée pourrait être préférable."
+ },
+ {
+  "slug": "jens-fager",
+  "name": "Jens Fager",
+  "sortKey": "Fager",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Jens Fager est un designer suédois, diplômé de Konstfack, l'université des arts, de l'artisanat et du design de Stockholm. Son travail a été exposé notamment à Londres, à Milan et à Stockholm. Il dit chercher pour chaque objet sa fonction principale, en y ajoutant une part d'humour, de surréalisme ou de poésie. Pour Muuto, il a dessiné la série de luminaires Tip (lampe de table, lampadaire et applique), la suspension Grain ainsi que la famille de tables Soft (table d'appoint, table basse et table de café).",
+  "bioSources": [
+   "https://www.muuto.com/designers2/jens-fager/",
+   "https://www.muuto.com/stories/product-stories/a-friendly-design--tip-lamp-series/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/jens-fager.jpg",
+   "sourcePage": "https://www.muuto.com/stories/product-stories/a-friendly-design--tip-lamp-series/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/a-friendly-design--tip-lamp-series/jens-fager-tip-lamp-story-muuto-hi-res-10.jpg",
+   "credit": null,
+   "width": 4000,
+   "height": 5000,
+   "notes": "Assis à son bureau, en train de dessiner à côté d'une lampe Tip ; regard hors champ, visage net. Format 4:5 natif."
+  },
+  "photoMissingReason": null,
+  "remarks": "Aucun site officiel joignable (jensfager.com ne répond pas) : bio fondée sur Muuto seul."
+ },
+ {
+  "slug": "margrethe-odgaard",
+  "name": "Margrethe Odgaard",
+  "sortKey": "Odgaard",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Margrethe Odgaard est une designer textile et coloriste danoise. Diplômée en 2005 de l'École de design de l'Académie royale des beaux-arts du Danemark, elle a aussi étudié à la Rhode Island School of Design, puis travaillé à Philadelphie, au Fabric Workshop and Museum, et à Paris, où elle a été pendant sept ans designer textile pour la marque Epice. Elle fonde son studio en 2013. Elle collabore avec Kvadrat, Muuto, Montana, HAY ou IKEA, et a reçu le prix Torsten et Wanja Söderberg en 2016. Pour Muuto, elle a créé les tapis Ply et Pebble, en s'appuyant sur son propre nuancier, baptisé The Popsicle Index.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/margrethe-odgaard/",
+   "https://margretheodgaard.com/",
+   "https://www.muuto.com/stories/studio-visit/studio-visit-margrethe-odgaard/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/margrethe-odgaard.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/margrethe-odgaard/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/margrethe-odgaard/margrethe-odgaard-portrait-muuto.jpg",
+   "credit": null,
+   "width": 1000,
+   "height": 1261,
+   "notes": "Fichier nommé « portrait » par Muuto : la designer en blouse dans son atelier, de trois quarts, penchée sur une table de peinture ; visage net mais tourné vers le bas. Recadrage 4:5 possible sur elle."
+  },
+  "photoMissingReason": null,
+  "remarks": "Portrait à valider : Muuto publie aussi une photo de face plus réussie (margrethe-odgaard-studio-visit-muuto.jpg) mais seulement en 440 x 578, sous le minimum de 600 px. Son site officiel ne publie pas de portrait."
+ },
+ {
+  "slug": "johan-van-hengel",
+  "name": "Johan van Hengel",
+  "sortKey": "Van Hengel",
+  "brands": [
+   "Muuto",
+   "HAY"
+  ],
+  "bio": "Johan van Hengel est un designer néerlandais installé à Rotterdam. Formé au design industriel, il a d'abord travaillé sur des produits électroniques grand public et du mobilier, avant de fonder en 2013 son propre studio, consacré au mobilier, aux luminaires et aux accessoires pour la maison. Son approche, qu'il décrit comme logique et méthodique, vise à enrichir les objets du quotidien d'un élément de surprise discret, en partant de la fonction, des matériaux et des techniques. Pour Muuto, il a dessiné les étagères murales Folded, en métal plié à la manière d'une feuille de papier, et la lampe baladeuse Ease, à source LED intégrée.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/johan-van-hengel/",
+   "https://www.johanvanhengel.com/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/johan-van-hengel.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/johan-van-hengel/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/johan-van-hengel/johan-van-hengel-studio-visit-13low-res.jpg",
+   "credit": null,
+   "width": 667,
+   "height": 1000,
+   "notes": "Debout près d'une fenêtre dans son studio, chemise brune, regard vers l'objectif ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Marque HAY : aucune page HAY n'existe pour lui (hay.com/shared/designers/johan-van-hengel renvoie 404) ; vérifier le produit HAY rattaché. Les dessertes Folded vendues par Mikado n'apparaissent pas sur sa page Muuto (seulement étagères Folded et Ease) : attribution non vérifiée, d'où leur absence de la bio."
+ },
+ {
+  "slug": "benjamin-hubert",
+  "name": "Benjamin Hubert",
+  "sortKey": "Hubert",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Benjamin Hubert est un designer britannique, fondateur et directeur de la création de LAYER, studio de design qu'il a créé en 2015 et installé dans l'est de Londres. Le studio, qui réunit une trentaine de créatifs, associe design industriel, design numérique, ingénierie et image de marque, et a travaillé pour des marques comme Nike, Google, Bang & Olufsen, Samsung ou Braun. Son approche s'appuie sur la recherche stratégique et l'observation des comportements. Pour Muuto, il a dessiné la famille de luminaires Strand, déclinée en suspensions et en lampes de table.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/benjamin-hubert/",
+   "https://layerdesign.com/studio/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/benjamin-hubert.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/benjamin-hubert/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/benjamin-hubert/benjaminhubert_selects_001.jpg",
+   "credit": "Mark Cocksedge",
+   "width": 667,
+   "height": 1000,
+   "notes": "Portrait en noir et blanc, de face, cadré poitrine ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Crédit photo lu dans les métadonnées EXIF du fichier (© Mark Cocksedge)."
+ },
+ {
+  "slug": "kaksikko",
+  "name": "Kaksikko",
+  "sortKey": "Kaksikko",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Kaksikko est un studio de design installé à Helsinki, fondé par Salla Luhtasela et Wesley Walters, qui se sont rencontrés pendant leurs études à l'École des arts, du design et de l'architecture de l'université Aalto. Le duo est spécialisé dans les arts de la table en céramique et le mobilier en bois ; il conçoit pour des marques et fabrique lui-même, à la main, de petites séries pour des clients privés. Ses créations privilégient des formes sobres qui mettent en valeur les qualités tactiles de chaque matériau. Pour Muuto, Kaksikko a dessiné le vase et le cache-pot Ridge ainsi que la coupe Mere.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/studio-kaksikko/",
+   "https://studiokaksikko.com/",
+   "https://www.muuto.com/stories/studio-visit/studio-kaksikko-on-crafting-a-simple-yet-sculptural-centerpiece/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/kaksikko.png",
+   "sourcePage": "https://www.muuto.com/designers2/studio-kaksikko/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/kaksikko/muuto-studio-kaksikko-13-med-res100.png",
+   "credit": null,
+   "width": 800,
+   "height": 1000,
+   "notes": "Les deux membres debout côte à côte, noir et blanc, dans un atelier ; visages nets. Format 4:5 natif."
+  },
+  "photoMissingReason": null,
+  "remarks": "Muuto emploie aussi « Studio Kaksikko » ; le site du studio dit « Kaksikko ». Nom conservé."
+ },
+ {
+  "slug": "andreas-engesvik",
+  "name": "Andreas Engesvik",
+  "sortKey": "Engesvik",
+  "brands": [
+   "Muuto",
+   "HAY"
+  ],
+  "bio": "Andreas Engesvik est un designer norvégien. Après des études d'histoire de l'art à l'université de Bergen, il étudie le design au National College of Art and Design, dont il sort diplômé d'un master en 2000. Membre fondateur du studio Norway Says, où il travaille six ans, il ouvre son propre studio en 2009. Il a été nommé designer de l'année en Norvège et a reçu notamment un Red Dot Award, un iF Product Design Award et un Wallpaper Design Award. Pour Muuto, il a dessiné le vase Silent et la carafe Corky ; pour HAY, la brosse à dents Tann et, avec Daniel Rybakken, la collection Arbour.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/andreas-engesvik/",
+   "https://www.hay.com/shared/designers/andreas-engesvik"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/andreas-engesvik.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/andreas-engesvik/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/andreas-engesvik/andreas-engesvik-portrait-muuto-23-roll-up-image.jpg",
+   "credit": null,
+   "width": 666,
+   "height": 1000,
+   "notes": "Portrait en noir et blanc, bras croisés, cadré mi-corps, regard vers l'objectif ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "broberg-ridderstrale",
+  "name": "Broberg & Ridderstråle",
+  "sortKey": "Broberg & Ridderstråle",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Broberg & Ridderstråle est le duo suédois formé par les designers et architectes Mats Broberg et Johan Ridderstråle. Tous deux diplômés avec mention de Konstfack, l'université des arts, de l'artisanat et du design de Stockholm, ils ont reçu la bourse de travail du Conseil suédois des arts. Leur travail, qui associe rationalité esthétique et touche d'humour, a été exposé à Tokyo, Milan et Londres. Pour Muuto, ils ont dessiné la lampe Leaf, en version de table et en lampadaire, ainsi que les verres et la carafe Raise.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/broberg-and-ridderstrale/",
+   "https://www.muuto.com/stories/product-stories/elevated-subtleties-raise-glass-carafe/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/broberg-ridderstrale.png",
+   "sourcePage": "https://www.muuto.com/stories/product-stories/elevated-subtleties-raise-glass-carafe/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/elevated-subtleties-raise-glass-and-carafe/broberg-ridderstrale-muuto-story-hi-res-37_optimized.png",
+   "credit": null,
+   "width": 3335,
+   "height": 5000,
+   "notes": "Les deux associés debout sur le seuil de leur studio (porte n° 54), en pied ; visages nets mais petits dans l'image entière. La haute définition permet un recadrage 4:5 serré sur les deux silhouettes. Même scène que l'image de la page designer Muuto (667 x 1000)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo : Muuto n'indique pas qui est à gauche ou à droite."
+ },
+ {
+  "slug": "earnest-studio",
+  "name": "Earnest Studio",
+  "sortKey": "Earnest Studio",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Earnest Studio est le studio fondé en 2012 à Rotterdam par la designer américaine Rachel Griffin. Formée au graphisme, elle a passé cinq ans à produire des expositions et des livres avant de s'installer aux Pays-Bas en 2007 pour étudier à la Design Academy Eindhoven. Le studio se consacre au mobilier, aux luminaires et aux accessoires, avec un intérêt pour la modularité, la multiplicité et les structures simples et franches. Pour Muuto, Earnest Studio a dessiné la série de luminaires modulaires Post (lampe de table, lampadaire et applique) et le vase Kink.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/earnest-studio/",
+   "https://www.muuto.com/stories/product-stories/a-sculptural-sentiment-kink-vase/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/earnest-studio.jpg",
+   "sourcePage": "https://www.muuto.com/stories/product-stories/a-sculptural-sentiment-kink-vase/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/a-sculptural-sentiment-kink-vase/rachel-griffin-studio-visit-2025-low-res-7_optimized.jpg",
+   "credit": null,
+   "width": 2590,
+   "height": 3238,
+   "notes": "Rachel Griffin, fondatrice du studio, debout devant sa bibliothèque, tenant un vase Kink, regard vers l'objectif ; visage net. Format 4:5 natif."
+  },
+  "photoMissingReason": null,
+  "remarks": "Studio d'une seule designer : la photo montre Rachel Griffin."
+ },
+ {
+  "slug": "tom-chung",
+  "name": "Tom Chung",
+  "sortKey": "Chung",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Tom Chung est un designer industriel installé à Toronto, où il a fondé son studio en 2016. Le studio travaille sur des objets industriels et des espaces intérieurs, pour des environnements domestiques, institutionnels et publics, en associant culture contemporaine et industrie locale. Il dit s'intéresser avant tout à l'expérience humaine de l'espace et appliquer à ses projets des principes de mobilité, de légèreté et de durabilité. Pour Muuto, il a dessiné la famille de luminaires Beam, déclinée en lampe de table, applique et lampe baladeuse.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/tom-chung/",
+   "https://www.muuto.com/stories/studio-visit/studio-visit-tom-chung/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/tom-chung.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/tom-chung/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/tom-chung/tom-chung-studio-visit-low-res-13.jpg",
+   "credit": null,
+   "width": 667,
+   "height": 1000,
+   "notes": "Assis sur un banc près d'une fenêtre, en pied, regard vers l'objectif ; visage net mais assez petit : recadrage 4:5 sur le haut du corps limité par la définition (667 px de large)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site tomchung.ca ne renvoie qu'une page vide ; bio fondée sur Muuto."
+ },
+ {
+  "slug": "normal-studio",
+  "name": "Normal Studio",
+  "sortKey": "Normal Studio",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Normal Studio est un studio de design parisien fondé en 2006 par Jean-François Dingjian et Eloi Chafaï. Le duo défend un « design élémentaire », qui part de l'outil de fabrication plutôt que de la recherche formelle, avec l'objectif de produire des objets durables qui échappent aux effets de mode. Des créations du studio figurent dans la collection permanente du musée des Arts décoratifs de Paris et dans plusieurs fondations d'art contemporain en France. Pour Muuto, Normal Studio a dessiné la desserte et la table basse Flow ainsi que le fauteuil Wrap.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/normal-studio/",
+   "https://www.muuto.com/stories/product-stories/elevating-the-everyday-object-flow-trolley/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/normal-studio.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/normal-studio/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/normal-studio/normal-studio-portrait-4.jpg",
+   "credit": null,
+   "width": 715,
+   "height": 1000,
+   "notes": "Les deux fondateurs debout côte à côte sur fond sombre, éclairage coloré rouge et bleu ; visages nets."
+  },
+  "photoMissingReason": null,
+  "remarks": "Muuto ne précise pas lequel des deux est à gauche."
+ },
+ {
+  "slug": "david-geckeler",
+  "name": "David Geckeler",
+  "sortKey": "Geckeler",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "David Geckeler est un designer industriel installé à Berlin, qui travaille le mobilier, l'aménagement intérieur, les arts de la table et le luminaire. Il dit rechercher dans ses objets la simplicité, le souci du détail et une pointe d'audace, et privilégier l'attachement durable à un objet plutôt que l'effet de surprise. Pour Muuto, il a dessiné la chaise Nerd, déclinée en tabourets de comptoir et de bar ; selon Muuto, ce modèle lui a valu un prix international de design en 2011.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/david-geckeler2/"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/david-geckeler.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/david-geckeler2/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/david-geckeler/david-geckeler-portrait-muuto-23-roll-up-image.jpg",
+   "credit": null,
+   "width": 1190,
+   "height": 1786,
+   "notes": "Portrait en noir et blanc, de face, cadré buste ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Muuto nomme le prix « Becker's International Design Award » ; intitulé non vérifié, donc non repris. Aucun site officiel joignable (geckeler.com ne contient qu'une page minimale)."
+ },
+ {
+  "slug": "jamie-wolfond",
+  "name": "Jamie Wolfond",
+  "sortKey": "Wolfond",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Jamie Wolfond est un designer installé à Toronto. Diplômé en 2013 de la Rhode Island School of Design en design de mobilier, il dirige de 2014 à 2018 la marque d'objets Good Thing, qu'il vend en 2018 pour ouvrir Jamie Wolfond Studio. Il s'intéresse particulièrement à la mécanique des luminaires et cherche à rendre leur fonctionnement visible. Pour Muuto, il a dessiné la lampe de table Set et le lampadaire Contra, dont le contrepoids se déplace le long d'un filetage pour modifier l'inclinaison du bras.",
+  "bioSources": [
+   "https://jamiewolfond.com/",
+   "https://www.muuto.com/designers2/jamie-wolfond/",
+   "https://www.muuto.com/stories/product-stories/contra-floor-lamp-finding-balance/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/jamie-wolfond.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/jamie-wolfond/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/jamie-wolfond/aw-04-04-24-1512.jpg",
+   "credit": null,
+   "width": 667,
+   "height": 1000,
+   "notes": "Dans son atelier, appuyé à une table derrière un prototype de lampe Set, regard vers l'objectif ; visage net. Image de la série de photos d'atelier publiée sur sa page Muuto."
+  },
+  "photoMissingReason": null,
+  "remarks": "La page Muuto n'a pas de texte biographique : bio fondée sur le site du designer et l'article Muuto sur Contra. Identité de la personne déduite du contexte (page Muuto du designer, photos de son atelier)."
+ },
+ {
+  "slug": "claesson-koivisto-rune",
+  "name": "Claesson Koivisto Rune",
+  "sortKey": "Claesson Koivisto Rune",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Claesson Koivisto Rune est un studio suédois réunissant trois designers, à la fois architectes et designers. Ce double métier les conduit à envisager chaque objet comme une partie d'un contexte spatial plus large, dans la continuité du lien entre architecture et design des designers scandinaves des années 1950 et 1960. Ses trois membres ont remporté ensemble huit fois le prix annuel du design suédois, ainsi que de nombreuses distinctions internationales. Pour Muuto, le studio a dessiné la suspension Fluid.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/claesson-koivisto-rune/"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/claesson-koivisto-rune.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/claesson-koivisto-rune/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/claesson-koivisto-rune/claesson-koivisto-rune-portrait-muuto.jpg",
+   "credit": "Knut Koivisto",
+   "width": 793,
+   "height": 1000,
+   "notes": "Les trois associés en noir et blanc, en buste, sur fond clair (composition en trois panneaux) ; visages nets."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site du studio (claessonkoivistorune.se) n'a pas pu être lu (page « about » absente) : noms des membres et année de fondation non vérifiés sur une source autorisée, donc omis. Crédit photo lu dans l'EXIF (© Knut Koivisto 2010)."
+ },
+ {
+  "slug": "phil-procter",
+  "name": "Phil Procter",
+  "sortKey": "Procter",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Phil Procter est un designer britannique installé à Rotterdam, aux Pays-Bas, où il dirige le Studio Phil Procter. Le studio travaille à la croisée du mobilier, du produit et de l'aménagement d'espace, de l'objet isolé à l'intérieur complet, en s'appuyant sur la recherche de matériaux et la connaissance de la fabrication ; presque tous ses projets font appel au métal. Il a travaillé notamment pour Muuto, New Balance, Stone Island Paris et le Studio Sabine Marcelis. Pour Muuto, il a dessiné le miroir Gaze, dont un même matériau forme la structure et les surfaces réfléchissantes, sans cadre ni dos.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/phil-procter/",
+   "https://philprocter.com/about",
+   "https://www.muuto.com/stories/studio-visit/gaze-mirror-a-play-between-reflection-and-material/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/phil-procter.jpg",
+   "sourcePage": "https://www.muuto.com/stories/studio-visit/gaze-mirror-a-play-between-reflection-and-material/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/gaze-mirror-a-play-between-reflection-and-material/phil-procter-studio-visit-gaze-mirror-12.jpg",
+   "credit": null,
+   "width": 666,
+   "height": 1000,
+   "notes": "Debout à son établi dans son atelier, des miroirs Gaze en cours devant lui, regard vers l'objectif ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "soren-rose-studio",
+  "name": "Søren Rose Studio",
+  "sortKey": "Søren Rose Studio",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Søren Rose Studio est le studio pluridisciplinaire du designer danois Søren Rose, né en 1972. Créé en 2009 selon le site du studio, il conçoit des produits, du mobilier, des luminaires et des projets sur mesure, depuis des bureaux à Copenhague et à New York, et cède ses créations sous licence à des éditeurs. Avant cela, Søren Rose avait fondé l'agence numérique In2media en 1994, puis en 2006 l'agence d'images Trunk Archive à New York. Il est membre permanent du jury du Danish Design Award. Pour Muuto, le studio a dessiné le buffet Reflect.",
+  "bioSources": [
+   "https://sorenrose.com/about",
+   "https://www.muuto.com/designers2/soren-rose-studio/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/soren-rose-studio.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/soren-rose-studio/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/soren-rose-studio/soren-rose-portrait-muuto.jpg",
+   "credit": null,
+   "width": 793,
+   "height": 1000,
+   "notes": "Søren Rose debout, appuyé contre un montant de porte, chemise sombre, regard vers l'objectif ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Date de création : 2009 selon sorenrose.com, 2008 selon Muuto ; la bio suit le site du studio."
+ },
+ {
+  "slug": "lise-vester",
+  "name": "Lise Vester",
+  "sortKey": "Vester",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Lise Vester est une designer danoise installée à Copenhague, titulaire d'un master en Design Products du Royal College of Art de Londres. Son studio conçoit du mobilier, des luminaires et des objets pensés pour agir sur le bien-être par les sens ; elle a notamment travaillé, pendant ses études, avec un hospice danois. Pour Muuto, elle a dessiné le banc Dream View, en acier brossé, conçu pour inviter à lever les yeux vers le ciel, distingué en 2026 aux Elle Decor International Design Awards et aux IDEAT Design Awards. Elle a aussi créé l'Inner View Object, édition limitée de 150 pièces en verre soufflé à Murano pour les 20 ans de Muuto.",
+  "bioSources": [
+   "https://www.lisevester.dk/about",
+   "https://www.muuto.com/stories/an-object-that-shifts-space/",
+   "https://www.muuto.com/product/Dream-View-Bench--DVBEN100A/DVBEN100A01/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/lise-vester.jpg",
+   "sourcePage": "https://www.lisevester.dk/about",
+   "imageUrl": "https://cdn.sanity.io/images/xzjv25b7/production/2b2e70026add0f5bf9cbd9759829c325b06fac0c-1869x2804.webp",
+   "credit": null,
+   "width": 1869,
+   "height": 2804,
+   "notes": "Portrait en pied, noir et blanc, pull rayé, de face ; visage net mais petit dans l'image entière : recadrage 4:5 sur le haut du corps possible grâce à la définition. Le CDN renvoie un JPEG malgré l'extension .webp de l'URL."
+  },
+  "photoMissingReason": null,
+  "remarks": "Pas de page designer Muuto accessible (muuto.com/designers2/lise-vester redirige vers une page vide)."
+ },
+ {
+  "slug": "tina-ratzer",
+  "name": "Tina Ratzer",
+  "sortKey": "Ratzer",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Tina Ratzer est une designer textile danoise, diplômée en 1998 en design textile et tissage de l'école des arts appliqués de Kolding. Elle fonde en 1999 son atelier, Ratzer. Ses créations, d'expression géométrique et aux couleurs équilibrées, comportent souvent un détail inattendu qui met en avant la technique du tissage ; elles ont été présentées notamment à la Biennale d'artisanat et de design au Rundetårn de Copenhague. À côté du design de produit, elle réalise des œuvres uniques et des commandes publiques. Pour Muuto, elle a dessiné le tapis Varjo et le plaid Sway.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/tina-ratzer/",
+   "https://www.ratzer.dk/about/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/tina-ratzer.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/tina-ratzer/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/tina-ratzar/tina-ratzer-portrait-muuto.jpg",
+   "credit": null,
+   "width": 793,
+   "height": 1000,
+   "notes": "Portrait de face, cadré buste, haut blanc sur fond gris ; visage net. Même photo que sur ratzer.dk (version paysage 1348 x 899)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "mattias-stahlbom",
+  "name": "Mattias Ståhlbom",
+  "sortKey": "Ståhlbom",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Mattias Ståhlbom est un architecte et designer suédois, associé du studio d'architecture et de design TAF Architects, à Stockholm. Le studio cherche à rendre la vie ordinaire un peu moins ordinaire par des ajustements discrets dans l'apparence et le fonctionnement des objets comme des bâtiments. Ses produits ont été exposés notamment au MoMA de New York et au Nationalmuseum de Stockholm. Pour Muuto, il a dessiné la suspension E27, lancée en 2008, dont la douille en caoutchouc silicone coloré habille une ampoule nue.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/mattias-stahlbom/",
+   "https://www.muuto.com/stories/product-stories/modern-simplicity-e27-pendant-lamp/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/mattias-stahlbom.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/mattias-stahlbom/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/mattias-stahlbom/mattias-stahlbom-portrait-muuto-23-roll-up-image.jpg",
+   "credit": null,
+   "width": 1190,
+   "height": 1786,
+   "notes": "Portrait couleur, chemise noire, cadré mi-corps dans un intérieur clair, regard vers l'objectif ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année 2008 déduite de l'article Muuto, qui fête en 2018 les dix ans de la suspension E27."
+ },
+ {
+  "slug": "rhys-cooper",
+  "name": "Rhys Cooper",
+  "sortKey": "Cooper",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Rhys Cooper est un designer australien installé à Sydney, où il a fondé son studio en 2016. Venu du travail manuel avant de passer au design de produit, il revendique une approche centrée sur l'artisanat et la connaissance des matériaux, appliquée au mobilier, au luminaire et aux accessoires. Son travail a été exposé en Australie et à l'étranger, et il collabore notamment avec Muuto et Design By Them. Pour Muuto, il a dessiné le miroir Arced, dont le cadre en épicéa certifié FSC reprend l'idée d'un profilé de bois mouluré, assemblé par segments.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/rhys-cooper/",
+   "https://rhyscooper.com.au/",
+   "https://www.muuto.com/stories/factory-visit/crafting-the-arced-mirror/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/rhys-cooper.png",
+   "sourcePage": "https://www.muuto.com/designers2/rhys-cooper/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/rhys-cooper/rhys_cooper_designerprofile.png",
+   "credit": null,
+   "width": 667,
+   "height": 1000,
+   "notes": "Portrait en noir et blanc, de face, cadré buste sur fond blanc ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "msds-studio",
+  "name": "MSDS Studio",
+  "sortKey": "MSDS Studio",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "MSDS Studio est un studio de design canadien installé à Toronto, fondé en 2013 par Jessica Nakanishi et Jonathan Sabine. Le duo réunit des parcours en architecture intérieure et en fabrication de mobilier, et travaille l'aménagement intérieur, le mobilier et l'objet. Il privilégie l'ingéniosité, le sens pratique et la matière, en cherchant pour chaque projet une idée directrice. Pour Muuto, MSDS a dessiné la table basse Halves, entièrement en terrazzo, chaque élément étant coulé d'une seule pièce, conçue pour l'intérieur comme pour l'extérieur.",
+  "bioSources": [
+   "https://www.fritzhansen.com/en/inspiration/designers/msds-studio",
+   "https://www.muuto.com/stories/product-stories/halves-coffee-table-sculptural-terrazzo/",
+   "https://msds-studio.ca/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/msds-studio.jpg",
+   "sourcePage": "https://www.fritzhansen.com/en/inspiration/designers/msds-studio",
+   "imageUrl": "https://cloudinary.fritzhansen.com/-/media/images/images/inspiration/designers/skagerak-designers/msds.jpg",
+   "credit": null,
+   "width": 3600,
+   "height": 2701,
+   "notes": "Les deux fondateurs debout côte à côte sur fond rose pâle, regard vers l'objectif ; visages nets. Image paysage : un recadrage 4:5 (2160 x 2701) garde les deux personnes. Publiée par Fritz Hansen (Skagerak), éditeur du studio."
+  },
+  "photoMissingReason": null,
+  "remarks": "Pas de page designer Muuto accessible (redirection vide). Année de fondation 2013 selon Fritz Hansen."
+ },
+ {
+  "slug": "whatswhat",
+  "name": "Whatswhat",
+  "sortKey": "Whatswhat",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Whatswhat est un studio de design installé à Stockholm, fondé en 2010 par John Astbury, Bengt Brummer et Karin Wallenbeck. Le trio a exposé à New York, Londres, Tokyo, Paris et Stockholm, et a remporté le Muuto Talent Award en 2010 puis un Elle Interior Award en 2012. Il dit concevoir le design scandinave comme une clarté esthétique fondée sur la connaissance du savoir-faire, l'honnêteté des matériaux et la simplicité d'usage, valeurs qu'il entend aussi questionner. Pour Muuto, Whatswhat a dessiné le lampadaire Pull.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/whatswhat2/"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/whatswhat.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/whatswhat2/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/whatswhat/whatswhat-portrait-muuto.jpg",
+   "credit": null,
+   "width": 793,
+   "height": 1000,
+   "notes": "Les trois membres en noir et blanc, une femme et deux hommes, regroupés en buste ; visages nets."
+  },
+  "photoMissingReason": null,
+  "remarks": "Muuto écrit « WHATSWHAT ». Le domaine whatswhat.se héberge aujourd'hui un contenu sans rapport (non utilisé). John Astbury a déjà sa propre fiche (photos/john-astbury.jpg)."
+ },
+ {
+  "slug": "gustav-winsth",
+  "name": "Gustav Winsth",
+  "sortKey": "Winsth",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Gustav Winsth est un designer suédois installé à Stockholm, qui travaille le mobilier, l'aménagement intérieur et l'accessoire. Formé à l'ingénierie mécanique, il s'intéresse aux procédés industriels et à la fabrication, qu'il associe à des références à la mode et à la culture urbaine ; il utilise des outils numériques comme la réalité virtuelle et la modélisation 3D. Il collabore notamment avec l'éditeur suédois Hem. Pour Muuto, il a dessiné le miroir Pleat, haut de 227 cm, formé d'une seule feuille d'acier poli miroir pliée.",
+  "bioSources": [
+   "https://gustavwinsth.com/",
+   "https://hem.com/en-us/designers/gustav-winsth",
+   "https://www.muuto.com/product/Pleat-Mirror--PLEMIR227A/PLEMIR227A01/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/gustav-winsth.jpg",
+   "sourcePage": "https://hem.com/en-us/designers/gustav-winsth",
+   "imageUrl": "https://images.ctfassets.net/v1z1ea1ae17v/xVDKJK6oJAybAxe7blHya/5f7e431cb3b113c422424edd3b584355/_DSC4118.jpg",
+   "credit": null,
+   "width": 4912,
+   "height": 7360,
+   "notes": "Assis dans un intérieur carrelé près d'une fenêtre, pull gris, regard vers l'objectif ; visage net. Très haute définition, recadrage 4:5 aisé. Publiée par Hem."
+  },
+  "photoMissingReason": null,
+  "remarks": "Pas de page designer Muuto accessible ; aucun portrait sur son site officiel. Hem qualifie son studio de « freelance »."
+ },
+ {
+  "slug": "sam-hecht-kim-colin",
+  "name": "Sam Hecht & Kim Colin",
+  "sortKey": "Hecht & Colin",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Sam Hecht et Kim Colin ont fondé en 2002 à Londres le studio Industrial Facility. Sam Hecht, Londonien, est formé au design industriel ; Kim Colin, originaire de Los Angeles, à l'architecture. Le studio conçoit des produits, du mobilier et des expositions pour des clients comme Muji, Mattiazzi, &Tradition, Santa & Cole ou Emeco, et le duo a été nommé en 2026 directeur de la création global d'Herman Miller. Tous deux sont Royal Designers for Industry ; leurs travaux figurent notamment dans les collections du MoMA, du Centre Pompidou et du Victoria and Albert Museum. Pour Muuto, ils ont dessiné le plateau Platform, le portemanteau Avail et la patère Attach.",
+  "bioSources": [
+   "https://www.industrialfacility.co.uk/about-us",
+   "https://www.muuto.com/designers2/sam-hecht-kim-colin/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/sam-hecht-kim-colin-montage.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/sam-hecht-kim-colin/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/sam-hecht--kim-colin/kim-sam-portrait01-square-bw.jpg",
+   "credit": null,
+   "width": 1500,
+   "height": 1293,
+   "notes": "Kim Colin (à gauche) et Sam Hecht en buste, noir et blanc, sur fond blanc ; visages nets. Image plus large que haute : un recadrage 4:5 strict couperait les épaules extérieures, prévoir un cadrage avec marge blanche. ; montage côte à côte des deux membres (photo en largeur)"
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo à valider pour le format 4:5."
+ },
+ {
+  "slug": "aiayu",
+  "name": "Aiayu",
+  "sortKey": "Aiayu",
+  "brands": [
+   "Muuto"
+  ],
+  "notCreator": true,
+  "bio": null,
+  "bioSources": [
+   "https://www.muuto.com/designers2/aiayu-designer-page/",
+   "https://www.muuto.com/stories/product-stories/rooted-in-nature-aiayu-for-muuto/"
+  ],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Marque, pas un créateur.",
+  "remarks": "Aiayu : marque danoise de textile et de mode fondée en 2005 à Copenhague (fondatrice et directrice de création : Maria Høgh Heilmann, selon Muuto). Le plaid Rhythm appartient à la collection « Aiayu for Muuto » : collaboration de marque, pas un créateur identifiable. Si l'on veut une fiche, la créditer à Maria Høgh Heilmann serait à valider."
+ },
+ {
+  "slug": "cara-davide",
+  "name": "Cara/Davide",
+  "sortKey": "Cara/Davide",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Cara/Davide (CARA \\ DAVIDE) est un studio de design pluridisciplinaire fondé à Milan en 2016 par la Sud-Africaine Cara Judd et l'Italien Davide Gramatica. Tous deux diplômés en design de produit de l'IED Milan, où ils enseignent, ils ont travaillé auprès d'artisans et d'industriels avant de réunir leurs expériences. Le duo explore les matériaux, les techniques et les procédés propres à différents territoires, en collaboration avec des artisans en Italie et en Afrique du Sud ; ses pièces sont représentées par des galeries en Europe et aux États-Unis. Pour Muuto, il a dessiné le plateau Wave.",
+  "bioSources": [
+   "https://www.caradavide.com/about",
+   "https://www.muuto.com/designers2/cara-davide/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/cara-davide.webp",
+   "sourcePage": "https://www.caradavide.com/about",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/5701b2bda3360c0321d81494/3204eb91-55ca-4b02-b438-b71a34aae1e8/FENIX_DesignDuoDoubleFeature_Portrait_CARA+DAVIDE_ph+Claudia+Zalla.jpg?format=2500w",
+   "credit": "Claudia Zalla",
+   "width": 2500,
+   "height": 3750,
+   "notes": "Cara Judd assise sur une chaise, Davide Gramatica debout derrière elle, en pied sur fond blanc ; visages nets. Le CDN Squarespace sert un WebP (plus grande taille disponible). Alternative Muuto carrée 1000 x 999 (cara--davide-designer-portrait-11-square.jpg)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nom officiel écrit « CARA \\ DAVIDE » par le studio et par Muuto ; « Cara/Davide » conservé, à ajuster si souhaité. Crédit photo tiré du nom de fichier."
+ },
+ {
+  "slug": "sia-hurtigkarl",
+  "name": "Sia Hurtigkarl",
+  "sortKey": "Hurtigkarl",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Sia Hurtigkarl est une designer danoise installée à Copenhague, dont la pratique porte sur les objets, le textile et l'installation. Diplômée avec mention de la Design Academy Eindhoven (département Man and Identity), elle a aussi étudié à l'Académie royale danoise, en Design, Object & Furniture. Le textile est au cœur de son travail, qu'elle décrit comme une traduction de récits en matière ; elle est aussi commissaire d'exposition, cofondatrice du collectif pro tempore.art. Pour Muuto, elle a dessiné le tapis Verso, lauréat du Muuto Design Contest 001 : un tissage toile en laine, réversible, aux franges torsadées à la main sur les quatre côtés.",
+  "bioSources": [
+   "https://siahurtigkarl.com/About",
+   "https://www.muuto.com/stories/studio-visit/sia-hurtigkarl-verso-rug/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/sia-hurtigkarl.jpg",
+   "sourcePage": "https://www.muuto.com/stories/studio-visit/sia-hurtigkarl-verso-rug/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/stories/studio-visit/sia-hurtigkarl---verso/sia-hurtigkarl-studio-visit-2026-7low-res.jpg",
+   "credit": null,
+   "width": 2752,
+   "height": 4128,
+   "notes": "Assise dans son studio devant un mur d'échantillons, chemise bleu clair, sourire, regard vers l'objectif ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Pas de page designer Muuto accessible ; portrait tiré de l'article Muuto sur sa visite d'atelier."
+ },
+ {
+  "slug": "maria-bruun",
+  "name": "Maria Bruun",
+  "sortKey": "Bruun",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Maria Bruun est une designer de mobilier danoise, diplômée en 2012 de l'École de design de l'Académie royale des beaux-arts du Danemark. Son studio, à Copenhague, conçoit du mobilier, des intérieurs et des expositions, en dialogue étroit avec des artisans. Elle a reçu le prix Finn Juhl en 2021 et le prix Wegner en 2022 ; ses travaux ont été montrés notamment au Design Museum de Londres et au Designmuseum Danmark. Elle a aussi été commissaire de plusieurs expositions pour Fredericia. Pour Muuto, elle a dessiné la table Re-Norm, à la silhouette sculpturale en forme de voile, en bois certifié FSC.",
+  "bioSources": [
+   "https://mariabruun.com/about",
+   "https://www.muuto.com/product/Re-Norm-Table--RNTAB130A/RNTAB130A01/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/maria-bruun.jpg",
+   "sourcePage": "https://mariabruun.com/about",
+   "imageUrl": "https://mariabruun.com/wp-content/uploads/2026/10/Maria-Bruun-Foto-Benjamin-Lund-02-1.jpg",
+   "credit": "Benjamin Lund",
+   "width": 900,
+   "height": 1350,
+   "notes": "Assise de trois quarts, chemise blanche, le bras sur le dossier d'une chaise en bois, regard vers l'objectif ; visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Pas de page designer Muuto accessible. Crédit photo tiré du nom de fichier."
+ }
+]

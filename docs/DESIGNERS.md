@@ -1,6 +1,6 @@
 # Répertoire des créateurs
 
-État du 30 septembre 2026.
+État du 7 octobre 2026 (565 fiches). Rapports, sources et listes de travail : `docs/reports/designers/` ; scripts de session : `scripts/designers/`.
 
 ## Données
 
@@ -13,6 +13,8 @@ Un tag de créateur ne doit jamais être le tag d'une marque : la page affichera
 ## Tags Shopify
 
 Le 30 septembre, avec l'accord du propriétaire pour les tags uniquement, le slug de la fiche a été ajouté (`tagsAdd`, aucun retrait) aux 63 produits actifs dont le métachamp nommait le créateur sans porter l'un de ses tags. Relevés avant/après et journal : `.context/designers/` de l'espace de travail concerné. Un produit qui porte déjà un tag de la fiche, même sous une autre écriture, n'est pas retagué.
+
+Le 6 octobre, même accord, même méthode sur les produits actifs et en brouillon : 427 produits tagués (journaux dans `docs/reports/designers/tags/`). Les valeurs du métachamp rattachées à une fiche existante, les duos à plusieurs fiches et les valeurs à ignorer sont dans `docs/reports/designers/canon.json` ; la liste à corriger dans l'importer est `docs/reports/designers/a-corriger-importer.csv`.
 
 Valeurs du métachamp qui ne sont pas des créateurs, laissées sans fiche : HAY, Ichendorf, Ferm Living, « Carl Hansen & Søn - Kitchen », studio blomus, Vitra Design Museum. À corriger à la source dans l'importer.
 

@@ -1,0 +1,488 @@
+[
+ {
+  "slug": "giulio-confalonieri",
+  "name": "Giulio Confalonieri",
+  "sortKey": "Confalonieri",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Aucun portrait dans les sources autorisées : les pages créateur Alessi (alessi.com/collections/giulio-confalonieri et giulio-confalonieri-1) n'ont ni texte ni image, les fiches Maya n'ont pas de bloc créateur illustré ; pas de site officiel (créateur décédé en 2008) ; la fiche de la collection Confalonieri de l'AIAP (CDPG) ne montre que des documents graphiques. Les portraits trouvés en ligne sont sur Wikimedia ou des sites non autorisés.",
+  "remarks": "Mode photo : bio existante conservée. Alessi a deux collections pour ce créateur (giulio-confalonieri et giulio-confalonieri-1), toutes deux sans portrait."
+ },
+ {
+  "slug": "fabrizio-crisa",
+  "name": "Fabrizio Crisà",
+  "sortKey": "Crisà",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Fabrizio Crisà est un designer italien, directeur du design (Chief Design Officer) d'Elica, fabricant de hottes et de plaques de cuisson, dont il dirige le centre de design. Sous son impulsion, Elica a fait de la hotte de cuisine un élément de mobilier, avec des fonctions plus ergonomiques et plus technologiques. Il a reçu le Compasso d'Oro ADI en 2018 pour NikolaTesla, puis en 2024 pour Lhov, système qui réunit pour la première fois four, plaque de cuisson et hotte. Pour Alessi, il a dessiné la vasque Big, grand seau à champagne en acier inoxydable.",
+  "bioSources": [
+   "https://www.elica.com/WW-en/design",
+   "https://www.elica.com/NL-en/magazine/in-evidence/fabrizio-crisa-brings-home-a-second-compasso-doro-award"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/fabrizio-crisa.jpg",
+   "sourcePage": "https://www.elica.com/NL-en/magazine/in-evidence/fabrizio-crisa-brings-home-a-second-compasso-doro-award",
+   "imageUrl": "https://www.elica.com/storage/Article/editorjs/1719475931_image00017.jpeg",
+   "credit": null,
+   "width": 3601,
+   "height": 2026,
+   "notes": "Photo publiée par Elica : Fabrizio Crisà tenant le Compasso d'Oro 2024 devant le mur de la XXVIIIe édition. Paysage, personne au centre : recadrage 4:5 possible (environ 1620 x 2026). Le portrait studio noir et blanc de la page Elica Design (fabrizio-crisa-photo.jpg) ne fait que 392 x 392 px."
+  },
+  "photoMissingReason": null,
+  "remarks": "Aucune page Crisà ni fiche « Big Vasque » sur alessi.com : l'attribution de la vasque Big repose sur le catalogue Mikado (et des revendeurs, non cités). Bio construite sur le site d'Elica, son employeur et éditeur ; année de naissance (1973) et formation (Sapienza) trouvées seulement sur des sites non autorisés, donc omises. Photo d'événement à valider (plus grande que le portrait studio officiel, mais moins formelle)."
+ },
+ {
+  "slug": "pauline-deltour",
+  "name": "Pauline Deltour",
+  "sortKey": "Deltour",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Pauline Deltour (1983-2021) est une designer française née à Landerneau. Elle étudie les arts appliqués et le design à l'école Olivier de Serres, puis à l'École nationale supérieure des Arts décoratifs de Paris, dont elle sort diplômée. De 2006 à 2009, elle travaille comme designer chez Konstantin Grcic Industrial Design à Munich, puis ouvre son propre studio fin 2009, à Munich puis à Paris. Elle conçoit des produits industriels, du mobilier, des bijoux et des espaces d'exposition, pour des clients comme Alessi, Muji ou Hem. Pour Alessi, elle a dessiné la ligne A Tempo, dont le plateau et l'égouttoir à vaisselle.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/pauline-deltour",
+   "https://hem.com/en-us/designers/pauline-deltour"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Alessi présente encore son activité au présent ; la date de décès (2021) vient de la page créatrice de Hem. Alessi situe l'ouverture du studio à Munich, Hem à Paris : la bio mentionne les deux."
+ },
+ {
+  "slug": "anita-dineen",
+  "name": "Anita Dineen",
+  "sortKey": "Dineen",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Anita Dineen est une créatrice australienne installée en Tasmanie, qui travaille principalement le métal. Elle découvre ce matériau alors qu'elle se forme au métier de classeuse de laine, puis développe des bijoux et des objets utiles pour la maison, nourris par son observation attentive de la nature. Elle cherche à incarner dans chaque objet une part de ses réflexions. Elle a remporté le premier Alessi + Vogue Living Design Award, une médaille d'or au New York City Design Prize et le Tasmanian Design Award. Pour Alessi, elle a dessiné le couteau à fromage Antechinus, en acier inoxydable.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/anita-dineen",
+   "https://www.anitadineen.com.au/about"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "luigi-caccia-dominioni",
+  "name": "Luigi Caccia Dominioni",
+  "sortKey": "Caccia Dominioni",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Luigi Caccia Dominioni est un architecte et designer italien né à Milan en 1913. Diplômé en architecture du Politecnico de Milan en 1936, il commence la même année à travailler avec Livio et Pier Giacomo Castiglioni, avec qui il remporte le concours de l'école de Vimercate. Il est l'un des pionniers du design industriel en Italie, avec une série de postes de radio présentés avec les frères Castiglioni à la VIIe Triennale de Milan. Dans les années 1950, il fonde avec Gardella et Corradi la société Azucena, qui édite ses meubles et objets. Les couverts Caccia, conçus en 1938 avec les Castiglioni et présentés en argent à la Triennale de 1940, sont édités par Alessi et figurent dans la collection du MoMA de New York.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/luigi-caccia-dominioni",
+   "https://alessi.com/fr/products/caccia-table-knife-6-pieces"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Les couverts Caccia sont cosignés par Livio et Pier Giacomo Castiglioni selon Alessi. Date de décès (2016) non indiquée par Alessi, donc omise."
+ },
+ {
+  "slug": "elisa-gargan",
+  "name": "Elisa Gargan",
+  "sortKey": "Gargan",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Elisa Gargan est une designer italienne née à Pordenone en 1960. Elle se spécialise en design industriel à la Scuola Politecnica di Design, puis collabore de 1986 à 1991 avec Michele De Lucchi. Associée du studio Giovannoni Design, elle travaille depuis comme designer pour Alessi, Giemmegi, Metals ou Viceversa, et enseigne le design à la Domus Academy. Avec Stefano Giovannoni, elle a dessiné pour Alessi la boîte à pain Gnam, en résine thermoplastique.",
+  "bioSources": [
+   "https://alessi.com/fr/products/gnam-bread-bin"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "La page collection Alessi est vide ; la bio vient du bloc créateur de la fiche Gnam. Gnam est cosignée avec Stefano Giovannoni."
+ },
+ {
+  "slug": "anna-e-gian-franco-gasparini",
+  "name": "Anna e Gian Franco Gasparini",
+  "sortKey": "Gasparini",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Anna et Gian Franco Gasparini forment un duo de designers italiens. Architecte diplômé à Florence, Gian Franco Gasparini a enseigné le design industriel à l'ISIA de Florence, puis a fondé et dirigé pendant douze ans l'Università del Progetto, école de design et de communication de Reggio Emilia. En 2002, ils créent ensemble la société Architettura della Comunicazione, consacrée au design et aux processus de communication qui y sont liés. Parmi leurs projets figurent le Museo delle Langhe, au château de Grinzane Cavour, et l'identité visuelle du réseau d'agences Cariparma Crédit Agricole. Pour Alessi, ils ont dessiné le bloc à couteaux K-Block et la planche à pain Sbriciola, en bambou.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/anna-e-gian-franco-gasparini"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Nom officiel Alessi en italien (« Anna e Gian Franco Gasparini ») conservé. sortKey « Gasparini » (duo portant le même nom de famille), à ajuster si la règle duo = nom complet doit s'appliquer littéralement."
+ },
+ {
+  "slug": "anna-gili",
+  "name": "Anna Gili",
+  "sortKey": "Gili",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos2/anna-gili.jpg",
+   "sourcePage": "https://www.annagili.com/en/about/",
+   "imageUrl": "https://www.annagili.com/wp-content/uploads/2019/07/ritratto-Anna-Gili.jpg",
+   "credit": "Stefano Ferrante",
+   "width": 906,
+   "height": 1362,
+   "notes": "Portrait officiel du site de la créatrice (fichier « ritratto-Anna-Gili »). Cadrage original : visage vu à travers l'ouverture d'une sculpture rose, une partie du visage masquée. Crédit tiré des métadonnées EXIF (copyright STEFANO FERRANTE). L'autre photo du site (about-photo.jpg, 1000 x 496, en pied avec un chat) est trop petite une fois recadrée en 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "Mode photo : bio existante conservée. Pas de collection Anna Gili sur alessi.com. Portrait à valider : visage en partie caché, pose artistique."
+ },
+ {
+  "slug": "frederic-gooris",
+  "name": "Frédéric Gooris",
+  "sortKey": "Gooris",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Frédéric Gooris est un designer industriel belge né à Louvain en 1974. Diplômé de la Hogeschool d'Anvers en 1998, il s'installe à Milan en 1999 et y obtient un master en design à la Domus Academy. Il travaille cinq ans auprès de Philippe Starck et de Stefano Giovannoni, puis ouvre à Milan le Studio Gooris, qui conçoit produits et concepts pour des entreprises du monde entier. En 2009, il cofonde Bombol, entreprise d'articles pour enfants, et en 2010 il ouvre un second studio à Hong Kong. Pour Alessi, il a dessiné en acier inoxydable l'ouvre-bouteilles Virgula Divina, le Savon du Chef anti-odeurs et les accroche-sacs Jumbo et Minou.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/frederic-gooris",
+   "https://alessi.com/fr/collections/frederic-gooris/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "jim-hannon-tan",
+  "name": "Jim Hannon-Tan",
+  "sortKey": "Hannon-Tan",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Jim Hannon-Tan est un designer né en Espagne, qui a grandi dans une Australie multiculturelle marquée par des influences asiatiques. Il a passé une quinzaine d'années dans des studios de design à Milan, Amsterdam et Londres, avant de réinstaller son activité en Australie. Son travail s'inspire des vastes paysages australiens, de la rencontre entre Orient et Occident et de la capacité du design à humaniser les nouvelles technologies et la fabrication de pointe. Pour Alessi, il a dessiné le casse-noix Sweetheart en fonte d'aluminium, inspiré de l'histoire du crocodile australien du même nom, ainsi que l'ouvre-noix Nut Splitter et le concasse-piment Piccantino.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/jim-hannon-tan",
+   "https://alessi.com/fr/products/sweetheart-nutcracker"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Selon les tags Alessi, Nut Splitter et Piccantino sont cosignés avec LPWK."
+ },
+ {
+  "slug": "harry-paul-van-iersel",
+  "name": "Harry Paul van Iersel",
+  "sortKey": "van Iersel",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Harry Paul van Iersel est un designer industriel néerlandais né à Breda en 1966. Diplômé de la Design Academy Eindhoven en 1992, il suit en 1994 le master de la Domus Academy à Milan, où il rencontre Camila Vega. Il travaille ensuite en indépendant avec Guido Venturini, Stefano Giovannoni et Matteo Thun, et signe pour Alessi des objets comme Antonio, Fred the Worm ou Ship Shape. En 1998, il fonde avec Camila Vega le studio Harry & Camila à Milan, puis s'installe à Barcelone en 2002. Pour Alessi, le beurrier Ship Shape, en résine avec spatule en acier, est cosigné avec Stefano Giovannoni.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/paul-van-iersel-harry",
+   "https://www.livingdivani.it/en/designers/harryandcamila/",
+   "https://alessi.com/fr/products/ship-shape-container"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Alessi le nomme « Paul Van Iersel Harry » (collection paul-van-iersel-harry) ; Living Divani « Harry Paul ». Graphie « van Ierssel » aussi rencontrée hors sources autorisées. Ship Shape cosigné avec Stefano Giovannoni."
+ },
+ {
+  "slug": "toyo-ito",
+  "name": "Toyo Ito",
+  "sortKey": "Ito",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Toyo Ito est un architecte japonais né en 1941, diplômé de l'université de Tokyo en 1965. En 1971, il fonde son agence Urban Robot (URBOT), rebaptisée Toyo Ito & Associates, Architects en 1979. Il a reçu notamment le Lion d'or de la Biennale de Venise, la médaille d'or royale du Royal Institute of British Architects et le prix Pritzker. Parmi ses bâtiments figurent la médiathèque de Sendai, la bibliothèque de l'université d'art Tama, les tours Porta Fira en Espagne, le Toyo Ito Museum of Architecture d'Imabari et le National Taichung Theater à Taïwan. Pour Alessi, il a dessiné le service de table KU en porcelaine blanche, aux lignes courbes, et les couverts MU.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/toyo-ito",
+   "https://alessi.com/fr/products/ku-salad-serving-bowl"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "marcello-jori",
+  "name": "Marcello Jori",
+  "sortKey": "Jori",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Marcello Jori est un artiste italien né à Merano en 1951, qui vit et travaille à Bologne. Diplômé du DAMS de Bologne, il commence en 1977 une carrière d'artiste et expose dans des galeries et des musées en Italie et à l'étranger. Son autoportrait de 1979 marque un tournant : la peinture devient centrale, avec les séries des Scritture, des Teatrini, des Cristalli et des Gioie, géométries colorées et kaléidoscopiques. Pour Alessi, il conçoit des figurines et des décorations de Noël en porcelaine ou en verre soufflé décorés à la main, dont la crèche Miracolo! et la figurine Miracolata, imaginées avec Massimo Giacon, et les boules Giuseppe et Asinello.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/marcello-jori",
+   "https://alessi.com/collections/marcello-jori",
+   "https://alessi.com/fr/products/miracolo-crib"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Miracolo! et Miracolata sont cosignées avec Massimo Giacon selon les fiches Alessi."
+ },
+ {
+  "slug": "jin-kuramoto",
+  "name": "Jin Kuramoto",
+  "sortKey": "Kuramoto",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Jin Kuramoto est un designer japonais né en 1976, qui a grandi sur une petite île rurale. En 2008, il fonde JIN KURAMOTO STUDIO INC., qui conçoit aussi bien des meubles que des appareils électroménagers, des lunettes ou des automobiles. Sa méthode repose sur l'expérimentation continue, le contact direct avec les matériaux, la fabrication de prototypes en atelier et les accidents heureux qui en découlent. Son travail a reçu notamment le Red Dot Award, le Good Design Award et l'iF Product Design Award. Pour Alessi, il a dessiné les plateaux en acier Pleats, inspirés de la forme d'une capsule de bouteille de bière.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/jin-kuramoto",
+   "https://alessi.com/fr/products/pleats-tray"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Le porte-manteau Knit listé chez Mikado n'apparaît pas dans le catalogue Alessi : éditeur à vérifier, non cité dans la bio."
+ },
+ {
+  "slug": "philippe-malouin",
+  "name": "Philippe Malouin",
+  "sortKey": "Malouin",
+  "brands": [
+   "Alessi",
+   "Flos"
+  ],
+  "bio": "Philippe Malouin est un designer industriel canadien né à Laval en 1982 et installé à Londres. Il fonde son studio en 2008 et travaille dans les domaines du mobilier, de l'éclairage, de l'objet, de l'installation et de l'œuvre d'art. Il a enseigné notamment au Royal College of Art de Londres et à l'ECAL de Lausanne, et a reçu des prix de Wallpaper*, Archiproducts et Dezeen. Pour Alessi, il a dessiné la cafetière espresso Vite en fonte d'aluminium, dont la chaudière reprend la forme d'une vis. Sa lampe de table Bilboquet, conçue en 2023 pour sa première collaboration avec Flos, a reçu le Compasso d'Oro ADI en 2026.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/philippe-malouin",
+   "https://alessi.com/fr/products/vite-espresso-coffee-maker",
+   "https://flos.com/en/us/stories/new-generation-bilboquet.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Le fauteuil et le canapé Mimi listés chez Mikado ne relèvent ni d'Alessi ni de Flos d'après leurs sites : éditeur à vérifier, non cités dans la bio."
+ },
+ {
+  "slug": "massimo-mariani",
+  "name": "Massimo Mariani",
+  "sortKey": "Mariani",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Massimo Mariani est un architecte et designer italien né à Pistoia en 1951. Diplômé de la faculté d'architecture de Florence en 1977, il y enseigne de 1980 à 1992 aux côtés de Remo Buti. En 1980, il fonde avec Alberto Casciani le studio Stilema, consacré aux objets expérimentaux et au mobilier, et installe son agence à Montecatini Terme ; en 1986, il cofonde le mouvement bolidiste. Il a réalisé des maisons privées, le musée Benozzo Gozzoli de Castelfiorentino et de nombreux sièges et agences bancaires en Toscane. En design, il a collaboré avec Alessi-Tendentse, Stilema, Meccani, Arredaesse, Limonta et Unitalia.",
+  "bioSources": [
+   "https://www.massimomariani.net/profilo/index.php?lang=it",
+   "https://www.massimomariani.net/design/index.php?lang=it"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait sur le site officiel (pages profil, design, architecture) ni sur alessi.com, qui n'a pas de page Massimo Mariani. Rien de convenable dans les sources autorisées.",
+  "remarks": "Aucun produit Mikado listé et aucune page créateur sur alessi.com : le lien avec Alessi passe par Alessi-Tendentse (céramiques), cité sur son site officiel. Vérifier qu'il s'agit bien du même Massimo Mariani que la fiche Mikado."
+ },
+ {
+  "slug": "carlo-mazzeri",
+  "name": "Carlo Mazzeri",
+  "sortKey": "Mazzeri",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Carlo Mazzeri est un architecte italien né en 1927 à Oleggio, près de Novare, diplômé de l'université d'architecture de Venise en 1956. En 1957, il dessine avec Luigi Massoni le shaker 870, l'un des premiers projets confiés par Alessi à des designers extérieurs, toujours produit et présent dans les bars du monde entier. Avec Anselmo Vitale, il conçoit pour Alessi, dans les années 1960 et 1970, une collection complète d'objets destinés surtout à l'hôtellerie. Il construit aussi l'usine Alessi d'Omegna (1960-1971), puis ouvre en 1973 un cabinet à Novare, consacré à l'architecture civile, à la restauration et à l'urbanisme.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/carlo-mazzeri",
+   "https://alessi.com/fr/products/870-cocktail-shaker"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Le shaker 870 est cosigné avec Luigi Massoni."
+ },
+ {
+  "slug": "moretti-savoy",
+  "name": "Moretti-Savoy",
+  "sortKey": "Moretti-Savoy",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Moretti-Savoy réunit le designer Bruno Moretti et le chef Guy Savoy. Diplômé de l'École nationale supérieure d'art de Dijon en 1985, Bruno Moretti fonde en 1987 le groupe 18 Août avec Fabrice Berrux et Pascal Oriol, puis mène des projets de design et d'architecture intérieure, souvent dans les arts de la table ; certaines pièces sont entrées au musée des Arts décoratifs de Paris. Sa rencontre avec Guy Savoy en 2012 ouvre une collaboration sur l'objet et le geste culinaire, avec une série d'objets de table pour le restaurant du chef à la Monnaie de Paris, ouvert en 2015. Pour Alessi, ils ont dessiné la collection Human, dont le saladier et les couverts à salade.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/moretti-savoy",
+   "https://alessi.com/fr/products/human-collection-salad-set"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Duo designer + chef ; sortKey = nom du duo."
+ },
+ {
+  "slug": "playlab",
+  "name": "PlayLab",
+  "sortKey": "PlayLab",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "PlayLab, Inc. est un studio de création pluridisciplinaire fondé en 2004 et installé à Los Angeles. Il travaille à toutes les échelles, par la direction artistique et créative, la stratégie, le design et la production : défilés de mode, films, campagnes, meubles, architecture, installations, livres, marques et œuvres d'art. L'équipe actuelle compte notamment Archie Lee Coates IV et Jeff Franklin. Pour Alessi, le studio a imaginé les décorations de sapin Nick, Holly et Carol, boules en verre soufflé peintes à la main en forme d'yeux, qui donnent un regard et une expression au sapin.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/playlab",
+   "https://www.playlab.org/",
+   "https://alessi.com/fr/products/nick-set-of-two-christmas-ornaments"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "L'image de la page Alessi (PlayLab_Inc.jpg) montre des figurines sculptées, pas une photographie des membres ; le site officiel playlab.org ne publie pas de portrait d'équipe. Rien de convenable dans les sources autorisées.",
+  "remarks": "Graphie officielle du studio : « PLAYLAB, INC. » ; « PlayLab » (Alessi) conservé. Année de fondation 2004 selon Alessi et playlab.org (une page de Virginia Tech indique 2009, non retenue)."
+ },
+ {
+  "slug": "kuno-prey",
+  "name": "Kuno Prey",
+  "sortKey": "Prey",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Kuno Prey est un designer et enseignant italien. Après des études artistiques, il collabore avec l'industrie et oriente ses recherches vers les matériaux et les nouvelles technologies, qui marquent tous ses projets. Consultant en design et en recherche pour de nombreuses entreprises, il a reçu plusieurs distinctions internationales. En 1993, il participe à la création de la faculté de design (Fakultät Gestaltung) de la Bauhaus-Universität Weimar, où il est professeur de design de produit, puis fonde en 2002 la faculté de design et d'art de l'université libre de Bozen-Bolzano. Depuis 2010, il se consacre entièrement à l'enseignement et à la recherche. Pour Alessi, il a dessiné le presse-citron UT108 en bois de cerisier.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/kuno-prey",
+   "https://alessi.com/collections/kuno-prey"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "mattia-di-rosa",
+  "name": "Mattia Di Rosa",
+  "sortKey": "Di Rosa",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Mattia Di Rosa est un artiste italien né à Carrare en 1969. Sa démarche, obsessionnelle et expérimentale, s'appuie sur l'attrait de l'erreur et du hasard, qu'il tient pour des ressorts privilégiés de l'invention. Il collabore avec Alessi depuis 1992. Pour la marque, il a dessiné le bocal de cuisine Gianni a little man holding on tight, en verre avec couvercle en résine : le motif n'est pas à l'extérieur mais à l'intérieur, où un petit bonhomme, Gianni, s'agrippe au couvercle.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/mattia-di-rosa",
+   "https://alessi.com/fr/products/gianni-a-little-man-holding-on-tight-kitchen-box"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/mattia-di-rosa.jpg",
+   "sourcePage": "https://alessi.com/fr/collections/mattia-di-rosa",
+   "imageUrl": "https://alessi.com/cdn/shop/files/DiRosa-Mattia_2136dc50-ea1e-4acc-b56b-249b8fd56611.jpg?v=1748186605",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait noir et blanc publié sur la page créateur Alessi, gros plan du visage, net. Format presque carré : recadrage 4:5 possible (environ 1045 x 1306). Version la plus grande servie par le CDN (le paramètre width=2000 renvoie 1424 px)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Sources minces (notice Alessi de trois phrases), d'où une bio courte."
+ },
+ {
+  "slug": "alejandro-ruiz",
+  "name": "Alejandro Ruiz",
+  "sortKey": "Ruiz",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Alejandro Ruiz est un designer, architecte d'intérieur et concepteur de stands né à Bahía Blanca en 1954. Il a collaboré avec le studio Alchimia et avec Gregotti Associati, et a enseigné à l'Istituto Europeo di Design et à la Domus Academy. Il travaille notamment pour Alacta, Perani, Mimo et Red-Zanussi. Pour Alessi, il a dessiné la râpe à fromage Parmenide, qui réunit la râpe et la fromagère en un seul objet, prêt à servir le fromage à table ; elle figure dans la collection du Museum of Modern Art de New York.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/alejandro-ruiz",
+   "https://alessi.com/collections/alejandro-ruiz",
+   "https://alessi.com/fr/products/parmenide-grater-with-cheese-cellar"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "elena-salmistraro",
+  "name": "Elena Salmistraro",
+  "sortKey": "Salmistraro",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Elena Salmistraro est une designer et artiste italienne qui vit et travaille à Milan. Après l'école d'art de Brera, elle est diplômée du Politecnico di Milano en design de mode en 2003, puis en design industriel en 2008. En 2009, elle fonde son studio avec l'architecte Angelo Stoli. Sa collection de vases Primates pour Bosa (2017) lui vaut la même année le prix du meilleur designer émergent du Salone del Mobile de Milan. Elle travaille notamment pour Alessi, Cappellini, Vitra et Moooi. Pour Alessi, elle a créé la collection de Noël Holyhedrics : décorations et cimier de sapin en verre soufflé décoré à la main, figurines de crèche et mug.",
+  "bioSources": [
+   "https://www.elenasalmistraro.com/aboutpage",
+   "https://alessi.com/fr/products/holyhedrics-christmas-tree-topper"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "La page créateur Alessi n'a pas de texte ; bio tirée du site officiel."
+ },
+ {
+  "slug": "john-truex",
+  "name": "John Truex",
+  "sortKey": "Truex",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "John Truex est un designer né en 1982, installé à New York et titulaire d'un MFA de la Cranbrook Academy of Art (2006). Il conçoit du mobilier et des produits en s'intéressant aux procédés micro-industriels, qui intègrent des outils de production de masse au travail manuel. Designer chez Stephen Burks puis chez Dakota Jackson, il a contribué à des projets variés, des flacons de parfum Calvin Klein à des pianos Steinway sur mesure. Les travaux de son studio new-yorkais ont été exposés à l'international. Pour Alessi, il a dessiné des articles de cuisine, dont le porte-bananes Dear Charlie en zamak chromé.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/john-truex",
+   "https://alessi.com/fr/products/dear-charlie-banana-holder"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Notice Alessi rédigée en anglais même sur le site français ; nationalité non précisée."
+ },
+ {
+  "slug": "paolo-ulian",
+  "name": "Paolo Ulian",
+  "sortKey": "Ulian",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos2/paolo-ulian.jpg",
+   "sourcePage": "https://www.kreoo.com/en/designers/paolo-ulian/",
+   "imageUrl": "https://www.kreoo.com/wp-content/uploads/2025/01/Paolo-Ulian.jpg",
+   "credit": null,
+   "width": 1340,
+   "height": 1675,
+   "notes": "Portrait studio noir et blanc publié par Kreoo, éditeur de pièces en marbre de Paolo Ulian. Déjà au format 4:5, visage net et souriant. Alessi ne publie pas de portrait (page créateur sans image)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Mode photo : bio existante conservée. Autres portraits disponibles chez des éditeurs : Styl'Editions (1000 x 1000) et Bufalini Marmi."
+ },
+ {
+  "slug": "tudelft-titus-wybenga",
+  "name": "TUDelft - Titus Wybenga",
+  "sortKey": "Wybenga",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Titus Wybenga est un designer néerlandais né à Ipswich en 1990. Diplômé de l'université de technologie de Delft (TU Delft) en 2016, il a été stagiaire au laboratoire de Joris Laarman et assistant d'un cours de design consacré à l'impact culturel, ce qui l'a conduit à s'engager dans le design social. Son projet de diplôme visait à favoriser la compréhension entre les communautés culturelles de Rotterdam, sa ville. Il est cofondateur du studio de design et de production De Staalslagerij. Pour Alessi, il a dessiné sous la signature « TUDelft - Titus Wybenga » la boule à thé T-Timepiece, en acier inoxydable.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/tudelft-titus-wybenga",
+   "https://alessi.com/fr/products/t-timepiece-tea-infuser"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Nom officiel Alessi « TUDelft - Titus Wybenga » conservé ; il s'agit d'une personne (Titus Wybenga) associée à la TU Delft. Envisager l'affichage « Titus Wybenga »."
+ },
+ {
+  "slug": "nika-zupanc",
+  "name": "Nika Zupanc",
+  "sortKey": "Zupanc",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Nika Zupanc est une designer slovène née à Ljubljana, où elle est diplômée avec mention de l'Académie des beaux-arts et de design. Elle ouvre son studio en 2008 et se fait connaître par des créations qui, selon ses mots, « défient la rationalité, la sobriété et le pragmatisme » au profit de l'intuition, de l'éclectisme et de l'intimité. Elle collabore avec de nombreuses marques de design tout en développant sa propre marque, et plusieurs de ses projets ont été primés. Pour Alessi, elle a dessiné la série Edges en acier inoxydable aux bords ajourés comme un galon de dentelle (seau à glace, présentoir à gâteau, plateau, corbeille) et les boules de Noël Delight.",
+  "bioSources": [
+   "https://alessi.com/fr/collections/nika-zupanc",
+   "https://alessi.com/fr/products/edges-ice-bucket"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ }
+]

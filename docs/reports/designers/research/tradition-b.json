@@ -1,0 +1,260 @@
+[
+ {
+  "slug": "signe-hytte",
+  "name": "Signe Hytte",
+  "sortKey": "Hytte",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Signe Hytte est une designer formée au Danemark : après des études d'esthétique et culture à l'université d'Aarhus, elle est diplômée de TEKO Design and Business School. Son travail cherche à épurer les objets jusqu'à leur essence, sans rien retirer d'essentiel. Pour &Tradition, elle a dessiné la famille de luminaires Journey, déclinée en lampe de table et applique (SHY1), en applique (SHY2) et en lampadaire (SHY4), ainsi que la lampe de table Herman SHY3. Journey part de deux formes géométriques simples, une sphère opale posée dans un socle rectangulaire, que la designer compare à une lune. Herman associe un abat-jour opale, une tige en noyer et un pied en marbre crème.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/signe-hytte",
+   "https://www.andtradition.com/products/journey-shy1",
+   "https://www.andtradition.com/products/herman-shy3"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/signe-hytte.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/signe-hytte",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/SigneHytte_05.jpg",
+   "credit": null,
+   "width": 3840,
+   "height": 5760,
+   "notes": "Portrait noir et blanc en buste sur fond noir, image principale de la page designer &Tradition (fichier original). Cadrage 4:5 facile."
+  },
+  "photoMissingReason": null,
+  "remarks": "La nationalité n'est pas indiquée par &Tradition (seulement sa formation au Danemark) ; non précisée dans la bio."
+ },
+ {
+  "slug": "note-design-studio",
+  "name": "Note Design Studio",
+  "sortKey": "Note Design Studio",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Note (design studio) est un studio pluridisciplinaire fondé en 2008 à Stockholm par Johannes Karlström et Cristiano Pigazzini, qui dispose aussi d'un bureau à Copenhague. Son équipe réunit architectes, architectes d'intérieur, designers produit et graphistes, et intervient aussi bien en architecture et en aménagement intérieur que dans le mobilier, l'identité visuelle ou la direction artistique. Le studio puise dans l'artisanat scandinave, les ressources naturelles locales et les techniques traditionnelles, en plaçant la fonction au centre de chaque pièce. En 2022, &Tradition lui a confié une nouvelle typologie : la desserte Alima, conçue pour ranger et exposer livres, revues et objets, puis déclinée en version plus compacte et en table d'appoint à tiroir.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/note-design-studio",
+   "https://notedesignstudio.se/studio",
+   "https://www.andtradition.com/journal/portraits-of-living-note-kristoffer",
+   "https://www.andtradition.com/products/alima-nds1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/note-design-studio.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/note-design-studio",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2022/02/ATD_22_NOTE_01.jpg",
+   "credit": null,
+   "width": 3330,
+   "height": 4991,
+   "notes": "Photo d'équipe de la page designer &Tradition (2022) : une femme debout près d'une desserte Alima et un homme assis sur une table, dans un intérieur. Les personnes ne sont pas nommées par &Tradition. Les deux occupent une part modeste de l'image : recadrage 4:5 possible mais serré sur les deux personnes ; l'original est grand (3330 px)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Orthographe du cofondateur : &Tradition écrit « Johannes Carlström », le site du studio écrit « Johannes Karlström » (Interior Architect / Founding Partner) ; la bio suit le site du studio. Nom officiel du studio : « Note (design studio) ». Identité des deux personnes sur la photo non confirmée (probablement des associés du studio). Autre option éditeur : série de 2026 de Kristoffer Fagerström (associé) chez lui, article &Tradition « Portraits of Living », mais elle ne montre qu'un associé."
+ },
+ {
+  "slug": "samuel-wilkinson",
+  "name": "Samuel Wilkinson",
+  "sortKey": "Wilkinson",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Samuel Wilkinson est un designer industriel diplômé de Ravensbourne University, à Londres, qui a fondé son propre studio en 2008. Son studio travaille à des échelles variées, du petit objet de consommation aux projets pour l'espace public, avec une attention portée aux matériaux, aux procédés de fabrication et à l'économie de matière. Il a notamment reçu le prix Design of the Year du Design Museum de Londres et un Black Pencil des D&AD, et ses pièces figurent dans les collections du MoMA, du Victoria and Albert Museum, du Cooper Hewitt et de l'Art Institute of Chicago. Pour &Tradition, il a dessiné en 2014 la suspension Blown (SW3, SW4), en verre soufflé bouche dont le motif en losanges réfléchit et diffracte la lumière.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/samuel-wilkinson",
+   "https://samuelwilkinson.com/studio/",
+   "https://samuelwilkinson.com/blown/",
+   "https://www.andtradition.com/products/blown-sw3"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/samuel-wilkinson.jpg",
+   "sourcePage": "https://astep.design/designers/samuel-wilkinson/",
+   "imageUrl": "https://astep.design/content/wp-content/uploads/2025/01/Samuel-Wilkinson-portrait-BW.jpg",
+   "credit": null,
+   "width": 2412,
+   "height": 2976,
+   "notes": "Portrait noir et blanc en buste dans un atelier. C'est la même photo que celle de la page designer &Tradition, mais &Tradition ne la publie qu'en 472 × 708 px ; la version haute définition vient de la page designer de l'éditeur de luminaires Astep, qui édite aussi ses créations."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo prise chez Astep (éditeur, pas revendeur) faute d'une version assez grande chez &Tradition : à valider si seul l'éditeur &Tradition est accepté. Nationalité non indiquée par les sources consultées, donc omise."
+ },
+ {
+  "slug": "teruhiro-yanagihara",
+  "name": "Teruhiro Yanagihara",
+  "sortKey": "Yanagihara",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Teruhiro Yanagihara est un designer japonais qui a fondé son studio en 2002. Il travaille pour des éditeurs et fabricants internationaux dans les domaines du mobilier, du textile et des arts de la table, et ses œuvres figurent notamment dans la collection permanente du Stedelijk Museum d'Amsterdam. Sa collaboration avec &Tradition a commencé en 2022 par sa participation au projet Studies of a Table, avec une table inspirée des éléments de charpente japonais. Il y signe en 2026 la collection de luminaires Numbra, une suspension (TY1) et une lampe portable (TY3) fondées sur la ligne droite, qui associent panneaux de chêne laqué et pièces en aluminium tonnelé.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/teruhiro-yanagihara",
+   "https://www.andtradition.com/journal/introducing-teruhiro-yanagihara",
+   "https://www.andtradition.com/products/numbra-ty1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/teruhiro-yanagihara.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/teruhiro-yanagihara/atd_designer-portrait_teruhiro-yanagihara_2026_03/",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2022/02/ATD_Designer-Portrait_Teruhiro-Yanagihara_2026_03.jpg",
+   "credit": null,
+   "width": 8736,
+   "height": 11648,
+   "notes": "Portrait couleur à mi-corps, assis à une table rouge, en train d'écrire (regard baissé). Fichier « ATD_Designer-Portrait » de la médiathèque &Tradition, rattaché à la page designer. Très grand original (15,7 Mo). L'image affichée actuellement sur la page designer et l'article « Introducing Teruhiro Yanagihara » est un plan en pied plus lointain, devant une suspension Numbra : https://wp.andtradition.com/wp-content/uploads/2025/07/tradition11150.jpg (8736 × 11648), en solution de repli."
+  },
+  "photoMissingReason": null,
+  "remarks": "&Tradition cite aussi le « National Centre for Fine Arts » de Paris parmi les collections : institution non identifiée avec certitude (probablement le Cnap), donc omise. La page d'attachement indiquée dans sourcePage est servie par le site Nuxt sans contenu propre ; le portrait retenu est dans la médiathèque de l'éditeur, mais il n'apparaît pas dans le contenu visible de la page designer."
+ },
+ {
+  "slug": "louise-liljencrantz",
+  "name": "Louise Liljencrantz",
+  "sortKey": "Liljencrantz",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Louise Liljencrantz est une designer d'intérieur établie à Stockholm, qui a fondé son studio éponyme en 2009. Elle conçoit des intérieurs pour des clients privés et professionnels, en privilégiant les matériaux naturels durables et le savoir-faire artisanal, dans un langage qui mêle influences du milieu du XXe siècle et écriture contemporaine. En parallèle, elle dessine du mobilier et des objets, et a collaboré avec l'atelier d'ébénisterie KFK sur deux marques, Veermakers et Liljencrantz x K.F.K Master Cabinet Makers. Pour &Tradition, elle a créé la série Margas, nommée d'après sa grand-mère, qui comprend notamment le fauteuil LC1 et sa version pivotante LC2, ainsi qu'un canapé trois places et un pouf.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/louise-liljencrantz",
+   "https://www.andtradition.com/products/margas-lc1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/louise-liljencrantz.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/louise-liljencrantz",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/DSC08297_220217_01-3.jpg",
+   "credit": null,
+   "width": 3448,
+   "height": 5168,
+   "notes": "Portrait couleur à mi-corps, appuyée contre un mur, bras croisés, regard de profil vers la gauche ; image principale de la page designer &Tradition (fichier original). Cadrage 4:5 facile."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "matteo-fogale",
+  "name": "Matteo Fogale",
+  "sortKey": "Fogale",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Matteo Fogale est un designer né en Uruguay dans une famille italienne. Installé en Italie en 2001, il a étudié à l'école d'art Leonardo da Vinci puis à l'université IUAV de Venise. En 2015, une collection créée avec Laetitia de Allegri a reçu un Wallpaper* Design Award. Aujourd'hui établi à Londres, il associe dans son travail les formes généreuses et les matériaux francs des designs italien et latino-américain à la rigueur du design scandinave. Pour &Tradition, il a dessiné la lampe portable Caret MF1, en acier laqué, qui reprend la silhouette des lampes de banquier des bibliothèques anciennes.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/matteo-fogale",
+   "https://www.andtradition.com/products/caret-mf1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/matteo-fogale.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/matteo-fogale",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2022/02/cid9E1277C3-5CB2-45CE-A66C-4F2850396E22.jpeg",
+   "credit": null,
+   "width": 2075,
+   "height": 3130,
+   "notes": "Portrait couleur en pied, assis sur une chaise en bois dans un intérieur (photo argentique, légèrement inclinée) ; image principale de la page designer &Tradition (fichier original, enregistré en .jpg). Recadrage 4:5 sur le haut du corps possible."
+  },
+  "photoMissingReason": null,
+  "remarks": "La médiathèque &Tradition contient aussi « ATD_22_Matteo_Fogale_WEB_BW.jpg » (2500 × 1667, paysage), qui montre un homme aux cheveux longs et à lunettes assez différent : non retenu faute de certitude. La page &Tradition contient deux versions du texte (influences « brésiliennes » ou « italiennes et latino-américaines ») ; la bio suit celle de l'en-tête designer."
+ },
+ {
+  "slug": "mia-hamborg",
+  "name": "Mia Hamborg",
+  "sortKey": "Hamborg",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Mia Hamborg est une designer norvégienne formée à la Steneby School of Crafts and Design, rattachée à Göteborg. Son travail associe fonctionnalité et humour, et renouvelle la tradition nordique du bois tourné. Pour &Tradition, elle a dessiné la table d'appoint Shuffle MH1, composée d'éléments tournés et colorés que l'on empile dans l'ordre de son choix pour composer sa propre table. L'idée lui vient du Brio Stacking Clown, un jouet en bois à empiler qu'elle avait enfant.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/mia-hamborg",
+   "https://www.andtradition.com/products/shuffle-mh1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Seule image publiée par &Tradition : https://wp.andtradition.com/wp-content/uploads/2019/09/MiaHamborg.jpg, 470 × 650 px (sous le minimum de 600 px), en noir et blanc, la designer accroupie au sol et visage en partie caché par les cheveux, avec des pièces tournées ; ce n'est pas un vrai portrait. Aucune version plus grande dans la médiathèque &Tradition (recherche « hamborg »). La media bank &Tradition (andtradition.presscloud.com) est désactivée ; le site personnel miahamborg.com ne répond pas. Les autres résultats sont des revendeurs (Finnish Design Shop, etc.), exclus.",
+  "remarks": "Année de naissance (1980) trouvée uniquement chez des revendeurs, donc omise."
+ },
+ {
+  "slug": "viggo-boesen",
+  "name": "Viggo Boesen",
+  "sortKey": "Boesen",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Viggo Boesen (1907-1985) est un architecte et designer danois actif dès les années 1930. Son travail se rattache au style « funkis », variante nordique de l'Art déco, avec des formes organiques et expressives, à rebours de la production en série et du dépouillement hérité du Bauhaus. Peu de ses créations ont été produites, mais elles ont annoncé l'orientation du modernisme danois dans les décennies suivantes. &Tradition réédite deux de ses fauteuils, Little Petra et Petra VB3, ce dernier d'après un dessin original de 1938 ; leur nom rend hommage à sa belle-mère, Petra.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/viggo-boesen",
+   "https://www.andtradition.com/products/petra-vb3"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Le portrait de la page designer &Tradition (https://wp.andtradition.com/wp-content/uploads/2019/06/Copyright_Viggo_Boesen_Foundation.jpg, crédit Viggo Boesen Foundation) est net et convenable (noir et blanc, souriant, assis dans une barque) mais ne mesure que 472 × 708 px, sous le minimum de 600 px ; aucune version plus grande dans la médiathèque &Tradition. Les photos d'archives de l'article « Viggo Boesen through his lens » sont grandes (2560 px) mais ne montrent pas Boesen identifié en portrait (paysages, famille, une silhouette non légendée dans la végétation). Media bank &Tradition désactivée. À retenir en 472 px si le propriétaire l'accepte.",
+  "remarks": "Le fichier porte la mention « Copyright Viggo Boesen Foundation » : crédit à indiquer si l'image basse définition est utilisée."
+ },
+ {
+  "slug": "jorn-utzon",
+  "name": "Jørn Utzon",
+  "sortKey": "Utzon",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Jørn Utzon (1918-2008) est un architecte danois né à Copenhague et élevé à Aalborg. Son père, ingénieur naval et constructeur de bateaux, lui a transmis très tôt un intérêt pour la construction des navires, qui a marqué son architecture comme son design. Il est surtout connu pour l'Opéra de Sydney, auquel il a travaillé dans les années 1960 et qui est inscrit au patrimoine mondial de l'UNESCO. La suspension Utzon JU1, dessinée en 1947, plus de dix ans avant l'Opéra, s'inspire des plans de navires de son père : ses éléments angulaires s'assemblent de façon modulaire.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/jorn-utzon",
+   "https://www.andtradition.com/products/utzon-ju1",
+   "https://www.andtradition.com/journal/utzon-and-the-art-of-living"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Le portrait de la page designer &Tradition (https://wp.andtradition.com/wp-content/uploads/2019/06/Copyright_Utzon_Foundation.jpg, crédit Utzon Foundation) est un beau portrait de profil en noir et blanc, mais il ne mesure que 472 × 708 px, sous le minimum de 600 px ; aucune version plus grande dans la médiathèque &Tradition. Les autres images d'archives publiées par &Tradition (crédit Utzon Archives / Utzon Center) sont des scènes de groupe ou de famille (chantier de l'Opéra de Sydney en 1962, famille à Hellebæk) ou une photo de jeunesse où il fait le poirier : pas de portrait cadrable en 4:5. Media bank &Tradition désactivée. À retenir en 472 px si le propriétaire l'accepte.",
+  "remarks": "Crédit à mentionner si le portrait de 472 px est utilisé : Utzon Foundation."
+ },
+ {
+  "slug": "edward-van-vliet",
+  "name": "Edward van Vliet",
+  "sortKey": "van Vliet",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Edward van Vliet est un designer néerlandais formé à la Design Academy Eindhoven et à l'école des arts HKU, où il a étudié l'architecture, l'architecture intérieure et le design industriel. Il a fondé son studio en 1990. Son travail, qui mêle des influences culturelles variées, couvre l'architecture, l'aménagement intérieur, le mobilier, le luminaire et le textile, ainsi que la conception de lieux et d'expériences. Pour &Tradition, il a dessiné le système de canapé modulable Develius, lancé en 2018 et complété depuis par la version Develius Mellow, ainsi que la table basse Develius EV3, qui se place seule ou entre deux modules.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/edward-van-vliet",
+   "https://www.andtradition.com/products/develius-ev3"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/edward-van-vliet.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/edward-van-vliet",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/Edward-van-Vliet-keuze-bw.jpg",
+   "credit": null,
+   "width": 3744,
+   "height": 5380,
+   "notes": "Portrait noir et blanc en buste, de face, sur fond noir ; image principale de la page designer &Tradition (fichier original). Une version couleur existe dans la médiathèque &Tradition (Edward-van-Vliet-keuze-1-scaled.jpg, 1782 × 2560)."
+  },
+  "photoMissingReason": null,
+  "remarks": "sortKey « van Vliet » (particule néerlandaise) ; à ajuster en « Vliet » si le classement ignore les particules."
+ },
+ {
+  "slug": "john-astbury",
+  "name": "John Astbury",
+  "sortKey": "Astbury",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "John Astbury est un designer britannique installé à Stockholm, où il a fondé son studio en 2014. Après des études d'anthropologie et de sociologie, il s'est formé au design produit à Konstfack, la plus grande université suédoise d'arts, d'artisanat et de design. Sa pratique consiste à réexaminer les éléments fondamentaux d'un archétype pour réduire l'objet à sa matière, sa structure et sa forme, avec un travail attentif sur l'équilibre et les proportions. Pour &Tradition, il a dessiné la table d'appoint Tung JA3, en MDF laqué brillant, portée par trois pieds incurvés qui évoquent des piliers antiques.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/john-astbury",
+   "https://www.andtradition.com/products/tung-ja3"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/john-astbury.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/john-astbury",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2021/01/DSC07149.jpg",
+   "credit": null,
+   "width": 3347,
+   "height": 5017,
+   "notes": "Portrait couleur à genoux sur un parquet, les mains sur une table Tung rouge, regard baissé ; image principale de la page designer &Tradition (fichier original). Recadrage 4:5 possible (personne et table)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ }
+]

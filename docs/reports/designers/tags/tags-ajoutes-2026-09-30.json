@@ -1,0 +1,569 @@
+[
+ {
+  "id": "gid://shopify/Product/10177165951305",
+  "handle": "vase-structure",
+  "add": [
+   "studio-cuno"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177168376137",
+  "handle": "vase-day-dream",
+  "add": [
+   "koens-middelkoop"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177170243913",
+  "handle": "vase-formy",
+  "add": [
+   "daphna-laurens"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177257636169",
+  "handle": "sculpture-calming-pebbles",
+  "add": [
+   "jan-wolleswinkel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177260585289",
+  "handle": "bougeoir-formy",
+  "add": [
+   "daphna-laurens"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177772486985",
+  "handle": "pot-namobo-plant",
+  "add": [
+   "aldo-deli"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177860632905",
+  "handle": "patere-mood",
+  "add": [
+   "modo-architettura"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177990558025",
+  "handle": "vase-coral",
+  "add": [
+   "norman-trapman"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10178108817737",
+  "handle": "couteau-a-beurre-collective-tools",
+  "add": [
+   "antonio-citterio-glen-oliver-low"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10178109800777",
+  "handle": "cuillere-de-service-collective-tools-moyenne",
+  "add": [
+   "antonio-citterio-glen-oliver-low"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10178713518409",
+  "handle": "vase-roman",
+  "add": [
+   "norman-trapman"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10178714173769",
+  "handle": "assiette-creuse-taika",
+  "add": [
+   "klaus-haapaniemi-heikki-orvola"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10178714272073",
+  "handle": "assiette-taika-30-cm",
+  "add": [
+   "klaus-haapaniemi-heikki-orvola"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10178714599753",
+  "handle": "plateau-taika",
+  "add": [
+   "klaus-haapaniemi-heikki-orvola"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10206127653193",
+  "handle": "bougeoir-nagel",
+  "add": [
+   "werner-stoff-hans-nagel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10206542594377",
+  "handle": "coupelle-nagel",
+  "add": [
+   "werner-stoff-hans-nagel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10206543151433",
+  "handle": "plateau-nagel",
+  "add": [
+   "werner-stoff-hans-nagel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10206543479113",
+  "handle": "bougeoir-nagel-sur-pied",
+  "add": [
+   "werner-stoff-hans-nagel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10254292648265",
+  "handle": "fauteuil-fk10-plico",
+  "add": [
+   "fabricius-kastholm"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10254292779337",
+  "handle": "fauteuil-fk11-plico",
+  "add": [
+   "fabricius-kastholm"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10254292844873",
+  "handle": "fauteuil-fk64-scimitar",
+  "add": [
+   "fabricius-kastholm"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10254293238089",
+  "handle": "fauteuil-lm92p-metropolitan",
+  "add": [
+   "larsen-bender-madsen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10254293303625",
+  "handle": "fauteuil-lm92t-metropolitan",
+  "add": [
+   "larsen-bender-madsen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10254293401929",
+  "handle": "fauteuil-lm92c-metropolitan",
+  "add": [
+   "larsen-bender-madsen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10255938847049",
+  "handle": "table-basse-nd55",
+  "add": [
+   "nanna-ditzel-jorgen-ditzel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10255939731785",
+  "handle": "table-sh900-extend-300-x-100-cm",
+  "add": [
+   "strand-hvass"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10258693456201",
+  "handle": "canape-nd52-2-vita",
+  "add": [
+   "nanna-ditzel-jorgen-ditzel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10258693488969",
+  "handle": "canape-nd52-3-vita",
+  "add": [
+   "nanna-ditzel-jorgen-ditzel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10258698797385",
+  "handle": "repose-pieds-nd550f",
+  "add": [
+   "nanna-ditzel-jorgen-ditzel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10258701418825",
+  "handle": "buffet-fk63",
+  "add": [
+   "fabricius-kastholm"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10258701484361",
+  "handle": "buffet-fk63-with-legs-725x112-x-36-cm",
+  "add": [
+   "fabricius-kastholm"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10258701517129",
+  "handle": "etagere-fk63-deep-56x112-x-36-cm",
+  "add": [
+   "fabricius-kastholm"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10258701549897",
+  "handle": "buffet-fk63-deep-with-legs",
+  "add": [
+   "fabricius-kastholm"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10258701582665",
+  "handle": "etagere-fk63-deep-upright-112x56-x-36-cm",
+  "add": [
+   "fabricius-kastholm"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10259323027785",
+  "handle": "suspension-bt1001-no-1",
+  "add": [
+   "bonderup-thorup"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10259323126089",
+  "handle": "suspension-bt101-diffuser",
+  "add": [
+   "bonderup-thorup"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10259323224393",
+  "handle": "suspension-bt1041-calot",
+  "add": [
+   "bonderup-thorup"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10259323257161",
+  "handle": "suspension-bt1091-confetti-set-of-2",
+  "add": [
+   "bonderup-thorup"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10259739181385",
+  "handle": "chaise-haute-nd54",
+  "add": [
+   "nanna-ditzel-jorgen-ditzel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266101940553",
+  "handle": "objet-decoratif-miniature-ch07-shell",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266102530377",
+  "handle": "objet-decoratif-miniature-ch24-wishbone",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266118914377",
+  "handle": "etagere-fb001-tsugi",
+  "add": [
+   "sharon-fisher-matteo-barenghi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266120552777",
+  "handle": "etagere-fb001s-tsugi-short",
+  "add": [
+   "sharon-fisher-matteo-barenghi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266125599049",
+  "handle": "cadre-kk75751-80-x-60-cm",
+  "add": [
+   "kaare-klint"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266126909769",
+  "handle": "cadre-kk75752-60-x-40-cm",
+  "add": [
+   "kaare-klint"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266129629513",
+  "handle": "cadre-kk75753-40-x-30-cm",
+  "add": [
+   "kaare-klint"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266130186569",
+  "handle": "cadre-kk75754-30-x-20-cm",
+  "add": [
+   "kaare-klint"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266131726665",
+  "handle": "cadre-kk75755-20-x-15-cm",
+  "add": [
+   "kaare-klint"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266252968265",
+  "handle": "planche-bm0568-12-x-18-cm",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266253590857",
+  "handle": "plateau-bm0569-18-x-48-cm",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10266302120265",
+  "handle": "coussin-cu-ch24",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10285902004553",
+  "handle": "coussin-ch24-wishbone-enfant",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10285902233929",
+  "handle": "coussin-ch24-wishbone-enfant-peau-de-mouton",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10285946110281",
+  "handle": "coussin-ch22-cuir",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10285955219785",
+  "handle": "coussin-ch23-cuir",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10285981172041",
+  "handle": "coussin-ch24-wishbone",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10285981991241",
+  "handle": "coussin-ch26-cuir",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10285982482761",
+  "handle": "coussin-ch36-cuir",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10285982974281",
+  "handle": "coussin-ch37-cuir",
+  "add": [
+   "hans-j-wegner"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10300323397961",
+  "handle": "bougeoir-nagel-lot-de-3",
+  "add": [
+   "werner-stoff-hans-nagel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10351303885129",
+  "handle": "vase-arcs-large",
+  "add": [
+   "muller-van-severen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10397642195273",
+  "handle": "hay-tabouret-de-bar-cornet-h75-acier-thermolaque",
+  "add": [
+   "jonas-trampedach"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10397681090889",
+  "handle": "hay-tabouret-de-bar-cornet-h65-acier-thermolaque",
+  "add": [
+   "jonas-trampedach"
+  ],
+  "ok": true,
+  "errors": []
+ }
+]

@@ -1,0 +1,2241 @@
+[
+ {
+  "slug": "eero-aarnio",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/eero-aarnio",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Aarnio-Eero.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B que la page designer Alessi (1424×1306), recadré en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "virgil-abloh",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/virgil-abloh",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Abloh-Virgil_e261876f-4bf9-4f1e-af54-04a0f51414d8.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B (t-shirt noir, fond clair) que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "carlo-alessi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/carlo-alessi",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Alessi-Carlo_e8bd4183-ac85-489b-901b-51cc19c176d8.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (fauteuil, plateau et théières) que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "abi-alice",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/abi-alice",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Alice-Abi_590c0767-4399-471e-a24f-33b742864844.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "william-alsop",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/william-alsop",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Alsop-William_89d001c0-040e-4d8b-9538-7037aede0257.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B (chemise blanche, toile peinte derrière) que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "lucy-d-karin-santorso-barbara-ambrosz",
+  "verdict": "officielle",
+  "sourceType": "créateur",
+  "sourcePage": "https://lucyd.com/about/",
+  "imageUrl": "https://lucyd.com/wp-content/uploads/2026/03/lucy.d_karin-santorso-barbara-ambrosz2026_sw.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que la page « about » du studio LUCY.D (1920×1123) ; la page Alessi montre une autre photo, plus ancienne. Le recadrage actuel coupe le visage de la seconde associée (on ne voit que l'arrière de sa tête) : à recadrer depuis l'original pour montrer les deux visages (cadrage serré, les deux visages occupent ~1020 px pour 898 px disponibles en 4:5).",
+  "replacement": null
+ },
+ {
+  "slug": "michael-anastassiades",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/michael-anastassiades",
+  "imageUrl": "https://alessi.com/cdn/shop/files/1024x1024_0000_Michael_Anastassiades_ph._Matthew_Donaldson.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (pull bleu, cafetières Menhir) que le portrait affiché dans l'en-tête de la page Alessi ; crédit Matthew Donaldson. L'original Alessi ne fait que 1024×1024.",
+  "replacement": null
+ },
+ {
+  "slug": "federico-angi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/federico-angi",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Angi_Federico_photo-Alberto-Strada.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B que la page designer Alessi (1024×1024) ; crédit Alberto Strada.",
+  "replacement": null
+ },
+ {
+  "slug": "ron-arad",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/ron-arad",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Arad-Ron.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B au chapeau que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "wiel-arets",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/wiel-arets",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Arets-Wiel-phJanBitter_03d2de6c-76f4-4da1-93aa-ca484b9ee13d.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B (écharpe, lunettes) que la page designer Alessi ; crédit Jan Bitter.",
+  "replacement": null
+ },
+ {
+  "slug": "antonio-arico",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/antonio-arico",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Arico-Antonio_84ff8f17-bd8d-4837-a45c-a594508aee3e.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "big-game",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "Photo couleur en pied, issue de la même séance que le portrait Alessi (mêmes pulls) mais d'une autre prise et d'un autre cadrage. Introuvable sur alessi.com, big-game.ch, hay.com ou moustache.fr ; muuto.com bloque les requêtes, donc non vérifié.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/big-game.jpg",
+   "sourcePage": "https://alessi.com/collections/big-game",
+   "imageUrl": "https://alessi.com/cdn/shop/files/Big-Game2_fbf2ec02-5771-4894-812a-f497a4e37cd0.jpg",
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait N&B officiel Alessi des trois associés. Le recadrage 4:5 est serré : les têtes s'étendent sur x≈175–1250 et 1045 px sont disponibles. Prendre toute la hauteur et x≈190–1235 (les oreilles des deux hommes aux extrémités touchent le bord), ou ajouter un peu de fond gris sur les côtés."
+  }
+ },
+ {
+  "slug": "mario-botta",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/mario-botta",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Botta-Mario.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B de profil que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "gabriele-chiave-lorenza-bozzoli",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/gabriele-chiave + https://alessi.com/collections/lorenza-bozzoli",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Chiave-Gabriele_7cc0227a-2317-4fda-a5e8-3a3b5f020ae1.jpg + https://alessi.com/cdn/shop/files/Bozzoli-Lorenza.jpg",
+  "foundElsewhere": null,
+  "notes": "Montage côte à côte de deux portraits officiels Alessi : Gabriele Chiave et Lorenza Bozzoli, chacun publié sur sa propre page designer. Alessi n'a pas de page duo ni de photo commune.",
+  "replacement": null
+ },
+ {
+  "slug": "andrea-branzi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/andrea-branzi",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Branzi-Andrea_315c5f3c-dec1-48be-82a9-48066aa38ebf.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B (main au menton, fond noir) que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "clare-brass",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/clare-brass",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Brass-Clare.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "fratelli-campana",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "Image couleur tirée d'une vidéo d'interview : les deux frères sont assis dans un salon doré, avec des micros-cravates, et le cadrage coupe le visage de gauche. Ce sont bien Humberto et Fernando Campana (mêmes visages que sur la photo Alessi), mais la vidéo d'origine n'a pas été retrouvée ; ce n'est pas un portrait éditorial.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/fratelli-campana.png",
+   "sourcePage": "https://estudiocampana.com.br/sobre/",
+   "imageUrl": "https://estudiocampana.com.br/wp-content/uploads/2024/08/Campana_Brothers_Vava_Ribeiro.png",
+   "width": 2032,
+   "height": 1934,
+   "notes": "Portrait N&B officiel de l'Estudio Campana (les deux frères dans une même veste croisée), crédit Vava Ribeiro. Recadrage 4:5 centré sur toute la hauteur (≈1547 px de large) : les deux visages restent entiers. Le PNG est en RGBA, à convertir en JPEG. Autre choix officiel : le portrait Alessi (Fratelli-Campana_c9f49df7….jpg, 1424×1306), mais les deux visages sont trop écartés pour tenir en 4:5."
+  }
+ },
+ {
+  "slug": "achille-castiglioni",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "Photo N&B ancienne : homme en veste et cravate qui regarde vers le bas. La page Alessi montre une autre photo, celle d'Achille âgé avec une cigarette. Rien trouvé sur le site de la Fondazione Achille Castiglioni. Probablement Achille jeune (visage long, ressemble à l'homme debout sur la photo Alessi de Livio et Pier Giacomo), mais l'identité n'est pas confirmée.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/achille-castiglioni.jpg",
+   "sourcePage": "https://alessi.com/collections/achille-castiglioni",
+   "imageUrl": "https://alessi.com/cdn/shop/files/Castiglioni-Achille_c9fe24cd-223e-4ad9-a1a9-76a6a69e4faa.jpg",
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait N&B officiel Alessi (Achille souriant, lunettes rondes, cigarette, bibliothèque derrière). Recadrage 4:5 sur toute la hauteur, centré sur le visage (x≈145–1190)."
+  }
+ },
+ {
+  "slug": "gary-chang",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/gary-chang",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Chang-Gary.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B (mains jointes) que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "pierre-charpin",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/pierre-charpin",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Charpin-Pierre_219520da-c776-43e5-a94c-028e79f3eda4.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B (main sur la tête, regard baissé) que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "gabriele-chiave",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/gabriele-chiave",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Chiave-Gabriele_7cc0227a-2317-4fda-a5e8-3a3b5f020ae1.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "david-chipperfield",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/david-chipperfield",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Chipperfield-David_36761915-df16-4a3f-8d9b-7a3f290feb3f.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait N&B (mur de béton) que la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "biagio-cisotti",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/biagio-cisotti",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Cisotti-Biagio_f4f4b571-6ba8-44f7-aad3-c7e40fdf9e1c.jpg?v=1748186648",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Alessi (original 1424×1306), recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "lluis-clotet",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/lluis-clotet",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Clotet-Lluis_5c78ab48-db62-4020-850c-f67d8f7d0e54.jpg?v=1748186606",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (Clotet penché sur un dessin), recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "susan-cohn",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/susan-cohn",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Cohn-Susan_507cc306-ef26-4e79-83c1-5784713d502f.jpg?v=1748186637",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi, recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "adam-cornish",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/adam-cornish",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Cornish-Adam.jpg?v=1748186631",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (t-shirt blanc, fond gris), recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "durbino-lomazzi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/durbino-lomazzi",
+  "imageUrl": "https://alessi.com/cdn/shop/files/DUrbino-Lomazzi.jpg?v=1748186614",
+  "foundElsewhere": null,
+  "notes": "Même photo du duo Donato D'Urbino et Paolo Lomazzi que sur la page designer Alessi ; le recadrage 4:5 coupe légèrement les deux visages sur les bords.",
+  "replacement": null
+ },
+ {
+  "slug": "michele-de-lucchi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/michele-de-lucchi",
+  "imageUrl": "https://alessi.com/cdn/shop/files/DeLucchi-Michele_288296b2-b111-486d-9894-9aaf5617ce5b.jpg?v=1748185969",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi, recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "pauline-deltour",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/pauline-deltour",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Deltour-Pauline.jpg?v=1748186619",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi, recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "anita-dineen",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/anita-dineen",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Dineen-Anita-1.jpg?v=1748186654",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi, recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "luigi-caccia-dominioni",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/luigi-caccia-dominioni",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Caccia-Dominioni-Luigi_26208c76-fbff-4748-aabc-5804cdbf4c30.jpg?v=1748186640",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (lunettes, crayon en bouche), recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "naoto-fukasawa",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/naoto-fukasawa",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Fukasawa-Naoto_b8cd9d48-1ce4-4e56-af05-99f1f6b9edc2.jpg?v=1748186635",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (mur de briques blanches), recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "doriana-e-massimiliano-fuksas",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/doriana-e-massimiliano-fuksas",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Fuksas-Fabio-Lovino_f777094a-5639-41ea-aa55-38d10eca67b5.jpg?v=1748186622",
+  "foundElsewhere": null,
+  "notes": "Même photo du couple que sur la page designer Alessi ; le nom du fichier indique le photographe Fabio Lovino (crédit possible).",
+  "replacement": null
+ },
+ {
+  "slug": "elisa-gargan",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/elisa-giovannoni",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Giovannoni-Elisa_03e68fba-c945-4ef2-8672-487d08ebdf07.jpg?v=1748186668",
+  "foundElsewhere": null,
+  "notes": "Elisa Gargan et Elisa Giovannoni sont la même personne (Elisa Gargan Giovannoni, cofondatrice de Giovannoni Design, selon son site elisagargangiovannoni.com) : la photo est un autre recadrage du portrait publié par Alessi sur la page Elisa Giovannoni. La page Alessi Elisa Gargan n'a pas de portrait. À valider : Mikado a deux fiches pour la même créatrice.",
+  "replacement": null
+ },
+ {
+  "slug": "anna-e-gian-franco-gasparini",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/anna-e-gian-franco-gasparini",
+  "imageUrl": "https://alessi.com/cdn/shop/files/gasparini-web-prodotto-store.jpg?v=1748186615",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi, mais Alessi ne la publie qu'en 690×490 : le portrait local (1200×1500) est un agrandissement d'environ 3×, un peu flou. Aucune version plus grande trouvée.",
+  "replacement": null
+ },
+ {
+  "slug": "paolo-gerosa",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/paolo-gerosa",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Gerosa-Paolo.jpg?v=1748186613",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (col roulé noir), recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "massimo-giacon",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/massimo-giacon",
+  "imageUrl": "https://alessi.com/cdn/shop/files/giacon-web-prodotto-store_5cbf920f-c74c-45cf-86e0-40f5f3646333.jpg?v=1748186650",
+  "foundElsewhere": null,
+  "notes": "Même photo (traitement très contrasté) que sur la page designer Alessi, mais l'original Alessi ne fait que 690×490 : le portrait local est un fort agrandissement, de qualité limitée.",
+  "replacement": null
+ },
+ {
+  "slug": "elisa-giovannoni",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/elisa-giovannoni",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Giovannoni-Elisa_03e68fba-c945-4ef2-8672-487d08ebdf07.jpg?v=1748186668",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (bras croisés, bracelet), recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "stefano-giovannoni",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/stefano-giovannoni",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Giovannoni-Stefano_14be2e96-9499-4b4a-ad4c-d29022a5b892.jpg?v=1748185932",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (profil, veste noire), recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "adam-goodrum",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/adam-goodrum",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Goodrum-Adam-Josh-Purnell.jpg?v=1748186650",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi ; le nom du fichier indique le photographe Josh Purnell (crédit possible).",
+  "replacement": null
+ },
+ {
+  "slug": "frederic-gooris",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/frederic-gooris",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Gooris-Fred-2014.jpg?v=1748186634",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (original 1198×1600, fichier « Gooris-Fred-2014 »).",
+  "replacement": null
+ },
+ {
+  "slug": "michael-graves",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/michael-graves",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Graves-Michael.jpg?v=1748185990",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi, recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "zaha-hadid",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/zaha-hadid",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Hadid-Zaha.jpg?v=1748186624",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi, recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "jim-hannon-tan",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/jim-hannon-tan",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Hannon-Tan-Jim-1_68005e1a-08a7-4f6d-b6c4-10154693f8d3.jpg?v=1748186646",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi, recadrée en 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "franco-sargiani-eija-helander",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/franco-sargiani",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Sargiani-Franco_e08d8f4a-fb18-45cd-b765-7380aeae85d7.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que la page Alessi de Franco Sargiani (1424×1306), mais elle ne montre que Sargiani, pas Eija Helander. Alessi publie un portrait du duo sur sa page Eija Helander (https://alessi.com/cdn/shop/files/helander-web-prodotto-store_a8bb1dc8-ce83-4368-81a6-78fa96f39de1.jpg), mais il ne fait que 690×490 : trop petit pour 600 px de large en 4:5. À faire valider.",
+  "replacement": null
+ },
+ {
+  "slug": "josef-hoffmann",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/josef-hoffmann",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Hoffmann-Josef.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue, même cadrage que le portrait de la page designer Alessi (1424×1306). C'est bien Josef Hoffmann.",
+  "replacement": null
+ },
+ {
+  "slug": "giulio-iacchetti",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/giulio-iacchetti",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Iacchetti-Giulio.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (atelier, lunettes blanches) que sur la page designer Alessi (1424×1306).",
+  "replacement": null
+ },
+ {
+  "slug": "harry-paul-van-iersel",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/paul-van-iersel-harry",
+  "imageUrl": "https://alessi.com/cdn/shop/files/HARRY-AMP-ritratto.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page Alessi (le duo Harry & Camila : Harry Paul van Iersel et Camila Vega), cadre noir dessiné compris. La source ne fait que 400×352 : le fichier local de 1200×1500 est fortement agrandi et le cadre noir reste visible. Qualité faible, à faire valider.",
+  "replacement": null
+ },
+ {
+  "slug": "toyo-ito",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/toyo-ito",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Ito-Toyo_1b08cb8f-6e16-48b0-8428-4c5a0f61c6f3.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (lunettes blanches) que sur la page designer Alessi (1424×1306).",
+  "replacement": null
+ },
+ {
+  "slug": "marcello-jori",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/marcello-jori",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Jori-Marcello_fdb10541-0bde-42c1-aa8d-59b01bcd7fd8.jpg",
+  "foundElsewhere": null,
+  "notes": "Même gros plan du visage, les yeux baissés, que sur la page designer Alessi (1424×1306).",
+  "replacement": null
+ },
+ {
+  "slug": "patrick-jouin",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/patrick-jouin",
+  "imageUrl": "https://alessi.com/cdn/shop/files/jouin-web-prodotto-store.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi. La source ne fait que 690×490 : le recadrage local est agrandi et coupe le haut de la tête.",
+  "replacement": null
+ },
+ {
+  "slug": "jin-kuramoto",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/jin-kuramoto",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Kuramoto-Jin_960x960_268f3637-6248-4842-9520-a95d48a2f72a.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (960×960).",
+  "replacement": null
+ },
+ {
+  "slug": "kristiina-lassus",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/kristiina-lassus",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Lassus-Kristiina_e94e48a0-00f8-4147-83e5-f5ac88ccbeca.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (1424×1306). Le recadrage local est serré sur le visage.",
+  "replacement": null
+ },
+ {
+  "slug": "boucquillon-maaoui",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/boucquillon-maaoui",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Boucquillon-Maaoui-2020_dda1981d-c477-422b-94e5-ef7f3c40ce71.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo du duo (Donia Maaoui derrière Michel Boucquillon) que sur la page Alessi Boucquillon & Maaoui (1424×1306). Les deux membres sont visibles.",
+  "replacement": null
+ },
+ {
+  "slug": "philippe-malouin",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/philippe-malouin",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Malouin_Philippe_ph_Oliver-Marshall.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (1219×1330). Crédit dans le nom du fichier : Oliver Marshall.",
+  "replacement": null
+ },
+ {
+  "slug": "enzo-mari",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/enzo-mari",
+  "imageUrl": "https://alessi.com/cdn/shop/files/enzomari-web-prodotto-store_6e211c88-7ff5-458e-968e-6e5569d12109.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi. La source ne fait que 690×490 : le fichier local est agrandi.",
+  "replacement": null
+ },
+ {
+  "slug": "anselmo-vitale-carlo-mazzeri",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/carlo-mazzeri",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Mazzeri-Carlo_8b87b55a-aca7-407a-99e0-b5c57f959ba9.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page Alessi de Carlo Mazzeri, mais elle ne montre que lui. La page Alessi d'Anselmo Vitale (https://alessi.com/collections/anselmo-vitale) ne publie aucun portrait : aucun portrait officiel du duo trouvé. À faire valider.",
+  "replacement": null
+ },
+ {
+  "slug": "carlo-mazzeri",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/carlo-mazzeri",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Mazzeri-Carlo_8b87b55a-aca7-407a-99e0-b5c57f959ba9.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (1424×1306). C'est le même fichier que celui du duo Vitale & Mazzeri.",
+  "replacement": null
+ },
+ {
+  "slug": "alessandro-mendini",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/alessandro-mendini",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Mendini_Alessandro-Lavatori.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (fauteuil baroque blanc en arrière-plan) que sur la page designer Alessi (1424×1306). Le nom du fichier mentionne « Lavatori », sans doute le photographe.",
+  "replacement": null
+ },
+ {
+  "slug": "miriam-mirri",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/miriam-mirri",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Mirri-Miriam_bbf807ca-d9b0-474a-a760-4a210ce79cbe.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (1424×1306).",
+  "replacement": null
+ },
+ {
+  "slug": "moretti-savoy",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/moretti-savoy",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Moretti-Savoy_1b13f61f-9ece-4837-928e-9f6551968f9d.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo du duo que sur la page Alessi Moretti-Savoy (1424×1306). Le recadrage 4:5 local coupe le visage de l'homme en veste de chef, à droite : recadrer plus large pour montrer les deux membres.",
+  "replacement": null
+ },
+ {
+  "slug": "nendo",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/nendo",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Oki-Sato-Nendo-ph-Allan-Abani.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo d'Oki Sato que sur la page designer Alessi de Nendo (1424×1306). Crédit dans le nom du fichier : Allan Abani.",
+  "replacement": null
+ },
+ {
+  "slug": "marc-newson",
+  "verdict": "officielle",
+  "sourceType": "créateur",
+  "sourcePage": "https://marc-newson.com/marc-newson/",
+  "imageUrl": "https://marc-newson.com/media/about/Phil-Poynter-2025_taXJivL.jpg",
+  "foundElsewhere": null,
+  "notes": "Alessi n'a plus de page Marc Newson (https://alessi.com/collections/marc-newson renvoie une erreur 404). Même photo sur la page bio du site officiel du créateur (740×925, alt « Portrait by Phil Poynter »).",
+  "replacement": null
+ },
+ {
+  "slug": "jean-nouvel",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/jean-nouvel",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Nouvel_Jean.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (1024×1024).",
+  "replacement": null
+ },
+ {
+  "slug": "kuno-prey",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/kuno-prey",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Kuno-prey_61101266-c994-47a5-9dc7-a91e17e483aa.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (chemise vichy, lunettes rondes) que sur la page designer Alessi (1424×1306).",
+  "replacement": null
+ },
+ {
+  "slug": "claudia-raimondo",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/claudia-raimondo",
+  "imageUrl": "https://alessi.com/cdn/shop/files/raimondo-web-prodotto-store_1b01af0c-ad7b-4905-9645-bdfbc1082966.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi. La source ne fait que 690×490 : le fichier local est agrandi.",
+  "replacement": null
+ },
+ {
+  "slug": "aldo-rossi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/aldo-rossi",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Rossi-Aldo_1e32f0d5-3db4-4750-9e34-790372c202dc.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue (main dans les cheveux, montre) que le portrait de la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "alejandro-ruiz",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/alejandro-ruiz",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Ruiz-Alejandro_892d67fa-5625-4487-a499-981777a5d6bd.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo noir et blanc (main au menton, fond noir) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "elena-salmistraro",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/elena-salmistraro",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Salmistraro-Elena_230ab0f5-8bc9-499c-b70e-ab8b94165a6c.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (mains sur les joues, veste brodée) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "richard-sapper",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/richard-sapper",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Sapper-Richard_4aac45a1-1f75-408e-8266-595e6b229157.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (chemise blanche, stylo à la main) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "inga-sempe",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/inga-sempe",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Sempe-Inga_71c39aa1-7379-4485-a4bc-647df3668fd0.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (veste à col fourré, papier peint) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "emma-silvestris",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/emma-silvestris",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Silvestris-Emma.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (gros plan, boucle d'oreille spirale) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "valerio-sommella",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/valerio-sommella",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Sommella-Valerio_57c64594-82c4-4c04-a25d-faa878292742.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (pull sombre, mur en céramique) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "ettore-sottsass",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/ettore-sottsass",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Sottsass_Ettore_Blocco_Designer.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (fichier Sottsass_Ettore_Blocco_Designer, 953 x 950).",
+  "replacement": null
+ },
+ {
+  "slug": "philippe-starck",
+  "verdict": "non-officielle",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": "Wikimedia Commons : « File:Philippe Starck.jpg » (Starck sur scène à la conférence Le Web, Paris, décembre 2007), aussi en version recadrée « File:Philippe Starck crop.jpg » (https://commons.wikimedia.org/wiki/File:Philippe_Starck.jpg)",
+  "notes": "La photo locale (éclairage violet, sur scène) est une photo de conférence venant de Wikimedia, pas un portrait officiel. Alessi publie un autre portrait en studio sur sa page designer.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/philippe-starck.jpg",
+   "sourcePage": "https://alessi.com/collections/philippe-starck",
+   "imageUrl": "https://alessi.com/cdn/shop/files/Starck-Philippe-copia-1.jpg",
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait noir et blanc sur fond blanc, sweat à capuche. Recadrage 4:5 centré sur le visage, à droite de l'image (environ 1045 x 1306 px). Aucun crédit indiqué."
+  }
+ },
+ {
+  "slug": "keiji-takeuchi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/keiji-takeuchi",
+  "imageUrl": "https://alessi.com/cdn/shop/files/KEIJI-TAKEUCHI-2023.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (devant la bibliothèque) que sur la page designer Alessi. L'original ne fait que 800 x 639 px : le portrait local de 1200 x 1500 est agrandi.",
+  "replacement": null
+ },
+ {
+  "slug": "mario-trimarchi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/mario-trimarchi",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Mario_Trimarchi_ph-Fabio-Vigano.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (crédit Fabio Viganò dans le nom du fichier).",
+  "replacement": null
+ },
+ {
+  "slug": "john-truex",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/john-truex",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Truex-John.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (lunettes, chemise rayée) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "ben-van-berkel-unstudio",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/ben-van-berkel-unstudio",
+  "imageUrl": "https://alessi.com/cdn/shop/files/VanBerkel-Ben-Koos-Breukel_a7bef3f8-92e1-4b9d-a114-92534be367dc.jpg",
+  "foundElsewhere": null,
+  "notes": "Même portrait de Ben van Berkel (crédit Koos Breukel dans le nom du fichier) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "patricia-urquiola",
+  "verdict": "non-officielle",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": "Wikimedia Commons : « File:PATRICIA URQUIOLA 05 040 (cropped).tif », recadrage de « File:PATRICIA URQUIOLA 05 040.tif » (auteur « Simon 171 », CC0, 2024 ; https://commons.wikimedia.org/wiki/File:PATRICIA_URQUIOLA_05_040.tif)",
+  "notes": "La photo locale (veste satinée marron, pull violet, fond bois) correspond au recadrage publié sur Wikimedia Commons. Elle n'apparaît ni sur la page designer Alessi ni sur patriciaurquiola.com.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/patricia-urquiola.jpg",
+   "sourcePage": "https://patriciaurquiola.com/studio",
+   "imageUrl": "https://cms.patriciaurquiola.com/wp-content/uploads/2020/02/portrait.jpg",
+   "width": 668,
+   "height": 807,
+   "notes": "Portrait couleur devant une bibliothèque, publié sur la page Studio du site de la créatrice. Recadrage 4:5 sur toute la hauteur (environ 645 x 807 px), centré sur le visage. Autre option : la photo d'Alessi (https://alessi.com/cdn/shop/files/Urquiola-Patricia-copia_ac7d02e9-6e9b-4c7f-b7d0-1349143e1b1a.jpg, 1424 x 1306), plus grande, mais elle la montre assise dans son bureau avec le visage plus petit."
+  }
+ },
+ {
+  "slug": "guido-venturini",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/guido-venturini",
+  "imageUrl": "https://alessi.com/cdn/shop/files/venturini-web-prodotto-store_7b4e5097-4d84-4c3c-9edd-cad5a781e220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que sur la page designer Alessi, recadrée serré sur le visage. L'original Alessi ne fait que 690 x 490 px : le portrait local est fortement agrandi, la netteté est limitée.",
+  "replacement": null
+ },
+ {
+  "slug": "marcel-wanders",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/marcel-wanders",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Wanders-Chiave_c112b17f-76e5-4dda-a034-4417101a753d.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi ; elle montre Marcel Wanders (à droite) avec Gabriele Chiave, directeur de création du studio (fichier Wanders-Chiave). La bonne personne y figure, mais elle n'est pas seule.",
+  "replacement": null
+ },
+ {
+  "slug": "kobi-wiesendanger",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/kobi-wiesendanger",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Wiesendanger-Kobi.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (lunettes, sourire, arbres en fond) que sur la page designer Alessi, recadrée un peu plus à droite.",
+  "replacement": null
+ },
+ {
+  "slug": "theo-williams",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/theo-williams",
+  "imageUrl": "https://alessi.com/cdn/shop/files/William-Theo.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (col roulé noir, bras croisés) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "tudelft-titus-wybenga",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/tudelft-titus-wybenga",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Wybenga-Titus.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo de Titus Wybenga (chemise à motifs) que sur la page designer Alessi.",
+  "replacement": null
+ },
+ {
+  "slug": "marco-zanuso",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/marco-zanuso",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Marco_Zanuso.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (manteau en tweed, cravate) que sur la page designer Alessi (fichier Marco_Zanuso, 960 x 960).",
+  "replacement": null
+ },
+ {
+  "slug": "nika-zupanc",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/collections/nika-zupanc",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Zupanc-Nika-Portrait-phcredit-Fulvio-Grisoni.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page designer Alessi (crédit Fulvio Grisoni dans le nom du fichier).",
+  "replacement": null
+ },
+ {
+  "slug": "alessandra-baldereschi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/alessandra-baldereschi/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3321/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0007-Alessandra-Baldereschi-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait Ichendorf (chemise fleurie, fond blanc), recadrée en 4:5. Original Ichendorf : 1950 × 1200 px.",
+  "replacement": null
+ },
+ {
+  "slug": "cristina-celestino",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/cristina-celestino/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3330/10000x10000/nocrop/noenlarge/align-4/01-CRISTINACELESTINO-credit-Sara-1.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (crédit « Sara » dans le nom de fichier), recadrage plus serré. Original Ichendorf : 3714 × 5572 px.",
+  "replacement": null
+ },
+ {
+  "slug": "corrado-dotti",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/corrado-doti/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3323/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0004-Foto-CORRADO-DOTTI-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Le recadrage actuel coupe la moitié gauche du visage : à recadrer depuis l'original Ichendorf (1950 × 1200 px), visage centré.",
+  "replacement": null
+ },
+ {
+  "slug": "simone-fanciullacci",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/simone-fanciullacci/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3329/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0006-Boboli-designer-Simone-Fanciullacci-portrait-bn-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (fichier « Boboli designer Simone Fanciullacci portrait »). Original Ichendorf : 1950 × 1200 px.",
+  "replacement": null
+ },
+ {
+  "slug": "alba-gallizia",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/alba-gallizia/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/1627/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0027-Alba-Gallizia-Ichendorf-672x372-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Original Ichendorf : 1950 × 1200 px, mais le nom de fichier indique une source de 672 × 372 px : la version locale est agrandie.",
+  "replacement": null
+ },
+ {
+  "slug": "nick-geipel",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/nick-geipel/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/7163/10000x10000/nocrop/noenlarge/align-4/NIckGeipel.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Original Ichendorf : 3710 × 5566 px.",
+  "replacement": null
+ },
+ {
+  "slug": "paolo-golinelli",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/paolo-golinelli/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/6636/10000x10000/nocrop/noenlarge/align-4/paolo-golinelli.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Original Ichendorf : 1249 × 1634 px.",
+  "replacement": null
+ },
+ {
+  "slug": "tsukasa-goto",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/tsukasa-goto/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3348/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0010-Tsukasa-Goto-port-2016-01-copia-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (chapeau, veste en jean). Original Ichendorf : 1950 × 1200 px. Le recadrage local est décentré vers la gauche.",
+  "replacement": null
+ },
+ {
+  "slug": "denis-guidone",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/denis-guidone/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3331/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0021-Denis-Guidone-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (regard baissé, pull noir). Original Ichendorf : 1950 × 1200 px.",
+  "replacement": null
+ },
+ {
+  "slug": "pascal-hien",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/pascal-hien/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/6635/10000x10000/nocrop/noenlarge/align-4/23-01-27-PASCAL-HIEN-INANIEHOFF-LOWRES-small-17-BW.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (bureau, chemise en velours ; fichier « Inaniehoff »). Original Ichendorf : 1535 × 2303 px.",
+  "replacement": null
+ },
+ {
+  "slug": "patrik-illo",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/patrik-illo/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/6540/10000x10000/nocrop/noenlarge/align-4/Schermata-2024-10-03-alle-15.44.41.png",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (fond noir, lunettes sans monture). Ichendorf ne publie qu'une capture d'écran de 480 × 497 px : la version locale est agrandie.",
+  "replacement": null
+ },
+ {
+  "slug": "forti-e-di-loreto",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designer/forti-e-di-loreto/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3585/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0018-Forti-e-Di-Loreto-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (le duo assis à une table en verre). La version locale contient des bandes grises en haut et en bas (image paysage posée dans un cadre 4:5) : à recadrer depuis l'original Ichendorf (1950 × 1200 px).",
+  "replacement": null
+ },
+ {
+  "slug": "astrid-luglio",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/astrid-luglio/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3356/10000x10000/nocrop/noenlarge/align-4/Astrid-Luglio-photocredit-Sirio-.png",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (crédit photo « Sirio » dans le nom de fichier). Original Ichendorf : 1087 × 768 px.",
+  "replacement": null
+ },
+ {
+  "slug": "mist-o",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/misto-o/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3327/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0015-Mist-o-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (Tommaso Nani et Noa Ikeuchi). La version locale contient des bandes grises en haut et en bas : à recadrer depuis l'original Ichendorf (1950 × 1200 px).",
+  "replacement": null
+ },
+ {
+  "slug": "tomoko-mizu",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/tomoko-mizu/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/4629/10000x10000/nocrop/noenlarge/align-4/Tomoko-Mizu-Sito.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Ichendorf ne publie que 480 × 480 px : la version locale est agrandie.",
+  "replacement": null
+ },
+ {
+  "slug": "studio-naessi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/naessi-studio/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/4426/10000x10000/nocrop/noenlarge/align-4/N-ssi-Studio.jpeg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (les deux membres du studio de profil). Ichendorf ne publie que 640 × 394 px : la version locale est agrandie.",
+  "replacement": null
+ },
+ {
+  "slug": "lina-obregon",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/lina-obregon/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/4627/10000x10000/nocrop/noenlarge/align-4/Lina-Obregon.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (assise sur un canapé). Ichendorf ne publie que 480 × 480 px : la version locale est agrandie.",
+  "replacement": null
+ },
+ {
+  "slug": "chiara-onida",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/chiara-onida/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/5095/10000x10000/nocrop/noenlarge/align-4/Chiara-Onida-ls.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Original Ichendorf : 2863 × 2008 px.",
+  "replacement": null
+ },
+ {
+  "slug": "daniele-dalla-pellegrina",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/daniele-dalla-pellegrina/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/7182/10000x10000/nocrop/noenlarge/align-4/daniele-dalla-pellegrina-BW.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Original Ichendorf : 2362 × 2362 px.",
+  "replacement": null
+ },
+ {
+  "slug": "anna-perugini",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/anna-perugini/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3335/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0025-Anna-Perugini-Portrait-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Original Ichendorf : 1950 × 1200 px.",
+  "replacement": null
+ },
+ {
+  "slug": "margherita-rui",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/margherita-rui/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/4424/10000x10000/nocrop/noenlarge/align-4/Screenshot-2023-04-16-alle-12.30.15.png",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (veste argentée, fond gris). Ichendorf publie une capture d'écran de 1190 × 1164 px.",
+  "replacement": null
+ },
+ {
+  "slug": "marta-sansoni",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://alessi.com/products/cactus-fruit-bowl",
+  "imageUrl": "https://alessi.com/cdn/shop/files/Sansoni-Marta_9a44983d-c43b-456c-b3b7-8c69d68a4432.jpg?v=1748186609",
+  "foundElsewhere": null,
+  "notes": "La photo locale n'est pas celle d'Ichendorf (main sous le menton, crédit Federico Marchionni). Elle se trouve chez Alessi, autre éditeur de Marta Sansoni : même prise de vue dans la section designer des fiches produit, en 1424 × 1306 px. Son site martasansoni.com publie d'autres images de la même séance.",
+  "replacement": null
+ },
+ {
+  "slug": "f-mastropaolo-e-b-scarfati",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/fabiana-mastropaolo-e-bianca-scarfati/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3619/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0000-mastropietroscarfati.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf, mais la version locale a de larges bandes noires en haut et en bas, et Bianca Scarfati n'y apparaît qu'à moitié, coupée au bord droit. À recadrer depuis l'original Ichendorf (1950 × 1200 px), où l'on voit les deux visages.",
+  "replacement": null
+ },
+ {
+  "slug": "brian-sironi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/brian-sironi/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/4425/10000x10000/nocrop/noenlarge/align-4/Brian-Sironi.jpeg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Ichendorf ne publie que 640 × 394 px : la version locale est agrandie.",
+  "replacement": null
+ },
+ {
+  "slug": "marco-sironi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/marco-sironi/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/3326/10000x10000/nocrop/noenlarge/align-4/Ichendorf-0016-Marco-Sironi-copy.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf. Le recadrage actuel coupe le visage et les lunettes au bord droit : à recadrer depuis l'original Ichendorf (1950 × 1200 px).",
+  "replacement": null
+ },
+ {
+  "slug": "studiopepe",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.ichendorfmilano.com/en/designers/studiopepe/",
+  "imageUrl": "https://www.ichendorfmilano.com/images/299/5994/10000x10000/nocrop/noenlarge/align-4/Studiopepe-SilviaRivoltella-2.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur Ichendorf (Arianna Lelli Mami et Chiara Di Pinto ; crédit « Silvia Rivoltella » dans le nom de fichier). Original Ichendorf : 3149 × 4724 px.",
+  "replacement": null
+ },
+ {
+  "slug": "filip-arickx",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/filip-arickx",
+  "imageUrl": "https://serax.com/cdn/shop/files/Filip_Arickx.jpg",
+  "foundElsewhere": null,
+  "notes": "Même image (portrait peint, lunettes d'aviateur) sur la page designer Serax, original 3200x4000. C'est une peinture et non une photo : choix de l'éditeur, à garder ou non selon le goût du propriétaire.",
+  "replacement": null
+ },
+ {
+  "slug": "kris-van-assche",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/kris-van-assche",
+  "imageUrl": "https://serax.com/cdn/shop/files/KrisVanAssche.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo noir et blanc (costume croisé, fond blanc) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "evelien-bleumink",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/evelien-bleumink",
+  "imageUrl": "https://serax.com/cdn/shop/files/EvelienBleumink.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (foulard fleuri, profil trois-quarts) sur la page designer Serax. Attention : Serax ne publie que 526x722 px ; le fichier local en 1200x1500 est donc un agrandissement, légèrement flou.",
+  "replacement": null
+ },
+ {
+  "slug": "piet-boon",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/piet-boon",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Piet_Boon_96926ec3-9baf-421b-a159-2aef1637d6e7.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (t-shirt blanc, façade sombre) sur la page designer Serax et dans la grille « Featured designers » (fichier Portrait_Piet_Boon.jpg), original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "sophie-casier",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/sophie-casier",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_SophieCasier.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (chemise blanche, atelier avec grand miroir) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "plan-c",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/plan-c",
+  "imageUrl": "https://serax.com/cdn/shop/files/BW_PlanC.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo de Carolina Castiglioni (manteau noir, bras croisés, deux lapins blancs) sur la page Plan C de Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "eva-claessens",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/eva-claessens",
+  "imageUrl": "https://serax.com/cdn/shop/files/Eva_Claessens.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (Eva Claessens dessinant à sa table, grande verrière) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "coseincorso",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/coseincorso",
+  "imageUrl": "https://serax.com/cdn/shop/files/cosecorso.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo des deux membres du studio debout, fond blanc avec miroir arrondi, sur la page Coseincorso de Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "ruben-deriemaeker",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/ruben-deriemaeker",
+  "imageUrl": "https://serax.com/cdn/shop/files/Ruben_Deriemaeker_Ecom.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (col roulé noir, moule en bois dans les mains) sur la page designer Serax. Serax ne publie que 960x1200 ; le fichier local 1200x1500 est légèrement agrandi.",
+  "replacement": null
+ },
+ {
+  "slug": "nadine-dewart",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/nadine-dewart",
+  "imageUrl": "https://serax.com/cdn/shop/files/Nadine_Dewart.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (chemise noire, assise sur un tabouret, fond gris) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "lauren-van-driessche",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/lauren-van-driessche",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portret_Lauren_Van_Driessche.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (blouse blanche à motifs, bras croisés, mur crépi) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "marc-ferrand",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/marc-ferrand",
+  "imageUrl": "https://serax.com/cdn/shop/files/Marc_Ferrand.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (cheveux gris, barbe, bardage en bois sombre) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "alex-gabriels",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/alex-gabriels",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_AlexGabriels_ZW_Ecom.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (tablier rayé, plat en céramique dans les mains, cuisine) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "nadia-gallardo",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/nadia-gallardo",
+  "imageUrl": "https://serax.com/cdn/shop/files/nadia-gallardo.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (profil, cheveux bouclés, t-shirt blanc) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "frederick-gautier",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/frederick-gautier",
+  "imageUrl": "https://serax.com/cdn/shop/files/Frederick_Gautier.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (assis dans un bassin vide sous un toit en bois) sur la page designer Serax, original 3200x4000. Le visage est très petit dans l'image ; cadrage peu lisible en vignette.",
+  "replacement": null
+ },
+ {
+  "slug": "grint",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/grint",
+  "imageUrl": "https://serax.com/cdn/shop/files/GRiNT.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo des deux fondateurs de Grint (veste en tweed, casquette et lunettes) sur la page Grint de Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "koen-van-guijze",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/koen-van-guijze",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Koen_Van_Guijze.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (pull clair, bras croisés, suspension noire au-dessus) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "wouters-hendrix",
+  "verdict": "officielle",
+  "sourceType": "créateur",
+  "sourcePage": "https://wouters-hendrix.com/blogs/about/our-story",
+  "imageUrl": "https://wouters-hendrix.com/cdn/shop/files/Portret_Karen_Katrin.jpg",
+  "foundElsewhere": null,
+  "notes": "La page Serax ne montre qu'un logo ; la même photo couleur de Katrin Wouters et Karen Hendrix (verrière, mur bleu) est publiée sur le site de la maison (pages Our story et Craftmanship), original 2837x3542. Les visages y sont petits ; le même site propose un profil serré des deux créatrices (Wouters_Hendrix_portrait_4, 1968x866, trop large pour un recadrage 4:5 des deux visages).",
+  "replacement": null
+ },
+ {
+  "slug": "sergio-herman",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/sergio-herman",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Sergio_Inko.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (veste noire, assiettes Inku contre la poitrine, couloir en béton) sur la page designer Serax et dans « Featured designers », original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "seppe-van-heusden",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/seppe-van-heusden",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Seppe_Van_Heusden.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (pull noir, devant une fenêtre) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "ann-van-hoey",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/ann-van-hoey",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_annvanhoey_nathaliesamain_Ecom.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (veste en jean, bol noir sur les genoux, pièces blanches empilées) sur la page designer Serax, original 3200x4000 ; le nom du fichier crédite la photographe Nathalie Samain.",
+  "replacement": null
+ },
+ {
+  "slug": "kseniya-kravtsova",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/kseniya-kravtsova",
+  "imageUrl": "https://serax.com/cdn/shop/files/Kseniya_Kravtsova.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (veste en lin, contre un tronc de pin) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "anita-le-grelle",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "C'est bien Anita Le Grelle, apparemment pendant la même séance que le portrait Serax (salopette, même atelier), mais ce cadrage en buste n'a été trouvé ni sur serax.com (UE et US, pages designer et collections), ni sur terresdereves.be, ni chez Nedgis ou dans la presse consultée (Home Fashion News, Tendances, High Level Com). Origine non établie, peut-être l'espace média Serax, qui demande une connexion.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/anita-le-grelle.jpg",
+   "sourcePage": "https://serax.com/pages/anita-le-grelle",
+   "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Anita_LEGRELLE_dd8f2cad-3c1f-4b1e-9601-7f99529ca637.jpg",
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait officiel Serax, en pied, salopette dans son atelier. Le visage est petit dans le cadre entier : recadrer en 4:5 sur le haut du corps (par exemple environ 1600x2000 centré sur le visage, ce qui reste au-dessus de 600 px de large)."
+  }
+ },
+ {
+  "slug": "bertrand-lejoly",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/bertrand-lejoly",
+  "imageUrl": "https://serax.com/cdn/shop/files/Bertrand_Lejoly.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (portrait frontal, pull noir, fond gris) sur la page designer Serax, original 3200x4000.",
+  "replacement": null
+ },
+ {
+  "slug": "arik-levy",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/arik-levy",
+  "imageUrl": "https://static.vitra.com/media/asset/8699956/storage/master/87250044.jpg",
+  "foundElsewhere": null,
+  "notes": "Serax n'a pas de page pour Arik Levy (serax.com/pages/arik-levy renvoie une 404). La même photo (gros plan noir et blanc, regard par-dessus l'épaule) est publiée sur sa page designer Vitra ; le fichier local de 1200x960 correspond à la version Vitra de 1440x960 recadrée, donc pas au format 4:5. La version master du CDN Vitra (3750x2500) permet un vrai recadrage 4:5 d'environ 2000x2500.",
+  "replacement": null
+ },
+ {
+  "slug": "jose-levy",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/jose-levy",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_JoseLevy_Photo_by_Mikael_Lafontan_-_Zwart_Wit.jpg?v=1684155372",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Serax (original 3200x4000). Crédit indiqué dans le nom du fichier : Mikael Lafontan.",
+  "replacement": null
+ },
+ {
+  "slug": "louis-de-limburg",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/louis-de-limburg",
+  "imageUrl": "https://serax.com/cdn/shop/files/Louis_de_Limburg.jpg?v=1688374344",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "nel-maertens",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/nel-maertens",
+  "imageUrl": "https://serax.com/cdn/shop/files/Nel.jpg?v=1772202025",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "marie-michielssen",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/marie-michielssen",
+  "imageUrl": "https://serax.com/cdn/shop/files/Marie_Michielssen_Portret_BW_V2_c1309178-41be-4e81-a7d9-d65ae9bc53e7.jpg?v=1764862557",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait N&B de la page designer Serax, aussi utilisé sur la page d'ensemble des designers (original 3200x4000). Visage de profil, mais c'est bien le portrait officiel.",
+  "replacement": null
+ },
+ {
+  "slug": "bea-mombaers",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/bea-mombaers",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_BeaMombaers_Ecom.jpg?v=1682603363",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "pascale-naessens",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/pascale-naessens",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Pascal_NAESSENS_87cd70f5-6759-4218-a870-349b6b85111f.jpg?v=1682696417",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "studio-ottawa",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/studio-ottawa",
+  "imageUrl": "https://serax.com/cdn/shop/files/studio_Ottawa.jpg?v=1746798040",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "ottolenghi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/ottolenghi",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Ecom_Ottolenghi_aaac3bfd-0eb2-4873-adf3-116bfe8dcaa9.jpg?v=1682582071",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax, aussi sur la page d'ensemble des designers (original 3200x4000). C'est bien Yotam Ottolenghi.",
+  "replacement": null
+ },
+ {
+  "slug": "patrick-paris",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/patrick-paris",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Patrick_Paris_Ecom_45f42c99-c31b-45fa-8cd1-9bf74ee6ad10.jpg?v=1684929004",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "annebet-philips",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/annebet-philips",
+  "imageUrl": "https://serax.com/cdn/shop/files/Annebet_Philips__EliasDerboven_HR_35.jpg?v=1776429207",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000). Crédit indiqué dans le nom du fichier : Elias Derboven.",
+  "replacement": null
+ },
+ {
+  "slug": "thijs-prinsen",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/thijs-prinsen",
+  "imageUrl": "https://serax.com/cdn/shop/files/DSC_2861zw.jpg?v=1706702247",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Serax (original 3280x4928, format 2:3) ; la photo locale en est un recadrage 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "claudia-schoemig",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/claudia-schoemig",
+  "imageUrl": "https://serax.com/cdn/shop/files/CS.jpg?v=1772114648",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "antonino-sciortino",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/antonino-sciortino",
+  "imageUrl": "https://serax.com/cdn/shop/files/mattiaaquila-000001.jpg?v=1683185752",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000, crédit Mattia Aquila d'après le nom du fichier). Plan large dans l'atelier : le visage est petit dans le cadre.",
+  "replacement": null
+ },
+ {
+  "slug": "bela-silva",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://web.archive.org/web/20250618055020/https://www.serax.com/pages/bela-silva",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_BelaSilva_Ecom.jpg?v=1682604961",
+  "foundElsewhere": null,
+  "notes": "Même photo que l'ancien portrait de la page designer Serax (archive Wayback du 18/06/2025) ; le fichier est toujours servi par le CDN Serax. Serax a depuis changé de portrait (bela_13c9a257-…jpg, Bela Silva assise, visage bien visible) : à envisager, car sur la photo actuelle le visage est penché et en partie caché.",
+  "replacement": null
+ },
+ {
+  "slug": "studio-simple",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/studio-simple",
+  "imageUrl": "https://serax.com/cdn/shop/files/Studio-Sample.jpg?v=1683896580",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000) ; on y voit les deux fondateurs, mais petits dans un plan d'intérieur.",
+  "replacement": null
+ },
+ {
+  "slug": "waww-la-table",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/waww-la-table",
+  "imageUrl": "https://serax.com/cdn/shop/files/WAWW_La_Table.jpg?v=1771335069",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000), montrant les deux fondatrices.",
+  "replacement": null
+ },
+ {
+  "slug": "luc-tuymans",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/luc-tuymans",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portreit_LucTuymans_crop_ecom.jpg?v=1684156029",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "utilise-objects",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/utilise-objects",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Utilise.objects_Ecom.jpg?v=1684324684",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000), montrant les deux membres du duo.",
+  "replacement": null
+ },
+ {
+  "slug": "roos-van-de-velde",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/roos-van-de-velde",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Roos_Van_De_Velde_ea6f745b-ff4d-4058-a0fb-ddaea33952df.jpg?v=1684320772",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3209x4000). Portrait artistique : le visage est voilé par un flou de reflets, c'est voulu.",
+  "replacement": null
+ },
+ {
+  "slug": "vincent-van-duysen",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/vincent-van-duysen",
+  "imageUrl": "https://serax.com/cdn/shop/files/Vincent.jpg?v=1730279781",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000) ; la même image existe aussi sous le nom Vincent_859238b8-….jpg sur la page d'ensemble des designers.",
+  "replacement": null
+ },
+ {
+  "slug": "jonas-van-put",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/jonas-van-put",
+  "imageUrl": "https://serax.com/cdn/shop/files/JonasVanPut_KnackWeekend-1__JefJacobsbw.jpg?v=1744023539",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000). D'après le nom du fichier, la photo vient d'un reportage de Knack Weekend (photo Jef Jacobs) repris par Serax : c'est l'éditeur qui la publie, mais le crédit presse est à noter.",
+  "replacement": null
+ },
+ {
+  "slug": "antoine-vandewoude",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/antoine-vandewoude",
+  "imageUrl": "https://serax.com/cdn/shop/files/Antoine_Vandewoude.jpg?v=1742901351",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000).",
+  "replacement": null
+ },
+ {
+  "slug": "bob-verhelst",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/bob-verhelst",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_BobVerhelst_KoenDeWaal.jpg?v=1732180448",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 1383x1699, crédit Koen De Waal d'après le nom du fichier).",
+  "replacement": null
+ },
+ {
+  "slug": "renate-vos",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.serax.com/pages/renate-vos",
+  "imageUrl": "https://serax.com/cdn/shop/files/Portrait_RenateVos_Ecom.jpg?v=1684320673",
+  "foundElsewhere": null,
+  "notes": "Même photo que le portrait de la page designer Serax (original 3200x4000). La page existe mais n'est pas listée dans l'index des designers de Serax.",
+  "replacement": null
+ },
+ {
+  "slug": "kelly-wearstler",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://web.archive.org/web/20250807111009/https://www.serax.com/pages/kelly-wearstler",
+  "imageUrl": "https://serax.com/cdn/shop/files/Kelly_W_ASerge_selection_71.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que l'ancien portrait de la page designer Serax (archive Wayback du 07/08/2025) ; le fichier est toujours servi par le CDN Serax (3200x4000). Serax affiche aujourd'hui un autre portrait de la même séance (portrait_ecom_Kelly.jpg, accroupie de profil).",
+  "replacement": null
+ },
+ {
+  "slug": "alvar-aalto",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.artek.fi/en/company/designers/alvar-aalto",
+  "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604823/designers/Alvar_Aalto_treated.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo (Aalto accoudé, crayon à la main, plante en arrière-plan), portrait principal de la page designer Artek ; l'original fait 2949×3894 px.",
+  "replacement": null
+ },
+ {
+  "slug": "anderssen-voll",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "C'est bien le duo (Espen Voll à gauche, Torbjørn Anderssen à droite). Flokk (HÅG) publie en noir et blanc une photo de la même séance, mais la tête d'Anderssen n'a pas la même inclinaison : ce n'est pas la même prise. La version couleur actuelle n'apparaît ni chez Muuto, ni chez &Tradition, ni sur anderssen-voll.com, Hem, Swedese ou Ariake.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/anderssen-voll.jpg",
+   "sourcePage": "https://www.flokk.com/designers/anderssen-voll",
+   "imageUrl": "https://www.flokk.com/hubfs/H%C3%85G%20Tion/Espen-Voll-og-Torbj%C3%B8rn-Anderssen-BW-1.jpg",
+   "width": 4480,
+   "height": 3176,
+   "notes": "Portrait officiel de Flokk, éditeur du siège HÅG Tion du duo, en noir et blanc et issu de la même séance que la photo actuelle. Recadrage 4:5 centré sur le duo, x 1260 à 3800 sur toute la hauteur (2540×3176), cadrage presque identique à la photo actuelle. Si on préfère un éditeur vendu chez Mikado, Muuto publie un portrait plus ancien en couleur (https://www.muuto.com/globalassets/content-media/images/designer/anderssen--voll/anderssen--voll-portrait-muuto-23-roll-up-image.jpg, 1190×1786)."
+  }
+ },
+ {
+  "slug": "carole-baijings",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": "Même séance (veste brodée rouge et violette) sur wanteddesignnyc.com (https://www.wanteddesignnyc.com/wp-content/uploads/2025/02/Carole-Baijings-WantedDesign-Resident-Portrait-scaled.jpg), mais pas la même prise : mèches et étalonnage différents.",
+  "notes": "C'est bien Carole Baijings, mais cette prise n'apparaît ni sur carolebaijings.com, ni sur scholtenbaijings.com, ni chez Fatboy. La seule prise proche est publiée par WantedDesign, un salon, donc pas une source officielle.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/carole-baijings.jpg",
+   "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+   "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw688e2fa0/Landingspages/Designer%20Stories/05.c-carole-bijings%20(1).jpg",
+   "width": 1408,
+   "height": 1760,
+   "notes": "Photo de la page Designer stories de Fatboy (Carole sur un pouf Fatboy). Le bandeau de produits du bas a été retiré, puis l'image recadrée en 4:5 sur la zone (150,0)-(1558,1760) de l'original 1760x2488. Elle regarde de côté."
+  }
+ },
+ {
+  "slug": "edward-barber-jay-osgerby",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/edward-barber-and-jay-osgerby",
+  "imageUrl": "https://static.vitra.com/media/asset/8682319/storage/v_fullbleed_1440x/81386118.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large). Les deux membres du duo sont visibles. Le nom du fichier Vitra indique le crédit « Mark Cocksedge ».",
+  "replacement": null
+ },
+ {
+  "slug": "dorothee-becker",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/dorothee-becker",
+  "imageUrl": "https://static.vitra.com/media/asset/8694995/storage/v_fullbleed_1440x/87250030.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large). Portrait en noir et blanc publié par Vitra pour Dorothee Becker.",
+  "replacement": null
+ },
+ {
+  "slug": "ronan-erwan-bouroullec",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/ronan-and-erwan-bouroullec",
+  "imageUrl": "https://static.vitra.com/media/asset/8692653/storage/v_fullbleed_1440x/81447863.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large). Les deux frères sont visibles, avec une chaise Vitra au premier plan.",
+  "replacement": null
+ },
+ {
+  "slug": "pier-giacomo-castiglioni",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "Scan très granuleux d'une photo d'archive. Le visage correspond à Pier Giacomo tel qu'il apparaît sur les photos des deux frères publiées par Flos et Zanotta. Cette prise n'est ni chez Flos (page A. & P.G. Castiglioni) ni chez Zanotta, et ce n'est pas non plus la photo de Wikimedia.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/pier-giacomo-castiglioni.jpg",
+   "sourcePage": "https://flos.com/en/nl/designers/a-and-pg-castiglioni.html",
+   "imageUrl": "https://flos.com/on/demandware.static/-/Library-Sites-FLOS-contentlib/default/dwb18200bd/clp_designers/designers-a-and-pg-castiglioni-flos-entrance-desk.jpg",
+   "width": 3025,
+   "height": 2269,
+   "notes": "Photo Flos des deux frères (Achille debout à gauche, Pier Giacomo assis à droite), publiée sur la liste des designers Flos et, teintée en bleu, en tête de leur page. Recadrage 4:5 sur Pier Giacomo : x 1880 à 3025, y 838 à 2269 (1145×1431). L'identification de Pier Giacomo (assis à droite) repose sur la ressemblance avec la photo actuelle : à faire valider."
+  }
+ },
+ {
+  "slug": "michel-charlot",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/michel-charlot",
+  "imageUrl": "https://static.vitra.com/media/asset/8695170/storage/v_fullbleed_1440x/81448250.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large).",
+  "replacement": null
+ },
+ {
+  "slug": "antonio-citterio",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/antonio-citterio",
+  "imageUrl": "https://static.vitra.com/media/asset/8682274/storage/v_fullbleed_1440x/81385570.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large).",
+  "replacement": null
+ },
+ {
+  "slug": "julien-de-smedt",
+  "verdict": "officielle",
+  "sourceType": "créateur",
+  "sourcePage": "https://www.juliendesmedt.com/about",
+  "imageUrl": "https://www.juliendesmedt.com/media/pages/about/44fe69ee75-1743759889/05cb97e481386079a2304f86a6dcd25d-min.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo que sur la page About du site de Julien De Smedt (escalier gris, chemise bleue). L'original publié fait 1000x1500 ; la version locale (1200x1500) est donc légèrement agrandie. Julien De Smedt n'a pas de page designer sur hay.com.",
+  "replacement": null
+ },
+ {
+  "slug": "charles-ray-eames",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/charles-and-ray-eames",
+  "imageUrl": "https://static.vitra.com/media/asset/8680079/storage/v_fullbleed_1440x/81353918.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large). Charles et Ray Eames sont tous deux visibles.",
+  "replacement": null
+ },
+ {
+  "slug": "daniel-enoksson",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=57aaa010-1267-48ee-83f8-fa1daf8d550c",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/daniel-enoksson_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers). Original HAY en 3000x3000.",
+  "replacement": null
+ },
+ {
+  "slug": "hannes-fritz",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=1a736296-b5bd-49cb-87a1-cc398e8d23e2",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/hannes-and-fritz_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers). Les deux membres du duo sont présents.",
+  "replacement": null
+ },
+ {
+  "slug": "frank-gehry",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/frank-gehry",
+  "imageUrl": "https://static.vitra.com/media/asset/8699807/storage/v_fullbleed_1440x/81488512.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large). Le nom du fichier Vitra est « Frank O. Gehry ».",
+  "replacement": null
+ },
+ {
+  "slug": "alexander-girard",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/alexander-girard",
+  "imageUrl": "https://static.vitra.com/media/asset/8682269/storage/v_fullbleed_1440x/81385132.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large).",
+  "replacement": null
+ },
+ {
+  "slug": "mette-rolf-hay",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": "Même séance (Mette et Rolf assis devant une fenêtre, mêmes vêtements) vue dans la presse, sans le cliché exact : Surface Magazine (https://images.surfacemag.com/app/uploads/2019/09/09154339/rolf-and-mette-hay-open.jpg) et Core77 (https://www.core77.com/posts/40965/, même tenue, debout).",
+  "notes": "Cliché exact non retrouvé ; il n'apparaît pas sur hay.com (page About HAY, articles « The foundation » et « All about HAY »). Il semble venir d'une séance publiée par la presse ; le recadrage local coupe aussi le visage de Mette sur le bord gauche.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/mette-rolf-hay.jpg",
+   "sourcePage": "https://www.hay.com/footer/about-hay/about-hay",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/brandsite/footer/about/about-hay/icon_mette-and-rolf-2026_1390x800.jpg",
+   "width": 2000,
+   "height": 1151,
+   "notes": "Photo officielle HAY 2026 de Mette et Rolf Hay au milieu de meubles HAY (Rolf assis, casquette ; Mette debout). Recadrage 4:5 conseillé : x 855-1575, y 170-1070 (720x900 px, les deux visages bien lisibles)."
+  }
+ },
+ {
+  "slug": "florentijn-hofman",
+  "verdict": "non-officielle",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": "Wikimedia Commons : « File:Florentijn Hofman in Glory Pier, Port of Kaohsiung, Taiwan.jpg » (https://upload.wikimedia.org/wikipedia/commons/7/71/Florentijn_Hofman_in_Glory_Pier%2C_Port_of_Kaohsiung%2C_Taiwan.jpg), image principale de son article Wikipedia.",
+  "notes": "Même prise de vue que la photo Wikimedia (lunettes de soleil, foule, Kaohsiung), recadrée. Le site florentijnhofman.com ne publie aucun portrait.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/florentijn-hofman.jpg",
+   "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+   "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw9f30cb9d/Landingspages/Designer%20Stories/05.a-florentijn-hofman%20(1).jpg",
+   "width": 1408,
+   "height": 1760,
+   "notes": "Portrait en noir et blanc de la page Designer stories de Fatboy. Bandeau de produits retiré, recadrage 4:5 sur (176,0)-(1584,1760) de l'original 1760x2488. Le visage remplit le cadre."
+  }
+ },
+ {
+  "slug": "arne-jacobsen",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "C'est bien Arne Jacobsen (manteau clair, pipe, assis devant un tirage d'architecture). La photo n'est ni chez &Tradition (page designer et médiathèque), ni chez Carl Hansen & Søn, ni chez Fritz Hansen, ni sur arnejacobsen.com, et ce n'est pas l'image de Wikipedia.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/arne-jacobsen.jpg",
+   "sourcePage": "https://www.fritzhansen.com/en/designers/arne-jacobsen",
+   "imageUrl": "https://cloudinary.fritzhansen.com/-/media/images/images/inspiration/designers/arne-jacobsen/arne-jacobsen-close-up.jpg",
+   "width": 3478,
+   "height": 4782,
+   "notes": "Gros plan en noir et blanc publié par Fritz Hansen, son éditeur historique, qui n'est pas une marque de Mikado. Recadrage 4:5 : toute la largeur, centré sur le visage (3478×4347). &Tradition n'a que des portraits de 472 px de large, trop petits."
+  }
+ },
+ {
+  "slug": "simon-jones",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=42d40a05-90a1-4585-84b5-4e233ec326f4",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/simon-jones-studio_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers). Photo du studio, avec Simon Jones et son associé (Jack Neville) dans l'atelier ; original HAY en 1000x1000.",
+  "replacement": null
+ },
+ {
+  "slug": "leif-jorgensen",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=be80968a-4ccc-4587-be6c-d26d9b46d0c0",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/leif-joergensen_b2b-b2c.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers). Original HAY en 2304x2304.",
+  "replacement": null
+ },
+ {
+  "slug": "kranen-gille",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+  "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw8817d392/Landingspages/Designer%20Stories/kranen-galle.jpg",
+  "foundElsewhere": null,
+  "notes": "Même image que la page Designer stories de Fatboy : Jos Kranen et Johannes Gille avec la table Bakkes. La photo locale reprend le visuel entier, bandeau de vignettes produits (Lebow, Bakkes) compris. Mieux vaut recadrer sur la photo, soit les 1760 px du haut de l'original 1760x2498.",
+  "replacement": null
+ },
+ {
+  "slug": "tristan-lohner",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.fermob.com/en_int/designers",
+  "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Tristan-LOHNER.gif",
+  "foundElsewhere": null,
+  "notes": "Même photo en noir et blanc (veste noire, chemise ouverte, regard vers la gauche) sur la page Designers de Fermob, en 640×722 px. Le fichier local, recadré plus serré, fait 719×899 px et est en réalité un WebP nommé .jpg : il vient d'une version plus grande ou a été agrandi.",
+  "replacement": null
+ },
+ {
+  "slug": "cecilie-manz",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "C'est bien Cecilie Manz. Son site publie une photo de la même séance (Jeppe Sørensen, 2022 : chemise noire, rideau blanc), mais c'est un plan large d'elle en train de peindre, pas ce gros plan. Le gros plan n'est ni chez Muuto, ni chez Fritz Hansen, ni chez Holmegaard.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/cecilie-manz.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/cecilie-manz/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/cecilie-manz/cecilie-manz-studio-muuto.jpg",
+   "width": 1416,
+   "height": 1786,
+   "notes": "Portrait officiel de Muuto : assise à son bureau, regard vers la droite, visage bien visible. Recadrage 4:5 décalé vers la droite, par exemple x 0 à 1416 et y 0 à 1770. Autre choix : la photo de son site, https://www.ceciliemanz.com/sites/default/files/CECILIE%20MANZ%20PORTRAIT_PHOTO%20CREDITS_JEPPE%20S%C3%98RENSEN.jpg (1333×2000, crédit Jeppe Sørensen), mais le visage y est de profil et baissé."
+  }
+ },
+ {
+  "slug": "jasper-morrison",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/jasper-morrison",
+  "imageUrl": "https://static.vitra.com/media/asset/8682408/storage/v_fullbleed_1440x/81388027.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large).",
+  "replacement": null
+ },
+ {
+  "slug": "jonathan-muecke",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=1a741f96-f18d-40ed-afe6-69c9464bb550",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jonathan-muecke_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers). L'URL de la page HAY porte le slug « johnathan-muecke ».",
+  "replacement": null
+ },
+ {
+  "slug": "george-nelson",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/george-nelson",
+  "imageUrl": "https://static.vitra.com/media/asset/8682358/storage/v_fullbleed_1440x/81386560.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large).",
+  "replacement": null
+ },
+ {
+  "slug": "isamu-noguchi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/isamu-noguchi",
+  "imageUrl": "https://static.vitra.com/media/asset/8682363/storage/v_fullbleed_1440x/81387209.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large).",
+  "replacement": null
+ },
+ {
+  "slug": "norm-architects",
+  "verdict": "introuvable",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "Montage de deux photos : Jonas Bjerre-Poulsen (chauve, lisant) et Kasper Rønn (lunettes, chemise blanche). Il n'est ni chez &Tradition, ni chez Muuto, ni chez Audo, ni sur la page People de normcph.com, dont les portraits ont été refaits en septembre 2026. Il n'apparaît pas non plus chez Connox ou Spotti.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/norm-architects.jpg",
+   "sourcePage": "https://normcph.com/people/",
+   "imageUrl": "https://normcph.com/wp-content/uploads/2026/09/Jonas-1-scaled.jpg",
+   "width": 1862,
+   "height": 2560,
+   "notes": "Portraits officiels du studio, un par fondateur : Jonas Bjerre-Poulsen dans photos/norm-architects.jpg, et Kasper Rønn Von Lotzbeck dans photos/norm-architects-2.jpg (https://normcph.com/wp-content/uploads/2026/09/Kasper.jpg, 1455×2000). Même fond et même lumière, donc on peut les mettre côte à côte comme le montage actuel. normcph.com bloque curl (erreur 455) : la page a été lue via r.jina.ai, et les images se téléchargent directement."
+  }
+ },
+ {
+  "slug": "marijn-oomen",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+  "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dwbf33e348/Landingspages/Designer%20Stories/04.b-marijn-oomen%20(1).jpg",
+  "foundElsewhere": null,
+  "notes": "Même image que la page Designer stories de Fatboy (Marijn Oomen avec un Lamzac). Comme pour Kranen/Gille, la photo locale garde la vignette produit (Lamzac rouge) en bas. Recadrer sur les 1760 px du haut.",
+  "replacement": null
+ },
+ {
+  "slug": "verner-panton",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/verner-panton",
+  "imageUrl": "https://static.vitra.com/media/asset/8694738/storage/v_fullbleed_1440x/91272973.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large). L'image Vitra porte en bas à droite le crédit « © Verner Panton Design AG », partiellement coupé dans la version locale.",
+  "replacement": null
+ },
+ {
+  "slug": "jean-prouve",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/jean-prouve",
+  "imageUrl": "https://static.vitra.com/media/asset/8682413/storage/v_fullbleed_1440x/81388550.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large).",
+  "replacement": null
+ },
+ {
+  "slug": "julien-renault",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=a85e47cd-edb1-4a48-be63-e469892713cb",
+  "imageUrl": "https://www.hay.com/contentassets/b3a9bde6d9f64f81ab3e9d72a44b3f33/julienrenault_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers).",
+  "replacement": null
+ },
+ {
+  "slug": "bruno-rey",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=35657f5f-f5fb-4755-9dda-160ae5a93747",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/bruno-rey_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers). Portrait noir et blanc avec étagères de chaises.",
+  "replacement": null
+ },
+ {
+  "slug": "nathalie-schellekens",
+  "verdict": "officielle",
+  "sourceType": "créateur",
+  "sourcePage": "https://www.studioons.com/",
+  "imageUrl": "https://static.wixstatic.com/media/996499_0b13e30800814d1290570c1c09264831~mv2.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue, au même cadrage, sur l'accueil de son studio (Studio ONS, 1198x1443). Fatboy publie une autre prise de la même séance, plus large.",
+  "replacement": null
+ },
+ {
+  "slug": "stefan-scholten",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=147b9a27-a456-4760-ba87-b7f466c2d656",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/stefan-scholten_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers).",
+  "replacement": null
+ },
+ {
+  "slug": "muller-van-severen",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=e991d0a6-473a-485e-922c-9afb6be31550",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/muller-van-severen_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers). Fien Muller et Hannes Van Severen tous deux présents.",
+  "replacement": null
+ },
+ {
+  "slug": "frederic-sofia",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.fermob.com/en_int/designers",
+  "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Fr_d_ric-SOFIA.gif",
+  "foundElsewhere": null,
+  "notes": "Même photo (lunettes rondes, barbe grise, col roulé, rideau sombre) sur la page Designers de Fermob, en noir et blanc 640×722. Le fichier local (1200×1200, teinte bleutée, métadonnées Photoshop 2014) est une version plus grande de la même prise.",
+  "replacement": null
+ },
+ {
+  "slug": "erik-stehmann",
+  "verdict": "mauvaise-personne",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": null,
+  "notes": "La photo actuelle ne montre personne : c'est une suspension de son studio photographiée dans un intérieur sombre (https://erikstehmann.nl/wp-content/uploads/2024/01/ErikStehman_ByMashaBakker-4096.jpg, accueil de erikstehmann.nl). La source est officielle, mais ce n'est pas un portrait. Son site ne publie aucun vrai portrait.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/erik-stehmann.jpg",
+   "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+   "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw5335e6ad/Landingspages/Designer%20Stories/02.c-erik-stehmann%20(1).jpg",
+   "width": 960,
+   "height": 1200,
+   "notes": "Photo de la page Designer stories de Fatboy : Erik Stehmann assis sur une chaise Toní. Recadrage 4:5 serré sur lui, zone (800,100)-(1760,1300) de l'original 1760x2496. Visage assez petit, mais lisible."
+  }
+ },
+ {
+  "slug": "jonas-trampedach",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=d364cf0c-b460-471f-9dd8-23c09a25758c",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jonas-trampedach_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers). Il s'agit du portrait solo, et non de la photo avec Viola Heyn-Johnsen.",
+  "replacement": null
+ },
+ {
+  "slug": "norman-trapman",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.polspotten.com/en/design-collabs/norman-trapman/",
+  "imageUrl": "https://www.polspotten.com/on/demandware.static/-/Sites/default/dw2e6acbaf/plp/ss26/5.png",
+  "foundElsewhere": null,
+  "notes": "Même portrait dessiné que l'éditeur Pols Potten (fond rouge, 1200x1200). La version locale est découpée en cercle sur fond blanc. Le carré original se prête mieux à un recadrage 4:5.",
+  "replacement": null
+ },
+ {
+  "slug": "john-tree",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=1b46d189-4fc5-4f17-aa44-bccd028ab551",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/john-tree_portrait.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers).",
+  "replacement": null
+ },
+ {
+  "slug": "nynke-tynagel",
+  "verdict": "officielle",
+  "sourceType": "créateur",
+  "sourcePage": "https://nynketynagel.com/about",
+  "imageUrl": "https://nynketynagel.com/media/pages/about/b98c2b95cc-1740609039/nynke-tynagel-atelier-portrait.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo d'atelier sur la page About de son site (1603x1047). Le recadrage local la laisse petite, au bord gauche. Fatboy publie un portrait plus serré, sur fond à motifs (Designer stories), si l'on veut mieux voir son visage.",
+  "replacement": null
+ },
+ {
+  "slug": "hortense-and-valeriane",
+  "verdict": "non-officielle",
+  "sourceType": null,
+  "sourcePage": null,
+  "imageUrl": null,
+  "foundElsewhere": "Même photo, sans pastille, dans le magazine Mastic Lifestyle (https://www.mastic-lifestyle.com/post/trousse-beaute-valeriane-hortense-fondatrices-miafit, https://static.wixstatic.com/media/42f651_136a94faa4a6462da1cfdd1ae3e6a392~mv2.jpg). La version locale porte une pastille « Hortense & Valériane @Miagoods » d'origine inconnue.",
+  "notes": "C'est bien le duo de fondatrices (Miasun, aujourd'hui Miafit). Cette photo n'est ni chez Fatboy ni sur miafitclub.com (page À propos) ; miasun.com renvoie vers Fatboy. La pastille incrustée est de toute façon à proscrire.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/hortense-and-valeriane.jpg",
+   "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+   "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dwc1bf0cac/Landingspages/Designer%20Stories/04.a-hortense-and-valeriane%20(1).jpg",
+   "width": 1200,
+   "height": 1500,
+   "notes": "Photo de la page Designer stories de Fatboy, sous « Hortense and Valériane » : deux femmes sur la plage devant la tente Miasun. Recadrage 4:5 sur (280,260)-(1480,1760) de l'original 1760x2486. À VALIDER : c'est une image de campagne produit, les visages ressemblent aux fondatrices plus jeunes sans certitude (il peut s'agir de mannequins)."
+  }
+ },
+ {
+  "slug": "de-makers-van",
+  "verdict": "officielle",
+  "sourceType": "créateur",
+  "sourcePage": "https://www.demakersvan.com/about-us",
+  "imageUrl": "https://images.squarespace-cdn.com/content/v1/651fd681d1e9393c62852994/fdff8643-7880-4df7-8d5a-54d97d159d6c/Demakersvan_about_06.jpg",
+  "foundElsewhere": null,
+  "notes": "Même photo sur la page About du studio, mais ce n'est pas un portrait : une femme travaille au bureau LS Desk, et le recadrage local coupe l'homme debout à droite. Les fondateurs (Joep et Jeroen Verhoeven, Judith de Graauw) ne sont pas identifiables. Mieux vaut la remplacer.",
+  "replacement": {
+   "file": ".context/designers/verify/photos/de-makers-van.jpg",
+   "sourcePage": "https://www.fatboy.com/en-be/designer-stories.html",
+   "imageUrl": "https://www.fatboy.com/on/demandware.static/-/Library-Sites-Fatboy-shared/default/dw41138b3d/Landingspages/Designer%20Stories/02.a-demakersvan%20(2).jpg",
+   "width": 1408,
+   "height": 1760,
+   "notes": "Photo du trio fondateur de la page Designer stories de Fatboy. Recadrage 4:5 sur (176,0)-(1584,1760) de l'original 1760x2496 : les trois visages restent dans le cadre, les épaules des deux hommes sont un peu coupées. Remplacement conseillé, la photo actuelle étant officielle mais pas un portrait."
+  }
+ },
+ {
+  "slug": "roderick-vos",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.polspotten.com/en/design-collabs/roderick-vos/",
+  "imageUrl": "https://www.polspotten.com/on/demandware.static/-/Sites/default/dw7a11093b/plp/ss26/4.png",
+  "foundElsewhere": null,
+  "notes": "Même portrait dessiné que Pols Potten (fond vert clair, 1200x1200). La version locale est découpée en cercle. Fatboy publie aussi une photo de lui sur sa page Designer stories.",
+  "replacement": null
+ },
+ {
+  "slug": "sylvain-willenz",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://serax.com/pages/sylvain-willenz",
+  "imageUrl": "https://serax.com/cdn/shop/files/Sylvain_willenz.jpg?v=1688373964",
+  "foundElsewhere": null,
+  "notes": "Même photo noir et blanc (assis sur un banc, vase de fleurs) que sur la page designer Serax ; l'original fait 3200x4000. HAY et le site du créateur utilisent un autre portrait de 2024 (bras croisés, fond blanc).",
+  "replacement": null
+ },
+ {
+  "slug": "sori-yanagi",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.vitra.com/en-us/product/designer/sori-yanagi",
+  "imageUrl": "https://static.vitra.com/media/asset/8700064/storage/v_fullbleed_1440x/81491349.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer Vitra (même cadrage et même lumière) ; la photo locale en est un recadrage central (original 1440 px de large). La version Vitra mesure 1295 × 863 px.",
+  "replacement": null
+ },
+ {
+  "slug": "clara-von-zweigbergk",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.hay.com/footer/about/designers/details?contentGuid=000de4fe-ccb2-448b-b6c4-5ea4d2b2d9dd",
+  "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/clara-von-zweigbergk-2020_1220x1220.jpg",
+  "foundElsewhere": null,
+  "notes": "Même prise de vue que le portrait de la page designer HAY (également affiché sur l'index https://www.hay.com/footer/about/designers).",
+  "replacement": null
+ },
+ {
+  "slug": "teun-zwets",
+  "verdict": "officielle",
+  "sourceType": "éditeur",
+  "sourcePage": "https://www.polspotten.com/en/design-collabs/teun-zwets/",
+  "imageUrl": "https://www.polspotten.com/on/demandware.static/-/Sites/default/dwa7c17d56/plp/ss26/3.png",
+  "foundElsewhere": null,
+  "notes": "Même portrait dessiné que Pols Potten (fond vert foncé, 1200x1200). La version locale est découpée en cercle sur fond blanc.",
+  "replacement": null
+ }
+]

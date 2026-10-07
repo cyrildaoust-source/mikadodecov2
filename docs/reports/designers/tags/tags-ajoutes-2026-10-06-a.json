@@ -1,0 +1,3561 @@
+[
+ {
+  "id": "gid://shopify/Product/10177573650761",
+  "handle": "mug-golden-finds-tea-set",
+  "add": [
+   "jan-wolleswinkel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177595277641",
+  "handle": "accessoire-golden-finds-serving-set",
+  "add": [
+   "jan-wolleswinkel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177649967433",
+  "handle": "bol-golden-finds-plates-set",
+  "add": [
+   "jan-wolleswinkel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177654292809",
+  "handle": "bol-structure",
+  "add": [
+   "studio-cuno"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177773535561",
+  "handle": "pot-golden-finds-tea",
+  "add": [
+   "jan-wolleswinkel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10177875476809",
+  "handle": "decanter-essence",
+  "add": [
+   "alfredo-haberli"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10178713583945",
+  "handle": "vase-upside-down-long-neck",
+  "add": [
+   "koens-middelkoop"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10181021008201",
+  "handle": "mug-espresso-golden-finds",
+  "add": [
+   "jan-wolleswinkel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10181021073737",
+  "handle": "mug-coffee-golden-finds",
+  "add": [
+   "jan-wolleswinkel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10181021172041",
+  "handle": "mug-espresso-gobi",
+  "add": [
+   "roderick-vos"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10181317460297",
+  "handle": "boite-a-pain-gnam",
+  "add": [
+   "stefano-giovannoni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10181400985929",
+  "handle": "bocal-de-conservation-girotondo",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182189154633",
+  "handle": "plateau-de-service-mini-girotondo",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182923845961",
+  "handle": "figurine-de-creche-presepe",
+  "add": [
+   "marcello-jori"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182923911497",
+  "handle": "creche-happy-eternity-baby",
+  "add": [
+   "marcello-jori"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183111147849",
+  "handle": "mug-et-tea-mmi24cuset",
+  "add": [
+   "miriam-mirri"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183114162505",
+  "handle": "fourchette-de-table-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183114391881",
+  "handle": "menagere-caccia-24-pieces",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183121961289",
+  "handle": "corbeille-girotondo-akk03",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183122747721",
+  "handle": "plateau-girotondo-1",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183134282057",
+  "handle": "cocotte-la-cintura-di-orione",
+  "add": [
+   "richard-sapper"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183326761289",
+  "handle": "pince-gtset",
+  "add": [
+   "carlo-mazzeri"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183330300233",
+  "handle": "seau-a-champagne-l",
+  "add": [
+   "carlo-mazzeri"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183330988361",
+  "handle": "seau-a-glace-l",
+  "add": [
+   "carlo-mazzeri"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183332495689",
+  "handle": "shaker-l",
+  "add": [
+   "carlo-mazzeri"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183350092105",
+  "handle": "couteau-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183350387017",
+  "handle": "couteau-de-table-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183350714697",
+  "handle": "couteau-a-poisson-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183350944073",
+  "handle": "cuiller-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183351173449",
+  "handle": "cuiller-de-table-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183351566665",
+  "handle": "cuillere-a-dessert-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183351959881",
+  "handle": "cuillere-a-glace-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183352123721",
+  "handle": "fourchette-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183352353097",
+  "handle": "fourchette-a-dessert-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183352615241",
+  "handle": "fourchette-a-poisson-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183352877385",
+  "handle": "pelle-a-tarte-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183370342729",
+  "handle": "porte-fruits-girotondo",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183370506569",
+  "handle": "porte-gressins-girotondo",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183370703177",
+  "handle": "porte-serviettes-girotondo",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183371096393",
+  "handle": "rond-de-serviette-ajoure-girotondo",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183423525193",
+  "handle": "entonnoir-pino",
+  "add": [
+   "stefano-giovannoni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10183447380297",
+  "handle": "recipient-ship-shape",
+  "add": [
+   "stefano-giovannoni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10206543937865",
+  "handle": "applique-nagel",
+  "add": [
+   "werner-stoff-hans-nagel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10206544658761",
+  "handle": "soliflore-nagel",
+  "add": [
+   "werner-stoff-hans-nagel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253290275145",
+  "handle": "pilulier-chestnut",
+  "add": [
+   "gabriele-chiave-lorenza-bozzoli"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253290963273",
+  "handle": "pilulier-yoyo",
+  "add": [
+   "boucquillon-maaoui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253345390921",
+  "handle": "horloge-murale-firenze",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253356532041",
+  "handle": "chausse-pied-germano",
+  "add": [
+   "harry-paul-van-iersel"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253356859721",
+  "handle": "porte-enveloppes-girotondo",
+  "add": [
+   "stefano-giovannoni",
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253359219017",
+  "handle": "gamelle-pour-chien-wowl",
+  "add": [
+   "boucquillon-maaoui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253360267593",
+  "handle": "plat-a-poisson-127",
+  "add": [
+   "anselmo-vitale-carlo-mazzeri"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253360529737",
+  "handle": "figurine-de-noel-happy-eternity-baby-lot-de-2",
+  "add": [
+   "massimo-giacon",
+   "marcello-jori"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253360726345",
+  "handle": "figurine-tiny-little-sheep-lot-de-2",
+  "add": [
+   "massimo-giacon"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253360759113",
+  "handle": "figurines-de-noel-amir-camelus-lot-de-2",
+  "add": [
+   "massimo-giacon"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253360890185",
+  "handle": "figurine-de-noel-angels-band-lot-de-2",
+  "add": [
+   "massimo-giacon"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253361021257",
+  "handle": "figurines-caronte-e-minosse-lot-de-2",
+  "add": [
+   "massimo-giacon"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253362495817",
+  "handle": "miroir-mural-colombina",
+  "add": [
+   "doriana-e-massimiliano-fuksas"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10253363282249",
+  "handle": "menagere-caccia-lot-de-24",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10278630883657",
+  "handle": "moulin-sel-poivre-epices-mp0215",
+  "add": [
+   "ettore-sottsass"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10440365932873",
+  "handle": "dessous-de-verre-mini-girotondo-lot-de-4",
+  "add": [
+   "stefano-giovannoni",
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10440366162249",
+  "handle": "dessous-de-bouteille-mini-girotondo-lot-de-2",
+  "add": [
+   "stefano-giovannoni",
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10440752988489",
+  "handle": "fourchette-de-table-caccia-a-trois-dents-lot-de-6",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10440753742153",
+  "handle": "cuillere-a-the-caccia-lot-de-6",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10440754200905",
+  "handle": "fourchette-de-service-caccia",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10440754692425",
+  "handle": "cuillere-a-cafe-caccia-lot-de-6",
+  "add": [
+   "pier-giacomo-castiglioni"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10181401510217",
+  "handle": "verre-a-eau-animal-farm-set-de-6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182188564809",
+  "handle": "rond-de-serviette-girotondo",
+  "add": [
+   "guido-venturini"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182745751881",
+  "handle": "verre-long-drink-animal-farm",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182745915721",
+  "handle": "goblet-animal-farm",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182746014025",
+  "handle": "cuillere-a-cafe-animal-farm-set-de-2",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182746145097",
+  "handle": "cloche-animal-farm",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10182746276169",
+  "handle": "theiere-animal-farm",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10210470035785",
+  "handle": "lampe-de-table-kelvin-led-base",
+  "add": [
+   "antonio-citterio"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10245343969609",
+  "handle": "sac-en-filet",
+  "add": [
+   "abi-alice"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10259907510601",
+  "handle": "accessoire-room-divider-beton-claustra-beton-fck",
+  "add": [
+   "frederick-gautier"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10259907739977",
+  "handle": "coussin-roll-fontainebleau",
+  "add": [
+   "jose-levy"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10259907805513",
+  "handle": "accessoire-sun-lounger-fontainebleau",
+  "add": [
+   "jose-levy"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10260980498761",
+  "handle": "table-d-appoint-fck",
+  "add": [
+   "frederick-gautier"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10260980531529",
+  "handle": "table-d-appoint-stool-beton-ux2-fck",
+  "add": [
+   "frederick-gautier"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10260980564297",
+  "handle": "lampadaire-floor-cube-bulb-uded-cube-fck",
+  "add": [
+   "frederick-gautier"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10260980728137",
+  "handle": "table-d-appoint-fontainebleau",
+  "add": [
+   "jose-levy"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10260980760905",
+  "handle": "tabouret-fontainebleau",
+  "add": [
+   "jose-levy"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10260980793673",
+  "handle": "table-rond-fontainebleau",
+  "add": [
+   "jose-levy"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10289435050313",
+  "handle": "coussin-bm0555",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10350406009161",
+  "handle": "baguettes-colour-sticks-lot-de-4",
+  "add": [
+   "carole-baijings"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398340677961",
+  "handle": "hay-chaise-result-aad14da2",
+  "add": [
+   "friso-kramer"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398392582473",
+  "handle": "hay-tapis-colour-carpet-170-240-cm-n-05-ab362f45",
+  "add": [
+   "carole-baijings"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398814863689",
+  "handle": "hay-coussin-j41-remix-41-37-cm-be642e5f",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398814961993",
+  "handle": "hay-coussin-j41-mode-41-37-cm-0b8f949d",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398815158601",
+  "handle": "hay-coussin-j41-bolgheri-41-37-cm-7ea460b0",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398815191369",
+  "handle": "hay-coussin-j41-cuir-sense-41-37-cm-44261a4a",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398815387977",
+  "handle": "hay-coussin-j41-atlas-41-37-cm-f725eca2",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398815584585",
+  "handle": "hay-coussin-j42-remix-43-40-cm-0eb1e24e",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398815846729",
+  "handle": "hay-coussin-j42-mode-43-40-cm-6325887f",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398816076105",
+  "handle": "hay-coussin-j42-bolgheri-43-40-cm-1f116147",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398816436553",
+  "handle": "hay-coussin-j42-cuir-sense-43-40-cm-d7fd42e1",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10398816731465",
+  "handle": "hay-coussin-j42-atlas-43-40-cm-58827b96",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10404435165513",
+  "handle": "hay-chaise-j41-95a6911f",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10404435198281",
+  "handle": "hay-chaise-avec-accoudoirs-j42-d1856c0e",
+  "add": [
+   "borge-mogensen"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418979504457",
+  "handle": "fauteuil-organic-chair-cosy-2",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418980028745",
+  "handle": "fauteuil-organic-chair-credo",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418980815177",
+  "handle": "fauteuil-organic-chair-hola",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418981503305",
+  "handle": "fauteuil-organic-chair-hopsak",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418982093129",
+  "handle": "fauteuil-organic-chair-tonus",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418982879561",
+  "handle": "fauteuil-organic-conference-cosy-2",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418983240009",
+  "handle": "fauteuil-organic-conference-credo",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418984059209",
+  "handle": "fauteuil-organic-conference-hola",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418984550729",
+  "handle": "fauteuil-organic-conference-hopsak",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418985402697",
+  "handle": "fauteuil-organic-conference-tonus",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418985992521",
+  "handle": "fauteuil-organic-highback-cosy-2",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418986385737",
+  "handle": "fauteuil-organic-highback-credo",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418987008329",
+  "handle": "fauteuil-organic-highback-hopsak",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10418987991369",
+  "handle": "fauteuil-organic-highback-tonus",
+  "add": [
+   "charles-ray-eames"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10421309243721",
+  "handle": "ichendorf-milano-boite-de-rangement-dogs-teckel-6726ed5d",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10424607605065",
+  "handle": "applique-oto-h-19-cm",
+  "add": [
+   "studio-fermob"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433112736073",
+  "handle": "ichendorf-milano-vase-talking-trees-branches-transparentes-cf8f5370",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433115521353",
+  "handle": "ichendorf-milano-vase-talking-trees-branches-ambre-113c52f0",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433116012873",
+  "handle": "ichendorf-milano-vase-talking-trees-cime-darbre-8d7262f5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433165066569",
+  "handle": "ichendorf-milano-vase-animal-farm-canard-b36f48dd",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433199309129",
+  "handle": "ichendorf-milano-boite-de-rangement-dogs-teckel-petit-d7026ad5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433287913801",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-bull-terrier-e6f74304",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433287946569",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-golden-retriever-d4ceeacb",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433287979337",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-foxhound-anglais-e0282715",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433288012105",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-teckel-128f50b6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433288077641",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-chihuahua-12d025bf",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433288143177",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-dalmatien-49d69640",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433288208713",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-bouledogue-francais-6611e2ce",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433288241481",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-caniche-86aea43a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433288307017",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-basset-hound-4c50ff4e",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433288339785",
+  "handle": "ichendorf-milano-verre-a-eau-dogs-carlin-f49361df",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433351483721",
+  "handle": "ichendorf-milano-verre-a-eau-fruits-flowers-avocat-aa5f0be7",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433351549257",
+  "handle": "ichendorf-milano-verre-a-eau-fruits-flowers-fraise-75dfe9d3",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433351647561",
+  "handle": "ichendorf-milano-verre-a-eau-fruits-flowers-raisin-a7bb9d23",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433351713097",
+  "handle": "ichendorf-milano-verre-a-eau-fruits-flowers-poire-453d18ed",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433351778633",
+  "handle": "ichendorf-milano-verre-a-eau-fruits-flowers-citron-5b52efc3",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433351844169",
+  "handle": "ichendorf-milano-verre-a-eau-fruits-flowers-demi-poire-a75d96be",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433351909705",
+  "handle": "ichendorf-milano-verre-a-eau-fruits-flowers-pomme-verte-5afa38b7",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433352008009",
+  "handle": "ichendorf-milano-verre-a-eau-fruits-flowers-demi-pomme-5ab967ae",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433375371593",
+  "handle": "ichendorf-milano-verre-a-eau-patisserie-gateau-aux-fraises-133ec594",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433375502665",
+  "handle": "ichendorf-milano-verre-a-eau-patisserie-charlotte-a-la-framboise-3d24c3da",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433375568201",
+  "handle": "ichendorf-milano-verre-a-eau-patisserie-mille-feuille-e0899aa4",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433375666505",
+  "handle": "ichendorf-milano-verre-a-eau-patisserie-gateau-aux-myrtilles-679eae0f",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433375732041",
+  "handle": "ichendorf-milano-verre-a-eau-patisserie-charlotte-a-la-mure-fd139dc8",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433375797577",
+  "handle": "ichendorf-milano-verre-a-eau-patisserie-croissant-93ab0818",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433409057097",
+  "handle": "ichendorf-milano-verre-a-eau-savannah-guepard-aa8490a7",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433409122633",
+  "handle": "ichendorf-milano-verre-a-eau-savannah-elephant-blanc-9be6fdc6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433409188169",
+  "handle": "ichendorf-milano-verre-a-eau-savannah-panda-4e8a70c1",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433409286473",
+  "handle": "ichendorf-milano-verre-a-eau-savannah-crocodile-8ef05f4f",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433409352009",
+  "handle": "ichendorf-milano-verre-a-eau-savannah-singe-rose-4e373952",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433409417545",
+  "handle": "ichendorf-milano-verre-a-eau-savannah-cameleon-0c29d48f",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433432224073",
+  "handle": "ichendorf-milano-verre-a-eau-vegetables-tomate-0fbe3d18",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433432289609",
+  "handle": "ichendorf-milano-verre-a-eau-vegetables-aubergine-4fec64b5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433432387913",
+  "handle": "ichendorf-milano-verre-a-eau-vegetables-citrouille-6f957e6a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433432518985",
+  "handle": "ichendorf-milano-verre-a-eau-vegetables-artichaut-19115ebb",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433432551753",
+  "handle": "ichendorf-milano-verre-a-eau-vegetables-piment-fa0eab2d",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433432617289",
+  "handle": "ichendorf-milano-verre-a-eau-vegetables-poivron-5775475c",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433432682825",
+  "handle": "ichendorf-milano-verre-a-eau-vegetables-radis-85a023d5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433459847497",
+  "handle": "ichendorf-milano-verre-a-eau-desert-plants-cactus-bleu-d16e9fd0",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433459913033",
+  "handle": "ichendorf-milano-verre-a-eau-desert-plants-cactus-ambre-d40eb19d",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433459978569",
+  "handle": "ichendorf-milano-verre-a-eau-desert-plants-cactus-a-fleur-rose-4de2eef3",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433460044105",
+  "handle": "ichendorf-milano-verre-a-eau-desert-plants-cactus-vert-b1b9e0f5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433460175177",
+  "handle": "ichendorf-milano-verre-a-eau-desert-plants-cactus-a-fleur-ambre-f8ae3aeb",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433460240713",
+  "handle": "ichendorf-milano-verre-a-eau-desert-plants-cactus-vert-et-ambre-7bc47252",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433460273481",
+  "handle": "ichendorf-milano-verre-a-eau-desert-plants-cactus-vert-mat-4f0764de",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484390729",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-fleur-bleu-ciel-b3891df7",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484456265",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-tulipe-bleue-941a884b",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484489033",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-tulipe-jaune-a50bbbe8",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484554569",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-tulipe-rose-4788a4d2",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484620105",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-tulipe-lilas-e4611227",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484652873",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-marguerite-ebe640ed",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484751177",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-orchidee-54563075",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484849481",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-fleur-bleue-1ef03238",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433484980553",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-fleur-rose-ac42e8a8",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433485111625",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-fleur-ambre-7e031ac3",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433485177161",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-fleur-blanche-653db9d5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433485242697",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-fleur-lilas-1a2c89ba",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433485308233",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-fleur-de-pecher-6169dbc6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433485373769",
+  "handle": "ichendorf-milano-verre-a-eau-botanica-lavande-cf759728",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433532690761",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-poisson-jaune-et-algue-ambre-6a0bd684",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433532789065",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-poisson-blanc-et-algue-verte-9fca2b95",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433532821833",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-poisson-vert-et-algue-rose-9fcf3bbb",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433532920137",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-poisson-rose-et-algue-bleue-2f8387ed",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433532985673",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-poisson-bleu-et-algue-ambre-8705edbc",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433533116745",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-poisson-jaune-et-algue-verte-d978d456",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433533149513",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-tortue-c697c01f",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433533247817",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-hippocampe-vert-03d6560e",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433533280585",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-sardine-rose-300ec91b",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433533378889",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-sardine-verte-d3010282",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433533444425",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-sardine-ambre-5eecb7f8",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433533509961",
+  "handle": "ichendorf-milano-verre-a-eau-marine-garden-hippocampe-bleu-f579aca3",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579188553",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-turquoise-clair-et-rouge-f296ee42",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579286857",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-jaune-et-bordeaux-54f08415",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579319625",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-bordeaux-et-lilas-2ddfe5d9",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579385161",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-bleu-et-rouge-245a950c",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579417929",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-decor-en-u-lilas-et-orange-38c96c49",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579450697",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-turquoise-clair-et-orange-6ee1e0f7",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579549001",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-bordeaux-et-orange-ae06b1ac",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579581769",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-lilas-et-bleu-855fb83d",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579647305",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-decor-en-u-bordeaux-et-turquoise-clair-65c067fd",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579680073",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-decor-en-u-jaune-et-bordeaux-446cc1a9",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579745609",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-turquoise-clair-et-jaune-8cf16f78",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579811145",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-orange-et-lilas-7b02bc14",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579843913",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-bordeaux-et-turquoise-clair-5f3f8516",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579909449",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-decor-en-u-bleu-et-bleu-clair-dbdda34a",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433579942217",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-rouge-et-bleu-clair-afff2cb7",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433580007753",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-decor-en-u-bleu-clair-et-jaune-8d5e373d",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433580040521",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-bleu-clair-et-jaune-285793d1",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433580073289",
+  "handle": "ichendorf-milano-verre-a-eau-gesti-bleu-et-bleu-clair-b5b49eef",
+  "add": [
+   "margherita-rui"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700135241",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-blanc-couche-avec-queue-gris-fume-745a96ff",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700200777",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-blanc-couche-avec-queue-ambre-12357231",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700233545",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-ambre-couche-avec-queue-blanche-27d06902",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700266313",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-blanc-avec-queue-gris-fume-b27f596f",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700299081",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-blanc-avec-queue-ambre-b42faabc",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700331849",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-ambre-avec-queue-blanche-ed24fc27",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700626761",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-blanc-a-taches-noires-e157c378",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700659529",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-blanc-avec-queue-grise-6beba907",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433700692297",
+  "handle": "ichendorf-milano-verre-a-eau-tabby-cat-chat-ambre-a-rayures-blanches-fdb20b41",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433710686537",
+  "handle": "ichendorf-milano-verre-a-vin-solisti-smooth-sangiovese-4392565c",
+  "add": [
+   "marco-sironi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433710719305",
+  "handle": "ichendorf-milano-verre-a-vin-solisti-smooth-pinot-noir-7d07975f",
+  "add": [
+   "marco-sironi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433710784841",
+  "handle": "ichendorf-milano-verre-a-vin-solisti-smooth-syrah-a17483f1",
+  "add": [
+   "marco-sironi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433710850377",
+  "handle": "ichendorf-milano-verre-a-vin-solisti-smooth-cabernet-45424052",
+  "add": [
+   "marco-sironi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433710883145",
+  "handle": "ichendorf-milano-verre-a-vin-solisti-smooth-chardonnay-acfa43ec",
+  "add": [
+   "marco-sironi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433710915913",
+  "handle": "ichendorf-milano-verre-a-vin-solisti-smooth-perlage-7fdcaa8e",
+  "add": [
+   "marco-sironi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433710948681",
+  "handle": "ichendorf-milano-verre-a-vin-solisti-smooth-riesling-9a824200",
+  "add": [
+   "marco-sironi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433729265993",
+  "handle": "ichendorf-milano-vase-iris-3-petit-ea0900d2",
+  "add": [
+   "lina-obregon"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433729462601",
+  "handle": "ichendorf-milano-vase-iris-3-grand-05723861",
+  "add": [
+   "lina-obregon"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433753186633",
+  "handle": "ichendorf-milano-huilier-bulle-11-cm-ecf2d94c",
+  "add": [
+   "daniele-dalla-pellegrina"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433753219401",
+  "handle": "ichendorf-milano-huilier-bulle-15-cm-b81196ba",
+  "add": [
+   "daniele-dalla-pellegrina"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433753252169",
+  "handle": "ichendorf-milano-huilier-bulle-19-cm-ab90acd0",
+  "add": [
+   "daniele-dalla-pellegrina"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433759510857",
+  "handle": "ichendorf-milano-cloche-avec-plateau-fruits-flowers-ecureuil-30-cm-4bd3b7a8",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433759543625",
+  "handle": "ichendorf-milano-cloche-avec-plateau-fruits-flowers-cerises-14-cm-92cc63e7",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433786249545",
+  "handle": "ichendorf-milano-carafe-inbottiglia-eau-27-cm-4c1bd7d9",
+  "add": [
+   "f-mastropaolo-e-b-scarfati"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433786282313",
+  "handle": "ichendorf-milano-carafe-inbottiglia-vin-25-cm-4f91224c",
+  "add": [
+   "f-mastropaolo-e-b-scarfati"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433799160137",
+  "handle": "ichendorf-milano-bol-travasi-violet-avec-olive-verte-3-cm-393e4ac3",
+  "add": [
+   "astrid-luglio"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433799979337",
+  "handle": "ichendorf-milano-bol-travasi-transparent-avec-olive-verte-3-cm-f59a0946",
+  "add": [
+   "astrid-luglio"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433812103497",
+  "handle": "ichendorf-milano-pichet-botanica-tulipes-18-cm-a2b7e6b3",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433812332873",
+  "handle": "ichendorf-milano-pichet-botanica-fleur-bleue-20-cm-7f6cfec1",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433825669449",
+  "handle": "ichendorf-milano-pichet-sogni-doriente-vert-et-rose-avec-lune-37-cm-dfdacd43",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433825734985",
+  "handle": "ichendorf-milano-pichet-sogni-doriente-bleu-37-cm-c14269f7",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433859420489",
+  "handle": "ichendorf-milano-bouteille-desert-plants-cactus-vert-a-pois-blancs-28-cm-7119f7a5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433861026121",
+  "handle": "ichendorf-milano-bouteille-desert-plants-cactus-a-fleur-rose-28-cm-cc3c5524",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433861648713",
+  "handle": "ichendorf-milano-bouteille-desert-plants-cactus-vert-28-cm-ae549760",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433886912841",
+  "handle": "ichendorf-milano-bouteille-savannah-palmier-32-cm-06b726b6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433887076681",
+  "handle": "ichendorf-milano-bouteille-savannah-crocodile-32-cm-156f39e6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433887371593",
+  "handle": "ichendorf-milano-bouteille-savannah-elephant-blanc-28-cm-14260e65",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433898512713",
+  "handle": "ichendorf-milano-huilier-vegetables-aubergine-21-cm-9166827a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433898545481",
+  "handle": "ichendorf-milano-huilier-vegetables-poivron-18-cm-9e460ca4",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433898578249",
+  "handle": "ichendorf-milano-huilier-vegetables-courgette-23-cm-1614b4f5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433898643785",
+  "handle": "ichendorf-milano-huilier-vegetables-piment-avec-anse-21-cm-773789ce",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433898709321",
+  "handle": "ichendorf-milano-huilier-vegetables-aubergine-sculptee-19-cm-07da0708",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433898774857",
+  "handle": "ichendorf-milano-huilier-vegetables-tomate-sculptee-19-cm-1013d8e7",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433898807625",
+  "handle": "ichendorf-milano-huilier-vegetables-oignon-vert-sculpte-24-cm-19bd1af0",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433926889801",
+  "handle": "ichendorf-milano-fleur-decorative-botanica-lavande-35-cm-4d37ef1a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433927053641",
+  "handle": "ichendorf-milano-fleur-decorative-botanica-fleur-de-pecher-35-cm-b6176fce",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433932624201",
+  "handle": "ichendorf-milano-bougeoir-iris-trois-bougies-16-cm-1e63092f",
+  "add": [
+   "lina-obregon"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433932919113",
+  "handle": "ichendorf-milano-bougeoir-iris-une-bougie-12-cm-83c27464",
+  "add": [
+   "lina-obregon"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433941406025",
+  "handle": "ichendorf-milano-bouteille-garden-picnic-1-8-l-29-cm-82814f4b",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433941733705",
+  "handle": "ichendorf-milano-bouteille-garden-picnic-1-l-27-cm-3c548176",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433947173193",
+  "handle": "ichendorf-milano-cuilleres-a-melange-desert-plants-cactus-lot-de-2-20-cm-e67bcbfa",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433947238729",
+  "handle": "ichendorf-milano-cuilleres-a-melange-desert-plants-cactus-et-fleur-lot-de-2-20-cm-6a3b19f6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433959002441",
+  "handle": "ichendorf-milano-pichet-desert-plants-cactus-19-cm-93bfe85f",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433959133513",
+  "handle": "ichendorf-milano-pichet-desert-plants-cactus-bleu-19-cm-550748fd",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433959166281",
+  "handle": "ichendorf-milano-pichet-desert-plants-cactus-vert-mat-20-cm-5b65b6f9",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433970569545",
+  "handle": "ichendorf-milano-theiere-sogni-doriente-rose-avec-couvercle-bleu-18-cm-7442509c",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433970602313",
+  "handle": "ichendorf-milano-theiere-sogni-doriente-bleue-avec-couvercle-vert-mat-27-cm-e5b2f73a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433970635081",
+  "handle": "ichendorf-milano-theiere-sogni-doriente-rose-avec-couvercle-vert-30-cm-88743edd",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433982955849",
+  "handle": "ichendorf-milano-verre-a-eau-talking-trees-oiseau-tropical-8-cm-852f722e",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433982988617",
+  "handle": "ichendorf-milano-verre-a-eau-talking-trees-colibri-8-cm-6c02413f",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10433983054153",
+  "handle": "ichendorf-milano-verre-a-eau-talking-trees-cacatoes-8-cm-05a406cb",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434024636745",
+  "handle": "ichendorf-milano-verre-a-liqueur-manhattan-cognac-basculant-11-cm-4844b2e2",
+  "add": [
+   "patrik-illo"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434035286345",
+  "handle": "ichendorf-milano-verre-a-vin-octave-lot-de-4-9-cm-fcbafbc9",
+  "add": [
+   "valerio-sommella"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057470281",
+  "handle": "ichendorf-milano-pichet-woodland-tales-faon-solitaire-et-anse-sapin-ea55e6fa",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057535817",
+  "handle": "ichendorf-milano-verre-a-eau-woodland-tales-faon-solitaire-9c9b0d39",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057568585",
+  "handle": "ichendorf-milano-boule-de-noel-woodland-tales-faon-solitaire-b9115178",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057601353",
+  "handle": "ichendorf-milano-verre-a-eau-woodland-tales-sapin-vert-09b88284",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057666889",
+  "handle": "ichendorf-milano-verre-a-vin-woodland-tales-sapin-vert-22e8341c",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057699657",
+  "handle": "ichendorf-milano-flute-a-champagne-woodland-tales-sapin-vert-33d3ee6a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057732425",
+  "handle": "ichendorf-milano-pichet-sweet-candy-monsieur-pain-d-epices-et-anse-sucre-d-orge-7bbe5840",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057797961",
+  "handle": "ichendorf-milano-boule-de-noel-tabby-cat-chat-ambre-dans-une-chaussette-rouge-d7e5694b",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057830729",
+  "handle": "ichendorf-milano-boule-de-noel-tabby-cat-chats-blancs-avec-cadeau-bleu-clair-69cfad39",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057863497",
+  "handle": "ichendorf-milano-boule-de-noel-tabby-cat-couronne-avec-chat-blanc-d30b956c",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434057994569",
+  "handle": "ichendorf-milano-pichet-tabby-cat-chats-blancs-avec-cadeau-bleu-clair-56a374b2",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434058125641",
+  "handle": "ichendorf-milano-decoration-de-noel-tabby-cat-cloche-avec-chat-blanc-et-cadeau-vert-af62048a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434058158409",
+  "handle": "ichendorf-milano-boite-de-rangement-tabby-cat-chats-blancs-avec-cadeau-bleu-clair-6ae0b585",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434058223945",
+  "handle": "ichendorf-milano-pichet-woodland-tales-lapin-blanc-et-fleur-rouge-3f4d8d11",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434058256713",
+  "handle": "ichendorf-milano-boule-de-noel-woodland-tales-ours-brun-avec-bonnet-et-couronne-de-noel-c4b8c5af",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434058289481",
+  "handle": "ichendorf-milano-boule-de-noel-woodland-tales-lapin-rose-avec-sucre-d-orge-et-cadeau-7cc2b281",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434086764873",
+  "handle": "ichendorf-milano-verre-a-eau-trick-or-treat-chouette-5be47f45",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434086797641",
+  "handle": "ichendorf-milano-verre-a-eau-trick-or-treat-fantome-029e44ac",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434086830409",
+  "handle": "ichendorf-milano-verre-a-eau-trick-or-treat-chat-fantome-677a7f61",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434086895945",
+  "handle": "ichendorf-milano-mug-trick-or-treat-fantome-sur-le-couvercle-e5263499",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434087027017",
+  "handle": "ichendorf-milano-boite-de-rangement-trick-or-treat-citrouille-4c351f38",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434087059785",
+  "handle": "ichendorf-milano-bougeoir-trick-or-treat-jack-o-lantern-65e1a537",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434087092553",
+  "handle": "ichendorf-milano-bougeoir-trick-or-treat-fantome-interieur-195e059d",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434087125321",
+  "handle": "ichendorf-milano-bougeoir-trick-or-treat-citrouille-avec-vrille-verte-7ec0ca7c",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434087158089",
+  "handle": "ichendorf-milano-bougeoir-trick-or-treat-citrouille-interieure-e22961c8",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171502921",
+  "handle": "ichendorf-milano-tasse-et-sous-tasse-dogs-bull-terrier-ccdc6914",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171666761",
+  "handle": "ichendorf-milano-tasse-et-sous-tasse-dogs-foxhound-anglais-8c6ebeec",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171699529",
+  "handle": "ichendorf-milano-tasse-et-sous-tasse-dogs-teckel-0ccb76e1",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171732297",
+  "handle": "ichendorf-milano-tasse-et-sous-tasse-dogs-bouledogue-francais-3cd2de7b",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171765065",
+  "handle": "ichendorf-milano-tasse-et-sous-tasse-dogs-caniche-30c60cb5",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171797833",
+  "handle": "ichendorf-milano-tasse-et-sous-tasse-dogs-chihuahua-c184890d",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171830601",
+  "handle": "ichendorf-milano-tasse-et-sous-tasse-dogs-dalmatien-ee51bd9a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171863369",
+  "handle": "ichendorf-milano-pichet-dogs-teckel-avec-balle-92ffbe9a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171896137",
+  "handle": "ichendorf-milano-pichet-dogs-bull-terrier-avec-os-166ab84e",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171928905",
+  "handle": "ichendorf-milano-mug-dogs-bull-terrier-28397e79",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171961673",
+  "handle": "ichendorf-milano-mug-dogs-golden-retriever-9eaeb259",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434171994441",
+  "handle": "ichendorf-milano-mug-dogs-foxhound-anglais-2cdd87ca",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434172027209",
+  "handle": "ichendorf-milano-mug-dogs-chihuahua-c12729ee",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434172059977",
+  "handle": "ichendorf-milano-mug-dogs-bouledogue-francais-101fdd0a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434172092745",
+  "handle": "ichendorf-milano-mug-dogs-caniche-c0183e7e",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434175205705",
+  "handle": "ichendorf-milano-cloche-avec-plateau-animal-farm-oiseau-11-cm-87676e77",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434175238473",
+  "handle": "ichendorf-milano-cloche-avec-plateau-animal-farm-oiseau-14-cm-0213eb92",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434186674505",
+  "handle": "ichendorf-milano-mug-botanica-orchidee-f938539e",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434186772809",
+  "handle": "ichendorf-milano-mug-botanica-fleur-bleue-3a93937f",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434186903881",
+  "handle": "ichendorf-milano-mug-botanica-fleur-rose-6e32dd0d",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434186969417",
+  "handle": "ichendorf-milano-mug-botanica-fleur-ambre-ccc418e1",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434187034953",
+  "handle": "ichendorf-milano-mug-botanica-fleur-blanche-e9e86807",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434187067721",
+  "handle": "ichendorf-milano-mug-botanica-fleur-lilas-84d7bd98",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434187133257",
+  "handle": "ichendorf-milano-mug-botanica-fleur-bleu-ciel-05171117",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434187297097",
+  "handle": "ichendorf-milano-mug-botanica-fleur-de-pecher-3fcbcb35",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434187362633",
+  "handle": "ichendorf-milano-mug-botanica-lavande-d980a736",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434196373833",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-tulipe-jaune-8276a9b8",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434196406601",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-tulipe-rose-c82c0379",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434196439369",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-tulipe-lilas-19cc11d0",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434196472137",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-tulipe-bleue-99146bc4",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434196504905",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-muguet-b2597d27",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434196537673",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-myosotis-81d76038",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434196570441",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-lavande-bb60a600",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434196603209",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-marguerite-baec5973",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434197717321",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-orchidee-optique-111a20d9",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434197750089",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-bourgeons-3533e894",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434197782857",
+  "handle": "ichendorf-milano-verre-a-vin-botanica-orchidee-transparente-59b63fc4",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434202861897",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-marguerite-4820233e",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434202894665",
+  "handle": "ichendorf-milano-coupe-a-champagne-botanica-marguerite-970ddc3b",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434202927433",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-orchidee-7e1ee567",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434202960201",
+  "handle": "ichendorf-milano-coupe-a-champagne-botanica-orchidee-1d97fcab",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434206335305",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-fleur-bleue-7d021dae",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434206368073",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-fleur-rose-7ea821cd",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434206433609",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-fleur-ambre-e7566539",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434206466377",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-fleur-blanche-fe71fca4",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434206499145",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-fleur-lilas-aa038188",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434206531913",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-fleur-bleu-ciel-55b75246",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434206564681",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-fleur-de-pecher-694cd475",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434206597449",
+  "handle": "ichendorf-milano-flute-a-champagne-botanica-lavande-b2cb4f43",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434210890057",
+  "handle": "ichendorf-milano-verre-a-vin-vegetables-artichaut-b4b5e910",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434210922825",
+  "handle": "ichendorf-milano-verre-a-vin-vegetables-piment-5f28caf6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434210955593",
+  "handle": "ichendorf-milano-verre-a-vin-vegetables-chou-fleur-e479d1d9",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434210988361",
+  "handle": "ichendorf-milano-verre-a-vin-vegetables-courgette-2bb122e6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434211021129",
+  "handle": "ichendorf-milano-verre-a-vin-vegetables-oignon-nouveau-feb0c216",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434211053897",
+  "handle": "ichendorf-milano-verre-a-vin-vegetables-tomates-1454c1ba",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434212626761",
+  "handle": "ichendorf-milano-verre-a-eau-jelly-dedec318",
+  "add": [
+   "doriana-e-massimiliano-fuksas"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434212659529",
+  "handle": "ichendorf-milano-verre-a-whisky-jelly-c01ed6be",
+  "add": [
+   "doriana-e-massimiliano-fuksas"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434214461769",
+  "handle": "ichendorf-milano-bol-jelly-d97da813",
+  "add": [
+   "doriana-e-massimiliano-fuksas"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434214592841",
+  "handle": "ichendorf-milano-bol-jelly-mini-4f02c589",
+  "add": [
+   "doriana-e-massimiliano-fuksas"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434220458313",
+  "handle": "ichendorf-milano-verre-a-vin-octave-ea7846f3",
+  "add": [
+   "valerio-sommella"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434220491081",
+  "handle": "ichendorf-milano-verre-a-eau-octave-lot-de-4-139f7f30",
+  "add": [
+   "valerio-sommella"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434220523849",
+  "handle": "ichendorf-milano-verre-a-eau-octave-ee0d53a2",
+  "add": [
+   "valerio-sommella"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434220556617",
+  "handle": "ichendorf-milano-verre-long-drink-octave-lot-de-4-c95ac612",
+  "add": [
+   "valerio-sommella"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434220589385",
+  "handle": "ichendorf-milano-verre-long-drink-octave-6b868ea5",
+  "add": [
+   "valerio-sommella"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434222817609",
+  "handle": "ichendorf-milano-sablier-snow-games-enfant-au-ski-0a9e89f1",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434222850377",
+  "handle": "ichendorf-milano-sablier-snow-games-ours-en-bobsleigh-547cce13",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225733961",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-enfant-en-patins-a-glace-cdb33b9d",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225766729",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-enfant-en-bobsleigh-df736e88",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225799497",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-enfant-au-ski-4244e169",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225832265",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-enfant-au-hockey-sur-glace-73e9a358",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225865033",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-enfant-en-snowboard-22e1359a",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225897801",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-lapin-en-patins-a-glace-d6284bb7",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225930569",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-ours-en-bobsleigh-6cab177d",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225963337",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-ecureuil-au-ski-fda2d582",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434225996105",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-lapin-au-hockey-sur-glace-5611dc70",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434226028873",
+  "handle": "ichendorf-milano-verre-a-eau-snow-games-ours-en-snowboard-1f278658",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434237989193",
+  "handle": "ichendorf-milano-base-de-vase-fio-grand-8485e11f",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238021961",
+  "handle": "ichendorf-milano-embout-bouquet-fio-grand-4036a3de",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238054729",
+  "handle": "ichendorf-milano-embout-soliflore-fio-grand-a23ff082",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238087497",
+  "handle": "ichendorf-milano-pique-fleurs-fio-grand-dec6d037",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238120265",
+  "handle": "ichendorf-milano-base-de-vase-fio-moyen-6c75dd3e",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238251337",
+  "handle": "ichendorf-milano-embout-bouquet-fio-moyen-767dd20c",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238316873",
+  "handle": "ichendorf-milano-embout-soliflore-fio-moyen-852f2dbc",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238382409",
+  "handle": "ichendorf-milano-pique-fleurs-fio-moyen-28948a62",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238415177",
+  "handle": "ichendorf-milano-base-de-vase-fio-petit-82db6b68",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238447945",
+  "handle": "ichendorf-milano-embout-bouquet-fio-petit-9d3c6213",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238480713",
+  "handle": "ichendorf-milano-embout-soliflore-fio-petit-05786b5c",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238513481",
+  "handle": "ichendorf-milano-pique-fleurs-fio-petit-1d41d2aa",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238546249",
+  "handle": "ichendorf-milano-vase-fio-grand-233215df",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238579017",
+  "handle": "ichendorf-milano-vase-fio-moyen-d07eee53",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434238611785",
+  "handle": "ichendorf-milano-vase-fio-petit-fea7e8ed",
+  "add": [
+   "foster-partners-industrial-design"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434294350153",
+  "handle": "ichendorf-milano-cloche-greenwood-baies-10-cm-a1566bdf",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434294415689",
+  "handle": "ichendorf-milano-cloche-greenwood-baies-25-cm-173cacb9",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434294448457",
+  "handle": "ichendorf-milano-pichet-greenwood-277546ff",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434294513993",
+  "handle": "ichendorf-milano-diffuseur-de-parfum-greenwood-feuilles-9ede782b",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434294579529",
+  "handle": "ichendorf-milano-diffuseur-de-parfum-greenwood-rosee-845eb481",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434294677833",
+  "handle": "ichendorf-milano-diffuseur-de-parfum-greenwood-fleur-5e5d41e6",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434294776137",
+  "handle": "ichendorf-milano-diffuseur-de-parfum-greenwood-baies-8bada79b",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ },
+ {
+  "id": "gid://shopify/Product/10434294841673",
+  "handle": "ichendorf-milano-theiere-greenwood-50fe9e90",
+  "add": [
+   "alessandra-baldereschi"
+  ],
+  "ok": true,
+  "errors": []
+ }
+]

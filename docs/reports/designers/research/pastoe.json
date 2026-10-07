@@ -1,0 +1,332 @@
+[
+ {
+  "slug": "martin-visser",
+  "name": "Martin Visser",
+  "sortKey": "Visser",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Martin Visser (1922-2009) est un designer de mobilier néerlandais. Après avoir travaillé au rayon meubles du grand magasin De Bijenkorf à Amsterdam, il devient en 1954 directeur artistique de l'éditeur Spectrum. Il y dessine des meubles aux formes simples et économes en matière, désignés par un code : la première lettre indique le type (B pour bank, canapé ; S pour stoel, chaise ; T pour tafel, table), la seconde la fonction, suivies d'un numéro. On lui doit notamment le canapé-lit BR02 (1960), le banc à lattes BZ, conçu en 1960 pour le Stedelijk Museum d'Amsterdam, la chaise SE07 et le fauteuil SZ63. Sous sa direction, Spectrum a édité des créations de Gerrit Rietveld, Friso Kramer et Benno Premsela.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Martin-Visser",
+   "https://www.pastoe.com/en/product/br02-sofa-bed-frame-black-tonus-4-131",
+   "https://www.pastoe.com/en/product/bz-bench-160x42x40-ash-natural"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/martin-visser.jpg",
+   "sourcePage": "https://www.pastoe.com/en/designer/Martin-Visser",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Martin%20Visser/Martin_Visser_cropped.jpg",
+   "credit": null,
+   "width": 1565,
+   "height": 1565,
+   "notes": "Photo d'archive noir et blanc, carrée ; Visser debout au centre, visage net. Une tête de dos au premier plan à gauche : un recadrage 4:5 centré sur lui l'écarte en grande partie."
+  },
+  "photoMissingReason": null,
+  "remarks": "Pastoe affiche une année 1960 pour presque tous les modèles Visser (étiquettes produit peu fiables) ; seules les dates citées dans les textes (BR02 et BZ, 1960) ont été reprises."
+ },
+ {
+  "slug": "carolina-wilcke",
+  "name": "Carolina Wilcke",
+  "sortKey": "Wilcke",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Carolina Wilcke, née en 1980, est designer de mobilier et orfèvre. Diplômée de la Design Academy Eindhoven en 2009, elle conçoit des pièces d'intérieur à la croisée de l'art et du design, présentées en galerie et éditées par plusieurs marques de mobilier. Sa pratique d'orfèvre se lit dans la série Tangled, éditée par Pastoe, dont le meuble Tangled Cabinet date de 2015 : deux volumes entrelacés, un fin tracé linéaire de la structure et des tablettes en verre. La série comprend aujourd'hui un buffet, une vitrine, des tables basses et une table d'appoint.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Carolina-Wilcke",
+   "https://www.pastoe.com/en/product/tangled-cabinet-cabinet-taupe"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/carolina-wilcke.png",
+   "sourcePage": "https://www.pastoe.com/en/designer/Carolina-Wilcke",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Caroline%20Wilcke/Carolina%20Wilcke.png",
+   "credit": null,
+   "width": 2006,
+   "height": 3028,
+   "notes": "Portrait noir et blanc vertical, visage net de trois quarts. Fichier PNG (RGBA) ; le dossier du CDN est nommé « Caroline Wilcke »."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité non précisée par Pastoe, donc omise. Le « Tangled Cabinet » (2015) correspond probablement au « Buffet Tangled » de Mikado."
+ },
+ {
+  "slug": "joost-van-der-vecht",
+  "name": "Joost van der Vecht",
+  "sortKey": "Van der Vecht",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Joost van der Vecht commence sa carrière de designer produit en 1996 et collabore avec plusieurs éditeurs européens, dont Pastoe. Il y devient ensuite directeur artistique et fait entrer dans la collection des designers et architectes internationaux comme Naoto Fukasawa, Maarten Van Severen et Vincent Van Duysen. Pour Pastoe, il dessine en 2012 la gamme Landscape, buffets et armoires murales aux lignes horizontales qui associent un placage chêne ou noyer à des portes et tiroirs proposés dans les 21 teintes de la palette de la marque, le piètement pouvant recevoir les mêmes couleurs.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Joost-van-der-Vecht",
+   "https://www.pastoe.com/en/product/landscape-cabinet-61x228x46-iconic-oak-natural-sepia-parchment-sepia-base-parchment"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/joost-van-der-vecht.jpg",
+   "sourcePage": "https://www.pastoe.com/en/designer/Joost-van-der-Vecht",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Joost%20van%20der%20Vecht/Joost%20van%20der%20Vecht.jpg",
+   "credit": null,
+   "width": 2880,
+   "height": 3240,
+   "notes": "Portrait noir et blanc sur fond clair, visage net, cadrage buste ; se recadre facilement en 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité et date de naissance non publiées par Pastoe, donc omises. Le « Buffet Landscape » de Mikado correspond au « Landscape Cabinet » de Pastoe."
+ },
+ {
+  "slug": "aldo-van-den-nieuwelaar",
+  "name": "Aldo van den Nieuwelaar",
+  "sortKey": "Van den Nieuwelaar",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Aldo van den Nieuwelaar (1944-2010) est un designer et architecte néerlandais. Influencé par Gerrit Rietveld, le Bauhaus et De Stijl, il développe un vocabulaire fondé sur la géométrie et la fonction, et expérimente de nouveaux matériaux dans les années 1960 et 1970, comme architecte, créateur de mobilier et de luminaires. En 1968, il dessine une série de lampes construites autour du tube fluorescent, dont la lampe circulaire TC6. En 1978 suit l'armoire A'dammer, meuble à rideau coulissant dont le nom évoque les bornes de rue d'Amsterdam. Ses créations figurent dans les collections du Stedelijk Museum d'Amsterdam et du MoMA à New York.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/aldo-van-den-nieuwelaar",
+   "https://www.pastoe.com/en/product/a-dammer-170x37x37-iconic-fossil",
+   "https://www.pastoe.com/en/product/tc6"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/aldo-van-den-nieuwelaar.png",
+   "sourcePage": "https://www.pastoe.com/en/designer/aldo-van-den-nieuwelaar",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Aldo%20van%20den%20Nieuwelaar/aldo%20van%20den%20nieuwelaar_portrait.png",
+   "credit": null,
+   "width": 1600,
+   "height": 1600,
+   "notes": "Photo d'archive noir et blanc, carrée, debout dans un atelier ; visage net. L'image semble retouchée ou rehaussée numériquement (lissage visible) : à contrôler à grande taille."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année de l'A'dammer (1978) tirée de l'étiquette produit Pastoe, cohérente avec le texte (« une décennie après » 1968)."
+ },
+ {
+  "slug": "cees-braakman",
+  "name": "Cees Braakman",
+  "sortKey": "Braakman",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Cees Braakman (1917-1995) est un designer de mobilier néerlandais. Fils cadet de Dirk Braakman, directeur de Pastoe, il grandit au contact de l'usine et devient en 1948 le principal designer de la collection. Inspiré par les courants internationaux, il oriente Pastoe vers un mobilier moderne et adaptable, en phase avec les intérieurs des années 1950 et 1960. Il conçoit notamment la série U+N, système modulaire de rangements aux combinaisons multiples qui fait connaître Pastoe à l'étranger, et la chaise Wire (1958), à structure en fil métallique. La gamme Wire comprend aujourd'hui la chaise SM05, le tabouret KM05 et des tabourets de bar.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/cees-braakman",
+   "https://www.pastoe.com/en/product/sm05-wire-dining-chair-sm05-black"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/cees-braakman.jpg",
+   "sourcePage": "https://www.pastoe.com/en/designer/cees-braakman",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Cees%20braakman/Cees_Braakman_portrait.jpg",
+   "credit": null,
+   "width": 1600,
+   "height": 1600,
+   "notes": "Photo d'archive noir et blanc, carrée, à la table à dessin, regard vers l'objectif, visage net à droite. Semble restaurée ou rehaussée numériquement. Recadrage 4:5 à décaler vers la droite."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "studio-parade",
+  "name": "Studio Parade",
+  "sortKey": "Studio Parade",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Studio Parade est un studio de design néerlandais formé par Paulien Berendsen (née en 1967) et Eric Sloot (né en 1963). Le duo conçoit du mobilier pour différents éditeurs, ainsi que des projets graphiques, des expositions et l'architecture intérieure de bâtiments publics, avec un travail fondé sur la simplicité et l'interprétation de formes graphiques. Pour Pastoe, il a dessiné en 2009 l'étagère murale Paperback : un panneau arrière fixé au mur reçoit treize tablettes, dont trois à rebord pour présenter livres et magazines. Les modules s'utilisent seuls ou se combinent horizontalement et verticalement.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Studio-Parade",
+   "https://www.pastoe.com/en/product/paperback-wallsystem-medium-60x60-white"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/studio-parade.png",
+   "sourcePage": "https://www.pastoe.com/en/designer/Studio-Parade",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Studio%20Parade/studio%20parade.png",
+   "credit": null,
+   "width": 4416,
+   "height": 6928,
+   "notes": "Portrait noir et blanc vertical des deux membres (Eric Sloot assis à gauche, Paulien Berendsen debout à droite) dans leur atelier ; visages nets mais assez petits dans le cadre. Fichier PNG très lourd (17 Mo)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année de fondation et ville du studio non publiées par Pastoe, donc omises. Attribution des prénoms aux personnes de la photo déduite (homme/femme), non légendée."
+ },
+ {
+  "slug": "constant-nieuwenhuys",
+  "name": "Constant Nieuwenhuys",
+  "sortKey": "Nieuwenhuys",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Constant Nieuwenhuys (Amsterdam, 1920 - Utrecht, 2005) est un artiste néerlandais. Il cofonde en 1948 Cobra, collectif international d'artistes actif jusqu'en 1951. Au début des années 1950, son travail devient plus abstrait et il réalise des constructions spatiales, conçues à la fois comme sculptures et comme maquettes d'architecture, le fer à souder rejoignant le pinceau parmi ses outils. À la fin de la décennie, ces recherches nourrissent New Babylon, projet utopique de ville et de société futures. La table d'appoint IJhorst (1954), au piètement en fil d'acier, date de cette transition entre Cobra et New Babylon.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Constant-Nieuwenhuys",
+   "https://www.pastoe.com/en/product/ijhorst-side-table-large-fenix-black"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/constant-nieuwenhuys.jpg",
+   "sourcePage": "https://www.pastoe.com/en/designer/Constant-Nieuwenhuys",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Constant%20Nieuwenhuys/Constant%20Nieuwenhuys.jpg",
+   "credit": null,
+   "width": 2380,
+   "height": 2378,
+   "notes": "Photo d'archive noir et blanc, carrée : Constant de profil, soudant une construction en fil métallique. Visage net mais de profil et partiellement masqué par le fer à souder ; portrait « au travail » plutôt que posé. Recadrage 4:5 à placer à gauche."
+  },
+  "photoMissingReason": null,
+  "remarks": "Connu sous le seul nom de Constant ; le nom complet fourni est conservé."
+ },
+ {
+  "slug": "kho-liang-ie",
+  "name": "Kho Liang Ie",
+  "sortKey": "Kho",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Kho Liang Ie (1927-1975) est un architecte d'intérieur et designer né à Magelang, dans les anciennes Indes néerlandaises, de parents chinois. Sa famille s'installe aux Pays-Bas en 1949. Après des études à l'Instituut voor Kunstnijverheid, il est rédacteur puis rédacteur en chef de la revue Goed Wonen, avant de se consacrer au mobilier et à l'aménagement intérieur à partir de 1958. Conseiller esthétique d'Artifort, il reçoit en 1963 la commande de l'intérieur du nouveau terminal de Schiphol, ouvert en 1967. Il dessine aussi des luminaires, dont le lampadaire K46 (1957) à abat-jour en papier laminé.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Kho-Liang-Ie",
+   "https://www.pastoe.com/nl/designer/Kho-Liang-Ie",
+   "https://www.pastoe.com/en/product/k46-high-white",
+   "https://www.stedelijk.nl/en/exhibitions/kho-liang-ie-2"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/kho-liang-ie.jpeg",
+   "sourcePage": "https://www.pastoe.com/en/designer/Kho-Liang-Ie",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Kho%20Liang%20Ie/atelier%20artiforte_kho%20liang%20ie.jpeg",
+   "credit": null,
+   "width": 1600,
+   "height": 1158,
+   "notes": "Photo d'archive noir et blanc, format paysage, en pied dans un jardin ; visage net mais petit. Un recadrage 4:5 (environ 926 × 1158) garde la silhouette entière, le visage restant réduit. Nom de fichier : « atelier artiforte »."
+  },
+  "photoMissingReason": null,
+  "remarks": "sortKey « Kho » : nom de famille chinois placé en premier. Date de décès (1975) et mission Artifort / ouverture de Schiphol (1967) issues du Stedelijk ; le reste de Pastoe. Année du K46 (1957) d'après l'étiquette produit Pastoe."
+ },
+ {
+  "slug": "walter-antonis",
+  "name": "Walter Antonis",
+  "sortKey": "Antonis",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Walter Antonis, né en 1943, est un designer néerlandais. Pendant ses études à la Design Academy d'Eindhoven, il entre chez l'éditeur Spectrum comme tapissier et travaille aux côtés de Martin Visser, qui l'encourage à approfondir les principes du design de produit puis lui confie un poste de designer. Son fauteuil SZ14 (1971) n'emploie que les matériaux strictement nécessaires, avec une attention particulière au détail et au confort. Son travail suit une logique constructive où le matériau et la fonction déterminent la forme.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Walter-Antonis",
+   "https://www.pastoe.com/nl/designer/Walter-Antonis"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/walter-antonis.png",
+   "sourcePage": "https://www.pastoe.com/en/designer/Walter-Antonis",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Walter%20Antonis/Walter%20Antonis%20portrait.png",
+   "credit": null,
+   "width": 1302,
+   "height": 1694,
+   "notes": "Portrait de studio noir et blanc, buste, fond sombre, visage net ; se recadre facilement en 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "werner-blaser",
+  "name": "Werner Blaser",
+  "sortKey": "Blaser",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Werner Blaser (1924-2019), né à Bâle, est un architecte et designer suisse. Il étudie à l'Illinois Institute of Technology de Chicago et collabore longuement avec Ludwig Mies van der Rohe. Ses voyages au Japon dans les années 1950 marquent durablement son travail, attentif à la simplicité des formes et aux matériaux. Architecte, auteur et commissaire d'expositions, il dessine aussi du mobilier, dont la table basse TZ75 (1963) : un plateau de verre posé sur un piètement triangulaire aux montants courbes.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Werner-Blaser",
+   "https://www.pastoe.com/en/product/tz75-coffee-table-coffee-table-oak-natural"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/werner-blaser.png",
+   "sourcePage": "https://www.pastoe.com/en/designer/Werner-Blaser",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Werner%20Blaser/Werner_blaser_designer_profile_portrait%201.png",
+   "credit": null,
+   "width": 764,
+   "height": 1032,
+   "notes": "Photo d'archive noir et blanc, verticale, assis en kimono dans un intérieur japonais ; visage net. Définition modeste (764 px de large), au-dessus du minimum de 600 px."
+  },
+  "photoMissingReason": null,
+  "remarks": "Pastoe indique aussi qu'il fut « élève d'Alvar Aalto » : affirmation non recoupée, omise par prudence. Année du TZ75 (1963) d'après l'étiquette produit Pastoe."
+ },
+ {
+  "slug": "benno-premsela",
+  "name": "Benno Premsela",
+  "sortKey": "Premsela",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Benno Premsela (1920-1997), né à Amsterdam, est un designer et architecte d'intérieur néerlandais. Dans les années 1950, il est étalagiste au grand magasin De Bijenkorf, puis fonde avec Jan Vonk un studio consacré à l'architecture intérieure et au textile. Il joue un rôle d'intermédiaire entre créateurs et industrie, en procurant des commandes à de nombreux designers, et s'engage pour l'émancipation homosexuelle aux Pays-Bas. Le miroir Benno (1956) serait né, selon Pastoe, d'un anneau de bois destiné à une petite table, dans lequel Premsela a pratiqué une fente.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Benno-Premsela",
+   "https://www.pastoe.com/en/product/benno-mirror-100-black"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/benno-premsela.jpg",
+   "sourcePage": "https://www.pastoe.com/en/designer/Benno-Premsela",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Benno%20Premsela/benno-premsela-spectrumdesign.jpg",
+   "credit": null,
+   "width": 1170,
+   "height": 780,
+   "notes": "Portrait noir et blanc, format paysage, assis face à l'objectif, main sur la poitrine ; visage net et centré. Recadrage 4:5 possible (environ 624 × 780), juste au-dessus du minimum de largeur."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "henk-fillekes",
+  "name": "Henk Fillekes",
+  "sortKey": "Fillekes",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Henk Fillekes (1918-1983) est un designer de luminaires néerlandais établi à Rotterdam. Après la Seconde Guerre mondiale, il reprend avec Johan van Wierst le Lichtornamenten Atelier Artiforte, qu'il oriente vers le design moderne en collaborant avec Kho Liang Ie et Johan Niegeman. Son lampadaire Magneto, conçu dans les années 1950, repose sur un trépied : une boule aimantée permet d'orienter librement le bras et l'abat-jour, dans lequel l'ampoule est profondément encastrée. Le modèle s'inscrit dans la filiation du Bauhaus.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Henk-Fillekes",
+   "https://www.pastoe.com/en/product/magneto-floor-lamp-magneto-white"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/henk-fillekes.jpg",
+   "sourcePage": "https://www.pastoe.com/en/designer/Henk-Fillekes",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Henk%20Fillekes/Henk%20Fillekes%20Atelier%20Artiforte.jpg",
+   "credit": null,
+   "width": 2279,
+   "height": 3480,
+   "notes": "Photo d'archive noir et blanc, verticale, cadrage buste, main au menton ; visage net, grain et léger flou d'origine. Probablement un scan de tirage (nom de fichier « Atelier Artiforte »)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "friso-kramer",
+  "name": "Friso Kramer",
+  "sortKey": "Kramer",
+  "brands": [
+   "Pastoe"
+  ],
+  "bio": "Friso Kramer (1922-2019) est un designer néerlandais, né à Amsterdam, fils de l'architecte Piet Kramer. Il étudie l'architecture intérieure à l'Instituut voor Kunstnijverheid d'Amsterdam, où l'enseignement de Mart Stam l'oriente vers le design industriel. En 1948, il entre chez le fabricant de meubles en acier De Cirkel (Ahrend), dont il devient plus tard directeur artistique, et y dessine la chaise Revolt (1953) en tôle d'acier. Il conçoit aussi des luminaires et des aménagements de bureaux complets. Le portemanteau mural DZ05 (1954), en acier thermolaqué, comporte une tablette à chapeaux et sept crochets.",
+  "bioSources": [
+   "https://www.pastoe.com/en/designer/Friso-Kramer",
+   "https://www.pastoe.com/nl/designer/Friso-Kramer",
+   "https://www.pastoe.com/en/product/dz05-coat-rack-yellow"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/friso-kramer.jpg",
+   "sourcePage": "https://www.pastoe.com/en/designer/Friso-Kramer",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Friso%20Kramer/Friso%20Kramer_pastoe.jpg",
+   "credit": null,
+   "width": 1916,
+   "height": 1924,
+   "notes": "Photo d'archive noir et blanc, carrée, pipe à la bouche, examinant une pièce de chaise ; visage net, montants métalliques au premier plan. Recadrage 4:5 centré possible."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ }
+]

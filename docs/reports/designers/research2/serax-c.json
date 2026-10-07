@@ -1,0 +1,324 @@
+[
+ {
+  "slug": "nedda",
+  "name": "Nedda El-Asmar",
+  "sortKey": "El-Asmar",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Nedda El-Asmar est une designer belge qui signe ses créations sous le nom de Studio Nedda. Elle a étudié la conception de bijoux et l'orfèvrerie à l'Académie royale des beaux-arts d'Anvers, puis au Royal College of Art de Londres. Son travail associe savoir-faire artisanal et relecture d'objets traditionnels, en particulier pour la table ; elle a travaillé pour Hermès, Puiforcat, Villeroy & Boch, Robbe & Berking, Demeyere et Serax. Élue Designer of the Year en Belgique en 2007, elle a reçu en 2025 le Henry van de Velde Lifetime Achievement Gold Award. Pour Serax, elle a dessiné Sastrugi, une collection de vaisselle conçue pour un usage quotidien. En décembre 2025, elle a été nommée à la tête de l'Académie royale des beaux-arts d'Anvers.",
+  "bioSources": [
+   "http://www.nedda.be/the-studio",
+   "http://www.nedda.be/shop/sastrugi-dinner-box-6pc"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/nedda.jpg",
+   "sourcePage": "http://www.nedda.be/the-studio",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/57961fe9e58c622260a5747c/6a42b3a3-1f68-4da3-8e05-f706e87c1128/NeddaCopyrightElyaneVan+Coillie.jpg?format=2500w",
+   "credit": "Elyane Van Coillie",
+   "width": 2500,
+   "height": 3750,
+   "notes": "Portrait de face sur fond noir, publié sur le site officiel du studio. Format 2:3, cadrage 4:5 facile."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nom corrigé : « Nedda » est le nom du studio (STUDIO|Nedda, crédité « Studio Nedda » par Serax) ; la personne est Nedda El-Asmar, dont le site officiel présente la biographie et le portrait. Garder « Nedda » si Mikado préfère le nom du studio (sortKey alors « Nedda »). De 2008 à 2017, elle a travaillé avec Erik Indekeu ; la source ne précise pas s'il a cosigné Sastrugi. Pas de page créateur sur le site actuel de Serax."
+ },
+ {
+  "slug": "boxy-s",
+  "name": "Boxy's",
+  "sortKey": "Boxy's",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Les Boxy's sont les frères jumeaux Kristof et Stefan Boxy, chefs et traiteurs flamands. Ils animent la maison de traiteur Douglas & Boxy's, installée à Deurle, en Belgique, qui associe une cuisine contemporaine à des valeurs traditionnelles, en suivant la simplicité et le rythme des saisons. Selon Serax, ils cherchent à composer l'ensemble d'une réception, des plats et des vins jusqu'à la vaisselle, aux accessoires et à l'animation. Cette approche les a conduits à créer avec Serax Take Time, une ligne de table destinée aux repas de fête, qui comprend notamment des couverts en acier.",
+  "bioSources": [
+   "http://web.archive.org/web/20230129151313/https://www.serax.com/en/designer/taketimebyboxys",
+   "https://www.douglasboxys.be/"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/boxy-s.jpg",
+   "sourcePage": "http://web.archive.org/web/20230129151313/https://www.serax.com/en/designer/taketimebyboxys",
+   "imageUrl": "http://web.archive.org/web/20230129151313im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_boxy_designer_1297x700.jpg",
+   "credit": null,
+   "width": 1297,
+   "height": 700,
+   "notes": "Photo noir et blanc des deux frères debout, de profil, en tablier, publiée par Serax sur son ancienne page créateur (récupérée dans les archives web, l'URL d'origine sur serax.com ne répond plus). Image en paysage : un recadrage 4:5 autour des deux personnes ne fait qu'environ 560 × 700 px, sous le seuil de 600 px, et les visages sont petits. À valider par Mikado ; sinon, pas de portrait."
+  },
+  "photoMissingReason": null,
+  "remarks": "Duo de chefs (jumeaux Kristof et Stefan Boxy), donc bien un créateur. Le site actuel de Serax n'a plus de page pour eux : la description vient de l'ancienne page créateur de Serax, lue dans les archives web. Le site du traiteur ne mentionne ni Serax ni Take Time. Portrait en paysage, à valider (voir photo.notes)."
+ },
+ {
+  "slug": "filip-arickx",
+  "name": "Filip Arickx",
+  "sortKey": "Arickx",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Filip Arickx est un créateur de mode belge. En 1997, il fonde avec An Vandevorst la marque A.F. Vandevorst, reconnaissable à son logo en croix cousue inspiré de l'emblème de la Croix-Rouge et à ses références aux uniformes militaires et aux tenues d'infirmière. Après vingt-trois ans d'activité, le duo arrête la marque en 2020. Filip Arickx s'est ensuite tourné vers le soufflage du verre. Il dessine pour Serax depuis 2025, avec pour première collection Oak Lighting, des appliques en verre aux couleurs contrastées dont la surface évoque l'écorce des arbres.",
+  "bioSources": [
+   "https://serax.com/pages/filip-arickx"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "sophie-casier",
+  "name": "Sophie Casier",
+  "sortKey": "Casier",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Sophie Casier est une designer installée à Bruxelles. Elle a suivi plusieurs formations, notamment en arts appliqués, en restauration de meubles anciens et en faux marbre à l'Institut des Arts et Métiers de Bruxelles. Elle travaille de nombreux matériaux, du bois au laiton, de l'acier au bronze, de l'aluminium à la céramique, et place la lumière, diffuse plutôt que directe, au centre de son travail. Elle réalise ses créations dans son atelier bruxellois. Pour Serax, elle a dessiné la collection de luminaires Oya, inspirée de la lumière du village d'Oia, sur l'île grecque de Santorin.",
+  "bioSources": [
+   "https://serax.com/pages/sophie-casier"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "coseincorso",
+  "name": "Coseincorso",
+  "sortKey": "Coseincorso",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Coseincorso est un studio de design pluridisciplinaire fondé par Marzia Cerio et Marwann Frikach. Le duo travaille à la frontière entre art et design et associe une esthétique contemporaine et épurée à des savoir-faire traditionnels. Ses objets sont réalisés avec des artisans à partir de matériaux d'origine locale, et chaque collection s'appuie sur un élément d'histoire, d'archéologie ou de géographie. Pour Serax, le studio a créé Candelabra, cinq bougeoirs en acier inspirés des béguinages belges qui forment un cercle une fois réunis, ainsi que Pillar, une lampe à poser inspirée des ruines d'une colonne antique.",
+  "bioSources": [
+   "https://serax.com/pages/coseincorso"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Serax écrit le nom en capitales (COSEINCORSO) ; graphie « Coseincorso » conservée."
+ },
+ {
+  "slug": "ruben-deriemaeker",
+  "name": "Ruben Deriemaeker",
+  "sortKey": "Deriemaeker",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Ruben Deriemaeker est un designer et fabricant de meubles anversois, formé au travail du bois, à l'architecture intérieure et au design de mobilier. Il a grandi dans un quartier d'Anvers marqué par l'architecture de Renaat Braem. En 2014, il fonde à Anvers le label DERI3, contraction de son nom, et se consacre surtout à des meubles sur mesure. Il privilégie les matériaux naturels, en particulier le bois. Pour Serax, il a dessiné Waves, une collection de vases en verre dont le rythme et la texture rappellent son métier de fabricant.",
+  "bioSources": [
+   "https://serax.com/pages/ruben-deriemaeker"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "nadine-dewart",
+  "name": "Nadine Dewart",
+  "sortKey": "Dewart",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Nadine Dewart est une artiste belge, née au Canada et installée à Bruxelles. Elle a d'abord travaillé le papier, le volume et la couture, en noir et blanc, avant d'introduire la couleur et des matières comme le plastique, le velours et le cuir. Sa pratique passe par le collage, le tissage et les compositions géométriques. Ces dernières années, elle s'est tournée vers la céramique, où la gravure et la peinture sur l'argile occupent une place centrale. Les plantes sont sa principale source d'inspiration : pour Serax, elle a créé Wild Vegetal Variations, une collection de vases et de cache-pots.",
+  "bioSources": [
+   "https://serax.com/pages/nadine-dewart"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "La page Serax de Nadine Dewart renvoie aussi à « Flowerpots & planters by Studio Terres de Rêves » : vérifier que Cache-pot 04, Vase 01 Mix et Bol 06 appartiennent bien à Wild Vegetal Variations et non à Studio Terres de Rêves."
+ },
+ {
+  "slug": "lauren-van-driessche",
+  "name": "Lauren Van Driessche",
+  "sortKey": "Van Driessche",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Lauren Van Driessche est architecte d'intérieur et céramiste. Attirée par les objets faits main, elle a choisi l'argile pour donner forme à ses idées et expérimente différents types de terre et de techniques ; le contraste entre les possibilités de la matière et ses limites guide sa démarche. Son travail va de pièces sculpturales à une vaisselle fonctionnelle aux formes affirmées. Pour Serax, elle a dessiné Terra Light, une collection de lampes à poser et de lampadaires en terre cuite, à la finition brute et aux formes ludiques.",
+  "bioSources": [
+   "https://serax.com/pages/lauren-van-driessche"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Source mince (nationalité et dates non publiées) : bio courte."
+ },
+ {
+  "slug": "marc-ferrand",
+  "name": "Marc Ferrand",
+  "sortKey": "Ferrand",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Marc Ferrand est un designer installé à Nice. Diplômé en design industriel de l'École Bleue à Paris en 2006, il collabore ensuite avec l'architecte japonais Shigeru Ban, sur du design industriel et des architectures nomades et temporaires. Il fonde l'Atelier Marc Ferrand en 2017. Son travail va de collaborations industrielles à des projets d'aide d'urgence, dont un mémorial bâti avec du bois flotté après la tempête Alex de 2020. Il a notamment conçu Jamais Content pour Bottega Ghianda, sélectionné au Compasso d'Oro. Pour Serax, il a dessiné Parole, une collection de vases inspirée de la Méditerranée.",
+  "bioSources": [
+   "https://serax.com/pages/marc-ferrand"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "nadia-gallardo",
+  "name": "Nadia Gallardo",
+  "sortKey": "Gallardo",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Nadia Gallardo est diplômée des beaux-arts en section sculpture. Elle a ensuite travaillé pendant dix ans dans un bureau de style parisien. Ses objets sont pour la plupart édités par Serax. En parallèle, elle mène en atelier un travail personnel avec des matériaux simples, comme le papier et le fil, autour du temps, des gestes répétés et du silence. Son regard sur les choses simples de la terre et des plantes se retrouve dans les Flower Bottles, des vases dessinés pour Serax.",
+  "bioSources": [
+   "https://serax.com/pages/nadia-gallardo"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Source mince (nationalité et dates non publiées) : bio courte."
+ },
+ {
+  "slug": "grint",
+  "name": "Grint",
+  "sortKey": "Grint",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "GRiNT est le duo formé par Michiel Goethals et Mattias van Mieghem, actif en architecture intérieure, de l'identité graphique à la façade et du luminaire au petit bâtiment. Leurs créations ont un langage graphique affirmé, avec une part de jeu, sans perdre de vue l'usage. Les projets sont conçus au GRiNTSTUDIO puis fabriqués par les artisans du GRiNTATELiER, qui produit tous les objets en interne. Avec Serax, le duo a créé Cover Up, une collection de miroirs aux lignes graphiques et à la présence sculpturale.",
+  "bioSources": [
+   "https://serax.com/pages/grint"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Le duo écrit son nom « GRiNT » ; Serax titre la page « Grint ». Garder « Grint » ou adopter « GRiNT » au choix de Mikado. Serax ne cite que Cover Up : l'attribution à GRiNT de Charles (dessous de verre, plateau Zigzag) n'est pas confirmée par la page."
+ },
+ {
+  "slug": "ann-van-hoey",
+  "name": "Ann Van Hoey",
+  "sortKey": "Van Hoey",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Ann Van Hoey est une céramiste belge. Après une première carrière de vingt ans, elle se consacre entièrement à la céramique, qu'elle approfondit par des voyages, un diplôme et des ateliers auprès de céramistes contemporains. Son travail, plusieurs fois récompensé au niveau international, part souvent d'équations mathématiques posées sur papier. Pour Serax, elle a dessiné Nido, une collection en porcelaine bone china fondée sur des formes géométriques, qui comprend assiettes, bols, tasses, verrerie et accessoires de table.",
+  "bioSources": [
+   "https://serax.com/pages/ann-van-hoey"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "La page Serax ne cite que Nido (vaisselle, verrerie, accessoires) : Bol A+A et Mug Geometry ne sont pas confirmés comme ses créations par cette page."
+ },
+ {
+  "slug": "louis-de-limburg",
+  "name": "Louis de Limburg",
+  "sortKey": "de Limburg",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Louis de Limburg, né en 1962, est un designer industriel belge formé à l'ENSAV La Cambre, à Bruxelles. Il a fait ses débuts en stage au studio IDEA Industrial Design d'Axel Enthoven à Anvers, puis a travaillé pour d'autres studios et instituts de recherche. Il dirige le studio Stirum Design et enseigne le design industriel au CAD College of Advertising & Design de Bruxelles depuis 2017. Son travail couvre les arts de la table, l'horlogerie, les sanitaires, l'orfèvrerie, le luminaire et le mobilier. Pour Serax, il a notamment dessiné Marbilouse, des plateaux de service en marbre empilables.",
+  "bioSources": [
+   "https://serax.com/pages/louis-de-limburg"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "« Belge » déduit de son parcours bruxellois, non écrit sur la page Serax ; à retirer si l'on veut s'en tenir à la lettre. Serax ne cite que Marbilouse : Frame, Windy et Monsieur Cruchot ne sont pas confirmés par la page. sortKey « de Limburg » (particule) : adapter à la convention de tri de Mikado (« Limburg » possible)."
+ },
+ {
+  "slug": "nel-maertens",
+  "name": "Nel Maertens",
+  "sortKey": "Maertens",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Nel Maertens est une artiste plasticienne anversoise venue de la mode. Après un master à l'Académie royale des beaux-arts d'Anvers, elle travaille dans l'industrie de la mode, puis développe une pratique pluridisciplinaire entre arts visuels, costume et performance. Elle réalise dessins, peintures, performances et installations colorés, avec une attention particulière à la féminité et à la nature. Pour Serax, elle a créé Serving Spring, un plat de service fleuri consacré aux fleurs qui poussent en bordure des routes et à la capacité de la nature à s'épanouir en ville.",
+  "bioSources": [
+   "https://serax.com/pages/nel-maertens"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "studio-ottawa",
+  "name": "Studio Ottawa",
+  "sortKey": "Studio Ottawa",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Studio Ottawa est un studio de design installé à Zurich, fondé par Nadine Ottawa, qui a d'abord travaillé dans l'hôtellerie et la restauration. Son esthétique, sobre et contemporaine, cherche l'équilibre entre artisanat traditionnel et langage formel actuel. Ces dernières années, elle s'est mise à la céramique faite main, dans la lignée de ses projets pour l'hôtellerie, et ses collections en faïence sont utilisées par des hôtels et des restaurants. Pour Serax, elle a dessiné Nebula, une collection de luminaires en céramique à la lumière douce.",
+  "bioSources": [
+   "https://serax.com/pages/studio-ottawa"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "« Lampe Deco T25 » n'est pas citée sur la page Serax du studio : attribution à vérifier."
+ },
+ {
+  "slug": "claudia-schoemig",
+  "name": "Claudia Schoemig",
+  "sortKey": "Schoemig",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Claudia Schoemig est une artiste plasticienne et céramiste. Après une formation en céramique, elle travaille dans un atelier traditionnel puis dirige son propre atelier dans le sud de l'Allemagne pendant quatre ans. En 1998, elle s'installe à Berlin, où elle étudie les beaux-arts et collabore avec des ateliers de céramique et de porcelaine. Elle fonde en 2010 la marque Schoemig Porzellan, dont l'atelier est établi à Berlin depuis 2013, avec une boutique attenante. Pour Serax, elle a dessiné GRAPH, une collection de vases qui reflète son goût pour le dessin au trait.",
+  "bioSources": [
+   "https://serax.com/pages/claudia-schoemig"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "utilise-objects",
+  "name": "Utilise.Objects",
+  "sortKey": "Utilise.Objects",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Utilise.Objects est un collectif de designers réunissant Giel Dedeurwaerder et Brent Neve. Pour Serax, le duo a créé le service à thé Collage, inspiré du design japonais : des tasses en acacia massif et une théière en fonte. Le projet repose sur l'équilibre entre matière, forme et proportion, et sur l'idée qu'un service à thé peut rester exposé comme objet décoratif plutôt que d'être rangé après usage. Collage a reçu en 2019 un Henry van de Velde Award dans la catégorie Habitat.",
+  "bioSources": [
+   "https://serax.com/pages/utilise-objects"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Source mince (ville, année de fondation non publiées) : bio courte ; pas de site officiel du collectif trouvé dans le temps imparti."
+ },
+ {
+  "slug": "jonas-van-put",
+  "name": "Jonas Van Put",
+  "sortKey": "Van Put",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Jonas Van Put est un designer qui s'est fait connaître avec son projet de fin d'études Observer, une chaise posée sur une structure en acier galvanisé de près de cinq mètres de haut. Après trois ans dans un bureau d'architecture intérieure, il fonde son propre studio en 2019 pour se consacrer à un travail personnel et à la métallerie sur mesure. Inspiré par la Verb List de Richard Serra, il mêle architecture, design et art dans des objets lisibles, fonctionnels ou sculpturaux. Pour Serax, il a dessiné L-Tray, une coupe à fruits réduite à un simple profilé d'acier en L.",
+  "bioSources": [
+   "https://serax.com/pages/jonas-van-put"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Le produit Mikado « Plateau L » correspond à L-Tray."
+ },
+ {
+  "slug": "antoine-vandewoude",
+  "name": "Antoine Vandewoude",
+  "sortKey": "Vandewoude",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Antoine Vandewoude est un designer autodidacte. Technicien de théâtre à l'Opéra des Flandres, il restaure des meubles anciens entre deux productions, puis ouvre son propre atelier en 1993. Ses meubles sur mesure sont commandés par des clients du monde de la mode et de l'art, dont le créateur Dries Van Noten. En 2014, il se tourne vers la céramique et réalise des pièces tantôt brutes et organiques, tantôt épurées. Pour Serax, il a créé Pique-Fleurs, des vases pique-fleurs et un bougeoir aux formes irrégulières, couverts d'un émail rouge profond dit sang de bœuf.",
+  "bioSources": [
+   "https://serax.com/pages/antoine-vandewoude"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ }
+]
