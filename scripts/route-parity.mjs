@@ -69,6 +69,7 @@ const URLS = [
   ['/nos-marques/autre', ['status', 'location']],
   ['/prendre-rendez-vous', ['status', 'location']],
   ['/contact', ['status', 'location']],
+  ['/home', ['status', 'location'], { status: 301, location: '/' }],   // A12 : 301 vers l'accueil
   ['/v3/contact.html', ['status', 'location']],
   ['/v3', ['status', 'location']],
   ['/vitra-home-stories-for-winter', ['status', 'location']],

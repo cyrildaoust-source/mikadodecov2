@@ -26,7 +26,8 @@ Date : 6 octobre 2026 · Base analysée : `main` @ `8800d9f` (PR #171) + prod `w
 | 4 | A3 (plan SEO) : modèle de titre par type de page en un seul endroit (`lib/render/seo.js` : `title_tag` Shopify, sinon « Nom — Marque \| Mikado Deco » ; « Nom · Mikado Deco » ailleurs) | ✅ en Preview (8 oct.) | PR seo/modele-de-titre |
 | 4 | 4.4 images hors git | ⏸ reporté : Blob plafonné sur le plan Hobby, sortie de git = réécriture d'historique | ADR 0008 |
 | 5 | 5.2 /api/health · 5.3 ADR 0001–0006 · 5.4 Dependabot · 5.4 Express 5 | ✅ livré | PR #185, #187 ; docs/adr |
-| 5 | 5.1 log drain + alertes (réglage Vercel) | à faire, réglage propriétaire | — |
+| 5 | 5.1 log drain + alertes | ✅ livré sous forme de surveillance GitHub toutes les 15 min (échec = e-mail) ; log drain impossible sur le plan Hobby | PR #207 |
+| SEO | A10 fiches de marchand (livraison + retour dans l'Offer, `data/offer-policy.json`) · A12 `/home` → 301 | ✅ en Preview (8 oct.), décidés par Cyril | PR seo/home-301-fiches-marchand |
 
 ---
 

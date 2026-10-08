@@ -31,3 +31,18 @@ test('Without a resolved variant, the offer falls back to the product price and 
   assert.equal(ld.gtin, undefined);
   assert.equal(ld.offers.availability, 'https://schema.org/BackOrder');
 });
+
+// Fiche de marchand complète (plan SEO, A10) : livraison et retour déclarés sur chaque offre, depuis data/offer-policy.json (CGV).
+test('chaque offre porte les conditions de livraison et de retour des CGV, identiques pour toutes les fiches', () => {
+  const { productJsonLd, shippingDetails, merchantReturnPolicy } = require('../lib/product-jsonld');
+  const policy = require('../data/offer-policy.json');
+  const ld = productJsonLd({ name: 'Chaise', priceMin: 100, inStock: true, available: true }, null, { url: 'https://www.mikadodeco.be/produit.html?handle=chaise', seller: 'Mikado Deco' });
+  assert.deepEqual(ld.offers.shippingDetails, { '@type': 'OfferShippingDetails', shippingRate: { '@type': 'MonetaryAmount', value: 50, currency: 'EUR' }, shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'BE' } });
+  assert.deepEqual(ld.offers.hasMerchantReturnPolicy, {
+    '@type': 'MerchantReturnPolicy', applicableCountry: 'BE', returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow', merchantReturnDays: 14,
+    returnMethod: ['https://schema.org/ReturnByMail', 'https://schema.org/ReturnInStore'], returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility',
+  });
+  assert.equal(policy.shipping.rate, 50); assert.equal(policy.returns.days, 14);
+  assert.deepEqual(shippingDetails({ country: 'FR', rate: 9, currency: 'EUR' }).shippingDestination.addressCountry, 'FR');
+  assert.deepEqual(merchantReturnPolicy({ country: 'BE', days: 30, methods: ['ReturnByMail'], fees: 'FreeReturn' }).returnMethod, ['https://schema.org/ReturnByMail']);
+});

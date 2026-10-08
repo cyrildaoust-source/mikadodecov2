@@ -1,0 +1,5 @@
+{
+  "_note": "Conditions de livraison et de retour déclarées à Google dans le JSON-LD Product/Offer de chaque fiche (lib/product-jsonld.js : shippingDetails + hasMerchantReturnPolicy). Source : CGV en ligne, article 4 (livraison en Belgique uniquement, 50 € par commande) et article 2 (rétractation 14 jours, le client « renvoie ou restitue », frais de renvoi à sa charge), version du 24/09/2026. Si les CGV changent, modifier ici : une seule source pour toutes les fiches.",
+  "shipping": { "country": "BE", "rate": 50, "currency": "EUR" },
+  "returns": { "country": "BE", "days": 14, "methods": ["ReturnByMail", "ReturnInStore"], "fees": "ReturnFeesCustomerResponsibility" }
+}
