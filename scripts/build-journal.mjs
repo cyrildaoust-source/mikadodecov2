@@ -90,40 +90,13 @@ async function renderArticle(slug, a) {
     },
   }).replace(/</g, '\\u003c');
 
-  return `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.ico" sizes="32x32" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <title>${esc(titleFull)}</title>
-  <meta name="description" content="${attrEsc(metaDesc)}" />
-  <!-- Open Graph / Twitter Cards (aperçu au partage social — par article, statique) -->
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Mikado Deco" />
-  <meta property="og:locale" content="fr_BE" />
-  <meta property="og:title" content="${attrEsc(titleFull)}" />
-  <meta property="og:description" content="${attrEsc(metaDesc)}" />
-  <meta property="og:url" content="${attrEsc(canonical)}" />
-  <meta property="og:image" content="${attrEsc(ogImage)}" />${ogDims}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${attrEsc(titleFull)}" />
-  <meta name="twitter:description" content="${attrEsc(metaDesc)}" />
-  <meta name="twitter:image" content="${attrEsc(ogImage)}" />
-  <link rel="canonical" href="${attrEsc(canonical)}" />
+  // Fragment pour le layout unique (ADR 0012) : en-tête de page + balises propres (dimensions
+  // Open Graph de la vraie image, JSON-LD Article) + corps. Le serveur assemble le <head> commun.
+  const pageMeta = JSON.stringify({ title: titleFull, description: metaDesc, canonical: `/journal/${slug}.html`, image: ogImage, ogType: 'article' });
+  return `<!--page ${pageMeta} -->
+<template data-head>${ogDims}
   <script type="application/ld+json">${jsonLd}</script>
-  <link rel="preconnect" href="https://use.typekit.net" />
-  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" />
-  <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-        href="https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3" />
-  <link rel="stylesheet" href="/styles.css" />
-</head>
-<body>
-  <div id="site-header"></div>
+</template>
   <div class="readbar" data-readbar aria-hidden="true"><span class="readbar__fill" data-readbar-fill></span></div>
 
   <main id="contenu" class="page wrap">
@@ -143,8 +116,6 @@ async function renderArticle(slug, a) {
       ${endCta}
     </div>
   </main>
-
-  <div id="site-footer"></div>
 
   <script type="module">
     import { initShell } from "/shell.mjs";
@@ -177,8 +148,6 @@ async function renderArticle(slug, a) {
       measure();
     })();
   </script>
-</body>
-</html>
 `;
 }
 

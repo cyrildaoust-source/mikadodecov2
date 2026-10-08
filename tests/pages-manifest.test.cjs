@@ -29,11 +29,14 @@ test('toute page HTML de v3/ est déclarée dans le manifeste (ajouter la ligne 
   assert.deepEqual(missing, [], `pages absentes du manifeste : ${missing.join(', ')}`);
 });
 
-test('les pages servies avec le chrome (ssr) ont bien un conteneur #site-header ; les stubs non', () => {
+test('les pages et gabarits sont des fragments du layout unique (ADR 0012) ; les stubs restent des documents sans chrome', () => {
   for (const p of manifest.pages) {
     const html = readFileSync(files(p), 'utf8');
-    if (p.ssr || p.role === 'template') assert.match(html, /id="site-header"/, `${p.file} : pas de #site-header`);
-    if (p.role === 'stub') assert.doesNotMatch(html, /id="site-header"/, `${p.file} : un stub ne porte pas le chrome`);
+    if (p.ssr || p.role === 'template') {
+      assert.match(html, /^<!--page \{/, `${p.file} : pas d'en-tête <!--page {…}-->`);
+      assert.doesNotMatch(html, /<!DOCTYPE|<html lang|<\/head>|id="site-header"/, `${p.file} : le layout porte le document et le chrome`);
+    }
+    if (p.role === 'stub') { assert.match(html, /<html/, `${p.file} : un stub est un document complet`); assert.doesNotMatch(html, /id="site-header"/, `${p.file} : un stub ne porte pas le chrome`); }
   }
 });
 

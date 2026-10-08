@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.ico" sizes="32x32" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <title>[[TITLE]]</title>
-  <meta name="description" content="[[DESCRIPTION]]" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Mikado Deco" />
-  <meta property="og:locale" content="fr_BE" />
-  <meta property="og:title" content="[[TITLE]]" />
-  <meta property="og:description" content="[[DESCRIPTION]]" />
-  <meta property="og:url" content="[[URL]]" />
-  <meta property="og:image" content="[[IMAGE]]" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="[[TITLE]]" />
-  <meta name="twitter:description" content="[[DESCRIPTION]]" />
-  <meta name="twitter:image" content="[[IMAGE]]" />
-  <link rel="canonical" href="[[URL]]" />
-  <link rel="preconnect" href="https://use.typekit.net" />
-  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" />
-  <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/cormorant-garamond-latin-600-normal.woff2" />
+<!--page {"title":"[[TITLE]]","description":"[[DESCRIPTION]]","canonical":"[[URL]]","image":"[[IMAGE]]"} -->
+<template data-head>
   <link rel="preload" as="image" href="[[HERO]]" fetchpriority="high" />
-  <link rel="stylesheet" href="/styles.css" />
-</head>
-<body>
-  <div id="site-header"></div>
+</template>
   <main id="contenu" class="fam" data-family="[[HANDLE]]">
     <section class="fam-hero">
       <span class="ph"><img class="ph-img editorial-photo" style="[[HERO_STYLE]]" src="[[HERO]]" alt="[[HERO_ALT]]" fetchpriority="high"></span>
@@ -53,8 +25,5 @@
     </section>
     [[BRANDS]]
   </main>
-  <div id="site-footer"></div>
   <script type="application/json" id="family-initial">[[INITIAL]]</script>
   <script type="module" src="/family-page.js"></script>
-</body>
-</html>
