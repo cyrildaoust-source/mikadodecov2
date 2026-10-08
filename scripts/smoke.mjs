@@ -39,7 +39,9 @@ const ACCEPT = {
 
 async function get(path, kind) {
   const headers = { 'user-agent': 'mikado-smoke/1 (+https://github.com/cyrildaoust-source/mikadodecov2)', accept: ACCEPT[kind] || '*/*' };
-  if (BYPASS) { headers['x-vercel-protection-bypass'] = BYPASS; headers['x-vercel-set-bypass-cookie'] = 'true'; }
+  // En-tête seul : avec `x-vercel-set-bypass-cookie`, Vercel répond par une redirection vers la même
+  // URL pour poser un cookie que fetch ne conserve pas → boucle de redirections (« fetch failed »).
+  if (BYPASS) headers['x-vercel-protection-bypass'] = BYPASS;
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   const t0 = performance.now();
