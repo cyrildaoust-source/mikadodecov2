@@ -1,4 +1,8 @@
-# Réchauffage du cache edge — Mikado Deco
+# Réchauffage du cache edge + index catalogue dans Blob — Mikado Deco
+# 1. POST /api/cron/catalog-index (secret CATALOG_INDEX_SECRET) : l'index est reconstruit et écrit
+#    dans Vercel Blob ; toutes les instances le lisent ensuite en un appel (ADR 0002, étape 2).
+#    Le Cron Vercel du plan Hobby ne permet qu'un passage par jour : c'est GitHub qui cadence.
+# 2. Visites des listes pour garder l'edge chaud.
 # L'index du catalogue (/index-catalogue/<part>.json, gardé 15 min à l'edge puis servi
 # périmé jusqu'à 24 h pendant sa régénération) et les pages de listes les plus vues sont
 # visités toutes les 30 minutes. Résultat : la régénération coûteuse (dizaines d'appels
@@ -17,8 +21,15 @@ jobs:
   warm:
     name: Index et listes
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
+    env:
+      SECRET: ${{ secrets.CATALOG_INDEX_SECRET }}
     steps:
+      - name: Reconstruire l'index catalogue dans Blob (route protégée, ADR 0002 étape 2)
+        if: env.SECRET != ''
+        run: |
+          curl -s --max-time 290 -X POST -H "Authorization: Bearer $SECRET" -H "User-Agent: mikado-warm/1" \
+            -w "\nHTTP %{http_code}  %{time_total}s\n" https://www.mikadodeco.be/api/cron/catalog-index || echo "échec (ignoré : le repli CDN reste en place)"
       - name: Visiter les URL clés (en parallèle, tolérant aux échecs)
         run: |
           base="https://www.mikadodeco.be"

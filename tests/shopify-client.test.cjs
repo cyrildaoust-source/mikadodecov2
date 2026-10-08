@@ -29,3 +29,9 @@ test('une mutation n’est jamais rejouée',async()=>{
   await assert.rejects(shopifyFetch('mutation NewsletterCreate($input: CustomerInput!) { customerCreate(input: $input) { customer { id } } }'),/fetch failed/);
   assert.equal(calls,1);
 });
+test('une erreur interne passagère de Shopify (GraphQL « Internal error ») est réessayée',async()=>{
+  calls=0;script=[Response.json({errors:[{message:'Internal error. Looks like something went wrong on our end.'}]}),ok({y:2})];
+  assert.deepEqual(await shopifyFetch('query Y { y }'),{y:2});assert.equal(calls,2);
+  calls=0;script=[Response.json({errors:[{message:'Boom',extensions:{code:'INTERNAL_SERVER_ERROR'}}]}),ok({z:3})];
+  assert.deepEqual(await shopifyFetch('query Z { z }'),{z:3});assert.equal(calls,2);
+});
