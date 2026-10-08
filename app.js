@@ -4,7 +4,7 @@
 //   1. redirections héritées (/v3/*)
 //   2. routes HTML rendues côté serveur (sitemaps, fiche produit, collections,
 //      catalogue, pages statiques avec chrome)  → routes/seo.js, routes/pages.js
-//   3. fichiers statiques de v3/
+//   3. fichiers statiques de v3/ (sauf gabarits ; en prod, dist/ est servi avant la fonction)
 //   4. CORS + corps JSON (rawBody conservé pour la signature des webhooks)
 //   5. API JSON, panier, formulaires                 → routes/api.js, cart.js, forms.js
 //   6. 404 (HTML avec chrome, ou markdown pour les agents)
@@ -17,7 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const { createErrorHandler } = require('./lib/http-errors');   // Express 5 : les promesses rejetées arrivent d'elles-mêmes au gestionnaire
 const { V3_DIR } = require('./lib/paths');
-const { PORT } = require('./lib/config');
+const { PAGES_MANIFEST, PORT } = require('./lib/config');
 const { chromeReady, injectChrome } = require('./lib/render/chrome');
 const { navigationReady } = require('./lib/render/navigation');
 const { acceptsHtmlExplicitly, sendMarkdown, markdown404 } = require('./lib/render/agents');
@@ -43,7 +43,13 @@ app.use(require('./routes/seo'));
 app.use(require('./routes/pages'));
 
 // ─── Statique, CORS, JSON ─────────────────────────────────
-app.use(express.static(V3_DIR));
+// En production, Vercel sert les fichiers de dist/ (copie de v3/ sans les gabarits) avant
+// d'appeler la fonction ; ce middleware vaut donc surtout en local et pour les fichiers
+// embarqués dans la fonction. Les gabarits (role: template) ne sont jamais servis bruts :
+// ils n'ont de sens que rendus par leur route → 404 avec chrome.
+const TEMPLATE_PATHS = new Set(PAGES_MANIFEST.pages.filter((p) => p.role === 'template' && p.dir !== 'templates').map((p) => '/' + p.file));
+const serveStatic = express.static(V3_DIR);
+app.use((req, res, next) => (TEMPLATE_PATHS.has(req.path) ? next() : serveStatic(req, res, next)));
 app.use(cors({ origin: process.env.BASE_URL || `http://localhost:${PORT}` }));
 // Capture le corps brut (req.rawBody) pour la vérification HMAC des webhooks
 // Shopify (calculée sur le body brut, pas le JSON parsé). Comportement JSON

@@ -2,11 +2,10 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { readFileSync, readdirSync, existsSync } = require('node:fs');
 const { join } = require('node:path');
-const { execFileSync } = require('node:child_process');
 
-// data/pages.manifest.json est la seule liste des pages HTML : le serveur (lib/config.js)
-// et vercel.json (scripts/build-vercel-config.mjs) en dérivent. Ces tests empêchent
-// la dérive dans les deux sens : page oubliée dans le manifeste, ou vercel.json pas régénéré.
+// data/pages.manifest.json est la seule liste des pages HTML : le serveur (lib/config.js) et le
+// build (scripts/build.mjs : seuls les stubs sont publiés en statique) en dérivent. Ces tests
+// empêchent la dérive : page oubliée dans le manifeste, page déclarée qui n'existe pas.
 const ROOT = join(__dirname, '..');
 const manifest = JSON.parse(readFileSync(join(ROOT, 'data', 'pages.manifest.json'), 'utf8'));
 const files = (p) => p.dir === 'templates' ? join(ROOT, 'templates', p.file) : join(ROOT, 'v3', p.file);
@@ -23,7 +22,7 @@ test('chaque page du manifeste existe, une seule fois, avec des champs valides',
   }
 });
 
-test('toute page HTML de v3/ est déclarée dans le manifeste (ajouter la ligne, puis régénérer vercel.json)', () => {
+test('toute page HTML de v3/ est déclarée dans le manifeste (ajouter la ligne ; le routage suit tout seul)', () => {
   const declared = new Set(manifest.pages.filter((p) => p.dir !== 'templates').map((p) => p.file));
   const onDisk = readdirSync(join(ROOT, 'v3')).filter((f) => f.endsWith('.html'));
   const missing = onDisk.filter((f) => !declared.has(f));
@@ -53,9 +52,4 @@ test('lib/config.js lit le manifeste : pages SSR, header solide, entrée active,
   assert.equal(resolveSsrRel('/'), 'index.html');
   assert.equal(resolveSsrRel('/produit.html'), null);           // gabarit : route dédiée, pas la générique
   assert.equal(resolveSsrRel('/journal/x.html'), 'journal/x.html');
-});
-
-test('vercel.json est aligné sur le manifeste (sinon : node scripts/build-vercel-config.mjs)', () => {
-  const out = execFileSync(process.execPath, [join(ROOT, 'scripts', 'build-vercel-config.mjs'), '--check'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-  assert.match(out, /aligné/);
 });
