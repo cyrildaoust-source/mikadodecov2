@@ -46,6 +46,7 @@ test('overrides : titre, description, image, url, robots ; pas de dimensions pou
   assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
   assert.doesNotMatch(renderPage('contact.html'), /name="robots"/);
   assert.match(renderPage('404.html'), /<meta name="robots" content="noindex" \/>/, 'robots déclaré par la page');
+  assert.doesNotMatch(renderPage('404.html'), /rel="canonical"/, 'une page noindex ne déclare pas de canonical');
 });
 
 test('renderWithOg (cas tardifs des listes) fonctionne sur la page assemblée, sans doublon de canonical', () => {

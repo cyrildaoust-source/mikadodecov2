@@ -47,7 +47,7 @@ const URLS = [
   ['/selection.html', ['status', 'who']],
   ['/nuancier-fermob.html', ['status', 'who']],
   ['/mentions-legales.html', ['status', 'who']],
-  ['/404.html', ['status', 'who']],
+  ['/404.html', ['status', 'who'], { ogImage: '/images/og-default.jpg' }],   // layout unique : image de partage sur toute page (ADR 0012)
   ['/about', ['status', 'who']],
   ['/privacy', ['status', 'who']],
   ['/sitemap.xml', ['status', 'who', 'type']],
