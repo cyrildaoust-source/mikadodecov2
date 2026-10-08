@@ -17,7 +17,7 @@ const { cached } = require('../lib/cache');
 const { BRAND_COLLECTION_ALIASES, BRAND_HERO_REVIEW, CAMPAIGN_COLLECTIONS, COLLECTION_ALIASES, COLLECTION_TEXTS, FAMILLES_RICHES, INTERNAL_COLLECTION, OG_DEFAULT, ORIGIN, resolveSsrRel } = require('../lib/config');
 const { renderPage } = require('../lib/render/layout');
 const { pageTitle, productTitle } = require('../lib/render/seo');
-const { journalReady } = require('../lib/render/journal');
+const { getArticle, journalReady } = require('../lib/render/journal');
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { htmlToMarkdown, sendMarkdown, wantsMarkdown } = require('../lib/render/agents');
@@ -448,10 +448,12 @@ function htmlTwin(p) {
   if (!m) return null;
   const rel = m[1] + '.html';
   if (!resolveSsrRel('/' + rel) && rel !== 'produit.html' && rel !== 'produits.html') return null;
+  if (rel.startsWith('journal/')) return getArticle(m[1].slice('journal/'.length)) ? '/' + rel : null;   // articles : depuis la donnée (ADR 0013)
   return fs.existsSync(path.join(V3_DIR, rel)) ? '/' + rel : null;
 }
 router.get(/.*/, async (req, res, next) => {
   if (req.path.startsWith('/api/') || req.path.startsWith('/_vercel/')) return next();
+  if (req.path.startsWith('/journal/')) await journalReady;   // articles rendus depuis leur source (ADR 0013)
   const rel = resolveSsrRel(req.path);
   if (!rel) {                                           // pas une page SSR → static/api gèrent
     const twin = htmlTwin(req.path);
@@ -462,7 +464,6 @@ router.get(/.*/, async (req, res, next) => {
   const root = V3_DIR;
   const file = path.join(root, rel);
   if (!file.startsWith(root + path.sep)) return next(); // anti path-traversal
-  if (rel.startsWith('journal/')) await journalReady;   // articles rendus depuis leur source (ADR 0013)
   let raw;
   try { raw = renderPage(rel); }                        // fragment + layout unique (ADR 0012)
   catch (e) {                                           // inexistant → 404 normal ; autre erreur → tracée (jamais silencieuse)
