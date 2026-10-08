@@ -3,22 +3,24 @@ const assert = require('node:assert/strict');
 const { readFileSync, readdirSync } = require('node:fs');
 const { join } = require('node:path');
 const { renderPage, loadFragment } = require('../lib/render/layout');
+const { journalReady, articleSlugs } = require('../lib/render/journal');
 const manifest = require('../data/pages.manifest.json');
 
 // Layout unique (ADR 0012) : une enveloppe, des fragments. Ces tests figent le contrat.
 const ROOT = join(__dirname, '..');
 
-test('chaque page et gabarit est un fragment complet : titre et description, un <main>, ni document HTML ni style inline', () => {
+test('chaque page et gabarit est un fragment complet : titre et description, un <main>, ni document HTML ni style inline', async () => {
+  await journalReady;
   for (const p of manifest.pages.filter((p) => p.role !== 'stub')) {
     const { meta, body } = loadFragment(p.file);
     assert.ok(meta.title && (meta.description || meta.robots), `${p.file} : titre ou description manquants dans <!--page {…}--> (une page noindex peut s'en passer)`);
     assert.match(body, /<main[\s>]/, `${p.file} : pas de <main>`);
     assert.doesNotMatch(body, /<!DOCTYPE|<html lang|<\/head>|<body[\s>]|id="site-header"|^\s*<style[\s>]/m, `${p.file} : document complet ou <style> inline`);
   }
-  for (const f of readdirSync(join(ROOT, 'v3', 'journal')).filter((f) => f.endsWith('.html'))) {
-    const { meta, body } = loadFragment('journal/' + f);
-    assert.ok(meta.title && meta.description && meta.ogType === 'article', `journal/${f} : en-tête incomplet`);
-    assert.match(body, /<main[\s>]/, `journal/${f} : pas de <main>`);
+  for (const slug of articleSlugs()) {
+    const { meta, body } = loadFragment(`journal/${slug}.html`);
+    assert.ok(meta.title && meta.description && meta.ogType === 'article', `journal/${slug} : en-tête incomplet`);
+    assert.match(body, /<main[\s>]/, `journal/${slug} : pas de <main>`);
   }
 });
 

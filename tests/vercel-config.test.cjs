@@ -17,7 +17,7 @@ test('vercel.json : configuration moderne, build vers dist/, fonction avec ses g
   assert.equal(cfg.buildCommand, 'npm run build');
   assert.equal(cfg.outputDirectory, 'dist');
   const fn = cfg.functions['api/index.js'];
-  for (const part of ['build/**', 'data/**', 'templates/**', 'v3/*.html', 'v3/*.js', 'v3/*.mjs', 'v3/*.css', 'v3/*.json', 'v3/pages/**', 'v3/journal/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
+  for (const part of ['build/**', 'data/**', 'docs/legal/**', 'templates/**', 'v3/*.html', 'v3/*.js', 'v3/*.mjs', 'v3/*.css', 'v3/*.json', 'v3/pages/**', 'v3/journal/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
   assert.equal(fn.maxDuration, undefined, 'maxDuration héritée du projet (Fluid compute, 300 s) : ne pas la plafonner ici');
   const excluded = (fn.excludeFiles || '').replace(/^\{|\}$/g, '').split(',');
   assert.ok(excluded.includes('dist/**'), 'dist/** exclu de la fonction : le build le produit avant le tracé (sinon 327 Mo > 250 Mo, vu le 8 oct.)');

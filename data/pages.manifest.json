@@ -5,7 +5,8 @@
     "role": "page = servie à son URL · template = rendue par une route (fiche, catalogue, familles, 500) · stub = redirection sans chrome",
     "ssr": "true = servie par la route générique des pages statiques avec chrome",
     "hero": "false = header rendu solide dès le serveur (pas de hero plein écran) ; true par défaut",
-    "active": "libellé de l'entrée de navigation à souligner (NAV_TOP), vide sinon"
+    "active": "libellé de l'entrée de navigation à souligner (NAV_TOP), vide sinon",
+    "generated": "legal = page produite à la demande depuis docs/legal/*.md + data/legal-pages.json (lib/render/legal.js, ADR 0013) : aucun fichier dans v3/"
   },
   "pages": [
     { "file": "index.html",                           "role": "page",     "ssr": true,  "hero": true,  "active": "" },
@@ -18,10 +19,10 @@
     { "file": "selection.html",                       "role": "page",     "ssr": true,  "hero": false, "active": "" },
     { "file": "journal.html",                         "role": "page",     "ssr": true,  "hero": false, "active": "Le journal" },
     { "file": "nuancier-fermob.html",                 "role": "page",     "ssr": true,  "hero": false, "active": "Le journal" },
-    { "file": "mentions-legales.html",                "role": "page",     "ssr": true,  "hero": false, "active": "" },
-    { "file": "conditions-generales-de-vente.html",   "role": "page",     "ssr": true,  "hero": false, "active": "" },
-    { "file": "politique-cookies.html",               "role": "page",     "ssr": true,  "hero": false, "active": "" },
-    { "file": "politique-et-vie-privee.html",         "role": "page",     "ssr": true,  "hero": false, "active": "" },
+    { "file": "mentions-legales.html",                "role": "page",     "ssr": true,  "hero": false, "active": "" , "generated": "legal" },
+    { "file": "conditions-generales-de-vente.html",   "role": "page",     "ssr": true,  "hero": false, "active": "" , "generated": "legal" },
+    { "file": "politique-cookies.html",               "role": "page",     "ssr": true,  "hero": false, "active": "" , "generated": "legal" },
+    { "file": "politique-et-vie-privee.html",         "role": "page",     "ssr": true,  "hero": false, "active": "" , "generated": "legal" },
     { "file": "404.html",                             "role": "page",     "ssr": true,  "hero": false, "active": "" },
 
     { "file": "500.html",                             "role": "template", "ssr": false, "hero": false, "active": "" },
@@ -33,7 +34,7 @@
 
     { "file": "article.html",                         "role": "stub",     "ssr": false, "hero": true,  "active": "" }
   ],
-  "journal": { "_note": "Tous les articles v3/journal/*.html : header solide, entrée « Le journal » active.", "hero": false, "active": "Le journal" },
+  "journal": { "_note": "Articles rendus à la demande depuis v3/journal/articles.data.mjs (lib/render/journal.js, ADR 0013) : header solide, entrée « Le journal » active.", "hero": false, "active": "Le journal" },
   "aliases": {
     "_note": "Pages de confiance attendues par les agents IA, servies en 200 avec le contenu d'une page existante (qui porte sa propre canonical).",
     "/about": "studio.html",

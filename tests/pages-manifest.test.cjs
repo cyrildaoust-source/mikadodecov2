@@ -13,7 +13,8 @@ const files = (p) => p.dir === 'templates' ? join(ROOT, 'templates', p.file) : j
 test('chaque page du manifeste existe, une seule fois, avec des champs valides', () => {
   const seen = new Set();
   for (const p of manifest.pages) {
-    assert.ok(existsSync(files(p)), `${p.file} n'existe pas`);
+    if (p.generated) assert.equal(p.generated, 'legal', `${p.file} : générateur inconnu`);
+    else assert.ok(existsSync(files(p)), `${p.file} n'existe pas`);
     assert.ok(!seen.has(p.file), `${p.file} en double`); seen.add(p.file);
     assert.ok(['page', 'template', 'stub'].includes(p.role), `${p.file} : role inconnu ${p.role}`);
     assert.equal(typeof p.ssr, 'boolean', `${p.file} : ssr doit être booléen`);
@@ -31,6 +32,7 @@ test('toute page HTML de v3/ est déclarée dans le manifeste (ajouter la ligne 
 
 test('les pages et gabarits sont des fragments du layout unique (ADR 0012) ; les stubs restent des documents sans chrome', () => {
   for (const p of manifest.pages) {
+    if (p.generated) continue;                               // produite depuis sa source (ADR 0013), testée dans content-source.test
     const html = readFileSync(files(p), 'utf8');
     if (p.ssr || p.role === 'template') {
       assert.match(html, /^<!--page \{/, `${p.file} : pas d'en-tête <!--page {…}-->`);

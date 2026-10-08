@@ -40,13 +40,12 @@ test('les pages de contenu reçoivent leur fil d\'Ariane du serveur, identique a
  }
 });
 test('chaque article du journal a son fil Accueil › Le journal › titre dès le serveur',async()=>{
- const dir=path.join(__dirname,'../v3/journal');
- for(const f of fs.readdirSync(dir).filter(f=>f.endsWith('.html'))){
-  const title=fs.readFileSync(path.join(dir,f),'utf8').match(/<h1 class="article__title">([^<]+)<\/h1>/);
-  if(!title)continue;
-  const {labels,ld}=await trailOf('/journal/'+f);
-  const expected=['Accueil','Le journal',title[1].replace(/&amp;/g,'&').replace(/&#39;/g,"'")];
-  assert.deepEqual(labels,expected,f);
-  assert.deepEqual(ld[0].itemListElement.map(e=>e.name),expected,f);
+ const { journalReady, articleSlugs, getArticle } = require('../lib/render/journal');
+ await journalReady;
+ for(const slug of articleSlugs()){
+  const {labels,ld}=await trailOf('/journal/'+slug+'.html');
+  const expected=['Accueil','Le journal',getArticle(slug).title];
+  assert.deepEqual(labels,expected,slug);
+  assert.deepEqual(ld[0].itemListElement.map(e=>e.name),expected,slug);
  }
 });
