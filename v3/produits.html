@@ -208,7 +208,7 @@
           alt: "Catalogue Mikado Deco", obj: "center 70%"
         };
         var enc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;"); };
-        // Bandeau de marque absent : shared.js (data-fallback="hero") retire la <source> WebP et
+        // Bandeau de marque absent : shell.mjs (data-fallback="hero") retire la <source> WebP et
         // bascule sur le visuel générique. Plus de onerror inline (CSP sans 'unsafe-inline').
         var onerr = hero.brand ? ' data-fallback="hero"' : '';
         document.write(

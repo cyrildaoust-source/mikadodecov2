@@ -1,4 +1,6 @@
-import {initShell,productCard,fetchPromos,applyPromos,loadNavigation,paintBreadcrumb,restoreSelectionPosition} from '/shared.js';
+import { initShell } from '/shell.mjs';
+import { productCard, restoreSelectionPosition } from '/product-grid.mjs';
+import { fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from '/catalog-data.mjs';
 import {listingTrail} from '/navigation.mjs';
 import {bindFamilyRails} from '/family-rail.js';
 import {filterControls,chairPagination,scopeURL,emptyState,CHAIRS_SCOPE} from '/catalog-filters-view.mjs';

@@ -1,4 +1,5 @@
-import { initShell, productCard, syncProductLinks, restoreSelectionPosition } from '/shared.js';
+import { initShell } from '/shell.mjs';
+import { productCard, syncProductLinks, restoreSelectionPosition } from '/product-grid.mjs';
 import { bindFamilyRails } from '/family-rail.js';
 import { ICON_TAGS, isFamilyIcon, uniqueProducts } from '/family-policy.mjs';
 

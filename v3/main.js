@@ -1,5 +1,9 @@
 /* Home page · mounts the shared shell, then fills the product rows. */
-import { initShell, productCard, fetchBrands, fetchPromos, applyPromos, slugify, escapeHtml, buildShaReady, versionedImg } from "/shared.js";
+import { initShell } from "/shell.mjs";
+import { productCard } from "/product-grid.mjs";
+import { fetchBrands, fetchPromos, applyPromos } from "/catalog-data.mjs";
+import { slugify, escapeHtml } from "/format.mjs";
+import { buildShaReady, versionedImg } from "/site-data.mjs";
 import { brandLogoSrc } from "/brand-logos.mjs";
 
 initShell({ active: "", transparentNav: true });
@@ -46,7 +50,7 @@ loadRows();
 fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
 /* Brand logo marquee + live "maisons" count, from the real vendor feed.
-   Tries the brand logo (brand-logos.mjs) first; if missing, data-fallback (shared.js,
+   Tries the brand logo (brand-logos.mjs) first; if missing, data-fallback (shell.mjs,
    bindImageFallbacks) swaps the <img> for a Cormorant-italic wordmark (.brandmarquee__name).
    No console 404 noise — the swap is silent for the viewer. */
 function brandLogo(b) {

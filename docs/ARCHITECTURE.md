@@ -14,7 +14,7 @@ Mikado utilise Express pour rendre du HTML côté serveur, puis des modules Java
 | `lib/search-intent.js`, `lib/search-catalog.js` | Interprétation et correspondance des demandes client |
 | `lib/search-facts.js` | Validation des configurations sourcées |
 | `v3/product-card.mjs`, `v3/format.mjs` | HTML et formatage communs au serveur et au navigateur, sans accès au DOM |
-| `v3/shared.js` | Navigation, sélection et initialisation des interactions communes |
+| `v3/shell.mjs` | Coquille commune (chrome, tiroir mobile, recherche, annonce, images de repli) ; `cart.mjs`, `cart-drawer.mjs`, `gift-rules.mjs`, `gift-offer.mjs`, `catalog-data.mjs`, `product-grid.mjs`, `site-data.mjs`, `sale.mjs`, `newsletter.mjs`, `analytics.mjs` portent chacun une responsabilité (ADR 0011) |
 | `v3/search-drawer.mjs` | Suggestions de recherche, chargées à la première ouverture |
 | `v3/*.html`, `templates/` | Structure et composition des pages |
 | `v3/styles.css` | Direction artistique et composants communs |

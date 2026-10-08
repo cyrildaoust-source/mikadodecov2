@@ -1,7 +1,12 @@
 /* selection.html · script de page (ex-inline, sorti dans ce fichier en octobre 2026 : cache navigateur,
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
-import { initShell, readCart, removeFromCartAt, setCartQty, euro, escapeHtml, isSaleActive, saleNextTier, SALE, giftOfferHTML, giftReconcile, giftBind, productHref } from "/shared.js";
+import { initShell } from "/shell.mjs";
+import { readCart, removeFromCartAt, setCartQty } from "/cart.mjs";
+import { euro, escapeHtml } from "/format.mjs";
+import { isSaleActive, saleNextTier, SALE } from "/sale.mjs";
+import { giftOfferHTML, giftReconcile, giftBind } from "/gift-offer.mjs";
+import { productHref } from "/navigation.mjs";
 initShell({ active: "", transparentNav: false });
 
 // Livraison : tarif unique en Belgique, sans seuil de gratuité (décision du

@@ -1,7 +1,9 @@
 /* designers.html · script de page (ex-inline, sorti dans ce fichier en octobre 2026 : cache navigateur,
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
-import { initShell, escapeHtml, loadNavigation } from "/shared.js";
+import { initShell } from "/shell.mjs";
+import { escapeHtml } from "/format.mjs";
+import { loadNavigation } from "/catalog-data.mjs";
 import { brandHref } from "/navigation.mjs";
 initShell({ active: "Designers", transparentNav: true });
 

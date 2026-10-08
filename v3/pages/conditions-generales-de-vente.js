@@ -1,7 +1,7 @@
 /* conditions-generales-de-vente.html · script de page (ex-inline, sorti dans ce fichier en octobre 2026 : cache navigateur,
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
-import { initShell } from "/shared.js";
+import { initShell } from "/shell.mjs";
 initShell({ active: "", transparentNav: false });
 
 // Onglets Particuliers / Professionnels. Les deux panneaux sont en dur dans

@@ -11,7 +11,7 @@
        options  { scrollOnLoad: bool } — scroll rootEl into view
                 if a matching hash is present on load (default true)
    ============================================================ */
-import { slugify, escapeHtml } from "/shared.js";
+import { slugify, escapeHtml } from "/format.mjs";
 import { nuancierHTML, swatchesHTML, harmoniesHTML, ambiancesHTML, ambianceThumbs } from "/nuancier-view.mjs";
 
 const FADE_MS = 150;

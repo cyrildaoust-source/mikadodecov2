@@ -1,5 +1,5 @@
 import { escapeHtml, priceLabel } from './format.mjs';
-import { fetchBrands } from './shared.js';
+import { fetchBrands } from './catalog-data.mjs';
 import { selectionURL, productHref } from './navigation.mjs';
 import { searchCriteria, searchNotes, searchSuggestions } from './search-view.mjs';
 
