@@ -1,9 +1,9 @@
 {
-  "_note": "Inventaire des pages HTML du site : UNE source pour le serveur (lib/config.js : pages servies avec le chrome SSR, header solide ou transparent, entrée de nav active) ET pour vercel.json (scripts/build-vercel-config.mjs régénère la règle de routage des pages ; tests/pages-manifest.test.cjs échoue si l'un des deux n'est plus aligné). Ajouter une page = une ligne ici, puis `node scripts/build-vercel-config.mjs`.",
+  "_note": "Inventaire des pages HTML du site : UNE source pour le serveur (lib/config.js : pages servies avec le chrome SSR, header solide ou transparent, entrée de nav active) ET pour le build (scripts/build.mjs : seules les pages `stub` sont publiées en statique, toutes les autres URL arrivent au serveur — ADR 0009). Ajouter une page = une ligne ici, rien d'autre ; tests/pages-manifest.test.cjs échoue si une page de v3/ manque.",
   "_fields": {
     "file": "nom du fichier (v3/ par défaut ; templates/ si dir = templates)",
     "role": "page = servie à son URL · template = rendue par une route (fiche, catalogue, familles, 500) · stub = redirection sans chrome",
-    "ssr": "true = servie par la route générique des pages statiques avec chrome (et donc routée vers la fonction dans vercel.json)",
+    "ssr": "true = servie par la route générique des pages statiques avec chrome",
     "hero": "false = header rendu solide dès le serveur (pas de hero plein écran) ; true par défaut",
     "active": "libellé de l'entrée de navigation à souligner (NAV_TOP), vide sinon"
   },

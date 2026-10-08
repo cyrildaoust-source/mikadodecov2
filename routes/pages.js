@@ -437,10 +437,25 @@ router.get('/marques.html', (req, res, next) => {
   return res.redirect(302, typeof handle === 'string' && /^[a-z0-9-]+$/.test(handle)
     ? '/collections/' + handle : '/marques.html');
 });
+// URL sans extension (/studio, /journal/fermob, /produits) : l'ancienne configuration Vercel
+// servait le gabarit brut v3/<chemin>.html (sans chrome). Depuis l'ADR 0009, toute URL inconnue
+// arrive ici : 301 vers la page .html quand elle existe, 404 sinon.
+function htmlTwin(p) {
+  const m = /^\/((?:journal\/)?[a-z0-9][a-z0-9-]*)\/?$/.exec(p);
+  if (!m) return null;
+  const rel = m[1] + '.html';
+  if (!resolveSsrRel('/' + rel) && rel !== 'produit.html' && rel !== 'produits.html') return null;
+  return fs.existsSync(path.join(V3_DIR, rel)) ? '/' + rel : null;
+}
 router.get(/.*/, async (req, res, next) => {
   if (req.path.startsWith('/api/') || req.path.startsWith('/_vercel/')) return next();
   const rel = resolveSsrRel(req.path);
-  if (!rel) return next();                              // pas une page SSR → static/api gèrent
+  if (!rel) {                                           // pas une page SSR → static/api gèrent
+    const twin = htmlTwin(req.path);
+    if (!twin) return next();
+    const q = req.originalUrl.indexOf('?');
+    return res.redirect(301, twin + (q >= 0 ? req.originalUrl.slice(q) : ''));
+  }
   const root = V3_DIR;
   const file = path.join(root, rel);
   if (!file.startsWith(root + path.sep)) return next(); // anti path-traversal

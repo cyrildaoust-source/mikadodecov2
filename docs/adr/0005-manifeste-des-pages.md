@@ -1,6 +1,6 @@
 # ADR 0005 — `data/pages.manifest.json` est la seule liste des pages ; `vercel.json` en est dérivé
 
-Date : 7 octobre 2026 · Statut : accepté · Phase 1.2 du plan.
+Date : 7 octobre 2026 · Statut : accepté · Phase 1.2 du plan. **Mise à jour du 8 octobre :** la dérivation de `vercel.json` (générateur `build-vercel-config.mjs`) est remplacée par l'ADR 0009 ; le manifeste reste la seule liste des pages.
 
 ## Contexte
 

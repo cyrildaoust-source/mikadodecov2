@@ -9,3 +9,6 @@ node_modules/
 v3/designers-data.json.bak-*
 .vercel
 .env*
+
+# Sortie de `npm run build` (copie des fichiers statiques pour Vercel) — jamais versionnée
+dist/
