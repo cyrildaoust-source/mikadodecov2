@@ -97,7 +97,7 @@ const URLS = [
 
 async function probe(base, path) {
   const headers = { 'user-agent': 'mikado-parity/1', accept: 'text/html,application/json;q=0.9,*/*;q=0.8' };
-  if (BYPASS && base !== A) headers['x-vercel-protection-bypass'] = BYPASS;
+  if (BYPASS && /\.vercel\.app$/.test(new URL(base).hostname)) headers['x-vercel-protection-bypass'] = BYPASS;   // toute Preview, côté A ou B
   const ctrl = new AbortController(); const timer = setTimeout(() => ctrl.abort(), 45_000);
   try {
     const res = await fetch(base + path, { headers, redirect: 'manual', signal: ctrl.signal });
