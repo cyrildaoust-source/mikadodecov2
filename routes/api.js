@@ -12,6 +12,11 @@ const { navigationReady } = require('../lib/render/navigation');
 const { collectionProductsFor, getActiveBrands, getCollections, getHomeRails, getMenu, getPredictive, getProductByHandle, getProducts, getProductsPage, getPromos } = require('../lib/services/catalog');
 const { INDEX_PART_NAMES, buildAndStoreIndex, getScopePage, indexPart, indexStatus } = require('../lib/services/catalog-scope');
 const { blobConfigured } = require('../lib/services/catalog-index-store');
+const fs = require('fs');
+const path = require('path');
+const { ROOT_DIR, V3_DIR } = require('../lib/paths');
+const { articleSlugs, journalReady } = require('../lib/render/journal');
+const { legalFragment, legalPages } = require('../lib/render/legal');
 
 router.get('/api/search',async(req,res)=>{
   res.set('Cache-Control','no-store');
@@ -267,6 +272,10 @@ router.get('/api/health', async (req, res) => {
       new Promise((_, reject) => setTimeout(() => reject(new Error('timeout 3 s')), 3000)),
     ]);
   } catch (error) { shopify = 'down: ' + error.message; }
+  // Contenu rendu depuis la source (ADR 0013) : les sources sont-elles embarquées, les pages se rendent-elles ?
+  const content = { sources: { journal: fs.existsSync(path.join(V3_DIR, 'journal', 'articles.data.mjs')), legal: fs.existsSync(path.join(ROOT_DIR, 'docs', 'legal', 'mentions-legales.md')) } };
+  try { await journalReady; content.journal = articleSlugs().length + ' articles'; } catch (e) { content.journal = 'erreur : ' + e.message; }
+  try { legalFragment('mentions-legales.html'); content.legal = legalPages().length + ' pages'; } catch (e) { content.legal = 'erreur : ' + e.message; }
   const ok = shopify === 'ok';
   res.status(ok ? 200 : 503).json({
     status: ok ? 'ok' : 'degraded',
@@ -275,6 +284,7 @@ router.get('/api/health', async (req, res) => {
     uptimeS: Math.round(process.uptime()),
     shopify, shopifyMs: Math.round(performance.now() - t0),
     index: indexStatus(),
+    content,
     cache: cache.stats(),
   });
 });

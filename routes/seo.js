@@ -12,6 +12,7 @@ const { BRAND_COLLECTION_ALIASES, FAMILLES_RICHES, INTERNAL_COLLECTION, ORIGIN }
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { activeDesignerSlugs } = require('../lib/render/pages');
+const { articleSlugs, journalReady } = require('../lib/render/journal');
 const { getCollections } = require('../lib/services/catalog');
 
 // ─── SEO: sitemap = INDEX instantané → pages (statique) + produits (walk) ──
@@ -61,12 +62,9 @@ router.get('/sitemap-pages.xml', async (req, res) => {
     if (active && !active.has(d.slug)) return;
     urls.push(smUrl(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5'));
   });
-  // Articles du journal (HTML pré-rendus)
-  try {
-    fs.readdirSync(path.join(V3_DIR, 'journal'))
-      .filter((f) => f.endsWith('.html'))
-      .forEach((f) => urls.push(smUrl(ORIGIN + '/journal/' + f, '0.5')));
-  } catch (e) { /* dossier absent du bundle → includeFiles v3/journal/** */ }
+  // Articles du journal (rendus depuis leur source, ADR 0013)
+  await journalReady;
+  articleSlugs().forEach((slug) => urls.push(smUrl(ORIGIN + '/journal/' + slug + '.html', '0.5')));
   return sendXml(res, smUrlset(urls));
 });
 // Le sitemap ne lit que les handles : les champs de carte et les 250 variantes

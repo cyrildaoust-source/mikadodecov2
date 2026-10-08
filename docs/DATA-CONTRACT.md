@@ -37,4 +37,4 @@ Côté site : un service `lib/services/content.js` lira ces metaobjects par Stor
 
 ## Fichiers générés commités
 
-`v3/journal/*.html` (depuis `articles.data.mjs`) et les 4 pages légales (depuis `docs/legal/*.md`) sont générés puis commités. Le journal est reproductible à l'identique (`npm run journal` ne produit aucun diff) ; **les pages légales ont dérivé** du générateur (`npm run build:legal` produit un diff le 07/10/2026) : à réconcilier avant d'ajouter la vérification « généré = commité » à la CI (phase 4.2).
+Les articles du journal (source `v3/journal/articles.data.mjs`) et les 4 pages légales (sources `docs/legal/*.md` + fiches `data/legal-pages.json`) sont **rendus à la demande** par le serveur depuis leurs sources (`lib/render/journal.js`, `lib/render/legal.js`, ADR 0013) : aucun HTML généré n'est commité, aucune étape de régénération. Modifier le contenu = modifier la source ; le déploiement suivant le sert.

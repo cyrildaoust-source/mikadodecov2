@@ -16,5 +16,6 @@ Une décision structurante = un fichier court (contexte, décision, conséquence
 | [0010](0010-assets-haches.md) | Assets front hachés par version de sources (esbuild au build Vercel, `immutable` un an, réécriture au rendu) | accepté |
 | [0011](0011-modules-front.md) | Front découpé par responsabilité (`shared.js` supprimé, 12 modules) ; sources jamais servies brutes en production ; 404 produit cachée 1 min | accepté |
 | [0012](0012-layout-unique.md) | Un seul `<head>` pour tout le site : `templates/layout.html` + pages en fragments (`<!--page {…}-->`, `<template data-head>`, `<main>`) assemblés par `renderPage()` | accepté |
+| [0013](0013-contenu-depuis-la-source.md) | Journal et pages légales rendus à la demande depuis leurs sources (`articles.data.mjs`, `docs/legal/*.md`) ; plus de HTML généré commité ni d'étape CI | accepté |
 
 Le plan d'ensemble et son état : [`../ARCHI-critique-et-plan-2026-10-06.md`](../ARCHI-critique-et-plan-2026-10-06.md).

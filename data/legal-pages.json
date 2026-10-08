@@ -1,0 +1,48 @@
+{
+  "_note": "Pages légales rendues à la demande depuis docs/legal/*.md (lib/render/legal.js, ADR 0013). Éditer la source markdown et, au besoin, ce fichier (titres, intro, date) : aucun fichier HTML à régénérer ni à committer.",
+  "publishDate": "10/06/2026",
+  "pages": {
+    "mentions-legales.html": {
+      "layout": "simple",
+      "sources": [
+        "mentions-legales.md"
+      ],
+      "h1": "Mentions légales",
+      "intro": "Informations sur l'éditeur du site, l'hébergement et la propriété intellectuelle.",
+      "title": "Mentions légales · Mikado Deco",
+      "desc": "Mentions légales du site édité par MIKADO M-O-A SRL (Uccle) : éditeur, hébergement, propriété intellectuelle, médiation."
+    },
+    "conditions-generales-de-vente.html": {
+      "layout": "tabs",
+      "date": "24/09/2026",
+      "h1": "Conditions générales de vente",
+      "intro": "Les règles qui encadrent nos ventes, pour les particuliers comme pour les professionnels.",
+      "title": "Conditions générales de vente · Mikado Deco",
+      "desc": "CGV de MIKADO M-O-A SRL : rétractation, prix, livraison en Belgique, garanties. Volets Particuliers et Professionnels.",
+      "panels": [
+        { "id": "particuliers", "label": "Particuliers", "source": "cgv-b2c.md" },
+        { "id": "professionnels", "label": "Professionnels", "source": "cgv-b2b.md" }
+      ]
+    },
+    "politique-et-vie-privee.html": {
+      "layout": "simple",
+      "sources": [
+        "politique-confidentialite.md"
+      ],
+      "h1": "Politique de confidentialité",
+      "intro": "Comment nous collectons, utilisons et protégeons vos données personnelles.",
+      "title": "Politique de confidentialité · Mikado Deco",
+      "desc": "Comment MIKADO M-O-A SRL traite vos données : finalités, bases RGPD, sous-traitants, durées, droits."
+    },
+    "politique-cookies.html": {
+      "layout": "simple",
+      "sources": [
+        "politique-cookies.md"
+      ],
+      "h1": "Politique cookies",
+      "intro": "Le site mikadodeco.be ne dépose aucun cookie de traçage, de mesure d'audience ni de publicité.",
+      "title": "Politique cookies · Mikado Deco",
+      "desc": "Le site mikadodeco.be ne dépose aucun cookie de traçage/mesure/publicité ; seuls des cookies strictement nécessaires sont utilisés. Cadre légal et gestion."
+    }
+  }
+}
