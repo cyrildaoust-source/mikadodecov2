@@ -16,6 +16,7 @@ const { selectInitialVariant } = require('../v3/product-variant');
 const { cached } = require('../lib/cache');
 const { BRAND_COLLECTION_ALIASES, BRAND_HERO_REVIEW, CAMPAIGN_COLLECTIONS, COLLECTION_ALIASES, COLLECTION_TEXTS, FAMILLES_RICHES, INTERNAL_COLLECTION, OG_DEFAULT, ORIGIN, resolveSsrRel } = require('../lib/config');
 const { renderPage } = require('../lib/render/layout');
+const { pageTitle, productTitle } = require('../lib/render/seo');
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { htmlToMarkdown, sendMarkdown, wantsMarkdown } = require('../lib/render/agents');
@@ -68,7 +69,7 @@ router.get('/produit.html', async (req, res) => {
     const name     = product.name || 'Produit';
     const brand    = product.brand || '';
     const designer = product.designer || '';
-    const title = product.seoTitle || `${name} · Mikado Deco`;
+    const title = productTitle(product);                      // title_tag Shopify, sinon « Nom — Marque | Mikado Deco »
     const description = ogDesc(product.seoDescription || product.description ||
       `${name}${brand ? ' — ' + brand : ''}. `
       + (designer ? `Dessiné par ${designer}. ` : '')
@@ -231,7 +232,7 @@ router.get('/collections/:handle', async (req, res) => {
     } : getBrandHero(handle, { includeCandidates: BRAND_HERO_REVIEW }) || getCollectionHero(handle);
     const collectionName = nav.navigationRules.collections[handle]?.label || col.name || 'Catalogue';
     const name = collectionName + (brand ? ' · ' + brandLabel : '');
-    const title = `${name} · Mikado Deco`;
+    const title = pageTitle(name);
     const description = ogDesc(
       brand ? `Les créations ${brandLabel} de notre sélection « ${collectionName} ».` : pageText ? pageText.description : col.description && col.description.trim()
         ? col.description
@@ -366,7 +367,7 @@ router.get('/produits.html', async (req, res) => {
         continuation: Number.parseInt(req.query.page, 10) > 1,
       });
       html = renderWithOg(html, {
-        title: 'Mobilier & objets de design · Mikado Deco', description: catalogLanding.description,
+        title: pageTitle('Mobilier & objets de design'), description: catalogLanding.description,
         image: catalogLanding.hero.image, url: ORIGIN + '/produits.html',
       });
     }
@@ -375,7 +376,7 @@ router.get('/produits.html', async (req, res) => {
       const title = q ? `Résultats pour « ${q} » · ${name}` : name;
       const description = `Toutes les pièces ${name} de notre catalogue.`;
       const url = ORIGIN + '/produits.html?' + new URLSearchParams(Object.entries(req.query).filter(([, value]) => typeof value === 'string'));
-      html = renderWithOg(html, { title: title + ' · Mikado Deco', description, image: OG_DEFAULT, url });
+      html = renderWithOg(html, { title: pageTitle(title), description, image: OG_DEFAULT, url });
       html = html.replace('id="collection-context-initial">null</script>', () => 'id="collection-context-initial">' + JSON.stringify({ brand: { slug: brand, name } }).replace(/</g, '\\u003c') + '</script>');
       html = html.replace('<h1 data-plp-title>Le catalogue</h1>', () => '<h1 data-plp-title data-context>' + ogEscape(title) + '</h1>');
       html = html.replace('<p data-plp-sub>Mobilier de design, choisi pièce par pièce.</p>', () => '<p data-plp-sub>' + ogEscape(description) + '</p>');
@@ -394,7 +395,7 @@ router.get('/produits.html', async (req, res) => {
     if (!designer) { return send404Shell(res, 'produits.html'); }
 
     const name = designer.name || 'Créateur';
-    const title = `${name} · Mikado Deco`;
+    const title = pageTitle(name);
     const description = ogDesc(
       designer.bio && designer.bio.trim()
         ? designer.bio
