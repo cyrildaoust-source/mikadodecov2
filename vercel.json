@@ -46,6 +46,7 @@
     { "source": "/nos-marques/:path*", "destination": "/marques.html", "statusCode": 301 },
     { "source": "/prendre-rendez-vous/:path*", "destination": "/rendez-vous.html", "statusCode": 301 },
     { "source": "/contact", "destination": "/contact.html", "statusCode": 301 },
+    { "source": "/home", "destination": "/", "statusCode": 301 },
     { "source": "/v3/:path*", "destination": "/:path*", "statusCode": 301 },
     { "source": "/collections", "destination": "/marques.html", "statusCode": 302 }
   ],

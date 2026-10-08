@@ -46,6 +46,7 @@ test('vercel.json : les redirections historiques sont toutes là, avec le bon st
   assert.equal(by['/nos-marques/vitra'].destination, '/collections/vitra');
   assert.equal(by['/prendre-rendez-vous/:path*'].destination, '/rendez-vous.html');
   assert.equal(by['/contact'].destination, '/contact.html');
+  assert.equal(by['/home'].destination, '/', '/home (vu en 404 par Google) → accueil');
   assert.equal(by['/v3/:path*'].destination, '/:path*');
   assert.equal(by['/collections'].statusCode, 302, '/collections → 302 comme avant');
   assert.equal(by['/nos-marques/vitra/'].destination, '/collections/vitra', 'variante avec barre finale (l’ancienne règle acceptait /?)');
