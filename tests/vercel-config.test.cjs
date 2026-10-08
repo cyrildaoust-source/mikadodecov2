@@ -43,9 +43,12 @@ test('vercel.json : les redirections historiques sont toutes là, avec le bon st
   assert.equal(by['/prendre-rendez-vous/:path*'].destination, '/rendez-vous.html');
   assert.equal(by['/contact'].destination, '/contact.html');
   assert.equal(by['/v3/:path*'].destination, '/:path*');
-  assert.equal(by['/collections'].permanent, false, '/collections → 302 comme avant');
+  assert.equal(by['/collections'].statusCode, 302, '/collections → 302 comme avant');
   assert.equal(by['/nos-marques/vitra/'].destination, '/collections/vitra', 'variante avec barre finale (l’ancienne règle acceptait /?)');
-  for (const r of cfg.redirects) if (r.source !== '/collections') assert.equal(r.permanent, true, r.source);
+  for (const r of cfg.redirects) {
+    assert.equal(r.permanent, undefined, `${r.source} : \`permanent\` donnerait 308/307 ; on fixe statusCode`);
+    if (r.source !== '/collections') assert.equal(r.statusCode, 301, r.source);
+  }
 });
 
 test('npm run build : dist/ ne contient que les fichiers statiques (pas de gabarit HTML, pas de fichier de travail)', () => {

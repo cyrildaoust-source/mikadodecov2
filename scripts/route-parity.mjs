@@ -20,7 +20,9 @@ const BYPASS = opt('--bypass', process.env.VERCEL_AUTOMATION_BYPASS_SECRET || ''
 const ONLY_DIFF = args.includes('--only-diff');
 if (!B) { console.error('Indiquer --b <URL de la Preview>'); process.exit(2); }
 
-// [chemin, aspects à comparer strictement] — tout est comparé, mais seuls les aspects listés font échouer.
+// [chemin, aspects à comparer strictement, changement voulu ?] — tout est comparé, mais seuls les aspects
+// listés font échouer. Un troisième élément décrit un changement VOULU (ADR 0009) : pour ces aspects,
+// B est comparé à l'attendu et non à A (ex. /studio : gabarit brut en 200 → 301 vers /studio.html).
 const URLS = [
   ['/', ['status', 'who', 'type']],
   ['/produits.html', ['status', 'who', 'type']],
@@ -85,8 +87,12 @@ const URLS = [
   ['/.env', ['status']],
   ['/lib/config.js', ['status']],
   ['/page-qui-n-existe-pas', ['status', 'who']],
-  ['/studio', ['status']],
   ['/dossier/inconnu/', ['status']],
+  ['/studio', ['status', 'location'], { status: 301, location: '/studio.html' }],
+  ['/journal/fermob', ['status', 'location'], { status: 301, location: '/journal/fermob.html' }],
+  ['/produits', ['status', 'location'], { status: 301, location: '/produits.html' }],
+  ['/famille.html', ['status'], { status: 404 }],
+  ['/500.html', ['status'], { status: 404 }],
 ];
 
 async function probe(base, path) {
@@ -109,13 +115,19 @@ async function probe(base, path) {
 }
 
 let failures = 0; const rows = [];
-for (const [path, strict] of URLS) {
+for (const [path, strict, expect = {}] of URLS) {
   const [a, b] = await Promise.all([probe(A, path), probe(B, path)]);
-  const diffs = [];
-  for (const k of ['status', 'location', 'type', 'cache', 'who']) if (String(a[k]) !== String(b[k])) diffs.push(`${k}: ${a[k] || '∅'} → ${b[k] || '∅'}`);
-  const strictFail = diffs.some((d) => strict.includes(d.split(':')[0]));
+  const diffs = [], wanted = [];
+  for (const k of ['status', 'location', 'type', 'cache', 'who']) {
+    if (k in expect) {
+      if (String(b[k]) !== String(expect[k])) diffs.push(`${k}: attendu ${expect[k]} → ${b[k] || '∅'}`);
+      else if (String(a[k]) !== String(b[k])) wanted.push(`${k}: ${a[k] || '∅'} → ${b[k]}`);
+    } else if (String(a[k]) !== String(b[k])) diffs.push(`${k}: ${a[k] || '∅'} → ${b[k] || '∅'}`);
+  }
+  const strictFail = diffs.some((d) => { const k = d.split(':')[0]; return strict.includes(k) || k in expect; });
   if (strictFail) failures++;
-  if (!ONLY_DIFF || diffs.length) rows.push(`${strictFail ? '❌' : diffs.length ? '⚠️ ' : '✅'} ${path.padEnd(52)} ${String(a.status).padStart(3)} ${a.who.padEnd(8)} | ${String(b.status).padStart(3)} ${b.who.padEnd(8)} ${diffs.join(' · ')}`);
+  const note = [...diffs, ...(wanted.length ? ['voulu : ' + wanted.join(', ')] : [])].join(' · ');
+  if (!ONLY_DIFF || diffs.length) rows.push(`${strictFail ? '❌' : diffs.length ? '⚠️ ' : '✅'} ${path.padEnd(52)} ${String(a.status).padStart(3)} ${a.who.padEnd(8)} | ${String(b.status).padStart(3)} ${b.who.padEnd(8)} ${note}`);
 }
 console.log(`Parité ${A} (A) → ${B} (B) — ${URLS.length} URL, ${failures} différence(s) bloquante(s)\n`);
 console.log('   URL'.padEnd(56) + ' A            | B');

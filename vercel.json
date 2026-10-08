@@ -12,43 +12,71 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        }
       ]
     },
     {
       "source": "/(.*)\\.(css|js|mjs)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
     },
     {
       "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|avif|svg|woff|woff2|ttf|eot|ico)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ],
   "redirects": [
-    { "source": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "destination": "/journal/:slug.html", "permanent": true },
-    { "source": "/nos-produits/:path*", "destination": "/produits.html", "permanent": true },
-    { "source": "/passez-commande/:path*", "destination": "/produits.html", "permanent": true },
-    { "source": "/vitra-home-stories-for-winter", "destination": "/collections/vitra-home-stories-for-winter", "permanent": true },
-    { "source": "/vitra-home-stories-for-winter/", "destination": "/collections/vitra-home-stories-for-winter", "permanent": true },
-    { "source": "/nos-marques/vitra", "destination": "/collections/vitra", "permanent": true },
-    { "source": "/nos-marques/vitra/", "destination": "/collections/vitra", "permanent": true },
-    { "source": "/nos-marques/ichendorf", "destination": "/collections/ichendorf-milano", "permanent": true },
-    { "source": "/nos-marques/ichendorf/", "destination": "/collections/ichendorf-milano", "permanent": true },
-    { "source": "/nos-marques/polspotten", "destination": "/collections/pols-potten", "permanent": true },
-    { "source": "/nos-marques/polspotten/", "destination": "/collections/pols-potten", "permanent": true },
-    { "source": "/nos-marques/string-furniture", "destination": "/collections/string-furniture", "permanent": true },
-    { "source": "/nos-marques/string-furniture/", "destination": "/collections/string-furniture", "permanent": true },
-    { "source": "/nos-marques/:path*", "destination": "/marques.html", "permanent": true },
-    { "source": "/prendre-rendez-vous/:path*", "destination": "/rendez-vous.html", "permanent": true },
-    { "source": "/contact", "destination": "/contact.html", "permanent": true },
-    { "source": "/v3/:path*", "destination": "/:path*", "permanent": true },
-    { "source": "/collections", "destination": "/marques.html", "permanent": false }
+    { "source": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "destination": "/journal/:slug.html", "statusCode": 301 },
+    { "source": "/nos-produits/:path*", "destination": "/produits.html", "statusCode": 301 },
+    { "source": "/passez-commande/:path*", "destination": "/produits.html", "statusCode": 301 },
+    { "source": "/vitra-home-stories-for-winter", "destination": "/collections/vitra-home-stories-for-winter", "statusCode": 301 },
+    { "source": "/vitra-home-stories-for-winter/", "destination": "/collections/vitra-home-stories-for-winter", "statusCode": 301 },
+    { "source": "/nos-marques/vitra", "destination": "/collections/vitra", "statusCode": 301 },
+    { "source": "/nos-marques/vitra/", "destination": "/collections/vitra", "statusCode": 301 },
+    { "source": "/nos-marques/ichendorf", "destination": "/collections/ichendorf-milano", "statusCode": 301 },
+    { "source": "/nos-marques/ichendorf/", "destination": "/collections/ichendorf-milano", "statusCode": 301 },
+    { "source": "/nos-marques/polspotten", "destination": "/collections/pols-potten", "statusCode": 301 },
+    { "source": "/nos-marques/polspotten/", "destination": "/collections/pols-potten", "statusCode": 301 },
+    { "source": "/nos-marques/string-furniture", "destination": "/collections/string-furniture", "statusCode": 301 },
+    { "source": "/nos-marques/string-furniture/", "destination": "/collections/string-furniture", "statusCode": 301 },
+    { "source": "/nos-marques/:path*", "destination": "/marques.html", "statusCode": 301 },
+    { "source": "/prendre-rendez-vous/:path*", "destination": "/rendez-vous.html", "statusCode": 301 },
+    { "source": "/contact", "destination": "/contact.html", "statusCode": 301 },
+    { "source": "/v3/:path*", "destination": "/:path*", "statusCode": 301 },
+    { "source": "/collections", "destination": "/marques.html", "statusCode": 302 }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index" }
+    {
+      "source": "/(.*)",
+      "destination": "/api/index"
+    }
   ]
 }
