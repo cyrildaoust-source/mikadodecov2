@@ -22,7 +22,8 @@ Date : 6 octobre 2026 · Base analysée : `main` @ `8800d9f` (PR #171) + prod `w
 | 3 | 3.4 scission de `shared.js` en 12 modules par responsabilité · sources brutes plus publiées ni servies · 404 produit cachée 60 s | ✅ en Preview (8 oct.), à valider puis merger | PR refactor/shell-modules ; ADR 0011 |
 | 4 | 4.2 contenu généré vérifié en CI · 4.3 contrat de données | ✅ livré | PR #185 |
 | 4 | 4.3 brief importateur metaobjects | ⏸ parqué (rien à encoder pour l'instant, décision du 8 oct.) | docs/BRIEF-importateur-metaobjects.md |
-| 4 | 4.1 layout unique : `templates/layout.html` + 30 pages en fragments, `renderPage()`, styles inline sortis | ✅ en Preview (8 oct.), à valider puis merger ; reste la fusion des 3 gabarits famille | PR refactor/layout-unique ; ADR 0012 |
+| 4 | 4.1 layout unique : `templates/layout.html` + 30 pages en fragments, `renderPage()`, styles inline sortis | ✅ livré (8 oct.) ; reste la fusion des 3 gabarits famille (à décider avec Cyril : pages riches encore en réflexion) | PR #205 ; ADR 0012 |
+| 4 | A3 (plan SEO) : modèle de titre par type de page en un seul endroit (`lib/render/seo.js` : `title_tag` Shopify, sinon « Nom — Marque \| Mikado Deco » ; « Nom · Mikado Deco » ailleurs) | ✅ en Preview (8 oct.) | PR seo/modele-de-titre |
 | 4 | 4.4 images hors git | ⏸ reporté : Blob plafonné sur le plan Hobby, sortie de git = réécriture d'historique | ADR 0008 |
 | 5 | 5.2 /api/health · 5.3 ADR 0001–0006 · 5.4 Dependabot · 5.4 Express 5 | ✅ livré | PR #185, #187 ; docs/adr |
 | 5 | 5.1 log drain + alertes (réglage Vercel) | à faire, réglage propriétaire | — |
