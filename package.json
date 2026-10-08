@@ -8,8 +8,8 @@
     "check": "node scripts/check-syntax.mjs",
     "build": "node scripts/build.mjs",
     "parity": "node scripts/route-parity.mjs",
-    "test": "node --test --test-timeout=30000 \"tests/*.test.cjs\" \"tests/*.test.mjs\"",
-    "test:e2e": "node --test --test-timeout=120000 \"tests/e2e/*.test.cjs\"",
+    "test": "ASSETS_HASHED=0 node --test --test-timeout=30000 \"tests/*.test.cjs\" \"tests/*.test.mjs\"",
+    "test:e2e": "ASSETS_HASHED=0 node --test --test-timeout=120000 \"tests/e2e/*.test.cjs\"",
     "images": "node scripts/optimize-images.js",
     "journal": "node scripts/build-journal.mjs",
     "build:legal": "node scripts/build-legal.mjs"
@@ -22,6 +22,7 @@
     "express-rate-limit": "^8.7.0"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "nodemon": "^3.0.2",
     "playwright": "^1.63.0",
     "sharp": "^0.35.5"
