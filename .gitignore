@@ -12,3 +12,6 @@ v3/designers-data.json.bak-*
 
 # Sortie de `npm run build` (copie des fichiers statiques pour Vercel) — jamais versionnée
 dist/
+
+# Manifeste du build (version des assets) lu par le serveur — jamais versionné
+build/

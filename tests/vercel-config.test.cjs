@@ -17,7 +17,7 @@ test('vercel.json : configuration moderne, build vers dist/, fonction avec ses g
   assert.equal(cfg.buildCommand, 'npm run build');
   assert.equal(cfg.outputDirectory, 'dist');
   const fn = cfg.functions['api/index.js'];
-  for (const part of ['data/**', 'templates/**', 'v3/*.html', 'v3/*.js', 'v3/*.mjs', 'v3/*.css', 'v3/*.json', 'v3/pages/**', 'v3/journal/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
+  for (const part of ['build/**', 'data/**', 'templates/**', 'v3/*.html', 'v3/*.js', 'v3/*.mjs', 'v3/*.css', 'v3/*.json', 'v3/pages/**', 'v3/journal/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
   assert.equal(fn.maxDuration, undefined, 'maxDuration héritée du projet (Fluid compute, 300 s) : ne pas la plafonner ici');
   const excluded = (fn.excludeFiles || '').replace(/^\{|\}$/g, '').split(',');
   assert.ok(excluded.includes('dist/**'), 'dist/** exclu de la fonction : le build le produit avant le tracé (sinon 327 Mo > 250 Mo, vu le 8 oct.)');
@@ -68,9 +68,10 @@ test('npm run build : dist/ ne contient que les fichiers statiques (pas de gabar
     assert.ok(!files.some((f) => /\.(md|bak)/.test(f) || f.split('/').some((seg) => seg.startsWith('.'))), 'aucun fichier de travail');
     assert.ok(!files.some((f) => f.startsWith('journal/') && f.endsWith('.html')), 'les articles sont rendus par le serveur');
     // Assets hachés (ADR 0010) : une entrée par module référencé dans le HTML, une par feuille de style, un manifeste de la même version que le serveur.
-    const { assetsVersion, entries } = require('../lib/assets');
+    const { computeSourcesVersion, entries } = require('../lib/assets');
     const built = JSON.parse(readFileSync(join(out, 'assets', 'manifest.json'), 'utf8'));
-    assert.equal(built.version, assetsVersion(), 'le build et le serveur calculent la même version');
+    assert.equal(built.version, computeSourcesVersion(), 'la version du build = hachage des sources');
+    assert.ok(!existsSync(join(ROOT, 'build', 'assets-manifest.json')) || JSON.parse(readFileSync(join(ROOT, 'build', 'assets-manifest.json'), 'utf8')).version.length === 10, 'un build --out ne touche pas build/ (réservé au vrai build)');
     for (const p of entries().js) assert.ok(files.includes(`assets/${p.slice(1).replace(/\.m?js$/, '')}.${built.version}.js`), `bundle manquant pour ${p}`);
     for (const p of entries().css) assert.ok(files.includes(`assets/${p.slice(1).replace(/\.css$/, '')}.${built.version}.css`), `feuille manquante pour ${p}`);
     assert.ok(files.some((f) => f.startsWith('assets/chunks/') && f.endsWith('.js')), 'le code partagé (shared.js…) est découpé en chunks');

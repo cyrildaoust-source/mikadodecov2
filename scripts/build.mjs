@@ -68,9 +68,9 @@ const racineV3 = {
   },
 };
 
-export async function bundleAssets(out) {
+export async function bundleAssets(out, { forFunction = out === OUT } = {}) {
   const { js, css } = assets.entries();
-  const version = assets.assetsVersion();
+  const version = assets.computeSourcesVersion();
   const outdir = join(out, 'assets');
   const asEntries = (list, ext) => Object.fromEntries(list.map((p) => [p.slice(1).replace(ext, ''), join(SRC, p)]));
   const common = { bundle: true, minify: true, charset: 'utf8', legalComments: 'none', outdir, entryNames: `[dir]/[name].${version}`, plugins: [racineV3], logLevel: 'warning' };
@@ -78,8 +78,11 @@ export async function bundleAssets(out) {
   await esbuild({ ...common, entryPoints: asEntries(js, /\.m?js$/), splitting: true, format: 'esm', platform: 'browser', target: ['es2022'], sourcemap: true, chunkNames: 'chunks/[name]-[hash]' });   // chunks : référencés par les bundles seulement → hachage de contenu
   // CSS : @import fusionnés ; les url() vers des hôtes externes ou des data: restent telles quelles.
   await esbuild({ ...common, entryPoints: asEntries(css, /\.css$/), external: ['https://*', 'http://*', 'data:*'] });
-  const built = { ...assets.manifest(), builtAt: new Date().toISOString() };
+  const built = { version, builtAt: new Date().toISOString(), js: Object.fromEntries(js.map((p) => [p, `/assets/${p.slice(1).replace(/\.m?js$/, '')}.${version}.js`])), css: Object.fromEntries(css.map((p) => [p, `/assets/${p.slice(1).replace(/\.css$/, '')}.${version}.css`])) };
   writeFileSync(join(outdir, 'manifest.json'), JSON.stringify(built, null, 2) + '\n');
+  // Copie pour le serveur : build/assets-manifest.json est embarqué dans la fonction (includeFiles),
+  // c'est là qu'il lit la version (il ne peut pas la recalculer sur Vercel, voir lib/assets.js).
+  if (forFunction) { mkdirSync(dirname(assets.BUILD_MANIFEST), { recursive: true }); writeFileSync(assets.BUILD_MANIFEST, JSON.stringify(built, null, 2) + '\n'); }
   return built;
 }
 

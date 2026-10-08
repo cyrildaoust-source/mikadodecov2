@@ -8,10 +8,12 @@ const assets = require('../lib/assets');
 // réécriture des références au rendu. Ces tests ne dépendent pas d'un build.
 const ROOT = join(__dirname, '..');
 
-test('la version est stable, courte, et change avec le contenu des sources', () => {
-  const v = assets.assetsVersion();
+test('la version est un hachage court des sources ; servie depuis le manifeste du build quand il existe', () => {
+  const v = assets.computeSourcesVersion();
   assert.match(v, /^[0-9a-f]{10}$/);
-  assert.equal(assets.assetsVersion(), v, 'mémorisée');
+  assert.equal(assets.computeSourcesVersion(), v, 'déterministe');
+  const built = assets.builtManifest();
+  assert.equal(assets.assetsVersion(), built ? built.version : v, 'manifeste du build prioritaire, sinon sources');
   const sources = assets.frontSources();
   assert.ok(sources.includes('shared.js') && sources.includes('styles.css') && sources.includes('pages/produits.js'), 'sources front présentes');
   assert.ok(!sources.some((s) => s.startsWith('journal/')), 'journal/articles.data.mjs (données de build) n’est pas une source front');
@@ -66,14 +68,14 @@ test('rewriteAssets : src, import statique, import() et <link> réécrits ; le r
   assert.equal(assets.rewriteAssets(html, false), html, 'désactivé : HTML intact');
 });
 
-test('hashedAssetsEnabled : forcé par ASSETS_HASHED, actif sur Vercel', () => {
+test('hashedAssetsEnabled : forcé par ASSETS_HASHED, sinon = présence du manifeste du build', () => {
   const saved = { ...process.env };
   try {
-    process.env.ASSETS_HASHED = '0'; process.env.VERCEL = '1';
+    process.env.ASSETS_HASHED = '0';
     assert.equal(assets.hashedAssetsEnabled(), false, 'ASSETS_HASHED=0 l’emporte');
-    delete process.env.ASSETS_HASHED;
-    assert.equal(assets.hashedAssetsEnabled(), true, 'sur Vercel, le build a produit dist/assets');
-    delete process.env.VERCEL; process.env.ASSETS_HASHED = '1';
+    process.env.ASSETS_HASHED = '1';
     assert.equal(assets.hashedAssetsEnabled(), true);
+    delete process.env.ASSETS_HASHED;
+    assert.equal(assets.hashedAssetsEnabled(), assets.builtManifest() !== null, 'sans forçage : actif ssi build/assets-manifest.json existe');
   } finally { for (const k of Object.keys(process.env)) if (!(k in saved)) delete process.env[k]; Object.assign(process.env, saved); }
 });

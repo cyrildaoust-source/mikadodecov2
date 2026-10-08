@@ -5,7 +5,7 @@
   "outputDirectory": "dist",
   "functions": {
     "api/index.js": {
-      "includeFiles": "{data/**,templates/**,v3/*.html,v3/*.js,v3/*.mjs,v3/*.css,v3/*.json,v3/pages/**,v3/journal/**}",
+      "includeFiles": "{build/**,data/**,templates/**,v3/*.html,v3/*.js,v3/*.mjs,v3/*.css,v3/*.json,v3/pages/**,v3/journal/**}",
       "excludeFiles": "{dist/**,v3/images/**,v3/fonts/**}"
     }
   },
