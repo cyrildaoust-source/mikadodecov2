@@ -10,5 +10,7 @@ Une décision structurante = un fichier court (contexte, décision, conséquence
 | [0004](0004-csp-nonce.md) | CSP posée par le serveur avec un nonce par requête ; plus de `unsafe-inline` pour les scripts | accepté |
 | [0005](0005-manifeste-des-pages.md) | `data/pages.manifest.json` est la seule liste des pages ; `vercel.json` en est dérivé | accepté |
 | [0006](0006-express-5.md) | Passage à Express 5 (promesses rejetées gérées nativement) | accepté |
+| [0007](0007-recherche-shopify.md) | La pertinence de la recherche reste celle de Shopify ; l'index ne la remplace pas (point 2.4 fermé) | accepté |
+| [0008](0008-images-statiques.md) | Les images restent servies en statique par Vercel, pas par Blob (point 4.4 reporté) | accepté |
 
 Le plan d'ensemble et son état : [`../ARCHI-critique-et-plan-2026-10-06.md`](../ARCHI-critique-et-plan-2026-10-06.md).
