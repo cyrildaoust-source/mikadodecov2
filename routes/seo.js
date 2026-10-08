@@ -8,7 +8,7 @@ const { families } = require('../lib/family-pages');
 const { shopifyFetch } = require('../lib/shopify/client');
 const { SITEMAP_PRODUCTS_QUERY } = require('../lib/shopify/queries');
 const { cached } = require('../lib/cache');
-const { BRAND_COLLECTION_ALIASES, FAMILLES_RICHES, INTERNAL_COLLECTION, ORIGIN } = require('../lib/config');
+const { BRAND_COLLECTION_ALIASES, FAMILLES_RICHES, INTERNAL_COLLECTION, JOURNAL_PRIORITY, ORIGIN, SITEMAP_PAGES } = require('../lib/config');
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { activeDesignerSlugs } = require('../lib/render/pages');
@@ -24,15 +24,9 @@ const { getCollections } = require('../lib/services/catalog');
 // lastmod) et les produits/collections (walk caché 6 h). Aucune URL perdue ;
 // les 3 chemins sont routés vers la fonction dans vercel.json.
 const SM_ESC = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-// Une date de démarrage serveur ne constitue pas une date de modification.
-const SM_STATIC = [
-  ['/', '1.0'], ['/produits.html', '0.9'], ['/marques.html', '0.8'],
-  ['/designers.html', '0.7'], ['/materiaux.html', '0.7'], ['/selection.html', '0.6'],
-  ['/studio.html', '0.6'], ['/rendez-vous.html', '0.7'], ['/contact.html', '0.6'],
-  ['/journal.html', '0.6'], ['/nuancier-fermob.html', '0.6'],
-  ['/mentions-legales.html', '0.3'], ['/conditions-generales-de-vente.html', '0.3'],
-  ['/politique-et-vie-privee.html', '0.3'], ['/politique-cookies.html', '0.3'],
-];
+// Pages statiques : la liste et les priorités viennent du manifeste des pages (data/pages.manifest.json,
+// champ `priority` ; `index: false` = hors sitemap). Pas de lastmod pour elles : une date de
+// démarrage serveur ne constitue pas une date de modification.
 // Date de dernière modification Shopify (AAAA-MM-JJ) ; absente plutôt qu'inventée.
 const smDate = (iso) => (typeof iso === 'string' && /^\d{4}-\d{2}-\d{2}/.test(iso) ? iso.slice(0, 10) : '');
 const smUrl = (loc, priority, lastmod) =>
@@ -53,7 +47,7 @@ router.get('/sitemap.xml', (req, res) => sendXml(res,
 // Pages statiques + créateurs indexables + articles : aucun appel Shopify → instantané.
 router.get('/sitemap-pages.xml', async (req, res) => {
   const urls = [];
-  SM_STATIC.forEach(([p, pr]) => urls.push(smUrl(ORIGIN + p, pr)));
+  SITEMAP_PAGES.forEach(({ loc, priority }) => urls.push(smUrl(ORIGIN + loc, priority)));
   // Créateurs visibles et portant au moins un produit publié.
   // Si l'index est inaccessible, la liste reste complète plutôt que de retirer des pages valides.
   const active = await activeDesignerSlugs({ patient: true });
@@ -64,7 +58,7 @@ router.get('/sitemap-pages.xml', async (req, res) => {
   });
   // Articles du journal (rendus depuis leur source, ADR 0013)
   await journalReady;
-  articleSlugs().forEach((slug) => urls.push(smUrl(ORIGIN + '/journal/' + slug + '.html', '0.5')));
+  articleSlugs().forEach((slug) => urls.push(smUrl(ORIGIN + '/journal/' + slug + '.html', JOURNAL_PRIORITY)));
   return sendXml(res, smUrlset(urls));
 });
 // Le sitemap ne lit que les handles : les champs de carte et les 250 variantes

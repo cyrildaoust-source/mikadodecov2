@@ -20,6 +20,8 @@ test('chaque page du manifeste existe, une seule fois, avec des champs valides',
     assert.equal(typeof p.ssr, 'boolean', `${p.file} : ssr doit être booléen`);
     assert.equal(typeof p.hero, 'boolean', `${p.file} : hero doit être booléen`);
     assert.equal(typeof p.active, 'string', `${p.file} : active doit être une chaîne`);
+    if ('priority' in p) assert.match(String(p.priority), /^(0\.[1-9]|1\.0)$/, `${p.file} : priority de sitemap entre 0.1 et 1.0`);
+    if ('index' in p) { assert.equal(p.index, false, `${p.file} : index ne sert qu'à exclure (false)`); assert.ok(!('priority' in p), `${p.file} : une page noindex n'a pas de priorité de sitemap`); }
   }
 });
 

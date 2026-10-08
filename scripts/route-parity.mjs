@@ -44,7 +44,7 @@ const URLS = [
   ['/journal.html', ['status', 'who']],
   ['/journal/fermob.html', ['status', 'who', 'type']],
   ['/contact.html', ['status', 'who']],
-  ['/selection.html', ['status', 'who']],
+  ['/selection.html', ['status', 'who'], { robots: 'noindex,follow', canonical: '' }],   // A2 : page panier hors indexation
   ['/nuancier-fermob.html', ['status', 'who']],
   ['/mentions-legales.html', ['status', 'who']],
   ['/404.html', ['status', 'who'], { ogImage: '/images/og-default.jpg' }],   // layout unique : image de partage sur toute page (ADR 0012)

@@ -51,6 +51,9 @@ test('overrides : titre, description, image, url, robots ; pas de dimensions pou
   assert.doesNotMatch(soft404, /<link rel="canonical"/, 'une page noindex ne déclare pas de canonical (le script inline de la fiche en parle, lui)');
   assert.doesNotMatch(renderPage('contact.html'), /name="robots"/);
   assert.match(renderPage('404.html'), /<meta name="robots" content="noindex" \/>/, 'robots déclaré par la page');
+  const selection = renderPage('selection.html');                            // `index: false` dans le manifeste (panier)
+  assert.match(selection, /<meta name="robots" content="noindex,follow" \/>/, 'noindex posé par le manifeste');
+  assert.doesNotMatch(selection, /<link rel="canonical"/);
   assert.doesNotMatch(renderPage('404.html'), /<link rel="canonical"/, 'une page noindex ne déclare pas de canonical');
 });
 
