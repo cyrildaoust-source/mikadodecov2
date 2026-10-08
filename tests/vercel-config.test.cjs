@@ -19,6 +19,9 @@ test('vercel.json : configuration moderne, build vers dist/, fonction avec ses g
   const fn = cfg.functions['api/index.js'];
   for (const part of ['data/**', 'templates/**', 'v3/*.html', 'v3/*.js', 'v3/*.mjs', 'v3/*.css', 'v3/*.json', 'v3/pages/**', 'v3/journal/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
   assert.equal(fn.maxDuration, undefined, 'maxDuration héritée du projet (Fluid compute, 300 s) : ne pas la plafonner ici');
+  const excluded = (fn.excludeFiles || '').replace(/^\{|\}$/g, '').split(',');
+  assert.ok(excluded.includes('dist/**'), 'dist/** exclu de la fonction : le build le produit avant le tracé (sinon 327 Mo > 250 Mo, vu le 8 oct.)');
+  assert.ok(excluded.includes('v3/images/**') && excluded.includes('v3/fonts/**'), 'images et polices servies par le CDN depuis dist/, jamais lues par le serveur : hors de la fonction (−163 Mo)');
 });
 
 test('vercel.json : tout ce qui n’est pas un fichier statique va au serveur ; en-têtes de sécurité et cache des médias', () => {
