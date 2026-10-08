@@ -55,7 +55,33 @@ async function get(path, kind) {
 }
 
 // ── Contrôles de contenu réutilisables ───────────────────────────────────────
+// Un contrôle reçoit le corps et un contexte { path, res } ; il renvoie null (OK) ou un libellé de
+// problème. Un libellé qui commence par « avis » n'est pas bloquant (conseil, pas défaut).
 const has = (re, label) => (body) => (re.test(body) ? null : label);
+// Balises de référencement d'une page HTML (exigence A1 du plan SEO) : title et description présents
+// et de longueur raisonnable, canonical qui pointe sur la page elle-même (ou la cible indiquée),
+// exactement un H1, les types JSON-LD attendus, et pas de noindex sauf si la page le veut.
+const decode = (t) => t.replace(/&amp;/g, '&').replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim();
+const seo = ({ canonical = 'self', ld = [], noindex = false } = {}) => (body, { path }) => {
+  const head = (body.match(/<head>([\s\S]*?)<\/head>/i) || [, body])[1];
+  const problems = [];
+  const title = decode((head.match(/<title>([\s\S]*?)<\/title>/i) || [, ''])[1]);
+  if (!title) problems.push('pas de <title>'); else if (title.length > 70) problems.push(`avis : title de ${title.length} caractères (> 70)`);
+  const desc = decode((head.match(/<meta name="description" content="([^"]*)"/i) || [, ''])[1]);
+  if (!desc) problems.push('pas de meta description'); else if (desc.length < 50 || desc.length > 170) problems.push(`avis : description de ${desc.length} caractères (hors 50–170)`);
+  const robots = decode((head.match(/<meta name="robots" content="([^"]*)"/i) || [, ''])[1]);
+  if (/noindex/i.test(robots) !== noindex) problems.push(noindex ? 'devrait être noindex' : `noindex inattendu (${robots})`);
+  const canon = decode((head.match(/<link rel="canonical" href="([^"]*)"/i) || [, ''])[1]).replace(/^https?:\/\/[^/]+/, '');
+  if (noindex) { if (canon) problems.push('canonical sur une page noindex'); }
+  else if (!canon) problems.push('pas de canonical');
+  else if (canonical && canon !== (canonical === 'self' ? path : canonical)) problems.push(`canonical ${canon} ≠ ${canonical === 'self' ? path : canonical}`);
+  const h1 = (body.match(/<h1[\s>]/gi) || []).length;
+  if (h1 !== 1) problems.push(`${h1} <h1>`);
+  const types = new Set();
+  for (const m of head.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) { try { const j = JSON.parse(m[1]); for (const o of Array.isArray(j) ? j : [j]) types.add(o['@type']); } catch { problems.push('JSON-LD invalide'); } }
+  for (const t of ld) if (!types.has(t)) problems.push(`JSON-LD ${t} absent`);
+  return problems.length ? problems.join(' ; ') : null;
+};
 const h1 = has(/<h1[\s>]/i, 'pas de <h1>');
 const chrome = has(/<header class="chrome/i, 'chrome (header) non rendu côté serveur');
 const ldjson = has(/<script type="application\/ld\+json">/i, 'pas de JSON-LD');
@@ -65,15 +91,18 @@ const noServerError = (body) => (/Erreur serveur|Internal Server Error|FUNCTION_
 // ── Parcours vérifiés ───────────────────────────────────────────────────────
 // `path` peut être une fonction async (résolu à l'exécution, ex. une vraie fiche produit).
 const CHECKS = [
-  { name: 'Accueil',               path: '/',                       kind: 'html', status: 200, checks: [h1, chrome, ldjson, noServerError] },
-  { name: 'Catalogue',             path: '/produits.html',          kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError] },
-  { name: 'Page marque (Vitra)',    path: '/collections/vitra',      kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError] },
-  { name: 'Catégorie (chaises)',    path: '/collections/chaises',    kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError] },
-  { name: 'Famille (tables)',       path: '/collections/tables',     kind: 'html', status: 200, checks: [h1, chrome, noServerError] },
-  { name: 'Designers',             path: '/designers.html',         kind: 'html', status: 200, checks: [h1, chrome, noServerError] },
-  { name: 'Journal',               path: '/journal.html',           kind: 'html', status: 200, checks: [h1, chrome, noServerError] },
-  { name: 'Fiche produit',         path: firstProductPath,          kind: 'html', status: 200, checks: [h1, chrome, ldjson, noServerError] },
-  { name: 'Contact',               path: '/contact.html',           kind: 'html', status: 200, checks: [h1, chrome, has(/<form/i, 'pas de formulaire')] },
+  { name: 'Accueil',               path: '/',                       kind: 'html', status: 200, checks: [h1, chrome, ldjson, noServerError, seo({ ld: ['WebSite'] })] },
+  { name: 'Catalogue',             path: '/produits.html',          kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError, seo({ ld: ['BreadcrumbList'] })] },
+  { name: 'Page marque (Vitra)',    path: '/collections/vitra',      kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError, seo({ ld: ['BreadcrumbList'] })] },
+  { name: 'Catégorie (chaises)',    path: '/collections/chaises',    kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError, seo({ ld: ['BreadcrumbList'] })] },
+  { name: 'Famille (tables)',       path: '/collections/tables',     kind: 'html', status: 200, checks: [h1, chrome, noServerError, seo({ ld: ['BreadcrumbList'] })] },
+  { name: 'Designers',             path: '/designers.html',         kind: 'html', status: 200, checks: [h1, chrome, noServerError, seo()] },
+  { name: 'Journal',               path: '/journal.html',           kind: 'html', status: 200, checks: [h1, chrome, noServerError, seo()] },
+  { name: 'Article du journal',    path: '/journal/fermob.html',    kind: 'html', status: 200, checks: [h1, chrome, noServerError, seo({ ld: ['Article', 'BreadcrumbList'] })] },
+  { name: 'Fiche produit',         path: firstProductPath,          kind: 'html', status: 200, checks: [h1, chrome, ldjson, noServerError, seo({ ld: ['Product', 'BreadcrumbList'] })] },
+  { name: 'Contact',               path: '/contact.html',           kind: 'html', status: 200, checks: [h1, chrome, has(/<form/i, 'pas de formulaire'), seo({ ld: ['FurnitureStore'] })] },
+  { name: 'Mentions légales',      path: '/mentions-legales.html',  kind: 'html', status: 200, checks: [h1, chrome, seo({ ld: ['BreadcrumbList'] })] },
+  { name: 'Sélection (noindex)',   path: '/selection.html',         kind: 'html', status: 200, checks: [h1, chrome, seo({ noindex: true })] },
   { name: 'Page inconnue → 404',   path: '/cette-page-n-existe-pas', kind: 'html', status: 404, checks: [chrome, has(/Page introuvable/, 'texte 404 absent')] },
   { name: 'Sitemap',               path: '/sitemap.xml',            kind: 'xml',  status: 200, checks: [has(/<(sitemapindex|urlset)/, 'ni sitemapindex ni urlset')] },
   { name: 'llms.txt',              path: '/llms.txt',               kind: 'text', status: 200, checks: [has(/Mikado/i, 'contenu inattendu')] },
@@ -121,12 +150,12 @@ for (const c of CHECKS) {
     if (res.status === 401 && !BYPASS) { console.error(`\n✖ ${BASE} répond 401 : déploiement protégé. Passer --bypass <VERCEL_AUTOMATION_BYPASS_SECRET>.\n`); process.exit(1); }
     if (res.status !== c.status) notes.push(`HTTP ${res.status} (attendu ${c.status})`);
     else {
-      for (const check of c.checks) { const problem = check(body); if (problem) notes.push(problem); }
+      for (const check of c.checks) { const problem = check(body, { path, res }); if (problem) notes.push(problem); }
       for (const [name, re] of Object.entries(c.headers || {})) { const v = res.headers.get(name) || ''; if (!re.test(v)) notes.push(`${name} : « ${v} » (attendu ${re})`); }
     }
     const slow = ttfb > SLOW_MS;
     if (slow) notes.push(`${STRICT_TIMING ? 'lent' : 'lent (alerte)'} : ${Math.round(ttfb)} ms > ${SLOW_MS} ms`);
-    const ok = notes.filter((n) => !n.startsWith('lent (alerte)')).length === 0;
+    const ok = notes.filter((n) => !n.startsWith('lent (alerte)') && !n.startsWith('avis')).length === 0;
     if (!ok) failures++;
     rows.push({ name: c.name, path, status: res.status, ms: `${Math.round(ttfb)} / ${Math.round(total)}`, ok, notes, cache: res.headers.get('x-vercel-cache') || '' });
   } catch (error) {

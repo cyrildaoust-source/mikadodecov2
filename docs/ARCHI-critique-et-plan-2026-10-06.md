@@ -27,7 +27,8 @@ Date : 6 octobre 2026 · Base analysée : `main` @ `8800d9f` (PR #171) + prod `w
 | 4 | 4.4 images hors git | ⏸ reporté : Blob plafonné sur le plan Hobby, sortie de git = réécriture d'historique | ADR 0008 |
 | 5 | 5.2 /api/health · 5.3 ADR 0001–0006 · 5.4 Dependabot · 5.4 Express 5 | ✅ livré | PR #185, #187 ; docs/adr |
 | 5 | 5.1 log drain + alertes | ✅ livré sous forme de surveillance GitHub toutes les 15 min (échec = e-mail) ; log drain impossible sur le plan Hobby | PR #207 |
-| SEO | A10 fiches de marchand (livraison + retour dans l'Offer, `data/offer-policy.json`) · A12 `/home` → 301 | ✅ en Preview (8 oct.), décidés par Cyril | PR seo/home-301-fiches-marchand |
+| SEO | A10 fiches de marchand (livraison + retour dans l'Offer, `data/offer-policy.json`) · A12 `/home` → 301 | ✅ livré (8 oct.) | PR #209 |
+| SEO | A2 sitemap des pages piloté par le manifeste (`priority`, `index: false`), sélection hors indexation · A1 contrôles SEO par page dans le smoke (title, description, canonical, H1, JSON-LD, noindex) | ✅ en Preview (8 oct.) | PR seo/sitemap-manifeste-smoke |
 
 ---
 
