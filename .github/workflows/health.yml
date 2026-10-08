@@ -1,0 +1,37 @@
+# Surveillance de la production — Mikado Deco (point 5.1 du plan, variante sans service externe)
+# Toutes les 15 minutes : /api/health doit répondre 200 avec status "ok" et Shopify joignable, l'accueil
+# et une liste doivent répondre 200 en moins de 10 s. Un échec fait échouer le job → GitHub envoie
+# un e-mail d'alerte (réglage par défaut : « Actions → échecs des workflows » pour l'auteur du
+# workflow). Le plan Hobby de Vercel n'offre ni log drain ni alerte : c'est ce filet qui les remplace.
+name: Santé de la production
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  health:
+    name: /api/health, accueil, liste
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: /api/health
+        run: |
+          set -e
+          body=$(curl -sS --max-time 20 -w '\n%{http_code}' https://www.mikadodeco.be/api/health)
+          code=$(echo "$body" | tail -1); json=$(echo "$body" | sed '$d')
+          echo "HTTP $code — $json" | cut -c1-400
+          [ "$code" = "200" ] || { echo "::error::/api/health répond $code"; exit 1; }
+          echo "$json" | grep -q '"status":"ok"' || { echo "::error::status ≠ ok"; exit 1; }
+          echo "$json" | grep -q '"shopify":"ok"' || { echo "::error::Shopify injoignable depuis la fonction"; exit 1; }
+      - name: Accueil et liste (code 200, moins de 10 s)
+        run: |
+          set -e
+          for p in / /collections/chaises /produit.html?handle=verre-a-eau-animal-farm; do
+            out=$(curl -sS -o /dev/null --max-time 20 -w '%{http_code} %{time_total}' -H 'Accept: text/html' "https://www.mikadodeco.be$p")
+            code=${out%% *}; t=${out##* }
+            echo "$p → HTTP $code en ${t}s"
+            [ "$code" = "200" ] || { echo "::error::$p répond $code"; exit 1; }
+            awk "BEGIN{exit !($t < 10)}" || { echo "::error::$p trop lent (${t}s)"; exit 1; }
+          done
