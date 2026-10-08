@@ -38,12 +38,15 @@ test('renderPage assemble le layout : document, balises communes, valeurs de la 
 });
 
 test('overrides : titre, description, image, url, robots ; pas de dimensions pour une image produit ; « $& » inoffensif', () => {
-  const html = renderPage('produit.html', { title: 'Chaise « A » & co', description: 'Prix 50$& — "test"', image: 'https://cdn.shopify.com/x.jpg?width=1200', url: 'https://www.mikadodeco.be/produit.html?handle=x', robots: 'noindex,follow' });
+  const html = renderPage('produit.html', { title: 'Chaise « A » & co', description: 'Prix 50$& — "test"', image: 'https://cdn.shopify.com/x.jpg?width=1200', url: 'https://www.mikadodeco.be/produit.html?handle=x' });
   assert.match(html, /<title>Chaise « A » &amp; co<\/title>/);
   assert.match(html, /content="Prix 50\$&amp; — &quot;test&quot;"/);
   assert.match(html, /<meta property="og:image" content="https:\/\/cdn\.shopify\.com\/x\.jpg\?width=1200" \/>\n\s+<meta name="twitter:card"/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.mikadodeco\.be\/produit\.html\?handle=x" \/>/);
-  assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
+  assert.doesNotMatch(html, /name="robots"/);
+  const soft404 = renderPage('produit.html', { robots: 'noindex,follow' });   // coquille 404 d'une fiche inexistante
+  assert.match(soft404, /<meta name="robots" content="noindex,follow" \/>/);
+  assert.doesNotMatch(soft404, /rel="canonical"/, 'une page noindex ne déclare pas de canonical');
   assert.doesNotMatch(renderPage('contact.html'), /name="robots"/);
   assert.match(renderPage('404.html'), /<meta name="robots" content="noindex" \/>/, 'robots déclaré par la page');
   assert.doesNotMatch(renderPage('404.html'), /rel="canonical"/, 'une page noindex ne déclare pas de canonical');
