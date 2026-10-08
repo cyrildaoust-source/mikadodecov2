@@ -22,7 +22,7 @@
 - `server.js` ne fait que démarrer `app.js` ; `api/index.js` (Vercel) importe la même application.
 - `app.js` compose les middlewares et monte les routeurs dans l'ordre qui compte : `routes/seo.js` (sitemaps) → `routes/pages.js` (fiche produit, collections, catalogue, pages statiques avec chrome) → statique `v3/` → CORS, JSON → `routes/api.js`, `routes/cart.js`, `routes/forms.js` → 404 → gestionnaire d'erreurs (`lib/http-errors.js`).
 - Le code métier vit dans `lib/` : `config.js` (constantes, pages SSR), `cache.js` (cache mémoire borné), `render/` (chrome, navigation, Open Graph, pages SSR, réponses agents), `services/catalog.js` (lectures Shopify mises en cache), `services/catalog-scope.js` (index du catalogue), `shopify/` (client, requêtes, mapper).
-- Une route ne contient que la lecture de la requête, l'appel au service et la réponse. Toute requête GraphQL vit dans `lib/shopify/queries.js`. Une nouvelle page `v3/*.html` se déclare dans `data/pages.manifest.json` (rôle, `ssr`, `hero`, `active`), puis `npm run build:vercel` régénère la règle de routage de `vercel.json` ; `tests/pages-manifest.test.cjs` échoue tant que les deux ne sont pas alignés ou qu'une page manque au manifeste.
+- Une route ne contient que la lecture de la requête, l'appel au service et la réponse. Toute requête GraphQL vit dans `lib/shopify/queries.js`. Une nouvelle page `v3/*.html` se déclare dans `data/pages.manifest.json` (rôle, `ssr`, `hero`, `active`) et c'est tout : `vercel.json` n'a plus de liste de pages (toute URL qui n'est pas un fichier de `dist/` arrive au serveur, ADR 0009) ; `tests/pages-manifest.test.cjs` échoue si une page manque au manifeste.
 
 ## Sécurité du contenu (CSP)
 

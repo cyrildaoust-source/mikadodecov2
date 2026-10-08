@@ -1,59 +1,54 @@
 {
-  "version": 2,
-  "builds": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{data/**,templates/**,v3/*.html,v3/*.js,v3/*.mjs,v3/*.json,v3/journal/**}"
+    }
+  },
+  "headers": [
     {
-      "src": "api/index.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["data/**", "templates/**", "v3/*.html", "v3/chrome-template.js", "v3/product-specs.mjs", "v3/pdp-view.mjs", "v3/nuancier-view.mjs", "v3/nuancier-fermob.data.json", "v3/product-card.mjs", "v3/brand-card.mjs", "v3/brand-logos.mjs", "v3/product-finishes.mjs", "v3/format.mjs", "v3/navigation.mjs", "v3/catalog-pagination.mjs", "v3/catalog-filters-view.mjs", "v3/family-policy.mjs", "v3/search-view.mjs", "v3/navigation-data.json", "v3/mega-menu-brands.json", "v3/mega-menu-config.json", "v3/designers-data.json", "v3/journal/**"] }
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000" }
+      ]
     },
-    { "src": "v3/**", "use": "@vercel/static" }
+    {
+      "source": "/(.*)\\.(css|js|mjs)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    },
+    {
+      "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|avif|svg|woff|woff2|ttf|eot|ico)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "headers": {
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Referrer-Policy": "strict-origin-when-cross-origin",
-        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), browsing-topics=()",
-        "Strict-Transport-Security": "max-age=31536000"
-      },
-      "continue": true
-    },
-    { "src": "/api/(.*)", "dest": "/api/index.js" },
-    { "src": "/index-catalogue/([a-z0-9-]+)\\.json", "dest": "/api/index.js" },
-    { "src": "/produit.html", "dest": "/api/index.js" },
-    { "src": "/produits.html", "has": [{ "type": "query", "key": "designer" }], "dest": "/api/index.js" },
-    { "src": "/sitemap.xml", "dest": "/api/index.js" },
-    { "src": "/sitemap-(pages|products)\\.xml", "dest": "/api/index.js" },
-    { "src": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "status": 301, "headers": { "Location": "/journal/$slug.html" } },
-    { "src": "/nos-produits(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
-    { "src": "/passez-commande(/.*)?", "status": 301, "headers": { "Location": "/produits.html" } },
-    { "src": "/vitra-home-stories-for-winter/?", "status": 301, "headers": { "Location": "/collections/vitra-home-stories-for-winter" } },
-    { "src": "/nos-marques/vitra/?", "status": 301, "headers": { "Location": "/collections/vitra" } },
-    { "src": "/nos-marques/ichendorf/?", "status": 301, "headers": { "Location": "/collections/ichendorf-milano" } },
-    { "src": "/nos-marques/polspotten/?", "status": 301, "headers": { "Location": "/collections/pols-potten" } },
-    { "src": "/nos-marques/string-furniture/?", "status": 301, "headers": { "Location": "/collections/string-furniture" } },
-    { "src": "/nos-marques(/.*)?", "status": 301, "headers": { "Location": "/marques.html" } },
-    { "src": "/prendre-rendez-vous(/.*)?", "status": 301, "headers": { "Location": "/rendez-vous.html" } },
-    { "src": "/contact", "status": 301, "headers": { "Location": "/contact.html" } },
-    { "src": "/(about|privacy)", "dest": "/api/index.js" },
-    { "src": "/v3/(.*)", "status": 301, "headers": { "Location": "/$1" } },
-    { "src": "/v3", "status": 301, "headers": { "Location": "/" } },
-    { "src": "/(.*\\.(?:css|js|mjs))(?:\\?.*)?$", "headers": { "cache-control": "public, max-age=0, must-revalidate" }, "continue": true },
-    { "src": "/(.*\\.html(?:\\?.*)?)?$", "headers": { "cache-control": "public, max-age=0, must-revalidate" }, "continue": true },
-    { "src": "/produit.html$", "dest": "/api/index.js" },
-    { "src": "/produits.html$", "dest": "/api/index.js" },
-    { "src": "/(index|marques|designers|studio|materiaux|rendez-vous|contact|selection|journal|nuancier-fermob|mentions-legales|conditions-generales-de-vente|politique-cookies|politique-et-vie-privee|404)\\.html$", "dest": "/api/index.js" },
-    { "src": "/journal/([^/]+\\.html)$", "dest": "/api/index.js" },
-    { "src": "/(.*\\.(?:png|jpg|jpeg|gif|webp|avif|svg|woff2?|ttf|eot|ico))", "headers": { "cache-control": "public, max-age=31536000, immutable" }, "dest": "/v3/$1" },
-    { "src": "/(.*\\.[a-zA-Z0-9]+)", "dest": "/v3/$1" },
-    { "src": "/collections", "status": 302, "headers": { "Location": "/marques.html" } },
-    { "src": "/collections/([^/]+)", "dest": "/api/index.js" },
-    { "src": "/products/([^/]+)", "dest": "/api/index.js" },
-    { "src": "/", "dest": "/api/index.js" },
-    { "src": "/(.+)", "dest": "/v3/$1.html" },
-    { "handle": "error" },
-    { "src": "/(?!api/).*", "status": 404, "dest": "/api/index.js" }
+  "redirects": [
+    { "source": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "destination": "/journal/:slug.html", "permanent": true },
+    { "source": "/nos-produits/:path*", "destination": "/produits.html", "permanent": true },
+    { "source": "/passez-commande/:path*", "destination": "/produits.html", "permanent": true },
+    { "source": "/vitra-home-stories-for-winter", "destination": "/collections/vitra-home-stories-for-winter", "permanent": true },
+    { "source": "/vitra-home-stories-for-winter/", "destination": "/collections/vitra-home-stories-for-winter", "permanent": true },
+    { "source": "/nos-marques/vitra", "destination": "/collections/vitra", "permanent": true },
+    { "source": "/nos-marques/vitra/", "destination": "/collections/vitra", "permanent": true },
+    { "source": "/nos-marques/ichendorf", "destination": "/collections/ichendorf-milano", "permanent": true },
+    { "source": "/nos-marques/ichendorf/", "destination": "/collections/ichendorf-milano", "permanent": true },
+    { "source": "/nos-marques/polspotten", "destination": "/collections/pols-potten", "permanent": true },
+    { "source": "/nos-marques/polspotten/", "destination": "/collections/pols-potten", "permanent": true },
+    { "source": "/nos-marques/string-furniture", "destination": "/collections/string-furniture", "permanent": true },
+    { "source": "/nos-marques/string-furniture/", "destination": "/collections/string-furniture", "permanent": true },
+    { "source": "/nos-marques/:path*", "destination": "/marques.html", "permanent": true },
+    { "source": "/prendre-rendez-vous/:path*", "destination": "/rendez-vous.html", "permanent": true },
+    { "source": "/contact", "destination": "/contact.html", "permanent": true },
+    { "source": "/v3/:path*", "destination": "/:path*", "permanent": true },
+    { "source": "/collections", "destination": "/marques.html", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index" }
   ]
 }
