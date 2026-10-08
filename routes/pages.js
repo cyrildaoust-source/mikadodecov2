@@ -14,7 +14,8 @@ const { shopifyFetch } = require('../lib/shopify/client');
 const { isOutdoor, isTable } = require('../lib/table-collections');
 const { selectInitialVariant } = require('../v3/product-variant');
 const { cached } = require('../lib/cache');
-const { BRAND_COLLECTION_ALIASES, BRAND_HERO_REVIEW, CAMPAIGN_COLLECTIONS, COLLECTION_ALIASES, COLLECTION_TEXTS, FAMILLES_RICHES, FAMILY_TEMPLATE, INTERNAL_COLLECTION, OG_DEFAULT, ORIGIN, PRODUITS_TEMPLATE, PRODUIT_TEMPLATE, resolveSsrRel } = require('../lib/config');
+const { BRAND_COLLECTION_ALIASES, BRAND_HERO_REVIEW, CAMPAIGN_COLLECTIONS, COLLECTION_ALIASES, COLLECTION_TEXTS, FAMILLES_RICHES, INTERNAL_COLLECTION, OG_DEFAULT, ORIGIN, resolveSsrRel } = require('../lib/config');
+const { renderPage } = require('../lib/render/layout');
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { htmlToMarkdown, sendMarkdown, wantsMarkdown } = require('../lib/render/agents');
@@ -45,24 +46,24 @@ router.get('/produit.html', async (req, res) => {
   if (!handle && req.query.id) {
     await navigationReady;
     const id = String(req.query.id).match(/^(?:gid:\/\/shopify\/Product\/)?([0-9]+)$/)?.[1];
-    if (!id) return send404Shell(res, PRODUIT_TEMPLATE);
+    if (!id) return send404Shell(res, 'produit.html');
     try {
       const data = await cached('product-handle:' + id, () => shopifyFetch(
         'query ProductHandle($id: ID!) { node(id: $id) { ... on Product { handle } } }',
         { id: 'gid://shopify/Product/' + id }
       ));
-      if (!data.node?.handle) return send404Shell(res, PRODUIT_TEMPLATE);
+      if (!data.node?.handle) return send404Shell(res, 'produit.html');
       return res.redirect(301, nav.navigation.productHref({ handle: data.node.handle }, nav.navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)), req.query.variant));
     } catch (error) { return temporaryUnavailable(res).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
   }
-  if (!handle) return send404Shell(res, PRODUIT_TEMPLATE);   // aucune fiche demandée
+  if (!handle) return send404Shell(res, 'produit.html');   // aucune fiche demandée
   try {
     await Promise.all([chromeReady, navigationReady]);
     const product = await getProductByHandle(handle);
     // Miss stable (produit inexistant/dépublié) : on cache aussi le repli pour
     // ne pas ré-invoquer la fonction à chaque bot. (Les erreurs Shopify partent
     // dans le catch ci-dessous, sans cache.)
-    if (!product) { return send404Shell(res, PRODUIT_TEMPLATE); }
+    if (!product) { return send404Shell(res, 'produit.html'); }
 
     const name     = product.name || 'Produit';
     const brand    = product.brand || '';
@@ -80,7 +81,7 @@ router.get('/produit.html', async (req, res) => {
     const image = raw ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200' : OG_DEFAULT;
     const url = ORIGIN + '/produit.html?handle=' + encodeURIComponent(handle);
 
-    const html = renderWithOg(fs.readFileSync(PRODUIT_TEMPLATE, 'utf8'), { title, description, image, url });
+    const html = renderPage('produit.html', { title, description, image, url });
     // SEO · Product JSON-LD en SSR (remplace l'IIFE JS de produit.html) — un seul
     // schéma, visible des crawlers sans exécution JS. Prix/dispo depuis le produit.
     // L'offre décrit la variante affichée (URL ?variant= ou photo de couverture),
@@ -126,7 +127,7 @@ router.get('/produit.html', async (req, res) => {
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
 router.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
-  if (INTERNAL_COLLECTION.test(handle)) return send404Shell(res, PRODUITS_TEMPLATE);
+  if (INTERNAL_COLLECTION.test(handle)) return send404Shell(res, 'produits.html');
   if (Object.hasOwn(BRAND_COLLECTION_ALIASES, handle)) {
     const query = req.originalUrl.indexOf('?');
     return res.redirect(301, '/collections/' + BRAND_COLLECTION_ALIASES[handle] + (query < 0 ? '' : req.originalUrl.slice(query)));
@@ -150,7 +151,7 @@ router.get('/collections/:handle', async (req, res) => {
     try {
       await Promise.all([chromeReady, navigationReady]);
       res.set('Content-Type', 'text/html; charset=utf-8');
-      let html = fs.readFileSync(path.join(V3_DIR, FAMILLES_RICHES[handle]), 'utf8');
+      let html = renderPage(FAMILLES_RICHES[handle]);
       if (handle === 'sieges') {
         // Une fiche dépubliée ou en panne ne bloque pas la sélection restante.
         const results = await Promise.allSettled(seatingIcons.handles.map(getProductByHandle));
@@ -178,7 +179,7 @@ router.get('/collections/:handle', async (req, res) => {
     const items = payload?.items || [];
     const featuredResults = await featuredPromise;
     const featuredItems = featuredResults.flatMap(result => result.status === 'fulfilled' && result.value && isTable(result.value) && !isOutdoor(result.value) ? [result.value] : []);
-    let html = renderFamilyPage(fs.readFileSync(FAMILY_TEMPLATE, 'utf8'), handle, {
+    let html = renderFamilyPage(renderPage('family-page.html'), handle, {
       items, pageInfo: payload?.pageInfo || {}, cursor, failed,
       cards: items.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''),
       featuredItems, featuredCards: featuredItems.map(p => plpCardSsr(p, req.originalUrl)).filter(Boolean).join(''),
@@ -202,7 +203,7 @@ router.get('/collections/:handle', async (req, res) => {
     const family = Object.hasOwn(families, handle) ? families[handle] : Object.hasOwn(richFamilies, handle) ? richFamilies[handle] : null;
     const col = family ? { name: family.title, description: family.description } : (await getCollections()).find(c => c.handle === handle) || campaign;
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
-    if (!col) return send404Shell(res, PRODUITS_TEMPLATE);
+    if (!col) return send404Shell(res, 'produits.html');
 
     const tag = typeof req.query.tag === 'string' ? req.query.tag : null;
     const cursor = typeof req.query.cursor === 'string' ? req.query.cursor : null;
@@ -241,7 +242,7 @@ router.get('/collections/:handle', async (req, res) => {
     const collectionUrl = '/collections/' + encodeURIComponent(handle);
     const url = ORIGIN + collectionUrl + (brand ? '?brand=' + encodeURIComponent(brand) : '');
 
-    let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    let html = renderPage('produits.html', { title, description, image, url });
     html = brandBanner(injectCollectionHero(html, collectionHero), handle);
     if (campaign) html = html.replace('<section class="subhero subhero--editorial"', '<section class="subhero subhero--editorial subhero--campaign"');
     html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
@@ -331,7 +332,7 @@ router.get('/produits.html', async (req, res) => {
     // Le module remplace ensuite la grille (garde data-ssr côté produits.html) : 0 doublon/flash.
     const brand = typeof req.query.brand === 'string' ? req.query.brand.trim().toLowerCase() : '';
     const q = typeof req.query.q === 'string' ? req.query.q : '';
-    let html = fs.readFileSync(PRODUITS_TEMPLATE, 'utf8');
+    let html = renderPage('produits.html');
     const landingRequest = isCatalogLanding(req.query);
     // Quatre choix explicites chargés en parallèle de la grille. Une fiche
     // indisponible n'est jamais remplacée par une meilleure vente arbitraire.
@@ -390,7 +391,7 @@ router.get('/produits.html', async (req, res) => {
     await Promise.all([chromeReady, navigationReady]);
     const designer = getDesigners().find((d) => String(d.slug || '').toLowerCase() === slug && !d.hidden);
     // Miss stable (slug inconnu) : repli cachable.
-    if (!designer) { return send404Shell(res, PRODUITS_TEMPLATE); }
+    if (!designer) { return send404Shell(res, 'produits.html'); }
 
     const name = designer.name || 'Créateur';
     const title = `${name} · Mikado Deco`;
@@ -402,7 +403,7 @@ router.get('/produits.html', async (req, res) => {
     const image = designer.photo ? absUrl(designer.photo) : OG_DEFAULT;
     const url = ORIGIN + '/produits.html?designer=' + encodeURIComponent(designer.slug || slug);
 
-    let html = renderWithOg(fs.readFileSync(PRODUITS_TEMPLATE, 'utf8'), { title, description, image, url });
+    let html = renderPage('produits.html', { title, description, image, url });
     html = listingNavigation(html, req);
     // SSR lot 3 · classe créateur (masque le subhero « Le catalogue » → un seul H1) +
     // hero nom/bio/portrait injecté (crawlable sans JS ; le module le remplace ensuite).
@@ -460,7 +461,7 @@ router.get(/.*/, async (req, res, next) => {
   const file = path.join(root, rel);
   if (!file.startsWith(root + path.sep)) return next(); // anti path-traversal
   let raw;
-  try { raw = fs.readFileSync(file, 'utf8'); }
+  try { raw = renderPage(rel); }                        // fragment + layout unique (ADR 0012)
   catch { return next(); }                              // inexistant → 404 normal
   if (!/id="site-header"/.test(raw)) return next();     // page hors-shell → ne pas toucher
   await Promise.all([chromeReady, navigationReady]);

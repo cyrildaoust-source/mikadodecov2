@@ -31,7 +31,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const SRC_DIR = join(__dirname, '..', 'docs', 'legal');
 const OUT_DIR = join(__dirname, '..', 'v3');
 const ORIGIN = 'https://www.mikadodeco.be';
-const OG_IMAGE = ORIGIN + '/images/og-default.jpg';
 const PUBLISH_DATE = '10/06/2026';   // mentions, confidentialité, cookies ; les CGV portent leur propre date (cfg.date)
 
 // Échappement identique à build-journal (contenu texte) + variante attribut.
@@ -269,36 +268,8 @@ function bodyFromSource(file, { stripHeader, date } = {}) {
  *  GABARIT — <head> conforme à contact.html, séparateur « · ».        *
  * ------------------------------------------------------------------ */
 function head(cfg, out) {
-  const canonical = `${ORIGIN}/${out}`;
-  return `  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.ico" sizes="32x32" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <title>${esc(cfg.title)}</title>
-  <!-- Open Graph / Twitter Cards (aperçu au partage social — statique) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Mikado Deco" />
-  <meta property="og:locale" content="fr_BE" />
-  <meta property="og:title" content="${attrEsc(cfg.title)}" />
-  <meta property="og:description" content="${attrEsc(cfg.desc)}" />
-  <meta property="og:url" content="${attrEsc(canonical)}" />
-  <meta property="og:image" content="${OG_IMAGE}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${attrEsc(cfg.title)}" />
-  <meta name="twitter:description" content="${attrEsc(cfg.desc)}" />
-  <meta name="twitter:image" content="${OG_IMAGE}" />
-  <meta name="description" content="${attrEsc(cfg.desc)}" />
-  <link rel="canonical" href="${attrEsc(canonical)}" />
-  <link rel="preconnect" href="https://use.typekit.net" />
-  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" />
-  <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-        href="https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3" />
-  <link rel="stylesheet" href="/styles.css" />`;
+  // Fragment pour le layout unique (ADR 0012) : le <head> commun est porté par templates/layout.html.
+  return `<!--page ${JSON.stringify({ title: cfg.title, description: cfg.desc, canonical: `/${out}` })} -->`;
 }
 
 const pagehead = (cfg) => `    <div data-breadcrumb></div>
@@ -311,13 +282,7 @@ const pagehead = (cfg) => `    <div data-breadcrumb></div>
 function renderSimple(cfg, out) {
   const body = bodyFromSource(cfg.sources[0], { stripHeader: true, date: cfg.date });
   if (!body.trim()) throw new Error(`Page « ${out} » : contenu vide après conversion.`);
-  return `<!DOCTYPE html>
-<html lang="fr">
-<head>
-${head(cfg, out)}
-</head>
-<body>
-  <div id="site-header"></div>
+  return `${head(cfg, out)}
   <main id="contenu" class="page wrap">
 ${pagehead(cfg)}
     <div class="prose">
@@ -325,13 +290,10 @@ ${pagehead(cfg)}
 ${body}
     </div>
   </main>
-  <div id="site-footer"></div>
   <script type="module">
     import { initShell } from "/shell.mjs";
     initShell({ active: "", transparentNav: false });
   </script>
-</body>
-</html>
 `;
 }
 
@@ -359,13 +321,7 @@ ${p.body}
     )
     .join('\n');
 
-  return `<!DOCTYPE html>
-<html lang="fr">
-<head>
-${head(cfg, out)}
-</head>
-<body>
-  <div id="site-header"></div>
+  return `${head(cfg, out)}
   <main id="contenu" class="page wrap">
 ${pagehead(cfg)}
     <div class="chips" role="tablist" aria-label="Type de client">
@@ -376,10 +332,7 @@ ${options}
     </select>
 ${sections}
   </main>
-  <div id="site-footer"></div>
   <script type="module" src="/pages/conditions-generales-de-vente.js"></script>
-</body>
-</html>
 `;
 }
 

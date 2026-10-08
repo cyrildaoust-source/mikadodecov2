@@ -20,6 +20,7 @@ const { DIST_DIR, V3_DIR } = require('./lib/paths');
 const { PAGES_MANIFEST, PORT } = require('./lib/config');
 const { hashedAssetsEnabled } = require('./lib/assets');
 const { chromeReady, injectChrome } = require('./lib/render/chrome');
+const { renderPage } = require('./lib/render/layout');
 const { navigationReady } = require('./lib/render/navigation');
 const { acceptsHtmlExplicitly, sendMarkdown, markdown404 } = require('./lib/render/agents');
 const { requestLogger } = require('./lib/request-log');
@@ -76,7 +77,7 @@ app.use(async (req, res) => {
   res.vary('Accept');
   if (!acceptsHtmlExplicitly(req)) return sendMarkdown(res, markdown404(req.path));
   let raw;
-  try { raw = fs.readFileSync(path.join(V3_DIR, '404.html'), 'utf8'); }
+  try { raw = renderPage('404.html'); }
   catch { return res.status(404).send('Not found'); }
   res.set('Content-Type', 'text/html; charset=utf-8');
   return res.send(injectChrome(raw, '404.html'));   // non-hero → solide
@@ -84,7 +85,7 @@ app.use(async (req, res) => {
 
 // ─── Erreurs : dernier middleware (voir lib/http-errors.js) ──
 app.use(createErrorHandler({
-  renderHtml: () => injectChrome(fs.readFileSync(path.join(V3_DIR, '500.html'), 'utf8'), '500.html'),
+  renderHtml: () => injectChrome(renderPage('500.html'), '500.html'),
 }));
 
 module.exports = app;

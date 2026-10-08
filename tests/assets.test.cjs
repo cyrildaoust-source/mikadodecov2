@@ -33,7 +33,7 @@ test('les entrées sont les modules et feuilles de style référencés par le HT
   const { js, css } = assets.entries();
   for (const p of ['/shell.mjs', '/main.js', '/family-page.js', '/pages/produits.js', '/pages/produit.js', '/nuancier-fermob.js']) assert.ok(js.includes(p), `${p} attendu`);
   assert.ok(!js.includes('/product-card.mjs'), 'un module seulement importé par d’autres modules n’est pas une entrée (il est regroupé)');
-  assert.deepEqual(css, ['/nuancier-fermob.css', '/styles.css']);
+  assert.deepEqual(css, ['/nuancier-fermob.css', '/pages/produits.css', '/styles.css']);
 });
 
 test('assetUrl : nom haché pour une entrée, inchangé sinon', () => {

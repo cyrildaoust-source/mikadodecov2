@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--page {"title":"Mobilier & objets de design — Catalogue · Mikado Deco","description":"Le catalogue Mikado Deco : mobilier, luminaires et objets de design, choisis pièce par pièce.","canonical":"/produits.html"} -->
+<template data-head>
   <!-- Placé avant les feuilles de style : un script situé après elles attend leur
        chargement, ce qui retardait le préchargement du bandeau (LCP mobile). -->
   <script type="application/json" id="collection-hero-initial">null</script>
@@ -42,26 +39,6 @@
       document.head.appendChild(link);
     })();
   </script>
-  <link rel="icon" href="/favicon.ico" sizes="32x32" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <title>Mobilier &amp; objets de design — Catalogue · Mikado Deco</title>
-  <!-- Open Graph / Twitter Cards (aperçu au partage social — statique) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Mikado Deco" />
-  <meta property="og:locale" content="fr_BE" />
-  <meta property="og:title" content="Mobilier &amp; objets de design — Catalogue · Mikado Deco" />
-  <meta property="og:description" content="Le catalogue Mikado Deco : mobilier, luminaires et objets de design, choisis pièce par pièce." />
-  <meta property="og:url" content="https://www.mikadodeco.be/produits.html" />
-  <link rel="canonical" href="https://www.mikadodeco.be/produits.html" />
-  <meta property="og:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Mobilier &amp; objets de design — Catalogue · Mikado Deco" />
-  <meta name="twitter:description" content="Le catalogue Mikado Deco : mobilier, luminaires et objets de design, choisis pièce par pièce." />
-  <meta name="twitter:image" content="https://www.mikadodeco.be/images/og-default.jpg" />
-  <meta name="description" content="Le catalogue Mikado Deco : mobilier, luminaires et objets de design, choisis pièce par pièce." />
   <script>
     /* SEO canonical — résolu selon la route : /collections/<handle> (sans query),
        ?designer / ?brand (self avec le param), sinon catalogue /produits.html
@@ -90,88 +67,7 @@
       link.href = canon;
     })();
   </script>
-  <link rel="preconnect" href="https://use.typekit.net" />
-  <link rel="preconnect" href="https://p.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" media="print" />
-  <noscript><link rel="stylesheet" href="https://use.typekit.net/gqc3ska.css" /></noscript>
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-        href="/fonts/cormorant-garamond-latin-600-normal.woff2" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-        href="https://use.typekit.net/af/912d1e/00000000000000007735bb33/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3" />
-  <link rel="stylesheet" href="/styles.css" />
-  <style>
-    /* Page créateur : réserve la hauteur du titre de grille pour que le
-       passage "vide → Les pièces de {name}" (anti-flash) ne décale rien (CLS). */
-    .plp-designer [data-grid-title] { min-height: 1.05em; }
-
-    /* Panneau Catégorie — multi-sélection serveur, façon Vitra · DA Mikado
-       (coins nets, crème/encre, case qui se REMPLIT en encre sans coche). */
-    .filterbar__left { display: flex; align-items: center; }
-    .cat-trigger { font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 500; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); padding: 9px 14px; cursor: pointer; letter-spacing: .02em; transition: border-color .15s var(--ease), color .15s var(--ease); }
-    .cat-trigger:hover, .cat-trigger[aria-expanded="true"] { border-color: var(--ink); }
-    .cat-trigger.is-active { border-color: var(--accent); }
-    .cat-trigger__count { font-weight: 600; color: var(--accent-ink); }
-    .cat-trigger__caret { font-size: 0; width: 12px; height: 12px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231a1916' stroke-width='1.6'><path d='M6 9l6 6 6-6'/></svg>") no-repeat center / 12px; transition: transform .2s var(--ease); }
-    .cat-trigger[aria-expanded="true"] .cat-trigger__caret { transform: rotate(180deg); }
-
-    /* Toggle colonnes (1 / 2) — mobile uniquement, persistant */
-    .cols-toggle { display: none; align-items: center; gap: 4px; }
-    .cols-btn { display: inline-flex; align-items: center; padding: 6px; border: 1px solid var(--line); background: var(--paper); color: var(--muted); cursor: pointer; line-height: 0; transition: border-color .15s var(--ease), color .15s var(--ease); }
-    .cols-btn:hover { color: var(--ink); }
-    .cols-btn[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
-    @media (max-width: 760px) {
-      .cols-toggle { display: inline-flex; }       /* le toggle n'a de sens que sur mobile */
-      .pgrid[data-cols="1"] { grid-template-columns: 1fr; }   /* override de la grille 2-col mobile */
-    }
-
-    .cat-panel { border: 1px solid var(--line); border-top: none; background: var(--paper); padding: clamp(18px, 2.2vw, 28px) var(--gutter); }
-    .cat-panel[hidden] { display: none; }
-    .cat-panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-    .cat-panel__title { font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 600; letter-spacing: .02em; }
-    .cat-panel__x { background: none; border: none; cursor: pointer; font-size: 26px; line-height: 1; color: var(--ink); padding: 4px; margin: -4px; }
-    .cat-panel__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .cat-opt { display: flex; align-items: center; cursor: pointer; padding: 8px 14px; border: 1px solid var(--line); font-family: var(--sans-product); font-size: var(--fs-small); color: var(--ink); line-height: 1; transition: border-color .12s var(--ease), background .12s var(--ease), color .12s var(--ease); }
-    @media (max-width: 760px) { .cat-panel__grid { grid-template-columns: repeat(2, 1fr); } }
-    .cat-opt:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
-    .cat-opt:has(.cat-opt__box:checked) { border-color: var(--accent-ink); background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
-    .cat-opt:has(.cat-opt__box:focus-visible) { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
-    .cat-opt__box { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-    .cat-panel__actions { display: flex; justify-content: flex-end; align-items: center; gap: 24px; margin-top: clamp(14px, 2vw, 22px); padding-top: 16px; border-top: 1px solid var(--line); }
-    .cat-panel__clear, .cat-panel__close { font-family: var(--sans-product); font-size: var(--fs-small); background: none; border: none; cursor: pointer; padding: 4px 2px; letter-spacing: .02em; }
-    .cat-panel__clear { color: var(--muted); }
-    .cat-panel__clear:hover { color: var(--ink); }
-    .cat-panel__close { color: var(--accent-ink); border-bottom: 1px solid currentColor; }
-    /* chips de filtres actifs (sous le compteur) */
-    .plp-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0 2px; }
-    .plp-chips[hidden] { display: none; }
-    .plp-chip { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-size: var(--fs-meta); border: 1px solid var(--line-ink); background: var(--paper); color: var(--ink); padding: 6px 10px; cursor: pointer; letter-spacing: .02em; line-height: 1; }
-    .plp-chip:hover { border-color: var(--accent-ink); }
-    .plp-chip__x { font-size: 1.3em; line-height: 1; color: var(--muted); }
-    .plp-chip:hover .plp-chip__x { color: var(--accent-ink); }
-    .plp-chip--clear { border: none; color: var(--accent-ink); text-decoration: underline; padding: 6px 4px; }
-
-    /* Pagination numérotée (remplace « Voir plus ») · DA Mikado : coins nets,
-       case courante REMPLIE en encre/crème — même langage que le panneau
-       Catégorie (« on remplit »). Masquée si une seule page. */
-    .grid-head { scroll-margin-top: 104px; } /* offset nav fixe au scroll-to-grille */
-    .plp-countline { margin: 4px 0 2px; }
-    .plp-count { font-family: var(--sans-product); font-size: var(--fs-small); color: var(--muted); letter-spacing: .02em; }
-    .plp-pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; min-height: 40px; margin-top: clamp(34px, 5vw, 60px); }
-    .plp-pagination[hidden] { display: none; }
-    .plp-pagination__numbers { display: flex; align-items: center; gap: 6px; }
-    .plp-pagination__mobile { display: none; font-family: var(--sans-product); font-size: var(--fs-small); color: var(--muted); letter-spacing: .04em; padding: 0 6px; }
-    .plp-page { font-family: var(--sans-product); font-size: var(--fs-small); min-width: 40px; height: 40px; padding: 0 13px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; letter-spacing: .02em; transition: border-color .15s var(--ease), color .15s var(--ease), background .12s var(--ease); }
-    .plp-page:hover:not(:disabled):not(.is-current) { border-color: var(--ink); }
-    .plp-page:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
-    .plp-page.is-current { background: var(--ink); border-color: var(--ink); color: var(--paper); cursor: default; }
-    .plp-page:disabled { opacity: .4; cursor: not-allowed; }
-    .plp-page--nav { font-weight: 500; }
-    .plp-page__ellipsis { min-width: 22px; text-align: center; color: var(--muted); user-select: none; }
-    @media (max-width: 560px) {
-      .plp-pagination__numbers { display: none; }
-      .plp-pagination__mobile { display: inline-flex; }
-    }
-  </style>
+  <link rel="stylesheet" href="/pages/produits.css" />
   <script>
     /* Page créateur (?designer=<slug>) — flag the document BEFORE first
        paint so styles.css can suppress the generic catalog hero / filterbar
@@ -186,9 +82,7 @@
     } catch (e) {}
   </script>
   <script type="application/json" id="collection-context-initial">null</script>
-</head>
-<body>
-  <div id="site-header"></div>
+</template>
   <main id="contenu">
 
   <section class="subhero">
@@ -343,8 +237,6 @@
   </section>
 
   </main>
-  <div id="site-footer"></div>
-
   <script type="module" src="/pages/produits.js"></script>
 
   <script>
@@ -379,5 +271,3 @@
       }
     })();
   </script>
-</body>
-</html>
