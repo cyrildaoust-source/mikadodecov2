@@ -46,10 +46,10 @@ test('overrides : titre, description, image, url, robots ; pas de dimensions pou
   assert.doesNotMatch(html, /name="robots"/);
   const soft404 = renderPage('produit.html', { robots: 'noindex,follow' });   // coquille 404 d'une fiche inexistante
   assert.match(soft404, /<meta name="robots" content="noindex,follow" \/>/);
-  assert.doesNotMatch(soft404, /rel="canonical"/, 'une page noindex ne déclare pas de canonical');
+  assert.doesNotMatch(soft404, /<link rel="canonical"/, 'une page noindex ne déclare pas de canonical (le script inline de la fiche en parle, lui)');
   assert.doesNotMatch(renderPage('contact.html'), /name="robots"/);
   assert.match(renderPage('404.html'), /<meta name="robots" content="noindex" \/>/, 'robots déclaré par la page');
-  assert.doesNotMatch(renderPage('404.html'), /rel="canonical"/, 'une page noindex ne déclare pas de canonical');
+  assert.doesNotMatch(renderPage('404.html'), /<link rel="canonical"/, 'une page noindex ne déclare pas de canonical');
 });
 
 test('renderWithOg (cas tardifs des listes) fonctionne sur la page assemblée, sans doublon de canonical', () => {
