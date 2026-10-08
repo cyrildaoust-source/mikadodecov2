@@ -10,7 +10,8 @@ const { shopifyFetch } = require('../lib/shopify/client');
 const { CAMPAIGN_COLLECTIONS } = require('../lib/config');
 const { navigationReady } = require('../lib/render/navigation');
 const { collectionProductsFor, getActiveBrands, getCollections, getHomeRails, getMenu, getPredictive, getProductByHandle, getProducts, getProductsPage, getPromos } = require('../lib/services/catalog');
-const { INDEX_PART_NAMES, getScopePage, indexPart, indexStatus } = require('../lib/services/catalog-scope');
+const { INDEX_PART_NAMES, buildAndStoreIndex, getScopePage, indexPart, indexStatus } = require('../lib/services/catalog-scope');
+const { blobConfigured } = require('../lib/services/catalog-index-store');
 
 router.get('/api/search',async(req,res)=>{
   res.set('Cache-Control','no-store');
@@ -22,7 +23,10 @@ router.get('/index-catalogue/:part.json', async (req, res) => {
   // Adresses fixes, sans paramètre : personne ne peut forcer de nouvelles constructions via le CDN.
   if (!INDEX_PART_NAMES.has(req.params.part) || Object.keys(req.query).length) return res.status(404).set('Cache-Control', 'no-store').end();
   try {
-    const { gzip, builtAt, count } = await indexPart(req.params.part);
+    const result = await indexPart(req.params.part);
+    // Index dans Blob : on y renvoie (lisible par le CDN), rien n'est construit ici.
+    if (result.redirect) { res.set('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=600'); return res.redirect(302, result.redirect); }
+    const { gzip, builtAt, count } = result;
     res.set({
       'Content-Type': 'application/json; charset=utf-8', 'Content-Encoding': 'gzip',
       // Même forme que les pages déjà gardées par le CDN (voir ogCache). 15 min puis
@@ -186,15 +190,38 @@ function verifyShopifyHmac(req) {
   const b = Buffer.from(sent);
   return a.length === b.length && crypto.timingSafeEqual(a, b); // comparaison constante
 }
-function hasValidToken(req) {
-  const token = process.env.REVALIDATE_TOKEN;
-  if (!token) return false;
-  const sent = (req.get('authorization') || '').replace(/^Bearer\s+/i, '') || String(req.query.token || '');
+// Jeton porteur attendu en `Authorization: Bearer <secret>` (ou ?token= si allowQuery), comparé en
+// temps constant. Fail-closed : sans secret configuré, rien ne passe.
+function bearerMatches(req, secret, { allowQuery = false } = {}) {
+  if (!secret) return false;
+  const bearer = /^Bearer\s+(\S+)$/i.exec(req.get('authorization') || '');   // le schéma Bearer est exigé
+  const sent = bearer ? bearer[1] : (allowQuery ? String(req.query.token || '') : '');
   if (!sent) return false;
   const a = Buffer.from(sent);
-  const b = Buffer.from(token);
-  return a.length === b.length && crypto.timingSafeEqual(a, b); // comparaison constante
+  const b = Buffer.from(secret);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
+const hasValidToken = (req) => bearerMatches(req, process.env.REVALIDATE_TOKEN, { allowQuery: true });
+// ─── API: CONSTRUCTION DE L'INDEX CATALOGUE → BLOB ─────
+// Appelée toutes les 30 min par .github/workflows/warm-cache.yml avec
+// `Authorization: Bearer CATALOG_INDEX_SECRET` (le Cron Vercel du plan Hobby ne permet
+// qu'un passage par jour). Construit l'index (dizaines d'appels Shopify, 15 à 60 s) et
+// l'écrit dans Blob : les instances le lisent ensuite en un appel au lieu de le
+// reconstruire dans la requête d'un visiteur (ADR 0002, étape 2). Fail-closed.
+router.post('/api/cron/catalog-index', async (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  if (!bearerMatches(req, process.env.CATALOG_INDEX_SECRET)) return res.status(401).json({ error: 'unauthorized' });
+  if (!blobConfigured()) return res.status(503).json({ error: 'blob_not_configured' });
+  try {
+    const meta = await buildAndStoreIndex();
+    console.log(`[catalog-index] écrit dans Blob : ${meta.count} produits, ${meta.parts} parties, ${meta.ms} ms`);
+    res.json({ ok: true, builtAt: meta.builtAt, count: meta.count, parts: meta.parts, ms: meta.ms });
+  } catch (error) {
+    console.error('[catalog-index] construction impossible :', error.message);
+    res.status(error.status || 502).json({ error: 'index_build_failed' });
+  }
+});
+
 // ─── API: REVALIDATE CACHE ─────────────────────────────
 // Call this from a Shopify webhook (Products/update, Collections/update)
 // Setup in Shopify admin → Settings → Notifications → Webhooks

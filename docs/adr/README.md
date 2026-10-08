@@ -5,7 +5,7 @@ Une décision structurante = un fichier court (contexte, décision, conséquence
 | N° | Décision | Statut |
 |---|---|---|
 | [0001](0001-cache-edge-des-listes.md) | Les pages de listes sont cachées à l'edge (`s-maxage` + `stale-while-revalidate`) | accepté |
-| [0002](0002-index-catalogue.md) | L'index du catalogue ne se construit jamais dans la requête d'un visiteur (réchauffage, puis Cron + Blob) | accepté, étape 2 à décider |
+| [0002](0002-index-catalogue.md) | L'index du catalogue ne se construit jamais dans la requête d'un visiteur (Blob + route protégée cadencée par GitHub) | accepté, étapes 1 et 2 faites |
 | [0003](0003-rate-limit-par-instance.md) | Le rate-limit reste par instance tant qu'aucun abus n'est mesuré | accepté |
 | [0004](0004-csp-nonce.md) | CSP posée par le serveur avec un nonce par requête ; plus de `unsafe-inline` pour les scripts | accepté |
 | [0005](0005-manifeste-des-pages.md) | `data/pages.manifest.json` est la seule liste des pages ; `vercel.json` en est dérivé | accepté |
