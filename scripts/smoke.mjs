@@ -81,10 +81,23 @@ const CHECKS = [
   { name: 'API menu',              path: '/api/menu',               kind: 'json', status: 200, checks: [jsonWhere((d) => Array.isArray(d.items) && d.items.length > 0, 'items vide')] },
   { name: 'API marques',           path: '/api/brands',             kind: 'json', status: 200, checks: [jsonWhere((d) => Array.isArray(d) && d.length > 5, 'moins de 6 marques')] },
   { name: 'API produits (page 1)', path: '/api/products?paginated=1&limit=3', kind: 'json', status: 200, checks: [jsonWhere((d) => Array.isArray(d.items) && d.items.length === 3, 'items ≠ 3')] },
+  // Assets hachés (ADR 0010) : l'accueil référence /assets/<nom>.<version>.(js|css), servis un an en immutable.
+  { name: 'Script haché (immutable)', path: hashedAssetPath('js'),  kind: 'text', status: 200, headers: { 'cache-control': /immutable/ }, checks: [has(/\S/, 'vide')] },
+  { name: 'CSS haché (immutable)',    path: hashedAssetPath('css'), kind: 'text', status: 200, headers: { 'cache-control': /immutable/ }, checks: [has(/\.chrome/, 'pas la feuille du site')] },
 ];
 
 function jsonWhere(pred, label) {
   return (body) => { try { return pred(JSON.parse(body)) ? null : label; } catch { return 'JSON invalide'; } };
+}
+
+function hashedAssetPath(ext) {
+  return async () => {
+    const { res, body } = await get('/', 'html');
+    if (!res.ok) throw new Error(`/ → ${res.status}`);
+    const m = body.match(new RegExp(`["'](/assets/[A-Za-z0-9_./-]+\\.${ext})["']`));
+    if (!m) throw new Error(`aucun /assets/*.${ext} dans l'accueil (assets hachés inactifs ?)`);
+    return m[1];
+  };
 }
 
 async function firstProductPath() {
@@ -107,7 +120,10 @@ for (const c of CHECKS) {
     const notes = [];
     if (res.status === 401 && !BYPASS) { console.error(`\n✖ ${BASE} répond 401 : déploiement protégé. Passer --bypass <VERCEL_AUTOMATION_BYPASS_SECRET>.\n`); process.exit(1); }
     if (res.status !== c.status) notes.push(`HTTP ${res.status} (attendu ${c.status})`);
-    else for (const check of c.checks) { const problem = check(body); if (problem) notes.push(problem); }
+    else {
+      for (const check of c.checks) { const problem = check(body); if (problem) notes.push(problem); }
+      for (const [name, re] of Object.entries(c.headers || {})) { const v = res.headers.get(name) || ''; if (!re.test(v)) notes.push(`${name} : « ${v} » (attendu ${re})`); }
+    }
     const slow = ttfb > SLOW_MS;
     if (slow) notes.push(`${STRICT_TIMING ? 'lent' : 'lent (alerte)'} : ${Math.round(ttfb)} ms > ${SLOW_MS} ms`);
     const ok = notes.filter((n) => !n.startsWith('lent (alerte)')).length === 0;

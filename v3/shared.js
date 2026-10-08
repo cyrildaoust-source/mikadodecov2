@@ -891,13 +891,6 @@ function bindAnnounce() {
 }
 
 /* ---------- entry ---------- */
-function ensureMegaMenuCss() {
-  if (document.querySelector('link[href="/mega-menu.css"]')) return;
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = "/mega-menu.css";
-  document.head.appendChild(link);
-}
 
 /* Vercel Web Analytics — mesure d'audience SANS cookie (pas de bandeau de
    consentement requis, la politique cookies reste inchangée). Chargé une seule
@@ -962,7 +955,6 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   ensureVercelAnalytics();
   const h = document.getElementById("site-header");
   const f = document.getElementById("site-footer");
-  ensureMegaMenuCss();
   // SSR : si le chrome est déjà rendu (header non vide), HYDRATER sans réécrire
   // (réécrire = re-flash). Sinon (page non-SSR / repli), injecter comme avant.
   if (h && !h.firstElementChild) h.innerHTML = chromeHTML(active);

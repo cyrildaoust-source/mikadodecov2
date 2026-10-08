@@ -16,7 +16,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const { createErrorHandler } = require('./lib/http-errors');   // Express 5 : les promesses rejetées arrivent d'elles-mêmes au gestionnaire
-const { V3_DIR } = require('./lib/paths');
+const { DIST_DIR, V3_DIR } = require('./lib/paths');
 const { PAGES_MANIFEST, PORT } = require('./lib/config');
 const { chromeReady, injectChrome } = require('./lib/render/chrome');
 const { navigationReady } = require('./lib/render/navigation');
@@ -47,6 +47,9 @@ app.use(require('./routes/pages'));
 // d'appeler la fonction ; ce middleware vaut donc surtout en local et pour les fichiers
 // embarqués dans la fonction. Les gabarits (role: template) ne sont jamais servis bruts :
 // ils n'ont de sens que rendus par leur route → 404 avec chrome.
+// Après `npm run build` en local, les assets hachés de dist/assets sont servis comme Vercel le fait
+// en production (immutable). Sur Vercel, dist/ n'est pas dans la fonction : le CDN s'en charge avant.
+if (fs.existsSync(path.join(DIST_DIR, 'assets'))) app.use('/assets', express.static(path.join(DIST_DIR, 'assets'), { immutable: true, maxAge: '1y', index: false }));
 const TEMPLATE_PATHS = new Set(PAGES_MANIFEST.pages.filter((p) => p.role === 'template' && p.dir !== 'templates').map((p) => '/' + p.file));
 const serveStatic = express.static(V3_DIR);
 app.use((req, res, next) => (TEMPLATE_PATHS.has(req.path) ? next() : serveStatic(req, res, next)));

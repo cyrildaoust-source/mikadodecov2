@@ -47,6 +47,8 @@
   }
 
   const api = { imageIdentity, selectInitialVariant, latestVariantSelection };
+  // Le global est toujours posé : regroupé par esbuild (ADR 0010), le module est enveloppé en CommonJS
+  // (`module` existe) alors que le navigateur attend `globalThis.MikadoProductVariant`.
+  root.MikadoProductVariant = api;
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else root.MikadoProductVariant = api;
 })(globalThis);

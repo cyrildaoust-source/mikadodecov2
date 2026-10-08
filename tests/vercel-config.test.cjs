@@ -17,8 +17,11 @@ test('vercel.json : configuration moderne, build vers dist/, fonction avec ses g
   assert.equal(cfg.buildCommand, 'npm run build');
   assert.equal(cfg.outputDirectory, 'dist');
   const fn = cfg.functions['api/index.js'];
-  for (const part of ['data/**', 'templates/**', 'v3/*.html', 'v3/*.mjs', 'v3/*.json', 'v3/journal/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
+  for (const part of ['build/**', 'data/**', 'templates/**', 'v3/*.html', 'v3/*.js', 'v3/*.mjs', 'v3/*.css', 'v3/*.json', 'v3/pages/**', 'v3/journal/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
   assert.equal(fn.maxDuration, undefined, 'maxDuration héritée du projet (Fluid compute, 300 s) : ne pas la plafonner ici');
+  const excluded = (fn.excludeFiles || '').replace(/^\{|\}$/g, '').split(',');
+  assert.ok(excluded.includes('dist/**'), 'dist/** exclu de la fonction : le build le produit avant le tracé (sinon 327 Mo > 250 Mo, vu le 8 oct.)');
+  assert.ok(excluded.includes('v3/images/**') && excluded.includes('v3/fonts/**'), 'images et polices servies par le CDN depuis dist/, jamais lues par le serveur : hors de la fonction (−163 Mo)');
 });
 
 test('vercel.json : tout ce qui n’est pas un fichier statique va au serveur ; en-têtes de sécurité et cache des médias', () => {
@@ -29,8 +32,9 @@ test('vercel.json : tout ce qui n’est pas un fichier statique va au serveur ; 
   assert.ok(!keys.includes('Content-Security-Policy'), 'la CSP vient du serveur (nonce), pas de vercel.json');
   const media = cfg.headers.find((h) => /png\|jpg/.test(h.source));
   assert.equal(media.headers[0].value, 'public, max-age=31536000, immutable');
-  const code = cfg.headers.find((h) => /css\|js/.test(h.source));
-  assert.equal(code.headers[0].value, 'public, max-age=0, must-revalidate', 'CSS/JS revalidés à chaque fois (pas encore de hash dans le nom)');
+  const hashed = cfg.headers.find((h) => h.source === '/assets/(.*)');
+  assert.equal(hashed.headers[0].value, 'public, max-age=31536000, immutable', 'assets hachés : un an, immutable (ADR 0010)');
+  assert.ok(!cfg.headers.some((h) => /css\|js/.test(h.source)), 'plus de règle CSS/JS à part : le défaut Vercel (max-age=0, must-revalidate) suffit pour les sources');
 });
 
 test('vercel.json : les redirections historiques sont toutes là, avec le bon statut', () => {
@@ -63,6 +67,18 @@ test('npm run build : dist/ ne contient que les fichiers statiques (pas de gabar
     assert.ok(files.some((f) => f.startsWith('images/')) && files.some((f) => f.startsWith('fonts/')));
     assert.ok(!files.some((f) => /\.(md|bak)/.test(f) || f.split('/').some((seg) => seg.startsWith('.'))), 'aucun fichier de travail');
     assert.ok(!files.some((f) => f.startsWith('journal/') && f.endsWith('.html')), 'les articles sont rendus par le serveur');
+    // Assets hachés (ADR 0010) : une entrée par module référencé dans le HTML, une par feuille de style, un manifeste de la même version que le serveur.
+    const { computeSourcesVersion, entries } = require('../lib/assets');
+    const built = JSON.parse(readFileSync(join(out, 'assets', 'manifest.json'), 'utf8'));
+    assert.equal(built.version, computeSourcesVersion(), 'la version du build = hachage des sources');
+    assert.ok(!existsSync(join(ROOT, 'build', 'assets-manifest.json')) || JSON.parse(readFileSync(join(ROOT, 'build', 'assets-manifest.json'), 'utf8')).version.length === 10, 'un build --out ne touche pas build/ (réservé au vrai build)');
+    for (const p of entries().js) assert.ok(files.includes(`assets/${p.slice(1).replace(/\.m?js$/, '')}.${built.version}.js`), `bundle manquant pour ${p}`);
+    for (const p of entries().css) assert.ok(files.includes(`assets/${p.slice(1).replace(/\.css$/, '')}.${built.version}.css`), `feuille manquante pour ${p}`);
+    assert.ok(files.some((f) => f.startsWith('assets/chunks/') && f.endsWith('.js')), 'le code partagé (shared.js…) est découpé en chunks');
+    assert.ok(files.some((f) => f.startsWith('assets/') && f.endsWith('.js.map')), 'sourcemaps présentes');
+    const styles = readFileSync(join(out, `assets/styles.${built.version}.css`), 'utf8');
+    assert.ok(!/@import/.test(styles) && /\.mm-/.test(styles), 'mega-menu.css est fusionné dans styles (plus d’@import en cascade)');
+    assert.ok(/url\(\/fonts\//.test(styles), 'les url(/fonts/…) restent absolues');
   } finally { rmSync(out, { recursive: true, force: true }); }
 });
 
