@@ -1,7 +1,13 @@
 /* produit.html · script de page (ex-inline, sorti dans ce fichier en octobre 2026 : cache navigateur,
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
-import { initShell, fetchProducts, fetchCollections, fetchPromos, applyPromos, isSaleActive, isGiftProductHandle, productCard, addToCart, cartQty, euro, priceLabel, escapeHtml, slugify, loadNavigation, paintBreadcrumb } from "/shared.js";
+import { initShell } from "/shell.mjs";
+import { fetchProducts, fetchCollections, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
+import { isSaleActive } from "/sale.mjs";
+import { isGiftProductHandle } from "/gift-rules.mjs";
+import { productCard } from "/product-grid.mjs";
+import { addToCart, cartQty } from "/cart.mjs";
+import { euro, priceLabel, escapeHtml, slugify } from "/format.mjs";
 import { productTrail, sourceSelection, productBrandDestination, designerSlug } from "/navigation.mjs";
 import { stockLabel } from "/format.mjs";
 import { pdpView, optionValue, variantForOption } from "/pdp-view.mjs";

@@ -18,8 +18,8 @@ Date : 6 octobre 2026 · Base analysée : `main` @ `8800d9f` (PR #171) + prod `w
 | 3 | 3.2 scripts de page externes · 3.3 CSP nonce sans 'unsafe-inline' | ✅ livré | PR #184 |
 | 3 | 3.5 double payload · 3.6 Lighthouse (rapport, non bloquant) | ✅ livré | PR #186 (3.5), #185 (3.6) |
 | 3 | 3.1 étape 1 : configuration Vercel moderne (`npm run build` → `dist/`, une seule réécriture vers le serveur, fin du double routage, outil de parité prod/Preview) | ✅ livré (8 oct.) | PR #199/#200 ; ADR 0009 |
-| 3 | 3.1 étape 2 : esbuild, assets hachés `immutable`, version = hachage des sources, réécriture au rendu | ✅ en Preview (8 oct.), à valider puis merger | PR perf/assets-haches ; ADR 0010 |
-| 3 | 3.4 scission shared.js (+ retrait des sources brutes de dist/) | à faire, débloqué par l'étape 2 | — |
+| 3 | 3.1 étape 2 : esbuild, assets hachés `immutable`, version transportée par le manifeste du build, réécriture au rendu | ✅ livré (8 oct.) | PR #202 ; ADR 0010 |
+| 3 | 3.4 scission de `shared.js` en 12 modules par responsabilité · sources brutes plus publiées ni servies · 404 produit cachée 60 s | ✅ en Preview (8 oct.), à valider puis merger | PR refactor/shell-modules ; ADR 0011 |
 | 4 | 4.2 contenu généré vérifié en CI · 4.3 contrat de données | ✅ livré | PR #185 |
 | 4 | 4.3 brief importateur metaobjects | ⏸ parqué (rien à encoder pour l'instant, décision du 8 oct.) | docs/BRIEF-importateur-metaobjects.md |
 | 4 | 4.1 layout unique | à faire | — |

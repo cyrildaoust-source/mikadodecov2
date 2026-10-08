@@ -5,7 +5,7 @@
  * Produit `dist/`, le dossier que Vercel sert en statique (vercel.json → outputDirectory).
  *
  * 1. Copie de v3/ : feuilles de style, modules, données JSON publiques, images, polices,
- *    robots.txt, llms.txt, favicons… SANS les pages HTML (gabarits lus par le serveur, qui les
+ *    robots.txt, llms.txt, favicons… SANS les sources JS/CSS (regroupées à l'étape 2), SANS les pages HTML (gabarits lus par le serveur, qui les
  *    rend avec le chrome, les métadonnées et le nonce CSP ; seuls les `stub` du manifeste sont
  *    copiés), sans .md, sauvegardes .bak, fichiers cachés.
  * 2. Assets hachés (ADR 0010) : esbuild regroupe et minifie chaque module référencé par le HTML
@@ -41,6 +41,7 @@ export function keep(rel) {
   if (/\.bak(-|$)/.test(base)) return false;                     // designers-data.json.bak-…
   if (base.endsWith('.md')) return false;                        // documentation
   if (base.endsWith('.html')) return STUBS.has(rel);             // seulement les stubs
+  if (/\.(m?js|css)$/.test(base)) return false;                  // sources front : servies regroupées et hachées depuis dist/assets (ADR 0010/0011)
   return true;
 }
 
@@ -54,7 +55,7 @@ function walk(dir, out = []) {
   return out;
 }
 
-// Les imports absolus (`/shared.js`, `@import url("/mega-menu.css")`) désignent des fichiers de
+// Les imports absolus (`/shell.mjs`, `@import url("/mega-menu.css")`) désignent des fichiers de
 // v3/ ; les ressources servies telles quelles (/fonts, /images) restent des URL externes au bundle.
 const racineV3 = {
   name: 'racine-v3',

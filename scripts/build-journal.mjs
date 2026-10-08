@@ -147,7 +147,7 @@ async function renderArticle(slug, a) {
   <div id="site-footer"></div>
 
   <script type="module">
-    import { initShell } from "/shared.js";
+    import { initShell } from "/shell.mjs";
     initShell({ active: "Le journal", transparentNav: false });
 
     // Fil d'Ariane rendu par le serveur (Accueil › Le journal › titre), avec son JSON-LD.

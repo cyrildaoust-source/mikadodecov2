@@ -2,7 +2,8 @@
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { bindFamilyRails } from "/family-rail.js";
-import { initShell, productCard, restoreSelectionPosition } from "/shared.js";
+import { initShell } from "/shell.mjs";
+import { productCard, restoreSelectionPosition } from "/product-grid.mjs";
 initShell({ active: "Mobilier", transparentNav: !document.documentElement.hasAttribute("data-chair-continuation") });
 var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 

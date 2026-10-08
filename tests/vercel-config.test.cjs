@@ -63,7 +63,8 @@ test('npm run build : dist/ ne contient que les fichiers statiques (pas de gabar
     const html = files.filter((f) => f.endsWith('.html'));
     const stubs = manifest.pages.filter((p) => p.role === 'stub').map((p) => p.file);
     assert.deepEqual(html.sort(), stubs.sort(), 'seuls les stubs du manifeste sont des HTML statiques');
-    for (const must of ['styles.css', 'shared.js', 'product-card.mjs', 'pages/produits.js', 'mega-menu-brands.json', 'robots.txt', 'llms.txt', 'favicon.ico', 'logomikado.svg']) assert.ok(files.includes(must), `${must} manquant`);
+    for (const must of ['mega-menu-brands.json', 'robots.txt', 'llms.txt', 'favicon.ico', 'logomikado.svg']) assert.ok(files.includes(must), `${must} manquant`);
+    assert.ok(!files.some((f) => /\.(m?js|css)$/.test(f) && !f.startsWith('assets/')), 'aucune source JS/CSS brute publiée : seuls les bundles de assets/ (ADR 0011)');
     assert.ok(files.some((f) => f.startsWith('images/')) && files.some((f) => f.startsWith('fonts/')));
     assert.ok(!files.some((f) => /\.(md|bak)/.test(f) || f.split('/').some((seg) => seg.startsWith('.'))), 'aucun fichier de travail');
     assert.ok(!files.some((f) => f.startsWith('journal/') && f.endsWith('.html')), 'les articles sont rendus par le serveur');
@@ -74,7 +75,7 @@ test('npm run build : dist/ ne contient que les fichiers statiques (pas de gabar
     assert.ok(!existsSync(join(ROOT, 'build', 'assets-manifest.json')) || JSON.parse(readFileSync(join(ROOT, 'build', 'assets-manifest.json'), 'utf8')).version.length === 10, 'un build --out ne touche pas build/ (réservé au vrai build)');
     for (const p of entries().js) assert.ok(files.includes(`assets/${p.slice(1).replace(/\.m?js$/, '')}.${built.version}.js`), `bundle manquant pour ${p}`);
     for (const p of entries().css) assert.ok(files.includes(`assets/${p.slice(1).replace(/\.css$/, '')}.${built.version}.css`), `feuille manquante pour ${p}`);
-    assert.ok(files.some((f) => f.startsWith('assets/chunks/') && f.endsWith('.js')), 'le code partagé (shared.js…) est découpé en chunks');
+    assert.ok(files.some((f) => f.startsWith('assets/chunks/') && f.endsWith('.js')), 'le code partagé (shell, cart, navigation…) est découpé en chunks');
     assert.ok(files.some((f) => f.startsWith('assets/') && f.endsWith('.js.map')), 'sourcemaps présentes');
     const styles = readFileSync(join(out, `assets/styles.${built.version}.css`), 'utf8');
     assert.ok(!/@import/.test(styles) && /\.mm-/.test(styles), 'mega-menu.css est fusionné dans styles (plus d’@import en cascade)');

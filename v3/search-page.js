@@ -1,4 +1,6 @@
-import {initShell,productCard,fetchPromos,applyPromos,restoreSelectionPosition} from '/shared.js';
+import { initShell } from '/shell.mjs';
+import { productCard, restoreSelectionPosition } from '/product-grid.mjs';
+import { fetchPromos, applyPromos } from '/catalog-data.mjs';
 const data=JSON.parse(document.querySelector('#search-initial').textContent);
 // Résultats déjà complets dans la page envoyée par le serveur : pas de reconstruction.
 const grid=document.querySelector('[data-grid]');

@@ -4,11 +4,12 @@
    - Marques   : fully hardcoded from /mega-menu-brands.json
                  (15 brands + featured collections + flat designer list)
    - Side panel "Coup de cœur" from /mega-menu-config.json (restored)
-   Top-level NAV labels/hrefs live in shared.js as the fallback so
+   Top-level NAV labels/hrefs live in chrome-template.js as the fallback so
    the chrome renders instantly with no flash.
    ============================================================ */
 
-import { escapeHtml, slugify, siteData } from "/shared.js";
+import { escapeHtml, slugify } from "/format.mjs";
+import { siteData } from "/site-data.mjs";
 
 const OPEN_DELAY  = 60;
 const CLOSE_DELAY = 200;
@@ -91,7 +92,7 @@ function indexTopItems(items) {
 // are the SAME visual component — only the data differs.
 function sideHTML({ image, imageAlt, title, lead, ctaHref, ctaLabel, imgOnError }) {
   if (!image) return "";
-  const onerr = imgOnError ? ` data-fallback="remove"` : "";   // shared.js retire l'image en erreur (plus d'onerror inline : CSP)
+  const onerr = imgOnError ? ` data-fallback="remove"` : "";   // shell.mjs (applyImageFallback) retire l'image en erreur (plus d'onerror inline : CSP)
   return `
     <aside class="mm-side">
       <img class="mm-side__visual" src="${escapeHtml(image)}" alt="${escapeHtml(imageAlt || "")}" loading="lazy"${onerr} />

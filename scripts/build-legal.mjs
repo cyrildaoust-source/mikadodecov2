@@ -6,7 +6,7 @@
  * NETTOYÉ (notes internes / encadrés « à retirer » / en-têtes de brouillon),
  * converti md→HTML, puis assemblé dans le gabarit de la DA (même <head> que
  * contact.html, mêmes classes .pagehead/.prose (sans étiquette au-dessus du titre), header/footer injectés
- * par shared.js). Modèle calqué sur build-journal.mjs.
+ * par shell.mjs). Modèle calqué sur build-journal.mjs.
  *
  *   mentions-legales.md ............. → v3/mentions-legales.html
  *   cgv-b2c.md (Particuliers)  ┐
@@ -327,7 +327,7 @@ ${body}
   </main>
   <div id="site-footer"></div>
   <script type="module">
-    import { initShell } from "/shared.js";
+    import { initShell } from "/shell.mjs";
     initShell({ active: "", transparentNav: false });
   </script>
 </body>

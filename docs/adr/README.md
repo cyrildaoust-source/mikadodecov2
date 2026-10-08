@@ -14,5 +14,6 @@ Une décision structurante = un fichier court (contexte, décision, conséquence
 | [0008](0008-images-statiques.md) | Les images restent servies en statique par Vercel, pas par Blob (point 4.4 reporté) | accepté |
 | [0009](0009-configuration-vercel-moderne.md) | Configuration Vercel moderne : `npm run build` publie `dist/` (statique sans gabarits), une seule réécriture vers le serveur, plus de liste de pages dans `vercel.json` | accepté |
 | [0010](0010-assets-haches.md) | Assets front hachés par version de sources (esbuild au build Vercel, `immutable` un an, réécriture au rendu) | accepté |
+| [0011](0011-modules-front.md) | Front découpé par responsabilité (`shared.js` supprimé, 12 modules) ; sources jamais servies brutes en production ; 404 produit cachée 1 min | accepté |
 
 Le plan d'ensemble et son état : [`../ARCHI-critique-et-plan-2026-10-06.md`](../ARCHI-critique-et-plan-2026-10-06.md).

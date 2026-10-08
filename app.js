@@ -18,6 +18,7 @@ const path = require('path');
 const { createErrorHandler } = require('./lib/http-errors');   // Express 5 : les promesses rejetées arrivent d'elles-mêmes au gestionnaire
 const { DIST_DIR, V3_DIR } = require('./lib/paths');
 const { PAGES_MANIFEST, PORT } = require('./lib/config');
+const { hashedAssetsEnabled } = require('./lib/assets');
 const { chromeReady, injectChrome } = require('./lib/render/chrome');
 const { navigationReady } = require('./lib/render/navigation');
 const { acceptsHtmlExplicitly, sendMarkdown, markdown404 } = require('./lib/render/agents');
@@ -52,7 +53,10 @@ app.use(require('./routes/pages'));
 if (fs.existsSync(path.join(DIST_DIR, 'assets'))) app.use('/assets', express.static(path.join(DIST_DIR, 'assets'), { immutable: true, maxAge: '1y', index: false }));
 const TEMPLATE_PATHS = new Set(PAGES_MANIFEST.pages.filter((p) => p.role === 'template' && p.dir !== 'templates').map((p) => '/' + p.file));
 const serveStatic = express.static(V3_DIR);
-app.use((req, res, next) => (TEMPLATE_PATHS.has(req.path) ? next() : serveStatic(req, res, next)));
+// Les sources JS/CSS ne sont servies brutes qu'en l'absence de build (dév) : en production, elles
+// n'existent que regroupées et hachées dans dist/assets (ADR 0011) → 404 sur /shell.mjs, /styles.css…
+const isFrontSource = (p) => /\.(m?js|css)$/.test(p);
+app.use((req, res, next) => ((TEMPLATE_PATHS.has(req.path) || (isFrontSource(req.path) && hashedAssetsEnabled())) ? next() : serveStatic(req, res, next)));
 app.use(cors({ origin: process.env.BASE_URL || `http://localhost:${PORT}` }));
 // Capture le corps brut (req.rawBody) pour la vérification HMAC des webhooks
 // Shopify (calculée sur le body brut, pas le JSON parsé). Comportement JSON

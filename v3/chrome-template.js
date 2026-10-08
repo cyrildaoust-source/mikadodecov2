@@ -1,7 +1,7 @@
 /* ============================================================
    Mikado Deco · chrome-template (SOURCE UNIQUE du markup chrome)
    Module PUR, ESM, zéro DOM, zéro effet de bord top-level.
-   Importé par /shared.js (client) ET par server.js (SSR Node).
+   Importé par /shell.mjs (client) ET par le serveur (SSR Node).
    NE JAMAIS y mettre fetch/document/window/localStorage.
    ============================================================ */
 
@@ -21,7 +21,7 @@ export const NAV_TOP = [
 ];
 
 export function chromeHTML(active) {
-  // Soldes actives ? (SSR — mêmes dates que shared.js SALE) → ne rend les spans
+  // Soldes actives ? (SSR — mêmes dates que sale.mjs SALE) → ne rend les spans
   // soldes de l'annonce QUE pendant la période (pas de flash post-1er-août).
   const saleActive = (() => {
     try { const n = Date.now();
