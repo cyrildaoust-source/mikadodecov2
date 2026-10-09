@@ -28,6 +28,7 @@
     { "file": "404.html",                             "role": "page",     "ssr": true,  "hero": false, "active": "" },
 
     { "file": "500.html",                             "role": "template", "ssr": false, "hero": false, "active": "" },
+    { "file": "410.html",                             "role": "template", "ssr": false, "hero": false, "active": "" },
     { "file": "produit.html",                         "role": "template", "ssr": false, "hero": false, "active": "" },
     { "file": "produits.html",                        "role": "template", "ssr": false, "hero": true,  "active": "" , "priority": "0.9" },
     { "file": "famille.html",                         "role": "template", "ssr": false, "hero": true,  "active": "Mobilier" },

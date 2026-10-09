@@ -20,7 +20,7 @@
  *
  * Code de sortie : 0 si tout passe, 1 dès qu'un contrôle échoue.
  */
-import { appendFileSync } from 'node:fs';
+import { appendFileSync, readFileSync } from 'node:fs';
 
 const args = process.argv.slice(2);
 const opt = (name, fallback) => { const i = args.indexOf(name); return i >= 0 && args[i + 1] ? args[i + 1] : fallback; };
@@ -90,6 +90,22 @@ const noServerError = (body) => (/Erreur serveur|Internal Server Error|FUNCTION_
 
 // ── Parcours vérifiés ───────────────────────────────────────────────────────
 // `path` peut être une fonction async (résolu à l'exécution, ex. une vraie fiche produit).
+// Table des redirections des anciennes fiches (ADR 0014), lue dans le dépôt : premier ancien handle
+// qui correspond au critère, et contrôle que la réponse suivie atterrit sur la cible de la table.
+const REDIRECTIONS = JSON.parse(readFileSync(new URL('../data/redirections.json', import.meta.url), 'utf8')).redirections;
+const redirectSample = (pick) => () => {
+  const e = REDIRECTIONS.find(pick);
+  if (!e) throw new Error('aucune entrée de ce type dans data/redirections.json');
+  return '/produit.html?handle=' + encodeURIComponent(e.from);
+};
+function landsOnRedirectTarget(body, { path, res }) {
+  const from = decodeURIComponent(path.split('handle=')[1] || '');
+  const e = REDIRECTIONS.find((x) => x.from === from);
+  const target = e.to.startsWith('/') ? e.to : '/produit.html?handle=' + encodeURIComponent(e.to);
+  const landed = new URL(res.url);
+  return landed.pathname + landed.search === target ? null : `atterrit sur ${landed.pathname + landed.search} (attendu ${target})`;
+}
+
 const CHECKS = [
   { name: 'Accueil',               path: '/',                       kind: 'html', status: 200, checks: [h1, chrome, ldjson, noServerError, seo({ ld: ['WebSite'] })] },
   { name: 'Catalogue',             path: '/produits.html',          kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError, seo({ ld: ['BreadcrumbList'] })] },
@@ -104,6 +120,10 @@ const CHECKS = [
   { name: 'Mentions légales',      path: '/mentions-legales.html',  kind: 'html', status: 200, checks: [h1, chrome, seo({ ld: ['BreadcrumbList'] })] },
   { name: 'Sélection (noindex)',   path: '/selection.html',         kind: 'html', status: 200, checks: [h1, chrome, seo({ noindex: true })] },
   { name: 'Page inconnue → 404',   path: '/cette-page-n-existe-pas', kind: 'html', status: 404, checks: [chrome, has(/Page introuvable/, 'texte 404 absent')] },
+  // Anciennes fiches (A9, ADR 0014) : premier ancien handle de chaque sorte dans data/redirections.json → arrive sur la cible de la table, ou 410.
+  { name: 'Ancienne fiche → fiche actuelle', path: redirectSample((e) => e.status === 301 && !e.to.startsWith('/')), kind: 'html', status: 200, checks: [landsOnRedirectTarget, h1, chrome] },
+  { name: 'Ancienne fiche → collection',     path: redirectSample((e) => e.status === 301 && e.to.startsWith('/')),  kind: 'html', status: 200, checks: [landsOnRedirectTarget, h1, chrome] },
+  { name: 'Fiche retirée → 410',             path: redirectSample((e) => e.status === 410),                           kind: 'html', status: 410, checks: [chrome, has(/plus proposée/, 'texte 410 absent')] },
   { name: 'Sitemap',               path: '/sitemap.xml',            kind: 'xml',  status: 200, checks: [has(/<(sitemapindex|urlset)/, 'ni sitemapindex ni urlset')] },
   { name: 'llms.txt',              path: '/llms.txt',               kind: 'text', status: 200, checks: [has(/Mikado/i, 'contenu inattendu')] },
   { name: 'robots.txt',            path: '/robots.txt',             kind: 'text', status: 200, checks: [has(/Sitemap:/i, 'pas de ligne Sitemap:')] },

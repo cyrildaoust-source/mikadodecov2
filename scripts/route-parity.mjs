@@ -38,6 +38,12 @@ const URLS = [
   ['/collections/tables', ['status', 'who']],
   ['/collections', ['status', 'location']],
   ['/products/verre-a-eau-animal-farm', ['status', 'location']],
+  // A9 (ADR 0014) : anciens handles de la table des redirections → 301 en un saut (fiche publiée ou chemin), 410 si retirée.
+  ['/produit.html?handle=chaise-belleville-copie', ['status', 'location'], { status: 301, location: '/produit.html?handle=chaise-avec-accoudoirs-belleville' }],
+  ['/produit.html?handle=pouf-the-cover-up', ['status', 'location'], { status: 301, location: '/collections/fatboy' }],
+  ['/produit.html?handle=bougie-parfumee-gstaad-glam-travel-from-home', ['status', 'who'], { status: 410 }],
+  ['/products/chaise-belleville-copie', ['status', 'location'], { status: 301, location: '/produit.html?handle=chaise-avec-accoudoirs-belleville' }],
+  ['/products/bougie-parfumee-gstaad-glam-travel-from-home', ['status'], { status: 410 }],
   ['/marques.html', ['status', 'who', 'type']],
   ['/designers.html', ['status', 'who']],
   ['/studio.html', ['status', 'who']],
@@ -98,6 +104,7 @@ const URLS = [
   ['/produits', ['status', 'location'], { status: 301, location: '/produits.html' }],
   ['/famille.html', ['status'], { status: 404 }],
   ['/500.html', ['status'], { status: 404 }],
+  ['/410.html', ['status'], { status: 404 }],   // gabarit de la fiche retirée (ADR 0014) : jamais servi en direct
 ];
 
 // Balises de référencement d'une page HTML (comparées en chemin relatif : la Preview et la prod

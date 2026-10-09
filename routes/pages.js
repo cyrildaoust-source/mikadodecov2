@@ -21,7 +21,8 @@ const { getArticle, journalReady } = require('../lib/render/journal');
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { htmlToMarkdown, sendMarkdown, wantsMarkdown } = require('../lib/render/agents');
-const { chromeReady, injectChrome, send404Shell, sendProduitTemplate, sendProduitsTemplate } = require('../lib/render/chrome');
+const { chromeReady, injectChrome, send404Shell, sendGoneShell, sendProduitTemplate, sendProduitsTemplate } = require('../lib/render/chrome');
+const { CACHE_CONTROL: REDIRECT_CACHE_CONTROL, lookupRedirect, redirectTarget } = require('../lib/redirections');
 const { brandBanner, canRenderInitialGrid, contentPageTrail, injectNavigation, listingNavigation, listingPagination, nav, navigationReady, plpCardSsr } = require('../lib/render/navigation');
 const { absUrl, ogCache, ogDesc, ogEscape, renderWithOg, temporaryUnavailable } = require('../lib/render/og');
 const { activeDesignerSlugs, designerHeroSsr, injectBrandsIndex, injectDesignersIndex, injectHomeRails, injectNuancier, pdpServed, pdpSsrBlock, sendScopeCatalog, sendSearchPage } = require('../lib/render/pages');
@@ -37,9 +38,25 @@ const { collectionProductsFor, getCollectionProducts, getCollections, getHomeRai
 // (send404Shell), donc pas de soft-404. Redirect RELATIF (fonctionne sur www + Preview).
 // Placé AVANT le catch-all app.get(/.*/). Les collections Shopify canonisent déjà vers
 // /collections/<handle> qui EXISTE ici (route ci-dessous) → rien à faire pour elles.
+// Table des redirections des anciennes fiches (ADR 0014) : 301 vers la fiche publiée (ou le chemin
+// indiqué), 410 pour une fiche retirée. Ne s'applique JAMAIS à un handle qui a une fiche publiée.
+function applyRedirect(res, entry) {
+  if (entry.status === 410) return sendGoneShell(res);
+  res.set('Cache-Control', REDIRECT_CACHE_CONTROL);
+  return res.redirect(301, redirectTarget(entry));
+}
 router.get('/products/:handle', async (req, res) => {
   await navigationReady;
   const handle = String(req.params.handle || '');
+  // Ancien handle de la table : un seul saut vers sa cible, à condition qu'aucune fiche publiée ne
+  // porte ce handle (on ne consulte Shopify que pour les handles de la table). Au moindre doute
+  // (Shopify indisponible) : le saut d'avant, et /produit.html tranche.
+  const entry = lookupRedirect(handle);
+  if (entry) {
+    let published = true;
+    try { published = Boolean(await getProductByHandle(handle)); } catch { /* doute → pas de redirection de table */ }
+    if (!published) return applyRedirect(res, entry);
+  }
   res.redirect(301, nav.navigation.productHref({ handle }, nav.navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)), req.query.variant) || '/produits.html');
 });
 // ─── Fiche produit : /produit.html?handle=<handle> (B7) ─
@@ -65,7 +82,10 @@ router.get('/produit.html', async (req, res) => {
     // Miss stable (produit inexistant/dépublié) : on cache aussi le repli pour
     // ne pas ré-invoquer la fonction à chaque bot. (Les erreurs Shopify partent
     // dans le catch ci-dessous, sans cache.)
-    if (!product) { return send404Shell(res, 'produit.html'); }
+    if (!product) {                                        // aucune fiche publiée → la table décide (ADR 0014), sinon 404
+      const entry = lookupRedirect(handle);
+      return entry ? applyRedirect(res, entry) : send404Shell(res, 'produit.html');
+    }
 
     const name     = product.name || 'Produit';
     const brand    = product.brand || '';

@@ -17,6 +17,7 @@ const path = require('path');
 const { ROOT_DIR, V3_DIR } = require('../lib/paths');
 const { articleSlugs, journalReady } = require('../lib/render/journal');
 const { legalFragment, legalPages } = require('../lib/render/legal');
+const { redirectionStats } = require('../lib/redirections');
 
 router.get('/api/search',async(req,res)=>{
   res.set('Cache-Control','no-store');
@@ -285,6 +286,7 @@ router.get('/api/health', async (req, res) => {
     shopify, shopifyMs: Math.round(performance.now() - t0),
     index: indexStatus(),
     content,
+    redirections: redirectionStats(),   // table des anciennes fiches (ADR 0014) : schéma, date, compteurs, erreur de chargement
     cache: cache.stats(),
   });
 });
