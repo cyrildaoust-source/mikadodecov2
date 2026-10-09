@@ -104,6 +104,7 @@ const URLS = [
   ['/produits', ['status', 'location'], { status: 301, location: '/produits.html' }],
   ['/famille.html', ['status'], { status: 404 }],
   ['/500.html', ['status'], { status: 404 }],
+  ['/410.html', ['status'], { status: 404 }],   // gabarit de la fiche retirée (ADR 0014) : jamais servi en direct
 ];
 
 // Balises de référencement d'une page HTML (comparées en chemin relatif : la Preview et la prod
