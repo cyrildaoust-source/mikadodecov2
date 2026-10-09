@@ -31,6 +31,10 @@ test('Shopify joignable → 200 ok, avec version, index, cache, jamais caché', 
   assert.deepEqual(body.index, { loaded: false });
   assert.equal(typeof body.cache.size, 'number');
   assert.equal(body.cache.max, 500);
+  // Table des redirections des anciennes fiches (ADR 0014) : chargée, au bon schéma, sans erreur.
+  assert.equal(body.redirections.schema, 'mikado.redirections@2');
+  assert.equal(body.redirections.error, null);
+  assert.ok(body.redirections.entries > 4000, `${body.redirections.entries} entrées`);
 });
 
 test('Shopify en panne → 503 degraded, le message est dans la réponse', async () => {

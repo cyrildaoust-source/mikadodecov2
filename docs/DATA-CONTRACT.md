@@ -38,3 +38,7 @@ Côté site : un service `lib/services/content.js` lira ces metaobjects par Stor
 ## Fichiers générés commités
 
 Les articles du journal (source `v3/journal/articles.data.mjs`) et les 4 pages légales (sources `docs/legal/*.md` + fiches `data/legal-pages.json`) sont **rendus à la demande** par le serveur depuis leurs sources (`lib/render/journal.js`, `lib/render/legal.js`, ADR 0013) : aucun HTML généré n'est commité, aucune étape de régénération. Modifier le contenu = modifier la source ; le déploiement suivant le sert.
+
+## Table des redirections des anciennes fiches (ADR 0014)
+
+`data/redirections.json` est **produit par l'importateur** (`mikado-importer`, `exports/site/redirections.json`, schéma `mikado.redirections@2`) et copié tel quel dans le dépôt : le site ne l'édite jamais à la main et n'en déduit rien (le champ `status` décide : 301 avec `to` = handle publié ou chemin `/collections/…`, 410 sans destination). Chaque livraison remplace le fichier. Règle d'application, posée par l'importateur : une fiche publiée passe toujours avant la table.
