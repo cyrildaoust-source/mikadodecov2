@@ -8,6 +8,8 @@
     "check": "node scripts/check-syntax.mjs",
     "build": "node scripts/build.mjs",
     "parity": "node scripts/route-parity.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "browser": "node scripts/browser-check.mjs",
     "test": "ASSETS_HASHED=0 node --test --test-timeout=30000 \"tests/*.test.cjs\" \"tests/*.test.mjs\"",
     "test:e2e": "ASSETS_HASHED=0 node --test --test-timeout=120000 \"tests/e2e/*.test.cjs\"",
     "images": "node scripts/optimize-images.js"
