@@ -6,7 +6,7 @@ Date : 6 octobre 2026 · Base analysée : `main` @ `8800d9f` (PR #171) + prod `w
 
 ---
 
-## 0. État d'avancement (mis à jour le 8 octobre 2026)
+## 0. État d'avancement (mis à jour le 9 octobre 2026 — plan livré)
 
 | Phase | Point | État | Où |
 |---|---|---|---|
@@ -19,16 +19,19 @@ Date : 6 octobre 2026 · Base analysée : `main` @ `8800d9f` (PR #171) + prod `w
 | 3 | 3.5 double payload · 3.6 Lighthouse (rapport, non bloquant) | ✅ livré | PR #186 (3.5), #185 (3.6) |
 | 3 | 3.1 étape 1 : configuration Vercel moderne (`npm run build` → `dist/`, une seule réécriture vers le serveur, fin du double routage, outil de parité prod/Preview) | ✅ livré (8 oct.) | PR #199/#200 ; ADR 0009 |
 | 3 | 3.1 étape 2 : esbuild, assets hachés `immutable`, version transportée par le manifeste du build, réécriture au rendu | ✅ livré (8 oct.) | PR #202 ; ADR 0010 |
-| 3 | 3.4 scission de `shared.js` en 12 modules par responsabilité · sources brutes plus publiées ni servies · 404 produit cachée 60 s | ✅ en Preview (8 oct.), à valider puis merger | PR refactor/shell-modules ; ADR 0011 |
-| 4 | 4.2 contenu : journal + pages légales rendus à la demande depuis leurs sources (plus de HTML généré commité ni d'étape CI) · 4.3 contrat de données | 4.2 ✅ en Preview (8 oct.) · 4.3 ✅ livré | PR content/rendu-depuis-la-source (ADR 0013) ; PR #185 |
+| 3 | 3.4 scission de `shared.js` en 12 modules par responsabilité · sources brutes plus publiées ni servies · 404 produit cachée 60 s | ✅ livré (8 oct.) | PR #203 ; ADR 0011 |
+| 4 | 4.2 contenu : journal + pages légales rendus à la demande depuis leurs sources (plus de HTML généré commité ni d'étape CI) · 4.3 contrat de données | 4.2 ✅ livré (8 oct.) · 4.3 ✅ livré | PR #208 (ADR 0013) ; PR #185 |
 | 4 | 4.3 brief importateur metaobjects | ⏸ parqué (rien à encoder pour l'instant, décision du 8 oct.) | docs/BRIEF-importateur-metaobjects.md |
-| 4 | 4.1 layout unique : `templates/layout.html` + 30 pages en fragments, `renderPage()`, styles inline sortis | ✅ livré (8 oct.) ; reste la fusion des 3 gabarits famille (à décider avec Cyril : pages riches encore en réflexion) | PR #205 ; ADR 0012 |
-| 4 | A3 (plan SEO) : modèle de titre par type de page en un seul endroit (`lib/render/seo.js` : `title_tag` Shopify, sinon « Nom — Marque \| Mikado Deco » ; « Nom · Mikado Deco » ailleurs) | ✅ en Preview (8 oct.) | PR seo/modele-de-titre |
+| 4 | 4.1 layout unique : `templates/layout.html` + 30 pages en fragments, `renderPage()`, styles inline sortis | ✅ livré (8 oct.) · fusion des 3 gabarits famille ✖ non retenue (décision de Cyril : chaque page famille sera retravaillée selon la demande, chantier design) | PR #205 ; ADR 0012 |
+| SEO | A3 : modèle de titre par type de page en un seul endroit (`lib/render/seo.js` : `title_tag` Shopify, sinon « Nom — Marque \| Mikado Deco » ; « Nom · Mikado Deco » ailleurs) | ✅ livré (8 oct.) | PR #206 |
 | 4 | 4.4 images hors git | ⏸ reporté : Blob plafonné sur le plan Hobby, sortie de git = réécriture d'historique | ADR 0008 |
 | 5 | 5.2 /api/health · 5.3 ADR 0001–0006 · 5.4 Dependabot · 5.4 Express 5 | ✅ livré | PR #185, #187 ; docs/adr |
 | 5 | 5.1 log drain + alertes | ✅ livré sous forme de surveillance GitHub toutes les 15 min (échec = e-mail) ; log drain impossible sur le plan Hobby | PR #207 |
 | SEO | A10 fiches de marchand (livraison + retour dans l'Offer, `data/offer-policy.json`) · A12 `/home` → 301 | ✅ livré (8 oct.) | PR #209 |
-| SEO | A2 sitemap des pages piloté par le manifeste (`priority`, `index: false`), sélection hors indexation · A1 contrôles SEO par page dans le smoke (title, description, canonical, H1, JSON-LD, noindex) | ✅ en Preview (8 oct.) | PR seo/sitemap-manifeste-smoke |
+| SEO | A2 sitemap des pages piloté par le manifeste (`priority`, `index: false`), sélection hors indexation · A1 contrôles SEO par page dans le smoke (title, description, canonical, H1, JSON-LD, noindex) | ✅ livré (9 oct.) | PR #210 |
+| SEO | A9 anciennes fiches : table de l'importateur (`data/redirections.json`, 4 318 × 301 + 68 × 410) appliquée par le serveur, la fiche publiée d'abord ; 410 avec gabarit `v3/410.html` | ✅ en Preview (9 oct.), à merger | PR #214 ; ADR 0014 |
+
+**Bilan au 9 octobre 2026.** Les 29 points du plan sont traités : 25 livrés en production, 2 fermés sans code sur décision documentée (2.4 → ADR 0007, 4.4 → ADR 0008), 2 écartés par Cyril (fusion des gabarits famille = chantier design ; brief metaobjects = rien à encoder pour l'instant). Hors plan, livrés dans la foulée : surveillance de la prod toutes les 15 min (#207), balise de vérification Meta (#201), et les points SEO côté site A1, A2, A3, A10, A11 (par l'architecture), A12 (#206, #209, #210). Restent connus et assumés : `style-src 'unsafe-inline'` (ADR 0004), rate-limit par instance (ADR 0003), images dans git (ADR 0008), trois gabarits famille, plan Hobby sans log drain.
 
 ---
 
