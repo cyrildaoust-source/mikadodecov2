@@ -1,0 +1,462 @@
+[
+ {
+  "slug": "piero-lissoni",
+  "name": "Piero Lissoni",
+  "sortKey": "Lissoni",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Piero Lissoni est un architecte, designer et directeur artistique italien. En 1986, il fonde à Milan avec Nicoletta Canesi le studio d'architecture et de design Lissoni Associati, puis le studio de communication visuelle Graph.x en 1996, l'agence Lissoni Architettura en 2013 et, deux ans plus tard, Lissoni Inc. à New York, consacrée aux projets d'intérieur sur le continent américain. Pour Alessi, il a dessiné Birillo, une famille d'accessoires de salle de bains aux formes rectangulaires et aux angles arrondis : porte-savon, distributeur de savon, porte-mouchoirs, balayette WC. Son travail a reçu le Good Design Award, le Red Dot Award et le Compasso d'Oro ADI.",
+  "bioSources": [
+   "https://alessi.com/collections/piero-lissoni",
+   "https://alessi.com/collections/piero-lissoni/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/piero-lissoni.jpg",
+   "sourcePage": "https://alessi.com/collections/piero-lissoni",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Piero-Lissoni.jpg?v=1779782077",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait noir et blanc publié par Alessi (page designer). Personne assise au centre d'un cadre circulaire, assez petite dans l'image : recadrage 4:5 serré possible (hauteur 1306 px)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "sakura-adachi",
+  "name": "Sakura Adachi",
+  "sortKey": "Adachi",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Sakura Adachi est une designer japonaise née en 1977 dans la préfecture d'Aichi. Diplômée en design industriel et artisanal de l'université d'art Musashino à Tokyo, elle obtient ensuite un master en design industriel à Central Saint Martins, à Londres. Installée à Milan depuis 2004, elle a collaboré avec plusieurs studios de design, enseigné à l'Istituto Europeo di Design de Milan et enseigne depuis 2014 le design industriel à l'ISIA de Pordenone. Pour Alessi, elle a dessiné Food à porter, une collection de boîtes à repas, bouteille isotherme et couverts de voyage pensés comme des accessoires de mode, ainsi que le bol Lovely Breeze. Elle a notamment reçu un Red Dot Design Award.",
+  "bioSources": [
+   "https://alessi.com/collections/sakura-adachi",
+   "https://alessi.com/collections/sakura-adachi/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/sakura-adachi.jpg",
+   "sourcePage": "https://alessi.com/collections/sakura-adachi",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Adachi-Sakura.jpg?v=1779782089",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait publié par Alessi sur la page designer."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "alessandro-stabile",
+  "name": "Alessandro Stabile",
+  "sortKey": "Stabile",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Alessandro Stabile est un designer et directeur artistique italien, qui a fondé son studio à Milan en 2011. Son travail cherche un équilibre entre innovation technique, typologique et formelle, et défend une approche circulaire du design, attentive à l'environnement, aux procédés et aux personnes. Pour Alessi, il a dessiné la bouteille isotherme Away, dont le bouchon en forme de virgule permet de l'accrocher à une ceinture ou à un sac, et Bedin, une lampe portable rechargeable en aluminium qui s'allume d'une pression sur la tête et se règle en la tournant. Il a reçu les prix Archiproducts, Red Dot et iF Design, ainsi que des nominations au Compasso d'Oro.",
+  "bioSources": [
+   "https://alessi.com/collections/alessandro-stabile",
+   "https://alessi.com/collections/alessandro-stabile/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait officiel trop petit (800 × 639 ; 511 px de large en 4:5, agrandissement au-delà de 1,18×) : https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Stabile-Alessandro-StefaniaZanetti-bw_2b3d1034-c0e1-4cbb-800f-41a257b41da5.jpg?v=1779782084",
+  "remarks": null
+ },
+ {
+  "slug": "rodrigo-torres",
+  "name": "Rodrigo Torres",
+  "sortKey": "Torres",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Rodrigo Torres est un designer colombien né à Bogota en 1976. Diplômé de la faculté de design industriel de l'université de Bogota, il suit ensuite un master en design à la Domus Academy de Milan ; en 1997, il reçoit le prix Santo Domingo du meilleur étudiant colombien en design. De 2000 à 2004, il travaille comme designer au studio Giovannoni, puis enseigne à la Domus Academy de Milan et à l'Istituto Europeo di Design de Turin. Pour Alessi, il a dessiné dans la famille Objets-Bijoux de petits accessoires de bureau en zamak chromé, comme le taille-crayon Kastor et le porte-trombones magnétique Chip. Il vit et travaille à Milan.",
+  "bioSources": [
+   "https://alessi.com/collections/rodrigo-torres",
+   "https://alessi.com/collections/rodrigo-torres/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/rodrigo-torres.jpg",
+   "sourcePage": "https://alessi.com/collections/rodrigo-torres",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Torres-Rodrigo.jpg?v=1779782068",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait publié par Alessi sur la page designer."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "francesca-amfitheatrof",
+  "name": "Francesca Amfitheatrof",
+  "sortKey": "Amfitheatrof",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Francesca Amfitheatrof est une designer née à Tokyo en 1968. Elle a étudié au Royal College of Art de Londres et s'est spécialisée dans le dessin de bijoux et d'argenterie, avec une formation aux techniques de fonte et de forgeage des métaux. Pour Alessi, elle a dessiné avec le studio LPWK le porte-clés Bon Bon, de la famille Objets-Bijoux : une petite coque en acier inoxydable 18/10 et résine thermoplastique, en forme d'œuf, qui s'ouvre en deux moitiés et contient un jeton ou une pièce de monnaie.",
+  "bioSources": [
+   "https://alessi.com/collections/francesca-amfitheatrof",
+   "https://alessi.com/fr/collections/francesca-amfitheatrof.json",
+   "https://us.alessi.com/products/bon-bon-key-ring-coin-holder"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Seul portrait officiel trouvé : la page designer Alessi (Amfitheatrof-Francesca.jpg), une photo de type Polaroïd de 448 × 336 px, trop petite et non cadrable en 4:5. Aucun site officiel personnel trouvé ; pages Louis Vuitton (livre) et Wikipédia écartées.",
+  "remarks": "metafieldValues = « LPWK & Francesca Amfitheatrof » : Alessi crédite bien Bon Bon à Francesca Amfitheatrof et LPWK. Bio limitée aux faits publiés par Alessi."
+ },
+ {
+  "slug": "bkid",
+  "name": "BKID",
+  "sortKey": "BKID",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "BKID est un studio de design fondé à Séoul en 2006 par le designer Bongkyu Song. Il intervient dans des domaines variés, de l'artisanat aux hautes technologies, et développe pour des marques internationales, des start-up et des artistes des projets allant de l'électroménager et des appareils médicaux au design numérique et aux contenus multimédias, avec l'objectif d'associer narration et design industriel. Pour Alessi, il a dessiné Buri, un gobelet isotherme en acier dont le profil évoque un bec effilé et dont le couvercle est muni d'un opercule coulissant. Le studio a reçu des prix iF, Red Dot et CES.",
+  "bioSources": [
+   "https://alessi.com/collections/bkid",
+   "https://alessi.com/collections/bkid/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/bkid.jpg",
+   "sourcePage": "https://alessi.com/collections/bkid",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Bongkyu_Song_Portrait.jpg?v=1779782071",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait noir et blanc de Bongkyu Song, fondateur de BKID, publié par Alessi (page designer). Personne en pied jusqu'aux genoux, assez petite : recadrage 4:5 serré possible."
+  },
+  "photoMissingReason": null,
+  "remarks": "Studio d'une seule personne identifiable (Bongkyu Song) : nom de studio conservé."
+ },
+ {
+  "slug": "marianne-brandt",
+  "name": "Marianne Brandt",
+  "sortKey": "Brandt",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Marianne Brandt (1893-1983) est une designer allemande. Après des études de peinture et de sculpture à Weimar, elle entre au Bauhaus, où elle est la seule femme à participer à l'atelier de métal. Ses objets témoignent d'une recherche de simplification des procédés industriels de repoussage et d'emboutissage. Alessi édite dans sa famille Bauhaus son cendrier 90010 en acier, en deux parties, présenté pour le centenaire de la fondation du Bauhaus dans un emballage commémoratif.",
+  "bioSources": [
+   "https://alessi.com/collections/marianne-brandt",
+   "https://alessi.com/collections/marianne-brandt/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/marianne-brandt.jpg",
+   "sourcePage": "https://alessi.com/collections/marianne-brandt",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Brandt-Marianne.jpg?v=1779782091",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Photographie historique noir et blanc publiée par Alessi (page designer), visage de profil renversé avec bijou de cou ; portrait reconnaissable mais atypique. Recadrage 4:5 possible."
+  },
+  "photoMissingReason": null,
+  "remarks": "Faits limités à la page Alessi."
+ },
+ {
+  "slug": "pio-manzu",
+  "name": "Pio Manzù",
+  "sortKey": "Manzù",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Pio Manzù (1939-1969) est un designer italien né à Bergame, fils du sculpteur Giacomo Manzù. Il étudie à la Hochschule für Gestaltung d'Ulm. En 1962, il remporte avec Michael Conrad le concours de la Revue Automobile pour un nouveau concept de coupé sur châssis Austin-Healey 100. En 1968, il devient consultant du Centro Stile FIAT, où il se consacre à l'étude des petites voitures. Il meurt en 1969. Alessi édite son horloge de table Cronotime, en ABS noir.",
+  "bioSources": [
+   "https://alessi.com/collections/pio-manzu",
+   "https://alessi.com/collections/pio-manzu/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait officiel trop petit (690 × 490 ; 392 px de large en 4:5, agrandissement au-delà de 1,18×) : https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/manzupio-web-prodotto-store.jpg?v=1779782072",
+  "remarks": "Portrait de qualité limitée (voir notes)."
+ },
+ {
+  "slug": "daniel-libeskind",
+  "name": "Daniel Libeskind",
+  "sortKey": "Libeskind",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Daniel Libeskind est un architecte né à Łódź, en Pologne, en 1946. Arrivé adolescent aux États-Unis, il obtient son diplôme d'architecte à la Cooper Union de New York en 1970. Lauréat en 1989 du concours du Musée juif de Berlin, il s'installe dans cette ville et y fonde son agence. Il a enseigné dans plusieurs universités, dont la Cranbrook Academy of Art, où il a dirigé le département d'architecture. Son studio a également conçu le plan directeur de la reconstruction du World Trade Center à New York (2003) et le Denver Art Museum. Pour Alessi, il a dessiné le récipient Water Tower, en acier inoxydable 18/10 posé sur un support.",
+  "bioSources": [
+   "https://alessi.com/collections/daniel-libeskind",
+   "https://alessi.com/collections/daniel-libeskind/products.json",
+   "https://libeskind.com/about/daniel-libeskind/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/daniel-libeskind.jpg",
+   "sourcePage": "https://alessi.com/collections/daniel-libeskind",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Libeskind-Daniel-Stepahn-Ruiz.jpg?v=1779782070",
+   "credit": "Stefan Ruiz (d'après le nom du fichier « Stepahn-Ruiz »)",
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait noir et blanc devant une bibliothèque, publié par Alessi (page designer)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "jakob-wagner",
+  "name": "Jakob Wagner",
+  "sortKey": "Wagner",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Jakob Wagner est un designer danois né à Copenhague en 1963. Diplômé en ingénierie du design au Danemark (1987), il obtient un second diplôme en design produit à l'Art Center en Suisse (1992), puis fonde en 1993 le Jakob Wagner Studio à Copenhague. Le studio se consacre d'abord à des produits de haute technologie pour le sport, la médecine et les usages professionnels, avant de se tourner vers les objets pour la maison, avec des collections pour Alessi, Bang & Olufsen, Menu, Muuto et Stelton et des meubles pour Cappellini, B&B Italia, Moroso et HAY. Pour Alessi, il a dessiné la table d'appoint Pick-Up, qui réunit table, porte-revues et porte-bouteilles. Son travail figure dans les collections du MoMA à New York.",
+  "bioSources": [
+   "https://alessi.com/collections/jakob-wagner",
+   "https://alessi.com/collections/jakob-wagner/products.json",
+   "https://www.jakobwagner.dk/about"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/jakob-wagner.jpg",
+   "sourcePage": "https://www.jakobwagner.dk/about",
+   "imageUrl": "https://cdn.prod.website-files.com/5fdf84ce30b61163f22469be/6304b37a3ccd127011044aa5_11.06.20_Jakob_Portrait_Portrait_473.jpg",
+   "credit": null,
+   "width": 1280,
+   "height": 1601,
+   "notes": "Portrait couleur publié sur le site officiel du studio (page About), assis à une table ; déjà au format 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "La page designer Alessi n'a pas de portrait ; photo prise sur le site officiel jakobwagner.dk. Le site officiel précise la naissance à Copenhague (Alessi : « au Danemark »)."
+ },
+ {
+  "slug": "medum",
+  "name": "MEDUM",
+  "sortKey": "MEDUM",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "MEDUM est un studio de design japonais fondé par Shintaro Monden et installé à Tokyo. Avant de le diriger, Shintaro Monden a travaillé pour des agences de design japonaises et pour un fabricant international d'ordinateurs, du mobilier en pièce unique aux ordinateurs portables de grande série. Le studio couvre l'ensemble du projet, de l'analyse des besoins du client aux prototypes, au design produit et à l'identité de marque, pour des objets physiques comme numériques. Pour Alessi, il a dessiné Tsumiki, une lampe portable sans fil dont la tête, le pied et la base s'assemblent par aimants, inspirée du jeu de construction japonais du même nom. Ses projets ont reçu un iF Gold Award et un Cannes Lions Design Gold, et figurent dans les collections de la Pinakothek der Moderne et du Designmuseum Danmark.",
+  "bioSources": [
+   "https://alessi.com/collections/medum",
+   "https://alessi.com/collections/medum/products.json",
+   "https://medum.jp/about"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/medum.jpg",
+   "sourcePage": "https://alessi.com/collections/medum",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Medum-Shintaru-BN-2024.jpg?v=1779782070",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait noir et blanc de Shintaro Monden, fondateur de MEDUM, publié par Alessi (page designer). Nom de fichier « Shintaru » (coquille d'Alessi)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Studio porté par une seule personne identifiable (Shintaro Monden) : nom de studio conservé."
+ },
+ {
+  "slug": "milton-glaser",
+  "name": "Milton Glaser",
+  "sortKey": "Glaser",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Milton Glaser est un graphiste américain né en 1929 à New York. Formé à la High School of Music and Art et à la Cooper Union, il étudie ensuite à l'Académie des beaux-arts de Bologne grâce à une bourse Fulbright, auprès du peintre Giorgio Morandi. Il cofonde Push Pin Studios en 1954, fonde New York Magazine avec Clay Felker en 1968, puis ouvre Milton Glaser, Inc. en 1974. Son œuvre a fait l'objet d'expositions personnelles au Museum of Modern Art de New York et au Centre Georges Pompidou, et il est en 2009 le premier graphiste à recevoir la National Medal of Arts. Pour Alessi, il a dessiné le présentoir à bouchon Cork.",
+  "bioSources": [
+   "https://www.miltonglaser.com/milton/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Pas de page designer sur alessi.com (collection milton-glaser en 404, aucun produit Glaser au catalogue actuel). Le site officiel miltonglaser.com ne publie qu'une photo de 560 × 308 px (MiltonR-5747.png), trop petite et en paysage.",
+  "remarks": "Le présentoir à bouchon n'est plus présenté sur alessi.com : attribution reprise des produits Mikado, non vérifiée sur une source autorisée (ni l'année). Milton Glaser est mort en 2020, mais le site officiel consulté ne le mentionne pas : date omise ; à ajouter si une source autorisée la confirme."
+ },
+ {
+  "slug": "peter-zumthor",
+  "name": "Peter Zumthor",
+  "sortKey": "Zumthor",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Peter Zumthor est un architecte suisse né à Bâle en 1943. Formé à la Schule für Gestaltung de Bâle puis au Pratt Institute de New York, il restaure d'abord des bâtiments protégés dans le canton des Grisons, avant d'ouvrir son agence en 1979. Parmi ses principales réalisations figurent la chapelle Sogn Benedetg à Sumvitg (1988), les thermes de Vals (1996), la Kunsthaus de Bregenz (1997) et le pavillon suisse de l'Exposition universelle de Hanovre en 2000. Pour Alessi, il a dessiné le bougeoir PZ02, en aluminium coulé et tourné.",
+  "bioSources": [
+   "https://alessi.com/collections/peter-zumthor",
+   "https://alessi.com/collections/peter-zumthor/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/peter-zumthor.jpg",
+   "sourcePage": "https://alessi.com/collections/peter-zumthor",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Zumthor-Peter.jpg?v=1779782063",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Portrait publié par Alessi sur la page designer."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "riccardo-dalisi",
+  "name": "Riccardo Dalisi",
+  "sortKey": "Dalisi",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Riccardo Dalisi est un architecte et designer italien né à Potenza en 1931. Il a enseigné la conception architecturale et le design industriel à l'université Federico II de Naples, dont il a dirigé l'institut de design industriel. Il compte parmi les fondateurs du groupe Global Tools et d'une école expérimentale d'artisanat, Arti minime. Il commence à travailler comme designer en 1975, notamment pour Baleri et Zanotta, et reçoit le Compasso d'Oro en 1981. Alessi édite sa Caffettiera con cuore e stelle, reproduction de l'un des plus de deux cents prototypes qu'il a réalisés dans les années 1970 lors de ses recherches sur la cafetière napolitaine.",
+  "bioSources": [
+   "https://alessi.com/collections/riccardo-dalisi",
+   "https://alessi.com/collections/riccardo-dalisi/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/riccardo-dalisi.jpg",
+   "sourcePage": "https://alessi.com/collections/riccardo-dalisi",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0337/3603/2392/collections/Dalisi-Riccardo.jpg?v=1779782073",
+   "credit": null,
+   "width": 1424,
+   "height": 1306,
+   "notes": "Photo noir et blanc publiée par Alessi (page designer) : Dalisi tenant une de ses cafetières en métal, visage partiellement masqué par l'objet. Recadrage 4:5 possible, portrait moins classique."
+  },
+  "photoMissingReason": null,
+  "remarks": "Riccardo Dalisi est mort en 2022, mais la page Alessi ne le mentionne pas : date omise. Alessi écrit « Global Tool » ; nom usuel du groupe : Global Tools."
+ },
+ {
+  "slug": "paolo-pagani",
+  "name": "Paolo Pagani",
+  "sortKey": "Pagani",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Paolo Pagani est le designer du moulin à sel, poivre et épices MP156 (référence MP1562) édité par Alessi. Ce grand moulin en hêtre, de couleur noire, figure toujours au catalogue de l'éditeur.",
+  "bioSources": [
+   "https://alessi.com/collections/paolo-pagani",
+   "https://alessi.com/products/mp156-pepper-mill"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Page designer Alessi sans texte ni portrait ; aucun site officiel identifié avec certitude (plusieurs architectes homonymes). Seules les pages de revendeurs le présentent.",
+  "remarks": "Les revendeurs le décrivent comme architecte, designer industriel et coloriste et datent le moulin de 1991 : non repris faute de source autorisée."
+ },
+ {
+  "slug": "virgil-abloh",
+  "name": "Virgil Abloh",
+  "sortKey": "Abloh",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Virgil Abloh est un artiste, architecte, designer et directeur artistique américain, né à Rockford, dans l'Illinois. Diplômé en génie civil de l'université du Wisconsin à Madison, il obtient un master en architecture à l'Illinois Institute of Technology de Chicago, où il découvre l'enseignement conçu par Mies van der Rohe. Fondateur et directeur de création d'Off-White, il a été directeur artistique des collections masculines de Louis Vuitton ; le Museum of Contemporary Art de Chicago lui a consacré une exposition itinérante en 2019. Pour Alessi, il a réinterprété la bouilloire 9093 de Michael Graves avec la 3909, éditée à 9 999 exemplaires numérotés, et dessiné Conversational Objects, couverts et bougeoir présentés à la Milan Design Week 2023.",
+  "bioSources": [
+   "https://alessi.com/collections/virgil-abloh",
+   "https://alessi.com/collections/virgil-abloh/products.json",
+   "https://alessi.com/products/3909-kettle-virgil-abloh-securities.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Alessi crédite la bouilloire 3909 à « Michael Graves | Virgil Abloh Securities ». Virgil Abloh est mort en 2021 ; Alessi l'évoque au passé sans date : année omise."
+ },
+ {
+  "slug": "lucy-d-karin-santorso-barbara-ambrosz",
+  "name": "LUCY.D - Karin Santorso and Barbara Ambrosz",
+  "sortKey": "LUCY.D",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "LUCY.D est un studio de design et d'architecture intérieure fondé à Vienne en 2003 par les designers autrichiennes Barbara Ambrosz et Karin Santorso ; un second studio a ouvert à Steyr en 2016. Toutes deux ont étudié le design industriel à l'Université des arts appliqués de Vienne, où elles ont aussi enseigné. Leur travail se distingue par un langage formel clair, des objets conçus pour durer et une utilisation raisonnée des matériaux. Pour Alessi, elles ont dessiné Tèo, une cuiller pour sachet de thé en acier inoxydable 18/10, qui a reçu une mention d'honneur au Compasso d'Oro en 2014. Le studio travaille aussi pour Lobmeyr, Augarten et Wiesner-Hager.",
+  "bioSources": [
+   "https://alessi.com/collections/lucy-d-karin-santorso-barbara-ambrosz",
+   "https://alessi.com/collections/lucy-d-karin-santorso-barbara-ambrosz/products.json",
+   "https://lucyd.com/about/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Nom repris d'Alessi, avec « and » en anglais ; le studio s'écrit « Lucy.D » sur son site. Nom d'affichage suggéré : « LUCY.D (Karin Santorso et Barbara Ambrosz) » ou « Lucy.D », non modifié ici."
+ },
+ {
+  "slug": "federico-angi",
+  "name": "Federico Angi",
+  "sortKey": "Angi",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Federico Angi est un designer industriel italien né à Milan en 1982. Diplômé en design industriel du Politecnico di Milano, il collabore avec plusieurs studios de design avant de fonder sa propre agence en 2010, consacrée au mobilier, à l'éclairage et à l'aménagement d'espaces. Son travail privilégie des formes épurées et une grande attention au détail ; il a été exposé à la Triennale de Milan et dans des salons à Paris et à New York. Pour Alessi, il a dessiné Discolo, un centre de table et un surtout en aluminium anodisé tournés au tour, inspirés des plateaux sur lesquels on sert la bière Kölsch à Cologne, proposés en orange, vert et bleu ciel.",
+  "bioSources": [
+   "https://alessi.com/collections/federico-angi",
+   "https://alessi.com/collections/federico-angi/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": null
+ },
+ {
+  "slug": "antonio-arico",
+  "name": "Antonio Aricò",
+  "sortKey": "Aricò",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Antonio Aricò est un designer italien, diplômé du Politecnico di Milano. Ses objets, réalisés en partie avec son grand-père, menuisier en Calabre, revendiquent un attachement aux formes simples et au savoir-faire artisanal ; parmi eux figurent les arrosoirs Watering Kettle Cans, la chaise Swing et le pichet Block. Son travail a été exposé dans plusieurs pays. Pour Alessi, il a dessiné avec le studio LPWK la bonbonnière La petite mariée, un contenant à dragées en porcelaine décorée à la main.",
+  "bioSources": [
+   "https://alessi.com/collections/antonio-arico",
+   "https://alessi.com/collections/antonio-arico/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Alessi crédite La petite mariée à Antonio Aricò et LPWK."
+ },
+ {
+  "slug": "fratelli-campana",
+  "name": "Fratelli Campana",
+  "sortKey": "Fratelli Campana",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Les frères Humberto et Fernando Campana sont des designers brésiliens : Humberto, né en 1953 à Rio Claro, a étudié le droit, et Fernando, né en 1961 à Brotas, l'architecture. Ils ouvrent l'Estúdio Campana à São Paulo en 1984 et développent un design fondé sur des matériaux pauvres et de récupération, assemblés à la main, comme la chaise Favela (1991). En 1998, le MoMA de New York leur consacre l'exposition Projects 66, aux côtés d'Ingo Maurer. Pour Alessi, ils ont dessiné la série Blow Up, dont table d'appoint, porte-revues et corbeille sont formés de tiges d'acier assemblées de manière presque aléatoire. Fernando Campana est mort en 2022.",
+  "bioSources": [
+   "https://alessi.com/collections/fratelli-campana",
+   "https://alessi.com/collections/fratelli-campana/products.json",
+   "https://estudiocampana.com.br/sobre/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Alessi date le début de leur collaboration de 1983 ; le site officiel donne 1984 pour l'ouverture du studio (date retenue). Alessi écrit « Progetto 66 » : titre de l'exposition MoMA rendu par « Projects 66 ». La « Miniature Campana Favela » vendue par Mikado relève probablement des Miniatures Vitra et non d'Alessi : à vérifier."
+ },
+ {
+  "slug": "gary-chang",
+  "name": "Gary Chang",
+  "sortKey": "Chang",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Gary Chang est un architecte né à Hong Kong en 1962, diplômé en architecture en 1987. Directeur de l'agence Edge de 1994 à 1998, il fonde ensuite son propre bureau, Edge (HK) Ltd, en 1998. Ses projets ont été présentés à Archilab à Orléans et aux 7e (2000) et 8e (2002) Biennales internationales d'architecture de Venise, et sa première exposition personnelle, Play Lab, s'est tenue à l'Arts Centre de Hong Kong en 2000. Pour Alessi, il a dessiné Trick and Treat, un plateau-récipient en acier inoxydable 18/10 et mélamine.",
+  "bioSources": [
+   "https://alessi.com/collections/gary-chang",
+   "https://alessi.com/collections/gary-chang/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Texte Alessi ancien (projets cités jusqu'en 2002)."
+ },
+ {
+  "slug": "biagio-cisotti",
+  "name": "Biagio Cisotti",
+  "sortKey": "Cisotti",
+  "brands": [
+   "Alessi"
+  ],
+  "bio": "Biagio Cisotti est un architecte et designer italien né dans les Pouilles en 1955. Il vit et travaille à Florence, où il obtient son diplôme d'architecture en 1980 et enseigne depuis 1989 la technologie de production à l'ISIA. En 1990, il fonde avec un groupe d'architectes florentins MADE, une association culturelle et un espace d'exposition consacrés à l'architecture et au design. Il dirige la création de plusieurs entreprises. Pour Alessi, il a dessiné avec le Centro Studi Alessi l'ouvre-bouteille Diabolix, en résine thermoplastique.",
+  "bioSources": [
+   "https://alessi.com/collections/biagio-cisotti",
+   "https://alessi.com/collections/biagio-cisotti/products.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Alessi crédite Diabolix à Biagio Cisotti et au CSA (Centro Studi Alessi)."
+ }
+]

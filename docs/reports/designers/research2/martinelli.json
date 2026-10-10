@@ -1,0 +1,428 @@
+[
+ {
+  "slug": "gae-aulenti",
+  "name": "Gae Aulenti",
+  "sortKey": "Aulenti",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Gae Aulenti est une architecte et designer italienne, née en 1927 à Palazzolo dello Stella, dans la province d'Udine. Diplômée de l'École polytechnique de Milan en 1953, elle exerce à Milan dans l'architecture, l'architecture intérieure, le design industriel et la scénographie de théâtre, et fait partie de 1955 à 1965 de la rédaction de la revue Casabella-Continuità dirigée par Ernesto Rogers. On lui doit notamment l'aménagement du musée d'Orsay à Paris (1980-1986) et la rénovation du Palazzo Grassi à Venise (1985-1986). Pour Martinelli Luce, elle dessine en 1965 la lampe Pipistrello, conçue pour les magasins Olivetti de Paris et de Buenos Aires et aujourd'hui déclinée en Pipistrello Med, Minipipistrello et Pipistrello Pop.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/gae-aulenti",
+   "https://martinelliluce.it/en/pipistrello",
+   "https://www.archiviogaeaulenti.info/biografia/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/gae-aulenti.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/gae-aulenti",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/4c8c354a31f16bc5927c64e4db471bfc45aa988a/Gae_Aulenti_1.jpg",
+   "credit": "Ugo Mulas (EXIF : artiste « ugo mulas », copyright « martinelli luce »)",
+   "width": 1380,
+   "height": 1800,
+   "notes": "Photo d'archive noir et blanc, déjà au format portrait : assise à sa table de travail, main au visage, visage net. Le pied d'une lampe Pipistrello entre dans le cadre en haut à gauche."
+  },
+  "photoMissingReason": null,
+  "remarks": "Date de la Pipistrello : 1965 selon Martinelli Luce, 1966-1967 selon l'Archivio Gae Aulenti (pour les showrooms Olivetti) ; la bio suit l'éditeur. La page Martinelli écrit « Palazzolo della Stella » : l'archive officielle donne « Palazzolo dello Stella », retenu. Année de décès (2012) non trouvée sur les sources autorisées consultées, donc omise."
+ },
+ {
+  "slug": "elio-martinelli",
+  "name": "Elio Martinelli",
+  "sortKey": "Martinelli",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Elio Martinelli (1922-2004) est un designer italien, fondateur de Martinelli Luce. Né le 19 novembre 1922, il grandit à Lucques et étudie la scénographie à Florence, puis aménage des espaces publics et commence à dessiner ses propres lampes, faute de trouver des luminaires satisfaisants au sortir de la Seconde Guerre mondiale. Il crée Martinelli Luce dans un sous-sol de la piazza Bernardini, à Lucques ; l'entreprise gagne une notoriété internationale après l'Eurodomus de Gênes en 1966. Dans les années 1960, il expérimente le moulage du méthacrylate et des nouvelles matières plastiques : de cette période datent la lampe Serpente, au diffuseur en méthacrylate opalin thermoformé, et la lampe Cobra (1968), moulée en résine thermodurcissable. On lui doit aussi la petite lampe Elmetto. Il meurt le 21 octobre 2004.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/elio-martinelli",
+   "https://martinelliluce.it/en/serpente",
+   "https://martinelliluce.it/en/serpente-60",
+   "https://martinelliluce.it/en/cobra",
+   "https://martinelliluce.it/en/elmetto"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/elio-martinelli.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/elio-martinelli",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/11d20d4bd3546e4a554c9a4a2b1c7e32240ef1d8/Elio_Martinelli.jpg",
+   "credit": null,
+   "width": 1600,
+   "height": 1600,
+   "notes": "Photo d'archive noir et blanc, carrée : assis, une feuille à la main, regard vers la droite, visage net. Recadrage 4:5 centré sur lui sans difficulté."
+  },
+  "photoMissingReason": null,
+  "remarks": "Lieu de naissance non précisé par l'éditeur (seulement enfance à Lucques), d'où « il grandit à Lucques ». Serpente datée des « années 1960 » (60 ans fêtés en 2025) sans année exacte ; Elmetto sans date."
+ },
+ {
+  "slug": "studio-habits",
+  "name": "Studio Habits",
+  "sortKey": "Studio Habits",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Studio Habits est un studio de design industriel fondé à Milan en 2004 par Innocenzo Rifino et Diego Rossi, tous deux diplômés en design industriel de l'École polytechnique de Milan. Avant de le créer, Innocenzo Rifino a travaillé au département design produit de Panasonic à Osaka, et Diego Rossi au développement de luminaires pour Luceplan. Le studio, qui réunit designers, ingénieurs, maquettistes et designers d'interaction, travaille sur les objets connectés, l'électroménager et l'éclairage, et a reçu plus de cent prix internationaux, dont le Compasso d'Oro. Pour Martinelli Luce, il a dessiné Elastica et la famille Metrica, dont la source LED s'allume et gagne en intensité à mesure qu'on l'extrait de sa base, ainsi que la lampe de table Grammoluce avec Min Dong.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/studio-habits",
+   "https://www.habits.it/about-profile/",
+   "https://martinelliluce.it/en/metrica",
+   "https://martinelliluce.it/en/grammoluce",
+   "https://martinelliluce.it/en/designer/min-dong"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Martinelli Luce illustre la fiche par une vue des bureaux du studio où les personnes sont minuscules (pas un portrait). Le site officiel habits.it ne publie que deux petites vignettes des fondateurs (245 × 363 px, sous le seuil de 600 px) et aucune photo de groupe.",
+  "remarks": "Le nom officiel varie : « Studio Habits » chez Martinelli, « Habits » / « Habits Design » sur habits.it ; nom conservé. Grammoluce est cosigné par Min Dong (responsable design de Habits pour la Chine, né à Pékin) d'où la valeur « Studio Habits,Min Dong » ; Min Dong a sa propre page chez Martinelli avec portrait si une fiche séparée est souhaitée."
+ },
+ {
+  "slug": "studio-natural",
+  "name": "Studio Natural",
+  "sortKey": "Studio Natural",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Studio Natural est une agence de création fondée par Marco De Santi et Alessandro Paoletti, qui réunissent deux formations complémentaires, l'une en design industriel, l'autre en design graphique. Le studio travaille sur le design de produits et d'espaces ainsi que sur l'édition et le web, et compose pour chaque projet une équipe de spécialistes. Pour Martinelli Luce, il a notamment dessiné la famille Cabriolette, petite lampe circulaire dont la tête, qui sert aussi de diffuseur, pivote à 180 degrés et qui se décline en suspension, applique, lampe de table et lampadaire, ainsi que les lampes Delux et le système d'éclairage Sistema U.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/studio-natural",
+   "https://martinelliluce.it/en/cabriolette"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/studio-natural.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/studio-natural",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/97767bf8f668d46c4e2a1b5a23d5b9625929c2a6/Studio_Natural.jpg",
+   "credit": null,
+   "width": 1600,
+   "height": 1600,
+   "notes": "Noir et blanc, carrée : les deux fondateurs debout contre un mur, visages nets. Un recadrage 4:5 garde les deux têtes mais coupe légèrement les épaules extérieures."
+  },
+  "photoMissingReason": null,
+  "remarks": "Ville et année de fondation non indiquées par l'éditeur ; l'attribution des deux personnes de la photo (qui est qui) n'est pas précisée."
+ },
+ {
+  "slug": "emiliana-martinelli",
+  "name": "Emiliana Martinelli",
+  "sortKey": "Martinelli",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Emiliana Martinelli est une designer italienne, fille d'Elio Martinelli et présidente de Martinelli Luce. Elle étudie la céramique à l'Institut d'art de Lucques et le design industriel à l'ISIA de Florence, puis obtient un diplôme d'architecture et rejoint l'entreprise familiale au début des années 1980, d'abord pour le graphisme avant de passer au design. Elle y est à la fois dirigeante, designer et directrice artistique, et a collaboré avec Gae Aulenti, Sergio Asti, Paolo Orlandini et Marc Sadler. Parmi ses créations figurent Papavero, plafonnier et applique dont le bouton central évoque le cœur d'un coquelicot, le plafonnier Maggiolino à ampoule interchangeable (sphère, cône ou disque) et Amanita, borne d'extérieur en béton inspirée du champignon du même nom.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/emiliana-martinelli",
+   "https://martinelliluce.it/en/designer/elio-martinelli",
+   "https://martinelliluce.it/en/papavero",
+   "https://martinelliluce.it/en/maggiolino",
+   "https://martinelliluce.it/en/amanita"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/emiliana-martinelli.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/emiliana-martinelli",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/dc7897071bfac20e03d57f92ab7272d9a5881e91/Emiliana_Martinelli.jpg",
+   "credit": null,
+   "width": 1439,
+   "height": 1800,
+   "notes": "Noir et blanc, déjà au format 4:5 : assise à son bureau, mains jointes, souriante, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Arrivée dans l'entreprise datée par la page d'Elio Martinelli (« début des années 1980 »). Le produit Mikado « Lampadaire Amanita » est, chez l'éditeur, une borne d'extérieur à fixer au sol (type « Floor »)."
+ },
+ {
+  "slug": "pio-tito-toso",
+  "name": "Pio & Tito Toso",
+  "sortKey": "Pio & Tito Toso",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Pio et Tito Toso sont deux frères architectes, nés à Venise en 1973 et en 1971 et diplômés en architecture à Venise en 1998. Ils ont fondé en 1996 le studio de design Pio & Tito Toso, qui conçoit des projets d'architecture, des stands, des magasins et du mobilier. Ils ont travaillé pour Alessi, Guzzini, Segis ou Metalco dans le mobilier et les objets, et pour Artemide, Foscarini, Leucos, Venini et Vistosi dans l'éclairage, et ont notamment reçu des Red Dot Design Awards en 2012 et 2015. Pour Martinelli Luce, ils ont dessiné l'applique Roll, une fine feuille d'aluminium enroulée autour de la source lumineuse, et le lampadaire Tenso, formé de trois tiges d'aluminium extrudé reliées par des câbles d'acier tendus.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/piotitotoso",
+   "https://martinelliluce.it/en/roll",
+   "https://martinelliluce.it/en/tenso"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/pio-tito-toso.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/piotitotoso",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/a7069b8f82a3d949fc317933f9b04284259994fd/PioeTitotoso.jpg",
+   "credit": null,
+   "width": 1800,
+   "height": 1350,
+   "notes": "Noir et blanc, paysage : les deux frères debout côte à côte dans un intérieur ancien, visages nets. Recadrage 4:5 centré possible (environ 1080 × 1350) en gardant les deux."
+  },
+  "photoMissingReason": null,
+  "remarks": "L'éditeur écrit le nom du studio « Pio&Titotoso » / « PIO&TITOTOSO » ; « Pio & Tito Toso » conservé, plus lisible. La source dit fondation du studio en 1996, deux ans avant le diplôme (1998) : repris tel quel."
+ },
+ {
+  "slug": "peluffo-partners",
+  "name": "Peluffo & Partners",
+  "sortKey": "Peluffo & Partners",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Peluffo & Partners est l'agence d'architecture fondée en 2017 à Albissola Marina, en Ligurie, par l'architecte italien Gianluca Peluffo. Celui-ci avait cofondé en 1995 l'agence 5+1, devenue 5+1AA, avec laquelle il a notamment remporté en 2005, avec Rudy Ricciotti, le concours du nouveau Palazzo del Cinema de Venise. L'agence conçoit des bâtiments publics, des écoles, des logements et des réhabilitations de bâtiments historiques ; Gianluca Peluffo est par ailleurs chercheur à l'université IULM de Milan. La suspension modulable Lady Galala, éditée par Martinelli Luce en versions intérieure et extérieure, a été conçue pour un projet de l'agence dans la région du mont Galala, en Égypte ; ses trois modules en méthacrylate satiné se combinent dans plusieurs couleurs.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/peluffo-and-partners",
+   "https://www.peluffoandpartners.com/en/who-we-are/gianluca-peluffo/",
+   "https://martinelliluce.it/en/lady-galala"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Seule image disponible (page Martinelli Luce et page Gianluca Peluffo du site officiel, 750 × 944 px) : Gianluca Peluffo en pied, petit, dans l'encadrement d'une porte au milieu d'une façade ; un recadrage 4:5 sur la personne ne ferait qu'environ 300 px de large. Aucune autre photo de lui sur peluffoandpartners.com (médiathèque WordPress vérifiée).",
+  "remarks": "Candidat écarté si on veut l'utiliser malgré tout : https://martinelliluce.onpage.it/api/storage/107b12ad99add7a09b81258c2ee391b98b3ee5ce/Peluffo_and_Co.jpg (noir et blanc) ou https://www.peluffoandpartners.com/wp-content/uploads/2017/08/Gianluca-Peluffo-e1503407314234.png (couleur)."
+ },
+ {
+  "slug": "andrea-steidl",
+  "name": "Andrea Steidl",
+  "sortKey": "Steidl",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Andrea Steidl est un designer diplômé en design industriel de l'École polytechnique de Milan. Il entre ensuite au studio de Patricia Urquiola, dont il est creative manager jusqu'en 2016 : il y dirige le département design et suit des projets d'intérieur, des éditions limitées et des installations temporaires. Il enseigne en parallèle à la Domus Academy, à la Scuola Politecnica di Design et à l'École polytechnique de Milan. En 2016, il fonde avec Raquel Pacchini le studio / àr o /, qui travaille sur le design de produits, les installations, le graphisme et la direction artistique. Pour Martinelli Luce, il a dessiné Brim, une famille de luminaires d'extérieur discrets, déclinée en lampadaire à simple ou double émission et en applique.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/andrea-steidl",
+   "https://martinelliluce.it/en/brim"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/andrea-steidl.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/andrea-steidl",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/1f90c4058d9508697d74d829576cd1859816334c/Andrea_Steidl.jpg",
+   "credit": null,
+   "width": 1418,
+   "height": 1800,
+   "notes": "Noir et blanc sur fond blanc, buste de face, visage net ; quasiment au format 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité non indiquée par l'éditeur, donc omise."
+ },
+ {
+  "slug": "neil-poulton",
+  "name": "Neil Poulton",
+  "sortKey": "Poulton",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Neil Poulton est un designer écossais installé à Paris, où il a créé son studio en 1992. Diplômé en design industriel de l'université Napier d'Édimbourg en 1985, il obtient en 1988 un master de la Domus Academy de Milan, puis travaille brièvement pour Philippe Starck. Il se fait connaître en 1989 avec ses « ageing pens », stylos dont les couches de couleur s'usent à l'usage, et dessine depuis des produits et des luminaires, notamment pour Artemide, ainsi que le disque dur Rugged de LaCie. Ses créations figurent dans la collection du Centre Pompidou. Pour Martinelli Luce, il a dessiné en 2021 l'applique Toggle, liseuse murale dont l'interrupteur reprend celui de la guitare Gibson Les Paul.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/neil-poulton",
+   "https://martinelliluce.it/en/toggle",
+   "https://www.neilpoulton.com/about/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/neil-poulton.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/neil-poulton",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/fc3e0ae7f387626b008d6d8474458a9bbbe68e29/Neil_Poulton.jpg",
+   "credit": null,
+   "width": 1800,
+   "height": 1241,
+   "notes": "Noir et blanc, paysage : bras croisés, lunettes, regard baissé, visage net ; recadrage 4:5 centré possible (environ 990 × 1240)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "moritz-putzier",
+  "name": "Moritz Putzier",
+  "sortKey": "Putzier",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Moritz Putzier est un designer établi à Cologne, en Allemagne, où il dirige le Studio Moritz Putzier. Le studio conçoit du mobilier, des luminaires, des produits d'usage courant et des projets d'architecture intérieure, avec une attention particulière aux solutions pratiques, aux lignes nettes et aux matériaux naturels. Le designer décrit son travail comme « avec une petite touche », un style discret qui ajoute une note ludique à des objets fonctionnels. Pour Martinelli Luce, il a dessiné Tortuga, une applique compacte dont la lentille sphérique en cristal projette la lumière sur le mur, et dont le corps pivote à 360 degrés et s'incline de 25 degrés.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/studio-moritz-putzer",
+   "https://martinelliluce.it/en/tortuga"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/moritz-putzier.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/studio-moritz-putzer",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/a7870d01d07fdae5af3f354d01b3071fb95165e4/Studio_Moritz_Putzier.jpg",
+   "credit": null,
+   "width": 1200,
+   "height": 1800,
+   "notes": "Noir et blanc, portrait vertical : de profil, penché sur une maquette blanche à son plan de travail, visage net mais vu de côté et un peu bas dans le cadre."
+  },
+  "photoMissingReason": null,
+  "remarks": "Source unique (page éditeur), sans formation ni dates : confiance faible. L'éditeur présente « Studio Moritz Putzier » (slug de page « studio-moritz-putzer », faute de frappe) ; nom de la personne conservé."
+ },
+ {
+  "slug": "simon-schmitz",
+  "name": "Simon Schmitz",
+  "sortKey": "Schmitz",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Simon Schmitz est un designer né à Arnsberg, en Allemagne, ville surnommée la « ville de la lumière » dans les années 1930, où était fabriquée la lampe Kaiser Idell et où se concentrait une grande partie de l'industrie allemande du luminaire. Installé à Hambourg, il se décrit à la fois comme designer, sculpteur et marionnettiste : le mouvement mécanique, les articulations et les jeux d'équilibre sont au cœur de ses luminaires. Pour Martinelli Luce, il a dessiné Dia, décliné en lampadaire et en suspension, dont le corps lumineux semble flotter, porté par deux fins câbles colorés qui conduisent aussi le courant ; ses deux LED peuvent éclairer vers le bas, vers le haut ou dans les deux directions.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/simon-schmitz",
+   "https://www.simon-schmitz.com/about",
+   "https://martinelliluce.it/en/dia"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/simon-schmitz.jpg",
+   "sourcePage": "https://www.simon-schmitz.com/about",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/6445ab8436dcf56cb189b4b4/c8df0c1a-1c89-4c74-9bd7-a02a78d28aa2/Simon+Schmitz",
+   "credit": null,
+   "width": 2500,
+   "height": 1888,
+   "notes": "Site officiel du designer, couleur : debout contre un mur clair, t-shirt noir, souriant, visage net. Version 2500 px servie par le CDN (original 5645 × 4262). Préférée à la photo Martinelli (en pied, petit dans le cadre, avec une lampe Dia). Recadrage 4:5 centré : environ 1510 × 1888."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site du designer affiche aussi les logos de Ligne Roset, DCW Éditions, Gantri ou Rakumba (clients probables), non repris faute de texte explicite."
+ },
+ {
+  "slug": "antonio-de-marco",
+  "name": "Antonio De Marco",
+  "sortKey": "De Marco",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Antonio De Marco est un designer formé à l'École polytechnique de Milan et à l'Académie royale danoise de Copenhague, titulaire d'un master de l'Istituto Marangoni de Milan. Familier depuis l'enfance des ateliers de mécanique et de menuiserie, il travaille dans un studio-laboratoire où recherche, expérimentation et conception vont de pair. Il enseigne également dans le master de méthodologie du design de la NABA et à la Scuola Politecnica di Design de Milan. Pour Martinelli Luce, il a dessiné Jan, lampe d'extérieur qui sert aussi d'assise de jardin, réalisée dans un mélange de grains de marbre blanc de Carrare et de ciment gris issus de matériaux de récupération, et dont la lumière sort d'une ouverture centrale.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/antonio-de-marco",
+   "https://martinelliluce.it/en/jan"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/antonio-de-marco.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/antonio-de-marco",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/5cca4c3f49e9d9937d931dc3a50d569b62bb9a65/Antonio_De_Marco.jpg",
+   "credit": null,
+   "width": 1800,
+   "height": 1800,
+   "notes": "Couleur, carrée : debout bras croisés devant un mur d'outils d'atelier, visage net ; recadrage 4:5 centré sur lui sans difficulté."
+  },
+  "photoMissingReason": null,
+  "remarks": "Source unique (page éditeur), sans dates ni nationalité : confiance faible. L'éditeur écrit aussi « Antonio de Marco » dans le texte ; casse du titre conservée."
+ },
+ {
+  "slug": "karim-rashid",
+  "name": "Karim Rashid",
+  "sortKey": "Rashid",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Karim Rashid est un designer industriel dont le studio revendique plus de 4 000 créations produites et des projets dans plus de quarante pays. Il travaille dans des domaines très variés : objets pour Alessi et Umbra, mobilier pour Bonaldo et BoConcept, éclairage pour Artemide et FontanaArte, aménagement d'hôtels comme le nhow de Berlin et de la station de métro Università à Naples. En 2017, il fonde avec l'architecte Alex Hughes l'agence d'architecture KURV. Ses œuvres figurent dans une vingtaine de collections permanentes, dont celles du MoMA et du Centre Pompidou. Pour Martinelli Luce, il a dessiné la famille Cyborg, aux formes fluides, en aluminium laqué pour l'intérieur et en béton pour l'extérieur, dont le grand modèle Cyborg Big.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/karim-rashid",
+   "https://martinelliluce.it/en/cyborg",
+   "https://www.karimrashid.com/about"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/karim-rashid.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/karim-rashid",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/b05410a467be8186d8ad91a4ec2f29aad54ddb34/Karim_Rashid.jpg",
+   "credit": null,
+   "width": 1600,
+   "height": 1600,
+   "notes": "Noir et blanc, carrée : assis, main au menton, lunettes de soleil blanches, profil trois-quarts ; visage net (yeux cachés par les lunettes). Recadrage 4:5 centré possible."
+  },
+  "photoMissingReason": null,
+  "remarks": "Lieu et date de naissance non donnés par les pages consultées (Martinelli Luce, karimrashid.com/about lu via r.jina.ai), donc omis."
+ },
+ {
+  "slug": "sergio-asti",
+  "name": "Sergio Asti",
+  "sortKey": "Asti",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Sergio Asti est un architecte et designer italien, mort en 2021. Diplômé en architecture de l'École polytechnique de Milan, il y est assistant en architecture intérieure pendant cinq ans et figure parmi les fondateurs de l'ADI, l'association italienne du design industriel. Il mène des projets d'architecture, d'intérieur et d'exposition en Italie et à l'étranger et travaille pour l'ameublement, l'éclairage, la radio-télévision et le verre. Il reçoit des distinctions de la Triennale et le Compasso d'Oro, et ses objets figurent dans de grandes collections de musées. Martinelli Luce, pour qui il avait dessiné les lampes Profiterolle et Scafandro, lui a rendu hommage en rééditant en série signée et numérotée la lampe de table Visiere, formée de trois demi-sphères superposées.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/sergio-asti",
+   "https://martinelliluce.it/en/visiere"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/sergio-asti.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/sergio-asti",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/2f51fb5773c677422a1669a8233a5dd02f224eac/Sergio_Asti.jpg",
+   "credit": null,
+   "width": 849,
+   "height": 1000,
+   "notes": "Noir et blanc sur fond noir, buste, main au visage, souriant, visage net ; presque au format 4:5. Largeur 849 px (au-dessus du minimum, sous l'idéal de 1000 px), seule version servie."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année et lieu de naissance non donnés par l'éditeur, donc omis."
+ },
+ {
+  "slug": "marco-ghilarducci",
+  "name": "Marco Ghilarducci",
+  "sortKey": "Ghilarducci",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Marco Ghilarducci est le petit-fils d'Elio Martinelli, fondateur de Martinelli Luce, dont il est aujourd'hui l'administrateur délégué. Né à Lucques, il est diplômé en ingénierie de la logistique et de la production de l'université de Pise, avec une spécialisation en gestion de la qualité. Entré dans l'entreprise en 2000, il en a d'abord dirigé le service commercial et la gestion. Passionné d'informatique, en particulier de conception assistée par ordinateur et de rendu, il a dessiné la lampe de table TX1 : un cylindre, deux bras fins et un disque réflecteur orientable en aluminium, dont la lumière, blanche ou colorée selon les versions, peut se piloter à distance.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/marco-ghilarducci",
+   "https://martinelliluce.it/en/tx1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/marco-ghilarducci.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/marco-ghilarducci",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/b1f3f8d6679feb7296fca299e104f26fe40820e3/Marco_Ghilarducci.jpg",
+   "credit": null,
+   "width": 1600,
+   "height": 1600,
+   "notes": "Noir et blanc, carrée : buste, main au menton, lunettes, souriant, visage net ; recadrage 4:5 centré sans difficulté."
+  },
+  "photoMissingReason": null,
+  "remarks": "« Managing director » traduit par administrateur délégué."
+ },
+ {
+  "slug": "francesco-lucchese",
+  "name": "Francesco Lucchese",
+  "sortKey": "Lucchese",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Francesco Lucchese est un architecte et designer, enseignant à l'École polytechnique de Milan, actif depuis une trentaine d'années dans l'architecture, le design et le conseil aux entreprises. Il dessine du mobilier, des accessoires, des luminaires, des équipements de salle de bains et des revêtements, et assure aussi la direction artistique de marques, des showrooms aux campagnes publicitaires. Son agence, basée à Milan, dispose d'un bureau à Nankin, en Chine, et d'un partenariat à Dubaï. Ses projets ont été récompensés notamment par le Compasso d'Oro, le Red Dot Design Award et le German Design Award. Pour Martinelli Luce, il a dessiné la suspension Chet-B, inspirée du trompettiste Chet Baker, dont le réflecteur en métal reprend la forme d'un pavillon de trompette.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/francesco-lucchese",
+   "https://martinelliluce.it/en/chet-b"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/francesco-lucchese.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/francesco-lucchese",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/ad1197a6a94261698f894f7335ff3ce625dfce84/Francesco_Lucchese.jpg",
+   "credit": null,
+   "width": 1200,
+   "height": 1800,
+   "notes": "Noir et blanc, portrait vertical : debout, veste, souriant, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité et dates non indiquées par l'éditeur, donc omises."
+ },
+ {
+  "slug": "lucci-orlandini-design",
+  "name": "Lucci Orlandini Design",
+  "sortKey": "Lucci Orlandini Design",
+  "brands": [
+   "Martinelli Luce"
+  ],
+  "bio": "Lucci Orlandini Design réunit Roberto Lucci, né à Milan en 1942 et formé à l'Institute of Design de Chicago et au cours supérieur de design industriel de Venise, et Paolo Orlandini, né à Grosseto en 1941 et diplômé en architecture de l'École polytechnique de Milan. Tous deux ont travaillé plusieurs années avec Marco Zanuso et Richard Sapper avant de s'associer dans la région milanaise. Leurs créations figurent dans les collections du MoMA de New York et du Museum für Kunst und Gewerbe de Hambourg, et ont été plusieurs fois sélectionnées pour le Compasso d'Oro. Pour Martinelli Luce, ils ont dessiné la suspension Vela, dont une nouvelle version, Vela 22, est signée Orlandini Design, le studio de Paolo Orlandini et de son fils Folco.",
+  "bioSources": [
+   "https://martinelliluce.it/en/designer/orlandini-design-2",
+   "https://martinelliluce.it/en/designer/orlandini-design",
+   "https://martinelliluce.it/en/vela-22",
+   "https://www.orlandinidesign.net/about-us/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/lucci-orlandini-design.jpg",
+   "sourcePage": "https://martinelliluce.it/en/designer/orlandini-design-2",
+   "imageUrl": "https://martinelliluce.onpage.it/api/storage/1e93bfd35d208e1990df4b19c34ff3ac5af5f5e8/Roberto_Lucci_and_Paolo_Orlandini.jpg",
+   "credit": null,
+   "width": 1800,
+   "height": 1306,
+   "notes": "Couleur, paysage : Roberto Lucci et Paolo Orlandini côte à côte, souriants, visages nets (l'éditeur ne précise pas qui est qui). Recadrage 4:5 centré possible (environ 1045 × 1306) en gardant les deux visages."
+  },
+  "photoMissingReason": null,
+  "remarks": "Martinelli Luce présente le duo sous « Roberto Lucci Paolo Orlandini » (lien vers lucciorlandini.com) ; « Lucci Orlandini Design » conservé, mais « Roberto Lucci & Paolo Orlandini » serait plus exact. À vérifier : si la « Suspension Vela » vendue par Mikado est la Vela 22, l'éditeur l'attribue au studio Orlandini Design (Paolo et Folco Orlandini), pas au duo Lucci-Orlandini."
+ }
+]

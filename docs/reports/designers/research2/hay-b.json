@@ -1,0 +1,408 @@
+[
+ {
+  "slug": "ethan-cook",
+  "name": "Ethan Cook",
+  "sortKey": "Cook",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Ethan Cook est un artiste et designer américain, né en 1983 dans une petite ville du Texas. Installé à New York en 2008, il vit et travaille à Soho. Il est surtout connu pour ses œuvres abstraites tissées, construites sur des compositions de couleurs franches et une grande simplicité de structure. Il expose dans des expositions collectives et des foires depuis 2009, et en solo depuis 2014. Pour HAY, il a dessiné Ethan Cook Flat Works, une série de kilims tissés à la main dans un mélange de laine de Nouvelle-Zélande et de coton, qui transposent ses œuvres murales en aplats de couleur.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/ethan-cook",
+   "https://www.hay.com/hay/accessories/flooring/ethan-cook-flat-works"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/ethan-cook.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/ethan-cook",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/ethan-cook_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait de face en buste devant une de ses œuvres tissées (rouge, rose, noir) ; visage net et centré, recadrage 4:5 facile."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "martin-solem",
+  "name": "Martin Solem",
+  "sortKey": "Solem",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Martin Solem est un designer norvégien né en 1985, installé à Copenhague. Venu au Danemark pour découvrir le design danois, il travaille d'abord chez l'ébéniste Rud. Rasmussen, puis étudie à l'École royale danoise de design, dont il sort diplômé en 2014. Il a ensuite mené des projets avec Cappellini et Bernhardt Design et participé à des expositions à Paris, Londres et Oslo. Il poursuit ses projets personnels tout en dirigeant le développement produit mobilier chez HAY. Pour HAY, il a dessiné la table basse Kofi.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/martin-solem"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/martin-solem.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/martin-solem",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/martin-solem.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait en buste, manteau sombre, devant un mur de pierre ; visage net, recadrage 4:5 simple."
+  },
+  "photoMissingReason": null,
+  "remarks": "HAY écrit « Capellini » ; l'orthographe de l'éditeur italien est Cappellini (corrigée dans la bio)."
+ },
+ {
+  "slug": "smithmatthias",
+  "name": "SmithMatthias",
+  "sortKey": "SmithMatthias",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "SmithMatthias est un studio de design britannique fondé par Jack Smith et Gemma Matthias, installé dans une ancienne fabrique de chapeaux du Fabric District de Liverpool. Après avoir travaillé pour plusieurs agences d'architecture et de design, le duo s'appuie sur sa connaissance de la fabrication pour concevoir des objets utilitaires, réduits à l'essentiel et pensés pour durer, avec une attention portée aux matériaux et à leur cycle de vie. Le studio travaille pour des éditeurs comme HAY, Modus, Allermuir et Deadgood. Pour HAY, il a dessiné la collection Noc : lampe à pince à abat-jour facetté en aluminium moulé, déclinée en appliques.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/smithmatthias",
+   "https://smithmatthias.com/about/",
+   "https://smithmatthias.com/portfolio/noc-light/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/smithmatthias.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/smithmatthias",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/smith--mattias_1220x1220srgb.jpg",
+   "credit": "Anna Batchelor (EXIF, 2014)",
+   "width": 3840,
+   "height": 3840,
+   "notes": "Gemma Matthias et Jack Smith côte à côte devant un mur blanc, à mi-corps ; visages nets. Recadrage 4:5 possible en gardant les deux."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le titre du site officiel dit « London-based », la page À propos situe le studio à Liverpool : Liverpool retenu. Le site écrit aussi « Smith.Matthias » ; HAY écrit « SmithMatthias » (conservé). Photo de 2014."
+ },
+ {
+  "slug": "jessica-hans",
+  "name": "Jessica Hans",
+  "sortKey": "Hans",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Jessica Hans est une artiste céramiste américaine installée à Philadelphie. Diplômée en 2012 d'un Bachelor of Fine Arts du Maryland Institute College of Art, où elle s'est consacrée au textile et à la céramique, elle dirige son propre atelier, d'où sortent des pièces d'art et des objets pour des clients aux États-Unis et à l'étranger. Son travail part des motifs et des textures naturelles de la roche et de la terre, croisés avec des motifs du design moderne. Elle veut des pièces utiles, comme un vase, qui puissent aussi exister seules comme objets d'art. Pour HAY, elle a dessiné une série de vases, dont le vase Jessica Hans et sa version Shadow.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/jessica-hans"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/jessica-hans.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/jessica-hans",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jessica-hans_1220x1220.jpg",
+   "credit": null,
+   "width": 960,
+   "height": 960,
+   "notes": "Portrait à mi-corps, écharpe moutarde, devant une toile peinte ; visage net. Image limitée à 960 px."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité américaine déduite (formation à Baltimore, atelier à Philadelphie), non écrite explicitement par HAY."
+ },
+ {
+  "slug": "rui-pereira-ryosuke-fukusada",
+  "name": "Rui Pereira & Ryosuke Fukusada",
+  "sortKey": "Pereira & Fukusada",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Rui Pereira, designer portugais, et Ryosuke Fukusada, designer japonais, forment un duo qui puise dans leurs deux cultures pour concevoir des objets. Ils se sont rencontrés à Milan, où ils travaillaient dans la même agence de design, et ont découvert une vision commune malgré des parcours très différents. Leur travail vise des produits durables, transmissibles d'une génération à l'autre, en explorant les possibilités des matériaux et des techniques de fabrication avec un langage formel net. Pour HAY, ils ont dessiné le diffuseur de parfum Chim Chim et la suspension Brim.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/rui-pereira-ryosuke-fukusada"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/rui-pereira-ryosuke-fukusada.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/rui-pereira-ryosuke-fukusada",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/rui-pereira--ryosuke-fukusada_1220x12202.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Les deux designers debout côte à côte devant un mur clair, à mi-corps ; visages nets. Recadrage 4:5 possible."
+  },
+  "photoMissingReason": null,
+  "remarks": "HAY a aussi une fiche distincte « Pereira Office » pour Rui Pereira seul. La durée de collaboration (« depuis six ans ») n'est pas datée par HAY : omise."
+ },
+ {
+  "slug": "kaschkasch",
+  "name": "Kaschkasch",
+  "sortKey": "Kaschkasch",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Kaschkasch est un studio de design allemand fondé en 2011 par Florian Kallus et Sebastian Schneider. Tous deux ont d'abord été formés comme ébénistes avant d'étudier le design produit. Ils associent ces deux savoirs dans une méthode très concrète, entre techniques artisanales traditionnelles et compréhension technique, pour répondre simplement aux usages quotidiens. Le duo travaille dans le mobilier, le luminaire et la direction artistique pour des clients allemands et internationaux, et a reçu plusieurs prix. Pour HAY, il a dessiné la collection Marselis, qui comprend une lampe de table et un lampadaire.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/kaschkasch"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/kaschkasch.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/kaschkasch",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/kaschkasch-2019-bw_1220x1220.jpg",
+   "credit": "Thomas Rabsch (EXIF)",
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait noir et blanc des deux membres, l'un assis devant, l'autre appuyé derrière ; visages nets. Recadrage 4:5 possible."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le studio s'écrit en minuscules (« kaschkasch ») chez HAY ; capitale initiale conservée pour l'affichage."
+ },
+ {
+  "slug": "moises-hernandez",
+  "name": "Moisés Hernández",
+  "sortKey": "Hernández",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Moisés Hernández est un designer mexicain né en 1983. Diplômé en 2013 d'un master en design produit de l'ECAL, en Suisse, où son travail a reçu une mention spéciale, il fonde l'année suivante son studio à Mexico. La ville, la culture vernaculaire mexicaine, ses traditions et ses contrastes sociaux nourrissent sa réflexion sur la manière d'améliorer les objets avec les outils, matériaux et techniques d'aujourd'hui. Il travaille des formes très simples, enrichies par la couleur et la texture. Il a exposé dans de nombreux pays et collabore avec des entreprises mexicaines et internationales. Pour HAY, il a dessiné les lampes de table LBM et LBM Corner.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/moises-hernandez"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/moises-hernandez.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/moises-hernandez",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/moises-hernandez-5_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait à mi-corps, chemise blanche, bras croisés sur fond noir ; visage net, recadrage 4:5 simple."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "cprv",
+  "name": "CPRV",
+  "sortKey": "CPRV",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "CPRV est un studio de design fondé en 2020 par Camille Paillard et Romain Voulet, qui travaille entre Londres et Marseille, dans le mobilier, le luminaire, les objets et l'aménagement intérieur. Diplômée de l'ECAL en 2012 (design pour le luxe et l'artisanat), Camille Paillard a travaillé chez Front Design, Philippe Starck et Tom Dixon. Diplômé de l'EID en 2011, Romain Voulet a travaillé chez Youmeus Design puis chez Industrial Facility auprès de Sam Hecht et Kim Colin. Le studio cherche un équilibre entre matière, simplicité et usage, pour des clients comme HAY, Karimoku New Standard, Ligne Roset ou Util. Pour HAY, CPRV a dessiné la lampe de table Aplat.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/cprv",
+   "https://cp-rv.com/information"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/cprv.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/cprv",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/cprv_1220x1220.jpg",
+   "credit": "Maxime Verret (EXIF)",
+   "width": 1220,
+   "height": 1220,
+   "notes": "Les deux membres en pied, appuyés contre une cloison claire ; visages nets mais petits dans l'image. Un recadrage 4:5 garde les deux silhouettes ; à valider visuellement."
+  },
+  "photoMissingReason": null,
+  "remarks": "Portrait en pied : visages assez petits, à valider au recadrage."
+ },
+ {
+  "slug": "jonas-forsman",
+  "name": "Jonas Forsman",
+  "sortKey": "Forsman",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Jonas Forsman est un designer industriel suédois né en 1979. Il a étudié le mobilier à Stenebyskolan, puis obtenu un master en ingénierie du design industriel à l'université de technologie Chalmers. Il vit à Göteborg, où il dirige son propre studio, spécialisé dans le mobilier et le design produit. Il part de solutions mécaniques et des possibilités des matériaux et des tissus pour ramener chaque objet à l'essentiel. Ses travaux ont été exposés à plusieurs reprises à Göteborg, Stockholm et Milan, et ont reçu plusieurs Red Dot Awards. Pour HAY, il a dessiné le fauteuil O2 et son pouf.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/jonas-forsman"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/jonas-forsman.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/jonas-forsman",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jonas-forsman_1220x1220.jpg",
+   "credit": "Bert Leandersson (EXIF)",
+   "width": 1220,
+   "height": 1220,
+   "notes": "Assis sur un tabouret dans un atelier, mur d'outils derrière ; visage net, personne à droite du cadre. Recadrage 4:5 décentré vers la droite."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "kristine-five-melvaer",
+  "name": "Kristine Five Melvær",
+  "sortKey": "Melvær",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Kristine Five Melvær est une designer norvégienne née en 1984. Elle est diplômée d'un master en design industriel de l'École d'architecture et de design d'Oslo (2008) et d'un master en communication visuelle de l'Académie nationale des arts d'Oslo (2012). Elle dessine des arts de la table, des luminaires, du mobilier, des objets textiles et du graphisme, en passant librement d'une catégorie et d'un matériau à l'autre, jusqu'à la direction artistique. Elle explore la capacité des objets à communiquer pour créer un lien entre l'objet et son usager. Elle a reçu plusieurs prix dans ses deux disciplines. Pour HAY, elle a dessiné le vase Juice.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/kristine-five-melvaer"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/kristine-five-melvaer.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/kristine-five-melvaer",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/kristine-five-melvaer_1220x1220.jpg",
+   "credit": "Erik Five Gunnerud (EXIF)",
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait souriant en buste sur fond blanc ; visage net, recadrage 4:5 simple."
+  },
+  "photoMissingReason": null,
+  "remarks": "sortKey « Melvær » (nom de famille ; « Five » est un second nom). À confirmer si le tri doit se faire sur « Five Melvær »."
+ },
+ {
+  "slug": "claire-lavabre",
+  "name": "Claire Lavabre",
+  "sortKey": "Lavabre",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Claire Lavabre est une designer et photographe française installée à Copenhague. Diplômée de l'ENSCI-Les Ateliers en 2012, elle a collaboré avec des designers et des architectes sur des projets d'objets et de photographie, avant de fonder son propre studio, où elle développe des objets ainsi que des projets photographiques personnels et de commande. Son travail repose sur des compositions équilibrées qui explorent la couleur, la texture et la forme, en tenant ensemble esthétique et fonction. Il a été présenté dans de nombreuses galeries. Pour HAY, elle a dessiné la lampe de table Posto.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/claire-lavabre"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/claire-lavabre.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/claire-lavabre",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/claire-lavabre_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait de face en buste sur fond gris clair ; visage net et centré, recadrage 4:5 simple. EXIF : « ALL RIGHT RESERVED », sans nom de photographe."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "chris-kabel",
+  "name": "Chris Kabel",
+  "sortKey": "Kabel",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Chris Kabel est un designer néerlandais né en 1975, qui vit et travaille à Rotterdam. Diplômé de la Design Academy Eindhoven en 2001, il s'installe à Rotterdam l'année suivante pour y ouvrir son studio. Il associe son intérêt pour les matériaux et les phénomènes naturels à une approche analytique du dessin d'objets et de mobilier. Il travaille pour de nombreux clients internationaux ; plusieurs de ses pièces figurent dans des collections permanentes de galeries et de musées, et son travail a reçu plusieurs prix. Pour HAY, il a dessiné le chandelier Wire.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/chris-kabel"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/chris-kabel.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/chris-kabel",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/chris-kabel_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Vue plongeante : assis sur une chaise bleue en fil sur une dalle de béton, bonnet bleu ; visage net mais assez petit dans l'image. Recadrage 4:5 serré possible, à valider."
+  },
+  "photoMissingReason": null,
+  "remarks": "HAY nomme la pièce « Wire Candleholder » (bougeoir) ; Mikado la vend sous le nom « Chandelier Wire »."
+ },
+ {
+  "slug": "branch",
+  "name": "Branch",
+  "sortKey": "Branch",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Branch est une unité de création rattachée au département de design intégré de l'université d'art Tama, au Japon. Elle étudie la relation entre l'environnement, les personnes et les objets en croisant art, science et design. Pour chaque projet, une équipe pluridisciplinaire est constituée, qui travaille aussi bien l'espace, le produit, le graphisme et l'écran que la recherche. Pour HAY, Branch a dessiné la lampe de table Slant.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/branch"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "La seule image publiée par HAY (branch_team_1220x1220.jpg) montre le bâtiment de l'université avec les membres minuscules sur les balcons, visages illisibles : pas un portrait. Le collectif, à composition variable selon les projets, n'a pas de portrait officiel identifié.",
+  "remarks": "HAY écrit « BRANCH » en capitales ; « Branch » conservé. Collectif universitaire à composition variable, pas une personne : à traiter comme un studio. Bio volontairement courte (source unique)."
+ },
+ {
+  "slug": "romain-sillon",
+  "name": "Romain Sillon",
+  "sortKey": "Sillon",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Romain Sillon est un designer français né en 1994 à Lyon. Après des études de design produit, il se tourne vers le travail du bois et obtient un diplôme d'ébéniste. Il travaille ensuite auprès du trio BIG-GAME à Lausanne, du designer belge Sylvain Willenz et du studio parisien Perron & Frères, avant de fonder sa propre pratique à Paris. Sa formation et son parcours lui donnent une méthode précise, fondée sur le travail d'atelier. Il explore la mécanique et le mouvement dans ses objets. Pour HAY, il a dessiné le lampadaire Twist.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/romain-sillon"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/romain-sillon.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/romain-sillon",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/romain-sillon_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait noir et blanc à mi-corps, mains dans les poches, devant un mur de planches ; visage net, recadrage 4:5 simple."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "christian-juhl",
+  "name": "Christian Juhl",
+  "sortKey": "Juhl",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Christian Juhl est un designer danois de mobilier et d'objets, installé à Copenhague. Ébéniste de formation, il a fait son apprentissage chez Rud. Rasmussen, à Nørrebro, puis a obtenu en 2017 un master en design de mobilier à l'Académie royale des beaux-arts du Danemark. Il aborde les matériaux, les savoir-faire et les assemblages de manière exploratoire, pour concevoir des objets contemporains et durables. Pour HAY, il a dessiné la lampe de table Drome.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/christian-juhl"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/christian-juhl.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/christian-juhl",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/christian-juhl_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait de trois quarts, assis à une table en train de dessiner, souriant, maquettes de lampe au premier plan ; visage net. Recadrage 4:5 centré sur lui."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "leclercq-viallet",
+  "name": "Leclercq Viallet",
+  "sortKey": "Leclercq Viallet",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Leclercq Viallet est le studio des designers français Théo Leclercq et Camille Viallet, installé à Paris. Tous deux diplômés de l'ESAD de Reims, ils fondent leur studio en 2016. Leur pratique couvre les objets, le mobilier, le textile et l'espace public, dans une approche pluridisciplinaire attachée au savoir-faire. Leur travail a été exposé à l'international et a reçu plusieurs prix. Pour HAY, leur première pièce est la lampe de table Canelé, dont l'abat-jour en tissu plissé repose sur un piètement tripode en acier plié.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/leclercq-viallet",
+   "https://www.hay.com/hay/lighting/table-lamp/canel-table-lamp"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/leclercq-viallet.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/leclercq-viallet",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/leclercq-viallet_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Duo dans l'atelier : lui debout, elle assise, étagères d'objets derrière ; visages nets mais personnages en pied. Recadrage 4:5 possible en gardant les deux."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "joel-hoff",
+  "name": "Joel Hoff",
+  "sortKey": "Hoff",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Joel Hoff est un designer né à Colchester, au Royaume-Uni. Formé d'abord comme décorateur d'intérieur, il étudie ensuite le design industriel à la Muthesius Kunsthochschule, puis au Royal College of Art de Londres, dont il sort diplômé en 2014 d'un master en Design Products. Il veut concevoir des objets produits en série qui n'encouragent pas la surconsommation : moins d'objets, de meilleure qualité et utilisés plus longtemps. Il s'appuie pour cela sur la connaissance des procédés de fabrication. Pour HAY, il a dessiné la lampe Turn On (2015), qui fait elle-même office de variateur : on tourne son tube noir cranté pour l'allumer, puis pour en régler l'intensité.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/joel-hoff",
+   "https://info.joel-hoff.com/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/joel-hoff.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/joel-hoff",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/joel-hoff.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait souriant en buste, blouson sombre, devant un mur de béton ; visage net, recadrage 4:5 simple."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le texte complet de la page À propos du site officiel ne se charge pas sans JavaScript : seuls l'extrait (naissance à Colchester, formation de décorateur, Muthesius) et la fiche projet Turn On (2015, variateur par rotation) ont été lus."
+ }
+]
