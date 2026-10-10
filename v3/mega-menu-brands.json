@@ -24,6 +24,11 @@
       ]
     },
     {
+      "name": "Addison Ross",
+      "href": "/collections/addison-ross",
+      "collections": []
+    },
+    {
       "name": "Alessi",
       "href": "/collections/alessi",
       "collections": [
@@ -217,6 +222,11 @@
       ]
     },
     {
+      "name": "Hoptimist",
+      "href": "/collections/hoptimist",
+      "collections": []
+    },
+    {
       "name": "Ichendorf Milano",
       "href": "/collections/ichendorf-milano",
       "collections": []
@@ -247,6 +257,11 @@
           "tag": "vulpes"
         }
       ]
+    },
+    {
+      "name": "Kay Bojesen",
+      "href": "/collections/kay-bojesen",
+      "collections": []
     },
     {
       "name": "LIND DNA",
@@ -347,6 +362,11 @@
           "tag": "base"
         }
       ]
+    },
+    {
+      "name": "Softline",
+      "href": "/collections/softline",
+      "collections": []
     },
     {
       "name": "Stoff Nagel",

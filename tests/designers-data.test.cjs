@@ -21,8 +21,10 @@ test('une fiche par créateur : slug unique, tag propre et marques du registre',
     }
     assert.ok(!('brandHrefs' in d), d.slug + ' : les liens de marque sont calculés par brandHref()');
   }
-  // Un tag de créateur égal au tag d'une marque afficherait tout son catalogue.
-  for (const b of brands) assert.ok(!owners.has(slug(b.name)), `${slug(b.name)} est une marque`);
+  // Un tag de créateur égal au tag d'une marque afficherait tout son catalogue — sauf quand la marque
+  // porte le nom du créateur et ne vend que ses dessins (Kay Bojesen Denmark) : là, c'est voulu.
+  const SAME_PERSON_BRANDS = new Set(['kay-bojesen']);
+  for (const b of brands) if (!SAME_PERSON_BRANDS.has(slug(b.name))) assert.ok(!owners.has(slug(b.name)), `${slug(b.name)} est une marque`);
 });
 
 test('chaque portrait existe avec sa version 640 et sa source', () => {
