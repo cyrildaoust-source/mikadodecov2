@@ -13,9 +13,9 @@ const {
 const root = path.join(__dirname, '..');
 const activeHandles = [
   'tradition', 'alessi', 'anglepoise', 'artek', 'avolt', 'blomus',
-  'carl-hansen-son', 'compagnie-de-provence', 'esteban', 'ester-erik',
+  'compagnie-de-provence', 'esteban', 'ester-erik',
   'fatboy', 'ferm-living', 'fermob', 'hay', 'hkliving', 'ichendorf-milano',
-  'iittala', 'lind-dna', 'marimekko', 'moustache', 'muuto', 'pastoe', 'pols-potten',
+  'iittala', 'lind-dna', 'marimekko', 'moustache', 'muuto', 'pols-potten',
   'relaxound', 'serax', 'stoff-nagel', 'string-furniture', 'tiptoe', 'vitra',
   'volta-mobiles',
 ];
@@ -28,7 +28,7 @@ test('brand hero manifest covers every active Shopify vendor without silently qu
   );
   assert.deepEqual(
     Object.entries(brandHeroManifest.heroes).filter(([, photo]) => photo.active === false).map(([handle]) => handle).sort(),
-    ['airborne', 'assouline'],
+    ['airborne', 'assouline', 'carl-hansen-son', 'pastoe'],   // marques hors du site (dormantes : logos et bannières conservés)
   );
   for (const [handle, photo] of Object.entries(brandHeroManifest.heroes)) {
     assert.match(handle, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);

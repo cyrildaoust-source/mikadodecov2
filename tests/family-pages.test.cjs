@@ -13,7 +13,7 @@ let vendorsUnavailable = false;
 let allowCatalogueQuery = false;
 let catalogueIconsUnavailable = false;
 const nextCursor = 'opaque+/=cursor';
-const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Carl Hansen & Søn', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Moustache', 'Muuto', 'Pastoe', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
+const activeNames = ['&Tradition', 'Alessi', 'Anglepoise', 'Artek', 'Avolt', 'Blomus', 'Compagnie de Provence', 'Esteban', 'Ester & Erik', 'Fatboy', 'Ferm Living', 'Fermob', 'HAY', 'HKliving', 'Ichendorf Milano', 'Iittala', 'LIND DNA', 'Marimekko', 'Moustache', 'Muuto', 'Pols Potten', 'Relaxound', 'Serax', 'Stoff Nagel', 'String Furniture', 'Tiptoe', 'Vitra', 'Volta Mobiles'];
 const brandSlug = name => name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 function product(id) {
@@ -89,7 +89,7 @@ before(async () => {
     const hasNextPage = isTables ? ids.at(-1) < 30 && (!variables.after || variables.after.startsWith('edge:')) : !variables.after;
     return Response.json({ data: { collection: {
       title: families[variables.handle]?.title || 'Verres et carafes', description: '', image: null,
-      products: { edges: ids.map(id => ({ cursor: 'edge:' + id, node: { ...product(id), ...(id % 11 === 0 ? { vendor: 'Carl Hansen & Søn' } : {}), tags: isTables && id <= 3 ? ['exterieur'] : [] } })), pageInfo: { hasNextPage, endCursor: isTables ? 'edge:' + ids.at(-1) : variables.after ? 'end' : nextCursor } },
+      products: { edges: ids.map(id => ({ cursor: 'edge:' + id, node: { ...product(id), ...(id % 11 === 0 ? { vendor: '&Tradition' } : {}), tags: isTables && id <= 3 ? ['exterieur'] : [] } })), pageInfo: { hasNextPage, endCursor: isTables ? 'edge:' + ids.at(-1) : variables.after ? 'end' : nextCursor } },
     } } });
   };
   const app = require('../server');
@@ -291,8 +291,8 @@ test('all active brands filter the generic catalogue from the first HTML respons
 });
 
 test('brand names stay readable and retired directories return to their family', async () => {
-  const carl = await page('/collections/sieges?brand=carl-hansen-son');
-  assert.match(carl.html, /Assises · Carl Hansen &amp; Søn/);
+  const tradition = await page('/collections/sieges?brand=tradition');
+  assert.match(tradition.html, /Assises · &amp;Tradition/);
   for (const handle of [...Object.keys(families), 'sieges', 'outdoor']) {
     const response = await realFetch(base + '/marques.html?collection=' + handle, { redirect: 'manual' });
     assert.equal(response.status, 302);

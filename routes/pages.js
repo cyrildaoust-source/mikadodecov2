@@ -238,7 +238,7 @@ router.get('/collections/:handle', async (req, res) => {
     // Le bandeau Luminaires montre déjà une scène Artek large, adaptée à ce format.
     const useFamilyPhoto = handle === 'luminaires' && brand === 'artek';
     const legacyPhotos = {
-      sieges: { 'carl-hansen-son': 'assises/brand-carlhansen', artek: 'assises/brand-artek', vitra: 'assises/brand-vitra', hay: 'assises/brand-hay' },
+      sieges: { tradition: 'assises/brand-tradition', artek: 'assises/brand-artek', vitra: 'assises/brand-vitra', hay: 'assises/brand-hay' },
       outdoor: { fermob: 'jardin/20', hay: 'jardin/21', fatboy: 'jardin/22', tradition: 'jardin/23' },
     };
     const legacyBrandPhoto = Object.hasOwn(legacyPhotos, handle) && Object.hasOwn(legacyPhotos[handle], brand) ? legacyPhotos[handle][brand] : null;
