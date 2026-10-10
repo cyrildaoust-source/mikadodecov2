@@ -1,8 +1,8 @@
 {
  "schema": "mikado.redirections@2",
- "generated_at": "2026-10-09T13:50:58+00:00",
+ "generated_at": "2026-10-09T19:24:08+00:00",
  "counts": {
-  "301": 4318,
+  "301": 4357,
   "410": 68
  },
  "rules": "chaînes aplaties ; cible hors ligne → collection de la marque ; seules les fiches qui ont eu une adresse publique",
@@ -9123,6 +9123,20 @@
    "source": "hors-ligne"
   },
   {
+   "from": "decoration-de-sapin-oiseaux-d-hiver",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "decoration-de-sapin-oiseaux-de-noel",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
    "from": "desserte-basse-a-tiroir-lager",
    "to": "/collections/ferm-living",
    "status": 301,
@@ -12984,6 +12998,258 @@
    "to": "/collections/ferm-living",
    "status": 301,
    "vendor": "Ferm Living",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-couple-d-oiseaux",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-elephant-liliput",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-hippopotame-liliput",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-hippopotame-petit",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-liliput-lot-de-3",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-liv-lykke",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-macareux-grand",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-macareux-moyen",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-macareux-petit",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-moineaux",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-mouette-grand",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-mouette-moyen",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-mouette-petit",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-oiseau-chanteur",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-oiseau-chanteur-grand",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-oiseau-chanteur-leif-sylvester",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-oiseau-chanteur-leif-sylvester-grand",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-oiseau-de-l-annee",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-oiseaux-d-hiver-liliput",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-ours-liliput",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-christmas-jumper-mini",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-christmas-jumper-petit",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-dbu-grand",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-dbu-mini",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-dbu-moyen",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-dbu-petit",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-grand",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-moyen",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-norgaard-grand",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-norgaard-moyen",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-norgaard-petit",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-reworked-anniversary-moyen",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-reworked-anniversary-petit",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-reworked-mini",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-singe-team-rynkeby-mini",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
+   "source": "hors-ligne"
+  },
+  {
+   "from": "figurine-teckel-moyen",
+   "to": "/collections/kay-bojesen",
+   "status": 301,
+   "vendor": "Kay Bojesen",
    "source": "hors-ligne"
   },
   {
@@ -26653,6 +26919,13 @@
    "source": "hors-ligne"
   },
   {
+   "from": "softline-fauteuil-eden-felt-melange-84eb44e0",
+   "to": "/collections/softline",
+   "status": 301,
+   "vendor": "Softline",
+   "source": "hors-ligne"
+  },
+  {
    "from": "sommier-a-lattes-standard-140-200-cm",
    "to": "/collections/hay",
    "status": 301,
@@ -31236,7 +31509,7 @@
    "vendor": "Ethnicraft",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "canape-nd52-2-vita",
@@ -31317,7 +31590,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "chaise-ad4",
@@ -31326,7 +31599,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "chaise-ah501",
@@ -32208,7 +32481,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "coussin-fh38",
@@ -32418,24 +32691,6 @@
    "reason": "marque retirée du site"
   },
   {
-   "from_handle": "decoration-de-sapin-oiseaux-d-hiver",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "decoration-de-sapin-oiseaux-de-noel",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
    "from_handle": "dessous-de-plat-carre-lot-de-3",
    "to_handle": null,
    "to_collection": "carl-hansen-son",
@@ -32559,7 +32814,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-a-bascule-acapulco",
@@ -32568,7 +32823,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-acapulco-classic",
@@ -32577,7 +32832,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-acapulco-cuir",
@@ -32586,7 +32841,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-acapulco-jalisco",
@@ -32595,7 +32850,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-acapulco-oaxaca",
@@ -32604,7 +32859,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-acapulco-palma",
@@ -32613,7 +32868,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-ah601",
@@ -32766,7 +33021,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-fh419-heritage",
@@ -32928,7 +33183,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "fauteuil-sz14",
@@ -32976,382 +33231,13 @@
    "reason": "marque retirée du site"
   },
   {
-   "from_handle": "figurine-couple-d-oiseaux",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-elephant-liliput",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-hippopotame-liliput",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-hippopotame-moyen",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-hippopotame-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-liliput-lot-de-3",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-liv-lykke",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-macareux-grand",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-macareux-moyen",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-macareux-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-moineaux",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-mouette-grand",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-mouette-moyen",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-mouette-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-oiseau-chanteur",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-oiseau-chanteur-grand",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-oiseau-chanteur-leif-sylvester",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-oiseau-chanteur-leif-sylvester-grand",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-oiseau-de-l-annee",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-oiseaux-d-hiver-liliput",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-ours-liliput",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-christmas-jumper-mini",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-christmas-jumper-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-dbu-grand",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-dbu-mini",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-dbu-moyen",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-dbu-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-grand",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-mini",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-moyen",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-norgaard-grand",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-norgaard-moyen",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-norgaard-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-reworked-anniversary-moyen",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-reworked-anniversary-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-reworked-mini",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-singe-team-rynkeby-mini",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-teckel-moyen",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "figurine-teckel-petit",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Kay Bojesen",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "gourde-bumble-400-ml",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
    "from_handle": "housse-batyline-eden-aa",
    "to_handle": null,
    "to_collection": null,
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-batyline-elios-aa",
@@ -33360,7 +33246,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-castelbajac-aa",
@@ -33369,7 +33255,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-coton-aa",
@@ -33378,7 +33264,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-cuir-buffalo-aa",
@@ -33387,7 +33273,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-cuir-classique-aa",
@@ -33396,7 +33282,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-e500",
@@ -33414,7 +33300,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-islandais-aa",
@@ -33423,7 +33309,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-kk47004-cuir",
@@ -33450,7 +33336,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-lhassa-aa",
@@ -33459,7 +33345,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-lin-aa",
@@ -33468,7 +33354,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-lodge-aa",
@@ -33477,7 +33363,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-peau-de-vache-aa",
@@ -33486,7 +33372,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-silhouette-aa",
@@ -33495,7 +33381,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-slow-aa",
@@ -33504,7 +33390,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "housse-sunbrella-aa",
@@ -33513,7 +33399,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "lampadaire-hjw03-opala-midi",
@@ -33559,87 +33445,6 @@
    "source": "hors-ligne",
    "status": 301,
    "reason": "marque retirée du site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-15-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-23-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-chene-15-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-chene-filaire-15-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-chrome-15-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-chrome-23-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-pe-23-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-soft-15-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
-   "from_handle": "lampe-de-table-bumble-soft-23-cm",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
   },
   {
    "from_handle": "lampe-de-table-hjw01-opala-mini",
@@ -34053,7 +33858,7 @@
    "vendor": "Ethnicraft",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "pouf-barrow-60-cm-ethnicraft",
@@ -34062,7 +33867,7 @@
    "vendor": "Ethnicraft",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "protections-pieds-aa",
@@ -34071,7 +33876,7 @@
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "rallonge-de-table-bm0121",
@@ -34281,15 +34086,6 @@
    "reason": "marque retirée du site"
   },
   {
-   "from_handle": "sac-cabas-bumble",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Hoptimist",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
    "from_handle": "sangle-bm0865-cuir",
    "to_handle": null,
    "to_collection": "carl-hansen-son",
@@ -34389,22 +34185,13 @@
    "reason": "marque retirée du site"
   },
   {
-   "from_handle": "softline-fauteuil-eden-felt-melange-84eb44e0",
-   "to_handle": null,
-   "to_collection": null,
-   "vendor": "Softline",
-   "source": "hors-ligne",
-   "status": 301,
-   "reason": "marque sans collection publiée sur le site"
-  },
-  {
    "from_handle": "structure-aa",
    "to_handle": null,
    "to_collection": null,
    "vendor": "Airborne",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "support-mural-ab020",
@@ -34620,7 +34407,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "table-ba103-preludia",
@@ -34944,7 +34731,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "table-basse-ml10097-egyptian-o100-cm",
@@ -35259,7 +35046,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "table-military-160-x-80-cm",
@@ -35322,7 +35109,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "tabouret-acapulco-cuir",
@@ -35331,7 +35118,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "tabouret-de-bar-ch56",
@@ -35736,7 +35523,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "vase-ceramique-rumba",
@@ -35745,7 +35532,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "vase-ceramique-trompeta",
@@ -35754,7 +35541,7 @@
    "vendor": "Acapulco Design",
    "source": "hors-ligne",
    "status": 301,
-   "reason": "marque sans collection publiée sur le site"
+   "reason": "marque retirée du site"
   },
   {
    "from_handle": "vase-clay-18-x-25-cm",
