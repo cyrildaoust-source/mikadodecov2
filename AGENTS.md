@@ -17,6 +17,10 @@
 - Vérifier les anciennes offres et retirer du classement les produits sans remise ni offre active. Ne pas inventer une nouvelle remise pour conserver un produit dans Promotions.
 - En cas de changement de présentation des promotions, exécuter aussi `node --test tests/promotion-variants.test.cjs tests/promotion-variants-api.test.cjs`.
 
+## Dialogue avec l'importateur (depuis le 9 octobre 2026)
+
+L'importateur (`cyrildaoust-source/mikado-importer`, branche de référence `audit-impl-2026-05-29`, une autre session d'agent) et le site se parlent par **issues GitHub** : les demandes du site vont dans les issues de `mikado-importer` (label `site`), celles de l'importateur dans les issues de `mikadodecov2` (label `importateur`) ; les réponses sont des commentaires. Les contrats restent dans les fichiers : livraisons de l'importateur dans `exports/site/` (son README), demandes détaillées du site dans `docs/BRIEF-importateur-*.md`. En début de session : `gh issue list -R cyrildaoust-source/mikadodecov2 --label importateur` et `gh issue list -R cyrildaoust-source/mikado-importer --label site`. Cyril lit tout et décide ; aucun des deux ne modifie le dépôt de l'autre (lecture seule : `gh api -H "Accept: application/vnd.github.raw" repos/cyrildaoust-source/mikado-importer/contents/<fichier>?ref=audit-impl-2026-05-29`).
+
 ## Architecture du code (depuis octobre 2026)
 
 - `server.js` ne fait que démarrer `app.js` ; `api/index.js` (Vercel) importe la même application.
