@@ -109,6 +109,7 @@
     },
     "carl-hansen-son": {
       "name": "Carl Hansen & Søn",
+      "active": false,
       "status": "qualified",
       "kind": "local",
       "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/img_007_5611eb47-ad9b-4f33-b219-8a3d34b78e60.jpg",
@@ -319,6 +320,7 @@
     },
     "pastoe": {
       "name": "Pastoe",
+      "active": false,
       "status": "qualified",
       "kind": "local",
       "sourceImage": "https://cdn.moooi.com/assets/Collection%20Pastoe/Landscape/Images/PASTOE_Landscape_LifestyleRender_03.png",
