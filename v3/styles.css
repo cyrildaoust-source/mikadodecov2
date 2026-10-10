@@ -587,7 +587,10 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .brandcard__logo[src*="ferm-living.svg"],
 .brandcard__logo[src*="stoff-nagel.svg"],
 .brandcard__logo[src*="string-furniture.svg"],
-.brandcard__logo[src*="ichendorf-milano.svg"] { height: 44px; }
+.brandcard__logo[src*="ichendorf-milano.svg"],
+.brandcard__logo[src*="/hoptimist."],
+.brandcard__logo[src*="/addison-ross."],
+.brandcard__logo[src*="/softline."] { height: 44px; }
 .brandcard__count { font-size: var(--fs-small); color: var(--muted); margin-top: 6px; }
 
 /* ---------- designers ---------- */
