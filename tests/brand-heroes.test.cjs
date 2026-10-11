@@ -12,11 +12,11 @@ const {
 
 const root = path.join(__dirname, '..');
 const activeHandles = [
-  'tradition', 'alessi', 'anglepoise', 'artek', 'avolt', 'blomus',
+  'tradition', 'addison-ross', 'alessi', 'anglepoise', 'artek', 'avolt', 'blomus',
   'compagnie-de-provence', 'esteban', 'ester-erik',
-  'fatboy', 'ferm-living', 'fermob', 'hay', 'hkliving', 'ichendorf-milano',
-  'iittala', 'lind-dna', 'marimekko', 'moustache', 'muuto', 'pols-potten',
-  'relaxound', 'serax', 'stoff-nagel', 'string-furniture', 'tiptoe', 'vitra',
+  'fatboy', 'ferm-living', 'fermob', 'hay', 'hkliving', 'hoptimist', 'ichendorf-milano',
+  'iittala', 'kay-bojesen', 'lind-dna', 'marimekko', 'moustache', 'muuto', 'pols-potten',
+  'relaxound', 'serax', 'softline', 'stoff-nagel', 'string-furniture', 'tiptoe', 'vitra',
   'volta-mobiles',
 ];
 
