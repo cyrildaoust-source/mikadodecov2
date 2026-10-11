@@ -32,3 +32,7 @@ Cible validée : une grille selon le poids de la commande (6,90 € jusqu'à 2 k
 dont 135 canapés et 518 éléments de canapé. Activer la grille avant de compléter ces poids ferait
 livrer des meubles au tarif de 0 kg. L'abonnement Basic ne permet pas les tarifs calculés par un
 transporteur ; la grille de poids native est la voie retenue.
+
+## Délais par marque — 11 octobre 2026 (ADR 0015)
+
+Le délai hors stock n'est plus uniforme : le site le résout par fiche depuis `data/lead-times.json` (marque, puis famille ou sous-catégorie) et les exceptions de la fiche (`custom.lead_time`, tag `delai-long`). Le défaut reste « 3–4 semaines » tant que la table n'a pas de règle pour la marque. Le panier annonce le plus long des articles hors stock ; le stock Mikado reste « 1–2 jours ». Le modèle d'e-mail `notifications/delivery-estimate.liquid` affiche désormais n'importe quel libellé : à recoller dans Shopify → Notifications → Confirmation de commande.

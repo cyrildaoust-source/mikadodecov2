@@ -36,3 +36,23 @@ test('old placeholder notes are ignored while real project notes survive', () =>
   assert.equal(realProject('Livraison: À confirmer au paiement'), '');
   assert.equal(realProject('Aménagement salon'), 'Aménagement salon');
 });
+
+// Délais par règles (ADR 0015) : hors stock, chaque ligne porte le délai de SA fiche ; l'envoi groupé prend le plus long.
+const product = (extra = {}) => ({ vendor: 'Marque test', tags: [], collections: { nodes: [] }, ...extra });
+test('a line out of stock takes the lead time of its product: metafield exception, delai-long tag, or the default', () => {
+  const lines = estimateDelivery([item(1), item(2), item(3)], [
+    stock(1, 0, { product: product({ metafield: { value: '8-10 semaines' } }) }),
+    stock(2, 0, { product: product({ tags: ['delai-long'] }) }),
+    stock(3, 0, { product: product() }),
+  ]).lines;
+  assert.deepEqual(lines.map(l => l.label), ['8–10 semaines', 'délai sur demande', '3–4 semaines']);
+});
+test('the grouped shipment announces the longest lead time; stock lines stay 1–2 jours', () => {
+  const r = estimateDelivery([item(1), item(2)], [stock(1, 5, { product: product() }), stock(2, 0, { product: product({ metafield: { value: '6 semaines' } }) })]);
+  assert.deepEqual([r.label, r.onOrder, r.lines[0].label, r.lines[1].label], ['6 semaines', true, '1–2 jours', '6 semaines']);
+  assert.equal(estimateDelivery([item(1), item(2)], [stock(1, 0, { product: product({ metafield: { value: '2-3 semaines' } }) }), stock(2, 0, { product: product({ tags: ['delai-long'] }) })]).label, 'délai sur demande');
+});
+test('the stock query also fetches what the lead-time rules need', () => {
+  const { VARIANT_STOCK_QUERY } = require('../lib/delivery-estimate');
+  for (const part of ['product {', 'vendor', 'tags', 'collections(first: 20)', 'metafield(namespace: "custom", key: "lead_time")']) assert.ok(VARIANT_STOCK_QUERY.includes(part), part);
+});

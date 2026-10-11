@@ -1,0 +1,6 @@
+{
+  "schema": "mikado.lead-times@1",
+  "_note": "Délais de livraison des articles SUR COMMANDE (hors stock Mikado), en semaines [min, max]. Résolution automatique par fiche : métachamp custom.lead_time de la fiche (exception) > marque + sous-catégorie > marque + famille > marque > défaut. Les clés de marque sont le nom fournisseur Shopify exact ; les clés de famille / sous-catégorie sont les handles de collection du site (sieges, tables, luminaires, outdoor, decoration, rangement, accessoires ; chaises, canapes, suspensions…). Le tag delai-long donne « délai sur demande ». Un article en stock Mikado reste « 1–2 jours » (vérifié au panier).",
+  "default": [3, 4],
+  "brands": {}
+}
