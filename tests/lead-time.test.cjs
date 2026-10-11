@@ -45,3 +45,28 @@ test('le plus long l’emporte pour un envoi groupé ; une demande prime sur tou
   assert.equal(longest([]), null);
   assert.equal(longest([null, a]).label, '2–3 semaines');
 });
+
+// Table remplie avec les délais de Cyril (11 oct.) : délai marque → Mikado + marge, affiché en jours ouvrés quand c'est court.
+test('une marque rapide s’affiche en jours ouvrés avec la marge Mikado (2–3 jours chez la marque → 5–7 jours ouvrés)', () => {
+  assert.deepEqual([leadTimeFor({ vendor: 'Blomus' }).label, leadTimeFor({ vendor: 'Fatboy' }).label, leadTimeFor({ vendor: 'LIND DNA' }).label], ['5–7 jours ouvrés', '5–7 jours ouvrés', '5–7 jours ouvrés']);
+  assert.equal(leadTimeFor({ vendor: 'HAY' }).label, '10–14 jours ouvrés');
+  assert.equal(leadTimeFor({ vendor: 'hay' }).source, 'brand', 'nom de marque insensible à la casse');
+});
+
+test('au-delà de 15 jours ouvrés, le délai passe en semaines ; une marque en semaines prend une semaine de marge', () => {
+  assert.equal(leadTimeFor({ vendor: 'Pols Potten' }).label, '3–4 semaines');     // 10–15 jours + marge → 13–19 → 3–4 semaines
+  assert.equal(leadTimeFor({ vendor: 'Vitra' }).label, '3–4 semaines');           // 2–3 semaines + 1
+  assert.equal(leadTimeFor({ vendor: 'Fermob' }).label, '4–6 semaines');          // 3–5 semaines + 1
+  assert.equal(leadTimeFor({ vendor: 'Kriptonite' }).label, '13–16 semaines');
+});
+
+test('une marque absente de la table prend le défaut, et la source le dit', () => {
+  const lt = leadTimeFor({ vendor: 'Anglepoise' });
+  assert.deepEqual([lt.label, lt.source], ['3–4 semaines', 'default']);
+});
+
+test('les jours ouvrés comptent dans l’envoi groupé', () => {
+  const fast = leadTimeFor({ vendor: 'Blomus' }), slow = leadTimeFor({ vendor: 'Vitra' }), mid = leadTimeFor({ vendor: 'HAY' });
+  assert.equal(longest([fast, mid]).label, '10–14 jours ouvrés');
+  assert.equal(longest([fast, slow, mid]).label, '3–4 semaines');
+});
