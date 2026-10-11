@@ -1,6 +1,20 @@
 {
   "schema": "mikado.site-brand-heroes@1",
   "heroes": {
+    "addison-ross": {
+      "name": "Addison Ross",
+      "status": "qualified",
+      "kind": "local",
+      "sourceImage": "https://www.addisonross.com/cdn/shop/files/HOMEPAGE_BANNER_HERO_DESKTOP_CUTLERY_test.jpg",
+      "sourcePage": "https://www.addisonross.com/",
+      "alt": "Addison Ross : couverts à manches émaillés à pois, rangés dans un tiroir en chêne",
+      "position": "50% 50%",
+      "mobilePosition": "45% 50%",
+      "width": 2400,
+      "height": 1200,
+      "derivation": "crop-184x0x2632x1316-2:1",
+      "visualReview": "2026-10-11:desktop-1440"
+    },
     "airborne": {
       "name": "Airborne",
       "active": false,
@@ -11,20 +25,6 @@
       "mobilePosition": "50% 50%",
       "width": 2400,
       "height": 800
-    },
-    "tradition": {
-      "name": "&Tradition",
-      "status": "qualified",
-      "kind": "local",
-      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ATD_Lifestyle-Images_Collection-2026.02_Gio-LN28_Alima-NDS2_Collect-SC63_Cruise-AP11_X-HM10_Wire-Coffee-Table-VP17_Wire-Stool-VP11_Flowerpot-VP10_Develius-EV8A_Develius-EV8B_Develius.jpg",
-      "sourceProduct": "table-basse-wire-vp17",
-      "alt": "&Tradition : canapé Develius écru, table basse Wire, fauteuil X en rotin et desserte devant un mur en béton patiné",
-      "position": "50% 80%",
-      "mobilePosition": "67% 80%",
-      "width": 2400,
-      "height": 1200,
-      "derivation": "crop-0x520x2521x1261-2:1",
-      "visualReview": "2026-09-29:desktop-1440-mobile-390-360"
     },
     "alessi": {
       "name": "Alessi",
@@ -234,6 +234,20 @@
       "derivation": "crop-0x800x3333x1667-2:1",
       "visualReview": "2026-09-29:desktop-1440-mobile-390-360"
     },
+    "hoptimist": {
+      "name": "Hoptimist",
+      "status": "qualified",
+      "kind": "local",
+      "sourceImage": "https://www.hoptimist.com/dw/image/v2/BGLP_PRD/on/demandware.static/-/Sites-hoptimist-Library/default/dw7ea3824e/homepage/ss26/hoptimist_animal_collection_hero_ss26_d.jpg",
+      "sourcePage": "https://www.hoptimist.com/dk/serier/",
+      "alt": "Hoptimist : figurines animaux en chêne, hérisson, guépard, rhinocéros, buffle et éléphant, sur une étagère entre plantes vertes et livres",
+      "position": "50% 50%",
+      "mobilePosition": "45% 50%",
+      "width": 2400,
+      "height": 1200,
+      "derivation": "crop-center-3000x1465-2:1",
+      "visualReview": "2026-10-11:desktop-1440"
+    },
     "ichendorf-milano": {
       "name": "Ichendorf Milano",
       "status": "qualified",
@@ -261,6 +275,20 @@
       "height": 1200,
       "derivation": "crop-0x1000x2500x1250-2:1",
       "visualReview": "2026-09-29:desktop-1440-mobile-390-360"
+    },
+    "kay-bojesen": {
+      "name": "Kay Bojesen",
+      "status": "qualified",
+      "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Kay-Bojesen-Other-animals-Dog-Dark-stained-oak-medium-39536-xZdLKg.png",
+      "sourceProduct": "figurine-teckel-moyen",
+      "alt": "Kay Bojesen : teckels en chêne teinté foncé devant un marbre noir, une sphère de marbre blanc et un rideau clair",
+      "position": "50% 60%",
+      "mobilePosition": "55% 60%",
+      "width": 2400,
+      "height": 1200,
+      "derivation": "crop-0x523x3615x1808-2:1",
+      "visualReview": "2026-10-11:desktop-1440"
     },
     "lind-dna": {
       "name": "LIND DNA",
@@ -375,6 +403,20 @@
       "derivation": "crop-0x533x3200x1600-2:1",
       "visualReview": "2026-09-29:desktop-1440-mobile-390-360"
     },
+    "softline": {
+      "name": "Softline",
+      "status": "qualified",
+      "kind": "local",
+      "sourceImage": "https://softline.b-cdn.net/wp-content/uploads/2025/06/JOE-SOFA-HERO.webp",
+      "sourcePage": "https://softlinefurniture.com/en/product/joe-sofa-high/",
+      "alt": "Softline : canapé Joe à dossier haut beige, fauteuil et pouf jaune moutarde autour d’une table basse ronde dans un salon lumineux",
+      "position": "50% 55%",
+      "mobilePosition": "50% 55%",
+      "width": 2400,
+      "height": 1200,
+      "derivation": "crop-0x114x1920x960-2:1-upscale-1.25",
+      "visualReview": "2026-10-11:desktop-1440"
+    },
     "stoff-nagel": {
       "name": "Stoff Nagel",
       "status": "qualified",
@@ -415,6 +457,20 @@
       "width": 2400,
       "height": 1200,
       "derivation": "crop-0x380x4500x2250-2:1",
+      "visualReview": "2026-09-29:desktop-1440-mobile-390-360"
+    },
+    "tradition": {
+      "name": "&Tradition",
+      "status": "qualified",
+      "kind": "local",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/ATD_Lifestyle-Images_Collection-2026.02_Gio-LN28_Alima-NDS2_Collect-SC63_Cruise-AP11_X-HM10_Wire-Coffee-Table-VP17_Wire-Stool-VP11_Flowerpot-VP10_Develius-EV8A_Develius-EV8B_Develius.jpg",
+      "sourceProduct": "table-basse-wire-vp17",
+      "alt": "&Tradition : canapé Develius écru, table basse Wire, fauteuil X en rotin et desserte devant un mur en béton patiné",
+      "position": "50% 80%",
+      "mobilePosition": "67% 80%",
+      "width": 2400,
+      "height": 1200,
+      "derivation": "crop-0x520x2521x1261-2:1",
       "visualReview": "2026-09-29:desktop-1440-mobile-390-360"
     },
     "vitra": {
