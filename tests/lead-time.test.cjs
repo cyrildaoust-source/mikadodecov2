@@ -54,7 +54,8 @@ test('une marque rapide s’affiche en jours ouvrés avec la marge Mikado (2–3
 });
 
 test('au-delà de 15 jours ouvrés, le délai passe en semaines ; une marque en semaines prend une semaine de marge', () => {
-  assert.equal(leadTimeFor({ vendor: 'Pols Potten' }).label, '3–4 semaines');     // 10–15 jours + marge → 13–19 → 3–4 semaines
+  assert.equal(leadTimeFor({ vendor: 'Remember' }).label, '3–4 semaines');        // 10–15 jours + marge → 13–19 → 3–4 semaines
+  assert.equal(leadTimeFor({ vendor: 'Pols Potten' }).label, '7–9 jours ouvrés');   // 4–5 jours (correction de Cyril du 11 oct.)
   assert.equal(leadTimeFor({ vendor: 'Vitra' }).label, '3–4 semaines');           // 2–3 semaines + 1
   assert.equal(leadTimeFor({ vendor: 'Fermob' }).label, '4–6 semaines');          // 3–5 semaines + 1
   assert.equal(leadTimeFor({ vendor: 'Kriptonite' }).label, '13–16 semaines');
