@@ -42,3 +42,7 @@ Les articles du journal (source `v3/journal/articles.data.mjs`) et les 4 pages l
 ## Table des redirections des anciennes fiches (ADR 0014)
 
 `data/redirections.json` est **produit par l'importateur** (`mikado-importer`, `exports/site/redirections.json`, schéma `mikado.redirections@2`) et copié tel quel dans le dépôt : le site ne l'édite jamais à la main et n'en déduit rien (le champ `status` décide : 301 avec `to` = handle publié ou chemin `/collections/…`, 410 sans destination). Chaque livraison remplace le fichier. Règle d'application, posée par l'importateur : une fiche publiée passe toujours avant la table.
+
+## Délais de livraison hors stock (ADR 0015)
+
+`data/lead-times.json` est une **règle de présentation du site** : délai de la marque vers Mikado (`days` ou `weeks`, `[min, max]`) par marque, affinable par famille ou sous-catégorie, plus la marge Mikado ; le site en déduit le délai affiché. Modifiée par PR sur les valeurs de Cyril. Côté Shopify, **l'importateur** peut poser une exception par fiche dans `custom.lead_time` (texte libre en français : « 6 semaines », « 2-3 semaines », « 10 jours », « sur demande »), que le site lit en priorité ; le tag `delai-long` reste « délai sur demande ». Un flux fournisseur ou l'historique des bons de commande alimentera ces mêmes champs.

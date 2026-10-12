@@ -32,3 +32,11 @@ Cible validée : une grille selon le poids de la commande (6,90 € jusqu'à 2 k
 dont 135 canapés et 518 éléments de canapé. Activer la grille avant de compléter ces poids ferait
 livrer des meubles au tarif de 0 kg. L'abonnement Basic ne permet pas les tarifs calculés par un
 transporteur ; la grille de poids native est la voie retenue.
+
+## Délais par marque — 11 octobre 2026 (ADR 0015)
+
+Le délai hors stock n'est plus uniforme : le site le résout par fiche depuis `data/lead-times.json` (délai de la marque vers Mikado observé par Cyril, plus une marge de 3–4 jours ouvrés ou d'une semaine ; marque, puis famille ou sous-catégorie) et les exceptions de la fiche (`custom.lead_time`, tag `delai-long`). Jusqu'à 15 jours ouvrés le délai s'affiche en jours ouvrés (« 5–7 jours ouvrés »), au-delà en semaines. Le défaut reste « 3–4 semaines » pour une marque sans règle. Le panier annonce le plus long des articles hors stock ; le stock Mikado reste « 1–2 jours ». Le modèle d'e-mail `notifications/delivery-estimate.liquid` affiche désormais n'importe quel libellé : à recoller dans Shopify → Notifications → Confirmation de commande.
+
+## Articles en stock — 12 octobre 2026
+
+Décision de Cyril : un article en stock chez Mikado annonce **« livraison 2–3 jours »** (préparation + poste ; l'ancien « 1–2 jours » du 22 septembre est abandonné) et **« en boutique sous 24 h »** pour le retrait. La carte et la fiche disent « En stock · livraison 2–3 jours » (la fiche ajoute « en boutique sous 24 h » et l'itinéraire) ; le panier, le checkout (attribut « Délai estimé ») et l'e-mail disent « 2–3 jours ». À mettre à jour dans Shopify par Cyril : le contenu français du checkout (« En stock : 1–2 jours… ») et le modèle d'e-mail (`notifications/delivery-estimate.liquid`).

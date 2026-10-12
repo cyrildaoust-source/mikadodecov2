@@ -111,7 +111,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
   const SHOWROOM_MAPS = "https://www.google.com/maps/dir/?api=1&destination=75%20Rue%20du%20Doyenn%C3%A9%2C%201180%20Uccle";
   const availStore = (v) => {
     const s = variantState(v || current);
-    if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>À voir en boutique</strong> · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a>`;
+    if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>En stock</strong> · livraison 2–3 jours · en boutique sous 24 h · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a>`;
     if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Indisponible</strong>`;
     return p.longDelay
       ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande`

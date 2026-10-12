@@ -169,7 +169,7 @@ function render() {
   if (etaEl) {
     etaEl.innerHTML = deliveryEstimate?.label
       ? `Délai estimé : <strong>${escapeHtml(deliveryEstimate.label)}</strong>${deliveryEstimate.onOrder ? ' · envoi groupé dès réception des articles sur commande.' : ''}`
-      : 'En stock : <strong>1–2 jours</strong> · Sur commande : <strong>3–4 semaines</strong>. Le délai le plus long s’applique aux envois groupés.';
+      : 'En stock : <strong>2–3 jours</strong> · Sur commande : <strong>selon la marque</strong>. Le délai le plus long s’applique aux envois groupés.';
     etaEl.classList.toggle('sel-eta--warn', !!deliveryEstimate?.onOrder);
     etaEl.hidden = false;
   }

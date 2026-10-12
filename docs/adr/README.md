@@ -18,5 +18,6 @@ Une décision structurante = un fichier court (contexte, décision, conséquence
 | [0012](0012-layout-unique.md) | Un seul `<head>` pour tout le site : `templates/layout.html` + pages en fragments (`<!--page {…}-->`, `<template data-head>`, `<main>`) assemblés par `renderPage()` | accepté |
 | [0013](0013-contenu-depuis-la-source.md) | Journal et pages légales rendus à la demande depuis leurs sources (`articles.data.mjs`, `docs/legal/*.md`) ; plus de HTML généré commité ni d'étape CI | accepté |
 | [0014](0014-redirections-anciennes-fiches.md) | Anciennes fiches produit : la table de l'importateur (`data/redirections.json`) donne 301 ou 410, appliquée par le serveur et seulement quand aucune fiche publiée ne porte le handle | accepté |
+| [0015](0015-delais-par-regles.md) | Délais hors stock : table de règles par marque et famille (`data/lead-times.json`), exceptions par fiche (`custom.lead_time`), un seul libellé de la carte au checkout | accepté |
 
 Le plan d'ensemble et son état : [`../ARCHI-critique-et-plan-2026-10-06.md`](../ARCHI-critique-et-plan-2026-10-06.md).

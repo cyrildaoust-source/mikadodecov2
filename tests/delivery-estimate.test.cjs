@@ -5,7 +5,7 @@ const id = n => `gid://shopify/ProductVariant/${n}`;
 const item = (n, qty = 1) => ({ variantId: id(n), qty });
 const stock = (n, quantityAvailable, extra = {}) => ({ id: id(n), quantityAvailable, requiresShipping: true, ...extra });
 test('short ETA requires enough physical stock for every unit', () => {
-  assert.equal(estimateDelivery([item(1, 2)], [stock(1, 2)]).label, '1–2 jours');
+  assert.equal(estimateDelivery([item(1, 2)], [stock(1, 2)]).label, '2–3 jours');
   assert.equal(estimateDelivery([item(1, 3)], [stock(1, 2)]).label, '3–4 semaines');
 });
 test('backorders, negative and unknown inventory never promise immediate availability', () => {
@@ -18,7 +18,7 @@ test('mixed carts and split gift lines use aggregated quantities', () => {
   assert.equal(estimateDelivery([item(1), { ...item(1), gift: 'offer' }], [stock(1, 1)]).label, '3–4 semaines');
 });
 test('digital items do not postpone physical delivery', () => {
-  assert.equal(estimateDelivery([item(1), item(2)], [stock(1, 1), stock(2, null, { requiresShipping: false })]).label, '1–2 jours');
+  assert.equal(estimateDelivery([item(1), item(2)], [stock(1, 1), stock(2, null, { requiresShipping: false })]).label, '2–3 jours');
   assert.equal(estimateDelivery([item(2)], [stock(2, null, { requiresShipping: false })]).label, null);
 });
 test('invalid or missing variants fail instead of receiving an invented estimate', () => {
@@ -29,10 +29,30 @@ test('invalid or missing variants fail instead of receiving an invented estimate
 test('inventory is fetched freshly and only for the exact variants', async () => {
   let calls = 0;
   const fetch = async (_, { ids }) => { calls++; assert.deepEqual(ids, [id(1)]); return { nodes: [stock(1, calls === 1 ? 2 : 0)] }; };
-  assert.equal((await getDeliveryEstimate([item(1)], fetch)).label, '1–2 jours');
+  assert.equal((await getDeliveryEstimate([item(1)], fetch)).label, '2–3 jours');
   assert.equal((await getDeliveryEstimate([item(1)], fetch)).label, '3–4 semaines');
 });
 test('old placeholder notes are ignored while real project notes survive', () => {
   assert.equal(realProject('Livraison: À confirmer au paiement'), '');
   assert.equal(realProject('Aménagement salon'), 'Aménagement salon');
+});
+
+// Délais par règles (ADR 0015) : hors stock, chaque ligne porte le délai de SA fiche ; l'envoi groupé prend le plus long.
+const product = (extra = {}) => ({ vendor: 'Marque test', tags: [], collections: { nodes: [] }, ...extra });
+test('a line out of stock takes the lead time of its product: metafield exception, delai-long tag, or the default', () => {
+  const lines = estimateDelivery([item(1), item(2), item(3)], [
+    stock(1, 0, { product: product({ metafield: { value: '8-10 semaines' } }) }),
+    stock(2, 0, { product: product({ tags: ['delai-long'] }) }),
+    stock(3, 0, { product: product() }),
+  ]).lines;
+  assert.deepEqual(lines.map(l => l.label), ['8–10 semaines', 'délai sur demande', '3–4 semaines']);
+});
+test('the grouped shipment announces the longest lead time; stock lines stay 2–3 jours', () => {
+  const r = estimateDelivery([item(1), item(2)], [stock(1, 5, { product: product() }), stock(2, 0, { product: product({ metafield: { value: '6 semaines' } }) })]);
+  assert.deepEqual([r.label, r.onOrder, r.lines[0].label, r.lines[1].label], ['6 semaines', true, '2–3 jours', '6 semaines']);
+  assert.equal(estimateDelivery([item(1), item(2)], [stock(1, 0, { product: product({ metafield: { value: '2-3 semaines' } }) }), stock(2, 0, { product: product({ tags: ['delai-long'] }) })]).label, 'délai sur demande');
+});
+test('the stock query also fetches what the lead-time rules need', () => {
+  const { VARIANT_STOCK_QUERY } = require('../lib/delivery-estimate');
+  for (const part of ['product {', 'vendor', 'tags', 'collections(first: 20)', 'metafield(namespace: "custom", key: "lead_time")']) assert.ok(VARIANT_STOCK_QUERY.includes(part), part);
 });

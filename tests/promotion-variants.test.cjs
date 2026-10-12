@@ -18,7 +18,7 @@ test('a discounted finish carries its own price, image, stock, cart ID and PDP l
   assert.equal(card.matchedVariantId,card.variantId);
   assert.equal(card.price,200); assert.equal(card.priceMin,200); assert.equal(card.priceMax,200);
   assert.equal(card.compareAt,250); assert.equal(card.priceIsExact,true);
-  assert.equal(card.finishLabel,'Bleu acapulco'); assert.equal(card.availabilityLabel,'En stock');
+  assert.equal(card.finishLabel,'Bleu acapulco'); assert.equal(card.availabilityLabel,'En stock · livraison 2–3 jours');
   assert.match(card.image,/\/2\.jpg\?width=600/); assert.match(card.image2,/ambiance\.jpg/);
   assert.equal(JSON.stringify(original),snapshot);
   const {productCardHTML}=await import('../v3/product-card.mjs');
