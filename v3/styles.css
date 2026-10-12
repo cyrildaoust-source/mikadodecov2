@@ -2010,8 +2010,9 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .gift-band { aspect-ratio: 1 / 1; flex-direction: column; justify-content: flex-end; align-items: flex-start; }
 .home-rc__count { position: relative; z-index: 2; font-family: var(--sans-product); font-size: var(--fs-meta); color: rgba(248,245,239,.85); letter-spacing: .03em; margin-top: 4px; }
 .home-rc:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; }
-/* Rubriques « Pour qui » (mêmes cartes) : les six tiennent sur une ligne dès 1200 px, sans flèches. */
-@media (min-width: 1200px) { .gift-rail { grid-auto-columns: minmax(0, 1fr); } }
+/* Rubriques « Pour qui » (mêmes cartes) : sur ordinateur, une grille de quatre cartes carrées par ligne, sans défilement ;
+   sur mobile, le rail horizontal de « Nos familles ». */
+@media (min-width: 1200px) { .gift-rail { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; } .gift-rail .home-rc { aspect-ratio: 1 / 1; } }
 .home-rc.is-active { outline: 3px solid var(--accent); outline-offset: 2px; }
 [data-chair-continuation] .gift-discovery { display: none; }
 /* Repères de saison sous les rubriques */

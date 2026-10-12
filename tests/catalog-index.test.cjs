@@ -217,7 +217,7 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   assert.match(html,/class="home-rc gift-band" href="\/collections\/idees-cadeaux\?max=50#grille" data-chair-link data-gift-band="\|50"><img class="home-rc__img editorial-photo"/,'tranche = carte photo');
   assert.match(html,/De 100 à 200 €<\/span><span class="home-rc__count">7 pièces/);
   assert.match(html,/data-gift-cat="cadeaux-enfants"/);assert.match(html,/data-gift-cat="cadeaux-belle-maman"/);assert.match(html,/>Pour qui<\/h2>/);
-  assert.doesNotMatch(html,/data-gift-cat="cadeaux-collegue"|data-gift-cat="cadeaux-chien-chat"|data-gift-cat="cadeaux-hote"/,'une rubrique sans fiche n’est pas montrée');
+  assert.doesNotMatch(html,/data-gift-cat="cadeaux-collegue"|data-gift-cat="cadeaux-animaux"|data-gift-cat="cadeaux-hote"|data-gift-cat="cadeaux-cuisine"|data-gift-cat="cadeaux-lecture"/,'une rubrique sans fiche n’est pas montrée');
   assert.equal((html.match(/class="pcard"/g)||[]).length,7);
   assert.match(html,/Accueil[\s\S]*Catalogue[\s\S]*Idées cadeaux/);
   assert.doesNotMatch(html,/noindex/);

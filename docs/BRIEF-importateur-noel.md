@@ -31,7 +31,9 @@ Six rubriques, chacune = des mots de tags comparés mot à mot dans chaque tag (
 | Pour les amoureux | `amour`, `amoureux`, `amoureuse`, `romantique`, `valentin`, `couple`, `bougie`, `parfum`, `champagne` | 75 |
 | Pour belle-maman | `mariage`, `vase`, `bougeoir`, `plaid`, `parfum`, `reception`, `vaisselle`, `service` | 868 |
 | Pour le collègue | `bureau`, `cafe`, `the`, `mug`, `carnet`, `stylo` | 230 |
-| Pour le chien et le chat | `chien`, `chiens`, `chat`, `chats`, `croquettes`, `gamelle` | 22 (44 fiches animaux au total : les gamelles Alessi et Doggielounge Fatboy sans tag cadeau n'y sont pas) |
+| Pour les animaux | `chien`, `chiens`, `chat`, `chats`, `croquettes`, `gamelle` (pas `animaux` : ce mot classe aussi les verres Animal Farm et les figurines Hoptimist) | 22 (44 fiches animaux au total : les gamelles Alessi et Doggielounge Fatboy sans tag cadeau n'y sont pas) |
+| Pour qui cuisine | `cuisine`, `ustensile`, `ustensiles`, `couteau`, `cafetiere`, `theiere`, `planche`, `casserole`, `epices`, `salade` | 402 |
+| Pour qui aime lire | `lecture`, `livre`, `livres`, `liseuse` | 68 |
 | Pour l'hôte du réveillon | `cremaillere`, `apero`, `aperitif`, `bar`, `vin`, `champagne`, `fete`, `reception`, `serviette` | 430 |
 
 À faire côté importateur : poser un tag cadeau sur les articles pour animaux (gamelles, coussins Doggielounge, boîtes à croquettes) et sur les lampes de bureau ; signaler tout mot de tag qui classerait mal une fiche.
