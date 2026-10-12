@@ -36,7 +36,7 @@ test('every promotions API page carries the exact discounted finish, preserving 
   const data=await r.json(),p=data.items[0];
   assert.equal(p.matchedVariantId,`gid://shopify/ProductVariant/${id}2`);
   assert.equal(p.price,119.5);assert.equal(p.compareAt,239);assert.equal(p.priceMin,119.5);assert.equal(p.priceMax,119.5);
-  assert.equal(p.finishLabel,'Bleu acapulco');assert.equal(p.availabilityLabel,'En stock');
+  assert.equal(p.finishLabel,'Bleu acapulco');assert.equal(p.availabilityLabel,'En stock · livraison 2–3 jours');
   assert.equal(data.pageInfo.hasNextPage,next);
  }
 });

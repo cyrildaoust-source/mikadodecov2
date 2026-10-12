@@ -15,7 +15,7 @@ test('couleur, prix et stock doivent correspondre à la même variante ; carte e
   const hit=filterCatalog([p],{color:'noir',min:'700',max:'701'}).items[0];
   assert.equal(hit.price,700.95);assert.equal(hit.priceMin,700.95);assert.equal(hit.priceMax,700.95);
   assert.equal(hit.matchedVariantId,p.variants[1].id);assert.equal(hit.variantId,p.variants[1].id);
-  assert.equal(hit.image,p.variants[1].image);assert.equal(hit.image2,null);assert.equal(hit.availabilityLabel,'Sur commande');
+  assert.equal(hit.image,p.variants[1].image);assert.equal(hit.image2,null);assert.equal(hit.availabilityLabel,'Livraison 10–14 jours ouvrés')   // HAY hors stock : délai de la marque (ADR 0015);
   assert.equal(hit.variants,undefined,'la liste complète de variantes reste sur le serveur');
 });
 test('les matières proposées par les options restent liées à la variante choisie',()=>{
