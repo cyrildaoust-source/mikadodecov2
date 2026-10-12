@@ -205,6 +205,10 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   const data=await (await realFetch(base+'/api/catalog/idees-cadeaux')).json();
   assert.equal(data.total,7,'5 vases idee-cadeau + le vase noel + la chaise cadeau-enfant');
   assert.deepEqual(data.facets.category.map(c=>[c.value,c.count]),[['cadeaux-enfants',1],['cadeaux-amoureux',1],['cadeaux-belle-maman',5]],'rubriques dans l’ordre de gift-ideas.json, sans celles qui sont vides');
+  // Ordre mélangé : les marques alternent (4 HAY, 3 Vitra → H V H V H V H), identique d'un appel à l'autre.
+  const brands=data.items.map(p=>p.brand);
+  for(let i=0;i<6;i++)assert.notEqual(brands[i],brands[i+1],'deux marques différentes se succèdent : '+brands.join(','));
+  assert.deepEqual((await (await realFetch(base+'/api/catalog/idees-cadeaux')).json()).items.map(p=>p.handle),data.items.map(p=>p.handle),'ordre stable');
   const kids=await (await realFetch(base+'/api/catalog/idees-cadeaux?category=cadeaux-enfants')).json();
   assert.equal(kids.total,1);assert.equal(kids.items[0].handle,'produit-7');
   const band=await (await realFetch(base+'/api/catalog/idees-cadeaux?min=150&max=160')).json();
@@ -250,4 +254,15 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
   const off=await page('/');
   assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous|class="nlink">Idées cadeaux/);
   assert.doesNotMatch((await page('/selection.html')).html,/data-gift-wrap|GIFT-WRAP/);
+});
+
+test('ordre mélangé (idées cadeaux) : tour de rôle des marques, tirage stable pour une même graine',()=>{
+  const {mixOrder}=require('../lib/catalog-index');
+  const list=[...Array(9)].map((_,i)=>({brand:['a','b','c'][i%3],card:{id:String(i)}}));
+  const a=mixOrder(list,42),b=mixOrder(list,42),c=mixOrder(list,43);
+  assert.equal(a.length,9);assert.deepEqual(new Set(a.map(p=>p.card.id)).size,9,'aucune fiche perdue ni doublée');
+  assert.deepEqual(a.map(p=>p.card.id),b.map(p=>p.card.id),'même graine → même ordre');
+  assert.notDeepEqual(a.map(p=>p.card.id),c.map(p=>p.card.id),'autre jour → autre ordre');
+  for(let i=0;i<8;i++)assert.notEqual(a[i].brand,a[i+1].brand);
+  assert.deepEqual(mixOrder([],1),[]);
 });
