@@ -62,12 +62,19 @@ function cardImageAttrs(url) {
 // Écran tactile sans survol : une image vide remplace la photo de survol, jamais téléchargée.
 const NO_HOVER = '<source media="(hover: none)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">';
 
+// Carte cadeau Shopify : rien à expédier (même texte côté serveur, lib/catalog-filters.js).
+const GIFT_CARD_LABEL = "Envoyée par e-mail";
+
 export function productCardHTML(p, {source = '', quantity = 0, interactive = true} = {}) {
   const href = escapeHtml(productHref(p, typeof source === 'string' ? source : ''));
   const alt = p.image2 && p.image2 !== p.image ? `<picture>${NO_HOVER}<img class="alt" ${cardImageAttrs(p.image2)} alt="" loading="lazy" decoding="async" /></picture>` : "";
-  const tag = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
+  const badge = p.badge === "nouveau" ? `<span class="tag">Nouveau</span>`
     : p.badge === "bestseller" ? `<span class="tag">Coup de cœur</span>`
     : p.badge === "limite" ? `<span class="tag">Édition limitée</span>` : "";
+  // « Livré avant Noël » (ADR 0016) : calculé par le serveur pour les deux états de la fiche ; la carte
+  // choisit selon le stock réel de la finition affichée. Absent hors saison (p.christmas = null).
+  const noel = p.christmas && (p.inStock ? p.christmas.inStock : p.christmas.onOrder);
+  const tag = badge + (noel ? `<span class="tag tag--noel">Livré avant Noël</span>` : "");
   return `
     <div class="pcard">
       <a class="pcard__media" href="${href}" aria-label="${escapeHtml(p.name)}">
@@ -85,7 +92,9 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
         ${variantBadge(p) ? `<span class="pcard__variants">${escapeHtml(variantBadge(p))}</span>` : ""}
       </div>
       ${finishHTML(p)}
-      ${p.availabilityLabel
+      ${p.giftCard
+        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>${GIFT_CARD_LABEL}</div>`
+        : p.availabilityLabel
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--${p.inStock ? 'stock' : 'order'}" aria-hidden="true"></span>${escapeHtml(p.availabilityLabel)}</div>`
         : p.inStock
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>En stock · livraison 2–3 jours</div>`

@@ -112,6 +112,7 @@ const CHECKS = [
   { name: 'Page marque (Vitra)',    path: '/collections/vitra',      kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError, seo({ ld: ['BreadcrumbList'] })] },
   { name: 'Catégorie (chaises)',    path: '/collections/chaises',    kind: 'html', status: 200, checks: [h1, chrome, cards, noServerError, seo({ ld: ['BreadcrumbList'] })] },
   { name: 'Famille (tables)',       path: '/collections/tables',     kind: 'html', status: 200, checks: [h1, chrome, noServerError, seo({ ld: ['BreadcrumbList'] })] },
+  { name: 'Idées cadeaux',         path: '/collections/idees-cadeaux', kind: 'html', status: 200, checks: [h1, chrome, cards, has(/gift-band/, 'tranches de budget absentes'), noServerError, seo({ ld: ['BreadcrumbList'] })] },
   { name: 'Designers',             path: '/designers.html',         kind: 'html', status: 200, checks: [h1, chrome, noServerError, seo()] },
   { name: 'Journal',               path: '/journal.html',           kind: 'html', status: 200, checks: [h1, chrome, noServerError, seo()] },
   { name: 'Article du journal',    path: '/journal/fermob.html',    kind: 'html', status: 200, checks: [h1, chrome, noServerError, seo({ ld: ['Article', 'BreadcrumbList'] })] },

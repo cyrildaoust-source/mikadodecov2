@@ -14,9 +14,10 @@ function node(id,{type='chaise',vendor=id%2?'HAY':'Vitra',tags=[],handles=[]}={}
     variants:{pageInfo:{hasNextPage:false,endCursor:null},edges:[{node:{id:`gid://shopify/ProductVariant/${id*10}`,title:'Noir',price:{amount:String(100+id)},availableForSale:true,quantityAvailable:id%3,selectedOptions:[{name:'Couleur',value:'Noir'}],image:{url:`https://cdn.shopify.com/${id}-noir.jpg`}}}]}};
 }
 // 40 chaises, 10 chaises de jardin, 10 vases, 5 tables et 3 tables d'extérieur : 68 fiches.
-for(let id=1;id<=40;id++)products.push(node(id,{tags:id<=6?['verner-panton']:[],handles:['chaises','sieges']}));
+// Idées cadeaux (ADR 0016) : la chaise 7 est taguée pour les enfants, les vases 51–55 « idee-cadeau », le vase 56 « noel ».
+for(let id=1;id<=40;id++)products.push(node(id,{tags:id<=6?['verner-panton']:id===7?['cadeau-enfant','chambre-enfant']:[],handles:['chaises','sieges']}));
 for(let id=41;id<=50;id++)products.push(node(id,{tags:['exterieur'],handles:['chaises-outdoor','outdoor','sieges']}));
-for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone']:[],handles:['vases','decoration']}));
+for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone','idee-cadeau']:id<=55?['idee-cadeau']:id===56?['noel']:[],handles:['vases','decoration']}));
 for(let id=61;id<=65;id++)products.push(node(id,{type:'table',handles:['tables-de-salle-a-manger','tables']}));
 for(let id=66;id<=68;id++)products.push(node(id,{type:'table',tags:['exterieur'],handles:['tables']}));
 
@@ -198,4 +199,55 @@ test('pages créateurs : pièces portant ses tags, rendues par le serveur, param
   const alias=await realFetch(base+'/produits.html?designer=ronan-bouroullec&brand=hay',{redirect:'manual'});
   assert.equal(alias.status,301,'une autre écriture inscrite dans les tags mène à la fiche du créateur');
   assert.equal(alias.headers.get('location'),'/produits.html?designer=ronan-erwan-bouroullec&brand=hay');
+});
+
+test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques par famille ou par mots de tags, tranches de budget',async()=>{
+  const data=await (await realFetch(base+'/api/catalog/idees-cadeaux')).json();
+  assert.equal(data.total,7,'5 vases idee-cadeau + le vase noel + la chaise cadeau-enfant');
+  assert.deepEqual(data.facets.category.map(c=>[c.value,c.count]),[['cadeaux-enfants',1],['decoration',6]],'rubriques dans l’ordre de gift-ideas.json, sans celles qui sont vides');
+  const kids=await (await realFetch(base+'/api/catalog/idees-cadeaux?category=cadeaux-enfants')).json();
+  assert.equal(kids.total,1);assert.equal(kids.items[0].handle,'produit-7');
+  const band=await (await realFetch(base+'/api/catalog/idees-cadeaux?min=150&max=160')).json();
+  assert.equal(band.total,6,'les six vases sont entre 151 et 156 €');
+  const {response,html}=await page('/collections/idees-cadeaux');
+  assert.equal(response.status,200);
+  assert.match(html,/<h1 data-plp-title data-context>Idées cadeaux<\/h1>/);
+  assert.match(html,/<title>Idées cadeaux design · Mikado Deco<\/title>/);
+  assert.match(html,/<link rel="canonical" href="https:\/\/www.mikadodeco.be\/collections\/idees-cadeaux"/);
+  assert.match(html,/class="gift-band" href="\/collections\/idees-cadeaux\?max=50#grille" data-chair-link data-gift-band="\|50"/);
+  assert.match(html,/De 100 à 200 €<\/span><span class="gift-band__count">7 pièces/);
+  assert.match(html,/data-gift-cat="cadeaux-enfants"/);assert.match(html,/data-gift-cat="decoration"/);
+  assert.doesNotMatch(html,/data-gift-cat="noel"|data-gift-cat="bureau"/,'une rubrique sans fiche n’est pas montrée');
+  assert.equal((html.match(/class="pcard"/g)||[]).length,7);
+  assert.match(html,/Accueil[\s\S]*Catalogue[\s\S]*Idées cadeaux/);
+  assert.doesNotMatch(html,/noindex/);
+  assert.doesNotMatch(html,/Livré avant Noël|gift-note|Emballage cadeau/,'hors saison : aucun repère de Noël');
+  assert.doesNotMatch(html,/subhero__img[^>]*src=""/,'bandeau de la page depuis collection-heroes.json');
+  const filtered=await page('/collections/idees-cadeaux?max=50');
+  assert.match(filtered.html,/class="gift-band is-active" href="\/collections\/idees-cadeaux\?max=50#grille"[^>]*aria-current="true"/);
+  assert.match(filtered.html,/content="noindex,follow"/);
+  assert.match(filtered.html,/Aucune idée cadeau ne correspond/);
+});
+
+test('saison de Noël (ADR 0016) : repère « Livré avant Noël » par marque, bandeau de l’accueil, annonce et emballage cadeau',async()=>{
+  process.env.MIKADO_CLOCK='2026-12-01T10:00:00+01:00';
+  try {
+    const data=await (await realFetch(base+'/api/catalog/idees-cadeaux?sort=az')).json();
+    const hay=data.items.find(p=>p.brand==='HAY'),vitra=data.items.find(p=>p.brand==='Vitra');
+    assert.deepEqual(hay.christmas,{inStock:true,onOrder:true},'HAY : 10–14 jours ouvrés depuis le 1er décembre → avant le 24');
+    assert.deepEqual(vitra.christmas,{inStock:true,onOrder:false},'Vitra : 3–4 semaines → trop tard');
+    const {html}=await page('/collections/idees-cadeaux?sort=az');
+    assert.match(html,/class="tag tag--noel">Livré avant Noël/);
+    assert.match(html,/gift-note/);assert.match(html,/Emballage cadeau offert/);assert.match(html,/jusqu’au 31 janvier|jusqu'au 31 janvier/);
+    assert.match(html,/<p data-plp-sub>[^<]*Livré avant Noël/);
+    const home=await page('/');
+    assert.match(home.html,/home-band--gifts/);assert.match(home.html,/href="\/collections\/idees-cadeaux\?max=50">Moins de 50 €/);
+    assert.match(home.html,/<span class="on"><a href="\/collections\/idees-cadeaux">Idées cadeaux pour tous les budgets · emballage offert<\/a><\/span>/);
+    assert.equal((home.html.match(/class="on"/g)||[]).length,1,'un seul message d’annonce affiché au départ');
+    const sel=await page('/selection.html');
+    assert.match(sel.html,/data-gift-wrap-input/);
+  } finally { delete process.env.MIKADO_CLOCK; }
+  const off=await page('/');
+  assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous/);
+  assert.doesNotMatch((await page('/selection.html')).html,/data-gift-wrap|GIFT-WRAP/);
 });

@@ -157,3 +157,13 @@ test('le parcours serveur refuse les lots incomplets, suit toutes les variantes 
   await assert.rejects(readChairCatalog(async()=>({products:{edges:[],pageInfo:{hasNextPage:true,endCursor:'same'}}}),()=>{}),/did not advance/);
   await assert.rejects(readChairCatalog(async()=>({products:{edges:[{node:raw}],pageInfo:{hasNextPage:false}}}),()=>{}),/Incomplete variants/);
 });
+test('« Livré avant Noël » : calculé au rendu depuis le délai de la marque, absent hors saison (ADR 0016)',()=>{
+  const p=chair(1,[{price:400,qty:2},{price:700,qty:0}]);
+  assert.equal(filterCatalog([p],{}).items[0].christmas,null);
+  process.env.MIKADO_CLOCK='2026-12-01T10:00:00+01:00';
+  try { assert.deepEqual(filterCatalog([p],{}).items[0].christmas,{inStock:true,onOrder:true}); }   // HAY : 10–14 jours ouvrés → avant le 24
+  finally { delete process.env.MIKADO_CLOCK; }
+  const gift=chair(2,[{price:50,qty:0}],{card:{giftCard:true}});
+  const hit=filterCatalog([gift],{}).items[0];
+  assert.equal(hit.availabilityLabel,'Envoyée par e-mail');assert.equal(hit.giftCard,true);assert.equal(hit.christmas,null);
+});

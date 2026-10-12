@@ -117,6 +117,10 @@
       "label": "Noël",
       "kind": "selection"
     },
+    "idees-cadeaux": {
+      "label": "Idées cadeaux",
+      "kind": "selection"
+    },
     "jean-prouve": {
       "label": "Jean Prouvé",
       "kind": "designer"

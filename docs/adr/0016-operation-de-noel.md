@@ -1,0 +1,23 @@
+# ADR 0016 — Opération de Noël : page Idées cadeaux par règles, repère « Livré avant Noël » calculé article par article
+
+Date : 13 octobre 2026 · Statut : accepté · Demande de Cyril du 12 octobre (« mettre le site au goût du jour pour Noël, des idées cadeaux à différents prix, pousser à acheter en ligne, sans rouge ni père Noël ») et décisions du 13 octobre (tranches de budget, rubriques, carte cadeau, emballage offert, échange jusqu'au 31 janvier, aucune promesse globale de date).
+
+## Contexte
+
+Mikado a peu de stock : promettre « commandez avant le 18 décembre » reviendrait à promettre ce que les marques ne garantissent pas. Les délais par marque existent désormais (ADR 0015) ; une page cadeaux doit s'appuyer sur ce que le catalogue porte déjà (tags `cadeau`/`idee-cadeau` de l'importateur sur ≈ 2 000 fiches, tag `noel`, familles du site) plutôt que sur une curation fiche par fiche.
+
+## Décision
+
+- **Une page toute l'année**, `/collections/idees-cadeaux`, sans collection Shopify : une portée de l'index du catalogue (`lib/filter-scopes.js`, kind `gifts`) qui retient les fiches portant un tag contenant le mot `cadeau`/`cadeaux` (`cadeau`, `idee-cadeau`, `cadeau-design`, `coffret-cadeau`, `cadeau-enfant`…) ou le tag `noel`. Mêmes cartes, mêmes filtres, même pagination que les autres listes (`sendScopeCatalog`). Un handle de navigation (`v3/navigation-data.json`, kind `selection`) donne le fil d'Ariane et le libellé.
+- **Deux lectures sur la page** (`data/gift-ideas.json`, `lib/render/gifts.js`) : les **tranches de budget** (moins de 50 €, 50–100, 100–200, plus de 200 ; tuiles typographiques = filtre `min`/`max`, avec le nombre de pièces) et les **rubriques « pour qui, pour quoi »** (Pour la table, Pour s'éclairer, Pour les enfants, Pour le bureau, Pour la maison, La table de Noël) = familles ou sélections du site, ou des mots de tags (`enfant`, `kids`, `naissance`… pour les enfants, kind `tagged`). Une rubrique sans fiche n'est pas montrée.
+- **Le repère « Livré avant Noël »** (`lib/christmas.js`) n'est jamais une date limite affichée : il se calcule pour chaque article à partir de son délai haut (stock Mikado = `IN_STOCK_RANGE`, sinon `leadTimeFor`), plus une marge de sécurité (`safetyDays`), et n'apparaît que si le colis arrive au plus tard le `deliveryBy`. Il disparaît de lui-même, article par article (stock jusqu'au 19 décembre, HAY jusque vers le 5 décembre, Vitra fin novembre). Les cartes et la fiche reçoivent les deux états (`christmas: { inStock, onOrder }`) et choisissent selon le stock réel de la finition ; `null` hors saison.
+- **La saison** (bloc `noel` de `data/campaigns.json`, du 16 novembre au 24 décembre 18 h 30) allume : la section « Idées cadeaux » de l'accueil, le message de la barre d'annonce, le texte de saison de la page, la case **emballage cadeau offert** du panier (attribut Shopify « Emballage cadeau : Oui », uniquement pendant la fenêtre quoi que dise le client) et les repères de la page. `enabled: false` éteint tout. `MIKADO_CLOCK` (date ISO) remplace l'horloge pour les tests et pour montrer la saison sur une Preview.
+- **L'échange des cadeaux** (geste commercial en boutique, décision de Cyril) : jusqu'au 31 janvier pour tout achat depuis le 15 novembre, sur présentation du ticket ou de la confirmation de commande, hors promotions ; affiché sur la page tant que la fenêtre court. Le droit de rétractation légal de 14 jours en ligne (CGV, article 2) ne change pas ; la formulation des CGV reste à l'avocate.
+- **La carte cadeau** est un produit Shopify (importateur, `docs/BRIEF-importateur-noel.md`) : le site lit `isGiftCard` (carte « Envoyée par e-mail », aucun délai ni repère) et la page cadeaux la propose dès qu'elle est publiée, sans déploiement.
+
+## Conséquences
+
+- Aucune donnée Shopify à créer pour ouvrir la page ; l'importateur peut affiner la curation en posant ou retirant des tags cadeau, le site suit à la prochaine construction de l'index (30 min).
+- Les pages de liste sont cachées quelques minutes à l'edge : la marge de sécurité de deux jours couvre ce délai au moment où un article perd son repère.
+- Lancer, décaler ou éteindre l'opération = une date dans `campaigns.json`, en PR. Les autres occasions (Saint-Valentin, fête des mères) pourront réutiliser le même mécanisme avec une autre fenêtre.
+- Tests : `tests/christmas.test.cjs` (fenêtres, calcul du repère sur les règles réelles des marques), `tests/catalog-index.test.cjs` (page, rubriques, tranches, saison), `tests/cart-delivery-api.test.cjs` (emballage), `tests/product-card.test.mjs`, `tests/catalog-filters.test.cjs`. Le smoke contrôle `/collections/idees-cadeaux`.

@@ -71,7 +71,13 @@ function paint(data,{keepOpen=false}={}) {
     target?.focus({preventScroll:true});
   }
   if(promos)applyPromos(promos);
+  syncGiftTiles(data.state);
   updateBreadcrumb();syncOffset();fitPopovers();if(typeof updateFab==='function')updateFab();
+}
+// Page Idées cadeaux : tuiles de budget et de rubrique en phase avec les filtres actifs (rendu serveur sinon).
+function syncGiftTiles(state) {
+  for(const el of document.querySelectorAll('[data-gift-band]')){const [min,max]=el.dataset.giftBand.split('|');el.classList.toggle('is-active',String(state.min??'')===min&&String(state.max??'')===max);}
+  for(const el of document.querySelectorAll('[data-gift-cat]'))el.classList.toggle('is-active',(state.category||[]).includes(el.dataset.giftCat));
 }
 function formURL() {
   const q=new URLSearchParams();

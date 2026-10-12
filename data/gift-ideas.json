@@ -1,0 +1,30 @@
+{
+  "_note": "Page « Idées cadeaux » (/collections/idees-cadeaux, ADR 0016), en ligne toute l'année. Membres = fiches de l'index du catalogue portant un tag cadeau de l'importateur (`cadeau`, `idee-cadeau`, `cadeau-design`, `coffret-cadeau`, `cadeau-enfant`…) ou le tag `noel` — aucune collection Shopify n'est requise (règles dans lib/filter-scopes.js). `bands` : tranches de budget (bornes en €, décision de Cyril du 13 octobre 2026 ; sans `max` = tranche ouverte). `categories` : rubriques « pour qui, pour quoi » (validées par Cyril le 13 octobre) = une famille ou une sélection du site (handle de collection) ou, avec `tags`, des mots de tags (`enfant`, `kids`…) ; une rubrique sans fiche n'est pas affichée. `home` : photo du bandeau de l'accueil pendant la saison. Images : locales ou CDN Shopify (`sourceProduct` = fiche d'origine).",
+  "handle": "idees-cadeaux",
+  "title": "Idées cadeaux",
+  "description": "Des pièces de design pour tous les budgets, choisies par Mikado. Le délai est indiqué sur chaque article : en stock, livré en 2–3 jours ou à retirer en boutique sous 24 h.",
+  "seasonDescription": "Des pièces de design pour tous les budgets, choisies par Mikado. Les articles marqués « Livré avant Noël » arrivent à temps si vous commandez aujourd'hui ; l'emballage cadeau est offert.",
+  "bands": [
+    { "label": "Moins de 50 €", "max": 50 },
+    { "label": "De 50 à 100 €", "min": 50, "max": 100 },
+    { "label": "De 100 à 200 €", "min": 100, "max": 200 },
+    { "label": "Plus de 200 €", "min": 200 }
+  ],
+  "categories": [
+    { "value": "accessoires", "label": "Pour la table", "image": "/images/home/fam-arts.webp", "position": "50% 50%" },
+    { "value": "luminaires", "label": "Pour s'éclairer", "image": "/images/home/fam-luminaires.webp", "position": "50% 50%" },
+    { "value": "cadeaux-enfants", "label": "Pour les enfants", "tags": ["enfant", "enfants", "kids", "naissance", "bebe"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/4808692_Panton_Junior_Eames_Elephant_v_fullbleed_1440x_9d65a23e-7f0d-4d58-bc69-001669803e5a.jpg?v=1778677219", "sourceProduct": "chaise-panton-junior", "position": "50% 62%" },
+    { "value": "bureau", "label": "Pour le bureau", "image": "/images/home/room-bureau.webp", "position": "50% 50%" },
+    { "value": "decoration", "label": "Pour la maison", "image": "/images/home/fam-decoration.webp", "position": "50% 50%" },
+    { "value": "noel", "label": "La table de Noël", "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9037-1.jpg?v=1779308321", "sourceProduct": "bougeoir-nagel", "position": "50% 40%" }
+  ],
+  "home": {
+    "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/1023748_iittalaemea_02_iittala-festico-candleholder-215-mm-2016.jpg?v=1777903551",
+    "sourceProduct": "bougeoir-festivo-22-cm",
+    "alt": "Bougeoirs Festivo d'Iittala et bougies allumées sur un socle en travertin",
+    "position": "50% 64%",
+    "mobilePosition": "50% 64%",
+    "width": 2500,
+    "height": 2500
+  }
+}

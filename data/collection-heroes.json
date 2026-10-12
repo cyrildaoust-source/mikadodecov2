@@ -367,5 +367,14 @@
     "mobilePosition": "55% 60%",
     "width": 2000,
     "height": 1333
+  },
+  "idees-cadeaux": {
+    "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/vase-bronzed-brass.jpg?v=1779351786&width=2000&format=webp",
+    "sourceProduct": "bougeoir-nagel",
+    "alt": "Bougeoirs Nagel et bougies allumées sur une table dressée",
+    "position": "50% 58%",
+    "mobilePosition": "55% 58%",
+    "width": 2000,
+    "height": 2000
   }
 }
