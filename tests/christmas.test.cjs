@@ -28,7 +28,7 @@ test('campaigns.json : bloc noel valide, dates cohérentes, fenêtre avant Noël
 });
 
 test('hors fenêtre : rien (ni repère, ni emballage, ni état de fiche)', () => {
-  clock('2026-10-20T10:00:00+02:00');
+  clock('2026-10-10T10:00:00+02:00');
   assert.equal(christmas.active(), false);
   assert.equal(christmas.giftWrapActive(), false);
   assert.equal(christmas.deliverable(null), false, 'même un article en stock n’affiche rien avant la saison');
