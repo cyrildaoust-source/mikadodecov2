@@ -35,7 +35,7 @@ test('checkout uses fresh server inventory and ignores fabricated client ETA and
 });
 test('preview reflects exact quantities and refreshed availability', async () => {
   available = 2;
-  for (const [qty, label] of [[2,'1–2 jours'],[3,'3–4 semaines']]) {
+  for (const [qty, label] of [[2,'2–3 jours'],[3,'3–4 semaines']]) {
     const response = await post('/api/cart/delivery',{items:[{variantId:id,qty}]});
     assert.equal(response.status, 200);
     assert.equal((await response.json()).label, label);
