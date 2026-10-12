@@ -14,10 +14,10 @@ function node(id,{type='chaise',vendor=id%2?'HAY':'Vitra',tags=[],handles=[]}={}
     variants:{pageInfo:{hasNextPage:false,endCursor:null},edges:[{node:{id:`gid://shopify/ProductVariant/${id*10}`,title:'Noir',price:{amount:String(100+id)},availableForSale:true,quantityAvailable:id%3,selectedOptions:[{name:'Couleur',value:'Noir'}],image:{url:`https://cdn.shopify.com/${id}-noir.jpg`}}}]}};
 }
 // 40 chaises, 10 chaises de jardin, 10 vases, 5 tables et 3 tables d'extérieur : 68 fiches.
-// Idées cadeaux (ADR 0016) : la chaise 7 est taguée pour les enfants, les vases 51–55 « idee-cadeau », le vase 56 « noel ».
+// Idées cadeaux (ADR 0016) : la chaise 7 est taguée pour les enfants, les vases 51–55 « idee-cadeau » + « vase » (belle-maman), le vase 56 « noel » + « bougie » (amoureux).
 for(let id=1;id<=40;id++)products.push(node(id,{tags:id<=6?['verner-panton']:id===7?['cadeau-enfant','chambre-enfant']:[],handles:['chaises','sieges']}));
 for(let id=41;id<=50;id++)products.push(node(id,{tags:['exterieur'],handles:['chaises-outdoor','outdoor','sieges']}));
-for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone','idee-cadeau']:id<=55?['idee-cadeau']:id===56?['noel']:[],handles:['vases','decoration']}));
+for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone','idee-cadeau','vase']:id<=55?['idee-cadeau','vase']:id===56?['noel','bougie']:[],handles:['vases','decoration']}));
 for(let id=61;id<=65;id++)products.push(node(id,{type:'table',handles:['tables-de-salle-a-manger','tables']}));
 for(let id=66;id<=68;id++)products.push(node(id,{type:'table',tags:['exterieur'],handles:['tables']}));
 
@@ -201,10 +201,10 @@ test('pages créateurs : pièces portant ses tags, rendues par le serveur, param
   assert.equal(alias.headers.get('location'),'/produits.html?designer=ronan-erwan-bouroullec&brand=hay');
 });
 
-test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques par famille ou par mots de tags, tranches de budget',async()=>{
+test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « Pour qui » par mots de tags, tranches de budget en photo',async()=>{
   const data=await (await realFetch(base+'/api/catalog/idees-cadeaux')).json();
   assert.equal(data.total,7,'5 vases idee-cadeau + le vase noel + la chaise cadeau-enfant');
-  assert.deepEqual(data.facets.category.map(c=>[c.value,c.count]),[['cadeaux-enfants',1],['decoration',6]],'rubriques dans l’ordre de gift-ideas.json, sans celles qui sont vides');
+  assert.deepEqual(data.facets.category.map(c=>[c.value,c.count]),[['cadeaux-enfants',1],['cadeaux-amoureux',1],['cadeaux-belle-maman',5]],'rubriques dans l’ordre de gift-ideas.json, sans celles qui sont vides');
   const kids=await (await realFetch(base+'/api/catalog/idees-cadeaux?category=cadeaux-enfants')).json();
   assert.equal(kids.total,1);assert.equal(kids.items[0].handle,'produit-7');
   const band=await (await realFetch(base+'/api/catalog/idees-cadeaux?min=150&max=160')).json();
@@ -214,17 +214,17 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques par 
   assert.match(html,/<h1 data-plp-title data-context>Idées cadeaux<\/h1>/);
   assert.match(html,/<title>Idées cadeaux design · Mikado Deco<\/title>/);
   assert.match(html,/<link rel="canonical" href="https:\/\/www.mikadodeco.be\/collections\/idees-cadeaux"/);
-  assert.match(html,/class="gift-band" href="\/collections\/idees-cadeaux\?max=50#grille" data-chair-link data-gift-band="\|50"/);
-  assert.match(html,/De 100 à 200 €<\/span><span class="gift-band__count">7 pièces/);
-  assert.match(html,/data-gift-cat="cadeaux-enfants"/);assert.match(html,/data-gift-cat="decoration"/);
-  assert.doesNotMatch(html,/data-gift-cat="noel"|data-gift-cat="bureau"/,'une rubrique sans fiche n’est pas montrée');
+  assert.match(html,/class="home-rc gift-band" href="\/collections\/idees-cadeaux\?max=50#grille" data-chair-link data-gift-band="\|50"><img class="home-rc__img editorial-photo"/,'tranche = carte photo');
+  assert.match(html,/De 100 à 200 €<\/span><span class="home-rc__count">7 pièces/);
+  assert.match(html,/data-gift-cat="cadeaux-enfants"/);assert.match(html,/data-gift-cat="cadeaux-belle-maman"/);assert.match(html,/>Pour qui<\/h2>/);
+  assert.doesNotMatch(html,/data-gift-cat="cadeaux-collegue"|data-gift-cat="cadeaux-chien-chat"|data-gift-cat="cadeaux-hote"/,'une rubrique sans fiche n’est pas montrée');
   assert.equal((html.match(/class="pcard"/g)||[]).length,7);
   assert.match(html,/Accueil[\s\S]*Catalogue[\s\S]*Idées cadeaux/);
   assert.doesNotMatch(html,/noindex/);
   assert.doesNotMatch(html,/Livré avant Noël|gift-note|Emballage cadeau/,'hors saison : aucun repère de Noël');
   assert.doesNotMatch(html,/subhero__img[^>]*src=""/,'bandeau de la page depuis collection-heroes.json');
   const filtered=await page('/collections/idees-cadeaux?max=50');
-  assert.match(filtered.html,/class="gift-band is-active" href="\/collections\/idees-cadeaux\?max=50#grille"[^>]*aria-current="true"/);
+  assert.match(filtered.html,/class="home-rc gift-band is-active" href="\/collections\/idees-cadeaux\?max=50#grille"[^>]*aria-current="true"/);
   assert.match(filtered.html,/content="noindex,follow"/);
   assert.match(filtered.html,/Aucune idée cadeau ne correspond/);
 });

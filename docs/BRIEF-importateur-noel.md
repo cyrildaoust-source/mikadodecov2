@@ -21,9 +21,20 @@ La page `/collections/idees-cadeaux` retient toute fiche publiée dont un tag co
 - Retirer le mot `cadeau` d'une fiche la sort de la page ; l'ajouter l'y fait entrer (prise en compte à la construction suivante de l'index, toutes les 30 min).
 - À vérifier côté importateur : pièces détachées, housses, accessoires techniques ou articles à « délai sur demande » qui porteraient un tag cadeau par héritage de gamme.
 
-## 3. Rubrique « Pour les enfants » (P1)
+## 3. Rubriques « Pour qui » (P1)
 
-Mots de tags lus : `enfant`, `enfants`, `kids`, `naissance`, `bebe` (à n'importe quelle position du tag : `chaise-enfant`, `cadeau-naissance`, `chambre-enfant`…). Au 13 octobre : 59 fiches `enfant`, dont 27 avec un tag cadeau. Pour figurer dans la page, une fiche enfant doit AUSSI porter un tag cadeau (règle 2).
+Six rubriques, chacune = des mots de tags comparés mot à mot dans chaque tag (`chaise-enfant` contient `enfant`, `cadeau-naissance` contient `naissance`). Pour figurer dans une rubrique, une fiche doit AUSSI porter un tag cadeau (règle 2). Comptes au 13 octobre dans la page :
+
+| Rubrique | Mots de tags lus | Fiches |
+|---|---|---|
+| Pour les enfants | `enfant`, `enfants`, `kids`, `naissance`, `bebe` | 29 |
+| Pour les amoureux | `amour`, `amoureux`, `amoureuse`, `romantique`, `valentin`, `couple`, `bougie`, `parfum`, `champagne` | 75 |
+| Pour belle-maman | `mariage`, `vase`, `bougeoir`, `plaid`, `parfum`, `reception`, `vaisselle`, `service` | 868 |
+| Pour le collègue | `bureau`, `cafe`, `the`, `mug`, `carnet`, `stylo` | 230 |
+| Pour le chien et le chat | `chien`, `chiens`, `chat`, `chats`, `croquettes`, `gamelle` | 22 (44 fiches animaux au total : les gamelles Alessi et Doggielounge Fatboy sans tag cadeau n'y sont pas) |
+| Pour l'hôte du réveillon | `cremaillere`, `apero`, `aperitif`, `bar`, `vin`, `champagne`, `fete`, `reception`, `serviette` | 430 |
+
+À faire côté importateur : poser un tag cadeau sur les articles pour animaux (gamelles, coussins Doggielounge, boîtes à croquettes) et sur les lampes de bureau ; signaler tout mot de tag qui classerait mal une fiche.
 
 ## 4. Délais (rappel ADR 0015)
 

@@ -20,6 +20,8 @@ Mikado a peu de stock : promettre « commandez avant le 18 décembre » reviendr
 - **Repère « Livré avant Noël » éteint** (`deliveryBadge: false`) : « je ne suis pas encore assez fiable sur les stocks, je viens à peine de me lancer ». Le calcul (`flagsFor`) reste en place et testé ; les cartes et les fiches n'écrivent rien tant que l'interrupteur est à `false`.
 - **Lancement le lundi 19 octobre 2026** (et non le 16 novembre) : « le tout peut être lancé mi-octobre ».
 - **Entrée « Idées cadeaux » dans la navigation, avant Promotions** (barre et tiroir mobile), pendant la saison (`lib/render/chrome.js`).
+- **Tranches de budget en photo** (« ça donne plus envie ») : mêmes cartes que « Nos familles », une scène produit par tranche, le nombre de pièces sous le titre.
+- **Rubriques « Pour qui »** à la place des rubriques par usage, sur la liste de Cyril : Pour les enfants, Pour les amoureux, Pour belle-maman, Pour le collègue, Pour le chien et le chat, Pour l'hôte du réveillon. Chaque rubrique = des mots de tags de l'importateur (`data/gift-ideas.json` : `vase`, `bougeoir`, `mariage`… pour belle-maman ; `bureau`, `cafe`, `the`… pour le collègue ; `chien`, `chat`, `gamelle`… ; `champagne`, `bougie`, `parfum`, `romantique`… ; `cremaillere`, `apero`, `bar`, `vin`…), comparés mot à mot dans chaque tag ; une rubrique vide n'apparaît pas. Pas de collection ni de tag à créer : affiner une rubrique = ajouter ou retirer un mot dans le fichier, ou un tag sur la fiche.
 
 ## Conséquences
 
