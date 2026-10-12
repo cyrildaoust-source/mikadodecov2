@@ -15,6 +15,12 @@ Mikado a peu de stock : promettre « commandez avant le 18 décembre » reviendr
 - **L'échange des cadeaux** (geste commercial en boutique, décision de Cyril) : jusqu'au 31 janvier pour tout achat depuis le 15 novembre, sur présentation du ticket ou de la confirmation de commande, hors promotions ; affiché sur la page tant que la fenêtre court. Le droit de rétractation légal de 14 jours en ligne (CGV, article 2) ne change pas ; la formulation des CGV reste à l'avocate.
 - **La carte cadeau** est un produit Shopify (importateur, `docs/BRIEF-importateur-noel.md`) : le site lit `isGiftCard` (carte « Envoyée par e-mail », aucun délai ni repère) et la page cadeaux la propose dès qu'elle est publiée, sans déploiement.
 
+## Décisions de Cyril après la première Preview (13 octobre 2026)
+
+- **Repère « Livré avant Noël » éteint** (`deliveryBadge: false`) : « je ne suis pas encore assez fiable sur les stocks, je viens à peine de me lancer ». Le calcul (`flagsFor`) reste en place et testé ; les cartes et les fiches n'écrivent rien tant que l'interrupteur est à `false`.
+- **Lancement le lundi 19 octobre 2026** (et non le 16 novembre) : « le tout peut être lancé mi-octobre ».
+- **Entrée « Idées cadeaux » dans la navigation, avant Promotions** (barre et tiroir mobile), pendant la saison (`lib/render/chrome.js`).
+
 ## Conséquences
 
 - Aucune donnée Shopify à créer pour ouvrir la page ; l'importateur peut affiner la curation en posant ou retirant des tags cadeau, le site suit à la prochaine construction de l'index (30 min).

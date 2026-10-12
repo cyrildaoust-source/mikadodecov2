@@ -3,7 +3,8 @@
   "handle": "idees-cadeaux",
   "title": "Idées cadeaux",
   "description": "Des pièces de design pour tous les budgets, choisies par Mikado. Le délai est indiqué sur chaque article : en stock, livré en 2–3 jours ou à retirer en boutique sous 24 h.",
-  "seasonDescription": "Des pièces de design pour tous les budgets, choisies par Mikado. Les articles marqués « Livré avant Noël » arrivent à temps si vous commandez aujourd'hui ; l'emballage cadeau est offert.",
+  "seasonDescription": "Des pièces de design pour tous les budgets, choisies par Mikado. L'emballage cadeau est offert ; le délai est indiqué sur chaque article.",
+  "seasonDescriptionBadge": "Des pièces de design pour tous les budgets, choisies par Mikado. Les articles marqués « Livré avant Noël » arrivent à temps si vous commandez aujourd'hui ; l'emballage cadeau est offert.",
   "bands": [
     { "label": "Moins de 50 €", "max": 50 },
     { "label": "De 50 à 100 €", "min": 50, "max": 100 },

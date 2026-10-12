@@ -229,17 +229,17 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques par 
   assert.match(filtered.html,/Aucune idée cadeau ne correspond/);
 });
 
-test('saison de Noël (ADR 0016) : repère « Livré avant Noël » par marque, bandeau de l’accueil, annonce et emballage cadeau',async()=>{
+test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navigation, annonce et emballage cadeau',async()=>{
   process.env.MIKADO_CLOCK='2026-12-01T10:00:00+01:00';
   try {
     const data=await (await realFetch(base+'/api/catalog/idees-cadeaux?sort=az')).json();
-    const hay=data.items.find(p=>p.brand==='HAY'),vitra=data.items.find(p=>p.brand==='Vitra');
-    assert.deepEqual(hay.christmas,{inStock:true,onOrder:true},'HAY : 10–14 jours ouvrés depuis le 1er décembre → avant le 24');
-    assert.deepEqual(vitra.christmas,{inStock:true,onOrder:false},'Vitra : 3–4 semaines → trop tard');
+    assert.ok(data.items.every(p=>p.christmas===null),'repère « Livré avant Noël » éteint (deliveryBadge: false) : aucun état envoyé');
     const {html}=await page('/collections/idees-cadeaux?sort=az');
-    assert.match(html,/class="tag tag--noel">Livré avant Noël/);
+    assert.doesNotMatch(html,/Livré avant Noël/,'ni chip ni repère sur la page');
     assert.match(html,/gift-note/);assert.match(html,/Emballage cadeau offert/);assert.match(html,/jusqu’au 31 janvier|jusqu'au 31 janvier/);
-    assert.match(html,/<p data-plp-sub>[^<]*Livré avant Noël/);
+    assert.match(html,/<p data-plp-sub>[^<]*emballage cadeau est offert/);
+    assert.match(html,/<a href="\/collections\/idees-cadeaux" class="nlink">Idées cadeaux<\/a><a href="\/collections\/promotions" class="nlink nlink--promo"/,'navigation : Idées cadeaux avant Promotions');
+    assert.match(html,/<a class="drawer__link" href="\/collections\/idees-cadeaux">Idées cadeaux<\/a><a class="drawer__link drawer__link--promo"/,'tiroir mobile aussi');
     const home=await page('/');
     assert.match(home.html,/home-band--gifts/);assert.match(home.html,/href="\/collections\/idees-cadeaux\?max=50">Moins de 50 €/);
     assert.match(home.html,/<span class="on"><a href="\/collections\/idees-cadeaux">Idées cadeaux pour tous les budgets · emballage offert<\/a><\/span>/);
@@ -248,6 +248,6 @@ test('saison de Noël (ADR 0016) : repère « Livré avant Noël » par marque, 
     assert.match(sel.html,/data-gift-wrap-input/);
   } finally { delete process.env.MIKADO_CLOCK; }
   const off=await page('/');
-  assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous/);
+  assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous|class="nlink">Idées cadeaux/);
   assert.doesNotMatch((await page('/selection.html')).html,/data-gift-wrap|GIFT-WRAP/);
 });

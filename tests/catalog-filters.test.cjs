@@ -161,7 +161,7 @@ test('« Livré avant Noël » : calculé au rendu depuis le délai de la marque
   const p=chair(1,[{price:400,qty:2},{price:700,qty:0}]);
   assert.equal(filterCatalog([p],{}).items[0].christmas,null);
   process.env.MIKADO_CLOCK='2026-12-01T10:00:00+01:00';
-  try { assert.deepEqual(filterCatalog([p],{}).items[0].christmas,{inStock:true,onOrder:true}); }   // HAY : 10–14 jours ouvrés → avant le 24
+  try { assert.equal(filterCatalog([p],{}).items[0].christmas,null,'repère éteint par deliveryBadge: false (Cyril, 13 octobre 2026), même en saison'); }
   finally { delete process.env.MIKADO_CLOCK; }
   const gift=chair(2,[{price:50,qty:0}],{card:{giftCard:true}});
   const hit=filterCatalog([gift],{}).items[0];

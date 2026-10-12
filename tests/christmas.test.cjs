@@ -19,6 +19,8 @@ test('campaigns.json : bloc noel valide, dates cohérentes, fenêtre avant Noël
   assert.ok(c.startsAt < c.endsAt && c.endsAt <= c.deliveryBy, 'la saison se termine au plus tard le jour de livraison');
   assert.equal(c.deliveryByLabel, '24 décembre');
   assert.equal(c.giftWrap, true);
+  assert.equal(c.deliveryBadge, false, 'repère « Livré avant Noël » éteint (Cyril, 13 octobre 2026)');
+  assert.equal(new Date(c.startsAt).toISOString(), '2026-10-18T22:00:00.000Z', 'lancement le lundi 19 octobre 2026');
   assert.deepEqual([c.exchange.fromLabel, c.exchange.untilLabel], ['15 novembre', '31 janvier']);
   assert.throws(() => christmas.parseConfig({ ...raw, deliveryBy: '24/12/2026' }), /YYYY-MM-DD/);
   assert.throws(() => christmas.parseConfig({ ...raw, endsAt: raw.startsAt }), /endsAt/);
@@ -31,6 +33,8 @@ test('hors fenêtre : rien (ni repère, ni emballage, ni état de fiche)', () =>
   assert.equal(christmas.giftWrapActive(), false);
   assert.equal(christmas.deliverable(null), false, 'même un article en stock n’affiche rien avant la saison');
   assert.equal(christmas.flagsFor(ONE_WEEK), null);
+  clock('2026-10-19T09:00:00+02:00');
+  assert.equal(christmas.active(), true, 'lancement le 19 octobre au matin');
   clock('2026-12-24T19:00:00+01:00');
   assert.equal(christmas.active(), false, 'la saison s’éteint le 24 décembre à la fermeture');
 });
@@ -51,13 +55,19 @@ test('« Livré avant Noël » suit le délai haut de l’article plus la marge,
   assert.equal(christmas.deliverable(DAYS(3)), false, '3 jours ouvrés → mercredi 23, + 2 → le 25');
 });
 
-test('les règles réelles des marques : HAY promet encore début décembre, Vitra plus fin novembre', () => {
+test('le repère est éteint par la configuration ; avec l’interrupteur, les règles réelles des marques décident', () => {
   clock('2026-12-01T10:00:00+01:00');
-  assert.deepEqual(christmas.flagsFor(leadTimeFor({ vendor: 'HAY' })), { inStock: true, onOrder: true });        // 10–14 jours ouvrés → 19 déc.
-  assert.deepEqual(christmas.flagsFor(leadTimeFor({ vendor: 'Vitra' })), { inStock: true, onOrder: false });     // 3–4 semaines → 29 déc.
+  assert.equal(christmas.badgeActive(), false);
+  assert.equal(christmas.flagsFor(leadTimeFor({ vendor: 'HAY' })), null, 'deliveryBadge: false → aucun repère, saison ou pas');
+  const raw = JSON.parse(readFileSync(join(__dirname, '..', 'data', 'campaigns.json'), 'utf8')).noel;
+  const on = christmas.parseConfig({ ...raw, deliveryBadge: true });
+  assert.deepEqual(christmas.flagsFor(leadTimeFor({ vendor: 'HAY' }), christmas.now(), on), { inStock: true, onOrder: true });        // 10–14 jours ouvrés → 19 déc.
+  assert.deepEqual(christmas.flagsFor(leadTimeFor({ vendor: 'Vitra' }), christmas.now(), on), { inStock: true, onOrder: false });     // 3–4 semaines → 29 déc.
   clock('2026-11-20T10:00:00+01:00');
-  assert.deepEqual(christmas.flagsFor(leadTimeFor({ vendor: 'Vitra' })), { inStock: true, onOrder: true });      // 28 jours → 18 déc.
-  assert.equal(christmas.flagsFor(leadTimeFor({ vendor: 'Vitra', tags: ['delai-long'] })).onOrder, false);
+  assert.deepEqual(christmas.flagsFor(leadTimeFor({ vendor: 'Vitra' }), christmas.now(), on), { inStock: true, onOrder: true });      // 28 jours → 18 déc.
+  assert.equal(christmas.flagsFor(leadTimeFor({ vendor: 'Vitra', tags: ['delai-long'] }), christmas.now(), on).onOrder, false);
+  clock('2026-10-01T10:00:00+02:00');
+  assert.equal(christmas.flagsFor(leadTimeFor({ vendor: 'HAY' }), christmas.now(), on), null, 'avant le lancement : rien, même interrupteur allumé');
 });
 
 test('emballage cadeau et fenêtre d’échange', () => {
