@@ -232,7 +232,8 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   const filtered=await page('/collections/idees-cadeaux?max=50');
   assert.match(filtered.html,/class="home-rc gift-band is-active" href="\/collections\/idees-cadeaux\?max=50#grille"[^>]*aria-current="true"/);
   assert.match(filtered.html,/class="catalog-filters__band is-active"[^>]*>Moins de 50 €/);
-  assert.match(filtered.html,/data-gift-cat="cadeaux-enfants"/);assert.doesNotMatch(filtered.html,/category=cadeaux-enfants&(?:min|max)=|max=50&category=/,'une rubrique remplace la tranche, et inversement');
+  assert.match(filtered.html,/data-gift-cat="cadeaux-enfants"/,'les rubriques restent proposées quand une tranche est active');
+  assert.match(filtered.html,/href="\/collections\/idees-cadeaux\?category=cadeaux-enfants#grille"/,'une rubrique remplace la tranche, et inversement');
   assert.match(filtered.html,/content="noindex,follow"/);
   assert.match(filtered.html,/Aucune idée cadeau ne correspond/);
 });
@@ -245,7 +246,7 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
     const {html}=await page('/collections/idees-cadeaux?sort=az');
     assert.doesNotMatch(html,/Livré avant Noël/,'ni chip ni repère sur la page');
     assert.match(html,/gift-note/);assert.match(html,/Emballage cadeau offert/);assert.match(html,/jusqu’au 31 janvier|jusqu'au 31 janvier/);
-    assert.match(html,/<p data-plp-sub>[^<]*emballage cadeau est offert/);
+    assert.match(html,/<p data-plp-sub>[^<]*Emballage cadeau offert/);
     assert.match(html,/<a href="\/collections\/idees-cadeaux" class="nlink">Idées cadeaux<\/a><a href="\/collections\/promotions" class="nlink nlink--promo"/,'navigation : Idées cadeaux avant Promotions');
     assert.match(html,/<a class="drawer__link" href="\/collections\/idees-cadeaux">Idées cadeaux<\/a><a class="drawer__link drawer__link--promo"/,'tiroir mobile aussi');
     const home=await page('/');
