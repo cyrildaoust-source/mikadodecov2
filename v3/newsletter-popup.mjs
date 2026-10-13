@@ -72,16 +72,22 @@ export function initNewsletterPopup(config = {}) {
   write(sessionStorage, SESSION_KEY, { views: session.views, shown: session.shown });
   if (!force && !session.trigger) return;                                // déjà montrée pendant cette visite
 
-  let root = null, lastFocus = null, timers = [];
+  // Une seule ouverture par visite : une fois montrée (puis fermée), ni le délai, ni la 2e page, ni la sortie de la
+  // souris ne la rouvrent (constat de Cyril du 13 octobre : elle revenait après l'inscription).
+  let root = null, lastFocus = null, timers = [], shownOnce = false, subscribed = false;
   const clear = () => { timers.forEach(clearTimeout); timers = []; };
   const remember = (value) => write(localStorage, STORE_KEY, value);
+  const onLeave = (e) => { if (e.clientY <= 0 && Date.now() - since >= (config.exitIntentSeconds ?? 10) * 1000) open(); };
+  const since = Date.now();
 
   function close(reason = "fermeture") {
     if (!root) return;
+    clear();
     document.removeEventListener("keydown", onKey, true);
     root.remove(); root = null;
     lockBodyScroll(false);
-    if (reason === "fermeture") { remember({ closedAt: Date.now() }); track("fermeture"); }
+    // Une inscription n'est jamais écrasée par une fermeture (croix pendant le « Merci »).
+    if (reason === "fermeture" && !subscribed) { remember({ closedAt: Date.now() }); track("fermeture"); }
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
   }
   function onKey(e) {
@@ -104,10 +110,14 @@ export function initNewsletterPopup(config = {}) {
       if (res.status === 429) throw new Error("rate_limit");
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || "server");
+      subscribed = true;
       remember({ subscribed: true, at: Date.now(), saved: data.saved });
       track("inscription");
       form.hidden = true;
       const done = root.querySelector("[data-nlp-done]");
+      // Le code de bienvenue ne part que pour une NOUVELLE inscription : on ne le promet pas à qui est déjà inscrit.
+      if (data.saved === "already") done.textContent = "Vous êtes déjà inscrit·e. Merci !";
+      else if (!(["created", "subscribed"].includes(data.saved))) done.textContent = "Merci ! Votre demande a été transmise à la boutique.";
       done.hidden = false; done.focus?.();
       timers.push(setTimeout(() => close("inscription"), 4000));
     } catch (err) {
@@ -117,9 +127,11 @@ export function initNewsletterPopup(config = {}) {
     }
   }
   function open() {
-    if (root) return;
+    if (root || shownOnce) return;
     if (busy() && !force) { timers.push(setTimeout(open, 5000)); return; }
     clear();
+    shownOnce = true;
+    document.documentElement.removeEventListener("mouseleave", onLeave);
     root = document.createElement("div");
     root.className = "nlp"; root.setAttribute("data-nlp", "");
     root.innerHTML = popupHTML(config);
@@ -138,10 +150,5 @@ export function initNewsletterPopup(config = {}) {
   if (session.trigger === "page") timers.push(setTimeout(open, 1500));
   else timers.push(setTimeout(open, (config.delaySeconds ?? 25) * 1000));
   // Ordinateur : la souris quitte la fenêtre vers le haut (le visiteur s'apprête à partir), jamais avant 10 s.
-  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    const since = Date.now();
-    document.documentElement.addEventListener("mouseleave", (e) => {
-      if (e.clientY <= 0 && Date.now() - since >= (config.exitIntentSeconds ?? 10) * 1000) open();
-    });
-  }
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) document.documentElement.addEventListener("mouseleave", onLeave);
 }

@@ -199,7 +199,7 @@ router.get('/api/shopify/newsletter/callback', formLimiter, async (req, res) => 
 // Abonne l'adresse dans Shopify (Admin API, consentement e-mail + tags). Sans jeton
 // Admin ou en cas d'échec, la boutique reçoit l'adresse par e-mail. Le visiteur ne
 // voit « inscrit » que si l'un des deux enregistrements a réussi.
-// Body: { email, source?: 'footer' | 'popup' }
+// Body: { email, source?: 'footer' | 'popup' } · réponse { ok, saved: created | subscribed | already | email | webhook }
 router.post('/api/newsletter', formLimiter, async (req, res) => {
   res.set('Cache-Control', 'no-store');
   try {

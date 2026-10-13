@@ -17,8 +17,8 @@ export function bindNewsletter() {
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || "server");
       input.style.display = "none"; btn.style.display = "none";
-      status.textContent = ["created", "subscribed"].includes(data.saved)
-        ? "Merci, vous êtes inscrit·e."
+      status.textContent = data.saved === "already" ? "Vous êtes déjà inscrit·e, merci."
+        : ["created", "subscribed"].includes(data.saved) ? "Merci, vous êtes inscrit·e."
         : "Votre demande a été transmise à la boutique. L’inscription sera finalisée manuellement.";
       status.className = "footer__news-status is-ok";
     } catch (e2) {

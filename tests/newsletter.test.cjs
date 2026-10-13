@@ -130,3 +130,13 @@ test('une panne passagère de Shopify (503) est réessayée une fois avant tout 
  assert.equal(calls.filter(c=>c.query==='NewsletterCreate').length,2,'deux essais, aucun e-mail de secours');
  assert.equal(calls.filter(c=>c.resend).length,0);
 });
+
+test('une adresse déjà abonnée reçoit ses tags mais aucun nouvel accord, et le site le sait (saved: already)',async()=>{
+ admin=query=>/customerCreate/.test(query)?Response.json({data:{customerCreate:{customer:null,userErrors:[{field:['email'],message:'Email has already been taken'}]}}})
+  :/customers\(/.test(query)?Response.json({data:{customers:{nodes:[{id:'gid://shopify/Customer/8',defaultEmailAddress:{marketingState:'SUBSCRIBED'}}]}}})
+  :Response.json({data:{tagsAdd:{userErrors:[]}}});
+ const r=await subscribe('cyril@example.be',{source:'popup'});
+ assert.deepEqual(await r.json(),{ok:true,saved:'already'});
+ assert.deepEqual(calls.map(c=>c.query),['NewsletterCreate','NewsletterCustomer','NewsletterTag']);
+ assert.deepEqual(calls[2].variables.tags,['newsletter','site-web','newsletter-popup']);
+});
