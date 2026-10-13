@@ -121,3 +121,12 @@ test('/api/health sonde l’application Admin de la newsletter, par mode, sans �
  delete process.env.SHOPIFY_ADMIN_TOKEN;
  assert.equal((await(await realFetch(base+'/api/health')).json()).newsletter.admin,'non configurée');
 });
+
+test('une panne passagère de Shopify (503) est réessayée une fois avant tout repli',async()=>{
+ let n=0;
+ admin=()=>++n===1?new Response('{}',{status:503}):Response.json({data:{customerCreate:{customer:{id:'gid://shopify/Customer/5'},userErrors:[]}}});
+ const r=await subscribe('reessai@example.be');
+ assert.deepEqual(await r.json(),{ok:true,saved:'created'});
+ assert.equal(calls.filter(c=>c.query==='NewsletterCreate').length,2,'deux essais, aucun e-mail de secours');
+ assert.equal(calls.filter(c=>c.resend).length,0);
+});
