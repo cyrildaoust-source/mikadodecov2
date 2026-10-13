@@ -249,6 +249,7 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
     assert.match(html,/<p data-plp-sub>[^<]*Emballage cadeau offert/);
     assert.match(html,/<a href="\/collections\/idees-cadeaux" class="nlink">Idées cadeaux<\/a><a href="\/collections\/promotions" class="nlink nlink--promo"/,'navigation : Idées cadeaux avant Promotions');
     assert.match(html,/<a class="drawer__link" href="\/collections\/idees-cadeaux">Idées cadeaux<\/a><a class="drawer__link drawer__link--promo"/,'tiroir mobile aussi');
+    assert.match(html,/data-gift-cat="cadeaux-hote"|Pour l'hôte du réveillon/,'la rubrique de saison est visible en saison');
     const home=await page('/');
     assert.match(home.html,/home-band--gifts/);assert.match(home.html,/href="\/collections\/idees-cadeaux\?max=50">Moins de 50 €/);
     assert.match(home.html,/<span class="on"><a href="\/collections\/idees-cadeaux">Idées cadeaux pour tous les budgets · emballage offert<\/a><\/span>/);
@@ -257,7 +258,9 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
     assert.match(sel.html,/data-gift-wrap-input/);
   } finally { delete process.env.MIKADO_CLOCK; }
   const off=await page('/');
-  assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous|class="nlink">Idées cadeaux/);
+  assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous/);
+  assert.match(off.html,/class="nlink">Idées cadeaux<\/a>/,'l’entrée de navigation reste toute l’année');
+  assert.doesNotMatch((await page('/collections/idees-cadeaux')).html,/data-gift-cat="cadeaux-hote"/,'hors saison, pas de rubrique « hôte du réveillon »');
   assert.doesNotMatch((await page('/selection.html')).html,/data-gift-wrap|GIFT-WRAP/);
 });
 
