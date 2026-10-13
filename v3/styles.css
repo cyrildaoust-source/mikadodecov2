@@ -2010,6 +2010,11 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .gift-band { aspect-ratio: 1 / 1; flex-direction: column; justify-content: flex-end; align-items: flex-start; }
 .home-rc__count { position: relative; z-index: 2; font-family: var(--sans-product); font-size: var(--fs-meta); color: rgba(248,245,239,.85); letter-spacing: .03em; margin-top: 4px; }
 .home-rc:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; }
+/* Raccourcis de budget dans le filtre Prix (page Idées cadeaux) : même langage que les puces de filtres actifs. */
+.catalog-filters__bands { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 14px; }
+.catalog-filters__band { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 12px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-family: var(--sans-product); font-size: var(--fs-meta); letter-spacing: .02em; text-decoration: none; }
+.catalog-filters__band:hover { border-color: var(--ink); }
+.catalog-filters__band.is-active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 /* Rubriques « Pour qui » (mêmes cartes) : sur ordinateur, une grille de quatre cartes carrées par ligne, sans défilement ;
    sur mobile, le rail horizontal de « Nos familles ». */
 @media (min-width: 1200px) { .gift-rail { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; } .gift-rail .home-rc { aspect-ratio: 1 / 1; } }

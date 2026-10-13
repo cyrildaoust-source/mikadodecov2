@@ -167,3 +167,11 @@ test('« Livré avant Noël » : calculé au rendu depuis le délai de la marque
   const hit=filterCatalog([gift],{}).items[0];
   assert.equal(hit.availabilityLabel,'Envoyée par e-mail');assert.equal(hit.giftCard,true);assert.equal(hit.christmas,null);
 });
+test('preferDiscount (idées cadeaux) : la carte montre la finition remisée, sinon la couverture Shopify',()=>{
+  const p=chair(1,[{price:685,qty:0},{price:342.5,compareAtPrice:685,qty:1,options:[{name:'Couleur',value:'Gris argile'}]}],{card:{variantId:'gid://shopify/ProductVariant/100'}});
+  const plain=filterCatalog([p],{}).items[0];
+  assert.equal(plain.price,685);assert.equal(plain.compareAt,null,'sans option : la couverture (variante par défaut)');
+  const gift=filterCatalog([p],{},60,{preferDiscount:true}).items[0];
+  assert.equal(gift.price,342.5);assert.equal(gift.compareAt,685);assert.equal(gift.finishLabel,'Gris argile');
+  assert.equal(filterCatalog([p],{sort:'asc'},60,{preferDiscount:true}).items[0].price,342.5,'le tri par prix suit la finition affichée');
+});
