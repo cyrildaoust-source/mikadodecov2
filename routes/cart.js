@@ -116,6 +116,12 @@ router.post('/api/cart/preview', cartLimiter, async (req, res) => {
     const total             = parseFloat(cart.cost.totalAmount.amount);
     res.json({ subtotal: subtotalDisplayed, total, discount, discounts, lineDiscounts, lines: linesOut });
   } catch (err) {
+    // Shopify limite le débit (« Throttled », déjà réessayé par shopifyFetch) : ce n'est pas une panne du site.
+    // 429 + Retry-After, le navigateur garde ses totaux locaux (alerte Vercel du 12 octobre 2026 : 657 × 500).
+    if (/throttled/i.test(err.message || '')) {
+      console.warn('Cart preview throttled:', err.message);
+      return res.status(429).set({ 'Cache-Control': 'no-store', 'Retry-After': '5' }).json({ error: 'too_many_requests' });
+    }
     console.error('Cart preview error:', err.message);
     res.status(500).set('Cache-Control', 'no-store').json({ error: 'Erreur lors du calcul du panier.' });
   }
