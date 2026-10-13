@@ -20,5 +20,6 @@ Une décision structurante = un fichier court (contexte, décision, conséquence
 | [0014](0014-redirections-anciennes-fiches.md) | Anciennes fiches produit : la table de l'importateur (`data/redirections.json`) donne 301 ou 410, appliquée par le serveur et seulement quand aucune fiche publiée ne porte le handle | accepté |
 | [0015](0015-delais-par-regles.md) | Délais hors stock : table de règles par marque et famille (`data/lead-times.json`), exceptions par fiche (`custom.lead_time`), un seul libellé de la carte au checkout | accepté |
 | [0016](0016-operation-de-noel.md) | Opération de Noël : page Idées cadeaux par règles (tags cadeau/noel, tranches de budget, rubriques), repère « Livré avant Noël » calculé article par article, saison pilotée par `campaigns.json` | accepté |
+| [0017](0017-popup-newsletter.md) | Popup newsletter discrète (règles d'ouverture, réglages dans `data/newsletter.json`), origine de l'inscription en tag, repli d'identifiants Admin et sonde dans `/api/health` | accepté |
 
 Le plan d'ensemble et son état : [`../ARCHI-critique-et-plan-2026-10-06.md`](../ARCHI-critique-et-plan-2026-10-06.md).

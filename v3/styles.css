@@ -2034,3 +2034,34 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .sel-giftwrap input { accent-color: var(--accent-ink); flex: none; width: 18px; height: 18px; margin-top: 2px; }
 .sel-giftwrap strong { font-weight: 600; }
 @media (max-width: 900px) { .gift-bands { grid-template-columns: repeat(2, 1fr); } }
+/* ═══ POPUP NEWSLETTER (ADR 0017) — fenêtre centrée sur ordinateur, panneau du bas sur téléphone ═══ */
+.nlp { position: fixed; inset: 0; z-index: 126; display: flex; align-items: center; justify-content: center; }
+.nlp__backdrop { position: absolute; inset: 0; background: rgba(var(--scrim), .38); }
+.nlp__box { position: relative; width: 640px; max-width: calc(100% - 32px); min-height: 380px; background: var(--paper); color: var(--ink); display: grid; grid-template-columns: 46% 1fr; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+.nlp__photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; background: var(--tile); }
+.nlp__body { padding: 44px 34px 30px; display: flex; flex-direction: column; justify-content: center; }
+.nlp__close { position: absolute; top: 10px; right: 10px; z-index: 1; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(248,245,239,.92); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+.nlp__close:hover { background: var(--paper-2); }
+.nlp__close:focus-visible, .nlp__form input[type=email]:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.nlp__title { font-size: 34px; line-height: 1.05; font-weight: 500; }
+.nlp__text { font-size: 14px; line-height: 1.5; margin-top: 10px; }
+.nlp__text strong { font-weight: 600; }
+.nlp__form { display: grid; gap: 8px; }
+.nlp__form input[type=email] { height: 44px; border: 1px solid var(--ink); background: #fff; padding: 0 14px; font: inherit; font-size: 15px; color: var(--ink); margin-top: 10px; }
+.nlp__form .btn { min-height: 44px; }
+.nlp__hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
+.nlp__fine { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.nlp__status { font-size: var(--fs-small); min-height: 1.3em; }
+.nlp__status.is-error { color: #b23b3b; }
+.nlp__done { font-size: 26px; line-height: 1.15; font-weight: 500; }
+@media (prefers-reduced-motion: no-preference) {
+  .nlp__box { animation: nlp-in .35s var(--ease); }
+  @keyframes nlp-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+}
+@media (max-width: 760px) {
+  .nlp { align-items: flex-end; }
+  .nlp__box { width: 100%; max-width: none; min-height: 0; max-height: 92vh; overflow: auto; grid-template-columns: 1fr; border-radius: 16px 16px 0 0; }
+  .nlp__photo { height: 150px; object-position: center 30%; }
+  .nlp__body { padding: 20px 22px calc(24px + env(safe-area-inset-bottom)); }
+  .nlp__title { font-size: 27px; }
+}
