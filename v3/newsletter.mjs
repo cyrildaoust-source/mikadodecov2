@@ -12,7 +12,7 @@ export function bindNewsletter() {
     const btn = form.querySelector("button");
     btn.disabled = true; const label = btn.textContent; btn.textContent = "…";
     try {
-      const res = await fetch("/api/newsletter", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
+      const res = await fetch("/api/newsletter", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, source: "footer" }) });
       if (res.status === 429) throw new Error("rate_limit");
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || "server");

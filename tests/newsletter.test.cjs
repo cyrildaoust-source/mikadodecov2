@@ -15,8 +15,10 @@ before(async()=>{
   }
   const {query,variables}=JSON.parse(options.body);
   if(pathname.startsWith('/admin/api/')){
-   assert.equal(options.headers['X-Shopify-Access-Token'],'admin-token');
-   calls.push({query:query.match(/(mutation|query) (\w+)/)[2],variables});
+   const token=options.headers['X-Shopify-Access-Token'];
+   if(token==='stale-token'){calls.push({stale:true});return new Response('{}',{status:401});}   // ancien jeton fixe révoqué
+   assert.equal(token,'admin-token');
+   calls.push({query:(query.match(/(mutation|query) (\w+)/)||[])[2]||'ping',variables});
    return admin(query,variables);
   }
   return Response.json({data:{}});
@@ -27,7 +29,7 @@ after(async()=>{global.fetch=realFetch;await new Promise(r=>server.close(r));});
 beforeEach(()=>{calls=[];resend=200;process.env.SHOPIFY_ADMIN_TOKEN='admin-token';process.env.RESEND_API_KEY='resend';delete process.env.SHOPIFY_ADMIN_CLIENT_ID;delete process.env.SHOPIFY_ADMIN_CLIENT_SECRET;});
 
 // Chaque test utilise sa propre adresse IP : le limiteur anti-abus reste actif.
-const subscribe=email=>realFetch(base+'/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json','X-Forwarded-For':`10.0.0.${++ip}`},body:JSON.stringify({email})});
+const subscribe=(email,extra={})=>realFetch(base+'/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json','X-Forwarded-For':`10.0.0.${++ip}`},body:JSON.stringify({email,...extra})});
 
 test('a new address becomes a subscribed Shopify customer, without a fallback email',async()=>{
  admin=()=>Response.json({data:{customerCreate:{customer:{id:'gid://shopify/Customer/1'},userErrors:[]}}});
@@ -83,4 +85,39 @@ test('a Dev Dashboard app exchanges its credentials once, then reuses the 24-hou
  const tokens=calls.filter(c=>c.token);
  assert.equal(tokens.length,1);
  assert.deepEqual(tokens[0].token,{grant_type:'client_credentials',client_id:'client',client_secret:'secret'});
+});
+
+test('l’origine de l’inscription (pied de page, popup) devient un tag Shopify ; une origine inconnue est ignorée (ADR 0017)',async()=>{
+ admin=()=>Response.json({data:{customerCreate:{customer:{id:'gid://shopify/Customer/3'},userErrors:[]}}});
+ assert.deepEqual(await(await subscribe('popup@example.be',{source:'popup'})).json(),{ok:true,saved:'created'});
+ assert.deepEqual(calls[0].variables.input.tags,['newsletter','site-web','newsletter-popup']);
+ calls=[];
+ await subscribe('footer@example.be',{source:'footer'});
+ assert.deepEqual(calls[0].variables.input.tags,['newsletter','site-web','newsletter-footer']);
+ calls=[];
+ await subscribe('autre@example.be',{source:'<script>'});
+ assert.deepEqual(calls[0].variables.input.tags,['newsletter','site-web']);
+});
+
+test('un jeton fixe révoqué n’empêche plus l’inscription : les identifiants de l’application prennent le relais, sans e-mail de secours',async()=>{
+ process.env.SHOPIFY_ADMIN_TOKEN='stale-token';process.env.SHOPIFY_ADMIN_CLIENT_ID='client';process.env.SHOPIFY_ADMIN_CLIENT_SECRET='secret';
+ admin=()=>Response.json({data:{customerCreate:{customer:{id:'gid://shopify/Customer/4'},userErrors:[]}}});
+ const r=await subscribe('relais@example.be',{source:'popup'});
+ assert.deepEqual(await r.json(),{ok:true,saved:'created'});
+ assert.ok(calls.some(c=>c.stale),'le jeton fixe a été essayé');
+ assert.equal(calls.filter(c=>c.query==='NewsletterCreate').length,1,'puis la création avec le jeton échangé (déjà en cache depuis le test précédent)');
+ assert.equal(calls.filter(c=>c.resend).length,0,'aucun repli par e-mail');
+});
+
+test('/api/health sonde l’application Admin de la newsletter, par mode, sans écriture',async()=>{
+ const {resetStatusCache}=require('../lib/newsletter');
+ resetStatusCache();
+ admin=query=>/shop/.test(query)?Response.json({data:{shop:{name:'Mikado'}}}):Response.json({data:{}});
+ const r=await realFetch(base+'/api/health');
+ const body=await r.json();
+ assert.equal(body.newsletter.admin,'ok');assert.deepEqual(body.newsletter.modes,{'jeton fixe':'ok'});
+ assert.deepEqual(calls.map(c=>c.query),['ping'],'une seule lecture, aucune mutation');
+ resetStatusCache();
+ delete process.env.SHOPIFY_ADMIN_TOKEN;
+ assert.equal((await(await realFetch(base+'/api/health')).json()).newsletter.admin,'non configurée');
 });

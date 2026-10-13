@@ -15,6 +15,7 @@ import { loadNavigation, paintBreadcrumb } from "./catalog-data.mjs";
 import { isSaleActive } from "./sale.mjs";
 import { lockBodyScroll } from "./scroll-lock.mjs";
 import { bindNewsletter } from "./newsletter.mjs";
+import { siteData } from "./site-data.mjs";
 import { ensureVercelAnalytics } from "./analytics.mjs";
 
 function bindDrawer() {
@@ -197,6 +198,12 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   bindChrome(transparentNav);
   bindAnnounce();
   bindNewsletter();
+  // Popup newsletter (ADR 0017, réglages data/newsletter.json via #site-data) : chargée après tout le reste.
+  const popup = siteData("newsletter");
+  if (popup && popup.enabled !== false) {
+    const schedule = () => setTimeout(() => import("./newsletter-popup.mjs").then(({ initNewsletterPopup }) => initNewsletterPopup(popup)).catch((e) => console.warn("[shell] popup newsletter :", e.message)), 1200);
+    if (document.readyState === "complete") schedule(); else window.addEventListener("load", schedule, { once: true });
+  }
   bindAddToCart();
   bindImageFallbacks();
   // Les familles possèdent un hero dédié ; leur fil est placé juste après.

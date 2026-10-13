@@ -18,6 +18,7 @@ const { ROOT_DIR, V3_DIR } = require('../lib/paths');
 const { articleSlugs, journalReady } = require('../lib/render/journal');
 const { legalFragment, legalPages } = require('../lib/render/legal');
 const { redirectionStats } = require('../lib/redirections');
+const { adminStatus: newsletterAdminStatus } = require('../lib/newsletter');
 
 router.get('/api/search',async(req,res)=>{
   res.set('Cache-Control','no-store');
@@ -277,6 +278,10 @@ router.get('/api/health', async (req, res) => {
   const content = { sources: { journal: fs.existsSync(path.join(V3_DIR, 'journal', 'articles.data.mjs')), legal: fs.existsSync(path.join(ROOT_DIR, 'docs', 'legal', 'mentions-legales.md')) } };
   try { await journalReady; content.journal = articleSlugs().length + ' articles'; } catch (e) { content.journal = 'erreur : ' + e.message; }
   try { legalFragment('mentions-legales.html'); content.legal = legalPages().length + ' pages'; } catch (e) { content.legal = 'erreur : ' + e.message; }
+  // Application Admin de l'inscription newsletter (ADR 0017) : une lecture par mode, cachée 5 min ; informatif.
+  let newsletter;
+  try { newsletter = await Promise.race([newsletterAdminStatus(), new Promise((_, reject) => setTimeout(() => reject(new Error('timeout 4 s')), 4000))]); }
+  catch (error) { newsletter = { admin: 'down: ' + error.message }; }
   const ok = shopify === 'ok';
   res.status(ok ? 200 : 503).json({
     status: ok ? 'ok' : 'degraded',
@@ -285,6 +290,7 @@ router.get('/api/health', async (req, res) => {
     uptimeS: Math.round(process.uptime()),
     shopify, shopifyMs: Math.round(performance.now() - t0),
     index: indexStatus(),
+    newsletter,
     content,
     redirections: redirectionStats(),   // table des anciennes fiches (ADR 0014) : schéma, date, compteurs, erreur de chargement
     cache: cache.stats(),
