@@ -1,0 +1,33 @@
+{
+  "_note": "Page « Idées cadeaux » (/collections/idees-cadeaux, ADR 0016), en ligne toute l'année. Membres = fiches de l'index du catalogue portant un tag cadeau de l'importateur (`cadeau`, `idee-cadeau`, `cadeau-design`, `coffret-cadeau`, `cadeau-enfant`…) ou le tag `noel` — aucune collection Shopify n'est requise (règles dans lib/filter-scopes.js). `bands` : tranches de budget (bornes en €, décision de Cyril du 13 octobre 2026 ; sans `max` = tranche ouverte), chacune avec une photo (demande de Cyril du 13 octobre : « une photo, ça donne plus envie »). `categories` : rubriques « Pour qui » (liste de Cyril du 13 octobre : collègue, belle-maman, les animaux, les enfants, les amoureux ; ajouts proposés : l'hôte du réveillon, qui cuisine, qui aime lire) = des MOTS de tags (`tags`, comparés mot à mot dans chaque tag séparé par des tirets : `chaise-enfant`, `cadeau-naissance`…) ; une rubrique sans fiche n'est pas affichée, une rubrique `season: true` n'apparaît qu'en saison de Noël. La page et son entrée de navigation (avant Promotions) sont là TOUTE L'ANNÉE (décision de Cyril du 13 octobre 2026). `home` : photo du bandeau de l'accueil pendant la saison. Images : locales ou CDN Shopify (`sourceProduct` = fiche d'origine), cadrage par `position` (bureau) et `mobilePosition`.",
+  "handle": "idees-cadeaux",
+  "title": "Idées cadeaux",
+  "description": "Des idées pour tous les budgets et pour tout le monde, de belle-maman aux collègues : des objets qu'on a envie d'offrir, et de garder.",
+  "seasonDescription": "Des idées pour tous les budgets et pour tout le monde, de belle-maman aux collègues : des objets qu'on a envie d'offrir, et de garder. Emballage cadeau offert.",
+  "seasonDescriptionBadge": "Des idées pour tous les budgets et pour tout le monde, de belle-maman aux collègues. Les articles marqués « Livré avant Noël » arrivent à temps si vous commandez aujourd'hui ; emballage cadeau offert.",
+  "bands": [
+    { "label": "Moins de 50 €", "max": 50, "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/festive_season_hkliving.jpg?v=1776933349", "sourceProduct": "hkliving-tasse-a-cafe-rock-set-0", "position": "50% 42%" },
+    { "label": "De 50 à 100 €", "min": 50, "max": 100, "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/packshot-a7e1e732699666e3c38ad9b260eab3e1.png?v=1790419244", "sourceProduct": "bougeoir-nagel", "position": "50% 62%" },
+    { "label": "De 100 à 200 €", "min": 100, "max": 200, "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/flowerpot-vp9_lf_2.rs.jpg?v=1778023876", "sourceProduct": "lampe-de-table-flowerpot-vp9", "position": "50% 45%" },
+    { "label": "Plus de 200 €", "min": 200, "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/vitra-6172359.jpg?v=1790545228", "sourceProduct": "patere-hang-it-all", "position": "50% 38%" }
+  ],
+  "categories": [
+    { "value": "cadeaux-enfants", "label": "Pour les enfants", "tags": ["enfant", "enfants", "kids", "naissance", "bebe"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/4808692_Panton_Junior_Eames_Elephant_v_fullbleed_1440x_9d65a23e-7f0d-4d58-bc69-001669803e5a.jpg?v=1778677219", "sourceProduct": "chaise-panton-junior", "position": "50% 62%" },
+    { "value": "cadeaux-amoureux", "label": "Pour les amoureux", "tags": ["amour", "amoureux", "amoureuse", "romantique", "valentin", "couple", "bougie", "parfum", "champagne"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/571221_1104271423_10.jpg?v=1777651388", "sourceProduct": "flute-a-champagne-ripple-champagne-flutes-set-2", "position": "50% 50%" },
+    { "value": "cadeaux-belle-maman", "label": "Pour belle-maman", "tags": ["mariage", "vase", "bougeoir", "plaid", "parfum", "reception", "vaisselle", "service"], "image": "/images/home/fam-decoration.webp", "position": "50% 50%" },
+    { "value": "cadeaux-collegue", "label": "Pour les collègues", "tags": ["bureau", "cafe", "the", "mug", "carnet", "stylo"], "image": "/images/home/room-bureau.webp", "position": "50% 50%" },
+    { "value": "cadeaux-animaux", "label": "Pour les animaux", "tags": ["chien", "chiens", "chat", "chats", "croquettes", "gamelle"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/AMMI19-02_ad1a5dc8-ddab-4ab7-bcaf-d4fc7a6b329d.jpg?v=1782304339", "sourceProduct": "gamelle-pour-chien-lupita", "position": "50% 60%" },
+    { "value": "cadeaux-hote", "label": "Pour l'hôte du réveillon", "season": true, "tags": ["cremaillere", "apero", "aperitif", "bar", "vin", "champagne", "fete", "reception", "serviette"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/editorial-eabb4423af8da14e882ad5cd293f953b_20ded366-886e-43f0-9167-172e067b599a.jpg?v=1790870598", "sourceProduct": "tasse-a-the-33cl-feast", "position": "50% 50%" },
+    { "value": "cadeaux-cuisine", "label": "Pour les cuistots", "tags": ["cuisine", "ustensile", "ustensiles", "couteau", "cafetiere", "theiere", "planche", "casserole", "epices", "salade"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/lr-2022_hk_campaign_antwerp_polina-17.jpg?v=1777943671", "sourceProduct": "hkliving-coupelle-rustic-blue-9-set-0", "position": "50% 55%" },
+    { "value": "cadeaux-lecture", "label": "Pour les grands lecteurs", "tags": ["lecture", "livre", "livres", "liseuse"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Apex_20Desk_20Lamp_imageslider_1.jpg?v=1776807855", "sourceProduct": "lampe-de-bureau-hay-apex-desk-lamp", "position": "50% 45%" }
+  ],
+  "home": {
+    "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/1023748_iittalaemea_02_iittala-festico-candleholder-215-mm-2016.jpg?v=1777903551",
+    "sourceProduct": "bougeoir-festivo-22-cm",
+    "alt": "Bougeoirs Festivo d'Iittala et bougies allumées sur un socle en travertin",
+    "position": "50% 64%",
+    "mobilePosition": "50% 64%",
+    "width": 2500,
+    "height": 2500
+  }
+}

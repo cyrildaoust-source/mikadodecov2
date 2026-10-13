@@ -26,6 +26,7 @@ const { CACHE_CONTROL: REDIRECT_CACHE_CONTROL, lookupRedirect, redirectTarget } 
 const { brandBanner, canRenderInitialGrid, contentPageTrail, injectNavigation, listingNavigation, listingPagination, nav, navigationReady, plpCardSsr } = require('../lib/render/navigation');
 const { absUrl, ogCache, ogDesc, ogEscape, renderWithOg, temporaryUnavailable } = require('../lib/render/og');
 const { activeDesignerSlugs, designerHeroSsr, injectBrandsIndex, injectDesignersIndex, injectHomeRails, injectNuancier, pdpServed, pdpSsrBlock, sendScopeCatalog, sendSearchPage } = require('../lib/render/pages');
+const { giftWrapHTML, homeGiftsHTML } = require('../lib/render/gifts');
 const { collectionProductsFor, getCollectionProducts, getCollections, getHomeRails, getProductByHandle, getProductsPage } = require('../lib/services/catalog');
 
 // ─── SEO · 301 /products/<handle> → /produit.html?handle=<handle> ─────────────
@@ -497,7 +498,11 @@ router.get(/.*/, async (req, res, next) => {
     try {
       raw = injectHomeRails(raw, await getHomeRails());
     } catch (e) { console.warn('[home-rails]', e.message); }
+    // Section « Idées cadeaux » pendant la saison de Noël (ADR 0016) ; le repère disparaît sinon.
+    raw = raw.replace('<!--NOEL-HOME-->', () => homeGiftsHTML());
   }
+  // Case « emballage cadeau offert » du panier, pendant la saison seulement.
+  if (rel === 'selection.html') raw = raw.replace('<!--GIFT-WRAP-->', () => giftWrapHTML());
   if (rel === 'marques.html') {
     try { raw = await injectBrandsIndex(raw); } catch (e) { console.warn('[brands-index]', e.message); }
   }

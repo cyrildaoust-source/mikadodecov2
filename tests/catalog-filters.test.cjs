@@ -157,3 +157,21 @@ test('le parcours serveur refuse les lots incomplets, suit toutes les variantes 
   await assert.rejects(readChairCatalog(async()=>({products:{edges:[],pageInfo:{hasNextPage:true,endCursor:'same'}}}),()=>{}),/did not advance/);
   await assert.rejects(readChairCatalog(async()=>({products:{edges:[{node:raw}],pageInfo:{hasNextPage:false}}}),()=>{}),/Incomplete variants/);
 });
+test('« Livré avant Noël » : calculé au rendu depuis le délai de la marque, absent hors saison (ADR 0016)',()=>{
+  const p=chair(1,[{price:400,qty:2},{price:700,qty:0}]);
+  assert.equal(filterCatalog([p],{}).items[0].christmas,null);
+  process.env.MIKADO_CLOCK='2026-12-01T10:00:00+01:00';
+  try { assert.equal(filterCatalog([p],{}).items[0].christmas,null,'repère éteint par deliveryBadge: false (Cyril, 13 octobre 2026), même en saison'); }
+  finally { delete process.env.MIKADO_CLOCK; }
+  const gift=chair(2,[{price:50,qty:0}],{card:{giftCard:true}});
+  const hit=filterCatalog([gift],{}).items[0];
+  assert.equal(hit.availabilityLabel,'Envoyée par e-mail');assert.equal(hit.giftCard,true);assert.equal(hit.christmas,null);
+});
+test('preferDiscount (idées cadeaux) : la carte montre la finition remisée, sinon la couverture Shopify',()=>{
+  const p=chair(1,[{price:685,qty:0},{price:342.5,compareAtPrice:685,qty:1,options:[{name:'Couleur',value:'Gris argile'}]}],{card:{variantId:'gid://shopify/ProductVariant/100'}});
+  const plain=filterCatalog([p],{}).items[0];
+  assert.equal(plain.price,685);assert.equal(plain.compareAt,null,'sans option : la couverture (variante par défaut)');
+  const gift=filterCatalog([p],{},60,{preferDiscount:true}).items[0];
+  assert.equal(gift.price,342.5);assert.equal(gift.compareAt,685);assert.equal(gift.finishLabel,'Gris argile');
+  assert.equal(filterCatalog([p],{sort:'asc'},60,{preferDiscount:true}).items[0].price,342.5,'le tri par prix suit la finition affichée');
+});

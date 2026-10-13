@@ -1997,6 +1997,43 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .nf404__home { color: var(--accent-ink); border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 .nf404__home:hover { color: var(--ink); }
 
+/* ═══ NOËL · IDÉES CADEAUX (ADR 0016) ═══ */
+/* Repère « Livré avant Noël » : même chip que « Nouveau », en bleu signature plein pour se distinguer. */
+.tag--noel { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.pcard__tags { flex-wrap: wrap; max-width: 62%; }
+/* Sur la fiche, le repère prend sa propre ligne sous l'état de stock (la ligne reste entière). */
+.pdp__avail { flex-wrap: wrap; }
+.pdp__avail .tag--noel { flex-basis: 100%; max-width: max-content; margin-left: 15px; }
+.announce span a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+/* Tranches de budget : cartes photo carrées (mêmes cartes que « Nos familles »), nombre de pièces sous le titre. */
+.gift-bands { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.gift-band { aspect-ratio: 1 / 1; flex-direction: column; justify-content: flex-end; align-items: flex-start; }
+.home-rc__count { position: relative; z-index: 2; font-family: var(--sans-product); font-size: var(--fs-meta); color: rgba(248,245,239,.85); letter-spacing: .03em; margin-top: 4px; }
+.home-rc:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; }
+/* Raccourcis de budget dans le filtre Prix (page Idées cadeaux) : même langage que les puces de filtres actifs. */
+.catalog-filters__bands { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 14px; }
+.catalog-filters__band { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 12px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-family: var(--sans-product); font-size: var(--fs-meta); letter-spacing: .02em; text-decoration: none; }
+.catalog-filters__band:hover { border-color: var(--ink); }
+.catalog-filters__band.is-active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+/* Rubriques « Pour qui » (mêmes cartes) : sur ordinateur, une grille de quatre cartes carrées par ligne, sans défilement ;
+   sur mobile, le rail horizontal de « Nos familles ». */
+@media (min-width: 1200px) { .gift-rail { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; } .gift-rail .home-rc { aspect-ratio: 1 / 1; } }
+.home-rc.is-active { outline: 3px solid var(--accent); outline-offset: 2px; }
+[data-chair-continuation] .gift-discovery { display: none; }
+/* Repères de saison sous les rubriques */
+.gift-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap); }
+.gift-note { border-top: 2px solid var(--accent); padding-top: 14px; }
+.gift-note h3 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-height: 1.1; margin: 0 0 8px; }
+.gift-note p { color: var(--muted); font-size: var(--fs-small); line-height: 1.5; margin: 0; }
+.gift-note a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
+/* Accueil : bandeau Idées cadeaux (saison) */
+.home-band--gifts .home-band__t { margin: 0; }
+.home-band--gifts .home-band__links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+/* Panier : emballage cadeau offert (saison) */
+.sel-giftwrap { display: flex; gap: 10px; align-items: flex-start; font-size: var(--fs-small); line-height: 1.45; padding: 12px 0; margin: 4px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); cursor: pointer; }
+.sel-giftwrap input { accent-color: var(--accent-ink); flex: none; width: 18px; height: 18px; margin-top: 2px; }
+.sel-giftwrap strong { font-weight: 600; }
+@media (max-width: 900px) { .gift-bands { grid-template-columns: repeat(2, 1fr); } }
 /* ═══ POPUP NEWSLETTER (ADR 0017) — fenêtre centrée sur ordinateur, panneau du bas sur téléphone ═══ */
 .nlp { position: fixed; inset: 0; z-index: 126; display: flex; align-items: center; justify-content: center; }
 .nlp__backdrop { position: absolute; inset: 0; background: rgba(var(--scrim), .38); }

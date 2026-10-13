@@ -36,6 +36,7 @@ const URLS = [
   ['/collections/vitra', ['status', 'who', 'type']],
   ['/collections/chaises', ['status', 'who']],
   ['/collections/tables', ['status', 'who']],
+  ['/collections/idees-cadeaux', ['status', 'who', 'type']],
   ['/collections', ['status', 'location']],
   ['/products/verre-a-eau-animal-farm', ['status', 'location']],
   // A9 (ADR 0014) : anciens handles de la table des redirections → 301 en un saut (fiche publiée ou chemin), 410 si retirée.

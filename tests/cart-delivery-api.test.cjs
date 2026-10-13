@@ -58,3 +58,18 @@ test('un panier vide ou un corps sans articles est une erreur du client : 400, p
   }
   assert.equal(captured, null, 'aucun panier Shopify créé');
 });
+test('emballage cadeau offert (ADR 0016) : transmis au paiement pendant la saison de Noël, ignoré sinon', async () => {
+  available = 2;
+  process.env.MIKADO_CLOCK = '2026-12-01T10:00:00+01:00';
+  try {
+    const response = await post('/api/cart/create', { items:[{variantId:id,qty:1}], giftWrap: true });
+    assert.equal(response.status, 200);
+    assert.deepEqual(captured.attributes.find(a => a.key === 'Emballage cadeau'), { key: 'Emballage cadeau', value: 'Oui' });
+    assert.match(captured.note, /Emballage cadeau : oui \(offert\)/);
+    await post('/api/cart/create', { items:[{variantId:id,qty:1}], giftWrap: false });
+    assert.equal(captured.attributes.find(a => a.key === 'Emballage cadeau'), undefined);
+  } finally { delete process.env.MIKADO_CLOCK; }
+  await post('/api/cart/create', { items:[{variantId:id,qty:1}], giftWrap: true });
+  assert.equal(captured.attributes.find(a => a.key === 'Emballage cadeau'), undefined, 'hors saison, la demande est ignorée');
+  assert.doesNotMatch(captured.note || '', /Emballage cadeau/);
+});

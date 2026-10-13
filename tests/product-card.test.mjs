@@ -41,3 +41,13 @@ test('mobile product card actions keep a 44 px touch target',()=>{
   const css=readFileSync(new URL('../v3/styles.css',import.meta.url),'utf8');
   assert.match(css,/@media\s*\(max-width:\s*760px\)[\s\S]*?\.pcard__cta\s*\{[^}]*min-height:\s*44px;/s);
 });
+
+test('« Livré avant Noël » suit le stock réel de la finition ; carte cadeau = envoyée par e-mail',()=>{
+  const flags={inStock:true,onOrder:false};
+  assert.match(productCardHTML({...product,inStock:true,christmas:flags}),/class="tag tag--noel">Livré avant Noël/);
+  assert.doesNotMatch(productCardHTML({...product,inStock:false,christmas:flags}),/Livré avant Noël/);
+  assert.doesNotMatch(productCardHTML({...product,inStock:true,christmas:null}),/Livré avant Noël/);
+  assert.doesNotMatch(productCardHTML({...product,inStock:true}),/Livré avant Noël/);
+  const card=productCardHTML({...product,giftCard:true,inStock:false});
+  assert.match(card,/Envoyée par e-mail/);assert.doesNotMatch(card,/Sur commande|Livraison /);
+});
