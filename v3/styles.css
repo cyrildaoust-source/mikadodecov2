@@ -141,13 +141,17 @@ ul { list-style: none; }
 :focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 
 /* --- a11y utilities --- */
+/* Lien d'évitement (accessibilité, EAA) : invisible, il n'apparaît qu'au clavier (Tab), discret et aux couleurs du
+   site — pas un bloc bleu (retour de Cyril du 13 octobre 2026). */
 .skip-link {
   position: absolute; left: 8px; top: -56px; z-index: 1000;
-  background: var(--accent-ink); color: var(--paper);
-  padding: 10px 16px; border-radius: 0;
-  font-size: 14px; font-weight: 600; text-decoration: none;
+  background: var(--paper); color: var(--ink); border: 1px solid var(--line-ink);
+  padding: 8px 12px; border-radius: 0;
+  font-family: var(--sans-product); font-size: 13px; font-weight: 500; letter-spacing: .02em; text-decoration: none;
   transition: top .15s ease;
 }
+/* La cible du lien d'évitement reçoit le focus sans anneau (le contenu commence, c'est tout). */
+#contenu:focus { outline: none; }
 .skip-link:focus { top: 8px; }
 .sr-only {
   position: absolute !important; width: 1px; height: 1px;

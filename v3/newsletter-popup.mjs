@@ -88,7 +88,10 @@ export function initNewsletterPopup(config = {}) {
     lockBodyScroll(false);
     // Une inscription n'est jamais écrasée par une fermeture (croix pendant le « Merci »).
     if (reason === "fermeture" && !subscribed) { remember({ closedAt: Date.now() }); track("fermeture"); }
-    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+    // Le focus revient d'où il venait ; sinon au début du contenu, pour que la touche Tab reprenne dans la page
+    // (et non sur le lien d'évitement « Aller au contenu », placé avant la navigation).
+    if (lastFocus && lastFocus !== document.body && document.contains(lastFocus)) lastFocus.focus();
+    else { const main = document.getElementById("contenu"); if (main) { if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1"); main.focus({ preventScroll: true }); } }
   }
   function onKey(e) {
     if (e.key === "Escape") { e.preventDefault(); close(); return; }
