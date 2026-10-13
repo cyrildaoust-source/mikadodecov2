@@ -47,3 +47,7 @@ test('une seule fois par visite : à la 2e page, ou après le délai sur la 1re'
   assert.equal(nextSession({ views: 2, shown: true }, config).trigger, null, 'déjà montrée pendant cette visite');
   assert.equal(nextSession({ views: 'x', shown: false }, config).views, 1, 'compteur illisible : on repart de 1');
 });
+
+test('ouverture 5 secondes après l’arrivée (décision de Cyril du 13/10/2026 ; le cahier des charges disait 25)', () => {
+  assert.equal(config.delaySeconds, 5);
+});

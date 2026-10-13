@@ -80,7 +80,7 @@ export function initNewsletterPopup(config = {}) {
   const onLeave = (e) => { if (e.clientY <= 0 && Date.now() - since >= (config.exitIntentSeconds ?? 10) * 1000) open(); };
   const since = Date.now();
 
-  function close(reason = "fermeture") {
+  function close(reason = subscribed ? "inscription" : "fermeture") {
     if (!root) return;
     clear();
     document.removeEventListener("keydown", onKey, true);
@@ -121,8 +121,9 @@ export function initNewsletterPopup(config = {}) {
       // Le code de bienvenue ne part que pour une NOUVELLE inscription : on ne le promet pas à qui est déjà inscrit.
       if (data.saved === "already") done.textContent = "Vous êtes déjà inscrit·e. Merci !";
       else if (!(["created", "subscribed"].includes(data.saved))) done.textContent = "Merci ! Votre demande a été transmise à la boutique.";
-      done.hidden = false; done.focus?.();
-      timers.push(setTimeout(() => close("inscription"), 4000));
+      // Le message reste affiché, avec sa croix, jusqu'à ce que le visiteur ferme (décision de Cyril du 13 octobre).
+      done.hidden = false;
+      root.querySelector(".nlp__close")?.focus({ preventScroll: true });
     } catch (err) {
       status.textContent = err.message === "rate_limit" ? "Trop de tentatives. Patientez quelques minutes." : "L'inscription n'a pas pu être enregistrée. Réessayez ou écrivez-nous à shop@mikadodeco.be.";
       status.className = "nlp__status is-error";

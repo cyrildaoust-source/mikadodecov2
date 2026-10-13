@@ -1,12 +1,12 @@
 {
-  "_note": "Popup d'inscription à la newsletter (ADR 0017, cahier des charges mikado-marketing/chantiers/supports/popup-newsletter.md). Réglages lus par le serveur (lib/render/chrome.js → site-data) et appliqués par v3/newsletter-popup.mjs. `offer` : le cadeau annoncé (« 10 % » ; vide = la popup s'affiche sans la phrase du cadeau ; passage à « 5 % » prévu le 01/02/2027). `photo`/`photoMobile` : images chargées seulement à l'ouverture (WebP ≤ 150 Ko ; l'idéal est une photo de la boutique, verticale). `delaySeconds` ou `pageViews` (au premier des deux) : ouverture ; `exitIntentSeconds` : sur ordinateur, quand la souris quitte la fenêtre vers le haut, jamais avant ce délai. `closedDays` : silence après une fermeture ; une inscription la fait taire pour toujours (localStorage). `excludedPaths`/`excludedPrefixes` : jamais sur le panier, le compte, les pages légales. `?newsletter=1` dans l'URL force l'ouverture (vérification). Modifier = PR.",
+  "_note": "Popup d'inscription à la newsletter (ADR 0017, cahier des charges mikado-marketing/chantiers/supports/popup-newsletter.md). Réglages lus par le serveur (lib/render/chrome.js → site-data) et appliqués par v3/newsletter-popup.mjs. `offer` : le cadeau annoncé (« 10 % » ; vide = la popup s'affiche sans la phrase du cadeau ; passage à « 5 % » prévu le 01/02/2027). `photo`/`photoMobile` : images chargées seulement à l'ouverture (WebP ≤ 150 Ko ; l'idéal est une photo de la boutique, verticale). `delaySeconds` ou `pageViews` (au premier des deux) : ouverture (5 secondes après l'arrivée, décision de Cyril du 13 octobre 2026 ; le cahier des charges disait 25) ; `exitIntentSeconds` : sur ordinateur, quand la souris quitte la fenêtre vers le haut, jamais avant ce délai. `closedDays` : silence après une fermeture ; une inscription la fait taire pour toujours (localStorage). `excludedPaths`/`excludedPrefixes` : jamais sur le panier, le compte, les pages légales. `?newsletter=1` dans l'URL force l'ouverture (vérification). Modifier = PR.",
   "popup": {
     "enabled": true,
     "offer": "10 %",
     "photo": "/images/newsletter/popup-750.webp",
     "photoMobile": "/images/newsletter/popup-480.webp",
     "photoAlt": "Intérieur avec table ronde et suspension",
-    "delaySeconds": 25,
+    "delaySeconds": 5,
     "pageViews": 2,
     "exitIntentSeconds": 10,
     "closedDays": 30,

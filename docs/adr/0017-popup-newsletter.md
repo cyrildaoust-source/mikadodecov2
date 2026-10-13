@@ -17,6 +17,8 @@ La newsletter porte le cadeau de bienvenue (code envoyé par l'automatisation Sh
 
 ## Corrections du 13 octobre (après le test de Cyril)
 
+- **Ouverture 5 secondes après l'arrivée** (le cahier des charges disait 25), la croix pour partir si l'on n'est pas intéressé ; après l'inscription, un simple message « Merci ! Votre code arrive par e-mail. » qui reste affiché avec sa croix (plus de fermeture automatique).
+
 - La popup revenait après l'inscription : la sortie de la souris vers le haut la rouvrait. Une fois montrée, plus aucun déclencheur ne la rouvre pendant la visite, et une fermeture n'écrase jamais le souvenir d'une inscription.
 - Une adresse **déjà abonnée** ne reçoit pas de mail de bienvenue (l'automatisation Shopify ne part que pour un nouvel accord marketing) : l'API répond `saved: already` (tags posés, accord inchangé) et le site dit « Vous êtes déjà inscrit·e » au lieu de promettre un code. Pour tester le mail, il faut une adresse qui n'est pas encore abonnée.
 
