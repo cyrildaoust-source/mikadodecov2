@@ -15,6 +15,11 @@ La newsletter porte le cadeau de bienvenue (code envoyé par l'automatisation Sh
 - **Inscription fiable** (`lib/newsletter.js`) : chaque client Admin configuré est essayé dans l'ordre (jeton fixe, puis identifiants de l'application avec jeton de 24 h) avant le repli par e-mail ; la raison de chaque échec est journalisée (`[newsletter] … reason`). `/api/health` sonde l'application Admin (lecture `shop { name }` par mode, cachée 5 min) : `newsletter.admin = ok | down | non configurée`, visible par le contrôle de santé GitHub toutes les 15 minutes.
 - **Mesure** : événement Vercel Analytics `newsletter_popup` (`vue`, `inscription`, `fermeture`), facultatif ; les tags Shopify restent la mesure de référence.
 
+## Corrections du 13 octobre (après le test de Cyril)
+
+- La popup revenait après l'inscription : la sortie de la souris vers le haut la rouvrait. Une fois montrée, plus aucun déclencheur ne la rouvre pendant la visite, et une fermeture n'écrase jamais le souvenir d'une inscription.
+- Une adresse **déjà abonnée** ne reçoit pas de mail de bienvenue (l'automatisation Shopify ne part que pour un nouvel accord marketing) : l'API répond `saved: already` (tags posés, accord inchangé) et le site dit « Vous êtes déjà inscrit·e » au lieu de promettre un code. Pour tester le mail, il faut une adresse qui n'est pas encore abonnée.
+
 ## Conséquences
 
 - Les scripts navigateur du dépôt (smoke, parité, browser-check) ne voient jamais la popup (`navigator.webdriver`).
