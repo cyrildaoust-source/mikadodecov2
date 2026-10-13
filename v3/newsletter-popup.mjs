@@ -41,7 +41,7 @@ function popupHTML(config) {
   return `<div class="nlp__backdrop" data-nlp-close></div>
   <div class="nlp__box" role="dialog" aria-modal="true" aria-labelledby="nlp-title">
     <button class="nlp__close" type="button" data-nlp-close aria-label="Fermer">&times;</button>
-    <img class="nlp__photo" src="${photo}" srcset="${mobile} 480w, ${photo} 750w" sizes="(max-width: 760px) 100vw, 300px" alt="${esc(config.photoAlt || "")}" decoding="async" />
+    <picture class="nlp__pic"><source media="(max-width: 760px)" srcset="${mobile}" /><img class="nlp__photo" src="${photo}" alt="${esc(config.photoAlt || "")}" decoding="async" /></picture>
     <div class="nlp__body">
       <form class="nlp__form" data-nlp-form novalidate>
         <h2 class="nlp__title serif" id="nlp-title">Restons en contact</h2>
