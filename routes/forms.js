@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
 const rateLimit = require('express-rate-limit');
-const { adminClient, notifyByEmail, subscribeInShopify } = require('../lib/newsletter');
+const { notifyByEmail, subscribe } = require('../lib/newsletter');
 const { ORIGIN } = require('../lib/config');
 
 // ─── RATE-LIMIT ANTI-ABUS (in-memory, best-effort par instance serverless) ──
@@ -199,7 +199,7 @@ router.get('/api/shopify/newsletter/callback', formLimiter, async (req, res) => 
 // Abonne l'adresse dans Shopify (Admin API, consentement e-mail + tags). Sans jeton
 // Admin ou en cas d'échec, la boutique reçoit l'adresse par e-mail. Le visiteur ne
 // voit « inscrit » que si l'un des deux enregistrements a réussi.
-// Body: { email }
+// Body: { email, source?: 'footer' | 'popup' }
 router.post('/api/newsletter', formLimiter, async (req, res) => {
   res.set('Cache-Control', 'no-store');
   try {
@@ -209,12 +209,12 @@ router.post('/api/newsletter', formLimiter, async (req, res) => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).json({ error: 'email_invalid' });
     }
-    let saved = null, reason = 'application Shopify non configurée';
-    const admin = adminClient();
-    if (admin) {
-      try { saved = await subscribeInShopify(email, admin); }
-      catch (e) { reason = e.message; console.warn('[newsletter] shopify failed:', e.message); }
-    }
+    // Origine de l'inscription (tag Shopify `newsletter-footer` / `newsletter-popup`, ADR 0017).
+    const source = ['footer', 'popup'].includes(req.body?.source) ? req.body.source : '';
+    // Chaque client Admin configuré est essayé (jeton fixe, puis identifiants) avant le repli par e-mail.
+    let { saved, reasons } = await subscribe(email, { source });
+    const reason = reasons.join(' ; ');
+    if (!saved) console.warn('[newsletter] shopify failed:', reason);
     if (!saved) {
       try { if (await notifyByEmail(email, reason)) saved = 'email'; }
       catch (e) { console.warn('[newsletter] email failed:', e.message); }
@@ -228,7 +228,7 @@ router.post('/api/newsletter', formLimiter, async (req, res) => {
         if (r.ok) saved ||= 'webhook';
       } catch (e) { console.warn('[newsletter] webhook failed:', e.message); }
     }
-    console.log('[newsletter]', JSON.stringify({ ts: new Date().toISOString(), saved }));
+    console.log('[newsletter]', JSON.stringify({ ts: new Date().toISOString(), saved, source, ...(['created', 'subscribed'].includes(saved) ? {} : { reason }) }));
     if (!saved) return res.status(502).json({ error: 'delivery_failed' });
     res.json({ ok: true, saved });
   } catch (err) {
