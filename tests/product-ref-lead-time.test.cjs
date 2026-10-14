@@ -13,7 +13,7 @@ const base = {
 
 test('carte de recommandation : custom.lead_time prime sur le tag delai-long, comme sur la fiche', () => {
   const card = mapProductRef({ ...base, leadTime: { value: '6-10 semaines' } });
-  assert.equal(card.leadTimeLabel, '6–10 semaines');
+  assert.equal(card.leadTimeLabel, '6–11 semaines');   // 6-10 semaines de la marque + 2–3 jours ouvrés de réception et d'envoi
   assert.equal(card.longDelay, false);
   const without = mapProductRef({ ...base, leadTime: null });
   assert.equal(without.longDelay, true);
