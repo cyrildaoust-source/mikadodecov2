@@ -2058,7 +2058,9 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .nlp__fine { font-size: 11px; color: var(--muted); margin-top: 2px; }
 .nlp__status { font-size: var(--fs-small); min-height: 1.3em; }
 .nlp__status.is-error { color: #b23b3b; }
-.nlp__done { font-size: 26px; line-height: 1.15; font-weight: 500; }
+.nlp__done { font-size: 19px; line-height: 1.25; font-weight: 500; white-space: nowrap; }
+/* État « merci » sur ordinateur : même cadre que le formulaire (photo + colonne), la phrase seule, sur une ligne (Cyril, 14/10). */
+.nlp__box--done .nlp__body { padding: 44px 26px 30px; }
 @media (prefers-reduced-motion: no-preference) {
   .nlp__box { animation: nlp-in .35s var(--ease); }
   @keyframes nlp-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -2069,4 +2071,9 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
   .nlp__photo { height: 200px; object-position: center; }
   .nlp__body { padding: 20px 22px calc(24px + env(safe-area-inset-bottom)); }
   .nlp__title { font-size: 27px; }
+  .nlp__done { font-size: 18px; }
+  /* Téléphone : bandeau compact sans photo, phrase centrée. */
+  .nlp__box--done { min-height: 0; }
+  .nlp__box--done .nlp__pic { display: none; }
+  .nlp__box--done .nlp__body { padding: 36px 22px calc(36px + env(safe-area-inset-bottom)); align-items: center; text-align: center; }
 }

@@ -117,10 +117,11 @@ export function initNewsletterPopup(config = {}) {
       remember({ subscribed: true, at: Date.now(), saved: data.saved });
       track("inscription");
       form.hidden = true;
+      root.querySelector(".nlp__box")?.classList.add("nlp__box--done");   // la phrase seule, sur une ligne
       const done = root.querySelector("[data-nlp-done]");
       // Le code de bienvenue ne part que pour une NOUVELLE inscription : on ne le promet pas à qui est déjà inscrit.
       if (data.saved === "already") done.textContent = "Vous êtes déjà inscrit·e. Merci !";
-      else if (!(["created", "subscribed"].includes(data.saved))) done.textContent = "Merci ! Votre demande a été transmise à la boutique.";
+      else if (!(["created", "subscribed"].includes(data.saved))) done.textContent = "Merci ! Votre demande a été transmise.";
       // Le message reste affiché, avec sa croix, jusqu'à ce que le visiteur ferme (décision de Cyril du 13 octobre).
       done.hidden = false;
       root.querySelector(".nlp__close")?.focus({ preventScroll: true });
