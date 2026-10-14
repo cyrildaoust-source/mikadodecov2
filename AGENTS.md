@@ -44,3 +44,22 @@ L'importateur (`cyrildaoust-source/mikado-importer`, branche de référence `aud
 - La CSP est posée par le serveur (`lib/csp.js`, via `lib/request-log.js`) avec un **nonce par requête** ; `injectChrome` l'ajoute automatiquement à chaque `<script>` inline exécutable. `script-src` n'a plus `'unsafe-inline'`.
 - Donc : **jamais de gestionnaire inline** (`onload=`, `onerror=`, `onclick=`…) ni de `href="javascript:"`. Pour une image de repli, poser `data-fallback="remove|text|brand-name|brand-wordmark|hero"` (traitée par `bindImageFallbacks` dans `shell.mjs`). Une feuille de style chargée en `media="print"` est basculée en `all` par le script d'en-tête commun.
 - Un script inline reste possible (gardes anti-flash de quelques lignes) ; au-delà de 20 lignes, il va dans `v3/pages/<page>.js`. `tests/csp.test.cjs` et `tests/no-inline-modules.test.cjs` veillent.
+
+## Périmètre et renvoi (13 octobre 2026)
+
+Registre des instances : `~/conductor/repos/mikado-importer/docs/INSTANCES.md` (dépôt GitHub `cyrildaoust-source/mikado-importer`, `docs/INSTANCES.md`). Écrivains Shopify : `docs/CONTRAT_DONNEES_SHOPIFY.md` du même dépôt.
+
+**Cette session : le code du site.**
+- Fait : le code et les données du site mikadodeco.be (ce dépôt), son contrat de lecture `docs/DATA-CONTRACT.md`, ses mises en ligne.
+- Écrit dans Shopify : seulement le panier et les inscriptions à la newsletter.
+- Ne fait pas : fiches, prix, balises, collections, métachamps (importateur, ou instance promotions pour les réductions) ; contenu marketing ; SEO des fiches produit.
+- Dialogue avec l'importateur : issues `mikadodecov2` (étiquette `importateur`) et `mikado-importer` (étiquette `site`).
+
+**La conversation « Plan d'action après article » (référencement)** partage ce dépôt : elle fait le plan SEO du site et les textes proposés ; elle ne code pas (c'est cette session) et ne touche pas au SEO des fiches produit (importateur).
+
+**Règle de renvoi**
+1. Rester dans son périmètre et ne pas en changer.
+2. Demande hors périmètre : ne pas la faire, même en partie. Répondre « Ce n'est pas mon rôle : c'est celui de <nom exact de la conversation> », puis donner le prompt complet pour cette instance, en un seul bloc prêt à coller, qui reformule la demande avec le contexte utile, les règles à suivre (par renvoi aux documents) et le résultat attendu.
+3. Demande qui touche deux instances : faire sa part et rédiger le prompt de l'autre part.
+4. Doute sur l'instance : le dire et renvoyer au « grand cerveau » (superviseur de l'importateur), qui tient le registre.
+5. Règle nouvelle donnée par Cyril : la signaler au grand cerveau.
