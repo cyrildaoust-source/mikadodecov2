@@ -45,11 +45,11 @@ test('a line out of stock takes the lead time of its product: metafield exceptio
     stock(2, 0, { product: product({ tags: ['delai-long'] }) }),
     stock(3, 0, { product: product() }),
   ]).lines;
-  assert.deepEqual(lines.map(l => l.label), ['8–10 semaines', 'délai sur demande', '3–4 semaines']);
+  assert.deepEqual(lines.map(l => l.label), ['9–11 semaines', 'délai sur demande', '3–4 semaines']);
 });
 test('the grouped shipment announces the longest lead time; stock lines stay 2–3 jours', () => {
   const r = estimateDelivery([item(1), item(2)], [stock(1, 5, { product: product() }), stock(2, 0, { product: product({ metafield: { value: '6 semaines' } }) })]);
-  assert.deepEqual([r.label, r.onOrder, r.lines[0].label, r.lines[1].label], ['6 semaines', true, '2–3 jours', '6 semaines']);
+  assert.deepEqual([r.label, r.onOrder, r.lines[0].label, r.lines[1].label], ['7 semaines', true, '2–3 jours', '7 semaines']);
   assert.equal(estimateDelivery([item(1), item(2)], [stock(1, 0, { product: product({ metafield: { value: '2-3 semaines' } }) }), stock(2, 0, { product: product({ tags: ['delai-long'] }) })]).label, 'délai sur demande');
 });
 test('the stock query also fetches what the lead-time rules need', () => {

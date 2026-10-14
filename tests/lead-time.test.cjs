@@ -11,7 +11,7 @@ test('la table est chargée : défaut 3–4 semaines, libellés en tiret demi-ca
   assert.equal(label([10, 10], 'jours'), '10 jours');
 });
 
-test('le métachamp custom.lead_time est une exception : texte libre compris, sinon ignoré', () => {
+test('le métachamp custom.lead_time est une exception : délai marque → Mikado, marge ajoutée ; texte libre compris, sinon ignoré', () => {
   assert.deepEqual(parse('2-3 semaines'), { range: [2, 3], unit: 'semaines' });
   assert.deepEqual(parse('6 semaines'), { range: [6, 6], unit: 'semaines' });
   assert.deepEqual(parse('10 jours'), { range: [10, 10], unit: 'jours' });
@@ -19,7 +19,12 @@ test('le métachamp custom.lead_time est une exception : texte libre compris, si
   assert.deepEqual(parse('Sur demande'), { onRequest: true });
   assert.equal(parse('bientôt'), null);
   assert.equal(parse(''), null);
-  assert.equal(leadTimeFor({ vendor: 'Vitra', leadTime: '8-10 semaines' }).label, '8–10 semaines');
+  assert.equal(leadTimeFor({ vendor: 'Vitra', leadTime: '8-10 semaines' }).label, '9–11 semaines');            // + 1 semaine de marge (décision du 14 oct.)
+  assert.equal(leadTimeFor({ vendor: 'HKliving', tags: ['delai-long'], leadTime: '6-10 semaines' }).label, '7–11 semaines'); // le métachamp prime sur delai-long
+  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '4-7 semaines' }).label, '5–8 semaines');
+  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '10 jours ouvrés' }).label, '13–14 jours ouvrés');   // + 3–4 jours ouvrés
+  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '10 jours' }).label, '11–12 jours ouvrés');          // jours calendaires → 8 jours ouvrés + marge
+  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '6-10 semaines' }).source, 'metafield');
   assert.equal(leadTimeFor({ vendor: 'Vitra', leadTime: 'sur demande' }).label, ON_REQUEST);
 });
 
