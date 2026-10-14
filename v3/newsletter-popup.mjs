@@ -41,7 +41,7 @@ function popupHTML(config) {
   return `<div class="nlp__backdrop" data-nlp-close></div>
   <div class="nlp__box" role="dialog" aria-modal="true" aria-labelledby="nlp-title">
     <button class="nlp__close" type="button" data-nlp-close aria-label="Fermer">&times;</button>
-    <img class="nlp__photo" src="${photo}" srcset="${mobile} 480w, ${photo} 750w" sizes="(max-width: 760px) 100vw, 300px" alt="${esc(config.photoAlt || "")}" decoding="async" />
+    <picture class="nlp__pic"><source media="(max-width: 760px)" srcset="${mobile}" /><img class="nlp__photo" src="${photo}" alt="${esc(config.photoAlt || "")}" decoding="async" /></picture>
     <div class="nlp__body">
       <form class="nlp__form" data-nlp-form novalidate>
         <h2 class="nlp__title serif" id="nlp-title">Restons en contact</h2>
@@ -80,7 +80,7 @@ export function initNewsletterPopup(config = {}) {
   const onLeave = (e) => { if (e.clientY <= 0 && Date.now() - since >= (config.exitIntentSeconds ?? 10) * 1000) open(); };
   const since = Date.now();
 
-  function close(reason = "fermeture") {
+  function close(reason = subscribed ? "inscription" : "fermeture") {
     if (!root) return;
     clear();
     document.removeEventListener("keydown", onKey, true);
@@ -121,8 +121,9 @@ export function initNewsletterPopup(config = {}) {
       // Le code de bienvenue ne part que pour une NOUVELLE inscription : on ne le promet pas à qui est déjà inscrit.
       if (data.saved === "already") done.textContent = "Vous êtes déjà inscrit·e. Merci !";
       else if (!(["created", "subscribed"].includes(data.saved))) done.textContent = "Merci ! Votre demande a été transmise à la boutique.";
-      done.hidden = false; done.focus?.();
-      timers.push(setTimeout(() => close("inscription"), 4000));
+      // Le message reste affiché, avec sa croix, jusqu'à ce que le visiteur ferme (décision de Cyril du 13 octobre).
+      done.hidden = false;
+      root.querySelector(".nlp__close")?.focus({ preventScroll: true });
     } catch (err) {
       status.textContent = err.message === "rate_limit" ? "Trop de tentatives. Patientez quelques minutes." : "L'inscription n'a pas pu être enregistrée. Réessayez ou écrivez-nous à shop@mikadodeco.be.";
       status.className = "nlp__status is-error";
