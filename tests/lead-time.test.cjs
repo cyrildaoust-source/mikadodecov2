@@ -19,11 +19,11 @@ test('le métachamp custom.lead_time est une exception : délai marque → Mikad
   assert.deepEqual(parse('Sur demande'), { onRequest: true });
   assert.equal(parse('bientôt'), null);
   assert.equal(parse(''), null);
-  assert.equal(leadTimeFor({ vendor: 'Vitra', leadTime: '8-10 semaines' }).label, '9–11 semaines');            // + 1 semaine de marge (décision du 14 oct.)
-  assert.equal(leadTimeFor({ vendor: 'HKliving', tags: ['delai-long'], leadTime: '6-10 semaines' }).label, '7–11 semaines'); // le métachamp prime sur delai-long
-  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '4-7 semaines' }).label, '5–8 semaines');
-  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '10 jours ouvrés' }).label, '13–14 jours ouvrés');   // + 3–4 jours ouvrés
-  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '10 jours' }).label, '11–12 jours ouvrés');          // jours calendaires → 8 jours ouvrés + marge
+  assert.equal(leadTimeFor({ vendor: 'Vitra', leadTime: '8-10 semaines' }).label, '8–11 semaines');            // + 2–3 jours ouvrés de réception et d'envoi (décision du 14 oct.) : 8,4 → 8 et 10,6 → 11 semaines
+  assert.equal(leadTimeFor({ vendor: 'HKliving', tags: ['delai-long'], leadTime: '6-10 semaines' }).label, '6–11 semaines'); // le métachamp prime sur delai-long
+  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '4-7 semaines' }).label, '4–8 semaines');
+  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '10 jours ouvrés' }).label, '12–13 jours ouvrés');   // + 2–3 jours ouvrés
+  assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '10 jours' }).label, '10–11 jours ouvrés');          // jours calendaires → 8 jours ouvrés + marge
   assert.equal(leadTimeFor({ vendor: 'HKliving', leadTime: '6-10 semaines' }).source, 'metafield');
   assert.equal(leadTimeFor({ vendor: 'Vitra', leadTime: 'sur demande' }).label, ON_REQUEST);
 });
