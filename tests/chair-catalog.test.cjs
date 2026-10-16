@@ -109,8 +109,9 @@ test('le retour de fiche conserve chaque filtre et la variante sans accepter une
 test('les sous-catégories reçoivent les mêmes filtres, avec leur propre chemin et leur titre',async()=>{
   const {filterScope,filterScopeHandles}=require('../lib/filter-scopes');
   assert.ok(filterScope('fauteuils')&&filterScope('verres-carafes'));
-  // Promotions garde son affichage de variantes remisées ; collections internes exclues.
-  for(const handle of ['promotions','promo-chaises-hay','featured','claude-modifs-2026-05-16','inconnue'])assert.equal(filterScope(handle),null,handle);
+  // Promotions est filtrable depuis l'index (ADR 0018) ; les collections promo-* de campagne et internes restent exclues.
+  assert.equal(filterScope('promotions').kind,'promotions');assert.equal(filterScope('promotions').fallback,'collection','sans index : liste directe, toujours filtrable');
+  for(const handle of ['promo-chaises-hay','featured','claude-modifs-2026-05-16','inconnue'])assert.equal(filterScope(handle),null,handle);
   for(const handle of ['hay','nouveautes','1900','verner-panton'])assert.equal(filterScope(handle).kind,'collection',handle);
   // Tables, Canapés et familles n'existent qu'avec l'index commun ; sans lui, liste d'origine.
   for(const handle of ['tables-de-salle-a-manger','canapes','tables','sieges','outdoor'])assert.equal(filterScope(handle).fallback,'legacy',handle);
@@ -127,7 +128,7 @@ test('les sous-catégories reçoivent les mêmes filtres, avec leur propre chemi
   assert.match(html,/content="noindex,follow"/);
   const api=await realFetch(base+'/api/catalog/fauteuils?brand=hay');
   assert.equal(api.status,200);assert.equal((await api.json()).scope.handle,'fauteuils');
-  assert.equal((await realFetch(base+'/api/catalog/promotions')).status,404);
+  assert.equal((await realFetch(base+'/api/catalog/promotions')).status,200,'Promotions filtrable (ADR 0018), liste directe sans index');
   const {selectionURL}=await import('../v3/navigation.mjs');
   assert.equal(selectionURL('/collections/fauteuils?color=noir&min=100&stock=1'),'/collections/fauteuils?color=noir&min=100&stock=1');
 });

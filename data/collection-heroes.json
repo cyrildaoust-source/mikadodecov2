@@ -376,5 +376,6 @@
     "mobilePosition": "55% 58%",
     "width": 2000,
     "height": 2000
-  }
+  },
+  "promotions": { "image": "/images/produits-hero.jpg", "alt": "Promotions Mikado Deco", "position": "50% 70%", "mobilePosition": "50% 70%", "width": 1600, "height": 2000 }
 }

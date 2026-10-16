@@ -511,11 +511,11 @@ test('qualified brand hero agrees across bootstrap, social preview and no-JS fal
 test('editorial curation has distinct photographs, safe focal points and known sources', () => {
   const { collectionHeroes, collectionHero, photoStyle, injectCollectionHero } = require('../lib/editorial-media');
   const imageKey = image => new URL(image, 'https://www.mikadodeco.be').pathname;
-  assert.equal(Object.keys(collectionHeroes).length, 42);   // 41 collections + Idées cadeaux (ADR 0016)
-  assert.equal(new Set(Object.values(collectionHeroes).map(photo => imageKey(photo.image))).size, 42);
+  assert.equal(Object.keys(collectionHeroes).length, 43);   // 41 collections + Idées cadeaux (ADR 0016) + Promotions (ADR 0018)
+  assert.equal(new Set(Object.values(collectionHeroes).map(photo => imageKey(photo.image))).size, 43);
   for (const [handle, photo] of Object.entries(collectionHeroes)) {
-    assert.match(photo.sourceProduct, /^[a-z0-9-]+$/);
-    assert.equal(new URL(photo.image).hostname, 'cdn.shopify.com');
+    if (photo.image.startsWith('/images/')) assert.ok(photo.alt, handle);   // photo du site (bandeau générique du catalogue, page Promotions)
+    else { assert.match(photo.sourceProduct, /^[a-z0-9-]+$/); assert.equal(new URL(photo.image).hostname, 'cdn.shopify.com'); }
     assert.doesNotMatch(photo.image, /chatgpt|generated/i);
     assert.ok(photo.width >= 1000 && photo.height > 0, handle);
     assert.match(photo.position, /^(100|\d{1,2})% (100|\d{1,2})%$/);

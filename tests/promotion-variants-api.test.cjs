@@ -6,7 +6,7 @@ const makeProduct=id=>({id:`gid://shopify/Product/${id}`,handle:`promo-${id}`,ti
  availableForSale:true,totalInventory:4,metafields:[],collections:{edges:[{node:{handle:'promotions'}}]},
  featuredImage:{url:'https://cdn.shopify.com/normal.jpg'},images:{edges:[{node:{url:'https://cdn.shopify.com/normal.jpg'}},{node:{url:'https://cdn.shopify.com/promo.jpg'}}]},
  priceRange:{minVariantPrice:{amount:'119.5'},maxVariantPrice:{amount:'239'}},compareAtPriceRange:{minVariantPrice:{amount:'0'}},
- variants:{edges:[
+ filterMetafields:[],variants:{pageInfo:{hasNextPage:false,endCursor:null},edges:[
   {node:{id:`gid://shopify/ProductVariant/${id}1`,title:'Noir',price:{amount:'239'},availableForSale:true,quantityAvailable:2,image:{url:'https://cdn.shopify.com/normal.jpg'},selectedOptions:[]}},
   {node:{id:`gid://shopify/ProductVariant/${id}2`,title:'Bleu acapulco',price:{amount:'119.5'},compareAtPrice:{amount:'239'},availableForSale:true,quantityAvailable:2,image:{url:'https://cdn.shopify.com/promo.jpg'},selectedOptions:[]}}
  ]}});
@@ -24,6 +24,9 @@ before(async()=>{
   if(/query GetCollections/.test(query))return Response.json({data:{collections:{edges:[{node:{id:'gid://shopify/Collection/1',handle:'promotions',title:'Promotions'}}]}}});
   if(/query ProductRecommendations\(/.test(query))return Response.json({data:{complementary:[],related:[],rangeCollections:[],search:{nodes:[]}}});
   if(/query GetProduct\(/.test(query))return Response.json({data:{product:makeProduct(1)}});
+  // Index commun (ADR 0018) : la page Promotions est désormais filtrable depuis l'index ; les deux fiches y sont.
+  if(/query CatalogueIndex\(/.test(query))return Response.json({data:{products:{edges:[{node:makeProduct(1)},{node:makeProduct(2)}],pageInfo:{hasNextPage:false,endCursor:null}}}});
+  if(/query CollectionMembers\(/.test(query))return Response.json({data:{collection:{products:{nodes:[],pageInfo:{hasNextPage:false,endCursor:null}}}}});
   throw Error('Unexpected operation '+query.slice(0,80));
  };
  server=require('../server').listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));base=`http://127.0.0.1:${server.address().port}`;
