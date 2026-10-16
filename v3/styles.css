@@ -827,6 +827,8 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 /* Fil d'Ariane — discreet breadcrumb on cream (schema.org BreadcrumbList) */
 [data-breadcrumb] { min-height: 1.3em; margin: 16px 0; }   /* marge sur le conteneur TOUJOURS présent → pas de CLS quand le fil d'Ariane se peuple */
 .breadcrumb { font-size: var(--fs-small); color: var(--muted); }
+/* La section qui suit le fil d'Ariane (listes, familles) : pas le plein espacement de section (Cyril, 16/10 : « un espace énorme »). */
+[data-breadcrumb] + .section { padding-top: 24px; }
 .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0; padding: 0; }
 .breadcrumb li { display: inline-flex; align-items: center; gap: 7px; }
 .breadcrumb li + li::before { content: "›"; color: var(--muted); opacity: .6; }

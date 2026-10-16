@@ -297,7 +297,7 @@ test('Promotions (ADR 0018) : page filtrable depuis l’index, appartenance par 
   assert.match(html,/aria-label="Filtrer les promotions"/);
   assert.equal((html.match(/class="pcard"/g)||[]).length,2);
   assert.doesNotMatch(html,/noindex/);
-  assert.match(html,/subhero__img[^>]*src="\/images\/produits-hero.jpg"/,'même bandeau que l’ancienne page');
+  assert.match(html,/subhero__img[^>]*src="https:\/\/cdn.shopify.com[^"]*Grand-Relax[^"]*"/,'bandeau = le Grand Relax Vitra et son ottoman (choix de Cyril)');
   const filtered=await page('/collections/promotions?category=sieges');
   assert.match(filtered.html,/noindex/,'page filtrée hors de l’index');
   assert.equal((filtered.html.match(/class="pcard"/g)||[]).length,1);

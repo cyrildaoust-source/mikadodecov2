@@ -514,8 +514,8 @@ test('editorial curation has distinct photographs, safe focal points and known s
   assert.equal(Object.keys(collectionHeroes).length, 43);   // 41 collections + Idées cadeaux (ADR 0016) + Promotions (ADR 0018)
   assert.equal(new Set(Object.values(collectionHeroes).map(photo => imageKey(photo.image))).size, 43);
   for (const [handle, photo] of Object.entries(collectionHeroes)) {
-    if (photo.image.startsWith('/images/')) assert.ok(photo.alt, handle);   // photo du site (bandeau générique du catalogue, page Promotions)
-    else { assert.match(photo.sourceProduct, /^[a-z0-9-]+$/); assert.equal(new URL(photo.image).hostname, 'cdn.shopify.com'); }
+    assert.match(photo.sourceProduct, /^[a-z0-9-]+$/);
+    assert.equal(new URL(photo.image).hostname, 'cdn.shopify.com');
     assert.doesNotMatch(photo.image, /chatgpt|generated/i);
     assert.ok(photo.width >= 1000 && photo.height > 0, handle);
     assert.match(photo.position, /^(100|\d{1,2})% (100|\d{1,2})%$/);
