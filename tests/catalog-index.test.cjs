@@ -17,7 +17,7 @@ function node(id,{type='chaise',vendor=id%2?'HAY':'Vitra',tags=[],handles=[],com
 // Idées cadeaux (ADR 0016) : la chaise 7 est taguée pour les enfants, les vases 51–55 « idee-cadeau » + « vase » (belle-maman), le vase 56 « noel » + « bougie » (amoureux).
 for(let id=1;id<=40;id++)products.push(node(id,{tags:id<=6?['verner-panton']:id===7?['cadeau-enfant','chambre-enfant']:id===8?['promotion']:[],handles:['chaises','sieges']}));
 for(let id=41;id<=50;id++)products.push(node(id,{tags:['exterieur'],handles:['chaises-outdoor','outdoor','sieges']}));
-for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone','idee-cadeau','vase']:id<=55?['idee-cadeau','vase']:id===56?['noel','bougie']:[],handles:['vases','decoration'],compareAt:id===54?300:null}));   // le vase 54 est remisé (300 → 154 €)
+for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone','idee-cadeau','vase']:id===54?['idee-cadeau','vase','alignement-concurrent']:id<=55?['idee-cadeau','vase']:id===56?['noel','bougie']:[],handles:['vases','decoration'],compareAt:id===54?300:null}));   // le vase 54 est remisé (300 → 154 €, balise alignement-concurrent)
 for(let id=61;id<=65;id++)products.push(node(id,{type:'table',handles:['tables-de-salle-a-manger','tables']}));
 for(let id=66;id<=68;id++)products.push(node(id,{type:'table',tags:['exterieur'],handles:['tables']}));
 
@@ -279,9 +279,9 @@ test('ordre mélangé (idées cadeaux) : tour de rôle des marques, tirage stabl
   assert.deepEqual(mixOrder([],1),[]);
 });
 
-test('Promotions (ADR 0018) : page filtrable depuis l’index, fiches en prix réduit ou taguées promotion, finition remisée sur la carte',async()=>{
+test('Promotions (ADR 0018) : page filtrable depuis l’index, appartenance par les quatre balises de raison, finition remisée sur la carte',async()=>{
   const data=await (await realFetch(base+'/api/catalog/promotions')).json();
-  assert.equal(data.total,2,'le vase 54 (prix comparé) et la chaise 8 (tag promotion)');
+  assert.equal(data.total,2,'le vase 54 (alignement-concurrent) et la chaise 8 (promotion) ; un prix barré seul ne suffit pas');
   assert.deepEqual(data.facets.category.map(c=>[c.value,c.count]),[['sieges',1],['decoration',1]],'familles du catalogue comme catégories');
   const vase=data.items.find(p=>p.handle==='produit-54');
   assert.equal(vase.compareAt,300);assert.equal(vase.price,154);
