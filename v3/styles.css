@@ -2027,6 +2027,13 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 @media (min-width: 1200px) { .gift-rail { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; } .gift-rail .home-rc { aspect-ratio: 1 / 1; } }
 .home-rc.is-active { outline: 3px solid var(--accent); outline-offset: 2px; }
 [data-chair-continuation] .gift-discovery { display: none; }
+/* PROMOTIONS (ADR 0018) : tuiles par famille (une par famille en promotion) et raccourcis par tranche de remise. */
+.promo-families { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--gap); }
+.promo-family { aspect-ratio: 1 / 1; flex-direction: column; justify-content: flex-end; align-items: flex-start; }
+.promo-bands { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; }
+.promo-bands__label { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); margin-right: 4px; }
+.promo-band__n { color: var(--muted); margin-left: 6px; }
+@media (max-width: 760px) { .promo-families { grid-auto-flow: column; grid-auto-columns: 72%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .promo-family { scroll-snap-align: start; } }
 /* Repères de saison sous les rubriques */
 .gift-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap); }
 .gift-note { border-top: 2px solid var(--accent); padding-top: 14px; }

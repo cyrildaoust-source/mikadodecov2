@@ -12,6 +12,13 @@ La page `/collections/promotions` était la seule liste du site sans filtres (Cy
 - Même page que les autres listes (`sendScopeCatalog`) : filtres, tri, pagination, familles du catalogue en catégories, finition remisée choisie pour la carte (`preferDiscount`), ordre mélangé par marque (graine quotidienne), bandeau = le fauteuil Grand Relax Vitra et son ottoman, l'offre Home Stories, choisi par Cyril le 16 octobre (`data/collection-heroes.json`). L'espace entre le fil d'Ariane et le titre des listes est resserré (72 → 24 px de haut de section).
 - Repli `collection` : si l'index manque, la liste directe de la collection `promotions` (qui fusionne déjà les remises automatiques) alimente la même page filtrable.
 
+## Au-dessus de la grille (décision de Cyril du 16 octobre, après la Preview)
+
+- **Par famille** : une tuile photo par famille du catalogue qui a des fiches en promotion, avec le **nombre réel** de fiches ; la photo est celle de la fiche la plus remisée de la famille. Un clic filtre la grille sur la famille. Une famille sans promotion n'a pas de tuile.
+- **Par remise** : raccourcis « −20 % et plus », « −30 % et plus », « −50 % et plus » (`discountBands`), avec le nombre de fiches ; une tranche vide n'apparaît pas. Nouveau paramètre de filtre `discount` (remise minimale en %, calculée sur le prix barré réel de chaque finition), partagé par le serveur et le navigateur.
+- **Tri par défaut « plus forte remise »** (`defaultSort: 'remise'`, absent de l'URL) ; les autres tris restent disponibles. Les tuiles « offres du moment » par marque, aux libellés déduits d'un seul produit, ont été rejetées : rien n'est rédigé à la main.
+- Bandeau : le fauteuil Grand Relax Vitra et son ottoman, la meilleure offre du moment.
+
 ## Conséquences
 
 - Les filtres de la page Promotions sont ceux du catalogue ; une entrée « Promotions » par famille dans le menu peut pointer sur `/collections/promotions?category=<famille>`.
