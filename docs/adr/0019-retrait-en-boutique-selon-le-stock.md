@@ -9,8 +9,8 @@ Le point de retrait « Mikado Deco » est réglé dans Shopify sur « Générale
 ## Décision (règle de Cyril)
 
 - Article **en stock** à la boutique : « Retrait en boutique : prêt sous 24 h ».
-- Article **à commander** : le retrait suit le **délai de la marque jusqu'à la boutique**, le métachamp `custom.lead_time` (« 3 semaines », « 6-10 semaines »), **sans** la marge d'expédition de 2–3 jours ouvrés appliquée à la livraison : la boutique prévient le client dès l'arrivée.
-- `custom.lead_time` vide ou « sur demande » : « Retrait en boutique : délai confirmé après commande ».
+- Article **à commander** : le retrait affiche **le même délai que la livraison** (règles par marque et famille, ou métachamp `custom.lead_time`, avec la marge) : « c'est littéralement le même temps » (Cyril, 17 octobre, après une première version qui retirait la marge d'expédition et donnait un retrait plus court que la livraison). La fiche l'écrit en une ligne : « Livraison ou retrait en boutique · 6–11 semaines ».
+- Délai sur demande (tag `delai-long`, métachamp « sur demande ») : « délai confirmé après commande », livraison ou retrait.
 - Jamais « 24 h » pour un article sans stock.
 
 Une seule fonction, `pickupFor` dans `lib/lead-time.js`, à côté de `leadTimeFor` ; `longestPickup` donne le retrait d'une commande (l'article le plus long, un délai à confirmer l'emporte).
@@ -23,7 +23,7 @@ Une seule fonction, `pickupFor` dans `lib/lead-time.js`, à côté de `leadTimeF
 ## Données
 
 - Stock à la boutique : `quantityAvailable` de la variante (Storefront). La boutique n'a **qu'un seul emplacement** actif qui honore les commandes en ligne (« Mikado Deco », vérifié par l'API Admin le 17/10) : cette quantité est exactement le stock du point de retrait. `storeAvailability` (portée `unauthenticated_read_product_pickup_locations`) n'est donc pas nécessaire ; si un second emplacement apparaît, cette décision est à revoir.
-- Délai : `custom.lead_time`, texte français d'une ligne, délai le plus long des variantes vendues (contrat `docs/CONTRAT_DONNEES_SHOPIFY.md` de l'importateur). Tant que le métachamp n'est pas posé sur toutes les marques (chantier A27 de l'importateur), la plupart des articles à commander affichent « délai confirmé après commande ».
+- Délai : celui de la livraison (`leadTimeFor`, ADR 0015) : métachamp `custom.lead_time` quand il existe, sinon la règle par marque et famille.
 
 ## Conséquences
 

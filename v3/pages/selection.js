@@ -59,9 +59,10 @@ function render() {
       : "";
     // Délai de livraison et retrait en boutique de la ligne (/api/cart/delivery : stock réel, délai de la fiche).
     const etaLine = deliveryEstimate?.lines?.find((l) => l.variantId === i.variantId);
-    const etaHTML = etaLine?.label
-      ? `<div class="sel-item__eta">Livraison ${escapeHtml(etaLine.label)}${etaLine.pickup ? ` · ${escapeHtml(etaLine.pickup)}` : ""}</div>`
-      : "";
+    const etaHTML = !etaLine?.label ? ""
+      : etaLine.pickupStatus === "ready" ? `<div class="sel-item__eta">Livraison ${escapeHtml(etaLine.label)} · ${escapeHtml(etaLine.pickup)}</div>`
+      : etaLine.pickupStatus === "tbc" ? `<div class="sel-item__eta">Sur commande · délai confirmé après commande</div>`
+      : `<div class="sel-item__eta">Livraison ou retrait en boutique : ${escapeHtml(etaLine.label)}</div>`;
 
     // 3 visual states (brief §3 cases 1/2/3):
     //   • free (≥99% off)  → original price struck + « Offert » italic
@@ -174,7 +175,7 @@ function render() {
   const etaEl = document.querySelector("[data-cart-eta]");
   if (etaEl) {
     etaEl.innerHTML = deliveryEstimate?.label
-      ? `Délai estimé : <strong>${escapeHtml(deliveryEstimate.label)}</strong>${deliveryEstimate.onOrder ? ' · envoi groupé dès réception des articles sur commande.' : ''}${deliveryEstimate.pickup ? ` · ${escapeHtml(deliveryEstimate.pickup)}${deliveryEstimate.onOrder ? ' (article le plus long)' : ''}.` : ''}`
+      ? `Délai estimé${deliveryEstimate.onOrder ? ', livraison ou retrait en boutique' : ''} : <strong>${escapeHtml(deliveryEstimate.label)}</strong>${deliveryEstimate.onOrder ? ' · envoi groupé dès réception des articles sur commande.' : deliveryEstimate.pickup ? ` · ${escapeHtml(deliveryEstimate.pickup)}.` : ''}`
       : 'En stock : <strong>2–3 jours</strong> · Sur commande : <strong>selon la marque</strong>. Le délai le plus long s’applique aux envois groupés.';
     etaEl.classList.toggle('sel-eta--warn', !!deliveryEstimate?.onOrder);
     etaEl.hidden = false;
