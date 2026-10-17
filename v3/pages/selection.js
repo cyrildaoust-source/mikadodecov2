@@ -65,6 +65,12 @@ function render() {
     const promoCodeHTML = discountTitles.length
       ? `<div class="sel-item__promo-code">${discountTitles.map(escapeHtml).join(" · ")}</div>`
       : "";
+    // Délai de livraison et retrait en boutique de la ligne (/api/cart/delivery : stock réel, délai de la fiche).
+    const etaLine = deliveryEstimate?.lines?.find((l) => l.variantId === i.variantId);
+    const etaHTML = !etaLine?.label ? ""
+      : etaLine.pickupStatus === "ready" ? `<div class="sel-item__eta">Livraison ${escapeHtml(etaLine.label)} · ${escapeHtml(etaLine.pickup)}</div>`
+      : etaLine.pickupStatus === "tbc" ? `<div class="sel-item__eta">Sur commande · délai confirmé après commande</div>`
+      : `<div class="sel-item__eta">Livraison ou retrait en boutique : ${escapeHtml(etaLine.label)}</div>`;
 
     // 3 visual states (brief §3 cases 1/2/3):
     //   • free (≥99% off)  → original price struck + « Offert » italic
@@ -102,6 +108,7 @@ function render() {
         <div class="sel-item__brand">${escapeHtml(i.brand || "")}</div>
         <a class="sel-item__name navigation-product-link" href="${escapeHtml(productHref(i, "/selection.html", i.variantId))}">${escapeHtml(i.name || "")}</a>
         ${promoCodeHTML}
+        ${etaHTML}
         <div class="sel-item__controls">
           ${i.gift ? `<span class="sel-item__giftchip">Cadeau</span>` : `<div class="qty qty--sm">
             <button class="qty__btn" data-qty-dec="${escapeHtml(i.variantId)}" data-qty-idx="${idx}" aria-label="${qty > 1 ? "Diminuer" : "Retirer l'article"}" type="button">−</button>
@@ -176,7 +183,7 @@ function render() {
   const etaEl = document.querySelector("[data-cart-eta]");
   if (etaEl) {
     etaEl.innerHTML = deliveryEstimate?.label
-      ? `Délai estimé : <strong>${escapeHtml(deliveryEstimate.label)}</strong>${deliveryEstimate.onOrder ? ' · envoi groupé dès réception des articles sur commande.' : ''}`
+      ? `Délai estimé${deliveryEstimate.onOrder ? ', livraison ou retrait en boutique' : ''} : <strong>${escapeHtml(deliveryEstimate.label)}</strong>${deliveryEstimate.onOrder ? ' · envoi groupé dès réception des articles sur commande.' : deliveryEstimate.pickup ? ` · ${escapeHtml(deliveryEstimate.pickup)}.` : ''}`
       : 'En stock : <strong>2–3 jours</strong> · Sur commande : <strong>selon la marque</strong>. Le délai le plus long s’applique aux envois groupés.';
     etaEl.classList.toggle('sel-eta--warn', !!deliveryEstimate?.onOrder);
     etaEl.hidden = false;
