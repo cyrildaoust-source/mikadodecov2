@@ -10,6 +10,7 @@ export function chairParams(state, page = state.page) {
   if(state.stock) q.set('stock','1');
   if(state.tag) q.set('tag',state.tag);
   if(state.q) q.set('q',state.q);
+  if(state.discount) q.set('discount',String(state.discount));
   if(state.sort !== 'pop') q.set('sort',state.sort);
   if(page > 1) q.set('page',String(page));
   return q;
@@ -21,11 +22,14 @@ export const scopeURL = (scope, state, page = state.page) => {
   scope ||= CHAIRS_SCOPE;
   const q=new URLSearchParams(scope.fixed||{});
   for(const [k,v] of chairParams(state,page))q.append(k,v);
+  // Tri par défaut propre à la page (Promotions : « plus forte remise ») : absent de l'URL ; « pop » y devient explicite.
+  const defaultSort = scope.defaultSort || 'pop';
+  if(defaultSort !== 'pop'){ q.delete('sort'); if(state.sort && state.sort !== defaultSort) q.set('sort',state.sort); }
   return scope.basePath+(q.size?'?'+q:'');
 };
 export const chairURL = (state, page = state.page) => scopeURL(CHAIRS_SCOPE,state,page);
 export function filterCount(state) {
-  return ['category','brand','color','material','usage','feature'].reduce((n,k)=>n+(state[k]?.length||0),0)+Number(state.min!==null||state.max!==null)+Number(state.stock)+Number(state.seat_min!==null||state.seat_max!==null)+Number(Boolean(state.tag))+Number(Boolean(state.q));
+  return ['category','brand','color','material','usage','feature'].reduce((n,k)=>n+(state[k]?.length||0),0)+Number(state.min!==null||state.max!==null)+Number(state.stock)+Number(state.seat_min!==null||state.seat_max!==null)+Number(Boolean(state.tag))+Number(Boolean(state.q))+Number(Boolean(state.discount));
 }
 function listFilter(key, data) {
   const values=data.facets[key]||[],selected=data.state[key]||[];
@@ -54,7 +58,7 @@ export function filterControls(data) {
       <button type="button" class="btn btn--outline catalog-filters__mobile-toggle" data-filters-toggle aria-expanded="false" aria-controls="chair-filter-options">Filtrer et trier${active?` (${active})`:''}</button>
       <div class="catalog-filters__groups" id="chair-filter-options">
         <div class="catalog-filters__sheet-head"><span class="serif">Filtrer et trier</span><button type="button" class="catalog-filters__close" data-filters-close aria-label="Fermer les filtres">&times;</button></div>
-        <label class="catalog-filters__sort"><span class="sr-only">${esc(scope.sortLabel)}</span><select class="fselect" name="sort">${[['pop',scope.popLabel||'Les plus populaires'],['asc','Prix croissant'],['desc','Prix décroissant'],['az','Nom : A → Z']].map(([v,l])=>`<option value="${v}"${state.sort===v?' selected':''}>${l}</option>`).join('')}</select></label>
+        <label class="catalog-filters__sort"><span class="sr-only">${esc(scope.sortLabel)}</span><select class="fselect" name="sort">${(scope.sortOptions||[['pop',scope.popLabel||'Les plus populaires'],['asc','Prix croissant'],['desc','Prix décroissant'],['az','Nom : A → Z']]).map(([v,l])=>`<option value="${v}"${state.sort===v?' selected':''}>${l}</option>`).join('')}</select></label>
         ${listFilter('category',data)}${listFilter('brand',data)}
         <details class="catalog-filters__group" data-filter-group="price"><summary>Prix${state.min!==null||state.max!==null?'<span class="catalog-filters__selected">1</span>':''}<span class="catalog-filters__chevron" aria-hidden="true"></span></summary><div class="catalog-filters__popover catalog-filters__price">
           <p>Votre budget</p>${priceBands(scope,state)}<div class="catalog-filters__range"><label>Minimum (€)<input type="number" inputmode="decimal" min="0" step="0.01" name="min" value="${state.min??''}" placeholder="${Math.floor(facets.price.min)}"></label><span aria-hidden="true">—</span><label>Maximum (€)<input type="number" inputmode="decimal" min="0" step="0.01" name="max" value="${state.max??''}" placeholder="${Math.ceil(facets.price.max)}"></label></div><button type="submit" class="btn btn--outline" data-filter-apply>Appliquer</button></div></details>
@@ -87,6 +91,6 @@ export function chairPagination(data) {
   const link=(page,label,extra='')=>`<a class="plp-page ${extra}" href="${esc(scopeURL(scope,state,page))}#grille" data-chair-link>${label}</a>`;
   return `${state.page>1?link(state.page-1,'‹ Précédent','plp-page--nav'):'<span class="plp-page" aria-disabled="true">‹ Précédent</span>'}<span class="plp-pagination__numbers">${items.map(n=>n==='…'?'<span class="plp-page__ellipsis">…</span>':n===state.page?`<span class="plp-page is-current" aria-current="page">${n}</span>`:link(n,n)).join('')}</span><span class="plp-pagination__mobile">Page ${state.page} / ${totalPages}</span>${state.page<totalPages?link(state.page+1,'Suivant ›','plp-page--nav'):'<span class="plp-page" aria-disabled="true">Suivant ›</span>'}`;
 }
-const EMPTY_STATE = {sort:'pop',page:1,tag:'',stock:false,q:'',category:[],brand:[],color:[],material:[],usage:[],feature:[],min:null,max:null,seat_min:null,seat_max:null};
+const EMPTY_STATE = {sort:'pop',page:1,tag:'',stock:false,q:'',discount:0,category:[],brand:[],color:[],material:[],usage:[],feature:[],min:null,max:null,seat_min:null,seat_max:null};
 export const emptyState = (scope = CHAIRS_SCOPE) => `<div class="catalog-filters__empty"><p class="serif">${esc(scope.empty)}</p><p>Retirez un filtre pour découvrir davantage de modèles.</p><a class="btn btn--outline" href="${esc(scopeURL(scope,EMPTY_STATE))}#grille" data-chair-link>${esc(scope.all)}</a></div>`;
 export const emptyChairs = () => emptyState(CHAIRS_SCOPE);

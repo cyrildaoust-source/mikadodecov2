@@ -15,9 +15,9 @@ function node(id,{type='chaise',vendor=id%2?'HAY':'Vitra',tags=[],handles=[],com
 }
 // 40 chaises, 10 chaises de jardin, 10 vases, 5 tables et 3 tables d'extérieur : 68 fiches.
 // Idées cadeaux (ADR 0016) : la chaise 7 est taguée pour les enfants, les vases 51–55 « idee-cadeau » + « vase » (belle-maman), le vase 56 « noel » + « bougie » (amoureux).
-for(let id=1;id<=40;id++)products.push(node(id,{tags:id<=6?['verner-panton']:id===7?['cadeau-enfant','chambre-enfant']:[],handles:['chaises','sieges']}));
+for(let id=1;id<=40;id++)products.push(node(id,{tags:id<=6?['verner-panton']:id===7?['cadeau-enfant','chambre-enfant']:id===8?['promotion']:[],handles:['chaises','sieges']}));
 for(let id=41;id<=50;id++)products.push(node(id,{tags:['exterieur'],handles:['chaises-outdoor','outdoor','sieges']}));
-for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone','idee-cadeau','vase']:id<=55?['idee-cadeau','vase']:id===56?['noel','bougie']:[],handles:['vases','decoration'],compareAt:id===54?300:null}));   // le vase 54 est remisé (300 → 154 €)
+for(let id=51;id<=60;id++)products.push(node(id,{type:'vase',tags:id===52?['icone','idee-cadeau','vase']:id===54?['idee-cadeau','vase','alignement-concurrent']:id<=55?['idee-cadeau','vase']:id===56?['noel','bougie']:[],handles:['vases','decoration'],compareAt:id===54?300:null}));   // le vase 54 est remisé (300 → 154 €, balise alignement-concurrent)
 for(let id=61;id<=65;id++)products.push(node(id,{type:'table',handles:['tables-de-salle-a-manger','tables']}));
 for(let id=66;id<=68;id++)products.push(node(id,{type:'table',tags:['exterieur'],handles:['tables']}));
 
@@ -227,7 +227,11 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   assert.equal((html.match(/class="pcard"/g)||[]).length,7);
   assert.match(html,/Accueil[\s\S]*Catalogue[\s\S]*Idées cadeaux/);
   assert.doesNotMatch(html,/noindex/);
-  assert.doesNotMatch(html,/Livré avant Noël|gift-note|Emballage cadeau/,'hors saison : aucun repère de Noël');
+  // Repères de saison selon la vraie horloge : échange ouvert 30 jours avant son début, saison dès startsAt (data/campaigns.json).
+  const { active: seasonActive, exchangeOpen } = require('../lib/christmas');
+  if (!seasonActive() && !exchangeOpen()) assert.doesNotMatch(html,/Livré avant Noël|gift-note|Emballage cadeau/,'hors saison : aucun repère de Noël');
+  else assert.match(html,/gift-note/,'en saison ou échange ouvert : les repères sont là');
+  assert.doesNotMatch(html,/Livré avant Noël/,'repère de livraison éteint (deliveryBadge: false)');
   assert.doesNotMatch(html,/subhero__img[^>]*src=""/,'bandeau de la page depuis collection-heroes.json');
   const filtered=await page('/collections/idees-cadeaux?max=50');
   assert.match(filtered.html,/class="home-rc gift-band is-active" href="\/collections\/idees-cadeaux\?max=50#grille"[^>]*aria-current="true"/);
@@ -273,4 +277,37 @@ test('ordre mélangé (idées cadeaux) : tour de rôle des marques, tirage stabl
   assert.notDeepEqual(a.map(p=>p.card.id),c.map(p=>p.card.id),'autre jour → autre ordre');
   for(let i=0;i<8;i++)assert.notEqual(a[i].brand,a[i+1].brand);
   assert.deepEqual(mixOrder([],1),[]);
+});
+
+test('Promotions (ADR 0018) : page filtrable depuis l’index, appartenance par les quatre balises de raison, finition remisée sur la carte',async()=>{
+  const data=await (await realFetch(base+'/api/catalog/promotions')).json();
+  assert.equal(data.total,2,'le vase 54 (alignement-concurrent) et la chaise 8 (promotion) ; un prix barré seul ne suffit pas');
+  assert.deepEqual(data.facets.category.map(c=>[c.value,c.count]),[['sieges',1],['decoration',1]],'familles du catalogue comme catégories');
+  const vase=data.items.find(p=>p.handle==='produit-54');
+  assert.equal(vase.compareAt,300);assert.equal(vase.price,154);
+  assert.equal(data.state.sort,'remise','tri par défaut : plus forte remise');assert.equal(data.items[0].handle,'produit-54','la remise de 49 % ouvre la grille');
+  assert.equal((await (await realFetch(base+'/api/catalog/promotions?discount=30')).json()).total,1,'−30 % et plus : le vase');
+  assert.equal((await (await realFetch(base+'/api/catalog/promotions?discount=50')).json()).total,0,'−50 % et plus : rien (49 %)');
+  const deco=await (await realFetch(base+'/api/catalog/promotions?category=decoration')).json();
+  assert.deepEqual(deco.items.map(p=>p.handle),['produit-54']);
+  const {response,html}=await page('/collections/promotions');
+  assert.equal(response.status,200);
+  assert.match(html,/<html lang="fr" class="plp-collection" data-chair-catalog/,"page de liste générique (filtres, tri, pagination)");
+  assert.match(html,/<h1 data-plp-title data-context>Promotions<\/h1>/);
+  assert.match(html,/<title>Promotions · Mikado Deco<\/title>/);
+  assert.match(html,/<link rel="canonical" href="https:\/\/www.mikadodeco.be\/collections\/promotions"/);
+  assert.match(html,/data-filter-group="category"/,'les filtres de catalogue sont là');
+  assert.match(html,/aria-label="Filtrer les promotions"/);
+  assert.equal((html.match(/class="pcard"/g)||[]).length,2);
+  assert.match(html,/>Par famille<\/h2>/);assert.match(html,/data-promo-cat="sieges"[^>]*>[\s\S]*?1 pièce<\/span>/,'tuile Assises avec son compte');assert.match(html,/data-promo-cat="decoration"/);
+  assert.doesNotMatch(html,/data-promo-cat="tables"/,'une famille sans promotion n’a pas de tuile');
+  assert.match(html,/href="\/collections\/promotions\?discount=20#grille"[^>]*>−20 % et plus<span class="promo-band__n">1<\/span>/,'raccourci −20 % avec son compte');
+  assert.doesNotMatch(html,/data-promo-band="50"/,'tranche vide masquée');
+  assert.match(html,/<option value="remise" selected>Plus forte remise<\/option>/);
+  assert.doesNotMatch(html,/sort=remise/,'le tri par défaut n’encombre pas les liens');
+  assert.doesNotMatch(html,/noindex/);
+  assert.match(html,/subhero__img[^>]*src="https:\/\/cdn.shopify.com[^"]*Grand-Relax[^"]*"/,'bandeau = le Grand Relax Vitra et son ottoman (choix de Cyril)');
+  const filtered=await page('/collections/promotions?category=sieges');
+  assert.match(filtered.html,/noindex/,'page filtrée hors de l’index');
+  assert.equal((filtered.html.match(/class="pcard"/g)||[]).length,1);
 });
