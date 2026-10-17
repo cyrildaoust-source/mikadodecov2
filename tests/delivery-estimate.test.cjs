@@ -60,14 +60,17 @@ test('the stock query also fetches what the lead-time rules need', () => {
 test('le retrait en boutique suit le stock réel de chaque ligne, puis l’article le plus long pour la commande', () => {
   const r = estimateDelivery([item(1), item(2), item(3), item(4)], [
     stock(1, 5, { product: product({ metafield: { value: '8-10 semaines' } }) }),   // en stock : prêt sous 24 h, quoi que dise le métachamp
-    stock(2, 0, { product: product({ metafield: { value: '8-10 semaines' } }) }),   // à commander : délai de la marque, sans marge
-    stock(3, 0, { product: product({ tags: ['delai-long'] }) }),                     // sans métachamp : confirmé après commande
-    stock(4, 0, { product: product() }),
+    stock(2, 0, { product: product({ metafield: { value: '8-10 semaines' } }) }),   // à commander : le même délai que la livraison
+    stock(3, 0, { product: product({ tags: ['delai-long'] }) }),                     // sur demande : confirmé après commande
+    stock(4, 0, { product: product() }),                                             // règle par défaut : comme la livraison
   ]);
-  assert.deepEqual(r.lines.map(l => l.pickup), ['Retrait en boutique : prêt sous 24 h', 'Retrait en boutique : 8–10 semaines', 'Retrait en boutique : délai confirmé après commande', 'Retrait en boutique : délai confirmé après commande']);
+  assert.deepEqual(r.lines.map(l => l.pickup), ['Retrait en boutique : prêt sous 24 h', 'Retrait en boutique : 8–11 semaines', 'Retrait en boutique : délai confirmé après commande', 'Retrait en boutique : 3–4 semaines']);
+  assert.deepEqual(r.lines.map(l => l.pickupStatus), ['ready', 'delay', 'tbc', 'delay']);
   assert.equal(r.pickup, 'Retrait en boutique : délai confirmé après commande', 'un délai à confirmer l’emporte');
+  assert.equal(r.pickupStatus, 'tbc');
   assert.ok(!('pickupInfo' in r.lines[0]), 'rien d’interne dans la réponse');
   const stocked = estimateDelivery([item(1), item(2)], [stock(1, 5, { product: product() }), stock(2, 0, { product: product({ metafield: { value: '3 semaines' } }) })]);
-  assert.equal(stocked.pickup, 'Retrait en boutique : 3 semaines');
+  assert.equal(stocked.pickup, 'Retrait en boutique : 3–4 semaines', 'identique au délai de livraison de la commande');
+  assert.equal(stocked.pickup.replace('Retrait en boutique : ', ''), stocked.label);
   assert.equal(estimateDelivery([item(1)], [stock(1, 2, { product: product() })]).pickup, 'Retrait en boutique : prêt sous 24 h');
 });

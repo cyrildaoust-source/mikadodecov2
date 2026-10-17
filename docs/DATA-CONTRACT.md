@@ -49,7 +49,7 @@ Les articles du journal (source `v3/journal/articles.data.mjs`) et les 4 pages l
 
 ## Retrait en boutique (ADR 0019)
 
-Un seul emplacement Shopify actif honore les commandes en ligne (« Mikado Deco ») : `quantityAvailable` d'une variante est le stock du point de retrait. Le site en déduit le retrait : en stock → « prêt sous 24 h » ; à commander → `custom.lead_time` tel quel (sans marge) ; vide ou « sur demande » → « délai confirmé après commande ». Si un second emplacement apparaît, lire `storeAvailability` (portée `unauthenticated_read_product_pickup_locations`).
+Un seul emplacement Shopify actif honore les commandes en ligne (« Mikado Deco ») : `quantityAvailable` d'une variante est le stock du point de retrait. Le site en déduit le retrait : en stock → « prêt sous 24 h » ; à commander → le même délai que la livraison ; sur demande → « délai confirmé après commande ». Si un second emplacement apparaît, lire `storeAvailability` (portée `unauthenticated_read_product_pickup_locations`).
 
 ## Idées cadeaux et saison de Noël (ADR 0016)
 

@@ -47,4 +47,4 @@ Aucune date limite globale n'est annoncée (le stock est faible, la promesse ne 
 
 ## Retrait en boutique — 17 octobre 2026 (ADR 0019)
 
-Le point de retrait Shopify dit « prêt sous 24 heures » pour tout le magasin ; le site suit le stock. En stock : « Retrait en boutique : prêt sous 24 h ». À commander : le délai de la marque jusqu'à la boutique (`custom.lead_time`), sans la marge d'expédition. Sans métachamp ou « sur demande » : « Retrait en boutique : délai confirmé après commande ». Au panier, la commande suit l'article le plus long ; le retrait est écrit dans les attributs et la note de la commande Shopify.
+Le point de retrait Shopify dit « prêt sous 24 heures » pour tout le magasin ; le site suit le stock. En stock : « Retrait en boutique : prêt sous 24 h ». À commander : le même délai que la livraison (« Livraison ou retrait en boutique · 6–11 semaines »). Délai sur demande : « délai confirmé après commande ». Au panier, la commande suit l'article le plus long ; le retrait est écrit dans les attributs et la note de la commande Shopify.
