@@ -14,7 +14,7 @@ La page `/collections/promotions` était la seule liste du site sans filtres (Cy
 
 ## Au-dessus de la grille (décision de Cyril du 16 octobre, après la Preview)
 
-- **Par famille** : une tuile photo par famille du catalogue qui a des fiches en promotion, avec le **nombre réel** de fiches ; la photo est celle de la fiche la plus remisée de la famille. Un clic filtre la grille sur la famille. Une famille sans promotion n'a pas de tuile.
+- **Par famille** : une tuile photo par famille du catalogue qui a des fiches en promotion, avec le **nombre réel** de fiches ; la photo est la photo curée de la famille (`data/catalog-landing.json`), jamais celle d'un produit remisé (Cyril, 17 octobre). Un clic filtre la grille sur la famille. Une famille sans promotion n'a pas de tuile.
 - **Par remise** : raccourcis « −20 % et plus », « −30 % et plus », « −50 % et plus » (`discountBands`), avec le nombre de fiches ; une tranche vide n'apparaît pas. Nouveau paramètre de filtre `discount` (remise minimale en %, calculée sur le prix barré réel de chaque finition), partagé par le serveur et le navigateur.
 - **Tri par défaut « plus forte remise »** (`defaultSort: 'remise'`, absent de l'URL) ; les autres tris restent disponibles. Les tuiles « offres du moment » par marque, aux libellés déduits d'un seul produit, ont été rejetées : rien n'est rédigé à la main.
 - Bandeau : le fauteuil Grand Relax Vitra et son ottoman, la meilleure offre du moment.
