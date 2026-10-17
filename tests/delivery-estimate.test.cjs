@@ -56,3 +56,18 @@ test('the stock query also fetches what the lead-time rules need', () => {
   const { VARIANT_STOCK_QUERY } = require('../lib/delivery-estimate');
   for (const part of ['product {', 'vendor', 'tags', 'collections(first: 20)', 'metafield(namespace: "custom", key: "lead_time")']) assert.ok(VARIANT_STOCK_QUERY.includes(part), part);
 });
+
+test('le retrait en boutique suit le stock réel de chaque ligne, puis l’article le plus long pour la commande', () => {
+  const r = estimateDelivery([item(1), item(2), item(3), item(4)], [
+    stock(1, 5, { product: product({ metafield: { value: '8-10 semaines' } }) }),   // en stock : prêt sous 24 h, quoi que dise le métachamp
+    stock(2, 0, { product: product({ metafield: { value: '8-10 semaines' } }) }),   // à commander : délai de la marque, sans marge
+    stock(3, 0, { product: product({ tags: ['delai-long'] }) }),                     // sans métachamp : confirmé après commande
+    stock(4, 0, { product: product() }),
+  ]);
+  assert.deepEqual(r.lines.map(l => l.pickup), ['Retrait en boutique : prêt sous 24 h', 'Retrait en boutique : 8–10 semaines', 'Retrait en boutique : délai confirmé après commande', 'Retrait en boutique : délai confirmé après commande']);
+  assert.equal(r.pickup, 'Retrait en boutique : délai confirmé après commande', 'un délai à confirmer l’emporte');
+  assert.ok(!('pickupInfo' in r.lines[0]), 'rien d’interne dans la réponse');
+  const stocked = estimateDelivery([item(1), item(2)], [stock(1, 5, { product: product() }), stock(2, 0, { product: product({ metafield: { value: '3 semaines' } }) })]);
+  assert.equal(stocked.pickup, 'Retrait en boutique : 3 semaines');
+  assert.equal(estimateDelivery([item(1)], [stock(1, 2, { product: product() })]).pickup, 'Retrait en boutique : prêt sous 24 h');
+});

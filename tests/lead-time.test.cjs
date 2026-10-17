@@ -76,3 +76,19 @@ test('les jours ouvrés comptent dans l’envoi groupé', () => {
   assert.equal(longest([fast, mid]).label, '10–14 jours ouvrés');
   assert.equal(longest([fast, slow, mid]).label, '3–4 semaines');
 });
+
+test('retrait en boutique : le stock décide, puis le délai de la marque sans marge, sinon « confirmé après commande » (Cyril, 17 oct.)', () => {
+  const { pickupFor, longestPickup, PICKUP_READY, PICKUP_TBC } = require('../lib/lead-time');
+  assert.equal(pickupFor({ inStock: true, leadTime: '6-10 semaines' }).label, PICKUP_READY);
+  assert.equal(pickupFor({ inStock: false, leadTime: '6-10 semaines' }).label, 'Retrait en boutique : 6–10 semaines', 'sans la marge d’expédition');
+  assert.equal(pickupFor({ inStock: false, leadTime: '3 semaines' }).label, 'Retrait en boutique : 3 semaines');
+  assert.equal(pickupFor({ inStock: false, leadTime: '10 jours ouvrés' }).label, 'Retrait en boutique : 10 jours ouvrés');
+  assert.equal(pickupFor({ inStock: false, leadTime: '' }).label, PICKUP_TBC, 'sans métachamp : jamais « 24 h »');
+  assert.equal(pickupFor({ inStock: false, leadTime: 'sur demande' }).label, PICKUP_TBC);
+  assert.equal(pickupFor({ inStock: false }).label, PICKUP_TBC);
+  const ready = pickupFor({ inStock: true }), six = pickupFor({ inStock: false, leadTime: '6 semaines' }), two = pickupFor({ inStock: false, leadTime: '2 semaines' }), tbc = pickupFor({ inStock: false });
+  assert.equal(longestPickup([ready, two, six]).label, six.label, 'la commande suit l’article le plus long');
+  assert.equal(longestPickup([six, tbc, ready]).label, PICKUP_TBC, 'un délai à confirmer l’emporte');
+  assert.equal(longestPickup([ready, ready]).label, PICKUP_READY);
+  assert.equal(longestPickup([]), null);
+});
