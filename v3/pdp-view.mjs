@@ -116,11 +116,11 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
   const availStore = (v) => {
     const s = variantState(v || current);
     if (p.giftCard)          return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>Carte cadeau</strong> · envoyée par e-mail dès le paiement`;
-    if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>En stock</strong> · livraison 2–3 jours · en boutique sous 24 h · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a>` + noelChip("instock");
+    if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>En stock</strong> · livraison 2–3 jours · ${escapeHtml(p.pickup?.ready || "Retrait en boutique : prêt sous 24 h")} · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a>` + noelChip("instock");
     if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Indisponible</strong>`;
     return p.longDelay
-      ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande`
-      : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}` + noelChip("order");
+      ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai sur demande · ${escapeHtml(p.pickup?.onOrder || "Retrait en boutique : délai confirmé après commande")}`
+      : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")} · ${escapeHtml(p.pickup?.onOrder || "Retrait en boutique : délai confirmé après commande")}` + noelChip("order");
   };
 
   // Accordéon Description + Caractéristiques (6 groupes, single-open) — le

@@ -30,8 +30,10 @@ test('checkout uses fresh server inventory and ignores fabricated client ETA and
   assert.match(captured.note, /3–4 semaines/);
   assert.doesNotMatch(captured.note, /Projet:|À confirmer/);
   assert.equal(captured.lines[0].quantity, 2);
-  assert.deepEqual(captured.lines[0].attributes, [{key:'_gift',value:'offer'},{key:'Délai estimé',value:'3–4 semaines'}]);
+  assert.deepEqual(captured.lines[0].attributes, [{key:'_gift',value:'offer'},{key:'Délai estimé',value:'3–4 semaines'},{key:'Retrait en boutique',value:'délai confirmé après commande'}]);
   assert.equal(captured.attributes.find(a => a.key === 'Délai estimé').value, '3–4 semaines');
+  assert.equal(captured.attributes.find(a => a.key === 'Retrait en boutique').value, 'délai confirmé après commande', 'sans stock ni métachamp : jamais « 24 h »');
+  assert.match(captured.note, /Retrait en boutique : délai confirmé après commande/);
 });
 test('preview reflects exact quantities and refreshed availability', async () => {
   available = 2;
