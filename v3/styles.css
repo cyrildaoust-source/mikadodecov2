@@ -2035,6 +2035,7 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .promo-band__n { color: var(--muted); margin-left: 6px; }
 /* Après les tuiles de découverte (promotions, idées cadeaux), la grille n'a pas besoin du plein espacement de section. */
 .gift-discovery + .catalog-section { padding-top: 28px; }
+.promo-discovery { padding-bottom: 4px; }   /* les raccourcis par remise collent presque à la grille */
 @media (max-width: 760px) { .promo-families { grid-auto-flow: column; grid-auto-columns: 72%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .promo-family { scroll-snap-align: start; } }
 /* Repères de saison sous les rubriques */
 .gift-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap); }
