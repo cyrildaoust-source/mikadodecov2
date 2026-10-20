@@ -47,6 +47,11 @@ after(async()=>{global.fetch=realFetch;await new Promise(r=>server.close(r));});
 const seed=html=>JSON.parse(html.match(/id="chair-catalog-initial">([\s\S]*?)<\/script>/)[1]);
 const page=async path=>{const response=await realFetch(base+path);return {response,html:await response.text()};};
 
+// Horloge imposée à lib/christmas.js : les assertions « hors saison » ne dépendent pas de la date du jour
+// (la saison de Noël court du 19 octobre au 24 décembre ; sans ceci, ces tests cassaient pendant la saison).
+const OFF_SEASON='2026-10-01T10:00:00+02:00';
+const withClock=async(iso,fn)=>{process.env.MIKADO_CLOCK=iso;try{return await fn();}finally{delete process.env.MIKADO_CLOCK;}};
+
 test('Assises : liste filtrée depuis l’index, sans le mobilier de jardin, avec les catégories du menu',async()=>{
   const data=await (await realFetch(base+'/api/catalog/sieges')).json();
   assert.equal(data.total,40,'les chaises de jardin restent hors d’Assises');
@@ -214,7 +219,7 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   assert.equal(kids.total,1);assert.equal(kids.items[0].handle,'produit-7');
   const band=await (await realFetch(base+'/api/catalog/idees-cadeaux?min=150&max=160')).json();
   assert.equal(band.total,6,'les six vases sont entre 151 et 156 €');
-  const {response,html}=await page('/collections/idees-cadeaux');
+  const {response,html}=await withClock(OFF_SEASON,()=>page('/collections/idees-cadeaux'));
   assert.equal(response.status,200);
   assert.match(html,/<h1 data-plp-title data-context>Idées cadeaux<\/h1>/);
   assert.match(html,/<title>Idées cadeaux design · Mikado Deco<\/title>/);
@@ -229,7 +234,7 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   assert.doesNotMatch(html,/noindex/);
   assert.doesNotMatch(html,/Livré avant Noël|gift-note|Emballage cadeau/,'hors saison : aucun repère de Noël');
   assert.doesNotMatch(html,/subhero__img[^>]*src=""/,'bandeau de la page depuis collection-heroes.json');
-  const filtered=await page('/collections/idees-cadeaux?max=50');
+  const filtered=await withClock(OFF_SEASON,()=>page('/collections/idees-cadeaux?max=50'));
   assert.match(filtered.html,/class="home-rc gift-band is-active" href="\/collections\/idees-cadeaux\?max=50#grille"[^>]*aria-current="true"/);
   assert.match(filtered.html,/class="catalog-filters__band is-active"[^>]*>Moins de 50 €/);
   assert.match(filtered.html,/data-gift-cat="cadeaux-enfants"/,'les rubriques restent proposées quand une tranche est active');
@@ -238,30 +243,29 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   assert.match(filtered.html,/Aucune idée cadeau ne correspond/);
 });
 
-test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navigation, annonce et emballage cadeau',async()=>{
+test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navigation, barre d’annonce intacte, sans emballage cadeau',async()=>{
   process.env.MIKADO_CLOCK='2026-12-01T10:00:00+01:00';
   try {
     const data=await (await realFetch(base+'/api/catalog/idees-cadeaux?sort=az')).json();
     assert.ok(data.items.every(p=>p.christmas===null),'repère « Livré avant Noël » éteint (deliveryBadge: false) : aucun état envoyé');
     const {html}=await page('/collections/idees-cadeaux?sort=az');
     assert.doesNotMatch(html,/Livré avant Noël/,'ni chip ni repère sur la page');
-    assert.match(html,/gift-note/);assert.match(html,/Emballage cadeau offert/);assert.match(html,/jusqu’au 31 janvier|jusqu'au 31 janvier/);
-    assert.match(html,/<p data-plp-sub>[^<]*Emballage cadeau offert/);
+    assert.match(html,/gift-note/);assert.doesNotMatch(html,/[Ee]mballage/,'plus d’emballage cadeau (Cyril, 20 octobre 2026)');assert.match(html,/jusqu’au 31 janvier|jusqu'au 31 janvier/);
+    assert.match(html,/<p data-plp-sub>Des idées pour tous les budgets[^<]*garder\.<\/p>/,'texte de page de toute l’année, sans emballage');
     assert.match(html,/<a href="\/collections\/idees-cadeaux" class="nlink">Idées cadeaux<\/a><a href="\/collections\/promotions" class="nlink nlink--promo"/,'navigation : Idées cadeaux avant Promotions');
     assert.match(html,/<a class="drawer__link" href="\/collections\/idees-cadeaux">Idées cadeaux<\/a><a class="drawer__link drawer__link--promo"/,'tiroir mobile aussi');
     assert.match(html,/data-gift-cat="cadeaux-hote"|Pour l'hôte du réveillon/,'la rubrique de saison est visible en saison');
     const home=await page('/');
     assert.match(home.html,/home-band--gifts/);assert.match(home.html,/href="\/collections\/idees-cadeaux\?max=50">Moins de 50 €/);
-    assert.match(home.html,/<span class="on"><a href="\/collections\/idees-cadeaux">Idées cadeaux pour tous les budgets · emballage offert<\/a><\/span>/);
+    assert.doesNotMatch(home.html,/[Ee]mballage cadeau|emballage offert|Idées cadeaux pour tous les budgets/,'ni message de saison dans la barre d’annonce, ni emballage cadeau (Cyril, 20 octobre 2026)');
+    assert.match(home.html,/<div class="announce" data-announce tabindex="0">\s*<span class="on">Boutique de design à Uccle/,'la barre ouvre sur son message permanent');
     assert.equal((home.html.match(/class="on"/g)||[]).length,1,'un seul message d’annonce affiché au départ');
-    const sel=await page('/selection.html');
-    assert.match(sel.html,/data-gift-wrap-input/);
+    assert.doesNotMatch((await page('/selection.html')).html,/data-gift-wrap|GIFT-WRAP|[Ee]mballage cadeau/,'panier sans case emballage, même en saison');
   } finally { delete process.env.MIKADO_CLOCK; }
-  const off=await page('/');
+  const off=await withClock(OFF_SEASON,()=>page('/'));
   assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous/);
   assert.match(off.html,/class="nlink">Idées cadeaux<\/a>/,'l’entrée de navigation reste toute l’année');
-  assert.doesNotMatch((await page('/collections/idees-cadeaux')).html,/data-gift-cat="cadeaux-hote"/,'hors saison, pas de rubrique « hôte du réveillon »');
-  assert.doesNotMatch((await page('/selection.html')).html,/data-gift-wrap|GIFT-WRAP/);
+  assert.doesNotMatch((await withClock(OFF_SEASON,()=>page('/collections/idees-cadeaux'))).html,/data-gift-cat="cadeaux-hote"/,'hors saison, pas de rubrique « hôte du réveillon »');
 });
 
 test('ordre mélangé (idées cadeaux) : tour de rôle des marques, tirage stable pour une même graine',()=>{

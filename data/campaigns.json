@@ -32,14 +32,13 @@
     }
   ],
   "noel": {
-    "_note": "Opération de Noël (ADR 0016, décisions de Cyril des 12 et 13 octobre 2026), lue par lib/christmas.js. `startsAt`/`endsAt` : fenêtre d'affichage de la saison (section de l'accueil, message de la barre d'annonce, case emballage cadeau du panier, texte de saison de la page Idées cadeaux). `deliveryBy` : date à laquelle le colis doit être arrivé ; `safetyDays` : jours calendaires ajoutés au délai haut de l'article avant d'afficher « Livré avant Noël » (le repère se calcule article par article et disparaît de lui-même). `giftWrap` : emballage cadeau offert proposé au panier pendant la fenêtre. `exchange` : geste commercial en boutique — échange ou avoir jusqu'au `until` pour les achats depuis `from` (le droit de rétractation légal de 14 jours en ligne reste inchangé). `deliveryBadge` : repère « Livré avant Noël » sur les cartes et les fiches — ÉTEINT par Cyril le 13 octobre 2026 (stock pas encore assez fiable pour jouer là-dessus) ; le calcul reste prêt. `enabled: false` éteint tout. La page /collections/idees-cadeaux reste en ligne toute l'année (data/gift-ideas.json).",
+    "_note": "Opération de Noël (ADR 0016, décisions de Cyril des 12 et 13 octobre 2026), lue par lib/christmas.js. `startsAt`/`endsAt` : fenêtre d'affichage de la saison (section de l'accueil, texte de saison de la page Idées cadeaux ; jamais la barre d'annonce ni d'emballage cadeau, retirés par Cyril le 20 octobre 2026). `deliveryBy` : date à laquelle le colis doit être arrivé ; `safetyDays` : jours calendaires ajoutés au délai haut de l'article avant d'afficher « Livré avant Noël » (le repère se calcule article par article et disparaît de lui-même). `exchange` : geste commercial en boutique — échange ou avoir jusqu'au `until` pour les achats depuis `from` (le droit de rétractation légal de 14 jours en ligne reste inchangé). `deliveryBadge` : repère « Livré avant Noël » sur les cartes et les fiches — ÉTEINT par Cyril le 13 octobre 2026 (stock pas encore assez fiable pour jouer là-dessus) ; le calcul reste prêt. `enabled: false` éteint tout. La page /collections/idees-cadeaux reste en ligne toute l'année (data/gift-ideas.json).",
     "enabled": true,
     "startsAt": "2026-10-19T00:00:00+02:00",
     "deliveryBadge": false,
     "endsAt": "2026-12-24T18:30:00+01:00",
     "deliveryBy": "2026-12-24",
     "safetyDays": 2,
-    "giftWrap": true,
     "exchange": { "from": "2026-11-15", "until": "2027-01-31" }
   }
 }

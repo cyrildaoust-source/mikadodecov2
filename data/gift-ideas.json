@@ -3,8 +3,7 @@
   "handle": "idees-cadeaux",
   "title": "Idées cadeaux",
   "description": "Des idées pour tous les budgets et pour tout le monde, de belle-maman aux collègues : des objets qu'on a envie d'offrir, et de garder.",
-  "seasonDescription": "Des idées pour tous les budgets et pour tout le monde, de belle-maman aux collègues : des objets qu'on a envie d'offrir, et de garder. Emballage cadeau offert.",
-  "seasonDescriptionBadge": "Des idées pour tous les budgets et pour tout le monde, de belle-maman aux collègues. Les articles marqués « Livré avant Noël » arrivent à temps si vous commandez aujourd'hui ; emballage cadeau offert.",
+  "seasonDescriptionBadge": "Des idées pour tous les budgets et pour tout le monde, de belle-maman aux collègues. Les articles marqués « Livré avant Noël » arrivent à temps si vous commandez aujourd'hui.",
   "bands": [
     { "label": "Moins de 50 €", "max": 50, "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/festive_season_hkliving.jpg?v=1776933349", "sourceProduct": "hkliving-tasse-a-cafe-rock-set-0", "position": "50% 42%" },
     { "label": "De 50 à 100 €", "min": 50, "max": 100, "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/packshot-a7e1e732699666e3c38ad9b260eab3e1.png?v=1790419244", "sourceProduct": "bougeoir-nagel", "position": "50% 62%" },

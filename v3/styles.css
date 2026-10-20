@@ -2033,10 +2033,6 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 /* Accueil : bandeau Idées cadeaux (saison) */
 .home-band--gifts .home-band__t { margin: 0; }
 .home-band--gifts .home-band__links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
-/* Panier : emballage cadeau offert (saison) */
-.sel-giftwrap { display: flex; gap: 10px; align-items: flex-start; font-size: var(--fs-small); line-height: 1.45; padding: 12px 0; margin: 4px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); cursor: pointer; }
-.sel-giftwrap input { accent-color: var(--accent-ink); flex: none; width: 18px; height: 18px; margin-top: 2px; }
-.sel-giftwrap strong { font-weight: 600; }
 @media (max-width: 900px) { .gift-bands { grid-template-columns: repeat(2, 1fr); } }
 /* ═══ POPUP NEWSLETTER (ADR 0017) — fenêtre centrée sur ordinateur, panneau du bas sur téléphone ═══ */
 .nlp { position: fixed; inset: 0; z-index: 126; display: flex; align-items: center; justify-content: center; }

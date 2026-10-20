@@ -12,14 +12,6 @@ initShell({ active: "", transparentNav: false });
 // Livraison : tarif unique en Belgique, sans seuil de gratuité (décision du
 // 24 septembre 2026). Shopify reste la référence au paiement.
 const DELIVERY_NOTE = "Livraison en Belgique : 50 €, quel que soit le montant.";
-// Emballage cadeau offert (saison de Noël, lib/christmas.js) : la case n'existe que si le serveur l'a rendue ;
-// le choix est gardé d'une visite à l'autre et transmis au paiement (attribut « Emballage cadeau »).
-const GIFT_WRAP_KEY = "mikado_v3_giftwrap";
-const giftWrapInput = document.querySelector("[data-gift-wrap-input]");
-if (giftWrapInput) {
-  try { giftWrapInput.checked = localStorage.getItem(GIFT_WRAP_KEY) === "1"; } catch (_) { /* stockage indisponible : case décochée */ }
-  giftWrapInput.addEventListener("change", () => { try { localStorage.setItem(GIFT_WRAP_KEY, giftWrapInput.checked ? "1" : "0"); } catch (_) { /* idem */ } });
-}
 const populated = document.querySelector("[data-populated]");
 const empty = document.querySelector("[data-empty]");
 const itemsEl = document.querySelector("[data-items]");
@@ -259,7 +251,7 @@ document.querySelector("[data-checkout]").addEventListener("click", async () => 
   try {
     const res = await fetch("/api/cart/create", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1, ...(i.gift ? { gift: i.gift } : {}) })), giftWrap: Boolean(giftWrapInput && giftWrapInput.checked) }),
+      body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1, ...(i.gift ? { gift: i.gift } : {}) })) }),
     });
     const data = await res.json();
     if (data.checkoutUrl) location.href = data.checkoutUrl;
