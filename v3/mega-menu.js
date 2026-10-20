@@ -1,7 +1,7 @@
 /* ============================================================
    Mikado Deco · Mega menu controller (V2.1)
    - Mobilier  : Shopify-driven (menu(handle:"main-menu"))
-   - Marques   : fully hardcoded from /mega-menu-brands.json
+   - Marques   : depuis /mega-menu-brands.json (registre) et /api/brands
                  (15 brands + featured collections + flat designer list)
    - Side panel "Coup de cœur" from /mega-menu-config.json (restored)
    Top-level NAV labels/hrefs live in chrome-template.js as the fallback so
@@ -140,7 +140,7 @@ function hydrateMobilier() {
     </div>`;
 }
 
-// --- Marques mega (V2.1: fully hardcoded) ---------------------
+// --- Marques mega (registre + /api/brands) ---------------------
 
 function hydrateMarques() {
   const panel = stageEl.querySelector('[data-mm-panel="marques"]');

@@ -2,15 +2,12 @@
 // Extrait de server.js (phase 1 du plan d'architecture, octobre 2026) — code déplacé, pas réécrit.
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
 const { families } = require('../lib/family-pages');
 const { shopifyFetch } = require('../lib/shopify/client');
 const { SITEMAP_PRODUCTS_QUERY } = require('../lib/shopify/queries');
 const { cached } = require('../lib/cache');
 const { BRAND_COLLECTION_ALIASES, FAMILLES_RICHES, INTERNAL_COLLECTION, ORIGIN, SITEMAP_PAGES } = require('../lib/config');
 const { getDesigners } = require('../lib/designers');
-const { V3_DIR } = require('../lib/paths');
 const { activeDesignerSlugs } = require('../lib/render/pages');
 const { getCollections } = require('../lib/services/catalog');
 const { GIFTS } = require('../lib/filter-scopes');

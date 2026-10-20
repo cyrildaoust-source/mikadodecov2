@@ -73,7 +73,7 @@ router.get('/produit.html', async (req, res) => {
       ));
       if (!data.node?.handle) return send404Shell(res, 'produit.html');
       return res.redirect(301, nav.navigation.productHref({ handle: data.node.handle }, nav.navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)), req.query.variant));
-    } catch (error) { return temporaryUnavailable(res).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
+    } catch { return temporaryUnavailable(res).send('Cette fiche est momentanément indisponible. Veuillez réessayer.'); }
   }
   if (!handle) return send404Shell(res, 'produit.html');   // aucune fiche demandée
   try {
@@ -345,7 +345,6 @@ router.get('/produits.html', async (req, res) => {
       return res.redirect(301, '/produits.html?' + query);
     }
   }
-  // Catalogue complet filtrable (demande du 24 septembre) ; liste d'origine en secours.
   // Catalogue complet et pages créateurs filtrables ; liste d'origine en secours.
   const listScope = slug ? filterScope('designer:' + slug) : CATALOGUE_SCOPE;
   if (listScope) {
@@ -486,16 +485,12 @@ router.get(/.*/, async (req, res, next) => {
     const q = req.originalUrl.indexOf('?');
     return res.redirect(301, twin + (q >= 0 ? req.originalUrl.slice(q) : ''));
   }
-  const root = V3_DIR;
-  const file = path.join(root, rel);
-  if (!file.startsWith(root + path.sep)) return next(); // anti path-traversal
   let raw;
   try { raw = renderPage(rel); }                        // fragment + layout unique (ADR 0012)
   catch (e) {                                           // inexistant → 404 normal ; autre erreur → tracée (jamais silencieuse)
-    if (e.code !== 'ENOENT' && !/article inconnu/.test(e.message)) console.warn('[page]', rel, e.message);
+    if (e.code !== 'ENOENT') console.warn('[page]', rel, e.message);
     return next();
   }
-  if (!/id="site-header"/.test(raw)) return next();     // page hors-shell → ne pas toucher
   await Promise.all([chromeReady, navigationReady]);
   // SSR des rails produits de l'accueil (liens crawlables + fin des squelettes au 1er paint).
   if (rel === 'index.html') {

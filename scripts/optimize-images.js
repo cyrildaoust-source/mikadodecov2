@@ -32,10 +32,6 @@ const IMG_DIR = path.join(__dirname, '..', 'v3', 'images');
 
 // Hero LCP images: full-bleed, need the widest ladder.
 const HERO_WIDTHS = [640, 960, 1280, 1920, 2600];
-// Below-the-fold editorial / lookbook photos: ~half-to-full column.
-const CONTENT_WIDTHS = [800, 1280];
-// Category tiles: small, ~1/4 → 1/2 viewport.
-const TILE_WIDTHS = [480, 800];
 // Designer portraits: single ~640px card thumbnail (capped to native).
 const DESIGNER_WIDTH = 640;
 // Brand collection-page heros: 2:1 banners (2400 × 1200) (sources ~1.9MB, never
@@ -51,20 +47,10 @@ const jobs = [];
 const add = (file, widths, label) => jobs.push({ src: path.join(IMG_DIR, file), widths, label });
 
 // 3.1/3.2 — the three heros (multi-width)
-['hero-home.jpg', 'produits-hero.jpg', 'marques-hero.jpg'].forEach(f => add(f, HERO_WIDTHS, 'hero'));
+['produits-hero.jpg', 'marques-hero.jpg'].forEach(f => add(f, HERO_WIDTHS, 'hero'));
 
-// 3.4 — accueil editorial / lookbook photos
-['feat-store.jpg', 'feat-visit.jpg',
- 'lookbook-recevoir.jpg', 'salon-quilton.jpg', 'dehors-thorvald.jpg']
-  .forEach(f => add(f, CONTENT_WIDTHS, 'content'));
-
-// 3.4 — the six homepage category tiles
-['assises.jpg', 'tables.jpg', 'luminaires.jpg', 'rangements.jpg', 'objets.jpg', 'exterieur.jpg']
-  .forEach(f => add(f, TILE_WIDTHS, 'tile'));
-
-// 3.5 — only the ~29 designer portraits actually referenced in designers-data.json.
-// The v3/images/designers/ folder also holds ~160 scraped-but-unreferenced
-// portraits (a separate in-progress chantier) — we must NOT touch those.
+// 3.5 — les portraits de créateurs référencés dans designers-data.json (les portraits
+// orphelins ont été retirés du dépôt le 20 octobre 2026).
 try {
   const data = require(path.join(__dirname, '..', 'v3', 'designers-data.json'));
   (data.designers || []).forEach(d => {
