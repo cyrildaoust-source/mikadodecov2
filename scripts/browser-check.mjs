@@ -23,7 +23,7 @@ const opt = (name, fallback) => { const i = args.indexOf(name); return i >= 0 &&
 const BASE = opt('--base', process.env.SMOKE_BASE || 'https://www.mikadodeco.be').replace(/\/$/, '');
 const SECRET = opt('--bypass', process.env.VERCEL_AUTOMATION_BYPASS_SECRET || '');
 const WITH_CART = !args.includes('--no-cart');
-const PAGES = ['/', '/produits.html', '/produit.html?handle=verre-a-eau-animal-farm', '/collections/vitra', '/produits.html?q=chaise', '/nuancier-fermob.html', '/journal/fermob.html', '/designers.html', '/selection.html'];
+const PAGES = ['/', '/produits.html', '/produit.html?handle=verre-a-eau-animal-farm', '/collections/vitra', '/produits.html?q=chaise', '/nuancier-fermob.html', '/designers.html', '/selection.html'];
 const rows = []; let failures = 0;
 const row = (ok, name, notes = '') => { rows.push({ ok, name, notes }); if (!ok) failures++; };
 

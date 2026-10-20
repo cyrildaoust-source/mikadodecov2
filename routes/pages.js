@@ -17,11 +17,10 @@ const { cached } = require('../lib/cache');
 const { BRAND_COLLECTION_ALIASES, BRAND_HERO_REVIEW, CAMPAIGN_COLLECTIONS, COLLECTION_ALIASES, COLLECTION_TEXTS, FAMILLES_RICHES, INTERNAL_COLLECTION, OG_DEFAULT, ORIGIN, resolveSsrRel } = require('../lib/config');
 const { renderPage } = require('../lib/render/layout');
 const { pageTitle, productTitle } = require('../lib/render/seo');
-const { getArticle, journalReady } = require('../lib/render/journal');
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { htmlToMarkdown, sendMarkdown, wantsMarkdown } = require('../lib/render/agents');
-const { chromeReady, injectChrome, send404Shell, sendGoneShell, sendProduitTemplate, sendProduitsTemplate } = require('../lib/render/chrome');
+const { chromeReady, injectChrome, send404Shell, sendGonePageShell, sendGoneShell, sendProduitTemplate, sendProduitsTemplate } = require('../lib/render/chrome');
 const { CACHE_CONTROL: REDIRECT_CACHE_CONTROL, lookupRedirect, redirectTarget } = require('../lib/redirections');
 const { brandBanner, canRenderInitialGrid, contentPageTrail, injectNavigation, listingNavigation, listingPagination, nav, navigationReady, plpCardSsr } = require('../lib/render/navigation');
 const { absUrl, ogCache, ogDesc, ogEscape, renderWithOg, temporaryUnavailable } = require('../lib/render/og');
@@ -461,20 +460,21 @@ router.get('/marques.html', (req, res, next) => {
   return res.redirect(302, typeof handle === 'string' && /^[a-z0-9-]+$/.test(handle)
     ? '/collections/' + handle : '/marques.html');
 });
-// URL sans extension (/studio, /journal/fermob, /produits) : l'ancienne configuration Vercel
+// URL sans extension (/studio, /produits) : l'ancienne configuration Vercel
 // servait le gabarit brut v3/<chemin>.html (sans chrome). Depuis l'ADR 0009, toute URL inconnue
 // arrive ici : 301 vers la page .html quand elle existe, 404 sinon.
 function htmlTwin(p) {
-  const m = /^\/((?:journal\/)?[a-z0-9][a-z0-9-]*)\/?$/.exec(p);
+  const m = /^\/([a-z0-9][a-z0-9-]*)\/?$/.exec(p);
   if (!m) return null;
   const rel = m[1] + '.html';
   if (!resolveSsrRel('/' + rel) && rel !== 'produit.html' && rel !== 'produits.html') return null;
-  if (rel.startsWith('journal/')) return getArticle(m[1].slice('journal/'.length)) ? '/' + rel : null;   // articles : depuis la donnée (ADR 0013)
   return fs.existsSync(path.join(V3_DIR, rel)) ? '/' + rel : null;
 }
+// Journal retiré du site (Cyril, 20 octobre 2026) : la page, les articles et l'ancien stub article.html
+// répondent 410 (partis pour de bon), pas 404 : les moteurs retirent ces adresses au lieu de réessayer.
+router.get(['/journal.html', '/journal', '/journal/:slug', '/article.html'], (req, res) => sendGonePageShell(res));
 router.get(/.*/, async (req, res, next) => {
   if (req.path.startsWith('/api/') || req.path.startsWith('/_vercel/')) return next();
-  if (req.path.startsWith('/journal/')) await journalReady;   // articles rendus depuis leur source (ADR 0013)
   const rel = resolveSsrRel(req.path);
   if (!rel) {                                           // pas une page SSR → static/api gèrent
     const twin = htmlTwin(req.path);

@@ -19,8 +19,7 @@
     { "file": "rendez-vous.html",                     "role": "page",     "ssr": true,  "hero": true,  "active": "" , "priority": "0.7" },
     { "file": "contact.html",                         "role": "page",     "ssr": true,  "hero": false, "active": "" , "priority": "0.6" },
     { "file": "selection.html",                       "role": "page",     "ssr": true,  "hero": false, "active": "" , "index": false },
-    { "file": "journal.html",                         "role": "page",     "ssr": true,  "hero": false, "active": "Le journal" , "priority": "0.6" },
-    { "file": "nuancier-fermob.html",                 "role": "page",     "ssr": true,  "hero": false, "active": "Le journal" , "priority": "0.6" },
+    { "file": "nuancier-fermob.html",                 "role": "page",     "ssr": true,  "hero": false, "active": "Marques" , "priority": "0.6" },
     { "file": "mentions-legales.html",                "role": "page",     "ssr": true,  "hero": false, "active": "" , "priority": "0.3", "generated": "legal" },
     { "file": "conditions-generales-de-vente.html",   "role": "page",     "ssr": true,  "hero": false, "active": "" , "priority": "0.3", "generated": "legal" },
     { "file": "politique-cookies.html",               "role": "page",     "ssr": true,  "hero": false, "active": "" , "priority": "0.3", "generated": "legal" },
@@ -29,15 +28,13 @@
 
     { "file": "500.html",                             "role": "template", "ssr": false, "hero": false, "active": "" },
     { "file": "410.html",                             "role": "template", "ssr": false, "hero": false, "active": "" },
+    { "file": "410-page.html",                        "role": "template", "ssr": false, "hero": false, "active": "" },
     { "file": "produit.html",                         "role": "template", "ssr": false, "hero": false, "active": "" },
     { "file": "produits.html",                        "role": "template", "ssr": false, "hero": true,  "active": "" , "priority": "0.9" },
     { "file": "famille.html",                         "role": "template", "ssr": false, "hero": true,  "active": "Mobilier" },
     { "file": "famille-assises.html",                 "role": "template", "ssr": false, "hero": true,  "active": "Mobilier" },
-    { "file": "family-page.html", "dir": "templates", "role": "template", "ssr": false, "hero": true,  "active": "Mobilier" },
-
-    { "file": "article.html",                         "role": "stub",     "ssr": false, "hero": true,  "active": "" }
+    { "file": "family-page.html", "dir": "templates", "role": "template", "ssr": false, "hero": true,  "active": "Mobilier" }
   ],
-  "journal": { "_note": "Articles rendus à la demande depuis v3/journal/articles.data.mjs (lib/render/journal.js, ADR 0013) : header solide, entrée « Le journal » active, priorité de sitemap commune.", "hero": false, "active": "Le journal", "priority": "0.5" },
   "aliases": {
     "_note": "Pages de confiance attendues par les agents IA, servies en 200 avec le contenu d'une page existante (qui porte sa propre canonical).",
     "/about": "studio.html",

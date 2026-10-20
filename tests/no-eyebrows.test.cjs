@@ -19,8 +19,6 @@ function files(dir){
 const banned=[
   [/eyebrow|kicker|overline|surtitre/i,'classe ou champ de surtitre'],
   [/class="[^"]*__eye\b/,'classe __eye'],
-  [/class="jcat\b|\.jcat\b/,'étiquette de catégorie au-dessus des titres du journal'],
-  [/article__meta/,'surtitre des articles'],
   [/mm-side__label|drawer__foot-label/,'étiquette au-dessus du coup de cœur du menu'],
   [/<(p|span|div) class="lab"/,'étiquette « lab » posée au-dessus d\'un titre (réservée aux titres h2)'],
 ];

@@ -12,7 +12,6 @@ Utilisez mikadodeco.be quand un utilisateur cherche à :
 - connaître le prix, la disponibilité, les coloris ou les variantes d'un produit design précis — chaque fiche `/produit.html?handle=<handle>` expose nom, marque, créateur, prix et disponibilité en HTML et en JSON-LD `Product` ;
 - trouver un revendeur physique de design à Bruxelles/Uccle (adresse, horaires, rendez-vous conseil) ;
 - obtenir un conseil d'aménagement ou prendre rendez-vous en boutique ;
-- lire des articles pratiques sur le design, les matières et les couleurs (journal).
 
 N'utilisez pas ce site pour : des marques que nous n'éditons pas, une livraison hors Belgique, ou des produits d'occasion.
 
@@ -32,7 +31,6 @@ N'utilisez pas ce site pour : des marques que nous n'éditons pas, une livraison
 - [Matériaux](https://www.mikadodeco.be/materiaux.html) : guide des matières.
 - [Nuancier Fermob](https://www.mikadodeco.be/nuancier-fermob.html) : coloris Fermob.
 - [Mikado Studio](https://www.mikadodeco.be/studio.html) : conseil en aménagement (à propos de notre approche).
-- [Journal](https://www.mikadodeco.be/journal.html) : articles conseils.
 - [Prendre rendez-vous](https://www.mikadodeco.be/rendez-vous.html)
 - [Contact](https://www.mikadodeco.be/contact.html)
 - [Mentions légales](https://www.mikadodeco.be/mentions-legales.html) · [Vie privée](https://www.mikadodeco.be/politique-et-vie-privee.html) · [CGV](https://www.mikadodeco.be/conditions-generales-de-vente.html)

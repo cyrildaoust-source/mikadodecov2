@@ -16,7 +16,6 @@ export const NAV_TOP = [
   { label: "Marques",       href: "/marques.html",    kind: "dropdown", key: "marques"   },
   { label: "Designers",     href: "/designers.html",  kind: "dropdown", key: "designers" },
   { label: "Mikado Studio", href: "/studio.html",     kind: "link"  },
-  { label: "Le journal",    href: "/journal.html",    kind: "link"  },
   { label: "Promotions",    href: "/collections/promotions", kind: "promo" },
 ];
 
@@ -49,7 +48,7 @@ export function chromeHTML(active) {
     </div>`;
 
   // Mobile drawer — accordion sections for Mobilier/Marques, then
-  // flat links for Designers / Studio / Le journal, plus a footer
+  // flat links for Designers / Studio, plus a footer
   // visual block hydrated from mega-menu-config.json.
   const drawerHTML = `
     <div class="drawer" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" data-drawer>
@@ -71,7 +70,6 @@ export function chromeHTML(active) {
           <ul class="drawer__sub" data-drawer-sub="designers"></ul>
         </div>
         <a class="drawer__link" href="/studio.html">Mikado Studio</a>
-        <a class="drawer__link" href="/journal.html">Le journal</a>
         <a class="drawer__link drawer__link--promo" href="/collections/promotions">Promotions</a>
         <a class="drawer__link drawer__link--util" href="/rendez-vous.html">Rendez-vous</a>
         <a class="drawer__link drawer__link--util" href="/selection.html">Ma sélection</a>
@@ -207,7 +205,6 @@ export function footerHTML() {
         <div><h3>Maison</h3><ul>
           <li><a href="/marques.html">Les marques</a></li>
           <li><a href="/materiaux.html">Les matières</a></li>
-          <li><a href="/journal.html">Le journal</a></li>
           <li><a href="/rendez-vous.html">Rendez-vous</a></li>
         </ul></div>
         <div><h3>Contact</h3><ul>

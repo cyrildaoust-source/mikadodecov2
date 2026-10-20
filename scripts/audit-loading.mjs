@@ -5,7 +5,7 @@
 import { chromium } from 'playwright';
 const BASE = process.env.BASE || 'https://www.mikadodeco.be';
 const OUT = process.cwd() + '/audit-loading-';
-const pages = (process.env.PAGES || '/,/produits.html,/collections/sieges,/collections/decoration,/collections/fauteuils,/collections/hay,/collections/promotions,/collections/nouveautes,/produits.html?designer=verner-panton,/produit.html?handle=chaise-aluminium-luxembourg-4101,/marques.html,/designers.html,/journal.html,/journal/fermob.html,/studio.html,/materiaux.html,/rendez-vous.html,/contact.html,/selection.html,/nuancier-fermob.html,/produits.html?q=chaise').split(',');
+const pages = (process.env.PAGES || '/,/produits.html,/collections/sieges,/collections/decoration,/collections/fauteuils,/collections/hay,/collections/promotions,/collections/nouveautes,/produits.html?designer=verner-panton,/produit.html?handle=chaise-aluminium-luxembourg-4101,/marques.html,/designers.html,/studio.html,/materiaux.html,/rendez-vous.html,/contact.html,/selection.html,/nuancier-fermob.html,/produits.html?q=chaise').split(',');
 const browser = await chromium.launch();
 const rows = [];
 for (const [device, opts] of [['desktop', { viewport: { width: 1440, height: 900 } }], ['mobile', { viewport: { width: 390, height: 844 }, hasTouch: true, deviceScaleFactor: 3 }]]) {

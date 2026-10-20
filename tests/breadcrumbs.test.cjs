@@ -20,7 +20,6 @@ const trailOf=async p=>{
  return {labels,ld};
 };
 const pages={
- '/journal.html':['Accueil','Le journal'],
  '/studio.html':['Accueil','Mikado Studio'],
  '/materiaux.html':['Accueil','Matières'],
  '/rendez-vous.html':['Accueil','Rendez-vous'],
@@ -37,15 +36,5 @@ test('les pages de contenu reçoivent leur fil d\'Ariane du serveur, identique a
   assert.deepEqual(labels,expected,p);
   assert.equal(ld.length,1,p);
   assert.deepEqual(ld[0].itemListElement.map(e=>e.name),expected,p);
- }
-});
-test('chaque article du journal a son fil Accueil › Le journal › titre dès le serveur',async()=>{
- const { journalReady, articleSlugs, getArticle } = require('../lib/render/journal');
- await journalReady;
- for(const slug of articleSlugs()){
-  const {labels,ld}=await trailOf('/journal/'+slug+'.html');
-  const expected=['Accueil','Le journal',getArticle(slug).title];
-  assert.deepEqual(labels,expected,slug);
-  assert.deepEqual(ld[0].itemListElement.map(e=>e.name),expected,slug);
  }
 });

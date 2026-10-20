@@ -2,6 +2,8 @@
 
 Date : 8 octobre 2026 · Statut : accepté · Phase 4.2 du plan.
 
+> **Révision du 20 octobre 2026** : le journal a été retiré du site à la demande de Cyril (« tout ce qui est en lien avec le journal doit partir ») : page, articles, entrée de navigation, liens et photos. `/journal.html`, `/journal/<slug>.html` et l'ancien `article.html?slug=` répondent **410** (`routes/pages.js`, gabarit `v3/410-page.html`) pour que les moteurs retirent ces adresses. La mécanique décrite ici ne sert plus qu'aux pages légales.
+
 ## Contexte
 
 Les neuf articles du journal (source : `v3/journal/articles.data.mjs`) et les quatre pages légales (sources : `docs/legal/*.md`, rédigées par l'avocate et Cyril) étaient pré-rendus par deux scripts (`npm run journal`, `npm run build:legal`) en treize fichiers HTML commités dans `v3/`, et une étape de CI vérifiait que ces fichiers correspondaient à leurs sources. Modifier un article demandait d'éditer la source, de régénérer, de committer treize fichiers. Les scripts dupliquaient la logique de `<head>` que le layout unique (ADR 0012) a depuis centralisée.

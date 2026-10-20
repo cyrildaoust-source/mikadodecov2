@@ -15,7 +15,6 @@ const { blobConfigured } = require('../lib/services/catalog-index-store');
 const fs = require('fs');
 const path = require('path');
 const { ROOT_DIR, V3_DIR } = require('../lib/paths');
-const { articleSlugs, journalReady } = require('../lib/render/journal');
 const { legalFragment, legalPages } = require('../lib/render/legal');
 const { redirectionStats } = require('../lib/redirections');
 const { adminStatus: newsletterAdminStatus } = require('../lib/newsletter');
@@ -275,8 +274,7 @@ router.get('/api/health', async (req, res) => {
     ]);
   } catch (error) { shopify = 'down: ' + error.message; }
   // Contenu rendu depuis la source (ADR 0013) : les sources sont-elles embarquées, les pages se rendent-elles ?
-  const content = { sources: { journal: fs.existsSync(path.join(V3_DIR, 'journal', 'articles.data.mjs')), legal: fs.existsSync(path.join(ROOT_DIR, 'docs', 'legal', 'mentions-legales.md')) } };
-  try { await journalReady; content.journal = articleSlugs().length + ' articles'; } catch (e) { content.journal = 'erreur : ' + e.message; }
+  const content = { sources: { legal: fs.existsSync(path.join(ROOT_DIR, 'docs', 'legal', 'mentions-legales.md')) } };
   try { legalFragment('mentions-legales.html'); content.legal = legalPages().length + ' pages'; } catch (e) { content.legal = 'erreur : ' + e.message; }
   // Application Admin de l'inscription newsletter (ADR 0017) : une lecture par mode, cachée 5 min ; informatif.
   let newsletter;

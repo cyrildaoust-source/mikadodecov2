@@ -54,16 +54,9 @@ const add = (file, widths, label) => jobs.push({ src: path.join(IMG_DIR, file), 
 ['hero-home.jpg', 'produits-hero.jpg', 'marques-hero.jpg'].forEach(f => add(f, HERO_WIDTHS, 'hero'));
 
 // 3.4 — accueil editorial / lookbook photos
-['feat-store.jpg', 'journal-patine.jpg', 'feat-visit.jpg',
+['feat-store.jpg', 'feat-visit.jpg',
  'lookbook-recevoir.jpg', 'salon-quilton.jpg', 'dehors-thorvald.jpg']
   .forEach(f => add(f, CONTENT_WIDTHS, 'content'));
-
-// Journal · "à la une" featured photo (Lot B — real editorial photo, 3:2)
-add('journal-couleur-fermob.jpg', [800, 1280, 1600], 'content');
-
-// Journal · photo d'ouverture de l'article Moustache (portrait 2:3, source
-// officielle de la marque — voir .context/moustache-marques-journal-20260922).
-add('journal-moustache.jpg', CONTENT_WIDTHS, 'content');
 
 // 3.4 — the six homepage category tiles
 ['assises.jpg', 'tables.jpg', 'luminaires.jpg', 'rangements.jpg', 'objets.jpg', 'exterieur.jpg']
