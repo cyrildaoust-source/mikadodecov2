@@ -63,17 +63,18 @@
   ],
   "icons": {
     "title": "Les icônes du design",
+    "_note": "Choix de Cyril du 20 octobre 2026 : la table basse Noguchi remplace la table Noguchi Dining, le bougeoir Nagel entre ; la CH24 Wishbone est partie avec Carl Hansen (retrait du 10 octobre 2026). Chaque fiche doit exister et être publiée dans Shopify, sinon la carte manque.",
     "handles": [
-      "chaise-ch24-wishbone",
       "lampe-de-table-flowerpot-vp9",
-      "table-noguchi-dining",
-      "artek-stool-60"
+      "table-basse-noguchi-coffee-table",
+      "artek-stool-60",
+      "bougeoir-nagel"
     ],
     "sources": {
-      "chaise-ch24-wishbone": "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/ch24",
       "lampe-de-table-flowerpot-vp9": "https://www.andtradition.com/products/flowerpot-vp9",
-      "table-noguchi-dining": "https://www.vitra.com/en-un/product/details/dining-table",
-      "artek-stool-60": "https://www.artek.fi/en/products/stool-60"
+      "table-basse-noguchi-coffee-table": "https://www.vitra.com/en-un/product/details/coffee-table",
+      "artek-stool-60": "https://www.artek.fi/en/products/stool-60",
+      "bougeoir-nagel": "https://www.stoffnagel.com/products/stoff-nagel-candle-holder"
     }
   },
   "discovery": {
