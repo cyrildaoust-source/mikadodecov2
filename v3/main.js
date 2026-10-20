@@ -1,10 +1,7 @@
 /* Home page · mounts the shared shell, then fills the product rows. */
 import { initShell } from "/shell.mjs";
 import { productCard } from "/product-grid.mjs";
-import { fetchBrands, fetchPromos, applyPromos } from "/catalog-data.mjs";
-import { slugify, escapeHtml } from "/format.mjs";
-import { buildShaReady, versionedImg } from "/site-data.mjs";
-import { brandLogoSrc } from "/brand-logos.mjs";
+import { fetchPromos, applyPromos } from "/catalog-data.mjs";
 
 initShell({ active: "", transparentNav: true });
 
@@ -24,7 +21,8 @@ initShell({ active: "", transparentNav: true });
 async function loadRows() {
   const hosts = [...document.querySelectorAll("[data-products]")];
   // Rails envoyés complets par le serveur : rien à recharger ni à redessiner.
-  if (!hosts.length || hosts.every((h) => h.querySelector(".pcard"))) return;
+  // Un squelette porte aussi la classe .pcard : seule une vraie carte a son bouton d'ajout.
+  if (!hosts.length || hosts.every((h) => h.querySelector(".pcard [data-add]"))) return;
   // Mêmes produits que le rendu serveur (/api/home-rails) : Nouveautés = vraie collection
   // « nouveautes » en alternant les marques ; Meilleures ventes = ordre BEST_SELLING.
   try {
@@ -49,37 +47,3 @@ loadRows();
 // silent — the badge is optional decoration.
 fetchPromos().then(applyPromos).catch((e) => console.warn("[v3] promos unavailable:", e.message));
 
-/* Brand logo marquee + live "maisons" count, from the real vendor feed.
-   Tries the brand logo (brand-logos.mjs) first; if missing, data-fallback (shell.mjs,
-   bindImageFallbacks) swaps the <img> for a Cormorant-italic wordmark (.brandmarquee__name).
-   No console 404 noise — the swap is silent for the viewer. */
-function brandLogo(b) {
-  const slug = slugify(b.name);
-  const href = escapeHtml(b.href || `/produits.html?brand=${slug}`);
-  const name = escapeHtml(b.name);
-  const src  = versionedImg(brandLogoSrc(slug));
-  return `<a class="brandmarquee__item" href="${href}" aria-label="${name}">`
-    + `<img class="brandmarquee__logo" src="${src}" alt="${name}" loading="lazy" `
-    + `data-fallback="brand-wordmark" />`
-    + `</a>`;
-}
-
-async function loadBrandMarquee() {
-  const track = document.querySelector("[data-brandmarquee]");
-  if (!track) return;
-  try {
-    // Wait for the build SHA so the logo URLs carry ?v=<sha> on the
-    // first paint. The fetch is cached server-side, sub-ms warm.
-    const [, brands] = await Promise.all([buildShaReady(), fetchBrands()]);
-    const filtered = brands.filter((b) => b.productCount > 0);
-    if (!filtered.length) throw new Error("empty brand feed");
-    const ordered = [...filtered].sort((a, b) => b.productCount - a.productCount);
-    const items = ordered.map(brandLogo).join("");
-    // Duplicate the set so the -50% keyframe loops seamlessly.
-    track.innerHTML = items + items;
-  } catch (err) {
-    track?.closest(".brandmarquee")?.remove();
-    console.warn("[v3] brand marquee unavailable:", err.message);
-  }
-}
-loadBrandMarquee();

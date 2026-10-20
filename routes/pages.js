@@ -24,7 +24,7 @@ const { chromeReady, injectChrome, send404Shell, sendGonePageShell, sendGoneShel
 const { CACHE_CONTROL: REDIRECT_CACHE_CONTROL, lookupRedirect, redirectTarget } = require('../lib/redirections');
 const { brandBanner, canRenderInitialGrid, contentPageTrail, injectNavigation, listingNavigation, listingPagination, nav, navigationReady, plpCardSsr } = require('../lib/render/navigation');
 const { absUrl, ogCache, ogDesc, ogEscape, renderWithOg, temporaryUnavailable } = require('../lib/render/og');
-const { activeDesignerSlugs, designerHeroSsr, injectBrandsIndex, injectDesignersIndex, injectHomeRails, injectNuancier, pdpServed, pdpSsrBlock, sendScopeCatalog, sendSearchPage } = require('../lib/render/pages');
+const { activeDesignerSlugs, designerHeroSsr, injectBrandsIndex, injectDesignersIndex, injectHomeRails, injectNuancier, pdpReady, pdpServed, pdpSsrBlock, sendScopeCatalog, sendSearchPage } = require('../lib/render/pages');
 const { homeGiftsHTML } = require('../lib/render/gifts');
 const { collectionProductsFor, getCollectionProducts, getCollections, getHomeRails, getProductByHandle, getProductsPage } = require('../lib/services/catalog');
 
@@ -77,7 +77,7 @@ router.get('/produit.html', async (req, res) => {
   }
   if (!handle) return send404Shell(res, 'produit.html');   // aucune fiche demandée
   try {
-    await Promise.all([chromeReady, navigationReady]);
+    await Promise.all([chromeReady, navigationReady, pdpReady]);
     const product = await getProductByHandle(handle);
     // Miss stable (produit inexistant/dépublié) : on cache aussi le repli pour
     // ne pas ré-invoquer la fonction à chaque bot. (Les erreurs Shopify partent
@@ -183,7 +183,11 @@ router.get('/collections/:handle', async (req, res) => {
         else ogCache(res);
       }
       return res.send(injectChrome(listingNavigation(html, req), FAMILLES_RICHES[handle]));
-    } catch (e) { /* repli sur le template générique ci-dessous */ }
+    } catch (e) {
+      // Repli sur le gabarit générique ci-dessous, tracé et jamais mis en cache (audit du 20 octobre 2026).
+      console.warn('[famille-riche]', handle, e.message);
+      res.set('Cache-Control', 'no-store');
+    }
   }
   if (Object.hasOwn(families, handle) && !brand) {
     await Promise.all([chromeReady, navigationReady]);

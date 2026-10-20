@@ -219,7 +219,8 @@ html.sale-hd-on .hero__badge { display: flex; }
 .drawer { position: fixed; inset: 0; background: var(--paper); color: var(--ink); z-index: 100; transform: translateX(-100%); visibility: hidden; transition: transform .4s var(--ease), visibility 0s .4s; display: flex; flex-direction: column; padding: 22px var(--gutter); }
 .drawer.open { transform: none; visibility: visible; transition: transform .4s var(--ease), visibility 0s 0s; }
 .drawer__close { align-self: flex-end; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; font-size: 30px; line-height: 1; margin-bottom: 14px; }
-@media (min-width: 921px) { .drawer { display: none; } }
+/* Même seuil que mega-menu.css (burger jusqu'à 1 023 px) : entre 921 et 1 023 px le tiroir doit exister. */
+@media (min-width: 1024px) { .drawer { display: none; } }
 
 /* ============================================================
    BUTTONS
@@ -354,29 +355,6 @@ html.sale-hd-on .hero__badge { display: flex; }
 .usp .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(24px, 3vw, 48px); padding-block: clamp(44px, 5vw, 76px); }
 .usp__col h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; margin-bottom: 10px; }
 .usp__col p { color: var(--muted); font-size: var(--fs-small); }
-
-/* ============================================================
-   BRAND LOGO MARQUEE  ·  "quelques-unes de nos maisons"
-   ============================================================ */
-.brandmarquee { border-block: 1px solid var(--line); padding-block: clamp(36px, 4vw, 64px); overflow: hidden; }
-.brandmarquee__head { text-align: center; font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .18em; color: var(--subtle); margin-bottom: clamp(22px, 3vw, 36px); }
-.brandmarquee__viewport { overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-.brandmarquee__track { display: flex; align-items: center; gap: clamp(48px, 6vw, 104px); width: max-content; animation: brand-scroll 42s linear infinite; }
-.brandmarquee:hover .brandmarquee__track { animation-play-state: paused; }
-.brandmarquee__item { flex: 0 0 auto; display: inline-flex; align-items: center; }
-.brandmarquee__logo { height: clamp(20px, 2.3vw, 28px); width: auto; opacity: .5; transition: opacity .3s var(--ease); }
-.brandmarquee__item:hover .brandmarquee__logo { opacity: 1; }
-.brandmarquee__wordmark { font-family: var(--sans-product); font-size: clamp(16px, 1.7vw, 22px); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); white-space: nowrap; transition: color .25s var(--ease); }
-.brandmarquee__item:hover .brandmarquee__wordmark { color: var(--ink-deep); }
-/* Interim text fallback for the marquee until the new SVG set ships.
-   Italic Cormorant Garamond at the same visual weight as the logo. */
-.brandmarquee__name { display: inline-block; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(20px, 2.3vw, 28px); line-height: 1; color: var(--ink); opacity: .5; white-space: nowrap; transition: opacity .3s var(--ease); }
-.brandmarquee__item:hover .brandmarquee__name { opacity: 1; }
-@keyframes brand-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-  .brandmarquee__track { animation: none; width: 100%; flex-wrap: wrap; justify-content: center; gap: clamp(28px, 4vw, 56px); }
-  .brandmarquee__viewport { -webkit-mask: none; mask: none; }
-}
 
 /* ============================================================
    SOCIAL PROOF  ·  stats band (dark)
@@ -840,11 +818,6 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp__gallery { position: relative; }
 .pdp__main { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; cursor: zoom-in; }
 .pdp__main:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
-.pdp__thumbs { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-.pdp__thumbs img { width: 74px; height: 74px; object-fit: cover; background: var(--tile); cursor: pointer; opacity: .55; transition: opacity .2s var(--ease); }
-.pdp__thumbs img:hover { opacity: .85; }
-.pdp__thumbs img.is-active { opacity: 1; outline: 1px solid var(--ink-deep); outline-offset: 2px; }
-.pdp__thumbs img:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 .pdp__info { position: sticky; top: 130px; }
 .pdp__info-skel { display: flex; flex-direction: column; }
 .pdp__skel-bar { display: block; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }

@@ -237,12 +237,9 @@ router.post('/api/revalidate', (req, res) => {
   if (!verifyShopifyHmac(req) && !hasValidToken(req)) {
     return res.status(401).json({ error: 'unauthorized' });
   }
-  cache.del('products');
-  cache.del('brands');
-  cache.del('collections');
-  cache.del('promos');
-  cache.del('menu');
-  cache.delByPrefix('catalog:index:');
+  // Tout le cache mémoire : fiches, marques, collections, rails, sitemap, index, menu… (une liste de clés
+  // à la main oubliait `brands:active`, `product:*`, `home-rails-v1`, `sitemap:products` — audit du 20 octobre 2026).
+  cache.clear();
   clearSearchCache();
   console.log('Cache cleared via /api/revalidate');
   res.json({ revalidated: true });

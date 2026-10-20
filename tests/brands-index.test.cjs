@@ -35,11 +35,12 @@ test('the Marques page is complete before JavaScript and uses the shared brand c
  const moustache=curated.find(b=>b.name==='Moustache')?.href||'/produits.html?brand=moustache';
  assert.deepEqual(cards.map(c=>c.match(/href="([^"]+)"/)[1]),['/collections/tradition','/produits.html?brand=atelier-test',moustache]);
  assert.match(cards[2],/brandcard__origin">France</);
- assert.match(cards[1],/alt="Atelier &lt;Test&gt;"/);
- assert(cards.every(c=>/src="\/images\/brands\/[a-z-]+\.svg\?v=dev"/.test(c)));
+ assert.match(cards[1],/brandcard__name">Atelier &lt;Test&gt;</,"nom échappé");
+ assert(cards[0].includes('src="/images/brands/tradition.svg?v=dev"')&&cards[2].includes('src="/images/brands/moustache.svg?v=dev"'),'logo présent dans le dépôt → <img> versionnée');
+ assert(!/<img/.test(cards[1])&&/<span class="brandcard__name">Atelier &lt;Test&gt;<\/span>/.test(cards[1]),'aucun fichier de logo → le nom, sans requête 404 (audit du 20 octobre 2026)');
  for(const [i,name]of ['&Tradition','Atelier <Test>','Moustache'].entries()){
   const href=cards[i].match(/href="([^"]+)"/)[1];
-  assert.equal(cards[i],brandCardHTML({name,href},{imageUrl:url=>`${url}?v=dev`}));
+  assert.equal(cards[i],brandCardHTML(i===1?{name,href,logo:null}:{name,href},{imageUrl:url=>`${url}?v=dev`}));
  }
 });
 
@@ -57,4 +58,13 @@ test('page de marque : les outils du registre (nuancier Fermob) apparaissent sou
  const moustache=brandBanner(hero,'moustache');
  assert.match(moustache,/subhero--brand/);assert.doesNotMatch(moustache,/subhero__tools|nuancier/);
  assert.equal(brandBanner(hero,'chaises'),hero,'une sous-catégorie n’est pas une marque');
+});
+
+test('brand-logos.mjs : la liste LOGOS correspond exactement aux fichiers de v3/images/brands (la fonction Vercel n’embarque pas les images)',async()=>{
+ const { LOGOS, PNG_LOGOS, brandLogoSrc } = await import('../v3/brand-logos.mjs');
+ const files=fs.readdirSync(path.join(__dirname,'../v3/images/brands')).filter(f=>/\.(svg|png)$/.test(f));
+ const slugs=new Set(files.map(f=>f.replace(/\.(svg|png)$/,'')));
+ assert.deepEqual([...LOGOS].sort(),[...slugs].sort(),'un logo ajouté ou retiré du dossier doit être reporté dans LOGOS');
+ for(const slug of LOGOS){ const file=brandLogoSrc(slug).replace('/images/brands/',''); assert.ok(files.includes(file),slug+' : '+file+' absent (PNG_LOGOS ou extension)'); }
+ for(const slug of PNG_LOGOS) assert.ok(LOGOS.has(slug),slug+' : PNG_LOGOS sans fichier');
 });

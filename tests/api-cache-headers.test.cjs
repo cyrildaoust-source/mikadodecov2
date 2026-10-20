@@ -53,3 +53,16 @@ test('POST /api/cart/preview : no-store explicite', async () => {
 test('/api/build : no-store (déjà le cas, inchangé)', async () => {
   assert.equal((await cacheOf('/api/build')).cache, 'no-store');
 });
+
+test('/api/revalidate vide tout le cache mémoire, y compris brands:active et les fiches (audit du 20 octobre 2026)', async () => {
+  const cache = require('../lib/cache');
+  process.env.REVALIDATE_TOKEN = 'jeton-de-test';
+  try {
+    cache.setEntry('brands:active', { data: [{ name: 'X' }], expiry: Date.now() + 60_000 });
+    cache.setEntry('product:test', { data: { handle: 'test' }, expiry: Date.now() + 60_000 });
+    const res = await realFetch(base + '/api/revalidate', { method: 'POST', headers: { Authorization: 'Bearer jeton-de-test' } });
+    assert.equal(res.status, 200);
+    assert.equal(cache.peek('brands:active'), undefined);
+    assert.equal(cache.peek('product:test'), undefined);
+  } finally { delete process.env.REVALIDATE_TOKEN; }
+});

@@ -48,7 +48,7 @@ function scrollToResults() {
 // Premier affichage : la page du serveur est déjà complète, on ne la redessine pas.
 let served=grid.dataset.ssr==='1';
 function paint(data,{keepOpen=false}={}) {
-  if(served){served=false;current=data;if(promos)applyPromos(promos);syncOffset();fitPopovers();if(typeof updateFab==='function')updateFab();return;}
+  if(served){served=false;current=data;if(promos)applyPromos(promos);syncOffset();fitPopovers();updateFab();return;}
   const open=keepOpen?[...controls.querySelectorAll('details[open]')].map(el=>el.dataset.filterGroup):[];
   const active=document.activeElement;
   const focus=controls.contains(active)?{name:active.name,value:active.value,group:active.closest('details')?.dataset.filterGroup,summary:active.tagName==='SUMMARY'}:null;
@@ -72,7 +72,7 @@ function paint(data,{keepOpen=false}={}) {
   }
   if(promos)applyPromos(promos);
   syncGiftTiles(data.state);
-  updateBreadcrumb();syncOffset();fitPopovers();if(typeof updateFab==='function')updateFab();
+  updateBreadcrumb();syncOffset();fitPopovers();updateFab();
 }
 // Page Idées cadeaux : tuiles de budget et de rubrique en phase avec les filtres actifs (rendu serveur sinon).
 function syncGiftTiles(state) {
