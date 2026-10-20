@@ -50,6 +50,10 @@ test('page de marque : les outils du registre (nuancier Fermob) apparaissent sou
  const fermob=brandBanner(hero,'fermob');
  assert.match(fermob,/<section class="subhero subhero--brand">/);
  assert.match(fermob,/<p data-plp-sub>Mobilier de design\.<\/p><p class="subhero__tools"><a class="btn btn--light" href="\/nuancier-fermob\.html">Voir le nuancier Fermob<\/a><\/p>/);
+ const withBanner=brandBanner(hero.replace('class="subhero"','class="subhero subhero--editorial subhero--brand"'),'fermob');
+ assert.match(withBanner,/<section class="subhero subhero--editorial subhero--brand">/,'la classe posée par la bannière n’est pas doublée');
+ assert.equal((withBanner.match(/subhero__tools/g)||[]).length,1,'les outils sont là même quand la bannière a déjà posé la classe');
+ assert.equal(brandBanner(withBanner,'fermob'),withBanner,'idempotent');
  const moustache=brandBanner(hero,'moustache');
  assert.match(moustache,/subhero--brand/);assert.doesNotMatch(moustache,/subhero__tools|nuancier/);
  assert.equal(brandBanner(hero,'chaises'),hero,'une sous-catégorie n’est pas une marque');
