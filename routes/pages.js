@@ -499,7 +499,11 @@ router.get(/.*/, async (req, res, next) => {
       raw = injectHomeRails(raw, await getHomeRails());
     } catch (e) { console.warn('[home-rails]', e.message); }
     // Section « Idées cadeaux » pendant la saison de Noël (ADR 0016) ; le repère disparaît sinon.
-    raw = raw.replace('<!--NOEL-HOME-->', () => homeGiftsHTML());
+    const gifts = homeGiftsHTML();
+    raw = raw.replace('<!--NOEL-HOME-->', () => gifts);
+    // Un seul grand bandeau sur l'accueil (Cyril, 20 octobre 2026) : pendant la saison, Idées cadeaux
+    // remplace la marque du moment ; hors saison, la marque du moment revient.
+    raw = gifts ? raw.replace(/\s*<!--MARQUE-DU-MOMENT-->[\s\S]*?<!--\/MARQUE-DU-MOMENT-->/, '') : raw.replace(/\s*<!--\/?MARQUE-DU-MOMENT-->/g, '');
   }
   if (rel === 'marques.html') {
     try { raw = await injectBrandsIndex(raw); } catch (e) { console.warn('[brands-index]', e.message); }
