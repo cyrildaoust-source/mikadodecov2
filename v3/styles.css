@@ -827,6 +827,9 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 /* Fil d'Ariane — discreet breadcrumb on cream (schema.org BreadcrumbList) */
 [data-breadcrumb] { min-height: 1.3em; margin: 16px 0; }   /* marge sur le conteneur TOUJOURS présent → pas de CLS quand le fil d'Ariane se peuple */
 .breadcrumb { font-size: var(--fs-small); color: var(--muted); }
+/* La section qui suit le fil d'Ariane (listes, familles) : pas le plein espacement de section (Cyril, 16/10 : « un espace énorme »). */
+[data-breadcrumb] ~ .section { padding-top: 24px; }
+[data-breadcrumb] ~ .section ~ .section { padding-top: var(--section-y); }   /* seule la première section après le fil d'Ariane est resserrée */
 .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0; padding: 0; }
 .breadcrumb li { display: inline-flex; align-items: center; gap: 7px; }
 .breadcrumb li + li::before { content: "›"; color: var(--muted); opacity: .6; }
@@ -2024,6 +2027,16 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 @media (min-width: 1200px) { .gift-rail { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; } .gift-rail .home-rc { aspect-ratio: 1 / 1; } }
 .home-rc.is-active { outline: 3px solid var(--accent); outline-offset: 2px; }
 [data-chair-continuation] .gift-discovery { display: none; }
+/* PROMOTIONS (ADR 0018) : tuiles par famille (une par famille en promotion) et raccourcis par tranche de remise. */
+.promo-families { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--gap); }
+.promo-family { aspect-ratio: 1 / 1; flex-direction: column; justify-content: flex-end; align-items: flex-start; }
+.promo-bands { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; }
+.promo-bands__label { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); margin-right: 4px; }
+.promo-band__n { color: var(--muted); margin-left: 6px; }
+/* Après les tuiles de découverte (promotions, idées cadeaux), la grille n'a pas besoin du plein espacement de section. */
+.gift-discovery + .catalog-section { padding-top: 28px; }
+.promo-discovery { padding-bottom: 4px; }   /* les raccourcis par remise collent presque à la grille */
+@media (max-width: 760px) { .promo-families { grid-auto-flow: column; grid-auto-columns: 72%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .promo-family { scroll-snap-align: start; } }
 /* Repères de saison sous les rubriques */
 .gift-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap); }
 .gift-note { border-top: 2px solid var(--accent); padding-top: 14px; }

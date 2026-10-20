@@ -11,9 +11,9 @@ const pages = readFileSync(join(__dirname, '..', 'lib', 'render', 'pages.js'), '
 const api = readFileSync(join(__dirname, '..', 'routes', 'api.js'), 'utf8');
 
 test('sendScopeCatalog : page de liste 2 min + SWR 24 h, page filtrée 1 min + SWR 1 h, erreur en no-store', () => {
-  const start = pages.indexOf("if(isFilteredState(data.state) || !data.total)");
+  const start = pages.indexOf("if(isFilteredState(data.state, scope) || !data.total)");
   const success = pages.slice(start, pages.indexOf("res.set('Content-Type', 'text/html; charset=utf-8');", start));
-  assert.match(success, /isFilteredState\(data\.state\)\s*\?\s*'public, s-maxage=60, stale-while-revalidate=3600'\s*:\s*'public, s-maxage=120, stale-while-revalidate=86400'/);
+  assert.match(success, /isFilteredState\(data\.state, scope\)\s*\?\s*'public, s-maxage=60, stale-while-revalidate=3600'\s*:\s*'public, s-maxage=120, stale-while-revalidate=86400'/);
   assert.doesNotMatch(success, /'no-store'/);   // (le commentaire du bloc cite no-store : on ne cherche que le littéral)
   assert.match(pages, /res\.status\(503\)\.set\(\{'Cache-Control':'no-store','Retry-After':'60'\}\)/);
 });
