@@ -13,6 +13,7 @@ const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { activeDesignerSlugs } = require('../lib/render/pages');
 const { getCollections } = require('../lib/services/catalog');
+const { GIFTS } = require('../lib/filter-scopes');
 
 // ─── SEO: sitemap = INDEX instantané → pages (statique) + produits (walk) ──
 // /sitemap.xml était UN fichier généré par un walk paginé de tout le catalogue
@@ -43,10 +44,11 @@ router.get('/sitemap.xml', (req, res) => sendXml(res,
   + `  <sitemap><loc>${ORIGIN}/sitemap-pages.xml</loc></sitemap>\n`
   + `  <sitemap><loc>${ORIGIN}/sitemap-products.xml</loc></sitemap>\n`
   + `</sitemapindex>\n`));
-// Pages statiques + créateurs indexables + articles : aucun appel Shopify → instantané.
+// Pages statiques, Idées cadeaux (portée sans collection Shopify) et créateurs indexables : aucun appel Shopify → instantané.
 router.get('/sitemap-pages.xml', async (req, res) => {
   const urls = [];
   SITEMAP_PAGES.forEach(({ loc, priority }) => urls.push(smUrl(ORIGIN + loc, priority)));
+  urls.push(smUrl(ORIGIN + GIFTS.basePath, '0.7'));
   // Créateurs visibles et portant au moins un produit publié.
   // Si l'index est inaccessible, la liste reste complète plutôt que de retirer des pages valides.
   const active = await activeDesignerSlugs({ patient: true });

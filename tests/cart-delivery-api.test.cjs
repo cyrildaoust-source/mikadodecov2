@@ -70,3 +70,12 @@ test('emballage cadeau : retiré par Cyril le 20 octobre 2026 — un `giftWrap` 
     assert.doesNotMatch(captured.note || '', /[Ee]mballage/);
   } finally { delete process.env.MIKADO_CLOCK; }
 });
+test('panne Shopify sur /api/cart/delivery : 503 (pas une faute client 400) ; un panier invalide reste 400 — audit du 20 octobre 2026', async () => {
+  failStock = true;
+  const response = await post('/api/cart/delivery', { items:[{variantId:id,qty:1}] });
+  assert.equal(response.status, 503);
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  failStock = false;
+  const bad = await post('/api/cart/delivery', { items: [] });
+  assert.equal(bad.status, 400);
+});

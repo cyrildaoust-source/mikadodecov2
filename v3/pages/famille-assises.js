@@ -85,7 +85,7 @@ if (iconRail && iconSeed.items.length && !iconRail.querySelector('.pcard')) {
       complete=false; TOTAL=Math.max(1,Math.ceil(ALL.length/PAGE));
       if(cnt)cnt.textContent="Chargement incomplet · réessayez en rechargeant la page";
       if(!ALL.length){ grid.innerHTML='<p class="fam-empty">Impossible de charger les produits pour le moment. Réessayez.</p>'; if(cnt)cnt.textContent=''; }
-      else { renderGrid(); renderPag(); }
+      else renderGrid();
       renderPag();
     }
   })();

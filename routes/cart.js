@@ -135,7 +135,7 @@ router.post('/api/cart/delivery', cartLimiter, async (req, res) => {
     const items = normalizeItems(req.body?.items);
     res.json(await getDeliveryEstimate(items, shopifyFetch));
   } catch (err) {
-    res.status(400).json({ error: 'Impossible de vérifier le délai. Réessayez avant de payer.' });
+    res.status(err.status || 503).json({ error: 'Impossible de vérifier le délai. Réessayez avant de payer.' });   // 400 = panier invalide ; panne amont = 503
   }
 });
 // ─── API: CREATE CART → SHOPIFY CHECKOUT ───────────────

@@ -107,7 +107,7 @@ function bindChrome(transparent) {
   const reanim = () => requestAnimationFrame(() =>
     requestAnimationFrame(() => chrome.classList.remove("chrome--noanim")));
   if (!transparent) { chrome.classList.add("chrome--solid"); reanim(); return; }
-  const hero = document.querySelector(".hero, .subhero, .rdv-hero, .fam-hero");
+  const hero = document.querySelector(".home-hero, .subhero, .rdv-hero, .fam-hero");
   if (!hero) { chrome.classList.add("chrome--solid"); reanim(); return; }
   const onScroll = () => chrome.classList.toggle("chrome--solid", !!document.querySelector('[data-catalogue-continuation]') || window.scrollY > hero.offsetHeight - chrome.offsetHeight - 8);
   onScroll();
@@ -154,14 +154,13 @@ function setActiveNav(active) {
 }
 
 /* Images de repli sans onerror inline (interdit par la CSP sans 'unsafe-inline').
-   Une image porte data-fallback="remove|text|brand-name|brand-wordmark|hero" ; l'événement
+   Une image porte data-fallback="remove|text|brand-name|hero" ; l'événement
    error ne remonte pas, on l'écoute en capture sur le document. Les images déjà en échec
    avant ce bind ont été mises en file par le script d'en-tête (window.__imgErrors). */
 const IMAGE_FALLBACKS = {
   remove: (img) => img.remove(),
   text: (img) => img.replaceWith(document.createTextNode(img.alt)),
   "brand-name": (img) => { const s = document.createElement("span"); s.className = "brandcard__name"; s.textContent = img.alt; img.replaceWith(s); },
-  "brand-wordmark": (img) => { const s = document.createElement("span"); s.className = "brandmarquee__name"; s.textContent = img.alt; img.replaceWith(s); },
   hero: (img) => { const src = img.parentNode && img.parentNode.querySelector("source"); if (src) src.remove(); img.src = "/images/produits-hero.jpg"; img.style.objectPosition = "center 70%"; },
 };
 export function applyImageFallback(img) {

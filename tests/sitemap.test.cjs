@@ -59,6 +59,7 @@ test('sitemap-pages : la liste et les priorités viennent du manifeste ; une pag
   assert.match(xml, /produits\.html<\/loc><priority>0\.9/); assert.match(xml, /mentions-legales\.html<\/loc><priority>0\.3/);
   assert.doesNotMatch(xml, /selection\.html/, 'la sélection (panier, noindex) est hors sitemap');
   assert.doesNotMatch(xml, /journal/, 'journal retiré du site (20 octobre 2026)');
+  assert.ok(xml.includes('<loc>https://www.mikadodeco.be/collections/idees-cadeaux</loc><priority>0.7</priority>'), 'Idées cadeaux, liée toute l’année, est dans le sitemap (audit du 20 octobre 2026)');
   assert.doesNotMatch(xml, /<lastmod>/, 'pas de date inventée pour les pages statiques');
 });
 

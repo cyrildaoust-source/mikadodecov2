@@ -35,11 +35,12 @@ test('the Marques page is complete before JavaScript and uses the shared brand c
  const moustache=curated.find(b=>b.name==='Moustache')?.href||'/produits.html?brand=moustache';
  assert.deepEqual(cards.map(c=>c.match(/href="([^"]+)"/)[1]),['/collections/tradition','/produits.html?brand=atelier-test',moustache]);
  assert.match(cards[2],/brandcard__origin">France</);
- assert.match(cards[1],/alt="Atelier &lt;Test&gt;"/);
- assert(cards.every(c=>/src="\/images\/brands\/[a-z-]+\.svg\?v=dev"/.test(c)));
+ assert.match(cards[1],/brandcard__name">Atelier &lt;Test&gt;</,"nom échappé");
+ assert(cards[0].includes('src="/images/brands/tradition.svg?v=dev"')&&cards[2].includes('src="/images/brands/moustache.svg?v=dev"'),'logo présent dans le dépôt → <img> versionnée');
+ assert(!/<img/.test(cards[1])&&/<span class="brandcard__name">Atelier &lt;Test&gt;<\/span>/.test(cards[1]),'aucun fichier de logo → le nom, sans requête 404 (audit du 20 octobre 2026)');
  for(const [i,name]of ['&Tradition','Atelier <Test>','Moustache'].entries()){
   const href=cards[i].match(/href="([^"]+)"/)[1];
-  assert.equal(cards[i],brandCardHTML({name,href},{imageUrl:url=>`${url}?v=dev`}));
+  assert.equal(cards[i],brandCardHTML(i===1?{name,href,logo:null}:{name,href},{imageUrl:url=>`${url}?v=dev`}));
  }
 });
 

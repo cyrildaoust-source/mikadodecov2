@@ -2,14 +2,13 @@
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { initShell } from "/shell.mjs";
-import { fetchProducts, fetchCollections, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
+import { fetchProducts, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
 import { isSaleActive } from "/sale.mjs";
 import { isGiftProductHandle } from "/gift-rules.mjs";
 import { productCard } from "/product-grid.mjs";
 import { addToCart, cartQty } from "/cart.mjs";
-import { euro, priceLabel, escapeHtml, slugify } from "/format.mjs";
+import { priceLabel, escapeHtml, slugify, stockLabel } from "/format.mjs";
 import { productTrail, sourceSelection, productBrandDestination, designerSlug } from "/navigation.mjs";
-import { stockLabel } from "/format.mjs";
 import { pdpView, optionValue, variantForOption } from "/pdp-view.mjs";
 import "/product-variant.js";
 const { selectInitialVariant, latestVariantSelection } = globalThis.MikadoProductVariant;
@@ -52,7 +51,6 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
 
   // Brand collection URL — curated /collections/<handle> when known (joined
   // via mega-menu-brands.json), else the ?brand= filter fallback.
-  const bslug = slugify(p.brand || "");
   const brandHref = typeof p.brandHref === "string" ? p.brandHref : productBrandDestination(p, new URL(location.href), navigation);
 
   // Fil d'Ariane CONTEXTUEL — reflète le chemin réel d'arrivée (encodé en
@@ -64,8 +62,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
   // page envoyée par le serveur : on la garde et on branche seulement les interactions.
   const view = pdpView(p, { requestedVariant: params.get("variant"), selectInitialVariant, brandHref,
     designerSlug: typeof p.designerSlug === "string" ? p.designerSlug : designerSlug(p.designer, designersData.designers || []) });
-  const { imgs, thumbSrcs, widthVariant, srcsetFor, MAIN_SIZES, variants, initialSelection, norm, ambiances, ambThumbs,
-    pickAxes, isColorAxis, axisLabel, variantImg, variantState, availInline, availStore, hasSku } = view;
+  const { imgs, srcsetFor, MAIN_SIZES, variants, norm, ambiances, pickAxes, axisLabel, variantImg, variantState, availInline, availStore } = view;
   let current = view.current;
   if (host.dataset.ssr !== ssrKey) host.innerHTML = view.html;
 
@@ -158,36 +155,6 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
   }
   probePromo(current.id);
 
-  // keep the active thumbnail in sync with whatever the main image shows,
-  // whether the change came from a thumbnail click or a variant selection.
-  const thumbs = Array.from(host.querySelectorAll("[data-thumb]"));
-  const stripQuery = (u) => (u || "").split("?")[0];
-  const syncActiveThumb = (src) => {
-    const target = stripQuery(src);
-    thumbs.forEach((t) => t.classList.toggle("is-active", stripQuery(t.getAttribute("src")) === target));
-  };
-
-  // match the initial highlight to the image the main is actually showing
-  syncActiveThumb(current.image || imgs[0] || "");
-
-  // gallery thumbnails — clic ET clavier (Entrée/Espace) via le même chemin.
-  // Affiche l'AMBIANCE pleine largeur ambiances[index] dans le main (pas le src
-  // de la vignette 240px) ; syncActiveThumb matche sur l'URL sans query. La
-  // principale repassera au packshot au prochain changement de variante.
-  const showThumb = (t) => {
-    const i = Number(t.dataset.thumb);
-    const full = ambiances[i] || t.src;
-    main.src = full;
-    main.srcset = srcsetFor(full);
-    syncActiveThumb(full);
-  };
-  thumbs.forEach((t) => {
-    t.addEventListener("click", () => showThumb(t));
-    t.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showThumb(t); }
-    });
-  });
-
   // Précharge les AMBIANCES (à la bonne résolution via srcset) pour un changement
   // de photo instantané — différé pour ne pas gêner le LCP.
   const preloadGallery = () => {
@@ -258,7 +225,6 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     const src = current.image || p.image || imgs[0] || "";
     main.src = src;
     main.srcset = srcsetFor(src);
-    syncActiveThumb(src);
     scrollRailTo(src);
     if (current.price != null && !Number.isNaN(current.price)) priceEl.innerHTML = priceLabel({ price: current.price, priceIsExact: true, compareAt: current.compareAtPrice });
     updateStatus();

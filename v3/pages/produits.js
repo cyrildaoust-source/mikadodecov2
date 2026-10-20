@@ -2,7 +2,7 @@
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { initShell } from "/shell.mjs";
-import { fetchProducts, fetchCollections, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
+import { fetchCollections, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
 import { productCard, restoreSelectionPosition } from "/product-grid.mjs";
 import { slugify, escapeHtml } from "/format.mjs";
 import { bindFamilyRails } from "/family-rail.js";
@@ -26,7 +26,10 @@ if (catalogueLanding) {
 
 import { listingTrail, brandHref } from '/navigation.mjs';
 import { walkCatalog, sortCatalog, catalogPagination, DISPLAY_PAGE_SIZE } from '/catalog-pagination.mjs';
-const navigation = await loadNavigation();
+// Si la navigation ne se charge pas, le chrome (tiroirs, panier, recherche) doit quand même se brancher.
+let navigation;
+try { navigation = await loadNavigation(); }
+catch (e) { initShell({ active: "Mobilier", transparentNav: !!catalogueLanding || !window.__hero?.editorial }); throw e; }
 const COLL_TITLES = Object.fromEntries(Object.entries(navigation.collections).map(([h, c]) => [h, c.label]));
 const BRAND_HANDLES = new Set(Object.entries(navigation.collections).filter(([, c]) => c.kind === 'brand').map(([h]) => h));
 const grid = document.querySelector("[data-grid]");

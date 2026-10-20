@@ -111,7 +111,7 @@ function coupDeCoeurHTML(megaKey) {
     title: cdc.title,
     lead: cdc.lead,
     ctaHref: cdc.ctaHref,
-    ctaLabel: cdc.ctaLabel || "Lire l'article",
+    ctaLabel: cdc.ctaLabel || "Découvrir",
   });
 }
 
@@ -255,7 +255,7 @@ function hydrateDrawer() {
   const cdc  = config?.mobilier?.coupDeCoeur;
   if (foot && (cdc?.title || cdc?.ctaHref)) {
     const href  = cdc.ctaHref || "";
-    const title = escapeHtml(cdc.title || cdc.ctaLabel || "Lire l'article");
+    const title = escapeHtml(cdc.title || cdc.ctaLabel || "Découvrir");
     foot.innerHTML = `
       ${href ? `<a class="drawer__foot-compact" href="${escapeHtml(href)}">${title} →</a>`
              : `<span class="drawer__foot-compact">${title}</span>`}`;

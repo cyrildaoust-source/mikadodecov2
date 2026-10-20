@@ -122,7 +122,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
     if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Indisponible</strong>`;
     return p.longDelay
       ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai confirmé après commande, livraison ou retrait en boutique`
-      : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison ou retrait en boutique</strong> · ${escapeHtml(p.leadTimeLabel || "3-4 semaines")}` + noelChip("order");
+      : `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Livraison ou retrait en boutique</strong> · ${escapeHtml(p.leadTimeLabel || "3–4 semaines")}` + noelChip("order");
   };
 
   // Accordéon Description + Caractéristiques (6 groupes, single-open) — le

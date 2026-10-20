@@ -215,7 +215,7 @@ test('chairs belong to Assises only, and unavailable models do not block the sel
   assert.doesNotMatch(html, /Les chaises iconiques|handle=chaise-panton/);
   assert.equal(seed(html).items.length, 24);
   assert.equal(seed(html).items[0].handle, 'family-product-4', 'outdoor prefix is excluded before SSR');
-  assert.equal(seed(html).featuredItems.length, 4);
+  assert.equal(seed(html).featuredItems.length, 3, "3 tables depuis le retrait de la CH006 (Carl Hansen, 20 octobre 2026) ; la 4e attend le choix de Cyril");
   assert.match(html, /Notre sélection de tables/);
   const assises = await page('/collections/sieges');
   assert.equal(assises.response.status, 200);
@@ -224,7 +224,7 @@ test('chairs belong to Assises only, and unavailable models do not block the sel
   assert.ok(assises.html.indexOf('Nos catégories') < assises.html.indexOf('data-icones-sec'));
   assert.ok(assises.html.indexOf('data-icones-sec') < assises.html.indexOf('Par pièce'));
   const initial = JSON.parse(assises.html.match(/id="seating-icons-initial">([\s\S]*?)<\/script>/)[1]);
-  assert.equal(initial.items.length, 2);
+  assert.equal(initial.items.length, 1, "3 chaises iconiques (CH24 retirée le 20 octobre 2026) moins la dépubliée et la panne");
   assert.ok(initial.items.every(item => !['chaise-standard', 'chaise-hay-rey-chair'].includes(item.handle)));
   // Une fiche en panne est réessayée par le client Shopify : compter les modèles distincts.
   assert.deepEqual([...new Set(productRequests.slice(beforeRequests))], seatingIcons.handles.filter(handle => !productRequests.slice(0, beforeRequests).includes(handle)), 'models already loaded by Mobilier reuse the product cache');
