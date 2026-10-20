@@ -5,7 +5,7 @@
   "outputDirectory": "dist",
   "functions": {
     "api/index.js": {
-      "includeFiles": "{build/**,data/**,docs/legal/**,templates/**,v3/*.html,v3/*.js,v3/*.mjs,v3/*.css,v3/*.json,v3/pages/**,v3/journal/**}",
+      "includeFiles": "{build/**,data/**,docs/legal/**,templates/**,v3/*.html,v3/*.js,v3/*.mjs,v3/*.css,v3/*.json,v3/pages/**}",
       "excludeFiles": "{dist/**,v3/images/**,v3/fonts/**}"
     }
   },
@@ -30,7 +30,6 @@
     }
   ],
   "redirects": [
-    { "source": "/article.html", "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }], "destination": "/journal/:slug.html", "statusCode": 301 },
     { "source": "/nos-produits/:path*", "destination": "/produits.html", "statusCode": 301 },
     { "source": "/passez-commande/:path*", "destination": "/produits.html", "statusCode": 301 },
     { "source": "/vitra-home-stories-for-winter", "destination": "/collections/vitra-home-stories-for-winter", "statusCode": 301 },

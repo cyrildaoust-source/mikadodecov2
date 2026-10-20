@@ -104,7 +104,7 @@ aucun titre compact ne s'ajoute à partir de la page 2.
 
 Règle permanente du propriétaire (24 septembre 2026) : **aucun surtitre (« eyebrow ») sur le site**.
 Un surtitre est un petit texte placé au-dessus d'un titre pour l'introduire, souvent en capitales
-espacées : catégorie (« Mobilier », « Matières »), contexte (« Le journal », « Informations légales »,
+espacées : catégorie (« Mobilier », « Matières »), contexte (« Informations légales »,
 « Panier »), slogan (« Notre conviction »), numéro (« 01 · Bois »), étiquette de mise en avant
 (« Marque du moment », « Coup de cœur du moment »). Le titre se suffit à lui-même ; une information
 utile va dans le texte qui suit (ex. « 6 min de lecture » sous le titre d'un article).

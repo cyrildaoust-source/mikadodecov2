@@ -6,8 +6,8 @@
       "imageAlt": "Salon Mikado · ambiance contemporaine",
       "title": "Verner Panton chez &Tradition",
       "lead": "Une réédition iconique des années 60, retravaillée avec les ateliers d'origine.",
-      "ctaLabel": "Lire l'article",
-      "ctaHref": "/journal/and-tradition.html"
+      "ctaLabel": "Voir ses pièces",
+      "ctaHref": "/produits.html?designer=verner-panton"
     }
   },
   "marques": {
@@ -16,8 +16,8 @@
       "imageAlt": "Pourquoi Fermob plutôt qu'ailleurs",
       "title": "Pourquoi Fermob plutôt qu'ailleurs",
       "lead": "Une maison qui répare encore les pièces dix ans après — la différence se voit à la troisième saison.",
-      "ctaLabel": "Lire l'article",
-      "ctaHref": "/journal/fermob.html"
+      "ctaLabel": "Voir les pièces Fermob",
+      "ctaHref": "/collections/fermob"
     }
   },
   "designers": {

@@ -17,7 +17,7 @@ test('vercel.json : configuration moderne, build vers dist/, fonction avec ses g
   assert.equal(cfg.buildCommand, 'npm run build');
   assert.equal(cfg.outputDirectory, 'dist');
   const fn = cfg.functions['api/index.js'];
-  for (const part of ['build/**', 'data/**', 'docs/legal/**', 'templates/**', 'v3/*.html', 'v3/*.js', 'v3/*.mjs', 'v3/*.css', 'v3/*.json', 'v3/pages/**', 'v3/journal/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
+  for (const part of ['build/**', 'data/**', 'docs/legal/**', 'templates/**', 'v3/*.html', 'v3/*.js', 'v3/*.mjs', 'v3/*.css', 'v3/*.json', 'v3/pages/**']) assert.ok(fn.includeFiles.includes(part), `includeFiles doit couvrir ${part}`);
   assert.equal(fn.maxDuration, undefined, 'maxDuration héritée du projet (Fluid compute, 300 s) : ne pas la plafonner ici');
   const excluded = (fn.excludeFiles || '').replace(/^\{|\}$/g, '').split(',');
   assert.ok(excluded.includes('dist/**'), 'dist/** exclu de la fonction : le build le produit avant le tracé (sinon 327 Mo > 250 Mo, vu le 8 oct.)');
@@ -39,8 +39,7 @@ test('vercel.json : tout ce qui n’est pas un fichier statique va au serveur ; 
 
 test('vercel.json : les redirections historiques sont toutes là, avec le bon statut', () => {
   const by = Object.fromEntries(cfg.redirects.map((r) => [r.source, r]));
-  assert.equal(by['/article.html'].destination, '/journal/:slug.html');
-  assert.equal(by['/article.html'].has[0].key, 'slug');
+  assert.equal(by['/article.html'], undefined, 'l’ancien stub article.html est parti avec le journal (410 côté serveur)');
   for (const src of ['/nos-produits/:path*', '/passez-commande/:path*']) assert.equal(by[src].destination, '/produits.html');
   assert.equal(by['/nos-marques/:path*'].destination, '/marques.html');
   assert.equal(by['/nos-marques/vitra'].destination, '/collections/vitra');
@@ -68,7 +67,6 @@ test('npm run build : dist/ ne contient que les fichiers statiques (pas de gabar
     assert.ok(!files.some((f) => /\.(m?js|css)$/.test(f) && !f.startsWith('assets/')), 'aucune source JS/CSS brute publiée : seuls les bundles de assets/ (ADR 0011)');
     assert.ok(files.some((f) => f.startsWith('images/')) && files.some((f) => f.startsWith('fonts/')));
     assert.ok(!files.some((f) => /\.(md|bak)/.test(f) || f.split('/').some((seg) => seg.startsWith('.'))), 'aucun fichier de travail');
-    assert.ok(!files.some((f) => f.startsWith('journal/') && f.endsWith('.html')), 'les articles sont rendus par le serveur');
     // Assets hachés (ADR 0010) : une entrée par module référencé dans le HTML, une par feuille de style, un manifeste de la même version que le serveur.
     const { computeSourcesVersion, entries } = require('../lib/assets');
     const built = JSON.parse(readFileSync(join(out, 'assets', 'manifest.json'), 'utf8'));

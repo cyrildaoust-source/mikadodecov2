@@ -8,11 +8,10 @@ const { families } = require('../lib/family-pages');
 const { shopifyFetch } = require('../lib/shopify/client');
 const { SITEMAP_PRODUCTS_QUERY } = require('../lib/shopify/queries');
 const { cached } = require('../lib/cache');
-const { BRAND_COLLECTION_ALIASES, FAMILLES_RICHES, INTERNAL_COLLECTION, JOURNAL_PRIORITY, ORIGIN, SITEMAP_PAGES } = require('../lib/config');
+const { BRAND_COLLECTION_ALIASES, FAMILLES_RICHES, INTERNAL_COLLECTION, ORIGIN, SITEMAP_PAGES } = require('../lib/config');
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { activeDesignerSlugs } = require('../lib/render/pages');
-const { articleSlugs, journalReady } = require('../lib/render/journal');
 const { getCollections } = require('../lib/services/catalog');
 
 // ─── SEO: sitemap = INDEX instantané → pages (statique) + produits (walk) ──
@@ -56,9 +55,6 @@ router.get('/sitemap-pages.xml', async (req, res) => {
     if (active && !active.has(d.slug)) return;
     urls.push(smUrl(ORIGIN + '/produits.html?designer=' + encodeURIComponent(d.slug), '0.5'));
   });
-  // Articles du journal (rendus depuis leur source, ADR 0013)
-  await journalReady;
-  articleSlugs().forEach((slug) => urls.push(smUrl(ORIGIN + '/journal/' + slug + '.html', JOURNAL_PRIORITY)));
   return sendXml(res, smUrlset(urls));
 });
 // Le sitemap ne lit que les handles : les champs de carte et les 250 variantes

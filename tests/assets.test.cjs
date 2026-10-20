@@ -16,7 +16,6 @@ test('la version est un hachage court des sources ; servie depuis le manifeste d
   assert.equal(assets.assetsVersion(), built ? built.version : v, 'manifeste du build prioritaire, sinon sources');
   const sources = assets.frontSources();
   assert.ok(sources.includes('shell.mjs') && sources.includes('styles.css') && sources.includes('pages/produits.js'), 'sources front présentes');
-  assert.ok(!sources.some((s) => s.startsWith('journal/')), 'journal/articles.data.mjs (données de build) n’est pas une source front');
 });
 
 test('les sources front sont toutes embarquées dans la fonction Vercel (sinon le serveur calculerait une autre version)', () => {

@@ -48,8 +48,8 @@ const URLS = [
   ['/marques.html', ['status', 'who', 'type']],
   ['/designers.html', ['status', 'who']],
   ['/studio.html', ['status', 'who']],
-  ['/journal.html', ['status', 'who']],
-  ['/journal/fermob.html', ['status', 'who', 'type']],
+  ['/journal.html', ['status'], { status: 410 }],          // journal retiré (20 octobre 2026)
+  ['/journal/fermob.html', ['status'], { status: 410 }],
   ['/contact.html', ['status', 'who']],
   ['/selection.html', ['status', 'who'], { robots: 'noindex,follow', canonical: '' }],   // A2 : page panier hors indexation
   ['/nuancier-fermob.html', ['status', 'who']],
@@ -101,7 +101,7 @@ const URLS = [
   ['/page-qui-n-existe-pas', ['status', 'who']],
   ['/dossier/inconnu/', ['status']],
   ['/studio', ['status', 'location'], { status: 301, location: '/studio.html' }],
-  ['/journal/fermob', ['status', 'location'], { status: 301, location: '/journal/fermob.html' }],
+  ['/journal/fermob', ['status'], { status: 410 }],
   ['/produits', ['status', 'location'], { status: 301, location: '/produits.html' }],
   ['/famille.html', ['status'], { status: 404 }],
   ['/500.html', ['status'], { status: 404 }],

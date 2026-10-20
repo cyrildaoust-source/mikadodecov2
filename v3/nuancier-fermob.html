@@ -11,9 +11,8 @@
 
   <section class="section wrap reveal" style="text-align:center">
     <h2 class="serif" style="font-size:clamp(26px,2.6vw,38px);margin-bottom:18px">Envie d'aller plus loin ?</h2>
-    <p style="color:var(--muted);margin-bottom:22px">Le guide couleur complet, ou les pièces Fermob disponibles.</p>
+    <p style="color:var(--muted);margin-bottom:22px">Toutes les pièces Fermob disponibles.</p>
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px">
-      <a href="/journal/comment-choisir-couleur-fermob.html" class="btn btn--outline">Lire le guide couleur</a>
       <a href="/collections/fermob" class="btn btn--blue">Voir les pièces Fermob</a>
     </div>
   </section>
@@ -21,7 +20,7 @@
     import { initShell } from "/shell.mjs";
     import { mountNuancier } from "/nuancier-fermob.js";
 
-    initShell({ active: "Le journal", transparentNav: false });
+    initShell({ active: "Marques", transparentNav: false });
 
     (async () => {
       try {
@@ -33,7 +32,7 @@
       } catch (err) {
         console.warn("[nuancier] load failed:", err.message);
         document.getElementById("nf-root").innerHTML =
-          `<p class="nf-error">Le nuancier ne s'est pas chargé. <a href="/journal.html">Retour au journal →</a></p>`;
+          `<p class="nf-error">Le nuancier ne s'est pas chargé. <a href="/collections/fermob">Voir les pièces Fermob →</a></p>`;
       }
     })();
   </script>

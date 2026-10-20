@@ -49,14 +49,12 @@ test('lib/config.js lit le manifeste : pages SSR, header solide, entrée active,
   assert.deepEqual([...SSR_PAGES].sort(), manifest.pages.filter((p) => p.ssr).map((p) => p.file).sort());
   assert.equal(isNonHero('contact.html'), true);
   assert.equal(isNonHero('index.html'), false);
-  assert.equal(isNonHero('journal/un-article.html'), true);
   assert.equal(isNonHero('page-inconnue.html'), false);        // défaut : hero (header transparent)
   assert.equal(activeForRel('marques.html'), 'Marques');
   assert.equal(activeForRel('family-page.html'), 'Mobilier');
-  assert.equal(activeForRel('journal/un-article.html'), 'Le journal');
   assert.equal(activeForRel('contact.html'), '');
   assert.equal(resolveSsrRel('/about'), 'studio.html');
   assert.equal(resolveSsrRel('/'), 'index.html');
   assert.equal(resolveSsrRel('/produit.html'), null);           // gabarit : route dédiée, pas la générique
-  assert.equal(resolveSsrRel('/journal/x.html'), 'journal/x.html');
+  assert.equal(resolveSsrRel('/journal/x.html'), null, 'le journal est parti (410 par la route dédiée)');
 });

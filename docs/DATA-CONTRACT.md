@@ -10,7 +10,7 @@ Trois lieux, trois natures de données, jamais de recopie d'un lieu vers l'autre
 |---|---|---|---|
 | **Shopify** | Les **faits commerciaux** : produits, variantes, prix, prix comparé, stock, disponibilité, images produit, collections (intelligentes et manuelles), metafields produit, tags, remises programmées, menu principal, clients, commandes. | L'importateur (données), Cyril (admin Shopify). | Storefront API côté serveur uniquement (`lib/shopify/`), jamais depuis le navigateur. Cache mémoire 5 min + cache edge. |
 | **`data/` du dépôt** | Les **règles de présentation** du site : conditions de livraison et de retour déclarées à Google (`offer-policy.json`, tirées des CGV), inventaire des pages (`pages.manifest.json`), filtres de catégorie (`category-filters.json`), campagnes et textes imposés (`campaigns.json`), pages familles (`family-pages.json`), héros de marques et collections (`brand-heroes.json`, `collection-heroes.json`), landing catalogue, icônes d'assises, enrichissements de recherche. | Le code (PR, revue, CI). | Lu au chargement par `lib/config.js` et les services ; testé (`tests/data-sources.test.cjs`, `tests/pages-manifest.test.cjs`). |
-| **Contenu éditorial** | Bios et photos des designers (`v3/designers-data.json`, `data/designer-photos.json`), coup de cœur du méga menu (`v3/mega-menu-config.json`), curation des marques du méga menu (`v3/mega-menu-brands.json`), articles du journal (`v3/journal/articles.data.mjs`), pages légales (`docs/legal/*.md`). | Cyril, aujourd'hui par PR. **Cible** : metaobjects Shopify (designers, coup de cœur, bannières de marques) pour éditer sans déploiement. | Fichiers du dépôt aujourd'hui ; Storefront API (metaobjects) demain, même contrat de lecture côté serveur. |
+| **Contenu éditorial** | Bios et photos des designers (`v3/designers-data.json`, `data/designer-photos.json`), coup de cœur du méga menu (`v3/mega-menu-config.json`), curation des marques du méga menu (`v3/mega-menu-brands.json`), pages légales (`docs/legal/*.md`). | Cyril, aujourd'hui par PR. **Cible** : metaobjects Shopify (designers, coup de cœur, bannières de marques) pour éditer sans déploiement. | Fichiers du dépôt aujourd'hui ; Storefront API (metaobjects) demain, même contrat de lecture côté serveur. |
 
 ## Interdits
 
@@ -37,7 +37,7 @@ Côté site : un service `lib/services/content.js` lira ces metaobjects par Stor
 
 ## Fichiers générés commités
 
-Les articles du journal (source `v3/journal/articles.data.mjs`) et les 4 pages légales (sources `docs/legal/*.md` + fiches `data/legal-pages.json`) sont **rendus à la demande** par le serveur depuis leurs sources (`lib/render/journal.js`, `lib/render/legal.js`, ADR 0013) : aucun HTML généré n'est commité, aucune étape de régénération. Modifier le contenu = modifier la source ; le déploiement suivant le sert.
+Les 4 pages légales (sources `docs/legal/*.md` + fiches `data/legal-pages.json`) sont **rendues à la demande** par le serveur depuis leurs sources (`lib/render/legal.js`, ADR 0013 ; le journal, qui suivait la même mécanique, a été retiré du site le 20 octobre 2026 et ses adresses répondent 410) : aucun HTML généré n'est commité, aucune étape de régénération. Modifier le contenu = modifier la source ; le déploiement suivant le sert.
 
 ## Table des redirections des anciennes fiches (ADR 0014)
 

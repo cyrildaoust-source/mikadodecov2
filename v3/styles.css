@@ -459,7 +459,7 @@ html.sale-hd-on .hero__badge { display: flex; }
 }
 
 /* ============================================================
-   SHARED PAGE PRIMITIVES (catalogue, brands, selection, forms, journal)
+   SHARED PAGE PRIMITIVES (catalogue, brands, selection, forms)
    ============================================================ */
 .nav__cart { position: relative; display: inline-flex; align-items: center; justify-content: center; color: inherit; }
 /* WCAG 2.5.8 : zone tactile 44px centrée sur l'icône, sans bouger l'icône ni le badge */
@@ -1024,12 +1024,7 @@ body.has-stickybuy .footer { padding-bottom: 76px; }
   .pdp-acc__chevron { transition: none; }
 }
 
-/* ---------- article ---------- */
-.article { max-width: 760px; margin-inline: auto; }
-.article__back { display: inline-block; font-size: var(--fs-small); color: var(--accent-ink); margin-bottom: 24px; }
-.article__title { font-family: var(--serif); font-weight: 600; font-size: clamp(38px, 4.6vw, 64px); line-height: 1.02; margin-bottom: 16px; }
-.article__lead { font-size: 20px; line-height: 1.5; color: var(--ink-deep); margin-bottom: 28px; }
-.article__hero { width: 100%; aspect-ratio: 3/2; object-fit: cover; background: var(--tile); margin-bottom: 36px; }
+/* ---------- prose (pages légales) ---------- */
 .prose p { font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 20px; }
 .prose h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.1; margin: 36px 0 14px; }
 .prose h3 { font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.2; margin: 28px 0 10px; color: var(--ink-deep); }
@@ -1048,21 +1043,6 @@ body.has-stickybuy .footer { padding-bottom: 76px; }
 .prose td { color: var(--ink); }
 /* Date discrète en tête de page légale. */
 .legal-updated { color: var(--muted); font-size: var(--fs-small); margin: -8px 0 24px; }
-
-/* ---------- article CTA · generic editorial call-to-action ----------
-   Centered block with Cormorant-italic lead + bordered Neue Haas button.
-   Reusable across articles — not nuancier-specific.
-   Selectors are prefixed with `a.` to outrank `.prose a` (which lives
-   in the same scope and would otherwise paint the link blue + add an
-   underline). */
-.article-cta { text-align: center; margin: clamp(2.5rem, 5vw, 3.5rem) 0; }
-.article-cta__lead { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.3; color: var(--ink); margin-bottom: 1rem; }
-a.article-cta__btn { display: inline-flex; align-items: center; gap: 0.5em; padding: 0.9rem 1.6rem; border: 1px solid var(--ink); border-bottom: 1px solid var(--ink); border-radius: 0; background: var(--paper); font-family: var(--sans-product); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease); }
-a.article-cta__btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
-@media (max-width: 540px) {
-  a.article-cta__btn { display: flex; justify-content: center; width: 100%; }
-}
 
 /* ---------- rendez-vous hero (form top-right) ---------- */
 .rdv-hero { position: relative; min-height: 740px; overflow: hidden; background: var(--tile); }
@@ -1139,16 +1119,8 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
   .locate__map-wrap { min-height: 380px; }
 }
 
-/* ---------- journal ---------- */
-.jgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.4vw, 36px); }
-.jcard__img { aspect-ratio: 3/2; object-fit: cover; width: 100%; background: var(--tile); }
-.jcard__meta { font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--accent-ink); margin: 16px 0 8px; }
-.jcard__title { font-family: var(--serif); font-weight: 600; font-size: 26px; line-height: 1.1; }
-.jcard:hover .jcard__title { color: var(--accent-ink); }
-
 @media (max-width: 1080px) {
   .pgrid, .brandgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .jgrid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 900px) {
   .formwrap--three { grid-template-columns: repeat(2, 1fr); }
@@ -1157,7 +1129,6 @@ a.article-cta__btn:focus-visible { outline: 2px solid var(--accent-ink); outline
   .pgrid, .brandgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sel, .formwrap, .formwrap--three { grid-template-columns: 1fr; }
   .sel-summary { position: static; }
-  .jgrid { grid-template-columns: 1fr; }
   .formgrid2 { grid-template-columns: 1fr; }
   /* Filterbar mobile : promouvoir TOUS les contrôles en enfants flex directs de
      .filterbar (sinon .filterbar__right en width:100% wrappe seul → Catégorie isolée
@@ -1319,144 +1290,6 @@ body.pdplb-locked { overflow: hidden; }
 .pdplb__close:hover, .pdplb__nav:hover { background: var(--paper-2); }
 .pdplb__close:focus-visible, .pdplb__nav:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .pdplb__backdrop, .pdplb__stage { transition: opacity .01s; } }
-
-/* =====================================================================
-   === JOURNAL / ARTICLE PREMIUM ===  (Lot A)
-   Self-contained section appended at EOF to avoid merge collisions with
-   the parallel nav work. Reading-progress bar (article.html) + premium
-   journal layout (journal.html). Tokens only — DA unchanged.
-   ===================================================================== */
-
-/* ---- Reading progress bar (article.html) ---- */
-.readbar {
-  position: fixed;
-  top: 116px;                 /* fallback; JS pins it to the live header bottom */
-  left: 0;
-  right: 0;
-  height: 3px;
-  z-index: 70;                /* tucks under the fixed .chrome (z-index 80) */
-  opacity: 0;
-  transition: opacity .25s var(--ease);
-  pointer-events: none;
-}
-.readbar.is-on { opacity: 1; }
-.readbar__fill {
-  display: block;
-  width: 100%;
-  height: 100%;
-  transform: scaleX(0);
-  transform-origin: left center;
-  background: var(--accent);
-  transition: transform .1s linear;
-  will-change: transform;
-}
-
-/* ---- Journal · "à la une" featured ---- */
-.jfeat {
-  display: grid;
-  grid-template-columns: 1.55fr 1fr;
-  background: var(--paper-2);
-  border-radius: 0;
-  overflow: hidden;
-  margin-bottom: clamp(32px, 4vw, 56px);
-  transition: background .3s var(--ease);
-}
-.jfeat:hover { background: var(--paper); }
-.jfeat__media { aspect-ratio: 16 / 10; overflow: hidden; background: var(--tile); }
-/* let a <picture> fill its media box so the inner img's height:100% resolves */
-.jfeat__media picture, .jcard__media picture { display: block; width: 100%; height: 100%; }
-.jfeat__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--ease); }
-.jfeat:hover .jfeat__img { transform: scale(1.03); }
-.jfeat__body { display: flex; flex-direction: column; justify-content: center; padding: clamp(26px, 3.4vw, 56px); }
-.jfeat__title {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(30px, 3.4vw, 46px);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
-  color: var(--ink-deep);
-  margin: 6px 0 0;
-}
-.jfeat__excerpt {
-  font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.55;
-  color: var(--muted);
-  margin: 14px 0 0;
-  max-width: 48ch;
-}
-.jfeat__more {
-  display: inline-flex;
-  align-items: center;
-  gap: .4em;
-  font-family: var(--sans-product);
-  font-size: .85rem;
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: var(--accent-ink);
-  margin-top: 20px;
-  transition: color .2s var(--ease);
-}
-.jfeat:hover .jfeat__more { color: var(--ink-deep); }
-/* Specificity 0,2,0 so this beats the .jread base (margin-top:auto) regardless
-   of source order — keeps the featured read-time grouped under the link. */
-.jfeat .jfeat__read { margin-top: 16px; padding-top: 0; }
-
-/* ---- Journal · refined grid cards ---- */
-.jcard {
-  display: flex;
-  flex-direction: column;
-  background: var(--paper-2);
-  border-radius: 0;
-  overflow: hidden;
-  transition: background .3s var(--ease);
-}
-.jcard:hover { background: var(--paper); }
-.jcard__media { aspect-ratio: 3 / 2; overflow: hidden; background: var(--tile); }
-.jcard__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--ease); }
-.jcard:hover .jcard__img { transform: scale(1.04); }
-.jcard__body { display: flex; flex-direction: column; flex: 1 1 auto; padding: clamp(16px, 1.6vw, 22px) clamp(16px, 1.6vw, 22px) clamp(18px, 2vw, 24px); }
-.jcard__title {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(21px, 2vw, 26px);
-  line-height: 1.12;
-  color: var(--ink-deep);
-  transition: color .2s var(--ease);
-}
-.jcard:hover .jcard__title { color: var(--accent-ink); }
-.jcard__excerpt {
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--muted);
-  margin: 8px 0 0;
-}
-
-/* ---- Journal · durée de lecture (aucune étiquette au-dessus des titres) ---- */
-.article__read { margin: 4px 0 18px; }
-.jread {
-  font-family: var(--sans);
-  font-size: var(--fs-meta);
-  color: var(--subtle);
-  margin-top: auto;           /* pins read-time to the card bottom, aligned across a row */
-  padding-top: 14px;
-}
-
-/* ---- Journal premium · responsive (featured stacks; grid uses .jgrid 3→2→1) ---- */
-@media (max-width: 860px) {
-  .jfeat { grid-template-columns: 1fr; }
-  .jfeat__media { aspect-ratio: 3 / 2; }
-  .jfeat__body { padding: clamp(20px, 5vw, 32px); }
-}
-
-/* ---- Reduced motion ---- */
-@media (prefers-reduced-motion: reduce) {
-  .readbar, .readbar__fill,
-  .jfeat, .jfeat__img, .jfeat__more,
-  .jcard, .jcard__img, .jcard__title { transition: none; }
-  .jfeat:hover .jfeat__img, .jcard:hover .jcard__img { transform: none; }
-}
 
 /* ============================================================
    DESIGNERS — refonte A-Z (designers.html) + page créateur

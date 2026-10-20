@@ -49,17 +49,28 @@ test('le sitemap couvre toutes les pages produit avec une requête légère', as
 });
 
 test('sitemap-pages : la liste et les priorités viennent du manifeste ; une page `index: false` en est absente', async () => {
-  const { SITEMAP_PAGES, JOURNAL_PRIORITY } = require('../lib/config');
-  const { journalReady, articleSlugs } = require('../lib/render/journal');
-  await journalReady;
+  const { SITEMAP_PAGES } = require('../lib/config');
   const response = await realFetch(base + '/sitemap-pages.xml');
   const xml = await response.text();
   assert.equal(response.status, 200);
   for (const { loc, priority } of SITEMAP_PAGES) assert.ok(xml.includes(`<loc>https://www.mikadodeco.be${loc}</loc><priority>${priority}</priority>`), loc);
-  assert.ok(SITEMAP_PAGES.length >= 14, `${SITEMAP_PAGES.length} pages`);
+  assert.ok(SITEMAP_PAGES.length >= 13, `${SITEMAP_PAGES.length} pages`);
   assert.match(xml, /<loc>https:\/\/www\.mikadodeco\.be\/<\/loc><priority>1\.0<\/priority>/, 'l’accueil s’écrit « / »');
   assert.match(xml, /produits\.html<\/loc><priority>0\.9/); assert.match(xml, /mentions-legales\.html<\/loc><priority>0\.3/);
   assert.doesNotMatch(xml, /selection\.html/, 'la sélection (panier, noindex) est hors sitemap');
-  for (const slug of articleSlugs()) assert.ok(xml.includes(`/journal/${slug}.html</loc><priority>${JOURNAL_PRIORITY}</priority>`), slug);
+  assert.doesNotMatch(xml, /journal/, 'journal retiré du site (20 octobre 2026)');
   assert.doesNotMatch(xml, /<lastmod>/, 'pas de date inventée pour les pages statiques');
+});
+
+test('journal retiré (Cyril, 20 octobre 2026) : page, articles et ancien stub répondent 410 avec le shell, hors sitemap, hors navigation', async () => {
+  for (const p of ['/journal.html', '/journal', '/journal/fermob.html', '/journal/fermob', '/article.html?slug=fermob']) {
+    const response = await realFetch(base + p, { headers: { Accept: 'text/html' } });
+    assert.equal(response.status, 410, p);
+    const html = await response.text();
+    assert.match(html, /Cette page n'existe plus/, p);
+    assert.match(html, /noindex/, p);
+    assert.match(html, /id="site-header"/, p + ' : le chrome est là');
+  }
+  const home = await (await realFetch(base + '/', { headers: { Accept: 'text/html' } })).text();
+  assert.doesNotMatch(home, /journal\.html|Le journal|\/journal\//, 'ni menu, ni tiroir, ni pied de page, ni coup de cœur');
 });
