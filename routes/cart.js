@@ -6,6 +6,8 @@ const rateLimit = require('express-rate-limit');
 const { getDeliveryEstimate, normalizeItems, realProject } = require('../lib/delivery-estimate');
 const { shopifyFetch } = require('../lib/shopify/client');
 const { CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('../lib/shopify/queries');
+// « Retrait en boutique : prêt sous 24 h » → « prêt sous 24 h » (la clé de l'attribut porte déjà le libellé).
+const pickupShort = (label) => String(label || '').replace(/^Retrait en boutique : /, '');
 
 const cartLimiter = rateLimit({
   windowMs: 60 * 1000,                // 1 min
@@ -157,12 +159,15 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
         ...(item.gift ? [{ key: '_gift', value: String(item.gift).slice(0, 40) }] : []),
         ...(delivery.lines.find(l => l.variantId === item.variantId)?.label
           ? [{ key: 'Délai estimé', value: delivery.lines.find(l => l.variantId === item.variantId).label }] : []),
+        ...(delivery.lines.find(l => l.variantId === item.variantId)?.pickup
+          ? [{ key: 'Retrait en boutique', value: pickupShort(delivery.lines.find(l => l.variantId === item.variantId).pickup) }] : []),
       ],
     }));
 
     // Pass customer context as cart note + attributes
     // (visible in Shopify admin → Orders → Notes / Attributes)
     const noteParts = delivery.label ? [`Délai estimé de la commande : ${delivery.label} (envoi groupé).`, 'Mode de réception : voir le mode choisi au paiement dans la commande Shopify.'] : [];
+    if (delivery.pickup) noteParts.push(`Retrait en boutique : ${pickupShort(delivery.pickup)} (article le plus long).`);
     if (customer?.prenom || customer?.nom) {
       noteParts.push(`Client: ${[customer.prenom, customer.nom].filter(Boolean).join(' ')}`);
     }
@@ -171,6 +176,7 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
     if (customer?.message)   noteParts.push(`Message: ${customer.message.substring(0, 500)}`);
 
     const attributes = delivery.label ? [{ key: 'Délai estimé', value: delivery.label }, { key: 'Stock vérifié le', value: checkedAt }] : [];
+    if (delivery.pickup) attributes.push({ key: 'Retrait en boutique', value: pickupShort(delivery.pickup) });
     if (customer?.prenom)    attributes.push({ key: 'Prenom',    value: customer.prenom });
     if (customer?.nom)       attributes.push({ key: 'Nom',       value: customer.nom });
     if (customer?.email)     attributes.push({ key: 'Email',     value: customer.email });

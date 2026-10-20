@@ -232,11 +232,8 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   assert.equal((html.match(/class="pcard"/g)||[]).length,7);
   assert.match(html,/Accueil[\s\S]*Catalogue[\s\S]*Idées cadeaux/);
   assert.doesNotMatch(html,/noindex/);
-  // Repères de saison selon la vraie horloge : échange ouvert 30 jours avant son début, saison dès startsAt (data/campaigns.json).
-  const { active: seasonActive, exchangeOpen } = require('../lib/christmas');
-  if (!seasonActive() && !exchangeOpen()) assert.doesNotMatch(html,/Livré avant Noël|gift-note|Emballage cadeau/,'hors saison : aucun repère de Noël');
-  else assert.match(html,/gift-note/,'en saison ou échange ouvert : les repères sont là');
-  assert.doesNotMatch(html,/Livré avant Noël/,'repère de livraison éteint (deliveryBadge: false)');
+  // La page a été lue avec l'horloge OFF_SEASON (1er octobre : ni saison, ni fenêtre d'échange) : aucun repère.
+  assert.doesNotMatch(html,/Livré avant Noël|gift-note|Emballage cadeau/,'hors saison : aucun repère de Noël');
   assert.doesNotMatch(html,/subhero__img[^>]*src=""/,'bandeau de la page depuis collection-heroes.json');
   const filtered=await withClock(OFF_SEASON,()=>page('/collections/idees-cadeaux?max=50'));
   assert.match(filtered.html,/class="home-rc gift-band is-active" href="\/collections\/idees-cadeaux\?max=50#grille"[^>]*aria-current="true"/);

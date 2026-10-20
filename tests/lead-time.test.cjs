@@ -76,3 +76,18 @@ test('les jours ouvrés comptent dans l’envoi groupé', () => {
   assert.equal(longest([fast, mid]).label, '10–14 jours ouvrés');
   assert.equal(longest([fast, slow, mid]).label, '3–4 semaines');
 });
+
+test('retrait en boutique : le stock décide, sinon le même délai que la livraison, « confirmé après commande » sur demande (Cyril, 17 oct.)', () => {
+  const { pickupFor, longestPickup, PICKUP_READY, PICKUP_TBC } = require('../lib/lead-time');
+  const lt = (opts) => leadTimeFor(opts);
+  assert.equal(pickupFor({ inStock: true, leadTime: lt({ vendor: 'HKliving', leadTime: '6-10 semaines' }) }).label, PICKUP_READY);
+  assert.equal(pickupFor({ inStock: false, leadTime: lt({ vendor: 'HKliving', leadTime: '6-10 semaines' }) }).label, 'Retrait en boutique : 6–11 semaines', 'le même délai que la livraison');
+  assert.equal(pickupFor({ inStock: false, leadTime: lt({ vendor: 'HAY' }) }).label, 'Retrait en boutique : 10–14 jours ouvrés', 'règle de marque, comme la livraison');
+  assert.equal(pickupFor({ inStock: false, leadTime: lt({ vendor: 'Fermob', tags: ['delai-long'] }) }).label, PICKUP_TBC, 'délai sur demande : jamais « 24 h »');
+  assert.equal(pickupFor({ inStock: false }).label, PICKUP_TBC);
+  const ready = pickupFor({ inStock: true }), six = pickupFor({ inStock: false, leadTime: lt({ vendor: 'HKliving', leadTime: '6 semaines' }) }), two = pickupFor({ inStock: false, leadTime: lt({ vendor: 'HKliving', leadTime: '2 semaines' }) }), tbc = pickupFor({ inStock: false });
+  assert.equal(longestPickup([ready, two, six]).label, six.label, 'la commande suit l’article le plus long');
+  assert.equal(longestPickup([six, tbc, ready]).label, PICKUP_TBC, 'un délai à confirmer l’emporte');
+  assert.equal(longestPickup([ready, ready]).label, PICKUP_READY);
+  assert.equal(longestPickup([]), null);
+});
