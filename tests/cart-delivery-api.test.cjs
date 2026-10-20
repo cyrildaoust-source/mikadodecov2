@@ -69,7 +69,8 @@ test('emballage cadeau offert (ADR 0016) : transmis au paiement pendant la saiso
     await post('/api/cart/create', { items:[{variantId:id,qty:1}], giftWrap: false });
     assert.equal(captured.attributes.find(a => a.key === 'Emballage cadeau'), undefined);
   } finally { delete process.env.MIKADO_CLOCK; }
-  await post('/api/cart/create', { items:[{variantId:id,qty:1}], giftWrap: true });
+  process.env.MIKADO_CLOCK = '2026-10-01T10:00:00+02:00';   // hors saison, quelle que soit la date du jour
+  try { await post('/api/cart/create', { items:[{variantId:id,qty:1}], giftWrap: true }); } finally { delete process.env.MIKADO_CLOCK; }
   assert.equal(captured.attributes.find(a => a.key === 'Emballage cadeau'), undefined, 'hors saison, la demande est ignorée');
   assert.doesNotMatch(captured.note || '', /Emballage cadeau/);
 });
