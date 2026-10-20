@@ -55,3 +55,11 @@ test('a single-option product keeps its single variant button', () => {
   assert.doesNotMatch(html, /data-axis=/);
   assert.match(html, /Coloris/);
 });
+
+test('fiche Fermob : lien « Toutes les couleurs Fermob » vers le nuancier sous le choix de couleur ; rien pour les autres marques', () => {
+  const p = { name: 'Chaise Bistro', brand: 'Fermob', variants, images: [], variantId: '1', price: 100 };
+  const { html } = pdpView(p, { selectInitialVariant });
+  assert.match(html, /<a class="pdp__palette" href="\/nuancier-fermob\.html">Toutes les couleurs Fermob<\/a>\s*<div class="pdp__buy">/);
+  const { html: other } = pdpView({ ...p, brand: 'HAY' }, { selectInitialVariant });
+  assert.doesNotMatch(other, /pdp__palette|nuancier/);
+});
