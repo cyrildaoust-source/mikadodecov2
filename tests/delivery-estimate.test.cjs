@@ -15,7 +15,7 @@ test('backorders, negative and unknown inventory never promise immediate availab
 });
 test('mixed carts and split gift lines use aggregated quantities', () => {
   assert.equal(estimateDelivery([item(1), item(2)], [stock(1, 8), stock(2, 0)]).label, '3–4 semaines');
-  assert.equal(estimateDelivery([item(1), { ...item(1), gift: 'offer' }], [stock(1, 1)]).label, '3–4 semaines');
+  assert.equal(estimateDelivery([item(1), item(1)], [stock(1, 1)]).label, '3–4 semaines');
 });
 test('digital items do not postpone physical delivery', () => {
   assert.equal(estimateDelivery([item(1), item(2)], [stock(1, 1), stock(2, null, { requiresShipping: false })]).label, '2–3 jours');

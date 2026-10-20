@@ -25,12 +25,12 @@ after(async () => { global.fetch = realFetch; await new Promise(r => server.clos
 const post = (route, body) => realFetch(base + route, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
 test('checkout uses fresh server inventory and ignores fabricated client ETA and stale project text', async () => {
   available = 0;
-  const response = await post('/api/cart/create', { items:[{variantId:id,qty:2,gift:'offer',inStock:true,delivery:'1 jour'}], customer:{projet:'Livraison: À confirmer au paiement'} });
+  const response = await post('/api/cart/create', { items:[{variantId:id,qty:2,inStock:true,delivery:'1 jour'}], customer:{projet:'Livraison: À confirmer au paiement'} });
   assert.equal(response.status, 200);
   assert.match(captured.note, /3–4 semaines/);
   assert.doesNotMatch(captured.note, /Projet:|À confirmer/);
   assert.equal(captured.lines[0].quantity, 2);
-  assert.deepEqual(captured.lines[0].attributes, [{key:'_gift',value:'offer'},{key:'Délai estimé',value:'3–4 semaines'},{key:'Retrait en boutique',value:'3–4 semaines'}]);
+  assert.deepEqual(captured.lines[0].attributes, [{key:'Délai estimé',value:'3–4 semaines'},{key:'Retrait en boutique',value:'3–4 semaines'}]);
   assert.equal(captured.attributes.find(a => a.key === 'Délai estimé').value, '3–4 semaines');
   assert.equal(captured.attributes.find(a => a.key === 'Retrait en boutique').value, '3–4 semaines', 'sans stock : jamais « 24 h », le même délai que la livraison');
   assert.match(captured.note, /Retrait en boutique : 3–4 semaines/);

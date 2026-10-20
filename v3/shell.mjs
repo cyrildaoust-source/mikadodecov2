@@ -4,7 +4,7 @@
    nav, tiroir mobile, pied de page), branche le tiroir panier, la recherche,
    la newsletter, les images de repli, et charge le méga menu à la demande.
    Le panier, les cartes, les données et l'offre cadeau vivent dans leurs
-   modules (cart.mjs, product-grid.mjs, catalog-data.mjs, gift-offer.mjs).
+   modules (cart.mjs, product-grid.mjs, catalog-data.mjs).
    ============================================================ */
 import { chromeHTML, footerHTML } from "./chrome-template.js";
 import { listingTrail } from "./navigation.mjs";
@@ -12,7 +12,6 @@ import { syncBadge } from "./cart.mjs";
 import { bindCartDrawer } from "./cart-drawer.mjs";
 import { bindAddToCart, syncProductLinks } from "./product-grid.mjs";
 import { loadNavigation, paintBreadcrumb } from "./catalog-data.mjs";
-import { isSaleActive } from "./sale.mjs";
 import { lockBodyScroll } from "./scroll-lock.mjs";
 import { bindNewsletter } from "./newsletter.mjs";
 import { siteData } from "./site-data.mjs";
@@ -119,12 +118,6 @@ function bindChrome(transparent) {
 function bindAnnounce() {
   const host = document.querySelector("[data-announce]");
   if (!host) return;
-  // Hors période de soldes : retire les messages soldes (data-sale) et ré-ancre l'affichage
-  // sur le 1er message restant → la barre revient d'elle-même à la normale après le 1er août.
-  if (!isSaleActive()) {
-    host.querySelectorAll("span[data-sale]").forEach((s) => s.remove());
-    [...host.querySelectorAll("span")].forEach((s, idx) => s.classList.toggle("on", idx === 0));
-  }
   const items = [...host.querySelectorAll("span")];
   if (items.length < 2) return;
   // WCAG 2.2.2 : si l'utilisateur préfère moins d'animation → pas de défilement ;

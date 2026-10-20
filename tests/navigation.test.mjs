@@ -9,8 +9,8 @@ const url = path => new URL(path, 'https://www.mikadodeco.be');
 const labels = trail => trail.map(x => x.label);
 const product = { handle: 'chaise', name: 'Chaise <&>', brand: 'HAY' };
 
-test('all 170 collections have a role and acyclic, explicit parents; all 41 children keep their family', () => {
- assert.equal(Object.keys(nav.collections).length, 170);   // 167 + 4 marques inscrites le 10 oct. (Hoptimist, Softline, Kay Bojesen, Addison Ross) − 2 retirées (Carl Hansen & Søn, Pastoe) + Idées cadeaux (sélection du site, ADR 0016)
+test('all 160 collections have a role and acyclic, explicit parents; all 41 children keep their family', () => {
+ assert.equal(Object.keys(nav.collections).length, 160);   // 170 − 10 entrées périmées retirées le 20 oct. 2026 (6 promo été, claude-modifs, 2 doublons Serax, serviettes-ete)
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'family').length, 7);
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'subcategory').length, 41);
  for (const [handle, c] of Object.entries(nav.collections)) {

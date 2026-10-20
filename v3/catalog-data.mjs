@@ -1,8 +1,6 @@
 /* ---------- données du catalogue + fil d'Ariane + promotions ---------- */
 import { createNavigation, breadcrumbHTML, breadcrumbData, returnLinkHTML } from "./navigation.mjs";
 import { siteData } from "./site-data.mjs";
-import { isSaleActive } from "./sale.mjs";
-import { isGiftProductHandle } from "./gift-rules.mjs";
 
 export async function fetchProducts() {
   const r = await fetch("/api/products");
@@ -64,17 +62,11 @@ export async function fetchPromos() {
 // the promos map. Cards show the REAL discount title (the admin title —
 // keep those short and client-facing); the PDP shows it in place too.
 export function applyPromos(promosMap) {
-  if (isSaleActive()) return;          // ← soldes : pas de badge par produit (remise = niveau commande)
   if (!promosMap || typeof promosMap !== "object") return;
   document.querySelectorAll(".pcard").forEach((card) => {
     const slot = card.querySelector("[data-promo-slot]");
     const variantId = card.querySelector("[data-variant]")?.dataset.variant;
     if (!slot || !variantId) return;
-    // Pas de badge sur les produits CADEAU : l'offre vit dans le module panier,
-    // et le titre complet plaqué sur le packshot dessert la carte.
-    const href = card.querySelector(".pcard__media")?.getAttribute("href") || "";
-    const hm = href.match(/[?&]handle=([^&"]+)/);
-    if (hm && isGiftProductHandle(decodeURIComponent(hm[1]))) { slot.hidden = true; slot.textContent = ""; return; }
     const title = promosMap[variantId];
     if (title) {
       slot.textContent = title;

@@ -3,8 +3,6 @@
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { initShell } from "/shell.mjs";
 import { fetchProducts, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
-import { isSaleActive } from "/sale.mjs";
-import { isGiftProductHandle } from "/gift-rules.mjs";
 import { productCard } from "/product-grid.mjs";
 import { addToCart, cartQty } from "/cart.mjs";
 import { priceLabel, escapeHtml, slugify, stockLabel } from "/format.mjs";
@@ -128,10 +126,6 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
   let promoSeq = 0;
   async function probePromo(variantId) {
     if (!variantId || !promoEl) return;
-    // Produit CADEAU de l'offre en cours : pas de badge (le module panier
-    // porte l'offre ; le titre long sur le packshot dessert la fiche).
-    if (isGiftProductHandle(handle)) { promoEl.hidden = true; promoEl.textContent = ""; return; }
-    if (isSaleActive()) { promoEl.hidden = true; promoEl.textContent = ""; return; }   // ← soldes : pas de badge PDP
     const mySeq = ++promoSeq;
     try {
       const r = await fetch("/api/cart/preview", {

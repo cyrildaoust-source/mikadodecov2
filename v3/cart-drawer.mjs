@@ -5,8 +5,6 @@
 import { euro, escapeHtml } from "./format.mjs";
 import { productHref } from "./navigation.mjs";
 import { CART_KEY, readCart, cartCount, cartQty, setCartQty, removeFromCartAt, syncBadge, createCartPreview } from "./cart.mjs";
-import { SALE, isSaleActive, saleNextTier } from "./sale.mjs";
-import { giftOfferHTML, giftReconcile, giftBind } from "./gift-offer.mjs";
 import { lockBodyScroll } from "./scroll-lock.mjs";
 
 export function bindCartDrawer() {
@@ -43,11 +41,11 @@ export function bindCartDrawer() {
           <div class="cartd__brand">${escapeHtml(i.brand || "")}</div>
           <a class="cartd__name navigation-product-link" href="${href}">${escapeHtml(i.name || "")}</a>
           <div class="cartd__line">
-            ${i.gift ? `<span class="cartd__giftchip">Cadeau</span>` : `<div class="cartd__qty">
+            <div class="cartd__qty">
               <button class="cartd__qbtn" type="button" data-cartd-dec="${escapeHtml(i.variantId)}" data-cartd-idx="${idx}" aria-label="${qty > 1 ? "Diminuer la quantité" : "Retirer l'article"}">−</button>
               <span class="cartd__qval">${qty}</span>
               <button class="cartd__qbtn" type="button" data-cartd-inc="${escapeHtml(i.variantId)}" aria-label="Augmenter la quantité">+</button>
-            </div>`}
+            </div>
             <div class="cartd__priceblock">${priceHTML(i, qty)}</div>
           </div>
         </div>
@@ -77,24 +75,14 @@ export function bindCartDrawer() {
     const total     = Math.max(0, subtotal - discount);
     const discounts = lastPreview?.discounts || [];
     foot.hidden = false;
-    const selVals = {};
-    foot.querySelectorAll("[data-gift-variant]").forEach((s) => { selVals[s.getAttribute("data-gift-variant")] = s.value; });
-    foot.innerHTML = `${giftOfferHTML(lastPreview)}` + `
+    foot.innerHTML = `
       <div class="cartd__row"><span>Sous-total</span><span>${euro(subtotal)}</span></div>
       ${discounts.map((d) => `<div class="cartd__row cartd__row--discount"><span>Remise · ${escapeHtml(d.title)}</span><span>−${euro(d.amount)}</span></div>`).join("")}
       <div class="cartd__row cartd__row--total"><span>Total</span><span>${euro(total)}</span></div>
-      ${(() => {
-        if (!isSaleActive()) return "";
-        const nt = saleNextTier(subtotal);
-        if (nt) return `<p class="cartd__tier">Plus que <strong>${euro(Math.ceil(nt.gap))}</strong> pour bénéficier de <strong>−${nt.pct}%</strong></p>`;
-        const maxPct = SALE.tiers[SALE.tiers.length - 1][1];
-        return `<p class="cartd__tier">Remise maximale atteinte · <strong>−${maxPct}%</strong></p>`;
-      })()}
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
       <p class="cartd__note">${discount > 0 ? "Remise appliquée automatiquement · " : ""}Livraison en Belgique : 50 €</p>
       <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Ma sélection →</a>
       <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
-    foot.querySelectorAll("[data-gift-variant]").forEach((s) => { const v = selVals[s.getAttribute("data-gift-variant")]; if (v) s.value = v; });
   }
 
   function onKeydown(e) {
@@ -134,9 +122,7 @@ export function bindCartDrawer() {
 
   // Real discounts/total from Shopify (same endpoint+logic as selection.html),
   // fetched ONLY while the drawer is open; null payload → keep client subtotal.
-  const preview = createCartPreview((data) => { lastPreview = data; giftReconcile(data); if (isOpen()) render(); });
-  giftBind();
-  document.addEventListener("gift:meta", () => { if (isOpen()) render(); });
+  const preview = createCartPreview((data) => { lastPreview = data; if (isOpen()) render(); });
 
   // ── open triggers ──
   cartLink?.addEventListener("click", (e) => { e.preventDefault(); open(); }); // href kept as no-JS fallback
