@@ -6,7 +6,6 @@ const rateLimit = require('express-rate-limit');
 const { getDeliveryEstimate, normalizeItems, realProject } = require('../lib/delivery-estimate');
 const { shopifyFetch } = require('../lib/shopify/client');
 const { CART_CREATE_MUTATION, CART_PREVIEW_MUTATION } = require('../lib/shopify/queries');
-const { giftWrapActive } = require('../lib/christmas');
 
 const cartLimiter = rateLimit({
   windowMs: 60 * 1000,                // 1 min
@@ -171,11 +170,7 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
     if (project) noteParts.push(`Projet: ${project}`);
     if (customer?.message)   noteParts.push(`Message: ${customer.message.substring(0, 500)}`);
 
-    // Emballage cadeau offert (saison de Noël, ADR 0016) : seulement pendant la fenêtre, quoi que dise le client.
-    const giftWrap = giftWrapActive() && req.body?.giftWrap === true;
-    if (giftWrap) noteParts.push('Emballage cadeau : oui (offert).');
     const attributes = delivery.label ? [{ key: 'Délai estimé', value: delivery.label }, { key: 'Stock vérifié le', value: checkedAt }] : [];
-    if (giftWrap) attributes.push({ key: 'Emballage cadeau', value: 'Oui' });
     if (customer?.prenom)    attributes.push({ key: 'Prenom',    value: customer.prenom });
     if (customer?.nom)       attributes.push({ key: 'Nom',       value: customer.nom });
     if (customer?.email)     attributes.push({ key: 'Email',     value: customer.email });

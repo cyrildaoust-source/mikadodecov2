@@ -1,5 +1,5 @@
 // Opération de Noël (ADR 0016) : fenêtre de saison, repère « Livré avant Noël » article par article,
-// emballage cadeau, fenêtre d'échange. L'horloge MIKADO_CLOCK remplace Date.now() pour ces tests.
+// fenêtre d'échange. L'horloge MIKADO_CLOCK remplace Date.now() pour ces tests.
 const { test, afterEach } = require('node:test');
 const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
@@ -18,7 +18,6 @@ test('campaigns.json : bloc noel valide, dates cohérentes, fenêtre avant Noël
   assert.equal(c.enabled, true);
   assert.ok(c.startsAt < c.endsAt && c.endsAt <= c.deliveryBy, 'la saison se termine au plus tard le jour de livraison');
   assert.equal(c.deliveryByLabel, '24 décembre');
-  assert.equal(c.giftWrap, true);
   assert.equal(c.deliveryBadge, false, 'repère « Livré avant Noël » éteint (Cyril, 13 octobre 2026)');
   assert.equal(new Date(c.startsAt).toISOString(), '2026-10-18T22:00:00.000Z', 'lancement le lundi 19 octobre 2026');
   assert.deepEqual([c.exchange.fromLabel, c.exchange.untilLabel], ['15 novembre', '31 janvier']);
@@ -27,10 +26,9 @@ test('campaigns.json : bloc noel valide, dates cohérentes, fenêtre avant Noël
   assert.throws(() => christmas.parseConfig(null), /absent/);
 });
 
-test('hors fenêtre : rien (ni repère, ni emballage, ni état de fiche)', () => {
+test('hors fenêtre : rien (ni repère, ni état de fiche)', () => {
   clock('2026-10-10T10:00:00+02:00');
   assert.equal(christmas.active(), false);
-  assert.equal(christmas.giftWrapActive(), false);
   assert.equal(christmas.deliverable(null), false, 'même un article en stock n’affiche rien avant la saison');
   assert.equal(christmas.flagsFor(ONE_WEEK), null);
   clock('2026-10-19T09:00:00+02:00');
@@ -70,13 +68,11 @@ test('le repère est éteint par la configuration ; avec l’interrupteur, les r
   assert.equal(christmas.flagsFor(leadTimeFor({ vendor: 'HAY' }), christmas.now(), on), null, 'avant le lancement : rien, même interrupteur allumé');
 });
 
-test('emballage cadeau et fenêtre d’échange', () => {
+test('fenêtre d’échange', () => {
   clock('2026-12-01T10:00:00+01:00');
-  assert.equal(christmas.giftWrapActive(), true);
   assert.equal(christmas.exchangeOpen(), true);
   clock('2027-01-15T10:00:00+01:00');
   assert.equal(christmas.active(), false);
-  assert.equal(christmas.giftWrapActive(), false, 'après Noël, plus d’emballage');
   assert.equal(christmas.exchangeOpen(), true, 'mais l’échange court jusqu’au 31 janvier');
   clock('2027-02-02T10:00:00+01:00');
   assert.equal(christmas.exchangeOpen(), false);
