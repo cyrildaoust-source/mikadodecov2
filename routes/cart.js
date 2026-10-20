@@ -35,13 +35,7 @@ router.post('/api/cart/preview', cartLimiter, async (req, res) => {
     if (result.userErrors?.length) return res.status(400).json({ error: result.userErrors[0].message });
     const cart = result.cart;
     const titleOf = (d) => d.title || d.code || 'Remise';
-    // Éligibilité « offre cadeau » par ligne : miroir de la collection Shopify
-    // « Catalogue — paliers cadeaux » (gid 694454944073) : prix > 0 SAUF tag
-    // `exclu-paliers` (03/09 : chaise Panton sortie du calcul — son 5+1 est
-    // financé par Vitra et ne doit pas être remplacé par les cadeaux Mikado).
-    const GIFT_EXCLUDE_TAGS = new Set(['exclu-paliers']);
-    const isEligible = (tags) => !(tags || []).some((t) => GIFT_EXCLUDE_TAGS.has(String(t).toLowerCase()));
-    // Cart-level discounts (e.g. code "WELCOME10")
+    // Remises au niveau du panier (ex. code BIENVENUE10)
     const cartDiscounts = (cart.discountAllocations || []).map(d => ({
       title:  titleOf(d),
       amount: parseFloat(d.discountedAmount.amount),
@@ -52,7 +46,6 @@ router.post('/api/cart/preview', cartLimiter, async (req, res) => {
     // variantId so the cart UI can show one clean row per variant with the
     // exact promo title(s) and the post-discount price.
     const internalLines = (cart.lines?.edges || []).map(e => e.node);
-    const lineDiscounts = {}; // variantId → total discount (legacy field)
     const allLineDiscountObjs = [];
     // Per-variant aggregation: subtotal, total, discount, discount titles, qty
     const byVariant = new Map();
@@ -62,7 +55,6 @@ router.post('/api/cart/preview', cartLimiter, async (req, res) => {
       const lineTot = parseFloat(n.cost.totalAmount.amount);
       const lineDiscount = Math.max(0, lineSub - lineTot);
       const qty = parseInt(n.quantity) || 0;
-      if (vid && lineDiscount > 0) lineDiscounts[vid] = (lineDiscounts[vid] || 0) + lineDiscount;
       if (vid) {
         const agg = byVariant.get(vid) || { subtotal: 0, total: 0, discount: 0, qty: 0, titles: new Set(), tags: (n.merchandise?.product?.tags) || [] };
         agg.subtotal += lineSub;
@@ -99,7 +91,7 @@ router.post('/api/cart/preview', cartLimiter, async (req, res) => {
       const agg = byVariant.get(item.variantId);
       if (!agg) {
         const qty = Math.max(1, Math.min(99, parseInt(item.qty) || 1));
-        return { variantId: item.variantId, qty, subtotal: 0, total: 0, discount: 0, discountPct: 0, discountTitles: [], eligible: false };
+        return { variantId: item.variantId, qty, subtotal: 0, total: 0, discount: 0, discountPct: 0, discountTitles: [] };
       }
       const pct = agg.subtotal > 0 ? (agg.discount / agg.subtotal) * 100 : 0;
       return {
@@ -110,13 +102,12 @@ router.post('/api/cart/preview', cartLimiter, async (req, res) => {
         discount:       agg.discount,
         discountPct:    Math.round(pct * 10) / 10,
         discountTitles: [...agg.titles],
-        eligible:       isEligible(agg.tags),
       };
     });
     // Cart cost totals (post-discount, pre-shipping/tax)
     const subtotalDisplayed = parseFloat(cart.cost.subtotalAmount.amount) + discount; // pre-discount, for "Sous-total"
     const total             = parseFloat(cart.cost.totalAmount.amount);
-    res.json({ subtotal: subtotalDisplayed, total, discount, discounts, lineDiscounts, lines: linesOut });
+    res.json({ subtotal: subtotalDisplayed, total, discount, discounts, lines: linesOut });
   } catch (err) {
     // Shopify limite le débit (« Throttled », déjà réessayé par shopifyFetch) : ce n'est pas une panne du site.
     // 429 + Retry-After, le navigateur garde ses totaux locaux (alerte Vercel du 12 octobre 2026 : 657 × 500).
@@ -153,10 +144,7 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
     const lines = items.map(item => ({
       merchandiseId: item.variantId,
       quantity:      item.qty,
-      // Ligne cadeau (offre Panton) : marquée par un attribut _gift (préfixe _
-      // = masqué au client) — retrouvable dans la commande côté admin.
       attributes: [
-        ...(item.gift ? [{ key: '_gift', value: String(item.gift).slice(0, 40) }] : []),
         ...(delivery.lines.find(l => l.variantId === item.variantId)?.label
           ? [{ key: 'Délai estimé', value: delivery.lines.find(l => l.variantId === item.variantId).label }] : []),
         ...(delivery.lines.find(l => l.variantId === item.variantId)?.pickup

@@ -82,10 +82,6 @@
       "label": "Serviettes Amour",
       "kind": "selection"
     },
-    "serviettes-ete": {
-      "label": "Serviettes Reste",
-      "kind": "selection"
-    },
     "plisse": {
       "label": "Plissé",
       "kind": "range",
@@ -124,10 +120,6 @@
     "jean-prouve": {
       "label": "Jean Prouvé",
       "kind": "designer"
-    },
-    "claude-modifs-2026-05-16": {
-      "label": "Claude — Modifs 2026-05-16",
-      "kind": "selection"
     },
     "julien-de-smedt": {
       "label": "Julien De Smedt",
@@ -501,11 +493,6 @@
       "kind": "range",
       "parent": "serax"
     },
-    "serax-wind-fire-1": {
-      "label": "Serax — Wind & Fire",
-      "kind": "range",
-      "parent": "serax"
-    },
     "serax-terres-de-reves": {
       "label": "Serax — Terres de Rêves",
       "kind": "range",
@@ -576,17 +563,8 @@
       "kind": "range",
       "parent": "serax"
     },
-    "serax-wind-fire-2": {
-      "label": "Serax — Wind & Fire",
-      "kind": "range",
-      "parent": "serax"
-    },
     "mobilier-exterieur": {
       "label": "Mobilier d'extérieur",
-      "kind": "selection"
-    },
-    "promo-4eme-chaise-offerte": {
-      "label": "Promo : 4ème chaise offerte",
       "kind": "selection"
     },
     "toni": {
@@ -621,26 +599,6 @@
       "kind": "subcategory",
       "parent": "outdoor",
       "catalogFilter": false
-    },
-    "promo-chaises-hay": {
-      "label": "Promo été 2026 — Chaises HAY",
-      "kind": "selection"
-    },
-    "promo-chaises-fermob": {
-      "label": "Promo été 2026 — Chaises Fermob",
-      "kind": "selection"
-    },
-    "promo-chaises-vitra": {
-      "label": "Promo été 2026 — Chaises Vitra",
-      "kind": "selection"
-    },
-    "promo-chaises-tradition": {
-      "label": "Promo été 2026 — Chaises &Tradition",
-      "kind": "selection"
-    },
-    "promo-chaises-fatboy": {
-      "label": "Promo été 2026 — Chaises Fatboy",
-      "kind": "selection"
     },
     "panton-cubes": {
       "label": "Panton Cubes",

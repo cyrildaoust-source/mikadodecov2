@@ -1,6 +1,4 @@
 /* ---------- panier (sélection) — localStorage ---------- */
-import { GIFT_OFFER, giftActive } from "./gift-rules.mjs";
-
 export const CART_KEY = "mikado_v3_cart";
 
 // Cart items: { variantId, qty, handle, name, brand, price, image }
@@ -12,7 +10,7 @@ export function readCart() {
     const raw = JSON.parse(localStorage.getItem(CART_KEY)) || [];
     if (!Array.isArray(raw)) return [];
     return raw
-      .filter((i) => i && i.variantId && (i.gift !== GIFT_OFFER.id || giftActive()))
+      .filter((i) => i && i.variantId)
       .map((i) => ({ ...i, qty: Math.max(1, parseInt(i.qty) || 1) }));
   } catch { return []; }
 }

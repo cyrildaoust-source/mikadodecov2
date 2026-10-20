@@ -4,8 +4,6 @@
 import { initShell } from "/shell.mjs";
 import { readCart, removeFromCartAt, setCartQty } from "/cart.mjs";
 import { euro, escapeHtml } from "/format.mjs";
-import { isSaleActive, saleNextTier, SALE } from "/sale.mjs";
-import { giftOfferHTML, giftReconcile, giftBind } from "/gift-offer.mjs";
 import { productHref } from "/navigation.mjs";
 initShell({ active: "", transparentNav: false });
 
@@ -102,11 +100,11 @@ function render() {
         ${promoCodeHTML}
         ${etaHTML}
         <div class="sel-item__controls">
-          ${i.gift ? `<span class="sel-item__giftchip">Cadeau</span>` : `<div class="qty qty--sm">
+          <div class="qty qty--sm">
             <button class="qty__btn" data-qty-dec="${escapeHtml(i.variantId)}" data-qty-idx="${idx}" aria-label="${qty > 1 ? "Diminuer" : "Retirer l'article"}" type="button">−</button>
             <input class="qty__val" data-qty-input="${escapeHtml(i.variantId)}" type="text" inputmode="numeric" value="${qty}" aria-label="Quantité" />
             <button class="qty__btn" data-qty-inc="${escapeHtml(i.variantId)}" aria-label="Augmenter" type="button">+</button>
-          </div>`}
+          </div>
           <button class="sel-item__remove" data-remove="${idx}">Retirer</button>
         </div>
       </div>
@@ -123,26 +121,7 @@ function render() {
   const hint = document.querySelector("[data-delivery-hint]");
   if (hint) { hint.textContent = DELIVERY_NOTE; hint.hidden = false; }
 
-  // Palier soldes : même encart que le tiroir (« Plus que X € pour −Y% »), pendant les soldes.
-  const tierEl = document.querySelector("[data-sale-tier]");
-  if (tierEl) {
-    if (isSaleActive()) {
-      const nt = saleNextTier(subtotal);
-      if (nt) { tierEl.innerHTML = `Plus que <strong>${euro(Math.ceil(nt.gap))}</strong> pour bénéficier de <strong>−${nt.pct}%</strong>`; tierEl.hidden = false; }
-      else { tierEl.innerHTML = `Remise maximale atteinte · <strong>−${SALE.tiers[SALE.tiers.length - 1][1]}%</strong>`; tierEl.hidden = false; }
-    } else { tierEl.hidden = true; }
-  }
-
   document.querySelector("[data-subtotal]").textContent = euro(subtotal);
-
-  // Offre cadeau « Mois Verner Panton » — module dans le résumé.
-  const gbox = document.querySelector("[data-gift-offer]");
-  if (gbox) {
-    const selVals = {};
-    gbox.querySelectorAll("[data-gift-variant]").forEach((s) => { selVals[s.getAttribute("data-gift-variant")] = s.value; });
-    gbox.innerHTML = giftOfferHTML(lastPreview);
-    gbox.querySelectorAll("[data-gift-variant]").forEach((s) => { const v = selVals[s.getAttribute("data-gift-variant")]; if (v) s.value = v; });
-  }
 
   // Discount lines (visible only when Shopify returned at least one)
   const list = lastPreview?.discounts || [];
@@ -205,7 +184,6 @@ function schedulePreview() {
       const data = await res.json();
       if (mySeq !== previewSeq) return; // a newer request already started
       lastPreview = data;
-      giftReconcile(data);   // cohérence cadeaux sur données fraîches (0 € réel, redescente)
       render();
     } catch (e) {
       // silent failure: keep the local (pre-discount) totals
@@ -258,7 +236,7 @@ document.querySelector("[data-checkout]").addEventListener("click", async () => 
   try {
     const res = await fetch("/api/cart/create", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1, ...(i.gift ? { gift: i.gift } : {}) })) }),
+      body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })) }),
     });
     const data = await res.json();
     if (data.checkoutUrl) location.href = data.checkoutUrl;
@@ -285,5 +263,3 @@ window.addEventListener("pageshow", () => {
 render();
 schedulePreview();
 refreshDelivery();
-giftBind();
-document.addEventListener("gift:meta", render);
