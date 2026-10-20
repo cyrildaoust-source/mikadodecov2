@@ -258,6 +258,8 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
     assert.match(html,/data-gift-cat="cadeaux-hote"|Pour l'hôte du réveillon/,'la rubrique de saison est visible en saison');
     const home=await page('/');
     assert.match(home.html,/home-band--gifts/);assert.match(home.html,/href="\/collections\/idees-cadeaux\?max=50">Moins de 50 €/);
+    assert.doesNotMatch(home.html,/class="home-band" href="\/collections\/moustache"|MARQUE-DU-MOMENT/,'un seul bandeau : la marque du moment s’efface derrière Idées cadeaux (Cyril, 20 octobre 2026)');
+    assert.doesNotMatch(home.html,/feature--rev|journal-patine|Imparfait, et parfait ainsi/,'plus de bloc journal sur l’accueil (Cyril, 20 octobre 2026)');
     assert.doesNotMatch(home.html,/[Ee]mballage cadeau|emballage offert|Idées cadeaux pour tous les budgets/,'ni message de saison dans la barre d’annonce, ni emballage cadeau (Cyril, 20 octobre 2026)');
     assert.match(home.html,/<div class="announce" data-announce tabindex="0">\s*<span class="on">Boutique de design à Uccle/,'la barre ouvre sur son message permanent');
     assert.equal((home.html.match(/class="on"/g)||[]).length,1,'un seul message d’annonce affiché au départ');
@@ -265,6 +267,7 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
   } finally { delete process.env.MIKADO_CLOCK; }
   const off=await withClock(OFF_SEASON,()=>page('/'));
   assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous/);
+  assert.match(off.html,/class="home-band" href="\/collections\/moustache"/,'hors saison, la marque du moment revient');assert.doesNotMatch(off.html,/MARQUE-DU-MOMENT|journal-patine/);
   assert.match(off.html,/class="nlink">Idées cadeaux<\/a>/,'l’entrée de navigation reste toute l’année');
   assert.doesNotMatch((await withClock(OFF_SEASON,()=>page('/collections/idees-cadeaux'))).html,/data-gift-cat="cadeaux-hote"/,'hors saison, pas de rubrique « hôte du réveillon »');
 });

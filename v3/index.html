@@ -52,7 +52,9 @@
   <!-- 2b · IDÉES CADEAUX — saison de Noël uniquement, rendu par le serveur (lib/render/gifts.js, ADR 0016) -->
   <!--NOEL-HOME-->
 
-  <!-- 3 · MARQUE DU MOMENT -->
+  <!-- 3 · MARQUE DU MOMENT — un seul grand bandeau sur l'accueil (Cyril, 20 octobre 2026) : pendant la saison
+       Idées cadeaux, le serveur retire cette section (routes/pages.js) ; hors saison, elle revient. -->
+  <!--MARQUE-DU-MOMENT-->
   <section class="reveal">
     <a class="home-band" href="/collections/moustache">
       <img class="home-band__img" src="/images/home/marque-moment-moustache.webp" alt="Moustache" loading="lazy" />
@@ -64,6 +66,7 @@
       </span>
     </a>
   </section>
+  <!--/MARQUE-DU-MOMENT-->
 
   <!-- 4 · NOUVEAUTÉS (auto · plus récents) -->
   <section class="section wrap reveal">
@@ -93,15 +96,8 @@
     </div>
   </section>
 
-  <!-- 7 · LE JOURNAL (dernier article) -->
-  <section class="feature feature--rev reveal">
-    <div class="feature__media"><picture><source type="image/webp" srcset="/images/journal-patine-800.webp 800w, /images/journal-patine-1200.webp 1200w" sizes="(max-width:760px) 100vw, 50vw" /><img src="/images/journal-patine.jpg" width="1200" height="1564" alt="Chambre baignée de lumière, intérieur qui se patine" loading="lazy" /></picture></div>
-    <div class="feature__body">
-      <h2 class="serif">Imparfait, et parfait ainsi</h2>
-      <p>Le beau vieillissement n'est pas un défaut, c'est une promesse. Petit guide des matières qui gagnent en caractère avec les années.</p>
-      <a href="/journal/tissu-qui-se-patine.html" class="btn btn--outline">Lire l'article</a>
-    </div>
-  </section>
+  <!-- 7 · LE JOURNAL : bloc retiré de l'accueil le 20 octobre 2026 (Cyril : « vide, ne sert pas à grand-chose, pour le moment ») ;
+       le journal reste accessible par la navigation (/journal.html). -->
 
   <!-- 8 · PAR PIÈCE -->
   <section class="section wrap reveal">
