@@ -32,6 +32,8 @@ export function variantForOption(variants, current, name, value) {
 }
 
 export function pdpView(p, { requestedVariant = null, selectInitialVariant, brandHref = '', designerSlug = '' }) {
+  // Fiche Fermob : lien vers le nuancier sous le choix de couleur (Cyril, 20 octobre 2026).
+  const isFermob = String(p.brand || "").trim().toLowerCase() === "fermob";
   const imgs = (p.images && p.images.length ? p.images : [p.image, p.image2]).filter(Boolean);
   // Thumbnail-strip sources: small-width versions, index-parallel to `imgs`.
   // Falls back to `imgs` when the API didn't supply thumbs[] (older payload).
@@ -195,6 +197,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
             <span class="pdp__variant-bar-arrow" aria-hidden="true">→</span>
           </button>
         </div>` : ""}
+        ${isFermob ? `<a class="pdp__palette" href="/nuancier-fermob.html">Toutes les couleurs Fermob</a>` : ""}
         <div class="pdp__buy">
           <button class="pdp__qty-open" type="button" data-qtyd-open aria-haspopup="dialog">Quantité : <span data-qty-label>1</span> <span aria-hidden="true">▾</span></button>
           <button class="btn btn--blue pdp__cta" data-add${current.available === false ? " disabled>Indisponible" : ">Ajouter au panier"}</button>

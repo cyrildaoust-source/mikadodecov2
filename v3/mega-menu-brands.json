@@ -153,6 +153,7 @@
     {
       "name": "Fermob",
       "href": "/collections/fermob",
+      "tools": [{ "label": "Voir le nuancier Fermob", "href": "/nuancier-fermob.html" }],
       "collections": [
         {
           "name": "Bistro",
