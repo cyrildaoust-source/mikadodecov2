@@ -96,25 +96,6 @@ function bindSearch() {
   document.querySelectorAll('[data-search-open]').forEach(button => button.addEventListener('click', open));
 }
 
-function bindChrome(transparent) {
-  const chrome = document.querySelector("[data-chrome]");
-  if (!chrome) return;
-  // Pose l'état initial du header (solid si le scroll est restauré au refresh)
-  // SANS transition, puis réactive les transitions au 2e frame → plus de fondu
-  // du filet `--line` au 1er paint, mais scroll/hover restent fluides.
-  chrome.classList.add("chrome--noanim");
-  const reanim = () => requestAnimationFrame(() =>
-    requestAnimationFrame(() => chrome.classList.remove("chrome--noanim")));
-  if (!transparent) { chrome.classList.add("chrome--solid"); reanim(); return; }
-  const hero = document.querySelector(".home-hero, .subhero, .rdv-hero, .fam-hero");
-  if (!hero) { chrome.classList.add("chrome--solid"); reanim(); return; }
-  const onScroll = () => chrome.classList.toggle("chrome--solid", !!document.querySelector('[data-catalogue-continuation]') || window.scrollY > hero.offsetHeight - chrome.offsetHeight - 8);
-  onScroll();
-  reanim();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("catalogue:layout", onScroll);
-}
-
 function bindAnnounce() {
   const host = document.querySelector("[data-announce]");
   if (!host) return;
@@ -169,7 +150,9 @@ function bindImageFallbacks() {
   window.__imgErrors = { push: applyImageFallback };   // le script d'en-tête continue d'appeler push : traitement direct
 }
 
-export function initShell({ active = "", transparentNav = false } = {}) {
+// `hero` : la page ouvre sur un bandeau plein écran (le contenu ne reçoit pas le dégagement `has-topnav`).
+// L'en-tête est opaque partout (Cyril, 20 octobre 2026) : plus d'état transparent à gérer.
+export function initShell({ active = "", hero = false } = {}) {
   // Garde d'idempotence : initShell ne doit jamais binder deux fois (sinon
   // double rotation d'annonce, double submit newsletter, double scroll handler).
   if (document.body.dataset.shellReady) return;
@@ -183,11 +166,10 @@ export function initShell({ active = "", transparentNav = false } = {}) {
   if (f && !f.firstElementChild) f.innerHTML = footerHTML();
   // Pose l'état actif (aria-current / is-active) quel que soit le chemin. Idempotent.
   setActiveNav(active);
-  if (!transparentNav) document.body.classList.add("has-topnav");
+  if (!hero) document.body.classList.add("has-topnav");
   bindDrawer();
   bindCartDrawer();
   bindSearch();
-  bindChrome(transparentNav);
   bindAnnounce();
   bindNewsletter();
   // Popup newsletter (ADR 0017, réglages data/newsletter.json via #site-data) : chargée après tout le reste.

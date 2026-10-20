@@ -135,7 +135,7 @@ router.get('/produit.html', async (req, res) => {
     };
     recoSsr(product.complementary, 'data-complementary', 'data-complementary-wrap');
     recoSsr(product.related, 'data-related', 'data-related-wrap');
-    out = injectChrome(out, 'produit.html');     // ← non-hero → header solide
+    out = injectChrome(out, 'produit.html');
     ogCache(res);
     return res.send(out);
   } catch (err) {
@@ -315,7 +315,7 @@ router.get('/collections/:handle', async (req, res) => {
       html = html.replace('<div class="pgrid" data-grid></div>', '<div class="pgrid" data-grid><p class="plp-empty">Impossible de charger cette sélection. Veuillez réessayer.</p></div>');
       console.warn('[coll-grid-ssr]', e.message);
     }
-    html = injectChrome(html, 'produits.html', Boolean(collectionHero));
+    html = injectChrome(html, 'produits.html');
     if (failed) temporaryUnavailable(res);
     else ogCache(res);
     return res.send(html);

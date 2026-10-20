@@ -10,7 +10,7 @@ import { productTrail, sourceSelection, productBrandDestination, designerSlug } 
 import { pdpView, optionValue, variantForOption } from "/pdp-view.mjs";
 import "/product-variant.js";
 const { selectInitialVariant, latestVariantSelection } = globalThis.MikadoProductVariant;
-initShell({ active: "Mobilier", transparentNav: false });
+initShell({ active: "Mobilier", hero: false });
 
 const params = new URLSearchParams(location.search);
 const handle = params.get("handle");

@@ -4,7 +4,7 @@
 import { bindFamilyRails } from "/family-rail.js";
 import { initShell } from "/shell.mjs";
 import { productCard, restoreSelectionPosition } from "/product-grid.mjs";
-initShell({ active: "Mobilier", transparentNav: !document.documentElement.hasAttribute("data-chair-continuation") });
+initShell({ active: "Mobilier", hero: !document.documentElement.hasAttribute("data-chair-continuation") });
 var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 bindFamilyRails(document.querySelector(".fam"));

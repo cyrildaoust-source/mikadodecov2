@@ -5,7 +5,7 @@ import { initShell } from "/shell.mjs";
 import { readCart, removeFromCartAt, setCartQty } from "/cart.mjs";
 import { euro, escapeHtml } from "/format.mjs";
 import { productHref } from "/navigation.mjs";
-initShell({ active: "", transparentNav: false });
+initShell({ active: "", hero: false });
 
 // Livraison : tarif unique en Belgique, sans seuil de gratuité (décision du
 // 24 septembre 2026). Shopify reste la référence au paiement.

@@ -3,7 +3,7 @@ import { productCard, syncProductLinks, restoreSelectionPosition } from '/produc
 import { bindFamilyRails } from '/family-rail.js';
 import { ICON_TAGS, isFamilyIcon, uniqueProducts } from '/family-policy.mjs';
 
-initShell({ active: 'Mobilier', transparentNav: !document.documentElement.hasAttribute('data-chair-continuation') });
+initShell({ active: 'Mobilier', hero: !document.documentElement.hasAttribute('data-chair-continuation') });
 const root = document.querySelector('[data-family]');
 const initial = JSON.parse(document.querySelector('#family-initial').textContent);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;

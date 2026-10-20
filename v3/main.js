@@ -3,7 +3,7 @@ import { initShell } from "/shell.mjs";
 import { productCard } from "/product-grid.mjs";
 import { fetchPromos, applyPromos } from "/catalog-data.mjs";
 
-initShell({ active: "", transparentNav: true });
+initShell({ active: "", hero: true });
 
 // Rail « Nos familles » — flèches + désactivation en bout de course.
 (function () {

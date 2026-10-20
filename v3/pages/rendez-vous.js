@@ -2,7 +2,7 @@
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { initShell } from "/shell.mjs";
-initShell({ active: "", transparentNav: true });
+initShell({ active: "", hero: true });
 
 const form = document.querySelector("[data-rdv-form]");
 const errEl = form.querySelector("[data-error]");

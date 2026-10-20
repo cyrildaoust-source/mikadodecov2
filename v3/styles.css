@@ -139,6 +139,8 @@ a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 ul { list-style: none; }
 :focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+/* Champs texte : le focus se voit par la bordure, jamais par un second cadre décalé (Cyril, 20 octobre 2026). */
+input:not([type=checkbox]):not([type=radio]):focus-visible, textarea:focus-visible, select:focus-visible { outline: none; border-color: var(--accent-ink); }
 
 /* --- a11y utilities --- */
 /* Lien d'évitement (accessibilité, EAA) : invisible, il n'apparaît qu'au clavier (Tab), discret et aux couleurs du
@@ -170,8 +172,7 @@ ul { list-style: none; }
 /* ============================================================
    NAV + ANNOUNCEMENT
    ============================================================ */
-.chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 80; transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease); color: var(--on-dark); border-bottom: 1px solid transparent; }
-.chrome--noanim { transition: none !important; }
+.chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 80; background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--line); }   /* opaque partout, photo ou non (Cyril, 20 octobre 2026) */
 /* Reassurance strip (delivery Belgium / boutique Uccle) — a visible, premium
    royal-blue band with cream text. Slim + full-width; sober, not baby-blue. */
 .announce { position: relative; height: 34px; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent); color: var(--paper); }
@@ -181,9 +182,6 @@ ul { list-style: none; }
 .nav__left { display: flex; align-items: center; gap: 16px; }
 .wordmark { display: inline-flex; align-items: center; line-height: 1; }
 .wordmark img { height: clamp(20px, 1.7vw, 28px); width: auto; display: block; }
-.chrome .wordmark img { filter: brightness(0) invert(1); transition: filter .3s var(--ease); }
-.chrome--solid .wordmark img, .chrome--mm .wordmark img, .chrome:hover .wordmark img { filter: none; }
-
 .nav__right { display: flex; align-items: center; gap: 24px; }
 .chrome a.nlink, .chrome .nav__util { font-size: var(--fs-nav); font-weight: 400; position: relative; white-space: nowrap; }
 .chrome a.nlink::after { content: ''; position: absolute; left: 0; bottom: -3px; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
@@ -191,7 +189,6 @@ ul { list-style: none; }
 .chrome a.nlink--promo { color: var(--accent); }
 .drawer__link--promo { color: var(--accent); }
 .nav__burger { display: none; align-items: center; min-height: 44px; padding: 0 4px; font-size: var(--fs-nav); }
-.chrome--solid, .chrome--mm, .chrome:hover { background: var(--paper); color: var(--ink); border-bottom-color: var(--line); }
 
 /* mobile drawer */
 .drawer { position: fixed; inset: 0; background: var(--paper); color: var(--ink); z-index: 100; transform: translateX(-100%); visibility: hidden; transition: transform .4s var(--ease), visibility 0s .4s; display: flex; flex-direction: column; padding: 22px var(--gutter); }
@@ -1748,7 +1745,8 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .nlp__body { padding: 44px 34px 30px; display: flex; flex-direction: column; justify-content: center; }
 .nlp__close { position: absolute; top: 10px; right: 10px; z-index: 1; width: 36px; height: 36px; border: 0; border-radius: 0; background: rgba(248,245,239,.92); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
 .nlp__close:hover { background: var(--paper-2); }
-.nlp__close:focus-visible, .nlp__form input[type=email]:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.nlp__close:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.nlp__form input[type=email]:focus-visible { outline: none; border-color: var(--accent-ink); }   /* pas de double cadre (Cyril, 20 octobre 2026) */
 .nlp__title { font-size: 34px; line-height: 1.05; font-weight: 500; }
 .nlp__text { font-size: 14px; line-height: 1.5; margin-top: 10px; }
 .nlp__text strong { font-weight: 600; }

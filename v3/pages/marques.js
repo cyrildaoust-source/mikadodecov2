@@ -4,7 +4,7 @@
 import { initShell } from "/shell.mjs";
 import { buildShaReady, versionedImg } from "/site-data.mjs";
 import { brandCardHTML } from "/brand-card.mjs";
-initShell({ active: "Marques", transparentNav: true });
+initShell({ active: "Marques", hero: true });
 
 const grid = document.querySelector("[data-brandgrid]");
 const countEl = document.querySelector("[data-brand-count]");

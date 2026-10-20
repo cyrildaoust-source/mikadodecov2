@@ -15,7 +15,7 @@ const pagination = document.querySelector('[data-pagination]');
 const status = document.querySelector('[data-chair-status]');
 let current = initial, pending = null, generation = 0, promos = null, navigation = null;
 // Les pages familles gardent leur propre script de page (menu, rubriques éditoriales).
-if(initial.shell!==false)initShell({active:'Mobilier',transparentNav:initial.state.page===1});
+if(initial.shell!==false)initShell({active:'Mobilier',hero:initial.state.page===1});
 document.documentElement.classList.add('chair-filters-ready');
 // Catalogue complet : rubriques de la composition Mobilier (familles, icônes).
 const landing=document.querySelector('[data-catalogue-landing]');

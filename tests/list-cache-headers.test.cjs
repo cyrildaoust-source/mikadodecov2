@@ -20,11 +20,11 @@ test('sendScopeCatalog : page de liste 2 min + SWR 24 h, page filtrée 1 min + S
 
 test('la page de recherche ?q= reste en no-store (résultats personnels à la saisie)', () => {
   const search = pages.slice(pages.indexOf('async function sendSearchPage'), pages.indexOf('sendSearchPage') + 2000);
-  assert.match(search, /res\.set\('Cache-Control','no-store'\)\.send\(injectChrome\(html,'produits\.html',true\)\)/);
+  assert.match(search, /res\.set\('Cache-Control','no-store'\)\.send\(injectChrome\(html,'produits\.html'\)\)/);
 });
 
 test('/api/catalog/:handle suit la même politique courte que les pages filtrées', () => {
-  const route = api.slice(api.indexOf("router.get('/api/catalog/:handle'"), api.indexOf('// ─── API: GET PRODUCTS'));
+  const route = api.slice(api.indexOf("router.get('/api/catalog/:handle'"), api.indexOf("router.get('/api/home-rails'"));
   assert.match(route, /'public, s-maxage=60, stale-while-revalidate=600'/);
   assert.doesNotMatch(route, /'no-store'\)\.json\(await getScopePage/);
 });

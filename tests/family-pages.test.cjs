@@ -351,7 +351,7 @@ test('family brand destinations show the intersection in SSR, metadata and bread
     assert.match(html, /class="pcard__brand">Artek/);
     assert.ok(html.includes('from=coll-brand%3A' + handle + '%3Aartek'), 'product links retain the family and brand before hydration');
     assert.doesNotMatch(html, /class="pcard__brand">HAY/);
-    assert.match(html, /<header class="chrome chrome--solid"/);
+    assert.match(html, /<header class="chrome"/);
     assert.doesNotMatch(html, /width="undefined"|height="undefined"/);
   }
 });
@@ -486,7 +486,7 @@ test('curated collection hero agrees across bootstrap, social preview and no-JS 
   const { html } = await page('/collections/verres-carafes');
   const initial = JSON.parse(html.match(/id="collection-hero-initial">([\s\S]*?)<\/script>/)[1]);
   assert.deepEqual(initial, expected);
-  assert.match(html, /<header class="chrome chrome--solid"/);
+  assert.match(html, /<header class="chrome"/);
   assert.ok(html.includes(`content="${expected.img.replace(/&/g, '&amp;')}"`));
   const fallback = html.match(/<noscript><img class="subhero__img editorial-photo"[^>]*>/)[0];
   assert.ok(fallback.includes(`width="${expected.width}" height="${expected.height}"`));

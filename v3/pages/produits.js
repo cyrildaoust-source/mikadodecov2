@@ -29,7 +29,7 @@ import { walkCatalog, sortCatalog, catalogPagination, DISPLAY_PAGE_SIZE } from '
 // Si la navigation ne se charge pas, le chrome (tiroirs, panier, recherche) doit quand même se brancher.
 let navigation;
 try { navigation = await loadNavigation(); }
-catch (e) { initShell({ active: "Mobilier", transparentNav: !!catalogueLanding || !window.__hero?.editorial }); throw e; }
+catch (e) { initShell({ active: "Mobilier", hero: !!catalogueLanding || !window.__hero?.editorial }); throw e; }
 const COLL_TITLES = Object.fromEntries(Object.entries(navigation.collections).map(([h, c]) => [h, c.label]));
 const BRAND_HANDLES = new Set(Object.entries(navigation.collections).filter(([, c]) => c.kind === 'brand').map(([h]) => h));
 const grid = document.querySelector("[data-grid]");
@@ -112,7 +112,7 @@ const designerSlug = params.get("designer") || "";
 const activeNav = designerSlug
   ? "Designers"
   : ((params.get("brand") && !collFromPath) || BRAND_HANDLES.has(collFromPath)) ? "Marques" : "Mobilier";
-initShell({ active: activeNav, transparentNav: !!catalogueLanding || !window.__hero?.editorial });
+initShell({ active: activeNav, hero: !!catalogueLanding || !window.__hero?.editorial });
 
 // Catégories (36, alphabétique) — handle + libellé pour le panneau multi-
 // sélection. Le filtrage est SERVEUR (?cats=<handles> → clauses Shopify dans

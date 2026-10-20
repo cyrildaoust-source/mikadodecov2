@@ -2,7 +2,7 @@
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { initShell } from "/shell.mjs";
-initShell({ active: "", transparentNav: false });
+initShell({ active: "", hero: false });
 
 // Onglets Particuliers / Professionnels. Les deux panneaux sont en dur dans
 // le HTML (indexables) ; le JS ne fait que basculer la visibilité. Le
