@@ -59,3 +59,12 @@ test('page de marque : les outils du registre (nuancier Fermob) apparaissent sou
  assert.match(moustache,/subhero--brand/);assert.doesNotMatch(moustache,/subhero__tools|nuancier/);
  assert.equal(brandBanner(hero,'chaises'),hero,'une sous-catégorie n’est pas une marque');
 });
+
+test('brand-logos.mjs : la liste LOGOS correspond exactement aux fichiers de v3/images/brands (la fonction Vercel n’embarque pas les images)',async()=>{
+ const { LOGOS, PNG_LOGOS, brandLogoSrc } = await import('../v3/brand-logos.mjs');
+ const files=fs.readdirSync(path.join(__dirname,'../v3/images/brands')).filter(f=>/\.(svg|png)$/.test(f));
+ const slugs=new Set(files.map(f=>f.replace(/\.(svg|png)$/,'')));
+ assert.deepEqual([...LOGOS].sort(),[...slugs].sort(),'un logo ajouté ou retiré du dossier doit être reporté dans LOGOS');
+ for(const slug of LOGOS){ const file=brandLogoSrc(slug).replace('/images/brands/',''); assert.ok(files.includes(file),slug+' : '+file+' absent (PNG_LOGOS ou extension)'); }
+ for(const slug of PNG_LOGOS) assert.ok(LOGOS.has(slug),slug+' : PNG_LOGOS sans fichier');
+});
