@@ -257,7 +257,7 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
     assert.match(html,/<a class="drawer__link" href="\/collections\/idees-cadeaux">Idées cadeaux<\/a><a class="drawer__link drawer__link--promo"/,'tiroir mobile aussi');
     assert.match(html,/data-gift-cat="cadeaux-hote"|Pour l'hôte du réveillon/,'la rubrique de saison est visible en saison');
     const home=await page('/');
-    assert.match(home.html,/home-band--gifts/);assert.match(home.html,/href="\/collections\/idees-cadeaux\?max=50">Moins de 50 €/);
+    assert.match(home.html,/class="section wrap home-gifts"/);assert.match(home.html,/class="home-rc gift-band" href="\/collections\/idees-cadeaux\?max=50#grille"><img class="home-rc__img editorial-photo"[^>]*><span class="home-rc__scrim" aria-hidden="true"><\/span><span class="home-rc__n">Moins de 50 €/,'cases photo par budget, pas de boutons sur une photo (Cyril, 21 octobre 2026)');
     assert.doesNotMatch(home.html,/class="home-band" href="\/collections\/moustache"|MARQUE-DU-MOMENT/,'un seul bandeau : la marque du moment s’efface derrière Idées cadeaux (Cyril, 20 octobre 2026)');
     assert.doesNotMatch(home.html,/feature--rev|journal-patine|Imparfait, et parfait ainsi/,'plus de bloc journal sur l’accueil (Cyril, 20 octobre 2026)');
     assert.doesNotMatch(home.html,/[Ee]mballage cadeau|emballage offert|Idées cadeaux pour tous les budgets/,'ni message de saison dans la barre d’annonce, ni emballage cadeau (Cyril, 20 octobre 2026)');
@@ -266,7 +266,7 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
     assert.doesNotMatch((await page('/selection.html')).html,/data-gift-wrap|GIFT-WRAP|[Ee]mballage cadeau/,'panier sans case emballage, même en saison');
   } finally { delete process.env.MIKADO_CLOCK; }
   const off=await withClock(OFF_SEASON,()=>page('/'));
-  assert.doesNotMatch(off.html,/home-band--gifts|NOEL-HOME|Idées cadeaux pour tous/);
+  assert.doesNotMatch(off.html,/home-gifts|NOEL-HOME|Idées cadeaux pour tous/);
   assert.match(off.html,/class="home-band" href="\/collections\/moustache"/,'hors saison, la marque du moment revient');assert.doesNotMatch(off.html,/MARQUE-DU-MOMENT|journal-patine/);
   assert.match(off.html,/class="nlink">Idées cadeaux<\/a>/,'l’entrée de navigation reste toute l’année');
   assert.doesNotMatch((await withClock(OFF_SEASON,()=>page('/collections/idees-cadeaux'))).html,/data-gift-cat="cadeaux-hote"/,'hors saison, pas de rubrique « hôte du réveillon »');

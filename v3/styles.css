@@ -287,6 +287,9 @@ input:not([type=checkbox]):not([type=radio]):focus-visible, textarea:focus-visib
    l'autre dans une rangée, quelle que soit la longueur du nom ou de la finition. */
 .pcard__avail { display: flex; align-items: center; gap: 6px; color: var(--warn); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .03em; margin-top: auto; padding-top: 6px; }
 .pcard__dot { display: inline-block; width: 7px; height: 7px; border-radius: 0; flex-shrink: 0; background: var(--warn); }
+.pcard__avail { align-items: flex-start; }
+.pcard__avail .pcard__dot { margin-top: .42em; }
+.pcard__nw { white-space: nowrap; }
 .pcard__dot--stock { background: var(--stock); }
 .pcard__dot--order { background: var(--warn); }
 .pcard__cta { margin-top: 0; }
@@ -377,10 +380,11 @@ input:not([type=checkbox]):not([type=radio]):focus-visible, textarea:focus-visib
   .feature, .room { grid-template-columns: 1fr; min-height: 0; }
   .feature--rev .feature__media { order: 0; }
   .feature__media { aspect-ratio: 4/5; }
-  .shead { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .shead { flex-wrap: wrap; gap: 8px 16px; margin-bottom: 22px; }
 
   .usp .wrap { grid-template-columns: 1fr; gap: 28px; }
-  .footer__grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
+  .footer__grid > .footer__news, .footer__grid > div:last-child { grid-column: 1 / -1; }
   .footer__lockbar { justify-content: center; text-align: center; }
 }
 
@@ -1405,6 +1409,7 @@ body.pdplb-locked { overflow: hidden; }
   .home-studio { grid-template-columns: 1fr; }
   .home-rooms { grid-template-columns: repeat(2, 1fr); }
   .home-room, .home-room--big { grid-column: span 1; aspect-ratio: 4 / 3; }
+  .home-room:last-child:nth-child(odd) { grid-column: span 2; aspect-ratio: 8 / 3; }
   .home-rail { grid-auto-columns: 62vw; }
   .home-hero, .home-band { aspect-ratio: auto; min-height: 62vh; }
 }
@@ -1732,8 +1737,6 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .gift-note p { color: var(--muted); font-size: var(--fs-small); line-height: 1.5; margin: 0; }
 .gift-note a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
 /* Accueil : bandeau Idées cadeaux (saison) */
-.home-band--gifts .home-band__t { margin: 0; }
-.home-band--gifts .home-band__links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 @media (max-width: 900px) { .gift-bands { grid-template-columns: repeat(2, 1fr); } }
 /* ═══ POPUP NEWSLETTER (ADR 0017) — fenêtre centrée sur ordinateur, panneau du bas sur téléphone ═══ */
 .nlp { position: fixed; inset: 0; z-index: 126; display: flex; align-items: center; justify-content: center; }
