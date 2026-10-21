@@ -116,7 +116,7 @@ router.post('/api/cart/preview', cartLimiter, async (req, res) => {
       return res.status(429).set({ 'Cache-Control': 'no-store', 'Retry-After': '5' }).json({ error: 'too_many_requests' });
     }
     console.error('Cart preview error:', err.message);
-    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Erreur lors du calcul du panier.' });
+    res.status(500).set('Cache-Control', 'no-store').json({ error: 'Erreur lors du calcul de la sélection.' });
   }
 });
 // Fresh availability for the exact variants and total quantities in the cart.
@@ -201,7 +201,7 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
   } catch (err) {
     // 400 pour un corps invalide (normalizeItems), 500 pour une panne (Shopify, stock…).
     if (err.status !== 400) console.error('Cart create error:', err.message);
-    res.status(err.status || 500).set('Cache-Control', 'no-store').json({ error: err.message || 'Erreur lors de la creation du panier.' });
+    res.status(err.status || 500).set('Cache-Control', 'no-store').json({ error: err.message || 'Erreur lors de la création de la sélection.' });
   }
 });
 

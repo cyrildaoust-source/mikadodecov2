@@ -110,10 +110,10 @@ export function chromeHTML(active) {
   const cartDrawerHTML = `
     <div class="cartd" data-cart-drawer>
       <div class="cartd__backdrop" data-cartd-backdrop></div>
-      <aside class="cartd__panel" role="dialog" aria-modal="true" aria-label="Mon panier" data-cartd-panel>
+      <aside class="cartd__panel" role="dialog" aria-modal="true" aria-label="Ma sélection" data-cartd-panel>
         <header class="cartd__head">
-          <p class="cartd__title" data-cartd-title>Mon panier</p>
-          <button class="cartd__close" data-cartd-close type="button" aria-label="Fermer le panier">&times;</button>
+          <p class="cartd__title" data-cartd-title>Ma sélection</p>
+          <button class="cartd__close" data-cartd-close type="button" aria-label="Fermer la sélection">&times;</button>
         </header>
         <div class="cartd__body" data-cartd-body></div>
         <footer class="cartd__foot" data-cartd-foot hidden></footer>

@@ -56,11 +56,11 @@ export function bindCartDrawer() {
   function render() {
     const cart = readCart();
     const n = cartCount();
-    title.textContent = `Mon panier${n ? ` (${n})` : ""}`;
+    title.textContent = `Ma sélection${n ? ` (${n})` : ""}`;
     if (!cart.length) {
       body.innerHTML = `
         <div class="cartd__empty">
-          <p class="cartd__empty-text">Votre panier est vide</p>
+          <p class="cartd__empty-text">Votre sélection est vide</p>
           <a class="btn btn--outline btn--block" href="/produits.html">Voir le catalogue</a>
         </div>`;
       foot.hidden = true; foot.innerHTML = "";

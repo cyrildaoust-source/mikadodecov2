@@ -286,7 +286,7 @@ input:not([type=checkbox]):not([type=radio]):focus-visible, textarea:focus-visib
 /* Disponibilité, prix et bouton forment le bas de la carte : alignés d'une carte à
    l'autre dans une rangée, quelle que soit la longueur du nom ou de la finition. */
 .pcard__avail { display: flex; align-items: center; gap: 6px; color: var(--warn); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .03em; margin-top: auto; padding-top: 6px; }
-.pcard__dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: var(--warn); }
+.pcard__dot { display: inline-block; width: 7px; height: 7px; border-radius: 0; flex-shrink: 0; background: var(--warn); }
 .pcard__dot--stock { background: var(--stock); }
 .pcard__dot--order { background: var(--warn); }
 .pcard__cta { margin-top: 0; }
@@ -391,7 +391,7 @@ input:not([type=checkbox]):not([type=radio]):focus-visible, textarea:focus-visib
 /* WCAG 2.5.8 : zone tactile 44px centrée sur l'icône, sans bouger l'icône ni le badge */
 .nav__cart::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; }
 .nav__cart svg { display: block; }
-.cartcount { position: absolute; top: -7px; right: -9px; display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--accent-ink); color: var(--paper); font-size: 10px; font-weight: 600; line-height: 1; }
+.cartcount { position: absolute; top: -7px; right: -9px; display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 0; background: var(--accent-ink); color: var(--paper); font-size: 10px; font-weight: 600; line-height: 1; }
 .cartcount.is-empty { display: none; }
 .chrome a.nlink.is-active::after { transform: scaleX(1); background: var(--accent); }
 
@@ -598,7 +598,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .searchd__hint, .searchd__empty { color: var(--muted); font-size: .9rem; padding: 20px 6px; }
 
 .sr__lab { font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
-.sr__row { display: flex; align-items: center; gap: 16px; padding: 9px 6px; text-decoration: none; color: var(--ink-deep); border-radius: 6px; }
+.sr__row { display: flex; align-items: center; gap: 16px; padding: 9px 6px; text-decoration: none; color: var(--ink-deep); border-radius: 0; }
 .sr__row:hover { background: var(--paper-2); }
 /* Comme les cartes produits : le blanc des packshots se fond dans le carré beige. */
 .sr__media { width: 50px; height: 50px; background: var(--tile); flex-shrink: 0; }
@@ -636,7 +636,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .searchd__more:hover { text-decoration: underline; }
 .sr__grp { margin-bottom: 22px; }
 .sr__chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.sr__chip { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 22px; font-size: .92rem; color: var(--ink-deep); text-decoration: none; transition: border-color .18s, background .18s; }
+.sr__chip { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 0; font-size: .92rem; color: var(--ink-deep); text-decoration: none; transition: border-color .18s, background .18s; }
 .sr__chip:hover { border-color: var(--ink-deep); background: var(--paper-2); }
 /* empilement mobile : MÊME seuil que les autres règles recherche (640px) */
 @media (max-width: 640px) { .searchd__cols { grid-template-columns: 1fr; gap: 30px; } }
@@ -667,7 +667,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 @media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } }
 
 .pcard__media { position: relative; }
-.pcard__sale { background: #b23b3b; color: #fff; font-family: var(--sans-product); font-weight: 700; font-size: 12px; letter-spacing: .03em; padding: 4px 9px; border-radius: 2px; }
+.pcard__sale { background: #b23b3b; color: #fff; font-family: var(--sans-product); font-weight: 700; font-size: 12px; letter-spacing: .03em; padding: 4px 9px; border-radius: 0; }
 .sel-item__price--final { font-family: var(--sans-product); font-weight: 500; color: var(--ink-deep); }
 .sel-item__price--free { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.1; color: var(--accent-ink); }
 .sel-item__discount-amount { display: block; font-family: var(--sans-product); font-size: 0.85rem; font-weight: 500; color: var(--accent-ink); }
@@ -986,7 +986,7 @@ body.has-stickybuy .footer { padding-bottom: 76px; }
 .mikado-pin { position: relative; }
 .mikado-pin__svg { position: relative; z-index: 2; display: block; width: 34px; height: 42px; fill: var(--accent); stroke: var(--accent-ink); stroke-width: 1.4; filter: drop-shadow(0 6px 9px rgba(26,25,22,.35)); }
 .mikado-pin__svg circle { fill: var(--paper); stroke: none; }
-.mikado-pin__ring { position: absolute; left: 17px; bottom: 2px; width: 16px; height: 16px; transform: translate(-50%, 50%) scale(.6); border-radius: 50%; background: var(--accent-ink); opacity: .5; z-index: 1; animation: pin-pulse 2.6s var(--ease) infinite; }
+.mikado-pin__ring { position: absolute; left: 17px; bottom: 2px; width: 16px; height: 16px; transform: translate(-50%, 50%) scale(.6); border-radius: 0; background: var(--accent-ink); opacity: .5; z-index: 1; animation: pin-pulse 2.6s var(--ease) infinite; }
 @keyframes pin-pulse { 0% { transform: translate(-50%,50%) scale(.6); opacity: .5; } 70% { transform: translate(-50%,50%) scale(2.7); opacity: 0; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .mikado-pin__ring { animation: none; } }
 
@@ -1601,7 +1601,7 @@ body.pdplb-locked { overflow: hidden; }
 .catalog-filters__option.is-unavailable { opacity: .45; cursor: default; }
 .catalog-filters__count { color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
 .catalog-filters__stock .catalog-filters__count { margin-left: 0; }
-.catalog-filters__swatch { flex: 0 0 14px; width: 14px; height: 14px; border: 1px solid rgba(0,0,0,.12); border-radius: 50%; background: var(--swatch); }
+.catalog-filters__swatch { flex: 0 0 14px; width: 14px; height: 14px; border: 1px solid rgba(0,0,0,.12); border-radius: 0; background: var(--swatch); }
 .catalog-filters__search { display: grid; gap: 8px; padding-bottom: 12px; color: var(--muted); }
 .catalog-filters__search input, .catalog-filters__range input { width: 100%; min-width: 0; box-sizing: border-box; padding: 10px; border: 1px solid var(--line); border-radius: 0; background: var(--paper); color: var(--ink); font: inherit; }
 .catalog-filters__price { width: 300px; }
