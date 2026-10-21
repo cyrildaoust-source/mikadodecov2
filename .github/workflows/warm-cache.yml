@@ -8,8 +8,7 @@
 # visités toutes les 30 minutes. Résultat : la régénération coûteuse (dizaines d'appels
 # Shopify) se fait en arrière-plan à l'edge, jamais dans la requête d'un visiteur, et
 # un déploiement ou un cold start ne laisse plus un visiteur attendre une construction.
-# Sans infrastructure supplémentaire (voir docs/adr/0002-index-catalogue.md pour l'étape
-# suivante : Cron Vercel + Blob).
+# L'index du catalogue vit dans Vercel Blob (ADR 0002) ; ce workflow le reconstruit et réchauffe les pages.
 name: Warm cache
 
 on:

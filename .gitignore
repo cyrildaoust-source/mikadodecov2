@@ -1,6 +1,4 @@
 node_modules/
-.env
-.env.local
 .DS_Store
 .claude/
 .gstack/
@@ -9,6 +7,8 @@ node_modules/
 v3/designers-data.json.bak-*
 .vercel
 .env*
+!.env.example
+.context/
 
 # Sortie de `npm run build` (copie des fichiers statiques pour Vercel) — jamais versionnée
 dist/

@@ -27,13 +27,13 @@ Trois lieux, trois natures de données, jamais de recopie d'un lieu vers l'autre
 - **Menu** : `main-menu` (Shopify) complété par `data/pages.manifest.json` et `v3/navigation-data.json`.
 - **Disponibilité** : `availableForSale` fait foi (réglage Shopify) ; le libellé « Indisponible » en découle.
 
-## Migration prévue du contenu éditorial (hors code du site, brief importateur)
+## Migration prévue du contenu éditorial (hors code du site, brief importateur) — parquée depuis le 8 octobre 2026
 
-1. Metaobject `designer` : nom, slug, biographie, photo, pays, marques associées → remplace `v3/designers-data.json` (229 Ko) et `data/designer-photos.json`.
+1. Metaobject `designer` : nom, slug, biographie, photo, pays, marques associées → remplace `v3/designers-data.json` (530 Ko) et `data/designer-photos.json`.
 2. Metaobject `mise_en_avant` : coup de cœur du méga menu (image, titre, accroche, lien) → remplace `v3/mega-menu-config.json`.
 3. Metaobject `banniere_marque` : visuel de bandeau par marque → remplace `data/brand-heroes.json` et les fichiers `v3/images/brands/headers/*`.
 
-Côté site : un service `lib/services/content.js` lira ces metaobjects par Storefront API (cache 30 min + edge), avec repli sur les fichiers actuels tant que les metaobjects n'existent pas. Aucune page ne change de forme.
+Côté site (à créer quand le chantier reprendra) : un service `lib/services/content.js` lira ces metaobjects par Storefront API (cache 30 min + edge), avec repli sur les fichiers actuels tant que les metaobjects n'existent pas. Aucune page ne change de forme.
 
 ## Fichiers générés commités
 

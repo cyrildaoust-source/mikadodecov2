@@ -55,10 +55,10 @@ French-first, warm, store-as-curator in Uccle (Bruxelles). Short, calm, concrete
 - **Email**: shop@mikadodeco.be (single contact address; the earlier info@/contact@ variants were placeholders).
 - **Founding year**: **2011** (used in the footer seal aria-label).
 - **Format**: walk-in boutique Tue–Sat; **Mikado Studio** handles design projects by appointment.
-- **Location block** (`rendez-vous.html` → `.locate`): bespoke brand-styled map (Leaflet + CARTO `light_all` tiles, warm-tinted via CSS) with a royal-blue pin + overlapping storefront print. This carries the page's single "blue moment".
+- **Location block** (`rendez-vous.html` → `.locate`): bespoke brand-styled map (Leaflet + OpenStreetMap tiles, warm-tinted via CSS; one finger scrolls the page on phones) with a royal-blue pin + overlapping storefront print. This carries the page's single "blue moment".
 
 ## To confirm before launch
 - Fonts: Cormorant is free (Google). `gopher` + `neue-haas-grotesk-*` come from the Adobe Fonts kit `gqc3ska` · confirm the plan covers production web use on the live domain.
 - Photography: the `v3/images/ref-*` files are placeholders and must be replaced with owned or licensed photography before launch (including the storefront print in the `.locate` block).
-- **Map tiles**: the location map uses CARTO basemaps (free tier, attribution shown). For a commercial site, confirm CARTO's terms or swap in a Mapbox/Google styled-map token for a fully custom palette. Attribution must stay visible.
-- **VAT / n° d'entreprise**: not yet shown anywhere. A Belgian shop is legally required to display its `BE0...` number in the footer. Add once provided.
+- **Map tiles**: done — OpenStreetMap tiles (no key, attribution shown) replaced CARTO, which now requires a key. Attribution must stay visible.
+- **VAT / n° d'entreprise**: done — the footer shows « Mikado M-O-A SRL · TVA BE 0839.015.455 » (October 2026).

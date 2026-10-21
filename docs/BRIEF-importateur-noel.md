@@ -1,5 +1,7 @@
 # Brief importateur — Noël 2026 : carte cadeau, tags cadeau, rubrique enfants
 
+> **État au 21 octobre 2026** : carte cadeau publiée (fournisseur « Mikado Deco », exclu des marques du site) ; tags cadeau en place (2 248 idées cadeaux).
+
 Référence : ADR 0016 (`docs/adr/0016-operation-de-noel.md`). Demandé le 13 octobre 2026 ; échange sur l'issue `site` ouverte dans `mikado-importer`. Le site ne touche pas aux données Shopify.
 
 ## 1. Produit « Carte cadeau » (P0 — décision de Cyril)

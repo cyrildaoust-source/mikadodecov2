@@ -35,14 +35,14 @@ Décision du propriétaire du 22 septembre, stock : afficher le nombre exact jus
 disponibilité. Le sélecteur de quantité propose au maximum 10 pièces par ajout ;
 les contrôles du panier conservent le stock réel.
 
-- Assises : quatre chaises fixes, Panton, CH24 Wishbone, Standard et Rey Chair de HAY. Aucun mélange ni roulement automatique.
-- Tables : sélection explicite de quatre tables d’intérieur dans `data/family-pages.json`, intitulée « Notre sélection de tables ». Ne pas présenter une préférence éditoriale comme un classement de ventes.
+- Assises : chaises fixes de `data/seating-icons.json` (Panton, Standard, Rey Chair de HAY ; la CH24 Wishbone est partie avec Carl Hansen & Søn le 20 octobre 2026, remplaçante à choisir par Cyril). Aucun mélange ni roulement automatique.
+- Tables : sélection explicite de tables d’intérieur dans `data/family-pages.json` (trois depuis le retrait de la CH006 le 20 octobre 2026), intitulée « Notre sélection de tables ». Ne pas présenter une préférence éditoriale comme un classement de ventes.
 - Tables outdoor : accès distinct aux modèles prévus pour l’extérieur. Les erreurs d’import restent à corriger à la source.
 - Arts de la table : aucune rubrique « Icônes ». Une promesse de matière dans un titre doit correspondre à la photo et aux produits accessibles après le clic.
 - Inspirations des cinq familles communes : une rangée de trois cartes compactes ; les marques suivent le catalogue.
 - Navigation des marques : depuis une famille, les cartes existantes ouvrent directement le catalogue filtré par famille ET marque. Ne pas ajouter de répertoire de marques par famille ni d’étape intermédiaire.
 
-Décision du propriétaire du 16 septembre, après la première refonte de Mobilier : enrichir l’entrée du catalogue avec « Les icônes du design » et des sous-catégories du méga menu. La sélection globale comporte quatre modèles fixes de quatre marques : CH24 Wishbone, Flowerpot VP9, Noguchi Dining et Tabouret 60. Elle est distincte des quatre chaises d’Assises. Dix sous-catégories photographiques suivent cette sélection. Réutiliser les cartes standards ; la refonte des filtres reste une étape séparée.
+Décision du propriétaire du 16 septembre, après la première refonte de Mobilier : enrichir l’entrée du catalogue avec « Les icônes du design » et des sous-catégories du méga menu. La sélection globale comporte quatre modèles fixes (`data/catalog-landing.json`, choix de Cyril du 20 octobre 2026) : Flowerpot VP9, table basse Noguchi, Tabouret 60 et bougeoir Nagel. Elle est distincte des quatre chaises d’Assises. Dix sous-catégories photographiques suivent cette sélection. Réutiliser les cartes standards ; la refonte des filtres reste une étape séparée.
 
 Décision du propriétaire du 16 septembre, pagination : à partir de la page 2 de Mobilier, conserver un en-tête compact, le fil d’Ariane et les filtres ; masquer le bandeau photographique, les familles, les icônes et les sous-catégories. Le retour à la page 1 rétablit la découverte. La remontée automatique reste active. Dans tous les catalogues numérotés, afficher les numéros seulement lorsque le total est connu, jamais un total provisoire qui augmente au chargement.
 
