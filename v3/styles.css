@@ -647,7 +647,6 @@ body.search-locked { overflow: hidden; }
    logo qui reste soit cliquable (retour accueil). Bordure retirée → raccord blanc
    sans liseré avec la barre de recherche. */
 body.search-locked .chrome { background: var(--paper); color: var(--ink); border-bottom-color: transparent; z-index: 140; }
-body.search-locked .chrome .wordmark img { filter: none; }
 /* On MASQUE le menu (liens de nav + utilitaires de droite) et le bandeau : pendant
    la recherche il ne reste que le logo, la barre de recherche INLINE et sa croix. */
 body.search-locked .nav__primary,
