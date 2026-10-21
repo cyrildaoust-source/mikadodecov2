@@ -202,9 +202,13 @@ const hasValidToken = (req) => bearerMatches(req, process.env.REVALIDATE_TOKEN, 
 // qu'un passage par jour). Construit l'index (dizaines d'appels Shopify, 15 à 60 s) et
 // l'écrit dans Blob : les instances le lisent ensuite en un appel au lieu de le
 // reconstruire dans la requête d'un visiteur (ADR 0002, étape 2). Fail-closed.
-router.post('/api/cron/catalog-index', async (req, res) => {
+// Deux déclencheurs : le Cron Vercel (GET toutes les 10 min, Authorization: Bearer <CRON_SECRET>, vercel.json) et le
+// workflow GitHub warm-cache (POST, CATALOG_INDEX_SECRET), gardé en secours : GitHub ne tient pas ses horaires (passages
+// espacés de 3 à 5 h constatés le 21 octobre 2026, promo terminée encore affichée sur la page Promotions).
+const cronAuthorized = (req) => bearerMatches(req, process.env.CRON_SECRET) || bearerMatches(req, process.env.CATALOG_INDEX_SECRET);
+async function rebuildCatalogIndex(req, res) {
   res.set('Cache-Control', 'no-store');
-  if (!bearerMatches(req, process.env.CATALOG_INDEX_SECRET)) return res.status(401).json({ error: 'unauthorized' });
+  if (!cronAuthorized(req)) return res.status(401).json({ error: 'unauthorized' });
   if (!blobConfigured()) return res.status(503).json({ error: 'blob_not_configured' });
   try {
     const meta = await buildAndStoreIndex();
@@ -214,7 +218,9 @@ router.post('/api/cron/catalog-index', async (req, res) => {
     console.error('[catalog-index] construction impossible :', error.message);
     res.status(error.status || 502).json({ error: 'index_build_failed' });
   }
-});
+}
+router.get('/api/cron/catalog-index', rebuildCatalogIndex);
+router.post('/api/cron/catalog-index', rebuildCatalogIndex);
 
 // ─── API: REVALIDATE CACHE ─────────────────────────────
 // Call this from a Shopify webhook (Products/update, Collections/update)

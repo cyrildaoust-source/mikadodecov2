@@ -3,6 +3,7 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "crons": [{ "path": "/api/cron/catalog-index", "schedule": "*/10 * * * *" }],
   "functions": {
     "api/index.js": {
       "includeFiles": "{build/**,data/**,docs/legal/**,templates/**,v3/*.html,v3/*.js,v3/*.mjs,v3/*.css,v3/*.json,v3/pages/**}",

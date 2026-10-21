@@ -40,3 +40,16 @@ test('GET /index-catalogue/<inconnu>.json reste un 404 ; /api/health expose la s
   const health = await (await realFetch(base + '/api/health')).json();
   assert.ok('index' in health);
 });
+
+test('Cron Vercel : GET avec Authorization: Bearer <CRON_SECRET> est accepté ; sans jeton, 401 (21 octobre 2026)', async () => {
+  process.env.CRON_SECRET = 'cron-de-test';
+  try {
+    assert.equal((await realFetch(base + '/api/cron/catalog-index')).status, 401);
+    const r = await realFetch(base + '/api/cron/catalog-index', { headers: { Authorization: 'Bearer cron-de-test' } });
+    assert.notEqual(r.status, 401, 'le jeton du Cron Vercel ouvre la route');
+  } finally { delete process.env.CRON_SECRET; }
+});
+test('vercel.json : la reconstruction de l’index est planifiée toutes les 10 minutes par le Cron Vercel', () => {
+  const cfg = require('../vercel.json');
+  assert.deepEqual(cfg.crons, [{ path: '/api/cron/catalog-index', schedule: '*/10 * * * *' }]);
+});
