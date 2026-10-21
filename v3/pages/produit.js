@@ -192,6 +192,8 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
   // (+ rail mobile + miniature active), le prix EXACT, le statut panier, le
   // badge promo, le bloc variantes de la buy-box, la dispo produit (§1.3) et
   // la référence (sku). Appelée par le tiroir variantes (clic/Tap/Entrée).
+  // URL d'image sans paramètres (les variantes de largeur partagent la même base).
+  const stripQuery = (u) => (u || "").split("?")[0];
   const scrollRailTo = (src) => {
     const railEl = host.querySelector("[data-rail]");
     if (!railEl) return;
