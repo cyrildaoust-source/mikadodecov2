@@ -5,7 +5,7 @@ import { initShell } from "/shell.mjs";
 import { escapeHtml } from "/format.mjs";
 import { loadNavigation } from "/catalog-data.mjs";
 import { brandHref } from "/navigation.mjs";
-initShell({ active: "Designers", transparentNav: true });
+initShell({ active: "Designers", hero: true });
 
 const featuredGrid = document.querySelector("[data-featured-grid]");
 const azBar        = document.querySelector("[data-az-bar]");
