@@ -1803,6 +1803,8 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
   .pdp__avail { display: block; }
   .pdp__avail .pcard__dot { margin-right: 6px; vertical-align: middle; }
   .home-room__n { font-size: 1.25rem; line-height: 1.15; }
+  .gift-band .home-rc__n { font-size: 1.3rem; line-height: 1.1; }
+  .gift-band { padding: 14px; }
 }
 /* Titres sur image : dégradé sombre du bas, lisible même sur une photo claire (bandeaux et pièces de l'accueil). */
 .home-band__scrim { background: linear-gradient(0deg, rgba(var(--scrim),.78), rgba(var(--scrim),.38) 55%, rgba(var(--scrim),.12)); }
