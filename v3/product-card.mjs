@@ -97,8 +97,8 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
         : p.availabilityLabel
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--${p.inStock ? 'stock' : 'order'}" aria-hidden="true"></span>${escapeHtml(p.availabilityLabel)}</div>`
         : p.inStock
-        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>En stock · livraison 2–3 jours</div>`
-        : `<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>${p.longDelay ? "Sur commande · délai sur demande" : "Livraison " + escapeHtml(p.leadTimeLabel || "3–4 semaines")}</div>`}
+        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>En stock · livraison 2–3&nbsp;jours</div>`
+        : `<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>${p.longDelay ? "Sur commande · délai sur demande" : "Livraison " + escapeHtml(p.leadTimeLabel || "3–4 semaines").replace(/ (jours|semaines|jours ouvrés)$/, "&nbsp;$1")}</div>`}
       <div class="pcard__price">${priceLabel(p)}</div>
       ${interactive ? `<button class="btn btn--outline btn--block pcard__cta" data-add
         ${p.purchaseDisabled ? 'disabled' : ''}

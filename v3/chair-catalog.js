@@ -47,6 +47,7 @@ function scrollToResults() {
 }
 // Premier affichage : la page du serveur est déjà complète, on ne la redessine pas.
 let served=grid.dataset.ssr==='1';
+let shownURL=location.pathname+location.search;
 function paint(data,{keepOpen=false}={}) {
   if(served){served=false;current=data;if(promos)applyPromos(promos);syncOffset();fitPopovers();updateFab();return;}
   const open=keepOpen?[...controls.querySelectorAll('details[open]')].map(el=>el.dataset.filterGroup):[];
@@ -109,9 +110,12 @@ async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
     // chargées qu'au premier changement de filtre.
     if(!navigation)navigation=await loadNavigation().catch(()=>null);
     if(request!==generation)return;
-    if(historyMode!=='none')history[historyMode==='replace'?'replaceState':'pushState'](null,'',pageURL(data.state));
+    // Même adresse qu'à l'écran (filtre modifié puis validé) : on remplace, pour qu'un « Retour » quitte vraiment la liste.
+    const target=pageURL(data.state);const mode=historyMode==='push'&&target===shownURL?'replace':historyMode;
+    if(mode!=='none')history[mode==='replace'?'replaceState':'pushState'](null,'',target);
+    shownURL=location.pathname+location.search;
     paint(data,{keepOpen});
-    status.textContent=`${data.total} modèle${data.total>1?'s':''} dans votre sélection.`;
+    status.textContent=`${data.total} modèle${data.total>1?'s':''}`;
     if(scroll)scrollToResults();
   } catch(error) {
     if(error.name==='AbortError'||request!==generation)return;
@@ -123,7 +127,7 @@ async function load(url,{historyMode='push',scroll=false,keepOpen=false}={}) {
 }
 
 controls.addEventListener('change',event=>{
-  if(event.target.matches('input[type=checkbox],select[name=sort]'))load(formURL(),{keepOpen:true});
+  if(event.target.matches('input[type=checkbox],select[name=sort]'))load(formURL(),{keepOpen:true,historyMode:'replace'});
 });
 controls.addEventListener('submit',event=>{event.preventDefault();load(formURL(),{scroll:matchMedia('(max-width: 760px)').matches});});
 controls.addEventListener('input',event=>{
@@ -175,7 +179,8 @@ document.addEventListener('keydown',event=>{
   if(d){d.open=false;d.querySelector('summary').focus();}
   else setFiltersOpen(false);
 });
-addEventListener('popstate',()=>load(location.href,{historyMode:'none',scroll:true}));
+// Fermer le tiroir du menu revient en arrière sur la même adresse : rien à recharger (audit mobile du 21 octobre 2026).
+addEventListener('popstate',()=>{if(location.pathname+location.search===shownURL)return;shownURL=location.pathname+location.search;load(location.href,{historyMode:'none',scroll:true});});
 addEventListener('resize',()=>{syncOffset();fitPopovers();},{passive:true});
 addEventListener('scroll',fitPopovers,{passive:true});
 if(!initial.error) {

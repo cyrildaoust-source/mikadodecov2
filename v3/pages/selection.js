@@ -7,9 +7,8 @@ import { euro, escapeHtml } from "/format.mjs";
 import { productHref } from "/navigation.mjs";
 initShell({ active: "", hero: false });
 
-// Livraison : tarif unique en Belgique, sans seuil de gratuité (décision du
-// 24 septembre 2026). Shopify reste la référence au paiement.
-const DELIVERY_NOTE = "Livraison en Belgique : 50 €, quel que soit le montant.";
+// Livraison : tarif unique en Belgique, 50 € sans seuil de gratuité (décision du 24 septembre 2026),
+// affiché sur la ligne du récapitulatif. Shopify reste la référence au paiement.
 const populated = document.querySelector("[data-populated]");
 const empty = document.querySelector("[data-empty]");
 const itemsEl = document.querySelector("[data-items]");
@@ -119,7 +118,7 @@ function render() {
   // Les frais de livraison s'ajoutent au paiement (Shopify) ; le récapitulatif les annonce.
   const grand    = payable;
   const hint = document.querySelector("[data-delivery-hint]");
-  if (hint) { hint.textContent = DELIVERY_NOTE; hint.hidden = false; }
+  if (hint) hint.hidden = true;   // le montant est sur la ligne « Livraison en Belgique » (plus de doublon)
 
   document.querySelector("[data-subtotal]").textContent = euro(subtotal);
 

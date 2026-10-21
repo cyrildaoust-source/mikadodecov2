@@ -175,10 +175,13 @@ function buildURL() {
   if (cursor) q.set("cursor", cursor);
   return location.pathname + (q.toString() ? "?" + q : "");
 }
+// Adresse affichée : un popstate sur la même adresse (fermeture du tiroir du menu) ne recharge rien.
+let shownURL = location.pathname + location.search;
 function writeURL(push) {
   const url = buildURL();
   if (push) history.pushState(null, "", url);
   else history.replaceState(null, "", url + location.hash);
+  shownURL = location.pathname + location.search;
 }
 // Conserve le nom existant : les appelants (marque, catégories) veulent un
 // replaceState (changement de filtre = pas de nouvelle entrée d'historique).
@@ -659,6 +662,8 @@ if (paginationEl) {
   });
 }
 window.addEventListener("popstate", () => {
+  if (location.pathname + location.search === shownURL) return;
+  shownURL = location.pathname + location.search;
   const p = new URLSearchParams(location.search);
   const urlCats = (p.get("cats") || "").split(",").map((s) => s.trim()).filter((h) => CAT_HANDLES.has(h)).join(",");
   const urlBrand = p.get("brand") || "";

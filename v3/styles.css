@@ -1775,3 +1775,36 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
   .nlp__box--done .nlp__pic { display: none; }
   .nlp__box--done .nlp__body { padding: 36px 22px calc(36px + env(safe-area-inset-bottom)); align-items: center; text-align: center; }
 }
+
+/* ═══ TÉLÉPHONE — audit mobile du 21 octobre 2026 ═══
+   Champs à 16 px (sinon iOS zoome à la saisie) ; zones tactiles de 44 px sans changer le dessin
+   (::after invisible ou hauteur minimale) ; titres sur image lisibles ; carte et paysage. */
+@media (max-width: 760px) {
+  input:not([type=checkbox]):not([type=radio]), textarea, select, .fselect, .chips-select, .qty--sm .qty__val { font-size: 16px; }
+  .qty--sm { min-height: 44px; }
+  .qty--sm .qty__btn, .qty--sm .qty__val { width: 44px; min-height: 44px; }
+  .cartd__qbtn { width: 44px; height: 44px; }
+  .cartd__remove { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; margin: -12px -12px 0 0; }
+  .cartd__continue { padding-block: 13px; margin-top: 2px; }
+  .sel-item__remove { min-height: 44px; }
+  .pdp__dot-btn { width: 44px; height: 44px; }
+  .nlp__close { width: 44px; height: 44px; }
+  .plp-page { min-width: 44px; height: 44px; }
+  .catalog-filters__band { min-height: 44px; }
+  .footer li { margin-bottom: 0; }
+  .footer li a { display: inline-flex; align-items: center; min-height: 44px; }
+  .footer__bottom nav a, .breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; margin-block: 0; }
+  .shead a, .designer-card__brands a { position: relative; }
+  .shead a::after, .designer-card__brands a::after { content: ""; position: absolute; inset: -14px -6px; }
+  .designer-card__brands { font-size: 13px; }
+  .pdp__avail { display: block; }
+  .pdp__avail .pcard__dot { margin-right: 6px; vertical-align: middle; }
+  .home-room__n { font-size: 1.25rem; line-height: 1.15; }
+}
+/* Titres sur image : dégradé sombre du bas, lisible même sur une photo claire (bandeaux et pièces de l'accueil). */
+.home-band__scrim { background: linear-gradient(0deg, rgba(var(--scrim),.78), rgba(var(--scrim),.38) 55%, rgba(var(--scrim),.12)); }
+.home-room__scrim { background: linear-gradient(0deg, rgba(var(--scrim),.72), rgba(var(--scrim),.18) 65%, transparent); }
+/* Téléphone en paysage : la photo d'accueil occupe l'écran pour que le titre passe sous l'en-tête. */
+@media (orientation: landscape) and (max-height: 500px) { .home-hero { min-height: 100svh; } }
+/* Carte du rendez-vous : contrôle de zoom carré, comme le reste du site. */
+.locate__map .leaflet-bar, .locate__map .leaflet-bar a { border-radius: 0; }
