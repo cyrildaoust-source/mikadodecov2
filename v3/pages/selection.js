@@ -147,7 +147,7 @@ function render() {
     }
   }
 
-  document.querySelector("[data-total-label]").textContent = "Total";
+  document.querySelector("[data-total-label]").textContent = "Total hors livraison";   // la livraison (50 € en Belgique) ou le retrait se choisit au paiement
   document.querySelector("[data-total]").textContent = euro(grand);
 
   const etaEl = document.querySelector("[data-cart-eta]");

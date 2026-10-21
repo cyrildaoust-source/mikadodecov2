@@ -26,7 +26,7 @@ const { brandBanner, canRenderInitialGrid, contentPageTrail, injectNavigation, l
 const { absUrl, ogCache, ogDesc, ogEscape, renderWithOg, temporaryUnavailable } = require('../lib/render/og');
 const { activeDesignerSlugs, designerHeroSsr, injectBrandsIndex, injectDesignersIndex, injectHomeRails, injectNuancier, pdpReady, pdpServed, pdpSsrBlock, sendScopeCatalog, sendSearchPage } = require('../lib/render/pages');
 const { homeGiftsHTML } = require('../lib/render/gifts');
-const { collectionProductsFor, getCollectionProducts, getCollections, getHomeRails, getProductByHandle, getProductsPage } = require('../lib/services/catalog');
+const { collectionProductsFor, getActiveBrands, getCollectionProducts, getCollections, getHomeRails, getProductByHandle, getProductsPage } = require('../lib/services/catalog');
 
 // ─── SEO · 301 /products/<handle> → /produit.html?handle=<handle> ─────────────
 // Les pages de l'online store Shopify (shop.mikadodeco.be) canonisent vers le domaine
@@ -508,7 +508,7 @@ router.get(/.*/, async (req, res, next) => {
     try { raw = await injectBrandsIndex(raw); } catch (e) { console.warn('[brands-index]', e.message); }
   }
   if (rel === 'designers.html') {
-    try { raw = injectDesignersIndex(raw, await activeDesignerSlugs()); } catch (e) { console.warn('[designers-index]', e.message); }
+    try { raw = injectDesignersIndex(raw, await activeDesignerSlugs(), await getActiveBrands().catch(() => null)); } catch (e) { console.warn('[designers-index]', e.message); }
   }
   if (rel === 'nuancier-fermob.html') {
     try { raw = await injectNuancier(raw); } catch (e) { console.warn('[nuancier]', e.message); }

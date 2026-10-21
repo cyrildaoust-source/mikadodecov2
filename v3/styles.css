@@ -687,7 +687,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .sel-row__savings-amount { font-family: var(--sans-product); font-size: 1rem; font-weight: 500; color: var(--accent-ink); }
 /* "Livraison · Calculée au paiement" — Shopify owns shipping at checkout;
    we no longer commit to a price in the cart récap. */
-.sel-row--delivery-calc > span:last-child { color: var(--muted); font-style: italic; }
+.sel-row--delivery-calc > span:last-child { color: var(--muted); text-align: right; }
 
 .sel-eta { font-size: var(--fs-small); color: var(--ink-deep); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); line-height: 1.5; }
 .sel-eta strong { font-weight: 600; }
@@ -755,7 +755,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
    desktop (which keeps .pdp__main + .pdp__thumbs). */
 .pdp__rail { display: none; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .pdp__rail::-webkit-scrollbar { display: none; }
-.pdp__rail-img { flex: 0 0 100%; width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; scroll-snap-align: center; cursor: zoom-in; }
+.pdp__rail-img { flex: 0 0 100%; width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--tile); scroll-snap-align: center; cursor: zoom-in; }
 .pdp__dots { display: none; justify-content: center; gap: 10px; margin-top: 12px; }
 .pdp__dot-btn { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; }
 .pdp__dot-btn::before { content: ""; width: 8px; height: 8px; background: var(--line); transition: background .2s var(--ease); }
@@ -1817,3 +1817,10 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 /* Carte du rendez-vous : contrôle de zoom carré, comme le reste du site. */
 .locate__map .leaflet-bar, .locate__map .leaflet-bar a { border-radius: 0; }
 @media (max-width: 760px) { .catalog-filters__heading + .catalog-filters { border-bottom: 0; padding-bottom: 6px; } }
+/* Page Marques sur téléphone : cartes moins hautes, logos à taille constante (36 cartes = moins de défilement à vide). */
+@media (max-width: 760px) {
+  .brandcard { min-height: 128px; padding: 16px; }
+  .brandcard__logo { height: 26px; max-width: 85%; }
+  .brandcard__logo[src*="/airborne."], .brandcard__logo[src*="compagnie-de-provence.svg"], .brandcard__logo[src*="/esteban."], .brandcard__logo[src*="/artek."], .brandcard__logo[src*="blomus.svg"], .brandcard__logo[src*="fatboy.svg"], .brandcard__logo[src*="fermob.svg"], .brandcard__logo[src*="hkliving.svg"], .brandcard__logo[src*="moustache.svg"], .brandcard__logo[src*="vitra.svg"], .brandcard__logo[src*="ferm-living.svg"], .brandcard__logo[src*="stoff-nagel.svg"], .brandcard__logo[src*="string-furniture.svg"], .brandcard__logo[src*="ichendorf-milano.svg"], .brandcard__logo[src*="/hoptimist."], .brandcard__logo[src*="/addison-ross."], .brandcard__logo[src*="/softline."] { height: 34px; }
+  .brandcard__name { font-size: 1.25rem; }
+}
