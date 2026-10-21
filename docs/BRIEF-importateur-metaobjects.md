@@ -1,5 +1,7 @@
 # Brief importateur — contenu éditorial dans Shopify (metaobjects)
 
+> **État au 21 octobre 2026 : parqué** depuis le 8 octobre (plan d'architecture, § 0). Rien n'a été créé côté Shopify ni côté site.
+
 Date : 7 octobre 2026 · Phase 4.3 du plan d'architecture · Pour : l'importateur Shopify · De : le code du site · Référence : `docs/DATA-CONTRACT.md`.
 
 ## Pourquoi

@@ -1,6 +1,6 @@
 # Pages familles et données du catalogue
 
-État du 15 septembre 2026. Les deux dépôts restent séparés : le site gère la présentation ; l’importer prépare et valide les données qui alimentent Shopify.
+État du 15 septembre 2026, mis à jour le 21 octobre 2026 (icônes, sélections, nombre de bandeaux). Les deux dépôts restent séparés : le site gère la présentation ; l’importer prépare et valide les données qui alimentent Shopify.
 
 ## Pages concernées
 
@@ -30,7 +30,7 @@ Le catalogue général (`/produits.html`) reprend depuis le 16 septembre la comp
 
 Recette du 16 septembre : preview contrôlée à 1626 px puis à 390 px de large ; sept images chargées, rail à la souris et au clavier, accès au catalogue sans titre caché, filtre Chaises, tri par prix et retour depuis la fiche Dapple vers la page 2 vérifiés. Le menu reconnaît désormais les bandeaux `.fam-hero` ; l’ancre de la grille tient compte de la hauteur réelle du menu et des filtres. Les 44 tests des quatre suites passent.
 
-La seconde itération, demandée par le propriétaire, ajoute quatre modèles fixes de quatre marques : CH24 Wishbone (Carl Hansen & Søn), Flowerpot VP9 (&Tradition), Noguchi Dining (Vitra) et Tabouret 60 (Artek). Les fiches viennent de Shopify et utilisent les mêmes cartes serveur et navigateur que le catalogue. Les sources éditoriales sont conservées dans `icons.sources`, sans ajout de tags Shopify. Un produit absent est omis ; une panne laisse les autres modèles et le catalogue disponibles sans mettre cette réponse en cache.
+La seconde itération, demandée par le propriétaire, ajoute quatre modèles fixes (`data/catalog-landing.json`, version du 20 octobre 2026) : Flowerpot VP9 (&Tradition), table basse Noguchi (Vitra), Tabouret 60 (Artek) et bougeoir Nagel (Stoff Nagel). Les fiches viennent de Shopify et utilisent les mêmes cartes serveur et navigateur que le catalogue. Les sources éditoriales sont conservées dans `icons.sources`, sans ajout de tags Shopify. Un produit absent est omis ; une panne laisse les autres modèles et le catalogue disponibles sans mettre cette réponse en cache.
 
 La rangée « Trouvez votre prochaine pièce » ouvre dix sous-catégories réelles du méga menu. Ses photos sont distinctes du bandeau et des sept catégories parentes ; leur produit source et leur cadrage sont enregistrés. La rubrique d’icônes et cette rangée se masquent dans une sélection filtrée par catégorie ou matière, et à partir de la page 2. Cela conserve des résultats pertinents pendant l’achat ; les sept accès aux familles restent disponibles en première page. Le retour d’une fiche garde la sélection et sa position. La pagination numérotée de tous les catalogues attend la fin du parcours des lots : un emplacement stable affiche « Chargement des pages… », puis les numéros définitifs. Une panne conserve les produits reçus et propose une nouvelle tentative sans annoncer de total partiel. La page demandée n’est bornée qu’après un chargement complet. Les filtres existants sont conservés pour leur prochaine refonte.
 
@@ -52,7 +52,7 @@ Le lien de marque sur chaque fiche produit conserve aussi la catégorie d’arri
 
 ## Photos des familles et sous-catégories
 
-`data/collection-heroes.json` définit les 39 bandeaux des sous-catégories du méga menu. Chaque entrée référence une photographie de galerie produit, son `sourceProduct`, un texte alternatif, ses dimensions et son point de cadrage (`position`, `mobilePosition`). Les fichiers identifiés comme générés et les schémas techniques sont exclus de cette sélection. Une photo de produit en situation peut illustrer une catégorie sans modifier son classement Shopify.
+`data/collection-heroes.json` définit les 43 bandeaux des sous-catégories et sélections du méga menu. Chaque entrée référence une photographie de galerie produit, son `sourceProduct`, un texte alternatif, ses dimensions et son point de cadrage (`position`, `mobilePosition`). Les fichiers identifiés comme générés et les schémas techniques sont exclus de cette sélection. Une photo de produit en situation peut illustrer une catégorie sans modifier son classement Shopify.
 
 `lib/editorial-media.js` aligne le bandeau visible, son chargement prioritaire, sa version sans JavaScript et son image de partage. Les tailles responsive restent limitées à la largeur disponible du fichier ; demander `width=2000` au CDN ne crée pas une source haute résolution.
 
@@ -86,9 +86,9 @@ Pour remplacer une photo : choisir une vraie scène de la galerie, contrôler so
 
 La rubrique est désactivée pour Arts de la table : aucun bloc ni appel API d’icônes n’y est généré.
 
-Sur Assises uniquement, « Les chaises iconiques » se place après les catégories. `data/seating-icons.json` contient quatre modèles fixes : Panton, CH24 Wishbone, Standard et Rey Chair de HAY. Les fiches sont rendues côté serveur avec les mêmes cartes produits que le catalogue, puis hydratées dans le même ordre. Une fiche dépubliée ou en panne laisse les autres disponibles. Aucun mélange, aucun roulement automatique ; la barre horizontale est masquée et le défilement reste disponible si l’écran l’exige.
+Sur Assises uniquement, « Les chaises iconiques » se place après les catégories. `data/seating-icons.json` contient les modèles fixes : Panton, Standard et Rey Chair de HAY (la CH24 Wishbone est partie avec Carl Hansen & Søn ; remplaçante à choisir par Cyril). Les fiches sont rendues côté serveur avec les mêmes cartes produits que le catalogue, puis hydratées dans le même ordre. Une fiche dépubliée ou en panne laisse les autres disponibles. Aucun mélange, aucun roulement automatique ; la barre horizontale est masquée et le défilement reste disponible si l’écran l’exige.
 
-Sur Tables, « Notre sélection de tables » utilise quatre handles explicites dans `data/family-pages.json` : Noguchi Dining, Drop Leaf HM6, Kaari REB004 et CH006. Cette proposition éditoriale peut être remplacée par les favoris du propriétaire. Elle ne prétend pas refléter les meilleures ventes. Seules des fiches de type table sans classement outdoor sont affichées. Les photos, prix et boutons gardent le composant standard.
+Sur Tables, « Notre sélection de tables » utilise des handles explicites dans `data/family-pages.json` : Noguchi Dining, Drop Leaf HM6 et Kaari REB004 (la CH006 de Carl Hansen & Søn a été retirée ; remplaçante à choisir par Cyril). Cette proposition éditoriale peut être remplacée par les favoris du propriétaire. Elle ne prétend pas refléter les meilleures ventes. Seules des fiches de type table sans classement outdoor sont affichées. Les photos, prix et boutons gardent le composant standard.
 
 Pour les autres familles, les tags `icone` et `icone-design` servent à une sélection éditoriale au sein de chaque collection. Une meilleure vente, une nouveauté, la notoriété d’une marque ou un mot trouvé sur le site fournisseur ne suffisent pas à attribuer ces tags. Une rubrique sans sélection reste masquée. Toutes les sélections utilisent le composant `productCard` et son agencement standard, même pour un ou deux produits : photo carrée au-dessus, marque, nom, disponibilité, prix puis bouton. Aucune variante horizontale ne déplace les éléments.
 
@@ -123,7 +123,7 @@ Avant de publier un lot : comparer le type fonctionnel du produit aux collection
 1. **Identité et URLs** : conserver les handles des produits et collections déjà publiés. Si un changement est indispensable, prévoir les redirections et mettre à jour menu et configuration des familles ensemble.
 2. **Images** : maintenir les médias déjà utilisés par les pages, ou fournir leur remplacement avant suppression. Vérifier visuellement les rôles packshot, ambiance et détail ; une image de variante n’est pas automatiquement une photo d’ambiance. La provenance des images de catégories est documentée dans la configuration du site.
 3. **Quantité vendue et variantes** : qualifier les unités/sets, options et prix avant envoi. Un prix fournisseur ne prouve pas à lui seul ce qui est vendu sur la fiche.
-4. **Informations techniques** : tout nouveau nom de metafield ou nouveau format doit être vérifié dans l’importer puis dans le mapping de `server.js` et le rendu de la fiche produit. Publier un champ ne garantit pas que le site le lise.
+4. **Informations techniques** : tout nouveau nom de metafield ou nouveau format doit être vérifié dans l’importer puis dans le mapping de `lib/shopify/product-mapper.js` et le rendu de la fiche produit (`v3/pdp-view.mjs`). Publier un champ ne garantit pas que le site le lise.
 5. **Disponibilité et délais** : préserver les données gérées manuellement et contrôler le libellé affiché sur les cartes et les fiches après import.
 6. **Validation** : produire un différentiel avant/après, un petit lot représentatif et une vérification sur le site avant d’élargir le lot. Inclure un produit à variantes, un article vendu en set, un prix avec centimes et un produit avec données techniques.
 

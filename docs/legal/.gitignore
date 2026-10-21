@@ -1,5 +1,5 @@
 # Documents internes / brouillons de travail — ne JAMAIS versionner ni publier.
-# Seules les 5 sources .md servant de base à `npm run build:legal` sont suivies.
+# Seules les sources .md rendues par le serveur (lib/render/legal.js, ADR 0013) sont suivies.
 00-NOTES-avocate-et-cyril.md
 PROMPT-codeur-pages-legales.md
 *.docx

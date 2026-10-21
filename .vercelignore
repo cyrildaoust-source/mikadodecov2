@@ -4,3 +4,5 @@
 .claude
 .gstack
 node_modules
+docs/archive
+docs/audits
