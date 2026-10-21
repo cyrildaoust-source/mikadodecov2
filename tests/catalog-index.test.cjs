@@ -225,7 +225,7 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   assert.match(html,/<title>Idées cadeaux design · Mikado Deco<\/title>/);
   assert.match(html,/<link rel="canonical" href="https:\/\/www.mikadodeco.be\/collections\/idees-cadeaux"/);
   assert.match(html,/class="home-rc gift-band" href="\/collections\/idees-cadeaux\?max=50#grille" data-chair-link data-gift-band="\|50"><img class="home-rc__img editorial-photo"/,'tranche = carte photo');
-  assert.match(html,/De 100 à 200 €<\/span><span class="home-rc__count">7 pièces/);
+  assert.match(html,/De 100 à 200&nbsp;€<\/span><span class="home-rc__count">7 pièces/);
   assert.match(html,/data-gift-cat="cadeaux-enfants"/);assert.match(html,/data-gift-cat="cadeaux-belle-maman"/);assert.match(html,/>Pour qui<\/h2>/);
   assert.match(html,/class="catalog-filters__band" href="\/collections\/idees-cadeaux\?max=50#grille" data-chair-link>Moins de 50 €/,'tranches aussi dans le filtre Prix');
   assert.doesNotMatch(html,/data-gift-cat="cadeaux-collegue"|data-gift-cat="cadeaux-animaux"|data-gift-cat="cadeaux-hote"|data-gift-cat="cadeaux-cuisine"|data-gift-cat="cadeaux-lecture"/,'une rubrique sans fiche n’est pas montrée');
@@ -257,7 +257,7 @@ test('saison de Noël (ADR 0016) : repère éteint, bandeau de l’accueil, navi
     assert.match(html,/<a class="drawer__link" href="\/collections\/idees-cadeaux">Idées cadeaux<\/a><a class="drawer__link drawer__link--promo"/,'tiroir mobile aussi');
     assert.match(html,/data-gift-cat="cadeaux-hote"|Pour l'hôte du réveillon/,'la rubrique de saison est visible en saison');
     const home=await page('/');
-    assert.match(home.html,/class="section wrap home-gifts"/);assert.match(home.html,/class="home-rc gift-band" href="\/collections\/idees-cadeaux\?max=50#grille"><img class="home-rc__img editorial-photo"[^>]*><span class="home-rc__scrim" aria-hidden="true"><\/span><span class="home-rc__n">Moins de 50 €/,'cases photo par budget, pas de boutons sur une photo (Cyril, 21 octobre 2026)');
+    assert.match(home.html,/class="section wrap home-gifts"/);assert.match(home.html,/class="home-rc gift-band" href="\/collections\/idees-cadeaux\?max=50#grille"><img class="home-rc__img editorial-photo"[^>]*><span class="home-rc__scrim" aria-hidden="true"><\/span><span class="home-rc__n">Moins de 50&nbsp;€/,'cases photo par budget, pas de boutons sur une photo (Cyril, 21 octobre 2026)');
     assert.doesNotMatch(home.html,/class="home-band" href="\/collections\/moustache"|MARQUE-DU-MOMENT/,'un seul bandeau : la marque du moment s’efface derrière Idées cadeaux (Cyril, 20 octobre 2026)');
     assert.doesNotMatch(home.html,/feature--rev|journal-patine|Imparfait, et parfait ainsi/,'plus de bloc journal sur l’accueil (Cyril, 20 octobre 2026)');
     assert.doesNotMatch(home.html,/[Ee]mballage cadeau|emballage offert|Idées cadeaux pour tous les budgets/,'ni message de saison dans la barre d’annonce, ni emballage cadeau (Cyril, 20 octobre 2026)');
