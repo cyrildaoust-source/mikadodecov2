@@ -1,0 +1,542 @@
+[
+ {
+  "slug": "uncharted",
+  "name": "Uncharted",
+  "sortKey": "Uncharted",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Uncharted est un collectif français fondé par Stéphanie Cohen, Julien Cohen et Raphael Navot, qui réunit design, cuisine et entrepreneuriat. Stéphanie Cohen est directrice de création, spécialisée dans le stylisme culinaire et la sélection de produits ; Julien Cohen est restaurateur, engagé dans une restauration durable. Raphael Navot est designer ; il mêle savoir-faire artisanal et design contemporain et a été nommé Designer de l'année Maison&Objet en 2023. Né du besoin d'une vaisselle adaptée à leurs projets de restauration, le collectif signe avec Serax sa première collection d'art de la table, Out of Lines, qui comprend vaisselle, verrerie, plateaux, couverts de service et bougeoirs.",
+  "bioSources": [
+   "https://serax.com/pages/uncharted"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/uncharted.jpg",
+   "sourcePage": "https://serax.com/pages/uncharted",
+   "imageUrl": "https://serax.com/cdn/shop/files/Uncharted.jpg?v=1732025021",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc des trois membres (Raphael Navot, Julien Cohen debout ; Stéphanie Cohen assise), publié par Serax sur la page du collectif. Format 4:5 natif, visages nets."
+  },
+  "photoMissingReason": null,
+  "remarks": "Collectif de trois personnes : sortKey = nom du collectif. La page Serax écrit « Stephanie » et « Raphael » sans accent dans le texte, mais « Stéphanie » dans l'aperçu de son article de blog ; « Stéphanie » retenu."
+ },
+ {
+  "slug": "tomorrowland",
+  "name": "Tomorrowland",
+  "sortKey": null,
+  "brands": [
+   "Serax"
+  ],
+  "bio": null,
+  "bioSources": [
+   "https://serax.com/pages/tomorrowland"
+  ],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Pas un créateur : aucun portrait à chercher. La page Serax ne montre que le logo du festival.",
+  "remarks": "Tomorrowland : festival de musique électronique de Boom (Belgique), collaboration de marque avec Serax pour la collection Unity (vaisselle et verrerie). Aucune créatrice ni aucun créateur nommé sur la page Serax. Sur la fiche, présenter plutôt les pièces comme « collection Unity, Tomorrowland pour Serax ».",
+  "notCreator": true
+ },
+ {
+  "slug": "shurleey",
+  "name": "Shurleey",
+  "sortKey": "Shurleey",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Shurleey est le nom d'artiste de Shirley Villavicencio Pizango, peintre belgo-péruvienne représentée par la galerie Sofie Van de Velde à Anvers. Elle peint surtout des portraits de proches et de connaissances, aux contours noirs appuyés, à la perspective libre et aux grands aplats de couleur. Avec Serax, elle transpose en céramique peinte à la main les poteries qui figurent dans ses tableaux : la collection Santiago de Borja, qui réunit une série de vases et une vaisselle colorée, dont les assiettes Dinner numérotées et titrées vendues par Mikado.",
+  "bioSources": [
+   "https://serax.com/pages/shurleey"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/shurleey.jpg",
+   "sourcePage": "https://serax.com/pages/shurleey",
+   "imageUrl": "https://serax.com/cdn/shop/files/Shurleey_4x5_ecom_gray.jpg?v=1756985171",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax : l'artiste en pied dans son atelier, tenant un vase peint au-dessus de sa tête ; visage net mais assez petit dans le cadre. Format 4:5 natif ; un recadrage serré sur le buste (visage vers x 1450-1800, y 1350-1700 px) reste très net. La série d'atelier publiée sur la même page est créditée à Elias Derboven, sans certitude pour cette image."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nom d'artiste conservé tel quel ; sortKey « Shurleey » (pseudonyme). Nom civil : Shirley Villavicencio Pizango."
+ },
+ {
+  "slug": "rene-barba",
+  "name": "René Barba",
+  "sortKey": "Barba",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "René Barba est un artiste et designer cubano-américain installé à Paris, qui se définit comme « sculpteur industriel ». Formé à l'art et au design industriel à l'École nationale supérieure des arts décoratifs de Paris, il commence par dessiner des meubles et des objets ; ses premières « sculptures fonctionnelles » sont présentées à Miami en 1988. Établi à Paris au début des années 1990, il expose aussi peintures et sculptures en bronze, céramique et bois. Pour Serax, il dessine des objets aux lignes épurées, notamment des vases, des luminaires et le fauteuil lounge Capizzi.",
+  "bioSources": [
+   "https://www.renebarba.com/bio/",
+   "https://web.archive.org/web/20191113064504/https://www.serax.com/en/rene-barba"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/rene-barba.jpg",
+   "sourcePage": "https://www.renebarba.com/bio/",
+   "imageUrl": "https://www.renebarba.com/wp-content/uploads/2023/03/rene-barba.jpg",
+   "credit": null,
+   "width": 1701,
+   "height": 1701,
+   "notes": "Portrait noir et blanc publié sur le site officiel : l'artiste assis dans son atelier, modelant une sculpture. Format carré ; recadrage 4:5 (≈1360 × 1701) centré sur lui possible, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "L'ancienne page Serax (archive 2019 de serax.com) est la seule source éditeur ; elle cite vases Antes, lampe, pied lumineux et fauteuil Capizzi, pas les pièces vendues par Mikado (Boule pour bougie, Vase Chaîne, Vase Mini, Solifleur Rectangle), que je n'ai pas pu vérifier. Année de naissance (1965, La Havane) non reprise : seulement sur des revendeurs."
+ },
+ {
+  "slug": "gerd-couckhuyt",
+  "name": "Gerd Couckhuyt",
+  "sortKey": "Couckhuyt",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Gerd Couckhuyt est un designer belge, installé à Courtrai, qui a ouvert en 2012 son propre studio, Bhoom, consacré au design de produits, d'intérieurs et au graphisme. Venu tard au design, il a commencé très jeune chez Bekaert Engineering, d'abord comme mécanicien puis comme électricien ; cette formation technique nourrit son approche de la forme. Il dessine des meubles et des objets à l'identité marquée, notamment pour BuzziSpace. Pour Serax, il signe Bond, une vaisselle qui va de la tasse à espresso aux assiettes plates, creuses et à dessert.",
+  "bioSources": [
+   "https://www.buzzi.space/designers/gerd-couckhuyt",
+   "http://bhoom.be/",
+   "https://web.archive.org/web/20170926023748/http://www.serax.com/en/gerd-couckhuyt",
+   "https://web.archive.org/web/20220818080049/https://www.serax.com/en/collection/bond-by-gerd-couckhuyt"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/gerd-couckhuyt.jpg",
+   "sourcePage": "https://www.buzzi.space/designers/gerd-couckhuyt",
+   "imageUrl": "https://www.buzzi.space/api/dato-asset/www.datocms-assets.com/88108/1680267033/gerd.jpeg",
+   "credit": null,
+   "width": 3456,
+   "height": 2831,
+   "notes": "Portrait couleur publié par l'éditeur BuzziSpace sur la page du designer : buste, tête tournée vers le haut, fond gris. Format paysage ; recadrage 4:5 (≈2265 × 2831) possible en gardant le visage (vers x 700-1800 px), net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Serax ne publie plus de page à son nom ; les pages Serax citées sont des archives (web.archive.org) de serax.com."
+ },
+ {
+  "slug": "pj-mares",
+  "name": "PJ Mares",
+  "sortKey": "PJ Mares",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "PJ Mares est une maison de design bruxelloise fondée par Tom Mares, né en 1983, rejoint par Peter-Jan Scherpereel ; le studio a pris ce nom en 2014. Tom Mares a étudié l'architecture d'intérieur à Gand et à Sint-Lukas Bruxelles, puis le design de mobilier à Malines, et a créé en 2007 le studio We Are No Design. PJ Mares conçoit sa propre collection de meubles, de cuisines et d'objets dans des matériaux qui vieillissent bien, comme le bois, l'acier, le marbre et le cuir. Pour Serax, le duo a dessiné la gamme Sanba, avec table, chaise et étagères murales Butterfly, ainsi que le portemanteau Oona.",
+  "bioSources": [
+   "https://pjmares.be/who-we-are",
+   "https://web.archive.org/web/20191117015142/https://www.serax.com/en/pj-mares"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait exploitable sur pjmares.be (pages who-we-are, press, downloads : seulement produits et cuisines). Serax a publié un portrait du duo, mais seulement dans d'anciennes versions de son site archivées : 1297 × 700 px, deux personnes regardant vers le haut, impossible à recadrer en 4:5 sans couper l'un des deux (https://web.archive.org/web/2023im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_PJMares_designer_1297x700.jpeg).",
+  "remarks": "Duo : sortKey « PJ Mares ». La marque s'écrit « PJMARES » sur son site et « PJ MARES » chez Serax ; « PJ Mares » conservé. Fondation : le site parle de Studio Showroom (2012), devenu PJMARES en 2014."
+ },
+ {
+  "slug": "morris-marigo",
+  "name": "Morris Marigo",
+  "sortKey": "Marigo",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Morris Marigo a grandi en Italie dans une famille de fleuristes et a poursuivi dans ce métier. Attiré par les nouveaux matériaux et les textures, il s'en sert pour développer de nouvelles formes, avec le même soin pour une grande création que pour une petite composition. Pour Serax, il a dessiné les collections Display, dont un portant et une étagère à plantes.",
+  "bioSources": [
+   "https://serax.com/pages/morris-marigo"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/morris-marigo.jpg",
+   "sourcePage": "https://serax.com/pages/morris-marigo",
+   "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Morris_Marigo.jpg?v=1684505960",
+   "credit": null,
+   "width": 3237,
+   "height": 4000,
+   "notes": "Portrait noir et blanc serré publié par Serax, visage net, lunettes. Proche du 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "La page Serax écrit « Marrigo » dans le texte et « Marigo » dans le titre et les URL ; « Marigo » conservé. Les pièces Magnetic (vase Bubblebubble, lampe Spot) vendues par Mikado ne sont pas citées par Serax sous son nom : non vérifiées. Sources minces, pas de dates."
+ },
+ {
+  "slug": "niels-datema",
+  "name": "Niels Datema",
+  "sortKey": "Datema",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Niels Datema est un designer qui privilégie des formes minimalistes et des lignes simples associées à des matériaux affirmés. Il travaille pour la gastronomie et cherche à mettre en valeur la présentation des plats. Pour Serax, il a créé Copper Chemistry, une verrerie associant verre et cuivre qui comprend une carafe et des verres.",
+  "bioSources": [
+   "https://serax.com/pages/niels-datema"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/niels-datema.jpg",
+   "sourcePage": "https://serax.com/pages/niels-datema",
+   "imageUrl": "https://serax.com/cdn/shop/files/Niels_Datema.jpg?v=1684158552",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax, buste, visage net, fond de verdure. Format 4:5 natif."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité et formation non publiées par Serax. Le bocal à épices et le plateau Vinyl Ovale vendus par Mikado ne sont pas attribués à Niels Datema sur le site Serax actuel : non vérifiés."
+ },
+ {
+  "slug": "carlo-van-poucke",
+  "name": "Carlo Van Poucke",
+  "sortKey": "Van Poucke",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Carlo Van Poucke est un céramiste belge, qui enseigne la céramique à la WAK, l'académie Westhoek de Koksijde. Pour lui, travailler l'argile repose sur le jeu entre quatre éléments, l'eau, la terre, l'air et le feu, qui sert de base à ses recherches et expériences. Pour Serax, il a dessiné Lens, une vaisselle comprenant assiettes, assiettes creuses et bols.",
+  "bioSources": [
+   "https://web.archive.org/web/20190722000410/https://www.serax.com/en/carlo-van-poucke",
+   "https://web.archive.org/web/20230120130831/https://www.serax.com/en/designer/carlovanpoucke",
+   "https://www.westhoekacademie.be/sites/default/files/2020-10/wak_ontwerpschetsen_frofiel.pdf"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/carlo-van-poucke.jpg",
+   "sourcePage": "https://web.archive.org/web/20230120130831/https://www.serax.com/en/designer/carlovanpoucke",
+   "imageUrl": "https://web.archive.org/web/2023im_/https://www.serax.com/media/designers/Designer_carlo_van_poucke_1297x700.jpg",
+   "credit": null,
+   "width": 1892,
+   "height": 1021,
+   "notes": "Portrait noir et blanc publié par Serax sur son ancienne page designer, récupéré via l'archive web.archive.org (Serax ne publie plus de page à son nom). Bandeau paysage : visage de face, net, au centre ; recadrage 4:5 ≈ 817 × 1021 possible (visage vers x 600-1300 px)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Sources éditeur uniquement archivées (serax.com 2019 et 2023 via web.archive.org) : à valider. L'enseignement à la WAK est déduit d'un support de cours publié par l'académie à son nom ; la formation à Gand (Sint-Lucas) n'apparaît que chez des revendeurs et a été omise."
+ },
+ {
+  "slug": "charles-kaisin",
+  "name": "Charles Kaisin",
+  "sortKey": "Kaisin",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Charles Kaisin est un architecte et designer belge. Diplômé en architecture à Bruxelles, il a fait des stages chez Jean Nouvel à Paris et chez Tony Cragg en Allemagne, étudié le pliage à l'université des arts de Kyoto en 2000, puis est sorti en 2001 de la classe de Ron Arad au Royal College of Art de Londres. Son travail, tourné vers le recyclage, la géométrie et le mouvement, couvre le design d'objets, l'architecture et la scénographie, notamment ses « dîners surréalistes ». Il a collaboré avec Hermès, Cartier, Delvaux ou Val-Saint-Lambert. Pour Serax, il a créé avec le chef David Martin la vaisselle modulaire S.Pellegrino, ainsi que la collection Nero.",
+  "bioSources": [
+   "https://www.surrealistdinner.com/biography",
+   "https://www.surrealistdinner.com/san-pellegrino",
+   "https://web.archive.org/web/20191117023001/https://www.serax.com/en/charles-kaisin",
+   "https://web.archive.org/web/20220818080049/https://www.serax.com/en/collection/bond-by-gerd-couckhuyt"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/charles-kaisin.jpg",
+   "sourcePage": "https://www.surrealistdinner.com/biography",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/5c57ee53fd67934e24b9df1e/1549619519366-W38GXGBGT4T9B4LHAS8S/IMG_2936.jpg?format=2500w",
+   "credit": null,
+   "width": 2500,
+   "height": 1693,
+   "notes": "Portrait couleur publié sur le site officiel (surrealistdinner.com, vers lequel redirige charleskaisin.com) : en pied devant un mur gris, visage net mais petit. Format paysage ; un recadrage 4:5 serré sur le buste (≈ 900 × 1125 px, visage vers x 1220-1310, y 330-420 px) reste exploitable."
+  },
+  "photoMissingReason": null,
+  "remarks": "La collection Nero n'apparaît que dans le menu de l'ancien site Serax (archive 2022, « Nero - Charles Kaisin ») ; la carafe Nero vendue par Mikado y correspond probablement. Le site officiel du designer est publié sous le domaine surrealistdinner.com."
+ },
+ {
+  "slug": "moniek-vanden-berghe",
+  "name": "Moniek Vanden Berghe",
+  "sortKey": "Vanden Berghe",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Moniek Vanden Berghe est une artiste florale belge, née le 7 mars 1954 à Waarschoot. Formée comme fleuriste à l'IMOV de Gand, elle exerce sous le nom de Cleome et donne cours et démonstrations dans de nombreux pays, du Japon aux États-Unis. Inspirée par la nature, elle conçoit pour Serax des contenants et supports destinés à mettre en valeur fleurs et branchages : pots en terre cuite, présentoirs en bois, métal ou verre, formes en verre. Ses collections Recycle et Recircled transforment des matériaux de rebut comme le carton ou le caoutchouc de pneus de vélo recyclés en vases.",
+  "bioSources": [
+   "http://www.cleome.be/wp/moniek",
+   "https://www.cleome.be/wp/ontwerpen",
+   "https://web.archive.org/web/20180203044221/http://serax.com/en/moniek-vanden-berghe"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Le site officiel cleome.be ne publie qu'une vignette de 166 × 250 px. Serax ne la présente plus sur son site actuel ; l'ancienne page (archive 2023) montre un portrait en bandeau 1297 × 700 px, recadrable en 4:5 seulement à ≈ 560 × 700 px, sous le minimum de 600 px de large (https://web.archive.org/web/2023im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_Moniekvandenberge__designer_1297x700.jpeg).",
+  "remarks": "Les pièces vendues par Mikado (tableau noir, cœur en fer, vases Board et Pacman) ne sont pas décrites individuellement par les sources ouvertes. Portrait Serax archivé de qualité limite, à valider par le propriétaire si un portrait est préféré à l'absence."
+ },
+ {
+  "slug": "roger-van-damme",
+  "name": "Roger van Damme",
+  "sortKey": "Van Damme",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Roger van Damme est un chef pâtissier néerlandais, né à Sluis, qui s'installe à Anvers au début des années 1990 et y ouvre son restaurant Het Gebaar. Ses desserts et ses passages à la télévision le font connaître en Belgique, et il obtient en 2010 une étoile Michelin pour l'ensemble de l'expérience de son restaurant. Il reprend ensuite la maison anversoise Désirée de Lille, pour laquelle il dessine avec Serax la vaisselle Désirée, blanche teintée de rose et bordée d'or. Het Gebaar a fermé le 30 juin 2025 ; il se consacre depuis à l'Atelier Roger van Damme, qui propose ateliers et démonstrations culinaires.",
+  "bioSources": [
+   "https://www.atelierrogervandamme.be/",
+   "https://hetgebaar.be/",
+   "https://web.archive.org/web/20230120130826/https://www.serax.com/en/designer/rogervandamme",
+   "https://web.archive.org/web/20220517152305/https://www.serax.com/en/collection/desiree-by-roger-van-damme"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/roger-van-damme.jpg",
+   "sourcePage": "https://www.atelierrogervandamme.be/",
+   "imageUrl": "https://www.atelierrogervandamme.be/wp-content/uploads/2025/09/490537687_17910995460100226_5168415726839491289_n.jpg",
+   "credit": null,
+   "width": 1080,
+   "height": 1350,
+   "notes": "Portrait couleur publié sur le site officiel Atelier Roger van Damme : en veste de chef, bras croisés, visage net. Format 4:5 natif. Le nom de fichier suggère une image reprise d'Instagram, mais elle est publiée par le chef sur son propre site."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nom corrigé en « Roger van Damme » (particule en minuscule), graphie de son site officiel et de Serax ; le slug reste inchangé. Le domaine rogervandamme.be appartient à un homonyme (vente de dumpers) et n'a pas été utilisé. Serax ne publie plus de page à son nom : sources Serax archivées."
+ },
+ {
+  "slug": "martine-keirsebilck",
+  "name": "Martine Keirsebilck",
+  "sortKey": "Keirsebilck",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Martine Keirsebilck est une céramiste belge qui dirige à Oostkamp le Studio Martine Keirsebilck, consacré à la céramique utilitaire faite main ; tout y est produit à l'atelier, en séries propres ou sur mesure. Le studio porte le label Handmade in Belgium depuis 2014. C'est sa passion pour l'argile, matière souple et malléable, qui a inspiré sa première collection pour Serax, Dusk, une vaisselle d'assiettes, de bols et de tasses.",
+  "bioSources": [
+   "https://www.handmadeinbelgium.com/labelhouder/studio-martine-keirsebilck",
+   "https://web.archive.org/web/20191113071518/https://www.serax.com/en/martine-keirsebilck"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Pas de site officiel actif (l'ancienne galerie martinekeirsebilck.smugmug.com renvoie une page introuvable). Serax ne la présente plus sur son site actuel ; l'ancienne page (archive 2023) montre un portrait en bandeau 1297 × 700 px, recadrable en 4:5 seulement à ≈ 560 × 700 px, sous le minimum de 600 px (https://web.archive.org/web/2023im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_MartineKeirsebilck_designer_1297x700.jpg).",
+  "remarks": "Source éditeur seulement archivée. Le label Handmade in Belgium est une initiative de l'organisation Unizo (source institutionnelle de complément). Portrait Serax archivé de qualité limite, à valider."
+ },
+ {
+  "slug": "merci",
+  "name": "Merci",
+  "sortKey": null,
+  "brands": [
+   "Serax"
+  ],
+  "bio": null,
+  "bioSources": [
+   "https://serax.com/pages/merci"
+  ],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Pas un créateur : la page Serax ne montre que le logo Merci.",
+  "remarks": "Merci : concept store du Haut-Marais à Paris, collaboration de marque avec Serax (collection La Nouvelle Table, vaisselle et verrerie, inspirée de l'American Modern de Russel Wright et du bento japonais). Aucune personne nommée comme créatrice. Les couverts Stonewash Mix et le bol Meal vendus par Mikado ne sont pas vérifiés comme faisant partie de cette collaboration.",
+  "notCreator": true
+ },
+ {
+  "slug": "ellen-cole",
+  "name": "Ellen Cole",
+  "sortKey": "Cole",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Ellen Cole est une fleuriste et photographe installée à Anvers. Elle a découvert la céramique sur le tard et en a tiré spOOn, sa première collection pour Serax : des cuillères en céramique dont le long manche imparfait évoque la tige d'une fleur, déclinées en formes ovale, ronde et angulaire.",
+  "bioSources": [
+   "https://web.archive.org/web/20190721232946/https://www.serax.com/en/ellen-cole",
+   "https://web.archive.org/web/20230120130831/https://www.serax.com/en/designer/ellencole"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Aucun site officiel trouvé (ellencole.com est un domaine parqué). L'ancienne page Serax (archives 2019 et 2023) n'illustre la designer que par une vignette de 440 × 520 px puis par une photo des cuillères spOOn, sans portrait.",
+  "remarks": "Source unique : anciennes pages Serax archivées. Le texte Serax écrit « The long, imperfect steel », sans doute pour « stem » (tige) ; traduit par « manche ». Formes ovale, ronde et angulaire reprises des intitulés produits Mikado."
+ },
+ {
+  "slug": "ann-demeulemeester",
+  "name": "Ann Demeulemeester",
+  "sortKey": "Demeulemeester",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Ann Demeulemeester est une créatrice de mode belge, membre des « Six d'Anvers ». Elle fonde en 1985 sa marque éponyme avec Patrick Robyn, son partenaire de création, et devient une figure importante de la mode internationale. Elle quitte sa maison en 2014 et explore depuis d'autres formes, dont la sculpture et la céramique. Depuis 2019, elle collabore avec Serax : porcelaine (collections Dé et Ra), couverts et verrerie, puis luminaires et objets lumineux, et en 2022 une collection de mobilier comprenant tabourets, chaises, tables, consoles et canapés.",
+  "bioSources": [
+   "https://serax.com/pages/ann-demeulemeester"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/ann-demeulemeester.jpg",
+   "sourcePage": "https://serax.com/pages/ann-demeulemeester",
+   "imageUrl": "https://serax.com/cdn/shop/files/Portrait_AnnDemeulemeester_Ecom_fa19d6bb-ee61-4d61-88aa-5e3309a34974.jpg?v=1682588890",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax, buste de face, visage net. Format 4:5 natif."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le plateau Dédé, le vase Lance et la lampe Wind vendus par Mikado ne sont pas nommés sur la page Serax ; la bio cite les lignes de produits. Date et lieu de naissance non publiés par Serax. L'appartenance aux Six d'Anvers vient de l'aperçu d'article affiché sur la même page Serax."
+ },
+ {
+  "slug": "axelle-delhaye",
+  "name": "Axelle Delhaye",
+  "sortKey": "Delhaye",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Axelle Delhaye est une céramiste qui a découvert l'argile enfant, aux côtés de sa grand-mère, dans une famille d'artistes. Elle a étudié la peinture à l'ENSAV La Cambre à Bruxelles avant de faire de la céramique son principal moyen d'expression. Elle travaille le grès avec des engobes et la technique du sgraffite, en grattant directement l'argile, dans une palette limitée à une ou deux teintes. Inspirée par la vision naïve de peintres comme Henri Rousseau, elle accepte l'imprévu et l'imperfection. Pour Serax, elle a créé une collection d'accessoires d'intérieur, avec vases et cache-pots.",
+  "bioSources": [
+   "https://serax.com/pages/axelle-delhaye"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/axelle-delhaye.jpg",
+   "sourcePage": "https://serax.com/pages/axelle-delhaye",
+   "imageUrl": "https://serax.com/cdn/shop/files/Axelle_Delhaye.jpg?v=1774003450",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax : assise sur un canapé, main au visage, visage net. Format 4:5 natif."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité non précisée par Serax (formation à Bruxelles). Sur serax.com, sa collection est rangée sous l'intitulé « Flower pots & planters by Studio Terres de Rêves »."
+ },
+ {
+  "slug": "giorgio-bonaguro",
+  "name": "Giorgio Bonaguro",
+  "sortKey": "Bonaguro",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Giorgio Bonaguro est un designer et directeur artistique italien qui travaille entre Milan et Rio de Janeiro. Après des études d'ingénierie mécanique à Modène, il obtient un master en design industriel et d'intérieur à la Scuola Politecnica di Design de Milan, travaille auprès de designers italiens confirmés, puis fonde son studio. Son travail part des qualités brutes des matériaux et circule entre éditions limitées pour des galeries et production industrielle, en dialogue avec l'artisanat brésilien. Pour Serax, il a dessiné en 2015 Roma, des carafes en verre borosilicate inspirées des amphores romaines.",
+  "bioSources": [
+   "https://www.bonagurogiorgio.com/about",
+   "https://www.bonagurogiorgio.com/roma",
+   "https://web.archive.org/web/20230120130830/https://www.serax.com/en/designer/giorgiobonaguro"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/giorgio-bonaguro.jpg",
+   "sourcePage": "https://www.bonagurogiorgio.com/about",
+   "imageUrl": "https://static.wixstatic.com/media/e43640_cc9c0f54580c4855a500e394667f4b02~mv2.jpg",
+   "credit": "Livia Scheide Xavier",
+   "width": 1048,
+   "height": 1304,
+   "notes": "Portrait noir et blanc publié sur le site officiel (page About), bras croisés devant un bloc de marbre, visage net. Proche du 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le vase Gold vendu par Mikado n'est pas listé sur son site : non vérifié. Crédit photo indiqué sur la page About (« ph. Livia Scheide Xavier »)."
+ },
+ {
+  "slug": "clodette",
+  "name": "Clodette",
+  "sortKey": null,
+  "brands": [
+   "Serax"
+  ],
+  "bio": null,
+  "bioSources": [
+   "https://web.archive.org/web/20161226200647/http://www.serax.com:80/en/clodette",
+   "https://web.archive.org/web/20230120130831/https://www.serax.com/en/designer/clodette"
+  ],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Label, pas une créatrice : non cherché. Pour mémoire, l'ancienne page Serax (archive 2023) montre les deux fondatrices en bandeau 1297 × 700 px (https://web.archive.org/web/2023im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_clodette-_designer_1297x700.jpeg).",
+  "remarks": "Clodette (Clodette Antwerp) : label de papeterie, linge et objets pour la maison, présenté par Serax comme « a label » / « this brand », dont les créatrices sont Veerle Dobbelaere et Karen Van Winkel. Cas à valider : si le propriétaire préfère traiter Clodette comme un duo de créatrices, une bio courte est possible à partir de ces deux pages Serax archivées (seules sources trouvées).",
+  "notCreator": true
+ },
+ {
+  "slug": "white-dirt",
+  "name": "White Dirt",
+  "sortKey": "White Dirt",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "White Dirt est un studio pluridisciplinaire de San Francisco fondé en 2020 par Dana Harel, née en 1970 à Tel-Aviv. Architecte de formation, avec plus de vingt ans de pratique artistique, elle conçoit des objets entre art et design dans des matériaux élémentaires comme le papier, le laiton, la porcelaine et le plâtre, dont elle souligne le caractère brut. Le studio mêle formes vernaculaires et contemporaines pour créer des sculptures fonctionnelles. Avec valerie_objects, marque sœur de Serax, White Dirt a créé Artifacts, une collection d'objets à la fois poétiques et fonctionnels, dont un vase et des tasses.",
+  "bioSources": [
+   "https://us.serax.com/pages/white-dirt",
+   "https://valerie-objects.com/pages/white-dirt"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/white-dirt.jpg",
+   "sourcePage": "https://valerie-objects.com/pages/white-dirt",
+   "imageUrl": "https://valerie-objects.com/cdn/shop/files/white_dirt.jpg?v=1732529459",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc de Dana Harel publié par valerie_objects (même image que sur us.serax.com/pages/white-dirt, où elle n'est servie qu'en 535 × 669 px). Debout, mains dans les poches, visage net. Format 4:5 natif."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nom corrigé en « White Dirt » (capitales), graphie de Serax ; valerie_objects écrit tout en minuscules. Studio : sortKey « White Dirt ». La page n'existe que sur le site américain de Serax."
+ },
+ {
+  "slug": "maarten-baas",
+  "name": "Maarten Baas",
+  "sortKey": "Baas",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Maarten Baas est un artiste et designer néerlandais né en 1978, diplômé de la Design Academy Eindhoven en 2002, dont le studio est installé à Bois-le-Duc. Son travail, entre art et design, associe art conceptuel, artisanat, installation et performance ; ses séries les plus connues sont Smoke, Clay et Real Time. Il a été nommé Designer de l'année par Design Miami/Basel en 2009, et ses œuvres figurent dans les collections du MoMA, du Rijksmuseum, du Stedelijk Museum ou du Victoria and Albert Museum. Pour valerie_objects, marque sœur de Serax, il a dessiné Inner Circle, une vaisselle et une verrerie fondées sur des cercles imparfaits tracés à la main, dont la carafe et les verres Smokey Grey.",
+  "bioSources": [
+   "https://maartenbaas.com/products/about",
+   "https://valerie-objects.com/pages/maarten-baas",
+   "https://valerie-objects.com/products/carafe-l-smokey-grey-inner-circle.json"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/maarten-baas.png",
+   "sourcePage": "https://valerie-objects.com/pages/maarten-baas",
+   "imageUrl": "https://valerie-objects.com/cdn/shop/files/maarten_baas_portrait_ZW.png?v=1691498528",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par valerie_objects (marque sœur de Serax) sur la page du designer : buste de face, chapeau, visage net. Format 4:5 natif. Fichier PNG de 4,2 Mo. Le portrait du site officiel (photo d'Anton Corbijn) a été écarté : le visage est caché sous une bâche plastique."
+  },
+  "photoMissingReason": null,
+  "remarks": "Les pièces Smokey vendues par Mikado appartiennent à la collection Inner Circle éditée par valerie_objects, que Serax présente comme sa marque sœur ; elles sont vendues sous la marque Serax chez Mikado."
+ },
+ {
+  "slug": "catherine-martin",
+  "name": "Catherine Martin",
+  "sortKey": "Martin",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Catherine Martin est une créatrice de costumes, de décors et d'objets pour la maison, connue pour les univers visuels qu'elle conçoit avec le réalisateur Baz Luhrmann. Depuis plus de trente ans, elle a façonné l'esthétique de films comme Romeo + Juliet, Moulin Rouge!, Gatsby le Magnifique et Elvis, et a reçu quatre Oscars. Avec Catherine Martin Designs, elle applique son goût du décor et des références historiques aux intérieurs, aux textiles, aux papiers peints et aux objets, nourri par sa double culture franco-australienne. En 2026, elle signe pour Serax les collections de céramique Palm et Flamboyance : objets décoratifs, vases, bougeoirs et luminaires.",
+  "bioSources": [
+   "https://serax.com/pages/catherine-martin",
+   "https://serax.com/sitemap.xml"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/catherine-martin.jpg",
+   "sourcePage": "https://serax.com/pages/catherine-martin",
+   "imageUrl": "https://serax.com/cdn/shop/files/CM_Serax_headshot_ZW_3200x4000px.jpg?v=1789470807",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax (headshot), souriante, lunettes, visage net. Format 4:5 natif."
+  },
+  "photoMissingReason": null,
+  "remarks": "Les bougeoirs sont déduits de la collection Serax « candles by Catherine Martin » listée dans le plan du site ; le bol avec couvercle et le vase Flamboyance vendus par Mikado figurent dans le plan du site serax.com (produits « bowl-lid » et « vase » Flamboyance)."
+ },
+ {
+  "slug": "felix-roobrouck",
+  "name": "Felix Roobrouck",
+  "sortKey": "Roobrouck",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Felix Roobrouck est un jeune designer dont le stage chez Serax a abouti à une édition : il a présenté l'un de ses projets d'examen au directeur général de Serax, Axel Van Den Bossche, qui y a vu un produit pour la marque. Ce projet est devenu Collar, une lampe d'ambiance à poser au sol qui diffuse une lumière chaude et indirecte, éditée par Serax en lampadaire et en lampe à poser.",
+  "bioSources": [
+   "https://web.archive.org/web/20191117231647/https://www.serax.com/en/felix-roobrouck",
+   "https://web.archive.org/web/20230120130830/https://www.serax.com/en/designer/felixroobrouck"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Aucun site officiel trouvé. Serax ne le présente plus sur son site actuel ; l'ancienne page (archive 2023) montre un portrait très serré en bandeau 1297 × 700 px, front coupé, recadrable en 4:5 seulement à ≈ 560 × 700 px, sous le minimum de 600 px (https://web.archive.org/web/2023im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_Felixroobrouck__designer_1297x700.jpg).",
+  "remarks": "Source unique : anciennes pages Serax archivées (2019 et 2023). Nationalité et formation non publiées ; l'origine du nom Collar (collerette de chien) n'a été lue que dans un résumé de recherche et a été omise."
+ },
+ {
+  "slug": "daphne-de-gheldere",
+  "name": "Daphne de Gheldere",
+  "sortKey": "De Gheldere",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Daphne de Gheldere est une céramiste née en Belgique. Formée en art et design à la Willem de Kooning Academy de Rotterdam, elle a fait de la céramique son moyen d'expression et s'inspire de la diversité de la nature, avec des pièces qui semblent évoluer comme des organismes vivants. Elle a appris le métier à Vallauris auprès de l'artiste Olivia Cognet, puis travaillé à New York avec Stephen Antonson, artiste du plâtre. Elle poursuit un master en céramique et verre au Royal College of Art de Londres. Pour Serax, elle a créé The Cabbage, un objet sculptural et fonctionnel.",
+  "bioSources": [
+   "https://serax.com/pages/daphne-de-gheldere"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/daphne-de-gheldere.jpg",
+   "sourcePage": "https://serax.com/pages/daphne-de-gheldere",
+   "imageUrl": "https://serax.com/cdn/shop/files/Daphne_de_Gheldere.jpg?v=1774003452",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Photo noir et blanc publiée par Serax : la céramiste debout dans son atelier derrière une table de travail, visage net mais assez petit. Format 4:5 natif ; recadrage plus serré sur le buste possible vu la définition."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le lien entre « Vase 07 » vendu par Mikado et The Cabbage n'est pas confirmé par la page (la collection Serax regroupe ses accessoires)."
+ }
+]

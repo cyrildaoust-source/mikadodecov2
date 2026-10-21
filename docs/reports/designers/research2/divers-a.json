@@ -1,0 +1,390 @@
+[
+ {
+  "slug": "hanne-kortegaard",
+  "name": "Hanne Kortegaard",
+  "sortKey": "Kortegaard",
+  "brands": [
+   "Linie Design"
+  ],
+  "bio": "Hanne Kortegaard est une designer danoise de mobilier et d'objets de décoration. Diplômée de l'Académie royale des beaux-arts du Danemark (écoles d'architecture, de design et de conservation), elle a travaillé pour plusieurs fabricants de meubles danois et suédois tout en dirigeant sa propre société de design. Elle rejoint Linie Design en 2012 comme designer et développeuse de produits, puis devient aussi responsable du design retail et intérieur de la marque. Elle puise son inspiration dans l'architecture, les formes et les compositions, et cherche à combiner motif, matière et forme dans des pièces fonctionnelles. Pour Linie Design, elle a notamment dessiné les tapis Matches, Mattia, Almeria et Dotto.",
+  "bioSources": [
+   "https://liniedesign.com/pages/hanne-kortegaard"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/hanne-kortegaard.jpg",
+   "sourcePage": "https://liniedesign.com/pages/hanne-kortegaard",
+   "imageUrl": "https://liniedesign.com/cdn/shop/files/Hanne_Kortegaard_Designer_II.jpg?v=1684849533",
+   "credit": null,
+   "width": 800,
+   "height": 1016,
+   "notes": "Portrait en couleur en tête de la page designer Linie Design : assise à une table de travail, ciseaux et papier en main, regard baissé vers son travail (visage net, de trois quarts). Original Shopify (sans suffixe de taille) 800x1016 ; recadrage 4:5 direct (800x1000)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Titres de produits (Matches, Mattia, Almeria, Dotto) d'après la liste des tapis présentés sur sa page designer Linie Design. « Chief Retail and Interior Designer » traduit librement."
+ },
+ {
+  "slug": "kay-bojesen",
+  "name": "Kay Bojesen",
+  "sortKey": "Bojesen",
+  "brands": [
+   "Kay Bojesen"
+  ],
+  "bio": "Kay Bojesen (1886-1958) est un orfèvre et designer danois né à Copenhague. Apprenti à partir de 1907 dans l'atelier de Georg Jensen, il obtient son diplôme d'orfèvre en 1910, étudie en Allemagne puis travaille à Paris, et ouvre en 1913 son propre atelier à Copenhague. Lauréat en 1922 d'un concours de jouets organisé par l'association Dansk Arbejde, il crée dès lors de nombreux jouets et animaux en bois, dont le singe présenté en 1951. Ses couverts Grand Prix, montrés pour la première fois en 1938, reçoivent le premier prix de la Triennale de Milan en 1951. Il laisse plus de 2000 modèles ; depuis 1991, ses figurines en bois sont produites sous licence par Rosendahl Design Group.",
+  "bioSources": [
+   "https://kaybojesen.com/about-kay-bojesen/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/kay-bojesen.jpg",
+   "sourcePage": "https://kaybojesen.com/about-kay-bojesen/",
+   "imageUrl": "https://kaybojesen.com/wp-content/uploads/sites/3/2022/07/Kay-Bojesen-Portrait-1.jpeg",
+   "credit": null,
+   "width": 1000,
+   "height": 1327,
+   "notes": "Portrait d'archive noir et blanc en buste, de trois quarts, visage net ; image d'en-tête de la page « About Kay Bojesen » du site officiel tenu par la famille (Kay Bojesen ApS). Recadrage 4:5 facile (1000x1250)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Les figurines vendues par Mikado (singe, hippopotame, teckel) relèvent de la licence Kay Bojesen Denmark / Rosendahl ; le site kaybojesen.com ne donne l'année que pour le singe (1951), d'où l'absence d'années pour les autres animaux."
+ },
+ {
+  "slug": "hans-gustav-ehrenreich",
+  "name": "Hans Gustav Ehrenreich",
+  "sortKey": "Ehrenreich",
+  "brands": [
+   "Hoptimist"
+  ],
+  "bio": "Hans Gustav Ehrenreich est un tourneur sur bois et ébéniste danois, créateur des figurines Hoptimist. À la fin des années 1950, il travaille dans un petit atelier, « Ehrenreichs Trækunst », installé dans sa maison d'Århusvej à Stilling, au Danemark, où il tourne des coupes et des plats et vend des objets artisanaux en bois du monde entier. À la fin des années 1960, il crée les premiers prototypes de Bimble et Bumble, petits personnages aux couleurs vives et aux formes rondes montés sur ressort, dessinés à partir d'un cercle et d'une ellipse. Leur succès dépasse vite les capacités de son atelier. La marque Hoptimist les a relancés en 2009 et développe depuis la gamme dans le même esprit.",
+  "bioSources": [
+   "https://www.hoptimist.com/eu/our-story/",
+   "https://hoptimist.design/us/about-hoptimist/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/hans-gustav-ehrenreich.jpg",
+   "sourcePage": "https://www.hoptimist.com/eu/our-story/",
+   "imageUrl": "https://www.hoptimist.com/on/demandware.static/-/Sites-hoptimist-Library/default/dw98d0fd64/historie/Historie_1_txt_image.jpg",
+   "credit": null,
+   "width": 1330,
+   "height": 1330,
+   "notes": "Photo d'archive noir et blanc à l'atelier (section « The Danish wood turner » de la page Our Story) : Ehrenreich debout tenant un Hoptimist, regard vers l'objectif, visage net ; une ouvrière floue au premier plan à gauche. Carré 1330x1330 ; recadrage 4:5 centré sur lui (environ x 300-1364 sur toute la hauteur) qui écarte l'ouvrière. Même photo en 1500x683 (tête coupée) sur hoptimist.design/us/."
+  },
+  "photoMissingReason": null,
+  "remarks": "Dates de naissance et de mort (1917-1984) trouvées seulement hors sources autorisées : omises. Le site US le dit « cabinetmaker », le site européen « wood turner » : les deux sont repris."
+ },
+ {
+  "slug": "kim-naver",
+  "name": "Kim Naver",
+  "sortKey": "Naver",
+  "brands": [
+   "Linie Design"
+  ],
+  "bio": "Kim Naver est une designer textile danoise. Sa collaboration avec Linie Design commence en 1967, avant même la création de la société : l'un de ses projets de fin d'études est alors retenu par Cotil/C. Olesen, pour qui elle dessine ensuite textiles et tapis jusqu'à la reprise de l'entreprise sous le nom de Linie Design. Elle a reçu le prix Lunning en 1970 et le prix Bindesbøll en 1982, et a été faite chevalier de l'ordre du Dannebrog en 2000. Parmi ses grands projets figurent la Banque nationale du Danemark (1978-1989) et le siège d'A.P. Møller (1980) ; elle a aussi créé pour Royal Copenhagen et Georg Jensen. Chez Linie Design, elle signe notamment les tapis tissés main Chess, Kent et Linca.",
+  "bioSources": [
+   "https://liniedesign.com/pages/kim-naver"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Linie Design ne publie qu'un montage de deux photos (Kim_Naver_Inspiration.png et 1.png, 850x600) : sur le premier, son portrait assis occupe la moitié droite, soit environ 420x540 px, sous le minimum de 600 px. Aucun site officiel de la créatrice ; la media bank Linie (liniedesign.presscloud.com, application Vocast) n'est pas lisible sans navigateur authentifié.",
+  "remarks": "Portrait candidat si la limite de taille est assouplie : https://liniedesign.com/cdn/shop/files/Kim_Naver_Inspiration.png?v=1684849574 (moitié droite)."
+ },
+ {
+  "slug": "bjorn-dahlstrom",
+  "name": "Björn Dahlström",
+  "sortKey": "Dahlström",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Björn Dahlström est un designer suédois né en 1957, qui vit et travaille à Stockholm. Il fonde son entreprise en 1982, d'abord consacrée au graphisme pour de grands clients suédois, puis se tourne vers le design industriel et le mobilier. Il a dessiné tapis, vélos, jouets, meubles et articles de cuisine pour des entreprises comme Cbi, Atlas Copco, Magis, Kasthall ou Nola, et a été distingué en 2001 par le prix Torsten et Wanja Söderberg. Ancien professeur à Konstfack, il a aussi enseigné à la Beckmans School of Design ; ses œuvres figurent au Nationalmuseum de Stockholm et au Victoria and Albert Museum. Pour Iittala, il a conçu la collection de cuisson Tools, en acier inoxydable, développée avec des chefs professionnels.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/tools",
+   "https://nola.se/en/designers/bjorn-dahlstrom/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/bjorn-dahlstrom.jpg",
+   "sourcePage": "https://nola.se/en/designers/bjorn-dahlstrom/",
+   "imageUrl": "https://nola.se/site/assets/files/6023/nola_formgivare_bjorn_dahlstrom.jpg",
+   "credit": null,
+   "width": 1500,
+   "height": 1355,
+   "notes": "Portrait noir et blanc publié par l'éditeur suédois Nola : assis à une table, lunettes noires, regard caméra, visage net ; ustensiles de cuisine disposés devant lui. Recadrage 4:5 centré : environ 1084x1355 (x 210-1294). Iittala publie seulement un portrait de 680x428 (1080x680_wide_image_bjrn-dahlstrm_-20160113.jpg), trop petit."
+  },
+  "photoMissingReason": null,
+  "remarks": "Iittala écrit qu'il « inaugurated » le prix Torsten et Wanja Söderberg en 2001 : traduit prudemment par « distingué en 2001 ». Photo issue de Nola, éditeur de mobilier urbain, et non d'Iittala."
+ },
+ {
+  "slug": "marie-louise-rosholm",
+  "name": "Marie-Louise Rosholm",
+  "sortKey": "Rosholm",
+  "brands": [
+   "Linie Design"
+  ],
+  "bio": "Marie-Louise Rosholm est une designer textile et chercheuse de tendances danoise, diplômée en design textile en 1984 après une formation au tissage et à la couture. Elle dirige Studio MLR, entre Milan et Copenhague, qui conseille fabricants de textiles d'intérieur et de mode, notamment sur les matières et le design durable ; elle a travaillé pour Ermenegildo Zegna, MUJI, Kinnasand ou IKEA. Elle a fondé le Danish Color Board en 2016, a présidé Intercolor et a reçu en 2021 le prix d'honneur du Danish Design Council. Elle collabore avec Linie Design depuis 1986 : elle y signe le tapis Rapallo (1992, réédité en 2022), puis Rapalline et Roccella, en partant toujours de la matière.",
+  "bioSources": [
+   "https://liniedesign.com/pages/marie-louise-rosholm",
+   "https://studio-mlr.com/about-mlr/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Le seul vrai portrait trouvé est sur le site officiel Studio MLR (https://studio-mlr.com/wp-content/uploads/2023/08/portraet-Linie-ML.jpg, page d'accueil et contact) : 598x797, sous le minimum de 600 px, avec son nom incrusté en bas de l'image. Autre photo sur le même site (MLR_web-1.jpg) en 500x750 seulement. La page Linie Design ne montre qu'un montage d'atelier (1200x800) où son visage est petit.",
+  "remarks": "Si la limite de 600 px peut être assouplie de 2 px, le portrait Studio MLR (noir et blanc, bras croisés devant des échantillons tissés) est utilisable en recadrant au-dessus du nom incrusté."
+ },
+ {
+  "slug": "gitte-annette-knudsen",
+  "name": "Gitte-Annette Knudsen",
+  "sortKey": "Knudsen",
+  "brands": [
+   "Linie Design"
+  ],
+  "bio": "Gitte-Annette Knudsen est une designer textile danoise. Elle étudie à l'École de design du Danemark de 1981 à 1986, dont une année à la Rietveld Academie d'Amsterdam en 1985, puis obtient en 2015 un diplôme de psychologie à l'Université de Copenhague. En 1986, elle ouvre son propre atelier, où elle travaille comme consultante pour de nombreuses entreprises ; elle est aussi l'autrice d'un livre sur la tisserande danoise Vibeke Klint. Elle dessine des tapis tissés main pour Linie Design depuis 2001, en associant un usage mesuré de la couleur à des matières et des structures choisies pour leur relief, comme les modèles Elmo et Sirius.",
+  "bioSources": [
+   "https://liniedesign.com/pages/gitte-annette-knudsen"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/gitte-annette-knudsen.jpg",
+   "sourcePage": "https://liniedesign.com/pages/gitte-annette-knudsen",
+   "imageUrl": "https://liniedesign.com/cdn/shop/files/Linie_Design_Portraetter_115355.jpg?v=1684849518",
+   "credit": null,
+   "width": 800,
+   "height": 1200,
+   "notes": "Portrait couleur de la page designer Linie Design (série « Linie Design Portrætter ») : accroupie dans son atelier près de pelotes et d'un tapis, souriante, regard caméra, visage net. Original 800x1200 ; recadrage 4:5 800x1000 en gardant le haut du corps."
+  },
+  "photoMissingReason": null,
+  "remarks": "Elmo et Sirius figurent dans la liste des tapis de sa page designer Linie Design."
+ },
+ {
+  "slug": "helene-blanche",
+  "name": "Helene Blanche",
+  "sortKey": "Blanche",
+  "brands": [
+   "Linie Design"
+  ],
+  "bio": "Helene Blanche, née en 1977, est une designer textile danoise, diplômée en design textile du Central Saint Martins College of Art and Design de Londres. Elle crée des collections de tissus et de papiers peints, ainsi que des accessoires de décoration (abat-jour, coussins, plaids), fabriqués avec des artisans et des manufactures en Europe ; elle dessine ses motifs au fusain, à l'encre et au crayon. Son studio est installé chez l'entreprise danoise de décoration Tapet-Cafe, dont elle assure aussi la direction artistique. Pour Linie Design, elle a dessiné une collection de tapis tissés à plat, née d'échanges avec Hugo, cofondateur de Linie Design et oncle de son mari, dont les tapis de couloir et tapis Aud et Carl-Hugo.",
+  "bioSources": [
+   "https://heleneblanche.com/pages/about",
+   "https://liniedesign.com/pages/helene-blanche"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/helene-blanche.jpg",
+   "sourcePage": "https://liniedesign.com/pages/helene-blanche",
+   "imageUrl": "https://liniedesign.com/cdn/shop/files/Helene_Blanche_1200x1200_cf1d1ec3-6e02-41ac-97c9-dcc8556ada49.jpg?v=1685550359",
+   "credit": null,
+   "width": 1201,
+   "height": 1200,
+   "notes": "Portrait noir et blanc de la page designer Linie Design : assise à une table, de face, regard caméra, visage net. Carré 1201x1200 ; recadrage 4:5 centré 960x1200. Variante plus grande sur son site officiel (https://heleneblanche.com/cdn/shop/files/HB_portrait_BW_62372_RGB.jpg?v=1695970711, 3508x2630) mais regard baissé sur des échantillons, moins adaptée à une vignette."
+  },
+  "photoMissingReason": null,
+  "remarks": "Date de naissance (1977) d'après son site officiel."
+ },
+ {
+  "slug": "maija-isola",
+  "name": "Maija Isola",
+  "sortKey": "Isola",
+  "brands": [
+   "Marimekko"
+  ],
+  "bio": "Maija Isola (1927-2001) est une artiste et designer textile finlandaise. Elle étudie de 1946 à 1949 à l'École des arts appliqués d'Helsinki, alors installée dans le bâtiment de l'Ateneum, où Armi Ratia, fondatrice de Marimekko, remarque son talent. Elle commence en 1949 comme dessinatrice de motifs chez Printex, l'entreprise d'impression textile qui a précédé Marimekko, et travaille 38 ans pour la maison, pour laquelle elle crée plus de 500 motifs. Le plus connu est Unikko (1964), coquelicot stylisé ; on lui doit aussi Fandango (1962), Puhveli (1964) ou Sateenkaari (1971). Plusieurs bougeoirs actuels de Marimekko reprennent Unikko ou sa déclinaison Piirto Unikko (2022).",
+  "bioSources": [
+   "https://www.marimekko.jp/maripedia/designers/maija-isola",
+   "https://company.marimekko.com/marimekkos-renowned-unikko-print-celebrates-its-60th-anniversary-lux-helsinki-kicks-off-the-festivities/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/maija-isola.png",
+   "sourcePage": "https://www.marimekko.jp/maripedia/designers/maija-isola",
+   "imageUrl": "https://marimekko.cms01.d-head.biz/designer_list/Designer_MaijaIsola_maripedia_bw.png",
+   "credit": null,
+   "width": 1200,
+   "height": 1500,
+   "notes": "Photo d'archive noir et blanc publiée par Marimekko (site officiel japonais, rubrique Maripedia) : assise par terre, en train de peindre au pinceau un grand motif floral ; visage net mais regard baissé. Déjà au format 4:5 (1200x1500) ; la tête est dans le tiers supérieur droit, un recadrage plus serré est possible (environ x 380-1200, y 150-1180)."
+  },
+  "photoMissingReason": null,
+  "remarks": "marimekko.com bloque toutes les requêtes (Vercel Security Checkpoint, erreur 429, y compris avec r.jina.ai et Playwright) : le site officiel japonais marimekko.jp (« ©Marimekko ») et le site corporate company.marimekko.com ont été utilisés. Années des motifs d'après la liste Maripedia."
+ },
+ {
+  "slug": "bodil-jerichau",
+  "name": "Bodil Jerichau",
+  "sortKey": "Jerichau",
+  "brands": [
+   "Linie Design"
+  ],
+  "bio": "Bodil Jerichau est une designer textile danoise installée à Copenhague. Elle associe une formation pluridisciplinaire en mathématiques et en informatique à une formation de tisserande et de designer textile, ce qui lui donne une approche technique et fonctionnaliste du textile. Dans sa société Jerichau Design, elle crée des textiles d'intérieur, explore de nouveaux procédés et de nouvelles compositions de matières, et développe des prototypes pour des architectes et des entreprises. Elle dit trouver ses idées en expérimentant au métier à tisser et dans la nature (coquillages, pierres, minéraux). Pour Linie Design, elle a dessiné en 1993 le tapis Bologna, dont chaque carré associe deux matières différentes selon le sens du tissage, ainsi que le modèle Genova.",
+  "bioSources": [
+   "https://liniedesign.com/pages/bodil-jerichau"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/bodil-jerichau.jpg",
+   "sourcePage": "https://liniedesign.com/pages/bodil-jerichau",
+   "imageUrl": "https://liniedesign.com/cdn/shop/files/Linie_Design_Portraetter_115680.jpg?v=1684849502",
+   "credit": null,
+   "width": 878,
+   "height": 1200,
+   "notes": "Portrait couleur de la page designer Linie Design (série « Linie Design Portrætter ») : assise dans son atelier, regard caméra, visage net. Original 878x1200 ; recadrage 4:5 878x1098."
+  },
+  "photoMissingReason": null,
+  "remarks": "Genova figure dans la liste des tapis de sa page designer Linie Design (Chess et Kent, également listés, sont de Kim Naver selon sa propre page)."
+ },
+ {
+  "slug": "magnus-pettersen",
+  "name": "Magnus Pettersen",
+  "sortKey": "Pettersen",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Magnus Pettersen, né en 1982, est un designer norvégien installé à Londres. Il fonde son studio en 2011 et travaille surtout le mobilier, le luminaire et les accessoires pour la maison, ainsi que le design de produits plus classique. Son travail, fonctionnel et utilitaire, a souvent une allure industrielle adoucie par des matières naturelles et des couleurs chaudes. Il a créé des produits pour Areaware et reçu des distinctions de l'iF, d'Elle Decoration et de Bo Bedre. Pour Iittala, il a dessiné la lampe de table Leimu, qui associe un abat-jour en verre soufflé bouche à un pied en béton, inspirée par le verre et le béton de l'architecture moderne et récompensée par un iF Gold Award en 2014.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/leimu",
+   "https://www.magnuspettersen.com/about"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/magnus-pettersen.jpg",
+   "sourcePage": "https://www.magnuspettersen.com/about",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/61729cde386213432bfaa14c/1634904796747-55QFF23LQ3DLJQ1WV22V/Shot-12-Portrait-693_RT+-+Copy.jpg?format=original",
+   "credit": null,
+   "width": 2500,
+   "height": 3333,
+   "notes": "Portrait couleur de son site officiel (page About) : debout contre un pilier en béton, veste noire, regard caméra, visage net. 2500x3333 (version JPEG demandée avec Accept: image/jpeg, le CDN Squarespace renvoyant sinon du WebP) ; recadrage 4:5 direct (2500x3125). Iittala publie aussi un portrait noir et blanc 1080x680."
+  },
+  "photoMissingReason": null,
+  "remarks": "Son site dit « working in the UK », Iittala « based in London »."
+ },
+ {
+  "slug": "marta-lavinia-carboni",
+  "name": "Marta Lavinia Carboni",
+  "sortKey": "Carboni",
+  "brands": [
+   "Ichendorf Milano"
+  ],
+  "bio": "Marta Lavinia Carboni est une designer et autrice qui a grandi entre Londres, Paris, Lerici, le Val d'Ayas et Milan, où elle vit et travaille. Ses objets, aux formes simples et fonctionnelles, à la frontière du design et de la poésie, reposent sur une recherche approfondie sur la couleur, au cœur de son travail. Elle est consultante pour des studios de graphisme et d'architecture et collabore avec des magazines de design, pour lesquels elle conçoit des récits croisant design, art, mode, musique et cinéma. Pour Ichendorf Milano, elle a dessiné les collections en verre Bolla, des vases sphériques, et +1, des vases hydroponiques pour faire germer graines et noyaux (citron, avocat, gland).",
+  "bioSources": [
+   "https://www.ichendorfmilano.com/en/designers/marta-lavinia-carboni/"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/marta-lavinia-carboni.jpg",
+   "sourcePage": "https://www.ichendorfmilano.com/en/designers/marta-lavinia-carboni/",
+   "imageUrl": "https://www.ichendorfmilano.com/images/299/8544/2000x2000/nocrop/align-4/MLC-1.jpg",
+   "credit": null,
+   "width": 1389,
+   "height": 2000,
+   "notes": "Portrait noir et blanc de la page designer Ichendorf Milano : assise devant des fougères, main contre la joue, souriante, regard caméra, visage net. La page sert 762x1097 ; le redimensionneur d'Ichendorf agrandit sans limite, donc la taille d'origine est inconnue : version 1389x2000 retenue (peut être légèrement agrandie). Recadrage 4:5 : 1389x1736 en partant du haut."
+  },
+  "photoMissingReason": null,
+  "remarks": "Bio courte : une seule source (Ichendorf Milano), sans nationalité ni dates ; nationalité italienne non affirmée. « Vase hydroponique +1 » correspond à l'« Idrophonic vase » de la collection +1."
+ },
+ {
+  "slug": "hans-van-bentem",
+  "name": "Hans van Bentem",
+  "sortKey": "Van Bentem",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Hans van Bentem est un artiste plasticien néerlandais, diplômé en 1988 de l'Académie royale des beaux-arts de La Haye. Son œuvre va des sculptures monumentales aux installations et aux objets en verre et en lumière ; il utilise des matériaux classiques et des techniques traditionnelles pour raconter des histoires contemporaines. Il a notamment exposé en solo à la KetelFactory de Schiedam (2010) et au Gemeentemuseum de La Haye (« Keep on Dreaming », 2012). Il collabore avec Pols Potten depuis le début des années 2000, à travers l'atelier de travail du bois au Sénégal où sont fabriqués les objets en bois de la marque. Il y a dessiné une collection sculpturale en bois, dont la table d'appoint Figure et le tabouret Robot.",
+  "bioSources": [
+   "https://www.polspotten.com/en/design-collabs/hans-van-bentem/",
+   "https://www.hansvanbentem.nl/about/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/hans-van-bentem.jpg",
+   "sourcePage": "https://www.hansvanbentem.nl/about/",
+   "imageUrl": "https://www.hansvanbentem.nl/content/uploads/1511213106-sf-web.jpg",
+   "credit": null,
+   "width": 905,
+   "height": 1140,
+   "notes": "Portrait noir et blanc en gros plan de son site officiel (page About) : visage de trois quarts, reflets de lumière, visage net. 905x1140, déjà proche du 4:5 (recadrage 905x1131)."
+  },
+  "photoMissingReason": null,
+  "remarks": "sortKey « Van Bentem » (particule néerlandaise conservée, usage courant pour le classement)."
+ },
+ {
+  "slug": "matti-klenell",
+  "name": "Matti Klenell",
+  "sortKey": "Klenell",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Matti Klenell, né en 1972, est un designer suédois. Diplômé en 1999 du département d'architecture intérieure et de design de mobilier de Konstfack, à Stockholm, il fonde son studio l'année suivante et travaille aussi bien l'artisanat que le design industriel et l'aménagement d'espaces. Il a travaillé pour FontanaArte, Offecct, Swedese, Källemo, Muuto, Marimekko ou Iittala, et assuré en 2015 la direction artistique du projet collectif NM& pour le nouveau Nationalmuseum de Stockholm. Pour Iittala, il a dessiné le verre Lempi (prix Red Dot), les bougeoirs Nappula, inspirés des pieds d'une table ancienne vue au musée du verre de Nuutajärvi, et les lampes Putki, issues des grandes lanternes en verre du restaurant du Nationalmuseum.",
+  "bioSources": [
+   "https://mattiklenell.com/About",
+   "https://www.iittala.com/en-gb/collections/all-collections/putki",
+   "https://www.iittala.com/en-gb/collections/all-collections/nappula"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/matti-klenell.jpg",
+   "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/putki",
+   "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_matti_klenell_lempi_group_bw.jpg",
+   "credit": null,
+   "width": 1080,
+   "height": 680,
+   "notes": "Portrait studio noir et blanc, assis à une table devant des verres Lempi, regard caméra, visage net. Paysage 1080x680 (plus grande version servie par le CDN Sitecore d'Iittala ; au-delà, l'image est seulement agrandie). Un recadrage 4:5 donne au mieux 544x680 px. Son site officiel (mattiklenell.com) ne publie pas de portrait."
+  },
+  "photoMissingReason": null,
+  "remarks": "Même limite de taille que les autres portraits Iittala de la première vague (Häberli, Franck, Haapaniemi) : 544x680 après recadrage, à valider."
+ },
+ {
+  "slug": "jorgen-wolff",
+  "name": "Jørgen Wolff",
+  "sortKey": "Wolff",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Jørgen Wolff est un ébéniste danois, auteur du fauteuil Wulff. Fabriqué à l'origine dans un atelier danois traditionnel au cours de la première moitié du XXe siècle, ce siège aux accoudoirs sculpturaux reliés à un large dossier en forme d'aile se rattache au « Danish Modern », né dans les années 1930 de la collaboration entre maîtres menuisiers et architectes. Sa connaissance de la construction, acquise par le métier d'ébéniste, se lit dans les détails de cette production artisanale en petite série. Après avoir acquis l'un des rares exemplaires en circulation lors d'une vente aux enchères chez Bruun Rasmussen, &Tradition l'a réédité sous les références Wulff ATD2 (fauteuil) et ATD3 (repose-pieds).",
+  "bioSources": [
+   "https://www.andtradition.com/journal/wulff",
+   "https://www.andtradition.com/products/wulff-atd2"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "&Tradition n'a pas de page designer pour Jørgen Wolff (recherche dans l'API WordPress d'&Tradition : seuls l'article « Wulff and the Danish Modern » et la fiche Wulff ATD2 existent, sans portrait). Aucun site officiel ni institution trouvés.",
+  "remarks": "Nom corrigé : « Jorgen Wolff » → « Jørgen Wolff », graphie utilisée par &Tradition (le fauteuil s'appelle bien « Wulff », avec un u). Aucune date de vie publiée par l'éditeur."
+ },
+ {
+  "slug": "carina-seth-andersson",
+  "name": "Carina Seth Andersson",
+  "sortKey": "Seth Andersson",
+  "brands": [
+   "Marimekko"
+  ],
+  "bio": "Carina Seth Andersson est une designer suédoise connue pour son travail du verre et de la céramique. Formée à Konstfack, à Stockholm, et au Royal College of Art de Londres, elle part de formes géométriques simples, cylindres, cônes ou cubes, dont elle ajuste les proportions, l'épaisseur et la surface. Elle collabore avec Marimekko depuis 2014 : elle y a dessiné des vases et des bougeoirs en verre, ainsi que des motifs textiles comme Hortensie et Spaljé (2015) ou Orkanen (2016). Elle travaille aussi pour l'éditeur suédois Fogia (vase Cube). Ses pièces figurent dans les collections du Victoria and Albert Museum et du Nationalmuseum de Stockholm, et elle a reçu la médaille du prince Eugène en 2024.",
+  "bioSources": [
+   "https://www.marimekko.jp/maripedia/designers/carina_seth_andersson",
+   "https://www.fogia.com/our-designers/carina-seth-andersson"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/carina-seth-andersson.png",
+   "sourcePage": "https://www.fogia.com/our-designers/carina-seth-andersson",
+   "imageUrl": "https://cdn.sanity.io/images/d6gjqdwj/production/b638637efd4bde856cfa9ca32ef6c3f2d74b5d7d-2000x2500.png",
+   "credit": null,
+   "width": 2000,
+   "height": 2500,
+   "notes": "Portrait noir et blanc publié par l'éditeur Fogia (Fogia_Portrait_Carina-Seth-Andersson.png) : en buste, lunettes rondes, regard caméra, visage net. Déjà en 4:5 (2000x2500), PNG avec canal alpha opaque. Alternative Marimekko (site officiel japonais) : https://marimekko.cms01.d-head.biz/designer_list/Designer_CarinaSethAndersson_maripedia.png, 1200x1500, debout en pied, visage plus petit."
+  },
+  "photoMissingReason": null,
+  "remarks": "marimekko.com bloqué (erreur 429 / Vercel Security Checkpoint) : textes Marimekko lus sur marimekko.jp. Les noms Fyr et Puteli n'ont pas pu être vérifiés sur un site Marimekko accessible ; la bio parle donc de « vases et bougeoirs en verre ». Année de naissance (1965) trouvée seulement hors sources autorisées : omise."
+ },
+ {
+  "slug": "benny-frandsen",
+  "name": "Benny Frandsen",
+  "sortKey": "Frandsen",
+  "brands": [
+   "Frandsen"
+  ],
+  "bio": "Benny Frandsen est un designer danois de luminaires, à l'origine de la marque Frandsen. Il commence à dessiner des lampes en 1968, dans son sous-sol, et crée la même année les suspensions Ball et les appliques magnétiques, que Frandsen produit encore et qui comptent parmi ses meilleures ventes. Connu pour ses formes graphiques, il a reçu de nombreux prix internationaux de design. Il a célébré en 2018 ses cinquante ans de création. On lui doit aussi la suspension Benjamin, abat-jour conique en métal laqué blanc à l'intérieur, déclinée en 30 et 46 cm de diamètre.",
+  "bioSources": [
+   "https://www.frandsen.com/benny-frandsen",
+   "https://www.frandsen.com/benjaminpendant"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Frandsen publie un beau portrait noir et blanc (chapeau, main contre la joue) sur https://www.frandsen.com/benny-frandsen, mais l'original ne fait que 464x576 (https://images.squarespace-cdn.com/content/v1/66c6113f16e3800238eefc85/999a2b3a-b850-44df-aa17-cea849cca54c/Benny+Frandsen+05.png) ; variante 512x512 sur /designers (Benny+Frandsen+02.png). Les deux sont sous le minimum de 600 px. La media bank Frandsen (frandsen.presscloud.com, application Vocast) n'est pas lisible sans navigateur authentifié.",
+  "remarks": "Portrait candidat en 464x576 si la limite de taille est assouplie. Bio courte faute de source plus détaillée chez l'éditeur (pas de date de naissance publiée)."
+ }
+]

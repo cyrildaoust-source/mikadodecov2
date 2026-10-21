@@ -1,0 +1,381 @@
+[
+ {
+  "slug": "jukka-setala",
+  "name": "Jukka Setälä",
+  "sortKey": "Setälä",
+  "brands": [
+   "Fatboy"
+  ],
+  "bio": "Jukka Setälä est un architecte d'intérieur finlandais. En 1998, il dessine l'Original, un grand pouf qui est à l'origine de la marque Fatboy. Pendant qu'il travaille sur ce modèle, il écoute Fatboy Slim, dont le nom sera repris pour la marque. En 2003, un entrepreneur néerlandais acquiert les droits de vente exclusifs de l'Original, point de départ du développement de Fatboy. Le modèle a depuis été décliné en plusieurs versions, dont l'Original Slim et l'Original Outdoor, et en housses de différentes matières.",
+  "bioSources": [
+   "https://www.fatboy.com/pt-en/aboutfatboy.html",
+   "https://www.fatboy.com/lv-en/original-landingspagina-indoor.html",
+   "https://fatboycanada.com/pages/jukka-setala"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait publié par Fatboy : pages « About Fatboy », « Original » (fatboy.com) et page designer de Fatboy Canada consultées, sans photo de la personne (uniquement des produits). Pas de site officiel du créateur trouvé (jukkasetala.com/.fi ne répondent pas). Les portraits trouvés sont sur des revendeurs (Finnish Design Shop, Connox, Vepsäläinen) ou Wikipédia, donc exclus.",
+  "remarks": "Date de naissance (1967), formation (Université d'art et de design d'Helsinki, 1996) et enseignement ne figurent que sur Wikipédia et des revendeurs : omis. Fatboy Canada dit « conceptualized in 1998 ». La phrase sur les déclinaisons (Slim, Outdoor, housses) s'appuie sur les produits du lot attribués à Setälä par Mikado ; Fatboy ne précise pas qui a dessiné chaque déclinaison (Floatzac notamment)."
+ },
+ {
+  "slug": "florentijn-hofman",
+  "name": "Florentijn Hofman",
+  "sortKey": "Hofman",
+  "brands": [
+   "Fatboy"
+  ],
+  "bio": "Florentijn Hofman, né en 1977, est un artiste dont le studio, Studio Florentijn Hofman, est installé aux Pays-Bas. Il est connu pour ses sculptures d'animaux à très grande échelle, à commencer par son canard en caoutchouc géant (Rubber Duck), qui a attiré huit millions de visiteurs en un mois à Hong Kong. Il a vécu et travaillé plusieurs années à Schiedam, où il a installé en 2021 la Stadscocon, une structure gonflable en toile de spinnaker de 26 mètres de long dans l'église Saint-Jean. Pour Fatboy, il a dessiné CO9, un lapin en peluche géant sur lequel on s'allonge, rempli de billes d'EPS, dont la version XS est proposée en tissu Teddy.",
+  "bioSources": [
+   "https://florentijnhofman.com/",
+   "https://stedelijkmuseumschiedam.nl/tentoonstelling/stadscocon/",
+   "https://www.fatboy.com/us-en/co9-xs-teddy/000225.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Mode « bio » : photo non demandée pour cette entrée.",
+  "remarks": "Fatboy orthographie le nom « Florentijn Hoffman » sur la fiche produit ; l'orthographe correcte, celle du site officiel du studio, est « Hofman » (valeur Mikado conservée). Le site officiel ne donne pas de texte biographique : l'année de naissance et le canard de Hong Kong viennent du Stedelijk Museum Schiedam."
+ },
+ {
+  "slug": "hortense-and-valeriane",
+  "name": "Hortense and Valériane",
+  "sortKey": "Hortense and Valériane",
+  "brands": [
+   "Fatboy"
+  ],
+  "bio": "Hortense Pontabry et Valériane Voirin sont les deux créatrices de Miasun, une tente de plage portable. L'idée leur est venue lors de vacances en Australie, alors qu'elles transportaient un parasol classique. Leur abri, monté sur des arceaux pliants en aluminium avec une toile en coton, pèse un peu plus d'un kilo, se monte en 90 secondes environ et offre près de 3 m² d'ombre, de quoi abriter deux adultes et deux enfants. Miasun fait aujourd'hui partie de la collection Fatboy.",
+  "bioSources": [
+   "https://www.fatboy.com/hr-en/miasun.html",
+   "https://www.fatboy.com/us-en/miasun/000140.html"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Mode « bio » : photo non demandée pour cette entrée.",
+  "remarks": "Noms complets confirmés par Fatboy (champ Designer : « Valériane Voirin & Hortense Pontabry »). La date de création de Miasun (2017), la ville (Annecy) et les métiers des fondatrices (architecte d'intérieur, marketing) ne figurent que dans la presse (ChEEk Magazine, Les Fondus) : omis. Miasun.com redirige vers Fatboy. Envisager d'afficher « Hortense Pontabry et Valériane Voirin » plutôt que « Hortense and Valériane »."
+ },
+ {
+  "slug": "lars-tornoe",
+  "name": "Lars Tornøe",
+  "sortKey": "Tornøe",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Lars Tornøe est un designer norvégien qui travaille le mobilier et le design produit depuis son studio de Stavanger, pour des éditeurs d'Europe et des États-Unis. Il a notamment reçu le prix DogA, un Red Dot Award, le prix Award for Design Excellence, et a été nommé designer de l'année en Norvège par le magazine Bo Bedre. Pour Muuto, il a dessiné les patères The Dots, d'abord en bois, puis en métal (2018) et en céramique (2019), produites à plus d'un million d'exemplaires ; les Dots figurent dans la collection permanente du Danish Design Center. Il signe aussi chez Muuto le portemanteau Coil et le bougeoir Pair.",
+  "bioSources": [
+   "https://www.muuto.com/designers2/lars-tornoe2/",
+   "https://www.muuto.com/stories/product-stories/playful-hooks-dots-series/",
+   "https://www.larstornoe.com/about"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/lars-tornoe.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/lars-tornoe2/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/lars-tornoe/lars-tornoe-portrait-muuto.jpg",
+   "credit": null,
+   "width": 793,
+   "height": 1000,
+   "notes": "Portrait noir et blanc publié par Muuto sur la page du designer, bras croisés, visage net ; déjà proche du 4:5. Muuto ne sert pas de version plus grande (paramètre width sans effet)."
+  },
+  "photoMissingReason": null,
+  "remarks": "L'année d'introduction des Dots en bois (2007) n'apparaît que dans un extrait de recherche d'une page Muuto non accessible : omise."
+ },
+ {
+  "slug": "mika-tolvanen",
+  "name": "Mika Tolvanen",
+  "sortKey": "Tolvanen",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Mika Tolvanen est un designer finlandais né en 1975, qui a grandi dans le village de Pankakoski, dans le nord de la Finlande. Diplômé du Royal College of Art de Londres en 2001, il ouvre ensuite sa propre agence à Helsinki. En 2015, il fonde avec Julie Tolvanen le Studio Tolvanen, installé avec son atelier sur l'île de Lauttasaari, à Helsinki. Il a reçu le prix Bruno Mathsson en 2012 et a été désigné designer de l'année 2017 par l'association finlandaise des architectes d'intérieur (SIO). Il travaille pour Muuto, Design Within Reach, Woud, Teknion, Zanotta ou Offecct ; chez Muuto, il signe les paniers et le plateau Restore, la chaise Visu et la table Base.",
+  "bioSources": [
+   "https://www.studiotolvanen.com/julie-mika-tolvanen-1-1-1",
+   "https://www.muuto.com/designers2/mika-tolvanen/",
+   "https://www.muuto.com/designers/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/mika-tolvanen.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/mika-tolvanen/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/mika-tolvanen/mika_tolvanen-portrait-muuto.jpg",
+   "credit": null,
+   "width": 793,
+   "height": 1000,
+   "notes": "Portrait noir et blanc de face sur fond clair, publié par Muuto ; visage net, proche du 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "harri-koskinen",
+  "name": "Harri Koskinen",
+  "sortKey": "Koskinen",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Harri Koskinen est un designer finlandais né en 1970, connu pour une approche sobre et conceptuelle du design produit et de l'aménagement. Il fonde en 2000 son agence Friends of Industry, consacrée au design produit, au concept et à la scénographie, puis lance en 2009 sa propre collection, Harri Koskinen Works. Directeur du design d'Iittala de 2012 à 2016, il y occupe depuis septembre 2024 un poste de responsable du développement design. Il a reçu le Compasso d'Oro (2004), la médaille Pro Finlandia (2007), le prix Torsten et Wanja Söderberg (2009) et le prix Kaj Franck (2014), et a été nommé designer de l'année en Finlande. Pour Muuto, il a dessiné la lampe de table Cosy.",
+  "bioSources": [
+   "https://www.harrikoskinen.com/about/index.html",
+   "https://www.muuto.com/designers2/harri-koskinen/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/harri-koskinen.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/harri-koskinen/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/harri-koskinen/harri-koskinen-portrait-muuto.jpg",
+   "credit": null,
+   "width": 793,
+   "height": 1000,
+   "notes": "Portrait noir et blanc, assis, publié par Muuto ; visage net, proche du 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "Muuto présente aujourd'hui la lampe sous le nom « Cosy in Grey » (et Cosy in White) ; Mikado l'appelle « Lampe de table Cosy »."
+ },
+ {
+  "slug": "thomas-bentzen",
+  "name": "Thomas Bentzen",
+  "sortKey": "Bentzen",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Thomas Bentzen est un designer danois, diplômé en 2003 de l'école de design de l'Académie royale des beaux-arts du Danemark. Designer senior puis associé du Studio Louise Campbell de 2005 à 2010, il fonde son propre studio à Copenhague en 2010. Il est aussi cofondateur du collectif de design REMOVE. Chez Muuto, il a été design manager de 2011 à 2013, puis directeur du design de 2013 à 2015. Il travaille notamment pour Bang & Olufsen, HAY, Louis Poulsen, Menu, Royal Copenhagen et Muuto, pour qui il a dessiné les séries Linear, Cover et Loft, le buffet Enfold et la caisse de rangement Sketch.",
+  "bioSources": [
+   "https://thomasbentzen.com/",
+   "https://www.muuto.com/designers2/thomas-bentzen/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/thomas-bentzen.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/thomas-bentzen/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/thomas-bentzen/thomas-bentzen_2023_2.jpg",
+   "credit": null,
+   "width": 800,
+   "height": 1000,
+   "notes": "Portrait en couleur (2023) publié par Muuto, debout contre un mur, veste bleue ; visage net, déjà au format 4:5. La personne occupe environ la moitié de la largeur : recadrage possible sur le buste."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité danoise déduite de sa formation et de son studio à Copenhague ; ses propres pages parlent de la tradition danoise du design sans écrire « danois » explicitement. Muuto écrit « Louise Campell Studio » (faute de frappe) ; le site de Bentzen écrit « Studio Louise Campbell »."
+ },
+ {
+  "slug": "form-us-with-love",
+  "name": "Form Us With Love",
+  "sortKey": "Form Us With Love",
+  "brands": [
+   "Muuto"
+  ],
+  "bio": "Form Us With Love est un studio suédois de design et d'architecture intérieure fondé en 2005 à Stockholm par Jonas Pettersson et John Löfgren. Le studio associe design produit et approche stratégique, avec une attention portée à la conception durable et à l'évolution des pratiques industrielles. Son travail a été distingué par des prix Red Dot, iF et Svensk Form ; Fast Company l'a classé en 2020 parmi les cinq entreprises de design les plus innovantes au monde. Il a été exposé au MoMA et au Nationalmuseum de Stockholm. Pour Muuto, il a dessiné la suspension Unfold ; il travaille aussi pour Keilhauer, Kristalia et Blond.",
+  "bioSources": [
+   "https://www.formuswithlove.se/us/",
+   "https://www.formuswithlove.se/",
+   "https://www.formuswithlove.se/unfold-translucent-at-muuto-milan-apartment/",
+   "https://www.muuto.com/designers2/form-us-with-love/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/form-us-with-love.jpg",
+   "sourcePage": "https://www.muuto.com/designers2/form-us-with-love/",
+   "imageUrl": "https://www.muuto.com/globalassets/content-media/images/designer/form-us-with-love/form_designer.jpg",
+   "credit": "Jonas Jacob Svensson",
+   "width": 800,
+   "height": 1000,
+   "notes": "Photo couleur de deux hommes (a priori les fondateurs) assis derrière trois suspensions Unfold, publiée par Muuto ; déjà au format 4:5, visages nets. Crédit lu dans les métadonnées EXIF (copyright). La page Muuto ne précise pas qui est qui."
+  },
+  "photoMissingReason": null,
+  "remarks": "Muuto parle encore d'un « trio » ; le site du studio cite deux cofondateurs (Pettersson, Löfgren) et une équipe plus large. « Nationalmuseum » : Muuto écrit « Swedish National Gallery »."
+ },
+ {
+  "slug": "esther-horchner",
+  "name": "Esther Hörchner",
+  "sortKey": "Hörchner",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Esther Hörchner est illustratrice et designer, installée à Arnhem. Diplômée de l'ArtEZ à Zwolle, elle fonde en 2009 avec Maaike Burgers et Els ten Klooster le collectif d'illustration Het Paradijs, dont l'atelier se trouve dans le quartier de Klarendal, à Arnhem. Le studio y a d'abord tenu une boutique d'objets illustrés (cartes, affiches, vaisselle), puis se consacre depuis 2023 à l'illustration de commande : livres, presse, infographies. Les dessins sont faits à la main, au feutre fin, au crayon ou à la gouache. Pour Pols Potten, elle a dessiné la théière et le service à thé Undressed, en porcelaine, avec des baigneuses dessinées au crayon et au feutre fin à l'intérieur des pièces.",
+  "bioSources": [
+   "https://www.studiohetparadijs.nl/info/",
+   "https://www.polspotten.com/en/undressed-teapot/230-400-177.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Le seul portrait officiel (studiohetparadijs.nl/info, portret-Esther.jpg) mesure 236 × 236 px et est détouré en cercle : trop petit. La photo de groupe du studio (wij-drie-nieuw, 1920 × 489 px au plus) montre trois personnes en bandeau, non cadrable en 4:5. Pols Potten ne publie pas de portrait.",
+  "remarks": "Pols Potten écrit « Esther Hörchner (Het Paradijs) ». La nationalité (néerlandaise) n'est pas écrite telle quelle sur le site du studio : omise, seule la ville est citée."
+ },
+ {
+  "slug": "koens-middelkoop",
+  "name": "Koens & Middelkoop",
+  "sortKey": "Koens & Middelkoop",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Koens & Middelkoop est le studio de design produit de Chris Koens et Ramon Middelkoop, tous deux formés à la Design Academy Eindhoven. Le duo développe des objets de sa propre initiative, qui trouvent ensuite un éditeur, ou sur commande, en lien étroit avec les marques. Il a notamment travaillé pour Royal Delft (Proud Mary, Bleu Herring), Kikkerland (gamme Huckleberry), Vivara et New Soda. Pour Pols Potten, il a dessiné les vases Upside-Down Head et Day Dream : ce dernier, en céramique, dispose les tiges en cercle autour d'un personnage absorbé dans ses pensées.",
+  "bioSources": [
+   "https://www.koens-middelkoop.nl/",
+   "https://www.koens-middelkoop.nl/about/",
+   "https://www.polspotten.com/en/day-dream-vase/240-205-084.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/koens-middelkoop.jpg",
+   "sourcePage": "https://www.koens-middelkoop.nl/about/",
+   "imageUrl": "https://www.koens-middelkoop.nl/wp-content/uploads/2023/07/Koens-Middelkoop-Design.jpg",
+   "credit": null,
+   "width": 1920,
+   "height": 1920,
+   "notes": "Photo couleur des deux designers côte à côte devant un mur blanc, publiée sur la page About du studio (vignette 1024 px, original 1920 px téléchargé). Carrée : un recadrage 4:5 (1536 × 1920) garde les deux visages. Le site n'indique pas qui est qui."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité (néerlandaise) non écrite sur le site du studio : omise. Le site nomme le vase « Dream Vase » ; Pols Potten écrit « Day Dream Vase » (et « Daydream Vase » dans le texte)."
+ },
+ {
+  "slug": "daphna-laurens",
+  "name": "Daphna Laurens",
+  "sortKey": "Daphna Laurens",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Daphna Laurens est un studio de design produit et d'espace fondé en 2008 à Eindhoven par Daphna Isaacs Burggraaf et Laurens Manders, tous deux diplômés de la Design Academy Eindhoven. Le duo cherche à rapprocher arts appliqués et beaux-arts, et travaille aussi bien sur des objets et des luminaires que sur des intérieurs et des scénographies, par exemple l'exposition « PLASTIC: Promises of a Home-made Future » à Het Nieuwe Instituut (2015). Formy est né comme bougeoir pour le Nationaal Glasmuseum de Leerdam : deux pièces de verre soufflé de couleurs différentes, dont le chevauchement fait apparaître une troisième teinte. Pour Pols Potten, le studio a développé la famille Formy en vases et bougeoirs.",
+  "bioSources": [
+   "https://nieuweinstituut.nl/en/projects/ontwerpplatform/daphna-laurens",
+   "https://www.daphnalaurens.nl/profile/",
+   "https://www.daphnalaurens.nl/project/formy-x-polspotten/",
+   "https://www.daphnalaurens.nl/project/formy-for-nationaal-glasmuseum-leerdam/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/daphna-laurens.jpg",
+   "sourcePage": "https://www.daphnalaurens.nl/profile/",
+   "imageUrl": "https://www.daphnalaurens.nl/wp-content/uploads/2026/08/HS_05145.jpg",
+   "credit": null,
+   "width": 4672,
+   "height": 5840,
+   "notes": "Photo couleur des deux fondateurs debout dans leur atelier, publiée sur la page Profile du studio ; original déjà au format 4:5 (8,6 Mo). Plan en pied : les visages sont nets mais assez petits, un recadrage serré sur le haut du corps est conseillé. Une version 1400 × 1896 px existe aussi."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "modo-architettura",
+  "name": "MODO Architettura",
+  "sortKey": "MODO Architettura",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "MODO architettura + design est un studio pluridisciplinaire d'architecture, d'architecture intérieure et de design produit installé à Livourne, en Toscane. Il est né de la rencontre de l'architecte Sondra Pantani, née en 1982, et l'architecte d'intérieur Pietro Marsili, né en 1983, qui forment aussi un couple. Tous deux sont diplômés en architecture de l'université de Florence ; elle a d'abord étudié la communication à Bologne, lui les sciences de l'environnement à Pise. Le studio a reçu un B.I.G. SEE Design Award pour le projet Little Venice Hair et deux Archilovers Best Project Awards. Pour Pols Potten, il a dessiné une série de patères murales en forme de gestes de la main ; il a aussi créé des tapis pour Now Carpets.",
+  "bioSources": [
+   "https://www.modoarchitettura.com/about",
+   "https://www.modoarchitettura.com/products-design",
+   "https://www.polspotten.com/en/thumbs-up-hook/390-300-048.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/modo-architettura.jpg",
+   "sourcePage": "https://www.modoarchitettura.com/about",
+   "imageUrl": "https://static.wixstatic.com/media/3679d1_9fb0685ead414a53be70a18ccb76aba5~mv2_d_1299_1298_s_2.jpg",
+   "credit": null,
+   "width": 1299,
+   "height": 1298,
+   "notes": "Le studio ne publie pas de photo commune : deux portraits individuels noir et blanc, carrés, dans la section « Our team ». Ce fichier est celui de Sondra Pantani. Le portrait de Pietro Marsili est dans .context/designers/photos/modo-architettura-pietro-marsili.jpg (960 × 958 px, https://static.wixstatic.com/media/3679d1_5fcbc6aa2a05430791d36bb95a507c3c~mv2.jpg). Les deux sont cadrables en 4:5 et peuvent être affichés côte à côte. Un 3e portrait sur la page (Lorenzo Rossi, entré en 2021) n'est pas repris."
+  },
+  "extraPhotos": [
+   {
+    "file": ".context/designers/photos/modo-architettura-pietro-marsili.jpg",
+    "person": "Pietro Marsili",
+    "sourcePage": "https://www.modoarchitettura.com/about",
+    "imageUrl": "https://static.wixstatic.com/media/3679d1_5fcbc6aa2a05430791d36bb95a507c3c~mv2.jpg",
+    "credit": null,
+    "width": 960,
+    "height": 958
+   }
+  ],
+  "photoMissingReason": null,
+  "remarks": "Valeur Shopify : « Sondra Pantani & Pietro Marsili / MODO Architettura ». Nom officiel du studio : « MODO architettura + design ». Pols Potten écrit « MODO Archittetura » (faute) et vend ces patères sous les noms Thumbs Up, I Love You et F You hook ; le nom « Mood » utilisé par Mikado n'apparaît pas chez Pols Potten : vérifier que la « Patère Mood » est bien l'une de ces patères. Le studio mentionne aussi la lampe Avocado pour Hommes Studio (non citée dans la bio)."
+ },
+ {
+  "slug": "jan-wolleswinkel",
+  "name": "Jan Wolleswinkel",
+  "sortKey": "Wolleswinkel",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Jan Wolleswinkel dessine des objets pour Pols Potten, la maison de décoration néerlandaise fondée en 1986 et installée à Amsterdam. On lui doit les Calming Pebbles, des galets décoratifs en verre poli qui contiennent 20 % de verre recyclé. Il signe aussi la vaisselle Golden Finds, en porcelaine rehaussée de détails en or véritable.",
+  "bioSources": [
+   "https://www.polspotten.com/en/calming-pebbles---s/140-300-278.html",
+   "https://www.polspotten.com/en/golden-finds-serving-set/230-400-634.html",
+   "https://www.polspotten.com/en/about-us/about-us.html",
+   "https://www.polspotten.com/en/meet-the-people-of-polspotten.html"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait sur polspotten.com : pas de page designer (l'URL design-collabs/jan-wolleswinkel renvoie une page vide) et il ne figure pas sur la page « Meet the team ». Pas de site personnel trouvé. Les seules images trouvées sont sur LinkedIn/Facebook ou dans un entretien publié par un revendeur (Amara), donc exclues.",
+  "remarks": "Selon un entretien publié par le revendeur Amara (source non autorisée), il aurait succédé à Erik Pol comme codirecteur de Pols Potten en 1997 et en aurait été directeur de la création, avec une formation de designer industriel : omis. Pols Potten n'explique pas son rôle dans l'entreprise."
+ },
+ {
+  "slug": "aldo-deli",
+  "name": "Aldo Deli",
+  "sortKey": "Deli",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Aldo Deli est un designer né en février 1991, formé comme architecte. Après un master en architecture, il se tourne vers le design produit et travaille aux Pays-Bas, en Espagne, en France et en Allemagne auprès d'acteurs du secteur, avant de fonder Aldo Deli Studio en 2019. Le studio se consacre surtout au mobilier, au luminaire et aux objets pour la maison. Sa lampe Magellano a reçu un A' Design Award d'argent en 2019 et son fauteuil Evelyn, en bois, a remporté le Primal Chair Contest en 2022. Pour Pols Potten, il a dessiné Namobo, un cache-pot en terre cuite émaillée à l'intérieur et mate à l'extérieur, avec des anses décoratives.",
+  "bioSources": [
+   "https://www.aldodelistudio.com/about",
+   "https://www.aldodelistudio.com/product/evelyn",
+   "https://www.aldodelistudio.com/product/magellano",
+   "https://www.polspotten.com/en/namobo-plant-pot---m/210-205-009.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/aldo-deli.jpg",
+   "sourcePage": "https://www.aldodelistudio.com/about",
+   "imageUrl": "https://cdn.prod.website-files.com/66fc1cb57b26e05097de3b73/67164df4745925b93d15faef_aldo.jpg",
+   "credit": "Charlotte Mendez",
+   "width": 1706,
+   "height": 2560,
+   "notes": "Portrait couleur, assis sur un rebord de fenêtre, publié sur la page About du studio ; visage net. Format 2:3 : recadrer en 4:5 en coupant le bas (jambes). Crédit indiqué sur la page (« Portrait by Charlotte Mendez »). Un second portrait (Foto bio 2, 1200 × 1800) existe sur la même page."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité non indiquée sur le site officiel (le concours A' Design le dit italien, source non autorisée) : omise. Le site du studio écrit Namobo ; les URL Pols Potten écrivent parfois « Namodo »."
+ },
+ {
+  "slug": "studio-cuno",
+  "name": "Studio Cuno",
+  "sortKey": "Studio Cuno",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Studio Cuno est un studio de design pluridisciplinaire basé aux Pays-Bas, à Amsterdam, et dirigé par Cuno Stevens. Il conçoit du mobilier haut de gamme, des luminaires et des objets de décoration, pour des marques ou sous forme de collections personnelles, en associant savoir-faire artisanal et influences glanées au fil de ses voyages. Pour Pols Potten, le studio a dessiné la série Structure, deux vases et une coupe en céramique inspirés des roches et des lochs des Highlands écossais : les reliefs reprennent les structures observées dans la pierre, et les émaux brillants évoquent les reflets de l'eau. Il travaille aussi pour la marque néerlandaise Zuiver.",
+  "bioSources": [
+   "https://www.studiocuno.com/about",
+   "https://www.studiocuno.com/collabpolspotten",
+   "https://www.studiocuno.com/",
+   "https://www.polspotten.com/en/structure-vase---l/240-205-051.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/studio-cuno.jpg",
+   "sourcePage": "https://www.studiocuno.com/about",
+   "imageUrl": "https://static.wixstatic.com/media/047925_108ff9b930034426bc61f38b2286e64f~mv2.jpg",
+   "credit": null,
+   "width": 1890,
+   "height": 2835,
+   "notes": "Portrait couleur de Cuno Stevens (texte alternatif « Cuno Stevens owner of STUDIO CUNO »), souriant, lunettes teintées, plan à la taille. Format 2:3 : recadrer en 4:5 sur le haut."
+  },
+  "photoMissingReason": null,
+  "remarks": "« Amsterdam » vient du pied de page du site (numéro KvK, Amsterdam). Le site ne donne pas d'année de création."
+ },
+ {
+  "slug": "nienke-sikkema",
+  "name": "Nienke Sikkema",
+  "sortKey": "Sikkema",
+  "brands": [
+   "HKliving"
+  ],
+  "bio": "Nienke Sikkema est une artiste verrière. Avec HKliving, elle a créé une famille d'objets en verre épais et lourd qui évoquent des pierres précieuses taillées : vases Gemstone, bougeoirs et présentoir à gâteau Jewel, déclinés en teintes comme émeraude, saphir, améthyste ou jade. Chaque pièce présente de légères variations d'une pièce à l'autre.",
+  "bioSources": [
+   "https://www.hkliving.com/collections/nienke-sikkema-for-hkliving/",
+   "https://www.hkliving.com/product/nsgsvase/nienke-sikkema-for-hkliving-gemstone-vase-jade/"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "HKliving (page collection, page collaboration, fiches produit) ne publie que des photos d'objets. Le site personnel nienkesikkema.nl est privé (« This site is private ») ; nienkesikkema.com appartient à une homonyme (conseil en management). Aucun portrait dans une source autorisée.",
+  "remarks": "La suspension Gemstone vendue par Mikado n'apparaît pas dans la collection Nienke Sikkema sur hkliving.com (vases, bougeoirs, présentoir, verres seulement) ; un revendeur (Fleux) vend une « Lampe Gemstone - Nienke Sikkema ». Attribution à confirmer auprès de HKliving. Nationalité et parcours non publiés par HKliving : omis."
+ }
+]

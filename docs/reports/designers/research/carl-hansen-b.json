@@ -1,0 +1,401 @@
+[
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": null,
+    "slug": "morten-gottler",
+    "name": "Morten Gøttler",
+    "sortKey": "Gøttler",
+    "bio": "Morten Gøttler est un designer danois né en 1944 à Copenhague. Après des études dans le transport maritime et plusieurs années dans ce secteur, il se tourne vers le design en autodidacte, en apprenant les propriétés des matériaux par l'expérience. Il fonde son propre studio en 1972 et conçoit des objets d'art appliqué, des luminaires, des jouets, des emballages et des travaux graphiques pour des clients au Danemark et à l'étranger. Depuis le milieu des années 1980, il se consacre surtout au mobilier, le plus souvent en bois associé à d'autres matériaux naturels. Pour Carl Hansen & Søn, il a dessiné en 1997 la chaise pliante MG501 Cuba, proposée avec assise en sangle ou en corde de papier.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/morten-gottler",
+      "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/mg501"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/morten-gottler.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/morten-gottler",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/morten-goettler-1500x1800px.jpg",
+      "credit": null,
+      "width": 1500,
+      "height": 1800,
+      "notes": "Portrait noir et blanc en buste, déjà au format 5:6 ; vignette officielle utilisée par Carl Hansen & Søn dans la liste des designers. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": null,
+    "slug": "anker-bak",
+    "name": "Anker Bak",
+    "sortKey": "Bak",
+    "bio": "Anker Bak est un ébéniste et designer danois né en 1983, qui a grandi à la campagne au Danemark. Formé à l'ébénisterie dans une entreprise de construction navale, où il réalise des aménagements sur mesure pour voiliers, il termine son apprentissage avec une médaille d'argent. Après avoir travaillé au Japon, en Finlande, en Chine et à Hawaï, il obtient en 2014 une licence en design de mobilier au VIA University College. Il a notamment reçu le prix Wegner, le prix Finn Juhl et un Danish Design Award de designer de l'année. Pour Carl Hansen & Søn, il a dessiné le bureau mural AB019, inspiré des petits logements japonais, et ses accessoires AB020 en chêne.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/anker-bak",
+      "https://www.carlhansen.com/en/en/collection/tables-desks/desks/ab019",
+      "https://www.carlhansen.com/en/en/collection/furniture-accessories/ab020D"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/anker-bak.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/anker-bak",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/anker-bak_portrait-large.jpg",
+      "credit": null,
+      "width": 3000,
+      "height": 2000,
+      "notes": "Portrait noir et blanc (visage net, trois quarts) au format paysage ; recadrage 4:5 possible (environ 1600 × 2000) centré sur le visage, au centre de l'image. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "Duo : Ejner Larsen et Aksel Bender Madsen. sortKey au nom complet du duo.",
+    "slug": "larsen-bender-madsen",
+    "name": "Larsen & Bender Madsen",
+    "sortKey": "Larsen & Bender Madsen",
+    "bio": "Ejner Larsen (1917-1987), tapissier de formation, et Aksel Bender Madsen (1916-2000), ébéniste, se rencontrent en suivant l'enseignement de Kaare Klint à l'Académie royale des beaux-arts du Danemark. Ils commencent à dessiner ensemble en 1947, pendant leur temps libre, et exposent ensuite chaque année au salon de la guilde des ébénistes de Copenhague. Le duo a conçu environ 300 meubles, des sièges aux chambres à coucher, bibliothèques et mobilier de bureau. Présenté au salon de la guilde en 1949 et produit à partir de 1950, leur fauteuil prend le nom de Metropolitan après l'exposition « The Arts of Denmark » au Metropolitan Museum of Art de New York en 1960. Carl Hansen & Søn l'édite sous la référence LM92.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/larsen-bender-madsen",
+      "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/lm92t",
+      "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/lm92p"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/larsen-bender-madsen.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/larsen-bender-madsen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/larsen-bender-madsen-1500x1800px.jpg",
+      "credit": null,
+      "width": 1500,
+      "height": 1800,
+      "notes": "Photo d'archives noir et blanc des deux designers assis côte à côte ; vignette officielle Carl Hansen & Søn. Les deux visages sont nets. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "La page designer de Carl Hansen & Søn a pour adresse /designers/thomas-kastholm (et non thomas-bo-kastholm). Mikado vend le produit sous le nom « Canapé TK8 » ; Carl Hansen & Søn le présente comme un lit de repos (daybed).",
+    "slug": "thomas-bo-kastholm",
+    "name": "Thomas Bo Kastholm",
+    "sortKey": "Kastholm",
+    "bio": "Thomas Bo Kastholm est un designer danois né en 1963, fils du designer Jørgen Kastholm. Formé d'abord à la menuiserie, il étudie à l'École danoise de design, dont il sort diplômé en 1989, puis travaille pour plusieurs studios au Danemark et en Allemagne sur du mobilier, des cuisines et des aménagements de boutiques. Il fonde son propre studio en 2008. Sa collaboration avec Carl Hansen & Søn commence en 2009 avec le lit de repos TK8, qui associe un cadre en acier inoxydable assemblé sans soudure, une assise en chêne ou en noyer et un long coussin en cuir.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/thomas-kastholm",
+      "https://www.carlhansen.com/en/en/collection/sofas-daybeds/tk8"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/thomas-bo-kastholm.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/thomas-kastholm",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/thomas-bo-kastholm_mobil.jpg",
+      "credit": null,
+      "width": 2019,
+      "height": 2577,
+      "notes": "Portrait noir et blanc en buste sur fond sombre, format proche du 4:5. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "Duo : sortKey « Fisher & Barenghi » (noms de famille, sur le modèle « Fabricius & Kastholm »). Page Carl Hansen & Søn : /designers/sharon-fisher-and-matteo-barenghi.",
+    "slug": "sharon-fisher-matteo-barenghi",
+    "name": "Sharon Fisher & Matteo Barenghi",
+    "sortKey": "Fisher & Barenghi",
+    "bio": "Sharon Fisher et Matteo Barenghi forment un duo dano-italien d'architectes et de designers qui travaille ensemble depuis 2008. Née en 1959, Sharon Fisher est diplômée en 1987 de l'Académie royale des beaux-arts du Danemark, après deux ans passés dans l'atelier textile de Vibeke Klint ; elle a fondé son propre studio en 1990. Né en Italie en 1971, Matteo Barenghi est diplômé de l'École polytechnique de Milan en 1999 ; il a travaillé chez Michele De Lucchi à Milan, cofondé Kokaistudios à Shanghai, puis collaboré cinq ans avec l'agence Dissing + Weitling à Copenhague. Pour Carl Hansen & Søn, ils ont dessiné l'étagère Tsugi, dont le système d'assemblage, inspiré de la menuiserie japonaise sashimono, reste invisible.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/sharon-fisher-and-matteo-barenghi",
+      "https://www.carlhansen.com/en/en/collection/accessories/decoration/fb001"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/sharon-fisher-matteo-barenghi.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/sharon-fisher-and-matteo-barenghi",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/fisherbarenghi_small.jpg",
+      "credit": null,
+      "width": 5040,
+      "height": 6500,
+      "notes": "Portrait en pied des deux designers devant un mur, format vertical ; recadrage 4:5 à mi-corps conseillé. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "Portrait à extraire d'une image composite (voir photo.notes).",
+    "slug": "henning-koppel",
+    "name": "Henning Koppel",
+    "sortKey": "Koppel",
+    "bio": "Henning Koppel (1918-1981) est un sculpteur et designer danois né à Copenhague. Il entre en 1936 à l'école de sculpture de l'Académie royale des beaux-arts du Danemark, puis étudie en 1938 à l'Académie Ranson à Paris. En 1945, il commence une collaboration durable avec l'orfèvre Georg Jensen, pour qui il dessine bijoux, pièces d'orfèvrerie et couverts, et travaille à partir de 1961 la porcelaine chez Bing & Grøndahl. Il a reçu plusieurs médailles d'or aux Triennales de Milan dans les années 1950 ainsi que le prix Lunning. Rare exemple de son travail dans l'éclairage, la lampe Bubi de 1972, en acrylique opale, est éditée par Carl Hansen & Søn en suspension (HK20) et en lampe à poser (HK21).",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/henning-koppel",
+      "https://www.carlhansen.com/en/en/collection/lighting/pendant-lamps/hk20",
+      "https://www.carlhansen.com/en/en/collection/lighting/table-lamps/hk21"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/henning-koppel.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/henning-koppel",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-andscape/henningkoppel-desktop-hero-3840x2160px.jpg",
+      "credit": null,
+      "width": 5120,
+      "height": 2880,
+      "notes": "ATTENTION : image composite (bandeau de la page designer) associant une photo d'ambiance de la lampe HK20 à gauche et un portrait d'archives noir et blanc à droite. Le portrait occupe environ x 3080-4610, y 540-2340 (≈ 1530 × 1800 px) : recadrer sur cette zone avant usage. Aucune version isolée du portrait trouvée sur carlhansen.com. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": "Il s'agit d'une manufacture, pas d'une personne. Carl Hansen & Søn n'a pas de page designer « Nason Moretti » (l'URL /designers/nason-moretti renvoie une page vide) ni de portrait. Sur nasonmoretti.com (page History), les seules images de personnes sont de petites photos d'archives (≤ 520 px de large, sans légende permettant d'identifier les membres de la famille). Rien d'utilisable.",
+    "remarks": "ANOMALIE PARTIELLE. La collaboration commerciale est réelle : carlhansen.com vend les vases « Murano | Vase Nuvole » (small, medium) avec la mention « designed by Nason Moretti », ainsi que des verres Nason Moretti présentés comme « exclusively made for Carl Hansen & Søn Flagship Stores ». Mais NasonMoretti est une verrerie de Murano (fondée en 1923), et non un designer : Carl Hansen & Søn distribue ses pièces, il ne s'agit pas d'une création d'un designer de l'éditeur. Aucun designer individuel n'est crédité pour la collection Nuvole. L'orthographe officielle de la maison est « NasonMoretti » (en un mot) ; Carl Hansen & Søn écrit « Nason Moretti ». À décider : garder « Nason Moretti » comme créateur (fabricant) ou le traiter comme marque distribuée. L'année de l'attribution du Compasso d'Oro (1955) n'apparaît que dans un intertitre du site et a été omise par prudence.",
+    "slug": "nason-moretti",
+    "name": "Nason Moretti",
+    "sortKey": "Nason Moretti",
+    "bio": "NasonMoretti est une verrerie familiale de Murano, fondée en 1923 par Ugo Nason, ancien chef de four de la verrerie Franchetti, avec ses quatre fils, rejoints peu après par Francesco Moretti. D'abord spécialisée dans la verrerie courante, la « Cristalleria Nason & Moretti » s'installe en 1927 dans le quartier de Serenella. Umberto Nason reçoit le Compasso d'Oro pour la série Lidia, premier exemple de verre incamiciato inversé, puis l'entreprise collabore à partir de 1986 avec l'architecte milanais Sergio Asti. Sa direction a ensuite été reprise par Giorgio, Marco et Piero Nason. Carl Hansen & Søn diffuse plusieurs de ses pièces en verre de Murano soufflé bouche, dont les vases Nuvole.",
+    "bioSources": [
+      "https://www.nasonmoretti.com/history?lang=en_US",
+      "https://www.nasonmoretti.com",
+      "https://www.carlhansen.com/en/en/collection/accessories/decoration/murano---vase-nuvole-medium",
+      "https://www.carlhansen.com/en/en/collection/accessories/kitchen-tableware/nason-moretti-multiglass-4-pcs"
+    ],
+    "photo": null
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "Le repose-pieds KK97170 Safari porte le préfixe KK (Kaare Klint) mais Carl Hansen & Søn l'attribue bien à Esben Klint (« Safari footstool designed by Esben Klint ») : attribution Mikado cohérente avec l'éditeur.",
+    "slug": "esben-klint",
+    "name": "Esben Klint",
+    "sortKey": "Klint",
+    "bio": "Esben Klint (1915-1969) est un architecte et ébéniste danois, fils de Kaare Klint et petit-fils de P. V. Jensen-Klint. Après un apprentissage d'ébéniste achevé en 1934 avec une médaille de bronze, il passe un an à l'Académie royale des beaux-arts du Danemark, puis travaille notamment pour son père, pour Mogens Koch, pour l'architecte suédois E. G. Asplund et, avec son ami Børge Mogensen, sur du mobilier scolaire en bois. Il ouvre son studio en 1954, termine plusieurs chantiers laissés par son père et achève l'église de Grundtvig à Copenhague. Carl Hansen & Søn édite le repose-pieds Safari KK97170, qu'il dessina après la mort de Kaare Klint pour accompagner la chaise Safari, et la suspension EK61 en verre opale, dessinée en 1961 et restée inédite jusqu'à sa production par l'éditeur.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/esben-klint",
+      "https://www.carlhansen.com/en/en/collection/lighting/pendant-lamps/ek61",
+      "https://www.carlhansen.com/en/collection/footrests-stools/kk97170/kk97170-ash-oil-canvas-natural/variant/7484"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/esben-klint.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/esben-klint",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esben-klint/esben-klint_landscape.jpg",
+      "credit": null,
+      "width": 2965,
+      "height": 1977,
+      "notes": "Photo d'archives noir et blanc, en extérieur, visage net ; format paysage, recadrage 4:5 possible (≈ 1580 × 1977) sur la moitié gauche où se trouve le visage. Une version verticale existe aussi (esben-klint_mobile.jpg, 1157 × 2058). Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": null,
+    "slug": "mogens-lassen",
+    "name": "Mogens Lassen",
+    "sortKey": "Lassen",
+    "bio": "Mogens Lassen (1901-1987) est un architecte danois, pionnier du fonctionnalisme au Danemark. Après un apprentissage de maçon de 1919 à 1923, il suit l'école d'architecture de l'Académie royale des beaux-arts du Danemark et travaille de 1925 à 1934 chez l'architecte Tyge Hvass. Un séjour à Paris en 1927-1928 le rapproche des idées de Le Corbusier, qui marquent ses villas et ses immeubles. De 1939 à 1967, il conçoit les présentations de l'Exposition permanente des arts appliqués et du design industriel danois à Copenhague. Sa table pliante Egyptian, inspirée des supports découverts dans la tombe de Toutânkhamon et présentée en 1940 au salon de la guilde des ébénistes de Copenhague, est éditée par Carl Hansen & Søn sous la référence ML10097.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/mogens-lassen",
+      "https://www.carlhansen.com/en/en/collection/tables-desks/coffee-tables/ml10097"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/mogens-lassen.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/mogens-lassen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/mogens-lassen-1500x1800px.jpg",
+      "credit": null,
+      "width": 1500,
+      "height": 1800,
+      "notes": "Portrait d'archives noir et blanc en buste, vignette officielle Carl Hansen & Søn. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "Le nom islandais complet est parfois écrit « Guðmundur Lúðvík » ; Carl Hansen & Søn écrit « Gudmundur Ludvik », conservé tel quel.",
+    "slug": "gudmundur-ludvik",
+    "name": "Gudmundur Ludvik",
+    "sortKey": "Ludvik",
+    "bio": "Gudmundur Ludvik est un designer islandais né en 1970, qui vit et travaille au Danemark. Formé comme charpentier, il travaille plusieurs années dans le bâtiment avant d'étudier la sculpture à l'Académie des arts d'Islande. Arrivé à Copenhague en 1999 pour étudier le design de mobilier à l'Académie royale danoise, il fonde ensuite son propre studio, Studio Gudmundur Ludvik. En 2010, il crée aussi avec Hee Welling, ancien camarade d'études, le studio de design industriel Welling/Ludvik. Sa première création pour Carl Hansen & Søn est le banc d'extérieur GL101 Timbur, dessiné en 2023.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/gudmundur-ludvik",
+      "https://www.carlhansen.com/en/en/collection/outdoor-furniture/gl101"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/gudmundur-ludvik.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/gudmundur-ludvik",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/gudmundur-ludvik/gudmundur_ludvik_portait_02.jpg",
+      "credit": null,
+      "width": 4000,
+      "height": 6000,
+      "notes": "Portrait noir et blanc en buste, visage net, format vertical 2:3 ; recadrage 4:5 facile. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "Collaboration réelle : Carl Hansen & Søn présente la CH24 Soft comme « Hans J. Wegner & Ilse Crawford » (lancée en 2022) mais la fiche produit reste « designed by Hans J. Wegner » : Ilse Crawford a choisi la palette de neuf couleurs, la chaise est de Wegner (1949). Pas de page designer Ilse Crawford sur carlhansen.com. Faits non retenus faute de source autorisée consultable : naissance (1962), fondation de Studioilse (2001), création d'Elle Decoration UK (1989) — la page du Sir John Soane's Museum renvoie une erreur 403.",
+    "slug": "ilse-crawford",
+    "name": "Ilse Crawford",
+    "sortKey": "Crawford",
+    "bio": "Ilse Crawford est une designer, enseignante et directrice de création installée à Londres, fondatrice du studio Studioilse. Elle a créé le département Man and Wellbeing de la Design Academy Eindhoven, qu'elle a dirigé pendant deux décennies. Son studio, établi dans une ancienne tannerie du quartier de Bermondsey, conçoit des logements, des hôtels, des restaurants, des écoles ou des bureaux, ainsi que du mobilier et des objets. En 2022, pour marquer plus de soixante-dix ans de collaboration entre Carl Hansen & Søn et Hans J. Wegner, elle a choisi neuf teintes mates à base d'eau pour la chaise CH24 Wishbone, éditée sous le nom de CH24 Soft.",
+    "bioSources": [
+      "https://www.studioilse.com/ilse-crawford/",
+      "https://www.carlhansen.com/en/en/lp/ilse-crawford-ch24-soft",
+      "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/ch24-soft-ilse-crawford"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/ilse-crawford.jpg",
+      "sourcePage": "https://www.studioilse.com/ilse-crawford/",
+      "imageUrl": "https://www.studioilse.com/wp-content/uploads/2022/11/ILSEC2-1.jpg",
+      "credit": null,
+      "width": 1122,
+      "height": 1611,
+      "notes": "Site officiel du studio. Portrait en couleur à mi-corps, de profil (elle regarde par une fenêtre), une plante verte au premier plan ; visage net mais non frontal. Recadrage 4:5 possible. Alternative Carl Hansen & Søn (landingpage/ilse/ilsecrawford_portrait_v6.jpg, 6633 × 4422) écartée : scène d'atelier à deux personnes, Ilse Crawford de profil. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": null,
+    "slug": "tadao-ando",
+    "name": "Tadao Ando",
+    "sortKey": "Ando",
+    "bio": "Tadao Ando est un architecte japonais né en 1941 à Osaka. Apprenti chez un charpentier local dès l'âge de 10 ans, il découvre l'architecture à 15 ans à travers un livre de croquis de Le Corbusier. Il a réalisé plus de 150 projets au Japon et à l'étranger, dont le Chichu Art Museum à Naoshima, la Pulitzer Foundation for the Arts à Saint-Louis et le Teatro Armani à Milan. Il a notamment reçu le prix Carlsberg en 1992, le prix Pritzker en 1995 et la médaille d'or du Royal Institute of British Architects en 1997. Admirateur du travail de Hans J. Wegner, il a conçu avec Carl Hansen & Søn la Dream Chair, dont le fauteuil TA001P est la version à assise et dossier rembourrés.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/tadao-ando",
+      "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/ta001p"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/tadao-ando.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/tadao-ando",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/tadao-ando-mobile.jpg",
+      "credit": null,
+      "width": 2160,
+      "height": 3840,
+      "notes": "Portrait noir et blanc en gros plan du visage, format 9:16 ; recadrage 4:5 (2160 × 2700) sans difficulté. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": null,
+    "slug": "marianne-tuxen",
+    "name": "Marianne Tuxen",
+    "sortKey": "Tuxen",
+    "bio": "Marianne Tuxen est une designer danoise née en 1958 à Frederiksberg, à Copenhague, spécialisée dans l'éclairage. Après des études d'arts graphiques et de sculpture aux États-Unis, elle entre à l'école d'architecture de l'Académie royale des beaux-arts du Danemark ; ses premières lampes sont produites avant son diplôme, obtenu en 1985. Elle fonde en 1988 son studio, Tuxen Design, et conçoit des luminaires pour des églises, des musées, des hôtels ou des aéroports, dont l'aéroport de Copenhague et l'Institut danois de Rome. Pour Carl Hansen & Søn, elle a dessiné en 2022 la suspension MT221 Tulip, en verre opale soufflé bouche et laiton, créée pour la salle pompéienne de l'Académie Carlsberg à Copenhague.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/marianne-tuxen",
+      "https://www.carlhansen.com/en/en/collection/lighting/pendant-lamps/mt221"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/marianne-tuxen.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/marianne-tuxen",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-andscape/marianne-tuxen_portrait.jpg",
+      "credit": null,
+      "width": 7952,
+      "height": 5304,
+      "notes": "Portrait noir et blanc à mi-corps sur fond noir, sujet centré ; format paysage mais recadrage 4:5 (≈ 4240 × 5304) centré très confortable. Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "Carl Hansen & Søn précise que les produits Brad Ascalon sont réservés au marché contract (« only available for the contract market ») : vérifier que la table BA103 est bien commandable pour Mikado.",
+    "slug": "brad-ascalon",
+    "name": "Brad Ascalon",
+    "sortKey": "Ascalon",
+    "bio": "Brad Ascalon est un designer américain né en 1977, petit-fils d'un sculpteur et designer industriel et fils d'un artiste. Il obtient en 2005 un master de design industriel au Pratt Institute de New York, année où le magazine Wallpaper le cite parmi les dix jeunes designers les plus recherchés. Il ouvre son studio à New York en 2006 et conçoit du mobilier pour les secteurs contract, hôtelier et résidentiel, ainsi que des luminaires et des emballages. Pour Carl Hansen & Søn, il a créé la série Preludia, ensemble de tables et de chaises aux nombreuses options de personnalisation, dont fait partie la table ronde BA103.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/brad-ascalon",
+      "https://www.carlhansen.com/en/en/collection/tables-desks/dining-tables/ba103"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/brad-ascalon.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/brad-ascalon",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/brad-ascalon-1500x1800px.jpg",
+      "credit": null,
+      "width": 1500,
+      "height": 1800,
+      "notes": "Portrait noir et blanc, assis sur un tabouret devant un mur brut, cadré aux genoux ; vignette officielle Carl Hansen & Søn. Version paysage plus grande disponible (esigner-portraits-andscape/brad-ascalon-portrait.jpg, 3840 × 2160, même séance). Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "Carl Hansen & Søn écrit le nom du studio « Strand + Hvass » dans ses textes et « Strand & Hvass » dans ses titres ; nom conservé tel que fourni.",
+    "slug": "strand-hvass",
+    "name": "Strand & Hvass",
+    "sortKey": "Strand & Hvass",
+    "bio": "Strand + Hvass est un studio de design fondé en 1998 à Copenhague par la designer industrielle Christina Strand, née en 1968, et l'architecte Niels Hvass, né en 1958. Le duo défend une approche centrée sur l'usager, ancrée dans la culture scandinave et fondée sur la recherche et la fonction. Ses meubles, simples et lisibles, cherchent à tirer parti des propriétés des matériaux et à concilier singularité et production industrielle. Pour Carl Hansen & Søn, il a dessiné en 2007 la table à rallonges SH900 Extend, en chêne.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/strand-hvass",
+      "https://www.carlhansen.com/en/en/collection/tables-desks/dining-tables/sh900"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/strand-hvass.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/strand-hvass",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/strand-hvass-mobile.jpg",
+      "credit": null,
+      "width": 2160,
+      "height": 3840,
+      "notes": "Portrait noir et blanc des deux membres du duo, épaule contre épaule ; format 9:16, recadrage 4:5 (2160 × 2700) sur les visages. Même photo disponible en vignette 1500 × 1800 (esigner-portraits-small/strand-hvass-1500x1800.png). Photographe non indiqué."
+    }
+  },
+  {
+    "brands": [
+      "Carl Hansen & Søn"
+    ],
+    "bioConfidence": "bonne",
+    "photoMissingReason": null,
+    "remarks": "sortKey « Utzon Popov » (nom de famille composé).",
+    "slug": "naja-utzon-popov",
+    "name": "Naja Utzon Popov",
+    "sortKey": "Utzon Popov",
+    "bio": "Naja Utzon Popov est une artiste et designer danoise née en 1973 à Copenhague, petite-fille de l'architecte Jørn Utzon, fille de l'artiste Lin Utzon et de l'architecte australien Alex Popov. Elle étudie le dessin, la peinture et la gravure à la Julian Ashton Art School en Australie, puis à la School of Media Arts and Design de l'université de Westminster en Angleterre. Installée dans son atelier de Copenhague, elle travaille le textile, le verre, la céramique et la sculpture en s'inspirant de la nature. Parmi ses tapis figurent Botanica, Oceania et Woodlines ; ce dernier, en laine nouée main, est édité par Carl Hansen & Søn.",
+    "bioSources": [
+      "https://www.carlhansen.com/en/designers/naja-utzon-popov",
+      "https://www.carlhansen.com/en/en/collection/rugs/nup003"
+    ],
+    "photo": {
+      "file": ".context/designers/photos/naja-utzon-popov.jpg",
+      "sourcePage": "https://www.carlhansen.com/en/en/designers/naja-utzon-popov",
+      "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/naja-utzon-hero-desktop.jpg",
+      "credit": null,
+      "width": 3840,
+      "height": 2160,
+      "notes": "Portrait noir et blanc à mi-corps, souriante, légèrement décalée à droite du centre ; recadrage 4:5 (≈ 1728 × 2160) centré sur x ≈ 1760. Version verticale en pied également publiée (naja-utzon-popov-mobile.jpg, 1215 × 2160), moins serrée. Photographe non indiqué."
+    }
+  }
+]

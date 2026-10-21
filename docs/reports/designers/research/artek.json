@@ -1,0 +1,366 @@
+[
+ {
+  "slug": "ilmari-tapiovaara",
+  "name": "Ilmari Tapiovaara",
+  "sortKey": "Tapiovaara",
+  "brands": [
+   "Artek"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/ilmari-tapiovaara.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/ilmari-tapiovaara",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604858/designers/Ilmari-Tapiovaara_1.jpg",
+   "credit": null,
+   "width": 1219,
+   "height": 1630,
+   "notes": "Portrait noir et blanc publié par Artek sur la page designer (légende des métadonnées : « Ilmari Tapiovaara in the 40's »). Il tient une miniature de chaise. Cadrage vertical, visage net, recadrable en 4:5 sans perte. Original non transformé du CDN Artek (Cloudinary)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Mode photo seulement, bio existante conservée. Une seconde image Artek (Ilmari-Tapiovaara_2.jpg) ne montre que ses mains tenant des miniatures Domus : écartée."
+ },
+ {
+  "slug": "taf-studio",
+  "name": "TAF Studio",
+  "sortKey": "TAF Studio",
+  "brands": [
+   "Artek",
+   "Muuto"
+  ],
+  "bio": "TAF est un studio suédois de design et d'architecture intérieure fondé à Stockholm en 2002 par Gabriella Lenke et Mattias Ståhlbom, tous deux diplômés du département d'architecture intérieure et de design de mobilier du Konstfack. Le studio travaille pour des particuliers, des institutions et des éditeurs, et ses créations sont présentes au Nationalmuseum de Stockholm et au musée du design de Copenhague. Il a reçu le prix Bruno Mathsson en 2017. Avec Artek, il a créé la chaise Atelier (2018), dessinée pour le restaurant du Nationalmuseum, puis le tabouret de bar Atelier (2021) et les luminaires Kori (2023). Pour Muuto, TAF a dessiné en 2016 la lampe de table Control, dont l'interrupteur-variateur évoque un bouton de volume.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/taf-studio",
+   "https://tafstudio.se/studio",
+   "https://tafstudio.se/control-lamp",
+   "https://www.artek.fi/en/products/atelier-chair"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/taf-studio.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/taf-studio",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604871/designers/TAF-Studio_Portrait_Orgatec_photo_Daniele-Ansidei.jpg",
+   "credit": "Daniele Ansidei (selon le nom de fichier Artek)",
+   "width": 1067,
+   "height": 1600,
+   "notes": "Gabriella Lenke et Mattias Ståhlbom assis devant un mur de chaises Atelier. Vertical, deux visages nets ; recadrage 4:5 possible en coupant un peu le haut. Les métadonnées XMP indiquent en revanche « Alexander Haas » comme auteur : crédit à confirmer."
+  },
+  "photoMissingReason": null,
+  "remarks": "Ne pas confondre avec taf-studio.com (fonderie typographique turque sans lien). Site officiel : tafstudio.se. L'équipe actuelle compte aussi Adrian Bursell, Feliz Suarez et M. Torsson, mais les fondateurs sont Lenke et Ståhlbom. Crédit photo incertain (Ansidei d'après le nom de fichier, Haas d'après les métadonnées)."
+ },
+ {
+  "slug": "aino-aalto",
+  "name": "Aino Aalto",
+  "sortKey": "Aalto",
+  "brands": [
+   "Artek",
+   "Iittala"
+  ],
+  "bio": "Aino Aalto (1894-1949), née Aino Marsio à Helsinki, est une architecte et designer finlandaise diplômée en architecture en 1920. Elle rejoint en 1924 l'agence d'Alvar Aalto, qu'elle épouse six mois plus tard ; le couple conçoit notamment le sanatorium de Paimio et la villa Mairea. Cofondatrice d'Artek, elle y exerce les fonctions de directrice artistique et de directrice générale, et dessine du mobilier, des luminaires et des textiles, dont la table d'appoint 606 (1932), les cache-pots Riihitie (1937) et la suspension AMA500 (1941). En 1932, pour un concours de la verrerie Karhula, elle crée la série de verre pressé Bölgeblick, inspirée des cercles formés par une pierre jetée dans l'eau, aujourd'hui éditée par Iittala sous le nom Aino Aalto.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/aino-aalto",
+   "https://www.iittala.com/en-gb/collections/all-collections/aino-aalto",
+   "https://www.artek.fi/en/products/artek-85-anniversary-poster-karoliina-hellberg"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/aino-aalto.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/aino-aalto",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604820/designers/Aino-Aalto_1.jpg",
+   "credit": null,
+   "width": 3221,
+   "height": 4387,
+   "notes": "Photographie d'archives noir et blanc publiée par Artek (légende des métadonnées : « Aino Aalto in the 1940s, photographed at Villa Mairea »). Accoudée à une rambarde en rondins, vue en contre-plongée ; visage net mais assez petit dans l'image entière, recadrage 4:5 à resserrer sur le haut du corps. Métadonnées : « Kolmio », « © Artek »."
+  },
+  "photoMissingReason": null,
+  "remarks": "L'autre image Artek (Aino-Aalto_2.jpg, crédit Eino Mäkinen / Alvar Aalto Museum) la montre de loin dans le jardin de Riihitie : écartée, ce n'est pas un portrait. Iittala donne « née Aino Mandelin-Marsio », Artek « Aino Marsio »."
+ },
+ {
+  "slug": "greige",
+  "name": "Greige",
+  "sortKey": "Greige",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Greige est un studio de design graphique berlinois, présenté sur son site sous le nom « Greige. Büro für Design » et animé par Mark Kiessling et Birthe Haas. Ses réalisations comprennent des identités visuelles, des catalogues, des lookbooks et des affiches, notamment pour Artek, le Vitra Design Museum et Y-3. Pour Artek, le studio a dessiné l'Icon Series, une série d'affiches sérigraphiées sur papier recyclé consacrées aux pièces historiques de la marque, dont les affiches Tabouret 60 (2013), Paimio et Beehive. Il a aussi conçu de la papeterie pour Artek, l'identité du premier magasin Vitra et Artek à Bikini Berlin, ainsi que le catalogue de l'exposition « Alvar Aalto: Second Nature » du Vitra Design Museum.",
+  "bioSources": [
+   "https://www.artek.fi/en/products/stool-60-poster-greige",
+   "https://shop.artek.fi/products/poster-paimio",
+   "https://shop.artek.fi/products/poster-beehive",
+   "http://web.archive.org/web/20150112191553/http://www.greige.de/"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Studio sans portrait publié : ni Artek (pages produits artek.fi et shop.artek.fi) ni le site greige.de (aujourd'hui une page d'attente « An Archival », version archivée de 2015 sans photo d'équipe) ne proposent de photo des membres.",
+  "remarks": "Greige est bien un créateur identifiable : Artek (artek.fi et shop.artek.fi) crédite les affiches au « Berlin-based graphic design studio Greige ». Ce n'est pas une personne mais un studio. Les noms Mark Kiessling et Birthe Haas et la liste des projets viennent de la version archivée (Wayback Machine, janvier 2015) du site officiel greige.de. Le site actuel ne contient plus rien. L'année de fondation (2001, citée par Archiproducts) n'est pas confirmée par une source autorisée : omise. Seule l'affiche Tabouret 60 est datée (2013) par Artek."
+ },
+ {
+  "slug": "yrjo-kukkapuro",
+  "name": "Yrjö Kukkapuro",
+  "sortKey": "Kukkapuro",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Yrjö Kukkapuro (1933-2025) est un designer finlandais, diplômé en architecture intérieure de l'Institut des arts industriels d'Helsinki en 1958. Il fonde l'année suivante son agence, Studio Kukkapuro, et enseigne des années 1960 aux années 1990, en tant qu'enseignant, professeur et recteur. Sa pièce la plus connue est le fauteuil Karuselli (1964), à coque en fibre de verre, accompagné de son repose-pieds : pour en fixer les proportions, il réalise un moulage en plâtre de son propre corps en position allongée. En 1974, le New York Times le présente comme le fauteuil le plus confortable du monde. Son travail figure dans les collections du MoMA, du Victoria and Albert Museum et du Nationalmuseum de Stockholm.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/yrjö-kukkapuro",
+   "https://www.artek.fi/en/products/karuselli-lounge-chair"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/yrjo-kukkapuro.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/yrj%C3%B6-kukkapuro",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1758026902/designers/Yrj%C3%B6-Kukkapuro_master.jpg",
+   "credit": null,
+   "width": 5484,
+   "height": 7320,
+   "notes": "Portrait couleur en studio sur fond sombre, casquette jaune, publié par Artek (image ajoutée en 2025). Très haute définition, visage net et centré, recadrable en 4:5 directement. Aucun crédit indiqué."
+  },
+  "photoMissingReason": null,
+  "remarks": "Artek indique « professor, and rector » sans préciser l'établissement : non repris."
+ },
+ {
+  "slug": "tsto",
+  "name": "TSTO",
+  "sortKey": "TSTO",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "TSTO (ou Tsto) est un studio de design graphique fondé en 2010 à Helsinki, qui travaille sur les identités visuelles, les publications, les sites web, l'animation et la typographie. Son équipe actuelle réunit Jonatan Eriksson, Lars Högström, Matti Kunttu et Antti Uotila. Pour les 80 ans d'Artek en 2015, le studio a créé l'identité visuelle de l'anniversaire, un logotype et un motif inspirés du tabouret 60, repris sur l'affiche Artek 80 ans où des bandes noires et blanches dessinent la silhouette du tabouret. La même année, il a dessiné pour Artek la série d'affiches Outline, qui reprend le contour de pièces d'Alvar Aalto comme la desserte Tea Trolley, chacune dans une couleur d'une palette nordique.",
+  "bioSources": [
+   "https://www.tsto.org/about",
+   "https://www.tsto.org/artek-80th-anniversary",
+   "https://shop.artek.fi/products/poster-artek-80-years",
+   "https://www.artek.fi/en/products/outline-poster-tea-trolley-901-tsto"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait d'équipe : tsto.org/about ne montre qu'une animation vidéo et Artek n'a pas de page designer pour TSTO. Pages projets et produits Artek consultées sans photo des membres.",
+  "remarks": "La page Artek de l'affiche Outline s'intitule « Tea Trolley 901 » mais son texte parle de « Outline Tea Trolley 900 Poster » : vérifier le modèle exact de l'affiche vendue par Mikado (Tea Trolley 900). La bio ne précise donc pas le numéro. Les fondateurs de 2010 ne sont pas nommés sur le site officiel ; seule l'équipe actuelle l'est."
+ },
+ {
+  "slug": "juha-leiviska",
+  "name": "Juha Leiviskä",
+  "sortKey": "Leiviskä",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Juha Leiviskä (1936-2023) est un architecte et designer finlandais, connu en particulier pour ses lieux de culte. Diplômé en architecture de l'Université de technologie d'Helsinki en 1963, il enseigne puis ouvre sa propre agence en 1967. Ses bâtiments donnent un rôle central à la lumière naturelle, et il conçoit aussi des luminaires, considérant les intérieurs comme des « instruments joués par la lumière ». Pour Artek, il a dessiné en 1969 la suspension JL341, un disque fin en aluminium repoussé à la main, suspendu à un unique câble blanc, avec des réflecteurs blancs ou en laiton.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/juha-leiviskä",
+   "https://www.artek.fi/en/products/pendant-light-jl341"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/juha-leiviska.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/juha-leivisk%C3%A4",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604860/designers/Juha-Leiviska_1.jpg",
+   "credit": null,
+   "width": 4500,
+   "height": 2596,
+   "notes": "Portrait noir et blanc publié par Artek, accoudé devant une fenêtre. Format paysage : le recadrage 4:5 (environ 2075 × 2596 px) doit se centrer sur la droite de l'image, où se trouve le visage. Aucun crédit indiqué."
+  },
+  "photoMissingReason": null,
+  "remarks": "Une seconde image Artek (Juha-Leiviska_2.jpg, à son bureau) existe aussi, paysage également. Le slug d'URL Artek utilise « leiviskä » avec tréma."
+ },
+ {
+  "slug": "pancho-nikander",
+  "name": "Pancho Nikander",
+  "sortKey": "Nikander",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Pancho Nikander, né en 1981 au Mexique, est un designer et constructeur de bateaux mexicano-finlandais qui vit en Finlande. Sa pièce la plus connue est le porte-revues Kanto, dessiné pour Artek en 2004 et utilisable aussi comme range-bûches. Kanto est formé d'une seule feuille de placage de bouleau moulé, dans la tradition du bois courbé d'Artek.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/pancho-nikander",
+   "https://www.artek.fi/en/products/kanto-magazine-firewood-rack-pn001"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos/pancho-nikander.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/pancho-nikander",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604865/designers/Pancho_Nikander.jpg",
+   "credit": null,
+   "width": 2592,
+   "height": 3872,
+   "notes": "Portrait couleur de profil trois quarts sur fond sombre, chemise blanche, publié par Artek. Vertical, visage net, recadrable en 4:5. Image assez sombre. Aucun crédit indiqué."
+  },
+  "photoMissingReason": null,
+  "remarks": "Sources minces (une seule page Artek) : bio courte (environ 340 caractères)."
+ },
+ {
+  "slug": "daniel-rybakken",
+  "name": "Daniel Rybakken",
+  "sortKey": "Rybakken",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Daniel Rybakken, né en 1984, est un designer norvégien installé en Suède. Il consacre le début de sa carrière à l'éclairage, en étudiant et en reproduisant la lumière naturelle dans des objets et des installations qui reposent sur un travail technique précis. Sa collaboration avec Artek est sa première commande de mobilier et donne naissance à la collection Kiila, dont le porte-manteau Kiila (2017). Celui-ci s'inspire du trépied photographique sur lequel le designer suspendait ses manteaux : trois pieds en frêne massif réunis par une pièce métallique en forme de coin, laissée visible.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/daniel-rybakken",
+   "https://www.artek.fi/en/products/kiila-coat-stand"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/daniel-rybakken.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/daniel-rybakken",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604849/designers/Daniel_Rybakken_Kiila_Collection.jpg",
+   "credit": null,
+   "width": 2455,
+   "height": 2930,
+   "notes": "Portrait couleur publié par Artek : le designer assis au milieu de porte-manteaux Kiila. Vertical, visage net, recadrable en 4:5 en resserrant sur le buste. Aucun crédit indiqué."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site officiel danielrybakken.com ne contient qu'une archive sans texte biographique exploitable."
+ },
+ {
+  "slug": "kustaa-saksi",
+  "name": "Kustaa Saksi",
+  "sortKey": "Saksi",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Kustaa Saksi, né en 1975 à Kouvola (Finlande), est un artiste finlandais installé à Amsterdam. Son travail, qui passe notamment par le tissage, associe des matériaux comme le papier, le mohair, la laine, le caoutchouc, le métal ou des fibres synthétiques, et s'appuie sur la migraine avec aura visuelle qu'il connaît depuis l'enfance. Il a exposé au Victoria and Albert Museum et à la Royal Academy of Arts à Londres, au Cooper Hewitt à New York et au Design Museum Helsinki, et a reçu en 2023 la médaille Pro Finlandia. Pour les 75 ans d'Artek en 2010, il a dessiné une affiche sérigraphiée représentant une colline, un arbre isolé et le motif Zebra associé à Artek depuis les années 1930.",
+  "bioSources": [
+   "https://kustaasaksi.com/about",
+   "https://kustaasaksi.com/press",
+   "https://www.artek.fi/en/products/artek-75-anniversary-poster-kustaa-saksi"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait sur le site officiel (pages about, press, contact : seulement des vues d'œuvres et d'exposition) ni chez Artek (pages produit affiche et carte postale 75 ans, sans page designer).",
+  "remarks": "Aucune page designer Artek pour lui. Les photos trouvées ailleurs (galeries, presse, revendeurs) ne sont pas des sources autorisées."
+ },
+ {
+  "slug": "karoliina-hellberg",
+  "name": "Karoliina Hellberg",
+  "sortKey": "Hellberg",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Karoliina Hellberg, née en 1987, est une artiste finlandaise qui vit et travaille à Helsinki. Diplômée de l'Académie des beaux-arts d'Helsinki en 2015, elle a aussi étudié à la Slade School of Fine Art de Londres en 2013. Elle réalise des peintures et des dessins, et a exposé notamment à la HAM Gallery d'Helsinki (2016) et au musée d'art Didrichsen (2019), qui lui a décerné son prix Pro Arte en 2018. Pour les 85 ans d'Artek en 2020, elle a réalisé « Garden as a Room », une œuvre sur papier à l'aquarelle, à l'encre et à l'acrylique inspirée du jardin et de la terrasse de la maison des Aalto à Helsinki, éditée en affiche imprimée en offset en Finlande.",
+  "bioSources": [
+   "https://www.karoliinahellberg.com/about",
+   "https://www.artek.fi/en/stories/garden-as-a-room",
+   "https://www.artek.fi/en/products/artek-85-anniversary-poster-karoliina-hellberg"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/karoliina-hellberg.jpg",
+   "sourcePage": "https://www.karoliinahellberg.com/about",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/5afbe478b27e39907ec799a0/1529397787787-ILNFSFA4JG7UOAF3MV8G/b88579960z.1_20161027165144_000gc4ub80u.10.iptcstrip_0+%281%29.jpg",
+   "credit": "Juha Törmälä",
+   "width": 1230,
+   "height": 820,
+   "notes": "Portrait publié sur la page About du site officiel de l'artiste (légende « Photo: Juha Törmälä ») : assise dans son atelier, entourée de toiles. Format paysage, personne à droite et assez petite : un recadrage 4:5 (environ 656 × 820 px) centré sur elle reste juste au-dessus de 600 px de large. Qualité limite, c'est la seule version disponible (1230 px). Le nom de fichier suggère une photo de presse d'origine (2016)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo à valider : petite taille, et probablement une photo de presse reprise par l'artiste sur son site officiel. Pas de portrait chez Artek (la story « Garden as a Room » ne montre que l'affiche et la maison des Aalto)."
+ },
+ {
+  "slug": "anna-maija-jaatinen",
+  "name": "Anna-Maija Jaatinen",
+  "sortKey": "Jaatinen",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Anna-Maija Jaatinen, née en 1941, est une architecte d'intérieur finlandaise. Elle dessine en 1964 le porte-manteau 160 pour une société affiliée créée par Maire Gullichsen, l'une des fondatrices d'Artek. À la fermeture de cette société, Artek intègre le modèle à sa collection. Le porte-manteau 160 associe un fût en bouleau massif, aux patères plus longues en haut qu'en bas, à un piétement en acier.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/anna-maija-jaatinen",
+   "https://www.artek.fi/en/products/clothes-tree-160"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos/anna-maija-jaatinen.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/anna-maija-jaatinen",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604825/designers/Anna-Maija-Jattinen.jpg",
+   "credit": null,
+   "width": 1353,
+   "height": 1353,
+   "notes": "Portrait noir et blanc publié par Artek (métadonnées : « Portrait of Anna-Maija Jattinen, designer of 160 clothes tree »), probablement ancien (jeune femme souriante en extérieur). Carré, visage net et centré, recadrable en 4:5 (environ 1082 × 1353 px). Aucun crédit."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le nom de fichier et les métadonnées Artek écrivent « Jattinen » ; le texte Artek écrit « Jaatinen » (orthographe retenue). Sources limitées à Artek : bio courte."
+ },
+ {
+  "slug": "company",
+  "name": "COMPANY",
+  "sortKey": "COMPANY",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "COMPANY est un studio de design finno-coréen fondé en 2000 à Helsinki par Aamu Song et Johan Olin. Le duo travaille à la fois comme artistes, designers et producteurs, et tient à Helsinki la boutique Salakauppa (« boutique secrète » en finnois). Avec son projet Secrets, il part à la rencontre d'artisans et de manufactures traditionnelles de différents pays, pour lesquels il crée de nouveaux objets. Pour la collection FIN/JPN Friendship d'Artek, qui marquait en 2019 le centenaire des relations diplomatiques entre la Finlande et le Japon, COMPANY a créé Secrets of Finland, une famille de céramiques faites main inspirées de rites saisonniers finlandais : vases, bougeoirs et tirelire.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/company",
+   "https://www.artek.fi/en/stories/the-secret-world-of-company",
+   "https://www.artek.fi/en/products/easter-dog-vase",
+   "https://salakauppa.fi/about/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/company.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/company",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604848/designers/Company_2_photo_Elina-SImonen.jpg",
+   "credit": "Elina Simonen (selon le nom de fichier Artek)",
+   "width": 4000,
+   "height": 3000,
+   "notes": "Aamu Song et Johan Olin en combinaisons bleu marine sur fond gris clair, Johan portant leur chien Yaya. Format paysage 4:3 : un recadrage 4:5 (2400 × 3000 px) peut contenir les deux personnes en rognant les marges latérales, mais cela reste serré. Visages nets."
+  },
+  "photoMissingReason": null,
+  "remarks": "Confirmé : COMPANY est le duo Aamu Song et Johan Olin (page designer Artek, story Artek, et salakauppa.fi « COMPANY Aamu Song & Johan Olin »). Le produit Mikado « Céramiques Secrets of Finland » correspond à la collection de 2019 (tirelire Pauper Coin Collector, bougeoirs Lucia et Lucius, vases Easter Witch, Easter Dog et Midsummer Dream)."
+ },
+ {
+  "slug": "inka-bell",
+  "name": "Inka Bell",
+  "sortKey": "Bell",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Inka Bell, née en 1981, est une artiste visuelle installée à Helsinki qui travaille principalement l'estampe, la sculpture en papier et l'art public. D'abord graphiste, elle se consacre à la pratique artistique à partir de 2015 ; le papier est au centre de ses œuvres, qui associent techniques d'impression traditionnelles et procédés plus récents. Ses œuvres figurent notamment dans les collections du Kiasma, de l'EMMA et du HAM. Pour les 90 ans d'Artek en 2025, elle a réalisé une œuvre inspirée du paravent 100 d'Alvar Aalto, faite de couches d'encre bleue et noire sérigraphiées puis gravées au laser, et éditée en affiche imprimée en offset.",
+  "bioSources": [
+   "https://inkabell.fi/",
+   "https://www.artek.fi/en/stories/a-discussion-with-inka-bell",
+   "https://www.artek.fi/en/products/artek-90-anniversary-poster",
+   "https://shop.artek.fi/products/artek-90th-anniversary-poster"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/inka-bell.jpg",
+   "sourcePage": "https://www.artek.fi/en/news/celebrating-90-years-of-artek",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1739366492/stories/Inka-Bell-portrait_Photo_Paavo-Lehtonen-2023_master.jpg",
+   "credit": "Paavo Lehtonen, 2023",
+   "width": 2000,
+   "height": 3000,
+   "notes": "Portrait en pied dans un espace d'exposition, publié par Artek (actualité des 90 ans) ; le site inkabell.fi crédite aussi son portrait à Paavo Lehtonen. Visage net mais petit dans l'image entière : recadrage 4:5 à resserrer sur le haut du corps (environ 1000 × 1250 px)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Dans l'entretien Artek, elle dit avoir cofondé un studio de graphisme qui travaille encore avec Artek (sans le nommer) : non repris dans la bio."
+ },
+ {
+  "slug": "konstantin-grcic",
+  "name": "Konstantin Grcic",
+  "sortKey": "Grcic",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Konstantin Grcic, né en 1965, est formé à l'ébénisterie à la John Makepeace School, dans le Dorset, puis au design au Royal College of Art de Londres. Il fonde son studio à Munich en 1991 ; Konstantin Grcic Design est aujourd'hui installé à Berlin. Il dessine du mobilier, des objets et des luminaires pour des éditeurs comme Artek, ClassiCon, Flos, Magis, Mattiazzi et Vitra. Pour Artek, il a conçu en 2014 la chaise Rival, première chaise pivotante de la marque, avec accoudoirs et dossier en lamellé de bouleau moulé et piètement fraisé dans du bouleau massif. Son travail a fait l'objet d'expositions personnelles au Museum Boijmans Van Beuningen, à l'Art Institute of Chicago et au Vitra Design Museum.",
+  "bioSources": [
+   "https://www.artek.fi/en/company/designers/konstantin-grcic",
+   "https://konstantin-grcic.com/",
+   "https://www.artek.fi/en/products/rival-chair"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/konstantin-grcic.jpg",
+   "sourcePage": "https://www.artek.fi/en/company/designers/konstantin-grcic",
+   "imageUrl": "https://res.cloudinary.com/artek/image/upload/v1729604863/designers/Konstantin-Grcic_2.jpg",
+   "credit": "Markus Jans",
+   "width": 1417,
+   "height": 1845,
+   "notes": "Portrait en pied, costume bleu marine, à côté d'une chaise Rival rouge, publié par Artek. Crédit « Markus Jans » dans les métadonnées. Visage net mais en haut de l'image : recadrage 4:5 à resserrer sur le haut du corps (largeur utile réduite, environ 900 px)."
+  },
+  "photoMissingReason": null,
+  "remarks": "La page designer Vitra (vitra.com) renvoie une erreur 403 aux requêtes automatisées : non consultée, donc non citée. Vitra figure parmi ses éditeurs d'après son site officiel. Nationalité non indiquée par Artek ni par son site : omise."
+ }
+]

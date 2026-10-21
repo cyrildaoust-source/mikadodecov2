@@ -1,0 +1,424 @@
+[
+ {
+  "slug": "studio-oe",
+  "name": "Studio Œ",
+  "sortKey": "Studio Œ",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Studio Œ est un studio de design fondé à Berlin en 2021 par les designers allemandes Lisa Ertel et Anne-Sophie Oberkrome, toutes deux nées en 1990, qui se sont rencontrées pendant leurs études de design produit à la Hochschule für Gestaltung de Karlsruhe. La ligature Œ réunit les initiales de leurs deux noms. Leur pratique se situe entre objets fonctionnels, interventions spatiales et recherches exploratoires, en partant de la matière et du contexte. Elles travaillent avec Vitra depuis 2025 et signent le fauteuil Bascule (2026), proposé en dossier haut ou bas, avec repose-pieds ou banc assortis : une housse amovible, coupée comme une veste, habille un mécanisme d'inclinaison qui passe de la position assise à une position presque allongée.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/designer/studio-oe",
+   "https://www.vitra.com/en-us/product/details/bascule-highback"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/studio-oe.jpg",
+   "sourcePage": "https://www.vitra.com/en-us/product/designer/studio-oe",
+   "imageUrl": "https://static.vitra.com/media/asset/9931592/storage/master/91614784.jpg",
+   "credit": "Marcus Werner",
+   "width": 6093,
+   "height": 4062,
+   "notes": "Image d'en-tête de la page designer Vitra (texte alternatif « Vitra_Bascule_Studio_OE_web-23 »), fichier master du CDN Vitra (20 Mo). Les deux designers posent sur un fauteuil Bascule et son repose-pieds devant un rideau argenté, visages nets ; crédit tiré des métadonnées EXIF (marcus-werner.com). Paysage : un recadrage 4:5 d'environ 3250x4062 px centré (x≈0,47) garde les deux personnes. L'image ne précise pas qui est qui."
+  },
+  "photoMissingReason": null,
+  "remarks": "Vrai studio de création, pas une erreur de saisie : Vitra a une page designer « Studio Œ » (Lisa Ertel et Anne-Sophie Oberkrome) et lui attribue le fauteuil Bascule (2026). Les 72 produits Mikado (Fauteuil Bascule Highback/Lowback, avec Ottoman ou Banc, Repose-pieds et Banc Bascule) déclinent les 9 tissus proposés par Vitra pour Bascule (Hola, Cento, Credo, Dumet, Iroko 2, Nubia, Reed, Savana, Volo), ce qui confirme l'attribution. Les pages Vitra ont été lues via r.jina.ai (vitra.com bloque les requêtes directes)."
+ },
+ {
+  "slug": "eero-saarinen",
+  "name": "Eero Saarinen",
+  "sortKey": "Saarinen",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Eero Saarinen (1910-1961) est un architecte et designer né à Kirkkonummi, en Finlande, fils de l'architecte Eliel Saarinen ; sa famille s'installe dans le Michigan en 1923. Après des études de sculpture à Paris (1929-1930) puis d'architecture à Yale jusqu'en 1934, il enseigne à la Cranbrook Academy of Art, où il rencontre Charles Eames. Ensemble, ils remportent en 1940 le concours « Organic Design in Home Furnishings » du Museum of Modern Art de New York avec l'Organic Chair, en contreplaqué moulé, aujourd'hui éditée par Vitra. Pour Knoll, il dessine ensuite le fauteuil Womb (conçu en 1946, produit dès 1948) et la Tulip Chair (1956), reproduits en miniature par le Vitra Design Museum. Architecte, il signe aussi le terminal TWA de l'aéroport JFK et la Gateway Arch de Saint-Louis.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/designer/charles-eames-and-eero-saarinen",
+   "https://www.vitra.com/en-us/product/details/organic-chair",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-organic-armchair",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-womb-chair-and-ottoman",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-tulip-chair",
+   "https://www.knoll.com/designer/Eero-Saarinen",
+   "https://ead-pdfs.library.yale.edu/4418.pdf"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/eero-saarinen.jpg",
+   "sourcePage": "https://www.vitra.com/en-us/product/designer/charles-eames-and-eero-saarinen",
+   "imageUrl": "https://static.vitra.com/media/asset/8696850/storage/master/81487539.jpg",
+   "credit": null,
+   "width": 2754,
+   "height": 1836,
+   "notes": "Photo d'archive noir et blanc, en-tête de la page designer Vitra « Charles Eames & Eero Saarinen » (texte alternatif « Eames, Saarinen »). Saarinen est l'homme au centre (nœud papillon, cigarette), visage net ; Charles Eames, à gauche, allume une cigarette ; une tête de dos floue à droite. Recadrage 4:5 serré centré sur Saarinen (x≈0,52, y≈0,40, environ 1000x1250 px) : la main et le profil d'Eames restent en partie dans le cadre."
+  },
+  "photoMissingReason": null,
+  "remarks": "Vitra n'a pas de page designer pour Saarinen seul ; la page commune avec Charles Eames donne sa biographie (texte en allemand sur la version en-us). Date de mort (1961) et arrivée dans le Michigan (1923) prises dans le guide de la collection Eero Saarinen de Yale (institution). Les valeurs « Charles Eames & Eero Saarinen » (Organic Chair, Organic Armchair) sont regroupées sur cette fiche. Le portrait est partagé avec Eames : à valider. Les portraits seuls de Knoll (INSP_Saarinen_womb.jpg, 700 px) sont trop petits."
+ },
+ {
+  "slug": "maarten-van-severen",
+  "name": "Maarten Van Severen",
+  "sortKey": "Van Severen",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Maarten Van Severen (mort en 2005 à Gand) est un designer et architecte d'intérieur belge. Formé en architecture à l'Académie d'art de Gand, il dessine ses premiers meubles en 1986 et ouvre l'année suivante un atelier où il produit lui-même ses modèles en petites séries. Son travail porte sur quelques types fondamentaux : chaise, table, chaise longue, étagère, armoire. À partir de 1990, il collabore avec Rem Koolhaas et réalise des aménagements intérieurs. Sa chaise CNº II (1992), devenue .02, dont l'assise et le dossier sont taillés dans une seule feuille d'aluminium ou de contreplaqué, mène à sa collaboration avec Vitra, engagée en 1996 : la chaise .03, lancée en 1998, puis la .05 (2004) en sont issues.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/designer/maarten-van-severen",
+   "https://www.vitra.com/fr-fr/product/details/miniatures-collection-02",
+   "https://www.vitra.com/fr-fr/product/details/03",
+   "https://www.vitra.com/fr-fr/product/details/05"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/maarten-van-severen.jpg",
+   "sourcePage": "https://www.vitra.com/en-us/product/designer/maarten-van-severen",
+   "imageUrl": "https://static.vitra.com/media/asset/8700059/storage/master/81490342.jpg",
+   "credit": null,
+   "width": 1772,
+   "height": 1181,
+   "notes": "Portrait couleur, en-tête de la page designer Vitra (texte alternatif « Maarten van Severen_P_web_3-2 ») : assis sur une chaise devant des façades de rangement colorées, visage net. Paysage : recadrage 4:5 d'environ 945x1181 px centré sur lui (x≈0,59)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Vitra ne donne pas son année de naissance : omise. Le nom s'écrit « Van Severen » avec V majuscule chez Vitra, conforme à la fiche."
+ },
+ {
+  "slug": "raw-edges",
+  "name": "Raw-Edges",
+  "sortKey": "Raw-Edges",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Raw-Edges est un studio de design fondé à Londres par les designers israéliens Shay Alkalay et Yael Mer, après l'obtention de leur diplôme au Royal College of Art en 2007. Le duo conçoit meubles, objets et installations en jouant sur la couleur, le motif, le mouvement et l'illusion. En 2018, il aménage tout un étage du VitraHaus, sur le campus Vitra, avec des coussins et de petits objets en bois teints par immersion. Ces pièces sont à l'origine de la collection Herringbone éditée par Vitra : des coussins et les Herringbone Vessels (2019), bols, vases et plateaux en céramique plongés à plusieurs reprises dans un émail coloré. Le motif en chevrons dépend de l'angle d'immersion, de la forme et du poids de chaque pièce, ce qui rend chacune unique.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/designer/raw-edges",
+   "https://www.vitra.com/en-us/product/details/herringbone-vessels-tray",
+   "https://www.vitra.com/fr-fr/product/designer/raw-edges"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/raw-edges.jpg",
+   "sourcePage": "https://www.vitra.com/en-us/product/designer/raw-edges",
+   "imageUrl": "https://static.vitra.com/media/asset/8699963/storage/master/81489849.jpg",
+   "credit": "Mark Cocksedge",
+   "width": 8688,
+   "height": 5792,
+   "notes": "Portrait couleur du duo assis à une table sur fond gris clair (Yael Mer à gauche, Shay Alkalay à droite d'après la légende EXIF « Yael Mer & Shay Alkalay »), visages nets ; en-tête de la page designer Vitra, fichier master (27 Mo). Crédit tiré des métadonnées EXIF. Paysage : recadrage 4:5 d'environ 4630x5792 px centré (x≈0,51) qui garde les deux."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "front-design",
+  "name": "Front",
+  "sortKey": "Front",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Front est un studio de design fondé à Stockholm en 2004 par les designers suédoises Sofia Lagerkvist et Anna Lindgren. Leur travail interroge le processus de création, qu'il s'agisse de « collaborations » avec des animaux ou d'expériences menées avec des technologies avancées, comme le projet Sketch Furniture. Le studio dessine des objets pour des éditeurs du monde entier ; il est représenté par la Galerie Kreo à Paris et Friedman Benda à New York, et ses pièces figurent dans les collections du Vitra Design Museum, du MoMA et du Victoria and Albert Museum. Pour Vitra, Front a créé en 2018 les Resting Animals, nés de l'observation d'animaux endormis : un grand ours habillé de tricot, utilisable comme tabouret ou repose-pieds, et des chats et oiseaux en céramique.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/designer/front",
+   "https://www.vitra.com/en-us/product/details/resting-bear"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/front-design.jpg",
+   "sourcePage": "https://www.vitra.com/en-us/product/designer/front",
+   "imageUrl": "https://static.vitra.com/media/asset/8699751/storage/master/81488525.jpg",
+   "credit": null,
+   "width": 4011,
+   "height": 2674,
+   "notes": "Portrait couleur des deux designers debout devant une porte métallique patinée, visages nets ; en-tête de la page designer Vitra (texte alternatif « Front (Sofia Lagerkvist & Anna Lindgren) »), fichier master. L'ordre gauche/droite n'est pas précisé. Paysage : recadrage 4:5 d'environ 2140x2674 px centré (x≈0,48) qui garde les deux."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nom affiché corrigé de « Front Design » en « Front », nom du studio sur Vitra (page designer, fiches Resting Animals). À valider si l'on préfère garder « Front Design », forme courante mais non officielle chez l'éditeur."
+ },
+ {
+  "slug": "frank-lloyd-wright",
+  "name": "Frank Lloyd Wright",
+  "sortKey": "Wright",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Frank Lloyd Wright, né le 8 juin 1867 à Richland Center (Wisconsin) et mort le 9 avril 1959, est un architecte américain. Après six ans auprès de Louis Sullivan chez Adler & Sullivan à Chicago, il définit le style « Prairie », fait de maisons basses et horizontales, comme la maison Darwin D. Martin à Buffalo (1903) ou la Robie House à Chicago (1908). Il conçoit 1 114 œuvres, dont 532 réalisées, parmi lesquelles Fallingwater, le siège de S.C. Johnson à Racine et le musée Guggenheim de New York. Il dessine aussi le mobilier de ses bâtiments : la Barrel Chair (1904) pour la maison Martin, la Johnson Wax Chair (1939) et le fauteuil de Taliesin West (1946), sa résidence d'hiver en Arizona, reproduits en miniature par le Vitra Design Museum.",
+  "bioSources": [
+   "https://franklloydwright.org/frank-lloyd-wright/",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-barrel-chair",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-johnson-wax-chair",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-taliesin-west-armchair"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/frank-lloyd-wright.jpg",
+   "sourcePage": "https://franklloydwright.org/a-friendship-in-photographs-pedro-e-guerrero-frank-lloyd-wright/",
+   "imageUrl": "https://franklloydwright.org/wp-content/uploads/2018/09/PGUE016.jpg",
+   "credit": "Pedro E. Guerrero (© Pedro E. Guerrero Archive)",
+   "width": 1404,
+   "height": 1875,
+   "notes": "Photo noir et blanc publiée par la Frank Lloyd Wright Foundation, légendée « Portrait of Wright, Taliesin, Spring Green, Wisconsin, 1947 » : Wright debout derrière une table couverte de plans, visage net mais assez petit dans l'image. Vertical ; recadrage 4:5 serré conseillé (environ 800x1000 px centré sur lui, x≈0,50, y≈0,42)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Vitra n'a pas de page designer pour Wright ; bio établie avec le site de la Frank Lloyd Wright Foundation (organisme officiel) et les fiches Miniatures Vitra. Portrait officiel de la Fondation, mais l'architecte occupe une part modeste du cadre : à valider."
+ },
+ {
+  "slug": "mies-van-der-rohe",
+  "name": "Mies van der Rohe",
+  "sortKey": "Mies van der Rohe",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Ludwig Mies van der Rohe (1886-1969), né Ludwig Mies à Aix-la-Chapelle, est un architecte et designer d'origine allemande. Formé auprès de Bruno Paul puis dans l'agence de Peter Behrens, il ouvre son agence à Berlin en 1912, assure la direction artistique de l'exposition du Werkbund à Stuttgart (cité du Weissenhof, 1927) et conçoit en 1929 la villa Tugendhat à Brno et le pavillon allemand de l'Exposition universelle de Barcelone, meublé du fauteuil Barcelona (MR 90). Inspiré par la chaise sans pieds arrière de Mart Stam, il crée en 1927 la MR 20, premier siège en porte-à-faux souple en tube d'acier. Directeur du Bauhaus de 1930 à 1933, il s'installe à Chicago en 1938, où il construit le campus de l'IIT, puis signe le Seagram Building à New York (1958).",
+  "bioSources": [
+   "https://www.thonet.de/en/magazine/designers/detail/ludwig-mies-van-der-rohe",
+   "https://www.knoll.com/designer/Ludwig-Mies-van-der-Rohe",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-mr-20",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-mr-90-barcelona"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait officiel trop petit (646 × 561 ; 448 px de large en 4:5, agrandissement au-delà de 1,18×) : https://www.thonet.de/fileadmin/media/07-magazine/designer/thonet-ludwig-mies-van-der-rohe.jpg",
+  "remarks": "Vitra n'a pas de page designer pour Mies ; bio établie avec les pages designer de Thonet et Knoll (éditeurs de son mobilier) et les fiches Miniatures Vitra. Nom gardé tel quel (« Mies van der Rohe ») ; nom complet Ludwig Mies van der Rohe donné dans la bio. Portrait de faible résolution : à valider. Le portrait Knoll (MIES_PORTRAITbio.jpg) ne fait que 250 px."
+ },
+ {
+  "slug": "hans-coray",
+  "name": "Hans Coray",
+  "sortKey": "Coray",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Hans Coray (1906-1991) a grandi à Zurich, où il obtient un doctorat en langues romanes. Autodidacte, il commence dans les années 1930 à travailler le métal et le fil de fer pour concevoir des meubles, des produits industriels et des sculptures, proche des artistes dada et de l'art concret zurichois, comme Max Bill, Verena Loewensberg et Hans Fischli. Encouragé par Fischli, il développe en 1938 la chaise Landi, siège officiel de l'Exposition nationale suisse de 1939 : une chaise empilable tout en aluminium dont la coque emboutie, percée de 91 trous, repose sur un piètement indépendant. Premier de ses sièges produit en série, elle est rééditée par Vitra. Il dessine des meubles jusque dans les années 1950, puis se consacre surtout à la peinture et à la sculpture.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/designer/hans-coray",
+   "https://www.vitra.com/en-us/product/details/landi-chair"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/hans-coray.jpg",
+   "sourcePage": "https://www.vitra.com/en-us/product/designer/hans-coray",
+   "imageUrl": "https://static.vitra.com/media/asset/8695267/storage/master/81448274.jpg",
+   "credit": null,
+   "width": 3624,
+   "height": 2416,
+   "notes": "Photo noir et blanc, en-tête de la page designer Vitra (texte alternatif « Hans Coray_web_3-2 ») : Coray souriant, assis en plein air devant une pile de chaises Landi, visage net. Paysage : recadrage 4:5 d'environ 1930x2416 px centré sur lui (x≈0,30)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "alberto-meda",
+  "name": "Alberto Meda",
+  "sortKey": "Meda",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Alberto Meda est un ingénieur et designer italien né en 1945 à Tremezzina, qui vit et travaille à Milan. Diplômé en génie mécanique du Politecnico de Milan, il est directeur technique de Kartell de 1972 à 1979, puis designer indépendant pour Alias, Alessi, Luceplan, Olivetti, Philips ou Vitra, et consultant pour Alfa Romeo de 1981 à 1985. Il enseigne à la Domus Academy, au Politecnico de Milan puis, depuis 2003, à l'université IUAV de Venise. Avec Vitra, dont il est partenaire depuis 1994, il conçoit des sièges et des tables de bureau, dont la chaise Physix (2012) : un panneau textile tendu entre deux montants latéraux souples forme l'assise et le dossier. Physix Studio (2017) en est la version allégée sur piètement à roulettes, pensée pour le bureau à domicile.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/designer/alberto-meda",
+   "https://www.vitra.com/en-us/product/details/physix",
+   "https://www.vitra.com/en-us/product/details/physix-studio"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/alberto-meda.jpg",
+   "sourcePage": "https://www.vitra.com/en-us/product/designer/alberto-meda",
+   "imageUrl": "https://static.vitra.com/media/asset/8699957/storage/master/81489630.jpg",
+   "credit": null,
+   "width": 1590,
+   "height": 1060,
+   "notes": "Portrait couleur, en-tête de la page designer Vitra (texte alternatif « Alberto Meda_web_3-2 ») : Meda assis à son bureau, en chemise blanche, en train de parler, visage net. Paysage, résolution moyenne : recadrage 4:5 d'environ 848x1060 px centré sur lui (x≈0,53)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "charles-rennie-mackintosh",
+  "name": "Charles Rennie Mackintosh",
+  "sortKey": "Mackintosh",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Charles Rennie Mackintosh, né à Glasgow en 1868 et mort à Londres le 10 décembre 1928, est un architecte et designer écossais. Son nom reste attaché à l'École d'art de Glasgow et au groupe de la « Glasgow School », qu'il forme avec son épouse Margaret Macdonald, la sœur de celle-ci, Frances, et Herbert McNair : leurs meubles géométriques aux formes étirées se démarquent du style floral de l'Art nouveau. Il construit la maison Windyhill à Kilmacolm (1900) et la Hill House à Helensburgh (1902-1903), aménage les salons de thé de Miss Cranston à Glasgow et la maison de Derngate à Northampton (1916-1920). Sa chaise Hill House 1 (1903), au dossier très haut en échelle, a été dessinée pour la chambre de la Hill House, où elle avait une fonction surtout décorative.",
+  "bioSources": [
+   "https://www.cassina.com/ww/en/maestri/charles-rennie-mackintosh.html",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-hill-house-1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/charles-rennie-mackintosh.jpg",
+   "sourcePage": "https://www.cassina.com/ww/en/maestri/charles-rennie-mackintosh.html",
+   "imageUrl": "https://www.cassina.com/content/dam/ld/cassina/designers/detail-pages/i-maestri/Charles-Rennie-Mackintosh.jpg",
+   "credit": null,
+   "width": 3840,
+   "height": 2860,
+   "notes": "Portrait photographique d'archive noir et blanc, de face (lavallière), détouré sur fond blanc ; page designer Cassina (éditeur de ses chaises dans la collection I Maestri). Fichier source de 3840x2860 vraisemblablement agrandi depuis un original plus petit (grain visible). Recadrage 4:5 d'environ 2290x2860 px centré (x≈0,50)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Vitra n'a pas de page designer pour Mackintosh ; bio établie avec la page designer de Cassina et la fiche Miniature Vitra. Vitra écrit « Margaret McDonald » ; la forme usuelle « Macdonald » a été retenue."
+ },
+ {
+  "slug": "marcel-breuer",
+  "name": "Marcel Breuer",
+  "sortKey": "Breuer",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Marcel Breuer (1902-1981), né à Pécs en Hongrie, est un architecte et designer. Après des études d'art à Vienne, il entre en 1920 au Bauhaus de Weimar, s'y forme à la menuiserie et dirige à partir de 1925 l'atelier de meubles comme « jeune maître ». Il y conçoit le fauteuil club B3 (1925), premier siège en tube d'acier étiré sans soudure, dessiné pour la maison du peintre Wassily Kandinsky et rebaptisé « Wassily » dans les années 1960. Il quitte le Bauhaus en 1928 et travaille plusieurs années pour Thonet, puis passe par Budapest et Londres avant de gagner les États-Unis en 1937, où il enseigne l'architecture à Harvard aux côtés de Walter Gropius. Installé à New York en 1946, il signe le Whitney Museum of American Art (1966) et, avec Bernard Zehrfuss et Pier Luigi Nervi, le siège de l'UNESCO à Paris (1958).",
+  "bioSources": [
+   "https://www.thonet.de/en/magazine/designers/detail/marcel-breuer",
+   "https://www.knoll.com/designer/Marcel-Breuer",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-b3-wassily"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait officiel trop petit (646 × 561 ; 448 px de large en 4:5, agrandissement au-delà de 1,18×) : https://www.thonet.de/fileadmin/media/07-magazine/designer/thonet-designer-marcel-breuer.jpg",
+  "remarks": "Vitra n'a pas de page designer pour Breuer ; bio établie avec les pages designer de Thonet et Knoll et la fiche Miniature Vitra. Portrait de faible résolution : à valider ; le portrait Knoll (BREUER_PORTRAITbio.jpg) ne fait que 250 px."
+ },
+ {
+  "slug": "harry-bertoia",
+  "name": "Harry Bertoia",
+  "sortKey": "Bertoia",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Harry Bertoia (1915-1978), né Arri Bertoia à San Lorenzo, dans le Frioul, est un sculpteur et designer d'origine italienne. Arrivé à Detroit en 1930, il étudie à la Cranbrook Academy of Art, où Eliel Saarinen lui confie en 1939 la réouverture de l'atelier du métal. En 1943, il rejoint Charles Eames en Californie pour ses recherches sur le contreplaqué moulé. À l'invitation de Hans et Florence Knoll, il s'installe en 1950 en Pennsylvanie et met au point une collection de sièges en fil d'acier, présentée par Knoll en 1952, dont le fauteuil Diamond, coque en treillis métallique posée sur un piètement en fer rond. Il se consacre ensuite à la sculpture : œuvres monumentales pour l'architecture et, à partir de 1960, sculptures sonores réunies sous le nom de Sonambient.",
+  "bioSources": [
+   "https://harrybertoia.org/biography/",
+   "https://www.knoll.com/designer/Harry-Bertoia",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-diamond-chair"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/harry-bertoia.jpg",
+   "sourcePage": "https://harrybertoia.org/photo-gallery/",
+   "imageUrl": "https://harrybertoia.org/wp-content/uploads/2025/01/harry.jpg",
+   "credit": null,
+   "width": 2232,
+   "height": 3000,
+   "notes": "Photo noir et blanc publiée par la Harry Bertoia Foundation (galerie photo) : Bertoia souriant, allongé dans un fauteuil de sa collection en fil d'acier, devant ses sculptures, visage net. Vertical ; recadrage 4:5 conseillé sur la moitié gauche (environ 1300x1625 px, centre x≈0,30, y≈0,45). Autre portrait possible sur la même page : HarryBertoia.jpg (1220x1024), visage plus grand mais main au premier plan."
+  },
+  "photoMissingReason": null,
+  "remarks": "Vitra n'a pas de page designer pour Bertoia ; bio établie avec la biographie de la Harry Bertoia Foundation (fondation officielle), la page designer Knoll et la fiche Miniature Vitra. Année de mort déduite de la Fondation (« died at age 63 », section « The last years, 1970-1978 »)."
+ },
+ {
+  "slug": "karl-friedrich-schinkel",
+  "name": "Karl Friedrich Schinkel",
+  "sortKey": "Schinkel",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Karl Friedrich Schinkel, né le 13 mars 1781 à Neuruppin et mort en 1841 à Berlin, est un architecte prussien, également urbaniste, peintre, dessinateur et décorateur de théâtre. Maître d'œuvre au service de la Prusse, il marque durablement le néoclassicisme et le néogothique ; à Berlin, on lui doit notamment le pavillon Schinkel du parc du château de Charlottenburg. Il dessine aussi du mobilier, avec des formes austères inspirées de l'Antiquité, et recourt à la fonte pour en rationaliser la fabrication : outre des meubles en bois, il conçoit au début du XIXe siècle des tables à tréteaux, des meubles de jardin et d'autres pièces en fer, dont la chaise de jardin Gartenstuhl (1820), reproduite en miniature par le Vitra Design Museum.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-gartenstuhl",
+   "https://www.berlin.de/ba-charlottenburg-wilmersdorf/ueber-den-bezirk/spazieren-und-wandern/kiezspaziergaenge/artikel.884870.php"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Aucune photographie possible : Schinkel est mort en 1841, aux débuts de la photographie ; les portraits connus sont des peintures ou des gravures, exclues par le brief. Vitra n'a pas de page designer pour lui (la fiche Miniature Gartenstuhl ne montre que l'objet).",
+  "remarks": "Bio courte : dates de naissance et de mort et liste des activités prises sur un texte du site officiel de la ville de Berlin (berlin.de, compte rendu de promenade de l'arrondissement de Charlottenburg-Wilmersdorf), source institutionnelle mais peu détaillée ; le reste vient de la fiche Miniature Vitra. À compléter avec une source muséale (Staatliche Museen zu Berlin) si besoin."
+ },
+ {
+  "slug": "studio-65",
+  "name": "Studio 65",
+  "sortKey": "Studio 65",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Studio 65 est un collectif italien de design radical formé en 1965 par un groupe d'étudiants en architecture, également peintres, nourris de pop art américain, de cinéma d'avant-garde et de théâtre expérimental. Il compte parmi les jeunes architectes et artistes à l'origine de l'éditeur turinois Gufram, pour lequel il réalise des meubles-sculptures en mousse de polyuréthane. Son canapé Bocca (1970), en forme de lèvres, s'inspire du portrait de Mae West peint par Salvador Dalí en 1935 ; il figure dans les collections du Centre Pompidou et du Design Museum de Londres. Studio 65 conçoit aussi pour Gufram le fauteuil Capitello (1971), qui reprend en mousse souple le chapiteau d'une colonne antique.",
+  "bioSources": [
+   "https://gufram.it/en/authors/studio-65/",
+   "https://gufram.it/en/products/bocca/",
+   "https://gufram.it/en/products/capitello/",
+   "https://gufram.it/en/history/where-are-we-born-2/",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-bocca"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Seule image de personnes trouvée : la photo de groupe de la page auteur Gufram (https://gufram.it/wp-content/uploads/2024/02/studio-65.jpg, 1536x875), qui montre une dizaine de personnes alignées en contre-plongée, visages petits ; impossible à recadrer en 4:5 sans couper le groupe. Vitra n'a pas de page designer Studio 65.",
+  "remarks": "Les membres ne sont pas nommés sur les pages Gufram consultées (Franco Audrito, souvent cité comme fondateur, n'a pas été vérifié sur une source autorisée) : bio volontairement générale. Gufram situe la fondation du groupe en 1965 sans préciser la ville."
+ },
+ {
+  "slug": "mart-stam",
+  "name": "Mart Stam",
+  "sortKey": "Stam",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Mart Stam (1899-1986), né à Purmerend aux Pays-Bas, est un architecte et designer néerlandais formé comme menuisier et professeur de dessin. Après avoir travaillé aux Pays-Bas, à Berlin et en Suisse, notamment chez Max Taut et Hans Poelzig, il fonde en 1924 la revue d'avant-garde ABC avec Hans Schmidt. Dès 1925, il assemble des tubes à gaz pour créer une chaise sans pieds arrière, principe du siège en porte-à-faux qu'il présente à l'exposition du Werkbund de Stuttgart en 1927 ; la chaise W1 en reprend les prototypes de 1926 et est produite en 1927 par L. & C. Arnold. Il enseigne ensuite au Bauhaus de Dessau, planifie des villes en URSS avec Ernst May, dirige des écoles d'art à Amsterdam, Dresde et Berlin-Weissensee, puis se retire en Suisse en 1977.",
+  "bioSources": [
+   "https://www.thonet.de/en/magazine/designers/detail/mart-stam",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-stuhl-w1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait officiel trop petit (646 × 561 ; 448 px de large en 4:5, agrandissement au-delà de 1,18×) : https://www.thonet.de/fileadmin/media/07-magazine/designer/thonet-mart-stam.jpg",
+  "remarks": "Vitra n'a pas de page designer pour Stam ; bio établie avec la page designer de Thonet (qui produit ses chaises en porte-à-faux) et la fiche Miniature Vitra. Thonet date les premiers essais de 1925, Vitra les prototypes de 1926 : les deux dates sont reprises sans contradiction. Portrait de faible résolution : à valider."
+ },
+ {
+  "slug": "franco-albini-franca-helg",
+  "name": "Franco Albini & Franca Helg",
+  "sortKey": "Albini & Helg",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Franco Albini (1905-1977) et Franca Helg (1920-1989) sont deux architectes et designers italiens, associés au sein du Studio Albini-Helg, fondé à Milan en 1952 après deux ans de collaboration. Diplômé du Politecnico de Milan en 1929, Albini, figure du rationalisme italien, travaille avec Cassina dès les années 1940 et reçoit le Compasso d'Oro pour la chaise Luisa (1955). Passée par l'agence BBPR, Helg partage avec lui projets et enseignement : ensemble, ils réalisent les musées du Palazzo Bianco et du Palazzo Rosso à Gênes, le grand magasin La Rinascente à Rome et des meubles pour Cassina ou Arteluce, tandis qu'elle dessine des sièges en vannerie pour Bonacina. Le fauteuil Gala, daté de 1950 par Vitra, est reproduit en miniature par le Vitra Design Museum.",
+  "bioSources": [
+   "https://www.cassina.com/ww/en/maestri/franco-albini.html",
+   "https://www.fondazionefrancoalbini.com/la-fondazione/",
+   "https://nieuweinstituut.nl/en/projects/art-on-display/franco-albini-en-franca-helg",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-gala"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/franco-albini-franca-helg.jpg",
+   "sourcePage": "https://www.cassina.com/ww/en/maestri/franco-albini.html",
+   "imageUrl": "https://www.cassina.com/content/dam/ld/cassina/designers/detail-pages/i-maestri/Franco-Albini.jpg",
+   "credit": null,
+   "width": 3840,
+   "height": 2860,
+   "notes": "Portrait noir et blanc de Franco Albini seul, de trois quarts, détouré sur fond blanc ; page designer Cassina. Fichier vraisemblablement agrandi (grain visible). Recadrage 4:5 d'environ 2290x2860 px centré sur lui (x≈0,50). Franca Helg n'apparaît pas."
+  },
+  "photoMissingReason": null,
+  "remarks": "Vitra attribue la miniature Gala à « Franco Albini, 1950 » seul ; la fiche Mikado l'attribue au duo. Aucun portrait commun ou de Franca Helg trouvé chez Cassina ni sur le site de la Fondazione Franco Albini (qui publie un autre portrait d'Albini seul, foto-albini-chi-e_.webp). Portrait d'Albini seul pour une fiche duo : à valider."
+ },
+ {
+  "slug": "gaetano-pesce",
+  "name": "Gaetano Pesce",
+  "sortKey": "Pesce",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Gaetano Pesce (1939-2024), né à La Spezia et mort à New York le 3 avril 2024, est un architecte, artiste et designer italien. Il étudie l'architecture à Venise, fréquente l'Institut de design industriel de la ville et cofonde en 1959 le Gruppo N, consacré à l'art programmé ; à partir de 1962, il se tourne vers le design en expérimentant matériaux nouveaux et formes inhabituelles. Sa série Up (1969), éditée par B&B Italia, réunit sept sièges aux formes généreuses, dont le fauteuil Up5_6, dit La Mamma ou Donna, qui évoque une statuette de la fécondité reliée à un pouf en boule. Pour Cassina, il crée le canapé Tramonto a New York (1980) et le fauteuil Feltri (1987). Après une longue période à Paris, il s'installe à New York en 1983.",
+  "bioSources": [
+   "https://www.cassina.com/ww/en/contemporanei/gaetano-pesce.html",
+   "https://www.bebitalia.com/en-us/gaetano-pesce",
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-la-mamma"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/gaetano-pesce.jpg",
+   "sourcePage": "https://www.cassina.com/ww/en/contemporanei/gaetano-pesce.html",
+   "imageUrl": "https://www.cassina.com/content/dam/ld/cassina/designers/detail-pages/i-contemporanei/Gaetano-Pesce.jpg",
+   "credit": null,
+   "width": 3840,
+   "height": 2860,
+   "notes": "Portrait noir et blanc très contrasté, de profil trois quarts, regard par-dessus ses lunettes, visage net ; détouré sur fond blanc et placé contre le bord gauche de l'image ; page designer Cassina. Recadrage 4:5 d'environ 2290x2860 px calé à gauche (x de 0 à 2290)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site gaetanopesce.com renvoie aujourd'hui vers un domaine sans rapport (défi Cloudflare d'un autre site) : non utilisé. Date de mort donnée par B&B Italia (3 avril 2024)."
+ },
+ {
+  "slug": "grete-jalk",
+  "name": "Grete Jalk",
+  "sortKey": "Jalk",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Grete Jalk (1920-2006) est une designer de mobilier danoise. Son œuvre la plus connue est la Laminated Chair, dessinée en 1963 et réalisée avec l'ébéniste Poul Jeppesen, accompagnée d'une table d'appoint assortie. Composé de deux pièces de contreplaqué moulé de forme voisine, ce fauteuil remporte la même année le premier prix d'un concours organisé par le quotidien britannique Daily Mail, mais il n'entre pas en production industrielle : la série d'origine compte environ 300 exemplaires. Le Vitra Design Museum en reproduit une miniature.",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/details/miniatures-collection-laminated-chair"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Aucune source autorisée trouvée : Vitra n'a pas de page designer Grete Jalk (la fiche Miniature Laminated Chair ne montre que l'objet) ; le site de Lange Production, éditeur actuel de la chaise GJ, n'a pas répondu (connexion impossible). Les autres résultats sont des revendeurs, Wikipédia ou des blogs.",
+  "remarks": "La « Miniature Jalk GJ Plywood Chair » de Mikado correspond à la miniature « Laminated Chair » (1963) de Vitra. Bio courte, fondée sur la seule fiche Vitra ; formation et enseignement (souvent cités ailleurs) omis faute de source autorisée."
+ }
+]

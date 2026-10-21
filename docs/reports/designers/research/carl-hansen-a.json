@@ -1,0 +1,418 @@
+[
+ {
+  "slug": "hans-j-wegner",
+  "name": "Hans J. Wegner",
+  "sortKey": "Wegner",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Hans J. Wegner (1914-2007) est un designer de mobilier danois, né à Tønder. Formé ébéniste auprès de H. F. Stahlberg, il étudie à l'École des arts et métiers de Copenhague de 1936 à 1938, puis dessine avec Arne Jacobsen et Erik Møller le mobilier de l'hôtel de ville d'Aarhus. Il ouvre son studio en 1943. En 1949, il conçoit pour Carl Hansen & Søn la chaise CH24, dite Wishbone, produite sans interruption depuis 1950 ; la maison édite aussi la crédence CH825 (1959) et le bureau CH110 (1970). Auteur de près de 500 chaises, il a reçu notamment le prix Lunning et le Grand Prix de la Triennale de Milan en 1951.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/hans-j-wegner",
+   "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/ch24",
+   "https://www.carlhansen.com/en/en/collection/bookcases-cabinets/ch825",
+   "https://www.carlhansen.com/en/en/collection/tables-desks/desks/ch110"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/hans-j-wegner.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/borge-mogensen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/hans-j-wegner-portrait.jpg",
+   "credit": null,
+   "width": 1260,
+   "height": 1512,
+   "notes": "Portrait noir et blanc de Wegner à sa table à dessin, publié par Carl Hansen & Søn (vignette de la liste des designers). Fichier JPEG en CMJN : convertir en sRVB au traitement. Recadrage 4:5 automatique possible. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Une fiche Mikado est attribuée à « Hans J. Wegner, Ilse Crawford » (CH24 Soft) : collaboration réelle, sans incidence sur la bio."
+ },
+ {
+  "slug": "borge-mogensen",
+  "name": "Børge Mogensen",
+  "sortKey": "Mogensen",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Børge Mogensen (1914-1972) est un ébéniste et architecte danois. Après son apprentissage d'ébéniste achevé en 1934, il étudie à l'École des arts et métiers puis à l'école de mobilier de l'Académie royale des beaux-arts du Danemark (1938-1942), tout en travaillant chez Kaare Klint et Mogens Koch. De 1942 à 1950, il dirige le studio de création de mobilier de la coopérative FDB, puis ouvre son propre studio. Carl Hansen & Søn édite notamment la chaise Huntsman BM1106 (1950), le buffet BM0057 (1957), le canapé BM0865 (1958) et la série d'extérieur conçue en 1971 pour son balcon, dont le banc BM1871. Il a reçu la médaille Eckersberg en 1950.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/borge-mogensen",
+   "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/bm1106",
+   "https://www.carlhansen.com/en/en/collection/bookcases-cabinets/bm0057",
+   "https://www.carlhansen.com/en/en/collection/sofas-daybeds/bm0865",
+   "https://www.carlhansen.com/en/en/collection/outdoor-furniture/bm1871"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/borge-mogensen.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/boerge-mogensen-1500x1800px.jpg",
+   "credit": null,
+   "width": 1500,
+   "height": 1800,
+   "notes": "Portrait noir et blanc en buste, visage net, publié par Carl Hansen & Søn. Recadrage 4:5 automatique. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "kaare-klint",
+  "name": "Kaare Klint",
+  "sortKey": "Klint",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Kaare Klint (1888-1954) est un architecte et designer danois, né à Copenhague, fils de l'architecte Peder Vilhelm Jensen-Klint. En 1924, il cofonde l'école de mobilier de l'Académie royale des beaux-arts du Danemark, où il devient professeur ; avec ses élèves, il mesure les objets usuels et le corps humain pour en tirer les proportions du mobilier. Son enseignement a marqué la génération du design danois moderne. Carl Hansen & Søn édite notamment le canapé KK41180, version deux places d'un modèle créé en 1930 pour le bureau du Premier ministre Thorvald Stauning, et le canapé Addition KK48650, présenté en 1933. Il a reçu la médaille Eckersberg en 1928 et la médaille C. F. Hansen en 1954.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/kaare-klint",
+   "https://www.carlhansen.com/en/en/collection/sofas-daybeds/kk41180",
+   "https://www.carlhansen.com/en/en/collection/sofas-daybeds/kk48650"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/kaare-klint.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/kare-klint_portrait_v1.jpg",
+   "credit": null,
+   "width": 1337,
+   "height": 1904,
+   "notes": "Portrait noir et blanc de Klint penché sur des plans, dans la moitié droite et basse de l'image. Recadrage conseillé : 0,233,1337,1671 (bas de l'image) plutôt que le recadrage automatique. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Les cadres KK75751 à KK75755 vendus par Mikado ne sont pas datés sur le site de l'éditeur ; non cités."
+ },
+ {
+  "slug": "alfred-homann",
+  "name": "Alfred Homann",
+  "sortKey": "Homann",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Alfred Homann (1948-2022) est un architecte et designer danois. Diplômé de l'Académie royale des beaux-arts du Danemark en 1976, il fonde son studio à Copenhague en 1978, puis Homann Design Inc. aux États-Unis en 1987. Il a conçu du mobilier, des luminaires et des projets d'architecture pour des musées, des gares, des résidences privées et des bâtiments publics. Pour Carl Hansen & Søn, il dessine en 2022 la série AH Outdoor, qui comprend notamment la chaise AH501, le canapé AH701 et la chaise longue AH603. Son travail a été distingué par un Red Dot Award, un iF Product Design Award et un Brunel Award.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/alfred-homann",
+   "https://www.carlhansen.com/en/en/collection/outdoor-furniture/ah501",
+   "https://www.carlhansen.com/en/en/collection/outdoor-furniture/ah701",
+   "https://www.carlhansen.com/en/en/collection/outdoor-furniture/ah603"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/alfred-homann.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/alfred-homann",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/homan_portrat_high.jpg",
+   "credit": null,
+   "width": 1281,
+   "height": 1571,
+   "notes": "Portrait studio noir et blanc, de trois quarts, visage net. Recadrage 4:5 automatique."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "eoos",
+  "name": "EOOS",
+  "sortKey": "EOOS",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "EOOS est un studio de design autrichien fondé à Vienne en 1995 par Martin Bergmann (né en 1963), Gernot Bohmann (né en 1968) et Harald Gründl (né en 1967), tous trois diplômés de l'Université des arts appliqués de Vienne. Le trio a mis au point une méthode appelée Poetical Analysis, qui part des racines historiques, des mythes et des rituels liés à un objet. Pour Carl Hansen & Søn, EOOS a conçu la série Embrace, avec le fauteuil E015 (2016) et la chaise E004 (2019), puis une version d'extérieur en teck. Le studio travaille aussi sur le design social et durable, a exposé au MAK de Vienne et a reçu plus de 250 distinctions, dont un Compasso d'Oro.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/eoos",
+   "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/e015",
+   "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/e004"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/eoos.png",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/eoos-1500x1800px.png",
+   "credit": null,
+   "width": 1500,
+   "height": 1800,
+   "notes": "Photo de groupe noir et blanc des trois membres debout sur fond blanc, publiée par Carl Hansen & Søn ; le tiers supérieur est vide. Les trois membres occupent toute la largeur : recadrage automatique 4:5 (1440 × 1800, centré) recommandé. Noms des membres non indiqués de gauche à droite. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "ole-wanscher",
+  "name": "Ole Wanscher",
+  "sortKey": "Wanscher",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Ole Wanscher (1903-1985) est un architecte et designer de mobilier danois. Élève de Kaare Klint à l'Académie royale des beaux-arts du Danemark, il travaille dans son agence avant de s'établir à son compte, puis lui succède comme professeur à l'Académie. Ses voyages d'étude en Égypte et en Europe nourrissent un mobilier aux sections fines et aux structures résistantes, qu'il considère comme une branche de l'architecture. Carl Hansen & Søn édite notamment le fauteuil Colonial OW149 (1959), le canapé Colonial OW149-2, la chaise longue OW150 (1963) et la chaise OW58. Il a reçu la médaille d'or de la Triennale de Milan en 1960.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/ole-wanscher",
+   "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/ow149",
+   "https://www.carlhansen.com/en/en/collection/sofas-daybeds/ow150",
+   "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/ow58-t-chair"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/ole-wanscher.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/ole-wanscher-1500x1800px.jpg",
+   "credit": null,
+   "width": 1500,
+   "height": 1800,
+   "notes": "Portrait studio noir et blanc en buste, visage net. Recadrage 4:5 automatique. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "bodil-kjaer",
+  "name": "Bodil Kjær",
+  "sortKey": "Kjær",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Bodil Kjær, née en 1932 près de Horsens, est une architecte et designer danoise. Formée au Frederiksberg Technical College et à l'école d'architecture d'intérieur de Copenhague, où elle suit notamment l'enseignement de Finn Juhl et de Jørgen Ditzel, elle ouvre un studio à Copenhague en 1960. En 1965, une bourse la conduit au Royal College of Art et à l'Architectural Association de Londres, où elle exerce comme architecte jusqu'en 1979. Elle conçoit des systèmes de mobilier et des environnements de travail, et a enseigné à Harvard, au Pratt Institute et à l'Académie royale d'architecture de Copenhague. Carl Hansen & Søn édite sa série de mobilier d'extérieur, dont la chaise BK10, le fauteuil BK11, le canapé BK12 et la chaise longue BK14.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/bodil-kjar",
+   "https://www.carlhansen.com/en/en/collection/furniture-accessories/cushion-bk10"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/bodil-kjaer.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/bodil-kjaer-1500x1800px.jpg",
+   "credit": null,
+   "width": 1500,
+   "height": 1800,
+   "notes": "Photo d'archive noir et blanc, visage souriant de trois quarts, net. Recadrage 4:5 automatique. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Slug Mikado « bodil-kjaer », slug de l'éditeur « bodil-kjar ». Année de conception de la série BK non retenue : les fiches produits BK10/BK11 de l'éditeur ne s'affichent plus (seul un extrait de moteur de recherche indique 1959)."
+ },
+ {
+  "slug": "urd-moll-gundermann",
+  "name": "Urd Moll Gundermann",
+  "sortKey": "Gundermann",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Urd Moll Gundermann est designer textile et directrice de la création de Linie Design, éditeur danois de tapis faits main fondé en 1980. Titulaire d'un master de l'Académie royale des beaux-arts du Danemark, spécialité vêtement et textile, elle a travaillé pour des entreprises danoises et étrangères dans la mode, l'impression, le textile et le design industriel. Elle rejoint Linie Design en 2012 et en prend la direction de la création en 2019, avec les nouvelles collections et des pièces uniques d'exposition. Pour Carl Hansen & Søn, elle a dessiné les tapis Cave, Pines et Seashore, noués à la main en Inde par Linie Design.",
+  "bioSources": [
+   "https://liniedesign.com/pages/urd-moll-gundermann",
+   "https://www.carlhansen.com/en/designers/linie-design",
+   "https://www.carlhansen.com/en/en/collection/rugs/linie-design-cave",
+   "https://www.carlhansen.com/en/en/collection/rugs/linie-design-pines"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/urd-moll-gundermann.png",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/urd-moll-gundermann_mobile.png",
+   "credit": null,
+   "width": 1877,
+   "height": 3337,
+   "notes": "Portrait studio noir et blanc, publié par Carl Hansen & Søn comme vignette de Linie Design dans la liste des designers ; identité confirmée par le portrait de la page designer de Linie Design (autre séance). Recadrage conseillé : 0,0,1877,2346 (haut de l'image). Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Carl Hansen & Søn attribue les fiches à « Linie Design » mais indique « Design: Urd Moll Gundermann » dans la description des tapis Cave, Pines et Seashore. Sa page designer chez Carl Hansen & Søn renvoie une erreur 404 ; bio tirée du site de Linie Design (éditeur des tapis). Alternative photo : https://liniedesign.com/cdn/shop/files/Urd_Moll_Gundermann_Desinger_Linie_Design.jpg (800 × 1200, en situation d'atelier)."
+ },
+ {
+  "slug": "vilhelm-lauritzen",
+  "name": "Vilhelm Lauritzen",
+  "sortKey": "Lauritzen",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Vilhelm Lauritzen (1894-1984) est un architecte danois, né à Slagelse. Diplômé de l'Académie royale des beaux-arts du Danemark en 1921, il fonde l'année suivante son agence, aujourd'hui Vilhelm Lauritzen Arkitekter. Il signe le premier terminal de l'aéroport de Copenhague (1939), la Maison de la radio à Frederiksberg (1945), Vega à Copenhague (1956) et l'ambassade du Danemark à Washington (1960), dont il dessine aussi les meubles, les luminaires et les poignées. Carl Hansen & Søn réédite la chaise Monarch VLA61 (1944), la série Foyer et le miroir VLA62 créés en 1945 pour la Maison de la radio, ainsi que la chaise Vega VLA26 (1956).",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/vilhelm-lauritzen",
+   "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/vla61",
+   "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/vla76",
+   "https://www.carlhansen.com/en/en/collection/accessories/decoration/vla62",
+   "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/vla26t"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/vilhelm-lauritzen.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/alfred-homann",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/vilhelm-lauritzen/09_vl-portrat.jpg",
+   "credit": null,
+   "width": 720,
+   "height": 1020,
+   "notes": "Portrait d'archive noir et blanc en buste, net. Publié par Carl Hansen & Søn (vignette de Lauritzen dans le carrousel « Our designers »). Résolution modeste (720 px de large) ; version plus grande seulement dans un collage produit + portrait (hero 1563 × 1563)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "frits-henningsen",
+  "name": "Frits Henningsen",
+  "sortKey": "Henningsen",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Frits Henningsen (1889-1965) est un ébéniste et designer danois. Il achève en 1911 son apprentissage chez l'ébéniste I. P. Mørck, travaille ensuite en Allemagne, en France et en Grande-Bretagne, puis ouvre en 1915 sa propre entreprise de meubles à Copenhague. Membre de la Guilde des ébénistes de Copenhague, il dessine lui-même ses meubles, en s'inspirant du style Empire, du rococo et du mobilier anglais du XVIIe siècle. Carl Hansen & Søn édite le fauteuil Heritage FH419 (1930), la chaise Windsor FH38 (1938) et le fauteuil Signature FH429, sa dernière création, achevé en 1954 et réédité en 2015.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/fh38",
+   "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/fh419",
+   "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/fh429"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/frits-henningsen.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/borge-mogensen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/frits-henningsen-1500x1800.jpg",
+   "credit": null,
+   "width": 1500,
+   "height": 1800,
+   "notes": "Photo d'archive noir et blanc, assis, visage net mais légèrement grainé. Recadrage 4:5 automatique. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "rikke-frost",
+  "name": "Rikke Frost",
+  "sortKey": "Frost",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Rikke Frost, née en 1973 et originaire de Bov, est une designer industrielle danoise. Formée à l'École d'architecture d'Aarhus, elle travaille plusieurs années à Londres comme designer et acheteuse pour Heal & Son, puis fonde en 2004 son studio, Rikke Frost Design, au Danemark ; elle enseigne aussi à l'École d'architecture d'Aarhus. Pour Carl Hansen & Søn, elle a dessiné la série Sideways (canapés, fauteuil, repose-pieds et table basse), qui oriente les assises de biais pour favoriser la conversation, ainsi que la lampe de table RF200 Petal. Elle a reçu notamment le Danish Design Award et le German Design Award.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/rikke-frost",
+   "https://www.carlhansen.com/en/en/collection/sofas-daybeds/rf1903",
+   "https://www.carlhansen.com/en/en/collection/lighting/table-lamps/rf200"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/rikke-frost.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/rikke-frost-2-mobile.jpg",
+   "credit": null,
+   "width": 1215,
+   "height": 2160,
+   "notes": "Portrait noir et blanc à mi-corps, souriante, visage net. Recadrage conseillé : 0,200,1215,1519. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "tina-lofstad",
+  "name": "Tina Lofstad",
+  "sortKey": "Lofstad",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Tina Lofstad, née en 1976, est une artiste verrière établie à Viborg, au Danemark. Elle a suivi de 1998 à 2001 une formation classique à l'école du verre d'Orrefors, en Suède, et dirige depuis 2003 son propre atelier de soufflage, Glaspusteriet Lofstad, dont elle conçoit les pièces. Pour Carl Hansen & Søn, elle a dessiné des décorations de Noël en verre soufflé à la main, dont une série de lutins en verre clair coiffés d'un bonnet rouge, dont la position donne à chacun son caractère. Faits main, les exemplaires ne sont jamais tout à fait identiques.",
+  "bioSources": [
+   "https://glaspusteriet-lofstad.dk/om/",
+   "https://glaspusteriet-lofstad.dk/om/om-tina-lofstad/",
+   "https://www.carlhansen.com/en/collection/accessories/holidays/handcrafted-glass-elf-happy"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait publié par Carl Hansen & Søn (la page designer tina-lofstad existe mais son contenu est vide ; aucune image dans la liste des designers ni sur la fiche des lutins) ni sur le site officiel glaspusteriet-lofstad.dk (pages Forside, Om, Om Tina Lofstad : seulement logo, entrée et montage de production). Espace presse Carl Hansen & Søn (presscloud) non consultable sans JavaScript.",
+  "remarks": "Nationalité non indiquée par les sources : la bio dit seulement « établie à Viborg ». Les décorations Ange et Bonhomme de neige vendues par Mikado ne sont pas décrites sur la page consultée ; formulation générale « décorations de Noël »."
+ },
+ {
+  "slug": "nanna-ditzel-jorgen-ditzel",
+  "name": "Nanna & Jørgen Ditzel",
+  "sortKey": "Nanna & Jørgen Ditzel",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Nanna Ditzel (1923-2005) et Jørgen Ditzel (1921-1961) forment un duo d'architectes et designers danois. Nanna Ditzel, née Hauberg à Copenhague, se forme comme ébéniste puis comme architecte de mobilier ; tous deux suivent notamment l'enseignement de Kaare Klint. Mariés en 1946, ils ouvrent la même année leur studio et développent un mobilier aux formes organiques, récompensé à la Triennale de Milan et par le prix Lunning. Carl Hansen & Søn édite le canapé Vita ND52 (1952), la table basse ND55 (1955) et la chaise haute ND54, inscrite au canon culturel danois. Après la mort de Jørgen en 1961, Nanna Ditzel poursuit seule, à Londres puis à Copenhague.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/nanna-ditzel",
+   "https://www.carlhansen.com/en/en/collection/sofas-daybeds/nd52-2",
+   "https://www.carlhansen.com/en/en/collection/tables-desks/coffee-tables/nd55",
+   "https://www.carlhansen.com/en/en/collection/childrens-furniture/nd54"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/nanna-ditzel-jorgen-ditzel.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/nanna-ditzel",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/ditzel-desktop-hero-3840x2160px-v2.jpg",
+   "credit": null,
+   "width": 5120,
+   "height": 2880,
+   "notes": "Collage de l'éditeur (photo produit à gauche, photo d'archive du couple à droite). RECADRAGE OBLIGATOIRE : 3120,546,1432,1790 isole la photo noir et blanc de Jørgen (pipe) et Nanna Ditzel à leur table, testée et vérifiée. Alternative, Nanna seule : https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-andscape/nanna-ditzel-portrait-mobile.jpg (1440 × 2560)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Chaise haute ND54 datée de 1954 sur la page designer et de 1955 sur la fiche produit : année omise."
+ },
+ {
+  "slug": "poul-kjaerholm",
+  "name": "Poul Kjærholm",
+  "sortKey": "Kjærholm",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Poul Kjærholm (1929-1980) est un designer danois, né à Østervrå, dans le nord du Jutland. Formé d'abord comme ébéniste, il étudie le design de mobilier à l'Académie royale des beaux-arts du Danemark, dont il sort diplômé en 1952. Il y enseigne à partir de 1955 et succède à Ole Wanscher comme professeur en 1976. Son mobilier associe souvent l'acier, le cuir et le verre. Carl Hansen & Søn édite notamment la chaise PK1 à l'assise tressée à la main, ainsi que le bureau Professor PK52, conçu pour l'Académie, et sa version Student PK52A. Il a reçu le prix Lunning en 1958 et la médaille Eckersberg en 1960.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/poul-kjarholm",
+   "https://www.carlhansen.com/en/en/collection/chairs/dining-chairs/pk1",
+   "https://www.carlhansen.com/en/en/collection/tables-desks/desks/pk52"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/poul-kjaerholm.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/poul-kjaerholm-1500x1800px.jpg",
+   "credit": null,
+   "width": 1500,
+   "height": 1800,
+   "notes": "Portrait noir et blanc en gros plan, regard baissé, visage net. Recadrage 4:5 automatique. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Slug de l'éditeur « poul-kjarholm ». Années de la PK1 et du PK52 non indiquées sur les fiches de l'éditeur : omises."
+ },
+ {
+  "slug": "mads-odgard",
+  "name": "Mads Odgård",
+  "sortKey": "Odgård",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Mads Odgård, né en 1960, est un designer industriel danois. Élève de l'École des arts décoratifs de Copenhague (aujourd'hui Académie royale du Danemark), il est engagé comme designer et maquettiste chez LEGO avant la fin de ses études, puis étudie le design automobile à l'ArtCenter Europe, en Suisse. Il fonde son studio en 1988 et conçoit du mobilier, des accessoires et des luminaires pour des entreprises danoises et étrangères, avec une prédilection pour les lignes droites et les formes géométriques. Pour Carl Hansen & Søn, il a dessiné la série de luminaires MO : applique MO300, lampe de table MO310, lampadaire MO320 et suspension MO330. Il a reçu notamment un Red Dot Award.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/mads-odgard",
+   "https://www.carlhansen.com/en/en/collection/lighting/pendant-lamps/mo330",
+   "https://www.carlhansen.com/en/en/collection/lighting/wall-lamps/mo300"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/mads-odgard.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-hero-images/mads-odgard-portrait-mobile.jpg",
+   "credit": null,
+   "width": 1440,
+   "height": 2560,
+   "notes": "Photo noir et blanc en atelier, tenant une lampe MO ; personne dans la moitié droite et basse. Recadrage conseillé : 0,640,1440,1800. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "bonderup-thorup",
+  "name": "Bonderup & Thorup",
+  "sortKey": "Bonderup & Thorup",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Bonderup & Thorup réunit les architectes danois Claus Bonderup (1943-2022), qui a grandi à Aalborg, et Torsten Thorup (né en 1944), originaire de Copenhague. Diplômés de l'école d'architecture de l'Académie royale des beaux-arts du Danemark en 1969, ils travaillent tous deux chez Henning Larsen avant de s'associer de 1985 à 1992. Leur agence réalise des logements, des hôtels et des projets d'urbanisme, dont le musée Arktikum à Rovaniemi, en Finlande, ainsi que des montres, des meubles et des luminaires. Carl Hansen & Søn édite leur série de suspensions géométriques, dont BT1041 Calot et BT1091 Confetti. Leur travail a été exposé au MoMA et au Cooper Hewitt à New York.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/designers/claus-bonderup-torsten-thorup",
+   "https://www.carlhansen.com/en/en/collection/lighting/pendant-lamps/bt1091"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/bonderup-thorup.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/designers/frits-henningsen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/esigner-portraits-small/bonnerup-thorup-1500x1800px.jpg",
+   "credit": null,
+   "width": 1800,
+   "height": 2160,
+   "notes": "Photo noir et blanc des deux architectes assis à une table sous une suspension BT ; les deux visages sont nets dans la moitié basse. Les deux personnes occupent presque toute la largeur : recadrage automatique 4:5 (1728 × 2160, centré) recommandé. Ordre gauche/droite des deux personnes non indiqué par l'éditeur. Image publiée dans le carrousel « Our designers » des pages designers de l'éditeur (ex. page indiquée)."
+  },
+  "photoMissingReason": null,
+  "remarks": "La fiche BT1091 de l'éditeur dit la série « completed in 1970 », antérieure à l'association de 1985 : date omise."
+ }
+]

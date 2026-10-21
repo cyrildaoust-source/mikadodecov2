@@ -1,0 +1,345 @@
+[
+ {
+  "slug": "studio-fermob",
+  "name": "Studio Fermob",
+  "sortKey": "Studio Fermob",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Studio Fermob désigne le bureau de création interne de Fermob, fabricant français de mobilier en métal installé à Thoissey, dans l'Ain. La marque a choisi de placer le design au cœur de l'entreprise, à un niveau stratégique, en intégrant un studio de design et de conception tout en collaborant avec des designers extérieurs. Le studio dessine de nombreuses pièces du catalogue, du mobilier d'extérieur aux luminaires et accessoires, pensées pour la palette de couleurs de la marque. On lui doit notamment la collection Opéra+, dont le dossier des chaises est formé d'un seul fil d'acier, et la collection Somerset, relecture du banc anglais associant aluminium et teck.",
+  "bioSources": [
+   "https://www.fermob.com/fr/marque-fermob",
+   "https://www.fermob.com/fr/les-designers",
+   "https://www.fermob-contract.com/fr_fr/groupe-fermob/designers-externes",
+   "http://web.archive.org/web/20241014173027/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Studio-Fermob",
+   "https://www.fermob.com/fr/chaise-operaplus-chaise.html",
+   "https://www.fermob.com/fr/banc-et-banquette-somerset-banc.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/studio-fermob.jpg",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/fermob-equipe.jpg",
+   "credit": null,
+   "width": 799,
+   "height": 1200,
+   "notes": "Photo de groupe (5 personnes, noir et blanc) publiée par Fermob sur sa page « Les designers », dans la grille des créateurs, sous la légende « L'équipe Fermob ». Aucun nom de membre n'est donné. 799 x 1200, cadrage vertical."
+  },
+  "photoMissingReason": null,
+  "remarks": "La photo est légendée « L'équipe Fermob » (et non « Studio Fermob ») mais c'est la seule entrée de la page designers qui représente la création interne ; à valider par le propriétaire. L'attribution au Studio d'Opéra+ et de Somerset vient de l'ancienne page designer Fermob (archive 2024) ; celle de Picolino, Yunos et Oto n'a pas été vérifiée sur une page Fermob."
+ },
+ {
+  "slug": "pascal-mourgue",
+  "name": "Pascal Mourgue",
+  "sortKey": "Mourgue",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/pascal-mourgue.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Pascal-MOURGUE.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo seule (bio existante conservée)."
+ },
+ {
+  "slug": "harald-guggenbichler",
+  "name": "Harald Guggenbichler",
+  "sortKey": "Guggenbichler",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/harald-guggenbichler.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Harald-Guggenbichler-640x722.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo seule (bio existante conservée)."
+ },
+ {
+  "slug": "pagnon-et-pelhaitre",
+  "name": "Pagnon et Pelhaître",
+  "sortKey": "Pagnon & Pelhaître",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/pagnon-et-pelhaitre.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/PAGNON-_-PELHAITRE.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500. Les deux membres du duo, dos à dos."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo seule (bio existante conservée). Fermob écrit « Pagnon & Pelhaître ». La source n'indique pas qui est qui sur la photo."
+ },
+ {
+  "slug": "antoine-lesur",
+  "name": "Antoine Lesur",
+  "sortKey": "Lesur",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/antoine-lesur.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Antoine-LESUR.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo seule (bio existante conservée)."
+ },
+ {
+  "slug": "archirivolto",
+  "name": "Archirivolto",
+  "sortKey": "Archirivolto",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/archirivolto.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/ARCHIRIVOLTO.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500. Les deux fondateurs (Claudio Dondoli et Marco Pocci), sans indication de qui est qui."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo seule (bio existante conservée). La bio existante parle du « fauteuil d'extérieur Rythmic » alors que Mikado vend la « Chaise Rythmic » ; à vérifier."
+ },
+ {
+  "slug": "goula-figuera",
+  "name": "Goula & Figuera",
+  "sortKey": "Goula & Figuera",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Goula/Figuera est un studio de design de produit et de direction artistique fondé à Barcelone en 2012 par Álvaro Goula, né à Barcelone en 1989, et Pablo Figuera, né à Madrid en 1988. Tous deux sont diplômés en design de l'école Elisava de Barcelone et titulaires d'un Bachelor of Arts de l'université de Southampton. Depuis 2013, ils associent le travail du studio à l'enseignement universitaire et lancent en 2015 Home Adventures, une marque consacrée à leurs projets expérimentaux, dont la collection de luminaires modulaires Lines & Dots. Leur travail a été distingué notamment par le Design Plus (2012), le prix Injuve (2012) et le Lexus Design Award (2013). Pour Fermob, ils ont dessiné la collection Salsa, une table basse de forme oblongue à corbeille de rangement intégrée et un guéridon assorti.",
+  "bioSources": [
+   "https://www.goulafiguera.com/about/",
+   "https://www.fermob.com/fr/table-basse-salsa-table-basse-113-x-58-cm.html",
+   "http://web.archive.org/web/20240618032920/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Goula-Figuera"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/goula-figuera.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/GOULA-et-FUGUERA.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500. Les deux membres du duo, assis à une table. Alternative couleur plus grande sur le site du studio (https://www.goulafiguera.com/storage/media/about3/alvaro_goula_pablo_figuera_2018.jpg, 1756 x 1166, paysage), difficile à recadrer en 4:5 sans couper l'un des deux."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le studio s'écrit lui-même « Goula / Figuera » ; Fermob écrit « Goula & Figuera ». Nom conservé tel que fourni."
+ },
+ {
+  "slug": "catherine-sofia",
+  "name": "Catherine Sofia",
+  "sortKey": "Sofia",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Catherine Sofia est graphiste, directrice artistique et plasticienne, installée à Paris. Depuis 2007, elle forme avec le designer industriel Frédéric Sofia le duo d'artistes contemporains FC Sofia, dont les sculptures sont réalisées à partir de procédés numériques comme la modélisation, l'impression 3D et la peinture de carrosserie. Fermob décrit son style comme joyeux et décalé, nourri de design, d'art et de mode. Pour la marque, elle a imaginé la collection Picoti : une mangeoire à oiseaux en forme de petite cabane, au toit en tôle d'acier perforée découpée au laser, et un dessous de plat en acier en forme d'oiseau.",
+  "bioSources": [
+   "http://web.archive.org/web/20240912162848/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Catherine-Sofia",
+   "https://www.fcsofia.com/about",
+   "https://www.fermob.com/fr/mangeoire-a-oiseaux-picoti-mangeoire-a-oiseaux.html",
+   "https://www.fermob.com/fr/dessous-de-plats-picoti-dessous-de-plat-26-x-18-cm.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/catherine-sofia.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Catherine-SOFIA_ok.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500. Une main couvre en partie un œil (pose souriante)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Son site personnel csofia.fr est privé ; le site du duo (fcsofia.com) ne donne ni formation ni date de naissance. Frédéric Sofia, avec qui elle forme FC Sofia, travaille aussi pour Fermob."
+ },
+ {
+  "slug": "jean-charles-de-castelbajac",
+  "name": "Jean-Charles de Castelbajac",
+  "sortKey": "Castelbajac",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Jean-Charles de Castelbajac est un créateur de mode, designer et artiste. Il commence sa carrière en 1968 aux côtés de sa mère au sein de la société Ko & Co, puis fonde en 1978 la maison Jean-Charles de Castelbajac, qu'il quitte en 2016. Entre les années 1970 et 1990, il est aussi directeur artistique pour Max Mara, cofonde Iceberg en 1974 et collabore en 1993 avec Courrèges, choisi par André Courrèges pour lui succéder. Son univers, fait de couleurs, de références au pop art et de collaborations avec des artistes comme Keith Haring ou Robert Mapplethorpe, a été exposé au Victoria and Albert Museum de Londres en 2006 puis au musée Galliera à Paris en 2007. Pour Fermob, il a dessiné la chaise Ange.",
+  "bioSources": [
+   "https://jeancharlesdecastelbajac.com/biographie",
+   "http://web.archive.org/web/20240807085052/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Jean-Charles-de-Castelbajac"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/jean-charles-de-castelbajac.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Jean-Charles-DE-CASTELBAJAC.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500."
+  },
+  "photoMissingReason": null,
+  "remarks": "La date et le lieu de naissance (1949, Casablanca) ne figurent pas sur la page biographie officielle consultée ; omis. Année de la chaise Ange non trouvée sur une source Fermob."
+ },
+ {
+  "slug": "matali-crasset",
+  "name": "Matali Crasset",
+  "sortKey": "Crasset",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Matali Crasset est une designer française née le 28 juillet 1965. Formée aux Ateliers-ENSCI dans les années 1990, elle défend un design à la croisée d'une pratique artistique, anthropologique et sociale, qu'elle applique à l'architecture, à la scénographie, aux objets, au mobilier et à l'espace public. Elle travaille aussi bien avec des industriels comme Ikea, Carrefour ou Thomson multimédia qu'avec des entreprises du patrimoine vivant comme la Manufacture de Sèvres, et ses œuvres figurent dans les collections du MoMA et du Centre Pompidou. Parmi ses objets connus figure la colonne d'hospitalité « Quand Jim monte à Paris ». Pour Fermob, elle signe la chaise Stripe en aluminium, conçue à l'origine pour les restaurants rapides Mini R du Crous, avec une poignée intégrée au dossier.",
+  "bioSources": [
+   "https://www.matalicrasset.com/fr/presentation",
+   "http://web.archive.org/web/20240910100352/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Matali-Crasset",
+   "https://www.fermob.com/fr/chaise-stripe-chaise.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/matali-crasset.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Matali-CRASSET.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500. Profil de trois quarts."
+  },
+  "photoMissingReason": null,
+  "remarks": "Elle écrit son nom en minuscules (« matali crasset ») ; nom conservé tel que fourni."
+ },
+ {
+  "slug": "olivier-gence",
+  "name": "Olivier Gence",
+  "sortKey": "Gence",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Olivier Gence est un designer né en 1990 à Poissy, originaire de l'île de La Réunion. Après une formation scientifique, il obtient un BTS Design de produit en 2011 puis un DSAA Création industrielle en 2013 à l'ENSAAMA Olivier de Serres, à Paris, et suit un master Stratégies du design mené en partenariat avec le Comité Colbert. Designer et chef de projet depuis 2014 chez Les Sismo, agence parisienne de design et d'innovation, il travaille l'objet industriel, le mobilier et le design d'édition. En 2013, il est lauréat du concours « Revisiter la chaise Bistro » organisé par Fermob. Sa chaise La Môme, éditée par la marque, reprend les lignes de la collection Bistro avec un clin d'œil à Piaf dans ses formes et ses couleurs.",
+  "bioSources": [
+   "http://web.archive.org/web/20240919032303/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/ENSAAMA-Olivier-Gence",
+   "https://www.fermob.com/fr/les-designers"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/olivier-gence.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Olivier-GENCE.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500."
+  },
+  "photoMissingReason": null,
+  "remarks": "Seule source : l'ancienne page designer Fermob (archive de septembre 2024) ; le poste chez Les Sismo « depuis 2014 » peut ne plus être à jour. Fermob le présente comme « Olivier Gence (ENSAAMA) ». Chaise La Môme absente du catalogue fermob.com actuel."
+ },
+ {
+  "slug": "j-mazoyer-do",
+  "name": "J. Mazoyer-Do",
+  "sortKey": "Mazoyer",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/j-mazoyer-do.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Joseph-MAZOYIER-_DO_.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500. Légende Fermob : « Joseph Mazoyer (Do) »."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo seule (bio existante conservée). Fermob l'affiche comme « Joseph Mazoyer (Do) » ; le nom de fichier Fermob contient une coquille (« MAZOYIER »)."
+ },
+ {
+  "slug": "terence-conran",
+  "name": "Terence Conran",
+  "sortKey": "Conran",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Terence Conran est un designer, commerçant et restaurateur britannique, né en 1931 à Kingston upon Thames et mort le 12 septembre 2020. Après des études de textile à la Central School de Londres, il monte un atelier de mobilier avec le sculpteur Eduardo Paolozzi, puis fonde le Conran Design Group en 1956. Il ouvre le premier magasin Habitat en 1964 à Chelsea, crée ensuite The Conran Shop et fonde en 1989 le Design Museum de Londres. Anobli en 1983, il est aussi l'auteur de nombreux livres sur la maison et le design. Pour Fermob, il a dessiné la chaise Kintbury, dont le dossier en fils d'acier entrecroisés forme des motifs en losanges.",
+  "bioSources": [
+   "https://designmuseum.org/designers/terence-conran",
+   "https://designmuseum.org/mourning-the-loss-of-sir-terence-conran",
+   "http://web.archive.org/web/20240910114840/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Terence-Conran",
+   "https://www.fermob.com/fr/chaise-kintbury-chaise.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/terence-conran.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Terence-CONRAN.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500. Portrait en pied jusqu'aux hanches."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le Design Museum date l'atelier avec Paolozzi de 1949 (page designer) ou du début des années 1950 (hommage) ; date omise. Année d'ouverture du Conran Shop divergente (1972/1973) entre les deux pages ; omise."
+ },
+ {
+  "slug": "thomas-bastide",
+  "name": "Thomas Bastide",
+  "sortKey": "Bastide",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Thomas Bastide est un designer et sculpteur né à Biarritz en 1954, d'un père écrivain et ambassadeur et d'une mère peintre et styliste suédoise. Il grandit à Paris dans un environnement suédois et passe ses étés en Suède, sur l'île d'Öland. Passionné par le verre et le travail des volumes, il collabore avec de nombreuses maisons d'arts de la table et d'objets, dont Baccarat, Christofle, Puiforcat, Ercuis, Rosenthal, Duralex et la Monnaie de Paris. Pour Fermob, il a revisité la chaise pliante Bistro en redessinant son dossier pour y intégrer un cintre : la chaise Valet peut ainsi recevoir un vêtement ou se suspendre dans un placard.",
+  "bioSources": [
+   "https://www.thomas-bastide.com/a-propos",
+   "https://www.thomas-bastide.com/collaborations",
+   "http://web.archive.org/web/20241104080227/https://www.fermob.com/fr/chaise-bistro-chaise-valet.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/thomas-bastide.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Thomas-BASTIDE.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 x 722, proche du 4:5). Version la plus grande trouvée ; la page Fermob Contract (designers externes) ne propose qu'une version 500 x 500."
+  },
+  "photoMissingReason": null,
+  "remarks": "La page Baccarat du designer (rendue en JavaScript) n'a pas pu être lue ; les chiffres de sa collaboration avec Baccarat ont donc été omis. La chaise Valet n'apparaît plus dans le catalogue fermob.com actuel (page produit archivée en novembre 2024)."
+ }
+]

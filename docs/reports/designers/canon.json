@@ -1,0 +1,183 @@
+{
+ "_note": "Normalisation des valeurs du métachamp custom.designer. alias → fiche canonique ; extraTags : membres d'un duo ayant leur propre fiche ; skip : valeur qui n'est pas un créateur (marque, gamme ou erreur de saisie).",
+ "alias": {
+  "Kastholm & Fabricius": "fabricius-kastholm",
+  "Fabricius & Kastholm": "fabricius-kastholm",
+  "Klaus Haapaniemi et Heikki Orvola": "klaus-haapaniemi-heikki-orvola",
+  "Klaus Haapaniemi & Heikki Orvola": "klaus-haapaniemi-heikki-orvola",
+  "Inga Sempe": "inga-sempe",
+  "Inga Sempé": "inga-sempe",
+  "Ronan & Erwan Bouroullec": "ronan-erwan-bouroullec",
+  "Ronan Bouroullec": "ronan-erwan-bouroullec",
+  "Erwan Bouroullec": "ronan-erwan-bouroullec",
+  "Barber & Osgerby": "edward-barber-jay-osgerby",
+  "Edward Barber & Jay Osgerby": "edward-barber-jay-osgerby",
+  "Næssi Studio": "studio-naessi",
+  "Big-Game": "big-game",
+  "Big Game": "big-game",
+  "Sondra Pantani & Pietro Marsili / MODO Architettura": "modo-architettura",
+  "Plan C": "plan-c",
+  "Doriana et Massimiliano Fuksas": "doriana-e-massimiliano-fuksas",
+  "Doriana et Massimiliano Fuksas & Alberto Gozzi": "doriana-e-massimiliano-fuksas",
+  "Ettore Sottsass & Alberto Gozzi": "ettore-sottsass",
+  "Ettore Sottsass, Alberto Gozzi": "ettore-sottsass",
+  "LPWK & Massimo Giacon": "massimo-giacon",
+  "LPWK – Massimo Giacon": "massimo-giacon",
+  "LPWK & Emma Silvestris": "emma-silvestris",
+  "Emma Silvestris et LPWK": "emma-silvestris",
+  "Emma Silvestris avec LPWK": "emma-silvestris",
+  "LPWK & Marta Sansoni": "marta-sansoni",
+  "LPWK & Paolo Gerosa": "paolo-gerosa",
+  "LPWK & Gabriele Chiave": "gabriele-chiave",
+  "LPWK & Jim Hannon-Tan": "jim-hannon-tan",
+  "LPWK & Antonio Aricò": "antonio-arico",
+  "LPWK & Marcello Jori": "marcello-jori",
+  "David Chipperfield & Pietro Leemann": "david-chipperfield",
+  "David Chipperfield, Pietro Leemann": "david-chipperfield",
+  "Giulio Iacchetti & Oscar Quagliarini": "giulio-iacchetti",
+  "Giulio Iacchetti, Oscar Quagliarini": "giulio-iacchetti",
+  "Giulio Iacchetti & Matteo Ragni": "giulio-iacchetti",
+  "Giulio Iacchetti, Matteo Ragni": "giulio-iacchetti",
+  "Alessandro Mendini & Annalisa Margarini": "alessandro-mendini",
+  "Alessandro Mendini et Annalisa Margarini": "alessandro-mendini",
+  "Luigi Massoni & Carlo Mazzeri": "carlo-mazzeri",
+  "Carlo Mazzeri, Luigi Massoni": "carlo-mazzeri",
+  "Carlo Mazzeri, Anselmo Vitale": "anselmo-vitale-carlo-mazzeri",
+  "Michel Boucquillon et Donia Maaoui": "boucquillon-maaoui",
+  "Michel Boucquillon": "boucquillon-maaoui",
+  "Richard Sapper, Alberto Gozzi & Gualtiero Marchesi": "richard-sapper",
+  "Richard Sapper & Alberto Gozzi": "richard-sapper",
+  "Richard Sapper, Alberto Gozzi, Raymond Thuilier & Jean-André Charial": "richard-sapper",
+  "Richard Sapper, Alberto Gozzi, Pierre Troisgros & Pierre et Michel Troisgros": "richard-sapper",
+  "Richard Sapper, Alberto Gozzi & Angelo Paracucchi": "richard-sapper",
+  "Richard Sapper, Alberto Gozzi & Alain Chapel": "richard-sapper",
+  "Jasper Morrison & Alberto Gozzi": "jasper-morrison",
+  "Kuno Prey, Alberto Gozzi": "kuno-prey",
+  "Ron Arad et Alberto Gozzi": "ron-arad",
+  "AA.VV. & Marcel Wanders": "marcel-wanders",
+  "William Alsop & Federico Grazzini": "william-alsop",
+  "CSA & Theo Williams": "theo-williams",
+  "Susan Cohn (Centro Studi Alessi)": "susan-cohn",
+  "Marta Sansoni (Centro Studi Alessi)": "marta-sansoni",
+  "Ronan et Erwan Bouroullec": "ronan-erwan-bouroullec",
+  "Franco Sargiani et Eija Helander": "franco-sargiani-eija-helander",
+  "Frédéric Gooris & Fabrice Leclerc": "frederic-gooris",
+  "Frédéric Gooris & Sebastiano Tosi": "frederic-gooris",
+  "Anna et Gian Franco Gasparini": "anna-e-gian-franco-gasparini",
+  "Lorenzo Piccione di Pianogrillo & Köbi Wiesendanger": "kobi-wiesendanger",
+  "Gabriele Chiave (concept Anna Borla)": "gabriele-chiave",
+  "Harry & Camila": "harry-paul-van-iersel",
+  "D'Urbino-Lomazzi": "durbino-lomazzi",
+  "Edward Barber and Jay Osgerby": "edward-barber-jay-osgerby",
+  "Viola Heyn-Johnsen et Jonas Trampedach": "jonas-trampedach",
+  "Scholten & Baijings": "carole-baijings",
+  "Antonio Citterio/assistant Toan Nguyen": "antonio-citterio",
+  "Friso Kramer & Wim Rietveld": "friso-kramer",
+  "Studio Design Fermob": "studio-fermob",
+  "nendo – Oki Sato": "nendo",
+  "Johan van Hengel": "johan-van-hengel",
+  "René Barba": "rene-barba",
+  "Aleksej Iskos": "iskos-berlin",
+  "Studio Habits,Min Dong": "studio-habits",
+  "LPWK & Francesca Amfitheatrof": "francesca-amfitheatrof"
+ },
+ "multi": {
+  "Hans J. Wegner, Ilse Crawford": [
+   "hans-j-wegner",
+   "ilse-crawford"
+  ],
+  "Luigi Caccia Dominioni, Livio Castiglioni, Pier Giacomo Castiglioni": [
+   "luigi-caccia-dominioni",
+   "pier-giacomo-castiglioni"
+  ],
+  "Luigi Caccia Dominioni & Livio et Pier Giacomo Castiglioni": [
+   "luigi-caccia-dominioni",
+   "pier-giacomo-castiglioni"
+  ],
+  "King-Kong": [
+   "stefano-giovannoni",
+   "guido-venturini"
+  ],
+  "King-Kong (Stefano Giovannoni et Guido Venturini)": [
+   "stefano-giovannoni",
+   "guido-venturini"
+  ],
+  "King-Kong (Stefano Giovannoni & Guido Venturini)": [
+   "stefano-giovannoni",
+   "guido-venturini"
+  ],
+  "Massimo Giacon & Marcello Jori": [
+   "massimo-giacon",
+   "marcello-jori"
+  ],
+  "Massimo Giacon, Marcello Jori": [
+   "massimo-giacon",
+   "marcello-jori"
+  ],
+  "Achille Castiglioni, Pier Giacomo Castiglioni": [
+   "achille-castiglioni",
+   "pier-giacomo-castiglioni"
+  ],
+  "Achille and Pier Giacomo Castiglioni": [
+   "achille-castiglioni",
+   "pier-giacomo-castiglioni"
+  ],
+  "Achille & Pier Giacomo Castiglioni": [
+   "achille-castiglioni",
+   "pier-giacomo-castiglioni"
+  ],
+  "Michael Graves & Virgil Abloh": [
+   "michael-graves",
+   "virgil-abloh"
+  ],
+  "Stefano Giovannoni & Elisa Gargan": [
+   "stefano-giovannoni",
+   "elisa-gargan"
+  ],
+  "Stefano Giovannoni & Miriam Mirri": [
+   "stefano-giovannoni",
+   "miriam-mirri"
+  ],
+  "Stefano Giovannoni, Harry-Paul van Iersel": [
+   "stefano-giovannoni",
+   "harry-paul-van-iersel"
+  ],
+  "Charles Eames & Eero Saarinen": [
+   "charles-ray-eames",
+   "eero-saarinen"
+  ]
+ },
+ "extraTags": {
+  "Antonio Citterio & Glen Oliver Löw": [
+   "antonio-citterio"
+  ],
+  "Klaus Haapaniemi et Heikki Orvola": [
+   "klaus-haapaniemi"
+  ],
+  "Klaus Haapaniemi & Heikki Orvola": [
+   "klaus-haapaniemi"
+  ]
+ },
+ "skip": {
+  "HAY": "nom de la marque, pas d'un créateur (conception interne) ; la page marque existe déjà",
+  "Ichendorf": "nom de la marque (Ichendorf Milano), pas d'un créateur",
+  "Ferm Living": "nom de la marque, pas d'un créateur",
+  "Carl Hansen & Søn - Kitchen": "nom d'une gamme de la marque saisi comme créateur (erreur de métachamp)",
+  "studio blomus": "studio interne de la marque Blomus ; aucun produit sur le site",
+  "Vitra Design Museum": "éditeur d'un livre, pas un créateur de mobilier ; produit absent du site",
+  "Serax": "marque",
+  "Vitra": "marque",
+  "Thonet": "fabricant",
+  "Pantone Horeca": "gamme sous licence",
+  "Pantone Universe": "gamme sous licence",
+  "Ufficio Tecnico Alessi": "bureau technique interne d'Alessi",
+  "AA.VV.": "« auteurs divers »",
+  "Anonyme": "auteur inconnu",
+  "Alberto Gozzi, Pierre Troisgros & Pierre et Michel Troisgros": "chefs cuisiniers, aucun designer",
+  "Vlaemynck": "Vlaemynck : marque française de mobilier et textile d'extérieur, qui appartient au groupe Fermob. Ce n'est pas une créatrice ni un créateur. Les housses Rivage ",
+  "Aiayu": "Aiayu : marque danoise de textile et de mode fondée en 2005 à Copenhague (fondatrice et directrice de création : Maria Høgh Heilmann, selon Muuto). Le plaid Rhy",
+  "Tomorrowland": "Tomorrowland : festival de musique électronique de Boom (Belgique), collaboration de marque avec Serax pour la collection Unity (vaisselle et verrerie). Aucune ",
+  "Merci": "Merci : concept store du Haut-Marais à Paris, collaboration de marque avec Serax (collection La Nouvelle Table, vaisselle et verrerie, inspirée de l'American Mo",
+  "Clodette": "Clodette (Clodette Antwerp) : label de papeterie, linge et objets pour la maison, présenté par Serax comme « a label » / « this brand », dont les créatrices son"
+ }
+}

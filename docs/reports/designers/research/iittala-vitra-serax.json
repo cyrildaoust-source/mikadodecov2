@@ -1,0 +1,306 @@
+[
+ {
+  "slug": "alfredo-haberli",
+  "name": "Alfredo Häberli",
+  "sortKey": "Häberli",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Alfredo Häberli est un designer suisse d'origine argentine, né en 1964 à Buenos Aires et installé à Zurich. Son travail puise dans son enfance en Argentine et dans l'observation des gestes du quotidien. Il collabore avec des entreprises comme Alias, BMW, Luceplan et Schiffini, et reçoit en 2014 le Grand Prix suisse du design décerné par l'Office fédéral de la culture. Pour Iittala, il dessine en 2001 la série de verres Essence, pensée pour servir tous les vins avec le moins de modèles possible, avec des pieds et des bases identiques. Il signe aussi la vaisselle colorée Origo, récompensée par un iF Design Award en 2002, et les verres à vin Senta.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/essence",
+   "https://www.iittala.com/en-gb/collections/all-collections/origo",
+   "https://www.iittala.com/en-gb/universe/inspiration/story-of-essence"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/alfredo-haberli.jpg",
+   "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/origo",
+   "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_iittala_designer_alfredo_haberli_2.jpg",
+   "credit": null,
+   "width": 1080,
+   "height": 680,
+   "notes": "Portrait studio noir et blanc, fond gris uni, visage net et centré (écharpe à carreaux). Paysage 1080x680 (plus grande version servie par le CDN Sitecore d'Iittala ; au-delà, l'image est seulement agrandie). Un recadrage 4:5 donne au mieux 544x680 px. Même photo en 840x600 sur la page Essence."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "oiva-toikka",
+  "name": "Oiva Toikka",
+  "sortKey": "Toikka",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Oiva Toikka (1931-2019) est un designer et artiste verrier finlandais, né à Vyborg. Formé à l'École des arts appliqués d'Helsinki de 1953 à 1960, il débute au département artistique d'Arabia, puis Kaj Franck le nomme en 1963 designer de la verrerie de Nuutajärvi, plus tard intégrée à Iittala. Il y dessine la série en verre pressé Kastehelmi (1964), dont les anneaux de gouttes masquent les marques de joint du moule. En 1972 naissent ses premiers oiseaux en verre soufflé, réunis en 1994 sous le nom Birds by Toikka ; depuis 1996, un oiseau et un œuf annuels sont édités en série limitée. Il reçoit notamment la médaille Pro Finlandia (1980), le prix Kaj Franck (1992) et la médaille du prince Eugen (2001).",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/universe/inspiration/the-story-of-birds",
+   "https://www.iittala.com/en-gb/collections/all-collections/kastehelmi",
+   "https://www.iittala.com/en-gb/collections/all-collections/oiva-toikka-collection",
+   "https://www.iittala.com/en-gb/collections/all-collections/birds-by-toikka"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/oiva-toikka.jpg",
+   "sourcePage": "https://www.iittala.com/en-gb/universe/inspiration/the-story-of-birds",
+   "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_oiva_toikka_designer.jpg",
+   "credit": null,
+   "width": 1080,
+   "height": 680,
+   "notes": "Portrait noir et blanc à la verrerie, visage net au centre ; silhouette floue d'un verrier au bord gauche, éliminée par un recadrage centré. Paysage 1080x680 (plus grande version servie par le CDN Sitecore d'Iittala ; au-delà, l'image est seulement agrandie). Un recadrage 4:5 donne au mieux 544x680 px. Aussi publiée sur la page Oiva Toikka Collection."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "tapio-wirkkala",
+  "name": "Tapio Wirkkala",
+  "sortKey": "Wirkkala",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Tapio Wirkkala (1915-1985) est un designer et sculpteur finlandais dont le travail couvre le verre, le mobilier, l'objet, la sculpture, le graphisme et même des billets de banque. En 1946, il remporte un concours organisé par Iittala, point de départ d'une collaboration de toute une vie : directeur artistique de la verrerie, il y crée plus de quatre cents objets en verre. Les verres Tapio, conçus pour la Triennale de Milan de 1954, reposent sur une bulle d'air obtenue par soufflage au bâton de bois humide. En 1968, il met au point la surface d'Ultima Thule, inspirée de la glace fondante de Laponie, toujours soufflée à la main à la verrerie d'Iittala. Il reçoit trois médailles d'or à la Triennale de Milan, le prix Lunning et la médaille du prince Eugen.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/tapio",
+   "https://www.iittala.com/en-gb/collections/all-collections/ultima-thule"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/tapio-wirkkala.jpg",
+   "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/tapio",
+   "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_iittala_2024_designers_tapio_wirkkala.jpg",
+   "credit": null,
+   "width": 1080,
+   "height": 680,
+   "notes": "Photo d'archive noir et blanc : Wirkkala de trois quarts, pipe à la bouche, examinant un verre Ultima Thule. Visage net à gauche du centre ; un recadrage 4:5 centré sur le visage coupe une partie du verre. Paysage 1080x680 (plus grande version servie par le CDN Sitecore d'Iittala ; au-delà, l'image est seulement agrandie). Un recadrage 4:5 donne au mieux 544x680 px. Version 840x600 sur la page Ultima Thule."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "klaus-haapaniemi",
+  "name": "Klaus Haapaniemi",
+  "sortKey": "Haapaniemi",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Klaus Haapaniemi est un illustrateur et designer finlandais né en 1970, installé à Londres. Diplômé en design graphique de l'Institut de design de Lahti, il a été directeur de création de la maison de mode italienne Bantam et a dessiné des imprimés pour Diesel, Levi's ou Marimekko. En 2010, il fonde avec Mia Wallenius la marque Klaus Haapaniemi, nourrie de nature, de folklore finlandais et d'arts décoratifs traditionnels. Pour Iittala, il crée en 2007 les décors de la série Taika, posés sur les formes de Heikki Orvola. En 2024, la collection Taika Sato (« récolte » en finnois) prolonge Taika avec des fruits et légumes ; Haapaniemi y dessine aussi lui-même la forme des vases et des pots.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/taika-sato",
+   "https://www.iittala.com/en-gb/collections/all-collections/taika",
+   "https://www.iittala.com/fi-fi/tuotesarjat/kaikki-tuotesarjat/taika"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/klaus-haapaniemi.jpg",
+   "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/taika-sato",
+   "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_klaus_haapaniemi.jpg",
+   "credit": null,
+   "width": 1080,
+   "height": 680,
+   "notes": "Portrait studio noir et blanc, fond blanc, visage net à droite du centre. Paysage 1080x680 (plus grande version servie par le CDN Sitecore d'Iittala ; au-delà, l'image est seulement agrandie). Un recadrage 4:5 donne au mieux 544x680 px. Version 840x600 (cadrage plus large) sur la page Taika."
+  },
+  "photoMissingReason": null,
+  "remarks": "Formation à Lahti, poste chez Bantam et Marimekko : faits tirés de la page finnoise de la collection Taika sur iittala.com."
+ },
+ {
+  "slug": "klaus-haapaniemi-heikki-orvola",
+  "name": "Klaus Haapaniemi & Heikki Orvola",
+  "sortKey": "Klaus Haapaniemi & Heikki Orvola",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Klaus Haapaniemi et Heikki Orvola sont les deux auteurs de la série Taika, lancée par Iittala en 2007. Haapaniemi, illustrateur finlandais né en 1970 et installé à Londres, signe les décors inspirés des contes et du folklore : chouettes, renards et forêts aux couleurs profondes. Orvola, né en 1943, entré au département artistique d'Arabia en 1987 et designer indépendant depuis 1994, en dessine les formes simples, reprises de sa série Aika. Titulaire du titre de professeur depuis 2002, Orvola a reçu le prix Kaj Franck et la médaille Pro Finlandia ; il a aussi conçu en 2005 de nouvelles pièces de la série Teema de Kaj Franck. En 2024, la collection Taika Sato associe de nouveau leurs deux signatures autour d'un décor de fruits et de légumes.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/taika",
+   "https://www.iittala.com/en-gb/collections/all-collections/taika-sato",
+   "https://www.iittala.com/fi-fi/tuotesarjat/kaikki-tuotesarjat/taika",
+   "https://www.iittala.com/fi-fi/arabia/muotoilijat/heikki-orvola",
+   "https://www.iittala.com/en-gb/universe/inspiration/the-story-of-teema"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Iittala ne publie que des portraits séparés (Klaus Haapaniemi sur les pages Taika et Taika Sato, Heikki Orvola seul sur sa page Arabia /fi-fi/arabia/muotoilijat/heikki-orvola). Aucun portrait commun trouvé sur iittala.com ; conformément à la consigne, pas de photo pour le duo.",
+  "remarks": "Les métachamps Shopify utilisent deux graphies (« & » et « et ») : à unifier."
+ },
+ {
+  "slug": "antonio-citterio-glen-oliver-low",
+  "name": "Antonio Citterio & Glen Oliver Löw",
+  "sortKey": "Antonio Citterio & Glen Oliver Löw",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Antonio Citterio et Glen Oliver Löw ont travaillé ensemble à Milan de 1987 à 2000. Architecte et designer italien né en 1950 à Meda, Citterio a reçu le Compasso d'Oro en 1987 et en 1994. Designer industriel allemand né en 1959 à Leverkusen, diplômé de l'université de Wuppertal puis de la Domus Academy, Löw devient en 1990 associé de l'agence Antonio Citterio & Partners. Le duo conçoit des produits pour Kartell, Vitra, Flos ou Iittala, dont les couverts Citterio 98 (1998) et la gamme d'ustensiles de service en acier inoxydable Collective Tools (2000). Depuis 2000, Löw dirige son propre studio à Hambourg, tandis que l'agence de Citterio mène des projets d'architecture et de design à l'international.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/collective-tools",
+   "https://www.iittala.com/en-gb/tableware/cutlery/serving-tools/collective-tools-serving-spoon-1009843",
+   "http://glenoliverloew.de/about/",
+   "http://glenoliverloew.de/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Iittala publie un portrait d'Antonio Citterio seul (1080x680_wide_image_antoniocitterio_2007.jpg, servi en 680x428 seulement) et le site de Glen Oliver Löw un portrait de Löw seul (portrait_loew-edited.jpg). Aucun portrait commun du duo trouvé chez l'éditeur ni sur les sites officiels : photo null selon la consigne.",
+  "remarks": "Iittala date la fondation d'Antonio Citterio and Partners de 1999, alors que Löw indique en être associé dès 1990 : la bio évite la date de fondation."
+ },
+ {
+  "slug": "timo-sarpaneva",
+  "name": "Timo Sarpaneva",
+  "sortKey": "Sarpaneva",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Timo Sarpaneva (1926-2006) est un designer, sculpteur et enseignant finlandais. Connu pour son travail du verre, qui rapproche art et objet utilitaire, il a aussi travaillé le textile, le bois, la porcelaine et le métal. Au cours de sa longue collaboration avec Iittala, il dessine le logo « i » de la marque et, en 1960, la cocotte en fonte Sarpaneva, médaillée d'argent à la Triennale de Milan la même année. Le bougeoir Festivo, créé en 1967, est né du pied d'un grand verre à vin ; sa surface imite la glace qui fond, et il est fabriqué depuis à la verrerie d'Iittala. Il reçoit le prix Lunning et, en 1976, le titre honorifique de professeur décerné par l'État finlandais.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/festivo",
+   "https://www.iittala.com/en-gb/collections/all-collections/sarpaneva"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Le seul portrait publié par Iittala (pages Festivo, Sarpaneva, Claritas, Orkidea, Tsaikka) est https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_sarpaneva_timo_1.jpg, dont l'original ne fait que 680x428 px (au-delà, le CDN l'agrandit seulement). Photo d'archive noir et blanc, Sarpaneva assis tenant un plat en verre, visage net mais petit : un recadrage 4:5 donnerait environ 340x428 px, jugé insuffisant. Pas de media bank Iittala/Fiskars publique trouvée.",
+  "remarks": null
+ },
+ {
+  "slug": "aleksi-kuokka",
+  "name": "Aleksi Kuokka",
+  "sortKey": "Kuokka",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Aleksi Kuokka est un designer finlandais, associé du studio de design Aivan, fondé en 2007 à Helsinki, où il dirige le pôle marques et espaces. Le studio conçoit des produits, des identités de marque et des espaces ; il a notamment réalisé pour Iittala la série de films « The Making of » consacrée à la fabrication du verre. Pour Iittala, Aleksi Kuokka dessine le mug Play, qui appartient à la collection Play, un ensemble d'objets de table et de décoration à combiner librement, inspiré par les couleurs chaudes et les papiers découpés de Matisse.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/tableware/drinkware/mugs-and-cups/play-mug-035l-beige-yellow-1074582",
+   "https://www.iittala.com/en-gb/collections/all-collections/play",
+   "https://aivan.fi/about/",
+   "https://aivan.fi/about/contact/",
+   "https://aivan.fi/case/the-making-of-range/"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos/aleksi-kuokka.jpg",
+   "sourcePage": "https://aivan.fi/about/contact/",
+   "imageUrl": "https://aivan.fi/wp-content/uploads/2021/11/Aivan_Contacts_Aleksi-5.jpg",
+   "credit": null,
+   "width": 900,
+   "height": 1200,
+   "notes": "Portrait noir et blanc du site officiel de son studio Aivan (page contacts, original sans suffixe de taille), vertical 3:4, visage net et centré ; recadrage 4:5 facile."
+  },
+  "photoMissingReason": null,
+  "remarks": "Iittala ne publie pas de biographie de Kuokka, seulement l'attribution du mug Play. Date de naissance (1978) visible chez un revendeur seulement : omise."
+ },
+ {
+  "slug": "kaj-franck",
+  "name": "Kaj Franck",
+  "sortKey": "Franck",
+  "brands": [
+   "Iittala"
+  ],
+  "bio": "Kaj Franck (1911-1989) est un designer finlandais, surnommé « la conscience du design finlandais ». Entré à la manufacture de céramique Arabia à Helsinki en 1945-1946, il y conçoit entre 1949 et 1952 la série Kilta : des pièces sans décor, empilables et polyvalentes, fondées sur des formes géométriques simples, où la couleur tient lieu d'ornement. Il la redessine à la fin des années 1970 pour un nouveau matériau ; elle devient Teema, lancée en 1981. En 1952, il dessine aussi les couverts Scandia, relancés par Iittala dans des tailles plus grandes après un arrêt de production en 1998. Professeur à l'École des arts appliqués d'Helsinki, il a donné son nom au principal prix de design finlandais.",
+  "bioSources": [
+   "https://www.iittala.com/en-gb/collections/all-collections/scandia",
+   "https://www.iittala.com/en-gb/universe/inspiration/the-story-of-teema"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/kaj-franck.jpg",
+   "sourcePage": "https://www.iittala.com/en-gb/collections/all-collections/scandia",
+   "imageUrl": "https://www.iittala.com/-/media/iittala/designers/wide-image/1080x680_wide_image_kaj_franck_3.jpg",
+   "credit": null,
+   "width": 1080,
+   "height": 680,
+   "notes": "Photo d'archive noir et blanc, Franck souriant de trois quarts, visage net au centre. Paysage 1080x680 (plus grande version servie par le CDN Sitecore d'Iittala ; au-delà, l'image est seulement agrandie). Un recadrage 4:5 donne au mieux 544x680 px. Même photo en 840x600 sur la page Teema."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "gerrit-rietveld",
+  "name": "Gerrit Rietveld",
+  "sortKey": "Rietveld",
+  "brands": [
+   "HAY",
+   "Pastoe"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/gerrit-rietveld.jpg",
+   "sourcePage": "https://www.pastoe.com/en/designer/Gerrit-Rietveld",
+   "imageUrl": "https://cdn.moooi.com/assets/Designers%20Pastoe/Gerrit%20Rietveld/Rietveld%20in%201941.jpg",
+   "credit": null,
+   "width": 1558,
+   "height": 2328,
+   "notes": "Image principale de la page designer Pastoe (fichier « Rietveld in 1941 ») : portrait noir et blanc en contre-plongée, visage net, vertical ; recadrage 4:5 facile. Pastoe publie aussi dans sa galerie des portraits en TIFF (ca 1956, 3648x5028 ; ca 1963) non retenus car au format TIFF."
+  },
+  "photoMissingReason": null,
+  "remarks": "Bio existante conservée. Elle se termine par « Ses meubles, dont ces deux chaises, sont réédités par Cassina » alors que Mikado vend Rietveld sous HAY et Pastoe : phrase à revoir. Aucun crédit photographe indiqué par Pastoe."
+ },
+ {
+  "slug": "hella-jongerius",
+  "name": "Hella Jongerius",
+  "sortKey": "Jongerius",
+  "brands": [
+   "Vitra"
+  ],
+  "bio": "Hella Jongerius est une designer néerlandaise née en 1963 à De Meern, qui vit et travaille à Berlin. Diplômée de l'Académie de design industriel d'Eindhoven, elle fonde en 1993 à Rotterdam le studio Jongeriuslab, où elle mêle procédés industriels et savoir-faire artisanal, pour Maharam, KLM ou le salon des délégués du siège des Nations unies. Elle collabore avec Vitra depuis 2004, dessine le canapé Polder et la chaise East River, et dirige les couleurs et matériaux de l'éditeur, dont elle a conçu la Colour & Material Library. Pour Vitra, elle crée aussi de petits objets : le tapis de souris Elephant Pad (2010) et le porte-clés Elephant (2015), en cuir d'ameublement et inspirés de l'Eames Elephant, ainsi que les patères Coat Dots (2013).",
+  "bioSources": [
+   "https://www.vitra.com/en-us/product/designer/hella-jongerius",
+   "https://www.vitra.com/en-us/product/details/elephant-pad",
+   "https://www.vitra.com/en-us/product/details/key-ring-elephant",
+   "https://www.vitra.com/en-us/product/details/coat-dots",
+   "https://jongeriuslab.com/about/",
+   "https://jongeriuslab.com/wp-content/uploads/2024/11/241106-Resume-Hella-Jongerius-English.pdf"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/hella-jongerius.jpg",
+   "sourcePage": "https://www.vitra.com/en-us/product/designer/hella-jongerius",
+   "imageUrl": "https://static.vitra.com/media/asset/8699877/storage/master/81488818.jpg",
+   "credit": "Markus Jans",
+   "width": 2159,
+   "height": 1440,
+   "notes": "Portrait couleur devant un mur de briques, visage net ; image d'en-tête de la page designer Vitra (texte alternatif « Hella Jongerius -®Markus Jans »). Fichier master du CDN Vitra (la page sert v_fullbleed_1440x, 1440x960). Paysage : recadrage 4:5 d'environ 1150x1440 px centré sur elle."
+  },
+  "photoMissingReason": null,
+  "remarks": "vitra.com renvoie un défi Cloudflare (403) aux requêtes directes ; les pages Vitra ont été lues via le lecteur r.jina.ai, qui en restitue le contenu, et l'image a été téléchargée directement sur static.vitra.com. Le portrait de jongeriuslab.com (457x640, © Katrin Streicher) est trop petit."
+ },
+ {
+  "slug": "marni",
+  "name": "Marni",
+  "sortKey": "Marni",
+  "brands": [
+   "Serax"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Marni est une maison de mode, pas une personne. La page https://serax.com/pages/marni ne publie que le logo Marni (MARNI_Logo-Ecommerce_3200x4000px.jpg) et des vignettes vidéo de vaisselle Midnight Flowers : pas de portrait possible. Un visuel de marque ou de produit serait à décider par Mikado.",
+  "remarks": "Bio existante conservée."
+ },
+ {
+  "slug": "paola-navone",
+  "name": "Paola Navone",
+  "sortKey": "Navone",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Paola Navone est une architecte et designer italienne, née à Turin et installée à Milan. Architecte d'intérieur, designer produit et directrice artistique, elle dirige à Milan son studio OTTO, qui réalise hôtels, restaurants et scénographies d'expositions dans le monde entier. Elle collabore avec des éditeurs comme Gervasoni, Cappellini ou Driade, et mêle la rigueur du design occidental aux couleurs et aux savoir-faire du Sud, de l'Asie et de l'Afrique. Elle a reçu notamment l'Osaka International Design Award, le Red Dot Design Award et le Good Design Award. Pour Serax, elle signe la collection Fish & Fish, dont une verrerie librement inspirée des verres du quotidien des années 1930, à laquelle appartient la carafe Fish & Fish.",
+  "bioSources": [
+   "https://serax.com/pages/paola-navone",
+   "https://www.carocim.com/en/pages/paola-navone"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/paola-navone.jpg",
+   "sourcePage": "https://serax.com/pages/paola-navone",
+   "imageUrl": "https://serax.com/cdn/shop/files/Paola_7a4b4177-8d3f-4dd8-a667-efddeb9e173d.jpg",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax (bloc « Featured designer ») : Paola Navone en pied dans une cuisine, visage net mais la personne n'occupe qu'une partie de l'image. Format 4:5 natif ; un recadrage plus serré sur le buste reste net vu la définition (visage vers x 1200-1500, y 900-1250 px)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année de naissance (1950) et diplôme de 1973 non repris : non trouvés sur une source autorisée ouverte. La page Serax cite la verrerie Fish & Fish ; Serax édite aussi une vaisselle Fish & Fish."
+ }
+]

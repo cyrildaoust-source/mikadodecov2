@@ -1,0 +1,402 @@
+[
+ {
+  "slug": "jean-baptiste-fastrez",
+  "name": "Jean-Baptiste Fastrez",
+  "sortKey": "Fastrez",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Jean-Baptiste Fastrez est un designer français né en 1984, qui vit et travaille à Paris. Diplômé de l'ENSCI-Les Ateliers en 2010, il collabore trois ans avec Ronan et Erwan Bouroullec avant d'ouvrir son studio en 2011. La même année, il remporte le Grand Prix du jury de la Design Parade 6 à la Villa Noailles, puis le Grand Prix de la création de la Ville de Paris en 2019. Il travaille notamment avec Kvadrat, Sèvres, le Cirva, la Galerie kreo et Moustache, qui édite sa lampe Olo (2016), sa lampe à huile Chantico (2022), la chaise Gelato et la collection de miroirs Sphera (2023). Ses pièces figurent dans les collections du Centre Pompidou, du Musée des Arts décoratifs de Paris et du CNAP.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/3-fastrez-jean-baptiste",
+   "https://jeanbaptistefastrez.com/about/",
+   "https://jeanbaptistefastrez.com/creation/gelato/",
+   "https://jeanbaptistefastrez.com/creation/olo/",
+   "https://jeanbaptistefastrez.com/creation/sphera/",
+   "https://jeanbaptistefastrez.com/creation/chantico/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/jean-baptiste-fastrez.jpg",
+   "sourcePage": "https://jeanbaptistefastrez.com/about/",
+   "imageUrl": "https://jeanbaptistefastrez.com/wp-content/uploads/2025/10/JB-FASTREZ-x-MONOPRIX1425.jpg",
+   "credit": null,
+   "width": 1396,
+   "height": 2048,
+   "notes": "Image principale de la page About du site officiel. Portrait en extérieur, de face, cadrage buste ; recadrage 4:5 facile en coupant le ciel. Le nom de fichier évoque une campagne Monoprix. Autre portrait disponible sur la même page (profil, lunettes de soleil, 1374 x 1068) : https://jeanbaptistefastrez.com/wp-content/uploads/2023/09/Jean-Baptiste-Fastrez-designer-about2.jpeg"
+  },
+  "photoMissingReason": null,
+  "remarks": "Les années des pièces viennent du site du designer, qui ne précise pas l'éditeur sur chaque fiche ; ces pièces sont bien vendues par Moustache. Moustache.fr n'affiche aucun portrait photographique (les pages designers ne montrent qu'un nom en typographie et une vidéo)."
+ },
+ {
+  "slug": "ionna-vautrin",
+  "name": "Ionna Vautrin",
+  "sortKey": "Vautrin",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Ionna Vautrin est une designer française née en 1979, qui vit et travaille à Paris. Diplômée de l'école de design Nantes Atlantique en 2002, elle travaille successivement pour Camper en Espagne, George J. Sowden en Italie et Ronan et Erwan Bouroullec en France. Elle fonde son studio en 2011 après avoir remporté le Grand Prix de la création de la Ville de Paris. Moustache édite sa collection Ô et Cyclope en 2011, puis le miroir Lucarne en 2021. Conçue pour les TGV de la SNCF en 2017, sa lampe TGV est développée en version domestique avec Moustache. Elle collabore aussi avec Foscarini, qui édite sa lampe Binic en 2010, et dessine avec Bosc les chaises de la cathédrale Notre-Dame de Paris.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/11-vautrin-ionna",
+   "https://www.ionnavautrin.com/contact",
+   "https://www.ionnavautrin.com/work/lampe-tgv",
+   "https://www.ionnavautrin.com/work/o",
+   "https://www.ionnavautrin.com/work/cyclope",
+   "https://www.ionnavautrin.com/work/lucarne"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/ionna-vautrin.jpg",
+   "sourcePage": "https://www.ionnavautrin.com/contact",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/66f31de58f1edc0ad8fb16f2/56680d9b-1a12-408a-bc91-3e0b4585e369/bio.jpg",
+   "credit": null,
+   "width": 2500,
+   "height": 2837,
+   "notes": "Portrait de la page studio (URL /contact) du site officiel. Assise de profil sur un banc noir, visage net tourné vers le haut ; recadrage 4:5 centré sur la personne possible. Squarespace sert du WebP par défaut : fichier JPEG obtenu avec l'en-tête Accept: image/jpeg."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site de la designer date la lampe TGV de 2018 (édition), alors que la lampe est installée dans les trains en 2017 ; la bio évite de dater l'édition Moustache. Le site indique « Cyclope » en céramique, édité par Moustache en 2011, sans préciser qu'il s'agit d'un miroir."
+ },
+ {
+  "slug": "benjamin-graindorge",
+  "name": "Benjamin Graindorge",
+  "sortKey": "Graindorge",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Benjamin Graindorge est un designer français né en 1980. Diplômé de l'ENSCI-Les Ateliers en 2006, il reçoit une aide du VIA pour son projet Paysage domestique, est sélectionné deux années de suite à la Design Parade de la Villa Noailles et remporte en 2008 le concours Cinna et les Audi Talents Awards. Après une résidence à la Villa Kujoyama à Kyoto en 2009, il collabore avec François Bauchet à la scénographie de la Biennale internationale du design de Saint-Étienne 2010. Il travaille pour Ligne Roset, Artuce, la galerie YMER&MALTA et Moustache, qui édite sa lampe The Cave et son vide-poche Ceramic Feeld (2012), ainsi que les vases Heirloom et les sculptures Orso.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/6-graindorge-benjamin",
+   "https://www.benjamingraindorge.fr/fr/informations.html",
+   "https://www.benjamingraindorge.fr/fr/projets/the-cave.html",
+   "https://www.benjamingraindorge.fr/fr/projets/ceramic-feeld.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/benjamin-graindorge.jpg",
+   "sourcePage": "https://www.benjamingraindorge.fr/fr/telechargement.html",
+   "imageUrl": "https://www.benjamingraindorge.fr/assets/files/portrait%20HD/portraitSimple%20tShirt.jpg",
+   "credit": null,
+   "width": 3320,
+   "height": 4360,
+   "notes": "Portrait HD de la rubrique téléchargement (presse) du site officiel. Fond blanc, buste, visage de trois quarts net ; beaucoup d'espace au-dessus de la tête, recadrage 4:5 à placer sur le bas de l'image. Deux variantes composées sur la même page (portraitCompose1/2 tShirt)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site officiel semble ancien (dernières actualités vers 2012) ; la photo peut dater de cette période."
+ },
+ {
+  "slug": "en-bande-organisee",
+  "name": "En Bande Organisée",
+  "sortKey": "En Bande Organisée",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "En Bande Organisée est un studio parisien d'architecture intérieure et de design fondé en 2011 par les designers Pauline Deltour, Anne-Laure Gautier et Gwenaëlle Girard. Atelier pluridisciplinaire, il conçoit des objets et des espaces, avec un goût commun pour le détail et les beaux matériaux. Pour Moustache, le studio réalise en 2019 la boutique de la rue Beaurepaire à Paris, avec l'architecte Julien Dufresne, puis dessine en 2020 le système d'étagères Bagou, destiné à cette boutique : une console en fonte inspirée de l'univers des masques et des tablettes en polyéthylène. Le studio a aussi signé des intérieurs d'hôtels et de restaurants, ainsi qu'un stand pour Offecct à Stockholm.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/108-en-bande-organisee",
+   "https://www.gwenaellegirard.com/moustache",
+   "https://www.gwenaellegirard.com/bagou-1",
+   "https://www.gwenaellegirard.com/interiordesign",
+   "https://www.gwenaellegirard.com/about"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/en-bande-organisee.jpg",
+   "sourcePage": "https://www.gwenaellegirard.com/about",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/5cc1a885f8135a3dc0a9b6ff/7b329f56-26b8-43a1-b8d9-4fcb4a761518/Gwenaelle+-+en+bande+organisee+EBO.jpg",
+   "credit": null,
+   "width": 2500,
+   "height": 3500,
+   "notes": "Portrait de Gwenaëlle Girard seule, sur la page About de son site (le domaine en-bande-organisee.com redirige vers gwenaellegirard.com ; nom de fichier « Gwenaelle - en bande organisee EBO »). Assise, en pied, visage net ; recadrage 4:5 sur le haut du corps. JPEG obtenu avec l'en-tête Accept: image/jpeg."
+  },
+  "photoMissingReason": null,
+  "remarks": "À valider : le portrait ne montre qu'une des trois fondatrices ; aucun portrait du trio n'a été trouvé. Le site du studio est désormais celui de Gwenaëlle Girard, qui présente les projets d'En Bande Organisée (dont Bagou et la boutique Moustache). Si l'on préfère ne pas illustrer le trio par une seule personne, mettre photo à null. La date de 2019 de la boutique vient de la liste « Concept store, Paris, 2019 » et du projet Moustache du même site."
+ },
+ {
+  "slug": "dimitri-bahler",
+  "name": "Dimitri Bähler",
+  "sortKey": "Bähler",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Dimitri Bähler est un designer suisse qui vit et travaille à Bienne. Formé à l'ECAL à Lausanne et à la Design Academy Eindhoven, il ouvre son studio en 2014. Finaliste de la Design Parade 8 à Hyères en 2013, il a mené des résidences notamment à l'EKWC, centre européen de la céramique aux Pays-Bas, et reçu le Grand Prix des Interieur Awards de Courtrai en 2016 ainsi qu'un Swiss Design Award en 2023. Ses recherches sur les matériaux et la céramique ont donné naissance aux tables d'appoint Touch, une série de trois tables en grès éditée par Moustache en 2018. Son travail figure dans les collections du mudac à Lausanne, du Museum für Gestaltung de Zurich et du Grand-Hornu.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/103-bahler-dimitri",
+   "https://dimitribaehler.ch/about/",
+   "https://dimitribaehler.ch/project/touch-side-tables/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/dimitri-bahler.jpg",
+   "sourcePage": "https://dimitribaehler.ch/about/",
+   "imageUrl": "https://dimitribaehler.ch/wp-content/uploads/2024/11/Dimitri-Bahler-2016-%C2%A9-Julie-Gourdier.jpg",
+   "credit": "Julie Gourdier",
+   "width": 1597,
+   "height": 2258,
+   "notes": "Portrait noir et blanc (2016) de la page About du site officiel, crédit dans le nom du fichier. Debout en atelier, cadrage mi-corps, personne dans la moitié droite ; recadrage 4:5 à décaler vers la droite."
+  },
+  "photoMissingReason": null,
+  "remarks": "Mikado vend les pièces sous le nom « Table basse Touch 1/2/3 » ; le designer et Moustache parlent de tables d'appoint (side tables). Le site officiel est dimitribaehler.ch (orthographe « ae »)."
+ },
+ {
+  "slug": "bertjan-pot",
+  "name": "Bertjan Pot",
+  "sortKey": "Pot",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Bertjan Pot est un designer néerlandais né en 1975 à Nieuwleusen. Diplômé de la Design Academy Eindhoven en 1998, il cofonde le studio Monkey Boys avec Daniel White, puis crée le Studio Bertjan Pot en 2003. Sa Random Light (1999) et ses masques en corde colorée sont nés, comme la plupart de ses objets, de recherches sur les matériaux et les techniques. Il travaille avec Arco, pour qui il dessine la table Slim, Moooi, Cassina, Hay, Maharam ou Moustache, qui édite les porte-manteaux Frik Frak, Ooga Booga et Pierre. Ses créations figurent dans les collections du Victoria & Albert Museum à Londres, du Museum Boijmans Van Beuningen à Rotterdam, du Stedelijk Museum d'Amsterdam et du MoMA.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/7-pot-bertjan",
+   "https://www.bertjanpot.nl/about/",
+   "https://www.arco.nl/en/about-arco/our-designers/bertjan-pot/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/bertjan-pot.jpg",
+   "sourcePage": "https://www.arco.nl/en/about-arco/our-designers/bertjan-pot/",
+   "imageUrl": "https://www.arco.nl/media/wmwhxk3h/onze_ontwerpers-bertjan_pot.jpg",
+   "credit": null,
+   "width": 1944,
+   "height": 2592,
+   "notes": "Portrait publié sur la page designer de l'éditeur Arco. Gros plan serré du visage (lunettes, t-shirt jaune), expression grimaçante et un œil plissé ; ratio 3:4, recadrage 4:5 facile. Ni le site du designer ni Moooi ni Moustache ne publient de portrait à visage découvert (masques, photo à la tarte, atelier)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Photo au ton volontairement décalé, et cadrage très serré : à valider visuellement. Moustache indique qu'il vit à Rotterdam."
+ },
+ {
+  "slug": "atelier-baptiste-et-jaina",
+  "name": "Atelier Baptiste et Jaïna",
+  "sortKey": "Atelier Baptiste et Jaïna",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "L'Atelier Baptiste & Jaïna est un duo formé en 2017 par Baptiste Sévin et Jaïna Ennequin. Leurs projets s'appuient sur des références naturelles et théâtrales, et la céramique leur permet d'explorer le dialogue entre forme, texture et lumière. En 2019, ils reçoivent le premier prix de la Ville de Carouge à la Biennale internationale de céramique de Carouge et le prix Jeunes Talents de la Biennale internationale de céramique de Vallauris. Pour Moustache, ils dessinent en 2023 la collection de miroirs Ingres (Auguste, Dominique et Jean), qui associe des formes molles, sculptées dans le plâtre puis réalisées en céramique, à des éléments géométriques simples. Leurs pièces figurent dans les collections du CNAP et du musée Magnelli de Vallauris.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/109-atelier-baptiste-jaina",
+   "https://www.baptistesevin.com/a-propos",
+   "https://www.baptistesevin.com/ingres"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/atelier-baptiste-et-jaina.jpg",
+   "sourcePage": "https://www.baptistesevin.com/a-propos",
+   "imageUrl": "https://static.wixstatic.com/media/ced0bd_e1e2acadc8c4466bbf64882cde123a8d~mv2.jpg",
+   "credit": "Atelier Baptiste & Jaïna",
+   "width": 3000,
+   "height": 4500,
+   "notes": "Portrait du duo en atelier sur la page À propos du site officiel (baptistesevin.com). Les deux visages sont nets, cadrage mi-corps ; recadrage 4:5 simple. La page indique « Photos : © Atelier Baptiste & Jaïna »."
+  },
+  "photoMissingReason": null,
+  "remarks": "Moustache écrit « Atelier Baptiste & Jaïna » ; le nom fourni (« et ») est conservé. Le site officiel porte le nom de Baptiste Sévin mais présente le travail du duo."
+ },
+ {
+  "slug": "pierre-charrie",
+  "name": "Pierre Charrié",
+  "sortKey": "Charrié",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Pierre Charrié est un designer français diplômé des Beaux-Arts de Nîmes et de l'ENSCI-Les Ateliers. Après avoir travaillé avec des agences de création, il exerce en indépendant et mène une recherche sur la dimension sensorielle des objets du quotidien : la manière dont les matériaux, les sons ou les gestes créent de nouvelles interactions. Il travaille le bois et la céramique, mais aussi la plume ou la nacre, avec des artisans. Lauréat du Grand Prix de la Ville de Paris et de la bourse Agora pour la recherche en design, il a vu plusieurs pièces entrer au CNAP. Pour Moustache, il dessine en 2024 les miroirs Shibari, suspendus par une corde dont les nœuds et le tressage répartissent le poids du miroir.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/104-charrie-pierre",
+   "https://www.pierrecharrie.com/about/",
+   "https://www.pierrecharrie.com/shibari/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait trouvé : la page designer Moustache ne montre qu'un nom en typographie ; la page About du site officiel pierrecharrie.com n'affiche que des couvertures de presse, et la médiathèque WordPress du site (recherches « portrait », « charrie-pierre ») ne contient que des photos de pièces et une affiche de salon. Pas de page designer avec portrait trouvée chez un autre éditeur.",
+  "remarks": "La bourse Agora apparaît dans la liste des prix du site officiel sans année ; la bio ne la date pas."
+ },
+ {
+  "slug": "constance-guisset",
+  "name": "Constance Guisset",
+  "sortKey": "Guisset",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Constance Guisset est une designer française née en 1976, qui vit et travaille à Paris. Après l'ESSEC, Sciences Po et une année au Parlement de Tokyo, elle entre à l'ENSCI-Les Ateliers, dont elle sort diplômée en 2007. Elle reçoit en 2008 le Grand Prix du design de la Ville de Paris et le Prix du public de la Design Parade, puis est nommée Créatrice de l'année au salon Maison & Objet en 2010. Son studio de design, d'architecture intérieure et de scénographie, fondé en 2009, travaille pour Petite Friture, Zanotta, Ginori, le ballet Preljocaj ou le Musée des Arts décoratifs. Pour Moustache, elle dessine le tabouret Canova en 2016 et le centre de table Canova en 2017, un trompe-l'œil en céramique.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/8-guisset-constance",
+   "https://constanceguisset.com/fr/studio",
+   "https://constanceguisset.com/fr/design/objets/canova"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/constance-guisset.jpg",
+   "sourcePage": "https://constanceguisset.com/fr/studio",
+   "imageUrl": "https://constanceguisset.com/media/pages/studio/b516fb5019-1779965712/constance-guisset-marion-berrin-1680x-q80.jpg",
+   "credit": "Marion Berrin",
+   "width": 1680,
+   "height": 2088,
+   "notes": "Portrait de la page Studio du site officiel ; photographe indiqué dans le nom du fichier. Assise, souriante, face à l'objectif, cadrage mi-corps, visage net ; déjà proche du 4:5. Plus grande taille disponible sur le site : 1680 px (l'original n'est pas servi)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Moustache date la fondation du studio en 2007 et le site officiel en 2009 ; la bio retient 2009 (site officiel). L'année de naissance (1976) vient de Moustache."
+ },
+ {
+  "slug": "les-graphiquants",
+  "name": "Les Graphiquants",
+  "sortKey": "Les Graphiquants",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Les Graphiquants est un studio de design graphique fondé en 2008 à Paris. Il travaille le graphisme, le dessin de caractères, la photographie, le set design et le digital, surtout pour la culture, l'art contemporain, la mode et le design. Diptyque, la Collection Pinault, Kering, Hermès ou Sèvres - Cité de la céramique lui confient leur identité ou leur univers visuel, et plusieurs de ses travaux sont entrés dans les collections de la Bibliothèque nationale de France. Pour Moustache, le studio conçoit l'identité visuelle ainsi que le site et la boutique en ligne de l'éditeur, qui édite aussi ses créations.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/16-les-graphiquants",
+   "https://www.les-graphiquants.fr/studio/clients.html",
+   "https://www.les-graphiquants.fr/studio/collections-publiques.html",
+   "https://www.les-graphiquants.fr/en/moustache-design-website.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait trouvé : Moustache n'affiche qu'un nom en typographie ; le site les-graphiquants.fr (pages studio, contact, presse, photographies, version mobile) ne publie ni photo d'équipe ni nom des fondateurs.",
+  "remarks": "Attribution à vérifier : le tapis Silkscreen vendu par Mikado n'apparaît plus sur moustache.fr (la page designer ne liste que le papier peint WallpaperLab Floating, et la recherche « silkscreen » ne donne rien). La bio ne cite donc pas le tapis. Membres du studio non publiés par les sources autorisées."
+ },
+ {
+  "slug": "dylan-martorell",
+  "name": "Dylan Martorell",
+  "sortKey": "Martorell",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Dylan Martorell est un artiste et musicien né en 1971 en Écosse et installé à Melbourne, en Australie. Il travaille l'impression, la photographie, le costume, la performance et la musique, en s'appuyant sur des matériaux glanés sur place, la récupération, la culture DIY, la robotique et les énergies alternatives. Il a cofondé avec Chaco Kato le Slow Art Collective, ainsi que le Forum of Sensory Motion, qui organise des résidences nomades en Australie, en Grèce et en Inde. Son travail a été présenté notamment à la National Gallery of Victoria dans l'exposition Melbourne Now en 2014. Moustache édite son tapis Tiger.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/9-martorell-dylan",
+   "https://www.dylanmartorell.com/bio",
+   "https://www.dylanmartorell.com/pagecv"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait exploitable : Moustache n'affiche qu'un nom en typographie ; sur la page Bio du site officiel dylanmartorell.com, la seule photo montre une performance de groupe en plein air, où l'artiste apparaît petit et de dos ou de profil, parmi de nombreuses personnes.",
+  "remarks": "La mention « Melbourne Now 2014 » vient de la liste d'expositions du CV (sous la rubrique Slow Art Collective)."
+ },
+ {
+  "slug": "studio-brichetziegler",
+  "name": "Studio BrichetZiegler",
+  "sortKey": "Studio BrichetZiegler",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Le Studio BrichetZiegler est fondé en 2010 par Caroline Ziegler et Pierre Brichet. Caroline Ziegler est diplômée de l'École supérieure d'art et de design de Reims en 2003 ; Pierre Brichet, ingénieur en mécanique de l'Université de technologie de Belfort-Montbéliard, sort de l'École nationale supérieure des Arts décoratifs en 2005. Membres du collectif Dito, ils reçoivent la bourse Agora en 2007, puis le Grand Prix de la création de la Ville de Paris en 2017. Ils travaillent pour Petite Friture, Hermès Petit h ou Théorème Éditions et produisent leur propre collection, By Hands, depuis 2015. Pour Moustache, ils dessinent en 2017 les étagères murales Isola, en céramique émaillée mate. Le Mobilier national et le CNAP ont acquis certaines de leurs pièces.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/102-studio-brichet-ziegler",
+   "https://www.brichetziegler.com/about",
+   "https://www.brichetziegler.com/work/isola-for-moustache"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/studio-brichetziegler.jpg",
+   "sourcePage": "https://www.brichetziegler.com/about",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/69cceb1feffdb65bef2c2721/1b828bba-bbbd-4b72-a039-4594a47804b1/PORTRAIT_BRICHETZIEGLER_MORGANE-LE-GALL.jpg",
+   "credit": "Morgane Le Gall",
+   "width": 2500,
+   "height": 1667,
+   "notes": "Portrait du duo sur la page About du site officiel (« portrait by Morgane Le Gall »). Photo en paysage : le duo pose au centre d'un ensemble de chaises noires sur fond blanc, visages nets mais assez petits. Un recadrage 4:5 serré sur les deux personnes donne environ 1000 x 1250 px."
+  },
+  "photoMissingReason": null,
+  "remarks": "Moustache écrit « Studio Brichet Ziegler », le studio écrit « BrichetZiegler ». L'affiche typographique de Moustache porte la faute « Zigler »."
+ },
+ {
+  "slug": "jacob-robertsson",
+  "name": "Jacob Robertsson",
+  "sortKey": "Robertsson",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Jakob Robertsson est un céramiste suédois, surtout connu pour ses créations humoristiques pour la manufacture Rörstrand. Son travail est représenté au Nationalmuseum, le musée national suédois de l'art et du design. Moustache édite sa sculpture A Moment in Time, une conversation face à face entre un oiseau et un personnage chevelu en prière, en céramique émaillée.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/106-robertsson-jakob",
+   "https://www.moustache.fr/fr/sculpture/897-a-moment-in-time.html"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait trouvé : Moustache n'affiche qu'un nom en typographie ; le site personnel jakobrobertsson.se est bloqué par l'hébergeur (page d'erreur Loopia, code 403) et Rörstrand n'a pas de page designer à son nom.",
+  "remarks": "Orthographe à corriger : Moustache écrit « Jakob » Robertsson (page designer et fiche produit), pas « Jacob ». La bio utilise « Jakob » ; le nom et le slug fournis sont conservés. Seule source disponible : Moustache (texte court), d'où la confiance faible. Moustache écrit « prieur chevelu », rendu ici par « personnage chevelu en prière » : à vérifier avec l'image du produit."
+ },
+ {
+  "slug": "marc-venot",
+  "name": "Marc Venot",
+  "sortKey": "Venot",
+  "brands": [
+   "Moustache"
+  ],
+  "bio": "Marc Venot est un designer industriel français né à Paris en 1979. Après des études de mathématiques et de physique, il étudie le design à l'ENSCI-Les Ateliers de 1999 à 2004, puis travaille six ans dans une agence parisienne pour des maisons comme Hermès, Cartier, Lanvin ou Givenchy. Il fonde son studio en 2011 et dessine du mobilier et des objets pour Normann Copenhagen, Thonet, Ligne Roset, EO, Atma ou USM. Lauréat du Grand Prix de la création de la Ville de Paris en 2016, il dessine en 2021 pour Moustache le soliflore Piao, qui repose en équilibre comme une toupie à l'arrêt ; son nom portugais renvoie aux figures de la capoeira.",
+  "bioSources": [
+   "https://www.moustache.fr/fr/designers/105-venot-marc",
+   "https://www.marc-venot.com/about/",
+   "https://www.marc-venot.com/project/toupie/",
+   "https://www.eo.dk/designers-marc-venot-fr"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/marc-venot.jpg",
+   "sourcePage": "https://www.eo.dk/designers-marc-venot-fr",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/5eafcdeb0c11b83129911b4c/1594293921541-PXPBZYWENXXG1PT29AHK/marc_antoine_c_pierremonetta-01.jpg",
+   "credit": "Pierre Monetta",
+   "width": 1200,
+   "height": 1200,
+   "notes": "Portrait noir et blanc sur la page designer de l'éditeur EO (EO Play). Gros plan, main devant la bouche, visage coupé par le bord droit ; carré 1200 px, recadrage 4:5 (960 x 1200) possible mais serré. Crédit tiré du nom du fichier (« c_pierremonetta »)."
+  },
+  "photoMissingReason": null,
+  "remarks": "À vérifier : le nom du fichier commence par « marc_antoine », mais c'est la seule photo de personne sur la page Marc Venot d'EO. Le site officiel marc-venot.com ne publie pas de portrait (seul un reflet dans une horloge). Qualité moyenne (1200 px, cadrage coupé) : à valider."
+ },
+ {
+  "slug": "otxo-amade",
+  "name": "Otxo Amade",
+  "sortKey": "Amade",
+  "brands": [
+   "Volta Mobiles"
+  ],
+  "bio": "Otxo Amade a fondé Volta à Paris en 2015 pour repenser la manière d'habiter les lieux à travers l'équilibre, la lumière et l'air. Inspirés par l'art cinétique du XXe siècle et le design du milieu du siècle, les mobiles Volta, suspendus ou sur pied, sont fabriqués dans l'atelier de la marque à Barcelone. Ils sont réalisés en aluminium et en acier, peints à la poudre et équilibrés à la main.",
+  "bioSources": [
+   "https://www.voltamobiles.com/pages/a-propos",
+   "https://www.voltamobiles.com/en/pages/a-propos"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait trouvé : la page À propos de voltamobiles.com (FR, EN, ES) ne montre que des mobiles en situation et la façade de l'ancien showroom parisien ; aucune autre source autorisée ne présente Otxo Amade.",
+  "remarks": "Le site Volta ne présente Otxo Amade que comme fondateur de la marque, sans biographie : nationalité, formation et rôle exact dans le dessin de chaque mobile non publiés. La bio parle donc surtout de la marque."
+ },
+ {
+  "slug": "studio-heju",
+  "name": "Studio HEJU",
+  "sortKey": "Studio HEJU",
+  "brands": [
+   "Tiptoe"
+  ],
+  "bio": "HEJU est un studio d'architecture intérieure fondé en 2017 par Hélène Pinaud et Julien Schwartzmann. Le duo associe des influences japonaises et scandinaves, avec des lignes droites et des volumes minimalistes, des matériaux naturels et le blanc comme base, relevé par la couleur. Pour Tiptoe, HEJU crée une palette de quatre teintes inspirées de la Scandinavie : Épicéa, Cannelle, Aurore et Bruyère. Elles sont appliquées aux pieds de table serre-joint de 75 et 43 cm, aux accroches murales Bracket et au tabouret Lou.",
+  "bioSources": [
+   "https://www.tiptoe.fr/fr-fr/blogs/lookbooks/tiptoe-x-heju-colorscape"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/studio-heju.jpg",
+   "sourcePage": "https://www.tiptoe.fr/fr-fr/blogs/lookbooks/tiptoe-x-heju-colorscape",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0999/6347/0166/files/lookbooks_tiptoe-x-heju-colorscape__Copie-de-11_TIPTOE_Heju309895_JMauloubier.jpg",
+   "credit": "J. Mauloubier",
+   "width": 1334,
+   "height": 2000,
+   "notes": "Portrait du duo dans le lookbook Tiptoe x HEJU, placé juste avant la section « À propos de HEJU ». Les deux personnes sont en pied, visages nets et souriants ; recadrage 4:5 simple. Crédit tiré du nom du fichier (« JMauloubier »)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Attribution : HEJU signe les couleurs de cette édition, pas la forme du tabouret Lou, qui appartient à la gamme Tiptoe. La page Designers de tiptoe.fr se charge en JavaScript et n'a pas pu être lue."
+ },
+ {
+  "slug": "werner-stoff-hans-nagel",
+  "name": "Werner Stoff & Hans Nagel",
+  "sortKey": "Stoff & Nagel",
+  "brands": [
+   "Stoff Nagel"
+  ],
+  "bio": "Werner Stoff et Hans Nagel sont les auteurs du bougeoir Nagel, dessiné à Cologne dans les années 1960. Fils d'un forgeron, Hans Nagel dirige la petite entreprise familiale qui prolonge le travail du métal de son père ; il rencontre dans le milieu du design de Cologne Werner Stoff, architecte et artiste, qui avait développé sa propre ligne d'objets arrondis « sans angles ». Nagel lui confie le dessin d'un bougeoir à trois bougies, empilable et modulable, lancé à la fin des années 1960. La marque danoise STOFF Nagel le réédite depuis 2015 d'après les dessins originaux de Werner Stoff, puis réédite d'autres pièces des années 1960, comme la coupelle, ancien cendrier, et le support.",
+  "bioSources": [
+   "https://stoffnagel.com/the-story/",
+   "https://stoffnagel.com/about/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait trouvé : les pages About et The Story de stoffnagel.com ne montrent que des produits et des croquis ; l'espace presse (presscloud) se charge en JavaScript et n'a pas pu être exploré. Il s'agit de créateurs des années 1960, pour qui aucun portrait officiel n'est publié.",
+  "remarks": "Attribution à nuancer : selon stoffnagel.com, le soliflore (vase, lancé en 2019) et l'applique (wall hanger, 2023) sont des créations récentes de la marque dans l'esprit du bougeoir, et non des dessins de Stoff et Nagel. Le bougeoir, la coupelle (bowl) et le support (stand) sont des rééditions des années 1960. À vérifier : « Chandelier Nagel » et « Bougeoir Nagel sur pied » pourraient correspondre au stand et au floor stand. La marque s'appelait d'abord « STOFF Copenhagen »."
+ }
+]

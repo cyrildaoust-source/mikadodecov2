@@ -1,0 +1,462 @@
+[
+ {
+  "slug": "helene-lepinay",
+  "name": "Hélène Lepinay",
+  "sortKey": "Lepinay",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Hélène Lepinay est une artiste plasticienne française, née à Paris. Autodidacte, elle a toujours travaillé la matière, de la corde à la laine, du bronze au pinceau et à la plume, en cherchant la simplicité et l'équilibre. Ses débuts se font dans l'atelier de Joël Blanc, plasticien travaillant le bronze, et son travail a été distingué par le prix Paul Landowski. Installée en Belgique, elle peint la nature et les animaux sur porcelaine brute dans l'atelier d'Anita Le Grelle, avant de faire de l'argile et du grès son matériau principal, dans des verts végétaux, des ocres et des bruns. Pour Serax, elle signe une collection d'accessoires d'intérieur inspirée des plantes et des animaux, à laquelle appartient le cache-pot 11.",
+  "bioSources": [
+   "https://serax.com/pages/helene-lepinay"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/helene-lepinay.jpg",
+   "sourcePage": "https://serax.com/pages/helene-lepinay",
+   "imageUrl": "https://serax.com/cdn/shop/files/Helene_Lepinay.jpg",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax : Hélène Lepinay souriante dans son atelier, à côté d'un grand pot peint. Format 4:5 natif, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le lien de la collection sur la page Serax porte le titre « Flower pots & planters by Studio Terres de Rêves » : nom d'atelier possible, non repris dans la bio faute de mention explicite."
+ },
+ {
+  "slug": "liz-objets",
+  "name": "LIZ.objets",
+  "sortKey": "LIZ.objets",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "LIZ.objets est l'atelier de céramique d'Elise Maes, née à Gand. Passionnée par l'argile depuis sa jeunesse, elle commence par une série de stages à l'adolescence, puis reprend ce travail des années plus tard et réalise son rêve d'aménager son propre atelier. Le nom LIZ.objets reprend son prénom tout en jouant sur l'expression française « les objets ». Elle y façonne des pièces faites à la main, éditées notamment par Serax, comme le vase 01 gris foncé.",
+  "bioSources": [
+   "https://serax.com/pages/liz-objets"
+  ],
+  "bioConfidence": "faible",
+  "photo": {
+   "file": ".context/designers/photos2/liz-objets.jpg",
+   "sourcePage": "https://serax.com/pages/liz-objets",
+   "imageUrl": "https://serax.com/cdn/shop/files/Portrait_Liz.Objects.jpg",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax : Elise Maes assise dans son atelier, tenant une assiette. Format 4:5 natif, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Studio (nom commercial d'Elise Maes) : sortKey = nom complet du studio. Source unique et courte, d'où la confiance faible."
+ },
+ {
+  "slug": "isabelle-de-borchgrave",
+  "name": "Isabelle de Borchgrave",
+  "sortKey": "Borchgrave",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Isabelle de Borchgrave est une artiste belge née en 1946 à Etterbeek, connue pour ses peintures et ses sculptures en papier peint. Elle entre à 14 ans au Centre des Arts décoratifs, puis sort diplômée de l'Académie royale des beaux-arts de Bruxelles et ouvre un atelier consacré à la mode et à la décoration intérieure. À partir de 1994, après une visite au Metropolitan Museum de New York, elle crée des costumes en papier en trompe-l'œil, réunis en quatre grandes collections présentées dans de nombreux musées. Elle a aussi travaillé pour Caspari, Gien, Target ou Hermès, des tissus et papiers peints jusqu'à la vaisselle et au linge de table. Elle a dessiné pour Serax une collection d'arts de la table.",
+  "bioSources": [
+   "https://isabelledeborchgrave.com/pages/biography",
+   "https://web.archive.org/web/20211022031906/https://www.serax.com/en/designer/isabelledeborchgrave"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/isabelle-de-borchgrave.jpg",
+   "sourcePage": "https://isabelledeborchgrave.com/pages/biography",
+   "imageUrl": "https://cdn.shopify.com/s/files/1/0006/6109/4458/files/Michel_Figuet-_DSF5128-2.jpg?v=1607524251",
+   "credit": "Michel Figuet (d'après le nom du fichier)",
+   "width": 960,
+   "height": 1280,
+   "notes": "Portrait couleur en pied publié sur le site officiel de l'artiste (page Biography), devant ses toiles. Visage net mais petit dans le cadre : un recadrage 4:5 serré reste possible à 960 px de large."
+  },
+  "photoMissingReason": null,
+  "remarks": "Son décès en octobre 2024 est signalé par des sources non autorisées (Wikipédia), mais le site officiel ne le mentionne pas : bio rédigée sans présent de vie, à vérifier. Le « Bol Waves » est à vérifier : la page Serax d'archive cite sa collection « Blue is the new black » et la collection actuelle Waves de Serax (vases) est attribuée à Ruben Deriemaeker ; la bio ne nomme donc pas la pièce. Page Serax consultée via une archive Wayback de serax.com (ancien site)."
+ },
+ {
+  "slug": "mieke-cuppen",
+  "name": "Mieke Cuppen",
+  "sortKey": "Cuppen",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Mieke Cuppen est une designer néerlandaise spécialisée dans les arts de la table. Elle fonde son studio en 2009, à sa sortie de la Design Academy Eindhoven, et se consacre depuis à la vaisselle, pour de petits labels comme pour de grandes marques internationales. Elle travaille la porcelaine, le grès, le verre, le bois, le métal ou la bagasse, en associant modélisation 3D et prototypes faits main. Ses objets, simples et contemporains, partent de l'expérience de l'utilisateur en cuisine et à table. Pour Serax, elle dessine notamment le verre à thé à double paroi Grind, en production depuis 2013, ainsi que la cloche en verre.",
+  "bioSources": [
+   "https://www.miekecuppen.com/en/about",
+   "https://www.miekecuppen.com/en/work/grind",
+   "https://web.archive.org/web/20230605175514/https://www.serax.com/en/designer/miekecuppen"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/mieke-cuppen.jpg",
+   "sourcePage": "https://www.miekecuppen.com/en/about",
+   "imageUrl": "https://www.miekecuppen.com/user/pages/03.over/101-new_1MiekeCuppen-cropsmall.jpg",
+   "credit": null,
+   "width": 1800,
+   "height": 1567,
+   "notes": "Portrait couleur publié sur le site officiel de la designer (page About) : assise devant des étagères de vaisselle. Personne centrée, recadrage 4:5 possible (environ 1250 x 1567)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité néerlandaise déduite du site (Design Academy Eindhoven, site en néerlandais) ; non écrite explicitement."
+ },
+ {
+  "slug": "gemma-bernal",
+  "name": "Gemma Bernal",
+  "sortKey": "Bernal",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Gemma Bernal est une designer industrielle espagnole, diplômée de l'école EINA de Barcelone et en activité depuis 1968. Pendant une trentaine d'années, elle signe de nombreux produits avec Ramon Isern sous la marque Bernal/Isern, puis fonde Gemma Bernal & Associats en 1998 et son propre studio en 2004. Son travail couvre le mobilier, l'éclairage, les sanitaires, le mobilier urbain et les arts de la table, pour des entreprises comme Roca, Vibia, Escofet, Rosenthal ou Bauscher, et lui a valu plusieurs prix. Elle enseigne également le design de produit. Sa passion pour la gastronomie et ses échanges avec de grands chefs l'ont amenée à se consacrer largement à la vaisselle ; pour Serax, elle signe l'assiette Drops & Clasp.",
+  "bioSources": [
+   "https://www.gemmabernal.com/experience/",
+   "https://web.archive.org/web/20230609020850/https://www.serax.com/en/designer/gemmabernal"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/gemma-bernal.jpg",
+   "sourcePage": "https://www.gemmabernal.com/gemma-bernal/",
+   "imageUrl": "https://www.gemmabernal.com/wp-content/uploads/2022/08/Estudio-32-scaled.jpg",
+   "credit": null,
+   "width": 1711,
+   "height": 2560,
+   "notes": "Portrait couleur publié sur le site officiel du studio (page Gemma Bernal) : assise à son bureau, crayon en main. Visage net, cadrage vertical adapté au 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année de naissance (1949, Barcelone) citée par des annuaires non autorisés : omise. Nationalité espagnole déduite (EINA Barcelone, site du studio) ; l'identité de la personne sur la photo est déduite de la page « Gemma Bernal » du site, sans légende."
+ },
+ {
+  "slug": "filip-janssens",
+  "name": "Filip Janssens",
+  "sortKey": "Janssens",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Filip Janssens est un designer belge autodidacte, installé à Alost. Il commence par dessiner des meubles sur mesure pour sa propre maison, puis ouvre en 2007 son studio, consacré au design de produits et de mobilier ainsi qu'à des projets artistiques. Le mobilier sur mesure reste le cœur de son activité, mais il collabore aussi avec des éditeurs comme Serax pour de petites collections de meubles. Il compare son travail à une peinture géométrique abstraite en trois dimensions : volumes emboîtés, asymétrie, jeux de profondeurs, volumes ouverts ou fermés. L'étagère murale Jointed, éditée par Serax, illustre ce mobilier modulaire aux accents architecturaux.",
+  "bioSources": [
+   "https://www.filipjanssens.be/biography"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/filip-janssens.jpg",
+   "sourcePage": "https://www.filipjanssens.be/biography",
+   "imageUrl": "https://images.squarespace-cdn.com/content/v1/53aeb79be4b0825a4fd0a107/1519988942228-CINZJSPXWYLJCBT4LHI9/F+Janssens++crop+61.jpg",
+   "credit": null,
+   "width": 2500,
+   "height": 1570,
+   "notes": "Photo couleur publiée sur le site officiel (page Biography) : Filip Janssens assis à une table, devant ses étagères. Format paysage ; il occupe la moitié droite, recadrage 4:5 possible (environ 1250 x 1570)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité belge déduite de l'adresse du studio à Alost ; « aux accents architecturaux » repris d'une source secondaire mais cohérent avec la page officielle."
+ },
+ {
+  "slug": "kiki-van-eijk",
+  "name": "Kiki van Eijk",
+  "sortKey": "Eijk",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Kiki van Eijk est une designer néerlandaise qui a grandi à Tegelen, aux Pays-Bas. Elle étudie à la Design Academy Eindhoven, dont elle sort diplômée avec mention et où elle rencontre son compagnon, le designer Joost van Bleiswijk, puis fonde son studio en 2000. Son travail va du mobilier aux tapis, textiles, luminaires, céramiques et verreries, jusqu'aux installations et aux œuvres sur papier, avec une grande attention au savoir-faire. Ses pièces ont été présentées dans des musées, galeries et salons à Bâle, Londres, Paris, Milan, New York ou Tokyo. Elle a collaboré avec Hermès, Saint-Louis, Bisazza ou Serax, pour qui elle signe notamment le panier Kiki.",
+  "bioSources": [
+   "https://kikiandjoost.com/kiki/about/",
+   "https://web.archive.org/web/20230610010752/https://www.serax.com/en/designer/kikivaneijck"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/kiki-van-eijk.jpg",
+   "sourcePage": "https://kikiandjoost.com/kiki/about/",
+   "imageUrl": "https://kikiandjoost.com/kiki/wp-content/uploads/sites/2/2025/03/frits_kiki_cover_HR_05-scaled.jpg",
+   "credit": null,
+   "width": 1876,
+   "height": 2560,
+   "notes": "Portrait couleur publié sur le site officiel (page About) : Kiki van Eijk tient deux disques décoratifs, l'un masquant son œil droit ; visage net et souriant. Cadrage vertical adapté au 4:5."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le slug de l'ancienne page Serax était « kikivaneijck » (faute de Serax) ; l'orthographe officielle est bien Kiki van Eijk."
+ },
+ {
+  "slug": "loic-willemot",
+  "name": "Loïc Willemot",
+  "sortKey": "Willemot",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Loïc Willemot est un designer belge né en 1992 à Gand. Diplômé en design textile, en architecture d'intérieur et en design de mobilier, il fonde son studio en 2015. Il défend une règle simple : transformer des objets ordinaires par des interventions minimales, en travaillant surtout des matériaux de base jusqu'à obtenir l'effet voulu, en écartant tout le superflu. Pour Serax, il dessine la collection de photophores Ligne Carrée. Il dirige aujourd'hui avec Lisa De Marez Bureau La Marmotte, une agence de création installée à Brakel.",
+  "bioSources": [
+   "https://web.archive.org/web/20221205021324/https://www.serax.com/en/designer/loicwillemot",
+   "https://www.lamarmotte.be/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/loic-willemot.jpg",
+   "sourcePage": "https://web.archive.org/web/20221205021324/https://www.serax.com/en/designer/loicwillemot",
+   "imageUrl": "https://web.archive.org/web/20221205021324im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_loicwillemot__designer_1297x700.jpeg",
+   "credit": null,
+   "width": 1297,
+   "height": 700,
+   "notes": "Portrait noir et blanc publié par Serax sur son ancien site (récupéré via l'archive Wayback ; l'original n'est plus en ligne) : Loïc Willemot bras croisés contre un mur. Format bandeau 1297 x 700 : un recadrage 4:5 ne fait que 560 px de large, sous le seuil de 600 px. À valider."
+  },
+  "photoMissingReason": null,
+  "remarks": "Page Serax consultée via l'archive Wayback de l'ancien site serax.com (la page n'existe plus sur le site actuel). loicwillemot.com redirige vers lamarmotte.be. Nationalité belge déduite (Gand)."
+ },
+ {
+  "slug": "axel-enthoven",
+  "name": "Axel Enthoven",
+  "sortKey": "Enthoven",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Axel Enthoven est un designer industriel belge né en 1947. Diplômé en 1970 de l'Academie Industriële Vormgeving d'Eindhoven, il fonde en 1976 la société Idea, devenue en 1990 Enthoven Associates Design Consultants. Il a dessiné des meubles, des luminaires, des sanitaires, des ustensiles de cuisine, mais aussi des bus, des trains et des trams, dont le fauteuil Bora Bora pour Leolux (1982) et des autocars pour Bova. Pour Memory Stone, filiale de Serax, il conçoit une collection de pierres tombales et d'urnes en béton léger, récompensée en 2017 par un Henry van de Velde Award dans la catégorie Feel Good.",
+  "bioSources": [
+   "https://www.henryvandevelde.be/en/awards/04/axel-enthoven",
+   "https://www.henryvandevelde.be/en/awards/16/memory-stone",
+   "https://web.archive.org/web/20170927133925/http://www.serax.com/en/memorystone-wins-henry-van-de-velde-award"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait publié par Serax/Memory Stone ou par le designer : memorystone.be ne répond plus, Yellow Window (ex-Enthoven Associates) ne présente pas de portrait. La seule photo trouvée est sur le site des Henry van de Velde Awards (Flanders DC, « Axel Enthoven at the ceremony of edition 16 © Michael De Lausnay »), institution non retenue comme source de portrait.",
+  "remarks": "Nationalité belge : désigné comme l'un des « Belges » étudiant à Eindhoven sur la page des Henry van de Velde Awards (institution officielle Flanders DC). « Sculpture Memorystone » chez Mikado correspond vraisemblablement à une pièce de cette collection funéraire : intitulé à vérifier."
+ },
+ {
+  "slug": "claire-bataille",
+  "name": "Claire Bataille",
+  "sortKey": "Bataille",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Claire Bataille est une architecte d'intérieur belge née en 1940. En 1968, elle fonde avec Paul ibens (1939-2020) l'agence Bataille & ibens, avec laquelle elle travaille pendant près de cinquante ans. Le duo a conçu et réalisé de très nombreux logements, magasins, bureaux, meubles et objets, comme la maison Vandendriessche à Bellem ou des appartements à Bruxelles et à Knokke. Leur démarche cherche l'équilibre entre le plus petit élément et l'ensemble, loin des effets de mode. L'Institut flamand d'architecture (VAI) a acquis l'ensemble de leurs archives en 2012.",
+  "bioSources": [
+   "https://www.vai.be/en/collection/collection-highlights/bataille-ibens"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Pas de site officiel de la créatrice ni de page Serax (actuelle ou archivée) ; le VAI ne publie que des photos de projets, et un portrait d'institution ne serait de toute façon pas une source autorisée.",
+  "remarks": "Le lien avec Serax (plateau à anse) n'apparaît dans aucune source consultée : attribution à vérifier, d'où la confiance faible et l'absence de mention de la pièce dans la bio. Nationalité belge déduite (agence anversoise, archives au VAI). Page VAI lue via r.jina.ai (erreur 429 en direct)."
+ },
+ {
+  "slug": "helena-rohner",
+  "name": "Helena Rohner",
+  "sortKey": "Rohner",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Helena Rohner est une créatrice de bijoux espagnole, née aux Canaries dans une famille hispano-suisse. Formée aux sciences politiques, elle découvre sa vocation lors de cours du soir de joaillerie suivis parallèlement à ses études, entre Londres, Genève et Florence, puis fonde sa marque à Madrid en 1995. Elle associe l'argent, l'or et le laiton à la porcelaine, la pierre, le bois, le verre ou le textile, et a dessiné des objets pour Georg Jensen, Ferm Living ou Kähler. Elle a reçu un Red Dot Award et, en 2015, la médaille d'or des beaux-arts en Espagne. Pour Serax, elle signe Planta, une collection de pots en terre cuite en forme d'entonnoir, dont le plateau à plantes.",
+  "bioSources": [
+   "https://helenarohner.com/pages/about",
+   "https://web.archive.org/web/20230401111405/https://www.serax.com/en/designer/helenarohner"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/helena-rohner.png",
+   "sourcePage": "https://helenarohner.com/pages/about",
+   "imageUrl": "https://helenarohner.com/cdn/shop/files/helena_rohner_portrait.png",
+   "credit": null,
+   "width": 2468,
+   "height": 3290,
+   "notes": "Portrait couleur publié sur le site officiel (page About) : Helena Rohner, mains sur la tête, chemise vichy bleue. Visage net, cadrage vertical adapté au 4:5. Fichier PNG (fond opaque)."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "glenn-sestig",
+  "name": "Glenn Sestig",
+  "sortKey": "Sestig",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Glenn Sestig est un architecte belge. Diplômé de l'institut Henry van de Velde à Anvers, il collabore avec d'autres designers, architectes et artistes avant de fonder en 1997 son agence dans sa ville natale de Gand. Ses projets couvrent l'habitat, le commerce, les lieux culturels et le design de produits, en Belgique et à l'étranger, pour des clients comme Raf Simons, Ann Demeulemeester, Olivier Theyskens ou Luc Tuymans. Son approche privilégie le calme, les formes nettes et l'honnêteté des matériaux, nourrie par l'héritage moderniste de l'architecture belge du XXe siècle. Pour Serax, il signe le plat Dishes to Dishes.",
+  "bioSources": [
+   "https://www.glennsestigarchitects.com/glenn-sestig/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/glenn-sestig.jpg",
+   "sourcePage": "https://www.glennsestigarchitects.com/glenn-sestig/",
+   "imageUrl": "https://www.glennsestigarchitects.com/media/slideshow-photo/3835-portret-glenn-2026-copy.jpg",
+   "credit": null,
+   "width": 1200,
+   "height": 900,
+   "notes": "Portrait noir et blanc publié sur le site de l'agence (page Glenn Sestig, fichier « portret-glenn-2026 ») : assis sur un bloc près d'une baie vitrée. Format paysage, personne centrée : recadrage 4:5 possible (720 x 900)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Site lu via r.jina.ai (rendu JavaScript). D'autres sources donnent 1999 pour la fondation de l'agence ; le site officiel indique 1997. Le lien avec Serax (Dishes to Dishes) n'a pas été trouvé dans une source autorisée : il repose sur les données Mikado."
+ },
+ {
+  "slug": "maurice-harris",
+  "name": "Maurice Harris",
+  "sortKey": "Harris",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Maurice Harris est un artiste pluridisciplinaire installé à Los Angeles. Formé à la sculpture, aux nouveaux médias et à la mode à l'Otis College of Art and Design, il crée d'abord des vitrines et des mises en scène avant de revenir aux fleurs, un savoir-faire appris auprès de sa grand-mère. En 2010, il fonde Bloom & Plume, studio floral sur mesure d'Echo Park, et travaille avec des marques comme Louis Vuitton, Dior, Gucci ou Nike. Pour Serax, il dessine Cameo In&Out, une collection de vases en verre soufflé bouche inspirée du camée, des textiles kente et de sa propre silhouette, à laquelle appartient le vase Cameo.",
+  "bioSources": [
+   "https://serax.com/pages/maurice-harris"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/maurice-harris.jpg",
+   "sourcePage": "https://serax.com/pages/maurice-harris",
+   "imageUrl": "https://serax.com/cdn/shop/files/Maurice_Harris_BW_Designer_Portret_01_df7539da-1dda-4bf3-8f52-26aa921ce8cb.jpg",
+   "credit": null,
+   "width": 3200,
+   "height": 4000,
+   "notes": "Portrait noir et blanc publié par Serax : Maurice Harris en pied, accoudé à un socle portant un vase Cameo. Format 4:5 natif, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "catharina-bossaert",
+  "name": "Catharina Bossaert",
+  "sortKey": "Bossaert",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Catharina Bossaert est une designer d'abord établie à Gand. Après des études de graphisme, elle se tourne vers la mode et y développe des collections pour femmes et enfants, spécialisées dans la maille, pour ses propres marques et pour des labels comme Maison Tricot et Fred & Ginger, tout en suivant des cours de sculpture et de céramique. Installée à Copenhague en 2020, elle se forme au textile et au design d'espace ; son travail personnel est exposé en Belgique et aux Pays-Bas. En 2023, sa collection Uovo, qui joue sur les contrastes de matières, de textures et de formes, obtient une mention au concours de design organisé par Serax avec Weekend Knack. Les coquetiers Uovo en font partie.",
+  "bioSources": [
+   "https://serax.com/pages/catharina-bossaert"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/catharina-bossaert.jpg",
+   "sourcePage": "https://serax.com/pages/catharina-bossaert",
+   "imageUrl": "https://serax.com/cdn/shop/files/Unknown_996eedf0-ac94-451b-8eda-f14caf225647.jpg",
+   "credit": null,
+   "width": 2104,
+   "height": 2945,
+   "notes": "Portrait noir et blanc publié par Serax : Catharina Bossaert appuyée contre un pilier, souriante. Cadrage vertical adapté au 4:5, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité non précisée par Serax (base à Gand) : non écrite."
+ },
+ {
+  "slug": "robbrecht-en-daem",
+  "name": "Robbrecht en Daem",
+  "sortKey": "Robbrecht en Daem",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Robbrecht en Daem architecten est une agence d'architecture fondée en 1975 par Paul Robbrecht et Hilde Daem, tous deux nés en 1950 ; Johannes Robbrecht, né en 1977, la rejoint en 2002 et en devient associé en 2012. Dès ses débuts, le duo développe un langage précis de couleurs, de mesures et de matières, et travaille en lien étroit avec les arts plastiques et la musique : pavillons de la Documenta IX à Kassel (1992), Concertgebouw de Bruges (2002), extension du musée Boijmans Van Beuningen à Rotterdam (2003). L'agence compte aujourd'hui plus de quarante collaborateurs. Pour Serax, elle signe le plateau ta tisch.",
+  "bioSources": [
+   "https://robbrechtendaem.com/studio"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/robbrecht-en-daem.jpg",
+   "sourcePage": "https://robbrechtendaem.com/studio",
+   "imageUrl": "https://robbrechtendaem.com/media/fullscreen/1177/rd-31-at-brechtvanmaele.jpg",
+   "credit": "Brecht Van Maele (d'après le nom du fichier)",
+   "width": 1600,
+   "height": 2400,
+   "notes": "Portrait couleur des trois associés publié sur la page Studio de l'agence : Johannes Robbrecht (bras levé), Hilde Daem au centre et Paul Robbrecht. Format 2:3 vertical, recadrage 4:5 possible en gardant les trois visages."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nom officiel : « Robbrecht en Daem architecten » ; « Robbrecht en Daem » conservé pour l'affichage. Le lien avec Serax (plateau ta tisch) n'a pas été trouvé dans une source autorisée : il repose sur les données Mikado. Le site bloque certaines requêtes (Cloudflare)."
+ },
+ {
+  "slug": "ontwerpduo",
+  "name": "Ontwerpduo",
+  "sortKey": "Ontwerpduo",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Ontwerpduo est un studio de design néerlandais installé à Eindhoven, formé par Tineke Beunders et Nathan Wierink, qui travaillaient déjà ensemble pendant leurs études à la Design Academy ; le studio est enregistré en 2008. Tineke Beunders imagine des objets aux fonctions nouvelles et aux formes inattendues, que Nathan Wierink rend réalisables dans son atelier. Le studio présente sa propre collection thématique et dessine pour des marques comme Vij5, Pode, Puik ou Serax ; depuis 2019, il se consacre surtout à l'éclairage avec Aptum, sa marque de luminaires sur mesure. Pour Serax, il signe la suspension Novecento.",
+  "bioSources": [
+   "https://www.ontwerpduo.nl/",
+   "https://www.ontwerpduo.nl/about/",
+   "https://web.archive.org/web/20230330171547/https://www.serax.com/en/designer/ontwerpduo"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "seul portrait officiel : bandeau 2250 × 877 ; ni un recadrage 4:5 ni deux bandes côte à côte ne gardent les deux visages sans agrandissement excessif (https://www.ontwerpduo.nl/wp-content/uploads/2015/04/Fotografie-2017_02_140301_LR_combi_v3.jpg)",
+  "remarks": null
+ },
+ {
+  "slug": "andrea-croonenberghs",
+  "name": "Andrea Croonenberghs",
+  "sortKey": "Croonenberghs",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Fille d'architecte, Andrea Croonenberghs grandit dans le goût de la forme, des proportions et de l'esthétique. À dix-huit ans, elle hésite à suivre une formation en design industriel, puis choisit les arts de la scène et mène une carrière de présentatrice de télévision, d'actrice et de chanteuse. Après avoir quitté la VRT en 2015, elle dessine une série de tables d'appoint et de bancs, présentés pour la première fois au salon BAD de Gand en 2017. Ses tables associent un piètement en acier ou en laiton à des plateaux de bois, d'émail ou de porcelaine. Serax édite une partie de ces modèles, dont des tables d'appoint laquées et un banc garni de cuir, comme le banc Bluesteel Andrea.",
+  "bioSources": [
+   "https://web.archive.org/web/20230609235540/https://www.serax.com/en/designer/andreacroonenberghs",
+   "https://andrea-design.be/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/andrea-croonenberghs.jpg",
+   "sourcePage": "https://web.archive.org/web/20230609235540/https://www.serax.com/en/designer/andreacroonenberghs",
+   "imageUrl": "https://web.archive.org/web/20230609235540im_/https://www.serax.com/media/designers/Andrea_Croonenberghs.jpeg",
+   "credit": null,
+   "width": 1297,
+   "height": 700,
+   "notes": "Portrait noir et blanc publié par Serax sur son ancien site (récupéré via l'archive Wayback ; l'original n'est plus en ligne) : visage de trois quarts, net. Format bandeau 1297 x 700 : un recadrage 4:5 ne fait que 560 px de large. À valider."
+  },
+  "photoMissingReason": null,
+  "remarks": "Page Serax consultée via l'archive Wayback de l'ancien site serax.com. Nationalité non écrite (belge très probable : VRT). Le site andrea-design.be ne publie que des photos de tables."
+ },
+ {
+  "slug": "miel-cardinael",
+  "name": "Miel Cardinael",
+  "sortKey": "Cardinael",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Miel Cardinael est un designer qui vit et travaille à Gand, où il enseigne à la KASK / School of Arts, dont il est lui-même diplômé. Son studio s'est d'abord consacré à l'architecture intérieure, puis, à partir de 2013, au mobilier et aux accessoires dans des matériaux durables comme le bois et l'acier. Il part du lien durable entre un objet et son utilisateur et procède de manière expérimentale, par maquettes et prototypes successifs. Il a reçu le label Henry van de Velde (2007), l'OVAM Ecodesign Award Pro (2010) et un Bronze Leaf aux IFDA Design Awards au Japon (2011). Pour Serax, il dessine notamment le fauteuil Edward.",
+  "bioSources": [
+   "https://www.mielcardinael.be/about-about-miel-cardinael.html",
+   "https://web.archive.org/web/20230529044302/https://www.serax.com/en/designer/mielcardinael"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/miel-cardinael.jpg",
+   "sourcePage": "https://web.archive.org/web/20230529044302/https://www.serax.com/en/designer/mielcardinael",
+   "imageUrl": "https://web.archive.org/web/20230529044302im_/https://www.serax.com/media/designers/Designers_overzichts_pagina_MielCardinael_designer_1297x700.jpg",
+   "credit": null,
+   "width": 1297,
+   "height": 700,
+   "notes": "Portrait noir et blanc publié par Serax sur son ancien site (archive Wayback) : gros plan du visage, haut du crâne coupé. Format bandeau 1297 x 700 : un recadrage 4:5 ne fait que 560 px de large. À valider."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site officiel ne publie pas de portrait (seulement des projets). Page Serax consultée via l'archive Wayback de l'ancien site serax.com."
+ },
+ {
+  "slug": "marcel-wolterinck",
+  "name": "Marcel Wolterinck",
+  "sortKey": "Wolterinck",
+  "brands": [
+   "Serax"
+  ],
+  "bio": "Marcel Wolterinck est un designer néerlandais né en 1960 à Groenlo. Autodidacte, il commence comme maître fleuriste, tient longtemps sa propre boutique de fleurs et décore de grands événements, avant d'être sollicité pour aménager des maisons privées. Il fonde Wolterinck, studio d'architecture, de jardins, d'intérieurs et de produits doublé d'un showroom à Laren, qui réunit plus de vingt-cinq collaborateurs. Son style sobre s'inspire de la nature et emploie des matériaux terreux comme la pierre, le marbre, le bois ou le cuir, avec des lignes simples et des matières répétées. Pour Serax, il dessine notamment le couteau de table Heii.",
+  "bioSources": [
+   "https://wolterinck.com/over-ons/",
+   "https://web.archive.org/web/20230330182028/https://www.serax.com/en/designer/marcelwolterinck"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/marcel-wolterinck.jpg",
+   "sourcePage": "https://wolterinck.com/over-ons/",
+   "imageUrl": "https://wolterinck.com/wp-content/uploads/2025/04/PBF4839-2-scaled.jpg",
+   "credit": "Peter Baas Fotografie (métadonnées EXIF)",
+   "width": 1920,
+   "height": 2560,
+   "notes": "Portrait couleur publié sur la page Over ons du studio (titre du média « Wolterinck_art_marcel_wolterinck_001 ») : Marcel Wolterinck à côté d'une sculpture. Visage net, recadrage 4:5 possible en le centrant."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité néerlandaise : Serax « Dutch designer »."
+ },
+ {
+  "slug": "marnix-van-roy",
+  "name": "Marnix Van Roy",
+  "sortKey": "Van Roy",
+  "brands": [
+   "Serax"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Aucune source autorisée : pas de page Serax (actuelle ou archivée), pas de site officiel trouvé.",
+  "remarks": "Aucune source autorisée trouvée (ni page Serax, ni site officiel ; la recherche sur serax.com ne renvoie ni « Nostos » ni le nom). Seul indice : un registre d'entreprises belge mentionne une société Marnix Van Roy (Schoten, design industriel, créée en 2025), source non autorisée. Bio non rédigée plutôt qu'inventée ; à compléter quand Serax publiera une page. sortKey « Van Roy » (particule flamande)."
+ }
+]

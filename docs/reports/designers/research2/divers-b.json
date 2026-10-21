@@ -1,0 +1,354 @@
+[
+ {
+  "slug": "erik-magnussen",
+  "name": "Erik Magnussen",
+  "sortKey": "Magnussen",
+  "brands": [
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Erik Magnussen (1940-2014) est un céramiste et designer industriel danois. Il grandit à Copenhague, où il obtient en 1960 son diplôme de céramiste avec médaille ; la même année, il ouvre son atelier et rejoint la manufacture de porcelaine Bing & Grøndahl. À partir de la fin des années 1960, il se tourne vers le design industriel : luminaires, mobilier, couverts, quincaillerie de porte et équipements techniques. Il reçoit le prix Lunning en 1967, à 27 ans, puis le titre de Honorary Royal Designer for Industry de la Royal Society of Arts de Londres en 1983. Il dirige son studio pendant plus de cinquante ans. Carl Hansen & Søn édite sa suspension EM82 Porcelight, dessinée en 1982, dont l'abat-jour en porcelaine tendre émaillée blanche diffuse une lumière chaude une fois allumé.",
+  "bioSources": [
+   "https://www.carlhansen.com/en/en/designers/erik-magnussen",
+   "https://www.carlhansen.com/en/en/collection/lighting/pendant-lamps/em82-porcelight/porcelight-d110-whitewhite-g9-ce-ukca-eu-uk-hk-sg-my/variant/11488"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/erik-magnussen.jpg",
+   "sourcePage": "https://www.carlhansen.com/en/en/designers/erik-magnussen",
+   "imageUrl": "https://admincms.carlhansen.com/globalassets/designers/erik-magnussen/erikmagnussen-desktop-hero-3840x2160px.jpg",
+   "credit": null,
+   "width": 5120,
+   "height": 2880,
+   "notes": "Visuel d'en-tête de la page designer de Carl Hansen & Søn : montage sur fond beige avec, à droite, un portrait noir et blanc de Magnussen (visage net, plan poitrine) et, à gauche, une photo d'ambiance avec les suspensions EM82. Recadrage manuel obligatoire sur le portrait : 3100,540,1440,1800 (vérifié). La version mobile (1563 × 1563) contient le même portrait, plus petit."
+  },
+  "photoMissingReason": null,
+  "remarks": "La page designer parle de l'Académie royale du Danemark, la page produit de l'école des arts appliqués de Copenhague : la bio dit seulement « à Copenhague ». « Bone china » traduit par « porcelaine tendre ».",
+  "notCreator": false
+ },
+ {
+  "slug": "bas-van-beek",
+  "name": "Bas van Beek",
+  "sortKey": "van Beek",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Bas van Beek, né à Nimègue en 1974, est un designer et artiste néerlandais installé à Rotterdam. Son travail part de recherches dans les archives de l'histoire de l'art et du design : il choisit, combine et réinterprète des formes existantes, souvent avec humour, en assumant ouvertement ses sources. Parmi ses projets figure le Gymseum, qui croise la typologie de la salle de sport et celle du musée en redessinant des appareils de musculation d'après des œuvres d'art et de design. En 2021-2022, la Wolfsonian–FIU de Miami lui consacre sa première exposition aux États-Unis, réalisée avec plusieurs institutions néerlandaises, dont Het Nieuwe Instituut. Pour Pols Potten, il a dessiné le Wolf Watering Can, grand objet décoratif en porcelaine émaillée entre sculpture et arrosoir.",
+  "bioSources": [
+   "http://www.basvanbeek.com/",
+   "https://www.polspotten.com/en/wolf-watering-can/230-205-221.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Aucun portrait exploitable : le site officiel (basvanbeek.com) ne montre que des œuvres, des ateliers et une photo de dos ; la page Pols Potten « design-collabs/bas-van-beek » est vide et la fiche produit ne montre que l'objet.",
+  "remarks": "« Nimègue » = Nijmegen. La description de l'objet reste prudente : Pols Potten parle d'un ornement de grande taille, sans détailler sa forme.",
+  "notCreator": false
+ },
+ {
+  "slug": "studio-verbaan",
+  "name": "Studio Verbaan",
+  "sortKey": "Studio Verbaan",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Studio Verbaan est un studio de design néerlandais fondé en 2019 à Rotterdam par Solange Frankort et Jordi Verbaan. Solange Frankort a étudié la photographie et les beaux-arts à la Willem de Kooning Academy, puis obtenu un master au Piet Zwart Institute ; Jordi Verbaan s'est formé à l'ébénisterie au Hout- en Meubileringscollege avant d'étudier lui aussi à la Willem de Kooning Academy. Le duo travaille entre design de produit et création autonome, avec un vocabulaire géométrique et sculptural et des objets souvent multifonctionnels. Il a dessiné un tapis pour Moooi Carpets avec Form Editions et deux tables pour Table du Sud. Pour Pols Potten, il signe la table d'appoint Kombo, lancée avec la collection printemps-été 2026, qui sert tour à tour de table, de socle ou d'objet.",
+  "bioSources": [
+   "https://www.studioverbaan.nl/about/",
+   "https://www.studioverbaan.nl/studio-verbaan-x-polspotten/",
+   "https://www.polspotten.com/en/design-collabs/studio-verbaan/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/studio-verbaan.jpg",
+   "sourcePage": "https://www.studioverbaan.nl/about/",
+   "imageUrl": "https://www.studioverbaan.nl/wp-content/uploads/2026/05/IAC8148.jpg",
+   "credit": "IAC Moonen",
+   "width": 3402,
+   "height": 6048,
+   "notes": "Photo couleur des deux fondateurs devant un mur de briques, publiée sur la page About du studio (original non réduit ; la page affiche IAC8148-scaled.jpg, 1440 × 2560). Elle debout à gauche, lui assis sur une table Kombo orange ; visages nets. Format très vertical : recadrage manuel conseillé 720,1650,2000,2500 (vérifié, coupe aux genoux). Crédit tiré des métadonnées EXIF (copyright IAC MOONEN). La page Pols Potten n'offre qu'un portrait dessiné (exclu) et une photo d'ambiance où les visages sont petits."
+  },
+  "photoMissingReason": null,
+  "remarks": "Le site ne précise pas qui est qui sur la photo ; d'après les prénoms, la femme serait Solange Frankort et l'homme Jordi Verbaan.",
+  "notCreator": false
+ },
+ {
+  "slug": "minke-van-voorthuizen",
+  "name": "Minke van Voorthuizen",
+  "sortKey": "van Voorthuizen",
+  "brands": [
+   "Pols Potten"
+  ],
+  "bio": "Minke van Voorthuizen est une designer néerlandaise dont le studio, Minke Products, est installé à Arnhem. Pour Pols Potten, elle a dessiné la lampe Mykiss Fish : une suspension en porcelaine non émaillée en forme de poisson, dont la paroi laisse passer une lumière diffuse et projette des ombres sur les murs.",
+  "bioSources": [
+   "https://www.polspotten.com/en/mykiss-fish-lamp/230-450-043.html",
+   "http://web.archive.org/web/20081226064305id_/http://www.minkeproducts.com:80/Minke_Profile_Background.htm",
+   "http://v-voorthuizen.com/"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Site officiel en reconstruction (minkeproducts.com, « under construction ») ; la page profil archivée ne charge que des cadres vides. Pols Potten n'a pas de page designer pour elle et la fiche produit ne montre que la lampe.",
+  "remarks": "Bio volontairement courte : formation (Minerva à Groningue, ArtEZ à Arnhem) et collaborations (Cascando…) ne figurent que chez des revendeurs ou portails. Arnhem vient de la description du site officiel archivé.",
+  "notCreator": false
+ },
+ {
+  "slug": "elissa-aalto",
+  "name": "Elissa Aalto",
+  "sortKey": "Aalto",
+  "brands": [
+   "Artek"
+  ],
+  "bio": "Elissa Aalto, née Elsa-Kaisa Mäkiniemi à Kemi en 1922 et morte en 1994, est une architecte finlandaise. Diplômée de l'Université technique d'Helsinki en 1949, elle entre la même année à l'agence d'Alvar Aalto, qu'elle épouse en 1952 ; associée à partir de 1959, elle conduit de grands chantiers comme la mairie de Säynätsalo et la Maison Louis Carré. Après la mort d'Alvar Aalto en 1976, elle dirige l'agence jusqu'en 1994 et achève les projets en cours. Elle a aussi dessiné des motifs textiles pour Artek, dont elle fut longtemps membre du conseil d'administration : H55, présenté à l'exposition d'Helsingborg en 1955, ainsi que Pisa et Patio.",
+  "bioSources": [
+   "https://www.alvaraalto.fi/en/alvar-aalto-foundation/elissa-aalto/",
+   "https://www.alvaraalto.fi/en/news/100-years-since-the-birth-of-architect-elissa-aalto/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/elissa-aalto.jpg",
+   "sourcePage": "https://www.alvaraalto.fi/en/alvar-aalto-foundation/elissa-aalto/",
+   "imageUrl": "https://www.alvaraalto.fi/wp-content/uploads/2021/11/106445-2500px.jpg",
+   "credit": null,
+   "width": 2500,
+   "height": 2500,
+   "notes": "Portrait de studio noir et blanc d'Elissa Aalto jeune, de face, fond clair ; visage net, carré 2500 × 2500. Image principale de la page Elissa Aalto de la Fondation Alvar Aalto (vignette 988 × 659 sur le site, original 2500 px). Recadrage automatique 4:5 centré possible. Photographe non indiqué."
+  },
+  "photoMissingReason": null,
+  "remarks": "Aucune page designer chez Artek (le lien de recherche est vide) : bio et portrait viennent de la Fondation Alvar Aalto, institution qui gère l'héritage et les archives de l'agence Aalto qu'Elissa a dirigée. Le portrait n'est donc pas publié par l'éditeur : à valider. Autre option sur le site de la fondation : Elissa Aalto à Studio Aalto dans les années 1970, photo Stig Bergström (102256-1.jpg, 1155 × 798).",
+  "notCreator": false
+ },
+ {
+  "slug": "vuokko-eskolin-nurmesniemi",
+  "name": "Vuokko Eskolin-Nurmesniemi",
+  "sortKey": "Eskolin-Nurmesniemi",
+  "brands": [
+   "Marimekko"
+  ],
+  "bio": "Vuokko Eskolin-Nurmesniemi (1930-2026), née à Helsinki, est une designer textile et de mode finlandaise. Formée à la céramique à l'Institut des arts industriels d'Helsinki, elle est encouragée par Armi Ratia à se tourner vers le textile et travaille pour Printex et Marimekko de 1953 à 1960. Ses vêtements amples aux lignes architecturales, souvent coupés avec une seule couture, rompent avec la taille serrée des années 1950 ; sa chemise Jokapoika (1956) est le vêtement produit le plus longtemps sans interruption par Marimekko. Son motif rayé Piccolo (1953), peint à main levée, superpose les bandes à l'impression pour créer une troisième couleur, procédé devenu une signature de la maison ; le bougeoir Piccolo en reprend le nom. En 1964, elle fonde sa société, Vuokko Oy.",
+  "bioSources": [
+   "http://web.archive.org/web/20240407022524/https://www.marimekko.com/com_en/maripedia/designers/vuokko-eskolin-nurmesniemi",
+   "https://admuseo.fi/en/textile-artist-vuokko-nurmesniemi-has-passed-away/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/vuokko-eskolin-nurmesniemi.png",
+   "sourcePage": "http://web.archive.org/web/20240407022524/https://www.marimekko.com/com_en/maripedia/designers/vuokko-eskolin-nurmesniemi",
+   "imageUrl": "https://www.marimekko.com/media/maripedia/designer/D/e/Designer_VuokkoNurmesniemi_maripedia.png",
+   "credit": null,
+   "width": 1200,
+   "height": 1500,
+   "notes": "Portrait noir et blanc récent (lunettes rondes, haut rayé), publié par Marimekko sur sa page Maripedia ; déjà au format 4:5, visage net. Téléchargé via la copie Internet Archive du 7 avril 2024 (marimekko.com bloque les requêtes directes : 429 et contrôle Vercel). PNG 1200 × 1500, la plus grande version proposée."
+  },
+  "photoMissingReason": null,
+  "remarks": "Décès en avril 2026 confirmé par le Musée d'architecture et de design d'Helsinki (admuseo.fi, « 1930-2026 »). La page Maripedia actuelle n'a pas pu être relue (429) : texte et photo viennent de l'archive de 2024. Le lien entre le bougeoir Piccolo vendu par Mikado et le motif n'est pas confirmé par Marimekko : la bio dit seulement que le bougeoir en reprend le nom.",
+  "notCreator": false
+ },
+ {
+  "slug": "marcantonio",
+  "name": "Marcantonio",
+  "sortKey": "Marcantonio",
+  "brands": [
+   "Ichendorf Milano"
+  ],
+  "bio": "Marcantonio (Marcantonio Raimondi Malerba), né en 1976, est un artiste et designer italien. Après l'Institut d'art et l'Académie des beaux-arts, il travaille comme scénographe et sculpteur, et aménage des boutiques et des lieux pour des clients privés. Depuis 2001, il se consacre à l'art et au design industriel, avec une approche sculpturale où reviennent la relation entre l'homme et la nature et le monde animal. En plus de ses pièces autonomes, dont des bronzes en édition limitée, il dessine pour des éditeurs comme Seletti (lampe Monkey), Qeeboo ou Mogg. Pour Ichendorf Milano, il signe le vase en verre Fleur-à-Porter.",
+  "bioSources": [
+   "https://www.ichendorfmilano.com/en/designers/marcantonio/",
+   "https://www.marcantonio.design/design"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/marcantonio.jpg",
+   "sourcePage": "https://www.ichendorfmilano.com/en/designers/marcantonio/",
+   "imageUrl": "https://www.ichendorfmilano.com/images/299/8573/4000x4000/nocrop/noenlarge/align-4/Marcantonio-seduto.jpg",
+   "credit": null,
+   "width": 1955,
+   "height": 2470,
+   "notes": "Portrait noir et blanc, assis, mains jointes, publié sur la page designer d'Ichendorf Milano ; visage net. Original 1955 × 2470 obtenu avec le paramètre noenlarge (sans agrandissement), proche du 4:5 : recadrage automatique sur le haut du corps."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nom complet tiré du titre du site officiel (« Art & Design | Marcantonio Raimondi Malerba ») ; garder « Marcantonio », nom utilisé par l'éditeur. La page Bio du site officiel ne se charge pas sans JavaScript.",
+  "notCreator": false
+ },
+ {
+  "slug": "carole-baijings",
+  "name": "Carole Baijings",
+  "sortKey": "Baijings",
+  "brands": [
+   "Fatboy"
+  ],
+  "bio": "Carole Baijings, née en 1973, est une designer néerlandaise. En 2000, elle fonde avec Stefan Scholten le Studio Scholten & Baijings, qui associe formes minimales, couleur, artisanat et production industrielle pour des éditeurs comme HAY, Georg Jensen, Moooi, Pastoe ou 1616 / Arita Japan. Après dix-neuf ans, les deux designers poursuivent chacun sous leur propre nom. Céramique, verre, textile, tapis ou mobilier : son travail repose sur l'équilibre des couleurs, des motifs et des éléments graphiques, qu'elle mélange et façonne elle-même en atelier. Elle a travaillé avec Samsung, IKEA et MINI. Pour Fatboy, elle a dessiné la ligne Pop of Colour, dont les coussins Pop Pillow.",
+  "bioSources": [
+   "https://www.fatboy.com/bg-en/carole-baijings.html",
+   "https://scholtenbaijings.com/about/",
+   "https://www.carolebaijings.com/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Mode « bio » : aucun portrait cherché. Fatboy cite aussi des pièces dans les collections du V&A, du Cooper Hewitt, de l'Art Institute of Chicago et du Rijksmuseum (non repris pour tenir la longueur). Aucun produit Mikado listé pour elle.",
+  "notCreator": false
+ },
+ {
+  "slug": "foster-partners-industrial-design",
+  "name": "Foster + Partners Industrial Design",
+  "sortKey": "Foster + Partners Industrial Design",
+  "brands": [
+   "Ichendorf Milano"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Aucun portrait d'équipe identifié. La page Ichendorf Milano du studio ne montre que les vases FIO ; le site du studio (fosterandpartnersindustrialdesign.com/studio) n'a que des photos d'atelier sans légende (vitrine, deux hommes de dos penchés sur une table, maquettes) ; fosterandpartners.com bloque les requêtes (403/Cloudflare).",
+  "remarks": "Mode « photo » (bio existante conservée). Une photo de Norman Foster ou de Mike Holland (chef du design industriel) ne représenterait pas le studio : non retenue. Option possible si une image est jugée indispensable : collaboration_idwebsite_landscape.jpg (2560 × 1440) sur la page Studio, mais personnes non nommées et vues de côté.",
+  "notCreator": false
+ },
+ {
+  "slug": "carolina-doni",
+  "name": "Carolina Doni",
+  "sortKey": "Doni",
+  "brands": [
+   "Ichendorf Milano"
+  ],
+  "bio": "Carolina Doni est la designer de la collection Torre d'Ichendorf Milano, rangée par l'éditeur dans les arts de la table. La collection comprend une bouteille, une carafe et un set de nuit (bouteille et verre), fabriqués à la main en verre borosilicate travaillé à la flamme.",
+  "bioSources": [
+   "https://www.ichendorfmilano.com/docs/299/1621/Ichendorf-Catalogue--1.pdf",
+   "https://www.ichendorfmilano.com/en/products/torre/093598428/set-night-bottle-glass/"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Pas de page designer chez Ichendorf Milano (absente de la liste des designers) et aucun site officiel trouvé ; seul le catalogue PDF de l'éditeur la crédite.",
+  "remarks": "Seule source : le catalogue Ichendorf (« TORRE — Carolina Doni »). La fiche produit en ligne n'indique aucun designer. Nationalité et parcours inconnus.",
+  "notCreator": false
+ },
+ {
+  "slug": "juliette-liberman",
+  "name": "Juliette Liberman",
+  "sortKey": "Liberman",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Juliette Liberman est une designer et ébéniste française. Formée à l'École Boulle puis à l'École nationale supérieure des arts décoratifs (section mobilier), elle apprend la restauration de meubles des XVIIe et XVIIIe siècles dans la Drôme, enseigne la marqueterie à la fondation Olorun au Burkina Faso et travaille avec un charpentier en Irlande. Elle met les techniques du bois, de la laque et du métal au service du mobilier : fauteuil Iris, bibliothèque arborescente Ginko Biloba, signalétique et mobilier du hall public de l'Opéra Garnier. Son banc Charivari, pièce de diplôme présentée à l'ENSAD en 2004 avec une assise en bois ployé à la vapeur à la manière des membrures de bateau, a été transposé en métal par Fermob.",
+  "bioSources": [
+   "http://web.archive.org/web/20240805191933/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Juliette-Liberman",
+   "https://www.fermob.com/fr/banc-et-banquette-charivari-banc.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/juliette-liberman.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Juliette-LIBERMAN.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 × 722, proche du 4:5) ; visage net, de trois quarts. Seule version trouvée."
+  },
+  "photoMissingReason": null,
+  "remarks": "Nationalité française déduite du parcours (Boulle, ENSAD) : Fermob ne la précise pas. Orthographe « Ginko » reprise de Fermob.",
+  "notCreator": false
+ },
+ {
+  "slug": "philippe-mathieu",
+  "name": "Philippe Mathieu",
+  "sortKey": "Mathieu",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Philippe Mathieu, né à Annemasse en 1957, est un designer et scénographe français. Fils d'un tailleur de pierre et marbrier, il découvre jeune les carrières italiennes et le façonnage du marbre, puis étudie la restauration du patrimoine architectural à Venise grâce à une bourse. Installé à Bruxelles en 1984, il conçoit des meubles, édite une chaise pour la galerie Théorème et est plusieurs fois retenu par les appels permanents du VIA. De 1988 à 1993, il est chef de projet aux Ateliers Manu Décor à Paris, au service du cinéma et du théâtre, puis se consacre à la scénographie événementielle et crée l'Atelier de Scénographie en 2005. En 2006, il dessine pour Fermob la gamme de tables Pétale.",
+  "bioSources": [
+   "http://web.archive.org/web/20140918001243/http://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Philippe-Mathieu",
+   "https://www.fermob.com/fr/table-petale-table-110-x-70-cm.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/philippe-mathieu.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Philippe-MATHIEU.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 × 722, proche du 4:5) ; profil de trois quarts, regard vers la gauche, visage net. Seule version trouvée."
+  },
+  "photoMissingReason": null,
+  "remarks": "Fiche designer Fermob lue dans sa dernière archive (2014) ; elle n'existe plus en ligne. La fiche produit actuelle confirme « Design : Philippe Mathieu ».",
+  "notCreator": false
+ },
+ {
+  "slug": "fabio-meliota",
+  "name": "Fabio Meliota",
+  "sortKey": "Meliota",
+  "brands": [
+   "Fermob"
+  ],
+  "bio": "Fabio Meliota est un architecte et designer italien. Originaire des Pouilles, il obtient son diplôme d'architecture à Pescara avec une thèse sur la salle de bains dans l'architecture de Le Corbusier, puis rejoint le studio d'Enzo Calabrese, avec qui il signe des projets pour Listone Giordano, Lema, L'Abbate, Covo et Rapsel. En 2007, leur projet B:Room pour Listone Giordano est sélectionné par l'ADI Design Index pour le Compasso d'Oro. Il fonde eF / eM à Rome en 2012, puis installe son studio à Gênes trois ans plus tard. Pour Fermob, il revisite la jardinière sur pied avec la collection Basket : une structure en fil d'acier, avec pieds et poignée, qui porte un bac amovible en aluminium.",
+  "bioSources": [
+   "http://web.archive.org/web/20240908140236/https://www.fermob.com/fr/Decouvrir-Fermob/Les-designers/Fabio-Meliota",
+   "https://www.fermob.com/fr/jardiniere-et-pot-basket-jardiniere-haute.html"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/fabio-meliota.gif",
+   "sourcePage": "https://www.fermob.com/fr/les-designers",
+   "imageUrl": "https://www.fermob.com/media/wysiwyg/fermob-d2c/LP/Designers/Fabio-MELIOTA.gif",
+   "credit": null,
+   "width": 640,
+   "height": 722,
+   "notes": "Portrait noir et blanc publié par Fermob sur sa page « Les designers » (GIF fixe, une seule image, 640 × 722, proche du 4:5) ; de face, pull sombre, visage net. Seule version trouvée."
+  },
+  "photoMissingReason": null,
+  "remarks": null,
+  "notCreator": false
+ },
+ {
+  "slug": "marijn-oomen",
+  "name": "Marijn Oomen",
+  "sortKey": "Oomen",
+  "brands": [
+   "Fatboy"
+  ],
+  "bio": "Marijn Oomen est le designer du Lamzac, édité par Fatboy. Gêné par les contraintes des matelas pneumatiques classiques, il imagine un canapé gonflable léger et facile à transporter, qui se remplit sans pompe : il suffit de le déplacer dans l'air pour le gonfler. Le kit de réparation Plakzac accompagne cet objet.",
+  "bioSources": [
+   "https://www.fatboy.com/nl-nl/designer-stories.html",
+   "https://www.fatboy.com/us-en/lamzac-3.0/000027.html"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "portrait existant conservé",
+  "remarks": "Mode « bio ». Fatboy ne donne ni nationalité, ni date, ni parcours ; l'histoire de la création du Lamzac (émission de télévision en 2010, rachat par Fatboy) n'apparaît que dans la presse et sur un blog juridique, donc omise.",
+  "notCreator": false
+ },
+ {
+  "slug": "peter-sipos",
+  "name": "Peter Šipoš",
+  "sortKey": "Šipoš",
+  "brands": [
+   "Ichendorf Milano"
+  ],
+  "bio": "Peter Šipoš, né en 1963, est un designer verrier slovaque, diplômé en création verrière de l'Académie des beaux-arts et du design de Bratislava (VŠVU). Dans les années 1990, il devient designer interne de la verrerie Rona, à Lednické Rovne, avec une approche nourrie par la tradition, l'imagination, le décor et le verre coloré. Le catalogue d'Ichendorf Milano lui attribue la collection de verres Manhattan.",
+  "bioSources": [
+   "https://scd.sk/clanky/rona-sklo-v-case/",
+   "https://www.ichendorfmilano.com/docs/299/1621/Ichendorf-Catalogue--1.pdf",
+   "https://www.ichendorfmilano.com/en/products/manhattan/09313203/wine-stemmed-glass/"
+  ],
+  "bioConfidence": "faible",
+  "photo": null,
+  "photoMissingReason": "Pas de page designer chez Ichendorf Milano et aucun site officiel trouvé ; l'article du Centre slovaque du design ne publie pas son portrait.",
+  "remarks": "ATTRIBUTION À VÉRIFIER : le site d'Ichendorf Milano crédite tous les verres Manhattan, dont le verre à vin à pied (09313203), à Patrik Illo. Le catalogue PDF met « MANHATTAN — Peter Šipoš » en tête de page, mais aussi « Design Patrik Illo » sur la même double page. Les verres Manhattan vendus par Mikado sont peut-être à rattacher à Patrik Illo. Orthographe : le Centre slovaque du design écrit « Šípoš », Ichendorf « Šipoš » ; nom gardé tel quel. Bio fondée sur l'article du Centre slovaque du design (institution publique), faute de source éditeur.",
+  "notCreator": false
+ },
+ {
+  "slug": "vlaemynck",
+  "name": "Vlaemynck",
+  "sortKey": "Vlaemynck",
+  "brands": [
+   "Fermob"
+  ],
+  "notCreator": true,
+  "bio": null,
+  "bioSources": [
+   "https://www.fermob-contract.com/fr_fr/groupe-fermob/designers-externes"
+  ],
+  "bioConfidence": null,
+  "photo": null,
+  "photoMissingReason": "Pas un créateur : aucun portrait à chercher.",
+  "remarks": "Vlaemynck : marque française de mobilier et textile d'extérieur, qui appartient au groupe Fermob. Ce n'est pas une créatrice ni un créateur. Les housses Rivage Protec équipent la collection Rivage de la marque ; Fermob Contract cite d'autres designers pour les collections Vlaemynck (Radice Orlandini, Natalia Rota Nodari & Alberto Basaglia, Alessandro Andreucci & Christian Hoisl), mais aucun n'est donné par une source autorisée pour Rivage. À traiter comme une marque (fiche à retirer ou à transformer en « bureau d'études Vlaemynck » comme Studio Fermob)."
+ }
+]

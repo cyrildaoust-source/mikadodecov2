@@ -1,0 +1,495 @@
+[
+ {
+  "slug": "doshi-levien",
+  "name": "Doshi Levien",
+  "sortKey": "Doshi Levien",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Doshi Levien est un studio de design fondé à Londres en 2000 par Nipa Doshi (née en 1971) et Jonathan Levien (né en 1972). Nipa Doshi a grandi en Inde et a étudié au National Institute of Design ; Jonathan Levien, originaire d'Écosse, s'est formé à l'ébénisterie puis au design industriel. Ils se sont rencontrés au Royal College of Art. Le duo travaille pour des éditeurs et des institutions dans le mobilier, la mode, les arts de la table, la technologie et l'éclairage, et a reçu en 2008 le prix Future Legends of Design du Cooper Hewitt à New York. Pour HAY, il a dessiné les fauteuils Uchiwa et Dapper, le canapé Quilton et ses coussins, ainsi que la collection textile Dori.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/doshi-levien"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/doshi-levien.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/doshi-levien",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/doshi-levien_2021_1220x1220.jpg",
+   "credit": null,
+   "width": 1053,
+   "height": 1053,
+   "notes": "Portrait du duo (Nipa Doshi à gauche, Jonathan Levien à droite) dans leur atelier, devant un canapé Quilton. Carré 1053 px : recadrage 4:5 serré possible sur les deux personnes."
+  },
+  "photoMissingReason": null,
+  "remarks": "Les coussins Quilton (Remix, Linara) sont rattachés à la collection Quilton citée par HAY."
+ },
+ {
+  "slug": "holly-golightly",
+  "name": "Holly Golightly",
+  "sortKey": "Holly Golightly",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Holly Golightly est une boutique de mode et de décoration créée par la Danoise Barbara Maj Husted Werner, devenue une marque à part entière. Collectionneuse d'art et passionnée d'intérieurs, Barbara Werner est connue pour son regard sur les couleurs et sa sélection d'objets. La nature, les jardins et les chiens tiennent une place importante dans son quotidien. Ces centres d'intérêt ont donné lieu à une collaboration avec son amie Mette Hay : HAY Dogs, une gamme colorée d'accessoires pour chiens comprenant notamment des paniers, des couvertures de voyage, des gamelles, des colliers et des laisses.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/holly-golightly"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/holly-golightly.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/holly-golightly",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/barbara-werner_1220x1220.jpg",
+   "credit": null,
+   "width": 5096,
+   "height": 5096,
+   "notes": "Barbara Maj Husted Werner assise sur un banc devant la vitrine Holly Golightly, un chien dans les bras. Image carrée 5096 px où elle occupe environ un cinquième de la largeur : recadrage 4:5 nécessaire (environ 1000 px de large), visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Holly Golightly est une boutique/marque, mais HAY la présente comme créatrice de HAY Dogs à travers sa fondatrice Barbara Maj Husted Werner (personne identifiable) : traité comme créateur selon BRIEF2. On pourrait afficher « Holly Golightly (Barbara Werner) » ; nom laissé tel quel."
+ },
+ {
+  "slug": "andreas-bergsaker",
+  "name": "Andreas Bergsaker",
+  "sortKey": "Bergsaker",
+  "brands": [
+   "HAY",
+   "Muuto"
+  ],
+  "bio": "Andreas Bergsaker, né en 1990, est un designer produit norvégien installé à Copenhague. Il est diplômé en 2015 d'un master en design produit de l'Oslo and Akershus University College of Applied Sciences (HiOA). Il dessine des objets du quotidien pensés pour durer, en partant de l'exploration des matériaux et des formes, avec une attention à l'artisanat traditionnel, aux procédés industriels et aux qualités tactiles. Son travail a été exposé à Londres, Milan, New York, Oslo et Stockholm. Pour HAY, il a créé l'étagère murale Korpus et la collection Chisel ; pour Muuto, la lampe de table Focus, une lampe qui sert aussi de socle pour poser et éclairer de petits objets.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/andreas-bergsaker",
+   "https://www.muuto.com/designers2/andreas-bergsaker/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/andreas-bergsaker.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/andreas-bergsaker",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/andreas-bergsaker_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait en noir et blanc, buste, fond clair, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Une version Muuto du portrait existe (muuto.com/globalassets/content-media/images/designer/andreas-bergsaker/andreas-bergsaker-portrait-muuto.jpg), non téléchargée : celle de HAY suffit."
+ },
+ {
+  "slug": "amanda-borberg",
+  "name": "Amanda Borberg",
+  "sortKey": "Borberg",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Amanda Borberg est une designer danoise installée à Copenhague. Elle est titulaire d'un master en design textile de l'École royale des beaux-arts du Danemark (écoles d'architecture, de design et de conservation). Designer indépendante, elle conçoit des imprimés et des palettes de couleurs pour des textiles utilisés dans des projets liés à l'intérieur, à la mode et à l'industrie textile. Son travail repose sur l'association des couleurs et sur des formes simples, qui laissent la place à la matière et à la qualité. Pour HAY, elle a dessiné la collection de linge de lit Été, housses de couette et taies d'oreiller.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/amanda-borberg"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/amanda-borberg.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/amanda-borberg",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/amanda-borberg-2017_bw_1220x1220.jpg",
+   "credit": null,
+   "width": 1187,
+   "height": 1187,
+   "notes": "Portrait en noir et blanc (2017), à mi-corps dans l'encadrement d'une porte, visage net. Image carrée 1187 px."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "ana-kras",
+  "name": "Ana Kraš",
+  "sortKey": "Kraš",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Ana Kraš est une designer serbe. Elle a étudié le design de mobilier et l'architecture intérieure à l'Université des arts appliqués de Belgrade. Elle partage son temps entre Paris et New York et travaille le design d'objets, l'art, la photographie et la mode. Son travail a été présenté dans de nombreuses expositions à travers le monde. Pour HAY, elle a dessiné l'abat-jour Bonbon, la série textile Ram (coussins, serviettes et sets de table) et la collection de luminaires Ava, qui comprend notamment la lampe de table Ava Pyramid, l'applique Ava Square et la suspension Ava Cone.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/ana-kras"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/ana-kras.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/ana-kras",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/ana-kra_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait à mi-corps, accoudée à un abat-jour Bonbon, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "pereira-office",
+  "name": "Pereira Office",
+  "sortKey": "Pereira Office",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Pereira Office est le studio du designer produit portugais Rui Pereira. Intéressé par l'apprentissage d'autres cultures, il a vécu à Valence et à Milan avant de s'installer à Copenhague, où il réside. Son travail consiste à redéfinir des typologies d'objets en explorant le potentiel des matériaux et des techniques de fabrication. Avec Pereira Office, il travaille pour des clients internationaux, tout en occupant chez HAY un poste de responsable du design et de la direction visuelle. Pour HAY, il a dessiné la collection Barro d'arts de la table en terre cuite (assiettes, pichets, bols, beurrier) et, avec le designer japonais Ryosuke Fukusada, le diffuseur Chim Chim.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/pereira-office"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/pereira-office.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/pereira-office",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/rui-pereira_2023_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait de Rui Pereira (2023), à mi-corps, fond clair, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "La page HAY écrit « Fukasada », la page duo de HAY (rui-pereira-ryosuke-fukusada) écrit « Fukusada » : retenu « Fukusada ». Le portrait montre Rui Pereira seul (le studio est son agence personnelle)."
+ },
+ {
+  "slug": "laila-gohar",
+  "name": "Laila Gohar",
+  "sortKey": "Gohar",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Laila Gohar est une artiste conceptuelle et cheffe qui utilise la nourriture comme médium. Elle conçoit des expériences immersives à la frontière entre la performance et le repas. Née en Égypte, elle a grandi dans une grande famille de cuisiniers et d'hôtes passionnés. Installée à New York, elle travaille à l'international et collabore avec des acteurs de l'art, du design et de la mode. Elle a tenu une chronique mensuelle, How to Host It, dans le magazine How to Spend It du Financial Times. Pour HAY, elle a dessiné la collection Sobremesa, une série d'arts de la table et d'accessoires de cuisine consacrée au plaisir de recevoir : assiettes, saladiers, vases rayés, nappes et serviettes.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/laila-gohar"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/laila-gohar.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/laila-gohar",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/laila-gohar_portrait.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait à mi-corps, tenant un vase Sobremesa Stripe garni de tulipes, visage net mais tourné vers le bas."
+  },
+  "photoMissingReason": null,
+  "remarks": "HAY écrit « writes a monthly column » au présent ; formulé au passé composé par prudence (chronique peut-être terminée)."
+ },
+ {
+  "slug": "studio-0405",
+  "name": "STUDIO 0405",
+  "sortKey": "STUDIO 0405",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "STUDIO 0405 est une agence d'architecture et de design fondée à Copenhague en 2015 par le designer danois Nikolaj Lorentz Mentze, diplômé en design produit de l'école de design de Kolding. Le studio travaille à la croisée de l'espace et de l'objet, en explorant les dimensions historiques, techniques et esthétiques du design, avec une attention à la matière et au savoir-faire. Il collabore avec des artistes, des photographes et des artisans pour une grande variété de clients. Pour HAY, Nikolaj Lorentz Mentze a créé la collection de luminaires Apollo (lustre, lampe de table, lampe portable, applique) et la collection Tiny de vases et de bougeoirs.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/studio-0405"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/studio-0405.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/studio-0405",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/nicolaj-mentze_studio-0405_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait serré en noir et blanc de Nikolaj Lorentz Mentze, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Casse « STUDIO 0405 » conservée (graphie de HAY). Le nom de fichier de HAY écrit « nicolaj », le texte « Nikolaj » : retenu « Nikolaj »."
+ },
+ {
+  "slug": "shane-schneck",
+  "name": "Shane Schneck",
+  "sortKey": "Schneck",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Shane Schneck est un designer américain installé en Suède, où il a fondé en 2010 son studio Office for Design, à Stockholm. Il a auparavant vécu et travaillé à Milan, au sein du studio de Piero Lissoni. Son travail a été distingué par les prix Red Dot, iF et Wallpaper Design Awards. Il cherche à créer des objets simples qui remettent en question les standards de l'industrie, avec souvent un élément de surprise dans la couleur, la forme ou le choix des matériaux. Pour HAY, il a dessiné Tool Box, Porter, Butler, la table d'appoint Bowler, le fauteuil Bernard et le lit Tamoto.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/shane-schneck"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/shane-schneck.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/shane-schneck",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/shane-schneck-portrait_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait en noir et blanc, bras croisés derrière une table, fond blanc avec horloge. Il occupe la moitié inférieure gauche : recadrage 4:5 d'environ 610 px de large, juste au-dessus du minimum."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "folke-palsson",
+  "name": "Folke Pålsson",
+  "sortKey": "Pålsson",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Folke Pålsson est un designer danois qui a travaillé dans les années 1960 au studio de design de mobilier de FDB (Fællesforeningen for Danmarks Brugsforeninger), la coopérative danoise de consommateurs plus connue sous le nom de Coop. Fondé en 1933 et dirigé à partir de 1942 par Børge Mogensen, ce département cherchait à produire des meubles simples, élégants et pratiques destinés au plus grand nombre. Sa chaise J77, légère, confortable et bien équilibrée, est devenue un classique reconnu dans toute la Scandinavie. Elle est aujourd'hui éditée par HAY dans une gamme de couleurs, avec des coussins d'assise assortis.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/folke-paalsson"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Le seul portrait trouvé est celui de la page designer HAY (https://www.hay.com/globalassets/blocks/shared/designers/folke-paalsson_1220x1220_must-not-be-on-imagebank-or-shared.jpg, 1220 px, noir et blanc) : son nom de fichier indique « must-not-be-on-imagebank-or-shared », donc des droits restreints ; non retenu. Aucun site officiel (designer historique).",
+  "remarks": "Les produits Mikado sont des coussins pour la chaise J77 ; HAY ne dit pas qui les a dessinés, l'attribution à Pålsson se fait par la chaise. Le portrait HAY pourrait être utilisé si HAY confirme l'autorisation (à valider)."
+ },
+ {
+  "slug": "jorgen-baekmark",
+  "name": "Jørgen Bækmark",
+  "sortKey": "Bækmark",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Jørgen Bækmark (1929-2021) est un designer danois, formé comme ébéniste, qui a aussi suivi des cours d'arts appliqués. De 1958 à 1967, il travaille au studio de design de mobilier de FDB, la coopérative danoise de consommateurs (Coop), dont le département mobilier, fondé en 1933 et dirigé à partir de 1942 par Børge Mogensen, défendait un mobilier simple et pratique pour le plus grand nombre. Chargé d'abord de concevoir des pièces légères destinées à l'export, comme la chaise JW08, il a été un pionnier du meuble livré à plat, avant de prendre la tête du département. HAY édite aujourd'hui sa chaise J104, avec des coussins d'assise assortis.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/joergen-baekmark"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/jorgen-baekmark.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/joergen-baekmark",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/joergen-baekmark_1220x1220.jpg",
+   "credit": null,
+   "width": 738,
+   "height": 738,
+   "notes": "Portrait en noir et blanc, âgé, assis sur une chaise, visage net. Image carrée de 738 px seulement (au-dessus du minimum de 600 px)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Les produits Mikado sont des coussins pour la chaise J104 ; attribution par la chaise."
+ },
+ {
+  "slug": "poul-m-volther",
+  "name": "Poul M. Volther",
+  "sortKey": "Volther",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Poul M. Volther est un designer danois, formé à l'ébénisterie et au design de mobilier à l'École des arts et métiers de Copenhague. Partisan du fonctionnalisme, il s'attache à appliquer les techniques artisanales à des matériaux de qualité. Il est engagé en 1949 comme designer chez FDB, la coopérative danoise de consommateurs (Coop), dont il devient ensuite le responsable du design. Il y dessine notamment des chaises, des fauteuils et des canapés. HAY édite aujourd'hui la J110, son interprétation de la chaise Windsor, avec des coussins d'assise assortis. Il a également enseigné à l'école de design du Danemark.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/poul-m.-volther"
+  ],
+  "bioConfidence": "bonne",
+  "photo": null,
+  "photoMissingReason": "Le seul portrait trouvé est celui de la page designer HAY (https://www.hay.com/globalassets/blocks/shared/designers/poul-volther_1220x1220_must-not-be-on-imagebank-or-shared.jpg, 1220 px, noir et blanc) : son nom de fichier indique « must-not-be-on-imagebank-or-shared », donc des droits restreints ; non retenu. Aucun site officiel (designer historique).",
+  "remarks": "HAY écrit « Paul Volther » dans le texte et « Poul M. Volther » dans le titre : nom conservé. Dates de naissance et de décès non publiées par HAY, omises. Produits Mikado = coussins pour la chaise J110 ; attribution par la chaise. Portrait HAY utilisable seulement avec l'accord de HAY (à valider)."
+ },
+ {
+  "slug": "aspekt-office",
+  "name": "Aspekt Office",
+  "sortKey": "Aspekt Office",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Aspekt Office est un studio de design installé à Copenhague, spécialisé dans le mobilier, le design produit, l'architecture intérieure et la direction de création. Il a été fondé en 2018 par Hans Toft Hornemann et Terkel Skou Steffensen. Le duo part d'une réflexion conceptuelle et d'idées originales, dans une approche intuitive du design, et cherche à associer simplicité formelle et grande fonctionnalité pour créer des objets durables auxquels on s'attache. Pour HAY, Aspekt Office a dessiné le plafonnier Ono et la collection de luminaires en verre Aspekt Buoy, qui comprend des suspensions et une lampe de table.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/aspekt-office"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/aspekt-office.jpg",
+   "sourcePage": "https://www.hay.com/footer/about/designers",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/brandsite/hays-world/news/2025-news-blocks/buoy-lamps/aspekt-office.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Les deux membres penchés sur une table de travail (échantillons, maquettes de tabourets). Publiée comme vignette du studio sur la liste des designers HAY (la page designer elle-même n'a pas d'image). Visages de trois quarts, regard vers le bas ; carré 1220 px."
+  },
+  "photoMissingReason": null,
+  "remarks": "HAY ne précise pas lequel des deux est Hans Toft Hornemann ou Terkel Skou Steffensen sur la photo."
+ },
+ {
+  "slug": "stefan-diez",
+  "name": "Stefan Diez",
+  "sortKey": "Diez",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Stefan Diez est un designer industriel allemand installé à Munich, qui a fondé son studio en 2003. Fils d'ébéniste, il a reçu sa première formation dans l'atelier familial, et sa démarche reste ancrée dans l'atelier et l'expérimentation des matériaux. Il est diplômé de l'Académie des beaux-arts de Stuttgart et ses créations ont reçu notamment un iF Gold Award et un Red Dot Award. Il défend un design qui produit des objets durables et de qualité, et s'intéresse de près aux contraintes concrètes de la fabrication du mobilier. Pour HAY, il a dessiné la table Boa, le système d'étagères New Order, la table New Order et le chariot New Order.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/stefan-diez"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/stefan-diez.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/stefan-diez",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/stefan-diez-2020_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait (2020), assis dans une étagère New Order rouge, casquette, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "julie-richoz",
+  "name": "Julie Richoz",
+  "sortKey": "Richoz",
+  "brands": [
+   "HAY",
+   "Vitra"
+  ],
+  "bio": "Julie Richoz est une designer franco-suisse. Diplômée de l'ECAL (École cantonale d'art de Lausanne), elle a été assistante de projet de Pierre Charpin avant de fonder son propre studio à Paris. Elle crée aussi bien des pièces uniques que des objets produits en série, du mobilier, des luminaires et des textiles, pour des maisons comme Alessi, Louis Poulsen, Tectona, Louis Vuitton, La Manufacture de Cogolin ou la Galerie Kreo. Elle a reçu le Grand Prix de la Design Parade (2012) et les Swiss Design Awards (2015, 2019), et enseigne le design industriel à l'ECAL depuis 2017. Pour HAY, elle a dessiné la collection de tapis Tapis ; pour Vitra, avec qui elle travaille depuis 2023, les miroirs Colour Frame (2024).",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/julie-richoz",
+   "https://www.vitra.com/en-us/product/colour-frame-mirrors"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/julie-richoz.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/julie-richoz",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/julie_richoz_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait en buste, fond sombre, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année de création du studio contradictoire : HAY indique 2015 (après avoir assisté Pierre Charpin de 2013 à 2015), Vitra indique 2012 ; année omise. Vitra publie aussi un portrait 16:9 (static.vitra.com, « Designerportrait Julie Richoz_web_16-9 »), non retenu car le carré HAY se recadre mieux en 4:5."
+ },
+ {
+  "slug": "leon-ransmeier",
+  "name": "Leon Ransmeier",
+  "sortKey": "Ransmeier",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Leon Ransmeier est un designer industriel américain qui a fondé son agence, Ransmeier Inc., à New York en 2010. Diplômé de la Rhode Island School of Design, il a vu son travail entrer dans les collections permanentes du San Francisco Museum of Modern Art (SFMOMA) et du Corning Museum of Glass. Il travaille directement sur la matière et réalise des prototypes grandeur nature de toutes ses créations. Pour HAY, il a dessiné la collection Revolver, composée de tabourets, de tabourets de bar et d'une table haute, ainsi que l'égouttoir à vaisselle Shortwave.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/leon-ransmeier"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/leon-ransmeier.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/leon-ransmeier",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/leon-ransmeier-2020_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait en pied (2020), assis sur un tabouret Revolver, casquette, fond blanc. Recadrage 4:5 nécessaire, visage net mais assez petit."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "marc-morro",
+  "name": "Marc Morro",
+  "sortKey": "Morro",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Marc Morro est un designer né à Majorque en 1984. À 18 ans, il quitte l'île pour étudier le design industriel à l'école Elisava de Barcelone, ville où il est toujours installé. Il recherche dans son travail l'honnêteté et une austérité radicale, avec une approche directe qui donne des objets logiques, à la construction claire et minimale. Il propose des services de création et de développement pour des projets commandés par des particuliers comme par des entreprises. Pour HAY, il a dessiné le tabouret de bar Taburete 8, décliné en deux hauteurs d'assise, et le tabouret Manolito, proposé en versions courte et longue.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/marc-morro"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/marc-morro.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/marc-morro",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/marc-morro__1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait en pied, assis sur un tabouret dans son atelier, visage net. Recadrage 4:5 confortable."
+  },
+  "photoMissingReason": null,
+  "remarks": "Les déclinaisons (deux hauteurs, court/long) s'appuient sur les produits Mikado du lot."
+ },
+ {
+  "slug": "niels-jorgen-haugesen",
+  "name": "Niels Jørgen Haugesen",
+  "sortKey": "Haugesen",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Niels Jørgen Haugesen (1936-2013) est un designer danois. Diplômé de l'École des arts, de l'artisanat et du design du Danemark, il a ensuite travaillé auprès d'Arne Jacobsen. Le soin porté par Jacobsen à la fabrication et au détail a influencé sa démarche, tournée vers des formes minimales aux lignes nettes, alliant légèreté visuelle et clarté de la structure. Il privilégiait l'usage et la fonction de l'objet plutôt que la recherche de reconnaissance. Il a dessiné en 1977 la chaise X-Line, aujourd'hui éditée par HAY en deux versions, dont une à piètement chromé, ainsi qu'un coussin et une galette d'assise assortis.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/niels-joergen-haugesen"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/niels-jorgen-haugesen.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/niels-joergen-haugesen",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/niels-joergen-haugensen_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait serré en noir et blanc, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "mario-bellini",
+  "name": "Mario Bellini",
+  "sortKey": "Bellini",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Mario Bellini est un architecte et designer italien né en 1935. Diplômé en architecture de l'École polytechnique de Milan en 1959, il fonde son studio en 1962 et mène une carrière entre mobilier, design industriel et architecture. Il a reçu huit fois le Compasso d'Oro et 25 de ses œuvres figurent dans la collection permanente du MoMA de New York, qui lui a consacré une rétrospective en 1987. De 1985 à 1991, il a dirigé la revue Domus. La Triennale de Milan lui a décerné en 2015 une médaille d'or pour l'ensemble de sa carrière et lui a consacré une rétrospective en 2017. Avec HAY, il a réédité le canapé modulable Amanta, dessiné en 1966, proposé en fauteuil et en canapés de deux à quatre places.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/mario-bellini",
+   "https://bellini.it/mario-bellini/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/mario-bellini.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/mario-bellini",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/mario-bellini_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Mario Bellini (à droite, pull bleu, crâne rasé, barbe blanche) penché sur un module Amanta, avec une seconde personne à gauche (casquette, t-shirt blanc, probablement Rolf Hay, non confirmé). Recadrer en 4:5 sur la moitié droite (environ x 500-1100, y 120-870) pour l'isoler ; visage net mais regard vers le bas."
+  },
+  "photoMissingReason": null,
+  "remarks": "Pas de portrait seul satisfaisant : bellini.it n'a qu'une image d'en-tête en pied, très petite (sfondo_mb-mobile.jpg, 1181 × 792) ; les photos HAY de la visite d'atelier (Andrea Ferrari, 910 × 1100) le montrent lisant ou dessinant, visage petit. Portrait HAY retenu sous réserve d'un bon recadrage : à valider visuellement."
+ },
+ {
+  "slug": "sam-weller",
+  "name": "Sam Weller",
+  "sortKey": "Weller",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Sam Weller est un designer britannique né à Bath en 1985. Après une formation en design industriel et en ingénierie, il a étudié au Royal College of Art de Londres, dont il est sorti en 2012 avec un master en Design Products. Il a ensuite rejoint un petit atelier londonien pour développer ses propres projets. Il a vécu, étudié et travaillé au Royaume-Uni, aux États-Unis et en Asie, et réside aujourd'hui à Copenhague. Son travail privilégie une esthétique dépouillée qui découle du choix des matériaux et de la fonction de l'objet. Pour HAY, il a dessiné la collection de luminaires Fifty-Fifty (lampe de bureau, lampadaire, applique) et la lampe de table Anagram.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/sam-weller"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/sam-weller.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/sam-weller",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/sam-weller_1220x1220.jpg",
+   "credit": null,
+   "width": 3378,
+   "height": 3378,
+   "notes": "Portrait en buste devant un mur de briques, visage net. Carré 3378 px."
+  },
+  "photoMissingReason": null,
+  "remarks": "L'applique Fifty-Fifty figure parmi les produits Mikado ; HAY ne la cite pas en lien sur la page designer mais elle fait partie de la collection Fifty-Fifty citée."
+ },
+ {
+  "slug": "jochen-holz",
+  "name": "Jochen Holz",
+  "sortKey": "Holz",
+  "brands": [
+   "HAY"
+  ],
+  "bio": "Jochen Holz est un artiste verrier allemand installé à Londres. Il s'est d'abord formé au soufflage de verre technique en Allemagne, avant d'obtenir un BA en arts appliqués à l'Edinburgh College of Art puis un master en céramique et verre au Royal College of Art. Diplômé en 2003, il fonde la même année son atelier à Stratford, dans l'est de Londres. Il est connu pour la maîtrise technique de ses pièces et pour son usage du travail du verre au chalumeau, qui laisse le verre en fusion guider la forme finale. Il a reçu le RSA Award en 2000 et le Centre Prize du RCA en 2003. Pour HAY, il a créé la carafe Jug, déclinée en plusieurs tailles.",
+  "bioSources": [
+   "https://www.hay.com/shared/designers/jochen-holz"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos2/jochen-holz.jpg",
+   "sourcePage": "https://www.hay.com/shared/designers/jochen-holz",
+   "imageUrl": "https://www.hay.com/globalassets/blocks/shared/designers/jochen-holz_1220x1220.jpg",
+   "credit": null,
+   "width": 1220,
+   "height": 1220,
+   "notes": "Portrait à mi-corps dans son atelier, pièces de verre en arrière-plan, visage net."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ }
+]

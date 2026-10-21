@@ -1,0 +1,303 @@
+[
+ {
+  "slug": "space-copenhagen",
+  "name": "Space Copenhagen",
+  "sortKey": "Space Copenhagen",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Space Copenhagen est un studio de design basé à Copenhague, fondé en 2005 par Signe Bindslev Henriksen et Peter Bundgaard Rützou. Il travaille aussi bien l'architecture intérieure de maisons privées, d'hôtels et de restaurants que le mobilier, le luminaire, les objets, les installations artistiques et la direction artistique. On lui doit notamment les intérieurs de l'hôtel 11 Howard à New York, des restaurants Geranium et du premier Noma à Copenhague, ainsi que du Toranomon Hills Hotel à Tokyo. Le studio collabore avec des éditeurs comme GUBI, Fredericia, Mater et &Tradition, pour qui il a dessiné le canapé Fly (2013), la collection d'objets Collect (à partir de 2020), la série Thorvald (2024) et les luminaires Bonnet (2024) et Solid (2025).",
+  "bioSources": [
+   "https://www.andtradition.com/designers/space-copenhagen",
+   "https://spacecph.dk/about/",
+   "https://spacecph.dk/contact/",
+   "https://www.andtradition.com/journal/toranomon-hills-hotel-and-le-pristine"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/space-copenhagen.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/space-copenhagen",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/230925_TRADITION_SPACECPH_03_0082-1_high.jpg",
+   "credit": null,
+   "width": 5350,
+   "height": 7967,
+   "notes": "Portrait des deux fondateurs (Signe Bindslev Henriksen à gauche, Peter Bundgaard Rützou à droite) assis sur des chaises Thorvald devant une porte verte ; image du haut de la page designer &Tradition. Fichier original de 31 Mo ; version allégée 1719x2560 : https://wp.andtradition.com/wp-content/uploads/2019/06/230925_TRADITION_SPACECPH_03_0082-1_high-scaled.jpg. Les personnes occupent le tiers inférieur : recadrer en 4:5 autour du duo (environ x 750-3900, y 4500-8000 sur l'original). Le portrait studio de spacecph.dk/about (fond brun, cadrage plus serré) n'existe qu'en 1024x683, trop petit pour un 4:5 de 600 px de large."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année de fondation et associés confirmés par &Tradition et spacecph.dk. Années des produits d'après les légendes de la page designer &Tradition (Fly SC1-SC5 2013-2017, Collect 2020-2024, Thorvald SC100-SC101 2024, Bonnet SC91-SC93 2024, Solid SC104 2025)."
+ },
+ {
+  "slug": "hee-welling",
+  "name": "Hee Welling",
+  "sortKey": "Welling",
+  "brands": [
+   "&Tradition",
+   "HAY"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/hee-welling.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/hee-welling",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2020/02/ATD_Designer-Portraits_Hee-Welling_2026_02.jpg",
+   "credit": null,
+   "width": 6107,
+   "height": 9160,
+   "notes": "Portrait officiel &Tradition 2026 (série « Designer Portraits ») : assis dans un fauteuil orange, regard caméra, visage net. Original de 13 Mo ; version 1707x2560 : https://wp.andtradition.com/wp-content/uploads/2020/02/ATD_Designer-Portraits_Hee-Welling_2026_02-scaled.jpg. Recadrage 4:5 facile (personne centrée, en pied)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Mode photo seulement : bio existante conservée."
+ },
+ {
+  "slug": "all-the-way-to-paris",
+  "name": "All the Way to Paris",
+  "sortKey": "All the Way to Paris",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "All the Way to Paris est un studio de création basé à Copenhague, fondé en 2004 par Tanja Vibe et Petra Olsson Gendt. D'abord duo de graphistes, il a élargi sa pratique au design numérique, à l'illustration, à l'architecture intérieure et aux objets pour la maison : mobilier, objets et luminaires. Sa démarche vise à éliminer le superflu pour garder l'essentiel de chaque forme. Pour &Tradition, le studio a notamment dessiné la série de sièges The Moor (à partir de 2016) et la famille de luminaires Mist (2023), en verre opalin, déclinée en suspensions, lampes de table, lampes portables et appliques. Il a aussi composé une gamme de parfums pour l'éditeur.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/all-the-way-to-paris",
+   "https://allthewaytoparis.com/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/all-the-way-to-paris.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/all-the-way-to-paris",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2022/02/Tradition_ATWP_Studio_visit.jpg",
+   "credit": null,
+   "width": 1378,
+   "height": 1838,
+   "notes": "Photo des deux fondatrices dans leur atelier (visite de studio &Tradition), debout contre un mur blanc derrière une table de travail. Pas de légende nommant qui est à gauche ou à droite. Cadrable en 4:5 (proportion d'origine 3:4)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Aucune page « à propos » sur allthewaytoparis.com (404) : seule l'adresse de Copenhague y figure. Années d'après les légendes &Tradition (The Moor AP5-AP8 & AP18-AP19 2016-2024, Mist AP15-AP17 2023). Mikado vend aussi AP20, AP21 et AP22 de la famille Mist, postérieurs à la légende."
+ },
+ {
+  "slug": "thau-kallio",
+  "name": "Thau & Kallio",
+  "sortKey": "Thau & Kallio",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Thau & Kallio est le duo formé par les designers Jakob Thau et Sami Kallio, tous deux ébénistes de formation. Né en Suède et élevé au Danemark, Jakob Thau est titulaire d'un master de l'École de design de l'Académie royale danoise des beaux-arts. Né en Finlande et élevé en Suède, Sami Kallio a obtenu un master à l'École de design et d'artisanat de Göteborg. Le duo partage un intérêt pour le bois et les techniques artisanales, qu'il applique à des formes contemporaines. Pour &Tradition, il a dessiné la série Betty, nommée d'après le théâtre Betty Nansen de Copenhague : lancée avec une chaise, elle compte aussi des tabourets de bar, un banc et un fauteuil.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/thau-kallio",
+   "https://www.andtradition.com/products/betty-tk1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/thau-kallio.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/thau-kallio",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/ThauKallio.jpg",
+   "credit": null,
+   "width": 800,
+   "height": 1200,
+   "notes": "Portrait noir et blanc du duo devant un mur blanc ; Sami Kallio est à droite (barbu, même visage que sur son portrait individuel), Jakob Thau à gauche. Plus grande version disponible : 800x1200. Recadrage 4:5 possible (800x1000)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année de lancement de Betty non indiquée par l'éditeur, donc omise."
+ },
+ {
+  "slug": "jaime-hayon",
+  "name": "Jaime Hayon",
+  "sortKey": "Hayon",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Né à Madrid en 1974, Jaime Hayon est un artiste et designer espagnol formé au design industriel. La base de son studio se trouve à Valence et il travaille aussi depuis l'Italie. Sa pratique couvre le mobilier, le luminaire, les objets, la céramique, la sculpture et la peinture, ainsi que des intérieurs d'hôtels, de restaurants et de boutiques. Il collabore avec des éditeurs comme B.D. Barcelona, Cassina, Fritz Hansen, Magis, Wittmann et &Tradition, pour qui il a créé la série de luminaires Formakami (2015 et 2018), les sièges Elefy et la lampe portable Setago (2019), la collection d'objets Momento (2023) et la lampe Montera (2024). Il a reçu le Prix national du design espagnol.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/jaime-hayon",
+   "https://hayonstudio.com/jaime-hayon/",
+   "https://hayonstudio.com/hayon-studio/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/jaime-hayon.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/jaime-hayon",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/01_JH_202.jpg",
+   "credit": null,
+   "width": 2057,
+   "height": 2400,
+   "notes": "Jaime Hayon dessinant sur une vitre : visage net et reconnaissable mais traversé par les lignes blanches du dessin (parti pris de l'image). Image du haut de la page designer &Tradition. Pas d'autre portrait fixe exploitable chez &Tradition (le « Designer Portrait » est une vidéo mp4)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Date de création du studio divergente (&Tradition : 2000 ; Hayon Studio : 2001, chronologie 2002) : omise. Années des produits d'après les légendes &Tradition."
+ },
+ {
+  "slug": "sami-kallio",
+  "name": "Sami Kallio",
+  "sortKey": "Kallio",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Né en Finlande, Sami Kallio a grandi en Suède, où il s'est formé comme ébéniste, notamment au tournage sur bois, avant d'obtenir un master à l'École de design et d'artisanat de Göteborg. Installé à Göteborg, où se trouve son studio, il conçoit du mobilier et des intérieurs qui associent fabrication industrielle et techniques artisanales. Pour &Tradition, il a dessiné la collection In Between, qui combine placage moulé et bois massif tourné, déclinée en chaises, tabourets et tables. Il signe aussi, avec Jakob Thau, la série Betty au sein du duo Thau & Kallio.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/sami-kallio",
+   "https://www.andtradition.com/designers/thau-kallio"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/sami-kallio.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/sami-kallio",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/Sami-Kallio-03_miccgray.jpg",
+   "credit": null,
+   "width": 3012,
+   "height": 3152,
+   "notes": "Portrait noir et blanc en buste, regard caméra, fond clair. La page designer affiche la version 770x906 (https://wp.andtradition.com/wp-content/uploads/2019/06/sami_kallio-1.w800_0.jpg) ; ce fichier 3012x3152 est la même prise de vue en grand format, rattachée à la page designer dans la médiathèque &Tradition (https://www.andtradition.com/designers/sami-kallio/sami-kallio-03_miccgray/). Recadrage 4:5 : 2520x3152."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année d'In Between non indiquée clairement par l'éditeur, donc omise."
+ },
+ {
+  "slug": "hvidt-molgaard",
+  "name": "Hvidt & Mølgaard",
+  "sortKey": "Hvidt & Mølgaard",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Hvidt & Mølgaard est le duo danois formé par Peter Hvidt (1916-1986) et Orla Mølgaard-Nielsen (1907-1993). Les deux hommes se rencontrent à l'école d'ébénisterie de la Kunsthåndværkerskolen, où Hvidt est d'abord l'élève de Mølgaard-Nielsen avant d'y enseigner à ses côtés. Lauréats en 1943 d'un concours de l'association suédoise Slöjdföreningen, ils créent en 1944 la série Portex, en hêtre, livrée en éléments à assembler pour l'exportation. Leur fauteuil AX (1950), en bois lamellé-collé, peut être fabriqué en série. &Tradition réédite notamment la lampe Tripod (1953), les chaises Drawn, le fauteuil X et la table Drop Leaf (1956). Leurs pièces figurent dans les collections du MoMA, du Victoria and Albert Museum et du Designmuseum Danmark.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/hvidt-molgaard"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/hvidt-molgaard.png",
+   "sourcePage": "https://www.andtradition.com/designers/hvidt-molgaard",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/09/Orla_Peter_v2.png",
+   "credit": null,
+   "width": 3294,
+   "height": 4117,
+   "notes": "Photo d'archive noir et blanc des deux designers penchés sur un plan (Orla Mølgaard-Nielsen à gauche avec la pipe, Peter Hvidt à droite avec les lunettes, d'après la légende &Tradition « Peter Hvidt (right) with Orla Mølgaard-Nielsen (left) » sur https://www.andtradition.com/journal/qa-with-peter-kjelgaard). La page designer et les pages produits affichent cette même photo en 472x708 seulement (https://wp.andtradition.com/wp-content/uploads/2020/02/Copyright_HM.jpg, trop étroite) ; le fichier retenu est le recadrage 4:5 haute définition déposé par &Tradition dans sa médiathèque (rattaché à https://www.andtradition.com/journal/blueprints-for-guild/orla_peter_v2/). Nom de fichier d'origine « Copyright_HM » : droits détenus par la famille ou la fondation Hvidt & Mølgaard, photographe non indiqué."
+  },
+  "photoMissingReason": null,
+  "remarks": "Mikado vend AX HM11, X HM10, Drawn HM3-HM4, Tripod HM8/HM9/HM12 et Drop Leaf HM6 ; années d'après les légendes &Tradition (Tripod HM8-HM9 1953, HM12 1956 ; Drawn, X HM10 et Dropleaf 1956). L'éditeur écrit « Dropleaf » dans ses légendes et Mikado « Drop Leaf ». Si la version haute définition non affichée pose problème, la même photo est publiée en 714x970 : https://wp.andtradition.com/wp-content/uploads/2019/09/Screenshot-2024-05-29-at-17.29.08.png."
+ },
+ {
+  "slug": "fabricius-kastholm",
+  "name": "Fabricius & Kastholm",
+  "sortKey": "Fabricius & Kastholm",
+  "brands": [
+   "&Tradition",
+   "Carl Hansen & Søn"
+  ],
+  "bio": "Fabricius & Kastholm est le duo danois formé par Preben Fabricius (1931-1984), ébéniste formé auprès du maître menuisier Niels Vodder, et Jørgen Kastholm (1931-2007), forgeron de formation. Diplômés de l'École danoise d'architecture intérieure, ils étudient auprès de Finn Juhl, puis d'Arne Jacobsen, avant de fonder ensemble un studio, actif jusqu'à leur séparation en 1968. Leur mobilier associe d'abord le bois, puis l'acier et le cuir. Carl Hansen & Søn édite le système de rangement FK63 (1963), les fauteuils pliants FK10 et FK11 Plico et le fauteuil FK64 Scimitar (1964) ; &Tradition réédite la suspension P376, conçue en 1963, à cinq abat-jour concentriques. Leurs pièces sont exposées au MoMA de New York.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/kastholm-fabricius",
+   "https://www.carlhansen.com/en/en/designers/fabricius-kastholm",
+   "https://www.carlhansen.com/en/inspiration/news/fk63",
+   "https://www.carlhansen.com/en/en/collection/chairs/lounge-chairs/fk64",
+   "https://www.carlhansen.com/da-dk/dadk/lp/plico",
+   "https://www.andtradition.com/products/p376-kf1"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/fabricius-kastholm.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/kastholm-fabricius",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/10/kastholm-Fabricius.jpg",
+   "credit": null,
+   "width": 800,
+   "height": 1085,
+   "notes": "Photo d'archive noir et blanc des deux designers assis en tailleur sur des fauteuils Scimitar, fond blanc. Aucune légende n'indique qui est à gauche ou à droite. Plus grande version publiée : 800x1085 (cadrable en 4:5 à 800x1000). Carl Hansen & Søn ne publie que des collages (portraits individuels à la table à dessin + photo produit), moins adaptés à une carte."
+  },
+  "photoMissingReason": null,
+  "remarks": "&Tradition nomme le duo « Kastholm & Fabricius » (URL /designers/kastholm-fabricius), Carl Hansen & Søn « Fabricius & Kastholm » : le métachamp Mikado contient les deux formes (2 et 8 produits), à fusionner. Date d'association non publiée (Carl Hansen : retrouvailles au studio d'Ole Hagen après 1957 ; &Tradition : association de moins de dix ans) : omise."
+ },
+ {
+  "slug": "luca-nichetto",
+  "name": "Luca Nichetto",
+  "sortKey": "Nichetto",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Luca Nichetto est un designer italien qui a grandi entre Venise et Murano, dans une famille liée au travail du verre. Diplômé de l'IUAV, l'Institut universitaire d'architecture de Venise, il fonde son agence à Venise en 2006, puis ouvre un second bureau à Stockholm. Devenue la maison de création NICHETTO®, elle travaille le design de produits, de mobilier et de luminaires, l'architecture intérieure et la direction artistique. Il a collaboré notamment avec Cassina, Foscarini, Barovier&Toso, Ginori 1735, Svenskt Tenn et &Tradition, pour qui il a dessiné les canapés Cloud (2015), les tables d'appoint Lato (2018), l'applique Tabata (2022), les tables Sett (2024) et les lustres Gio (2025).",
+  "bioSources": [
+   "https://www.andtradition.com/designers/luca-nichetto",
+   "https://www.nichetto.com/info"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/luca-nichetto.jpg",
+   "sourcePage": "https://www.nichetto.com/info",
+   "imageUrl": "https://images.prismic.io/nichetto/ablhlrbci2UF6H1J_NW26_Info_Luca.jpg",
+   "credit": null,
+   "width": 3000,
+   "height": 3000,
+   "notes": "Portrait officiel du site NICHETTO® (section Luca Nichetto de la page Info) : assis dans un fauteuil, casquette noire et lunettes, regard caméra, cadré dans une embrasure de porte. Carré 3000x3000 ; recadrage 4:5 (2400x3000) centré sur lui sans perte. Alternatives &Tradition : page designer https://wp.andtradition.com/wp-content/uploads/2019/09/ATD_Luca-Nichetto-Studio-visit-Stockholm_32-scaled.jpg (personnage petit dans un intérieur) ou https://wp.andtradition.com/wp-content/uploads/2025/07/ATD25-Luca-Nichetto-Studio-Venice-analog_26-scaled.jpg (à son bureau, publié sur https://www.andtradition.com/journal/luca-nichetto-studio-visit)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Année de naissance absente des sources autorisées : omise. Années des produits d'après les légendes &Tradition (Cloud LN1-LN7 2015, Lato 2018, Tabata LN10 2022, Sett LN11-LN13 2024, Gio LN14-LN15 2025)."
+ },
+ {
+  "slug": "oeo-studio",
+  "name": "OEO Studio",
+  "sortKey": "OEO Studio",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "OEO Studio est une agence danoise pluridisciplinaire fondée en 2003 par Thomas Lykke et Anne-Marie Buemann. Basée à Copenhague, avec un bureau de projets à Tokyo, elle travaille dans l'architecture résidentielle, l'architecture intérieure pour l'hôtellerie et le commerce, le design de produits et l'identité de marque. Son approche, qu'elle nomme « Compelling Minimalism », associe héritage scandinave et esthétique japonaise, avec une attention portée aux matériaux et au détail. L'agence a été désignée Designer de l'année aux Danish Design Awards 2021. Pour &Tradition, elle a conçu la collection Ita, qui réunit tables, tables basses et bancs pensés jusque dans leur assemblage.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/oeo-studio",
+   "https://oeo.dk/about/"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/oeo-studio.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/oeo-studio",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/ATD24_OEO_STUDIO_01.jpg",
+   "credit": null,
+   "width": 5000,
+   "height": 7500,
+   "notes": "Portrait des deux fondateurs dans leur studio (Anne-Marie Buemann debout, Thomas Lykke assis sur un banc Ita), visages nets, regard caméra ; image du haut de la page designer &Tradition. Original de 23 Mo ; version 1707x2560 : https://wp.andtradition.com/wp-content/uploads/2019/06/ATD24_OEO_STUDIO_01-scaled.jpg. L'identification des personnes repose sur l'association femme/homme aux prénoms, non légendée par l'éditeur. Le portrait de oeo.dk/about (Lasse Kusk) les montre de dos, inutilisable."
+  },
+  "photoMissingReason": null,
+  "remarks": null
+ },
+ {
+  "slug": "robin-day",
+  "name": "Robin Day",
+  "sortKey": "Day",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": "Robin Day (1915-2010) est un designer britannique qui a grandi à High Wycombe, ville de fabrication de meubles. Diplômé du Royal College of Art de Londres, il réalise pendant la guerre dessins et maquettes pour des architectes et enseigne, puis devient designer d'expositions. En 1948, il remporte avec Clive Latimer le premier prix de sa catégorie au concours international de mobilier à bas prix du Museum of Modern Art de New York, ce qui lance sa collaboration avec l'éditeur Hille. Il signe ensuite le mobilier du Royal Festival Hall et participe au Festival of Britain de 1951. &Tradition réédite ses pièces de 1951 : la chaise Daystak, la chaise et les tables RFH Terrace. Il était l'époux de la designer textile Lucienne Day.",
+  "bioSources": [
+   "https://www.andtradition.com/designers/robin-day"
+  ],
+  "bioConfidence": "bonne",
+  "photo": {
+   "file": ".context/designers/photos/robin-day.png",
+   "sourcePage": "https://www.andtradition.com/designers/robin-day",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/Screenshot-2024-05-24-at-13.50.07.png",
+   "credit": "© Robin & Lucienne Day Foundation (d'après les autres légendes de la page ; photographe non indiqué)",
+   "width": 1302,
+   "height": 1732,
+   "notes": "Photo d'archive noir et blanc titrée par &Tradition « Robin Day in his studio at Cheyne Walk, London in 1956 » : de profil, à sa table à dessin, visage net. Fichier PNG (capture d'écran d'un scan fournie par l'éditeur). Recadrage 4:5 possible (1302x1628)."
+  },
+  "photoMissingReason": null,
+  "remarks": "Crédit non indiqué sur ce fichier précis : les autres images de la page portent « © Robin & Lucienne Day Foundation ». Années d'après les légendes &Tradition (Daystak RD1, RFH Terrace RD4-RD6 : 1951)."
+ },
+ {
+  "slug": "sebastian-herkner",
+  "name": "Sebastian Herkner",
+  "sortKey": "Herkner",
+  "brands": [
+   "&Tradition"
+  ],
+  "bio": null,
+  "bioSources": [],
+  "bioConfidence": null,
+  "photo": {
+   "file": ".context/designers/photos/sebastian-herkner.jpg",
+   "sourcePage": "https://www.andtradition.com/designers/sebastian-herkner",
+   "imageUrl": "https://wp.andtradition.com/wp-content/uploads/2019/06/ATD_2021-Sebastian-Herkner_19.jpg",
+   "credit": null,
+   "width": 3000,
+   "height": 4500,
+   "notes": "Portrait &Tradition 2021 : assis sur un escalier blanc, veste en jean, souriant, visage net. Original 3000x4500 ; version 1707x2560 : https://wp.andtradition.com/wp-content/uploads/2019/06/ATD_2021-Sebastian-Herkner_19-scaled.jpg. Recadrage 4:5 facile."
+  },
+  "photoMissingReason": null,
+  "remarks": "Mode photo seulement : bio existante conservée."
+ }
+]
