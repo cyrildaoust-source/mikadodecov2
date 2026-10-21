@@ -10,7 +10,7 @@ const { BRAND_COLLECTION_ALIASES, FAMILLES_RICHES, INTERNAL_COLLECTION, ORIGIN, 
 const { getDesigners } = require('../lib/designers');
 const { activeDesignerSlugs } = require('../lib/render/pages');
 const { getCollections } = require('../lib/services/catalog');
-const { GIFTS } = require('../lib/filter-scopes');
+const { GIFTS, designerPageFor } = require('../lib/filter-scopes');
 
 // ─── SEO: sitemap = INDEX instantané → pages (statique) + produits (walk) ──
 // /sitemap.xml était UN fichier généré par un walk paginé de tout le catalogue
@@ -79,7 +79,7 @@ router.get('/sitemap-products.xml', async (req, res) => {
       }
       (await getCollections()).forEach((c) => {
         // Les familles éditoriales et les sélections composites ont leurs propres sources.
-        if (Object.hasOwn(BRAND_COLLECTION_ALIASES, c.handle) || INTERNAL_COLLECTION.test(c.handle)) return;
+        if (Object.hasOwn(BRAND_COLLECTION_ALIASES, c.handle) || INTERNAL_COLLECTION.test(c.handle) || designerPageFor(c.handle)) return;   // créateur : sa page /produits.html?designer= est déjà dans le sitemap
         const composed = Object.hasOwn(families, c.handle) || Object.hasOwn(FAMILLES_RICHES, c.handle) || ['chaises', 'tables-outdoor', 'promotions'].includes(c.handle);
         if (c.handle && (c.hasProducts !== false || composed)) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6', smDate(c.updatedAt)));
       });

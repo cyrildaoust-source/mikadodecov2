@@ -8,7 +8,7 @@ const { isCatalogLanding, landing: catalogLanding, renderCatalogLanding } = requ
 const { brandName } = require('../lib/collection-brand');
 const { brandHero: getBrandHero, collectionHero: getCollectionHero, imageAtWidth, injectCollectionHero, photoStyle } = require('../lib/editorial-media');
 const { PAGE_SIZE: FAMILY_PAGE_SIZE, families, renderFamilyPage, renderSeatingPage, seatingIcons } = require('../lib/family-pages');
-const { CATALOGUE: CATALOGUE_SCOPE, filterScope } = require('../lib/filter-scopes');
+const { CATALOGUE: CATALOGUE_SCOPE, designerPageFor, filterScope } = require('../lib/filter-scopes');
 const { productJsonLd } = require('../lib/product-jsonld');
 const { shopifyFetch } = require('../lib/shopify/client');
 const { isOutdoor, isTable } = require('../lib/table-collections');
@@ -150,6 +150,8 @@ router.get('/produit.html', async (req, res) => {
 router.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
   if (INTERNAL_COLLECTION.test(handle)) return send404Shell(res, 'produits.html');
+  const designerPage = designerPageFor(handle);
+  if (designerPage) return res.set('Cache-Control', 'public, s-maxage=3600').redirect(301, designerPage);
   if (Object.hasOwn(BRAND_COLLECTION_ALIASES, handle)) {
     const query = req.originalUrl.indexOf('?');
     return res.redirect(301, '/collections/' + BRAND_COLLECTION_ALIASES[handle] + (query < 0 ? '' : req.originalUrl.slice(query)));
