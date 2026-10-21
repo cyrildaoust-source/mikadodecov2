@@ -289,7 +289,9 @@ test('Promotions (ADR 0018) : page filtrable depuis l’index, appartenance par 
   assert.deepEqual(data.facets.category.map(c=>[c.value,c.count]),[['sieges',1],['decoration',1]],'familles du catalogue comme catégories');
   const vase=data.items.find(p=>p.handle==='produit-54');
   assert.equal(vase.compareAt,300);assert.equal(vase.price,154);
-  assert.equal(data.state.sort,'remise','tri par défaut : plus forte remise');assert.equal(data.items[0].handle,'produit-54','la remise de 49 % ouvre la grille');
+  assert.equal(data.state.sort,'pop','tri par défaut : mélange stable des marques (Cyril, 21 octobre 2026)');
+  const byDiscount=await (await realFetch(base+'/api/catalog/promotions?sort=remise')).json();
+  assert.equal(byDiscount.items[0].handle,'produit-54','« Plus forte remise » reste disponible : la remise de 49 % ouvre la grille');
   assert.equal((await (await realFetch(base+'/api/catalog/promotions?discount=30')).json()).total,1,'−30 % et plus : le vase');
   assert.equal((await (await realFetch(base+'/api/catalog/promotions?discount=50')).json()).total,0,'−50 % et plus : rien (49 %)');
   const deco=await (await realFetch(base+'/api/catalog/promotions?category=decoration')).json();
@@ -307,8 +309,8 @@ test('Promotions (ADR 0018) : page filtrable depuis l’index, appartenance par 
   assert.doesNotMatch(html,/data-promo-cat="tables"/,'une famille sans promotion n’a pas de tuile');
   assert.match(html,/href="\/collections\/promotions\?discount=20#grille"[^>]*>−20 % et plus<span class="promo-band__n">1<\/span>/,'raccourci −20 % avec son compte');
   assert.doesNotMatch(html,/data-promo-band="50"/,'tranche vide masquée');
-  assert.match(html,/<option value="remise" selected>Plus forte remise<\/option>/);
-  assert.doesNotMatch(html,/sort=remise/,'le tri par défaut n’encombre pas les liens');
+  assert.match(html,/<option value="pop" selected>Notre sélection<\/option>/);assert.match(html,/<option value="remise">Plus forte remise<\/option>/);
+  assert.doesNotMatch(html,/sort=pop/,'le tri par défaut n’encombre pas les liens');
   assert.doesNotMatch(html,/noindex/);
   assert.match(html,/subhero__img[^>]*src="https:\/\/cdn.shopify.com[^"]*Grand-Relax[^"]*"/,'bandeau = le Grand Relax Vitra et son ottoman (choix de Cyril)');
   const filtered=await page('/collections/promotions?category=sieges');
