@@ -286,7 +286,10 @@ input:not([type=checkbox]):not([type=radio]):focus-visible, textarea:focus-visib
 /* Disponibilité, prix et bouton forment le bas de la carte : alignés d'une carte à
    l'autre dans une rangée, quelle que soit la longueur du nom ou de la finition. */
 .pcard__avail { display: flex; align-items: center; gap: 6px; color: var(--warn); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .03em; margin-top: auto; padding-top: 6px; }
-.pcard__dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: var(--warn); }
+.pcard__dot { display: inline-block; width: 7px; height: 7px; border-radius: 0; flex-shrink: 0; background: var(--warn); }
+.pcard__avail { align-items: flex-start; }
+.pcard__avail .pcard__dot { margin-top: .42em; }
+.pcard__nw { white-space: nowrap; }
 .pcard__dot--stock { background: var(--stock); }
 .pcard__dot--order { background: var(--warn); }
 .pcard__cta { margin-top: 0; }
@@ -377,10 +380,11 @@ input:not([type=checkbox]):not([type=radio]):focus-visible, textarea:focus-visib
   .feature, .room { grid-template-columns: 1fr; min-height: 0; }
   .feature--rev .feature__media { order: 0; }
   .feature__media { aspect-ratio: 4/5; }
-  .shead { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .shead { flex-wrap: wrap; gap: 8px 16px; margin-bottom: 22px; }
 
   .usp .wrap { grid-template-columns: 1fr; gap: 28px; }
-  .footer__grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
+  .footer__grid > .footer__news, .footer__grid > div:last-child { grid-column: 1 / -1; }
   .footer__lockbar { justify-content: center; text-align: center; }
 }
 
@@ -391,7 +395,7 @@ input:not([type=checkbox]):not([type=radio]):focus-visible, textarea:focus-visib
 /* WCAG 2.5.8 : zone tactile 44px centrée sur l'icône, sans bouger l'icône ni le badge */
 .nav__cart::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; }
 .nav__cart svg { display: block; }
-.cartcount { position: absolute; top: -7px; right: -9px; display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--accent-ink); color: var(--paper); font-size: 10px; font-weight: 600; line-height: 1; }
+.cartcount { position: absolute; top: -7px; right: -9px; display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 0; background: var(--accent-ink); color: var(--paper); font-size: 10px; font-weight: 600; line-height: 1; }
 .cartcount.is-empty { display: none; }
 .chrome a.nlink.is-active::after { transform: scaleX(1); background: var(--accent); }
 
@@ -598,7 +602,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .searchd__hint, .searchd__empty { color: var(--muted); font-size: .9rem; padding: 20px 6px; }
 
 .sr__lab { font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
-.sr__row { display: flex; align-items: center; gap: 16px; padding: 9px 6px; text-decoration: none; color: var(--ink-deep); border-radius: 6px; }
+.sr__row { display: flex; align-items: center; gap: 16px; padding: 9px 6px; text-decoration: none; color: var(--ink-deep); border-radius: 0; }
 .sr__row:hover { background: var(--paper-2); }
 /* Comme les cartes produits : le blanc des packshots se fond dans le carré beige. */
 .sr__media { width: 50px; height: 50px; background: var(--tile); flex-shrink: 0; }
@@ -636,7 +640,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .searchd__more:hover { text-decoration: underline; }
 .sr__grp { margin-bottom: 22px; }
 .sr__chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.sr__chip { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 22px; font-size: .92rem; color: var(--ink-deep); text-decoration: none; transition: border-color .18s, background .18s; }
+.sr__chip { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 0; font-size: .92rem; color: var(--ink-deep); text-decoration: none; transition: border-color .18s, background .18s; }
 .sr__chip:hover { border-color: var(--ink-deep); background: var(--paper-2); }
 /* empilement mobile : MÊME seuil que les autres règles recherche (640px) */
 @media (max-width: 640px) { .searchd__cols { grid-template-columns: 1fr; gap: 30px; } }
@@ -667,7 +671,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 @media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } }
 
 .pcard__media { position: relative; }
-.pcard__sale { background: #b23b3b; color: #fff; font-family: var(--sans-product); font-weight: 700; font-size: 12px; letter-spacing: .03em; padding: 4px 9px; border-radius: 2px; }
+.pcard__sale { background: #b23b3b; color: #fff; font-family: var(--sans-product); font-weight: 700; font-size: 12px; letter-spacing: .03em; padding: 4px 9px; border-radius: 0; }
 .sel-item__price--final { font-family: var(--sans-product); font-weight: 500; color: var(--ink-deep); }
 .sel-item__price--free { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.1; color: var(--accent-ink); }
 .sel-item__discount-amount { display: block; font-family: var(--sans-product); font-size: 0.85rem; font-weight: 500; color: var(--accent-ink); }
@@ -683,7 +687,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .sel-row__savings-amount { font-family: var(--sans-product); font-size: 1rem; font-weight: 500; color: var(--accent-ink); }
 /* "Livraison · Calculée au paiement" — Shopify owns shipping at checkout;
    we no longer commit to a price in the cart récap. */
-.sel-row--delivery-calc > span:last-child { color: var(--muted); font-style: italic; }
+.sel-row--delivery-calc > span:last-child { color: var(--muted); text-align: right; }
 
 .sel-eta { font-size: var(--fs-small); color: var(--ink-deep); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); line-height: 1.5; }
 .sel-eta strong { font-weight: 600; }
@@ -751,7 +755,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
    desktop (which keeps .pdp__main + .pdp__thumbs). */
 .pdp__rail { display: none; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .pdp__rail::-webkit-scrollbar { display: none; }
-.pdp__rail-img { flex: 0 0 100%; width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; scroll-snap-align: center; cursor: zoom-in; }
+.pdp__rail-img { flex: 0 0 100%; width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--tile); scroll-snap-align: center; cursor: zoom-in; }
 .pdp__dots { display: none; justify-content: center; gap: 10px; margin-top: 12px; }
 .pdp__dot-btn { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; }
 .pdp__dot-btn::before { content: ""; width: 8px; height: 8px; background: var(--line); transition: background .2s var(--ease); }
@@ -986,7 +990,7 @@ body.has-stickybuy .footer { padding-bottom: 76px; }
 .mikado-pin { position: relative; }
 .mikado-pin__svg { position: relative; z-index: 2; display: block; width: 34px; height: 42px; fill: var(--accent); stroke: var(--accent-ink); stroke-width: 1.4; filter: drop-shadow(0 6px 9px rgba(26,25,22,.35)); }
 .mikado-pin__svg circle { fill: var(--paper); stroke: none; }
-.mikado-pin__ring { position: absolute; left: 17px; bottom: 2px; width: 16px; height: 16px; transform: translate(-50%, 50%) scale(.6); border-radius: 50%; background: var(--accent-ink); opacity: .5; z-index: 1; animation: pin-pulse 2.6s var(--ease) infinite; }
+.mikado-pin__ring { position: absolute; left: 17px; bottom: 2px; width: 16px; height: 16px; transform: translate(-50%, 50%) scale(.6); border-radius: 0; background: var(--accent-ink); opacity: .5; z-index: 1; animation: pin-pulse 2.6s var(--ease) infinite; }
 @keyframes pin-pulse { 0% { transform: translate(-50%,50%) scale(.6); opacity: .5; } 70% { transform: translate(-50%,50%) scale(2.7); opacity: 0; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .mikado-pin__ring { animation: none; } }
 
@@ -1405,6 +1409,7 @@ body.pdplb-locked { overflow: hidden; }
   .home-studio { grid-template-columns: 1fr; }
   .home-rooms { grid-template-columns: repeat(2, 1fr); }
   .home-room, .home-room--big { grid-column: span 1; aspect-ratio: 4 / 3; }
+  .home-room:last-child:nth-child(odd) { grid-column: span 2; aspect-ratio: 8 / 3; }
   .home-rail { grid-auto-columns: 62vw; }
   .home-hero, .home-band { aspect-ratio: auto; min-height: 62vh; }
 }
@@ -1581,7 +1586,10 @@ body.pdplb-locked { overflow: hidden; }
 .chair-catalog__compact > * { font-family: var(--serif); font-weight: 600; font-size: var(--fs-h2); line-height: 1.05; margin: 8px 0 20px; }
 .chair-catalog__controls { margin-bottom: 0; }
 .catalog-filters__heading { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 22px; }
-.catalog-filters__heading .catalogue-head { margin: 0; }
+.catalog-filters__heading .catalogue-head { margin: 0; padding-bottom: 0; border-bottom: 0; }
+/* Un seul filet bleu sous le titre ET le nombre de modèles, comme les autres titres de section ; pas de second filet juste dessous. */
+.catalog-filters__heading { padding-bottom: 14px; border-bottom: 2px solid var(--accent); }
+.catalog-filters__heading + .catalog-filters { border-top: 0; }
 .catalog-filters { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); align-items: center; font-family: var(--sans-product); font-size: var(--fs-small); }
 .catalog-filters__groups { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 24px; }
 .catalog-filters__group { position: relative; }
@@ -1601,7 +1609,7 @@ body.pdplb-locked { overflow: hidden; }
 .catalog-filters__option.is-unavailable { opacity: .45; cursor: default; }
 .catalog-filters__count { color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
 .catalog-filters__stock .catalog-filters__count { margin-left: 0; }
-.catalog-filters__swatch { flex: 0 0 14px; width: 14px; height: 14px; border: 1px solid rgba(0,0,0,.12); border-radius: 50%; background: var(--swatch); }
+.catalog-filters__swatch { flex: 0 0 14px; width: 14px; height: 14px; border: 1px solid rgba(0,0,0,.12); border-radius: 0; background: var(--swatch); }
 .catalog-filters__search { display: grid; gap: 8px; padding-bottom: 12px; color: var(--muted); }
 .catalog-filters__search input, .catalog-filters__range input { width: 100%; min-width: 0; box-sizing: border-box; padding: 10px; border: 1px solid var(--line); border-radius: 0; background: var(--paper); color: var(--ink); font: inherit; }
 .catalog-filters__price { width: 300px; }
@@ -1732,8 +1740,6 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .gift-note p { color: var(--muted); font-size: var(--fs-small); line-height: 1.5; margin: 0; }
 .gift-note a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
 /* Accueil : bandeau Idées cadeaux (saison) */
-.home-band--gifts .home-band__t { margin: 0; }
-.home-band--gifts .home-band__links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 @media (max-width: 900px) { .gift-bands { grid-template-columns: repeat(2, 1fr); } }
 /* ═══ POPUP NEWSLETTER (ADR 0017) — fenêtre centrée sur ordinateur, panneau du bas sur téléphone ═══ */
 .nlp { position: fixed; inset: 0; z-index: 126; display: flex; align-items: center; justify-content: center; }
@@ -1774,4 +1780,47 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
   .nlp__box--done { min-height: 0; }
   .nlp__box--done .nlp__pic { display: none; }
   .nlp__box--done .nlp__body { padding: 36px 22px calc(36px + env(safe-area-inset-bottom)); align-items: center; text-align: center; }
+}
+
+/* ═══ TÉLÉPHONE — audit mobile du 21 octobre 2026 ═══
+   Champs à 16 px (sinon iOS zoome à la saisie) ; zones tactiles de 44 px sans changer le dessin
+   (::after invisible ou hauteur minimale) ; titres sur image lisibles ; carte et paysage. */
+@media (max-width: 760px) {
+  input:not([type=checkbox]):not([type=radio]), textarea, select, .fselect, .chips-select, .qty--sm .qty__val { font-size: 16px; }
+  .qty--sm { min-height: 44px; }
+  .qty--sm .qty__btn, .qty--sm .qty__val { width: 44px; min-height: 44px; }
+  .cartd__qbtn { width: 44px; height: 44px; }
+  .cartd__remove { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; margin: -12px -12px 0 0; }
+  .cartd__continue { padding-block: 13px; margin-top: 2px; }
+  .sel-item__remove { min-height: 44px; }
+  .pdp__dot-btn { width: 44px; height: 44px; }
+  .nlp__close { width: 44px; height: 44px; }
+  .plp-page { min-width: 44px; height: 44px; }
+  .catalog-filters__band { min-height: 44px; }
+  .footer li { margin-bottom: 0; }
+  .footer li a { display: inline-flex; align-items: center; min-height: 44px; }
+  .footer__bottom nav a, .breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; margin-block: 0; }
+  .shead a, .designer-card__brands a { position: relative; }
+  .shead a::after, .designer-card__brands a::after { content: ""; position: absolute; inset: -14px -6px; }
+  .designer-card__brands { font-size: 13px; }
+  .pdp__avail { display: block; }
+  .pdp__avail .pcard__dot { margin-right: 6px; vertical-align: middle; }
+  .home-room__n { font-size: 1.25rem; line-height: 1.15; }
+  .gift-band .home-rc__n { font-size: 1.3rem; line-height: 1.1; }
+  .gift-band { padding: 14px; }
+}
+/* Titres sur image : dégradé sombre du bas, lisible même sur une photo claire (bandeaux et pièces de l'accueil). */
+.home-band__scrim { background: linear-gradient(0deg, rgba(var(--scrim),.78), rgba(var(--scrim),.38) 55%, rgba(var(--scrim),.12)); }
+.home-room__scrim { background: linear-gradient(0deg, rgba(var(--scrim),.72), rgba(var(--scrim),.18) 65%, transparent); }
+/* Téléphone en paysage : la photo d'accueil occupe l'écran pour que le titre passe sous l'en-tête. */
+@media (orientation: landscape) and (max-height: 500px) { .home-hero { min-height: 100svh; } }
+/* Carte du rendez-vous : contrôle de zoom carré, comme le reste du site. */
+.locate__map .leaflet-bar, .locate__map .leaflet-bar a { border-radius: 0; }
+@media (max-width: 760px) { .catalog-filters__heading + .catalog-filters { border-bottom: 0; padding-bottom: 6px; } }
+/* Page Marques sur téléphone : cartes moins hautes, logos à taille constante (36 cartes = moins de défilement à vide). */
+@media (max-width: 760px) {
+  .brandcard { min-height: 128px; padding: 16px; }
+  .brandcard__logo { height: 26px; max-width: 85%; }
+  .brandcard__logo[src*="/airborne."], .brandcard__logo[src*="compagnie-de-provence.svg"], .brandcard__logo[src*="/esteban."], .brandcard__logo[src*="/artek."], .brandcard__logo[src*="blomus.svg"], .brandcard__logo[src*="fatboy.svg"], .brandcard__logo[src*="fermob.svg"], .brandcard__logo[src*="hkliving.svg"], .brandcard__logo[src*="moustache.svg"], .brandcard__logo[src*="vitra.svg"], .brandcard__logo[src*="ferm-living.svg"], .brandcard__logo[src*="stoff-nagel.svg"], .brandcard__logo[src*="string-furniture.svg"], .brandcard__logo[src*="ichendorf-milano.svg"], .brandcard__logo[src*="/hoptimist."], .brandcard__logo[src*="/addison-ross."], .brandcard__logo[src*="/softline."] { height: 34px; }
+  .brandcard__name { font-size: 1.25rem; }
 }

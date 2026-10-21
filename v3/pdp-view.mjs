@@ -200,7 +200,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
         ${isFermob ? `<a class="pdp__palette" href="/nuancier-fermob.html">Toutes les couleurs Fermob</a>` : ""}
         <div class="pdp__buy">
           <button class="pdp__qty-open" type="button" data-qtyd-open aria-haspopup="dialog">Quantité : <span data-qty-label>1</span> <span aria-hidden="true">▾</span></button>
-          <button class="btn btn--blue pdp__cta" data-add${current.available === false ? " disabled>Indisponible" : ">Ajouter au panier"}</button>
+          <button class="btn btn--blue pdp__cta" data-add${current.available === false ? " disabled>Indisponible" : ">Ajouter à la sélection"}</button>
         </div>
         <p class="pdp__cart-status" data-cart-status></p>
         <div class="pdp__reassure">

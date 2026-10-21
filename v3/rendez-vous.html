@@ -6,7 +6,7 @@
   <main id="contenu">
 
   <section class="rdv-hero">
-    <img class="rdv-hero__img" src="/images/rdv-hero.jpg" alt="Le showroom Mikado Deco" />
+    <img class="rdv-hero__img" src="/images/rdv-hero.jpg" srcset="/images/rdv-hero-800.webp 800w, /images/rdv-hero.jpg 1600w" sizes="100vw" alt="Le showroom Mikado Deco" />
     <div class="rdv-hero__scrim"></div>
     <div class="rdv-hero__in">
       <div class="rdv-hero__text">
@@ -92,6 +92,8 @@
         zoom: 16,
         zoomControl: false,
         scrollWheelZoom: false,   // never hijack the page scroll
+        dragging: !L.Browser.mobile,   // sur téléphone, un doigt fait défiler la page (audit mobile du 21 octobre 2026)
+        tap: false,
         attributionControl: true,
       });
       L.control.zoom({ position: "topright" }).addTo(map);

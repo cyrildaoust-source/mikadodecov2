@@ -63,12 +63,14 @@ if (iconRail && iconSeed.items.length && !iconRail.querySelector('.pcard')) {
     if(page>1) params.set('page',String(page)); else params.delete('page');
     var qs=params.toString();
     history.pushState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash);
+    shownURL=location.pathname+location.search;
     renderGrid(); renderPag();
     var head=document.querySelector('#grille .fam-gridhead'); if(head)head.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
     var c=pag&&pag.querySelector('.plp-page.is-current'); if(c)c.focus({preventScroll:true});
   }
   if(pag) pag.addEventListener('click',function(e){ var b=e.target.closest('button[data-page]'); if(!b||b.disabled)return; goTo(parseInt(b.getAttribute('data-page'),10)); });
-  window.addEventListener('popstate',function(){ params=new URLSearchParams(location.search); page=Math.max(1,parseInt(params.get('page'),10)||1); if(page>TOTAL)page=TOTAL; renderGrid(); renderPag(); });
+  var shownURL=location.pathname+location.search;
+  window.addEventListener('popstate',function(){ if(location.pathname+location.search===shownURL)return; shownURL=location.pathname+location.search; params=new URLSearchParams(location.search); page=Math.max(1,parseInt(params.get('page'),10)||1); if(page>TOTAL)page=TOTAL; renderGrid(); renderPag(); });
 
   (async function(){
     try{

@@ -3,6 +3,8 @@ import {escapeHtml, priceLabel} from './format.mjs';
 import {productHref} from './navigation.mjs';
 import {finishHTML} from './product-finishes.mjs';
 
+// Un délai (« 2–3 jours », « 9–13 jours ouvrés ») ne se coupe jamais entre ses chiffres et son unité.
+const keepDelay = (html) => html.replace(/(\d+–\d+) (\S+)/, '<span class="pcard__nw">$1&nbsp;$2</span>');
 export function selectionLabel(quantity) {
   return quantity === 0 ? '+ Ajouter à la sélection' : quantity === 1 ? 'Dans la sélection' : `Dans la sélection (${quantity})`;
 }
@@ -95,10 +97,10 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
       ${p.giftCard
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>${GIFT_CARD_LABEL}</div>`
         : p.availabilityLabel
-        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--${p.inStock ? 'stock' : 'order'}" aria-hidden="true"></span>${escapeHtml(p.availabilityLabel)}</div>`
+        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--${p.inStock ? 'stock' : 'order'}" aria-hidden="true"></span><span>${keepDelay(escapeHtml(p.availabilityLabel))}</span></div>`
         : p.inStock
-        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span>En stock · livraison 2–3 jours</div>`
-        : `<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span>${p.longDelay ? "Sur commande · délai sur demande" : "Livraison " + escapeHtml(p.leadTimeLabel || "3–4 semaines")}</div>`}
+        ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><span>En stock · <span class="pcard__nw">livraison 2–3 jours</span></span></div>`
+        : `<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><span>${p.longDelay ? "Sur commande · délai sur demande" : "Livraison " + `<span class="pcard__nw">${escapeHtml(p.leadTimeLabel || "3–4 semaines")}</span>`}</span></div>`}
       <div class="pcard__price">${priceLabel(p)}</div>
       ${interactive ? `<button class="btn btn--outline btn--block pcard__cta" data-add
         ${p.purchaseDisabled ? 'disabled' : ''}

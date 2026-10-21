@@ -136,7 +136,7 @@ test('la fiche arrive complète du serveur : achat, coloris, disponibilité et d
   const html=await (await realFetch(base+'/produit.html?handle=chaise-1&variant=gid%3A%2F%2Fshopify%2FProductVariant%2F11')).text();
   assert.match(html,/<div data-pdp data-ssr="chaise-1\|gid:\/\/shopify\/ProductVariant\/11">/);
   assert.doesNotMatch(html,/pdp__info-skel|pcard__skel/,'plus de squelette');
-  assert.match(html,/class="btn btn--blue pdp__cta" data-add>Ajouter au panier/);
+  assert.match(html,/class="btn btn--blue pdp__cta" data-add>Ajouter à la sélection/);
   assert.match(html,/data-vard-open/);
   assert.match(html,/data-coloris-name>Noir</);
   assert.match(html,/class="pdp__avail" data-avail/);

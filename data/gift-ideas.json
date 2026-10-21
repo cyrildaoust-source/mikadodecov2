@@ -19,14 +19,5 @@
     { "value": "cadeaux-hote", "label": "Pour l'hôte du réveillon", "season": true, "tags": ["cremaillere", "apero", "aperitif", "bar", "vin", "champagne", "fete", "reception", "serviette"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/editorial-eabb4423af8da14e882ad5cd293f953b_20ded366-886e-43f0-9167-172e067b599a.jpg?v=1790870598", "sourceProduct": "tasse-a-the-33cl-feast", "position": "50% 50%" },
     { "value": "cadeaux-cuisine", "label": "Pour les cuistots", "tags": ["cuisine", "ustensile", "ustensiles", "couteau", "cafetiere", "theiere", "planche", "casserole", "epices", "salade"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/lr-2022_hk_campaign_antwerp_polina-17.jpg?v=1777943671", "sourceProduct": "hkliving-coupelle-rustic-blue-9-set-0", "position": "50% 55%" },
     { "value": "cadeaux-lecture", "label": "Pour les grands lecteurs", "tags": ["lecture", "livre", "livres", "liseuse"], "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/Apex_20Desk_20Lamp_imageslider_1.jpg?v=1776807855", "sourceProduct": "lampe-de-bureau-hay-apex-desk-lamp", "position": "50% 45%" }
-  ],
-  "home": {
-    "image": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/1023748_iittalaemea_02_iittala-festico-candleholder-215-mm-2016.jpg?v=1777903551",
-    "sourceProduct": "bougeoir-festivo-22-cm",
-    "alt": "Bougeoirs Festivo d'Iittala et bougies allumées sur un socle en travertin",
-    "position": "50% 64%",
-    "mobilePosition": "50% 64%",
-    "width": 2500,
-    "height": 2500
-  }
+  ]
 }
