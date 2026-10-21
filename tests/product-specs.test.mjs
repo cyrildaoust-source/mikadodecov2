@@ -1,58 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { buildProductSpecRows, buildProductSpecGroups } from "../v3/product-specs.mjs";
-
-test("builds ordered general and technical characteristics", () => {
-  const rows = buildProductSpecRows({
-    dimensions: "Ø 11 × H 25,5 cm",
-    material: "Chêne et aluminium",
-    usage: "Intérieur",
-    capacity: "1,3 L",
-    martindale: "30 000 tours",
-    designer: "Teruhiro Yanagihara",
-    year: 2026,
-    origin: "Édité par &Tradition",
-    weight: "0,7 kg",
-    lightingType: "Lampe portable rechargeable",
-    lightSourceType: "LED intégrée variable",
-    ledType: "LED intégrée",
-    power: "3,5 W",
-    voltage: "Recharge 5 V / 2 A",
-    dimming: "3 niveaux : 100 % / 50 % / 20 %",
-    batteryRuntime: "Jusqu'à 10 heures",
-    chargingTime: "Environ 8 heures",
-    cableDetails: "Câble magnétique USB-A, 200 cm",
-    ipRating: "IP44",
-    safetyClass: "Classe II",
-    lightSourceReplaceable: "Batterie et module LED remplaçables",
-  });
-
-  assert.deepEqual(rows.slice(0, 3), [
-    ["Dimensions", "Ø 11 × H 25,5 cm"],
-    ["Matériaux / Finitions", "Chêne et aluminium"],
-    ["Usage", "Intérieur"],
-  ]);
-  assert.ok(rows.some(([label, value]) => (
-    label === "Autonomie" && value === "Jusqu'à 10 heures"
-  )));
-  assert.ok(rows.some(([label, value]) => (
-    label === "Indice de protection" && value === "IP44"
-  )));
-  assert.equal(
-    rows.filter(([label]) => label === "Source lumineuse").length,
-    1,
-  );
-});
-
-test("omits empty rows and uses construction materials as fallback", () => {
-  assert.deepEqual(buildProductSpecRows({
-    constructionMaterials: "Acier inoxydable",
-    warranty: "",
-  }), [
-    ["Matériaux / Finitions", "Acier inoxydable"],
-  ]);
-});
+import { buildProductSpecGroups } from "../v3/product-specs.mjs";
 
 // ── buildProductSpecGroups (accordéon PDP) ──────────────────────────────────
 const KEYS = ["description", "dimensions", "materiaux", "technique", "conception", "documents"];

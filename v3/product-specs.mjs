@@ -1,57 +1,5 @@
 const hasValue = (value) => value != null && String(value).trim() !== "";
 
-export function buildProductSpecRows(product = {}) {
-  const rows = [];
-  const add = (label, value) => {
-    if (hasValue(value)) rows.push([label, value]);
-  };
-
-  add("Dimensions", product.dimensions);
-  add(
-    "Matériaux / Finitions",
-    product.material || product.constructionMaterials,
-  );
-  add("Usage", product.usage);
-  add("Capacité", product.capacity);
-  add("Résistance à l’abrasion", product.martindale);
-  add("Entretien", product.entretien);
-  add("Designer", product.designer);
-  add("Année / Édition", product.year);
-  add("Fabrication / Origine", product.origin);
-  add("Poids", product.weight);
-
-  add("Infos électriques", product.infosElectriques);
-  add("Type de luminaire", product.lightingType);
-  add("Source lumineuse", product.lightSourceType || product.ledType);
-  add("Puissance", product.power);
-  add("Alimentation / Voltage", product.voltage);
-  add("Température de couleur", product.colorTemperature);
-  add("Variation", product.dimming);
-  add("Autonomie", product.batteryRuntime);
-  add("Temps de charge", product.chargingTime);
-  add("Câble fourni", product.cableDetails);
-  add("Indice de protection", product.ipRating);
-  add("Classe électrique", product.safetyClass);
-  add("Étiquette énergétique", product.energyLabel);
-  add("Éléments remplaçables", product.lightSourceReplaceable);
-
-  add("Garantie", product.warranty);
-  add("Certifications", product.certifications);
-  add("Tests & normes", product.testsAndStandards);
-  return rows;
-}
-
-/**
- * Source UNIQUE du regroupement des specs de la PDP (accordéon 6 groupes).
- * Aucune valeur produit n'est codée en dur : tout vient de `product`. Les champs
- * futurs (collection, manufacturer, certifications, testsAndStandards…) sont
- * référencés par nom : absents ⇒ ligne omise, groupe potentiellement vide.
- *
- * Retourne TOUJOURS les 6 groupes dans l'ordre. Un groupe « rows/text » peut
- * être vide : c'est l'appelant (produit.html) qui décide s'il l'affiche —
- * notamment le groupe « technique », qui s'affiche aussi quand une Référence
- * (SKU par variante) existe, celle-ci étant ajoutée côté page (hors mapping).
- */
 export function buildProductSpecGroups(product = {}) {
   const row = (label, value) => (hasValue(value) ? [[label, value]] : []);
   const text = hasValue(product.description) ? String(product.description) : "";

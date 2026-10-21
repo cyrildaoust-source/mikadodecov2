@@ -22,7 +22,6 @@ const formLimiter = rateLimit({
 // ─── CONTACT FORM ──────────────────────────────────────
 // Body: { name, email, telephone?, projet?, message }
 // Validates server-side, logs structured payload, returns 200.
-// Wire up nodemailer / a webhook later — the endpoint contract stays the same.
 router.post('/api/contact', formLimiter, async (req, res) => {
   res.set('Cache-Control', 'no-store');
   try {

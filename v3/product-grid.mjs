@@ -10,9 +10,6 @@ const cardLabel = variantId => selectionLabel(cartQty(variantId));
 // actually took — read by the PDP to build a CONTEXTUAL breadcrumb. Derived
 // from location at card-render time; "" = no context (homepage / bare
 // catalogue / PDP related) → the PDP shows the neutral catalogue trail.
-export function currentViewFrom() {
-  return listingContext(new URL(location.href));
-}
 
 export function productCard(p, source) {
   return productCardHTML(p, {source: typeof source === 'string' ? source : location.pathname + location.search, quantity: cartQty(p.variantId)});

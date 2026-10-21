@@ -154,28 +154,6 @@
 .mm-brand__name:hover {
   color: var(--accent-ink);
 }
-.mm-brand__colls {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.mm-brand__colls a {
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  color: var(--muted);
-  padding: 1px 0;
-  border-bottom: 1px solid transparent;
-  transition: color .18s var(--ease), border-color .18s var(--ease);
-}
-.mm-brand__colls a:hover,
-.mm-brand__colls a:focus-visible {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-  outline: none;
-}
 
 /* Designers — flat alphabetic list, multi-column flow */
 .mm-des-flat {
@@ -225,7 +203,7 @@
   border-left: 1px solid rgba(26, 25, 22, 0.1);
 }
 /* Coup de cœur photo · keeps the 16/10 frame but anchors the visible
-   slice to the top of the source. The editorial blog images are often
+   slice to the top of the source. Les photos éditoriales sont souvent
    portrait (e.g. ref-feat-2.webp 1200×1600) — without object-position
    the center crop ends up on a meaningless detail (texture, hand…). */
 .mm-side__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center top; background: var(--tile); margin-bottom: 4px; }
@@ -334,31 +312,7 @@
 }
 
 .drawer__foot { padding: 18px 0 24px; }
-.drawer__visual { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--tile); margin-bottom: 10px; }
-.drawer__foot-title {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--ink-deep);
-  margin-bottom: 4px;
-}
-.drawer__foot-lead {
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  line-height: 1.45;
-  color: var(--muted);
-  margin: 0 0 10px;
-}
-.drawer__foot-cta {
-  display: inline-block;
-  font-family: var(--sans-product);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  padding: 2px 0;
-  border-bottom: 1px solid var(--ink);
-}
+
 .drawer__foot-compact { display: block; font-family: var(--serif); font-weight: 600; font-size: 1.1rem; color: var(--ink-deep); padding: 2px 0 4px; }
 .drawer__foot-compact:hover { color: var(--accent-ink); }
 

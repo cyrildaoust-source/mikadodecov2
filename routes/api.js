@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
 const { filterScope } = require('../lib/filter-scopes');
-const { clearSearchCache, getSearchPage } = require('../lib/services/search');
+const { clearSearchCache } = require('../lib/services/search');
 const cache = require('../lib/cache');
 const { shopifyFetch } = require('../lib/shopify/client');
 const { CAMPAIGN_COLLECTIONS } = require('../lib/config');
@@ -19,12 +19,6 @@ const { legalFragment, legalPages } = require('../lib/render/legal');
 const { redirectionStats } = require('../lib/redirections');
 const { adminStatus: newsletterAdminStatus } = require('../lib/newsletter');
 
-router.get('/api/search',async(req,res)=>{
-  res.set('Cache-Control','no-store');
-  if(typeof req.query.q!=='string'||!req.query.q.trim())return res.status(400).json({error:'Indiquez votre recherche.'});
-  try {res.json(await getSearchPage(req.query));}
-  catch(error){console.warn('[search-api]',error.message);res.status(503).json({error:'Recherche momentanément indisponible.'});}
-});
 router.get('/index-catalogue/:part.json', async (req, res) => {
   // Adresses fixes, sans paramètre : personne ne peut forcer de nouvelles constructions via le CDN.
   if (!INDEX_PART_NAMES.has(req.params.part) || Object.keys(req.query).length) return res.status(404).set('Cache-Control', 'no-store').end();
@@ -54,13 +48,7 @@ router.get('/api/catalog/:handle',async (req,res)=>{
   try { res.set('Cache-Control','public, s-maxage=60, stale-while-revalidate=600').json(await getScopePage(scope, req.query)); }
   catch(error) { console.warn('[catalog-api]',scope.handle,error.message);res.status(503).json({error:'Cette sélection ne peut pas être chargée. Réessayez.'}); }
 });
-// ─── API: GET PRODUCTS ─────────────────────────────────
-// Two modes:
-//   GET /api/products                              → legacy array (≤ 250 products)
-//     consumed by home (main.js), selection, produit, internal getPromos
-//   GET /api/products?paginated=1&limit=50&cursor= → { items, pageInfo }
-//     consumed by the new PLP at /produits.html
-// The legacy shape is contractual — 4 callers depend on it.
+// ─── API: RAILS DE L'ACCUEIL (mêmes produits que le rendu serveur) ─────
 router.get('/api/home-rails', async (req, res) => {
   try { res.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600').json(await getHomeRails()); }
   catch (err) { console.error('Home rails error:', err.message); res.status(503).set('Cache-Control', 'no-store').json({ error: 'home_rails_unavailable' }); }

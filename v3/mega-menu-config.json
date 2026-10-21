@@ -1,5 +1,5 @@
 {
-  "_note": "Editorial 'coup de cœur du moment' shown in the side panel of each mega menu. Cyril edits this file by hand to rotate the feature (no code change needed). One block per mega: 'mobilier' + 'marques'.",
+  "_note": "Coup de cœur du moment dans le panneau latéral de chaque méga menu (mobilier, marques) et créateur du mois (designers). Cyril modifie ce fichier à la main pour faire tourner la mise en avant, sans déploiement de code.",
   "mobilier": {
     "coupDeCoeur": {
       "image": "/images/lifestyle-1.jpg",
@@ -27,14 +27,6 @@
       "photo": "/images/designers/verner-panton.jpg",
       "lead": "Couleur, courbes et audace — l'icône du design pop danois.",
       "ctaLabel": "Voir ses pièces"
-    },
-    "aLaUne": [
-      { "slug": "ettore-sottsass",        "name": "Ettore Sottsass" },
-      { "slug": "patricia-urquiola",      "name": "Patricia Urquiola" },
-      { "slug": "jasper-morrison",        "name": "Jasper Morrison" },
-      { "slug": "naoto-fukasawa",         "name": "Naoto Fukasawa" },
-      { "slug": "achille-castiglioni",    "name": "Achille Castiglioni" },
-      { "slug": "ronan-erwan-bouroullec", "name": "Ronan & Erwan Bouroullec" }
-    ]
+    }
   }
 }

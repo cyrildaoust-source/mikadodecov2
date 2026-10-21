@@ -27,7 +27,6 @@ export const scopeURL = (scope, state, page = state.page) => {
   if(defaultSort !== 'pop'){ q.delete('sort'); if(state.sort && state.sort !== defaultSort) q.set('sort',state.sort); }
   return scope.basePath+(q.size?'?'+q:'');
 };
-export const chairURL = (state, page = state.page) => scopeURL(CHAIRS_SCOPE,state,page);
 export function filterCount(state) {
   return ['category','brand','color','material','usage','feature'].reduce((n,k)=>n+(state[k]?.length||0),0)+Number(state.min!==null||state.max!==null)+Number(state.stock)+Number(state.seat_min!==null||state.seat_max!==null)+Number(Boolean(state.tag))+Number(Boolean(state.q))+Number(Boolean(state.discount));
 }
@@ -93,4 +92,3 @@ export function chairPagination(data) {
 }
 const EMPTY_STATE = {sort:'pop',page:1,tag:'',stock:false,q:'',discount:0,category:[],brand:[],color:[],material:[],usage:[],feature:[],min:null,max:null,seat_min:null,seat_max:null};
 export const emptyState = (scope = CHAIRS_SCOPE) => `<div class="catalog-filters__empty"><p class="serif">${esc(scope.empty)}</p><p>Retirez un filtre pour découvrir davantage de modèles.</p><a class="btn btn--outline" href="${esc(scopeURL(scope,EMPTY_STATE))}#grille" data-chair-link>${esc(scope.all)}</a></div>`;
-export const emptyChairs = () => emptyState(CHAIRS_SCOPE);
