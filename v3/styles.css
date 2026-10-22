@@ -732,6 +732,9 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 /* La section qui suit le fil d'Ariane (listes, familles) : pas le plein espacement de section (Cyril, 16/10 : « un espace énorme »). */
 [data-breadcrumb] ~ .section { padding-top: 24px; }
 [data-breadcrumb] ~ .section ~ .section { padding-top: var(--section-y); }   /* seule la première section après le fil d'Ariane est resserrée */
+/* Catalogue : les catégories vivent dans un bloc [data-catalogue-families] ; même espace qu'ailleurs sous le fil d'Ariane
+   (Cyril, 22 octobre 2026 : 134 px de vide sur ordinateur au lieu de 40). */
+[data-breadcrumb] + [data-catalogue-families] > .section:first-child { padding-top: 24px; }
 .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0; padding: 0; }
 .breadcrumb li { display: inline-flex; align-items: center; gap: 7px; }
 .breadcrumb li + li::before { content: "›"; color: var(--muted); opacity: .6; }
@@ -1258,7 +1261,7 @@ body.pdplb-locked { overflow: hidden; }
 .plp-designer [data-pop-section] { display: none; }
 /* Reserve the breadcrumb's filled height (it renders after the product
    fetch) so the hero below it doesn't get nudged down (CLS). */
-.plp-designer [data-breadcrumb] { min-height: 52px; }
+.plp-designer [data-breadcrumb]:empty { min-height: 52px; }   /* réserve seulement si le serveur n'a pas rendu le fil d'Ariane (sinon 30 px de vide en trop) */
 /* Reserve roughly one product row so the grid filling (empty → cards) on a
    sparse designer page doesn't yank the near-fold footer upward (CLS). For
    richer designers the grid simply grows past this floor, below the fold. */
@@ -1272,7 +1275,7 @@ body.pdplb-locked { overflow: hidden; }
    parsing (script inline) ; le module pose le nom exact ensuite. */
 .plp-collection .filterbar,
 .plp-collection [data-pop-section] { display: none; }
-.plp-collection [data-breadcrumb] { min-height: 52px; }
+.plp-collection [data-breadcrumb]:empty { min-height: 52px; }   /* réserve seulement si le serveur n'a pas rendu le fil d'Ariane (sinon 30 px de vide en trop) */
 .plp-collection [data-plp-title] { min-height: 1em; }
 .plp-collection [data-grid-title] { min-height: 1.05em; }
 .plp-collection [data-grid] { min-height: 380px; }
