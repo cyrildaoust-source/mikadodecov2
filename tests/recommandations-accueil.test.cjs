@@ -3,9 +3,9 @@ const assert = require('node:assert/strict');
 // Accueil et catalogue mélangés (Cyril, 22 octobre 2026) : du mobilier, pas seulement de petits objets.
 const { rotateSelection } = require('../lib/home-rails');
 const { filterScope } = require('../lib/filter-scopes');
-const selection = require('../data/meilleures-ventes.json');
+const selection = require('../data/recommandations-accueil.json');
 
-test('Meilleures ventes : sélection choisie, 4 par jour, décalée de 2 chaque jour', () => {
+test('Nos recommandations : sélection choisie, 4 par jour, décalée de 2 chaque jour', () => {
   const h = ['m1', 'o1', 'm2', 'o2', 'm3', 'o3'];
   assert.deepEqual(rotateSelection(h, 0).slice(0, 4), ['m1', 'o1', 'm2', 'o2']);
   assert.deepEqual(rotateSelection(h, 1).slice(0, 4), ['m2', 'o2', 'm3', 'o3']);
