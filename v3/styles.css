@@ -1169,7 +1169,7 @@ body.pdplb-locked { overflow: hidden; }
 .pdplb__img { max-width: 100%; max-height: 100%; object-fit: contain; background: var(--tile); }
 /* Croix et flèches : les boutons de la pagination des listes (.plp-page, « ‹ Précédent / Suivant › »), posés sur la photo
    (Cyril, 22 octobre 2026 : pas de grosse flèche maison). */
-.pdplb__close { position: absolute; top: 16px; right: 16px; font-size: 22px; line-height: 1; }
+.pdplb .pdplb__close { position: absolute; top: 16px; right: 16px; font-size: 24px; line-height: 1; }
 .pdplb__nav { position: absolute; top: 50%; transform: translateY(-50%); }
 .pdplb__nav--prev { left: 12px; }
 .pdplb__nav--next { right: 12px; }
