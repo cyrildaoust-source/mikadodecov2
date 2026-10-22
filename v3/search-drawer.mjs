@@ -16,7 +16,7 @@ export function createSearchDrawer() {
   const row = (p, source) => `<a class="sr__row" href="${pdpHref(p, source)}"><span class="sr__media"><img class="sr__thumb" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" /></span><span class="sr__info"><span class="sr__brand">${escapeHtml(p.brand || "")}</span><span class="sr__name">${escapeHtml(p.name || "")}</span>${p.finishLabel ? `<span class="sr__finish">${escapeHtml(p.finishLabel)}</span>` : ''}<span class="sr__price">${priceLabel(p)}</span></span></a>`;
   // Chaque marque de /api/brands et de /api/predictive porte déjà son lien.
   const brandHref = (b) => b.href || `/produits.html?brand=${encodeURIComponent(b.slug)}`;
-  const catHref   = (c) => `/collections/${encodeURIComponent(c.handle)}`;
+  const catHref   = (c) => c.href || `/collections/${encodeURIComponent(c.handle)}`;   // un créateur mène à sa page créateur
   // Belle saison (avril→sept) = extérieur ; sinon intérieur. Le tag EST la saison →
   // la clé de cache serveur (getProductsPage, keyée par tags) se régénère seule.
   const seasonTag = () => { const m = new Date().getMonth() + 1; return (m >= 4 && m <= 9) ? "exterieur" : "interieur"; };

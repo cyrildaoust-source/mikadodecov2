@@ -147,3 +147,11 @@ test('la fiche arrive complète du serveur : achat, coloris, disponibilité et d
   assert.equal(typeof served.brandHref,'string');
   assert.equal(typeof served.designerSlug,'string');
 });
+
+test('collection Shopify d’un créateur qui a sa page : redirigée vers la page créateur, qui fait foi (21 octobre 2026)', () => {
+  const { designerPageFor } = require('../lib/filter-scopes');
+  assert.equal(designerPageFor('charles-ray-eames'), '/produits.html?designer=charles-ray-eames');
+  assert.equal(designerPageFor('verner-panton'), '/produits.html?designer=verner-panton');
+  assert.equal(designerPageFor('chaises'), null, 'une sous-catégorie n’est pas un créateur');
+  assert.equal(designerPageFor('hay'), null, 'une marque n’est pas un créateur');
+});
