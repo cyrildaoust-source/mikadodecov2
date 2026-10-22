@@ -16,7 +16,7 @@ global.fetch = async (url, options) => {
   const { variables } = JSON.parse(options.body);
   return Response.json({ data: { nodes: variables.ids.map((id) => shop[id] ? { id, price: { amount: shop[id].price }, compareAtPrice: shop[id].compareAtPrice ? { amount: shop[id].compareAtPrice } : null, availableForSale: true, product: { tags: shop[id].tags } } : null) } });
 };
-const { withLivePrices } = require('../lib/live-prices');
+const { withLivePrices, stillPromoted } = require('../lib/live-prices');
 const card = (n, price, compareAt) => ({ handle: 'p' + n, variantId: 'gid://shopify/ProductVariant/' + n, price, compareAt, priceIsExact: true, finishChoices: [{ variantId: 'gid://shopify/ProductVariant/' + n, price, compareAt }] });
 
 test('les cartes prennent le prix et le prix barré actuels de Shopify ; une promo terminée perd son prix barré', async () => {
@@ -24,9 +24,12 @@ test('les cartes prennent le prix et le prix barré actuels de Shopify ; une pro
   assert.deepEqual(out.map((c) => [c.handle, c.price, c.compareAt]), [['p1', 59, null], ['p2', 32, 42]]);
   assert.equal(out[0].finishChoices[0].compareAt, null, 'les finitions au survol aussi');
 });
-test('page Promotions : une carte sans prix barré ni balise de raison disparaît ; une carte balisée reste', async () => {
-  const out = await withLivePrices([card(1, 45, 59), card(2, 32, 42), card(3, 75, null)], { promotionsOnly: true });
-  assert.deepEqual(out.map((c) => c.handle), ['p2', 'p3']);
+test('page Promotions : tri sur toute la liste avant la pagination (balise retirée = fiche retirée ; rien de changé = même liste)', async () => {
+  const product = (n) => ({ card: { variantId: 'gid://shopify/ProductVariant/' + n } });
+  const list = [product(1), product(2), product(3)];
+  assert.deepEqual((await stillPromoted(list)).map((p) => p.card.variantId.slice(-1)), ['2', '3']);
+  const promoted = [product(2), product(3)];
+  assert.equal(await stillPromoted(promoted), promoted, 'même objet : la mémoire des pages reste valable');
 });
 test('mémoire de 60 s : pas de nouvel appel pour les mêmes finitions ; panne Shopify = cartes de l’index inchangées', async () => {
   const before = calls; await withLivePrices([card(2, 32, 42)]); assert.equal(calls, before);
