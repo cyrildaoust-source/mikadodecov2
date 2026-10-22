@@ -1,0 +1,13 @@
+{
+  "description": "Rangée « Meilleures ventes » de l'accueil (Cyril, 22 octobre 2026 : « que des petits objets… je souhaiterais qu'il y ait aussi du mobilier, que ça tourne »). Sélection choisie, montrée 4 par 4 et décalée chaque jour de 2 : la liste alterne mobilier et objets, chaque jour montre donc 2 meubles et 2 objets. Une fiche indisponible ou dépubliée est sautée. Ajouter / retirer = éditer cette liste (handles Shopify).",
+  "handles": [
+    "chaise-hay-rey-chair",
+    "verre-a-eau-animal-farm",
+    "table-metal-bistro-o-77-cm",
+    "verre-a-eau-marine-garden",
+    "tabouret-eames-elephant",
+    "pichet-animal-farm",
+    "chaise-bistro-metal",
+    "verre-a-eau-talking-tress"
+  ]
+}
