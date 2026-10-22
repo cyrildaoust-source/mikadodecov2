@@ -152,11 +152,22 @@ function bindImageFallbacks() {
 
 // `hero` : la page ouvre sur un bandeau plein écran (le contenu ne reçoit pas le dégagement `has-topnav`).
 // L'en-tête est opaque partout (Cyril, 20 octobre 2026) : plus d'état transparent à gérer.
+// Focus visible au clavier seulement (Cyril, 22 octobre 2026) : html.kbd dès qu'une touche de navigation est utilisée,
+// retiré au premier clic ou toucher. Une fenêtre ouverte à la souris qui place le focus sur sa croix ne montre donc
+// aucun cadre (styles.css : html.kbd :focus-visible).
+const NAV_KEYS = new Set(["Tab", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown", "Enter", " ", "Escape"]);
+function bindFocusMode() {
+  const root = document.documentElement;
+  document.addEventListener("keydown", (e) => { if (NAV_KEYS.has(e.key) && !e.metaKey && !e.ctrlKey && !e.altKey) root.classList.add("kbd"); }, true);
+  document.addEventListener("pointerdown", () => root.classList.remove("kbd"), true);
+}
+
 export function initShell({ active = "", hero = false } = {}) {
   // Garde d'idempotence : initShell ne doit jamais binder deux fois (sinon
   // double rotation d'annonce, double submit newsletter, double scroll handler).
   if (document.body.dataset.shellReady) return;
   document.body.dataset.shellReady = "1";
+  bindFocusMode();
   ensureVercelAnalytics();
   const h = document.getElementById("site-header");
   const f = document.getElementById("site-footer");

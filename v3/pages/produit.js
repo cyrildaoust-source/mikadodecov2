@@ -270,10 +270,10 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     <div class="pdplb" data-lightbox>
       <div class="pdplb__backdrop" data-lb-backdrop></div>
       <div class="pdplb__stage" role="dialog" aria-modal="true" aria-label="Galerie photos" data-lb-stage>
-        <button class="pdplb__close" data-lb-close type="button" aria-label="Fermer">&times;</button>
-        ${ambiances.length ? `<button class="pdplb__nav pdplb__nav--prev" data-lb-prev type="button" aria-label="Photo précédente">&lsaquo;</button>` : ""}
+        <button class="plp-page pdplb__close" data-lb-close type="button" aria-label="Fermer">&times;</button>
+        ${ambiances.length ? `<button class="plp-page plp-page--nav pdplb__nav pdplb__nav--prev" data-lb-prev type="button" aria-label="Photo précédente">&lsaquo; Précédente</button>` : ""}
         <img class="pdplb__img" data-lb-img alt="" />
-        ${ambiances.length ? `<button class="pdplb__nav pdplb__nav--next" data-lb-next type="button" aria-label="Photo suivante">&rsaquo;</button>` : ""}
+        ${ambiances.length ? `<button class="plp-page plp-page--nav pdplb__nav pdplb__nav--next" data-lb-next type="button" aria-label="Photo suivante">Suivante &rsaquo;</button>` : ""}
       </div>
     </div>`);
   const lbRoot = document.querySelector("[data-lightbox]");
