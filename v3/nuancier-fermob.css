@@ -98,7 +98,6 @@
   transition: transform 0.15s var(--ease);
 }
 .nf-swatch:hover .nf-swatch__dot { transform: scale(1.12); }
-.nf-swatch:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; border-radius: 0; }
 
 /* Active state · a marked ring around the square sample */
 .nf-swatch[aria-pressed="true"] .nf-swatch__dot {

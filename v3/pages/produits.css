@@ -32,7 +32,7 @@
 @media (max-width: 760px) { .cat-panel__grid { grid-template-columns: repeat(2, 1fr); } }
 .cat-opt:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
 .cat-opt:has(.cat-opt__box:checked) { border-color: var(--accent-ink); background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
-.cat-opt:has(.cat-opt__box:focus-visible) { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+html.kbd .cat-opt:has(.cat-opt__box:focus-visible) { outline: 2px solid var(--ink-deep); outline-offset: -2px; }   /* case cachée : le trait clavier va sur l'étiquette (règle de focus : styles.css) */
 .cat-opt__box { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .cat-panel__actions { display: flex; justify-content: flex-end; align-items: center; gap: 24px; margin-top: clamp(14px, 2vw, 22px); padding-top: 16px; border-top: 1px solid var(--line); }
 .cat-panel__clear, .cat-panel__close { font-family: var(--sans-product); font-size: var(--fs-small); background: none; border: none; cursor: pointer; padding: 4px 2px; letter-spacing: .02em; }
@@ -60,7 +60,6 @@
 .plp-pagination__mobile { display: none; font-family: var(--sans-product); font-size: var(--fs-small); color: var(--muted); letter-spacing: .04em; padding: 0 6px; }
 .plp-page { font-family: var(--sans-product); font-size: var(--fs-small); min-width: 40px; height: 40px; padding: 0 13px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; letter-spacing: .02em; transition: border-color .15s var(--ease), color .15s var(--ease), background .12s var(--ease); }
 .plp-page:hover:not(:disabled):not(.is-current) { border-color: var(--ink); }
-.plp-page:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 .plp-page.is-current { background: var(--ink); border-color: var(--ink); color: var(--paper); cursor: default; }
 .plp-page:disabled { opacity: .4; cursor: not-allowed; }
 .plp-page--nav { font-weight: 500; }
