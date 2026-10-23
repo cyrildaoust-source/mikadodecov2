@@ -834,7 +834,6 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 
 /* Sibling sections under the gallery/buy-box — Description (prose) + the
    Caractéristiques key/value table (only filled rows render). */
-.pdp-section { margin-top: clamp(36px, 5vw, 64px); }
 .pdp-desc { color: var(--ink); line-height: 1.7; white-space: pre-line; max-width: 70ch; }
 .pdp-specs { max-width: 820px; border-top: 1px solid var(--line); }
 .pdp-specs div { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-small); }

@@ -144,7 +144,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
     : g.key === "technique" ? (g.rows.length > 0 || hasSku)
     : (g.rows.length > 0 || g.images?.length > 0));
   const specAccordionHTML = specShown.length
-    ? `<section class="section pdp-section pdp-acc" data-accordion>${specShown.map((g, i) => `<div class="pdp-acc__item">
+    ? `<section class="section pdp-acc" data-accordion>${specShown.map((g, i) => `<div class="pdp-acc__item">
         <h2 class="catalogue-head serif pdp-acc__head"><button type="button" class="pdp-acc__btn" id="pdp-acc-btn-${g.key}" aria-controls="pdp-acc-panel-${g.key}" aria-expanded="${i === 0 ? "true" : "false"}"><span class="pdp-acc__label">${escapeHtml(g.label)}</span><span class="pdp-acc__chevron" aria-hidden="true">▾</span></button></h2>
         <div class="pdp-acc__panel" id="pdp-acc-panel-${g.key}" role="region" aria-labelledby="pdp-acc-btn-${g.key}"${i === 0 ? "" : " hidden"}>${specPanelBody(g)}</div>
       </div>`).join("")}</section>`
