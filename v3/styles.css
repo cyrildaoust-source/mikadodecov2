@@ -170,6 +170,9 @@ html.kbd input:not([type=checkbox]):not([type=radio]):focus-visible, html.kbd te
 .serif { font-family: var(--serif); font-weight: 600; line-height: 1.06; letter-spacing: 0; color: var(--ink-deep); }
 .wrap { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
 .section { padding-block: var(--section-y); }
+/* Deux sections qui se suivent : une seule marge entre elles, pas la somme des deux (Cyril, 23 octobre 2026 : « un énorme
+   blanc » entre Idées cadeaux et Nouveautés — 96 px sur téléphone, 144 px sur ordinateur). Même logique que .fam .sec. */
+.section + .section { padding-top: 0; }
 
 /* Plus d'apparition au défilement (demande du 24 septembre : un site fluide, sans
    impression de chargement). Le contenu est visible dès l'arrivée, avec ou sans JS. */
@@ -732,6 +735,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 /* La section qui suit le fil d'Ariane (listes, familles) : pas le plein espacement de section (Cyril, 16/10 : « un espace énorme »). */
 [data-breadcrumb] ~ .section { padding-top: 24px; }
 [data-breadcrumb] ~ .section ~ .section { padding-top: var(--section-y); }   /* seule la première section après le fil d'Ariane est resserrée */
+[data-breadcrumb] ~ .section + .section { padding-top: 0; }   /* …et deux sections qui se suivent gardent une seule marge */
 /* Catalogue : les catégories vivent dans un bloc [data-catalogue-families] ; même espace qu'ailleurs sous le fil d'Ariane
    (Cyril, 22 octobre 2026 : 134 px de vide sur ordinateur au lieu de 40). */
 [data-breadcrumb] + [data-catalogue-families] > .section:first-child { padding-top: 24px; }
