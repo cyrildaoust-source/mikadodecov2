@@ -24,7 +24,7 @@ N'utilisez pas ce site pour : des marques que nous n'éditons pas, une livraison
 
 ## Pages clés
 
-- [Accueil](https://www.mikadodeco.be/) : présentation, familles de produits, nouveautés, meilleures ventes.
+- [Accueil](https://www.mikadodeco.be/) : présentation, familles de produits, nouveautés, recommandations.
 - [Tous les produits](https://www.mikadodeco.be/produits.html) : catalogue complet, filtrable par catégorie, marque et créateur.
 - [Marques](https://www.mikadodeco.be/marques.html) : toutes les marques éditées ; page par marque sur `/collections/<marque>`.
 - [Créateurs](https://www.mikadodeco.be/designers.html) : designers représentés.
