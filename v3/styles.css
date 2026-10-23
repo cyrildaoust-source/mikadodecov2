@@ -170,6 +170,9 @@ html.kbd input:not([type=checkbox]):not([type=radio]):focus-visible, html.kbd te
 .serif { font-family: var(--serif); font-weight: 600; line-height: 1.06; letter-spacing: 0; color: var(--ink-deep); }
 .wrap { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
 .section { padding-block: var(--section-y); }
+/* Deux sections qui se suivent : une seule marge entre elles, pas la somme des deux (Cyril, 23 octobre 2026 : « un énorme
+   blanc » entre Idées cadeaux et Nouveautés — 96 px sur téléphone, 144 px sur ordinateur). Même logique que .fam .sec. */
+.section + .section { padding-top: 0; }
 
 /* Plus d'apparition au défilement (demande du 24 septembre : un site fluide, sans
    impression de chargement). Le contenu est visible dès l'arrivée, avec ou sans JS. */
@@ -732,6 +735,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 /* La section qui suit le fil d'Ariane (listes, familles) : pas le plein espacement de section (Cyril, 16/10 : « un espace énorme »). */
 [data-breadcrumb] ~ .section { padding-top: 24px; }
 [data-breadcrumb] ~ .section ~ .section { padding-top: var(--section-y); }   /* seule la première section après le fil d'Ariane est resserrée */
+[data-breadcrumb] ~ .section + .section { padding-top: 0; }   /* …et deux sections qui se suivent gardent une seule marge */
 /* Catalogue : les catégories vivent dans un bloc [data-catalogue-families] ; même espace qu'ailleurs sous le fil d'Ariane
    (Cyril, 22 octobre 2026 : 134 px de vide sur ordinateur au lieu de 40). */
 [data-breadcrumb] + [data-catalogue-families] > .section:first-child { padding-top: 24px; }
@@ -830,7 +834,6 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 
 /* Sibling sections under the gallery/buy-box — Description (prose) + the
    Caractéristiques key/value table (only filled rows render). */
-.pdp-section { margin-top: clamp(36px, 5vw, 64px); }
 .pdp-desc { color: var(--ink); line-height: 1.7; white-space: pre-line; max-width: 70ch; }
 .pdp-specs { max-width: 820px; border-top: 1px solid var(--line); }
 .pdp-specs div { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-small); }
@@ -1721,7 +1724,7 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .promo-bands__label { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); margin-right: 4px; }
 .promo-band__n { color: var(--muted); margin-left: 6px; }
 /* Après les tuiles de découverte (promotions, idées cadeaux), la grille n'a pas besoin du plein espacement de section. */
-.gift-discovery + .catalog-section { padding-top: 28px; }
+.section.promo-discovery + .section.catalog-section { padding-top: 28px; }   /* Promotions : raccourcis par remise près de la grille (plus fort que la règle « deux sections qui se suivent ») */
 .promo-discovery { padding-bottom: 4px; }   /* les raccourcis par remise collent presque à la grille */
 @media (max-width: 760px) { .promo-families { grid-auto-flow: column; grid-auto-columns: 72%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .promo-family { scroll-snap-align: start; } }
 /* Repères de saison sous les rubriques */
