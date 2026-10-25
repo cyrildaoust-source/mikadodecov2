@@ -52,7 +52,7 @@ function featuredCardHTML(d) {
       ${photoHTML(d)}
       <h3 class="designer-card__name">${escapeHtml(d.name)}</h3>
       <div class="designer-card__brands">${brandsHTML(d)}</div>
-      <a class="designer-card__link" href="/produits.html?designer=${encodeURIComponent(d.slug)}" aria-label="Voir les produits de ${escapeHtml(d.name)}"></a>
+      <a class="designer-card__link" href="/produits.html?designer=${encodeURIComponent(d.slug)}" aria-label="Voir les pièces ${/^[aeiouyàâéèêîôû]/i.test(d.name) ? "d’" : "de "}${escapeHtml(d.name)}"></a>
     </article>`;
 }
 
