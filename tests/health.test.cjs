@@ -34,7 +34,8 @@ test('Shopify joignable → 200 ok, avec version, index, cache, jamais caché', 
   // Table des redirections des anciennes fiches (ADR 0014) : chargée, au bon schéma, sans erreur.
   assert.equal(body.redirections.schema, 'mikado.redirections@2');
   assert.equal(body.redirections.error, null);
-  assert.ok(body.redirections.entries > 4000, `${body.redirections.entries} entrées`);
+  // La table rétrécit quand des fiches reviennent en ligne (4 425 le 09/10, 2 950 le 25/10) : on vérifie qu'elle est bien chargée.
+  assert.ok(body.redirections.entries > 1000, `${body.redirections.entries} entrées`);
 });
 
 test('Shopify en panne → 503 degraded, le message est dans la réponse', async () => {
