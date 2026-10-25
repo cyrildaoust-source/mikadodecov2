@@ -112,7 +112,8 @@ test('les sous-catégories reçoivent les mêmes filtres, avec leur propre chemi
   // Promotions est filtrable depuis l'index (ADR 0018) ; les collections promo-* de campagne et internes restent exclues.
   assert.equal(filterScope('promotions').kind,'promotions');assert.equal(filterScope('promotions').fallback,'collection','sans index : liste directe, toujours filtrable');
   for(const handle of ['promo-chaises-hay','featured','claude-modifs-2026-05-16','inconnue'])assert.equal(filterScope(handle),null,handle);
-  for(const handle of ['hay','nouveautes','1900','verner-panton'])assert.equal(filterScope(handle).kind,'collection',handle);
+  for(const handle of ['hay','nouveautes','1900'])assert.equal(filterScope(handle).kind,'collection',handle);
+  assert.equal(filterScope('verner-panton'),null,'créateur : plus une collection, sa page /produits.html?designer= fait foi (22 octobre 2026)');
   // Tables, Canapés et familles n'existent qu'avec l'index commun ; sans lui, liste d'origine.
   for(const handle of ['tables-de-salle-a-manger','canapes','tables','sieges','outdoor'])assert.equal(filterScope(handle).fallback,'legacy',handle);
   assert.ok(filterScopeHandles().length>20);
@@ -154,4 +155,7 @@ test('collection Shopify d’un créateur qui a sa page : redirigée vers la pag
   assert.equal(designerPageFor('verner-panton'), '/produits.html?designer=verner-panton');
   assert.equal(designerPageFor('chaises'), null, 'une sous-catégorie n’est pas un créateur');
   assert.equal(designerPageFor('hay'), null, 'une marque n’est pas un créateur');
+  // 22 octobre 2026 : plus aucune collection de créateur ; Wegner rejoint sa page, Paulin (sans page ni pièce) la liste des designers.
+  assert.equal(designerPageFor('hans-wegner'), '/produits.html?designer=hans-j-wegner');
+  assert.equal(designerPageFor('pierre-paulin'), '/designers.html');
 });

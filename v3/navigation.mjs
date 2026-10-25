@@ -120,7 +120,6 @@ export function collectionTrail(handle, nav, label = '', seen = new Set()) {
   if (!entry && !label) return [HOME, CATALOG];
   const current = { label: entry?.label || label, href: '/collections/' + handle };
   if (entry?.kind === 'brand') return [HOME, BRANDS, current];
-  if (entry?.kind === 'designer') return [HOME, DESIGNERS, current];
   if (entry?.parent) return [...collectionTrail(entry.parent, nav, '', seen), current];
   return [HOME, CATALOG, current];
 }

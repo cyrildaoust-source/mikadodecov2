@@ -9,8 +9,9 @@ const url = path => new URL(path, 'https://www.mikadodeco.be');
 const labels = trail => trail.map(x => x.label);
 const product = { handle: 'chaise', name: 'Chaise <&>', brand: 'HAY' };
 
-test('all 160 collections have a role and acyclic, explicit parents; all 41 children keep their family', () => {
- assert.equal(Object.keys(nav.collections).length, 160);   // 170 − 10 entrées périmées retirées le 20 oct. 2026 (6 promo été, claude-modifs, 2 doublons Serax, serviettes-ete)
+test('all 150 collections have a role and acyclic, explicit parents; all 41 children keep their family', () => {
+ assert.equal(Object.keys(nav.collections).length, 150);   // 170 − 10 entrées périmées (20 oct. 2026) − 10 collections de créateurs (22 oct. 2026 : un créateur = sa page)
+ assert.equal(Object.values(nav.collections).filter(c => c.kind === 'designer').length, 0);
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'family').length, 7);
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'subcategory').length, 41);
  for (const [handle, c] of Object.entries(nav.collections)) {
@@ -19,7 +20,6 @@ test('all 160 collections have a role and acyclic, explicit parents; all 41 chil
   assert.equal(new Set(trail.map(x => x.href)).size, trail.length, handle);
   if (c.kind === 'subcategory') { assert.equal(trail.length, 4, handle); assert.equal(trail[2].label, nav.collections[c.parent].label); }
   if (c.kind === 'brand') assert.equal(trail[1].label, 'Marques', handle);
-  if (c.kind === 'designer') assert.equal(trail[1].label, 'Designers', handle);
  }
  assert.deepEqual(labels(collectionTrail('tables-outdoor',nav)), ['Accueil','Catalogue','Jardin','Tables outdoor']);
 });

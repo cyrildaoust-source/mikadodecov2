@@ -35,10 +35,6 @@
       "label": "Caractère",
       "kind": "selection"
     },
-    "verner-panton": {
-      "label": "Verner Panton",
-      "kind": "designer"
-    },
     "palissade": {
       "label": "Palissade",
       "kind": "range",
@@ -96,10 +92,6 @@
       "label": "Carte Blanche",
       "kind": "selection"
     },
-    "alvar-aalto": {
-      "label": "Alvar Aalto",
-      "kind": "designer"
-    },
     "arts-de-la-table": {
       "label": "Arts de la table",
       "kind": "selection"
@@ -116,14 +108,6 @@
     "idees-cadeaux": {
       "label": "Idées cadeaux",
       "kind": "selection"
-    },
-    "jean-prouve": {
-      "label": "Jean Prouvé",
-      "kind": "designer"
-    },
-    "julien-de-smedt": {
-      "label": "Julien De Smedt",
-      "kind": "designer"
     },
     "sieges": {
       "label": "Assises",
@@ -358,30 +342,6 @@
       "label": "Ustensiles & cuisine",
       "kind": "subcategory",
       "parent": "accessoires"
-    },
-    "charles-ray-eames": {
-      "label": "Charles & Ray Eames",
-      "kind": "designer"
-    },
-    "pierre-paulin": {
-      "label": "Pierre Paulin",
-      "kind": "designer"
-    },
-    "pascal-mourgue": {
-      "label": "Pascal Mourgue",
-      "kind": "designer"
-    },
-    "achille-castiglioni": {
-      "label": "Achille Castiglioni",
-      "kind": "designer"
-    },
-    "hella-jongerius": {
-      "label": "Hella Jongerius",
-      "kind": "designer"
-    },
-    "hans-wegner": {
-      "label": "Hans Wegner",
-      "kind": "designer"
     },
     "serax-marie": {
       "label": "Serax — Marie",
