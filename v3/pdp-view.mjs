@@ -137,7 +137,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
   const hasSku = variants.some((v) => v && v.sku);
   const specPanelBody = (g) =>
     g.key === "description"
-      ? `<p class="pdp-desc">${escapeHtml(g.text)}</p>`
+      ? g.text.split(/\n\s*\n/).map((para) => `<p class="pdp-desc">${escapeHtml(para).replace(/\n/g, "<br>")}</p>`).join("")
       : `<dl class="pdp-specs">${g.rows.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join("")}${g.key === "technique" && hasSku ? `<div><dt>Référence</dt><dd data-spec-sku>${escapeHtml(current.sku || "—")}</dd></div>` : ""}</dl>${renderDimensionImages(g, escapeHtml)}`;
   const specShown = specGroups.filter((g) =>
     g.key === "description" ? !!g.text
