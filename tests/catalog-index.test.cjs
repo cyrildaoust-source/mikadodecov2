@@ -222,7 +222,7 @@ test('Idées cadeaux (ADR 0016) : fiches taguées cadeau ou noel, rubriques « P
   const {response,html}=await withClock(OFF_SEASON,()=>page('/collections/idees-cadeaux'));
   assert.equal(response.status,200);
   assert.match(html,/<h1 data-plp-title data-context>Idées cadeaux<\/h1>/);
-  assert.match(html,/<title>Idées cadeaux design · Mikado Deco<\/title>/);
+  assert.match(html,/<title>Idées cadeaux design à Bruxelles · Mikado Deco<\/title>/);
   assert.match(html,/<link rel="canonical" href="https:\/\/www.mikadodeco.be\/collections\/idees-cadeaux"/);
   assert.match(html,/class="home-rc gift-band" href="\/collections\/idees-cadeaux\?max=50#grille" data-chair-link data-gift-band="\|50"><img class="home-rc__img editorial-photo"/,'tranche = carte photo');
   assert.match(html,/De 100 à 200&nbsp;€<\/span><span class="home-rc__count">7 pièces/);
