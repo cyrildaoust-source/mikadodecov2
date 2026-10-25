@@ -24,13 +24,13 @@ async function loadRows() {
   // Un squelette porte aussi la classe .pcard : seule une vraie carte a son bouton d'ajout.
   if (!hosts.length || hosts.every((h) => h.querySelector(".pcard [data-add]"))) return;
   // Mêmes produits que le rendu serveur (/api/home-rails) : Nouveautés = vraie collection
-  // « nouveautes » en alternant les marques ; Meilleures ventes = ordre BEST_SELLING.
+  // « nouveautes » en alternant les marques ; Nos recommandations = sélection du jour (data/recommandations-accueil.json).
   try {
     const r = await fetch("/api/home-rails");
     if (!r.ok) throw new Error("home rails " + r.status);
     const rails = await r.json();
     for (const host of hosts) {
-      const list = (host.dataset.sort === "new" ? rails.nouveautes : rails.best) || [];
+      const list = (host.dataset.sort === "new" ? rails.nouveautes : rails.selection) || [];
       const slice = list.slice(0, parseInt(host.dataset.count || "4", 10));
       if (slice.length) host.innerHTML = slice.map(productCard).join("");
     }

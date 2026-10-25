@@ -1,0 +1,17 @@
+{
+  "description": "Rangée « Nos recommandations » de l'accueil (Cyril, 22 octobre 2026 : pas les meilleures ventes, qui ne sont que de petits objets vendus en volume, mais des recommandations variées qui donnent envie). Sélection choisie, montrée 4 par 4 et décalée chaque jour de 2 : la liste alterne une grande pièce et un objet, chaque jour montre donc 2 + 2. Une fiche indisponible ou dépubliée est sautée (la suivante de la liste prend sa place). Ajouter / retirer = éditer cette liste (handles Shopify), en gardant un nombre pair.",
+  "handles": [
+    "chaise-hay-rey-chair",
+    "verre-a-eau-animal-farm",
+    "table-metal-bistro-o-77-cm",
+    "lampe-de-table-akari-24n",
+    "etagere-murale-string-pocket",
+    "pichet-animal-farm",
+    "tabouret-eames-elephant",
+    "suspension-flowerpot-vp1",
+    "chaise-eames-fiberglass-dsr",
+    "corbeille-compressioni-itm15",
+    "chaise-bistro-metal",
+    "vase-pallas"
+  ]
+}
