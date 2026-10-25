@@ -55,7 +55,7 @@
 
         <table class="hours">
           <tr><td>Mardi – Samedi</td><td>10h30 – 18h30</td></tr>
-          <tr><td>Dimanche &amp; Lundi</td><td>Fermé</td></tr>
+          <tr><td>Dimanche et lundi</td><td>Fermé</td></tr>
         </table>
 
         <p class="locate__studio">Un projet d'aménagement ? <a href="/studio.html">Mikado Studio</a> vous reçoit sur rendez-vous.</p>
@@ -96,7 +96,8 @@
         tap: false,
         attributionControl: true,
       });
-      L.control.zoom({ position: "topright" }).addTo(map);
+      L.control.zoom({ position: "topright", zoomInTitle: "Zoom avant", zoomOutTitle: "Zoom arrière" }).addTo(map);
+      map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');   // sans l'infobulle anglaise de Leaflet
 
       // Les tuiles CARTO exigent désormais une clé : OpenStreetMap, sans clé, avec attribution.
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
