@@ -53,3 +53,10 @@ test('barre d’adresse : la fiche retire ?from= et ?returnTo= et garde le fil d
  assert.match(pageScript,/for \(const key of \["handle", "id", "variant"\]\)/);
  assert.match(pageScript,/paintBreadcrumb\(productTrail\(p, arrival, nav\), sourceSelection\(arrival\)\)/);
 });
+test('aperçu de partage : un lien avec ?variant= montre la photo de ce coloris, sinon la couverture',async()=>{
+ for(const [query,expected] of [['',orange],['&variant=1',blue]]){
+  const html=await(await realFetch(base+'/produit.html?handle=cover-selection'+query,{headers:{Accept:'text/html'}})).text();
+  const og=html.match(/<meta property="og:image" content="([^"]+)"/)[1].replace(/&amp;/g,'&');
+  assert.equal(og,expected+'&width=1200&height=630&pad_color=ffffff');
+ }
+});

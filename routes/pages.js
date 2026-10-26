@@ -98,7 +98,9 @@ router.get('/produit.html', async (req, res) => {
     // Aperçu de partage (WhatsApp, Messenger, Facebook…) : première image produit au format
     // 1200×630, posée sur un fond blanc (pad_color). Les packshots détourés sont des PNG
     // transparents, que plusieurs messageries affichent sur fond noir. Repli og-default.
-    const raw = product.firstImageRaw || '';
+    // Un lien partagé avec ?variant= montre la photo de CE coloris (même règle que la fiche).
+    const ldVariant = selectInitialVariant(product.variants, { requestedId: new URL(req.originalUrl, ORIGIN).searchParams.get('variant'), coverUrl: product.image || product.firstImageRaw, fallback: false });
+    const raw = String(ldVariant?.image || '').replace(/[?&]width=\d+&format=webp$/, '') || product.firstImageRaw || '';
     const image = raw ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200&height=630&pad_color=ffffff' : OG_DEFAULT;
     const url = ORIGIN + '/produit.html?handle=' + encodeURIComponent(handle);
 
@@ -107,7 +109,6 @@ router.get('/produit.html', async (req, res) => {
     // schéma, visible des crawlers sans exécution JS. Prix/dispo depuis le produit.
     // L'offre décrit la variante affichée (URL ?variant= ou photo de couverture),
     // comme le bloc SSR : même prix, même prix barré et même disponibilité.
-    const ldVariant = selectInitialVariant(product.variants, { requestedId: new URL(req.originalUrl, ORIGIN).searchParams.get('variant'), coverUrl: product.image || product.firstImageRaw, fallback: false });
     // Données structurées : la photo carrée d'origine (Google Shopping), pas l'aperçu 1200×630.
     const ld = productJsonLd(product, ldVariant, { url, image: raw ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200' : OG_DEFAULT, seller: 'Mikado Deco' });
     // Prix de l'aperçu de partage (og:type product), celui des données structurées.
