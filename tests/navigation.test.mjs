@@ -9,8 +9,8 @@ const url = path => new URL(path, 'https://www.mikadodeco.be');
 const labels = trail => trail.map(x => x.label);
 const product = { handle: 'chaise', name: 'Chaise <&>', brand: 'HAY' };
 
-test('all 150 collections have a role and acyclic, explicit parents; all 41 children keep their family', () => {
- assert.equal(Object.keys(nav.collections).length, 150);   // 170 − 10 entrées périmées (20 oct. 2026) − 10 collections de créateurs (22 oct. 2026 : un créateur = sa page)
+test('all 127 collections have a role and acyclic, explicit parents; all 41 children keep their family', () => {
+ assert.equal(Object.keys(nav.collections).length, 127);   // 170 − 10 entrées périmées (20 oct.) − 10 créateurs (22 oct.) − 23 collections vides dont 3 marques (26 oct. 2026, Cyril : « ça ne sert à rien »)
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'designer').length, 0);
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'family').length, 7);
  assert.equal(Object.values(nav.collections).filter(c => c.kind === 'subcategory').length, 41);

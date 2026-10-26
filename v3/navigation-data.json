@@ -70,14 +70,6 @@
       "kind": "range",
       "parent": "pols-potten"
     },
-    "serviettes-noel": {
-      "label": "Serviettes Noël",
-      "kind": "selection"
-    },
-    "serviettes-amour": {
-      "label": "Serviettes Amour",
-      "kind": "selection"
-    },
     "plisse": {
       "label": "Plissé",
       "kind": "range",
@@ -343,11 +335,6 @@
       "kind": "subcategory",
       "parent": "accessoires"
     },
-    "serax-marie": {
-      "label": "Serax — Marie",
-      "kind": "range",
-      "parent": "serax"
-    },
     "serax-metal-sculptures": {
       "label": "Serax — Metal Sculptures",
       "kind": "range",
@@ -355,21 +342,6 @@
     },
     "serax-la-mere": {
       "label": "Serax — La Mère",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-urban-jungle": {
-      "label": "Serax — Urban Jungle",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-perfect-imperfection": {
-      "label": "Serax — Perfect Imperfection",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-lighting": {
-      "label": "Serax — Lighting",
       "kind": "range",
       "parent": "serax"
     },
@@ -388,11 +360,6 @@
       "kind": "range",
       "parent": "serax"
     },
-    "serax-earth": {
-      "label": "Serax — Earth",
-      "kind": "range",
-      "parent": "serax"
-    },
     "serax-carte-blanche": {
       "label": "Serax — Carte Blanche",
       "kind": "range",
@@ -408,18 +375,8 @@
       "kind": "range",
       "parent": "serax"
     },
-    "serax-santiago-de-borja": {
-      "label": "Serax — Santiago de Borja",
-      "kind": "range",
-      "parent": "serax"
-    },
     "serax-bazaar": {
       "label": "Serax — Bazaar",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-construct": {
-      "label": "Serax — Construct",
       "kind": "range",
       "parent": "serax"
     },
@@ -443,16 +400,6 @@
       "kind": "range",
       "parent": "serax"
     },
-    "serax-wind-fire": {
-      "label": "Serax — Wind & Fire",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-serving-spring": {
-      "label": "Serax — Serving Spring",
-      "kind": "range",
-      "parent": "serax"
-    },
     "serax-terres-de-reves": {
       "label": "Serax — Terres de Rêves",
       "kind": "range",
@@ -460,21 +407,6 @@
     },
     "serax-dune": {
       "label": "Serax — Dune",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-rudolph": {
-      "label": "Serax — Rudolph",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-august": {
-      "label": "Serax — August",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-sofisticato": {
-      "label": "Serax — Sofisticato",
       "kind": "range",
       "parent": "serax"
     },
@@ -488,38 +420,8 @@
       "kind": "range",
       "parent": "serax"
     },
-    "serax-fck": {
-      "label": "Serax — FCK",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-zuma": {
-      "label": "Serax — Zuma",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-the-josephine-collection": {
-      "label": "Serax — The Josephine Collection",
-      "kind": "range",
-      "parent": "serax"
-    },
     "serax-pottery": {
       "label": "Serax — Pottery",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-out-of-lines": {
-      "label": "Serax — Out of Lines",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-passe-partout": {
-      "label": "Serax — Passe-partout",
-      "kind": "range",
-      "parent": "serax"
-    },
-    "serax-silhouette": {
-      "label": "Serax — Silhouette",
       "kind": "range",
       "parent": "serax"
     },

@@ -45,7 +45,8 @@ test('every promotions API page carries the exact discounted finish, preserving 
 });
 test('SSR card and destination PDP agree before JavaScript; the ordinary PDP keeps its normal cover',async()=>{
  const html=await(await realFetch(base+'/collections/promotions',{headers:{Accept:'text/html'}})).text();
- const href=html.match(/class="pcard__media" href="([^"]+)"/)[1].replaceAll('&amp;','&');
+ // La page Promotions est mélangée (ordre du jour, #261) : on prend la carte de promo-1, pas la première de la grille.
+ const href=html.match(/class="pcard__media" href="(\/produit\.html\?handle=promo-1&[^"]+)"/)[1].replaceAll('&amp;','&');
  assert.match(href,/variant=12/);assert.match(html,/Bleu acapulco/);assert.match(html,/−50%/);
  const pdp=await(await realFetch(base+href,{headers:{Accept:'text/html'}})).text();
  assert.match(pdp,/<img class="pdp__main" data-main src="[^"]*promo\.jpg/);
