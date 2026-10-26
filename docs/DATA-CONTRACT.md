@@ -43,6 +43,26 @@ Les 4 pages légales (sources `docs/legal/*.md` + fiches `data/legal-pages.json`
 
 `data/redirections.json` est **produit par l'importateur** (`mikado-importer`, `exports/site/redirections.json`, schéma `mikado.redirections@2`) et copié tel quel dans le dépôt : le site ne l'édite jamais à la main et n'en déduit rien (le champ `status` décide : 301 avec `to` = handle publié ou chemin `/collections/…`, 410 sans destination). Chaque livraison remplace le fichier. Règle d'application, posée par l'importateur : une fiche publiée passe toujours avant la table.
 
+## Identifiants des fiches (handles) — décision de Cyril du 26/10/2026
+
+Le handle Shopify forme l'adresse de la fiche sur le site. Il suit **une seule règle, pour toutes les fiches** : celles qui existent (migration suivie dans l'issue #284) et chaque fiche créée ensuite. Le titre affiché (« Chaise Rey ») n'est pas concerné.
+
+**Forme** : `<marque>-<type>-<modèle>`, plus une précision seulement si deux fiches se confondraient.
+
+| Partie | Règle | Exemples |
+|---|---|---|
+| Marque | Le slug de marque du site (minuscules, accents retirés, `ø`→`o`, `æ`→`ae`, tout autre caractère → un tiret), celui de `/collections/<marque>`. | `hay`, `vitra`, `ichendorf-milano`, `fermob` |
+| Type | Le type de produit Shopify, en français et au singulier. | `chaise`, `tabouret`, `vase`, `lampe-de-table`, `table-basse` |
+| Modèle | Le nom du modèle tel que la marque le nomme, sans répéter la marque ni le type, sans doublon de langue (« Rey », pas « Rey Chair »). Le nom du créateur seulement s'il fait partie du nom commercial. | `rey`, `eames-elephant`, `pallas`, `animal-farm` |
+| Précision | Uniquement pour départager deux fiches : dimension, version ou lot. Jamais `-1`, `-2`, `-copie`, jamais la couleur ou la finition (ce sont des variantes). | `-77-cm`, `-outdoor`, `-lot-de-6` |
+
+Résultat : `hay-chaise-rey`, `vitra-tabouret-eames-elephant`, `iittala-vase-pallas`, `ichendorf-milano-pichet-animal-farm`, `fermob-table-bistro-77-cm`.
+
+- **Caractères** : `a`–`z`, `0`–`9` et un tiret simple entre les mots (`^[a-z0-9]+(-[a-z0-9]+)*$`), 70 caractères au plus.
+- **Exceptions** : la carte cadeau garde `carte-cadeau` (Mikado Deco n'est pas une marque). Un produit sans nom de modèle prend son trait distinctif (`hay-coussin-carre-50-cm`).
+- **Stabilité** : un handle conforme ne change plus. Tout changement de handle, même ponctuel, ajoute **le même jour** la ligne ancien → nouveau (301) à la table des redirections, et il est annoncé avant sur le canal GitHub (label `importateur`) pour que le site mette à jour ses fichiers de curation (`data/*.json`) le même jour.
+- **Contrôle** : l'importateur refuse de créer ou de renommer une fiche dont le handle ne respecte pas la forme ci-dessus ou ne commence pas par le slug de sa marque. Le site ne renomme jamais rien : il sert le handle tel quel.
+
 ## Délais de livraison hors stock (ADR 0015)
 
 `data/lead-times.json` est une **règle de présentation du site** : délai de la marque vers Mikado (`days` ou `weeks`, `[min, max]`) par marque, affinable par famille ou sous-catégorie, plus la marge Mikado ; le site en déduit le délai affiché. Modifiée par PR sur les valeurs de Cyril. Côté Shopify, **l'importateur** peut poser une exception par fiche dans `custom.lead_time` (texte libre en français : « 6 semaines », « 2-3 semaines », « 10 jours », « sur demande »), que le site lit en priorité ; le tag `delai-long` reste « délai sur demande ». Un flux fournisseur ou l'historique des bons de commande alimentera ces mêmes champs. Le métachamp `custom.lead_time` d'une fiche (écrit par l'importateur) porte le **délai de la marque vers Mikado** en texte libre (« 6-10 semaines », « 10 jours ouvrés ») ; le site y ajoute 2–3 jours ouvrés de réception et d'envoi (`margin.metafieldDays`), le délai de la marque comprenant déjà la livraison jusqu'à la boutique ; en semaines, seule la borne haute peut monter d'une semaine (« 6-10 semaines » → « 6–11 semaines ») ; « sur demande » est affiché tel quel (décision de Cyril du 14/10/2026).
