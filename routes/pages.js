@@ -95,24 +95,27 @@ router.get('/produit.html', async (req, res) => {
       `${name}${brand ? ' — ' + brand : ''}. `
       + (designer ? `Dessiné par ${designer}. ` : '')
       + 'Pièce design à voir en boutique à Uccle, livraison en Belgique.');
-    // Première image produit NON redimensionnée (firstImageRaw), en absolu, en
-    // ajoutant &width=1200 → JPEG (pas de format=webp : meilleur support og:image
-    // par les scrapers sociaux). images[] est désormais en webp pour la galerie,
-    // donc on ne le réutilise plus ici. Repli og-default.
-    const raw = product.firstImageRaw || '';
-    const image = raw ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200' : OG_DEFAULT;
+    // Aperçu de partage (WhatsApp, Messenger, Facebook…) : première image produit au format
+    // 1200×630, posée sur un fond blanc (pad_color). Les packshots détourés sont des PNG
+    // transparents, que plusieurs messageries affichent sur fond noir. Repli og-default.
+    // Un lien partagé avec ?variant= montre la photo de CE coloris (même règle que la fiche).
+    const ldVariant = selectInitialVariant(product.variants, { requestedId: new URL(req.originalUrl, ORIGIN).searchParams.get('variant'), coverUrl: product.image || product.firstImageRaw, fallback: false });
+    const raw = String(ldVariant?.image || '').replace(/[?&]width=\d+&format=webp$/, '') || product.firstImageRaw || '';
+    const image = raw ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200&height=630&pad_color=ffffff' : OG_DEFAULT;
     const url = ORIGIN + '/produit.html?handle=' + encodeURIComponent(handle);
 
-    const html = renderPage('produit.html', { title, description, image, url });
+    const html = renderPage('produit.html', { title, description, image, url, ogType: 'product', imageSize: raw ? [1200, 630] : null, imageAlt: brand ? `${name} — ${brand}` : name });
     // SEO · Product JSON-LD en SSR (remplace l'IIFE JS de produit.html) — un seul
     // schéma, visible des crawlers sans exécution JS. Prix/dispo depuis le produit.
     // L'offre décrit la variante affichée (URL ?variant= ou photo de couverture),
     // comme le bloc SSR : même prix, même prix barré et même disponibilité.
-    const ldVariant = selectInitialVariant(product.variants, { requestedId: new URL(req.originalUrl, ORIGIN).searchParams.get('variant'), coverUrl: product.image || product.firstImageRaw, fallback: false });
-    const ld = productJsonLd(product, ldVariant, { url, image, seller: 'Mikado Deco' });
+    // Données structurées : la photo carrée d'origine (Google Shopping), pas l'aperçu 1200×630.
+    const ld = productJsonLd(product, ldVariant, { url, image: raw ? raw + (raw.includes('?') ? '&' : '?') + 'width=1200' : OG_DEFAULT, seller: 'Mikado Deco' });
+    // Prix de l'aperçu de partage (og:type product), celui des données structurées.
+    const sharePrice = ld.offers.price ? `<meta property="product:price:amount" content="${ogEscape(ld.offers.price)}" />\n<meta property="product:price:currency" content="EUR" />\n` : '';
     const ldTag = `<script type="application/ld+json">` + JSON.stringify(ld).replace(/</g, '\\u003c') + `</script>`
       ;
-    let out = html.replace('</head>', ldTag + '\n</head>');
+    let out = html.replace('</head>', () => sharePrice + ldTag + '\n</head>');
     out = injectNavigation(out, nav.navigation.productTrail(product, new URL(req.originalUrl, ORIGIN), nav.navigationRules), url, nav.navigation.sourceSelection(new URL(req.originalUrl, ORIGIN)));
     // SSR lot 1 · contenu produit (nom/prix/dispo) à la place du squelette → crawlable sans JS.
     const sourceURL = new URL(req.originalUrl, ORIGIN);

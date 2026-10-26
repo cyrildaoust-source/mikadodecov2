@@ -38,3 +38,25 @@ test('SSR starts on the same cover variant, explicit and invalid URLs follow the
   assert.match(pageScript,/import "\/product-variant.js"/);
  }
 });
+test('aperçu de partage : type produit, image 1200×630 sur fond blanc, prix ; photo carrée gardée pour les données structurées',async()=>{
+ const html=await(await realFetch(base+'/produit.html?handle=cover-selection',{headers:{Accept:'text/html'}})).text();
+ assert.match(html,/<meta property="og:type" content="product" \/>/);
+ const og=html.match(/<meta property="og:image" content="([^"]+)"/)[1];
+ assert.match(og,/width=1200&amp;height=630&amp;pad_color=ffffff/);
+ assert.match(html,/<meta property="og:image:width" content="1200" \/>\s+<meta property="og:image:height" content="630" \/>\s+<meta property="og:image:alt" content="[^"]+" \/>/);
+ assert.match(html,/<meta property="product:price:amount" content="189" \/>\s*<meta property="product:price:currency" content="EUR" \/>/);
+ const ld=JSON.parse(html.match(/<script type="application\/ld\+json">(\{"@context":"https:\/\/schema\.org","@type":"Product"[\s\S]*?)<\/script>/)[1]);
+ assert.doesNotMatch(ld.image,/pad_color/);
+});
+test('barre d’adresse : la fiche retire ?from= et ?returnTo= et garde le fil d’arrivée dans l’historique',()=>{
+ assert.match(pageScript,/history\.replaceState\(\{ \.\.\.history\.state, mikadoArrival:/);
+ assert.match(pageScript,/for \(const key of \["handle", "id", "variant"\]\)/);
+ assert.match(pageScript,/paintBreadcrumb\(productTrail\(p, arrival, nav\), sourceSelection\(arrival\)\)/);
+});
+test('aperçu de partage : un lien avec ?variant= montre la photo de ce coloris, sinon la couverture',async()=>{
+ for(const [query,expected] of [['',orange],['&variant=1',blue]]){
+  const html=await(await realFetch(base+'/produit.html?handle=cover-selection'+query,{headers:{Accept:'text/html'}})).text();
+  const og=html.match(/<meta property="og:image" content="([^"]+)"/)[1].replace(/&amp;/g,'&');
+  assert.equal(og,expected+'&width=1200&height=630&pad_color=ffffff');
+ }
+});
