@@ -152,6 +152,7 @@
     },
     "ester-erik": {
       "name": "Ester & Erik",
+      "active": false,
       "status": "qualified",
       "kind": "local",
       "sourceImage": "https://www.ester-erik.dk/wp-content/uploads/2020/06/EsterogErik_AW22_59-1.jpg",
@@ -447,6 +448,7 @@
     },
     "tiptoe": {
       "name": "Tiptoe",
+      "active": false,
       "status": "qualified",
       "kind": "local",
       "sourceImage": "https://www.tiptoe.fr/cdn/shop/files/push-menu-mobile-rangements.jpg?v=1780047807",

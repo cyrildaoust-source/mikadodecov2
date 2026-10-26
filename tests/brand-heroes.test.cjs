@@ -13,10 +13,10 @@ const {
 const root = path.join(__dirname, '..');
 const activeHandles = [
   'tradition', 'addison-ross', 'alessi', 'anglepoise', 'artek', 'avolt', 'blomus',
-  'compagnie-de-provence', 'esteban', 'ester-erik',
+  'compagnie-de-provence', 'esteban',
   'fatboy', 'ferm-living', 'fermob', 'hay', 'hkliving', 'hoptimist', 'ichendorf-milano',
   'iittala', 'kay-bojesen', 'lind-dna', 'marimekko', 'moustache', 'muuto', 'pols-potten',
-  'relaxound', 'serax', 'softline', 'stoff-nagel', 'string-furniture', 'tiptoe', 'vitra',
+  'relaxound', 'serax', 'softline', 'stoff-nagel', 'string-furniture', 'vitra',
   'volta-mobiles',
 ];
 
@@ -28,7 +28,7 @@ test('brand hero manifest covers every active Shopify vendor without silently qu
   );
   assert.deepEqual(
     Object.entries(brandHeroManifest.heroes).filter(([, photo]) => photo.active === false).map(([handle]) => handle).sort(),
-    ['airborne', 'assouline', 'carl-hansen-son', 'pastoe'],   // marques hors du site (dormantes : logos et bannières conservés)
+    ['airborne', 'assouline', 'carl-hansen-son', 'ester-erik', 'pastoe', 'tiptoe'],   // marques hors du site (dormantes : logos et bannières conservés ; Ester & Erik et Tiptoe sans produit, 26/10/2026)
   );
   for (const [handle, photo] of Object.entries(brandHeroManifest.heroes)) {
     assert.match(handle, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
