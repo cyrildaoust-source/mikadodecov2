@@ -15,6 +15,19 @@ initShell({ active: "Mobilier", hero: false });
 const params = new URLSearchParams(location.search);
 const handle = params.get("handle");
 const id     = params.get("id");
+// Adresse d'arrivée (avec ?from= / ?returnTo= posés par les cartes) : seule source du fil
+// d'Ariane contextuel et du lien de retour. La barre d'adresse est ensuite nettoyée pour qu'un
+// lien copié ou partagé reste court : /produit.html?handle=… (et ?variant= d'un coloris).
+// L'adresse d'arrivée reste dans l'historique : un retour arrière sur la fiche retrouve son fil.
+const saved = history.state?.mikadoArrival;
+const restored = !params.has("from") && !params.has("returnTo") && typeof saved === "string"
+  && new URL(saved, location.origin).searchParams.get("handle") === params.get("handle");
+const arrival = new URL(restored ? saved : location.href, location.origin);
+{
+  const clean = new URL(location.pathname, location.origin);
+  for (const key of ["handle", "id", "variant"]) if (params.has(key)) clean.searchParams.set(key, params.get(key));
+  history.replaceState({ ...history.state, mikadoArrival: arrival.pathname + arrival.search }, "", clean.pathname + clean.search + location.hash);
+}
 const host = document.querySelector("[data-pdp]");
 // Fiche envoyée complète par le serveur : produit, lien marque et lien créateur
 // sont dans la page ; ni relecture du produit ni données de navigation à charger.
@@ -38,7 +51,7 @@ async function loadProduct() {
 
 async function buildContextualBreadcrumb(p) {
   const nav = await loadNavigation();
-  paintBreadcrumb(productTrail(p, new URL(location.href), nav), sourceSelection(new URL(location.href)));
+  paintBreadcrumb(productTrail(p, arrival, nav), sourceSelection(arrival));
 }
 
 Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designers: [] } : fetch("/designers-data.json", { cache: "force-cache" }).then((r) => (r.ok ? r.json() : { designers: [] })).catch(() => ({ designers: [] }))]).then(([p, navigation, designersData]) => {
@@ -49,12 +62,12 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
 
   // Brand collection URL — curated /collections/<handle> when known (joined
   // via mega-menu-brands.json), else the ?brand= filter fallback.
-  const brandHref = typeof p.brandHref === "string" ? p.brandHref : productBrandDestination(p, new URL(location.href), navigation);
+  const brandHref = typeof p.brandHref === "string" ? p.brandHref : productBrandDestination(p, arrival, navigation);
 
   // Fil d'Ariane CONTEXTUEL — reflète le chemin réel d'arrivée (encodé en
   // ?from=<type:valeur> par productCard). Repli neutre si from absent/inconnu
   // — on n'invente jamais la marque.
-  if (!served) buildContextualBreadcrumb(p);
+  if (!served || restored) buildContextualBreadcrumb(p);
 
   // Fiche : même balisage que le serveur (pdp-view.mjs). Déjà présente dans la
   // page envoyée par le serveur : on la garde et on branche seulement les interactions.
@@ -214,7 +227,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     if (v?.id) {
       const url = new URL(location.href);
       url.searchParams.set('variant', String(v.id).split('/').pop());
-      history.replaceState(null, '', url.pathname + url.search);
+      history.replaceState(history.state, '', url.pathname + url.search);
     }
     if (!v) return;
     current = v;
