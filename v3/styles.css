@@ -1122,17 +1122,19 @@ body.vard-locked { overflow: hidden; }
 .vard__preview-img { width: 100%; height: clamp(150px, 22vh, 200px); object-fit: contain; background: #fff; }
 .vard__preview-name { font-family: var(--serif); font-weight: 600; font-size: 20px; margin-top: 8px; color: var(--ink-deep); }
 .vard__preview-avail { display: flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--warn); margin-top: 4px; }
-.vard__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; padding: 0; list-style: none; }
+/* minmax(0, 1fr) : colonnes toujours égales, même quand un nom de coloris est long (« Rouge foncé/nero »). */
+.vard__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; padding: 0; list-style: none; }
 .vard__opt { display: flex; flex-direction: column; gap: 5px; padding: 0; background: none; border: 1px solid transparent; cursor: pointer; text-align: center; min-height: 44px; }
 .vard__opt:hover { border-color: var(--line-ink); }                 /* survol = filet encre discret */
 .vard__opt[aria-selected="true"] { border-color: var(--ink); }  /* sélection = cadre ENCRE net, 1 seul filet (DA : bleu réservé au CTA) */
 .vard__opt-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #fff; }   /* fond blanc comme la photo principale : packshot détouré et photo fournisseur identiques (Cyril, 25/10) */
-.vard__opt-name { font-size: var(--fs-meta); color: var(--ink-deep); line-height: 1.2; }
-.vard__opt-avail { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: var(--warn); }
+.vard__opt-name { font-size: var(--fs-meta); color: var(--ink-deep); line-height: 1.2; overflow-wrap: anywhere; }
+.vard__opt-avail { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: var(--warn); white-space: nowrap; }
 .vard__opt[aria-disabled="true"] .vard__opt-img { opacity: .4; }
 .vard__opt[aria-disabled="true"] .vard__opt-name { opacity: .5; text-decoration: line-through; }
 @media (prefers-reduced-motion: reduce) { .vard__backdrop, .vard__panel { transition: opacity .01s, visibility 0s; } }
-@media (max-width: 760px) { .vard__panel { width: 100vw; } }
+/* Téléphone : deux grandes vignettes par ligne (Cyril, 27/10). */
+@media (max-width: 760px) { .vard__panel { width: 100vw; } .vard__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; } }
 
 /* ---------- quantity drawer (PDP) ----------
    Slide from the RIGHT (mirror .vard/.cartd). Liste 1→10 + dispo par quantité.
