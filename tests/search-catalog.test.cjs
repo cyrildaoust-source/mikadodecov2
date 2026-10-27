@@ -73,3 +73,8 @@ test('les erreurs de pagination et de variantes restent des erreurs, jamais une 
   await assert.rejects(readSearchCatalog(async()=>({edges:[],pageInfo:{hasNextPage:true,endCursor:'same'}}),x=>x),/cursor/);
   await assert.rejects(readSearchCatalog(async()=>null,x=>x),/unavailable/);
 });
+test('une référence tapée collée retrouve le nom écrit en deux mots (« EA217 » → « Soft Pad EA 217 »)',()=>{
+  const p=product({name:'Chaise de bureau Soft Pad EA 217',type:'chaise de bureau'});
+  for(const q of ['EA217','ea 217','EA 217','soft pad ea217'])assert.equal(searchCatalog([p],{q}).total,1,q);
+  assert.equal(searchCatalog([p],{q:'EA219'}).total,0);
+});
