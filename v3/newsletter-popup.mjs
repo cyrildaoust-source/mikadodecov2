@@ -17,7 +17,9 @@ export function popupAllowed({ path = "/", search = "", memory = null, config = 
   if (webdriver) return { allowed: false, reason: "navigateur automatisé" };
   if (config.enabled === false) return { allowed: false, reason: "désactivée" };
   const params = new URLSearchParams(search);
-  if (params.get("utm_medium") === "email-bienvenue") return { allowed: false, reason: "arrivée depuis le mail de bienvenue", remember: { subscribed: true } };
+  // Arrivée depuis un e-mail (mail de bienvenue, newsletter Shopify Email : utm_medium=email…) :
+  // le visiteur est déjà abonné, la popup ne lui est plus jamais proposée.
+  if (/^email/i.test(params.get("utm_medium") || "")) return { allowed: false, reason: "arrivée depuis un e-mail", remember: { subscribed: true } };
   if ((config.excludedPaths || []).includes(path) || (config.excludedPrefixes || []).some((p) => path.startsWith(p))) return { allowed: false, reason: "page exclue" };
   if (memory?.subscribed) return { allowed: false, reason: "déjà inscrit" };
   if (memory?.closedAt && now - memory.closedAt < (config.closedDays ?? 30) * DAY) return { allowed: false, reason: "fermée récemment" };

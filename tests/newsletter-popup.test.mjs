@@ -36,6 +36,10 @@ test('le souvenir : 30 jours après une fermeture, pour toujours après une insc
   const fromMail = popupAllowed({ path: '/', search: '?utm_source=shopify&utm_medium=email-bienvenue', config, now });
   assert.equal(fromMail.allowed, false);
   assert.deepEqual(fromMail.remember, { subscribed: true });
+  const fromNewsletter = popupAllowed({ path: '/collections/idees-cadeaux', search: '?utm_source=shopify_email&utm_medium=email&utm_campaign=noel', config, now });
+  assert.equal(fromNewsletter.allowed, false, 'un clic depuis la newsletter ne propose pas de s’inscrire');
+  assert.deepEqual(fromNewsletter.remember, { subscribed: true });
+  assert.equal(popupAllowed({ path: '/', search: '?utm_source=instagram&utm_medium=social', config, now }).allowed, true);
   assert.equal(popupAllowed({ path: '/selection.html', config, now, memory: { subscribed: true }, force: true }).allowed, true, '?newsletter=1 force l’ouverture pour vérifier');
 });
 
