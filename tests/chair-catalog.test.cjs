@@ -159,3 +159,15 @@ test('collection Shopify d’un créateur qui a sa page : redirigée vers la pag
   assert.equal(designerPageFor('hans-wegner'), '/produits.html?designer=hans-j-wegner');
   assert.equal(designerPageFor('pierre-paulin'), '/designers.html');
 });
+test('une marque sans collection Shopify a sa page : ses fiches par le fournisseur (Hartô, 30 octobre 2026)',()=>{
+  const {filterScope,acceptProduct,memberSources,categoryScope}=require('../lib/filter-scopes');
+  const {scopeProducts}=require('../lib/catalog-index');
+  const scope=filterScope('harto');
+  assert.equal(scope.vendor,'harto');assert.equal(scope.basePath,'/collections/harto');
+  const card=(id,brand)=>({card:{id,brand,tags:[]}});
+  const index={products:[card('1','Hartô'),card('2','HAY'),card('3','Hartô')],members:{}};
+  assert.deepEqual(scopeProducts(index,scope,{acceptProduct,memberSources,categoryScope}).map(p=>p.card.id),['1','3']);
+  // Avec sa collection, la marque garde la liste et l'ordre de Shopify.
+  const hay=filterScope('hay');
+  assert.deepEqual(scopeProducts({...index,members:{hay:['2']}},hay,{acceptProduct,memberSources,categoryScope}).map(p=>p.card.id),['2']);
+});

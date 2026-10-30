@@ -14,10 +14,10 @@ const root = path.join(__dirname, '..');
 const activeHandles = [
   'tradition', 'addison-ross', 'alessi', 'anglepoise', 'artek', 'avolt', 'blomus',
   'compagnie-de-provence', 'esteban',
-  'fatboy', 'ferm-living', 'fermob', 'hay', 'hkliving', 'hoptimist', 'ichendorf-milano',
-  'iittala', 'kay-bojesen', 'lind-dna', 'marimekko', 'moustache', 'muuto', 'pols-potten',
-  'relaxound', 'serax', 'softline', 'stoff-nagel', 'string-furniture', 'vitra',
-  'volta-mobiles',
+  'fatboy', 'ferm-living', 'fermob', 'harto', 'hay', 'hkliving', 'hoptimist', 'ichendorf-milano',
+  'iittala', 'kay-bojesen', 'lind-dna', 'linie-design', 'marimekko', 'missoni', 'moustache', 'muuto', 'normann-copenhagen', 'pols-potten',
+  'relaxound', 'serax', 'softline', 'stoff-nagel', 'string-furniture', 'studio-about', 'vitra',
+  'volta-mobiles', 'zone-denmark',
 ];
 
 test('brand hero manifest covers every active Shopify vendor without silently qualifying candidates', () => {
