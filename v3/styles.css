@@ -1630,7 +1630,7 @@ body.pdplb-locked { overflow: hidden; }
 .catalog-filters__clear { margin-left: 10px; text-underline-offset: 4px; }
 .catalog-filters__status { min-height: 20px; margin: 12px 0 20px; color: var(--muted); font-family: var(--sans-product); font-size: var(--fs-small); }
 .catalog-filters__retry { border: 0; padding: 0; background: none; color: var(--ink); font: inherit; text-decoration: underline; cursor: pointer; }
-[data-chair-catalog] [data-grid][aria-busy=true] { opacity: .55; }
+[data-chair-catalog] [data-grid][aria-busy=true], .search-page__results [data-grid][aria-busy=true] { opacity: .55; }
 .catalog-filters__empty { grid-column: 1 / -1; padding: 45px 0 60px; text-align: center; }
 .catalog-filters__empty .serif { font-size: var(--fs-h2); }
 .catalog-filters__empty .btn { margin-top: 15px; }
