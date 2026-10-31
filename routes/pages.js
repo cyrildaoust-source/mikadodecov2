@@ -233,6 +233,8 @@ router.get('/collections/:handle', async (req, res) => {
     const pageText = campaign || (Object.hasOwn(COLLECTION_TEXTS, handle) ? COLLECTION_TEXTS[handle] : null);
     const family = Object.hasOwn(families, handle) ? families[handle] : Object.hasOwn(richFamilies, handle) ? richFamilies[handle] : null;
     const col = family ? { name: family.title, description: family.description } : (await getCollections()).find(c => c.handle === handle) || campaign;
+    // Marque sans collection Shopify, index indisponible : le catalogue filtré sur la marque, le temps qu'il revienne.
+    if (!col && filterScope(handle)?.vendor) return res.set('Cache-Control', 'no-store').redirect(302, '/produits.html?brand=' + encodeURIComponent(handle));
     // Miss stable (handle hors catalogue, ex. /collections/all) : repli cachable.
     if (!col) return send404Shell(res, 'produits.html');
 

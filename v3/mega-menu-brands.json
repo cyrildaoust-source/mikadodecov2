@@ -1,5 +1,5 @@
 {
-  "_note": "Registre unique des marques du site. Chaque entrée correspond à une collection Shopify automatique « Fournisseur = nom », publiée sur le canal du site ; href = /collections/<slug du nom>. Une marque absente d’ici retombe sur le catalogue filtré (/produits.html?brand=). `collections` : gammes mises en avant (non affichées depuis la V2.2).",
+  "_note": "Registre unique des marques du site. Chaque entrée a sa page /collections/<slug du nom> : produits de la collection Shopify automatique « Fournisseur = nom » si elle existe, sinon les fiches dont le fournisseur porte ce nom (30 octobre 2026 : Hartô, Missoni… n'avaient pas de collection). Une marque absente d’ici retombe sur le catalogue filtré (/produits.html?brand=). `collections` : gammes mises en avant (non affichées depuis la V2.2).",
   "brands": [
     {
       "name": "&Tradition",
@@ -169,6 +169,11 @@
       ]
     },
     {
+      "name": "Hartô",
+      "href": "/collections/harto",
+      "collections": []
+    },
+    {
       "name": "HAY",
       "href": "/collections/hay",
       "collections": [
@@ -255,8 +260,18 @@
       "collections": []
     },
     {
+      "name": "Linie Design",
+      "href": "/collections/linie-design",
+      "collections": []
+    },
+    {
       "name": "Marimekko",
       "href": "/collections/marimekko",
+      "collections": []
+    },
+    {
+      "name": "Missoni",
+      "href": "/collections/missoni",
       "collections": []
     },
     {
@@ -289,6 +304,11 @@
           "tag": "linear"
         }
       ]
+    },
+    {
+      "name": "Normann Copenhagen",
+      "href": "/collections/normann-copenhagen",
+      "collections": []
     },
     {
       "name": "Pols Potten",
@@ -360,6 +380,11 @@
       "collections": []
     },
     {
+      "name": "Studio About",
+      "href": "/collections/studio-about",
+      "collections": []
+    },
+    {
       "name": "Vitra",
       "href": "/collections/vitra",
       "collections": [
@@ -388,6 +413,11 @@
     {
       "name": "Volta Mobiles",
       "href": "/collections/volta-mobiles",
+      "collections": []
+    },
+    {
+      "name": "Zone Denmark",
+      "href": "/collections/zone-denmark",
       "collections": []
     }
   ],
