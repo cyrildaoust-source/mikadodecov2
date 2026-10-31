@@ -171,3 +171,23 @@ test('une marque sans collection Shopify a sa page : ses fiches par le fournisse
   const hay=filterScope('hay');
   assert.deepEqual(scopeProducts({...index,members:{hay:['2']}},hay,{acceptProduct,memberSources,categoryScope}).map(p=>p.card.id),['2']);
 });
+test('recherche d’un seul mot de couleur ou de matière : des résultats, jamais « Précisez » (31 octobre 2026)',async()=>{
+  const html=await (await realFetch(base+'/produits.html?q=noir')).text();
+  const data=seed(html);
+  assert.equal(data.needsCategory,false);assert.ok(data.total>0);
+  assert.doesNotMatch(html,/Précisez votre recherche/);
+  // Tri appliqué dès le choix : le bouton « Trier » n’existe que sans JavaScript.
+  assert.match(html,/<noscript><button class="btn btn--outline" type="submit">Trier<\/button><\/noscript>/);
+});
+test('recherche rapide : les fiches de l’index, dans l’ordre de Shopify, sans modifier l’index',()=>{
+  const {joinIndexHits}=require('../lib/services/search');
+  const {buildFilterProduct}=require('../lib/catalog-filters');
+  const {mapProduct}=require('../lib/shopify/product-mapper');
+  const product=id=>{const n=node(id);return buildFilterProduct(n,mapProduct(n));};
+  const index={products:[product(1),product(2),product(3)],members:{}};
+  const hits=[{id:'gid://shopify/Product/3',description:'Trois.'},{id:'gid://shopify/Product/9'},{id:'gid://shopify/Product/1',description:'Un.'}];
+  const found=joinIndexHits(index,hits);
+  assert.deepEqual(found.map(p=>p.card.id),['gid://shopify/Product/3','gid://shopify/Product/1']);
+  assert.equal(found[0].card.description,'Trois.');assert.ok(found[0].search.words.includes('chaise'));
+  assert.equal(index.products[2].search,undefined);assert.equal(joinIndexHits(index,hits)[0],found[0]);
+});
