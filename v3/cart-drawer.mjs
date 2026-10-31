@@ -78,10 +78,10 @@ export function bindCartDrawer() {
     foot.innerHTML = `
       <div class="cartd__row"><span>Sous-total</span><span>${euro(subtotal)}</span></div>
       ${discounts.map((d) => `<div class="cartd__row cartd__row--discount"><span>Remise · ${escapeHtml(d.title)}</span><span>−${euro(d.amount)}</span></div>`).join("")}
-      <div class="cartd__row cartd__row--total"><span>Total</span><span>${euro(total)}</span></div>
+      <div class="cartd__row cartd__row--total"><span>Total hors livraison</span><span>${euro(total)}</span></div>
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
       <p class="cartd__note">${discount > 0 ? "Remise appliquée automatiquement · " : ""}Livraison en Belgique : 50 €</p>
-      <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Ma sélection →</a>
+      <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Finaliser ma sélection</a>
       <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
   }
 
