@@ -25,7 +25,7 @@ export function searchContent(data,renderCard) {
     <div data-breadcrumb></div>
     <div class="pagehead"><h1>Votre recherche.</h1><p>Un meuble, une finition, des dimensions, un budget.</p></div>
     <form class="search-page__form" action="/produits.html" method="get" role="search">
-      <div class="field"><label for="catalog-search">Décrivez ce que vous cherchez</label><input id="catalog-search" type="search" name="q" value="${esc(state.q)}" maxlength="200" required placeholder="Table en chêne pour 6 personnes, 2 000 €" /></div>
+      <div class="field"><label for="catalog-search">Décrivez ce que vous cherchez</label><input id="catalog-search" type="search" name="q" value="${esc(state.q)}" maxlength="200" required placeholder="Table en chêne pour 6 personnes, 2&nbsp;000&nbsp;€" /></div>
       <button class="btn btn--outline" type="submit">Rechercher</button>
     </form>
     ${searchCriteria(data)}${searchNotes(data)}
