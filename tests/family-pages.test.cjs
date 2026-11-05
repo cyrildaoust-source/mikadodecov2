@@ -544,7 +544,7 @@ test('server breadcrumbs and JSON-LD share the full hierarchy, and product links
   const pdp = await page(link);
   const productLd = JSON.parse(pdp.html.match(/id="navigation-breadcrumb">(.*?)<\/script>/s)[1]);
   assert.deepEqual(productLd.itemListElement.map(x => x.name).slice(0,-1), ld.itemListElement.map(x => x.name));
-  assert.match(pdp.html, /Retour à ma sélection/);
+  assert.match(pdp.html, /Retour à la liste/);
   assert.equal((pdp.html.match(/"@type":"BreadcrumbList"/g) || []).length, 1);
 });
 test('legacy cart identifiers resolve directly and preserve selected variant; unpublished products return 404', async () => {
