@@ -83,7 +83,7 @@ export function chromeHTML(active) {
               <div class="searchd__col">
                 <div class="sr__lab">Décrivez ce que vous cherchez</div>
                 <ul class="searchd__kw">
-                  <li><a href="/produits.html?q=chaise+noire+500%E2%82%AC">Une chaise noire, 500 €</a></li>
+                  <li><a href="/produits.html?q=chaise+noire+500%E2%82%AC">Une chaise noire, 500&nbsp;€</a></li>
                   <li><a href="/produits.html?q=table+pour+6+personnes">Une table pour 6 personnes</a></li>
                   <li><a href="/produits.html?q=canap%C3%A9+3+places">Un canapé 3 places</a></li>
                   <li><a href="/produits.html?q=vase">Vases</a></li>
