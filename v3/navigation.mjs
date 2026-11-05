@@ -176,7 +176,7 @@ export function breadcrumbData(trail, currentURL) {
 
 export function returnLinkHTML(source) {
   const href = selectionURL(source);
-  return href ? `<a class="navigation-return" href="${escape(href)}"><span aria-hidden="true">← </span>Retour à ma sélection</a>` : '';
+  return href ? `<a class="navigation-return" href="${escape(href)}"><span aria-hidden="true">← </span>Retour à la liste</a>` : '';
 }
 
 export function productBrandDestination(product, url, nav) {
