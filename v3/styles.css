@@ -1550,7 +1550,7 @@ body.pdplb-locked { overflow: hidden; }
 /* Voiles : en haut pour le menu transparent, en bas à gauche pour le texte. */
 .subhero--brand .subhero__scrim, .subhero--campaign .subhero__scrim { background: linear-gradient(180deg, rgba(var(--scrim),.4) 0%, transparent 24%), linear-gradient(0deg, rgba(var(--scrim),.6) 0%, rgba(var(--scrim),.18) 45%, transparent 70%), linear-gradient(90deg, rgba(var(--scrim),.45) 0%, rgba(var(--scrim),.1) 60%, transparent 85%); }
 @media (max-width: 700px) {
-  .subhero--brand, .subhero--campaign { height: 58vh; min-height: 400px; }
+  .subhero--brand, .subhero--campaign { height: 270px; min-height: 0; }
   .subhero--brand .subhero__scrim, .subhero--campaign .subhero__scrim { background: linear-gradient(180deg, rgba(var(--scrim),.4) 0%, transparent 24%), linear-gradient(0deg, rgba(var(--scrim),.72) 0%, rgba(var(--scrim),.3) 55%, rgba(var(--scrim),.12) 100%); }
 }
 
@@ -1812,6 +1812,15 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 /* Carte du rendez-vous : contrôle de zoom carré, comme le reste du site. */
 .locate__map .leaflet-bar, .locate__map .leaflet-bar a { border-radius: 0; }
 @media (max-width: 760px) { .catalog-filters__heading + .catalog-filters { border-bottom: 0; padding-bottom: 6px; } }
+/* Listes sur téléphone (maquette validée par Cyril le 5 novembre 2026) : en-tête photo compact, titre en bas sur
+   le voile comme les pages de marque, et la première rangée de produits visible dès l'arrivée. */
+@media (max-width: 700px) {
+  .subhero { height: 270px; min-height: 0; }
+  .subhero__in { justify-content: flex-end; padding-bottom: 18px; }
+  .subhero p { font-size: 15px; margin-top: 6px; line-height: 1.35; }
+  .catalog-filters__heading { margin-bottom: 12px; }
+  .catalog-filters__status:empty { min-height: 0; margin: 0 0 16px; }
+}
 /* Page Marques sur téléphone : cartes moins hautes, logos à taille constante (36 cartes = moins de défilement à vide). */
 @media (max-width: 760px) {
   .brandcard { min-height: 128px; padding: 16px; }
