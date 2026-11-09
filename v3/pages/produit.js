@@ -5,7 +5,8 @@ import { initShell } from "/shell.mjs";
 import { fetchProducts, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
 import { productCard } from "/product-grid.mjs";
 import { addToCart, cartQty } from "/cart.mjs";
-import { priceLabel, escapeHtml, slugify, stockLabel } from "/format.mjs";
+import { priceLabel, escapeHtml, slugify, stockLabel, euro } from "/format.mjs";
+import { siteData } from "/site-data.mjs";
 import { productTrail, sourceSelection, productBrandDestination, designerSlug } from "/navigation.mjs";
 import { pdpView, optionValue, variantForOption } from "/pdp-view.mjs";
 import "/product-variant.js";
@@ -151,6 +152,13 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
       if (data.discounts && data.discounts.length > 0) {
         promoEl.textContent = String(data.discounts[0].title).replace(/(\d) (?=€|%)/g, "$1\u00a0");
         promoEl.hidden = false;
+        // Offre du moment (Black Month, #site-data.offer) : prix remisé et économie sous le prix, seulement à
+        // partir du minimum d'achat (en dessous, le prix remisé serait faux au panier pour un achat isolé).
+        const offer = siteData("offer"), line = data.lines?.[0];
+        promoEl.classList.toggle("pdp__promo--bm", Boolean(offer && String(data.discounts[0].title).includes(offer.title)));
+        const unit = line?.qty ? Math.round(line.total / line.qty * 100) / 100 : null;
+        if (offer && String(data.discounts[0].title).includes(offer.title) && current.id === variantId && unit && unit < current.price && current.price >= offer.minimum)
+          priceEl.innerHTML = priceLabel({ price: unit, priceIsExact: true, compareAt: current.price }) + `<span class="price-save">${euro(Math.round((current.price - unit) * 100) / 100)} d’économie</span>`;
       } else {
         promoEl.hidden = true;
         promoEl.textContent = "";
