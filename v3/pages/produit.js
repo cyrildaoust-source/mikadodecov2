@@ -5,7 +5,8 @@ import { initShell } from "/shell.mjs";
 import { fetchProducts, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
 import { productCard } from "/product-grid.mjs";
 import { addToCart, cartQty } from "/cart.mjs";
-import { priceLabel, escapeHtml, slugify, stockLabel } from "/format.mjs";
+import { priceLabel, escapeHtml, slugify, stockLabel, euro } from "/format.mjs";
+import { siteData } from "/site-data.mjs";
 import { productTrail, sourceSelection, productBrandDestination, designerSlug } from "/navigation.mjs";
 import { pdpView, optionValue, variantForOption } from "/pdp-view.mjs";
 import "/product-variant.js";
@@ -149,8 +150,15 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
       const data = await r.json();
       if (mySeq !== promoSeq) return; // a newer probe started (variant change)
       if (data.discounts && data.discounts.length > 0) {
-        promoEl.textContent = data.discounts[0].title;
+        promoEl.textContent = String(data.discounts[0].title).replace(/(\d) (?=€|%)/g, "$1\u00a0");
         promoEl.hidden = false;
+        // Offre du moment (Black Month, #site-data.offer) : prix remisé et économie sous le prix, seulement à
+        // partir du minimum d'achat (en dessous, le prix remisé serait faux au panier pour un achat isolé).
+        const offer = siteData("offer"), line = data.lines?.[0];
+        promoEl.classList.toggle("pdp__promo--bm", Boolean(offer && String(data.discounts[0].title).includes(offer.title)));
+        const unit = line?.qty ? Math.round(line.total / line.qty * 100) / 100 : null;
+        if (offer && String(data.discounts[0].title).includes(offer.title) && current.id === variantId && unit && unit < current.price && current.price >= offer.minimum)
+          priceEl.innerHTML = priceLabel({ price: unit, priceIsExact: true, compareAt: current.price }) + `<span class="price-save">${euro(Math.round((current.price - unit) * 100) / 100)} d’économie</span>`;
       } else {
         promoEl.hidden = true;
         promoEl.textContent = "";
@@ -161,6 +169,11 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     }
   }
   probePromo(current.id);
+  // Une autre variante est choisie : l'offre de la précédente disparaît tout de suite (la nouvelle n'est confirmée
+  // qu'après le chargement de sa photo et la réponse de Shopify, plusieurs secondes : #300, chaise Moca).
+  const forgetPromo = () => { promoSeq++; if (promoEl) { promoEl.hidden = true; promoEl.textContent = ""; } };
+  // Choix abandonné (photo illisible) : l'offre de la variante restée affichée est vérifiée à nouveau.
+  const chooseVariant = (v) => { forgetPromo(); applyVariant(v).then((done) => { if (!done) probePromo(current.id); }); };
 
   // Précharge les AMBIANCES (à la bonne résolution via srcset) pour un changement
   // de photo instantané — différé pour ne pas gêner le LCP.
@@ -483,7 +496,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     vGrid.addEventListener("focusin", (e) => { const o = e.target.closest(".vard__opt"); if (o) vPreview(vItem(o)); });
     vGrid.addEventListener("click", (e) => {
       const o = e.target.closest(".vard__opt"); if (!o) return;
-      applyVariant(vItem(o)); closeVard();
+      chooseVariant(vItem(o)); closeVard();
     });
     vGrid.addEventListener("keydown", (e) => {
       const o = e.target.closest(".vard__opt"); if (!o) return;
@@ -495,7 +508,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
         case "Home":       e.preventDefault(); focusOpt(vOpts()[0]); break;
         case "End":        e.preventDefault(); { const a = vOpts(); focusOpt(a[a.length - 1]); } break;
         case "Enter":
-        case " ":          e.preventDefault(); applyVariant(vItem(o)); closeVard(); break;
+        case " ":          e.preventDefault(); chooseVariant(vItem(o)); closeVard(); break;
       }
     });
   }

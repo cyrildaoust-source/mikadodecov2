@@ -26,6 +26,10 @@ const { brandBanner, canRenderInitialGrid, contentPageTrail, injectNavigation, l
 const { absUrl, ogCache, ogDesc, ogEscape, renderWithOg, temporaryUnavailable } = require('../lib/render/og');
 const { activeDesignerSlugs, designerHeroSsr, injectBrandsIndex, injectDesignersIndex, injectHomeRails, injectNuancier, pdpReady, pdpServed, pdpSsrBlock, sendScopeCatalog, sendSearchPage } = require('../lib/render/pages');
 const { homeGiftsHTML } = require('../lib/render/gifts');
+const blackMonth = require('../lib/black-month');
+const { heroHTML: blackMonthHero, pageMainHTML: blackMonthMain, piecesHTML: blackMonthPieces } = require('../lib/render/black-month');
+const { getBlackMonth } = require('../lib/services/black-month');
+const cache = require('../lib/cache');
 const { collectionProductsFor, getActiveBrands, getCollectionProducts, getCollections, getHomeRails, getProductByHandle, getProductsPage } = require('../lib/services/catalog');
 
 // ─── SEO · 301 /products/<handle> → /produit.html?handle=<handle> ─────────────
@@ -150,9 +154,27 @@ router.get('/produit.html', async (req, res) => {
 // Nom + description + image via getCollections() (caché). Image par priorité :
 // bandeau de marque qualifié → image Shopify de la collection →
 // og-default. Collection inconnue → template générique inchangé (jamais 500).
+// Page de l'offre Black Month (lib/black-month.js) : bandeau, grandes pièces et grille de toutes les pièces remisées,
+// rendus par le serveur. Les pièces se lisent dans Shopify (15 min de cache) ; au premier appel, 12 s au plus.
+async function sendBlackMonthPage(req, res) {
+  await Promise.all([chromeReady, navigationReady]);
+  let offer = null;
+  try { offer = await Promise.race([getBlackMonth(), new Promise(resolve => setTimeout(resolve, 12_000, null))]); }
+  catch (error) { console.warn('[black-month]', error.message); }
+  const url = ORIGIN + blackMonth.PAGE;
+  let html = renderPage('produits.html', { title: pageTitle('Black Month : −20 % sur le mobilier en stock'), description: 'Du 10 au 28 novembre 2026, −20 % sur le mobilier de design en stock dès 200 € de mobilier, en boutique à Uccle et en ligne.', image: blackMonth.config.heroImage + '?width=1200', url });
+  html = html.replace('<body>', '<body class="has-topnav">')
+    .replace(/<script>[\s\S]*?<\/script>/g, '')
+    .replace(/<main id="contenu">[\s\S]*?<\/main>/, () => blackMonthMain(offer))
+    .replace(/<script type="module"(?: src="\/pages\/produits\.js")?>[\s\S]*?<\/script>/, '<script type="module" src="/black-month-page.js"></script>');
+  res.set('Content-Type', 'text/html; charset=utf-8');
+  if (!offer?.pieces?.length) res.set('Cache-Control', 'no-store'); else ogCache(res);
+  return res.send(injectChrome(html, 'produits.html'));
+}
 router.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
   if (INTERNAL_COLLECTION.test(handle)) return send404Shell(res, 'produits.html');
+  if (handle === blackMonth.config.collection && blackMonth.active()) return sendBlackMonthPage(req, res);
   const designerPage = designerPageFor(handle);
   if (designerPage) return res.set('Cache-Control', 'public, s-maxage=3600').redirect(301, designerPage);
   if (Object.hasOwn(BRAND_COLLECTION_ALIASES, handle)) {
@@ -505,6 +527,15 @@ router.get(/.*/, async (req, res, next) => {
       raw = injectHomeRails(raw, await getHomeRails());
     } catch (e) { console.warn('[home-rails]', e.message); }
     // Section « Idées cadeaux » pendant la saison de Noël (ADR 0016) ; le repère disparaît sinon.
+    // Black Month : le grand bandeau du haut et « Les grandes pièces » (pièces déjà lues ; sinon lues pour la visite suivante).
+    if (blackMonth.active()) {
+      const entry = cache.peek('black-month:offer');
+      const loading = !entry || entry.expiry < Date.now() ? getBlackMonth().catch(error => { console.warn('[black-month]', error.message); return null; }) : null;
+      // Première visite : la liste des pièces, attendue 2 s au plus (ensuite servie depuis le cache, 15 min).
+      const offer = entry?.data || (loading ? await Promise.race([loading, new Promise(resolve => setTimeout(resolve, 2000, null))]) : null);
+      const pieces = offer?.pieces || [];
+      raw = raw.replace(/<section class="home-hero">[\s\S]*?<\/section>/, () => blackMonthHero({ level: 'h1', cta: pieces.length ? `Voir les ${pieces.length} pièces en stock` : 'Voir le mobilier en stock' }) + blackMonthPieces(pieces));
+    }
     const gifts = homeGiftsHTML();
     raw = raw.replace('<!--NOEL-HOME-->', () => gifts);
     // Un seul grand bandeau sur l'accueil (Cyril, 20 octobre 2026) : pendant la saison, Idées cadeaux

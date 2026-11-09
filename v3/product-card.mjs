@@ -76,7 +76,9 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
   // « Livré avant Noël » (ADR 0016) : calculé par le serveur pour les deux états de la fiche ; la carte
   // choisit selon le stock réel de la finition affichée. Absent hors saison (p.christmas = null).
   const noel = p.christmas && (p.inStock ? p.christmas.inStock : p.christmas.onOrder);
-  const tag = badge + (noel ? `<span class="tag tag--noel">Livré avant Noël</span>` : "");
+  const tag = badge + (noel ? `<span class="tag tag--noel">Livré avant Noël</span>` : "")
+    // Offre du moment posée par le serveur (Black Month : « −20 % dès 200 € de mobilier » sous le minimum).
+    + (p.offerTag ? `<span class="tag tag--offer">${escapeHtml(p.offerTag)}</span>` : "");
   return `
     <div class="pcard">
       <a class="pcard__media" href="${href}" aria-label="${escapeHtml(p.name)}">
@@ -106,7 +108,7 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
         ${p.purchaseDisabled ? 'disabled' : ''}
         data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.handle || p.id)}"
         data-name="${escapeHtml(p.name)}" data-brand="${escapeHtml(p.brand || "")}"
-        data-price="${p.price || 0}" data-image="${escapeHtml(p.image || "")}">
+        data-price="${p.cartPrice ?? p.price ?? 0}" data-image="${escapeHtml(p.image || "")}">
         ${p.purchaseDisabled ? 'Indisponible' : selectionLabel(quantity)}
       </button>` : ''}
     </div>`;

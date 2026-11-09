@@ -38,6 +38,22 @@
     "endsAt": "2026-12-24T18:30:00+01:00",
     "deliveryBy": "2026-12-24",
     "safetyDays": 2,
-    "exchange": { "from": "2026-11-15", "until": "2027-01-31" }
+    "exchange": {
+      "from": "2026-11-15",
+      "until": "2027-01-31"
+    }
+  },
+  "blackMonth": {
+    "_note": "Black Month 2026 (demande de Cyril du 09/11, offre gérée par l'instance promotions). Le site n'affiche l'opération qu'entre startsAt et endsAt (extinction automatique le 29/11 au matin). Les pièces remisées ne sont jamais listées ici : le site interroge Shopify (panier) variante par variante, parmi les variantes en stock de la collection `collection`. Prix remisé affiché seulement à partir de `minimum` € (règle de l'instance promotions : en dessous, « −20 % dès 200 € de mobilier »). Le −10 % du 24 au 28/11 n'est pas annoncé ici. `MIKADO_CLOCK` (lib/christmas.js) avance l'horloge en Preview.",
+    "enabled": true,
+    "startsAt": "2026-11-09T00:00:00+01:00",
+    "endsAt": "2026-11-29T00:00:00+01:00",
+    "lastDay": "2026-11-28",
+    "collection": "black-month-mobilier",
+    "discountTitle": "Black Month",
+    "percent": 20,
+    "minimum": 200,
+    "heroImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9950813_PantonChairClassicGold_webres_v_fullbleed_1440x_e55220f7-49d2-4e8a-aa84-25658f082dc9.jpg",
+    "heroImageAlt": "Chaise Panton Classic Gold de Vitra, en stock chez Mikado Deco"
   }
 }
