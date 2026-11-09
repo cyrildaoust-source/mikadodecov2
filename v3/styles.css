@@ -1850,7 +1850,7 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
 .bm-btn { display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; background: #f4f0e8; color: #0b0b0b; font: 600 15px var(--sans-product); text-decoration: none; border: 1px solid #f4f0e8; border-radius: 0; }
 .bm-btn:hover { background: #fff; }
 .bm-hero__media { position: relative; min-height: 420px; overflow: hidden; }
-.bm-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+.bm-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 68%; }   /* tout le dossier de la Panton, reflets au-dessus */
 .bm-pieces { background: #0b0b0b; color: #f4f0e8; padding: 8px 0 56px; }
 .bm-page .bm-pieces { padding-top: 48px; }
 .bm-pieces__head { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 22px; border-top: 1px solid #2a2722; padding-top: 28px; }
@@ -1874,6 +1874,7 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
 .tag.tag--offer { background: #0b0b0b; color: #fff; }
 .bm-grid { scroll-margin-top: 110px; }
 .bm-terms .campaign-terms { max-width: 72ch; }
+.bm-more { margin-top: 32px; }
 @media (max-width: 900px) { .bm-pieces__row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
 @media (max-width: 700px) {
   .announce--bm i, .announce--bm em, .announce--bm .bm-sep { display: none; }

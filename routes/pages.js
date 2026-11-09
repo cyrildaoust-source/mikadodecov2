@@ -529,8 +529,10 @@ router.get(/.*/, async (req, res, next) => {
     // Section « Idées cadeaux » pendant la saison de Noël (ADR 0016) ; le repère disparaît sinon.
     // Black Month : le grand bandeau du haut et « Les grandes pièces » (pièces déjà lues ; sinon lues pour la visite suivante).
     if (blackMonth.active()) {
-      const entry = cache.peek('black-month:offer'), offer = entry?.data || null;
-      if (!entry || entry.expiry < Date.now()) getBlackMonth().catch(error => console.warn('[black-month]', error.message));
+      const entry = cache.peek('black-month:offer');
+      const loading = !entry || entry.expiry < Date.now() ? getBlackMonth().catch(error => { console.warn('[black-month]', error.message); return null; }) : null;
+      // Première visite : la liste des pièces, attendue 2 s au plus (ensuite servie depuis le cache, 15 min).
+      const offer = entry?.data || (loading ? await Promise.race([loading, new Promise(resolve => setTimeout(resolve, 2000, null))]) : null);
       const pieces = offer?.pieces || [];
       raw = raw.replace(/<section class="home-hero">[\s\S]*?<\/section>/, () => blackMonthHero({ level: 'h1', cta: pieces.length ? `Voir les ${pieces.length} pièces en stock` : 'Voir le mobilier en stock' }) + blackMonthPieces(pieces));
     }
