@@ -149,7 +149,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
       const data = await r.json();
       if (mySeq !== promoSeq) return; // a newer probe started (variant change)
       if (data.discounts && data.discounts.length > 0) {
-        promoEl.textContent = data.discounts[0].title;
+        promoEl.textContent = String(data.discounts[0].title).replace(/(\d) (?=€|%)/g, "$1\u00a0");
         promoEl.hidden = false;
       } else {
         promoEl.hidden = true;
@@ -161,6 +161,11 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     }
   }
   probePromo(current.id);
+  // Une autre variante est choisie : l'offre de la précédente disparaît tout de suite (la nouvelle n'est confirmée
+  // qu'après le chargement de sa photo et la réponse de Shopify, plusieurs secondes : #300, chaise Moca).
+  const forgetPromo = () => { promoSeq++; if (promoEl) { promoEl.hidden = true; promoEl.textContent = ""; } };
+  // Choix abandonné (photo illisible) : l'offre de la variante restée affichée est vérifiée à nouveau.
+  const chooseVariant = (v) => { forgetPromo(); applyVariant(v).then((done) => { if (!done) probePromo(current.id); }); };
 
   // Précharge les AMBIANCES (à la bonne résolution via srcset) pour un changement
   // de photo instantané — différé pour ne pas gêner le LCP.
@@ -483,7 +488,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     vGrid.addEventListener("focusin", (e) => { const o = e.target.closest(".vard__opt"); if (o) vPreview(vItem(o)); });
     vGrid.addEventListener("click", (e) => {
       const o = e.target.closest(".vard__opt"); if (!o) return;
-      applyVariant(vItem(o)); closeVard();
+      chooseVariant(vItem(o)); closeVard();
     });
     vGrid.addEventListener("keydown", (e) => {
       const o = e.target.closest(".vard__opt"); if (!o) return;
@@ -495,7 +500,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
         case "Home":       e.preventDefault(); focusOpt(vOpts()[0]); break;
         case "End":        e.preventDefault(); { const a = vOpts(); focusOpt(a[a.length - 1]); } break;
         case "Enter":
-        case " ":          e.preventDefault(); applyVariant(vItem(o)); closeVard(); break;
+        case " ":          e.preventDefault(); chooseVariant(vItem(o)); closeVard(); break;
       }
     });
   }
