@@ -44,3 +44,14 @@ test('Black Month : la lecture ne retient que les variantes en stock où Shopify
   assert.deepEqual(probed.sort(), ['v1', 'v3']);
   assert.deepEqual(offer.pieces.map(p => p.variant.id), ['v1']);
 });
+
+test('Black Month : la lecture précalculée par le cron redonne les mêmes pièces que la lecture directe', async () => {
+  const index = { products: [
+    { card: { id: 'P1', handle: 'p1', name: 'P1' }, variants: [{ id: 'v1', price: 499, available: true, qty: 1 }] },
+    { card: { id: 'P2', handle: 'p2', name: 'P2' }, variants: [{ id: 'v2', price: 1900, available: true, qty: 2 }] },
+  ] };
+  const live = await bm.readOffer({ collectionIds: async () => ['P1', 'P2'], getIndex: async () => index, probe: async () => 'Black Month' });
+  const stored = bm.offerFromStored(JSON.parse(JSON.stringify({ productIds: live.productIds, eligible: [...live.eligible] })), index);
+  assert.deepEqual(stored.pieces.map(p => [p.variant.id, p.sale]), live.pieces.map(p => [p.variant.id, p.sale]));
+  assert.deepEqual(stored.pieces.map(p => p.variant.id), ['v2', 'v1']);
+});
