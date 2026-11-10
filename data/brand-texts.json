@@ -1,0 +1,60 @@
+{
+  "_note": "Textes des pages de marque tenus par le site (audit SEO du 10 novembre 2026 : les descriptions de collection de marque sont vides dans Shopify). `intro` : sous-titre du bandeau et description SEO (160 caractères au plus) ; une description Shopify de la collection, si elle est remplie, passe avant. `title` et `paragraphs` : bloc « À propos » sous la grille, page 1 sans filtre. Faits vérifiables seulement : jamais de stock, de prix ni de délai ici (ils changent). Lu par lib/brand-texts.js.",
+  "brands": {
+    "fermob": {
+      "intro": "Le mobilier de jardin en métal coloré de Fermob, fabriqué en France : chaises Bistro et Luxembourg, tables, bains de soleil. En boutique à Uccle et en ligne.",
+      "title": "Fermob à Bruxelles",
+      "paragraphs": [
+        "Fermob fabrique du mobilier en métal à Thoissey, dans l’Ain. Sa chaise Bistro, pliante et légère, reprend un modèle né en 1889 pour les terrasses de café ; la collection Luxembourg, dessinée par Frédéric Sofia, vient des fauteuils du jardin du Luxembourg à Paris.",
+        "L’acier et l’aluminium sont protégés par une peinture poudre cuite au four : ils supportent la pluie belge et s’entretiennent d’un coup de chiffon humide. Chaque modèle se décline dans le nuancier Fermob, une palette de couleurs franches et de teintes plus douces qui se combinent d’une pièce à l’autre.",
+        "Chez Mikado Deco, vous trouvez Fermob en ligne et dans notre boutique d’Uccle. Nous vous aidons à composer un balcon, une terrasse ou un jardin, et nous livrons partout en Belgique."
+      ],
+      "links": [{ "label": "Voir le nuancier Fermob", "href": "/nuancier-fermob.html" }]
+    },
+    "vitra": {
+      "intro": "Vitra, éditeur suisse des Eames, de Verner Panton et de Jean Prouvé : chaises, fauteuils, tables et accessoires de design, en boutique à Uccle et en ligne.",
+      "title": "Vitra à Bruxelles",
+      "paragraphs": [
+        "Fondée en 1950 à Birsfelden, près de Bâle, l’entreprise familiale Vitra édite quelques-unes des pièces les plus connues du design : le Lounge Chair de Charles et Ray Eames, la Panton Chair de Verner Panton, les chaises et tables de Jean Prouvé, les horloges de George Nelson.",
+        "Ses designers contemporains, de Ronan et Erwan Bouroullec à Jasper Morrison et Hella Jongerius, prolongent la même idée : des meubles conçus pour durer, qu’on garde et qu’on transmet.",
+        "Chez Mikado Deco, vous trouvez Vitra en ligne et dans notre boutique d’Uccle, avec nos conseils sur les finitions, les tissus et les configurations. Livraison partout en Belgique."
+      ]
+    },
+    "hay": {
+      "intro": "HAY, le design danois accessible et coloré : chaises, tables, luminaires, mobilier d’extérieur Palissade et petits objets, en boutique à Uccle et en ligne.",
+      "title": "HAY à Bruxelles",
+      "paragraphs": [
+        "HAY a été fondée à Copenhague en 2002 par Rolf et Mette Hay, avec une idée simple : un design contemporain, bien fabriqué et à un prix raisonnable. La marque couvre toute la maison, du mobilier aux luminaires, aux textiles et aux objets du quotidien.",
+        "Parmi ses classiques, la chaise About A Chair de Hee Welling et la collection Palissade de Ronan et Erwan Bouroullec, en acier traité pour l’extérieur. Les couleurs de HAY se répondent d’une collection à l’autre, ce qui permet de composer une pièce entière sans fausse note.",
+        "Chez Mikado Deco, retrouvez HAY en ligne et dans notre boutique d’Uccle, où nous vous conseillons sur les couleurs et les finitions. Livraison partout en Belgique."
+      ]
+    },
+    "tradition": {
+      "intro": "&Tradition, maison danoise qui réédite les classiques de Verner Panton ou Arne Jacobsen et édite des créations contemporaines. À Uccle et en ligne.",
+      "title": "&Tradition à Bruxelles",
+      "paragraphs": [
+        "Fondée à Copenhague en 2010, &Tradition relie deux époques : elle réédite des pièces dessinées à partir des années 1930, comme la lampe Flowerpot de Verner Panton (1968) ou le fauteuil Little Petra de Viggo Boesen (1938), et confie de nouvelles collections à des designers d’aujourd’hui, de Space Copenhagen à Jaime Hayon.",
+        "Le fil conducteur est la qualité des matières : bois massif, laine bouclée, métal laqué, verre soufflé. Les luminaires, fauteuils et tables de la maison se mêlent facilement à des meubles anciens.",
+        "Chez Mikado Deco, retrouvez &Tradition en ligne et dans notre boutique d’Uccle, avec nos conseils sur les tissus et les finitions. Livraison partout en Belgique."
+      ]
+    },
+    "muuto": {
+      "intro": "Muuto, le design scandinave contemporain : canapés Outline, chaises Fiber, luminaires et rangements, en boutique à Uccle et livrés en Belgique.",
+      "title": "Muuto à Bruxelles",
+      "paragraphs": [
+        "Muuto est née à Copenhague en 2006. Son nom vient du finnois « muutos », qui signifie changement ou nouvelle perspective : la marque invite des designers nordiques à revisiter les formes simples et fonctionnelles du design scandinave.",
+        "Le canapé Outline d’Anderssen & Voll, la chaise Fiber d’Iskos-Berlin ou la suspension E27 de Mattias Ståhlbom en sont de bons exemples : des lignes calmes, des matières douces et des couleurs sourdes qui s’accordent entre elles.",
+        "Chez Mikado Deco, à Uccle, nous vous aidons à choisir tissus, couleurs et configurations, en boutique ou en ligne. Livraison partout en Belgique."
+      ]
+    },
+    "string-furniture": {
+      "intro": "L’étagère String, système modulaire suédois créé en 1949 par Nisse et Kajsa Strinning : String System, Pocket et rangements muraux, à Uccle et en ligne.",
+      "title": "String Furniture à Bruxelles",
+      "paragraphs": [
+        "En 1949, l’architecte suédois Nisse Strinning et sa femme Kajsa dessinent une étagère légère, faite de montants fins et de tablettes à fixer où l’on veut. Le système String est né, et il n’a presque pas changé depuis : il est aujourd’hui produit par String Furniture, à Malmö.",
+        "Tout part de quelques éléments : montants muraux ou posés au sol, tablettes, armoires, tiroirs et bureaux. On commence par une petite étagère Pocket et on agrandit au fil des années, du salon au bureau, de la cuisine à l’entrée.",
+        "Chez Mikado Deco, à Uccle, nous vous aidons à composer votre String selon vos murs et vos mesures, puis nous livrons partout en Belgique."
+      ]
+    }
+  }
+}
