@@ -927,6 +927,9 @@ body.has-stickybuy .footer { padding-bottom: 76px; }
 .prose em { font-style: italic; }
 .prose a { color: var(--accent-ink); border-bottom: 1px solid currentColor; transition: color .2s var(--ease); }
 .prose a:hover { color: var(--ink-deep); }
+/* Pages de marque : « À propos » sous la grille (data/brand-texts.json). */
+.brand-about > * { max-width: 72ch; }
+.brand-about .brand-about__links a { border-bottom: 0; }
 .prose blockquote { font-family: var(--serif); font-weight: 500; font-size: 26px; line-height: 1.25; color: var(--ink-deep); border-left: 3px solid var(--accent); padding-left: 22px; margin: 28px 0; }
 .prose blockquote a { font-family: var(--sans); font-size: 16px; font-weight: 600; color: var(--accent-ink); display: inline-block; margin-top: 6px; }
 /* Tableaux (pages légales — ex. finalités/bases RGPD). .prose ne les stylait pas. */
@@ -1366,6 +1369,8 @@ body.pdplb-locked { overflow: hidden; }
 .home-hero__in { position: relative; z-index: 2; width: 100%; padding-top: var(--nav-h); padding-bottom: clamp(34px, 5vw, 64px); }
 .home-hero__in h1 { color: var(--on-dark); font-size: clamp(40px, 6vw, 82px); line-height: .98; letter-spacing: -.01em; }
 .home-hero__cta { margin-top: 24px; }
+/* Le lieu fait partie du H1 (audit SEO du 10 novembre 2026) : même titre toute l'année, sous la signature. */
+.home-hero__where { display: block; margin-top: 14px; font-family: var(--sans); font-size: clamp(15px, 1.5vw, 19px); font-weight: 500; line-height: 1.3; letter-spacing: .01em; }
 
 /* Rail familles (portrait) */
 .home-railhead { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid var(--accent); }
