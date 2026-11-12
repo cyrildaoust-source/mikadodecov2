@@ -10,6 +10,7 @@ const { shopifyFetch } = require('../lib/shopify/client');
 const { CAMPAIGN_COLLECTIONS } = require('../lib/config');
 const { navigationReady } = require('../lib/render/navigation');
 const { collectionProductsFor, getActiveBrands, getCollections, getHomeRails, getMenu, getPredictive, getProductByHandle, getProducts, getProductsPage, getPromos } = require('../lib/services/catalog');
+const { storeBlackMonth } = require('../lib/services/black-month');
 const { INDEX_PART_NAMES, buildAndStoreIndex, getScopePage, indexPart, indexStatus } = require('../lib/services/catalog-scope');
 const { blobConfigured } = require('../lib/services/catalog-index-store');
 const fs = require('fs');
@@ -213,6 +214,9 @@ async function rebuildCatalogIndex(req, res) {
   try {
     const meta = await buildAndStoreIndex();
     console.log(`[catalog-index] écrit dans Blob : ${meta.count} produits, ${meta.parts} parties, ${meta.ms} ms`);
+    // Black Month : pièces remisées précalculées pour toutes les instances (lib/services/black-month.js), ~10 s de plus ;
+    // sauté si l'index a déjà pris longtemps (durée maximale de la fonction), repris au passage suivant.
+    if (meta.ms < 40_000) await storeBlackMonth().then(n => n != null && console.log(`[black-month] ${n} pièces écrites dans Blob`)).catch(error => console.warn('[black-month] précalcul impossible :', error.message));
     res.json({ ok: true, builtAt: meta.builtAt, count: meta.count, parts: meta.parts, ms: meta.ms });
   } catch (error) {
     console.error('[catalog-index] construction impossible :', error.message);

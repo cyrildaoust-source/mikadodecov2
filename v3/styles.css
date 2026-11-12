@@ -840,7 +840,11 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp-specs dt { flex: 0 0 min(42%, 280px); color: var(--muted); }
 .pdp-specs dd { min-width: 0; color: var(--ink-deep); text-align: right; overflow-wrap: anywhere; white-space: pre-line; }
 @media (max-width: 760px) {
-  .pdp { grid-template-columns: 1fr; }
+  /* minmax(0, 1fr) + min-width 0 : la colonne ne dépasse jamais l'écran. Avec 1fr, le rail (photos à 100 % de sa largeur)
+     et la colonne se dimensionnaient l'un l'autre, et la fiche restait plus large que le téléphone (chaise Moca : 554 px
+     au lieu de 390, page dézoomée ; 9 novembre 2026). */
+  .pdp { grid-template-columns: minmax(0, 1fr); }
+  .pdp > *, .pdp__main-wrap, .pdp__rail, .pdp__dots { min-width: 0; }
   .pdp__info { position: static; }
   .pdp__amb { display: none; }   /* grille ambiances = desktop ; sur mobile le packshot (main) reste affiché + rail d'ambiances dessous */
   .pdp__rail { display: flex; }
