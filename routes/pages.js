@@ -163,7 +163,7 @@ async function sendBlackMonthPage(req, res) {
   try { offer = await Promise.race([getBlackMonth(), new Promise(resolve => setTimeout(resolve, 12_000, null))]); }
   catch (error) { console.warn('[black-month]', error.message); }
   const url = ORIGIN + blackMonth.PAGE;
-  let html = renderPage('produits.html', { title: pageTitle('Black Month : −20 % sur le mobilier en stock'), description: 'Du 10 au 28 novembre 2026, −20 % sur le mobilier de design en stock dès 200 € de mobilier, en boutique à Uccle et en ligne.', image: blackMonth.config.heroImage + '?width=1200', url });
+  let html = renderPage('produits.html', { title: pageTitle('Black Month : −20 % sur le mobilier en stock'), description: 'Du 10 au 28 novembre 2026, −20 % sur le mobilier de design en stock dès 200 € de mobilier, en boutique à Uccle et en ligne.', image: blackMonth.config.pageImage + '?width=1200', url });
   html = html.replace('<body>', '<body class="has-topnav">')
     .replace(/<script>[\s\S]*?<\/script>/g, '')
     .replace(/<main id="contenu">[\s\S]*?<\/main>/, () => blackMonthMain(offer))
