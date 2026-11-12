@@ -16,7 +16,8 @@ const { selectInitialVariant } = require('../v3/product-variant');
 const { cached } = require('../lib/cache');
 const { BRAND_COLLECTION_ALIASES, BRAND_HERO_REVIEW, CAMPAIGN_COLLECTIONS, COLLECTION_ALIASES, COLLECTION_TEXTS, FAMILLES_RICHES, INTERNAL_COLLECTION, OG_DEFAULT, ORIGIN, resolveSsrRel } = require('../lib/config');
 const { renderPage } = require('../lib/render/layout');
-const { pageTitle, productTitle } = require('../lib/render/seo');
+const { listingTitle, pageTitle, productTitle } = require('../lib/render/seo');
+const { brandText, injectBrandAbout } = require('../lib/brand-texts');
 const { getDesigners } = require('../lib/designers');
 const { V3_DIR } = require('../lib/paths');
 const { htmlToMarkdown, sendMarkdown, wantsMarkdown } = require('../lib/render/agents');
@@ -162,7 +163,7 @@ async function sendBlackMonthPage(req, res) {
   try { offer = await Promise.race([getBlackMonth(), new Promise(resolve => setTimeout(resolve, 12_000, null))]); }
   catch (error) { console.warn('[black-month]', error.message); }
   const url = ORIGIN + blackMonth.PAGE;
-  let html = renderPage('produits.html', { title: pageTitle('Black Month : −20 % sur le mobilier en stock'), description: 'Du 10 au 28 novembre 2026, −20 % sur le mobilier de design en stock dès 200 € de mobilier, en boutique à Uccle et en ligne.', image: blackMonth.config.heroImage + '?width=1200', url });
+  let html = renderPage('produits.html', { title: pageTitle('Black Month : −20 % sur le mobilier en stock'), description: 'Du 10 au 28 novembre 2026, −20 % sur le mobilier de design en stock dès 200 € de mobilier, en boutique à Uccle et en ligne.', image: blackMonth.config.pageImage + '?width=1200', url });
   html = html.replace('<body>', '<body class="has-topnav">')
     .replace(/<script>[\s\S]*?<\/script>/g, '')
     .replace(/<main id="contenu">[\s\S]*?<\/main>/, () => blackMonthMain(offer))
@@ -175,6 +176,7 @@ router.get('/collections/:handle', async (req, res) => {
   const handle = String(req.params.handle || '').toLowerCase();
   if (INTERNAL_COLLECTION.test(handle)) return send404Shell(res, 'produits.html');
   if (handle === blackMonth.config.collection && blackMonth.active()) return sendBlackMonthPage(req, res);
+  if (handle === blackMonth.config.collection && blackMonth.ended()) return res.set('Cache-Control', 'public, s-maxage=3600').redirect(301, '/collections/promotions');
   const designerPage = designerPageFor(handle);
   if (designerPage) return res.set('Cache-Control', 'public, s-maxage=3600').redirect(301, designerPage);
   if (Object.hasOwn(BRAND_COLLECTION_ALIASES, handle)) {
@@ -286,10 +288,13 @@ router.get('/collections/:handle', async (req, res) => {
     } : getBrandHero(handle, { includeCandidates: BRAND_HERO_REVIEW }) || getCollectionHero(handle);
     const collectionName = nav.navigationRules.collections[handle]?.label || col.name || 'Catalogue';
     const name = collectionName + (brand ? ' · ' + brandLabel : '');
-    const title = pageTitle(name);
+    // Même titre que la page servie par l'index (lib/seo-meta.js), même quand on retombe ici.
+    const collectionKind = family ? 'family' : nav.navigationRules.collections[handle]?.kind || filterScope(handle)?.collectionKind;
+    const title = brand || campaign || !collectionKind ? pageTitle(name) : listingTitle(collectionName, collectionKind === 'brand' ? 'brand' : 'family');
     const description = ogDesc(
       brand ? `Les créations ${brandLabel} de notre sélection « ${collectionName} ».` : pageText ? pageText.description : col.description && col.description.trim()
         ? col.description
+        : collectionKind === 'brand' && brandText(handle) ? brandText(handle).intro
         : `${name} chez Mikado Deco — sélection design. Retrait à Uccle, livraison en Belgique.`
     );
     const bodyDescription = pageText && !brand ? pageText.heroDescription : description;
@@ -299,6 +304,7 @@ router.get('/collections/:handle', async (req, res) => {
 
     let html = renderPage('produits.html', { title, description, image, url });
     html = brandBanner(injectCollectionHero(html, collectionHero), handle);
+    if (collectionKind === 'brand' && !brand && !tag && !cursor) html = injectBrandAbout(html, handle);
     if (campaign) html = html.replace('<section class="subhero subhero--editorial"', '<section class="subhero subhero--editorial subhero--campaign"');
     html = listingNavigation(html, req, { title: collectionName, brandName: brandLabel });
     if (campaign) {
@@ -534,7 +540,8 @@ router.get(/.*/, async (req, res, next) => {
       // Première visite : la liste des pièces, attendue 2 s au plus (ensuite servie depuis le cache, 15 min).
       const offer = entry?.data || (loading ? await Promise.race([loading, new Promise(resolve => setTimeout(resolve, 2000, null))]) : null);
       const pieces = offer?.pieces || [];
-      raw = raw.replace(/<section class="home-hero">[\s\S]*?<\/section>/, () => blackMonthHero({ level: 'h1', cta: pieces.length ? `Voir les ${pieces.length} pièces en stock` : 'Voir le mobilier en stock' }) + blackMonthPieces(pieces));
+      // Le H1 de l'accueil reste le même toute l'année (audit SEO du 10 novembre 2026) : la campagne passe en H2.
+      raw = raw.replace(/<section class="home-hero">[\s\S]*?<\/section>/, () => '<h1 class="sr-only">Mikado Deco, mobilier et déco design à Bruxelles</h1>' + blackMonthHero({ level: 'h2', cta: pieces.length ? `Voir les ${pieces.length} pièces en stock` : 'Voir le mobilier en stock' }) + blackMonthPieces(pieces));
     }
     const gifts = homeGiftsHTML();
     raw = raw.replace('<!--NOEL-HOME-->', () => gifts);

@@ -20,7 +20,7 @@ test('chaque page et gabarit est un fragment complet : titre et description, un 
 test('renderPage assemble le layout : document, balises communes, valeurs de la page, extras data-head', () => {
   const html = renderPage('contact.html');
   assert.match(html, /^<!DOCTYPE html>\n<html lang="fr">/);
-  assert.match(html, /<title>Contact · Mikado Deco<\/title>/);
+  assert.match(html, /<title>Contact, horaires et accès de la boutique à Uccle · Mikado Deco<\/title>/);
   assert.match(html, /<meta name="description" content="Boutique Mikado Deco à Uccle/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.mikadodeco\.be\/contact\.html" \/>/);
   assert.match(html, /<meta property="og:image" content="https:\/\/www\.mikadodeco\.be\/images\/og-default\.jpg" \/>\n\s+<meta property="og:image:width" content="1200"/, 'dimensions pour l’image par défaut');
