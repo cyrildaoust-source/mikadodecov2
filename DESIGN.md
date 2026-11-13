@@ -164,3 +164,14 @@ communes, quatre cartes au plus, et ne jamais introduire ces titres par un surti
 La règle s'applique à tout le catalogue : lorsqu'une gamme exacte n'existe pas,
 « Vous aimerez aussi » passe au même type puis au même univers fonctionnel. Ne pas
 remplir artificiellement « Complétez avec » lorsqu'aucun complément honnête n'existe.
+
+## Refonte v3 « index » (13 novembre 2026, proposition, PR #309)
+
+Repartie de zéro à partir des références Mobbin (In Common With, Palmer, Waka Waka, BAGGU, Savor, SOTF, KÖPPEN), pas du site actuel.
+
+- Une seule famille : la grotesque Neue Haas remplace le Cormorant (`--serif` pointe vers `--sans-product`), graisse 500, interlettrage serré sur les grands titres.
+- Blanc cassé froid (`--paper #f5f3ef`), encre `#23201c`, filets d'un pixel. Le bleu roi `#38529F` n'est plus un aplat : compteur du panier, survols, numéros N°, points d'état, focus.
+- En-tête en texte : logo à gauche, menu au centre, « Rechercher », « Rendez-vous », « Panier (n) » à droite.
+- Accueil reconstruit : photo plein écran légendée, intro en deux colonnes, familles en grande liste typographique (photo au survol, vignette sur téléphone), produits numérotés, Studio en grande photo, bande de cinq portraits « Par pièce », chiffres en tableau à filets.
+- Catalogue : titre géant en texte, description à droite, photo en bandeau dessous. Cartes : légende courte, bouton visible au survol (toujours visible sur téléphone).
+- Fiche produit en galerie verticale ; panier sobre au bouton d'encre ; pied de page clair avec grand nom pâle.

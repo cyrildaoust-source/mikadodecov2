@@ -145,7 +145,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
     : (g.rows.length > 0 || g.images?.length > 0));
   const specAccordionHTML = specShown.length
     ? `<section class="section pdp-acc" data-accordion>${specShown.map((g, i) => `<div class="pdp-acc__item">
-        <h2 class="catalogue-head serif pdp-acc__head"><button type="button" class="pdp-acc__btn" id="pdp-acc-btn-${g.key}" aria-controls="pdp-acc-panel-${g.key}" aria-expanded="${i === 0 ? "true" : "false"}"><span class="pdp-acc__label">${escapeHtml(g.label)}</span><span class="pdp-acc__chevron" aria-hidden="true">▾</span></button></h2>
+        <h2 class="catalogue-head serif pdp-acc__head"><button type="button" class="pdp-acc__btn" id="pdp-acc-btn-${g.key}" aria-controls="pdp-acc-panel-${g.key}" aria-expanded="${i === 0 ? "true" : "false"}"><span class="pdp-acc__label">${escapeHtml(g.label)}</span><span class="pdp-acc__chevron" aria-hidden="true">+</span></button></h2>
         <div class="pdp-acc__panel" id="pdp-acc-panel-${g.key}" role="region" aria-labelledby="pdp-acc-btn-${g.key}"${i === 0 ? "" : " hidden"}>${specPanelBody(g)}</div>
       </div>`).join("")}</section>`
     : "";
@@ -200,7 +200,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
         ${isFermob ? `<a class="pdp__palette" href="/nuancier-fermob.html">Toutes les couleurs Fermob</a>` : ""}
         <div class="pdp__buy">
           <button class="pdp__qty-open" type="button" data-qtyd-open aria-haspopup="dialog">Quantité : <span data-qty-label>1</span> <span aria-hidden="true">▾</span></button>
-          <button class="btn btn--blue pdp__cta" data-add${current.available === false ? " disabled>Indisponible" : ">Ajouter à la sélection"}</button>
+          <button class="btn btn--blue pdp__cta" data-add${current.available === false ? " disabled>Indisponible" : ">Ajouter au panier"}</button>
         </div>
         <p class="pdp__cart-status" data-cart-status></p>
         <div class="pdp__reassure">
@@ -208,9 +208,9 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
           <ul class="trust-list" aria-label="Nos garanties"><li><svg class="trust-list__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.2-2.8 7.6-7 9-4.2-1.4-7-4.8-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Paiement 100&nbsp;% sécurisé</li><li><svg class="trust-list__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v4h4"/></svg>Retour sous 14&nbsp;jours</li><li><svg class="trust-list__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h12v8H2z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="6.5" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>Livraison partout en Belgique&nbsp;: 50&nbsp;€ · retrait gratuit à Uccle</li><li><svg class="trust-list__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Un conseil&nbsp;? <a href="tel:+32493837983">+32&nbsp;493&nbsp;83&nbsp;79&nbsp;83</a></li></ul>
           <p class="pdp__contact"><a href="/contact.html">Une question ? Écrivez-nous <span aria-hidden="true">→</span></a></p>
         </div>
+        ${specAccordionHTML}
       </div>
-    </div>
-    ${specAccordionHTML}`;
+    </div>`;
 
   return { html, imgs, thumbSrcs, widthVariant, srcsetFor, MAIN_SIZES, variants, initialSelection, current, norm, ambiances, ambThumbs,
     optionNames, pickAxes, isColorAxis, axisLabel, axisLabelLower, moreCount, moreWord, variantImg, variantState, availInline, availStore, hasSku };
