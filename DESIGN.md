@@ -165,25 +165,13 @@ La règle s'applique à tout le catalogue : lorsqu'une gamme exacte n'existe pas
 « Vous aimerez aussi » passe au même type puis au même univers fonctionnel. Ne pas
 remplir artificiellement « Complétez avec » lorsqu'aucun complément honnête n'existe.
 
-## Refonte « bleu Mikado » (13 novembre 2026, proposition)
+## Refonte v3 « index » (13 novembre 2026, proposition, PR #309)
 
-Proposition de refonte complète, faite à partir de références Mobbin (bella, Palmer, In Common With,
-Waka Waka, BAGGU, Savor, SOTF). Couche placée en fin de `v3/styles.css` (« REFONTE · novembre
-2026 »). Le bleu roi reste la couleur de marque (Sacha, 13 novembre : le noir n'est que celui de
-Black Month) et devient une matière en grands aplats.
+Repartie de zéro à partir des références Mobbin (In Common With, Palmer, Waka Waka, BAGGU, Savor, SOTF, KÖPPEN), pas du site actuel.
 
-- En-tête : logo au centre, menu à gauche, outils à droite sur ordinateur ; logo à gauche sous
-  1 024 px (le menu passe dans le tiroir).
-- Accueil : hero en aplat bleu (titre, boutons, adresse) à côté de la photo ; phrase manifeste ;
-  familles en index numéroté sur une bande bleue pleine largeur (`.home-fams`, `.home-ix`, N° à côté
-  du nom, jamais au-dessus) ; Studio sur bleu pâle ; « Par pièce » légendé sous la photo ; chiffres
-  bleus sur fond clair.
-- Catalogue : en-tête de famille en aplat bleu + photo ; grand titre de grille, compteur bleu.
-- Titres de section : filet fin d'encre AU-DESSUS du titre, Cormorant 500 ; les soulignés bleus de
-  2 px deviennent un filet d'encre de 1 px.
-- Cartes : nom en Cormorant, prix bleu, bouton qui passe au bleu au survol.
-- Fiche produit : photos empilées en colonne à gauche, informations fixes à droite (BAGGU).
-- Pied de page : bleu plein, colonnes à filet haut, newsletter en une ligne, grand nom « Mikado Deco ».
-- Panier : vocabulaire « panier » (« Ajouter au panier », « Mon panier », « Commander · total ») ;
-  en-tête bleu ; le tiroir rappelle la livraison à 50 €, le retrait gratuit à Uccle et le retour sous
-  14 jours.
+- Une seule famille : la grotesque Neue Haas remplace le Cormorant (`--serif` pointe vers `--sans-product`), graisse 500, interlettrage serré sur les grands titres.
+- Blanc cassé froid (`--paper #f5f3ef`), encre `#23201c`, filets d'un pixel. Le bleu roi `#38529F` n'est plus un aplat : compteur du panier, survols, numéros N°, points d'état, focus.
+- En-tête en texte : logo à gauche, menu au centre, « Rechercher », « Rendez-vous », « Panier (n) » à droite.
+- Accueil reconstruit : photo plein écran légendée, intro en deux colonnes, familles en grande liste typographique (photo au survol, vignette sur téléphone), produits numérotés, Studio en grande photo, bande de cinq portraits « Par pièce », chiffres en tableau à filets.
+- Catalogue : titre géant en texte, description à droite, photo en bandeau dessous. Cartes : légende courte, bouton visible au survol (toujours visible sur téléphone).
+- Fiche produit en galerie verticale ; panier sobre au bouton d'encre ; pied de page clair avec grand nom pâle.
