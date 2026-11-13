@@ -2121,7 +2121,6 @@ a.home-info__cell:hover .home-info__num { color: var(--accent); }
 .chip.is-active { color: var(--accent); border-bottom-color: var(--accent); }
 
 /* ===== FICHE PRODUIT : galerie verticale, colonne d'achat sobre (BAGGU, Savor) ===== */
-.pdp { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
 .pdp__main { background: var(--tile); mix-blend-mode: normal; }
 @media (min-width: 761px) {
   .pdp__amb { grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
@@ -2224,3 +2223,137 @@ a.home-info__cell:hover .home-info__num { color: var(--accent); }
   .footer__grid > div:last-child { grid-column: auto; }
   .footer__grid > div:nth-child(2) { grid-column: 1 / -1; }
 }
+
+/* ============================================================
+   v3 · fiche produit et panier (13 novembre 2026, références Mobbin : Selfridges et H&M
+   pour la fiche — photos en grille à deux colonnes, colonne d'achat collante, détails en
+   accordéon sous le bouton ; H&M, Selfridges, Urban Outfitters pour le panier — articles
+   à gauche, récapitulatif en encadré collant à droite).
+   ============================================================ */
+/* --- Fiche produit --- */
+.pdp-page .crumbs, .crumbs { font-size: 13px; }
+@media (min-width: 761px) {
+  .pdp { grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr); gap: clamp(28px, 4vw, 72px); }
+  .pdp__gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-content: start; }
+  .pdp__gallery > .pdp__main-wrap { grid-column: 1 / -1; }
+  .pdp__gallery .pdp__amb { display: contents; }
+  .pdp__amb-img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .pdp__amb-img:only-child { grid-column: 1 / -1; aspect-ratio: 3 / 2; }
+  .pdp__info { top: calc(var(--nav-h) + 40px); padding-top: 4px; }
+}
+.pdp__main { aspect-ratio: 4 / 3.4; object-fit: contain; }
+.pdp__brand { display: inline-block; color: var(--ink); font-size: 14px; border-bottom: 1px solid transparent; }
+.pdp__brand:hover { color: var(--accent); }
+.pdp__designer { display: block; color: var(--muted); font-size: 14px; margin: 4px 0 0; }
+
+.pdp__designer--link { color: var(--muted); }
+.pdp__designer--link:hover { color: var(--accent); border-bottom-color: transparent; }
+.pdp__name { font-size: clamp(30px, 2.6vw, 44px); margin: 10px 0 0; }
+.pdp__price { margin: 10px 0 22px; font-size: 18px; }
+.pdp .label { font-family: var(--sans-product); text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 500; color: var(--muted); }
+.pdp__variant-bar { border-color: var(--line); padding: 12px; background: transparent; }
+.pdp__variant-bar:hover { border-color: var(--ink); }
+.pdp__variant-name { font-weight: 500; }
+.pdp__variant-count, .pdp__variant-bar-arrow { font-weight: 500; color: var(--muted); }
+.pdp__palette { color: var(--ink); text-decoration-color: var(--line); }
+.pdp__palette:hover { color: var(--accent); }
+.pdp__buy { gap: 8px; margin-top: 20px; }
+.pdp__qty-open { border-color: var(--line); background: transparent; }
+.pdp__qty-open:hover { border-color: var(--ink); }
+.pdp__cart-status a { color: var(--accent); }
+.pdp__avail { font-size: 13.5px; font-weight: 400; color: var(--ink); line-height: 1.45; display: block; margin: 12px 0 0; }
+.pdp__avail strong { font-weight: 500; }
+.pdp__avail a { color: var(--ink); border-bottom: 1px solid var(--line); }
+.pdp__avail .pcard__dot { display: inline-block; margin-right: 6px; vertical-align: 1px; }
+.trust-list { gap: 6px; padding-top: 12px; margin-top: 14px; }
+.trust-list__i { display: none; }
+.trust-list li { font-size: 13.5px; color: var(--muted); }
+.trust-list a { color: var(--ink); border-bottom: 1px solid var(--line); }
+.pdp__contact { margin-top: 10px; }
+.pdp__contact a { font-size: 13.5px; }
+/* Détails en accordéon dans la colonne d'achat (H&M) */
+.pdp__info .pdp-acc { padding: 0; margin-top: 28px; max-width: none; }
+.pdp-acc__item { border-top-color: var(--line); }
+.pdp-acc__item:last-child { border-bottom-color: var(--line); }
+.pdp-acc__head { font-family: var(--sans-product); font-size: 15px; font-weight: 500; letter-spacing: 0; border-top: 0; padding: 0; }
+.pdp-acc__btn { padding: 14px 0; min-height: 52px; }
+.pdp-acc__chevron { font-size: 20px; font-weight: 400; color: var(--ink); line-height: 1; }
+.pdp-acc__btn[aria-expanded="true"] .pdp-acc__chevron { transform: rotate(45deg); }
+.pdp-acc__btn:hover .pdp-acc__label { color: var(--accent); }
+.pdp-acc__panel { padding: 0 0 20px; }
+.pdp-desc { font-size: 14.5px; line-height: 1.65; color: var(--ink); }
+.pdp-specs div { padding: 9px 0; font-size: 13.5px; }
+.pdp-stickybuy { box-shadow: none; }
+
+/* --- Page panier --- */
+.pagehead { border-bottom: 0; padding-block: clamp(28px, 4vw, 64px) clamp(14px, 2vw, 28px); margin-bottom: 0; }
+.pagehead h1 { font-weight: 500; font-size: clamp(40px, 5.6vw, 96px); letter-spacing: -.045em; line-height: .95; }
+.pagehead p { font-size: 15px; }
+.sel { border-top: 1px solid var(--ink); padding-top: 4px; }
+@media (min-width: 901px) { .sel { grid-template-columns: minmax(0, 1.8fr) minmax(300px, 1fr); gap: clamp(28px, 4vw, 72px); } }
+.sel-item { grid-template-columns: 120px minmax(0, 1fr) auto; gap: clamp(14px, 2vw, 28px); align-items: start; padding: 20px 0; }
+.sel-item__img { width: 120px; height: 120px; background: var(--tile); }
+.sel-item__brand { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 13px; color: var(--muted); }
+.sel-item__name { font-weight: 500; font-size: 16px; line-height: 1.3; }
+.sel-item__name:hover { color: var(--accent); }
+.sel-item__eta { font-size: 13px; }
+.sel-item__promo-code { text-transform: none; letter-spacing: 0; font-size: 12.5px; }
+.sel-item__controls { margin-top: 14px; }
+.sel-item__remove { font-family: var(--sans-product); font-size: 13px; color: var(--muted); text-decoration-color: var(--line); text-underline-offset: 3px; min-height: 44px; }
+.sel-item__remove:hover { color: var(--ink); }
+.sel-item__price--final { font-weight: 500; font-size: 15px; color: var(--ink); }
+.sel-item__price--free, .sel-item__free-mention { font-style: normal; font-family: var(--sans-product); text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--accent); }
+.sel-item__discount-amount { color: var(--accent); }
+.qty { border-color: var(--line); }
+.sel-summary { top: calc(var(--nav-h) + 40px); background: var(--paper-2); padding: clamp(22px, 2.4vw, 32px); margin-top: 20px; }
+.sel-summary h2 { font-weight: 500; font-size: 20px; letter-spacing: -.015em; margin-bottom: 12px; }
+.sel-row { font-size: 14px; padding: 7px 0; }
+.sel-row--total { font-size: 16px; font-weight: 500; border-top-color: var(--ink); }
+.sel-row--discount, .sel-row__savings-label, .sel-row__savings-amount { color: var(--accent); }
+.sel-row__savings-label { text-transform: none; letter-spacing: 0; }
+.sel-eta { font-size: 13px; }
+.sel-summary .btn--blue { min-height: 54px; font-size: 15px; }
+.sel-summary .btn--outline { border: 0; min-height: 44px; padding: 0; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; font-size: 14px; }
+.sel-summary .btn--outline:hover { background: none; color: var(--accent); }
+.sel-summary .trust-list { border-top-color: var(--line); }
+.sel-empty { border-top: 1px solid var(--ink); }
+.sel-empty h2 { font-weight: 500; font-size: clamp(26px, 2.6vw, 40px); letter-spacing: -.03em; }
+@media (max-width: 760px) {
+  .sel-item { grid-template-columns: 88px minmax(0, 1fr); }
+  .sel-item__img { width: 88px; height: 88px; }
+  .sel-item__price { grid-column: 2; align-items: flex-start; }
+  .sel-summary { margin-top: 0; }
+}
+
+/* --- Pages de contenu (marques, studio, rendez-vous, légales) --- */
+.subhero__in h1, .subhero h1 { font-weight: 500; letter-spacing: -.04em; }
+.brandcard { border-color: var(--line); }
+.brandcard:hover { background: var(--paper-2); color: var(--ink); border-color: var(--ink); }
+.brandcard__name { font-style: normal; font-weight: 500; letter-spacing: -.02em; }
+.brandcard:hover .brandcard__name { color: var(--accent); }
+.designer-card { background: transparent; border-top: 1px solid var(--line); padding: 14px 0 0; }
+.designer-card__brands { text-transform: none; letter-spacing: 0; font-size: 12.5px; }
+.prose h2 { font-weight: 500; letter-spacing: -.02em; }
+.prose a { color: var(--ink); text-decoration-color: var(--accent); }
+.pdp__buy .pdp__cta { min-width: 0; padding-inline: 16px; }
+@media (max-width: 760px) { .pdp__qty-open { padding: 0 12px; } }
+.trust-list li { display: block; min-width: 0; overflow-wrap: anywhere; }
+/* En-têtes de pages de contenu : titre en texte sur le papier, photo en bandeau dessous (comme le catalogue) */
+.subhero:not(.subhero--brand):not(.subhero--campaign) { display: grid; height: auto; min-height: 0; max-height: none; overflow: visible; background: none; }
+.subhero:not(.subhero--brand):not(.subhero--campaign) .subhero__scrim { display: none; }
+.subhero:not(.subhero--brand):not(.subhero--campaign) .subhero__in { grid-row: 1; height: auto; width: 100%; padding: calc(var(--nav-h) + clamp(40px, 5vw, 80px)) var(--gutter) clamp(24px, 2.6vw, 40px); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: end; gap: 16px clamp(24px, 4vw, 80px); }
+.subhero:not(.subhero--brand):not(.subhero--campaign) h1 { color: var(--ink); font-size: clamp(46px, 7vw, 132px); line-height: .92; letter-spacing: -.05em; max-width: none; }
+.subhero:not(.subhero--brand):not(.subhero--campaign) p { color: var(--muted); text-shadow: none; font-size: 15px; line-height: 1.55; margin: 0; }
+.subhero:not(.subhero--brand):not(.subhero--campaign) picture { grid-row: 2; display: block; position: relative; width: calc(100% - 2 * var(--gutter)); margin: 0 auto; aspect-ratio: 21 / 6; overflow: hidden; background: var(--tile); }
+.subhero:not(.subhero--brand):not(.subhero--campaign) .subhero__img { position: absolute; inset: 0; }
+@media (max-width: 900px) {
+  .subhero:not(.subhero--brand):not(.subhero--campaign) .subhero__in { grid-template-columns: 1fr; }
+  .subhero:not(.subhero--brand):not(.subhero--campaign) picture { aspect-ratio: 16 / 9; }
+}
+/* Formulaires et petites étiquettes : pas de capitales espacées */
+.field label, .brandcard__origin { text-transform: none; letter-spacing: 0; font-family: var(--sans-product); font-size: 13px; font-weight: 500; }
+.field input, .field select, .field textarea { background: transparent; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--ink); }
+.rdv-hero__text h1 { font-weight: 500; letter-spacing: -.045em; font-size: clamp(44px, 6vw, 110px); line-height: .92; }
+.rdv-form-card { box-shadow: none; }
+.rdv-form-card h3 { font-weight: 500; font-size: 22px; letter-spacing: -.02em; }
