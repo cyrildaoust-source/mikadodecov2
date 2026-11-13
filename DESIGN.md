@@ -165,21 +165,25 @@ La règle s'applique à tout le catalogue : lorsqu'une gamme exacte n'existe pas
 « Vous aimerez aussi » passe au même type puis au même univers fonctionnel. Ne pas
 remplir artificiellement « Complétez avec » lorsqu'aucun complément honnête n'existe.
 
-## Refonte « galerie » (13 novembre 2026, proposition)
+## Refonte « bleu Mikado » (13 novembre 2026, proposition)
 
-Proposition de refonte complète, faite à partir de références Mobbin (In Common With, Waka Waka,
-Palmer, BAGGU, Savor, KÖPPEN, SOTF). Couche placée en fin de `v3/styles.css` (« REFONTE ·
-novembre 2026 ») et nouveaux jetons dans `:root`.
+Proposition de refonte complète, faite à partir de références Mobbin (bella, Palmer, In Common With,
+Waka Waka, BAGGU, Savor, SOTF). Couche placée en fin de `v3/styles.css` (« REFONTE · novembre
+2026 »). Le bleu roi reste la couleur de marque (Sacha, 13 novembre : le noir n'est que celui de
+Black Month) et devient une matière en grands aplats.
 
-- Palette : papier un ton plus clair, encre brune ; le bleu roi est remplacé par un sang-de-bœuf
-  (`--accent: #7a3a2a`) réservé aux liens, au survol et aux petits signes. Le bouton principal
-  (`.btn--blue`) passe à l'encre, survol sang-de-bœuf.
+- En-tête : logo au centre, menu à gauche, outils à droite sur ordinateur ; logo à gauche sous
+  1 024 px (le menu passe dans le tiroir).
+- Accueil : hero en aplat bleu (titre, boutons, adresse) à côté de la photo ; phrase manifeste ;
+  familles en index numéroté sur une bande bleue pleine largeur (`.home-fams`, `.home-ix`, N° à côté
+  du nom, jamais au-dessus) ; Studio sur bleu pâle ; « Par pièce » légendé sous la photo ; chiffres
+  bleus sur fond clair.
+- Catalogue : en-tête de famille en aplat bleu + photo ; grand titre de grille, compteur bleu.
 - Titres de section : filet fin d'encre AU-DESSUS du titre, Cormorant 500 ; les soulignés bleus de
   2 px deviennent un filet d'encre de 1 px.
-- Accueil : hero plein cadre (titre en bas à gauche, deux boutons et adresse à droite), phrase
-  manifeste, index numéroté des familles avec légende sous la photo (`.home-ix`, N° à côté du nom,
-  jamais au-dessus), Studio sur panneau encre, « Par pièce » légendé sous la photo, chiffres sur fond
-  clair à filets.
-- Pied de page : colonnes à filet haut, newsletter en une ligne, grand nom « Mikado Deco ».
+- Cartes : nom en Cormorant, prix bleu, bouton qui passe au bleu au survol.
+- Fiche produit : photos empilées en colonne à gauche, informations fixes à droite (BAGGU).
+- Pied de page : bleu plein, colonnes à filet haut, newsletter en une ligne, grand nom « Mikado Deco ».
 - Panier : vocabulaire « panier » (« Ajouter au panier », « Mon panier », « Commander · total ») ;
-  le tiroir rappelle la livraison à 50 €, le retrait gratuit à Uccle et le retour sous 14 jours.
+  en-tête bleu ; le tiroir rappelle la livraison à 50 €, le retrait gratuit à Uccle et le retour sous
+  14 jours.

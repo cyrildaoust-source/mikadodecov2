@@ -25,8 +25,14 @@
 </template>
   <main id="contenu">
 
-  <!-- 1 · HERO — refonte nov. 2026 : photo plein cadre, titre en bas à gauche, légende et accès boutique à droite -->
+  <!-- 1 · HERO — refonte nov. 2026 : aplat bleu de marque à gauche (titre, boutons, adresse), photo à droite -->
   <section class="home-hero">
+    <div class="home-hero__panel">
+      <h1 class="serif">Le design,<br>pour toute la maison.<span class="home-hero__where">Mobilier et déco design à Bruxelles</span></h1>
+      <div class="home-hero__cta"><a href="/produits.html" class="btn btn--light-solid">Découvrir le catalogue</a><a href="/rendez-vous.html" class="btn btn--light">Venir en boutique</a></div>
+      <p class="home-hero__caption">75 Rue du Doyenné, Uccle · du mardi au samedi, 10h30–18h30</p>
+    </div>
+    <div class="home-hero__media">
     <picture>
       <source type="image/avif" media="(max-width: 600px)" srcset="/images/home/hero-mobile.avif" />
       <source type="image/webp" media="(max-width: 600px)" srcset="/images/home/hero-mobile.webp" />
@@ -35,13 +41,6 @@
       <source type="image/avif" srcset="/images/home/hero-1280.avif 1280w, /images/home/hero-2000.avif 2000w" sizes="100vw" />
       <img class="home-hero__img" src="/images/home/hero.webp" srcset="/images/home/hero-1280.webp 1280w, /images/home/hero.webp 2000w" sizes="100vw" width="2000" height="800" alt="Salon de design, fauteuil lounge et ottoman" fetchpriority="high" />
     </picture>
-    <span class="home-hero__scrim"></span>
-    <div class="home-hero__in wrap">
-      <h1 class="serif">Le design,<br>pour toute la maison.<span class="home-hero__where">Mobilier et déco design à Bruxelles</span></h1>
-      <div class="home-hero__side">
-        <div class="home-hero__cta"><a href="/produits.html" class="btn btn--light-solid">Découvrir le catalogue</a><a href="/rendez-vous.html" class="btn btn--light">Venir en boutique</a></div>
-        <p class="home-hero__caption">75 Rue du Doyenné, Uccle · du mardi au samedi, 10h30–18h30</p>
-      </div>
     </div>
   </section>
 
@@ -52,9 +51,11 @@
   </section>
 
   <!-- 2 · NOS FAMILLES — index numéroté, légende sous la photo (références Mobbin : Waka Waka, In Common With) -->
-  <section class="section wrap">
+  <section class="home-fams">
+    <div class="wrap">
     <div class="shead"><h2 class="serif">Nos familles</h2><a href="/produits.html">Tout le catalogue</a></div>
     <div class="home-index"><a class="home-ix" href="/collections/sieges"><span class="home-ix__ph"><img src="/images/home/fam-sieges.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°01</span><span class="home-ix__n">Assises</span></span></a><a class="home-ix" href="/collections/tables"><span class="home-ix__ph"><img src="/images/home/fam-tables.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°02</span><span class="home-ix__n">Tables</span></span></a><a class="home-ix" href="/collections/luminaires"><span class="home-ix__ph"><img src="/images/home/fam-luminaires.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°03</span><span class="home-ix__n">Luminaires</span></span></a><a class="home-ix" href="/collections/decoration"><span class="home-ix__ph"><img src="/images/home/fam-decoration.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°04</span><span class="home-ix__n">Décoration</span></span></a><a class="home-ix" href="/collections/outdoor"><span class="home-ix__ph"><img src="/images/home/fam-outdoor.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°05</span><span class="home-ix__n">Jardin</span></span></a><a class="home-ix" href="/collections/rangement"><span class="home-ix__ph"><img src="/images/home/fam-rangement.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°06</span><span class="home-ix__n">Rangement</span></span></a><a class="home-ix" href="/collections/accessoires"><span class="home-ix__ph"><img src="/images/home/fam-arts.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°07</span><span class="home-ix__n">Arts de la table</span></span></a><a class="home-ix home-ix--all" href="/produits.html"><span class="home-ix__ph"><span class="home-ix__all serif">Tout le catalogue <span aria-hidden="true">→</span></span></span><span class="home-ix__cap"><span class="home-ix__no">N°08</span><span class="home-ix__n">Toutes les pièces</span></span></a></div>
+    </div>
   </section>
 
   <!-- 2b · IDÉES CADEAUX — saison de Noël uniquement, rendu par le serveur (lib/render/gifts.js, ADR 0016) -->
