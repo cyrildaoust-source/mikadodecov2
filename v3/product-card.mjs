@@ -6,7 +6,7 @@ import {finishHTML} from './product-finishes.mjs';
 // Un délai (« 2–3 jours », « 9–13 jours ouvrés ») ne se coupe jamais entre ses chiffres et son unité.
 const keepDelay = (html) => html.replace(/(\d+–\d+) (\S+)/, '<span class="pcard__nw">$1&nbsp;$2</span>');
 export function selectionLabel(quantity) {
-  return quantity === 0 ? '+ Ajouter à la sélection' : quantity === 1 ? 'Dans la sélection' : `Dans la sélection (${quantity})`;
+  return quantity === 0 ? 'Ajouter au panier' : quantity === 1 ? 'Dans le panier' : `Dans le panier (${quantity})`;
 }
 
 // FR plurals — overrides for option names where the naive "+ s" rule misleads.

@@ -24,7 +24,7 @@ test('server and browser share the exact visible product facts and contextual li
 });
 
 test('selection controls preserve disabled state and saved cart quantity',()=>{
-  assert.match(productCardHTML(product,{quantity:2}),/Dans la sélection \(2\)/);
+  assert.match(productCardHTML(product,{quantity:2}),/Dans le panier \(2\)/);
   const html=productCardHTML({...product,purchaseDisabled:true});
   assert.match(html,/data-add\s+disabled/);
   assert.match(html,/Indisponible/);

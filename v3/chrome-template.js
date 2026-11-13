@@ -65,7 +65,7 @@ export function chromeHTML(active) {
         <a class="drawer__link" href="/studio.html">Mikado Studio</a>
         <a class="drawer__link drawer__link--promo" href="/collections/promotions">Promotions</a>
         <a class="drawer__link drawer__link--util" href="/rendez-vous.html">Rendez-vous</a>
-        <a class="drawer__link drawer__link--util" href="/selection.html">Ma sélection</a>
+        <a class="drawer__link drawer__link--util" href="/selection.html">Mon panier</a>
       </div>
       <footer class="drawer__foot" data-drawer-foot></footer>
     </div>`;
@@ -110,10 +110,10 @@ export function chromeHTML(active) {
   const cartDrawerHTML = `
     <div class="cartd" data-cart-drawer>
       <div class="cartd__backdrop" data-cartd-backdrop></div>
-      <aside class="cartd__panel" role="dialog" aria-modal="true" aria-label="Ma sélection" data-cartd-panel>
+      <aside class="cartd__panel" role="dialog" aria-modal="true" aria-label="Mon panier" data-cartd-panel>
         <header class="cartd__head">
-          <p class="cartd__title" data-cartd-title>Ma sélection</p>
-          <button class="cartd__close" data-cartd-close type="button" aria-label="Fermer la sélection">&times;</button>
+          <p class="cartd__title" data-cartd-title>Mon panier</p>
+          <button class="cartd__close" data-cartd-close type="button" aria-label="Fermer le panier">&times;</button>
         </header>
         <div class="cartd__body" data-cartd-body></div>
         <footer class="cartd__foot" data-cartd-foot hidden></footer>
@@ -142,7 +142,7 @@ export function chromeHTML(active) {
       <div class="nav__right">
         <button class="nav__search" type="button" data-search-open aria-label="Rechercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
         <a href="/rendez-vous.html" class="nav__util nav__util-extra">Rendez-vous</a>
-        <a href="/selection.html" class="nav__cart" aria-label="Ma sélection">
+        <a href="/selection.html" class="nav__cart" aria-label="Mon panier">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" width="22" height="22" aria-hidden="true">
             <path d="M6.46 8.2 4.55 19.2a.25.25 0 0 0 .25.3h14.4a.25.25 0 0 0 .25-.3L17.54 8.2a.25.25 0 0 0-.25-.2H6.71a.25.25 0 0 0-.25.2Z" stroke-linejoin="round"/>
             <path d="M9.5 11V4.75a.25.25 0 0 1 .25-.25h4.5a.25.25 0 0 1 .25.25V11"/>
@@ -160,49 +160,44 @@ export function chromeHTML(active) {
 }
 
 export function footerHTML() {
+  // Refonte novembre 2026 (références Mobbin : In Common With, KÖPPEN, SOTF) : colonnes à filet haut,
+  // newsletter en une ligne, grand nom de la boutique en pied de page.
   return `
   <footer class="footer">
     <div class="wrap">
-      <div class="footer__lockbar">
-        <span class="lockup-lg">Mikado Deco · Boutique de design · Uccle, Bruxelles</span>
-        <svg class="seal" viewBox="0 0 120 120" role="img" aria-label="Mikado Deco, Bruxelles, depuis 2011">
-          <defs><path id="seal-arc" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
-          <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="1" />
-          <circle cx="60" cy="60" r="40" fill="none" stroke="currentColor" stroke-width="1" />
-          <text font-family="'neue-haas-grotesk-display', sans-serif" font-size="8.4" letter-spacing="2.1" fill="currentColor"><textPath href="#seal-arc" startOffset="0">· MIKADO DECO · MOBILIER DE DESIGN · BRUXELLES </textPath></text>
-          <text x="60" y="67" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-weight="600" font-size="20" fill="currentColor">Uccle</text>
-        </svg>
-      </div>
       <div class="footer__grid">
         <div class="footer__news">
           <h2 class="serif">Restons en contact</h2>
-          <p>Recevez nos nouveautés, nos coups de cœur et les rendez-vous de la boutique.</p>
+          <p>Nouveautés, coups de cœur et rendez-vous de la boutique, une fois par mois.</p>
           <form class="footer__form" data-newsletter novalidate>
             <input type="email" name="email" placeholder="Votre adresse e-mail" aria-label="E-mail" autocomplete="email" required />
             <input type="text" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
-            <button class="btn btn--solid btn--block" type="submit">S'inscrire</button>
+            <button class="footer__submit" type="submit">S'inscrire</button>
             <p class="footer__news-status" data-news-status role="status" aria-live="polite"></p>
           </form>
         </div>
-        <div><h3>Boutique</h3><ul>
+        <div class="footer__col"><h3>La boutique</h3><ul>
+          <li><a href="https://maps.google.com/?q=75+Rue+du+Doyenné+1180+Uccle" target="_blank" rel="noopener">75 Rue du Doyenné<br>1180 Uccle, Bruxelles</a></li>
+          <li class="footer__hours">Du mardi au samedi<br>10h30 – 18h30</li>
+          <li><a href="/rendez-vous.html">Prendre rendez-vous</a></li>
+        </ul></div>
+        <div class="footer__col"><h3>Catalogue</h3><ul>
           <li><a href="/produits.html">Mobilier</a></li>
           <li><a href="/collections/luminaires">Luminaires</a></li>
           <li><a href="/collections/decoration">Décoration</a></li>
           <li><a href="/collections/outdoor">Jardin</a></li>
-        </ul></div>
-        <div><h3>Maison</h3><ul>
           <li><a href="/marques.html">Les marques</a></li>
           <li><a href="/materiaux.html">Les matières</a></li>
-          <li><a href="/rendez-vous.html">Rendez-vous</a></li>
         </ul></div>
-        <div><h3>Contact</h3><ul>
-          <li><a href="mailto:shop@mikadodeco.be">shop@mikadodeco.be</a></li>
+        <div class="footer__col"><h3>Contact</h3><ul>
           <li><a href="tel:+32493837983">+32 (0)493 83 79 83</a></li>
+          <li><a href="mailto:shop@mikadodeco.be">shop@mikadodeco.be</a></li>
           <li><a href="/contact.html">Nous écrire</a></li>
-          <li><a href="https://maps.google.com/?q=75+Rue+du+Doyenné+1180+Uccle" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a></li>
-          <li><a href="https://maps.app.goo.gl/NE71nd6NytFjot6K6" target="_blank" rel="noopener">★ Voir nos avis Google</a></li>
+          <li><a href="https://maps.app.goo.gl/NE71nd6NytFjot6K6" target="_blank" rel="noopener">★ 4,9/5 sur Google</a></li>
+          <li><a href="https://www.instagram.com/mikadodeco/" target="_blank" rel="noopener">Instagram</a></li>
         </ul></div>
       </div>
+      <p class="footer__giant serif" aria-hidden="true">Mikado Deco</p>
       <div class="footer__bottom">
         <nav aria-label="Liens légaux">
           <a href="/mentions-legales.html">Mentions légales</a>

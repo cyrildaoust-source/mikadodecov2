@@ -242,7 +242,7 @@ document.querySelector("[data-checkout]").addEventListener("click", async () => 
     else throw new Error(data.error || "checkout");
   } catch (e2) {
     err.textContent = "Le paiement n'a pas pu démarrer. Réessayez ou contactez-nous."; err.style.display = "block";
-    btn.disabled = false; btn.textContent = "Finaliser la sélection";
+    btn.disabled = false; btn.textContent = "Commander";
     console.warn(e2);
   }
 });
@@ -254,7 +254,7 @@ document.addEventListener("cart:change", () => { render(); schedulePreview(); re
 // "Redirection…". Reset to its idle state on every pageshow.
 window.addEventListener("pageshow", () => {
   const btn = document.querySelector("[data-checkout]");
-  if (btn) { btn.disabled = false; btn.textContent = "Finaliser la sélection"; }
+  if (btn) { btn.disabled = false; btn.textContent = "Commander"; }
   const err = document.querySelector("[data-checkout-error]");
   if (err) { err.style.display = "none"; err.textContent = ""; }
 });

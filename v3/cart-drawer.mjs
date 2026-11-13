@@ -56,11 +56,11 @@ export function bindCartDrawer() {
   function render() {
     const cart = readCart();
     const n = cartCount();
-    title.textContent = `Ma sélection${n ? ` (${n})` : ""}`;
+    title.textContent = `Mon panier${n ? ` (${n})` : ""}`;
     if (!cart.length) {
       body.innerHTML = `
         <div class="cartd__empty">
-          <p class="cartd__empty-text">Votre sélection est vide</p>
+          <p class="cartd__empty-text">Votre panier est vide</p>
           <a class="btn btn--outline btn--block" href="/produits.html">Voir le catalogue</a>
         </div>`;
       foot.hidden = true; foot.innerHTML = "";
@@ -80,8 +80,8 @@ export function bindCartDrawer() {
       ${discounts.map((d) => `<div class="cartd__row cartd__row--discount"><span>Remise · ${escapeHtml(d.title)}</span><span>−${euro(d.amount)}</span></div>`).join("")}
       <div class="cartd__row cartd__row--total"><span>Total hors livraison</span><span>${euro(total)}</span></div>
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
-      <p class="cartd__note">${discount > 0 ? "Remise appliquée automatiquement · " : ""}Livraison partout en Belgique&nbsp;: 50&nbsp;€</p>
-      <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Finaliser ma sélection</a>
+      <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Commander · ${euro(total)}</a>
+      <ul class="cartd__perks"><li>Livraison partout en Belgique&nbsp;: 50&nbsp;€</li><li>Retrait gratuit en boutique à Uccle</li><li>Retour sous 14&nbsp;jours · paiement sécurisé</li></ul>${discount > 0 ? `<p class="cartd__note">Remise appliquée automatiquement</p>` : ""}
       <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
   }
 

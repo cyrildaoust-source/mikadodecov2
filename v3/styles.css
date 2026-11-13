@@ -2,7 +2,7 @@
 /* ============================================================
    Mikado Deco · design system
    Identity decisions in DESIGN.md.
-   - Warm base #f8f5ef + brown-black ink + ROYAL-BLUE signature (#38529F); promo = ink label
+   - Warm base #f8f5ef + brown-black ink + oxblood signature (#7a3a2a, refonte novembre 2026); promo = ink label
    - Cormorant Garamond display (matches logo) + Neue Haas Grotesk body
    - Signature: royal-blue accent (measured · carries primary CTAs) + warm-greige product tiles
    ============================================================ */
@@ -81,40 +81,40 @@
 
 :root {
   /* --- Mikado palette --- */
-  --paper:      #f8f5ef;   /* warm base */
-  --paper-2:    #efe9df;   /* warm band · USP, alt sections */
-  --tile:       #ECE7DD;   /* product / image backdrop · warm greige */
-  --ink:        #1a1916;   /* warm brown-black */
-  --ink-deep:   #1a1916;
+  --paper:      #f6f2eb;   /* warm base */
+  --paper-2:    #ece5d9;   /* warm band · USP, alt sections */
+  --tile:       #ebe5da;   /* product / image backdrop · warm greige */
+  --ink:        #1d1a16;   /* warm brown-black */
+  --ink-deep:   #1d1a16;
   --muted:      #6b655d;   /* secondary text · AA sur paper/paper-2/tile */
   --subtle:     #6b655d;   /* meta · fusionné avec --muted pour AA (audit 06/2026) */
-  --line:       #e0d9cf;   /* warm beige hairline */
-  --line-ink:   #1a1916;   /* button/strong borders */
+  --line:       #d9d0c2;   /* warm beige hairline */
+  --line-ink:   #1d1a16;   /* button/strong borders */
 
   /* signature royal blue · premium accent (measured, not an omnipresent fill).
      DARK now → when used as a BACKGROUND, text must be --paper (cream). */
-  --accent:     #38529F;   /* royal blue · links text, rules, underlines, btn--blue bg */
-  --accent-ink: #1C2F6B;   /* deep royal · link/hover text on cream + btn hover bg */
+  --accent:     #7a3a2a;   /* royal blue · links text, rules, underlines, btn--blue bg */
+  --accent-ink: #5a2619;   /* deep royal · link/hover text on cream + btn hover bg */
   --danger:     #c43d3d;   /* rouge erreur/validation (etait reference sans etre declare) */
   --warn:       #b9742c;   /* sur commande / stock faible */
   --stock:      #5a8c4a;   /* en stock */
   --scrim:      20, 18, 16; /* anthracite chaud — voile « titre sur image » */
-  --accent-soft:#ECEFF7;   /* pale blue tint · soft panels (light bg, dark text) */
+  --accent-soft:#f3e8e1;   /* pale blue tint · soft panels (light bg, dark text) */
 
   /* promotions · ink/charcoal label — monochrome with the royal blue, no gold */
   --promo:      var(--ink-deep);   /* near-black promo badge (with --paper text) */
   --promo-deep: #000;              /* darkest · hover */
 
-  --on-dark:    #f8f5ef;   /* text over imagery */
+  --on-dark:    #f6f2eb;   /* text over imagery */
 
   /* --- type --- */
   --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --sans:  'neue-haas-grotesk-text', 'nhg-fallback', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;  /* body / UI */
   --sans-product: 'neue-haas-grotesk-display', 'nhg-fallback', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif; /* product names + same tier · nhg-fallback = repli métrique (évite le saut de police sur le contenu SSR) */
 
-  --fs-display: clamp(44px, 5vw, 92px);   /* Cormorant is narrow/light · runs larger */
-  --fs-h2:      clamp(28px, 2.6vw, 40px);
-  --fs-nav:     14px;
+  --fs-display: clamp(46px, 6vw, 104px);   /* Cormorant is narrow/light · runs larger */
+  --fs-h2:      clamp(30px, 3vw, 48px);
+  --fs-nav:     13.5px;
   --fs-body:    16px;
   --fs-small:   14px;
   --fs-meta:    12px;
@@ -235,7 +235,7 @@ html.kbd input:not([type=checkbox]):not([type=radio]):focus-visible, html.kbd te
 /* ============================================================
    SECTION HEADER · serif + royal-blue rule (signature detail)
    ============================================================ */
-.shead { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid var(--accent); }
+.shead { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--ink-deep); }
 .shead h2 { font-family: var(--serif); font-weight: 600; font-size: var(--fs-h2); line-height: 1.05; max-width: 24ch; }
 .shead a { font-size: var(--fs-small); color: var(--ink); border-bottom: 1px solid var(--accent-ink); padding-bottom: 3px; white-space: nowrap; transition: color .25s var(--ease); }
 .shead a:hover { color: var(--accent-ink); }
@@ -421,7 +421,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .subhero p { color: rgba(248,245,239,1); margin-top: 14px; max-width: 46ch; font-size: 17px; text-shadow: 0 1px 8px rgba(0,0,0,.35); }
 
 /* page head for form / list pages (no hero image) */
-.pagehead { padding-block: clamp(28px, 4vw, 56px) clamp(24px, 3vw, 40px); border-bottom: 2px solid var(--accent); margin-bottom: clamp(28px, 4vw, 52px); }
+.pagehead { padding-block: clamp(28px, 4vw, 56px) clamp(24px, 3vw, 40px); border-bottom: 1px solid var(--ink-deep); margin-bottom: clamp(28px, 4vw, 52px); }
 .pagehead h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(38px, 4.4vw, 64px); line-height: 1.0; letter-spacing: -0.035em; }
 .pagehead p { color: var(--muted); max-width: 56ch; margin-top: 14px; font-size: 17px; }
 
@@ -486,7 +486,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .plp-count { font-size: var(--fs-small); color: var(--muted); }
 .plp-loading { font-style: italic; opacity: .75; } /* libellé « chargement du catalogue… » pendant le walk progressif */
 .pgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 30px) var(--gap); }
-.catalogue-head { font-size: var(--fs-h2); line-height: 1.05; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 2px solid var(--accent); }
+.catalogue-head { font-size: var(--fs-h2); line-height: 1.05; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--ink-deep); }
 .plp-empty { grid-column: 1 / -1; color: var(--muted); padding: 60px 0; text-align: center; }
 
 /* ---------- brands ---------- */
@@ -1295,7 +1295,7 @@ body.pdplb-locked { overflow: hidden; }
 .grid-head__count { display: none; }
 .plp-designer .grid-head {
   display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
-  margin-bottom: 22px; padding-bottom: 14px; border-bottom: 2px solid var(--accent);
+  margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--ink-deep);
 }
 .plp-designer .grid-head .catalogue-head { flex: 1; margin: 0; padding: 0; border-bottom: 0; }
 .plp-designer .grid-head__count { display: inline; white-space: nowrap; }
@@ -1377,7 +1377,7 @@ body.pdplb-locked { overflow: hidden; }
 .home-hero__where { display: block; margin-top: 14px; font-family: var(--sans); font-size: clamp(15px, 1.5vw, 19px); font-weight: 500; line-height: 1.3; letter-spacing: .01em; }
 
 /* Rail familles (portrait) */
-.home-railhead { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid var(--accent); }
+.home-railhead { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--ink-deep); }
 .home-railhead h2 { font-family: var(--serif); font-weight: 600; font-size: var(--fs-h2); line-height: 1.05; }
 .home-arrows { display: flex; gap: 8px; flex-shrink: 0; }
 .home-arw { width: 40px; height: 40px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 19px; line-height: 1; cursor: pointer; border-radius: 0; display: flex; align-items: center; justify-content: center; transition: border-color .2s var(--ease), opacity .2s; }
@@ -1430,7 +1430,7 @@ body.pdplb-locked { overflow: hidden; }
 /* ── Page famille (ex. Jardin) ── */
     .fam{width:100%;margin:0 auto;}
     .fam .sec{width:100%;max-width:var(--container);margin:0 auto;padding:0 var(--gutter) var(--section-y);}
-    .fam .lab{font-family:var(--serif);font-weight:600;font-size:var(--fs-h2);line-height:1.05;letter-spacing:0;color:var(--ink-deep);margin:0 0 28px;padding-bottom:16px;border-bottom:2px solid var(--accent);}
+    .fam .lab{font-family:var(--serif);font-weight:600;font-size:var(--fs-h2);line-height:1.05;letter-spacing:0;color:var(--ink-deep);margin:0 0 28px;padding-bottom:16px;border-bottom: 1px solid var(--ink-deep);}
     .ph{position:relative;display:block;background:var(--tile);width:100%;overflow:hidden;}
     .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
     .fam-empty{grid-column:1/-1;color:var(--muted);font-size:14px;padding:30px 0;}
@@ -1509,7 +1509,7 @@ body.pdplb-locked { overflow: hidden; }
     .bcard__logo img{height:30px;width:auto;max-width:66%;filter:brightness(0) invert(1);opacity:.96;}
     .bcard:hover .bcard__scrim{background:rgba(var(--scrim),.54);}
     /* grille + compteur */
-    .fam-gridhead{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin:0 0 20px;padding-bottom:16px;border-bottom:2px solid var(--accent);}
+    .fam-gridhead{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin:0 0 20px;padding-bottom:16px;border-bottom: 1px solid var(--ink-deep);}
     .fam-gridhead h2{font-family:var(--serif);font-weight:600;font-size:var(--fs-h2);line-height:1.05;margin:0;}
     .fam-gridhead span{font-size:13px;color:var(--muted);}
     .fam-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,24px);}
@@ -1596,7 +1596,7 @@ body.pdplb-locked { overflow: hidden; }
 .catalog-filters__heading { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 22px; }
 .catalog-filters__heading .catalogue-head { margin: 0; padding-bottom: 0; border-bottom: 0; }
 /* Un seul filet bleu sous le titre ET le nombre de modèles, comme les autres titres de section ; pas de second filet juste dessous. */
-.catalog-filters__heading { padding-bottom: 14px; border-bottom: 2px solid var(--accent); }
+.catalog-filters__heading { padding-bottom: 14px; border-bottom: 1px solid var(--ink-deep); }
 .catalog-filters__heading + .catalog-filters { border-top: 0; }
 .catalog-filters { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); align-items: center; font-family: var(--sans-product); font-size: var(--fs-small); }
 .catalog-filters__groups { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 24px; }
@@ -1905,3 +1905,224 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
 }
 .price-save { display: block; margin-top: 4px; font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 600; color: #0b0b0b; }
 .pdp__promo.pdp__promo--bm { background: #0b0b0b; color: #fff; }
+
+/* ============================================================
+   REFONTE · novembre 2026 (« galerie »)
+   Direction : galerie de design plutôt que vitrine. Papier chaud, encre brune, une seule couleur
+   signature (sang-de-bœuf, --accent), filets fins au lieu des soulignés bleus, grandes capitales
+   Cormorant, légendes en petit grotesque. Références Mobbin : In Common With (en-tête, catalogue,
+   pied de page), Waka Waka (index numéroté), BAGGU et Savor (fiche produit), Palmer (accueil),
+   KÖPPEN et SOTF (pied de page). Couche placée en fin de feuille : elle prime à spécificité égale.
+   ============================================================ */
+
+/* --- Typographie d'ensemble --- */
+.serif { font-weight: 500; letter-spacing: -.012em; }
+body { font-size: 15.5px; }
+::selection { background: var(--accent); color: var(--paper); }
+
+/* --- Barre d'annonce + en-tête --- */
+.announce { background: var(--ink-deep); color: var(--paper); height: 32px; }
+.announce span { font-size: 12.5px; letter-spacing: .02em; }
+.chrome { border-bottom-color: var(--line); background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: saturate(1.2) blur(10px); -webkit-backdrop-filter: saturate(1.2) blur(10px); }
+.chrome a.nlink { letter-spacing: .005em; }
+.chrome a.nlink::after { height: 1px; bottom: -4px; background: currentColor; }
+.chrome a.nlink.is-active::after { transform: scaleX(1); }
+.nav__util { border-bottom: 1px solid transparent; transition: border-color .2s var(--ease); }
+.nav__util:hover { border-bottom-color: currentColor; }
+.cartcount { background: var(--accent); color: var(--paper); }
+
+/* --- Boutons : carrés, encre ; le bouton principal passe à l'encre, survol sang-de-bœuf --- */
+.btn { font-family: var(--sans-product); font-weight: 600; font-size: 13.5px; letter-spacing: .02em; padding: 14px 26px; min-height: 48px; }
+.btn--blue { background: var(--ink-deep); border-color: var(--ink-deep); color: var(--paper); }
+.btn--blue:hover { background: var(--accent); border-color: var(--accent); }
+.btn--solid:hover { background: var(--accent); }
+.btn--outline:hover { background: var(--ink-deep); border-color: var(--ink-deep); }
+.btn--light-solid { background: var(--paper); color: var(--ink-deep); border: 1px solid var(--paper); }
+.btn--light-solid:hover { background: transparent; color: var(--on-dark); }
+
+/* --- Titres de section : filet fin AU-DESSUS (In Common With), lien fléché à droite --- */
+.shead, .home-railhead { border-bottom: 0; border-top: 1px solid var(--ink-deep); padding: 18px 0 0; margin-bottom: clamp(22px, 2.4vw, 34px); }
+.shead h2, .home-railhead h2 { font-weight: 500; letter-spacing: -.015em; }
+.shead a { border-bottom: 1px solid var(--line-ink); color: var(--ink-deep); font-family: var(--sans-product); font-weight: 600; font-size: 13.5px; }
+.shead a { display: inline-flex; align-items: baseline; gap: 5px; white-space: nowrap; }
+.shead a::after { content: "→"; }
+.shead a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.fam .lab { border-bottom: 0; border-top: 1px solid var(--ink-deep); padding: 18px 0 0; font-weight: 500; }
+.catalogue-head { font-weight: 500; }
+
+/* --- Carte produit : légende de galerie (nom à gauche, prix à droite), bouton discret --- */
+.pcard__media { background: var(--tile); }
+.pcard__media img { transition: opacity .35s var(--ease), transform .9s var(--ease); }
+@media (hover: hover) { .pcard__media:hover img.main { transform: scale(1.025); } }
+.tag { border: 0; background: var(--paper); color: var(--ink-deep); font-weight: 600; letter-spacing: .03em; text-transform: none; font-size: 12px; padding: 4px 9px; }
+.pcard__brand { margin-top: 14px; color: var(--muted); font-weight: 500; letter-spacing: .1em; font-size: 11.5px; }
+.pcard__name { font-weight: 500; font-size: 15px; letter-spacing: -.005em; }
+.pcard__price { color: var(--ink-deep); font-weight: 600; font-size: 15px; margin-top: 2px; margin-bottom: 14px; }
+.pcard__avail { color: var(--muted); font-weight: 500; letter-spacing: 0; }
+.pcard__dot { width: 6px; height: 6px; border-radius: 50%; }
+.pcard__cta { min-height: 42px; padding: 10px 14px; border-color: var(--line); font-size: 13px; }
+.pcard__cta:hover { border-color: var(--ink-deep); }
+
+/* --- Catégories (tuiles avec titre sur l'image, toutes pages) : voile plus léger, flèche --- */
+.home-rc__scrim { background: linear-gradient(0deg, rgba(var(--scrim),.42), transparent 48%); }
+.home-rc__n { font-weight: 500; letter-spacing: -.01em; }
+.home-rc.is-active { outline-color: var(--accent); }
+
+/* ===== ACCUEIL ===== */
+/* Hero : photo plein cadre, titre en bas à gauche, boutons + légende à droite */
+.home-hero { aspect-ratio: auto; min-height: clamp(560px, 82vh, 900px); }
+.home-hero__scrim { background: linear-gradient(0deg, rgba(var(--scrim),.66), rgba(var(--scrim),.12) 50%, transparent 72%); }
+.home-hero__in { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px 48px; flex-wrap: wrap; }
+.home-hero__in h1 { font-weight: 500; font-size: clamp(48px, 7.4vw, 128px); line-height: .92; letter-spacing: -.03em; }
+.home-hero__where { font-family: var(--sans-product); font-weight: 500; font-size: clamp(14px, 1.1vw, 16px); letter-spacing: .02em; margin-top: 22px; opacity: .9; }
+.home-hero__side { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
+.home-hero__cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 0; justify-content: flex-end; }
+.home-hero__caption { font-family: var(--sans-product); font-size: 12.5px; color: var(--on-dark); opacity: .82; }
+
+/* Manifeste */
+.home-manifesto { padding-block: clamp(64px, 9vw, 150px) clamp(48px, 6vw, 96px); display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px 48px; }
+.home-manifesto__t { font-size: clamp(30px, 4vw, 68px); line-height: 1.06; letter-spacing: -.02em; max-width: 30ch; font-weight: 400; }
+.home-manifesto__t a { font-style: italic; color: var(--accent); background: linear-gradient(currentColor 0 0) left bottom / 100% 1px no-repeat; transition: background-size .35s var(--ease); }
+.home-manifesto__t a:hover { background-size: 0 1px; }
+.home-manifesto__more { font-family: var(--sans-product); font-weight: 600; font-size: 13.5px; border-bottom: 1px solid currentColor; padding-bottom: 3px; white-space: nowrap; }
+.home-manifesto__more:hover { color: var(--accent); }
+
+/* Index des familles : grille numérotée, légende sous la photo (Waka Waka) */
+.home-index { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(28px, 3vw, 44px) var(--gap); }
+.home-ix { display: flex; flex-direction: column; gap: 12px; }
+.home-ix__ph { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--tile); }
+.home-ix__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease); }
+.home-ix:hover .home-ix__ph img { transform: scale(1.035); }
+.home-ix__cap { display: flex; align-items: baseline; gap: 12px; padding-top: 10px; border-top: 1px solid var(--line); transition: border-color .3s var(--ease); }
+.home-ix:hover .home-ix__cap { border-top-color: var(--ink-deep); }
+.home-ix__no { font-family: var(--sans-product); font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.home-ix__n { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 1.8vw, 28px); line-height: 1.05; letter-spacing: -.01em; }
+.home-ix--all .home-ix__ph { background: var(--ink-deep); color: var(--paper); display: flex; align-items: flex-end; padding: clamp(18px, 2vw, 28px); transition: background .3s var(--ease); }
+.home-ix--all:hover .home-ix__ph { background: var(--accent); }
+.home-ix__all { font-size: clamp(26px, 2.4vw, 38px); line-height: 1.02; color: var(--paper); font-weight: 400; }
+
+/* Marque du moment */
+.home-band__scrim { background: linear-gradient(90deg, rgba(var(--scrim),.62), rgba(var(--scrim),.1) 60%, transparent); }
+.home-band__t { font-weight: 500; font-size: clamp(40px, 6vw, 96px); letter-spacing: -.03em; }
+.home-band__cta { background: var(--paper); color: var(--ink-deep); border-color: var(--paper); }
+.home-band:hover .home-band__cta { background: transparent; color: var(--on-dark); }
+
+/* Mikado Studio : panneau encre, grande typographie */
+.home-studio__body { background: var(--ink-deep); color: var(--on-dark); }
+.home-studio__body h2 { color: var(--on-dark); font-weight: 400; letter-spacing: -.03em; }
+.home-studio__body p { color: rgba(246,242,235,.78); }
+.home-studio__body .btn--solid { background: var(--paper); color: var(--ink-deep); }
+.home-studio__body .btn--solid:hover { background: var(--accent); color: var(--paper); }
+
+/* Par pièce : légende sous la photo */
+.home-room { display: flex; flex-direction: column; align-items: stretch; gap: 12px; padding: 0; background: none; aspect-ratio: auto; overflow: visible; }
+.home-room--big { aspect-ratio: auto; }
+.home-room__ph { position: relative; display: block; overflow: hidden; background: var(--tile); aspect-ratio: 16 / 10; }
+.home-room--big .home-room__ph { aspect-ratio: 3 / 2; }
+.home-room__img { position: absolute; inset: 0; }
+.home-room__n { position: static; color: var(--ink-deep); font-weight: 500; font-size: clamp(22px, 1.8vw, 28px); letter-spacing: -.01em; padding-top: 10px; border-top: 1px solid var(--line); transition: border-color .3s var(--ease), color .3s var(--ease); }
+.home-room:hover .home-room__n { border-top-color: var(--ink-deep); color: var(--accent); }
+
+/* Chiffres : bandeau clair à filets, plus de panneau noir */
+.stats { background: var(--paper); color: var(--ink); border-top: 1px solid var(--ink-deep); }
+.stats .wrap { text-align: left; gap: 0; padding-block: clamp(36px, 4vw, 64px); }
+.stat, .stat--google { padding: 4px clamp(16px, 2vw, 32px); border-left: 1px solid var(--line); }
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat__num { color: var(--ink-deep); font-weight: 400; justify-content: flex-start; font-size: clamp(52px, 5.4vw, 92px); letter-spacing: -.04em; }
+.stat__suf { color: var(--accent); font-size: .36em; letter-spacing: 0; }
+.stat__label { color: var(--muted); margin-inline: 0; }
+.stat__stars { color: var(--accent); justify-content: flex-start; text-align: left; }
+.stat--google:hover { background: var(--paper-2); }
+.usp { background: var(--paper); }
+.usp .wrap { padding-top: 8px; }
+.usp__col { border-top: 1px solid var(--ink-deep); padding-top: 16px; }
+.usp__col h3 { font-weight: 500; font-size: clamp(22px, 1.8vw, 28px); }
+
+/* ===== PIED DE PAGE ===== */
+.footer { background: var(--paper-2); border-top: 0; }
+.footer .wrap { padding-block: clamp(56px, 6vw, 96px) 24px; }
+.footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 24px clamp(24px, 3vw, 48px); }
+.footer__grid > div { border-top: 1px solid var(--ink-deep); padding-top: 16px; }
+.footer__news h2 { font-weight: 500; font-size: clamp(28px, 2.4vw, 38px); letter-spacing: -.015em; }
+.footer h3 { font-family: var(--sans-product); font-weight: 600; font-size: 13.5px; margin-bottom: 18px; }
+.footer li { margin-bottom: 9px; font-size: var(--fs-small); line-height: 1.4; }
+.footer li a, .footer__hours { color: var(--ink); font-size: var(--fs-small); }
+.footer__hours { color: var(--muted); }
+.footer li a:hover { color: var(--accent); }
+.footer__form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0; max-width: 440px; }
+.footer__form input[type="email"] { border: 1px solid var(--ink-deep); border-right: 0; background: transparent; min-height: 48px; }
+.footer__submit { border: 1px solid var(--ink-deep); background: var(--ink-deep); color: var(--paper); padding: 0 20px; font-family: var(--sans-product); font-weight: 600; font-size: 13.5px; cursor: pointer; transition: background .25s var(--ease); }
+.footer__submit:hover { background: var(--accent); border-color: var(--accent); }
+.footer__news-status { grid-column: 1 / -1; }
+.footer__giant { font-size: clamp(64px, 17vw, 330px); line-height: .8; letter-spacing: -.055em; font-weight: 400; color: var(--ink-deep); white-space: nowrap; margin: clamp(48px, 6vw, 96px) 0 0; overflow: hidden; text-align: center; }
+.footer__bottom { margin-top: clamp(20px, 2vw, 32px); border-top: 1px solid var(--line); }
+.pay span { border-color: var(--line); background: var(--paper); }
+
+/* ===== FICHE PRODUIT ===== */
+.pdp__main { background: var(--tile); mix-blend-mode: normal; }
+.pdp__brand { color: var(--muted); font-weight: 500; letter-spacing: .12em; }
+.pdp__brand:hover { color: var(--accent); }
+.pdp__name { font-weight: 500; font-size: clamp(36px, 3.8vw, 62px); letter-spacing: -.025em; line-height: .98; margin: 10px 0 10px; }
+.pdp__price { font-family: var(--sans-product); font-weight: 600; font-size: 22px; color: var(--ink-deep); }
+.pdp__buy .pdp__cta { min-height: 54px; font-size: 14.5px; }
+.pdp__qty-open { min-height: 54px; }
+.pdp__avail { color: var(--ink); font-weight: 500; letter-spacing: 0; }
+.trust-list { background: var(--paper-2); border-top: 0; padding: 16px 18px; margin-top: 16px; gap: 11px; }
+.trust-list__i { stroke: var(--ink-deep); }
+.trust-list a, .pdp__contact a, .pdp__cart-status a, .pdp__palette { color: var(--accent); }
+.pdp-acc__item { border-color: var(--line); }
+
+/* ===== PANIER (tiroir) ===== */
+.cartd__panel { width: min(460px, 92vw); box-shadow: none; border-left: 1px solid var(--line); }
+.cartd__title { font-weight: 500; font-size: 30px; }
+.cartd__img { width: 72px; height: 72px; background: var(--tile); }
+.cartd__item { grid-template-columns: 72px 1fr auto; }
+.cartd__price { color: var(--ink-deep); }
+.cartd__foot { background: var(--paper-2); border-top: 1px solid var(--ink-deep); }
+.cartd__row--total { border-top-color: var(--ink-deep); font-size: 17px; }
+.cartd__cta { margin-top: 14px; min-height: 54px; font-size: 14.5px; }
+.cartd__perks { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 4px; }
+.cartd__perks li { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); padding-left: 16px; position: relative; }
+.cartd__perks li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); }
+.cartd__note { margin: 8px 0 0; }
+
+/* ===== Mobile ===== */
+@media (max-width: 1080px) {
+  .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__news { grid-column: 1 / -1; }
+  .home-index { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .home-index .home-ix--all { display: none; }
+  .home-index .home-ix:nth-child(7) { display: none; }
+}
+@media (max-width: 900px) {
+  .home-hero { min-height: 78svh; }
+  .home-hero__side { align-items: flex-start; }
+  .home-hero__cta { justify-content: flex-start; }
+  .home-manifesto { grid-template-columns: 1fr; }
+  .home-room, .home-room--big { aspect-ratio: auto; }
+  .home-room:last-child:nth-child(odd) { aspect-ratio: auto; }
+  .stats .wrap { gap: 28px 0; }
+  .stat, .stat--google { padding: 0 16px; }
+  .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__news { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .home-index { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
+  .home-index .home-ix:nth-child(7), .home-index .home-ix--all { display: flex; }
+  .home-ix__ph { aspect-ratio: 1 / 1; }
+  .home-ix__n { font-size: 20px; }
+  .home-ix__no { font-size: 11px; }
+  .home-ix__all { font-size: 24px; }
+  .home-hero__in h1 { font-size: clamp(42px, 12vw, 64px); }
+  .home-hero__cta .btn { flex: 1 1 auto; }
+  .home-hero__side, .home-hero__cta { width: 100%; }
+  .home-studio__body h2 { font-size: clamp(40px, 11vw, 56px); }
+}
+@media (max-width: 680px) {
+  .footer__grid > div:last-child { grid-column: auto; }
+  .footer__grid > div:nth-child(2) { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .stat__num { font-size: 48px; }
+}

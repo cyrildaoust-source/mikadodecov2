@@ -127,7 +127,7 @@ export function collectionTrail(handle, nav, label = '', seen = new Set()) {
 export function listingTrail(url, nav, { title = '', brandName = '' } = {}) {
   if (url.pathname === '/marques.html') return [HOME, BRANDS];
   if (url.pathname === '/designers.html') return [HOME, DESIGNERS];
-  if (url.pathname === '/selection.html') return [HOME, { label: 'Ma sélection', href: '/selection.html' }];
+  if (url.pathname === '/selection.html') return [HOME, { label: 'Mon panier', href: '/selection.html' }];
   const path = selectionURL(url.pathname + url.search);
   if (!path) return [HOME, CATALOG];
   const p = new URL(path, ORIGIN).searchParams;

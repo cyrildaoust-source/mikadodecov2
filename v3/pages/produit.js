@@ -122,12 +122,12 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
   const updateStatus = () => {
     const n = cartQty(current.id);
     status.innerHTML = n > 0
-      ? `Dans la sélection : <strong>${n}</strong> · <a href="/selection.html">Ma sélection <span aria-hidden="true">›</span></a>`
+      ? `Dans le panier : <strong>${n}</strong> · <a href="/selection.html">Voir le panier <span aria-hidden="true">›</span></a>`
       : "";
     const stock = (typeof current.qty === "number") ? current.qty : 0;
     const atMax = isPromo && stock >= 1 && n >= stock;
     const unavailable = current.available === false;   // variante non commandable : pas d'ajout possible
-    if (cta) { cta.disabled = atMax || unavailable; cta.textContent = unavailable ? "Indisponible" : atMax ? `Maximum en stock (${stockLabel(stock)})` : "Ajouter à la sélection"; }
+    if (cta) { cta.disabled = atMax || unavailable; cta.textContent = unavailable ? "Indisponible" : atMax ? `Maximum en stock (${stockLabel(stock)})` : "Ajouter au panier"; }
   };
   updateStatus();
   document.addEventListener("cart:change", updateStatus);
@@ -610,7 +610,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     let add = pickQty;
     if (isPromo && stock >= 1) {                        // article en SOLDE a stock limite : ne jamais depasser le stock (panier compris)
       const room = stock - (cartQty(current.id) || 0);
-      if (room <= 0) { status.innerHTML = `Vous avez déjà le maximum en stock (${stockLabel(stock)}) dans votre sélection. · <a href="/selection.html">Ma sélection <span aria-hidden="true">›</span></a>`; return; }
+      if (room <= 0) { status.innerHTML = `Vous avez déjà le maximum en stock (${stockLabel(stock)}) dans votre panier. · <a href="/selection.html">Voir le panier <span aria-hidden="true">›</span></a>`; return; }
       add = Math.min(pickQty, room);
     }
     addToCart({
@@ -621,7 +621,7 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
       price: current.price || 0,
       image: current.image || p.image,
     }, add);
-    if (isPromo && stock >= 1 && add < pickQty) status.innerHTML = `Ajouté ${add} — stock limité (${stockLabel(stock)} en stock). · <a href="/selection.html">Ma sélection <span aria-hidden="true">›</span></a>`;
+    if (isPromo && stock >= 1 && add < pickQty) status.innerHTML = `Ajouté ${add} — stock limité (${stockLabel(stock)} en stock). · <a href="/selection.html">Voir le panier <span aria-hidden="true">›</span></a>`;
   });
 
   // Mobile : barre d'achat fixe quand le bouton principal est sorti de l'écran.

@@ -25,7 +25,7 @@
 </template>
   <main id="contenu">
 
-  <!-- 1 · HERO -->
+  <!-- 1 · HERO — refonte nov. 2026 : photo plein cadre, titre en bas à gauche, légende et accès boutique à droite -->
   <section class="home-hero">
     <picture>
       <source type="image/avif" media="(max-width: 600px)" srcset="/images/home/hero-mobile.avif" />
@@ -38,15 +38,23 @@
     <span class="home-hero__scrim"></span>
     <div class="home-hero__in wrap">
       <h1 class="serif">Le design,<br>pour toute la maison.<span class="home-hero__where">Mobilier et déco design à Bruxelles</span></h1>
-      <div class="home-hero__cta"><a href="/produits.html" class="btn btn--blue">Découvrir le catalogue</a></div>
+      <div class="home-hero__side">
+        <div class="home-hero__cta"><a href="/produits.html" class="btn btn--light-solid">Découvrir le catalogue</a><a href="/rendez-vous.html" class="btn btn--light">Venir en boutique</a></div>
+        <p class="home-hero__caption">75 Rue du Doyenné, Uccle · du mardi au samedi, 10h30–18h30</p>
+      </div>
     </div>
   </section>
 
-  <!-- 2 · NOS FAMILLES (rail portrait) -->
+  <!-- 1b · MANIFESTE — une phrase, en grand (référence Mobbin : Loom shop, In Common With) -->
+  <section class="home-manifesto wrap">
+    <p class="home-manifesto__t serif">Depuis 2011, nous choisissons pièce par pièce le mobilier, la lumière et les objets qui font une maison&nbsp;: <a href="/collections/fermob">Fermob</a>, <a href="/collections/vitra">Vitra</a>, <a href="/collections/hay">HAY</a>, <a href="/collections/alessi">Alessi</a> et une vingtaine d'autres maisons européennes.</p>
+    <a class="home-manifesto__more" href="/marques.html">Toutes les marques <span aria-hidden="true">→</span></a>
+  </section>
+
+  <!-- 2 · NOS FAMILLES — index numéroté, légende sous la photo (références Mobbin : Waka Waka, In Common With) -->
   <section class="section wrap">
-    <div class="home-railhead"><h2 class="serif">Nos familles</h2>
-      <div class="home-arrows"><button class="home-arw" data-prev aria-label="Familles précédentes">‹</button><button class="home-arw" data-next aria-label="Familles suivantes">›</button></div></div>
-    <div class="home-rail" data-famrail><a class="home-rc" href="/collections/sieges"><img class="home-rc__img" src="/images/home/fam-sieges.webp" alt="" loading="lazy"><span class="home-rc__scrim"></span><span class="home-rc__n">Assises</span></a><a class="home-rc" href="/collections/tables"><img class="home-rc__img" src="/images/home/fam-tables.webp" alt="" loading="lazy"><span class="home-rc__scrim"></span><span class="home-rc__n">Tables</span></a><a class="home-rc" href="/collections/luminaires"><img class="home-rc__img" src="/images/home/fam-luminaires.webp" alt="" loading="lazy"><span class="home-rc__scrim"></span><span class="home-rc__n">Luminaires</span></a><a class="home-rc" href="/collections/decoration"><img class="home-rc__img" src="/images/home/fam-decoration.webp" alt="" loading="lazy"><span class="home-rc__scrim"></span><span class="home-rc__n">Décoration</span></a><a class="home-rc" href="/collections/outdoor"><img class="home-rc__img" src="/images/home/fam-outdoor.webp" alt="" loading="lazy"><span class="home-rc__scrim"></span><span class="home-rc__n">Jardin</span></a><a class="home-rc" href="/collections/rangement"><img class="home-rc__img" src="/images/home/fam-rangement.webp" alt="" loading="lazy"><span class="home-rc__scrim"></span><span class="home-rc__n">Rangement</span></a><a class="home-rc" href="/collections/accessoires"><img class="home-rc__img" src="/images/home/fam-arts.webp" alt="" loading="lazy"><span class="home-rc__scrim"></span><span class="home-rc__n">Arts de la table</span></a></div>
+    <div class="shead"><h2 class="serif">Nos familles</h2><a href="/produits.html">Tout le catalogue</a></div>
+    <div class="home-index"><a class="home-ix" href="/collections/sieges"><span class="home-ix__ph"><img src="/images/home/fam-sieges.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°01</span><span class="home-ix__n">Assises</span></span></a><a class="home-ix" href="/collections/tables"><span class="home-ix__ph"><img src="/images/home/fam-tables.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°02</span><span class="home-ix__n">Tables</span></span></a><a class="home-ix" href="/collections/luminaires"><span class="home-ix__ph"><img src="/images/home/fam-luminaires.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°03</span><span class="home-ix__n">Luminaires</span></span></a><a class="home-ix" href="/collections/decoration"><span class="home-ix__ph"><img src="/images/home/fam-decoration.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°04</span><span class="home-ix__n">Décoration</span></span></a><a class="home-ix" href="/collections/outdoor"><span class="home-ix__ph"><img src="/images/home/fam-outdoor.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°05</span><span class="home-ix__n">Jardin</span></span></a><a class="home-ix" href="/collections/rangement"><span class="home-ix__ph"><img src="/images/home/fam-rangement.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°06</span><span class="home-ix__n">Rangement</span></span></a><a class="home-ix" href="/collections/accessoires"><span class="home-ix__ph"><img src="/images/home/fam-arts.webp" alt="" loading="lazy" /></span><span class="home-ix__cap"><span class="home-ix__no">N°07</span><span class="home-ix__n">Arts de la table</span></span></a><a class="home-ix home-ix--all" href="/produits.html"><span class="home-ix__ph"><span class="home-ix__all serif">Tout le catalogue <span aria-hidden="true">→</span></span></span><span class="home-ix__cap"><span class="home-ix__no">N°08</span><span class="home-ix__n">Toutes les pièces</span></span></a></div>
   </section>
 
   <!-- 2b · IDÉES CADEAUX — saison de Noël uniquement, rendu par le serveur (lib/render/gifts.js, ADR 0016) -->
@@ -99,7 +107,7 @@
   <!-- 7 · PAR PIÈCE -->
   <section class="section wrap">
     <div class="shead"><h2 class="serif">Par pièce</h2><a href="/produits.html">Tout voir</a></div>
-    <div class="home-rooms"><a class="home-room home-room--big" href="/collections/sieges"><img class="home-room__img" src="/images/home/room-salon.webp" alt="" loading="lazy"><span class="home-room__scrim"></span><span class="home-room__n">Le salon</span></a><a class="home-room home-room--big" href="/collections/tables"><img class="home-room__img" src="/images/home/room-sam.webp" alt="" loading="lazy"><span class="home-room__scrim"></span><span class="home-room__n">La salle à manger</span></a><a class="home-room" href="/produits.html"><img class="home-room__img" src="/images/home/room-chambre.webp" alt="" loading="lazy"><span class="home-room__scrim"></span><span class="home-room__n">La chambre</span></a><a class="home-room" href="/collections/bureau"><img class="home-room__img" src="/images/home/room-bureau.webp" alt="" loading="lazy"><span class="home-room__scrim"></span><span class="home-room__n">Le bureau</span></a><a class="home-room" href="/collections/outdoor"><img class="home-room__img" src="/images/home/room-dehors.webp" alt="" loading="lazy"><span class="home-room__scrim"></span><span class="home-room__n">L'extérieur</span></a></div>
+    <div class="home-rooms"><a class="home-room home-room--big" href="/collections/sieges"><span class="home-room__ph"><img class="home-room__img" src="/images/home/room-salon.webp" alt="" loading="lazy"></span><span class="home-room__n">Le salon <span aria-hidden="true">→</span></span></a><a class="home-room home-room--big" href="/collections/tables"><span class="home-room__ph"><img class="home-room__img" src="/images/home/room-sam.webp" alt="" loading="lazy"></span><span class="home-room__n">La salle à manger <span aria-hidden="true">→</span></span></a><a class="home-room" href="/produits.html"><span class="home-room__ph"><img class="home-room__img" src="/images/home/room-chambre.webp" alt="" loading="lazy"></span><span class="home-room__n">La chambre <span aria-hidden="true">→</span></span></a><a class="home-room" href="/collections/bureau"><span class="home-room__ph"><img class="home-room__img" src="/images/home/room-bureau.webp" alt="" loading="lazy"></span><span class="home-room__n">Le bureau <span aria-hidden="true">→</span></span></a><a class="home-room" href="/collections/outdoor"><span class="home-room__ph"><img class="home-room__img" src="/images/home/room-dehors.webp" alt="" loading="lazy"></span><span class="home-room__n">L'extérieur <span aria-hidden="true">→</span></span></a></div>
   </section>
 
   <!-- 8 · RÉASSURANCE · STATS -->
