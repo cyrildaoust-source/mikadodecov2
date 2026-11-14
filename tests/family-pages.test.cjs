@@ -64,7 +64,7 @@ before(async () => {
       if (catalogueIconsUnavailable && variables.handle === 'artek-stool-60') return new Response('Unavailable', { status: 503 });
       // Une chaise dépubliée et une requête en panne ne bloquent pas le catalogue.
       if (variables.handle === 'chaise-standard') return Response.json({ data: { product: null } });
-      if (variables.handle === 'chaise-hay-rey-chair') return new Response('Unavailable', { status: 503 });
+      if (variables.handle === 'chaise-hay-rey-chair-non-rembourree') return new Response('Unavailable', { status: 503 });
       if (variables.handle === 'seo-example') return Response.json({ data: { product: {
         ...product(100), handle: variables.handle,
         seo: { title: 'Titre Shopify & design', description: 'Description Shopify & utile' },
@@ -224,8 +224,8 @@ test('chairs belong to Assises only, and unavailable models do not block the sel
   assert.ok(assises.html.indexOf('Nos catégories') < assises.html.indexOf('data-icones-sec'));
   assert.ok(assises.html.indexOf('data-icones-sec') < assises.html.indexOf('Par pièce'));
   const initial = JSON.parse(assises.html.match(/id="seating-icons-initial">([\s\S]*?)<\/script>/)[1]);
-  assert.equal(initial.items.length, 1, "3 chaises iconiques (CH24 retirée le 20 octobre 2026) moins la dépubliée et la panne");
-  assert.ok(initial.items.every(item => !['chaise-standard', 'chaise-hay-rey-chair'].includes(item.handle)));
+  assert.equal(initial.items.length, 2, "4 chaises iconiques (liste du 14 novembre 2026) moins la dépubliée et la panne");
+  assert.ok(initial.items.every(item => !['chaise-standard', 'chaise-hay-rey-chair-non-rembourree'].includes(item.handle)));
   // Une fiche en panne est réessayée par le client Shopify : compter les modèles distincts.
   assert.deepEqual([...new Set(productRequests.slice(beforeRequests))], seatingIcons.handles.filter(handle => !productRequests.slice(0, beforeRequests).includes(handle)), 'models already loaded by Mobilier reuse the product cache');
   assert.ok(assises.html.includes('/produit.html?handle=chaise-panton'));
@@ -584,7 +584,7 @@ test('les lots de collections sont liés sans JavaScript avec une canonique prop
 });
 
 test('les erreurs Shopify retournent 503 sans cache tandis qu’une fiche retirée garde 404', async () => {
-  for (const url of ['/produit.html?handle=chaise-hay-rey-chair', '/collections/nouveautes?cursor=unavailable']) {
+  for (const url of ['/produit.html?handle=chaise-hay-rey-chair-non-rembourree', '/collections/nouveautes?cursor=unavailable']) {
     const { response } = await page(url);
     assert.equal(response.status, 503);
     assert.equal(response.headers.get('cache-control'), 'no-store');

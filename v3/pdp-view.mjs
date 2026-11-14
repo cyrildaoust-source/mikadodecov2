@@ -118,7 +118,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
   const availStore = (v) => {
     const s = variantState(v || current);
     if (p.giftCard)          return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>Carte cadeau</strong> · envoyée par e-mail dès le paiement`;
-    if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>En stock</strong> · livraison 2–3 jours · ${escapeHtml(p.pickupReady || "Retrait en boutique : prêt sous 24 h")} · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a>` + noelChip("instock");
+    if (s === "instock")     return `<span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><strong>En stock</strong> · livraison 2–3 jours<span class="pdp__avail-more">${escapeHtml(p.pickupReady || "Retrait en boutique : prêt sous 24 h")} · <a href="${SHOWROOM_MAPS}" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a></span>` + noelChip("instock");
     if (s === "unavailable") return `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Indisponible</strong>`;
     return p.longDelay
       ? `<span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><strong>Sur commande</strong> · délai confirmé après commande, livraison ou retrait en boutique`
@@ -157,7 +157,6 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
   const html = `
     <div class="pdp">
       <div class="pdp__gallery">
-        <span class="pdp__promo" data-promo hidden></span>
         <div class="pdp__main-wrap">
           <img class="pdp__main" data-main src="${escapeHtml(current.image || imgs[0] || "")}" srcset="${escapeHtml(srcsetFor(current.image || imgs[0] || ""))}" sizes="${MAIN_SIZES}" alt="${escapeHtml(p.name)}" fetchpriority="high" decoding="async" role="button" tabindex="0" aria-label="Agrandir la photo" />
         </div>
@@ -170,6 +169,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
         <h1 class="pdp__name">${escapeHtml(p.name)}</h1>
         ${designerHTML}
         <div class="pdp__price" data-price-el>${priceLabel(initialSelection ? {...p,price:current.price,priceMin:current.price,priceMax:current.price,compareAt:current.compareAtPrice} : p)}</div>
+        <p class="pdp__promo" data-promo hidden></p>
         ${pickAxes.length ? `
         <div class="pdp__variant-picks">${pickAxes.map((axis, i) => `
           <div class="pdp__variant-pick">

@@ -764,7 +764,8 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 /* PROMO BADGE · flat ink/charcoal label, cream text + soft shadow. Minimalist
    and modern — monochrome with the royal blue, not a "sale red" sticker.
    Kept perfectly horizontal — no tilt. */
-.pdp__promo { position: absolute; top: 16px; left: 16px; z-index: 2; max-width: calc(100% - 32px); padding: 10px 16px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; box-shadow: 0 4px 14px rgba(26,25,22,.14); }
+.pdp__promo { display: inline-block; margin: 12px 0 0; padding: 6px 10px; background: var(--promo); color: var(--paper); font-family: var(--sans-product); font-weight: 600; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; line-height: 1.25; }
+.pdp__promo[hidden] { display: none; }
 .pdp__designer { display: block; color: var(--muted); font-size: var(--fs-small); margin: 2px 0 0; }
 .pdp__designer--link { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s var(--ease); }
 .pdp__designer--link:hover { border-bottom-color: currentColor; }
@@ -822,8 +823,10 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .trust-list__i { width: 17px; height: 17px; flex-shrink: 0; fill: none; stroke: var(--accent-ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .trust-list a { color: var(--accent-ink); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; }
 .trust-list a:hover { border-bottom-color: currentColor; }
-.pdp__avail { display: flex; align-items: center; gap: 8px; color: var(--warn-ink); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; margin: 10px 0 4px; }
-.pdp__avail strong { font-weight: 700; }
+.pdp__avail { display: block; color: var(--muted); font-family: var(--sans-product); font-weight: 400; font-size: var(--fs-small); line-height: 1.5; margin: 10px 0 4px; }
+.pdp__avail .pcard__dot { margin-right: 8px; vertical-align: middle; }
+.pdp__avail-more { display: block; margin-top: 2px; }
+.pdp__avail strong { font-weight: 600; color: var(--ink); }
 .pdp__avail a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
 
 .pdp__contact { margin-top: 8px; }
@@ -1716,8 +1719,7 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .tag--noel { background: var(--accent); border-color: var(--accent); color: var(--paper); }
 .pcard__tags { flex-wrap: wrap; max-width: 62%; }
 /* Sur la fiche, le repère prend sa propre ligne sous l'état de stock (la ligne reste entière). */
-.pdp__avail { flex-wrap: wrap; }
-.pdp__avail .tag--noel { flex-basis: 100%; max-width: max-content; margin-left: 15px; }
+.pdp__avail .tag--noel { display: block; max-width: max-content; margin-top: 6px; }
 .announce span a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 /* Tranches de budget : cartes photo carrées (mêmes cartes que « Nos familles »), nombre de pièces sous le titre. */
 .gift-bands { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
@@ -1812,8 +1814,6 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
   .shead a, .designer-card__brands a { position: relative; }
   .shead a::after, .designer-card__brands a::after { content: ""; position: absolute; inset: -14px -6px; }
   .designer-card__brands { font-size: 13px; }
-  .pdp__avail { display: block; }
-  .pdp__avail .pcard__dot { margin-right: 6px; vertical-align: middle; }
   .home-room__n { font-size: 1.25rem; line-height: 1.15; }
   .gift-band .home-rc__n { font-size: 1.3rem; line-height: 1.1; }
   .gift-band { padding: 14px; }
@@ -1910,3 +1910,17 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
 }
 .price-save { display: block; margin-top: 4px; font-family: var(--sans-product); font-size: var(--fs-small); font-weight: 600; color: #0b0b0b; }
 .pdp__promo.pdp__promo--bm { background: #0b0b0b; color: #fff; }
+
+/* Rangées de la fiche : quand « Complétez avec » n'a qu'une ou deux pièces, les deux rangées partagent
+   la même ligne de quatre cartes au lieu de laisser une demi-ligne vide (audit du 14 novembre 2026). */
+@media (min-width: 1024px) {
+  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--gap); }
+  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) > .section { min-width: 0; padding-top: var(--section-y); }
+  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) > .section { grid-column: span 2; }
+  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+3) { display: none; }
+  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) > [data-related-wrap] { grid-column: span 3; }
+  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-complementary] { grid-template-columns: minmax(0, 1fr); }
+  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+4) { display: none; }
+}

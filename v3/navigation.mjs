@@ -162,6 +162,14 @@ export function productTrail(product, url, nav) {
     const entry = nav.collections[handle];
     if (!entry || entry.kind !== 'brand' || entry.brand === navigationSlug(product.brand)) trail = listingTrail(listing, nav, { brandName: product.brand });
   }
+  // Arrivée directe (moteur de recherche, lien partagé) : la catégorie vient des collections de la fiche,
+  // la plus précise d'abord (Chaises avant Assises).
+  if (trail.length === 2 && trail[1] === CATALOG) {
+    const own = new Set(product.collections || []);
+    const pick = kind => Object.entries(nav.collections).find(([handle, entry]) => entry.kind === kind && own.has(handle))?.[0];
+    const handle = pick('subcategory') || pick('family');
+    if (handle) trail = collectionTrail(handle, nav);
+  }
   return [...trail, { label: product.name }];
 }
 
