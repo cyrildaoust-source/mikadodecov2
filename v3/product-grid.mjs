@@ -1,9 +1,16 @@
 /* ---------- cartes produit (toutes les grilles) + ajout au panier délégué ---------- */
 import { listingContext, selectionURL, productHref } from "./navigation.mjs";
-import { productCardHTML, selectionLabel } from "./product-card.mjs";
+import { productCardHTML, selectionLabel, selectionMark } from "./product-card.mjs";
 import { cartQty, inCart, addToCart, removeFromCart } from "./cart.mjs";
 
-const cardLabel = variantId => selectionLabel(cartQty(variantId));
+// État du bouton d'une carte : « + » / « ✓ », libellé complet pour les lecteurs d'écran et l'info-bulle.
+function paintAdd(btn) {
+  const qty = cartQty(btn.dataset.variant), label = selectionLabel(qty), mark = selectionMark(qty);
+  if (btn.textContent.trim() !== mark) btn.textContent = mark;
+  btn.setAttribute('aria-pressed', String(qty > 0));
+  btn.title = label;
+  btn.setAttribute('aria-label', btn.dataset.name ? `${label} : ${btn.dataset.name}` : label);
+}
 
 // Encodes the current listing view as a token (coll:<h> |
 // designer:<x> | brand:<x>) so a product link carries the path the user
@@ -27,7 +34,7 @@ export function bindAddToCart() {
     if (!v) return;
     if (inCart(v)) removeFromCart(v);
     else addToCart({ handle: btn.dataset.handle, variantId: v, name: btn.dataset.name, brand: btn.dataset.brand, price: parseFloat(btn.dataset.price) || 0, image: btn.dataset.image });
-    btn.textContent = cardLabel(v);
+    if (btn.classList.contains('pcard__add')) paintAdd(btn);
   });
   // Keep every [data-add] label in sync when the cart changes elsewhere.
   document.addEventListener("cart:change", () => syncCardLabels());
@@ -37,10 +44,7 @@ export function bindAddToCart() {
 export function syncCardLabels(root = document) {
   root.querySelectorAll("[data-add]").forEach((b) => {
     const v = b.dataset.variant;
-    if (v && !b.disabled) {
-      const label = cardLabel(v);
-      if (b.textContent.trim() !== label.trim()) b.textContent = label;
-    }
+    if (v && !b.disabled && b.classList.contains('pcard__add')) paintAdd(b);
   });
 }
 

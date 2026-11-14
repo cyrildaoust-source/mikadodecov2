@@ -39,7 +39,7 @@ test('hover photos fill the square product card without letterbox bands',()=>{
 
 test('mobile product card actions keep a 44 px touch target',()=>{
   const css=readFileSync(new URL('../v3/styles.css',import.meta.url),'utf8');
-  assert.match(css,/@media\s*\(max-width:\s*760px\)[\s\S]*?\.pcard__cta\s*\{[^}]*min-height:\s*44px;/s);
+  assert.match(css,/@media\s*\(max-width:\s*760px\)[\s\S]*?\.pcard__add\s*\{[^}]*width:\s*44px;\s*height:\s*44px;/s);
 });
 
 test('« Livré avant Noël » suit le stock réel de la finition ; carte cadeau = envoyée par e-mail',()=>{

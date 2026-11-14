@@ -96,7 +96,8 @@
   --accent:     #38529F;   /* royal blue · links text, rules, underlines, btn--blue bg */
   --accent-ink: #1C2F6B;   /* deep royal · link/hover text on cream + btn hover bg */
   --danger:     #c43d3d;   /* rouge erreur/validation (etait reference sans etre declare) */
-  --warn:       #b9742c;   /* sur commande / stock faible */
+  --warn:       #b9742c;   /* sur commande / stock faible (pastille) */
+  --warn-ink:   #8f5a1c;   /* même teinte pour du texte : contraste AA sur paper et tile (audit du 14 novembre 2026) */
   --stock:      #5a8c4a;   /* en stock */
   --scrim:      20, 18, 16; /* anthracite chaud — voile « titre sur image » */
   --accent-soft:#ECEFF7;   /* pale blue tint · soft panels (light bg, dark text) */
@@ -259,7 +260,7 @@ html.kbd input:not([type=checkbox]):not([type=radio]):focus-visible, html.kbd te
 .prow { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
 .prow--4 { grid-template-columns: repeat(4, 1fr); }
 .pcard { display: flex; flex-direction: column; min-width: 0; }   /* laisse la carte rétrécir sous la largeur de son contenu (bouton) → pas de débordement en 2 colonnes */
-.pcard__media { position: relative; aspect-ratio: 1/1; background: var(--tile); overflow: hidden; }
+.pcard__media { display: block; position: relative; aspect-ratio: 1/1; background: var(--tile); overflow: hidden; }
 .pcard__media img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; transition: opacity .35s var(--ease); }
 .pcard__media img.alt {
   position: absolute;
@@ -285,7 +286,7 @@ html.kbd input:not([type=checkbox]):not([type=radio]):focus-visible, html.kbd te
 .pcard__brand { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
 .pcard__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 4px; }
 .pcard__name { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--ink-deep); line-height: 1.35; min-width: 0; }
-.pcard__price { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--accent-ink); margin-top: 4px; margin-bottom: 18px; }
+.pcard__price { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--accent-ink); margin-top: 4px; }
 .pcard__variants { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); white-space: nowrap; flex-shrink: 0; }
 .pcard__finish-label { font-family: var(--sans-product); font-size: var(--fs-meta); color: var(--muted); margin-top: 6px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 /* Availability line — same warm orange text on every card, the dot
@@ -293,14 +294,19 @@ html.kbd input:not([type=checkbox]):not([type=radio]):focus-visible, html.kbd te
    alongside the brand / name / price tier. */
 /* Disponibilité, prix et bouton forment le bas de la carte : alignés d'une carte à
    l'autre dans une rangée, quelle que soit la longueur du nom ou de la finition. */
-.pcard__avail { display: flex; align-items: center; gap: 6px; color: var(--warn); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-meta); letter-spacing: .03em; margin-top: auto; padding-top: 6px; }
+.pcard__avail { display: flex; align-items: center; gap: 6px; color: var(--muted); font-family: var(--sans-product); font-weight: 500; font-size: var(--fs-meta); letter-spacing: .03em; margin-top: auto; padding-top: 6px; }
 .pcard__dot { display: inline-block; width: 7px; height: 7px; border-radius: 0; flex-shrink: 0; background: var(--warn); }
 .pcard__avail { align-items: flex-start; }
 .pcard__avail .pcard__dot { margin-top: .42em; }
 .pcard__nw { white-space: nowrap; }
 .pcard__dot--stock { background: var(--stock); }
 .pcard__dot--order { background: var(--warn); }
-.pcard__cta { margin-top: 0; }
+.pcard__top { position: relative; }
+/* Ajout discret posé sur la photo (audit du 14 novembre 2026) : carré « + », plein et « ✓ » une fois dans la sélection. */
+.pcard__add { position: absolute; right: 10px; bottom: 10px; z-index: 3; width: 40px; height: 40px; display: grid; place-items: center; background: var(--paper); border: 1px solid var(--line); color: var(--ink-deep); font-family: var(--sans-product); font-size: 20px; font-weight: 400; line-height: 1; transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease); }
+.pcard__add:hover, .pcard__add[aria-pressed="true"] { background: var(--ink-deep); border-color: var(--ink-deep); color: var(--paper); }
+.pcard__add[aria-pressed="true"] { font-size: 16px; }
+.pcard__add:disabled { display: none; }
 .pcard__skel { background: transparent; }
 .pcard__skel::before { content: ""; display: block; aspect-ratio: 1/1; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
 .pcard__skel::after { content: ""; display: block; height: 54px; margin-top: 14px; animation: pulse 1.4s var(--ease) infinite; background: linear-gradient(var(--tile) 0 0) left 0 / 45% 12px no-repeat, linear-gradient(var(--tile) 0 0) left 22px / 72% 16px no-repeat, linear-gradient(var(--tile) 0 0) left 46px / 30% 12px no-repeat; }
@@ -342,8 +348,8 @@ html.kbd .stat--google:focus-visible { outline-color: var(--on-dark); }
 }
 
 .footer { background: var(--paper); border-top: 1px solid var(--line); }
-.footer .wrap { padding-block: clamp(48px, 6vw, 84px); }
-.footer__lockbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-bottom: clamp(32px, 4vw, 56px); margin-bottom: clamp(32px, 4vw, 56px); border-bottom: 1px solid var(--line); }
+.footer .wrap { padding-block: clamp(36px, 4vw, 56px); }
+.footer__lockbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-bottom: clamp(24px, 2.5vw, 36px); margin-bottom: clamp(28px, 3vw, 44px); border-bottom: 1px solid var(--line); }
 .footer__lockbar .lockup-lg { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .seal { width: 104px; height: 104px; color: var(--accent-ink); flex: 0 0 auto; animation: seal-spin 40s linear infinite; }
 @keyframes seal-spin { to { transform: rotate(360deg); } }
@@ -361,6 +367,7 @@ html.kbd .stat--google:focus-visible { outline-color: var(--on-dark); }
 .footer li { margin-bottom: 11px; }
 .footer li a { font-size: var(--fs-small); color: var(--muted); }
 .footer li a:hover { color: var(--accent-ink); }
+.footer__hours { font-size: var(--fs-small); color: var(--muted); }
 .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: clamp(40px, 5vw, 64px); padding-top: 22px; border-top: 1px solid var(--line); font-size: var(--fs-small); color: var(--muted); }
 .footer__bottom nav { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
 .pay { display: flex; gap: 8px; }
@@ -600,6 +607,7 @@ body.has-topnav .page { padding-top: 116px; padding-bottom: clamp(56px, 7vw, 104
 .pdp__cta:disabled { opacity: .45; cursor: not-allowed; }
 /* ── Recherche : loupe header + overlay prédictif (descend SOUS le header) ── */
 .nav__search { position: relative; background: none; border: 0; color: inherit; cursor: pointer; display: inline-flex; align-items: center; padding: 0; }
+.nav__search::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; }
 .nav__search::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; } /* zone tactile 44 px, comme le panier */
 .searchd[hidden] { display: none; }
 .searchd { position: fixed; inset: 0; z-index: 132; }
@@ -676,7 +684,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 /* Une seule croix : celle du site ferme la recherche ; celle du navigateur (effacer) est masquée. */
 .nav__searchbar-input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; display: none; }
 .nav__searchbar-x { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; background: none; border: 0; color: var(--ink-deep); font-size: 26px; line-height: 1; cursor: pointer; flex-shrink: 0; padding: 0 4px; }
-@media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } }
+@media (max-width: 640px) { .searchd__inner { padding: 18px 18px 22px; } .searchd__bar { min-height: calc(100dvh - var(--search-top, 72px)); } }
 
 .pcard__media { position: relative; }
 .pcard__sale { background: #b23b3b; color: #fff; font-family: var(--sans-product); font-weight: 700; font-size: 12px; letter-spacing: .03em; padding: 4px 9px; border-radius: 0; }
@@ -699,7 +707,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 
 .sel-eta { font-size: var(--fs-small); color: var(--ink-deep); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); line-height: 1.5; }
 .sel-eta strong { font-weight: 600; }
-.sel-eta--warn { color: var(--warn); font-style: italic; }
+.sel-eta--warn { color: var(--warn-ink); font-style: italic; }
 .sel-eta--warn strong { font-style: normal; }
 
 .sel-empty { text-align: center; padding: clamp(48px, 8vw, 120px) 0; }
@@ -760,7 +768,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp__designer { display: block; color: var(--muted); font-size: var(--fs-small); margin: 2px 0 0; }
 .pdp__designer--link { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s var(--ease); }
 .pdp__designer--link:hover { border-bottom-color: currentColor; }
-.pdp__price { font-family: var(--sans-product); font-weight: 600; font-size: 22px; color: var(--ink-deep); margin: 18px 0; }
+.pdp__price { font-family: var(--sans-product); font-weight: 600; font-size: 26px; color: var(--ink-deep); margin: 18px 0; }
 /* Mobile swipe gallery (≤760px) — rail scroll-snap + square dots. Hidden on
    desktop (which keeps .pdp__main + .pdp__thumbs). */
 .pdp__rail { display: none; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
@@ -788,7 +796,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp__variant-img { width: 64px; height: 64px; object-fit: cover; background: #fff; flex-shrink: 0; }
 .pdp__variant-meta { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .pdp__variant-name { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-body); color: var(--ink-deep); }
-.pdp__variant-avail { display: flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; color: var(--warn); }
+.pdp__variant-avail { display: flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; color: var(--warn-ink); }
 .pdp__variant-bar-arrow { margin-left: auto; flex-shrink: 0; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-body); color: var(--ink-deep); }
 .pdp__variant-count { margin-left: auto; flex-shrink: 0; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; color: var(--muted); white-space: nowrap; }
 .pdp__variant-count + .pdp__variant-bar-arrow { margin-left: 0; }
@@ -814,7 +822,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .trust-list__i { width: 17px; height: 17px; flex-shrink: 0; fill: none; stroke: var(--accent-ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .trust-list a { color: var(--accent-ink); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; }
 .trust-list a:hover { border-bottom-color: currentColor; }
-.pdp__avail { display: flex; align-items: center; gap: 8px; color: var(--warn); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; margin: 10px 0 4px; }
+.pdp__avail { display: flex; align-items: center; gap: 8px; color: var(--warn-ink); font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; margin: 10px 0 4px; }
 .pdp__avail strong { font-weight: 700; }
 .pdp__avail a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
 
@@ -1045,13 +1053,16 @@ body.has-stickybuy .footer { padding-bottom: 76px; }
   .filterbar .cols-btn { padding: 12px; }
   /* Cartes en 2 colonnes : finitions sous le nom, bouton plus compact. */
   .pcard__row { flex-direction: column; align-items: flex-start; gap: 2px; }
-  .pcard__cta { min-height: 44px; font-size: 13px; line-height: 1.25; padding: 10px 8px; text-wrap: balance; }
+  .pcard__add { width: 44px; height: 44px; right: 8px; bottom: 8px; }
   /* Petits liens : zone tactile agrandie sans déplacer la mise en page. */
   .breadcrumb a, .footer__bottom nav a { display: inline-block; padding-block: 7px; margin-block: -7px; }
   .pdp__brand { display: inline-block; padding-block: 10px; margin-block: -10px; }
   /* La page courante tient sur une ligne : jamais de « › » orphelin en début de ligne. */
   .product-navigation > *, .breadcrumb, .breadcrumb ol { min-width: 0; max-width: 100%; }
-  .breadcrumb li:last-child { min-width: 0; max-width: 100%; }
+  .breadcrumb ol { flex-wrap: nowrap; }
+  .breadcrumb li { flex-shrink: 0; }
+  .breadcrumb li:last-child { display: block; flex: 0 1 auto; min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .breadcrumb li:last-child::before { margin-right: 7px; }
   .breadcrumb [aria-current="page"] { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }
 
@@ -1128,7 +1139,7 @@ body.vard-locked { overflow: hidden; }
 .vard__body { flex: 1 1 auto; overflow-y: auto; padding: 4px var(--gutter) 24px; -webkit-overflow-scrolling: touch; }
 .vard__preview-img { width: 100%; height: clamp(150px, 22vh, 200px); object-fit: contain; background: #fff; }
 .vard__preview-name { font-family: var(--serif); font-weight: 600; font-size: 20px; margin-top: 8px; color: var(--ink-deep); }
-.vard__preview-avail { display: flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--warn); margin-top: 4px; }
+.vard__preview-avail { display: flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--warn-ink); margin-top: 4px; }
 /* minmax(0, 1fr) : colonnes toujours égales, même quand un nom de coloris est long (« Rouge foncé/nero »). */
 .vard__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; padding: 0; list-style: none; }
 .vard__opt { display: flex; flex-direction: column; gap: 5px; padding: 0; background: none; border: 1px solid transparent; cursor: pointer; text-align: center; min-height: 44px; }
@@ -1136,7 +1147,7 @@ body.vard-locked { overflow: hidden; }
 .vard__opt[aria-selected="true"] { border-color: var(--ink); }  /* sélection = cadre ENCRE net, 1 seul filet (DA : bleu réservé au CTA) */
 .vard__opt-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #fff; }   /* fond blanc comme la photo principale : packshot détouré et photo fournisseur identiques (Cyril, 25/10) */
 .vard__opt-name { font-size: var(--fs-meta); color: var(--ink-deep); line-height: 1.2; overflow-wrap: anywhere; }
-.vard__opt-avail { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: var(--warn); white-space: nowrap; }
+.vard__opt-avail { display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: var(--warn-ink); white-space: nowrap; }
 .vard__opt[aria-disabled="true"] .vard__opt-img { opacity: .4; }
 .vard__opt[aria-disabled="true"] .vard__opt-name { opacity: .5; text-decoration: line-through; }
 @media (prefers-reduced-motion: reduce) { .vard__backdrop, .vard__panel { transition: opacity .01s, visibility 0s; } }
@@ -1169,7 +1180,7 @@ body.qtyd-locked { overflow: hidden; }
 .qtyd__opt:focus-visible { background: var(--paper-2); }
 .qtyd__opt[aria-selected="true"] { box-shadow: inset 2px 0 0 var(--ink); font-weight: 600; }
 .qtyd__num { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-body); color: var(--ink-deep); }
-.qtyd__state { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; color: var(--warn); }
+.qtyd__state { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); letter-spacing: .03em; color: var(--warn-ink); }
 @media (prefers-reduced-motion: reduce) { .qtyd__backdrop, .qtyd__panel { transition: opacity .01s, visibility 0s; } }
 @media (max-width: 760px) { .qtyd__panel { width: 100vw; } }
 
@@ -1685,12 +1696,6 @@ body.pdplb-locked { overflow: hidden; }
 
 /* Conditions d'une campagne, sous sa grille de produits. */
 .campaign-terms { display: grid; gap: 8px; max-width: 80ch; padding-left: 1.1em; list-style: disc; color: var(--muted); }
-
-/* Écrans de moins de 390 px : « + Ajouter à la sélection » passe sur deux lignes, pas
-   « Indisponible ». Même hauteur pour tous les boutons, pour garder les rangées alignées. */
-@media (max-width: 389px) {
-  .pcard__cta { min-height: 55px; }
-}
 
 /* ── Styles de page sortis des <style> inline (404/500, sélection) — layout unique, ADR 0012 ── */
 html:not(.cart-has-items) [data-populated] { display: none; }

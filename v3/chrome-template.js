@@ -189,10 +189,13 @@ export function footerHTML() {
           <li><a href="/collections/luminaires">Luminaires</a></li>
           <li><a href="/collections/decoration">Décoration</a></li>
           <li><a href="/collections/outdoor">Jardin</a></li>
+          <li><a href="/collections/idees-cadeaux">Idées cadeaux</a></li>
         </ul></div>
         <div><h3>Maison</h3><ul>
           <li><a href="/marques.html">Les marques</a></li>
+          <li><a href="/designers.html">Les designers</a></li>
           <li><a href="/materiaux.html">Les matières</a></li>
+          <li><a href="/studio.html">Mikado Studio</a></li>
           <li><a href="/rendez-vous.html">Rendez-vous</a></li>
         </ul></div>
         <div><h3>Contact</h3><ul>
@@ -200,6 +203,7 @@ export function footerHTML() {
           <li><a href="tel:+32493837983">+32 (0)493 83 79 83</a></li>
           <li><a href="/contact.html">Nous écrire</a></li>
           <li><a href="https://maps.google.com/?q=75+Rue+du+Doyenné+1180+Uccle" target="_blank" rel="noopener">75 Rue du Doyenné, 1180 Uccle</a></li>
+          <li class="footer__hours">Mardi – samedi · 10h30 – 18h30</li>
           <li><a href="https://maps.app.goo.gl/NE71nd6NytFjot6K6" target="_blank" rel="noopener">★ Voir nos avis Google</a></li>
         </ul></div>
       </div>
