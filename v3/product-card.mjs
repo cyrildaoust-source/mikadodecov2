@@ -5,9 +5,12 @@ import {finishHTML} from './product-finishes.mjs';
 
 // Un délai (« 2–3 jours », « 9–13 jours ouvrés ») ne se coupe jamais entre ses chiffres et son unité.
 const keepDelay = (html) => html.replace(/(\d+–\d+) (\S+)/, '<span class="pcard__nw">$1&nbsp;$2</span>');
+// Bouton discret posé sur la photo (audit du 14 novembre 2026) : « + » puis « ✓ » ; le libellé complet est lu
+// par les lecteurs d'écran et affiché en info-bulle.
 export function selectionLabel(quantity) {
-  return quantity === 0 ? '+ Ajouter à la sélection' : quantity === 1 ? 'Dans la sélection' : `Dans la sélection (${quantity})`;
+  return quantity === 0 ? 'Ajouter à la sélection' : quantity === 1 ? 'Dans la sélection' : `Dans la sélection (${quantity})`;
 }
+export const selectionMark = quantity => (quantity > 0 ? '✓' : '+');
 
 // FR plurals — overrides for option names where the naive "+ s" rule misleads.
 const VARIANT_PLURALS = {
@@ -81,6 +84,7 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
     + (p.offerTag ? `<span class="tag tag--offer">${escapeHtml(p.offerTag)}</span>` : "");
   return `
     <div class="pcard">
+      <div class="pcard__top">
       <a class="pcard__media" href="${href}" aria-label="${escapeHtml(p.name)}">
         <div class="pcard__tags">${tag}</div>
         <div class="pcard__offers">
@@ -90,6 +94,13 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
         <img class="main" ${cardImageAttrs(p.image)} alt="${escapeHtml(p.name + (p.finishLabel ? ' · ' + p.finishLabel : ''))}" loading="lazy" decoding="async" />
         ${alt}
       </a>
+      ${interactive ? `<button class="pcard__add" type="button" data-add
+        ${p.purchaseDisabled ? 'disabled' : ''} aria-pressed="${quantity > 0}"
+        data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.handle || p.id)}"
+        data-name="${escapeHtml(p.name)}" data-brand="${escapeHtml(p.brand || "")}"
+        data-price="${p.cartPrice ?? p.price ?? 0}" data-image="${escapeHtml(p.image || "")}"
+        aria-label="${p.purchaseDisabled ? 'Indisponible' : selectionLabel(quantity)} : ${escapeHtml(p.name)}" title="${p.purchaseDisabled ? 'Indisponible' : selectionLabel(quantity)}">${selectionMark(quantity)}</button>` : ''}
+      </div>
       <div class="pcard__brand">${escapeHtml(p.brand || "")}</div>
       <div class="pcard__row">
         <a class="pcard__name" href="${href}">${escapeHtml(p.name)}</a>
@@ -104,12 +115,5 @@ export function productCardHTML(p, {source = '', quantity = 0, interactive = tru
         ? `<div class="pcard__avail"><span class="pcard__dot pcard__dot--stock" aria-hidden="true"></span><span>En stock · <span class="pcard__nw">livraison 2–3 jours</span></span></div>`
         : `<div class="pcard__avail"><span class="pcard__dot pcard__dot--order" aria-hidden="true"></span><span>${p.longDelay ? "Sur commande · délai sur demande" : "Livraison " + `<span class="pcard__nw">${escapeHtml(p.leadTimeLabel || "3–4 semaines")}</span>`}</span></div>`}
       <div class="pcard__price">${priceLabel(p)}</div>
-      ${interactive ? `<button class="btn btn--outline btn--block pcard__cta" data-add
-        ${p.purchaseDisabled ? 'disabled' : ''}
-        data-variant="${escapeHtml(p.variantId)}" data-handle="${escapeHtml(p.handle || p.id)}"
-        data-name="${escapeHtml(p.name)}" data-brand="${escapeHtml(p.brand || "")}"
-        data-price="${p.cartPrice ?? p.price ?? 0}" data-image="${escapeHtml(p.image || "")}">
-        ${p.purchaseDisabled ? 'Indisponible' : selectionLabel(quantity)}
-      </button>` : ''}
     </div>`;
 }
