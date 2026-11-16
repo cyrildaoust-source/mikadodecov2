@@ -87,7 +87,7 @@ export function createSearchDrawer() {
     results.innerHTML = intent
       + grp("Marques",    chips(d.brands, brandHref))
       + grp("Catégories", chips(d.categories, catHref))
-      + grp(d.family || "Produits", prods.map(p => row(p, source)).join(""))
+      + grp(d.family || "Produits", prods.length ? `<div class="sr__rows">${prods.map(p => row(p, source)).join("")}</div>` : "")
       + all;
   };
   const run = async (term) => {

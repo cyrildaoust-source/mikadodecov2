@@ -82,7 +82,8 @@ export function bindCartDrawer() {
       ${discount > 0 ? `<div class="cartd__savings">Vous économisez ${euro(discount)}</div>` : ""}
       <p class="cartd__note">${discount > 0 ? "Remise appliquée automatiquement · " : ""}Livraison partout en Belgique&nbsp;: 50&nbsp;€</p>
       <a class="btn btn--blue btn--block cartd__cta" href="/selection.html">Finaliser ma sélection</a>
-      <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>`;
+      <button type="button" class="cartd__continue" data-cartd-continue>← Continuer mes achats</button>
+      <p class="cartd__trust">Paiement sécurisé · Retour sous 14&nbsp;jours · Retrait gratuit à Uccle</p>`;
   }
 
   function onKeydown(e) {
