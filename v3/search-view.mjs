@@ -4,6 +4,7 @@ export function searchCriteria(data) {
 }
 export function searchNotes(data) {
   return (data.corrected?'<p class="searchd__hint">Recherche avec correction de l’orthographe.</p>':'')
+    +(data.widened?`<p class="searchd__hint">Rien de précis pour « ${esc(data.widened)} » : voici ce qui s’en approche le plus.</p>`:'')
     +(data.issues||[]).map(note=>`<p class="searchd__hint">${esc(note)}</p>`).join('')
     +(data.incomplete||[]).map(x=>`<p class="searchd__hint">${x.count} modèle${x.count>1?'s':''} avec ${esc(x.label)} à confirmer ${x.count>1?'ne sont pas inclus':'n’est pas inclus'} dans cette sélection.</p>`).join('');
 }
