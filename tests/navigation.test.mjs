@@ -61,6 +61,8 @@ test('brand and designer histories have truthful fallbacks; related products are
  assert.deepEqual(labels(productTrail(product,url('/produit.html?from=coll:artek'),nav)), ['Accueil','Catalogue','Chaise <&>']);
  assert.deepEqual(labels(productTrail(product,url('/produit.html?from=coll:unknown'),nav)), ['Accueil','Catalogue','Chaise <&>']);
  assert.deepEqual(labels(productTrail(product,url(productHref(product,'/produit.html?handle=other')),nav)), ['Accueil','Catalogue','Chaise <&>']);
+ assert.deepEqual(labels(productTrail({...product,collections:['hay','sieges','chaises']},url('/produit.html?handle=chaise'),nav)), ['Accueil','Catalogue','Assises','Chaises','Chaise <&>']);
+ assert.deepEqual(labels(productTrail({...product,collections:['luminaires','promotions']},url('/produit.html?handle=chaise'),nav)), ['Accueil','Catalogue','Luminaires','Chaise <&>']);
  assert.equal(productBrandDestination(product,url(productHref(product,'/collections/alvar-aalto')),nav),'/collections/hay');
  assert.equal(productBrandDestination(product,url(productHref(product,'/collections/luminaires')),nav),'/collections/luminaires?brand=hay');
 });
