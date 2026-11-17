@@ -109,3 +109,13 @@ test('phrase courante : les résultats de la recherche par phrase de Shopify rem
   assert.equal(phrasePage(data,[],{q},intent,60),data);
   assert.equal(phraseNeeded(parseSearch('fauteuil club'),searchCatalog([club,repos],{q:'fauteuil club'})),false);
 });
+test('la pièce cherchée est le premier nom de la phrase, pas le premier de la liste',()=>{
+  const fam=q=>parseSearch(q).criteria.find(c=>c.kind==='family')?.value;
+  assert.equal(fam('luminaire au-dessus de la table à manger'),'lampe');
+  assert.equal(fam('lampe design pour bureau'),'lampe');
+  assert.equal(fam('coussin pour canapé gris'),'coussin');
+  assert.equal(fam('chaise pour bureau à la maison'),'chaise');
+  assert.equal(fam('lampe de table noire'),'lampe-table');
+  assert.equal(fam('table basse ronde'),'table-basse');
+  assert.equal(fam('tabouret de bar pour cuisine'),'chaise-bar');
+});
