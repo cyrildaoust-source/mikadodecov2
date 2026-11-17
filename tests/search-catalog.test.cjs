@@ -78,3 +78,16 @@ test('une référence tapée collée retrouve le nom écrit en deux mots (« EA2
   for(const q of ['EA217','ea 217','EA 217','soft pad ea217'])assert.equal(searchCatalog([p],{q}).total,1,q);
   assert.equal(searchCatalog([p],{q:'EA219'}).total,0);
 });
+test('une phrase courante ne vide plus la page : les mots en trop élargissent, et la page le dit',()=>{
+  const sofa=product({name:'Fauteuil Club',type:'fauteuil',description:'Assise profonde.',variants:[['Noir','',900]]});
+  const cosy={...product({name:'Fauteuil Nuage',type:'fauteuil',description:'Un fauteuil confortable.',variants:[['Blanc','',700]]})};
+  cosy.card={...cosy.card,id:'gid://shopify/Product/2',handle:'fauteuil-nuage'};
+  const wide=searchCatalog([sofa,cosy],{q:'fauteuil confortable pour le salon'});
+  assert.equal(wide.total,2);assert.equal(wide.widened,'confortable salon');
+  assert.equal(wide.items[0].name,'Fauteuil Nuage');   // la fiche qui porte un des mots passe devant
+  assert.equal(wide.criteria.some(c=>c.id==='text'),false);
+  // Un nom de modèle qui trouve quelque chose reste un vrai filtre.
+  const strict=searchCatalog([sofa,cosy],{q:'fauteuil nuage'});
+  assert.equal(strict.total,1);assert.equal(strict.widened,'');
+  assert.equal(parseSearch('éclairage terrasse').criteria.find(c=>c.kind==='family').value,'lampe');
+});
