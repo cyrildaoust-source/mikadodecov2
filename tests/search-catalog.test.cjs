@@ -119,3 +119,13 @@ test('la pièce cherchée est le premier nom de la phrase, pas le premier de la 
   assert.equal(fam('table basse ronde'),'table-basse');
   assert.equal(fam('tabouret de bar pour cuisine'),'chaise-bar');
 });
+test('une caractéristique décisive absente des fiches ne montre pas de faux résultats',()=>{
+  const sofa=product({name:'Canapé Mags',type:'canape',description:'Canapé profond.',variants:[['Gris','',2000]]});
+  const page=searchCatalog([sofa],{q:'canapé convertible'});
+  assert.equal(page.total,0);assert.equal(page.widened,'');
+  assert.equal(page.suggestions[0].label,'Sans « Convertible »');
+  const {phrasePage}=require('../lib/services/search');
+  assert.equal(phrasePage(page,[sofa],{q:'canapé convertible'},parseSearch('canapé convertible'),60),page);
+  const swivel=product({name:'Fauteuil Orbo pivotant',type:'fauteuil',variants:[['Noir','',900]]});
+  assert.equal(searchCatalog([swivel],{q:'fauteuil pivotant'}).total,1);
+});
