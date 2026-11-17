@@ -91,3 +91,21 @@ test('une phrase courante ne vide plus la page : les mots en trop élargissent, 
   assert.equal(strict.total,1);assert.equal(strict.widened,'');
   assert.equal(parseSearch('éclairage terrasse').criteria.find(c=>c.kind==='family').value,'lampe');
 });
+test('phrase courante : les résultats de la recherche par phrase de Shopify remplacent l’élargissement, dans son ordre',()=>{
+  const {phraseNeeded,phrasePage}=require('../lib/services/search');
+  const mk=(id,name,type,price)=>{const p=product({name,type,variants:[['Noir','',price]]});p.card={...p.card,id:'gid://shopify/Product/'+id,handle:'h'+id};return p;};
+  const club=mk(1,'Fauteuil Club','fauteuil',900),repos=mk(2,'Fauteuil Repos','fauteuil',4000),lampe=mk(3,'Lampe Apex','lampe',90);
+  const q='fauteuil confortable pour le salon',intent=parseSearch(q),data=searchCatalog([club,repos],{q});
+  assert.equal(phraseNeeded(intent,data),true);
+  // Shopify classe le fauteuil de repos d'abord et propose aussi une lampe : la famille comprise reste un filtre.
+  const page=phrasePage(data,[repos,lampe,club],{q},intent,60);
+  assert.deepEqual(page.items.map(c=>c.name),['Fauteuil Repos','Fauteuil Club']);
+  assert.equal(page.widened,'');assert.equal(page.criteria.some(c=>c.id==='text'),false);
+  assert.equal(page.resultsUrl.includes('omit'),false);
+  // Phrase sans famille reconnue : les résultats de Shopify, sans demander de catégorie.
+  const q2='quelque chose de confortable',i2=parseSearch(q2),d2=searchCatalog([],{q:q2}),p2=phrasePage(d2,[repos,lampe],{q:q2},i2,60);
+  assert.equal(p2.total,2);assert.equal(p2.needsCategory,false);
+  // Rien côté Shopify : la page d'origine est gardée. Un nom de modèle trouvé ne passe pas par la phrase.
+  assert.equal(phrasePage(data,[],{q},intent,60),data);
+  assert.equal(phraseNeeded(parseSearch('fauteuil club'),searchCatalog([club,repos],{q:'fauteuil club'})),false);
+});
