@@ -71,6 +71,22 @@ export function buildProductSpecGroups(product = {}) {
   ];
 }
 
+// « L’essentiel » : les quelques faits qui décident d'un achat, repris tels quels des caractéristiques de la
+// fiche et affichés près du bouton d'achat (17 novembre 2026). Rien n'est rédigé ni déduit ; cinq lignes au plus.
+export function buildProductEssentials(product = {}, max = 5) {
+  const short = (value) => String(value).split(/[,;(]/)[0].trim();
+  return [
+    ["Dimensions", product.dimensions],
+    ["Matériaux", product.material || product.constructionMaterials],
+    ["Capacité", product.capacity],
+    ["Autonomie", product.batteryRuntime],
+    ["Usage", product.usage],
+    ["Fabrication", product.origin],
+    ["Création", product.year],
+    ["Garantie", hasValue(product.warranty) ? short(product.warranty) : ""],
+  ].filter(([, value]) => hasValue(value)).slice(0, max).map(([label, value]) => [label, String(value).trim()]);
+}
+
 // Shared by server rendering and the hydrated PDP. Images stay in Dimensions,
 // including when no textual measurement has been supplied yet.
 export function renderDimensionImages(group, escapeHtml) {
