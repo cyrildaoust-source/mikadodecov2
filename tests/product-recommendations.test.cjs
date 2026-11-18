@@ -168,8 +168,9 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
   const selected = selectProductRecommendations({
     product: glass,
     universe: [waterGlass],
-    automaticRelated: [card('automatic')],
+    automaticRelated: [card('figurine', { productType: 'Figurine' }), card('automatic', { productType: 'Verre à vin' })],
   });
+  // Le repli Shopify reste dans l'univers de la fiche (18 novembre 2026 : pas de figurine sous un verre).
   assert.deepEqual(selected.related.map(item => [item.id, item.recommendationSource]), [
     ['water-glass', 'same-universe'],
     ['automatic', 'shopify-related'],
@@ -192,7 +193,7 @@ test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique',
   const table = card('table', { name: 'Table Palissade', recommendationCollectionIds: [collection.id] });
   const autoComp = card('auto-comp', { brand: 'Iittala' });
   const autoRange = card('auto-range', { name: 'Fauteuil Palissade', tags: ['palissade'] });
-  const autoRelated = card('auto-related', { brand: 'Vitra' });
+  const autoRelated = card('auto-related', { brand: 'Vitra', productType: 'Chaise' });
   const result = selectProductRecommendations({
     product,
     curatedComplementary: [curatedComp], curatedRelated: [curatedRelated],
@@ -202,8 +203,10 @@ test('curation, gamme et repli Shopify gardent leur priorité et leur rubrique',
   assert.deepEqual(result.complementary.map(p => [p.id, p.recommendationSource]), [
     ['curated-comp', 'curated'], ['cushion', 'range-functional'], ['table', 'range-functional'], ['auto-comp', 'shopify-complementary'],
   ]);
+  // La gamme a sa rubrique « De la même collection » ; « Vous aimerez aussi » garde les alternatives.
+  assert.deepEqual(result.sameRange.map(p => [p.id, p.recommendationSource]), [['auto-range', 'shopify-same-range']]);
   assert.deepEqual(result.related.map(p => [p.id, p.recommendationSource]), [
-    ['curated-related', 'curated'], ['auto-range', 'shopify-same-range'], ['auto-related', 'shopify-related'],
+    ['curated-related', 'curated'], ['auto-related', 'shopify-related'],
   ]);
 });
 
@@ -222,8 +225,8 @@ test('les choix automatiques diversifient les marques sans casser la gamme ni la
     ],
   });
   assert.deepEqual(result.complementary.map(item => item.id), ['range-1']);
-  assert.deepEqual(result.related.map(item => item.id), ['range-2', 'range-3', 'vitra', 'iittala']);
-  assert.deepEqual(result.related.map(item => item.brand), ['HAY', 'HAY', 'Vitra', 'Iittala']);
+  assert.deepEqual(result.sameRange.map(item => item.id), ['range-2', 'range-3']);
+  assert.deepEqual(result.related.map(item => item.brand), ['Vitra', 'Iittala', 'HAY']);
 
   const curated = selectProductRecommendations({
     product,
@@ -279,9 +282,10 @@ test('« Vous aimerez aussi » garde deux pièces de la gamme au plus, même cho
     ],
   });
   assert.deepEqual(result.related.map(item => item.id), ['palissade-chaise', 'palissade-banc', 'fermob-luxembourg', 'fatboy-paletti']);
-  // Sans autre produit pertinent, la gamme complète la rubrique plutôt que de la laisser vide.
+  // Le reste de la gamme passe dans « De la même collection ».
   const alone = selectProductRecommendations({ product: outdoorChair, curatedRelated: curatedRange, range: curatedRange });
-  assert.equal(alone.related.length, 4);
+  assert.equal(alone.related.length, 2);
+  assert.equal(alone.sameRange.length, 4);
 });
 
 test('indisponibles, produit courant et doublons sont exclus ; chaque rubrique reste bornée', () => {
@@ -295,4 +299,36 @@ test('indisponibles, produit courant et doublons sont exclus ; chaque rubrique r
   assert.equal(result.related.length, MAX_RECOMMENDATIONS);
   assert.equal(new Set([...result.complementary, ...result.related].map(p => p.id)).size, MAX_RECOMMENDATIONS * 2);
   assert.ok([...result.complementary, ...result.related].every(p => p.available && p.id !== product.id));
+});
+
+test('autres créations du créateur : types variés, ni la fiche ni ses déclinaisons, rien de déjà proposé', () => {
+  const { designerPieces } = require('../lib/product-recommendations');
+  const card = (id, name, type, designer = 'Verner Panton', extra = {}) => ({ id, name, productType: type, designer, image: 'x.jpg', available: true, variants: [{ id: id + 'v', searchWords: ['a'] }], description: 'long', ...extra });
+  const product = { id: 'p0', name: 'Suspension Flowerpot VP1', designer: 'Verner Panton' };
+  const cards = [card('p0', 'Suspension Flowerpot VP1', 'Suspension'), card('p1', 'Suspension Flowerpot VP2', 'Suspension'),
+    card('p2', 'Chaise Panton', 'Chaise'), card('p3', 'Chaise Panton Classic', 'Chaise'), card('p4', 'Lampe Panthella', 'Lampe de table'),
+    card('p5', 'Figurine Panton Cubes', 'Figurine'), card('p6', 'Fauteuil Cone', 'Fauteuil', 'Verner Panton', { available: false }),
+    card('p7', 'Chaise Eames', 'Chaise', 'Charles & Ray Eames'), card('p8', 'Applique VP8', 'Applique')];
+  const picked = designerPieces(product, cards, new Set(['p8']));
+  assert.deepEqual(picked.map(c => c.id), ['p2', 'p4', 'p5', 'p3']);
+  assert.equal(picked[0].description, undefined); assert.equal(picked[0].variants[0].searchWords, undefined);
+  assert.deepEqual(designerPieces({ id: 'x', name: 'Vase' }, cards), []);
+});
+
+test('une collection au nom du créateur n’est pas une gamme ; les déclinaisons ne reviennent pas en alternatives', () => {
+  const eames = { id: 'dsr', name: 'Chaise Eames Plastic DSR', brand: 'Vitra', designer: 'Charles & Ray Eames', productType: 'Chaise', tags: ['eames'],
+    collectionRefs: [{ id: 'c-eames', handle: 'eames', title: 'Eames' }] };
+  assert.deepEqual(selectRangeCollections(eames), []);
+  const panton = { id: 'pan', name: 'Chaise Panton', brand: 'Vitra', designer: 'Verner Panton', productType: 'Chaise', tags: ['black-month-mobilier', 'idees-cadeaux', 'terrasse', 'salle-a-manger'],
+    collectionRefs: [{ id: 'bm', handle: 'black-month-mobilier', title: 'Black Month mobilier' }, { id: 'ic', handle: 'idees-cadeaux', title: 'Idées cadeaux' }, { id: 'te', handle: 'terrasse', title: 'Terrasse' }, { id: 'sm', handle: 'salle-a-manger', title: 'Salle à manger' }] };
+  assert.deepEqual(selectRangeCollections(panton), []);
+  assert.equal(identityTerms(eames).includes('eames'), false);
+  const elephant = card('elephant', { name: 'Tabouret Eames Elephant', brand: 'Vitra', productType: 'Tabouret', tags: ['eames'] });
+  assert.deepEqual(selectProductRecommendations({ product: eames, range: [elephant], searched: [elephant] }).sameRange, []);
+  const sofa = { id: 's1', name: 'Canapé Develius Mellow 3 places', brand: '&Tradition', productType: 'Canapé', tags: ['develius'], collectionRefs: [] };
+  const variant = card('s2', { name: 'Canapé Develius Mellow 2 places', brand: '&Tradition', productType: 'Canapé', tags: ['develius'] });
+  const other = card('rico', { name: 'Canapé Rico', brand: 'Ferm Living', productType: 'Canapé' });
+  const result = selectProductRecommendations({ product: sofa, universe: [variant, other], range: [variant] });
+  assert.deepEqual(result.sameRange.map(c => c.id), ['s2']);
+  assert.deepEqual(result.related.map(c => c.id), ['rico']);
 });
