@@ -314,3 +314,18 @@ test('autres créations du créateur : types variés, ni la fiche ni ses déclin
   assert.equal(picked[0].description, undefined); assert.equal(picked[0].variants[0].searchWords, undefined);
   assert.deepEqual(designerPieces({ id: 'x', name: 'Vase' }, cards), []);
 });
+
+test('une collection au nom du créateur n’est pas une gamme ; les déclinaisons ne reviennent pas en alternatives', () => {
+  const eames = { id: 'dsr', name: 'Chaise Eames Plastic DSR', brand: 'Vitra', designer: 'Charles & Ray Eames', productType: 'Chaise', tags: ['eames'],
+    collectionRefs: [{ id: 'c-eames', handle: 'eames', title: 'Eames' }] };
+  assert.deepEqual(selectRangeCollections(eames), []);
+  assert.equal(identityTerms(eames).includes('eames'), false);
+  const elephant = card('elephant', { name: 'Tabouret Eames Elephant', brand: 'Vitra', productType: 'Tabouret', tags: ['eames'] });
+  assert.deepEqual(selectProductRecommendations({ product: eames, range: [elephant], searched: [elephant] }).sameRange, []);
+  const sofa = { id: 's1', name: 'Canapé Develius Mellow 3 places', brand: '&Tradition', productType: 'Canapé', tags: ['develius'], collectionRefs: [] };
+  const variant = card('s2', { name: 'Canapé Develius Mellow 2 places', brand: '&Tradition', productType: 'Canapé', tags: ['develius'] });
+  const other = card('rico', { name: 'Canapé Rico', brand: 'Ferm Living', productType: 'Canapé' });
+  const result = selectProductRecommendations({ product: sofa, universe: [variant, other], range: [variant] });
+  assert.deepEqual(result.sameRange.map(c => c.id), ['s2']);
+  assert.deepEqual(result.related.map(c => c.id), ['rico']);
+});
