@@ -3,7 +3,7 @@
 // envoie la fiche entière ; le navigateur garde ce balisage et branche seulement
 // les interactions (produit.html). Code repris tel quel du rendu navigateur.
 import { escapeHtml, priceLabel, stockLabel } from './format.mjs';
-import { buildProductSpecGroups, renderDimensionImages } from './product-specs.mjs';
+import { buildProductSpecGroups, buildProductEssentials, renderDimensionImages } from './product-specs.mjs';
 
 // Fiches à plusieurs options (Couleur × Piètement × Cuir du dos…) : un bouton par
 // option qui compte au moins deux valeurs, dans l'ordre de Shopify (demande du 3 octobre).
@@ -133,11 +133,22 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
   // l'attribut natif `hidden` (préserve SEO, arbre a11y et le hook SKU).
   // Majoritairement vide tant que les métafields custom.* ne sont pas remplis
   // côté Shopify (import Conductor) : ce n'est PAS un bug de code.
+  // Description longue (textes de marque de plusieurs écrans) : les deux premiers paragraphes, puis « Lire la
+  // suite » (élément natif, tout le texte reste dans la page pour les moteurs de recherche).
+  const descriptionHTML = (text) => {
+    const paras = text.split(/\n\s*\n/).map((para) => `<p class="pdp-desc">${escapeHtml(para).replace(/\n/g, "<br>")}</p>`);
+    if (paras.length <= 2 || text.length < 900) return paras.join("");
+    return paras.slice(0, 2).join("") + `<details class="pdp-desc-rest"><summary>Lire la suite</summary>${paras.slice(2).join("")}</details>`;
+  };
+  const essentials = buildProductEssentials(p);
+  const essentialsHTML = essentials.length >= 2
+    ? `<div class="pdp__facts"><h2 class="label">L’essentiel</h2><dl>${essentials.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd></div>`).join("")}</dl></div>`
+    : "";
   const specGroups = buildProductSpecGroups(p);
   const hasSku = variants.some((v) => v && v.sku);
   const specPanelBody = (g) =>
     g.key === "description"
-      ? g.text.split(/\n\s*\n/).map((para) => `<p class="pdp-desc">${escapeHtml(para).replace(/\n/g, "<br>")}</p>`).join("")
+      ? descriptionHTML(g.text)
       : `<dl class="pdp-specs">${g.rows.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join("")}${g.key === "technique" && hasSku ? `<div><dt>Référence</dt><dd data-spec-sku>${escapeHtml(current.sku || "—")}</dd></div>` : ""}</dl>${renderDimensionImages(g, escapeHtml)}`;
   const specShown = specGroups.filter((g) =>
     g.key === "description" ? !!g.text
@@ -206,6 +217,7 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
         <div class="pdp__reassure">
           <p class="pdp__avail" data-avail role="status" aria-live="polite">${availStore(current)}</p>
           <ul class="trust-list" aria-label="Nos garanties"><li><svg class="trust-list__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.2-2.8 7.6-7 9-4.2-1.4-7-4.8-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Paiement 100&nbsp;% sécurisé</li><li><svg class="trust-list__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v4h4"/></svg>Retour sous 14&nbsp;jours</li><li><svg class="trust-list__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h12v8H2z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="6.5" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>Livraison partout en Belgique&nbsp;: 50&nbsp;€ · retrait gratuit à Uccle</li><li><svg class="trust-list__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Un conseil&nbsp;? <a href="tel:+32493837983">+32&nbsp;493&nbsp;83&nbsp;79&nbsp;83</a></li></ul>
+          ${essentialsHTML}
           <p class="pdp__contact"><a href="/contact.html">Une question ? Écrivez-nous <span aria-hidden="true">→</span></a></p>
         </div>
       </div>

@@ -831,6 +831,19 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp__avail strong { font-weight: 600; color: var(--ink); }
 .pdp__avail a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
 
+/* « L’essentiel » : faits clés près du bouton d'achat (mêmes filets et corps que la liste de garanties). */
+.pdp__facts { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.pdp__facts .label { display: block; margin: 0; font-family: var(--sans-product); font-weight: 400; font-size: var(--fs-meta); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.pdp__facts dl { margin: 10px 0 0; display: grid; gap: 8px; }
+.pdp__facts dl div { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; font-family: var(--sans-product); font-size: var(--fs-small); line-height: 1.45; }
+.pdp__facts dt { color: var(--muted); }
+.pdp__facts dd { margin: 0; color: var(--ink-deep); overflow-wrap: anywhere; }
+.pdp__facts + .pdp__contact { margin-top: 16px; }
+.pdp-desc-rest > summary { display: inline-block; margin-top: 12px; cursor: pointer; list-style: none; font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--accent-ink); border-bottom: 1px solid transparent; }
+.pdp-desc-rest > summary::-webkit-details-marker { display: none; }
+.pdp-desc-rest > summary:hover { border-bottom-color: currentColor; }
+.pdp-desc-rest[open] > summary { display: none; }
+.pdp-desc-rest .pdp-desc:first-of-type { margin-top: 0; }
 .pdp__contact { margin-top: 8px; }
 .pdp__contact a { font-family: var(--sans-product); font-weight: 600; font-size: var(--fs-small); color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s var(--ease); }
 .pdp__contact a:hover { border-bottom-color: currentColor; }
