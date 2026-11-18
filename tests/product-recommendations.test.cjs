@@ -394,3 +394,15 @@ test('rayons au nom du type, cotes et studios de marque ; alternatives proches e
     v('v5', 'Vase Conical Petit', 'HAY', 40), card('l1', { name: 'Lampe Pao', brand: 'HAY', productType: 'Lampe', price: 60 })];
   assert.deepEqual(similarPieces(vase, cards).map(c => c.id), ['v2', 'v4', 'v1']);
 });
+
+test('même marque, même type, même modèle = même gamme, même quand le modèle porte le nom du créateur', () => {
+  const { sameModel, modelPieces, similarPieces } = require('../lib/product-recommendations');
+  const table = { id: 't0', name: 'Table enfant Aalto 90A Ø 100 cm H60', brand: 'Artek', productType: 'Table', designer: 'Alvar Aalto', tags: ['enfant'] };
+  const other = card('t1', { name: 'Table enfant Aalto 81C 75 × 75 cm', brand: 'Artek', productType: 'table', tags: ['enfant'] });
+  const vase = card('v1', { name: 'Vase Aalto 12 cm', brand: 'Iittala', productType: 'vase' });
+  assert.equal(sameModel(table, other), true);
+  assert.equal(sameModel(table, vase), false);
+  assert.deepEqual(modelPieces(table, [other, vase]).map(c => c.id), ['t1']);
+  assert.deepEqual(similarPieces(table, [other]), []);
+  assert.deepEqual(selectProductRecommendations({ product: table, searched: [other] }).sameRange.map(c => c.id), ['t1']);
+});
