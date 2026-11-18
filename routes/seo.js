@@ -86,10 +86,13 @@ router.get('/sitemap-products.xml', async (req, res) => {
       // Pages de marque sans collection Shopify (registre, 30 octobre 2026 : Hartô, Missoni…) : absentes de la
       // liste ci-dessus, elles manquaient au plan du site (18 novembre 2026).
       const listed = new Set(urls.map(u => u.match(/<loc>([^<]*)</)[1]));
-      (await getActiveBrands()).forEach((b) => {
-        const loc = /^\/collections\/[a-z0-9-]+$/.test(b.href || '') && ORIGIN + b.href;
-        if (loc && !listed.has(loc)) { listed.add(loc); urls.push(smUrl(loc, '0.6')); }
-      });
+      // Jamais bloquant : sans la liste des marques, le plan garde les fiches et les collections.
+      try {
+        (await getActiveBrands()).forEach((b) => {
+          const loc = /^\/collections\/[a-z0-9-]+$/.test(b.href || '') && ORIGIN + b.href;
+          if (loc && !listed.has(loc)) { listed.add(loc); urls.push(smUrl(loc, '0.6')); }
+        });
+      } catch (error) { console.warn('[sitemap-products] marques', error.message); }
       return smUrlset(urls);
     }, 6 * 60 * 60 * 1000); // cache 6 h
     return sendXml(res, xml);
