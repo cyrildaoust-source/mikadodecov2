@@ -372,3 +372,37 @@ test('couverts, rayons et matières ne passent pas pour une table ou une gamme ;
   const junior = card('jr', { name: 'Chaise Panton Junior', brand: 'Vitra', productType: 'Chaise enfant' });
   assert.deepEqual(selectProductRecommendations({ product: panton, universe: [junior, adultChair] }).related.map(c => c.id), ['aac']);
 });
+
+test('rayons au nom du type, cotes et studios de marque ; alternatives proches en prix et en style', () => {
+  const { designerPieces, designerIsBrand, similarPieces } = require('../lib/product-recommendations');
+  const roll = { id: 'r', name: 'Porte-rouleau Bunny & Carrot', brand: 'Alessi', productType: 'Porte-rouleau', tags: [],
+    collectionRefs: [{ id: 'pr', handle: 'porte-rouleaux', title: 'Porte-rouleaux' }] };
+  assert.deepEqual(selectRangeCollections(roll), []);
+  const side = { id: 's', name: "Table d'appoint à plateau 30 × 30 cm H44", brand: 'HAY', productType: "Table d'appoint", tags: ['h44'] };
+  assert.equal(identityTerms(side).includes('h44'), false);
+  const pot = { id: 'm', name: 'Pot Mus Très grand', brand: 'Ferm Living', productType: 'Pot', tags: [] };
+  assert.equal(identityTerms(pot).some(term => term.includes('tres')), false);
+  assert.equal(role({ productType: 'Miniature', name: 'Miniature Eames La Chaise' }), 'decor-object');
+  assert.equal(role({ productType: 'Tasse à cappuccino', name: 'Tasse à cappuccino Solare' }), 'cup');
+  assert.equal(designerIsBrand({ brand: 'Fermob', designer: 'Studio Fermob' }), true);
+  assert.equal(designerIsBrand({ brand: 'Fermob', designer: 'Pascal Mourgue' }), false);
+  assert.deepEqual(designerPieces({ id: 'u', name: 'Lampe Ulli', brand: 'Fermob', designer: 'Studio Fermob' }, [card('x', { designer: 'Studio Fermob' })]), []);
+  const vase = { id: 'v0', name: 'Vase Conical Grand', brand: 'HAY', productType: 'Vase', price: 60, tags: ['scandinave'] };
+  const v = (id, name, brand, price, tags = []) => card(id, { name, brand, productType: 'vase', price, tags });
+  const cards = [v('v1', 'Vase Gleam Petit', 'HKliving', 15), v('v2', 'Vase Steps Grand', 'Pols Potten', 65, ['scandinave']),
+    v('v3', 'Vase Steps Petit', 'Pols Potten', 30), v('v4', 'Vase Aalto 16 cm', 'Iittala', 70, ['scandinave']),
+    v('v5', 'Vase Conical Petit', 'HAY', 40), card('l1', { name: 'Lampe Pao', brand: 'HAY', productType: 'Lampe', price: 60 })];
+  assert.deepEqual(similarPieces(vase, cards).map(c => c.id), ['v2', 'v4', 'v1']);
+});
+
+test('même marque, même type, même modèle = même gamme, même quand le modèle porte le nom du créateur', () => {
+  const { sameModel, modelPieces, similarPieces } = require('../lib/product-recommendations');
+  const table = { id: 't0', name: 'Table enfant Aalto 90A Ø 100 cm H60', brand: 'Artek', productType: 'Table', designer: 'Alvar Aalto', tags: ['enfant'] };
+  const other = card('t1', { name: 'Table enfant Aalto 81C 75 × 75 cm', brand: 'Artek', productType: 'table', tags: ['enfant'] });
+  const vase = card('v1', { name: 'Vase Aalto 12 cm', brand: 'Iittala', productType: 'vase' });
+  assert.equal(sameModel(table, other), true);
+  assert.equal(sameModel(table, vase), false);
+  assert.deepEqual(modelPieces(table, [other, vase]).map(c => c.id), ['t1']);
+  assert.deepEqual(similarPieces(table, [other]), []);
+  assert.deepEqual(selectProductRecommendations({ product: table, searched: [other] }).sameRange.map(c => c.id), ['t1']);
+});
