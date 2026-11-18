@@ -255,6 +255,11 @@
       "collections": []
     },
     {
+      "name": "Kriptonite",
+      "href": "/collections/kriptonite",
+      "collections": []
+    },
+    {
       "name": "LIND DNA",
       "href": "/collections/lind-dna",
       "collections": []
@@ -382,6 +387,11 @@
     {
       "name": "Studio About",
       "href": "/collections/studio-about",
+      "collections": []
+    },
+    {
+      "name": "Tiptoe",
+      "href": "/collections/tiptoe",
       "collections": []
     },
     {
