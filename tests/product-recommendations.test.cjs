@@ -332,3 +332,43 @@ test('une collection au nom du créateur n’est pas une gamme ; les déclinaiso
   assert.deepEqual(result.sameRange.map(c => c.id), ['s2']);
   assert.deepEqual(result.related.map(c => c.id), ['rico']);
 });
+
+test('couverts, rayons et matières ne passent pas pour une table ou une gamme ; le mobilier enfant reste entre enfants', () => {
+  const { isKids } = require('../lib/product-recommendations');
+  assert.equal(role({ productType: 'Couteau de table', name: 'Couteau de table Scandia' }), 'cutlery');
+  assert.equal(role({ productType: 'Cuillère de table', name: 'Cuillère de table Scandia' }), 'cutlery');
+  assert.equal(role({ productType: 'Centre de table', name: 'Centre de table Canova' }), 'decor-object');
+  assert.equal(role({ productType: 'Service de table', name: 'Service de table enfant Giro Kids' }), 'dishware');
+  const barro = { id: 'b1', name: 'Assiette Barro (Lot de 2) Ø 18 cm', brand: 'HAY', productType: 'Assiette', tags: ['arts-de-la-table', 'barro', 'ceramique'],
+    collectionRefs: [{ id: 'acc', handle: 'accessoires', title: 'Arts de la table' }, { id: 'va', handle: 'vaisselle-assiettes', title: 'Vaisselle & assiettes' }] };
+  assert.deepEqual(selectRangeCollections(barro), []);
+  assert.deepEqual(identityTerms(barro), ['barro']);
+  const scandia = { id: 'sc', name: 'Couverts Scandia Coffret 24 pièces', brand: 'Iittala', productType: 'Couverts', tags: ['couverts', 'scandia'],
+    collectionRefs: [{ id: 'cv', handle: 'couverts', title: 'Couverts' }] };
+  assert.deepEqual(selectRangeCollections(scandia), []);
+  const flake = { id: 'f', name: 'Élément de canapé central XL Flake Corduroy Velvet', brand: 'HKliving', productType: 'Élément de canapé', tags: ['corduroy-velvet', 'flake'] };
+  assert.deepEqual(identityTerms(flake), ['flake']);
+  // Une collection partagée par plusieurs marques n'est pas une gamme.
+  const other = card('ich', { name: 'Bouteille Animal Farm', brand: 'Ichendorf Milano', productType: 'Bouteille', recommendationCollectionIds: ['ra'] });
+  const ranged = { ...barro, collectionRefs: [{ id: 'ra', handle: 'barro-et-cie', title: 'Barro et cie' }], name: 'Assiette Barro et cie' };
+  assert.deepEqual(selectProductRecommendations({ product: ranged, range: [other] }).sameRange, []);
+  // Table enfant : des assises enfant, jamais une chaise adulte ; pas de verres à vin.
+  const kidsTable = { id: 'kt', name: 'Table enfant Aalto 90A H60', brand: 'Artek', productType: 'Table', tags: ['enfant', 'mobilier-enfant'] };
+  assert.equal(isKids(kidsTable), true);
+  const adultChair = card('aac', { name: 'Chaise AAC 22', brand: 'HAY', productType: 'Chaise' });
+  const kidChair = card('n65', { name: 'Chaise enfant N65', brand: 'Artek', productType: 'Chaise', tags: ['enfant'] });
+  const kidStool = card('ne60', { name: 'Tabouret enfant NE60', brand: 'Artek', productType: 'Tabouret', tags: ['enfant'] });
+  const adultTable = card('bistro', { name: 'Table Bistro Ø 77 cm', brand: 'Fermob', productType: 'Table' });
+  const kidTable2 = card('slope', { name: 'Table enfant Slope', brand: 'Ferm Living', productType: 'Table enfant', tags: ['enfant'] });
+  const result = selectProductRecommendations({ product: kidsTable, scene: { seating: [adultChair, kidChair, kidStool] }, universe: [adultTable, kidTable2] });
+  assert.deepEqual(result.complementary.map(c => c.id).sort(), ['n65', 'ne60']);
+  assert.deepEqual(result.related.map(c => c.id), ['slope']);
+  const scene = sceneSearchQueries(kidsTable);
+  assert.match(scene.sceneSeating, /tag:enfant/);
+  assert.equal(scene.sceneDrinkware.includes('Verre'), false);
+  assert.match(universeSearchQueries(kidsTable).sameUniverse, /Table enfant.*AND tag:enfant$/);
+  // Et l'inverse : une chaise adulte ne propose pas une chaise junior.
+  const panton = { id: 'pan', name: 'Chaise Panton', brand: 'Vitra', productType: 'Chaise', tags: [] };
+  const junior = card('jr', { name: 'Chaise Panton Junior', brand: 'Vitra', productType: 'Chaise enfant' });
+  assert.deepEqual(selectProductRecommendations({ product: panton, universe: [junior, adultChair] }).related.map(c => c.id), ['aac']);
+});
