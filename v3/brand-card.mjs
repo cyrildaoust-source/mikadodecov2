@@ -1,7 +1,9 @@
 import { escapeHtml, slugify } from './format.mjs';
 import { brandLogoSrc } from './brand-logos.mjs';
 
-const ORIGIN = { fermob: 'France', hay: 'Danemark', vitra: 'Suisse', muuto: 'Danemark', tradition: 'Danemark', 'ferm-living': 'Danemark', fatboy: 'Pays-Bas', hkliving: 'Pays-Bas', 'pols-potten': 'Pays-Bas', alessi: 'Italie', artek: 'Finlande', relaxound: 'Allemagne', gubi: 'Danemark', moustache: 'France', hoptimist: 'Danemark', softline: 'Danemark', 'kay-bojesen': 'Danemark', 'addison-ross': 'Royaume-Uni' };
+const ORIGIN = { fermob: 'France', hay: 'Danemark', vitra: 'Suisse', muuto: 'Danemark', tradition: 'Danemark', 'ferm-living': 'Danemark', fatboy: 'Pays-Bas', hkliving: 'Pays-Bas', 'pols-potten': 'Pays-Bas', alessi: 'Italie', artek: 'Finlande', relaxound: 'Allemagne', gubi: 'Danemark', moustache: 'France', hoptimist: 'Danemark', softline: 'Danemark', 'kay-bojesen': 'Danemark', 'addison-ross': 'Royaume-Uni',
+  // 18 novembre 2026 : pays réels (19 marques affichaient « Europe »).
+  anglepoise: 'Royaume-Uni', avolt: 'Suède', blomus: 'Allemagne', 'compagnie-de-provence': 'France', esteban: 'France', harto: 'France', 'ichendorf-milano': 'Italie', iittala: 'Finlande', kriptonite: 'Italie', 'lind-dna': 'Danemark', 'linie-design': 'Danemark', marimekko: 'Finlande', missoni: 'Italie', 'normann-copenhagen': 'Danemark', remember: 'Allemagne', serax: 'Belgique', 'stoff-nagel': 'Allemagne', 'string-furniture': 'Suède', 'studio-about': 'Danemark', tiptoe: 'France', 'zone-denmark': 'Danemark' };
 
 // The server and the static-page fallback render the same brand card.
 // `brand.href` vient de /api/brands (règle commune de navigation.mjs).
