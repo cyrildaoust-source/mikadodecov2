@@ -658,6 +658,9 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
     if (!document.querySelector(gridSel).querySelector(".pcard")) document.querySelector(gridSel).innerHTML = list.map(productCard).join("");
   };
   renderRecos(p.complementary, "[data-complementary-wrap]", "[data-complementary]");
+  renderRecos(p.sameRange, "[data-range-wrap]", "[data-range]");
+  renderRecos(p.byDesigner, "[data-designer-wrap]", "[data-designer]");
+  if (p.designer && p.byDesigner?.length) document.querySelector("[data-designer-title]").textContent = `Autres créations de ${p.designer}`;
   renderRecos(p.related, "[data-related-wrap]", "[data-related]");
 
   // Inject promo badges on the main PDP (non-default variants via probePromo

@@ -142,6 +142,9 @@ router.get('/produit.html', async (req, res) => {
       out = out.replace('<section class="section" ' + wrap + ' style="display:none">', () => '<section class="section" ' + wrap + '>');
     };
     recoSsr(product.complementary, 'data-complementary', 'data-complementary-wrap');
+    recoSsr(product.sameRange, 'data-range', 'data-range-wrap');
+    recoSsr(product.byDesigner, 'data-designer', 'data-designer-wrap');
+    if (product.byDesigner?.length && product.designer) out = out.replace('<h2 class="catalogue-head serif" data-designer-title>Du même créateur</h2>', () => '<h2 class="catalogue-head serif" data-designer-title>Autres créations de ' + ogEscape(product.designer) + '</h2>');
     recoSsr(product.related, 'data-related', 'data-related-wrap');
     out = injectChrome(out, 'produit.html');
     ogCache(res);
