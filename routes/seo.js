@@ -9,7 +9,7 @@ const { cached } = require('../lib/cache');
 const { BRAND_COLLECTION_ALIASES, FAMILLES_RICHES, INTERNAL_COLLECTION, ORIGIN, SITEMAP_PAGES } = require('../lib/config');
 const { getDesigners } = require('../lib/designers');
 const { activeDesignerSlugs } = require('../lib/render/pages');
-const { getCollections } = require('../lib/services/catalog');
+const { getCollections, getActiveBrands } = require('../lib/services/catalog');
 const { GIFTS, designerPageFor } = require('../lib/filter-scopes');
 
 // ─── SEO: sitemap = INDEX instantané → pages (statique) + produits (walk) ──
@@ -82,6 +82,13 @@ router.get('/sitemap-products.xml', async (req, res) => {
         if (Object.hasOwn(BRAND_COLLECTION_ALIASES, c.handle) || INTERNAL_COLLECTION.test(c.handle) || designerPageFor(c.handle)) return;   // créateur : sa page /produits.html?designer= est déjà dans le sitemap
         const composed = Object.hasOwn(families, c.handle) || Object.hasOwn(FAMILLES_RICHES, c.handle) || ['chaises', 'tables-outdoor', 'promotions'].includes(c.handle);
         if (c.handle && (c.hasProducts !== false || composed)) urls.push(smUrl(ORIGIN + '/collections/' + encodeURIComponent(c.handle), '0.6', smDate(c.updatedAt)));
+      });
+      // Pages de marque sans collection Shopify (registre, 30 octobre 2026 : Hartô, Missoni…) : absentes de la
+      // liste ci-dessus, elles manquaient au plan du site (18 novembre 2026).
+      const listed = new Set(urls.map(u => u.match(/<loc>([^<]*)</)[1]));
+      (await getActiveBrands()).forEach((b) => {
+        const loc = /^\/collections\/[a-z0-9-]+$/.test(b.href || '') && ORIGIN + b.href;
+        if (loc && !listed.has(loc)) { listed.add(loc); urls.push(smUrl(loc, '0.6')); }
       });
       return smUrlset(urls);
     }, 6 * 60 * 60 * 1000); // cache 6 h
