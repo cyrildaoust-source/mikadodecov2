@@ -319,8 +319,8 @@ test('une collection au nom du créateur n’est pas une gamme ; les déclinaiso
   const eames = { id: 'dsr', name: 'Chaise Eames Plastic DSR', brand: 'Vitra', designer: 'Charles & Ray Eames', productType: 'Chaise', tags: ['eames'],
     collectionRefs: [{ id: 'c-eames', handle: 'eames', title: 'Eames' }] };
   assert.deepEqual(selectRangeCollections(eames), []);
-  const panton = { id: 'pan', name: 'Chaise Panton', brand: 'Vitra', designer: 'Verner Panton', productType: 'Chaise', tags: ['black-month-mobilier', 'idees-cadeaux'],
-    collectionRefs: [{ id: 'bm', handle: 'black-month-mobilier', title: 'Black Month mobilier' }, { id: 'ic', handle: 'idees-cadeaux', title: 'Idées cadeaux' }] };
+  const panton = { id: 'pan', name: 'Chaise Panton', brand: 'Vitra', designer: 'Verner Panton', productType: 'Chaise', tags: ['black-month-mobilier', 'idees-cadeaux', 'terrasse', 'salle-a-manger'],
+    collectionRefs: [{ id: 'bm', handle: 'black-month-mobilier', title: 'Black Month mobilier' }, { id: 'ic', handle: 'idees-cadeaux', title: 'Idées cadeaux' }, { id: 'te', handle: 'terrasse', title: 'Terrasse' }, { id: 'sm', handle: 'salle-a-manger', title: 'Salle à manger' }] };
   assert.deepEqual(selectRangeCollections(panton), []);
   assert.equal(identityTerms(eames).includes('eames'), false);
   const elephant = card('elephant', { name: 'Tabouret Eames Elephant', brand: 'Vitra', productType: 'Tabouret', tags: ['eames'] });
