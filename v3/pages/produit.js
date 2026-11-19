@@ -84,6 +84,16 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
   const status = host.querySelector("[data-cart-status]");
   const qtyLabel = host.querySelector("[data-qty-label]");
 
+  // ── Colonne d'achat collante, jamais coupée : si elle dépasse l'écran, son accroche remonte
+  // pour que sa fin (« L'essentiel ») reste lisible pendant la lecture de la description à gauche.
+  const info = host.querySelector(".pdp__info");
+  if (info && "ResizeObserver" in window) {
+    const fitSticky = () => { info.style.top = Math.min(130, window.innerHeight - info.offsetHeight - 24) + "px"; };
+    new ResizeObserver(fitSticky).observe(info);
+    window.addEventListener("resize", fitSticky, { passive: true });
+    fitSticky();
+  }
+
   // ── Accordéon specs : single-open, replié via l'attribut natif `hidden` ──
   // Un seul panneau ouvert à la fois. L'état est porté UNIQUEMENT par
   // aria-expanded + `hidden` (aucun montage paresseux, aucun max-height:0).
