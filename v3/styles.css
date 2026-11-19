@@ -765,6 +765,7 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp > .pdp__gallery { grid-column: 1; grid-row: 1; }
 .pdp > .pdp__info { grid-column: 2; grid-row: 1 / span 2; }
 .pdp > .pdp-acc { grid-column: 1; grid-row: 2; padding-block: 0; max-width: none; min-width: 0; }
+.pdp:has(> .pdp-acc) { padding-bottom: var(--section-y); }   /* la marge que portait la section des caractéristiques */
 .pdp__info-skel { display: flex; flex-direction: column; }
 .pdp__skel-bar { display: block; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
 .pdp__brand { font-family: var(--sans-product); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: var(--fs-meta); color: var(--accent-ink); }
