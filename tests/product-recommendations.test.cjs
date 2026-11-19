@@ -137,7 +137,7 @@ test('le dernier filet rapproche le même type puis le même univers sans produi
   assert.equal(role({ name: 'Cartes postales', productType: 'Accessoire', tags: ['papeterie'] }), 'desk-space');
   assert.equal(role({ name: 'Bobèche Nagel', productType: 'Accessoire', tags: ['bobeche'] }), 'candle-holder');
   assert.equal(role({ name: 'Patins feutre', productType: 'Accessoire', tags: ['protection-sol'] }), 'furniture-care');
-  assert.equal(sameUniverse(officeChair, diningChair), true);
+  assert.equal(sameUniverse(officeChair, diningChair), false);   // 19 novembre 2026 : un siège de bureau a sa propre famille
   assert.equal(sameUniverse(glass, waterGlass), true);
   assert.equal(sameUniverse(
     { name: 'Ouvre-bouteille Virgula Divina', productType: 'Ouvre-bouteille' },
@@ -405,4 +405,21 @@ test('même marque, même type, même modèle = même gamme, même quand le mod�
   assert.deepEqual(modelPieces(table, [other, vase]).map(c => c.id), ['t1']);
   assert.deepEqual(similarPieces(table, [other]), []);
   assert.deepEqual(selectProductRecommendations({ product: table, searched: [other] }).sameRange.map(c => c.id), ['t1']);
+});
+
+test('un siège de bureau se complète d’un poste de travail, pas de coussins', () => {
+  const chair = { id: 'sp', name: 'Chaise de bureau Soft Pad EA 231 Cuir', brand: 'Vitra', productType: 'Chaise de bureau', tags: ['soft-pad', 'bureau'] };
+  assert.equal(role(chair), 'office-seat');
+  assert.equal(sceneSearchQueries(chair).includeTableScene, true);
+  const cushion = card('cu', { name: 'Coussin d’assise Soft Seats', brand: 'Vitra', productType: 'Coussin', tags: ['soft-seats'] });
+  const deskOther = card('d1', { name: 'Bureau CPH 90', brand: 'HAY', productType: 'Bureau' });
+  const deskVitra = card('d2', { name: 'Bureau Courier', brand: 'Vitra', productType: 'Bureau' });
+  const kidsDesk = card('d3', { name: 'Bureau enfant Feve', brand: 'Ferm Living', productType: 'Bureau', tags: ['enfant'] });
+  const lamp = card('l1', { name: 'Lampe de bureau Apex', brand: 'HAY', productType: 'Lampe de bureau' });
+  const pad = card('s1', { name: 'Sous-main Repad', brand: 'Vitra', productType: 'Sous-main' });
+  const tidy = card('o1', { name: 'Vide-poche S-Tidy', brand: 'Vitra', productType: 'Vide-poche' });
+  const result = selectProductRecommendations({ product: chair, range: [cushion], searched: [cushion],
+    scene: { seating: [kidsDesk, deskOther, deskVitra], dishware: [lamp], drinkware: [pad], textiles: [tidy] } });
+  assert.deepEqual(result.complementary.map(c => c.id), ['d2', 'l1', 's1', 'o1']);
+  assert.equal(sameUniverse(chair, card('x', { name: 'Chaise AAC 22', productType: 'Chaise' })), false);
 });

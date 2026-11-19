@@ -758,6 +758,13 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
 .pdp__gallery { position: relative; }
 .pdp__main { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; cursor: zoom-in; }
 .pdp__info { position: sticky; top: 130px; }
+/* Description et caractéristiques sous la photo, dans la colonne de gauche : plus de grand blanc sous la photo
+   quand la colonne d'achat est plus longue (19 novembre 2026). La colonne d'achat couvre les deux rangées et
+   reste visible pendant la lecture ; la rangée flexible absorbe sa hauteur. */
+.pdp { grid-template-rows: auto 1fr; }
+.pdp > .pdp__gallery { grid-column: 1; grid-row: 1; }
+.pdp > .pdp__info { grid-column: 2; grid-row: 1 / span 2; }
+.pdp > .pdp-acc { grid-column: 1; grid-row: 2; padding-block: 0; max-width: none; min-width: 0; }
 .pdp__info-skel { display: flex; flex-direction: column; }
 .pdp__skel-bar { display: block; background: var(--tile); animation: pulse 1.4s var(--ease) infinite; }
 .pdp__brand { font-family: var(--sans-product); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: var(--fs-meta); color: var(--accent-ink); }
@@ -882,6 +889,9 @@ body.search-locked .nav__searchbar { display: flex; flex: 1; align-items: center
   .pdp__info { order: 2; }
   .pdp__rail { order: 3; }
   .pdp__dots { order: 4; margin-top: -20px; }
+  .pdp { grid-template-rows: none; }
+  .pdp > .pdp__gallery, .pdp > .pdp__info, .pdp > .pdp-acc { grid-column: auto; grid-row: auto; }
+  .pdp > .pdp-acc { order: 5; }
 }
 /* Barre d'achat mobile : sous les tiroirs (panier 120), au-dessus du contenu. */
 .pdp-stickybuy { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: flex; align-items: center; gap: 14px; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(26,25,22,.06); }
