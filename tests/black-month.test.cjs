@@ -66,7 +66,7 @@ test('barre d’annonce : le code BLACK10 apparaît dès le 20 novembre, en clai
     const html = render();
     assert.match(html, /<strong class="bm-code">BLACK10<\/strong>/);
     assert.match(html, /bm-long[^>]*><b>Black Month<\/b>&nbsp;: −10&nbsp;% dès 200&nbsp;€ d’achat avec le code/);
-    assert.match(html, /bm-short[^>]*>−10&nbsp;% dès 200&nbsp;€ avec le code/);
+    assert.match(html, /bm-short[^>]*>−10&nbsp;% dès 200&nbsp;€ avec <strong/);
     assert.doesNotMatch(html, /−20/);   // le −20 % se voit sur les prix (Cyril, 20 novembre 2026)
     assert.match(html, /jusqu’au 28\/11/);
     assert.doesNotMatch(html, /jusqu.à −/i);
