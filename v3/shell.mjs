@@ -99,7 +99,7 @@ function bindSearch() {
 function bindAnnounce() {
   const host = document.querySelector("[data-announce]");
   if (!host) return;
-  const items = [...host.querySelectorAll("span")];
+  const items = [...host.querySelectorAll(":scope > span")];   // les messages, pas leurs morceaux (barre Black Month)
   if (items.length < 2) return;
   // WCAG 2.2.2 : si l'utilisateur préfère moins d'animation → pas de défilement ;
   // sinon défile mais se met en PAUSE au survol/focus de la barre.

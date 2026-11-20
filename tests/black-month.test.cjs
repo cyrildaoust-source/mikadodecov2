@@ -55,3 +55,19 @@ test('Black Month : la lecture précalculée par le cron redonne les mêmes piè
   assert.deepEqual(stored.pieces.map(p => [p.variant.id, p.sale]), live.pieces.map(p => [p.variant.id, p.sale]));
   assert.deepEqual(stored.pieces.map(p => p.variant.id), ['v2', 'v1']);
 });
+
+test('barre d’annonce : le code BLACK10 apparaît dès le 20 novembre, en clair, avec une version courte', () => {
+  const clock = process.env.MIKADO_CLOCK;
+  const render = () => { delete require.cache[require.resolve('../lib/render/black-month')]; return require('../lib/render/black-month').announceHTML(); };
+  try {
+    process.env.MIKADO_CLOCK = '2026-11-19T12:00:00+01:00';
+    assert.doesNotMatch(render(), /BLACK10/);
+    process.env.MIKADO_CLOCK = '2026-11-20T09:00:00+01:00';
+    const html = render();
+    assert.match(html, /<strong class="bm-code">BLACK10<\/strong>/);
+    assert.match(html, /bm-long[^>]*><b>Black Month<\/b>&nbsp;: −20\s% sur le mobilier en stock · −10&nbsp;% sur tout le reste dès 200&nbsp;€ avec le code/);
+    assert.match(html, /bm-short[^>]*>−20\s% mobilier en stock · −10&nbsp;% sur le reste avec/);
+    assert.match(html, /jusqu’au 28\/11/);
+    assert.doesNotMatch(html, /jusqu.à −/i);
+  } finally { if (clock === undefined) delete process.env.MIKADO_CLOCK; else process.env.MIKADO_CLOCK = clock; }
+});
