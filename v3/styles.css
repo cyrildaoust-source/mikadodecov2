@@ -1870,11 +1870,8 @@ html.cart-has-items [data-items]:empty { min-height: calc(var(--cart-rows, 1) * 
 .announce--bm .bm-short { display: none; }
 .announce--bm .bm-code { display: inline-block; padding: 0 6px; border: 1px solid #d8c08a; color: #d8c08a; font-weight: 600; letter-spacing: .06em; line-height: 18px; }
 @media (max-width: 1100px) { .announce--code .bm-long { display: none; } .announce--code .bm-short { display: inline; } }
-/* Téléphone : le texte court tient sur deux lignes plutôt que d'être coupé (le code doit rester lisible). */
 @media (max-width: 520px) {
-  .announce.announce--code { height: auto; min-height: 34px; padding: 6px 12px; }
-  .announce--code > span { white-space: normal; text-align: center; font-size: 12.5px; line-height: 1.45; }
-  .announce--code .bm-short { white-space: normal; }
+  .announce--code > span { font-size: 13px; }
   .announce--code .bm-code { padding: 0 4px; letter-spacing: .03em; line-height: 16px; }
 }
 .chrome a.nlink--bm, .drawer__link--bm { color: #0b0b0b; font-weight: 600; }
