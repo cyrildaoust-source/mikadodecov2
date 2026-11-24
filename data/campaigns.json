@@ -44,7 +44,7 @@
     }
   },
   "blackMonth": {
-    "_note": "Black Month 2026 (demande de Cyril du 09/11, offre gérée par l'instance promotions). Le site n'affiche l'opération qu'entre startsAt et endsAt (extinction automatique le 29/11 au matin). Les pièces remisées ne sont jamais listées ici : le site interroge Shopify (panier) variante par variante, parmi les variantes en stock de la collection `collection`. Prix remisé affiché seulement à partir de `minimum` € (règle de l'instance promotions : en dessous, « −20 % dès 200 € de mobilier »). Le −10 % du 24 au 28/11 n'est pas annoncé ici. `MIKADO_CLOCK` (lib/christmas.js) avance l'horloge en Preview.",
+    "_note": "Black Month 2026 (demande de Cyril du 09/11, offre gérée par l'instance promotions). Le site n'affiche l'opération qu'entre startsAt et endsAt (extinction automatique le 29/11 au matin). Les pièces remisées ne sont jamais listées ici : le site interroge Shopify (panier) variante par variante, parmi les variantes en stock de la collection `collection`. Prix remisé affiché seulement à partir de `minimum` € (règle de l'instance promotions : en dessous, « −20 % dès 200 € de mobilier »). Le code BLACK10 (−10 % sur le reste, dès le 20/11) est annoncé dans la barre d'annonce (bloc `code`). `MIKADO_CLOCK` (lib/christmas.js) avance l'horloge en Preview.",
     "enabled": true,
     "startsAt": "2026-11-09T00:00:00+01:00",
     "endsAt": "2026-11-29T00:00:00+01:00",
@@ -53,6 +53,13 @@
     "discountTitle": "Black Month",
     "percent": 20,
     "minimum": 200,
+    "code": {
+      "_note": "Code BLACK10 (instance promotions, 20/11) : −10 % sur tout le reste dès 200 € d'achat, hors articles tagués « promotion », cumulable avec le −20 % (une remise par ligne). Les prix ne changent pas : le bandeau est le seul endroit où le client découvre le code.",
+      "name": "BLACK10",
+      "percent": 10,
+      "minimum": 200,
+      "startsAt": "2026-11-20T00:00:00+01:00"
+    },
     "heroImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/9950813_PantonChairClassicGold_webres_v_fullbleed_1440x_e55220f7-49d2-4e8a-aa84-25658f082dc9.jpg",
     "heroImageAlt": "Chaise Panton Classic Gold de Vitra, en stock chez Mikado Deco",
     "pageImage": "https://cdn.shopify.com/s/files/1/0958/8441/1209/files/salondedar.png",
