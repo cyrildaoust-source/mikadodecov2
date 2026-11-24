@@ -221,8 +221,8 @@ export function pdpView(p, { requestedVariant = null, selectInitialVariant, bran
           <p class="pdp__contact"><a href="/contact.html">Une question ? Écrivez-nous <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
-    </div>
-    ${specAccordionHTML}`;
+      ${specAccordionHTML}
+    </div>`;
 
   return { html, imgs, thumbSrcs, widthVariant, srcsetFor, MAIN_SIZES, variants, initialSelection, current, norm, ambiances, ambThumbs,
     optionNames, pickAxes, isColorAxis, axisLabel, axisLabelLower, moreCount, moreWord, variantImg, variantState, availInline, availStore, hasSku };
