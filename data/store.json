@@ -1,0 +1,16 @@
+{
+  "_note": "Fiche du magasin, source unique des données structurées locales (accueil, contact, Mikado Studio). Lu par lib/store.js. Demande de la session marketing du 25/11/2026 : FurnitureStore, adresse, téléphone, horaires, sameAs.",
+  "name": "Mikado Deco",
+  "legalName": "Mikado M-O-A SRL",
+  "vatID": "BE0839015455",
+  "description": "Boutique de mobilier et d'objets de design à Uccle (Bruxelles) : sélection éditée de grandes marques de design, vente en boutique et en ligne, livraison en Belgique, conseil en aménagement.",
+  "telephone": "+32493837983",
+  "email": "shop@mikadodeco.be",
+  "priceRange": "€€€",
+  "address": { "streetAddress": "75 Rue du Doyenné", "postalCode": "1180", "addressLocality": "Uccle", "addressRegion": "Bruxelles", "addressCountry": "BE" },
+  "geo": { "latitude": 50.8031192, "longitude": 4.3404365 },
+  "hours": [{ "days": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "10:30", "closes": "18:30" }],
+  "map": "https://maps.app.goo.gl/7pyXqC7r3L4VhFHU8",
+  "sameAs": ["https://www.instagram.com/mikadodeco/", "https://maps.app.goo.gl/7pyXqC7r3L4VhFHU8"],
+  "languages": ["fr", "nl", "en"]
+}

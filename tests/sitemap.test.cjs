@@ -45,7 +45,8 @@ test('le sitemap couvre toutes les pages produit avec une requête légère', as
   assert.deepEqual(cursors, [null, 'next-page']);
   assert.match(xml, /produit\.html\?handle=premier-produit/);
   assert.match(xml, /produit\.html\?handle=deuxieme-produit/);
-  assert.match(xml, /collections\/assises/);
+  assert.match((await (await realFetch(base + '/sitemap-collections.xml')).text()), /collections\/assises/);
+  assert.match((await (await realFetch(base + '/sitemap.xml')).text()), /sitemap-collections\.xml/);
 });
 
 test('sitemap-pages : la liste et les priorités viennent du manifeste ; une page `index: false` en est absente', async () => {
