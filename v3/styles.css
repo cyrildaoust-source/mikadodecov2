@@ -1967,7 +1967,7 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
 .consent__in { display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; padding-block: 20px calc(20px + env(safe-area-inset-bottom)); flex-wrap: wrap; }
 .consent__txt { flex: 1 1 520px; min-width: 0; font-size: var(--fs-small); line-height: 1.55; color: var(--ink); }
 .consent__title { font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--ink-deep); margin: 0 0 4px; }
-.consent__txt a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+.consent__txt a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
 .consent__details { display: grid; gap: 10px; margin-top: 14px; }
 .consent__opt { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
 .consent__opt input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--ink-deep); flex-shrink: 0; border-radius: 0; }
