@@ -969,7 +969,7 @@ body.has-stickybuy .footer { padding-bottom: 76px; }
 .prose a { color: var(--accent-ink); border-bottom: 1px solid currentColor; transition: color .2s var(--ease); }
 .prose a:hover { color: var(--ink-deep); }
 /* Pages de marque : texte sous le titre, avant la grille (métaobjet Shopify texte_marque, sinon data/brand-texts.json). */
-.brand-about { padding-top: 24px; }
+.brand-about { padding-block: 24px 48px; }
 .brand-about > *, .brand-about__more > * { max-width: 72ch; }
 .brand-about h2 { margin-top: 0; font-size: clamp(22px, 2.2vw, 28px); }
 .brand-about p { margin-bottom: 12px; }
