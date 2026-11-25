@@ -1,8 +1,6 @@
 # Politique cookies
 
-*Brouillon à valider — dernière mise à jour : 10/06/2026.*
-
-> **Note technique :** l'analyse du site confirme qu'**aucun cookie de mesure d'audience, de traçage ou de publicité** n'est déposé (pas de Google Analytics, pas de pixel Meta, etc.). Cette politique reste néanmoins requise à titre d'information, et devra être complétée (avec mise en place d'un bandeau de consentement) si un outil de mesure ou de marketing est ajouté ultérieurement.
+*Brouillon à valider — dernière mise à jour : 26/11/2026.*
 
 ## Cadre légal
 
@@ -18,7 +16,26 @@ Un cookie est un petit fichier déposé sur votre appareil lors de la visite d'u
 
 ### Le site mikadodeco.be
 
-Le site **mikadodeco.be ne dépose aucun cookie** de traçage, de mesure d'audience ou de publicité. Pour le fonctionnement de la boutique, votre **panier en cours** est conservé dans le **stockage local de votre navigateur** (*localStorage*) : c'est un élément **strictement nécessaire** au service que vous demandez. Il relève de l'exemption prévue à l'article 129 de la loi du 13 juin 2005 et à l'article 5, §3 de la directive 2002/58/CE : **aucun consentement préalable n'est requis**, et c'est pourquoi aucun bandeau de consentement n'est affiché.
+**Sans votre accord, le site ne dépose aucun cookie** de mesure d'audience ou de publicité. Votre **panier en cours** et **votre choix en matière de cookies** sont conservés dans le **stockage local de votre navigateur** (*localStorage*) : ce sont des éléments **strictement nécessaires**, exemptés de consentement (article 129 de la loi du 13 juin 2005 ; article 5, §3 de la directive 2002/58/CE). La campagne publicitaire qui vous a mené au site (paramètres « utm » de l'adresse) est gardée le temps de la visite (*sessionStorage*) et transmise à la commande ; elle ne vous identifie pas.
+
+Lors de votre première visite, un **bandeau** vous permet d'**accepter**, de **refuser** (aussi simplement) ou de **choisir par finalité**. Vous pouvez modifier votre choix à tout moment via le lien **« Gérer les cookies »** en bas de chaque page ; retirer votre accord efface les cookies concernés. Votre choix est conservé **6 mois**, puis vous est redemandé.
+
+**Avec votre accord « Mesure d'audience »**
+
+| Cookie | Éditeur | Finalité | Durée |
+|---|---|---|---|
+| `_ga` | Google (Google Analytics 4) | Distinguer les visiteurs pour compter la fréquentation | 13 mois |
+| `_ga_<identifiant>` | Google (Google Analytics 4) | Conserver l'état de la session | 13 mois |
+
+**Avec votre accord « Publicité »**
+
+| Cookie | Éditeur | Finalité | Durée |
+|---|---|---|---|
+| `_gcl_au`, `_gcl_aw` | Google (Google Ads) | Savoir si une visite ou une commande fait suite à une annonce Google | 90 jours |
+| `_fbp` | Meta (Facebook, Instagram) | Savoir si une visite ou une commande fait suite à une annonce Meta | 90 jours |
+| `_fbc` | Meta | Conserver l'identifiant du clic sur une annonce Meta | 90 jours |
+
+Avec ce même accord, les événements de navigation (page vue, produit vu, ajout à la sélection, début de paiement, demande de rendez-vous ou de devis) sont aussi transmis à Meta **par notre serveur** (« API Conversions »), avec votre adresse IP et le type de navigateur, afin d'éviter les doubles comptages ; aucune donnée de formulaire (nom, e-mail, téléphone) n'est transmise. Google et Meta agissent en partie comme responsables de traitement distincts ; leurs politiques s'appliquent ([Google](https://policies.google.com/privacy), [Meta](https://www.facebook.com/privacy/policy/)). Certaines données peuvent être transférées hors de l'Union européenne, dans le cadre du *Data Privacy Framework* UE–États-Unis.
 
 ### Tunnel de paiement (Shopify)
 
@@ -39,10 +56,6 @@ Vous pouvez à tout moment configurer votre navigateur pour refuser ou supprimer
 
 ## Évolution
 
-Si un outil de **mesure d'audience** (par ex. Google Analytics, Plausible non anonymisé), un **pixel marketing** (Meta, etc.) ou tout autre cookie non strictement nécessaire est ajouté à l'avenir, il devra :
+Tout nouvel outil de mesure ou de publicité sera **bloqué par défaut**, soumis au bandeau de consentement et ajouté à la présente politique (cookie, finalité, durée, destinataire) avant sa mise en service.
 
-1. être **bloqué par défaut** et n'être déposé qu'**après recueil du consentement préalable** de l'internaute (art. 129 de la loi du 13 juin 2005 ; art. 5, §3 directive 2002/58/CE ; art. 6.1.a RGPD) ;
-2. être proposé via un **bandeau / module de gestion du consentement (CMP)** offrant un choix libre et permettant de **refuser aussi simplement que d'accepter**, ainsi que de **retirer le consentement** à tout moment ;
-3. faire l'objet d'une **mise à jour de la présente politique** (liste des cookies, finalité, durée de conservation, destinataire).
-
-> *Note interne (à supprimer avant mise en ligne) : aucune solution d'analytics « sans cookie / sans consentement » n'est garantie en l'état du droit belge ; faire valider toute future solution analytics avant déploiement.*
+> *Note interne (à supprimer avant mise en ligne) : section « mesure et publicité » ajoutée le 26/11/2026 pour le test publicitaire de décembre ; à faire relire par l'avocate avec la politique de confidentialité (finalités, base légale = consentement, destinataires Google/Meta, transferts).*

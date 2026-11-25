@@ -1,0 +1,7 @@
+{
+  "_note": "Mesure publicitaire (session marketing, test Google Recherche + Meta du 1er au 20/12/2026, validé par Cyril). Identifiants PUBLICS seulement (le jeton de l'API Conversions Meta est la variable secrète META_CAPI_TOKEN sur Vercel, saisie par Cyril). Rien n'est chargé ni déposé avant l'accord donné dans le bandeau (v3/consent.mjs). Sans aucun identifiant, ni bandeau ni balise. Lu par lib/tracking.js.",
+  "consentVersion": 1,
+  "ga4": "",
+  "googleAds": { "id": "", "leadLabel": "", "addToCartLabel": "", "beginCheckoutLabel": "" },
+  "metaPixel": ""
+}
