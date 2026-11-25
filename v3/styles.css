@@ -1962,25 +1962,44 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
 
 /* ---------- Bandeau de consentement aux cookies (v3/consent.mjs) ----------
    Bas de l'écran, sans voile : la page reste lisible. Refuser et accepter ont exactement le même bouton.
-   Coins carrés, au-dessus de la barre d'achat mobile (70) et sous les tiroirs (120). */
-.consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 110; background: var(--paper); border-top: 1px solid var(--ink-deep); box-shadow: 0 -10px 30px rgba(26,25,22,.08); }
-.consent__in { display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; padding-block: 20px calc(20px + env(safe-area-inset-bottom)); flex-wrap: wrap; }
-.consent__txt { flex: 1 1 520px; min-width: 0; font-size: var(--fs-small); line-height: 1.55; color: var(--ink); }
-.consent__title { font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--ink-deep); margin: 0 0 4px; }
-.consent__txt a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-.consent__details { display: grid; gap: 10px; margin-top: 14px; }
-.consent__opt { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
-.consent__opt input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--ink-deep); flex-shrink: 0; border-radius: 0; }
-.consent__btns { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.consent__btn { min-height: 44px; padding: 0 22px; border: 1px solid var(--ink-deep); background: var(--ink-deep); color: var(--paper); font-size: var(--fs-small); font-weight: 500; border-radius: 0; cursor: pointer; }
+   Coins carrés partout (interrupteurs compris). Au-dessus de la barre d'achat mobile (70), sous les tiroirs (120). */
+.consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 110; background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -12px 32px rgba(26,25,22,.07); }
+.consent__in { display: flex; align-items: center; justify-content: space-between; gap: 20px 48px; padding-block: 22px calc(22px + env(safe-area-inset-bottom)); }
+.consent__txt { flex: 1 1 auto; min-width: 0; max-width: 760px; font-size: var(--fs-small); line-height: 1.55; color: var(--ink); }
+.consent__title { font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.2; color: var(--ink-deep); margin: 0 0 4px; }
+.consent__msg { margin: 0; }
+.consent__msg a { color: inherit; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.consent__btns { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.consent__btn { min-height: 44px; padding: 0 22px; border: 1px solid var(--ink-deep); background: var(--ink-deep); color: var(--paper); font-size: var(--fs-small); font-weight: 500; border-radius: 0; cursor: pointer; white-space: nowrap; transition: background .2s var(--ease); }
 .consent__btn:hover { background: #000; }
-.consent__link { min-height: 44px; padding: 0 6px; background: none; border: 0; color: var(--ink-deep); font-size: var(--fs-small); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.consent__link { min-height: 44px; padding: 0 4px; background: none; border: 0; color: var(--ink-deep); font-size: var(--fs-small); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; white-space: nowrap; }
 .consent [hidden] { display: none !important; }
+/* Choix par finalité : une ligne par famille, interrupteur carré à droite. */
+.consent__details { display: grid; border-top: 1px solid var(--line); margin-top: 10px; }
+.consent__row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.consent__rowtxt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.consent__rowtxt b { font-weight: 600; color: var(--ink-deep); }
+.consent__rowtxt span { color: var(--muted); }
+.consent__always { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.consent__switch { position: relative; flex-shrink: 0; width: 44px; height: 24px; cursor: pointer; }
+.consent__switch input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.consent__switch span { position: absolute; inset: 0; border: 1px solid var(--ink-deep); background: var(--paper); transition: background .2s var(--ease); pointer-events: none; }
+.consent__switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; background: var(--ink-deep); transition: transform .2s var(--ease), background .2s var(--ease); }
+.consent__switch input:checked + span { background: var(--ink-deep); }
+.consent__switch input:checked + span::after { transform: translateX(20px); background: var(--paper); }
+html.kbd .consent__switch input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
 .footer__consent { background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; }
 .footer__consent:hover { color: var(--ink-deep); }
+@media (prefers-reduced-motion: reduce) { .consent__switch span, .consent__switch span::after { transition: none; } }
+/* Téléphone : court et compact — une phrase, deux boutons côte à côte, « Personnaliser » en lien discret. */
 @media (max-width: 760px) {
-  .consent__in { padding-block: 16px calc(16px + env(safe-area-inset-bottom)); gap: 14px; }
-  .consent__btns { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
-  .consent__link, .consent__btn--save { grid-column: 1 / -1; }
+  .consent__in { flex-direction: column; align-items: stretch; gap: 12px; padding-block: 16px calc(12px + env(safe-area-inset-bottom)); }
+  .consent__title { font-family: var(--sans); font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .consent__txt { font-size: 13.5px; line-height: 1.5; }
+  .consent__btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .consent__btn { padding: 0 10px; font-size: 14px; }
+  .consent__link { grid-column: 1 / -1; min-height: 36px; font-size: 13px; color: var(--muted); }
+  .consent__row { padding: 10px 0; }
+  .consent__rowtxt span { font-size: 12.5px; }
   html.consent-open .pdp-stickybuy { display: none; }
 }

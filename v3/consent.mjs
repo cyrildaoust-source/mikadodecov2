@@ -65,21 +65,28 @@ export function openConsent({ details = false } = {}) {
   root.setAttribute("role", "dialog");
   root.setAttribute("aria-modal", "false");
   root.setAttribute("aria-labelledby", "consent-title");
+  const row = (key, title, text, on, locked = false) => `
+          <div class="consent__row">
+            <div class="consent__rowtxt"><b>${title}</b><span>${text}</span></div>
+            ${locked ? `<span class="consent__always">Toujours actifs</span>`
+              : `<label class="consent__switch"><input type="checkbox" role="switch" data-consent-${key}${on ? " checked" : ""} aria-label="${title}"><span aria-hidden="true"></span></label>`}
+          </div>`;
   root.innerHTML = `
     <div class="consent__in wrap">
       <div class="consent__txt">
-        <h2 class="consent__title" id="consent-title">Cookies</h2>
-        <p>Avec votre accord, nous mesurons la fréquentation du site${hasAds ? " et l’efficacité de nos publicités (Google, Meta)" : ""}. Sans accord, rien n’est déposé. <a href="/politique-cookies.html">En savoir plus</a></p>
+        <p class="consent__title" id="consent-title">${details ? "Vos choix de cookies" : "Cookies"}</p>
+        <p class="consent__msg"${details ? " hidden" : ""} data-consent-msg>Avec votre accord, nous mesurons la fréquentation du site${hasAds ? " et l’efficacité de nos publicités" : ""}. Sans accord, rien n’est déposé. <a href="/politique-cookies.html">En savoir plus</a></p>
         <div class="consent__details"${details ? "" : " hidden"} data-consent-details>
-          ${hasAnalytics ? `<label class="consent__opt"><input type="checkbox" data-consent-analytics${current.analytics ? " checked" : ""}> <span><b>Mesure d’audience</b> — Google Analytics : pages vues, parcours, origine des visites.</span></label>` : ""}
-          ${hasAds ? `<label class="consent__opt"><input type="checkbox" data-consent-ads${current.ads ? " checked" : ""}> <span><b>Publicité</b> — Google Ads et Meta : savoir quelles annonces mènent à une visite ou à une commande.</span></label>` : ""}
+          ${row("needed", "Nécessaires", "Votre sélection et ce choix, gardés dans votre navigateur.", true, true)}
+          ${hasAnalytics ? row("analytics", "Mesure d’audience", "Google Analytics : pages vues et origine des visites.", current.analytics) : ""}
+          ${hasAds ? row("ads", "Publicité", "Google Ads et Meta : quelles annonces mènent au site.", current.ads) : ""}
         </div>
       </div>
       <div class="consent__btns">
         <button type="button" class="consent__btn" data-consent-refuse>Tout refuser</button>
-        <button type="button" class="consent__btn" data-consent-accept>Tout accepter</button>
+        <button type="button" class="consent__btn" data-consent-accept${details ? " hidden" : ""}>Tout accepter</button>
+        <button type="button" class="consent__btn" data-consent-save${details ? "" : " hidden"}>Enregistrer</button>
         <button type="button" class="consent__link" data-consent-custom${details ? " hidden" : ""}>Personnaliser</button>
-        <button type="button" class="consent__btn consent__btn--save" data-consent-save${details ? "" : " hidden"}>Enregistrer mes choix</button>
       </div>
     </div>`;
   document.body.appendChild(root);
@@ -88,7 +95,10 @@ export function openConsent({ details = false } = {}) {
   root.querySelector("[data-consent-accept]").addEventListener("click", () => save({ analytics: hasAnalytics, ads: hasAds }));
   root.querySelector("[data-consent-custom]").addEventListener("click", (e) => {
     root.querySelector("[data-consent-details]").hidden = false;
+    root.querySelector("[data-consent-msg]").hidden = true;
+    root.querySelector("#consent-title").textContent = "Vos choix de cookies";
     e.currentTarget.hidden = true;
+    root.querySelector("[data-consent-accept]").hidden = true;
     root.querySelector("[data-consent-save]").hidden = false;
     root.querySelector("[data-consent-details] input")?.focus();
   });
