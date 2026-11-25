@@ -68,6 +68,7 @@ app.use(express.json({ verify: (req, _res, buf) => { req.rawBody = buf; } }));
 app.use(require('./routes/api'));
 app.use(require('./routes/cart'));
 app.use(require('./routes/forms'));
+app.use(require('./routes/track'));
 
 // ─── 404 : 404.html avec chrome SSR (Vercel route les URL inconnues ici via
 // { handle: error } → /api/index.js). Agents sans text/html : markdown court.

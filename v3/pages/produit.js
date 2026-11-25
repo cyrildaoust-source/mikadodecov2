@@ -2,6 +2,7 @@
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { initShell } from "/shell.mjs";
+import { track } from "/tracking.mjs";
 import { fetchProducts, fetchPromos, applyPromos, loadNavigation, paintBreadcrumb } from "/catalog-data.mjs";
 import { productCard } from "/product-grid.mjs";
 import { addToCart, cartQty } from "/cart.mjs";
@@ -81,6 +82,8 @@ Promise.all([loadProduct(), served ? null : loadNavigation(), served ? { designe
   const main = host.querySelector("[data-main]");
   const priceEl = host.querySelector("[data-price-el]");
   const cta = host.querySelector("[data-add]");
+  // Produit vu (mesure publicitaire, après accord seulement : tracking.mjs).
+  track("view_item", { value: current.price || p.price || 0, items: [{ id: String(current.id || p.variantId || "").split("/").pop(), name: p.name, brand: p.brand, price: current.price || p.price || 0 }] });
   const status = host.querySelector("[data-cart-status]");
   const qtyLabel = host.querySelector("[data-qty-label]");
 

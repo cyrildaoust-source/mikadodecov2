@@ -129,6 +129,13 @@ router.post('/api/cart/delivery', cartLimiter, async (req, res) => {
     res.status(err.status || 503).json({ error: 'Impossible de vérifier le délai. Réessayez avant de payer.' });   // 400 = panier invalide ; panne amont = 503
   }
 });
+// UTM reçus du navigateur : seulement les 5 champs connus, valeurs courtes en texte simple.
+const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+function cleanUtm(raw) {
+  if (!raw || typeof raw !== 'object') return {};
+  return Object.fromEntries(UTM_FIELDS.filter(k => typeof raw[k] === 'string' && raw[k].trim())
+    .map(k => [k, raw[k].trim().replace(/[^\p{L}\p{N} ._\-+]/gu, '').slice(0, 100)]).filter(([, v]) => v));
+}
 // ─── API: CREATE CART → SHOPIFY CHECKOUT ───────────────
 // Body: { items: [{ variantId, qty }], customer: { prenom, nom, email, telephone, projet, message } }
 // Returns: { checkoutUrl } — redirect the browser to this URL
@@ -170,6 +177,9 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
     if (customer?.email)     attributes.push({ key: 'Email',     value: customer.email });
     if (customer?.telephone) attributes.push({ key: 'Telephone', value: customer.telephone });
     if (project) attributes.push({ key: 'Projet', value: project });
+    // Campagne d'origine (UTM de la session, test publicitaire de décembre 2026) : visible dans la commande Shopify.
+    const utm = cleanUtm(req.body?.utm);
+    for (const [key, value] of Object.entries(utm)) attributes.push({ key, value });
 
     const data = await shopifyFetch(CART_CREATE_MUTATION, {
       lines,
@@ -196,6 +206,10 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
       } catch (_) { /* keep Shopify's original URL on parse failure */ }
     }
 
+    // Les UTM suivent aussi jusqu'au paiement : Shopify rattache la commande à la campagne (page d'arrivée).
+    if (Object.keys(utm).length) {
+      try { const u = new URL(checkoutUrl); for (const [k, v] of Object.entries(utm)) u.searchParams.set(k, v); checkoutUrl = u.toString(); } catch (_) { /* adresse gardée telle quelle */ }
+    }
     res.json({ checkoutUrl });
 
   } catch (err) {
@@ -206,3 +220,4 @@ router.post('/api/cart/create', cartLimiter, async (req, res) => {
 });
 
 module.exports = router;
+module.exports.cleanUtm = cleanUtm;

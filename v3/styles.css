@@ -1959,3 +1959,28 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
   .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+4) { display: none; }
 }
+
+/* ---------- Bandeau de consentement aux cookies (v3/consent.mjs) ----------
+   Bas de l'écran, sans voile : la page reste lisible. Refuser et accepter ont exactement le même bouton.
+   Coins carrés, au-dessus de la barre d'achat mobile (70) et sous les tiroirs (120). */
+.consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 110; background: var(--paper); border-top: 1px solid var(--ink-deep); box-shadow: 0 -10px 30px rgba(26,25,22,.08); }
+.consent__in { display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; padding-block: 20px calc(20px + env(safe-area-inset-bottom)); flex-wrap: wrap; }
+.consent__txt { flex: 1 1 520px; min-width: 0; font-size: var(--fs-small); line-height: 1.55; color: var(--ink); }
+.consent__title { font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--ink-deep); margin: 0 0 4px; }
+.consent__txt a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+.consent__details { display: grid; gap: 10px; margin-top: 14px; }
+.consent__opt { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+.consent__opt input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--ink-deep); flex-shrink: 0; border-radius: 0; }
+.consent__btns { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.consent__btn { min-height: 44px; padding: 0 22px; border: 1px solid var(--ink-deep); background: var(--ink-deep); color: var(--paper); font-size: var(--fs-small); font-weight: 500; border-radius: 0; cursor: pointer; }
+.consent__btn:hover { background: #000; }
+.consent__link { min-height: 44px; padding: 0 6px; background: none; border: 0; color: var(--ink-deep); font-size: var(--fs-small); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.consent [hidden] { display: none !important; }
+.footer__consent { background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; }
+.footer__consent:hover { color: var(--ink-deep); }
+@media (max-width: 760px) {
+  .consent__in { padding-block: 16px calc(16px + env(safe-area-inset-bottom)); gap: 14px; }
+  .consent__btns { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+  .consent__link, .consent__btn--save { grid-column: 1 / -1; }
+  html.consent-open .pdp-stickybuy { display: none; }
+}

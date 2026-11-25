@@ -9,7 +9,10 @@ const ROOT = join(__dirname, '..');
 // ── lib/csp.js ──────────────────────────────────────────────────────────────
 test('cspHeader : nonce dans script-src, plus de unsafe-inline pour les scripts, styles inchangés', () => {
   const h = cspHeader('abc123');
-  assert.match(h, /script-src 'self' https:\/\/unpkg\.com 'nonce-abc123'(;|$)/);
+  assert.match(h, /script-src 'self' https:\/\/unpkg\.com [^;]*'nonce-abc123'(;|$)/);
+  // Google et Meta seulement (mesure publicitaire, chargée après accord dans le bandeau de cookies).
+  assert.deepEqual(h.match(/script-src[^;]*/)[0].split(' ').filter(x => x.startsWith('https://')),
+    ['https://unpkg.com', 'https://www.googletagmanager.com', 'https://www.googleadservices.com', 'https://googleads.g.doubleclick.net', 'https://connect.facebook.net']);
   assert.doesNotMatch(h.match(/script-src[^;]*/)[0], /unsafe-inline/);
   assert.match(h, /style-src 'self' 'unsafe-inline' https:\/\/use\.typekit\.net/);
   assert.match(h, /img-src [^;]*https:\/\/cdn\.shopify\.com/);

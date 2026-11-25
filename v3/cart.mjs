@@ -34,7 +34,7 @@ export function addToCart(item, qty = 1) {
   writeCart(cart);
   // `cart:add` fires ONLY on an actual add (not on qty edits / removals, which
   // go through writeCart → cart:change only). The cart drawer opens on this.
-  document.dispatchEvent(new CustomEvent("cart:add"));
+  document.dispatchEvent(new CustomEvent("cart:add", { detail: { item, qty: n } }));
   return cart;
 }
 export function setCartQty(variantId, qty) {
