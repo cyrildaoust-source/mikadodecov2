@@ -1954,15 +1954,61 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
 .pdp__promo.pdp__promo--bm { background: #0b0b0b; color: #fff; }
 
 /* Rangées de la fiche : quand « Complétez avec » n'a qu'une ou deux pièces, les deux rangées partagent
-   la même ligne de quatre cartes au lieu de laisser une demi-ligne vide (audit du 14 novembre 2026). */
+   la même ligne de quatre cartes au lieu de laisser une demi-ligne vide (audit du 14 novembre 2026).
+   Seulement si « De la même collection » et « Du même créateur » sont vides : sinon l'une d'elles se
+   retrouverait coincée dans une seule colonne entre les deux (fiche Develius, 25 novembre 2026). */
 @media (min-width: 1024px) {
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--gap); }
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) > .section { min-width: 0; padding-top: var(--section-y); }
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) > .section { grid-column: span 2; }
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+3) { display: none; }
-  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) > [data-related-wrap] { grid-column: span 3; }
-  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-complementary] { grid-template-columns: minmax(0, 1fr); }
-  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+4) { display: none; }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--gap); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) > .section { min-width: 0; padding-top: var(--section-y); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) > .section { grid-column: span 2; }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+3) { display: none; }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) > [data-related-wrap] { grid-column: span 3; }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-complementary] { grid-template-columns: minmax(0, 1fr); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+4) { display: none; }
+}
+
+/* ---------- Bandeau de consentement aux cookies (v3/consent.mjs) ----------
+   Bas de l'écran, sans voile : la page reste lisible. Refuser et accepter ont exactement le même bouton.
+   Coins carrés partout (interrupteurs compris). Au-dessus de la barre d'achat mobile (70), sous les tiroirs (120). */
+.consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 110; background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -12px 32px rgba(26,25,22,.07); }
+.consent__in { display: flex; align-items: center; justify-content: space-between; gap: 20px 48px; padding-block: 22px calc(22px + env(safe-area-inset-bottom)); }
+.consent__txt { flex: 1 1 auto; min-width: 0; max-width: 760px; font-size: var(--fs-small); line-height: 1.55; color: var(--ink); }
+.consent__title { font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.2; color: var(--ink-deep); margin: 0 0 4px; }
+.consent__msg { margin: 0; }
+.consent__msg a { color: inherit; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.consent__btns { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.consent__btn { min-height: 44px; padding: 0 24px; border: 1px solid var(--ink-deep); background: transparent; color: var(--ink-deep); font-size: var(--fs-small); font-weight: 500; border-radius: 0; cursor: pointer; white-space: nowrap; transition: background .2s var(--ease), color .2s var(--ease); }
+.consent__btn:hover { background: var(--ink-deep); color: var(--paper); }
+.consent__link { min-height: 44px; padding: 0 4px; background: none; border: 0; color: var(--ink-deep); font-size: var(--fs-small); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; white-space: nowrap; }
+.consent [hidden] { display: none !important; }
+/* Choix par finalité : une ligne par famille, interrupteur carré à droite. */
+.consent__details { display: grid; border-top: 1px solid var(--line); margin-top: 10px; }
+.consent__row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.consent__rowtxt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.consent__rowtxt b { font-weight: 600; color: var(--ink-deep); }
+.consent__rowtxt span { color: var(--muted); }
+.consent__always { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.consent__switch { position: relative; flex-shrink: 0; width: 44px; height: 24px; cursor: pointer; }
+.consent__switch input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.consent__switch span { position: absolute; inset: 0; border: 1px solid #c9c0b3; background: #efe9e0; transition: background .2s var(--ease), border-color .2s var(--ease); pointer-events: none; }
+.consent__switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; background: var(--paper); border: 1px solid #c9c0b3; box-sizing: border-box; transition: transform .2s var(--ease), border-color .2s var(--ease); }
+.consent__switch input:checked + span { background: var(--ink-deep); border-color: var(--ink-deep); }
+.consent__switch input:checked + span::after { transform: translateX(20px); border-color: var(--ink-deep); }
+html.kbd .consent__switch input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.footer__consent { background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; }
+.footer__consent:hover { color: var(--ink-deep); }
+@media (prefers-reduced-motion: reduce) { .consent__switch span, .consent__switch span::after { transition: none; } }
+/* Téléphone : court et compact — une phrase, deux boutons côte à côte, « Personnaliser » en lien discret. */
+@media (max-width: 760px) {
+  .consent__in { flex-direction: column; align-items: stretch; gap: 12px; padding-block: 16px calc(12px + env(safe-area-inset-bottom)); }
+  .consent__title { font-family: var(--sans); font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .consent__txt { font-size: 13.5px; line-height: 1.5; }
+  .consent__btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .consent__btn { padding: 0 10px; font-size: 14px; }
+  .consent__link { grid-column: 1 / -1; min-height: 36px; font-size: 13px; color: var(--muted); }
+  .consent__row { padding: 10px 0; }
+  .consent__rowtxt span { font-size: 12.5px; }
+  html.consent-open .pdp-stickybuy { display: none; }
 }

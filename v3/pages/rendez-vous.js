@@ -2,6 +2,7 @@
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { initShell } from "/shell.mjs";
+import { track } from "/tracking.mjs";
 initShell({ active: "", hero: true });
 
 const form = document.querySelector("[data-rdv-form]");
@@ -26,5 +27,6 @@ form.addEventListener("submit", async (e) => {
     if (!res.ok || data.error) throw new Error(data.error || "server");
     document.querySelector("[data-form-wrap]").style.display = "none";
     document.querySelector("[data-success]").style.display = "block";
+    track("generate_lead", { form: "rendez-vous" });
   } catch (e2) { fail(e2.message === "rate_limit" ? "Trop de tentatives. Patientez quelques minutes avant de réessayer." : "L'envoi a échoué. Réessayez ou écrivez à shop@mikadodeco.be."); btn.disabled = false; btn.textContent = "Demander ce rendez-vous"; console.warn(e2); }
 });

@@ -16,6 +16,8 @@ import { lockBodyScroll } from "./scroll-lock.mjs";
 import { bindNewsletter } from "./newsletter.mjs";
 import { siteData } from "./site-data.mjs";
 import { ensureVercelAnalytics } from "./analytics.mjs";
+import { initConsent } from "./consent.mjs";
+import { initTracking, track } from "./tracking.mjs";
 
 function bindDrawer() {
   const drawer = document.querySelector("[data-drawer]");
@@ -169,6 +171,13 @@ export function initShell({ active = "", hero = false } = {}) {
   document.body.dataset.shellReady = "1";
   bindFocusMode();
   ensureVercelAnalytics();
+  // Mesure publicitaire : rien avant l'accord (consent.mjs) ; UTM gardés pour la session.
+  initTracking();
+  const consentShown = initConsent();
+  document.addEventListener("cart:add", (e) => {
+    const { item, qty } = e.detail || {};
+    if (item) track("add_to_cart", { value: (Number(item.price) || 0) * (qty || 1), items: [{ id: String(item.variantId).split("/").pop(), name: item.name, brand: item.brand, price: item.price, quantity: qty || 1 }] });
+  });
   const h = document.getElementById("site-header");
   const f = document.getElementById("site-footer");
   // SSR : si le chrome est déjà rendu (header non vide), HYDRATER sans réécrire
@@ -187,7 +196,9 @@ export function initShell({ active = "", hero = false } = {}) {
   const popup = siteData("newsletter");
   if (popup && popup.enabled !== false) {
     const schedule = () => setTimeout(() => import("./newsletter-popup.mjs").then(({ initNewsletterPopup }) => initNewsletterPopup(popup)).catch((e) => console.warn("[shell] popup newsletter :", e.message)), 1200);
-    if (document.readyState === "complete") schedule(); else window.addEventListener("load", schedule, { once: true });
+    // Jamais deux fenêtres à la fois : la popup attend le choix dans le bandeau de cookies.
+    const later = () => { if (document.readyState === "complete") schedule(); else window.addEventListener("load", schedule, { once: true }); };
+    if (consentShown) document.addEventListener("consent:change", later, { once: true }); else later();
   }
   bindAddToCart();
   bindImageFallbacks();

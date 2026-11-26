@@ -2,6 +2,7 @@
    syntaxe vérifiée par npm run check, prêt pour une CSP sans 'unsafe-inline').
    Comportement identique : un module inline s'exécute lui aussi après l'analyse du document. */
 import { initShell } from "/shell.mjs";
+import { track, getUtm } from "/tracking.mjs";
 import { readCart, removeFromCartAt, setCartQty } from "/cart.mjs";
 import { euro, escapeHtml } from "/format.mjs";
 import { productHref } from "/navigation.mjs";
@@ -235,10 +236,14 @@ document.querySelector("[data-checkout]").addEventListener("click", async () => 
   try {
     const res = await fetch("/api/cart/create", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })) }),
+      // UTM de la session : gardés jusqu'à la commande (attributs du panier + adresse du paiement Shopify).
+      body: JSON.stringify({ items: cart.map((i) => ({ variantId: i.variantId, qty: i.qty || 1 })), utm: getUtm() }),
     });
     const data = await res.json();
-    if (data.checkoutUrl) location.href = data.checkoutUrl;
+    if (data.checkoutUrl) {
+      await track("begin_checkout", { items: cart.map((i) => ({ id: String(i.variantId).split("/").pop(), name: i.name, brand: i.brand, price: i.price, quantity: i.qty || 1 })) });
+      location.href = data.checkoutUrl;
+    }
     else throw new Error(data.error || "checkout");
   } catch (e2) {
     err.textContent = "Le paiement n'a pas pu démarrer. Réessayez ou contactez-nous."; err.style.display = "block";
