@@ -78,7 +78,7 @@ const seo = ({ canonical = 'self', ld = [], noindex = false } = {}) => (body, { 
   const h1 = (body.match(/<h1[\s>]/gi) || []).length;
   if (h1 !== 1) problems.push(`${h1} <h1>`);
   const types = new Set();
-  for (const m of head.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) { try { const j = JSON.parse(m[1]); for (const o of Array.isArray(j) ? j : [j]) types.add(o['@type']); } catch { problems.push('JSON-LD invalide'); } }
+  for (const m of head.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) { try { const j = JSON.parse(m[1]); for (const o of (Array.isArray(j) ? j : [j]).flatMap((x) => x['@graph'] || [x])) types.add(o['@type']); } catch { problems.push('JSON-LD invalide'); } }
   for (const t of ld) if (!types.has(t)) problems.push(`JSON-LD ${t} absent`);
   return problems.length ? problems.join(' ; ') : null;
 };

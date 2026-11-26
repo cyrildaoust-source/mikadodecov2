@@ -18,7 +18,7 @@ const { GIFTS, designerPageFor } = require('../lib/filter-scopes');
 // budget de la fonction → connexion coupée (curl : http=000), et crawlers/agents
 // concluent « pas de sitemap ». On sert désormais un sitemapindex qui répond
 // immédiatement et pointe vers deux sitemaps : les pages (statique, avec
-// lastmod) et les produits/collections (walk caché 6 h). Aucune URL perdue ;
+// lastmod), les collections et marques, et les produits (walk caché 6 h). Aucune URL perdue ;
 // les 3 chemins sont routés vers la fonction dans vercel.json.
 const SM_ESC = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // Pages statiques : la liste et les priorités viennent du manifeste des pages (data/pages.manifest.json,
@@ -39,6 +39,7 @@ router.get('/sitemap.xml', (req, res) => sendXml(res,
   `<?xml version="1.0" encoding="UTF-8"?>\n`
   + `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
   + `  <sitemap><loc>${ORIGIN}/sitemap-pages.xml</loc></sitemap>\n`
+  + `  <sitemap><loc>${ORIGIN}/sitemap-collections.xml</loc></sitemap>\n`
   + `  <sitemap><loc>${ORIGIN}/sitemap-products.xml</loc></sitemap>\n`
   + `</sitemapindex>\n`));
 // Pages statiques, Idées cadeaux (portée sans collection Shopify) et créateurs indexables : aucun appel Shopify → instantané.
@@ -60,8 +61,9 @@ router.get('/sitemap-pages.xml', async (req, res) => {
 // par produit rendent le parcours complet trop lent lors d'un démarrage à froid.
 
 
-// Toutes les fiches visibles par le canal Storefront + collections.
-// URLs canoniques (seulement ?handle=). Caché 6 h.
+// Toutes les fiches visibles par le canal Storefront. URLs canoniques (seulement ?handle=). Caché 6 h.
+// Les collections et les marques ont leur propre plan (sitemap-collections.xml, 25 novembre 2026 : lisibles
+// à part dans la Search Console).
 router.get('/sitemap-products.xml', async (req, res) => {
   try {
     const xml = await cached('sitemap:products', async () => {
@@ -77,6 +79,20 @@ router.get('/sitemap-products.xml', async (req, res) => {
         if (!pageInfo.endCursor) throw new Error('Curseur Shopify manquant pendant le parcours du sitemap');
         after = pageInfo.endCursor;
       }
+      return smUrlset(urls);
+    }, 6 * 60 * 60 * 1000); // cache 6 h
+    return sendXml(res, xml);
+  } catch (err) {
+    console.warn('[sitemap-products]', err.message);
+    return res.status(500).send('');
+  }
+});
+
+// Collections publiées (marques, gammes, familles) et pages de marque du registre. Caché 6 h.
+router.get('/sitemap-collections.xml', async (req, res) => {
+  try {
+    const xml = await cached('sitemap:collections', async () => {
+      const urls = [];
       (await getCollections()).forEach((c) => {
         // Les familles éditoriales et les sélections composites ont leurs propres sources.
         if (Object.hasOwn(BRAND_COLLECTION_ALIASES, c.handle) || INTERNAL_COLLECTION.test(c.handle) || designerPageFor(c.handle)) return;   // créateur : sa page /produits.html?designer= est déjà dans le sitemap
@@ -92,12 +108,12 @@ router.get('/sitemap-products.xml', async (req, res) => {
           const loc = /^\/collections\/[a-z0-9-]+$/.test(b.href || '') && ORIGIN + b.href;
           if (loc && !listed.has(loc)) { listed.add(loc); urls.push(smUrl(loc, '0.6')); }
         });
-      } catch (error) { console.warn('[sitemap-products] marques', error.message); }
+      } catch (error) { console.warn('[sitemap-collections] marques', error.message); }
       return smUrlset(urls);
     }, 6 * 60 * 60 * 1000); // cache 6 h
     return sendXml(res, xml);
   } catch (err) {
-    console.warn('[sitemap-products]', err.message);
+    console.warn('[sitemap-collections]', err.message);
     return res.status(500).send('');
   }
 });

@@ -594,9 +594,9 @@ test('les erreurs Shopify retournent 503 sans cache tandis quâ€™une fiche retirÃ
 });
 
 test('le sitemap omet les collections vides, conserve les familles et parcourt toutes les collections', async () => {
-  const { html, response } = await page('/sitemap-products.xml');
+  assert.match((await page('/sitemap-products.xml')).html, /handle=seo-example/);
+  const { html, response } = await page('/sitemap-collections.xml');
   assert.equal(response.status, 200);
-  assert.match(html, /handle=seo-example/);
   assert.match(html, /\/collections\/verres-carafes/);
   assert.match(html, /\/collections\/outdoor/);
   assert.doesNotMatch(html, /empty-collection/);
