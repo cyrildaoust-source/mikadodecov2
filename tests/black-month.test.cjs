@@ -4,14 +4,26 @@ const assert = require('node:assert/strict');
 const bm = require('../lib/black-month');
 const at = iso => Date.parse(iso);
 
-test('Black Month : visible du 9 au 28 novembre, éteint le 29 au matin, compte à rebours à Bruxelles', () => {
+test('Black Month : visible du 9 au 30 novembre (Cyber Monday), éteint le 1er décembre au matin, compte à rebours à Bruxelles', () => {
   assert.equal(bm.active(at('2026-11-08T23:59:00+01:00')), false);
   assert.equal(bm.active(at('2026-11-10T09:00:00+01:00')), true);
-  assert.equal(bm.active(at('2026-11-28T23:30:00+01:00')), true);
-  assert.equal(bm.active(at('2026-11-29T00:00:00+01:00')), false);
-  assert.equal(bm.countdown(at('2026-11-10T09:00:00+01:00')), 'Plus que 19 jours');
-  assert.equal(bm.countdown(at('2026-11-27T23:30:00+01:00')), 'Plus que 2 jours');
-  assert.equal(bm.countdown(at('2026-11-28T08:00:00+01:00')), 'Dernier jour');
+  assert.equal(bm.active(at('2026-11-30T23:59:00+01:00')), true);
+  assert.equal(bm.active(at('2026-12-01T00:00:00+01:00')), false);
+  assert.equal(bm.countdown(at('2026-11-10T09:00:00+01:00')), 'Plus que 21 jours');
+  assert.equal(bm.countdown(at('2026-11-29T23:30:00+01:00')), 'Plus que 2 jours');
+  assert.equal(bm.countdown(at('2026-11-30T08:00:00+01:00')), 'Dernier jour');
+});
+
+test('Black Month : la date de fin affichée vient de lastDay, nulle part écrite à la main', () => {
+  const fs = require('node:fs'), path = require('node:path');
+  assert.equal(bm.lastDayShort, '30/11');
+  assert.equal(bm.lastDayLong, '30 novembre');
+  const render = require('../lib/render/black-month');
+  const html = [render.announceHTML?.(), render.heroHTML?.()].filter(Boolean).join(' ');
+  assert.match(html, /30(\/11|&nbsp;novembre)/);
+  for (const f of ['lib/render/black-month.js', 'routes/pages.js']) {
+    assert.doesNotMatch(fs.readFileSync(path.join(__dirname, '..', f), 'utf8'), /\b2[89](\/11|&nbsp;novembre| novembre)/, f);
+  }
 });
 
 test('Black Month : prix remisé au centime dès 200 €, jamais seul en dessous ; pièces de la plus chère à la moins chère', () => {
@@ -68,7 +80,7 @@ test('barre d’annonce : le code BLACK10 apparaît dès le 20 novembre, en clai
     assert.match(html, /bm-long[^>]*><b>Black Month<\/b>&nbsp;: −10&nbsp;% dès 200&nbsp;€ d’achat avec le code/);
     assert.match(html, /bm-short[^>]*>−10&nbsp;% dès 200&nbsp;€ avec <strong/);
     assert.doesNotMatch(html, /−20/);   // le −20 % se voit sur les prix (Cyril, 20 novembre 2026)
-    assert.match(html, /jusqu’au 28\/11/);
+    assert.match(html, /jusqu’au 30\/11/);
     assert.doesNotMatch(html, /jusqu.à −/i);
   } finally { if (clock === undefined) delete process.env.MIKADO_CLOCK; else process.env.MIKADO_CLOCK = clock; }
 });

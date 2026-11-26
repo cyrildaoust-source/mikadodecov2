@@ -56,9 +56,9 @@ test('accueil : le H1 porte le lieu, toute l’année', () => {
   assert.doesNotMatch(routes, /blackMonthHero\(\{ level: 'h1'/, 'la campagne ne prend plus le H1 de l’accueil');
 });
 
-test('Black Month : terminée le 29 novembre au matin, jamais avant', () => {
-  assert.equal(bm.ended(Date.parse('2026-11-28T23:30:00+01:00')), false);
-  assert.equal(bm.ended(Date.parse('2026-11-29T00:00:00+01:00')), true);
+test('Black Month : terminée le 1er décembre au matin (prolongé au Cyber Monday), jamais avant', () => {
+  assert.equal(bm.ended(Date.parse('2026-11-30T23:59:00+01:00')), false);
+  assert.equal(bm.ended(Date.parse('2026-12-01T00:00:00+01:00')), true);
 });
 
 test('magasin : une seule source de données structurées pour l’accueil, le contact et Mikado Studio', () => {
