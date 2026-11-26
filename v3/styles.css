@@ -1947,17 +1947,19 @@ body:not(.has-topnav) .bm-hero__txt { padding-top: calc(var(--nav-h) + 48px); }
 .pdp__promo.pdp__promo--bm { background: #0b0b0b; color: #fff; }
 
 /* Rangées de la fiche : quand « Complétez avec » n'a qu'une ou deux pièces, les deux rangées partagent
-   la même ligne de quatre cartes au lieu de laisser une demi-ligne vide (audit du 14 novembre 2026). */
+   la même ligne de quatre cartes au lieu de laisser une demi-ligne vide (audit du 14 novembre 2026).
+   Seulement si « De la même collection » et « Du même créateur » sont vides : sinon l'une d'elles se
+   retrouverait coincée dans une seule colonne entre les deux (fiche Develius, 25 novembre 2026). */
 @media (min-width: 1024px) {
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--gap); }
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) > .section { min-width: 0; padding-top: var(--section-y); }
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) > .section { grid-column: span 2; }
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pdp-recos:has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+3) { display: none; }
-  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) > [data-related-wrap] { grid-column: span 3; }
-  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-complementary] { grid-template-columns: minmax(0, 1fr); }
-  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .pdp-recos:has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+4) { display: none; }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--gap); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(-n+2)):has([data-related] > .pcard) > .section { min-width: 0; padding-top: var(--section-y); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) > .section { grid-column: span 2; }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:first-child:nth-last-child(2)):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+3) { display: none; }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) > [data-related-wrap] { grid-column: span 3; }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-complementary] { grid-template-columns: minmax(0, 1fr); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pdp-recos:not(:has([data-range] > .pcard, [data-designer] > .pcard)):has([data-complementary] > .pcard:only-child):has([data-related] > .pcard) [data-related] > .pcard:nth-child(n+4) { display: none; }
 }
 
 /* ---------- Bandeau de consentement aux cookies (v3/consent.mjs) ----------
