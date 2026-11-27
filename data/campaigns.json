@@ -44,11 +44,11 @@
     }
   },
   "blackMonth": {
-    "_note": "Black Month 2026 (demande de Cyril du 09/11, offre gérée par l'instance promotions). Le site n'affiche l'opération qu'entre startsAt et endsAt (extinction automatique le 29/11 au matin). Les pièces remisées ne sont jamais listées ici : le site interroge Shopify (panier) variante par variante, parmi les variantes en stock de la collection `collection`. Prix remisé affiché seulement à partir de `minimum` € (règle de l'instance promotions : en dessous, « −20 % dès 200 € de mobilier »). Le code BLACK10 (−10 % sur le reste, dès le 20/11) est annoncé dans la barre d'annonce (bloc `code`). `MIKADO_CLOCK` (lib/christmas.js) avance l'horloge en Preview.",
+    "_note": "Black Month 2026 (demande de Cyril du 09/11, offre gérée par l'instance promotions). Le site n'affiche l'opération qu'entre startsAt et endsAt (extinction automatique le 01/12 au matin ; prolongé jusqu'au Cyber Monday 30/11 sur demande de Cyril du 26/11). Toutes les dates affichées se calculent depuis `lastDay`. Les pièces remisées ne sont jamais listées ici : le site interroge Shopify (panier) variante par variante, parmi les variantes en stock de la collection `collection`. Prix remisé affiché seulement à partir de `minimum` € (règle de l'instance promotions : en dessous, « −20 % dès 200 € de mobilier »). Le code BLACK10 (−10 % sur le reste, dès le 20/11) est annoncé dans la barre d'annonce (bloc `code`). `MIKADO_CLOCK` (lib/christmas.js) avance l'horloge en Preview.",
     "enabled": true,
     "startsAt": "2026-11-09T00:00:00+01:00",
-    "endsAt": "2026-11-29T00:00:00+01:00",
-    "lastDay": "2026-11-28",
+    "endsAt": "2026-12-01T00:00:00+01:00",
+    "lastDay": "2026-11-30",
     "collection": "black-month-mobilier",
     "discountTitle": "Black Month",
     "percent": 20,
